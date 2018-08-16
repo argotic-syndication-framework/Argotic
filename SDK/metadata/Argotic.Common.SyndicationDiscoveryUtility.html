@@ -81,11 +81,35 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">SyndicationDiscoveryUtility</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Common.html">Argotic.Common</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Common.dll</h6>
   <h5 id="Argotic_Common_SyndicationDiscoveryUtility_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class SyndicationDiscoveryUtility : object</code></pre>
+    <pre><code class="lang-csharp hljs">public static class SyndicationDiscoveryUtility</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -125,14 +149,14 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_Uri_DateTime_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(Uri%2CDateTime%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_System_Uri_System_DateTime_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri%2CSystem.DateTime%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L505">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_Uri_DateTime_System_String_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(Uri,DateTime,System.String)">ConditionalGet(Uri, DateTime, String)</h4>
-  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:DateTime"></see> and entity tag.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_System_Uri_System_DateTime_System_String_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String)">ConditionalGet(Uri, DateTime, String)</h4>
+  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.DateTime</span> and entity tag.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -150,15 +174,15 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> to perform a conditional GET operation against.</p>
+        <td><p>The <span class="xref">System.Uri</span> to perform a conditional GET operation against.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">lastModified</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
 </td>
       </tr>
       <tr>
@@ -179,26 +203,42 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">HttpWebResponse</span></td>
-        <td><p>A <see cref="!:HttpWebResponse"></see> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.</p>
+        <td><span class="xref">System.Net.HttpWebResponse</span></td>
+        <td><p>A <span class="xref">System.Net.HttpWebResponse</span> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_Uri_DateTime_System_String__examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_System_Uri_System_DateTime_System_String__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="ConditionalGet(Uri source, DateTime lastModified, string entityTag)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_Uri_DateTime_System_String_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(Uri%2CDateTime%2CSystem.String%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_System_Uri_System_DateTime_System_String_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri%2CSystem.DateTime%2CSystem.String%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L565">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_Uri_DateTime_System_String_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(Uri,DateTime,System.String,Argotic.Common.WebRequestOptions)">ConditionalGet(Uri, DateTime, String, WebRequestOptions)</h4>
-  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:DateTime"></see>, entity tag and <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_System_Uri_System_DateTime_System_String_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions)">ConditionalGet(Uri, DateTime, String, WebRequestOptions)</h4>
+  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.DateTime</span>, entity tag and <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -216,15 +256,15 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> to perform a conditional GET operation against.</p>
+        <td><p>The <span class="xref">System.Uri</span> to perform a conditional GET operation against.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">lastModified</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
 </td>
       </tr>
       <tr>
@@ -251,22 +291,38 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">HttpWebResponse</span></td>
-        <td><p>A <see cref="!:HttpWebResponse"></see> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.</p>
+        <td><span class="xref">System.Net.HttpWebResponse</span></td>
+        <td><p>A <span class="xref">System.Net.HttpWebResponse</span> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_Uri_DateTime_System_String_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(Uri%2CDateTime%2CSystem.String%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_System_Uri_System_DateTime_System_String_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri%2CSystem.DateTime%2CSystem.String%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L522">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_Uri_DateTime_System_String_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(Uri,DateTime,System.String,ICredentials)">ConditionalGet(Uri, DateTime, String, ICredentials)</h4>
-  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:DateTime"></see>, entity tag and <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_System_Uri_System_DateTime_System_String_System_Net_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials)">ConditionalGet(Uri, DateTime, String, ICredentials)</h4>
+  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.DateTime</span>, entity tag and <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -284,15 +340,15 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> to perform a conditional GET operation against.</p>
+        <td><p>The <span class="xref">System.Uri</span> to perform a conditional GET operation against.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">lastModified</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
 </td>
       </tr>
       <tr>
@@ -302,9 +358,9 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
@@ -320,22 +376,38 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">HttpWebResponse</span></td>
-        <td><p>A <see cref="!:HttpWebResponse"></see> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.</p>
+        <td><span class="xref">System.Net.HttpWebResponse</span></td>
+        <td><p>A <span class="xref">System.Net.HttpWebResponse</span> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_Uri_DateTime_System_String_ICredentials_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(Uri%2CDateTime%2CSystem.String%2CICredentials%2CIWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_System_Uri_System_DateTime_System_String_System_Net_ICredentials_System_Net_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri%2CSystem.DateTime%2CSystem.String%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L551">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_Uri_DateTime_System_String_ICredentials_IWebProxy_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(Uri,DateTime,System.String,ICredentials,IWebProxy)">ConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy)</h4>
-  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:DateTime"></see>, entity tag and <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ConditionalGet_System_Uri_System_DateTime_System_String_System_Net_ICredentials_System_Net_IWebProxy_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy)">ConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy)</h4>
+  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.DateTime</span>, entity tag and <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -353,15 +425,15 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> to perform a conditional GET operation against.</p>
+        <td><p>The <span class="xref">System.Uri</span> to perform a conditional GET operation against.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">lastModified</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
 </td>
       </tr>
       <tr>
@@ -371,16 +443,16 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -395,22 +467,38 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">HttpWebResponse</span></td>
-        <td><p>A <see cref="!:HttpWebResponse"></see> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.</p>
+        <td><span class="xref">System.Net.HttpWebResponse</span></td>
+        <td><p>A <span class="xref">System.Net.HttpWebResponse</span> for the <code data-dev-comment-type="paramref" class="paramref">source</code> if it has been modfied, otherwise <strong>null</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ExtractDiscoverableSyndicationEndpoints_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ExtractDiscoverableSyndicationEndpoints_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.IO.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L805">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_ExtractDiscoverableSyndicationEndpoints_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ExtractDiscoverableSyndicationEndpoints_Stream_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(Stream)">ExtractDiscoverableSyndicationEndpoints(Stream)</h4>
-  <div class="markdown level1 summary"><p>Extracts auto-discoverable syndication endpoints from the supplied <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ExtractDiscoverableSyndicationEndpoints_System_IO_Stream_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.IO.Stream)">ExtractDiscoverableSyndicationEndpoints(Stream)</h4>
+  <div class="markdown level1 summary"><p>Extracts auto-discoverable syndication endpoints from the supplied <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -428,9 +516,9 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
-        <td><p>A <see cref="!:Stream"></see> that represents the HTML markup to parse.</p>
+        <td><p>A <span class="xref">System.IO.Stream</span> that represents the HTML markup to parse.</p>
 </td>
       </tr>
     </tbody>
@@ -445,16 +533,32 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a>&gt;</td>
         <td><p>A collection of <a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a> objects that represent auto-discoverable syndicated content endpoints contained within the <code data-dev-comment-type="paramref" class="paramref">stream</code>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_ExtractDiscoverableSyndicationEndpoints_Stream__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_ExtractDiscoverableSyndicationEndpoints_System_IO_Stream__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
 further information about the auto-discovery of syndicated content.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ExtractDiscoverableSyndicationEndpoints_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -499,7 +603,7 @@ further information about the auto-discovery of syndicated content.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a>&gt;</td>
         <td><p>A collection of <a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a> objects that represent auto-discoverable syndicated content endpoints contained within the <code data-dev-comment-type="paramref" class="paramref">content</code>.</p>
 </td>
       </tr>
@@ -509,6 +613,27 @@ further information about the auto-discovery of syndicated content.</p>
   <div class="markdown level1 remarks"><p>See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
 further information about the auto-discovery of syndicated content.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ExtractPingbackNotificationServer_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -575,16 +700,37 @@ If no pingback auto-discovery link was found, returns <strong>null</strong>.</p>
     for more information about the pingback notification mechanism.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ExtractTrackbackNotificationServers_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ExtractTrackbackNotificationServers_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.IO.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L1313">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_ExtractTrackbackNotificationServers_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ExtractTrackbackNotificationServers_Stream_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(Stream)">ExtractTrackbackNotificationServers(Stream)</h4>
-  <div class="markdown level1 summary"><p>Extracts embedded RDF Trackback discovery meta-data from the supplied <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ExtractTrackbackNotificationServers_System_IO_Stream_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.IO.Stream)">ExtractTrackbackNotificationServers(Stream)</h4>
+  <div class="markdown level1 summary"><p>Extracts embedded RDF Trackback discovery meta-data from the supplied <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -602,9 +748,9 @@ If no pingback auto-discovery link was found, returns <strong>null</strong>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
-        <td><p>A <see cref="!:Stream"></see> that represents the HTML markup to parse.</p>
+        <td><p>A <span class="xref">System.IO.Stream</span> that represents the HTML markup to parse.</p>
 </td>
       </tr>
     </tbody>
@@ -619,16 +765,32 @@ If no pingback auto-discovery link was found, returns <strong>null</strong>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a>&gt;</td>
         <td><p>A collection of <a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a> objects that represent embedded Trackback ping URLs contained within the <code data-dev-comment-type="paramref" class="paramref">stream</code>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_ExtractTrackbackNotificationServers_Stream__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_ExtractTrackbackNotificationServers_System_IO_Stream__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
 further information about the auto-discovery of Trackback ping URLs.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ExtractTrackbackNotificationServers_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -673,7 +835,7 @@ further information about the auto-discovery of Trackback ping URLs.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a>&gt;</td>
         <td><p>A collection of <a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a> objects that represent embedded Trackback ping URLs contained within the <code data-dev-comment-type="paramref" class="paramref">content</code>.</p>
 </td>
       </tr>
@@ -683,6 +845,27 @@ further information about the auto-discovery of Trackback ping URLs.</p>
   <div class="markdown level1 remarks"><p>See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
 further information about the auto-discovery of Trackback ping URLs.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_ExtractUrls_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -692,7 +875,7 @@ further information about the auto-discovery of Trackback ping URLs.</p>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_ExtractUrls_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls*"></a>
   <h4 id="Argotic_Common_SyndicationDiscoveryUtility_ExtractUrls_System_String_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.ExtractUrls(System.String)">ExtractUrls(String)</h4>
-  <div class="markdown level1 summary"><p>Returns a collection of <see cref="!:Uri"></see> instances that represent HTML header links and/or anchor tags in the supplied HTML markup.</p>
+  <div class="markdown level1 summary"><p>Returns a collection of <span class="xref">System.Uri</span> instances that represent HTML header links and/or anchor tags in the supplied HTML markup.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -727,22 +910,43 @@ further information about the auto-discovery of Trackback ping URLs.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">Uri</span>&gt;</td>
-        <td><p>A collection of <see cref="!:Uri"></see> instances that represent HTML anchor elements and header links in the supplied HTML markup.</p>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Uri</span>&gt;</td>
+        <td><p>A collection of <span class="xref">System.Uri</span> instances that represent HTML anchor elements and header links in the supplied HTML markup.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L999">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(Uri)">IsPingbackEnabled(Uri)</h4>
-  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <see cref="!:Uri"></see> is a pingback enabled web resource.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_System_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri)">IsPingbackEnabled(Uri)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <span class="xref">System.Uri</span> is a pingback enabled web resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -760,9 +964,9 @@ further information about the auto-discovery of Trackback ping URLs.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>The <see cref="!:Uri"></see> to validate.</p>
+        <td><p>The <span class="xref">System.Uri</span> to validate.</p>
 </td>
       </tr>
     </tbody>
@@ -783,7 +987,7 @@ further information about the auto-discovery of Trackback ping URLs.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     There are two mechanisms used when determining if a web resource is pingback enabled;
     the presence of an HTML/XHTML &lt;link> element with a <em>rel</em> attribute value of <strong>pingback</strong>
@@ -809,20 +1013,36 @@ either or both of these mechanisms.
     for more information about the pingback notification mechanism.
 </p>
 </div>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="IsPingbackEnabled(Uri uri)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_Uri_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(Uri%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_System_Uri_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L1048">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_Uri_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(Uri,ICredentials)">IsPingbackEnabled(Uri, ICredentials)</h4>
-  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <see cref="!:Uri"></see> is a pingback enabled web resource using the specified <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_System_Uri_System_Net_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsPingbackEnabled(System.Uri,System.Net.ICredentials)">IsPingbackEnabled(Uri, ICredentials)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <span class="xref">System.Uri</span> is a pingback enabled web resource using the specified <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -840,15 +1060,15 @@ either or both of these mechanisms.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>The <see cref="!:Uri"></see> to validate.</p>
+        <td><p>The <span class="xref">System.Uri</span> to validate.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
@@ -870,7 +1090,7 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_Uri_ICredentials__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsPingbackEnabled_System_Uri_System_Net_ICredentials__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     There are two mechanisms used when determining if a web resource is pingback enabled;
     the presence of an HTML/XHTML &lt;link> element with a <em>rel</em> attribute value of <strong>pingback</strong>
@@ -896,16 +1116,32 @@ either or both of these mechanisms.
     for more information about the pingback notification mechanism.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L1372">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri)">IsTrackbackEnabled(Uri)</h4>
-  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <see cref="!:Uri"></see> is a trackback enabled web resource.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_System_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri)">IsTrackbackEnabled(Uri)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <span class="xref">System.Uri</span> is a trackback enabled web resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -923,9 +1159,9 @@ either or both of these mechanisms.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>The <see cref="!:Uri"></see> to validate.</p>
+        <td><p>The <span class="xref">System.Uri</span> to validate.</p>
 </td>
       </tr>
     </tbody>
@@ -946,7 +1182,7 @@ either or both of these mechanisms.
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.
 </p>
@@ -973,20 +1209,36 @@ either or both of these mechanisms.
     further information about the auto-discovery of Trackback ping URLs.
 </p>
 </div>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="IsTrackbackEnabled(Uri uri)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_Uri_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_System_Uri_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L1422">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_Uri_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri,ICredentials)">IsTrackbackEnabled(Uri, ICredentials)</h4>
-  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <see cref="!:Uri"></see> is a trackback enabled web resource using the specified <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_System_Uri_System_Net_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.IsTrackbackEnabled(System.Uri,System.Net.ICredentials)">IsTrackbackEnabled(Uri, ICredentials)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <span class="xref">System.Uri</span> is a trackback enabled web resource using the specified <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1004,15 +1256,15 @@ either or both of these mechanisms.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>The <see cref="!:Uri"></see> to validate.</p>
+        <td><p>The <span class="xref">System.Uri</span> to validate.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
@@ -1034,7 +1286,7 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_Uri_ICredentials__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_IsTrackbackEnabled_System_Uri_System_Net_ICredentials__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.
 </p>
@@ -1061,16 +1313,32 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     further information about the auto-discovery of Trackback ping URLs.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L835">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(Uri)">LocateDiscoverableSyndicationEndpoints(Uri)</h4>
-  <div class="markdown level1 summary"><p>Returns a collection of <a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a> objects that represent auto-discoverable syndicated content endpoints for the supplied <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_System_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri)">LocateDiscoverableSyndicationEndpoints(Uri)</h4>
+  <div class="markdown level1 summary"><p>Returns a collection of <a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a> objects that represent auto-discoverable syndicated content endpoints for the supplied <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1088,9 +1356,9 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the  web resource to parse.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the  web resource to parse.</p>
 </td>
       </tr>
     </tbody>
@@ -1105,31 +1373,47 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a>&gt;</td>
         <td><p>A collection of <a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a> objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <code data-dev-comment-type="paramref" class="paramref">uri</code>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
 further information about the auto-discovery of syndicated content.</p>
 </div>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="LocateDiscoverableSyndicationEndpoints(Uri uri)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_Uri_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(Uri%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_System_Uri_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L857">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_Uri_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(Uri,ICredentials)">LocateDiscoverableSyndicationEndpoints(Uri, ICredentials)</h4>
-  <div class="markdown level1 summary"><p>Returns a collection of <a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a> objects that represent auto-discoverable syndicated content endpoints for the supplied <see cref="!:Uri"></see>
-using the specified <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_System_Uri_System_Net_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(System.Uri,System.Net.ICredentials)">LocateDiscoverableSyndicationEndpoints(Uri, ICredentials)</h4>
+  <div class="markdown level1 summary"><p>Returns a collection of <a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a> objects that represent auto-discoverable syndicated content endpoints for the supplied <span class="xref">System.Uri</span>
+using the specified <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1147,15 +1431,15 @@ using the specified <see cref="!:ICredentials">credentials</see>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the web resource to parse.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the web resource to parse.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
@@ -1171,26 +1455,42 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a>&gt;</td>
         <td><p>A collection of <a class="xref" href="Argotic.Common.DiscoverableSyndicationEndpoint.html">DiscoverableSyndicationEndpoint</a> objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <code data-dev-comment-type="paramref" class="paramref">uri</code>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_Uri_ICredentials__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateDiscoverableSyndicationEndpoints_System_Uri_System_Net_ICredentials__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
 further information about the auto-discovery of syndicated content.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L1148">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(Uri)">LocatePingbackNotificationServer(Uri)</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:Uri"></see> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_System_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri)">LocatePingbackNotificationServer(Uri)</h4>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.Uri</span> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1208,9 +1508,9 @@ further information about the auto-discovery of syndicated content.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>The <see cref="!:Uri"></see> of a web resource to perform pingback auto-discovery against.</p>
+        <td><p>The <span class="xref">System.Uri</span> of a web resource to perform pingback auto-discovery against.</p>
 </td>
       </tr>
     </tbody>
@@ -1225,14 +1525,14 @@ further information about the auto-discovery of syndicated content.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the absolute URI of the pingback XML-RPC server.
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the absolute URI of the pingback XML-RPC server.
 If pingback server auto-discovery fails to locate a pingback XML-RPC server endpoint, returns <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     There are two mechanisms used when determining if a web resource is pingback enabled;
     the presence of an HTML/XHTML &lt;link> element with a <em>rel</em> attribute value of <strong>pingback</strong>
@@ -1258,21 +1558,37 @@ either or both of these mechanisms.
     for more information about the pingback notification mechanism.
 </p>
 </div>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="LocatePingbackNotificationServer(Uri uri)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_Uri_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(Uri%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_System_Uri_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L1201">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_Uri_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(Uri,ICredentials)">LocatePingbackNotificationServer(Uri, ICredentials)</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:Uri"></see> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <see cref="!:Uri"></see>
-using the specified <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_System_Uri_System_Net_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocatePingbackNotificationServer(System.Uri,System.Net.ICredentials)">LocatePingbackNotificationServer(Uri, ICredentials)</h4>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.Uri</span> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <span class="xref">System.Uri</span>
+using the specified <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1290,15 +1606,15 @@ using the specified <see cref="!:ICredentials">credentials</see>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>The <see cref="!:Uri"></see> of a web resource to perform pingback auto-discovery against.</p>
+        <td><p>The <span class="xref">System.Uri</span> of a web resource to perform pingback auto-discovery against.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
@@ -1314,14 +1630,14 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the absolute URI of the pingback XML-RPC server.
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the absolute URI of the pingback XML-RPC server.
 If pingback server auto-discovery fails to locate a pingback XML-RPC server endpoint, returns <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_Uri_ICredentials__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocatePingbackNotificationServer_System_Uri_System_Net_ICredentials__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     There are two mechanisms used when determining if a web resource is pingback enabled;
     the presence of an HTML/XHTML &lt;link> element with a <em>rel</em> attribute value of <strong>pingback</strong>
@@ -1347,16 +1663,32 @@ either or both of these mechanisms.
     for more information about the pingback notification mechanism.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L1450">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(Uri)">LocateTrackbackNotificationServers(Uri)</h4>
-  <div class="markdown level1 summary"><p>Returns a collection of <a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a> objects that represent trackback ping URL endpoints for the supplied <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_System_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri)">LocateTrackbackNotificationServers(Uri)</h4>
+  <div class="markdown level1 summary"><p>Returns a collection of <a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a> objects that represent trackback ping URL endpoints for the supplied <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1374,9 +1706,9 @@ either or both of these mechanisms.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the  web resource to parse.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the  web resource to parse.</p>
 </td>
       </tr>
     </tbody>
@@ -1391,31 +1723,47 @@ either or both of these mechanisms.
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a>&gt;</td>
         <td><p>A collection of <a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a> objects that represent embedded Trackback ping URLs for the web resource located at the <code data-dev-comment-type="paramref" class="paramref">uri</code>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
 further information about the auto-discovery of Trackback ping URLs.</p>
 </div>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="LocateTrackbackNotificationServers(Uri uri)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_Uri_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(Uri%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_System_Uri_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L1473">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_Uri_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(Uri,ICredentials)">LocateTrackbackNotificationServers(Uri, ICredentials)</h4>
-  <div class="markdown level1 summary"><p>Returns a collection of <a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a> objects that represent trackback ping URL endpoints for the supplied <see cref="!:Uri"></see>
-using the specified <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_System_Uri_System_Net_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(System.Uri,System.Net.ICredentials)">LocateTrackbackNotificationServers(Uri, ICredentials)</h4>
+  <div class="markdown level1 summary"><p>Returns a collection of <a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a> objects that represent trackback ping URL endpoints for the supplied <span class="xref">System.Uri</span>
+using the specified <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1433,15 +1781,15 @@ using the specified <see cref="!:ICredentials">credentials</see>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the web resource to parse.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the web resource to parse.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
@@ -1457,26 +1805,42 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a>&gt;</td>
         <td><p>A collection of <a class="xref" href="Argotic.Common.TrackbackDiscoveryMetadata.html">TrackbackDiscoveryMetadata</a> objects that represent embedded Trackback ping URLs for the web resource located at the <code data-dev-comment-type="paramref" class="paramref">uri</code>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_Uri_ICredentials__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_LocateTrackbackNotificationServers_System_Uri_System_Net_ICredentials__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
 further information about the auto-discovery of Trackback ping URLs.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_Uri_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(Uri%2CUri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_System_Uri_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri%2CSystem.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L376">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_Uri_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(Uri,Uri)">SourceReferencesTarget(Uri, Uri)</h4>
-  <div class="markdown level1 summary"><p>Returns a value indicating if the source <see cref="!:Uri"></see> references the target <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_System_Uri_System_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri,System.Uri)">SourceReferencesTarget(Uri, Uri)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating if the source <span class="xref">System.Uri</span> references the target <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1494,15 +1858,15 @@ further information about the auto-discovery of Trackback ping URLs.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the source web resource that will be searched.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the source web resource that will be searched.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">target</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the target web resource being searched for.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the target web resource being searched for.</p>
 </td>
       </tr>
     </tbody>
@@ -1523,20 +1887,41 @@ further information about the auto-discovery of Trackback ping URLs.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_Uri_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_System_Uri_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="SourceReferencesTarget(Uri source, Uri target)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_Uri_Uri_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(Uri%2CUri%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_System_Uri_System_Uri_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri%2CSystem.Uri%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L393">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_Uri_Uri_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(Uri,Uri,ICredentials)">SourceReferencesTarget(Uri, Uri, ICredentials)</h4>
-  <div class="markdown level1 summary"><p>Returns a value indicating if the source <see cref="!:Uri"></see> references the target <see cref="!:Uri"></see>, using the specifed <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SourceReferencesTarget_System_Uri_System_Uri_System_Net_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SourceReferencesTarget(System.Uri,System.Uri,System.Net.ICredentials)">SourceReferencesTarget(Uri, Uri, ICredentials)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating if the source <span class="xref">System.Uri</span> references the target <span class="xref">System.Uri</span>, using the specifed <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1554,21 +1939,21 @@ further information about the auto-discovery of Trackback ping URLs.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the source web resource that will be searched.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the source web resource that will be searched.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">target</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the target web resource being searched for.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the target web resource being searched for.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
@@ -1586,6 +1971,27 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
       <tr>
         <td><span class="xref">System.Boolean</span></td>
         <td><p><strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">source</code> contains at least one link to the <code data-dev-comment-type="paramref" class="paramref">target</code>, otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -1643,16 +2049,37 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
   <h5 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatByName_System_String__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method disregards case of specified format name.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.IO.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L133">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_Stream_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(Stream)">SyndicationContentFormatGet(Stream)</h4>
-  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource represented by the supplied <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_IO_Stream_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.IO.Stream)">SyndicationContentFormatGet(Stream)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource represented by the supplied <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1670,9 +2097,9 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
-        <td><p>A <see cref="!:Stream"></see> that represents the XML data for the syndicated resource.</p>
+        <td><p>A <span class="xref">System.IO.Stream</span> that represents the XML data for the syndicated resource.</p>
 </td>
       </tr>
     </tbody>
@@ -1694,16 +2121,32 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L89">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(Uri)">SyndicationContentFormatGet(Uri)</h4>
-  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource located at the specified <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri)">SyndicationContentFormatGet(Uri)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource located at the specified <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1721,9 +2164,9 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> of the syndication resource to determine syndication content format for.</p>
+        <td><p>The <span class="xref">System.Uri</span> of the syndication resource to determine syndication content format for.</p>
 </td>
       </tr>
     </tbody>
@@ -1745,20 +2188,36 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="SyndicationContentFormatGet(Uri source)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_Uri_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(Uri%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_Uri_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L107">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_Uri_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(Uri,ICredentials)">SyndicationContentFormatGet(Uri, ICredentials)</h4>
-  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource located at the specified <see cref="!:Uri"></see> using the supplied <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_Uri_System_Net_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Uri,System.Net.ICredentials)">SyndicationContentFormatGet(Uri, ICredentials)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource located at the specified <span class="xref">System.Uri</span> using the supplied <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1776,15 +2235,15 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> of the syndication resource to determine syndication content format for.</p>
+        <td><p>The <span class="xref">System.Uri</span> of the syndication resource to determine syndication content format for.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
@@ -1807,16 +2266,32 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_Xml_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L156">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_XmlReader_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(XmlReader)">SyndicationContentFormatGet(XmlReader)</h4>
-  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource represented by the supplied <see cref="!:XmlReader"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_Xml_XmlReader_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XmlReader)">SyndicationContentFormatGet(XmlReader)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource represented by the supplied <span class="xref">System.Xml.XmlReader</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1834,9 +2309,9 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlReader</span></td>
+        <td><span class="xref">System.Xml.XmlReader</span></td>
         <td><span class="parametername">reader</span></td>
-        <td><p>A <see cref="!:XmlReader"></see> that represents the XML data for the syndicated resource.</p>
+        <td><p>A <span class="xref">System.Xml.XmlReader</span> that represents the XML data for the syndicated resource.</p>
 </td>
       </tr>
     </tbody>
@@ -1858,16 +2333,32 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L199">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_XPathNavigator_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(XPathNavigator)">SyndicationContentFormatGet(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource represented by the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_SyndicationContentFormatGet_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.SyndicationContentFormatGet(System.Xml.XPath.XPathNavigator)">SyndicationContentFormatGet(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Returns the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> of the syndicated resource represented by the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1885,9 +2376,9 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">navigator</span></td>
-        <td><p>A <see cref="!:XPathNavigator"></see> that represents the XML data for the syndicated resource.</p>
+        <td><p>A <span class="xref">System.Xml.XPath.XPathNavigator</span> that represents the XML data for the syndicated resource.</p>
 </td>
       </tr>
     </tbody>
@@ -1909,16 +2400,32 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">navigator</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_Uri_DateTime_System_String_Argotic_Common_WebRequestOptions_HttpWebResponse__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(Uri%2CDateTime%2CSystem.String%2CArgotic.Common.WebRequestOptions%2CHttpWebResponse%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_System_Uri_System_DateTime_System_String_Argotic_Common_WebRequestOptions_System_Net_HttpWebResponse__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri%2CSystem.DateTime%2CSystem.String%2CArgotic.Common.WebRequestOptions%2CSystem.Net.HttpWebResponse%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L694">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_Uri_DateTime_System_String_Argotic_Common_WebRequestOptions_HttpWebResponse__" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(Uri,DateTime,System.String,Argotic.Common.WebRequestOptions,HttpWebResponse@)">TryConditionalGet(Uri, DateTime, String, WebRequestOptions, out HttpWebResponse)</h4>
-  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:DateTime"></see>, entity tag and <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_System_Uri_System_DateTime_System_String_Argotic_Common_WebRequestOptions_System_Net_HttpWebResponse__" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,Argotic.Common.WebRequestOptions,System.Net.HttpWebResponse@)">TryConditionalGet(Uri, DateTime, String, WebRequestOptions, out HttpWebResponse)</h4>
+  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.DateTime</span>, entity tag and <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1936,15 +2443,15 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> to perform a conditional GET operation against.</p>
+        <td><p>The <span class="xref">System.Uri</span> to perform a conditional GET operation against.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">lastModified</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
 </td>
       </tr>
       <tr>
@@ -1960,9 +2467,9 @@ If unable to determine format, returns <a class="xref" href="Argotic.Common.Synd
 </td>
       </tr>
       <tr>
-        <td><span class="xref">HttpWebResponse</span></td>
+        <td><span class="xref">System.Net.HttpWebResponse</span></td>
         <td><span class="parametername">response</span></td>
-        <td><p>When this method returns, contains the <see cref="!:HttpWebResponse"></see> for the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.
+        <td><p>When this method returns, contains the <span class="xref">System.Net.HttpWebResponse</span> for the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.
 This parameter is passed uninitialized.</p>
 </td>
       </tr>
@@ -1984,16 +2491,32 @@ This parameter is passed uninitialized.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_Uri_DateTime_System_String_HttpWebResponse__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(Uri%2CDateTime%2CSystem.String%2CHttpWebResponse%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_System_Uri_System_DateTime_System_String_System_Net_HttpWebResponse__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri%2CSystem.DateTime%2CSystem.String%2CSystem.Net.HttpWebResponse%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L599">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_Uri_DateTime_System_String_HttpWebResponse__" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(Uri,DateTime,System.String,HttpWebResponse@)">TryConditionalGet(Uri, DateTime, String, out HttpWebResponse)</h4>
-  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:DateTime"></see> and entity tag.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_System_Uri_System_DateTime_System_String_System_Net_HttpWebResponse__" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.HttpWebResponse@)">TryConditionalGet(Uri, DateTime, String, out HttpWebResponse)</h4>
+  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.DateTime</span> and entity tag.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2011,15 +2534,15 @@ This parameter is passed uninitialized.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> to perform a conditional GET operation against.</p>
+        <td><p>The <span class="xref">System.Uri</span> to perform a conditional GET operation against.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">lastModified</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
 </td>
       </tr>
       <tr>
@@ -2029,9 +2552,9 @@ This parameter is passed uninitialized.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">HttpWebResponse</span></td>
+        <td><span class="xref">System.Net.HttpWebResponse</span></td>
         <td><span class="parametername">response</span></td>
-        <td><p>When this method returns, contains the <see cref="!:HttpWebResponse"></see> for the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.
+        <td><p>When this method returns, contains the <span class="xref">System.Net.HttpWebResponse</span> for the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.
 This parameter is passed uninitialized.</p>
 </td>
       </tr>
@@ -2053,20 +2576,36 @@ This parameter is passed uninitialized.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_Uri_DateTime_System_String_HttpWebResponse___examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_System_Uri_System_DateTime_System_String_System_Net_HttpWebResponse___examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="TryConditionalGet(Uri source, DateTime lastModified, string entityTag, out WebResponse response)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_Uri_DateTime_System_String_ICredentials_HttpWebResponse__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(Uri%2CDateTime%2CSystem.String%2CICredentials%2CHttpWebResponse%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_System_Uri_System_DateTime_System_String_System_Net_ICredentials_System_Net_HttpWebResponse__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri%2CSystem.DateTime%2CSystem.String%2CSystem.Net.ICredentials%2CSystem.Net.HttpWebResponse%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L620">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_Uri_DateTime_System_String_ICredentials_HttpWebResponse__" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(Uri,DateTime,System.String,ICredentials,HttpWebResponse@)">TryConditionalGet(Uri, DateTime, String, ICredentials, out HttpWebResponse)</h4>
-  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:DateTime"></see>, entity tag and <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_System_Uri_System_DateTime_System_String_System_Net_ICredentials_System_Net_HttpWebResponse__" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.HttpWebResponse@)">TryConditionalGet(Uri, DateTime, String, ICredentials, out HttpWebResponse)</h4>
+  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.DateTime</span>, entity tag and <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2084,15 +2623,15 @@ This parameter is passed uninitialized.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> to perform a conditional GET operation against.</p>
+        <td><p>The <span class="xref">System.Uri</span> to perform a conditional GET operation against.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">lastModified</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
 </td>
       </tr>
       <tr>
@@ -2102,16 +2641,16 @@ This parameter is passed uninitialized.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">HttpWebResponse</span></td>
+        <td><span class="xref">System.Net.HttpWebResponse</span></td>
         <td><span class="parametername">response</span></td>
-        <td><p>When this method returns, contains the <see cref="!:HttpWebResponse"></see> for the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.
+        <td><p>When this method returns, contains the <span class="xref">System.Net.HttpWebResponse</span> for the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.
 This parameter is passed uninitialized.</p>
 </td>
       </tr>
@@ -2133,16 +2672,32 @@ This parameter is passed uninitialized.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_Uri_DateTime_System_String_ICredentials_IWebProxy_HttpWebResponse__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(Uri%2CDateTime%2CSystem.String%2CICredentials%2CIWebProxy%2CHttpWebResponse%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_System_Uri_System_DateTime_System_String_System_Net_ICredentials_System_Net_IWebProxy_System_Net_HttpWebResponse__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri%2CSystem.DateTime%2CSystem.String%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CSystem.Net.HttpWebResponse%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L676">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_Uri_DateTime_System_String_ICredentials_IWebProxy_HttpWebResponse__" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(Uri,DateTime,System.String,ICredentials,IWebProxy,HttpWebResponse@)">TryConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy, out HttpWebResponse)</h4>
-  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:DateTime"></see>, entity tag and <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_TryConditionalGet_System_Uri_System_DateTime_System_String_System_Net_ICredentials_System_Net_IWebProxy_System_Net_HttpWebResponse__" data-uid="Argotic.Common.SyndicationDiscoveryUtility.TryConditionalGet(System.Uri,System.DateTime,System.String,System.Net.ICredentials,System.Net.IWebProxy,System.Net.HttpWebResponse@)">TryConditionalGet(Uri, DateTime, String, ICredentials, IWebProxy, out HttpWebResponse)</h4>
+  <div class="markdown level1 summary"><p>Performs a conditional get operation against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.DateTime</span>, entity tag and <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2160,15 +2715,15 @@ This parameter is passed uninitialized.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> to perform a conditional GET operation against.</p>
+        <td><p>The <span class="xref">System.Uri</span> to perform a conditional GET operation against.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">lastModified</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents the date and time at which the <code data-dev-comment-type="paramref" class="paramref">source</code> was last known to be modified.</p>
 </td>
       </tr>
       <tr>
@@ -2178,22 +2733,22 @@ This parameter is passed uninitialized.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">HttpWebResponse</span></td>
+        <td><span class="xref">System.Net.HttpWebResponse</span></td>
         <td><span class="parametername">response</span></td>
-        <td><p>When this method returns, contains the <see cref="!:HttpWebResponse"></see> for the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.
+        <td><p>When this method returns, contains the <span class="xref">System.Net.HttpWebResponse</span> for the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>, if the web resource has been modified, or <strong>null</strong> if the web resource has <u>not</u> been modified.
 This parameter is passed uninitialized.</p>
 </td>
       </tr>
@@ -2215,16 +2770,32 @@ This parameter is passed uninitialized.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_UriExists_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.UriExists(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_UriExists_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L445">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.UriExists*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.UriExists(Uri)">UriExists(Uri)</h4>
-  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <see cref="!:Uri"></see> exists.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_System_Uri_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri)">UriExists(Uri)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <span class="xref">System.Uri</span> exists.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2242,9 +2813,9 @@ This parameter is passed uninitialized.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>The <see cref="!:Uri"></see> to validate.</p>
+        <td><p>The <span class="xref">System.Uri</span> to validate.</p>
 </td>
       </tr>
     </tbody>
@@ -2265,23 +2836,23 @@ This parameter is passed uninitialized.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method will return <strong>false</strong> if the <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference or the <code data-dev-comment-type="paramref" class="paramref">uri</code> is otherwise inaccessible.</p>
 </div>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs" region="UriExists(Uri uri)"></code></pre>
 <p></code></pre><p>
 
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_UriExists_Uri_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.UriExists(Uri%2CICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDiscoveryUtility_UriExists_System_Uri_System_Net_ICredentials_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri%2CSystem.Net.ICredentials)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDiscoveryUtility.cs/#L462">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.UriExists*"></a>
-  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_Uri_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.UriExists(Uri,ICredentials)">UriExists(Uri, ICredentials)</h4>
-  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <see cref="!:Uri"></see> exists using the specified <see cref="!:ICredentials">credentials</see>.</p>
+  <h4 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_System_Uri_System_Net_ICredentials_" data-uid="Argotic.Common.SyndicationDiscoveryUtility.UriExists(System.Uri,System.Net.ICredentials)">UriExists(Uri, ICredentials)</h4>
+  <div class="markdown level1 summary"><p>Returns a value indicating if the supplied <span class="xref">System.Uri</span> exists using the specified <span class="xref">System.Net.ICredentials</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2299,15 +2870,15 @@ This parameter is passed uninitialized.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">uri</span></td>
-        <td><p>The <see cref="!:Uri"></see> to validate.</p>
+        <td><p>The <span class="xref">System.Uri</span> to validate.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the web resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the web resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
@@ -2329,7 +2900,7 @@ If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_Uri_ICredentials__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationDiscoveryUtility_UriExists_System_Uri_System_Net_ICredentials__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method will return <strong>false</strong> if the <code data-dev-comment-type="paramref" class="paramref">uri</code> is a null reference or the <code data-dev-comment-type="paramref" class="paramref">uri</code> is otherwise inaccessible.</p>
 </div>
 </article>

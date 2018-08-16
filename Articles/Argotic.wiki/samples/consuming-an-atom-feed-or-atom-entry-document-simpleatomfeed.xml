@@ -1,0 +1,17 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost/</id>
+  <title>Simple Atom Feed</title>
+  <updated>2008-02-27T16:21:43.46-08:00</updated>
+  <link href="http://localhost/atom.xml" rel="self" />
+  <author>
+    <name>Brian William Kuhn</name>
+  </author>
+  <entry>
+    <id>urn:uuid:fbd850a0-e333-12dc-bc36-7d8b00dd6d4c</id>
+    <title>Simple Atom Entry</title>
+    <updated>2008-02-27T16:21:43.47-08:00</updated>
+    <summary>A minimal Atom feed entry.</summary>
+    <link href="http://localhost/entries/SimpleAtomEntry.aspx" rel="alternate" />
+  </entry>
+</feed>

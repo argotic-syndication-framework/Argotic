@@ -79,21 +79,38 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">SyndicationResourceLoadedEventArgs</span></div>
+    <div class="level1"><span class="xref">System.EventArgs</span></div>
+    <div class="level2"><span class="xref">SyndicationResourceLoadedEventArgs</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">IComparable</span></div>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Common.html">Argotic.Common</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Common.dll</h6>
   <h5 id="Argotic_Common_SyndicationResourceLoadedEventArgs_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable</code></pre>
   </div>
   <h5 id="Argotic_Common_SyndicationResourceLoadedEventArgs_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>A <a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Loaded">Loaded</a> event occurs whenever the <see cref="!:ISyndicationResource.Load(System.Xml.XmlReader)"></see>
-or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></see> methods are called.</p>
+  <div class="markdown level0 remarks"><p>A <a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Loaded">Loaded</a> event occurs whenever the <a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_System_Xml_XmlReader_">Load(XmlReader)</a>
+or <a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_System_Xml_XPath_IXPathNavigable_">Load(IXPathNavigable)</a> methods are called.</p>
 </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -115,14 +132,14 @@ or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></s
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(System.Xml.XPath.IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationResourceLoadedEventArgs.cs/#L54">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor*"></a>
-  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(IXPathNavigable)">SyndicationResourceLoadedEventArgs(IXPathNavigable)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <see cref="!:IXPathNavigable"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(System.Xml.XPath.IXPathNavigable)">SyndicationResourceLoadedEventArgs(IXPathNavigable)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -140,23 +157,39 @@ or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></s
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
         <td><span class="parametername">data</span></td>
-        <td><p>A <see cref="!:IXPathNavigable"></see> object that represents the XML data that was used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Xml.XPath.IXPathNavigable</span> object that represents the XML data that was used to load the syndication resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">data</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(IXPathNavigable%2CUri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_System_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(System.Xml.XPath.IXPathNavigable%2CSystem.Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationResourceLoadedEventArgs.cs/#L94">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor*"></a>
-  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(IXPathNavigable,Uri,Argotic.Common.WebRequestOptions)">SyndicationResourceLoadedEventArgs(IXPathNavigable, Uri, WebRequestOptions)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <see cref="!:IXPathNavigable"></see>, <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_System_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(System.Xml.XPath.IXPathNavigable,System.Uri,Argotic.Common.WebRequestOptions)">SyndicationResourceLoadedEventArgs(IXPathNavigable, Uri, WebRequestOptions)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span>, <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -174,15 +207,15 @@ or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></s
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
         <td><span class="parametername">data</span></td>
-        <td><p>A <see cref="!:IXPathNavigable"></see> object that represents the XML data that was used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Xml.XPath.IXPathNavigable</span> object that represents the XML data that was used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> of the Internet resource that the syndication resource was loaded from. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
+        <td><p>The <span class="xref">System.Uri</span> of the Internet resource that the syndication resource was loaded from. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
 </td>
       </tr>
       <tr>
@@ -193,21 +226,42 @@ or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></s
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">data</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_Uri_Argotic_Common_WebRequestOptions_Object_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(IXPathNavigable%2CUri%2CArgotic.Common.WebRequestOptions%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_System_Uri_Argotic_Common_WebRequestOptions_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(System.Xml.XPath.IXPathNavigable%2CSystem.Uri%2CArgotic.Common.WebRequestOptions%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationResourceLoadedEventArgs.cs/#L134">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor*"></a>
-  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_Uri_Argotic_Common_WebRequestOptions_Object_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(IXPathNavigable,Uri,Argotic.Common.WebRequestOptions,Object)">SyndicationResourceLoadedEventArgs(IXPathNavigable, Uri, WebRequestOptions, Object)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <see cref="!:IXPathNavigable"></see>, <see cref="!:ICredentials">credentials</see>, <see cref="!:IWebProxy">proxy</see> and user token.</p>
+  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_System_Uri_Argotic_Common_WebRequestOptions_System_Object_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(System.Xml.XPath.IXPathNavigable,System.Uri,Argotic.Common.WebRequestOptions,System.Object)">SyndicationResourceLoadedEventArgs(IXPathNavigable, Uri, WebRequestOptions, Object)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span>, <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span> and user token.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, Object state)</code></pre>
+    <pre><code class="lang-csharp hljs">public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, object state)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -220,15 +274,15 @@ or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></s
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
         <td><span class="parametername">data</span></td>
-        <td><p>A <see cref="!:IXPathNavigable"></see> object that represents the XML data that was used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Xml.XPath.IXPathNavigable</span> object that represents the XML data that was used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> of the Internet resource that the syndication resource was loaded from. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
+        <td><p>The <span class="xref">System.Uri</span> of the Internet resource that the syndication resource was loaded from. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
 </td>
       </tr>
       <tr>
@@ -238,23 +292,44 @@ or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></s
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">state</span></td>
         <td><p>The user-defined object that was passed to the asynchronous operation.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">data</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_Uri_ICredentials_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(IXPathNavigable%2CUri%2CICredentials%2CIWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(System.Xml.XPath.IXPathNavigable%2CSystem.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationResourceLoadedEventArgs.cs/#L76">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor*"></a>
-  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_Uri_ICredentials_IWebProxy_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(IXPathNavigable,Uri,ICredentials,IWebProxy)">SyndicationResourceLoadedEventArgs(IXPathNavigable, Uri, ICredentials, IWebProxy)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <see cref="!:IXPathNavigable"></see>, <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(System.Xml.XPath.IXPathNavigable,System.Uri,System.Net.ICredentials,System.Net.IWebProxy)">SyndicationResourceLoadedEventArgs(IXPathNavigable, Uri, ICredentials, IWebProxy)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span>, <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -272,46 +347,67 @@ or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></s
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
         <td><span class="parametername">data</span></td>
-        <td><p>A <see cref="!:IXPathNavigable"></see> object that represents the XML data that was used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Xml.XPath.IXPathNavigable</span> object that represents the XML data that was used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> of the Internet resource that the syndication resource was loaded from. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
+        <td><p>The <span class="xref">System.Uri</span> of the Internet resource that the syndication resource was loaded from. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>The <see cref="!:ICredentials"></see> that were used to authenticate the request to an Internet resource. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
+        <td><p>The <span class="xref">System.Net.ICredentials</span> that were used to authenticate the request to an Internet resource. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>The <see cref="!:IWebProxy"></see> used to access the Internet resource. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
+        <td><p>The <span class="xref">System.Net.IWebProxy</span> used to access the Internet resource. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">data</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_Uri_ICredentials_IWebProxy_Object_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(IXPathNavigable%2CUri%2CICredentials%2CIWebProxy%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.%23ctor(System.Xml.XPath.IXPathNavigable%2CSystem.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationResourceLoadedEventArgs.cs/#L118">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor*"></a>
-  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_IXPathNavigable_Uri_ICredentials_IWebProxy_Object_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(IXPathNavigable,Uri,ICredentials,IWebProxy,Object)">SyndicationResourceLoadedEventArgs(IXPathNavigable, Uri, ICredentials, IWebProxy, Object)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <see cref="!:IXPathNavigable"></see>, <see cref="!:ICredentials">credentials</see>, <see cref="!:IWebProxy">proxy</see> and user token.</p>
+  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_System_Object_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.#ctor(System.Xml.XPath.IXPathNavigable,System.Uri,System.Net.ICredentials,System.Net.IWebProxy,System.Object)">SyndicationResourceLoadedEventArgs(IXPathNavigable, Uri, ICredentials, IWebProxy, Object)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a> class using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span>, <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span> and user token.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, Object state)</code></pre>
+    <pre><code class="lang-csharp hljs">public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, object state)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -324,33 +420,54 @@ or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></s
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
         <td><span class="parametername">data</span></td>
-        <td><p>A <see cref="!:IXPathNavigable"></see> object that represents the XML data that was used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Xml.XPath.IXPathNavigable</span> object that represents the XML data that was used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:Uri"></see> of the Internet resource that the syndication resource was loaded from. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
+        <td><p>The <span class="xref">System.Uri</span> of the Internet resource that the syndication resource was loaded from. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>The <see cref="!:ICredentials"></see> that were used to authenticate the request to an Internet resource. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
+        <td><p>The <span class="xref">System.Net.ICredentials</span> that were used to authenticate the request to an Internet resource. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>The <see cref="!:IWebProxy"></see> used to access the Internet resource. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
+        <td><p>The <span class="xref">System.Net.IWebProxy</span> used to access the Internet resource. Can be <strong>null</strong> if syndication resource was not loaded using an Internet resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">state</span></td>
         <td><p>The user-defined object that was passed to the asynchronous operation.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">data</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -383,8 +500,8 @@ or <see cref="!:ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"></s
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
-        <td><p>The <see cref="!:ICredentials"></see> that were used to authenticate the request to an Internet resource.
+        <td><span class="xref">System.Net.ICredentials</span></td>
+        <td><p>The <span class="xref">System.Net.ICredentials</span> that were used to authenticate the request to an Internet resource.
 If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicationResource</a> was not loaded by an Internet resource or no credentials were provided, returns <strong>null</strong>.</p>
 </td>
       </tr>
@@ -392,7 +509,7 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
   </table>
   <h5 id="Argotic_Common_SyndicationResourceLoadedEventArgs_Credentials_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_Uri_ICredentials_IWebProxy_">Load(Uri, ICredentials, IWebProxy)</a></div>
+      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_">Load</a>(<span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span>)</div>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -403,7 +520,7 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs_Data_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.Data*"></a>
   <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs_Data" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.Data">Data</h4>
-  <div class="markdown level1 summary"><p>Gets a read-only <see cref="!:XPathNavigator"></see> object for navigating the XML data that was used to load the syndication resource.</p>
+  <div class="markdown level1 summary"><p>Gets a read-only <span class="xref">System.Xml.XPath.XPathNavigator</span> object for navigating the XML data that was used to load the syndication resource.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -420,8 +537,8 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>A read-only <see cref="!:XPathNavigator"></see> object for navigating the XML data that was used to load the syndication resource.</p>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>A read-only <span class="xref">System.Xml.XPath.XPathNavigator</span> object for navigating the XML data that was used to load the syndication resource.</p>
 </td>
       </tr>
     </tbody>
@@ -487,8 +604,8 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
-        <td><p>The <see cref="!:IWebProxy"></see> used to access the Internet resource.
+        <td><span class="xref">System.Net.IWebProxy</span></td>
+        <td><p>The <span class="xref">System.Net.IWebProxy</span> used to access the Internet resource.
 If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicationResource</a> was not loaded by an Internet resource or no proxy was specified, returns <strong>null</strong>.</p>
 </td>
       </tr>
@@ -496,7 +613,7 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
   </table>
   <h5 id="Argotic_Common_SyndicationResourceLoadedEventArgs_Proxy_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_Uri_ICredentials_IWebProxy_">Load(Uri, ICredentials, IWebProxy)</a></div>
+      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_">Load</a>(<span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span>)</div>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -507,7 +624,7 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs_Source_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.Source*"></a>
   <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs_Source" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.Source">Source</h4>
-  <div class="markdown level1 summary"><p>Gets the <see cref="!:Uri"></see> of the Internet resource that the syndication resource was loaded from.</p>
+  <div class="markdown level1 summary"><p>Gets the <span class="xref">System.Uri</span> of the Internet resource that the syndication resource was loaded from.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -524,8 +641,8 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>The <see cref="!:Uri"></see> of the Internet resource that the syndication resource was loaded from.
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>The <span class="xref">System.Uri</span> of the Internet resource that the syndication resource was loaded from.
 If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicationResource</a> was not loaded by an Internet resource, returns <strong>null</strong>.</p>
 </td>
       </tr>
@@ -533,7 +650,7 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
   </table>
   <h5 id="Argotic_Common_SyndicationResourceLoadedEventArgs_Source_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_Uri_ICredentials_IWebProxy_">Load(Uri, ICredentials, IWebProxy)</a></div>
+      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_">Load</a>(<span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span>)</div>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -544,12 +661,12 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs_State_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.State*"></a>
   <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs_State" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.State">State</h4>
-  <div class="markdown level1 summary"><p>Gets an <see cref="!:Object"></see> containing state information that was passed to the asynchronous load operation.</p>
+  <div class="markdown level1 summary"><p>Gets an <span class="xref">System.Object</span> containing state information that was passed to the asynchronous load operation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Object State { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public object State { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -561,8 +678,8 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
-        <td><p>A <see cref="!:Object"></see> containing state information that was passed to the asynchronous load operation.
+        <td><span class="xref">System.Object</span></td>
+        <td><p>A <span class="xref">System.Object</span> containing state information that was passed to the asynchronous load operation.
 If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicationResource</a> was not loaded by an Internet resource or no user token provided, returns <strong>null</strong>.</p>
 </td>
       </tr>
@@ -570,7 +687,7 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
   </table>
   <h5 id="Argotic_Common_SyndicationResourceLoadedEventArgs_State_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_LoadAsync_Uri_Object_">LoadAsync(Uri, Object)</a></div>
+      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_LoadAsync_System_Uri_System_Object_">LoadAsync</a>(<span class="xref">System.Uri</span>, <span class="xref">System.Object</span>)</div>
   </div>
   <h3 id="methods">Methods
   </h3>
@@ -624,21 +741,37 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationResourceLoadedEventArgs.cs/#L282">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs_Equals_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.Equals*"></a>
-  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs_Equals_Object_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs_Equals_System_Object_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -651,9 +784,9 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -669,11 +802,13 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -706,6 +841,8 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadedEventArgs_ToString.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadedEventArgs.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -715,7 +852,7 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadedEventArgs_ToString_" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.ToString*"></a>
   <h4 id="Argotic_Common_SyndicationResourceLoadedEventArgs_ToString" data-uid="Argotic.Common.SyndicationResourceLoadedEventArgs.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -733,11 +870,13 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Common_SyndicationResourceLoadedEventArgs_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.</p>
 </div>
@@ -969,11 +1108,13 @@ If the <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicat
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <span class="xref">IComparable</span>
+      <span class="xref">System.IComparable</span>
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
       <div><a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicationResource</a></div>
+      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_System_Xml_XPath_IXPathNavigable_">Load</a>(<span class="xref">System.Xml.XPath.IXPathNavigable</span>)</div>
+      <div><a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_System_Xml_XmlReader_">Load</a>(<span class="xref">System.Xml.XmlReader</span>)</div>
   </div>
 </article>
           </div>

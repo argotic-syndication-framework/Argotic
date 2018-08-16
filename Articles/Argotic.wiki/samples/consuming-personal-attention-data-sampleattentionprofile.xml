@@ -1,0 +1,88 @@
+﻿<?xml version="1.0"?>
+
+<APML xmlns="http://www.apml.org/apml-0.6" version="0.6" >
+
+  <Head>
+    <Title>Example APML file for apml.org</Title>
+    <Generator>Written by Hand</Generator>
+    <UserEmail>sample@apml.org</UserEmail>
+    <DateCreated>2007-03-11T01:55:00Z</DateCreated>
+  </Head>
+
+  <Body defaultprofile="Work">
+
+    <Profile name="Home">
+
+      <ImplicitData>
+        <Concepts>
+          <Concept key="attention" value="0.99" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="content distribution" value="0.97" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="information" value="0.95" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="business" value="0.93" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="alerting" value="0.91" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="intelligent agents" value="0.89" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="development" value="0.87" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="service" value="0.85" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="user interface" value="0.83" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="experience design" value="0.81" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="site design" value="0.79" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="television" value="0.77" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="management" value="0.75" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          <Concept key="media" value="0.73" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+        </Concepts>
+
+        <Sources>
+          <Source key="http://feeds.feedburner.com/apmlspec" name="APML.org" value="1.00" type="application/rss+xml" from="GatheringTool.com" updated="2007-03-11T01:55:00Z">
+            <Author key="Sample" value="0.5" from="GatheringTool.com" updated="2007-03-11T01:55:00Z" />
+          </Source>
+        </Sources>
+
+      </ImplicitData>
+
+      <ExplicitData>
+
+        <Concepts>
+          <Concept key="direct attention" value="0.99" />
+        </Concepts>
+
+        <Sources>
+          <Source key="http://feeds.feedburner.com/TechCrunch" name="Techcrunch" type="application/rss+xml" value="0.4">
+            <Author key="ExplicitSample" value="0.5" />
+          </Source>
+        </Sources>
+
+      </ExplicitData>
+
+    </Profile>
+
+    <Profile name="Work">
+
+      <ImplicitData />
+
+      <ExplicitData>
+
+        <Concepts>
+          <Concept key="Golf" value="0.2" />
+        </Concepts>
+
+        <Sources>
+          <Source key="http://feeds.feedburner.com/TechCrunch" name="Techcrunch" type="application/atom+xml" value="0.4">
+            <Author key="ProfessionalBlogger" value="0.5" />
+          </Source>
+        </Sources>
+
+      </ExplicitData>
+
+    </Profile>
+
+    <Applications>
+
+      <Application name="sample.com">
+        <SampleAppEl />
+      </Application>
+
+    </Applications>
+
+  </Body>
+
+</APML>

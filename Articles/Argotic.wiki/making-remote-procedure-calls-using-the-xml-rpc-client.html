@@ -1,0 +1,148 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Extensible Markup Language Remote Procedure Call (XML-RPC) Client </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Extensible Markup Language Remote Procedure Call (XML-RPC) Client ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../Network_Protocols/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="extensible-markup-language-remote-procedure-call-xml-rpc-client">Extensible Markup Language Remote Procedure Call (XML-RPC) Client</h1>
+
+<p>XML-RPC is a Remote Procedure Calling protocol that works over the Internet. An XML-RPC message is an HTTP-POST request. The body of the request is in XML. A procedure executes on the server and the value it returns is also formatted in XML. Procedure parameters can be scalars, numbers, strings, dates, etc. and can also be complex record and list structures.</p>
+<p>The Argotic framework supports the XML-RPC communication protocol through the <em>XmlRpcClient</em> class, which allows applications to send remote procedure calls by using the Extensible Markup Language Remote Procedure Call (XML-RPC) protocol. The network client supports both synchronous and asynchronous communication.</p>
+<pre><code>using Argotic.Net;
+
+// Initialize the XML-RPC client
+XmlRpcClient client = new XmlRpcClient();
+client.Host = new Uri(&quot;http://bob.example.net/xmlrpcserver&quot;);
+
+// Construct a Pingback peer-to-peer notification XML-RPC message
+XmlRpcMessage message = new XmlRpcMessage(&quot;pingback.ping&quot;);
+message.Encoding = Encoding.UTF8;
+message.Parameters.Add(new XmlRpcScalarValue(&quot;http://alice.example.org/#p123&quot;)); // sourceURI
+message.Parameters.Add(new XmlRpcScalarValue(&quot;http://bob.example.net/#foo&quot;)); // targetURI
+
+// Send a synchronous pingback ping
+XmlRpcResponse response = client.Send(message);
+
+// Verify response to the trackback ping
+if (response != null)
+{
+    if (response.Fault != null)
+    {
+        XmlRpcStructureMember faultCode = response.Fault[&quot;faultCode&quot;];
+        XmlRpcStructureMember faultMessage = response.Fault[&quot;faultString&quot;];
+
+        if (faultCode != null &amp;&amp; faultMessage != null)
+        {
+            // Handle the pingback ping error condition that occurred
+        }
+    }
+    else
+    {
+        XmlRpcScalarValue successInformation = response.Parameter as XmlRpcScalarValue;
+        if (successInformation != null)
+        {
+            // Pingback request was successful, return should be a string containing information the server deems useful.
+        }
+    }
+}
+</code></pre>
+<p>The example above is a describes how to use the XmlRpcClient to send a Pingback peer-to-peer notification ping.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

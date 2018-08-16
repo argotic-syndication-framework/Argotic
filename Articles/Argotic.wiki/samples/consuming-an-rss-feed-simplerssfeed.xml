@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Simple RSS Feed</title>
+    <link>http://localhost/</link>
+    <description>A minimal RSS 2.0 syndication feed.</description>
+    <docs>http://www.rssboard.org/rss-specification</docs>
+    <generator>Argotic Syndication Framework 2008.0.0.0, http://www.codeplex.com/Argotic</generator>
+    <item>
+      <title>Simple RSS Item</title>
+      <description>A minimal RSS channel item.</description>
+      <link>http://localhost/items/SimpleRSSItem.aspx</link>
+    </item>
+  </channel>
+</rss>

@@ -125,7 +125,7 @@
   </span>
   <a id="Argotic_Extensions_ISyndicationExtension_Documentation_" data-uid="Argotic.Extensions.ISyndicationExtension.Documentation*"></a>
   <h4 id="Argotic_Extensions_ISyndicationExtension_Documentation" data-uid="Argotic.Extensions.ISyndicationExtension.Documentation">Documentation</h4>
-  <div class="markdown level1 summary"><p>Gets a <see cref="!:Uri"></see> that points to documentation for the syndication extension.</p>
+  <div class="markdown level1 summary"><p>Gets a <span class="xref">System.Uri</span> that points to documentation for the syndication extension.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -142,8 +142,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the documentation or implementation details for the syndication extension.</p>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that points to the documentation or implementation details for the syndication extension.</p>
 </td>
       </tr>
     </tbody>
@@ -206,7 +206,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Version</span></td>
+        <td><span class="xref">System.Version</span></td>
         <td><p>The <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Version">Version</a> of the specification that the syndication extension conforms to.</p>
 </td>
       </tr>
@@ -280,14 +280,14 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_CreateNamespaceManager_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_CreateNamespaceManager_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/ISyndicationExtension.cs/#L106">View Source</a>
   </span>
   <a id="Argotic_Extensions_ISyndicationExtension_CreateNamespaceManager_" data-uid="Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager*"></a>
-  <h4 id="Argotic_Extensions_ISyndicationExtension_CreateNamespaceManager_XPathNavigator_" data-uid="Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(XPathNavigator)">CreateNamespaceManager(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Initializes a <see cref="!:XmlNamespaceManager"></see> object for resolving prefixed XML namespaces utilized by this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>.</p>
+  <h4 id="Argotic_Extensions_ISyndicationExtension_CreateNamespaceManager_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Extensions.ISyndicationExtension.CreateNamespaceManager(System.Xml.XPath.XPathNavigator)">CreateNamespaceManager(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Initializes a <span class="xref">System.Xml.XmlNamespaceManager</span> object for resolving prefixed XML namespaces utilized by this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -305,7 +305,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">navigator</span></td>
         <td><p>Provides a cursor model for navigating syndication extension data.</p>
 </td>
@@ -322,28 +322,44 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlNamespaceManager</span></td>
-        <td><p>A <see cref="!:XmlNamespaceManager"></see> that resolves prefixed XML namespaces and provides scope management for these namespaces.</p>
+        <td><span class="xref">System.Xml.XmlNamespaceManager</span></td>
+        <td><p>A <span class="xref">System.Xml.XmlNamespaceManager</span> that resolves prefixed XML namespaces and provides scope management for these namespaces.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Extensions_ISyndicationExtension_CreateNamespaceManager_XPathNavigator__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This method will return a <see cref="!:XmlNamespaceManager"></see> that has a namespace added to it using the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_XmlPrefix">XmlPrefix</a> and <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_XmlNamespace">XmlNamespace</a>
-of the extension unless the supplied <see cref="!:XPathNavigator"></see> already has an XML namespace associated to the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_XmlPrefix">XmlPrefix</a>, in which case
+  <h5 id="Argotic_Extensions_ISyndicationExtension_CreateNamespaceManager_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This method will return a <span class="xref">System.Xml.XmlNamespaceManager</span> that has a namespace added to it using the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_XmlPrefix">XmlPrefix</a> and <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_XmlNamespace">XmlNamespace</a>
+of the extension unless the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span> already has an XML namespace associated to the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_XmlPrefix">XmlPrefix</a>, in which case
 the associated XML namespace is used instead. This is to prevent collisions and is an attempt to gracefully handle the case where a XML namespace that
 is not per the extension's specification has been declared on the syndication resource.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">navigator</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_ExistsInSource_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.ExistsInSource(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_ExistsInSource_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/ISyndicationExtension.cs/#L92">View Source</a>
   </span>
   <a id="Argotic_Extensions_ISyndicationExtension_ExistsInSource_" data-uid="Argotic.Extensions.ISyndicationExtension.ExistsInSource*"></a>
-  <h4 id="Argotic_Extensions_ISyndicationExtension_ExistsInSource_XPathNavigator_" data-uid="Argotic.Extensions.ISyndicationExtension.ExistsInSource(XPathNavigator)">ExistsInSource(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Determines if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> exists in the XML data in the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Extensions_ISyndicationExtension_ExistsInSource_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Extensions.ISyndicationExtension.ExistsInSource(System.Xml.XPath.XPathNavigator)">ExistsInSource(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Determines if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> exists in the XML data in the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -361,9 +377,9 @@ is not per the extension's specification has been declared on the syndication re
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to parse.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to parse.</p>
 </td>
       </tr>
     </tbody>
@@ -384,84 +400,26 @@ is not per the extension's specification has been declared on the syndication re
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Extensions_ISyndicationExtension_ExistsInSource_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Extensions_ISyndicationExtension_ExistsInSource_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <strong>Notes to Implementers:</strong>
 <ul><li>
             This method should be as lightweight as possible when determining if the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> or its related entities are present in the <code data-dev-comment-type="paramref" class="paramref">source</code>. 
-            It is recommended that implementers utilize the <see cref="!:XPathNavigator.GetNamespacesInScope(XmlNamespaceScope)"></see> method to determine if the <code data-dev-comment-type="paramref" class="paramref">source</code> contains 
+            It is recommended that implementers utilize the <span class="xref">System.Xml.XPath.XPathNavigator.GetNamespacesInScope(System.Xml.XmlNamespaceScope)</span> method to determine if the <code data-dev-comment-type="paramref" class="paramref">source</code> contains 
             the expected namespace(s) for the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>.
 </li></ul>
 </p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_Load_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.Load(IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/ISyndicationExtension.cs/#L126">View Source</a>
-  </span>
-  <a id="Argotic_Extensions_ISyndicationExtension_Load_" data-uid="Argotic.Extensions.ISyndicationExtension.Load*"></a>
-  <h4 id="Argotic_Extensions_ISyndicationExtension_Load_IXPathNavigable_" data-uid="Argotic.Extensions.ISyndicationExtension.Load(IXPathNavigable)">Load(IXPathNavigable)</h4>
-  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <see cref="!:IXPathNavigable"></see>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">bool Load(IXPathNavigable source)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The <strong>IXPathNavigable</strong> used to load the syndication extension.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the syndication extension was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Extensions_ISyndicationExtension_Load_IXPathNavigable__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-<strong>Notes to Implementers:</strong>
-<ul><li>
-            After the load operation has successfully completed, the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Loaded">Loaded</a> event <strong>must</strong> be raised.
-</li></ul>
-</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_Load_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.Load(XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/ISyndicationExtension.cs/#L152">View Source</a>
   </span>
   <a id="Argotic_Extensions_ISyndicationExtension_Load_" data-uid="Argotic.Extensions.ISyndicationExtension.Load*"></a>
-  <h4 id="Argotic_Extensions_ISyndicationExtension_Load_XmlReader_" data-uid="Argotic.Extensions.ISyndicationExtension.Load(XmlReader)">Load(XmlReader)</h4>
-  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <see cref="!:XmlReader"></see>.</p>
+  <h4 id="Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XmlReader_" data-uid="Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XmlReader)">Load(XmlReader)</h4>
+  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <span class="xref">System.Xml.XmlReader</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -479,7 +437,7 @@ is not per the extension's specification has been declared on the syndication re
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlReader</span></td>
+        <td><span class="xref">System.Xml.XmlReader</span></td>
         <td><span class="parametername">reader</span></td>
         <td><p>The <strong>XmlReader</strong> used to load the syndication extension.</p>
 </td>
@@ -502,27 +460,117 @@ is not per the extension's specification has been declared on the syndication re
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Extensions_ISyndicationExtension_Load_XmlReader__remarks">Remarks</h5>
+  <h5 id="Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XmlReader__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <strong>Notes to Implementers:</strong>
 <ul><li>
-            When implementing this method, the <see cref="!:XmlReader"></see> should be used to create a <see cref="!:IXPathNavigable"></see> 
-            that is then passed to the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_IXPathNavigable_">Load(IXPathNavigable)</a> method.
+            When implementing this method, the <span class="xref">System.Xml.XmlReader</span> should be used to create a <span class="xref">System.Xml.XPath.IXPathNavigable</span> 
+            that is then passed to the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_">Load(IXPathNavigable)</a> method.
 </li><li>
     After the load operation has successfully completed, the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Loaded">Loaded</a> event <strong>must</strong> be raised.
 </li></ul>
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/ISyndicationExtension.cs/#L126">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_ISyndicationExtension_Load_" data-uid="Argotic.Extensions.ISyndicationExtension.Load*"></a>
+  <h4 id="Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_" data-uid="Argotic.Extensions.ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)">Load(IXPathNavigable)</h4>
+  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">bool Load(IXPathNavigable source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <strong>IXPathNavigable</strong> used to load the syndication extension.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the syndication extension was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XPath_IXPathNavigable__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+<strong>Notes to Implementers:</strong>
+<ul><li>
+            After the load operation has successfully completed, the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Loaded">Loaded</a> event <strong>must</strong> be raised.
+</li></ul>
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/ISyndicationExtension.cs/#L159">View Source</a>
   </span>
   <a id="Argotic_Extensions_ISyndicationExtension_WriteTo_" data-uid="Argotic.Extensions.ISyndicationExtension.WriteTo*"></a>
-  <h4 id="Argotic_Extensions_ISyndicationExtension_WriteTo_XmlWriter_" data-uid="Argotic.Extensions.ISyndicationExtension.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Writes the syndication extension to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Extensions_ISyndicationExtension_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Extensions.ISyndicationExtension.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Writes the syndication extension to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -540,23 +588,39 @@ is not per the extension's specification has been declared on the syndication re
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
         <td><p>The <strong>XmlWriter</strong> to which you want to write the syndication extension.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_WriteXmlNamespaceDeclaration_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_ISyndicationExtension_WriteXmlNamespaceDeclaration_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/ISyndicationExtension.cs/#L166">View Source</a>
   </span>
   <a id="Argotic_Extensions_ISyndicationExtension_WriteXmlNamespaceDeclaration_" data-uid="Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration*"></a>
-  <h4 id="Argotic_Extensions_ISyndicationExtension_WriteXmlNamespaceDeclaration_XmlWriter_" data-uid="Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)">WriteXmlNamespaceDeclaration(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Writes the prefixed XML namespace for the current syndication extension to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Extensions_ISyndicationExtension_WriteXmlNamespaceDeclaration_System_Xml_XmlWriter_" data-uid="Argotic.Extensions.ISyndicationExtension.WriteXmlNamespaceDeclaration(System.Xml.XmlWriter)">WriteXmlNamespaceDeclaration(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Writes the prefixed XML namespace for the current syndication extension to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -574,9 +638,25 @@ is not per the extension's specification has been declared on the syndication re
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
         <td><p>The <strong>XmlWriter</strong> to which you want to write the prefixed XML namespace declaration to.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -608,15 +688,15 @@ is not per the extension's specification has been declared on the syndication re
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Extensions_ISyndicationExtension_Loaded_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_IXPathNavigable_">Load(IXPathNavigable)</a></div>
-      <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_XmlReader_">Load(XmlReader)</a></div>
+      <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_">Load(IXPathNavigable)</a></div>
+      <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XmlReader_">Load(XmlReader)</a></div>
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">

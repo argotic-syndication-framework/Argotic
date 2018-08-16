@@ -84,13 +84,29 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a></div>
-    <div><span class="xref">IComparable</span></div>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Net.html">Argotic.Net</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Net_XmlRpcScalarValue_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class XmlRpcScalarValue : object, IXmlRpcValue, IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class XmlRpcScalarValue : IXmlRpcValue, IComparable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -110,44 +126,6 @@
   <div class="codewrapper">
     <pre><code class="lang-csharp hljs">public XmlRpcScalarValue()</code></pre>
   </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue__ctor_DateTime_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.%23ctor(DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValue.cs/#L74">View Source</a>
-  </span>
-  <a id="Argotic_Net_XmlRpcScalarValue__ctor_" data-uid="Argotic.Net.XmlRpcScalarValue.#ctor*"></a>
-  <h4 id="Argotic_Net_XmlRpcScalarValue__ctor_DateTime_" data-uid="Argotic.Net.XmlRpcScalarValue.#ctor(DateTime)">XmlRpcScalarValue(DateTime)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a> class using the specified instance in time.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public XmlRpcScalarValue(DateTime value)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">DateTime</span></td>
-        <td><span class="parametername">value</span></td>
-        <td><p>A <see cref="!:DateTime"></see>, provided in Coordinated Universal Time (UTC).</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Net_XmlRpcScalarValue__ctor_DateTime__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This constructor sets the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Net_XmlRpcScalarValue_ValueType">ValueType</a> property to be <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.html#Argotic_Net_XmlRpcScalarValueType_DateTime">DateTime</a>,
-and sets the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Net_XmlRpcScalarValue_Value">Value</a> property using the supplied <code data-dev-comment-type="paramref" class="paramref">value</code>.</p>
-</div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue__ctor_System_Boolean_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.%23ctor(System.Boolean)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -222,6 +200,60 @@ and sets the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Ne
   </table>
   <h5 id="Argotic_Net_XmlRpcScalarValue__ctor_System_Byte____remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This constructor sets the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Net_XmlRpcScalarValue_ValueType">ValueType</a> property to be <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.html#Argotic_Net_XmlRpcScalarValueType_Base64">Base64</a>,
+and sets the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Net_XmlRpcScalarValue_Value">Value</a> property using the supplied <code data-dev-comment-type="paramref" class="paramref">value</code>.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue__ctor_System_DateTime_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.%23ctor(System.DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValue.cs/#L74">View Source</a>
+  </span>
+  <a id="Argotic_Net_XmlRpcScalarValue__ctor_" data-uid="Argotic.Net.XmlRpcScalarValue.#ctor*"></a>
+  <h4 id="Argotic_Net_XmlRpcScalarValue__ctor_System_DateTime_" data-uid="Argotic.Net.XmlRpcScalarValue.#ctor(System.DateTime)">XmlRpcScalarValue(DateTime)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a> class using the specified instance in time.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public XmlRpcScalarValue(DateTime value)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><span class="parametername">value</span></td>
+        <td><p>A <span class="xref">System.DateTime</span>, provided in Coordinated Universal Time (UTC).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Net_XmlRpcScalarValue__ctor_System_DateTime__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>This constructor sets the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Net_XmlRpcScalarValue_ValueType">ValueType</a> property to be <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.html#Argotic_Net_XmlRpcScalarValueType_DateTime">DateTime</a>,
 and sets the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Net_XmlRpcScalarValue_Value">Value</a> property using the supplied <code data-dev-comment-type="paramref" class="paramref">value</code>.</p>
 </div>
   <span class="small pull-right mobile-hide">
@@ -367,14 +399,30 @@ and sets the <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Ne
     <tbody>
       <tr>
         <td><span class="xref">System.Object</span></td>
-        <td><p>A <see cref="!:Object"></see> that represents the value of this parameter.</p>
+        <td><p>A <span class="xref">System.Object</span> that represents the value of this parameter.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Net_XmlRpcScalarValue_Value_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> should represent a <see cref="!:Type"></see> that is appropriate for this parameter&apos;s <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Net_XmlRpcScalarValue_ValueType">ValueType</a>.</p>
+  <div class="markdown level1 remarks"><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> should represent a <span class="xref">System.Type</span> that is appropriate for this parameter&apos;s <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html#Argotic_Net_XmlRpcScalarValue_ValueType">ValueType</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue_ValueType.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.ValueType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -468,21 +516,37 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValue.cs/#L309">View Source</a>
   </span>
   <a id="Argotic_Net_XmlRpcScalarValue_Equals_" data-uid="Argotic.Net.XmlRpcScalarValue.Equals*"></a>
-  <h4 id="Argotic_Net_XmlRpcScalarValue_Equals_Object_" data-uid="Argotic.Net.XmlRpcScalarValue.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Net_XmlRpcScalarValue_Equals_System_Object_" data-uid="Argotic.Net.XmlRpcScalarValue.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -495,9 +559,9 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -513,11 +577,13 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -550,16 +616,18 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValue.cs/#L178">View Source</a>
   </span>
   <a id="Argotic_Net_XmlRpcScalarValue_Load_" data-uid="Argotic.Net.XmlRpcScalarValue.Load*"></a>
-  <h4 id="Argotic_Net_XmlRpcScalarValue_Load_XPathNavigator_" data-uid="Argotic.Net.XmlRpcScalarValue.Load(XPathNavigator)">Load(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Net_XmlRpcScalarValue_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Net.XmlRpcScalarValue.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -577,9 +645,9 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
     </tbody>
@@ -600,9 +668,25 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Net_XmlRpcScalarValue_Load_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Net_XmlRpcScalarValue_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue_ToString.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -612,7 +696,7 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
   </span>
   <a id="Argotic_Net_XmlRpcScalarValue_ToString_" data-uid="Argotic.Net.XmlRpcScalarValue.ToString*"></a>
   <h4 id="Argotic_Net_XmlRpcScalarValue_ToString" data-uid="Argotic.Net.XmlRpcScalarValue.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -630,24 +714,26 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Net_XmlRpcScalarValue_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcScalarValue_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcScalarValue.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcScalarValue.cs/#L227">View Source</a>
   </span>
   <a id="Argotic_Net_XmlRpcScalarValue_WriteTo_" data-uid="Argotic.Net.XmlRpcScalarValue.WriteTo*"></a>
-  <h4 id="Argotic_Net_XmlRpcScalarValue_WriteTo_XmlWriter_" data-uid="Argotic.Net.XmlRpcScalarValue.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Net_XmlRpcScalarValue_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Net.XmlRpcScalarValue.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Net.XmlRpcScalarValue.html">XmlRpcScalarValue</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -665,9 +751,25 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
-        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -903,7 +1005,7 @@ The default value is <a class="xref" href="Argotic.Net.XmlRpcScalarValueType.htm
       <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>
   </div>
   <div>
-      <span class="xref">IComparable</span>
+      <span class="xref">System.IComparable</span>
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">

@@ -73,7 +73,7 @@
   
   <h1 id="Argotic_Net_WebContentType" data-uid="Argotic.Net.WebContentType" class="text-break">Class WebContentType
   </h1>
-  <div class="markdown level0 summary"><p>Represents the media type for the content of a <see cref="!:WebRequest"></see> or <see cref="!:WebResponse"></see>.</p>
+  <div class="markdown level0 summary"><p>Represents the media type for the content of a <span class="xref">System.Net.WebRequest</span> or <span class="xref">System.Net.WebResponse</span>.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -81,11 +81,31 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">WebContentType</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Net.html">Argotic.Net</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Net_WebContentType_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class WebContentType : IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class WebContentType : IComparable</code></pre>
   </div>
   <h5 id="Argotic_Net_WebContentType_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.</p>
@@ -148,6 +168,37 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType__ctor_System_String_System_String_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.%23ctor(System.String%2CSystem.String%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -194,15 +245,46 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType__ctor_System_String_System_String_System_String_Encoding_.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.%23ctor(System.String%2CSystem.String%2CSystem.String%2CEncoding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType__ctor_System_String_System_String_System_String_System_Text_Encoding_.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.%23ctor(System.String%2CSystem.String%2CSystem.String%2CSystem.Text.Encoding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/WebContentType.cs/#L90">View Source</a>
   </span>
   <a id="Argotic_Net_WebContentType__ctor_" data-uid="Argotic.Net.WebContentType.#ctor*"></a>
-  <h4 id="Argotic_Net_WebContentType__ctor_System_String_System_String_System_String_Encoding_" data-uid="Argotic.Net.WebContentType.#ctor(System.String,System.String,System.String,Encoding)">WebContentType(String, String, String, Encoding)</h4>
+  <h4 id="Argotic_Net_WebContentType__ctor_System_String_System_String_System_String_System_Text_Encoding_" data-uid="Argotic.Net.WebContentType.#ctor(System.String,System.String,System.String,System.Text.Encoding)">WebContentType(String, String, String, Encoding)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.WebContentType.html">WebContentType</a> class using the specified media type, sub-type, type discriminator and character encoding.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -239,9 +321,45 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Encoding</span></td>
+        <td><span class="xref">System.Text.Encoding</span></td>
         <td><span class="parametername">characterSet</span></td>
         <td><p>A <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_Encoding">Encoding</a> object that represents the character encoding of the media content.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaType</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">mediaSubtype</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">characterSet</code> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -276,14 +394,14 @@
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><p>The name registered with the <a href="http://www.iana.org">Internet Assigned Numbers Authority</a> (IANA) for the character encoding of this media content.
-If no character encoding has been specified, returns <see cref="!:String.Empty"></see>.</p>
+If no character encoding has been specified, returns <span class="xref">System.String.Empty</span>.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Net_WebContentType_CharacterSet_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_CharacterSet">CharacterSet</a> property gets or sets the <em>charset</em> parameter within the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_Parameters">Parameters</a> collection.
-Specifiying <see cref="!:String.Empty"></see> for the character encoding will remove the <em>charset</em> parameter from the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_Parameters">Parameters</a> collection.</p>
+Specifiying <span class="xref">System.String.Empty</span> for the character encoding will remove the <em>charset</em> parameter from the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_Parameters">Parameters</a> collection.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -313,7 +431,7 @@ Specifiying <see cref="!:String.Empty"></see> for the character encoding will re
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><p>A value that provides a means of discriminating this media content.
-If no type discriminator has been specified, returns <see cref="!:String.Empty"></see>.</p>
+If no type discriminator has been specified, returns <span class="xref">System.String.Empty</span>.</p>
 </td>
       </tr>
     </tbody>
@@ -321,7 +439,7 @@ If no type discriminator has been specified, returns <see cref="!:String.Empty">
   <h5 id="Argotic_Net_WebContentType_Discriminator_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_Discriminator">Discriminator</a> property gets or sets the <em>type</em> parameter within the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_Parameters">Parameters</a> collection.
 The <em>type</em> parameter can be used to discrimiate between resource representations that share the same <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_MediaType">MediaType</a> and <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_MediaSubtype">MediaSubtype</a>.
-Specifiying <see cref="!:String.Empty"></see> for the type discriminator will remove the <em>type</em> parameter from the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_Parameters">Parameters</a> collection.</p>
+Specifiying <span class="xref">System.String.Empty</span> for the type discriminator will remove the <em>type</em> parameter from the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_Parameters">Parameters</a> collection.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -349,9 +467,30 @@ Specifiying <see cref="!:String.Empty"></see> for the type discriminator will re
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Encoding</span></td>
+        <td><span class="xref">System.Text.Encoding</span></td>
         <td><p>A <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_Encoding">Encoding</a> object that represents the character encoding of this media content.
 If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_CharacterSet">CharacterSet</a> is not specified, a <strong>null</strong> reference (Nothing in Visual Basic) is returned.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_CharacterSet">CharacterSet</a> is not a valid code page name.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The code page indicated by <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebContentType_CharacterSet">CharacterSet</a> is not supported by the underlying platform.</p>
 </td>
       </tr>
     </tbody>
@@ -388,6 +527,27 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType_MediaType.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.MediaType%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -420,6 +580,27 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType_Parameters.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.Parameters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -446,8 +627,8 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
-        <td><p>A <see cref="!:Dictionary&lt;T, T>"></see> collection of strings that represents the name/value pairs of additional parameters applied to this media content.</p>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;</span> collection of strings that represents the name/value pairs of additional parameters applied to this media content.</p>
 </td>
       </tr>
     </tbody>
@@ -464,14 +645,14 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType_CompareSequence_Dictionary_System_String_System_String__Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.CompareSequence(Dictionary%7BSystem.String%2CSystem.String%7D%2CDictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType_CompareSequence_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.CompareSequence(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D%2CSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/WebContentType.cs/#L265">View Source</a>
   </span>
   <a id="Argotic_Net_WebContentType_CompareSequence_" data-uid="Argotic.Net.WebContentType.CompareSequence*"></a>
-  <h4 id="Argotic_Net_WebContentType_CompareSequence_Dictionary_System_String_System_String__Dictionary_System_String_System_String__" data-uid="Argotic.Net.WebContentType.CompareSequence(Dictionary{System.String,System.String},Dictionary{System.String,System.String})">CompareSequence(Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified <see cref="!:Dictionary&lt;T, T>"></see> collections.</p>
+  <h4 id="Argotic_Net_WebContentType_CompareSequence_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__" data-uid="Argotic.Net.WebContentType.CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String})">CompareSequence(Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified <span class="xref">System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;</span> collections.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -489,13 +670,13 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">source</span></td>
         <td><p>The first collection.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">target</span></td>
         <td><p>The second collection.</p>
 </td>
@@ -518,7 +699,7 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Net_WebContentType_CompareSequence_Dictionary_System_String_System_String__Dictionary_System_String_System_String___remarks">Remarks</h5>
+  <h5 id="Argotic_Net_WebContentType_CompareSequence_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String___remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
 </p>
@@ -529,6 +710,27 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
     If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -579,21 +781,37 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/WebContentType.cs/#L368">View Source</a>
   </span>
   <a id="Argotic_Net_WebContentType_Equals_" data-uid="Argotic.Net.WebContentType.Equals*"></a>
-  <h4 id="Argotic_Net_WebContentType_Equals_Object_" data-uid="Argotic.Net.WebContentType.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Net_WebContentType_Equals_System_Object_" data-uid="Argotic.Net.WebContentType.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -606,9 +824,9 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -624,11 +842,13 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -661,6 +881,8 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_WebContentType_ToString.md&amp;value=---%0Auid%3A%20Argotic.Net.WebContentType.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -670,7 +892,7 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
   </span>
   <a id="Argotic_Net_WebContentType_ToString_" data-uid="Argotic.Net.WebContentType.ToString*"></a>
   <h4 id="Argotic_Net_WebContentType_ToString" data-uid="Argotic.Net.WebContentType.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.WebContentType.html">WebContentType</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.WebContentType.html">WebContentType</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -688,11 +910,13 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.WebContentType.html">WebContentType</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.WebContentType.html">WebContentType</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Net_WebContentType_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the MIME content type representation for the current instance.</p>
 </div>
@@ -922,6 +1146,10 @@ If the <a class="xref" href="Argotic.Net.WebContentType.html#Argotic_Net_WebCont
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
 </article>
           </div>
           

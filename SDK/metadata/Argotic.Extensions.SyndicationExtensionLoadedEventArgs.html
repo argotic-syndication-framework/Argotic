@@ -79,21 +79,38 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">SyndicationExtensionLoadedEventArgs</span></div>
+    <div class="level1"><span class="xref">System.EventArgs</span></div>
+    <div class="level2"><span class="xref">SyndicationExtensionLoadedEventArgs</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">IComparable</span></div>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.html">Argotic.Extensions</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
   <h5 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable</code></pre>
   </div>
   <h5 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>A <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Loaded">Loaded</a> event occurs whenever the <see cref="!:ISyndicationExtension.Load(System.Xml.XmlReader)"></see>
-or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></see> methods are called.</p>
+  <div class="markdown level0 remarks"><p>A <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Loaded">Loaded</a> event occurs whenever the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XmlReader_">Load(XmlReader)</a>
+or <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_">Load(IXPathNavigable)</a> methods are called.</p>
 </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -115,14 +132,14 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.SyndicationExtensionLoadedEventArgs.%23ctor(IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.SyndicationExtensionLoadedEventArgs.%23ctor(System.Xml.XPath.IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/SyndicationExtensionLoadedEventArgs.cs/#L48">View Source</a>
   </span>
   <a id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.#ctor*"></a>
-  <h4 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_IXPathNavigable_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.#ctor(IXPathNavigable)">SyndicationExtensionLoadedEventArgs(IXPathNavigable)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a> class using the supplied <see cref="!:IXPathNavigable"></see>.</p>
+  <h4 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.#ctor(System.Xml.XPath.IXPathNavigable)">SyndicationExtensionLoadedEventArgs(IXPathNavigable)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a> class using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -140,23 +157,39 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
         <td><span class="parametername">data</span></td>
-        <td><p>A <see cref="!:IXPathNavigable"></see> object that represents the XML data that was used to load the syndication extension.</p>
+        <td><p>A <span class="xref">System.Xml.XPath.IXPathNavigable</span> object that represents the XML data that was used to load the syndication extension.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">data</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_IXPathNavigable_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.SyndicationExtensionLoadedEventArgs.%23ctor(IXPathNavigable%2CArgotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.SyndicationExtensionLoadedEventArgs.%23ctor(System.Xml.XPath.IXPathNavigable%2CArgotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/SyndicationExtensionLoadedEventArgs.cs/#L64">View Source</a>
   </span>
   <a id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.#ctor*"></a>
-  <h4 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_IXPathNavigable_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.#ctor(IXPathNavigable,Argotic.Extensions.ISyndicationExtension)">SyndicationExtensionLoadedEventArgs(IXPathNavigable, ISyndicationExtension)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a> class using the supplied <see cref="!:IXPathNavigable"></see> and <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>.</p>
+  <h4 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs__ctor_System_Xml_XPath_IXPathNavigable_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.#ctor(System.Xml.XPath.IXPathNavigable,Argotic.Extensions.ISyndicationExtension)">SyndicationExtensionLoadedEventArgs(IXPathNavigable, ISyndicationExtension)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a> class using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span> and <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -174,15 +207,36 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
         <td><span class="parametername">data</span></td>
-        <td><p>A <see cref="!:IXPathNavigable"></see> object that represents the XML data that was used to load the syndication extension.</p>
+        <td><p>A <span class="xref">System.Xml.XPath.IXPathNavigable</span> object that represents the XML data that was used to load the syndication extension.</p>
 </td>
       </tr>
       <tr>
         <td><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></td>
         <td><span class="parametername">extension</span></td>
         <td><p>A <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> that represents the syndication extension after the load operation completed.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">data</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -198,7 +252,7 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
   </span>
   <a id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_Data_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.Data*"></a>
   <h4 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_Data" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.Data">Data</h4>
-  <div class="markdown level1 summary"><p>Gets a read-only <see cref="!:XPathNavigator"></see> object for navigating the XML data that was used to load the syndication extension.</p>
+  <div class="markdown level1 summary"><p>Gets a read-only <span class="xref">System.Xml.XPath.XPathNavigator</span> object for navigating the XML data that was used to load the syndication extension.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -215,8 +269,8 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>A read-only <see cref="!:XPathNavigator"></see> object for navigating the XML data that was used to load the syndication extension.</p>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>A read-only <span class="xref">System.Xml.XPath.XPathNavigator</span> object for navigating the XML data that was used to load the syndication extension.</p>
 </td>
       </tr>
     </tbody>
@@ -340,21 +394,37 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_SyndicationExtensionLoadedEventArgs_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.SyndicationExtensionLoadedEventArgs.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_SyndicationExtensionLoadedEventArgs_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.SyndicationExtensionLoadedEventArgs.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/SyndicationExtensionLoadedEventArgs.cs/#L190">View Source</a>
   </span>
   <a id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_Equals_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.Equals*"></a>
-  <h4 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_Equals_Object_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_Equals_System_Object_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -367,9 +437,9 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -385,11 +455,13 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_SyndicationExtensionLoadedEventArgs_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Extensions.SyndicationExtensionLoadedEventArgs.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -422,6 +494,8 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_SyndicationExtensionLoadedEventArgs_ToString.md&amp;value=---%0Auid%3A%20Argotic.Extensions.SyndicationExtensionLoadedEventArgs.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -431,7 +505,7 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
   </span>
   <a id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_ToString_" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.ToString*"></a>
   <h4 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_ToString" data-uid="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -449,11 +523,13 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.SyndicationExtensionLoadedEventArgs.html">SyndicationExtensionLoadedEventArgs</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Extensions_SyndicationExtensionLoadedEventArgs_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.</p>
 </div>
@@ -685,11 +761,13 @@ or <see cref="!:ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"></
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <span class="xref">IComparable</span>
+      <span class="xref">System.IComparable</span>
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
       <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></div>
+      <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_">Load</a>(<span class="xref">System.Xml.XPath.IXPathNavigable</span>)</div>
+      <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html#Argotic_Extensions_ISyndicationExtension_Load_System_Xml_XmlReader_">Load</a>(<span class="xref">System.Xml.XmlReader</span>)</div>
   </div>
 </article>
           </div>

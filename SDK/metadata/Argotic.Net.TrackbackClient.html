@@ -81,11 +81,35 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">TrackbackClient</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Net.html">Argotic.Net</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Net_TrackbackClient_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class TrackbackClient : object</code></pre>
+    <pre><code class="lang-csharp hljs">public class TrackbackClient</code></pre>
   </div>
   <h5 id="Argotic_Net_TrackbackClient_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>
@@ -117,13 +141,13 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackClient__ctor_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackClient.%23ctor(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackClient__ctor_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackClient.%23ctor(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs/#L78">View Source</a>
   </span>
   <a id="Argotic_Net_TrackbackClient__ctor_" data-uid="Argotic.Net.TrackbackClient.#ctor*"></a>
-  <h4 id="Argotic_Net_TrackbackClient__ctor_Uri_" data-uid="Argotic.Net.TrackbackClient.#ctor(Uri)">TrackbackClient(Uri)</h4>
+  <h4 id="Argotic_Net_TrackbackClient__ctor_System_Uri_" data-uid="Argotic.Net.TrackbackClient.#ctor(System.Uri)">TrackbackClient(Uri)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.TrackbackClient.html">TrackbackClient</a> class that sends Trackback pings using the specified Trackback server.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -142,22 +166,38 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">host</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the host computer used for Trackback transactions.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the host computer used for Trackback transactions.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackClient__ctor_Uri_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackClient.%23ctor(Uri%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackClient__ctor_System_Uri_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackClient.%23ctor(System.Uri%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs/#L92">View Source</a>
   </span>
   <a id="Argotic_Net_TrackbackClient__ctor_" data-uid="Argotic.Net.TrackbackClient.#ctor*"></a>
-  <h4 id="Argotic_Net_TrackbackClient__ctor_Uri_System_String_" data-uid="Argotic.Net.TrackbackClient.#ctor(Uri,System.String)">TrackbackClient(Uri, String)</h4>
+  <h4 id="Argotic_Net_TrackbackClient__ctor_System_Uri_System_String_" data-uid="Argotic.Net.TrackbackClient.#ctor(System.Uri,System.String)">TrackbackClient(Uri, String)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.TrackbackClient.html">TrackbackClient</a> class that sends Trackback pings using the specified Trackback server and user agent.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -176,15 +216,41 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">host</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the host computer used for Trackback transactions.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the host computer used for Trackback transactions.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">userAgent</span></td>
         <td><p>Information such as the application name, version, host operating system, and language.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">userAgent</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">userAgent</code> is an empty string.</p>
 </td>
       </tr>
     </tbody>
@@ -217,8 +283,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> object that represents the authentication credentials provided by this client when making Trackback pings.
+        <td><span class="xref">System.Net.ICredentials</span></td>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> object that represents the authentication credentials provided by this client when making Trackback pings.
 The default is a null reference (Nothing in Visual Basic), which indicates no authentication information will be supplied to identify the maker of the request.</p>
 </td>
       </tr>
@@ -250,8 +316,8 @@ The default is a null reference (Nothing in Visual Basic), which indicates no au
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the host computer used for Trackback transactions.</p>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the host computer used for Trackback transactions.</p>
 </td>
       </tr>
     </tbody>
@@ -259,6 +325,22 @@ The default is a null reference (Nothing in Visual Basic), which indicates no au
   <h5 id="Argotic_Net_TrackbackClient_Host_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>If <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_Host">Host</a> is a null reference (Nothing in Visual Basic), <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_Host">Host</a> is initialized using the settings in the application or machine configuration files.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackClient_Proxy.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackClient.Proxy%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -285,8 +367,8 @@ The default is a null reference (Nothing in Visual Basic), which indicates no au
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> object that represents the web proxy utilized by this client to proxy Trackback pings.
+        <td><span class="xref">System.Net.IWebProxy</span></td>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> object that represents the web proxy utilized by this client to proxy Trackback pings.
 The default is a null reference (Nothing in Visual Basic), which indicates no proxy will be used to proxy the request.</p>
 </td>
       </tr>
@@ -318,15 +400,36 @@ The default is a null reference (Nothing in Visual Basic), which indicates no pr
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TimeSpan</span></td>
-        <td><p>A <see cref="!:TimeSpan"></see> that specifies the time-out period. The default value is 15 seconds.</p>
+        <td><span class="xref">System.TimeSpan</span></td>
+        <td><p>A <span class="xref">System.TimeSpan</span> that specifies the time-out period. The default value is 15 seconds.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Net_TrackbackClient_Timeout_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>If <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_Timeout">Timeout</a> is equal to <see cref="!:TimeSpan.MinValue"></see>, <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_Timeout">Timeout</a> is initialized using the settings in the application or machine configuration files.</p>
+  <div class="markdown level1 remarks"><p>If <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_Timeout">Timeout</a> is equal to <span class="xref">System.TimeSpan.MinValue</span>, <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_Timeout">Timeout</a> is initialized using the settings in the application or machine configuration files.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The time out period is less than zero.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The time out period is greater than a year.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackClient_UseDefaultCredentials.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackClient.UseDefaultCredentials%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -336,7 +439,7 @@ The default is a null reference (Nothing in Visual Basic), which indicates no pr
   </span>
   <a id="Argotic_Net_TrackbackClient_UseDefaultCredentials_" data-uid="Argotic.Net.TrackbackClient.UseDefaultCredentials*"></a>
   <h4 id="Argotic_Net_TrackbackClient_UseDefaultCredentials" data-uid="Argotic.Net.TrackbackClient.UseDefaultCredentials">UseDefaultCredentials</h4>
-  <div class="markdown level1 summary"><p>Gets or sets a <see cref="!:Boolean"></see> value that controls whether the <see cref="!:CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making Trackback pings.</p>
+  <div class="markdown level1 summary"><p>Gets or sets a <span class="xref">System.Boolean</span> value that controls whether the <span class="xref">System.Net.CredentialCache.DefaultCredentials</span> are sent when making Trackback pings.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -403,6 +506,27 @@ The default is a null reference (Nothing in Visual Basic), which indicates no pr
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><p>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.</p>
 </td>
       </tr>
     </tbody>
@@ -503,22 +627,48 @@ This is the preferred technique for handling <a class="xref" href="Argotic.Net.T
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>The <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_Host">Host</a> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Net.TrackbackClient.html">TrackbackClient</a> has a <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object_">SendAsync(TrackbackMessage, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/Trackback/TrackbackClient.cs/#L416">View Source</a>
   </span>
   <a id="Argotic_Net_TrackbackClient_SendAsync_" data-uid="Argotic.Net.TrackbackClient.SendAsync*"></a>
-  <h4 id="Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_Object_" data-uid="Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage,Object)">SendAsync(TrackbackMessage, Object)</h4>
+  <h4 id="Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object_" data-uid="Argotic.Net.TrackbackClient.SendAsync(Argotic.Net.TrackbackMessage,System.Object)">SendAsync(TrackbackMessage, Object)</h4>
   <div class="markdown level1 summary"><p>Sends the specified message to an Trackback server to execute an Trackback ping request.
 This method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void SendAsync(TrackbackMessage message, Object userToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public void SendAsync(TrackbackMessage message, object userToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -537,19 +687,45 @@ This method does not block the calling thread and allows the caller to pass an o
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">userToken</span></td>
         <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_Object__remarks">Remarks</h5>
+  <h5 id="Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     To receive notification when the Trackback ping request has been sent or the operation has been cancelled, add an event handler to the <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendCompleted">SendCompleted</a> event.
-    You can cancel a <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_Object_">SendAsync(TrackbackMessage, Object)</a> operation by calling the <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsyncCancel">SendAsyncCancel()</a> method.
+    You can cancel a <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object_">SendAsync(TrackbackMessage, Object)</a> operation by calling the <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsyncCancel">SendAsyncCancel()</a> method.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>The <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_Host">Host</a> is a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Net.TrackbackClient.html">TrackbackClient</a> has a <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object_">SendAsync(TrackbackMessage, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackClient_SendAsyncCancel.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackClient.SendAsyncCancel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -567,7 +743,7 @@ This method does not block the calling thread and allows the caller to pass an o
     <pre><code class="lang-csharp hljs">public void SendAsyncCancel()</code></pre>
   </div>
   <h5 id="Argotic_Net_TrackbackClient_SendAsyncCancel_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Use the <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsyncCancel">SendAsyncCancel()</a> method to cancel a pending <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_Object_">SendAsync(TrackbackMessage, Object)</a> operation.
+  <div class="markdown level1 remarks"><p>Use the <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsyncCancel">SendAsyncCancel()</a> method to cancel a pending <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object_">SendAsync(TrackbackMessage, Object)</a> operation.
 If there is an Trackback ping request waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.
 If there is no send operation pending, this method does nothing.</p>
 </div>
@@ -598,14 +774,14 @@ If there is no send operation pending, this method does nothing.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Argotic.Net.TrackbackMessageSentEventArgs.html">TrackbackMessageSentEventArgs</a>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Argotic.Net.TrackbackMessageSentEventArgs.html">TrackbackMessageSentEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Net_TrackbackClient_SendCompleted_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_Object_">SendAsync(TrackbackMessage, Object)</a></div>
+      <div><a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object_">SendAsync(TrackbackMessage, Object)</a></div>
   </div>
 </article>
           </div>

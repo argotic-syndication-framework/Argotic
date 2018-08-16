@@ -1,0 +1,140 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Trackback Peer-to-Peer Notification Client </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Trackback Peer-to-Peer Notification Client ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../Network_Protocols/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="trackback-peer-to-peer-notification-client">Trackback Peer-to-Peer Notification Client</h1>
+
+<p>TrackBack is a framework for peer-to-peer communication and notifications between web sites. The central idea behind TrackBack is the idea of a <em>TrackBack ping</em>, a request saying, essentially, &quot;resource A is related/linked to resource B.&quot; TrackBack uses a REST model, where requests are made through standard HTTP calls.</p>
+<p>To send a TrackBack ping, the client makes a standard HTTP request to the server, and receives a response in a simple XML format.</p>
+<p>To send a ping, the client sends an HTTP POST request to the TrackBack Ping URL.</p>
+<p>A TrackBack <em>resource</em> is represented by a TrackBack Ping URL, which is just a standard URI. Using TrackBack, sites can communicate about related resources. For example, if Weblogger A wishes to notify Weblogger B that he has written something interesting/related/shocking, A sends a TrackBack ping to B. This accomplishes two things:</p>
+<p>Weblogger B can automatically list all sites that have referenced a particular post on his site, allowing visitors to his site to read all related posts around the web, including Weblogger A's.</p>
+<p>The ping provides a firm, explicit link between his entry and yours, as opposed to an implicit link (like a referrer log) that depends upon outside action (someone clicking on the link).</p>
+<p>The Argotic framework supports Trackback peer-to-peer notification through the <em>TrackbackClient</em> class, which allows applications to send and received notification pings by using the Trackback peer-to-peer notification protocol. The network client supports both synchronous and asynchronous communication.</p>
+<pre><code>using Argotic.Net;
+
+// Initialize the Trackback peer-to-peer notification protocol client
+TrackbackClient client = new TrackbackClient();
+client.Host = new Uri(&quot;http://www.example.com/trackback/5&quot;);
+
+// Construct the trackback message to be sent
+TrackbackMessage message = new TrackbackMessage(new Uri(&quot;http://www.bar.com/&quot;));
+message.Encoding = Encoding.UTF8;
+message.WeblogName = &quot;Foo&quot;;
+message.Title = &quot;Foo Bar&quot;;
+message.Excerpt = &quot;My Excerpt&quot;;
+
+// Send a synchronous trackback ping
+TrackbackResponse response  = client.Send(message);
+
+// Verify response to the trackback ping
+if (response != null)
+{
+    if (response.HasError)
+    {
+        // Use the TrackbackResponse.ErrorMessage property to determine the reason the trackback ping failed
+    }
+}
+</code></pre>
+<p>The example above describes how to synchronously send a Trackback notification ping.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<opml version="2.0">
+  <head>
+    <title>Simple Blogroll</title>
+    <dateCreated>Tue, 01 Jan 2008 00:00:00 GMT</dateCreated>
+    <dateModified>Thu, 28 Feb 2008 10:15:08 GMT</dateModified>
+    <ownerName>Brian William Kuhn</ownerName>
+    <ownerEmail>oppositional@gmail.com</ownerEmail>
+    <ownerId>http://blog.oppositionallydefiant.com/</ownerId>
+    <docs>http://www.opml.org/spec2</docs>
+  </head>
+  <body>
+    <outline text="Argotic Syndication Framework" type="rss" xmlUrl="http://www.codeplex.com/Argotic/Project/ProjectRss.aspx" />
+    <outline text="Carl Franklin" type="rss" xmlUrl="http://www.intellectualhedonism.com/SyndicationService.asmx/GetRss" htmlUrl="http://www.intellectualhedonism.com/" title="Carl Franklin" description="Podcasting pioneer" />
+    <outline text="Richard Campbell" type="rss" xmlUrl="http://www.campbellassociates.ca/blog/SyndicationService.asmx/GetRss" htmlUrl="http://www.campbellassociates.ca/" title="Richard Campbell" description="Surrendering to the Inevitable" />
+    <outline text="Scott Hanselman" type="rss" xmlUrl="http://feeds.feedburner.com/ScottHanselman" htmlUrl="http://www.hanselman.com/" title="Scott Hanselman" description="Programming Life and the Zen of Computers" />
+    <outline text="The ZBuffer" type="rss" xmlUrl="http://www.thezbuffer.com/feeds/rss.aspx" htmlUrl="http://www.thezbuffer.com/" title="The ZBuffer" description="News, Information and resources for Managed DirectX and XNA Framework" />
+  </body>
+</opml>

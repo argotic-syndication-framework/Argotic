@@ -81,11 +81,31 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">YahooMediaRestriction</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.Core.html">Argotic.Extensions.Core</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
   <h5 id="Argotic_Extensions_Core_YahooMediaRestriction_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class YahooMediaRestriction : IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class YahooMediaRestriction : IComparable</code></pre>
   </div>
   <h5 id="Argotic_Extensions_Core_YahooMediaRestriction_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>
@@ -140,8 +160,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <see cref="!:String"></see> objects that represent the entities this restriction applies to.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <span class="xref">System.String</span> objects that represent the entities this restriction applies to.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -152,7 +172,7 @@ The default value is an <em>empty</em> collection.</p>
     To allow a producer to explicitly declare their intentions, two literal entity names are reserved: <strong>all</strong> and <strong>none</strong>. These literals can <u>only</u> be used once.
 </p>
 <p>
-    When the restriction <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html#Argotic_Extensions_Core_YahooMediaRestriction_EntityType">EntityType</a> is <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestrictionType.html#Argotic_Extensions_Core_YahooMediaRestrictionType_Uri">Uri</a> the elements in this collection should represent distributor <see cref="!:Uri">Uri&apos;s</see>.
+    When the restriction <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html#Argotic_Extensions_Core_YahooMediaRestriction_EntityType">EntityType</a> is <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestrictionType.html#Argotic_Extensions_Core_YahooMediaRestrictionType_Uri">Uri</a> the elements in this collection should represent distributor <span class="xref">System.Uri</span>.
 </p>
 <p>
     When the restriction <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html#Argotic_Extensions_Core_YahooMediaRestriction_EntityType">EntityType</a> is <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestrictionType.html#Argotic_Extensions_Core_YahooMediaRestrictionType_Country">Country</a> the elements in this collection should represent country codes. 
@@ -275,21 +295,37 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs/#L401">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaRestriction_Equals_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.Equals*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaRestriction_Equals_Object_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaRestriction_Equals_System_Object_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -302,9 +338,9 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -320,11 +356,13 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -357,16 +395,18 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs/#L252">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaRestriction_Load_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.Load*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaRestriction_Load_XPathNavigator_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.Load(XPathNavigator)">Load(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaRestriction_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -384,9 +424,9 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
     </tbody>
@@ -407,9 +447,25 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Extensions_Core_YahooMediaRestriction_Load_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Extensions_Core_YahooMediaRestriction_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_RelationshipAsString_Argotic_Extensions_Core_YahooMediaRestrictionRelationship_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.RelationshipAsString(Argotic.Extensions.Core.YahooMediaRestrictionRelationship)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -513,6 +569,27 @@ The default value is an <em>empty</em> collection.</p>
   <h5 id="Argotic_Extensions_Core_YahooMediaRestriction_RelationshipByName_System_String__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method disregards case of specified relationship name.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_RestrictionTypeAsString_Argotic_Extensions_Core_YahooMediaRestrictionType_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.RestrictionTypeAsString(Argotic.Extensions.Core.YahooMediaRestrictionType)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -616,6 +693,27 @@ The default value is an <em>empty</em> collection.</p>
   <h5 id="Argotic_Extensions_Core_YahooMediaRestriction_RestrictionTypeByName_System_String__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method disregards case of specified restriction type name.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_ToString.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -625,7 +723,7 @@ The default value is an <em>empty</em> collection.</p>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaRestriction_ToString_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.ToString*"></a>
   <h4 id="Argotic_Extensions_Core_YahooMediaRestriction_ToString" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -643,24 +741,26 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Extensions_Core_YahooMediaRestriction_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaRestriction_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaRestriction.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaRestriction.cs/#L311">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaRestriction_WriteTo_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.WriteTo*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaRestriction_WriteTo_XmlWriter_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaRestriction_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Extensions.Core.YahooMediaRestriction.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -678,9 +778,25 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
-        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -911,6 +1027,10 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
 </article>
           </div>
           

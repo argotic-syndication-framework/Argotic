@@ -1,0 +1,400 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>Introduction to the framework API and core entities </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="Introduction to the framework API and core entities ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../The_Basics/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="introduction-to-the-framework-api-and-core-entities">Introduction to the framework API and core entities</h1>
+
+<p>The framework is segmented logically using namespaces that organize code and provides a way to create globally unique types. While the breadth and depth of functionality that the framework provides can often seem daunting at first, most common usage scenarios will be handled by the framework classes listed below. These classes also provide a good starting point for familiarizing yourself with the framework’s capabilities.</p>
+<h2 id="commonshared-entities">Common/Shared Entities</h2>
+<ul>
+<li><strong>ISyndicationResource</strong>
+<ul>
+<li><strong>Purpose:</strong>  Allows an object to implement a syndication resource by representing a set of properties, methods, indexers and events common to web content syndication resources. Can be used to reliably add custom syndication formats not implemented in the framework.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Common</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Common</em></li>
+</ul>
+</li>
+<li><strong>SyndicationContentFormat</strong>
+<ul>
+<li><strong>Purpose:</strong> Specifies the web content syndication format that the syndicated content conforms to.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Common</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Common</em></li>
+</ul>
+</li>
+<li><strong>SyndicationDiscoveryUtility</strong>
+<ul>
+<li><strong>Purpose:</strong> Provides methods for extracting peer-to-peer auto-discovery and resource information from syndicated content. Provides support for conditional GET operations. This class cannot be inherited.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Common</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Common</em></li>
+</ul>
+</li>
+</ul>
+<p>##Really Simple Syndication (RSS)##</p>
+<ul>
+<li><strong>RssFeed</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a Really Simple Syndication (RSS) syndication feed.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>RssChannel</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents information about the meta-data and contents associated to an RssFeed.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>RssItem</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents distinct content published in an RssFeed such as a news article, weblog entry or some other form of discrete update.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>RssCategory</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a category or tag to which an RssFeed or RssItem belongs.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>RssEnclosure</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a media object such as an audio, video, or executable file that can be associated with an RssItem.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+</ul>
+<p>##Atom Syndication Format##</p>
+<ul>
+<li><strong>AtomFeed</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents an Atom syndication feed, including metadata about the feed, and some or all of the entries associated with it.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>AtomEntry</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents distinct content published in a AtomFeed; or exactly one Atom entry, outside of the context of an AtomFeed.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>AtomCategory</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents information about a category associated with a AtomEntry or AtomFeed.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>AtomLink</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a reference from an AtomEntry or AtomFeed to a Web resource.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+</ul>
+<p>##Format Agnostic Feed Retrieval##</p>
+<ul>
+<li><strong>GenericSyndicationFeed</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a format agnostic view of a syndication feed.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>GenericSyndicationItem</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a format agnostic view of the discrete content for a syndication feed.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>GenericSyndicationCategory</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a format agnostic view of a syndication category.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+</ul>
+<p>##Outline Processor Markup Language (OPML)##</p>
+<ul>
+<li><strong>OpmlDocument</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a Outline Processor Markup Language (OPML) syndication resource.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+<li><strong>OpmlOutline</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a discrete entity within an OpmlDocument, used to provide a way to exchange information between outliners and Internet services.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+</ul>
+<p>##Attention Profiling Markup Language (APML)##</p>
+<ul>
+<li><strong>ApmlDocument</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a Attention Profiling Markup Language (APML) syndication resource.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication.Specialized</em></li>
+</ul>
+</li>
+<li><strong>ApmlApplication</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a product or service data that can be associated to an ApmlDocument.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication.Specialized</em></li>
+</ul>
+</li>
+<li><strong>ApmlProfile</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents an attention profile that can be associated to an ApmlDocument.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication.Specialized</em></li>
+</ul>
+</li>
+</ul>
+<p>##Web Log Markup Language (BlogML)##</p>
+<ul>
+<li><strong>BlogMLDocument</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a Web Log Markup Language (BlogML) syndication resource.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication.Specialized</em></li>
+</ul>
+</li>
+<li><strong>BlogMLPost</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents information that describes a web log entry.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication.Specialized</em></li>
+</ul>
+</li>
+<li><strong>BlogMLAuthor</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents an author of published content.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication.Specialized</em></li>
+</ul>
+</li>
+<li><strong>BlogMLCategory</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents an categorization taxonomy for published content.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication.Specialized</em></li>
+</ul>
+</li>
+</ul>
+<p>##Really Simple Discovery (RSD)##</p>
+<ul>
+<li><p><strong>RsdDocument</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Represents a Really Simple Discovery (RSD) syndication resource.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication.Specialized</em></li>
+</ul>
+</li>
+<li><p><strong>RsdApplicationInterface</strong></p>
+<ul>
+<li><strong>Purpose:</strong> Represents a discoverable application programming interface (API) that provides services to web log clients.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication.Specialized</em></li>
+</ul>
+</li>
+</ul>
+<p>##Trackback Peer-to-Peer Notification##</p>
+<ul>
+<li><strong>TrackbackClient</strong>
+<ul>
+<li><strong>Purpose:</strong> Allows applications to send and received notification pings by using the Trackback peer-to-peer notification protocol.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Net</em></li>
+</ul>
+</li>
+<li><strong>TrackbackMessage</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a Trackback ping request that can be sent using the TrackbackClient class.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Net</em></li>
+</ul>
+</li>
+<li><strong>TrackbackResponse</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents the response to a Trackback ping request.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Net</em></li>
+</ul>
+</li>
+</ul>
+<p>##Extensible Markup Language Remote Procedure Call (XML-RPC)##</p>
+<ul>
+<li><strong>XmlRpcClient</strong>
+<ul>
+<li><strong>Purpose:</strong> Allows applications to send remote procedure calls by using the Extensible Markup Language Remote Procedure Call (XML-RPC) protocol.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Net</em></li>
+</ul>
+</li>
+<li><strong>XmlRpcMessage</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a remote procedure call that can be sent using the XmlRpcClient class.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Net</em></li>
+</ul>
+</li>
+<li><strong>XmlRpcResponse</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents the response to an XML remote procedure call.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Net</em></li>
+</ul>
+</li>
+</ul>
+<p>##Extensible Provider Model##</p>
+<ul>
+<li><strong>SyndicationResourceProvider</strong>
+<ul>
+<li><strong>Purpose:</strong> Provides a base implementation for the syndication resource extensible provider model.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Configuration.Provider</em></li>
+</ul>
+</li>
+<li><strong>SyndicationResourceProviderCollection</strong>
+<ul>
+<li><strong>Purpose:</strong> Represents a collection of provider objects that inherit from SyndicationResourceProvider.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Configuration.Provider</em></li>
+</ul>
+</li>
+<li><strong>SyndicationResourceSection</strong>
+<ul>
+<li><strong>Purpose:</strong> Defines configuration settings to support the infrastructure for configuring and managing syndication resource details. This class cannot be inherited.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Configuration.Provider</em></li>
+</ul>
+</li>
+<li><strong>XmlSyndicationResourceProvider</strong>
+<ul>
+<li><strong>Purpose:</strong> Manages storage of syndication resource information for applications in an XML file data store.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Configuration.Provider</em></li>
+</ul>
+</li>
+<li><strong>SyndicationManager</strong>
+<ul>
+<li><strong>Purpose:</strong> Manages application syndication resources. This class cannot be inherited.</li>
+<li><strong>Assembly:</strong>  <em>Argotic.Core</em></li>
+<li><strong>Namespace:</strong>  <em>Argotic.Syndication</em></li>
+</ul>
+</li>
+</ul>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

@@ -81,11 +81,31 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">XmlRpcMessage</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Net.html">Argotic.Net</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Net_XmlRpcMessage_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class XmlRpcMessage : IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class XmlRpcMessage : IComparable</code></pre>
   </div>
   <h5 id="Argotic_Net_XmlRpcMessage_examples"><strong>Examples</strong></h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs" region="XmlRpcClient"></code></pre>
@@ -143,15 +163,36 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">methodName</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">methodName</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage__ctor_System_String_Collection_Argotic_Net_IXmlRpcValue__.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.%23ctor(System.String%2CCollection%7BArgotic.Net.IXmlRpcValue%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage__ctor_System_String_System_Collections_ObjectModel_Collection_Argotic_Net_IXmlRpcValue__.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.%23ctor(System.String%2CSystem.Collections.ObjectModel.Collection%7BArgotic.Net.IXmlRpcValue%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessage.cs/#L65">View Source</a>
   </span>
   <a id="Argotic_Net_XmlRpcMessage__ctor_" data-uid="Argotic.Net.XmlRpcMessage.#ctor*"></a>
-  <h4 id="Argotic_Net_XmlRpcMessage__ctor_System_String_Collection_Argotic_Net_IXmlRpcValue__" data-uid="Argotic.Net.XmlRpcMessage.#ctor(System.String,Collection{Argotic.Net.IXmlRpcValue})">XmlRpcMessage(String, Collection&lt;IXmlRpcValue&gt;)</h4>
+  <h4 id="Argotic_Net_XmlRpcMessage__ctor_System_String_System_Collections_ObjectModel_Collection_Argotic_Net_IXmlRpcValue__" data-uid="Argotic.Net.XmlRpcMessage.#ctor(System.String,System.Collections.ObjectModel.Collection{Argotic.Net.IXmlRpcValue})">XmlRpcMessage(String, Collection&lt;IXmlRpcValue&gt;)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a> class using the specified method name and parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -176,9 +217,35 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>&gt;</td>
         <td><span class="parametername">parameters</span></td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> objects that represent the method parameters.</p>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> objects that represent the method parameters.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">methodName</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">methodName</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">parameters</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -211,8 +278,24 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Encoding</span></td>
-        <td><p>A <a class="xref" href="Argotic.Net.XmlRpcMessage.html#Argotic_Net_XmlRpcMessage_Encoding">Encoding</a> that specifies the character encoding of this message. The default value is <see cref="!:UTF8Encoding">UTF-8</see>.</p>
+        <td><span class="xref">System.Text.Encoding</span></td>
+        <td><p>A <a class="xref" href="Argotic.Net.XmlRpcMessage.html#Argotic_Net_XmlRpcMessage_Encoding">Encoding</a> that specifies the character encoding of this message. The default value is <span class="xref">System.Text.UTF8Encoding</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -249,6 +332,27 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_Parameters.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.Parameters%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -275,8 +379,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> objects that represent the method parameters.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> objects that represent the method parameters.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -286,14 +390,14 @@ The default value is an <em>empty</em> collection.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_CompareSequence_Collection_Argotic_Net_IXmlRpcValue__Collection_Argotic_Net_IXmlRpcValue__.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.CompareSequence(Collection%7BArgotic.Net.IXmlRpcValue%7D%2CCollection%7BArgotic.Net.IXmlRpcValue%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Net_IXmlRpcValue__System_Collections_ObjectModel_Collection_Argotic_Net_IXmlRpcValue__.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.CompareSequence(System.Collections.ObjectModel.Collection%7BArgotic.Net.IXmlRpcValue%7D%2CSystem.Collections.ObjectModel.Collection%7BArgotic.Net.IXmlRpcValue%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessage.cs/#L152">View Source</a>
   </span>
   <a id="Argotic_Net_XmlRpcMessage_CompareSequence_" data-uid="Argotic.Net.XmlRpcMessage.CompareSequence*"></a>
-  <h4 id="Argotic_Net_XmlRpcMessage_CompareSequence_Collection_Argotic_Net_IXmlRpcValue__Collection_Argotic_Net_IXmlRpcValue__" data-uid="Argotic.Net.XmlRpcMessage.CompareSequence(Collection{Argotic.Net.IXmlRpcValue},Collection{Argotic.Net.IXmlRpcValue})">CompareSequence(Collection&lt;IXmlRpcValue&gt;, Collection&lt;IXmlRpcValue&gt;)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified <see cref="!:Collection&lt;IXmlRpcValue>"></see> collections.</p>
+  <h4 id="Argotic_Net_XmlRpcMessage_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Net_IXmlRpcValue__System_Collections_ObjectModel_Collection_Argotic_Net_IXmlRpcValue__" data-uid="Argotic.Net.XmlRpcMessage.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Net.IXmlRpcValue},System.Collections.ObjectModel.Collection{Argotic.Net.IXmlRpcValue})">CompareSequence(Collection&lt;IXmlRpcValue&gt;, Collection&lt;IXmlRpcValue&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collections.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -311,13 +415,13 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>&gt;</td>
         <td><span class="parametername">source</span></td>
         <td><p>The first collection.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>&gt;</td>
         <td><span class="parametername">target</span></td>
         <td><p>The second collection.</p>
 </td>
@@ -340,7 +444,7 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Net_XmlRpcMessage_CompareSequence_Collection_Argotic_Net_IXmlRpcValue__Collection_Argotic_Net_IXmlRpcValue___remarks">Remarks</h5>
+  <h5 id="Argotic_Net_XmlRpcMessage_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Net_IXmlRpcValue__System_Collections_ObjectModel_Collection_Argotic_Net_IXmlRpcValue___remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
 </p>
@@ -351,6 +455,27 @@ The default value is an <em>empty</em> collection.</p>
     If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -401,21 +526,37 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessage.cs/#L322">View Source</a>
   </span>
   <a id="Argotic_Net_XmlRpcMessage_Equals_" data-uid="Argotic.Net.XmlRpcMessage.Equals*"></a>
-  <h4 id="Argotic_Net_XmlRpcMessage_Equals_Object_" data-uid="Argotic.Net.XmlRpcMessage.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Net_XmlRpcMessage_Equals_System_Object_" data-uid="Argotic.Net.XmlRpcMessage.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -428,9 +569,9 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -446,11 +587,13 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -483,16 +626,18 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessage.cs/#L192">View Source</a>
   </span>
   <a id="Argotic_Net_XmlRpcMessage_Load_" data-uid="Argotic.Net.XmlRpcMessage.Load*"></a>
-  <h4 id="Argotic_Net_XmlRpcMessage_Load_XPathNavigator_" data-uid="Argotic.Net.XmlRpcMessage.Load(XPathNavigator)">Load(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Net_XmlRpcMessage_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Net.XmlRpcMessage.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -510,9 +655,9 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
     </tbody>
@@ -533,9 +678,25 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Net_XmlRpcMessage_Load_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Net_XmlRpcMessage_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_ToString.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -545,7 +706,7 @@ The default value is an <em>empty</em> collection.</p>
   </span>
   <a id="Argotic_Net_XmlRpcMessage_ToString_" data-uid="Argotic.Net.XmlRpcMessage.ToString*"></a>
   <h4 id="Argotic_Net_XmlRpcMessage_ToString" data-uid="Argotic.Net.XmlRpcMessage.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -563,24 +724,26 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Net_XmlRpcMessage_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_XmlRpcMessage_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Net.XmlRpcMessage.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/XmlRpcMessage.cs/#L235">View Source</a>
   </span>
   <a id="Argotic_Net_XmlRpcMessage_WriteTo_" data-uid="Argotic.Net.XmlRpcMessage.WriteTo*"></a>
-  <h4 id="Argotic_Net_XmlRpcMessage_WriteTo_XmlWriter_" data-uid="Argotic.Net.XmlRpcMessage.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Net_XmlRpcMessage_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Net.XmlRpcMessage.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Net.XmlRpcMessage.html">XmlRpcMessage</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -598,9 +761,25 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
-        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -831,6 +1010,10 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
 </article>
           </div>
           

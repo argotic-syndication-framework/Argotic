@@ -73,7 +73,7 @@
   
   <h1 id="Argotic_Common_SyndicationResourceLoadSettings" data-uid="Argotic.Common.SyndicationResourceLoadSettings" class="text-break">Class SyndicationResourceLoadSettings
   </h1>
-  <div class="markdown level0 summary"><p>Specifies a set of features to support on a <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicationResource</a> object loaded by the <a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_IXPathNavigable_Argotic_Common_SyndicationResourceLoadSettings_">Load(IXPathNavigable, SyndicationResourceLoadSettings)</a> method.</p>
+  <div class="markdown level0 summary"><p>Specifies a set of features to support on a <a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicationResource</a> object loaded by the <a class="xref" href="Argotic.Common.ISyndicationResource.html#Argotic_Common_ISyndicationResource_Load_System_Xml_XPath_IXPathNavigable_Argotic_Common_SyndicationResourceLoadSettings_">Load(IXPathNavigable, SyndicationResourceLoadSettings)</a> method.</p>
 </div>
   <div class="markdown level0 conceptual"></div>
   <div class="inheritance">
@@ -81,11 +81,31 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">SyndicationResourceLoadSettings</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Common.html">Argotic.Common</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Common.dll</h6>
   <h5 id="Argotic_Common_SyndicationResourceLoadSettings_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public sealed class SyndicationResourceLoadSettings : IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public sealed class SyndicationResourceLoadSettings : IComparable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -170,8 +190,24 @@ to the <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Encoding</span></td>
-        <td><p>A <see cref="!:Encoding"></see> object that indicates the character encoding to use when parsing a syndication resource. The default value is <see cref="!:Encoding.UTF8"></see>.</p>
+        <td><span class="xref">System.Text.Encoding</span></td>
+        <td><p>A <span class="xref">System.Text.Encoding</span> object that indicates the character encoding to use when parsing a syndication resource. The default value is <span class="xref">System.Text.Encoding.UTF8</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -212,6 +248,22 @@ to the <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html
   <div class="markdown level1 remarks"><p>This setting is typically used to optimize processing by reducing the number of resource entities that must be parsed.
 Some syndication resources may not utilize this setting if they do not represent a list of retrievable entities.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is less than zero.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadSettings_SupportedExtensions.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadSettings.SupportedExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -238,8 +290,8 @@ Some syndication resources may not utilize this setting if they do not represent
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">Type</span>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <see cref="!:Type"></see> objects that represent syndication extension instances to attempt to instantiate during the load operation.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Type</span>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <span class="xref">System.Type</span> objects that represent syndication extension instances to attempt to instantiate during the load operation.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -275,8 +327,29 @@ Automatic detection will <strong>not</strong> remove any syndication extensions 
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TimeSpan</span></td>
-        <td><p>An <see cref="!:TimeSpan"></see> that specifies the time-out period. The default value is 15 seconds.</p>
+        <td><span class="xref">System.TimeSpan</span></td>
+        <td><p>An <span class="xref">System.TimeSpan</span> that specifies the time-out period. The default value is 15 seconds.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The time-out period is less than zero.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The time-out period is greater than a year.</p>
 </td>
       </tr>
     </tbody>
@@ -333,21 +406,37 @@ Automatic detection will <strong>not</strong> remove any syndication extensions 
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadSettings_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadSettings.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadSettings_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadSettings.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationResourceLoadSettings.cs/#L209">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadSettings_Equals_" data-uid="Argotic.Common.SyndicationResourceLoadSettings.Equals*"></a>
-  <h4 id="Argotic_Common_SyndicationResourceLoadSettings_Equals_Object_" data-uid="Argotic.Common.SyndicationResourceLoadSettings.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Common_SyndicationResourceLoadSettings_Equals_System_Object_" data-uid="Argotic.Common.SyndicationResourceLoadSettings.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -360,9 +449,9 @@ Automatic detection will <strong>not</strong> remove any syndication extensions 
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -378,11 +467,13 @@ Automatic detection will <strong>not</strong> remove any syndication extensions 
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadSettings_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadSettings.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -415,6 +506,8 @@ Automatic detection will <strong>not</strong> remove any syndication extensions 
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationResourceLoadSettings_ToString.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationResourceLoadSettings.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -424,7 +517,7 @@ Automatic detection will <strong>not</strong> remove any syndication extensions 
   </span>
   <a id="Argotic_Common_SyndicationResourceLoadSettings_ToString_" data-uid="Argotic.Common.SyndicationResourceLoadSettings.ToString*"></a>
   <h4 id="Argotic_Common_SyndicationResourceLoadSettings_ToString" data-uid="Argotic.Common.SyndicationResourceLoadSettings.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -442,11 +535,13 @@ Automatic detection will <strong>not</strong> remove any syndication extensions 
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Common_SyndicationResourceLoadSettings_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns a human-readable string for the current instance.</p>
 </div>
@@ -676,6 +771,10 @@ Automatic detection will <strong>not</strong> remove any syndication extensions 
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
 </article>
           </div>
           

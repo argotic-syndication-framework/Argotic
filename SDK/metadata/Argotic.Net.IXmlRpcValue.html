@@ -87,14 +87,14 @@ implements to create a type-specific XML-RPC values.</p>
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_IXmlRpcValue_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Net.IXmlRpcValue.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_IXmlRpcValue_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Net.IXmlRpcValue.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs/#L25">View Source</a>
   </span>
   <a id="Argotic_Net_IXmlRpcValue_Load_" data-uid="Argotic.Net.IXmlRpcValue.Load*"></a>
-  <h4 id="Argotic_Net_IXmlRpcValue_Load_XPathNavigator_" data-uid="Argotic.Net.IXmlRpcValue.Load(XPathNavigator)">Load(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Net_IXmlRpcValue_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Net.IXmlRpcValue.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -112,9 +112,9 @@ implements to create a type-specific XML-RPC values.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
     </tbody>
@@ -135,9 +135,25 @@ implements to create a type-specific XML-RPC values.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Net_IXmlRpcValue_Load_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Net_IXmlRpcValue_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_IXmlRpcValue_ToString.md&amp;value=---%0Auid%3A%20Argotic.Net.IXmlRpcValue.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -147,7 +163,7 @@ implements to create a type-specific XML-RPC values.</p>
   </span>
   <a id="Argotic_Net_IXmlRpcValue_ToString_" data-uid="Argotic.Net.IXmlRpcValue.ToString*"></a>
   <h4 id="Argotic_Net_IXmlRpcValue_ToString" data-uid="Argotic.Net.IXmlRpcValue.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -165,7 +181,7 @@ implements to create a type-specific XML-RPC values.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a>.</p>
 </td>
       </tr>
     </tbody>
@@ -175,14 +191,14 @@ implements to create a type-specific XML-RPC values.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_IXmlRpcValue_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Net.IXmlRpcValue.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_IXmlRpcValue_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Net.IXmlRpcValue.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/XmlRpc/IXmlRpcValue.cs/#L32">View Source</a>
   </span>
   <a id="Argotic_Net_IXmlRpcValue_WriteTo_" data-uid="Argotic.Net.IXmlRpcValue.WriteTo*"></a>
-  <h4 id="Argotic_Net_IXmlRpcValue_WriteTo_XmlWriter_" data-uid="Argotic.Net.IXmlRpcValue.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Net_IXmlRpcValue_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Net.IXmlRpcValue.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Net.IXmlRpcValue.html">IXmlRpcValue</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -200,9 +216,25 @@ implements to create a type-specific XML-RPC values.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
-        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>

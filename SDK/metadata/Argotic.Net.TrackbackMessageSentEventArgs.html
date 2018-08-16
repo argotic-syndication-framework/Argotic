@@ -79,20 +79,37 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">TrackbackMessageSentEventArgs</span></div>
+    <div class="level1"><span class="xref">System.EventArgs</span></div>
+    <div class="level2"><span class="xref">TrackbackMessageSentEventArgs</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">IComparable</span></div>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Net.html">Argotic.Net</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Net_TrackbackMessageSentEventArgs_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class TrackbackMessageSentEventArgs : EventArgs, IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class TrackbackMessageSentEventArgs : EventArgs, IComparable</code></pre>
   </div>
   <h5 id="Argotic_Net_TrackbackMessageSentEventArgs_remarks"><strong>Remarks</strong></h5>
-  <div class="markdown level0 remarks"><p>A <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendCompleted">SendCompleted</a> event occurs whenever the <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_Object_">SendAsync(TrackbackMessage, Object)</a> method is called.</p>
+  <div class="markdown level0 remarks"><p>A <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendCompleted">SendCompleted</a> event occurs whenever the <a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object_">SendAsync(TrackbackMessage, Object)</a> method is called.</p>
 </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -114,19 +131,19 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackMessageSentEventArgs__ctor_Uri_Argotic_Net_TrackbackMessage_Argotic_Net_TrackbackResponse_Argotic_Common_WebRequestOptions_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackMessageSentEventArgs.%23ctor(Uri%2CArgotic.Net.TrackbackMessage%2CArgotic.Net.TrackbackResponse%2CArgotic.Common.WebRequestOptions%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackMessageSentEventArgs__ctor_System_Uri_Argotic_Net_TrackbackMessage_Argotic_Net_TrackbackResponse_Argotic_Common_WebRequestOptions_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackMessageSentEventArgs.%23ctor(System.Uri%2CArgotic.Net.TrackbackMessage%2CArgotic.Net.TrackbackResponse%2CArgotic.Common.WebRequestOptions%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/Trackback/TrackbackMessageSentEventArgs.cs/#L88">View Source</a>
   </span>
   <a id="Argotic_Net_TrackbackMessageSentEventArgs__ctor_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.#ctor*"></a>
-  <h4 id="Argotic_Net_TrackbackMessageSentEventArgs__ctor_Uri_Argotic_Net_TrackbackMessage_Argotic_Net_TrackbackResponse_Argotic_Common_WebRequestOptions_Object_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.#ctor(Uri,Argotic.Net.TrackbackMessage,Argotic.Net.TrackbackResponse,Argotic.Common.WebRequestOptions,Object)">TrackbackMessageSentEventArgs(Uri, TrackbackMessage, TrackbackResponse, WebRequestOptions, Object)</h4>
+  <h4 id="Argotic_Net_TrackbackMessageSentEventArgs__ctor_System_Uri_Argotic_Net_TrackbackMessage_Argotic_Net_TrackbackResponse_Argotic_Common_WebRequestOptions_System_Object_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.#ctor(System.Uri,Argotic.Net.TrackbackMessage,Argotic.Net.TrackbackResponse,Argotic.Common.WebRequestOptions,System.Object)">TrackbackMessageSentEventArgs(Uri, TrackbackMessage, TrackbackResponse, WebRequestOptions, Object)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.TrackbackMessageSentEventArgs.html">TrackbackMessageSentEventArgs</a> class using the supplied parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TrackbackMessageSentEventArgs(Uri host, TrackbackMessage message, TrackbackResponse response, WebRequestOptions options, Object state)</code></pre>
+    <pre><code class="lang-csharp hljs">public TrackbackMessageSentEventArgs(Uri host, TrackbackMessage message, TrackbackResponse response, WebRequestOptions options, object state)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -139,9 +156,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">host</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the host computer used for the XML-RPC transaction.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the host computer used for the XML-RPC transaction.</p>
 </td>
       </tr>
       <tr>
@@ -163,28 +180,54 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">state</span></td>
-        <td><p>A <see cref="!:Object"></see> containing state information that was passed to the asynchronous send operation. This parameter may be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Object</span> containing state information that was passed to the asynchronous send operation. This parameter may be <strong>null</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">response</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackMessageSentEventArgs__ctor_Uri_Argotic_Net_TrackbackMessage_Argotic_Net_TrackbackResponse_ICredentials_IWebProxy_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackMessageSentEventArgs.%23ctor(Uri%2CArgotic.Net.TrackbackMessage%2CArgotic.Net.TrackbackResponse%2CICredentials%2CIWebProxy%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackMessageSentEventArgs__ctor_System_Uri_Argotic_Net_TrackbackMessage_Argotic_Net_TrackbackResponse_System_Net_ICredentials_System_Net_IWebProxy_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackMessageSentEventArgs.%23ctor(System.Uri%2CArgotic.Net.TrackbackMessage%2CArgotic.Net.TrackbackResponse%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/Trackback/TrackbackMessageSentEventArgs.cs/#L64">View Source</a>
   </span>
   <a id="Argotic_Net_TrackbackMessageSentEventArgs__ctor_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.#ctor*"></a>
-  <h4 id="Argotic_Net_TrackbackMessageSentEventArgs__ctor_Uri_Argotic_Net_TrackbackMessage_Argotic_Net_TrackbackResponse_ICredentials_IWebProxy_Object_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.#ctor(Uri,Argotic.Net.TrackbackMessage,Argotic.Net.TrackbackResponse,ICredentials,IWebProxy,Object)">TrackbackMessageSentEventArgs(Uri, TrackbackMessage, TrackbackResponse, ICredentials, IWebProxy, Object)</h4>
+  <h4 id="Argotic_Net_TrackbackMessageSentEventArgs__ctor_System_Uri_Argotic_Net_TrackbackMessage_Argotic_Net_TrackbackResponse_System_Net_ICredentials_System_Net_IWebProxy_System_Object_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.#ctor(System.Uri,Argotic.Net.TrackbackMessage,Argotic.Net.TrackbackResponse,System.Net.ICredentials,System.Net.IWebProxy,System.Object)">TrackbackMessageSentEventArgs(Uri, TrackbackMessage, TrackbackResponse, ICredentials, IWebProxy, Object)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Net.TrackbackMessageSentEventArgs.html">TrackbackMessageSentEventArgs</a> class using the supplied parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public TrackbackMessageSentEventArgs(Uri host, TrackbackMessage message, TrackbackResponse response, ICredentials credentials, IWebProxy proxy, Object state)</code></pre>
+    <pre><code class="lang-csharp hljs">public TrackbackMessageSentEventArgs(Uri host, TrackbackMessage message, TrackbackResponse response, ICredentials credentials, IWebProxy proxy, object state)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -197,9 +240,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">host</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the host computer used for the XML-RPC transaction.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the host computer used for the XML-RPC transaction.</p>
 </td>
       </tr>
       <tr>
@@ -215,21 +258,47 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that represents the authentication credentials utilized by the client when making the Trackback ping request. This parameter may be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that represents the authentication credentials utilized by the client when making the Trackback ping request. This parameter may be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that represents the web proxy utilized by the client to proxy the Trackback ping request. This parameter may be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that represents the web proxy utilized by the client to proxy the Trackback ping request. This parameter may be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">state</span></td>
-        <td><p>A <see cref="!:Object"></see> containing state information that was passed to the asynchronous send operation. This parameter may be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Object</span> containing state information that was passed to the asynchronous send operation. This parameter may be <strong>null</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">host</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">message</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">response</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -262,8 +331,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that represents the authentication credentials utilized by the client when making the Trackback ping request.
+        <td><span class="xref">System.Net.ICredentials</span></td>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that represents the authentication credentials utilized by the client when making the Trackback ping request.
 If no credentials were provided, returns <strong>null</strong>.</p>
 </td>
       </tr>
@@ -330,8 +399,8 @@ If no credentials were provided, returns <strong>null</strong>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the host computer used for the XML-RPC transaction.</p>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the host computer used for the XML-RPC transaction.</p>
 </td>
       </tr>
     </tbody>
@@ -394,8 +463,8 @@ If no credentials were provided, returns <strong>null</strong>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that represents the web proxy utilized by the client to proxy the Trackback ping request.
+        <td><span class="xref">System.Net.IWebProxy</span></td>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that represents the web proxy utilized by the client to proxy the Trackback ping request.
 If no proxy was used, returns <strong>null</strong>.</p>
 </td>
       </tr>
@@ -442,12 +511,12 @@ If no proxy was used, returns <strong>null</strong>.</p>
   </span>
   <a id="Argotic_Net_TrackbackMessageSentEventArgs_State_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.State*"></a>
   <h4 id="Argotic_Net_TrackbackMessageSentEventArgs_State" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.State">State</h4>
-  <div class="markdown level1 summary"><p>Gets an <see cref="!:Object"></see> containing state information that was passed to the asynchronous send operation.</p>
+  <div class="markdown level1 summary"><p>Gets an <span class="xref">System.Object</span> containing state information that was passed to the asynchronous send operation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public Object State { get; }</code></pre>
+    <pre><code class="lang-csharp hljs">public object State { get; }</code></pre>
   </div>
   <h5 class="propertyValue">Property Value</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -459,8 +528,8 @@ If no proxy was used, returns <strong>null</strong>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
-        <td><p>A <see cref="!:Object"></see> containing state information that was passed to the asynchronous send operation. If no user token provided, returns <strong>null</strong>.</p>
+        <td><span class="xref">System.Object</span></td>
+        <td><p>A <span class="xref">System.Object</span> containing state information that was passed to the asynchronous send operation. If no user token provided, returns <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -517,21 +586,37 @@ If no proxy was used, returns <strong>null</strong>.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackMessageSentEventArgs_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackMessageSentEventArgs.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackMessageSentEventArgs_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackMessageSentEventArgs.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Net/Trackback/TrackbackMessageSentEventArgs.cs/#L254">View Source</a>
   </span>
   <a id="Argotic_Net_TrackbackMessageSentEventArgs_Equals_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.Equals*"></a>
-  <h4 id="Argotic_Net_TrackbackMessageSentEventArgs_Equals_Object_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Net_TrackbackMessageSentEventArgs_Equals_System_Object_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -544,9 +629,9 @@ If no proxy was used, returns <strong>null</strong>.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -562,11 +647,13 @@ If no proxy was used, returns <strong>null</strong>.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackMessageSentEventArgs_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackMessageSentEventArgs.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -599,6 +686,8 @@ If no proxy was used, returns <strong>null</strong>.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Net_TrackbackMessageSentEventArgs_ToString.md&amp;value=---%0Auid%3A%20Argotic.Net.TrackbackMessageSentEventArgs.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -608,7 +697,7 @@ If no proxy was used, returns <strong>null</strong>.</p>
   </span>
   <a id="Argotic_Net_TrackbackMessageSentEventArgs_ToString_" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.ToString*"></a>
   <h4 id="Argotic_Net_TrackbackMessageSentEventArgs_ToString" data-uid="Argotic.Net.TrackbackMessageSentEventArgs.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.TrackbackMessageSentEventArgs.html">TrackbackMessageSentEventArgs</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.TrackbackMessageSentEventArgs.html">TrackbackMessageSentEventArgs</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -626,11 +715,13 @@ If no proxy was used, returns <strong>null</strong>.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Net.TrackbackMessageSentEventArgs.html">TrackbackMessageSentEventArgs</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Net.TrackbackMessageSentEventArgs.html">TrackbackMessageSentEventArgs</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Net_TrackbackMessageSentEventArgs_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.</p>
 </div>
@@ -862,11 +953,11 @@ If no proxy was used, returns <strong>null</strong>.</p>
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <span class="xref">IComparable</span>
+      <span class="xref">System.IComparable</span>
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_Object_">SendAsync(TrackbackMessage, Object)</a></div>
+      <div><a class="xref" href="Argotic.Net.TrackbackClient.html#Argotic_Net_TrackbackClient_SendAsync_Argotic_Net_TrackbackMessage_System_Object_">SendAsync(TrackbackMessage, Object)</a></div>
       <div><a class="xref" href="Argotic.Net.TrackbackClient.html">TrackbackClient</a></div>
   </div>
 </article>

@@ -83,14 +83,30 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">IComparable</span></div>
+    <div><span class="xref">System.IComparable</span></div>
     <div><a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Syndication.Specialized.html">Argotic.Syndication.Specialized</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class BlogMLAuthor : object, IBlogMLCommonObject, IComparable, IExtensibleSyndicationObject</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndicationObject</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -171,15 +187,15 @@ The default value is <a class="xref" href="Argotic.Syndication.Specialized.BlogM
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
-        <td><p>A <see cref="!:DateTime"></see> that indicates an instant in time associated with an event early in the life cycle of this web log entity.
-The default value is <see cref="!:DateTime.MinValue"></see>, which indicates that no creation date-time was provided.</p>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><p>A <span class="xref">System.DateTime</span> that indicates an instant in time associated with an event early in the life cycle of this web log entity.
+The default value is <span class="xref">System.DateTime.MinValue</span>, which indicates that no creation date-time was provided.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_CreatedOn_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The <see cref="!:DateTime"></see> should be provided in Coordinated Universal Time (UTC).</p>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.DateTime</span> should be provided in Coordinated Universal Time (UTC).</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -239,15 +255,31 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
-        <td><p>A <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_Extensions_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <see cref="!:Collection&lt;T>"></see> collection.</p>
+  <div class="markdown level1 remarks"><p>This <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_HasExtensions.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.HasExtensions%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -338,15 +370,15 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
-        <td><p>A <see cref="!:DateTime"></see> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant.
-The default value is <see cref="!:DateTime.MinValue"></see>, which indicates that no modification date-time was provided.</p>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><p>A <span class="xref">System.DateTime</span> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant.
+The default value is <span class="xref">System.DateTime.MinValue</span>, which indicates that no modification date-time was provided.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_LastModifiedOn_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The <see cref="!:DateTime"></see> should be provided in Coordinated Universal Time (UTC).</p>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.DateTime</span> should be provided in Coordinated Universal Time (UTC).</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -376,6 +408,22 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       <tr>
         <td><a class="xref" href="Argotic.Syndication.Specialized.BlogMLTextConstruct.html">BlogMLTextConstruct</a></td>
         <td><p>A <a class="xref" href="Argotic.Syndication.Specialized.BlogMLTextConstruct.html">BlogMLTextConstruct</a> object that represents the title of this web log entity.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -432,6 +480,22 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -482,21 +546,37 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLAuthor.cs/#L433">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_BlogMLAuthor_Equals_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.Equals*"></a>
-  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_Equals_Object_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_Equals_System_Object_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -509,9 +589,9 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -527,20 +607,22 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.FindExtension(Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.FindExtension(System.Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLAuthor.cs/#L252">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_BlogMLAuthor_FindExtension_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.FindExtension*"></a>
-  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.FindExtension(Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
+  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
   <div class="markdown level1 summary"><p>Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argotic_Syndication_Specialized_BlogMLAuthor_Extensions">Extensions</a> collection.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -559,9 +641,9 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><span class="xref">System.Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
         <td><span class="parametername">match</span></td>
-        <td><p>The <see cref="!:Predicate&lt;ISyndicationExtension>"></see> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
+        <td><p>The <span class="xref">System.Predicate&lt;T&gt;</span> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
 </td>
       </tr>
     </tbody>
@@ -582,11 +664,27 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The <see cref="!:Predicate&lt;ISyndicationExtension>"></see> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
-The elements of the current <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argotic_Syndication_Specialized_BlogMLAuthor_Extensions">Extensions</a> are individually passed to the <see cref="!:Predicate&lt;ISyndicationExtension>"></see> delegate, moving forward in
+  <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.Predicate&lt;T&gt;</span> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
+The elements of the current <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argotic_Syndication_Specialized_BlogMLAuthor_Extensions">Extensions</a> are individually passed to the <span class="xref">System.Predicate&lt;T&gt;</span> delegate, moving forward in
 the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argotic_Syndication_Specialized_BlogMLAuthor_Extensions">Extensions</a>, starting with the first element and ending with the last element. Processing is stopped when a match is found.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -619,16 +717,18 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLAuthor.cs/#L290">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_XPathNavigator_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.Load(XPathNavigator)">Load(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -646,9 +746,9 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
     </tbody>
@@ -669,19 +769,35 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_Load_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.Load(XPathNavigator%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.Load(System.Xml.XPath.XPathNavigator%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLAuthor.cs/#L323">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.Load(XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)">Load(XPathNavigator, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a> using the supplied <see cref="!:XPathNavigator"></see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)">Load(XPathNavigator, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -699,9 +815,9 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
       <tr>
@@ -728,9 +844,30 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_RemoveExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.RemoveExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -784,6 +921,22 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
   <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_RemoveExtension_Argotic_Extensions_ISyndicationExtension__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>If the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argotic_Syndication_Specialized_BlogMLAuthor_Extensions">Extensions</a> collection of the current instance does not contain the specified <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>, will return <strong>false</strong>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_ToString.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -793,7 +946,7 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
   </span>
   <a id="Argotic_Syndication_Specialized_BlogMLAuthor_ToString_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.ToString*"></a>
   <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_ToString" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -811,24 +964,26 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Syndication_Specialized_BlogMLAuthor_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_BlogMLAuthor_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.BlogMLAuthor.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/BlogML/BlogMLAuthor.cs/#L353">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_BlogMLAuthor_WriteTo_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.WriteTo*"></a>
-  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_WriteTo_XmlWriter_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_BlogMLAuthor_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Syndication.Specialized.BlogMLAuthor.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html">BlogMLAuthor</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -846,9 +1001,25 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
-        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -1081,7 +1252,7 @@ the <a class="xref" href="Argotic.Syndication.Specialized.BlogMLAuthor.html#Argo
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <span class="xref">IComparable</span>
+      <span class="xref">System.IComparable</span>
   </div>
   <div>
       <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a>

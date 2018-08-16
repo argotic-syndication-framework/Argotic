@@ -81,24 +81,48 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">SyndicationEncodingUtility</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Common.html">Argotic.Common</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Common.dll</h6>
   <h5 id="Argotic_Common_SyndicationEncodingUtility_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class SyndicationEncodingUtility : object</code></pre>
+    <pre><code class="lang-csharp hljs">public static class SyndicationEncodingUtility</code></pre>
   </div>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L60">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Stream_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Stream)">CreateSafeNavigator(Stream)</h4>
-  <div class="markdown level1 summary"><p>Creates a <see cref="!:XPathNavigator"></see> against the supplied <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_IO_Stream_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream)">CreateSafeNavigator(Stream)</h4>
+  <div class="markdown level1 summary"><p>Creates a <span class="xref">System.Xml.XPath.XPathNavigator</span> against the supplied <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -116,9 +140,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
-        <td><p>The <see cref="!:Stream"></see> object that contains the XML data to be navigated by the created <see cref="!:XPathNavigator"></see>.</p>
+        <td><p>The <span class="xref">System.IO.Stream</span> object that contains the XML data to be navigated by the created <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </td>
       </tr>
     </tbody>
@@ -133,28 +157,44 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>An <see cref="!:XPathNavigator"></see> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">stream</code>.
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>An <span class="xref">System.Xml.XPath.XPathNavigator</span> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">stream</code>.
 The supplied <code data-dev-comment-type="paramref" class="paramref">stream</code> XML data is parsed to remove invalid XML characters that would normally prevent
 a navigator from being created.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Stream__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_IO_Stream__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The character encoding of the supplied <code data-dev-comment-type="paramref" class="paramref">stream</code> is automatically determined based on the <em>encoding</em> attribute of the XML document declaration.
-If the character encoding cannot be determined, a default encoding of <see cref="!:Encoding.UTF8"></see> is used.</p>
+If the character encoding cannot be determined, a default encoding of <span class="xref">System.Text.Encoding.UTF8</span> is used.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Stream_Encoding_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Stream%2CEncoding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_IO_Stream_System_Text_Encoding_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream%2CSystem.Text.Encoding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L89">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Stream_Encoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Stream,Encoding)">CreateSafeNavigator(Stream, Encoding)</h4>
-  <div class="markdown level1 summary"><p>Creates a <see cref="!:XPathNavigator"></see> against the supplied <see cref="!:Stream"></see> using the specified <see cref="!:Encoding"></see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_IO_Stream_System_Text_Encoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.Stream,System.Text.Encoding)">CreateSafeNavigator(Stream, Encoding)</h4>
+  <div class="markdown level1 summary"><p>Creates a <span class="xref">System.Xml.XPath.XPathNavigator</span> against the supplied <span class="xref">System.IO.Stream</span> using the specified <span class="xref">System.Text.Encoding</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -172,15 +212,15 @@ If the character encoding cannot be determined, a default encoding of <see cref=
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
-        <td><p>The <see cref="!:Stream"></see> object that contains the XML data to be navigated by the created <see cref="!:XPathNavigator"></see>.</p>
+        <td><p>The <span class="xref">System.IO.Stream</span> object that contains the XML data to be navigated by the created <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Encoding</span></td>
+        <td><span class="xref">System.Text.Encoding</span></td>
         <td><span class="parametername">encoding</span></td>
-        <td><p>A <see cref="!:Encoding"></see> object that indicates the character encoding to use when reading the supplied <code data-dev-comment-type="paramref" class="paramref">stream</code>.</p>
+        <td><p>A <span class="xref">System.Text.Encoding</span> object that indicates the character encoding to use when reading the supplied <code data-dev-comment-type="paramref" class="paramref">stream</code>.</p>
 </td>
       </tr>
     </tbody>
@@ -195,10 +235,99 @@ If the character encoding cannot be determined, a default encoding of <see cref=
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>An <see cref="!:XPathNavigator"></see> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">stream</code>.
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>An <span class="xref">System.Xml.XPath.XPathNavigator</span> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">stream</code>.
 The supplied <code data-dev-comment-type="paramref" class="paramref">stream</code> XML data is parsed to remove invalid XML characters that would normally prevent
 a navigator from being created.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">encoding</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_IO_TextReader_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.TextReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L110">View Source</a>
+  </span>
+  <a id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*"></a>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_IO_TextReader_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.IO.TextReader)">CreateSafeNavigator(TextReader)</h4>
+  <div class="markdown level1 summary"><p>Creates a <span class="xref">System.Xml.XPath.XPathNavigator</span> against the supplied <span class="xref">System.IO.TextReader</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static XPathNavigator CreateSafeNavigator(TextReader reader)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.TextReader</span></td>
+        <td><span class="parametername">reader</span></td>
+        <td><p>The <span class="xref">System.IO.TextReader</span> object that contains the XML data to be navigated by the created <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>An <span class="xref">System.Xml.XPath.XPathNavigator</span> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">reader</code>.
+The supplied <code data-dev-comment-type="paramref" class="paramref">reader</code> XML data is parsed to remove invalid XML characters that would normally prevent
+a navigator from being created.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -212,7 +341,7 @@ a navigator from being created.</p>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*"></a>
   <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_String_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.String)">CreateSafeNavigator(String)</h4>
-  <div class="markdown level1 summary"><p>Creates a <see cref="!:XPathNavigator"></see> against the supplied XML data.</p>
+  <div class="markdown level1 summary"><p>Creates a <span class="xref">System.Xml.XPath.XPathNavigator</span> against the supplied XML data.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -232,7 +361,7 @@ a navigator from being created.</p>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">xml</span></td>
-        <td><p>The XML data to be navigated by the created <see cref="!:XPathNavigator"></see>.</p>
+        <td><p>The XML data to be navigated by the created <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </td>
       </tr>
     </tbody>
@@ -247,76 +376,45 @@ a navigator from being created.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>An <see cref="!:XPathNavigator"></see> that provides a cursor model for navigating the supplied XML data.
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>An <span class="xref">System.Xml.XPath.XPathNavigator</span> that provides a cursor model for navigating the supplied XML data.
 The supplied <code data-dev-comment-type="paramref" class="paramref">xml</code> data is parsed to remove invalid XML characters that would normally prevent
 a navigator from being created.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_TextReader_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(TextReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L110">View Source</a>
-  </span>
-  <a id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_TextReader_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(TextReader)">CreateSafeNavigator(TextReader)</h4>
-  <div class="markdown level1 summary"><p>Creates a <see cref="!:XPathNavigator"></see> against the supplied <see cref="!:TextReader"></see>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static XPathNavigator CreateSafeNavigator(TextReader reader)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="exceptions">Exceptions</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
+        <th>Condition</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TextReader</span></td>
-        <td><span class="parametername">reader</span></td>
-        <td><p>The <see cref="!:TextReader"></see> object that contains the XML data to be navigated by the created <see cref="!:XPathNavigator"></see>.</p>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">xml</code> data is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
       <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>An <see cref="!:XPathNavigator"></see> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">reader</code>.
-The supplied <code data-dev-comment-type="paramref" class="paramref">reader</code> XML data is parsed to remove invalid XML characters that would normally prevent
-a navigator from being created.</p>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">xml</code> data is an empty string.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L151">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Uri,Argotic.Common.WebRequestOptions)">CreateSafeNavigator(Uri, WebRequestOptions)</h4>
-  <div class="markdown level1 summary"><p>Creates a <see cref="!:XPathNavigator"></see> against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions)">CreateSafeNavigator(Uri, WebRequestOptions)</h4>
+  <div class="markdown level1 summary"><p>Creates a <span class="xref">System.Xml.XPath.XPathNavigator</span> against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -334,9 +432,9 @@ a navigator from being created.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the XML data to be navigated by the created <see cref="!:XPathNavigator"></see>.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the XML data to be navigated by the created <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </td>
       </tr>
       <tr>
@@ -357,24 +455,40 @@ a navigator from being created.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>An <see cref="!:XPathNavigator"></see> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>An <span class="xref">System.Xml.XPath.XPathNavigator</span> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.
 The supplied <code data-dev-comment-type="paramref" class="paramref">source</code> XML data is parsed to remove invalid XML characters that would normally prevent
 a navigator from being created.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_Argotic_Common_WebRequestOptions_Encoding_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Uri%2CArgotic.Common.WebRequestOptions%2CEncoding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_Argotic_Common_WebRequestOptions_System_Text_Encoding_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri%2CArgotic.Common.WebRequestOptions%2CSystem.Text.Encoding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L200">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_Argotic_Common_WebRequestOptions_Encoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Uri,Argotic.Common.WebRequestOptions,Encoding)">CreateSafeNavigator(Uri, WebRequestOptions, Encoding)</h4>
-  <div class="markdown level1 summary"><p>Creates a <see cref="!:XPathNavigator"></see> against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_Argotic_Common_WebRequestOptions_System_Text_Encoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,Argotic.Common.WebRequestOptions,System.Text.Encoding)">CreateSafeNavigator(Uri, WebRequestOptions, Encoding)</h4>
+  <div class="markdown level1 summary"><p>Creates a <span class="xref">System.Xml.XPath.XPathNavigator</span> against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -392,9 +506,9 @@ a navigator from being created.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the XML data to be navigated by the created <see cref="!:XPathNavigator"></see>.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the XML data to be navigated by the created <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </td>
       </tr>
       <tr>
@@ -404,9 +518,9 @@ a navigator from being created.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Encoding</span></td>
+        <td><span class="xref">System.Text.Encoding</span></td>
         <td><span class="parametername">encoding</span></td>
-        <td><p>A <see cref="!:Encoding"></see> object that indicates the expected character encoding of the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Text.Encoding</span> object that indicates the expected character encoding of the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -421,28 +535,44 @@ a navigator from being created.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>An <see cref="!:XPathNavigator"></see> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>An <span class="xref">System.Xml.XPath.XPathNavigator</span> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.
 The supplied <code data-dev-comment-type="paramref" class="paramref">source</code> XML data is parsed to remove invalid XML characters that would normally prevent
 a navigator from being created.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_Argotic_Common_WebRequestOptions_Encoding__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_Argotic_Common_WebRequestOptions_System_Text_Encoding__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>If the <code data-dev-comment-type="paramref" class="paramref">encoding</code> is <strong>null</strong>, the character encoding of the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> is determined automatically.
 Otherwise the specified <code data-dev-comment-type="paramref" class="paramref">encoding</code> is used when reading the XML data represented by the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_ICredentials_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Uri%2CICredentials%2CIWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L135">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_ICredentials_IWebProxy_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Uri,ICredentials,IWebProxy)">CreateSafeNavigator(Uri, ICredentials, IWebProxy)</h4>
-  <div class="markdown level1 summary"><p>Creates a <see cref="!:XPathNavigator"></see> against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)">CreateSafeNavigator(Uri, ICredentials, IWebProxy)</h4>
+  <div class="markdown level1 summary"><p>Creates a <span class="xref">System.Xml.XPath.XPathNavigator</span> against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -460,23 +590,23 @@ Otherwise the specified <code data-dev-comment-type="paramref" class="paramref">
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the XML data to be navigated by the created <see cref="!:XPathNavigator"></see>.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the XML data to be navigated by the created <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
-If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <see cref="!:WebRequest"></see> default proxy settings.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
+If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <span class="xref">System.Net.WebRequest</span> default proxy settings.</p>
 </td>
       </tr>
     </tbody>
@@ -491,24 +621,40 @@ If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <stro
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>An <see cref="!:XPathNavigator"></see> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>An <span class="xref">System.Xml.XPath.XPathNavigator</span> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.
 The supplied <code data-dev-comment-type="paramref" class="paramref">source</code> XML data is parsed to remove invalid XML characters that would normally prevent
 a navigator from being created.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_ICredentials_IWebProxy_Encoding_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Uri%2CICredentials%2CIWebProxy%2CEncoding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_System_Text_Encoding_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CSystem.Text.Encoding)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L179">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_ICredentials_IWebProxy_Encoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(Uri,ICredentials,IWebProxy,Encoding)">CreateSafeNavigator(Uri, ICredentials, IWebProxy, Encoding)</h4>
-  <div class="markdown level1 summary"><p>Creates a <see cref="!:XPathNavigator"></see> against the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_System_Text_Encoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateSafeNavigator(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,System.Text.Encoding)">CreateSafeNavigator(Uri, ICredentials, IWebProxy, Encoding)</h4>
+  <div class="markdown level1 summary"><p>Creates a <span class="xref">System.Xml.XPath.XPathNavigator</span> against the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -526,29 +672,29 @@ a navigator from being created.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the XML data to be navigated by the created <see cref="!:XPathNavigator"></see>.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the XML data to be navigated by the created <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
-If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <see cref="!:WebRequest"></see> default proxy settings.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
+If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <span class="xref">System.Net.WebRequest</span> default proxy settings.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Encoding</span></td>
+        <td><span class="xref">System.Text.Encoding</span></td>
         <td><span class="parametername">encoding</span></td>
-        <td><p>A <see cref="!:Encoding"></see> object that indicates the expected character encoding of the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Text.Encoding</span> object that indicates the expected character encoding of the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -563,28 +709,44 @@ If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <stro
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>An <see cref="!:XPathNavigator"></see> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>An <span class="xref">System.Xml.XPath.XPathNavigator</span> that provides a cursor model for navigating the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.
 The supplied <code data-dev-comment-type="paramref" class="paramref">source</code> XML data is parsed to remove invalid XML characters that would normally prevent
 a navigator from being created.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_Uri_ICredentials_IWebProxy_Encoding__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_SyndicationEncodingUtility_CreateSafeNavigator_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_System_Text_Encoding__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>If the <code data-dev-comment-type="paramref" class="paramref">encoding</code> is <strong>null</strong>, the character encoding of the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> is determined automatically.
 Otherwise the specified <code data-dev-comment-type="paramref" class="paramref">encoding</code> is used when reading the XML data represented by the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_System_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L274">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebRequest*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(Uri,Argotic.Common.WebRequestOptions)">CreateWebRequest(Uri, WebRequestOptions)</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:WebRequest"></see> that makes a request for a resource located at the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_System_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri,Argotic.Common.WebRequestOptions)">CreateWebRequest(Uri, WebRequestOptions)</h4>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.Net.WebRequest</span> that makes a request for a resource located at the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -602,9 +764,9 @@ Otherwise the specified <code data-dev-comment-type="paramref" class="paramref">
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the resource to be retrieved.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the resource to be retrieved.</p>
 </td>
       </tr>
       <tr>
@@ -625,23 +787,39 @@ Otherwise the specified <code data-dev-comment-type="paramref" class="paramref">
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">WebRequest</span></td>
-        <td><p>An <see cref="!:WebRequest"></see> that makes a request to the <code data-dev-comment-type="paramref" class="paramref">source</code>. If unable to create a <see cref="!:WebRequest"></see> for
+        <td><span class="xref">System.Net.WebRequest</span></td>
+        <td><p>An <span class="xref">System.Net.WebRequest</span> that makes a request to the <code data-dev-comment-type="paramref" class="paramref">source</code>. If unable to create a <span class="xref">System.Net.WebRequest</span> for
 the specified <code data-dev-comment-type="paramref" class="paramref">source</code>, returns a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_Uri_ICredentials_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(Uri%2CICredentials%2CIWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L259">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebRequest*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_Uri_ICredentials_IWebProxy_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(Uri,ICredentials,IWebProxy)">CreateWebRequest(Uri, ICredentials, IWebProxy)</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:WebRequest"></see> that makes a request for a resource located at the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateWebRequest_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebRequest(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)">CreateWebRequest(Uri, ICredentials, IWebProxy)</h4>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.Net.WebRequest</span> that makes a request for a resource located at the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -659,23 +837,23 @@ the specified <code data-dev-comment-type="paramref" class="paramref">source</co
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the resource to be retrieved.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the resource to be retrieved.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials if supported by the underlying protocol.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
-If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <see cref="!:WebRequest"></see> default proxy settings if supported by the underlying protocol.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
+If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <span class="xref">System.Net.WebRequest</span> default proxy settings if supported by the underlying protocol.</p>
 </td>
       </tr>
     </tbody>
@@ -690,23 +868,39 @@ If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <stro
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">WebRequest</span></td>
-        <td><p>An <see cref="!:WebRequest"></see> that makes a request to the <code data-dev-comment-type="paramref" class="paramref">source</code>. If unable to create a <see cref="!:WebRequest"></see> for
+        <td><span class="xref">System.Net.WebRequest</span></td>
+        <td><p>An <span class="xref">System.Net.WebRequest</span> that makes a request to the <code data-dev-comment-type="paramref" class="paramref">source</code>. If unable to create a <span class="xref">System.Net.WebRequest</span> for
 the specified <code data-dev-comment-type="paramref" class="paramref">source</code>, returns a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_System_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L329">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebResponse*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(Uri,Argotic.Common.WebRequestOptions)">CreateWebResponse(Uri, WebRequestOptions)</h4>
-  <div class="markdown level1 summary"><p>Returns the <see cref="!:WebResponse"></see> to a request for a resource located at the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_System_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri,Argotic.Common.WebRequestOptions)">CreateWebResponse(Uri, WebRequestOptions)</h4>
+  <div class="markdown level1 summary"><p>Returns the <span class="xref">System.Net.WebResponse</span> to a request for a resource located at the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -724,9 +918,9 @@ the specified <code data-dev-comment-type="paramref" class="paramref">source</co
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the resource to be retrieved.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the resource to be retrieved.</p>
 </td>
       </tr>
       <tr>
@@ -747,23 +941,39 @@ the specified <code data-dev-comment-type="paramref" class="paramref">source</co
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">WebResponse</span></td>
-        <td><p>An <see cref="!:WebResponse"></see> that contains the response from the requested resource. If unable to create a <see cref="!:WebResponse"></see> for
+        <td><span class="xref">System.Net.WebResponse</span></td>
+        <td><p>An <span class="xref">System.Net.WebResponse</span> that contains the response from the requested resource. If unable to create a <span class="xref">System.Net.WebResponse</span> for
 the requested <code data-dev-comment-type="paramref" class="paramref">source</code>, returns a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_Uri_ICredentials_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(Uri%2CICredentials%2CIWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L314">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebResponse*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_Uri_ICredentials_IWebProxy_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(Uri,ICredentials,IWebProxy)">CreateWebResponse(Uri, ICredentials, IWebProxy)</h4>
-  <div class="markdown level1 summary"><p>Returns the <see cref="!:WebResponse"></see> to a request for a resource located at the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_CreateWebResponse_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_" data-uid="Argotic.Common.SyndicationEncodingUtility.CreateWebResponse(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)">CreateWebResponse(Uri, ICredentials, IWebProxy)</h4>
+  <div class="markdown level1 summary"><p>Returns the <span class="xref">System.Net.WebResponse</span> to a request for a resource located at the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -781,23 +991,23 @@ the requested <code data-dev-comment-type="paramref" class="paramref">source</co
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the resource to be retrieved.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the resource to be retrieved.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
 If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials if supported by the underlying protocol.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
-If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <see cref="!:WebRequest"></see> default proxy settings if supported by the underlying protocol.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required.
+If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <span class="xref">System.Net.WebRequest</span> default proxy settings if supported by the underlying protocol.</p>
 </td>
       </tr>
     </tbody>
@@ -812,9 +1022,25 @@ If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <stro
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">WebResponse</span></td>
-        <td><p>An <see cref="!:WebResponse"></see> that contains the response from the requested resource. If unable to create a <see cref="!:WebResponse"></see> for
+        <td><span class="xref">System.Net.WebResponse</span></td>
+        <td><p>An <span class="xref">System.Net.WebResponse</span> that contains the response from the requested resource. If unable to create a <span class="xref">System.Net.WebResponse</span> for
 the requested <code data-dev-comment-type="paramref" class="paramref">source</code>, returns a <strong>null</strong> reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -863,8 +1089,29 @@ the requested <code data-dev-comment-type="paramref" class="paramref">source</co
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
-        <td><p>A <see cref="!:Stream"></see> the represents the decoded result of the base64 encoded value.</p>
+        <td><span class="xref">System.IO.Stream</span></td>
+        <td><p>A <span class="xref">System.IO.Stream</span> the represents the decoded result of the base64 encoded value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">encodedValue</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">encodedValue</code> is an empty string.</p>
 </td>
       </tr>
     </tbody>
@@ -915,6 +1162,27 @@ the requested <code data-dev-comment-type="paramref" class="paramref">source</co
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><p>A string the represents the unescaped result of the HTML escaped value.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">escapedValue</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">escapedValue</code> is an empty string.</p>
 </td>
       </tr>
     </tbody>
@@ -976,6 +1244,27 @@ the requested <code data-dev-comment-type="paramref" class="paramref">source</co
     and any Unicode character; excluding the surrogate blocks FFFE and FFFF.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_EncodeSafeDirectoryName_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -985,7 +1274,7 @@ the requested <code data-dev-comment-type="paramref" class="paramref">source</co
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_EncodeSafeDirectoryName_" data-uid="Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName*"></a>
   <h4 id="Argotic_Common_SyndicationEncodingUtility_EncodeSafeDirectoryName_System_String_" data-uid="Argotic.Common.SyndicationEncodingUtility.EncodeSafeDirectoryName(System.String)">EncodeSafeDirectoryName(String)</h4>
-  <div class="markdown level1 summary"><p>Converts a string into a value that can be safely used as a <see cref="!:Directory">directory</see> name.</p>
+  <div class="markdown level1 summary"><p>Converts a string into a value that can be safely used as a <span class="xref">System.IO.Directory</span> name.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1021,58 +1310,28 @@ the requested <code data-dev-comment-type="paramref" class="paramref">source</co
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A string that can be safely used as an argument when <see cref="!:Directory.CreateDirectory(string)">creating a directory</see>.</p>
+        <td><p>A string that can be safely used as an argument when <span class="xref">System.IO.Directory.CreateDirectory(System.String)</span>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L501">View Source</a>
-  </span>
-  <a id="Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding*"></a>
-  <h4 id="Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_Stream_" data-uid="Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(Stream)">GetXmlEncoding(Stream)</h4>
-  <div class="markdown level1 summary"><p>Returns an <see cref="!:Encoding"></see> that represents the XML character encoding for the supplied <see cref="!:Stream"></see>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static Encoding GetXmlEncoding(Stream stream)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="exceptions">Exceptions</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
+        <th>Condition</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
-        <td><span class="parametername">stream</span></td>
-        <td><p>A <see cref="!:Stream"></see> that represents an XML data source to determine the character encoding for.</p>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
       <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Encoding</span></td>
-        <td><p>A <see cref="!:Encoding"></see> that represents the character encoding specified by the XML data source.
-If the character encoding is not specified or unable to be determined, returns <see cref="!:Encoding.UTF8"></see>.</p>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">name</code> is an empty string.</p>
 </td>
       </tr>
     </tbody>
@@ -1086,7 +1345,7 @@ If the character encoding is not specified or unable to be determined, returns <
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding*"></a>
   <h4 id="Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_System_Byte___" data-uid="Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.Byte[])">GetXmlEncoding(Byte[])</h4>
-  <div class="markdown level1 summary"><p>Returns an <see cref="!:Encoding"></see> that represents the XML character encoding for the supplied array of bytes.</p>
+  <div class="markdown level1 summary"><p>Returns an <span class="xref">System.Text.Encoding</span> that represents the XML character encoding for the supplied array of bytes.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1121,9 +1380,92 @@ If the character encoding is not specified or unable to be determined, returns <
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Encoding</span></td>
-        <td><p>A <see cref="!:Encoding"></see> that represents the character encoding specified by the XML data source.
-If the character encoding is not specified or unable to be determined, returns <see cref="!:Encoding.UTF8"></see>.</p>
+        <td><span class="xref">System.Text.Encoding</span></td>
+        <td><p>A <span class="xref">System.Text.Encoding</span> that represents the character encoding specified by the XML data source.
+If the character encoding is not specified or unable to be determined, returns <span class="xref">System.Text.Encoding.UTF8</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">data</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.IO.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationEncodingUtility.cs/#L501">View Source</a>
+  </span>
+  <a id="Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding*"></a>
+  <h4 id="Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_System_IO_Stream_" data-uid="Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.IO.Stream)">GetXmlEncoding(Stream)</h4>
+  <div class="markdown level1 summary"><p>Returns an <span class="xref">System.Text.Encoding</span> that represents the XML character encoding for the supplied <span class="xref">System.IO.Stream</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static Encoding GetXmlEncoding(Stream stream)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.IO.Stream</span></td>
+        <td><span class="parametername">stream</span></td>
+        <td><p>A <span class="xref">System.IO.Stream</span> that represents an XML data source to determine the character encoding for.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Text.Encoding</span></td>
+        <td><p>A <span class="xref">System.Text.Encoding</span> that represents the character encoding specified by the XML data source.
+If the character encoding is not specified or unable to be determined, returns <span class="xref">System.Text.Encoding.UTF8</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -1137,7 +1479,7 @@ If the character encoding is not specified or unable to be determined, returns <
   </span>
   <a id="Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_" data-uid="Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding*"></a>
   <h4 id="Argotic_Common_SyndicationEncodingUtility_GetXmlEncoding_System_String_" data-uid="Argotic.Common.SyndicationEncodingUtility.GetXmlEncoding(System.String)">GetXmlEncoding(String)</h4>
-  <div class="markdown level1 summary"><p>Returns an <see cref="!:Encoding"></see> that represents the XML character encoding for the supplied content.</p>
+  <div class="markdown level1 summary"><p>Returns an <span class="xref">System.Text.Encoding</span> that represents the XML character encoding for the supplied content.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1172,9 +1514,30 @@ If the character encoding is not specified or unable to be determined, returns <
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Encoding</span></td>
-        <td><p>A <see cref="!:Encoding"></see> that represents the character encoding specified by the XML data.
-If the character encoding is not specified or unable to be determined, returns <see cref="!:Encoding.UTF8"></see>.</p>
+        <td><span class="xref">System.Text.Encoding</span></td>
+        <td><p>A <span class="xref">System.Text.Encoding</span> that represents the character encoding specified by the XML data.
+If the character encoding is not specified or unable to be determined, returns <span class="xref">System.Text.Encoding.UTF8</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.</p>
 </td>
       </tr>
     </tbody>
@@ -1236,6 +1599,27 @@ If the character encoding is not specified or unable to be determined, returns <
     and any Unicode character; excluding the surrogate blocks FFFE and FFFF.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">content</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           

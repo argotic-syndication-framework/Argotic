@@ -1,0 +1,173 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to consume syndication feeds in a format agnostic manner </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to consume syndication feeds in a format agnostic manner ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../The_Basics/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-consume-syndication-feeds-in-a-format-agnostic-manner">How to consume syndication feeds in a format agnostic manner</h1>
+
+<p>Published syndicated content can sometimes change its underlying content format while retaining the same URL endpoint. This can lead to scenarios where a consumer can not reliably predict the syndication format they will be consuming. The framework provides support for this type of scenario by allow you to consume syndication feeds in a +format agnostic+ manner. This means that you can retrieve some general information about a syndication feed, the format it conforms to, and and its content items; and then cast the format agnostic view of the syndicated content to a strongly-typed representation of the published data.</p>
+<p>The classes and enumerations that together compose the implementation of format agnostic feed consumption are located in the <em>Argotic.Syndication</em> namespace. The primary framework entity that you will use when working with a format agnostic view of syndication resources is the <em>GenericSyndicationFeed</em> class. This format agnostic view of a syndication feed exposes an <em>Items</em> collection of <em>GenericSyndicationItem</em> objects that provides an agnostic view of the discrete content for the syndication feed, while the <em>GenericSyndicationCategory</em> class represents the categorizations that have been applied to a feed or the feed's items.</p>
+<h2 id="syndication-feed-abstraction-api-overview">Syndication feed abstraction API overview</h2>
+<p>The <em>GenericSyndicationFeed</em> class exposes the following properties:</p>
+<ul>
+<li><strong>Categories</strong> - A collection of <em>GenericSyndicationCategory</em> objects that represent the categories associated with the feed.</li>
+<li><strong>Description</strong> - Character data that provides a human-readable characterization or summary of the feed.</li>
+<li><strong>Format</strong> - The <em>SyndicationContentFormat</em> enumeration value that indicates the type of syndication format that the syndication feed conforms to.</li>
+<li><strong>Items</strong> - A collection of <em>GenericSyndicationItem</em> objects that represent distinct content published in the feed.</li>
+<li><strong>Language</strong> - A <em>CultureInfo</em> object that represents the natural or formal language in which the feed's content is written.</li>
+<li><strong>LastUpdatedOn</strong> - A <em>DateTime</em> object that represents a date-time indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.</li>
+<li><strong>Resource</strong> - An object that implements the <em>ISyndicationResource</em> interface that represents the actual syndication feed that is being abstracted by the generic feed.</li>
+<li><strong>Title</strong> - Character data that provides the name of the feed.</li>
+</ul>
+<p>The <em>GenericSyndicationItem</em> class exposes the following properties:</p>
+<ul>
+<li><strong>Categories</strong> - A collection of <em>GenericSyndicationCategory</em> objects that represent the categories associated with the item.</li>
+<li><strong>PublishedOn</strong> - A <em>DateTime</em> object that represents a date-time indicating an instant in time associated with an event early in the life cycle of the item.</li>
+<li><strong>Summary</strong> - A short summary, abstract, or excerpt for the item.</li>
+<li><strong>Title</strong> - The human-readable title for the item.</li>
+</ul>
+<p>The <em>GenericSyndicationCategory</em> class exposes the following properties:</p>
+<ul>
+<li><strong>Scheme</strong> - A string that identifies the categorization scheme used by the category.</li>
+<li><strong>Term</strong> - A string that identifies the category.</li>
+</ul>
+<h2 id="consuming-syndicated-content-without-prior-knowledge-of-the-format-it-conforms-to">Consuming syndicated content without prior knowledge of the format it conforms to</h2>
+<pre><code>using Argotic.Common;
+using Argotic.Syndication;
+
+GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri(&quot;http://www.pwop.com/feed.aspx?show=dotnetrocks&amp;filetype=master&quot;));
+
+SyndicationContentFormat format = feed.Format;
+string name = feed.Title;
+string description = feed.Description;
+CultureInfo language = feed.Language;
+DateTime lastUpdatedOn = feed.LastUpdatedOn;
+
+foreach(GenericSyndicationCategory category in feed.Categories)
+{
+    string term = category.Term;
+    string scheme = category.Scheme;
+}
+
+foreach (GenericSyndicationItem item in feed.Items)
+{
+    string title = item.Title;
+    string summary = item.Summary;
+    DateTime publishedOn = item.PublishedOn;
+    
+    foreach (GenericSyndicationCategory category in feed.Categories)
+    {
+        string itemCategoryTerm = category.Term;
+        string itemCategoryTScheme = category.Scheme;
+    }
+}
+
+if (feed.Format == SyndicationContentFormat.Rss)
+{
+    RssFeed rssFeed = feed.Resource as RssFeed;
+    if (rssFeed != null)
+    {
+        // Process format specific information
+    }
+}
+</code></pre>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

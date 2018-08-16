@@ -79,17 +79,72 @@
   <div class="inheritance">
     <h5>Inheritance</h5>
     <div class="level0"><span class="xref">System.Object</span></div>
-    <div class="level1"><span class="xref">SyndicationResourceProviderCollection</span></div>
+    <div class="level1"><span class="xref">System.Configuration.Provider.ProviderCollection</span></div>
+    <div class="level2"><span class="xref">SyndicationResourceProviderCollection</span></div>
   </div>
   <div classs="implements">
     <h5>Implements</h5>
-    <div><span class="xref">ICollection</span>&lt;<a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProvider.html">SyndicationResourceProvider</a>&gt;</div>
+    <div><span class="xref">System.Collections.ICollection</span></div>
+    <div><span class="xref">System.Collections.Generic.ICollection</span>&lt;<a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProvider.html">SyndicationResourceProvider</a>&gt;</div>
+    <div><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProvider.html">SyndicationResourceProvider</a>&gt;</div>
+    <div><span class="xref">System.Collections.IEnumerable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Configuration.Provider.ProviderCollection.Add(System.Configuration.Provider.ProviderBase)</span>
+    </div>
+    <div>
+      <span class="xref">System.Configuration.Provider.ProviderCollection.Clear()</span>
+    </div>
+    <div>
+      <span class="xref">System.Configuration.Provider.ProviderCollection.CopyTo(System.Configuration.Provider.ProviderBase[], System.Int32)</span>
+    </div>
+    <div>
+      <span class="xref">System.Configuration.Provider.ProviderCollection.Remove(System.String)</span>
+    </div>
+    <div>
+      <span class="xref">System.Configuration.Provider.ProviderCollection.SetReadOnly()</span>
+    </div>
+    <div>
+      <span class="xref">System.Configuration.Provider.ProviderCollection.System.Collections.ICollection.CopyTo(System.Array, System.Int32)</span>
+    </div>
+    <div>
+      <span class="xref">System.Configuration.Provider.ProviderCollection.Count</span>
+    </div>
+    <div>
+      <span class="xref">System.Configuration.Provider.ProviderCollection.IsSynchronized</span>
+    </div>
+    <div>
+      <span class="xref">System.Configuration.Provider.ProviderCollection.SyncRoot</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Configuration.Provider.html">Argotic.Configuration.Provider</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Configuration_Provider_SyndicationResourceProviderCollection_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class SyndicationResourceProviderCollection : ProviderCollection, ICollection&lt;SyndicationResourceProvider&gt;</code></pre>
+    <pre><code class="lang-csharp hljs">public class SyndicationResourceProviderCollection : ProviderCollection, ICollection, ICollection&lt;SyndicationResourceProvider&gt;, IEnumerable&lt;SyndicationResourceProvider&gt;, IEnumerable</code></pre>
   </div>
   <h3 id="properties">Properties
   </h3>
@@ -270,7 +325,7 @@
   </span>
   <a id="Argotic_Configuration_Provider_SyndicationResourceProviderCollection_CopyTo_" data-uid="Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo*"></a>
   <h4 id="Argotic_Configuration_Provider_SyndicationResourceProviderCollection_CopyTo_Argotic_Configuration_Provider_SyndicationResourceProvider___System_Int32_" data-uid="Argotic.Configuration.Provider.SyndicationResourceProviderCollection.CopyTo(Argotic.Configuration.Provider.SyndicationResourceProvider[],System.Int32)">CopyTo(SyndicationResourceProvider[], Int32)</h4>
-  <div class="markdown level1 summary"><p>Copies the elements of the <a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProviderCollection.html">SyndicationResourceProviderCollection</a> to an <see cref="!:Array"></see>, starting at a particular <see cref="!:Array"></see> index.</p>
+  <div class="markdown level1 summary"><p>Copies the elements of the <a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProviderCollection.html">SyndicationResourceProviderCollection</a> to an <span class="xref">System.Array</span>, starting at a particular <span class="xref">System.Array</span> index.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -290,8 +345,8 @@
       <tr>
         <td><a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProvider.html">SyndicationResourceProvider</a>[]</td>
         <td><span class="parametername">array</span></td>
-        <td><p>The one-dimensional <see cref="!:Array"></see> that is the destination of the elements copied from <a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProviderCollection.html">SyndicationResourceProviderCollection</a>.
-The <see cref="!:Array"></see> must have zero-based indexing.</p>
+        <td><p>The one-dimensional <span class="xref">System.Array</span> that is the destination of the elements copied from <a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProviderCollection.html">SyndicationResourceProviderCollection</a>.
+The <span class="xref">System.Array</span> must have zero-based indexing.</p>
 </td>
       </tr>
       <tr>
@@ -328,8 +383,8 @@ The <see cref="!:Array"></see> must have zero-based indexing.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerator</span>&lt;<a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProvider.html">SyndicationResourceProvider</a>&gt;</td>
-        <td><p>A <see cref="!:IEnumerator&lt;T>"></see> that can be used to iterate through the collection.</p>
+        <td><span class="xref">System.Collections.Generic.IEnumerator</span>&lt;<a class="xref" href="Argotic.Configuration.Provider.SyndicationResourceProvider.html">SyndicationResourceProvider</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.IEnumerator&lt;T&gt;</span> that can be used to iterate through the collection.</p>
 </td>
       </tr>
     </tbody>
@@ -386,7 +441,16 @@ This method also returns <strong>false</strong> if item is not found in the coll
   </table>
   <h3 id="implements">Implements</h3>
   <div>
-      <span class="xref">ICollection&lt;&gt;</span>
+      <span class="xref">System.Collections.ICollection</span>
+  </div>
+  <div>
+      <span class="xref">System.Collections.Generic.ICollection&lt;T&gt;</span>
+  </div>
+  <div>
+      <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span>
+  </div>
+  <div>
+      <span class="xref">System.Collections.IEnumerable</span>
   </div>
 </article>
           </div>

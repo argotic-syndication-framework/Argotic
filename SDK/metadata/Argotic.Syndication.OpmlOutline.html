@@ -83,13 +83,30 @@
   </div>
   <div classs="implements">
     <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
     <div><a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Syndication.html">Argotic.Syndication</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Syndication_OpmlOutline_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class OpmlOutline : IComparable, IExtensibleSyndicationObject</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class OpmlOutline : IComparable, IExtensibleSyndicationObject</code></pre>
   </div>
   <h5 id="Argotic_Syndication_OpmlOutline_examples"><strong>Examples</strong></h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlOutlineExample.cs" region="OpmlOutline"></code></pre>
@@ -150,6 +167,27 @@
   <h5 id="Argotic_Syndication_OpmlOutline__ctor_System_String__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Textual values <em>may</em> contain encoded HTML markup.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -178,8 +216,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
-        <td><p>A <see cref="!:Dictionary&lt;T, T>"></see> of strings that represent custom attributes applied to this outline.</p>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.Dictionary&lt;TKey, TValue&gt;</span> of strings that represent custom attributes applied to this outline.</p>
 </td>
       </tr>
     </tbody>
@@ -214,8 +252,8 @@ within the OPML specification. Use the class properties that represent these att
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> of strings that represent the categorization taxonomy applied to this outline.</p>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> of strings that represent the categorization taxonomy applied to this outline.</p>
 </td>
       </tr>
     </tbody>
@@ -282,15 +320,15 @@ To represent a <em>tag</em>, the category string should contain <u>no</u> slashe
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
-        <td><p>A <see cref="!:DateTime"></see> that indicates when this outline was created.
-The default value is <see cref="!:DateTime.MinValue"></see>, which indicates that no creation date was provided.</p>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><p>A <span class="xref">System.DateTime</span> that indicates when this outline was created.
+The default value is <span class="xref">System.DateTime.MinValue</span>, which indicates that no creation date was provided.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_OpmlOutline_CreatedOn_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The <see cref="!:DateTime"></see> should be provided in Coordinated Universal Time (UTC).</p>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.DateTime</span> should be provided in Coordinated Universal Time (UTC).</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -318,15 +356,31 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
-        <td><p>A <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_OpmlOutline_Extensions_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <see cref="!:Collection&lt;T>"></see> collection.</p>
+  <div class="markdown level1 remarks"><p>This <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_HasBreakpoint.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.HasBreakpoint%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -463,7 +517,7 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
   </table>
   <h5 id="Argotic_Syndication_OpmlOutline_IsInclusionOutline_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_CreateInclusionOutline_System_String_Uri_">CreateInclusionOutline(String, Uri)</a></div>
+      <div><a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_CreateInclusionOutline_System_String_System_Uri_">CreateInclusionOutline(String, Uri)</a></div>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -499,7 +553,7 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
   </table>
   <h5 id="Argotic_Syndication_OpmlOutline_IsSubscriptionListOutline_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_Uri_">CreateSubscriptionListOutline(String, String, Uri)</a></div>
+      <div><a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_System_Uri_">CreateSubscriptionListOutline(String, String, Uri)</a></div>
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -527,8 +581,8 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> of <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> objects that represent the children of this outline.</p>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> of <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> objects that represent the children of this outline.</p>
 </td>
       </tr>
     </tbody>
@@ -568,6 +622,27 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
   <h5 id="Argotic_Syndication_OpmlOutline_Text_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>Textual values <em>may</em> contain encoded HTML markup.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -620,16 +695,32 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_CompareSequence_Collection_Argotic_Syndication_OpmlOutline__Collection_Argotic_Syndication_OpmlOutline__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.CompareSequence(Collection%7BArgotic.Syndication.OpmlOutline%7D%2CCollection%7BArgotic.Syndication.OpmlOutline%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Syndication_OpmlOutline__System_Collections_ObjectModel_Collection_Argotic_Syndication_OpmlOutline__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.CompareSequence(System.Collections.ObjectModel.Collection%7BArgotic.Syndication.OpmlOutline%7D%2CSystem.Collections.ObjectModel.Collection%7BArgotic.Syndication.OpmlOutline%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs/#L555">View Source</a>
   </span>
   <a id="Argotic_Syndication_OpmlOutline_CompareSequence_" data-uid="Argotic.Syndication.OpmlOutline.CompareSequence*"></a>
-  <h4 id="Argotic_Syndication_OpmlOutline_CompareSequence_Collection_Argotic_Syndication_OpmlOutline__Collection_Argotic_Syndication_OpmlOutline__" data-uid="Argotic.Syndication.OpmlOutline.CompareSequence(Collection{Argotic.Syndication.OpmlOutline},Collection{Argotic.Syndication.OpmlOutline})">CompareSequence(Collection&lt;OpmlOutline&gt;, Collection&lt;OpmlOutline&gt;)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified <see cref="!:Collection&lt;OpmlOutline>"></see> collections.</p>
+  <h4 id="Argotic_Syndication_OpmlOutline_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Syndication_OpmlOutline__System_Collections_ObjectModel_Collection_Argotic_Syndication_OpmlOutline__" data-uid="Argotic.Syndication.OpmlOutline.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline},System.Collections.ObjectModel.Collection{Argotic.Syndication.OpmlOutline})">CompareSequence(Collection&lt;OpmlOutline&gt;, Collection&lt;OpmlOutline&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collections.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -647,13 +738,13 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>&gt;</td>
         <td><span class="parametername">source</span></td>
         <td><p>The first collection.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>&gt;</td>
         <td><span class="parametername">target</span></td>
         <td><p>The second collection.</p>
 </td>
@@ -676,7 +767,7 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_OpmlOutline_CompareSequence_Collection_Argotic_Syndication_OpmlOutline__Collection_Argotic_Syndication_OpmlOutline___remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_OpmlOutline_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Syndication_OpmlOutline__System_Collections_ObjectModel_Collection_Argotic_Syndication_OpmlOutline___remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
 </p>
@@ -687,6 +778,27 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_CompareTo_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.CompareTo(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -737,15 +849,31 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_CreateInclusionOutline_System_String_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String%2CUri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_CreateInclusionOutline_System_String_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String%2CSystem.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs/#L602">View Source</a>
   </span>
   <a id="Argotic_Syndication_OpmlOutline_CreateInclusionOutline_" data-uid="Argotic.Syndication.OpmlOutline.CreateInclusionOutline*"></a>
-  <h4 id="Argotic_Syndication_OpmlOutline_CreateInclusionOutline_System_String_Uri_" data-uid="Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String,Uri)">CreateInclusionOutline(String, Uri)</h4>
+  <h4 id="Argotic_Syndication_OpmlOutline_CreateInclusionOutline_System_String_System_Uri_" data-uid="Argotic.Syndication.OpmlOutline.CreateInclusionOutline(System.String,System.Uri)">CreateInclusionOutline(String, Uri)</h4>
   <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> that represents an inclusion outline using the supplied parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -770,9 +898,9 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">url</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents an http address.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents an http address.</p>
 </td>
       </tr>
     </tbody>
@@ -793,7 +921,7 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_OpmlOutline_CreateInclusionOutline_System_String_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_OpmlOutline_CreateInclusionOutline_System_String_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     When a outline is expanded in an outliner, if the <code data-dev-comment-type="paramref" class="paramref">url</code> ends with <em>.opml</em>, the outline expands in place. This is called <strong>inclusion</strong>. 
 </p>
@@ -806,15 +934,41 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     otherwise the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_ContentType">ContentType</a> will have a value of <strong>link</strong>.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">url</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String%2CSystem.String%2CUri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String%2CSystem.String%2CSystem.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs/#L644">View Source</a>
   </span>
   <a id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_" data-uid="Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline*"></a>
-  <h4 id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_Uri_" data-uid="Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,Uri)">CreateSubscriptionListOutline(String, String, Uri)</h4>
+  <h4 id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_System_Uri_" data-uid="Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri)">CreateSubscriptionListOutline(String, String, Uri)</h4>
   <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> that represents a subscription list outline using the supplied parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -845,9 +999,9 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">xmlUrl</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the http address of the feed.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the http address of the feed.</p>
 </td>
       </tr>
     </tbody>
@@ -868,7 +1022,7 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     A subscription list is a possibly multiple-level list of subscriptions to feeds. Each sub-element of the body of the OPML document 
     is a node of type <em>rss</em> or an outline element that contains nodes of type <em>rss</em>.
@@ -878,15 +1032,51 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     that are arbitrarily structured. A validator may flag these files, warning that some processors may not understand and preserve the structure.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">type</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">type</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">xmlUrl</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_Uri_Uri_System_String_System_String_System_String_CultureInfo_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String%2CSystem.String%2CUri%2CUri%2CSystem.String%2CSystem.String%2CSystem.String%2CCultureInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_System_Uri_System_Uri_System_String_System_String_System_String_System_Globalization_CultureInfo_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String%2CSystem.String%2CSystem.Uri%2CSystem.Uri%2CSystem.String%2CSystem.String%2CSystem.String%2CSystem.Globalization.CultureInfo)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs/#L680">View Source</a>
   </span>
   <a id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_" data-uid="Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline*"></a>
-  <h4 id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_Uri_Uri_System_String_System_String_System_String_CultureInfo_" data-uid="Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,Uri,Uri,System.String,System.String,System.String,CultureInfo)">CreateSubscriptionListOutline(String, String, Uri, Uri, String, String, String, CultureInfo)</h4>
+  <h4 id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_System_Uri_System_Uri_System_String_System_String_System_String_System_Globalization_CultureInfo_" data-uid="Argotic.Syndication.OpmlOutline.CreateSubscriptionListOutline(System.String,System.String,System.Uri,System.Uri,System.String,System.String,System.String,System.Globalization.CultureInfo)">CreateSubscriptionListOutline(String, String, Uri, Uri, String, String, String, CultureInfo)</h4>
   <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> that represents a subscription list outline using the supplied parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -917,15 +1107,15 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">xmlUrl</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the http address of the feed.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the http address of the feed.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">htmlUrl</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the web site that hosts the feed. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the web site that hosts the feed. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
@@ -949,9 +1139,9 @@ This value can be an empty string.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">CultureInfo</span></td>
+        <td><span class="xref">System.Globalization.CultureInfo</span></td>
         <td><span class="parametername">language</span></td>
-        <td><p>A <see cref="!:CultureInfo"></see> that represents the natural or formal language in which the feed is written. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Globalization.CultureInfo</span> that represents the natural or formal language in which the feed is written. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -972,7 +1162,7 @@ This value can be an empty string.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_Uri_Uri_System_String_System_String_System_String_CultureInfo__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_OpmlOutline_CreateSubscriptionListOutline_System_String_System_String_System_Uri_System_Uri_System_String_System_String_System_String_System_Globalization_CultureInfo__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     A subscription list is a possibly multiple-level list of subscriptions to feeds. Each sub-element of the body of the OPML document 
     is a node of type <em>rss</em> or an outline element that contains nodes of type <em>rss</em>.
@@ -982,21 +1172,57 @@ This value can be an empty string.</p>
     that are arbitrarily structured. A validator may flag these files, warning that some processors may not understand and preserve the structure.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">text</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">type</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">type</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">xmlUrl</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs/#L786">View Source</a>
   </span>
   <a id="Argotic_Syndication_OpmlOutline_Equals_" data-uid="Argotic.Syndication.OpmlOutline.Equals*"></a>
-  <h4 id="Argotic_Syndication_OpmlOutline_Equals_Object_" data-uid="Argotic.Syndication.OpmlOutline.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Syndication_OpmlOutline_Equals_System_Object_" data-uid="Argotic.Syndication.OpmlOutline.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1009,9 +1235,9 @@ This value can be an empty string.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -1027,20 +1253,22 @@ This value can be an empty string.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.FindExtension(Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.FindExtension(System.Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs/#L344">View Source</a>
   </span>
   <a id="Argotic_Syndication_OpmlOutline_FindExtension_" data-uid="Argotic.Syndication.OpmlOutline.FindExtension*"></a>
-  <h4 id="Argotic_Syndication_OpmlOutline_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Syndication.OpmlOutline.FindExtension(Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
+  <h4 id="Argotic_Syndication_OpmlOutline_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Syndication.OpmlOutline.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
   <div class="markdown level1 summary"><p>Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_Extensions">Extensions</a> collection.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -1059,9 +1287,9 @@ This value can be an empty string.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><span class="xref">System.Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
         <td><span class="parametername">match</span></td>
-        <td><p>The <see cref="!:Predicate&lt;ISyndicationExtension>"></see> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
+        <td><p>The <span class="xref">System.Predicate&lt;T&gt;</span> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
 </td>
       </tr>
     </tbody>
@@ -1082,11 +1310,27 @@ This value can be an empty string.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_OpmlOutline_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The <see cref="!:Predicate&lt;ISyndicationExtension>"></see> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
-The elements of the current <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_Extensions">Extensions</a> are individually passed to the <see cref="!:Predicate&lt;ISyndicationExtension>"></see> delegate, moving forward in
+  <h5 id="Argotic_Syndication_OpmlOutline_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.Predicate&lt;T&gt;</span> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
+The elements of the current <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_Extensions">Extensions</a> are individually passed to the <span class="xref">System.Predicate&lt;T&gt;</span> delegate, moving forward in
 the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_Extensions">Extensions</a>, starting with the first element and ending with the last element. Processing is stopped when a match is found.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -1119,16 +1363,18 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs/#L381">View Source</a>
   </span>
   <a id="Argotic_Syndication_OpmlOutline_Load_" data-uid="Argotic.Syndication.OpmlOutline.Load*"></a>
-  <h4 id="Argotic_Syndication_OpmlOutline_Load_XPathNavigator_" data-uid="Argotic.Syndication.OpmlOutline.Load(XPathNavigator)">Load(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Syndication_OpmlOutline_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1146,9 +1392,9 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
     </tbody>
@@ -1169,19 +1415,35 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_OpmlOutline_Load_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_OpmlOutline_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_Load_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.Load(XPathNavigator%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs/#L435">View Source</a>
   </span>
   <a id="Argotic_Syndication_OpmlOutline_Load_" data-uid="Argotic.Syndication.OpmlOutline.Load*"></a>
-  <h4 id="Argotic_Syndication_OpmlOutline_Load_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.OpmlOutline.Load(XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)">Load(XPathNavigator, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> using the supplied <see cref="!:XPathNavigator"></see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+  <h4 id="Argotic_Syndication_OpmlOutline_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.OpmlOutline.Load(System.Xml.XPath.XPathNavigator,Argotic.Common.SyndicationResourceLoadSettings)">Load(XPathNavigator, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1199,9 +1461,9 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
       <tr>
@@ -1228,9 +1490,30 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_OpmlOutline_Load_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_OpmlOutline_Load_System_Xml_XPath_XPathNavigator_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_RemoveExtension_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.RemoveExtension(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -1284,6 +1567,22 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
   <h5 id="Argotic_Syndication_OpmlOutline_RemoveExtension_Argotic_Extensions_ISyndicationExtension__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>If the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndication_OpmlOutline_Extensions">Extensions</a> collection of the current instance does not contain the specified <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>, will return <strong>false</strong>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_ToString.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -1293,7 +1592,7 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
   </span>
   <a id="Argotic_Syndication_OpmlOutline_ToString_" data-uid="Argotic.Syndication.OpmlOutline.ToString*"></a>
   <h4 id="Argotic_Syndication_OpmlOutline_ToString" data-uid="Argotic.Syndication.OpmlOutline.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1311,24 +1610,26 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Syndication_OpmlOutline_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_OpmlOutline_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.OpmlOutline.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Opml/OpmlOutline.cs/#L485">View Source</a>
   </span>
   <a id="Argotic_Syndication_OpmlOutline_WriteTo_" data-uid="Argotic.Syndication.OpmlOutline.WriteTo*"></a>
-  <h4 id="Argotic_Syndication_OpmlOutline_WriteTo_XmlWriter_" data-uid="Argotic.Syndication.OpmlOutline.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Syndication_OpmlOutline_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Syndication.OpmlOutline.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Syndication.OpmlOutline.html">OpmlOutline</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1346,9 +1647,25 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
-        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -1580,6 +1897,9 @@ the <a class="xref" href="Argotic.Syndication.OpmlOutline.html#Argotic_Syndicati
     </tbody>
   </table>
   <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
   <div>
       <a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a>
   </div>

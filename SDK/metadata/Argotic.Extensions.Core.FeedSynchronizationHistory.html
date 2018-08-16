@@ -81,11 +81,31 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">FeedSynchronizationHistory</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.Core.html">Argotic.Extensions.Core</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
   <h5 id="Argotic_Extensions_Core_FeedSynchronizationHistory_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class FeedSynchronizationHistory : IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class FeedSynchronizationHistory : IComparable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -139,15 +159,31 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">sequence</code> is less than <strong>1</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory__ctor_System_Int32_DateTime_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.%23ctor(System.Int32%2CDateTime%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory__ctor_System_Int32_System_DateTime_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.%23ctor(System.Int32%2CSystem.DateTime%2CSystem.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationHistory.cs/#L55">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_FeedSynchronizationHistory__ctor_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.#ctor*"></a>
-  <h4 id="Argotic_Extensions_Core_FeedSynchronizationHistory__ctor_System_Int32_DateTime_System_String_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.#ctor(System.Int32,DateTime,System.String)">FeedSynchronizationHistory(Int32, DateTime, String)</h4>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationHistory__ctor_System_Int32_System_DateTime_System_String_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.#ctor(System.Int32,System.DateTime,System.String)">FeedSynchronizationHistory(Int32, DateTime, String)</h4>
   <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a> class using the supplied parameters.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -172,15 +208,31 @@
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">utcWhen</span></td>
-        <td><p>A <see cref="!:DateTime"></see> that represents the date-time for the device that performed the item modification.</p>
+        <td><p>A <span class="xref">System.DateTime</span> that represents the date-time for the device that performed the item modification.</p>
 </td>
       </tr>
       <tr>
         <td><span class="xref">System.String</span></td>
         <td><span class="parametername">by</span></td>
         <td><p>A text value that uniquely identifies the endpoint that made the modification.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">sequence</code> is less than <strong>1</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -266,6 +318,22 @@
   <div class="markdown level1 remarks"><p>The sequence number is typically assigned by copying the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html#Argotic_Extensions_Core_FeedSynchronizationItem_Updates">Updates</a> value on <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html">FeedSynchronizationItem</a>,
 after it has been incremented at the time of an update.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is less than <strong>1</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory_When.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.When%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -292,9 +360,9 @@ after it has been incremented at the time of an update.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
-        <td><p>A <see cref="!:DateTime"></see> that represents the date-time for the device that performed the item modification.
-The default value is <see cref="!:DateTime.MinValue"></see>, which indicates that no date-time was specified.</p>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><p>A <span class="xref">System.DateTime</span> that represents the date-time for the device that performed the item modification.
+The default value is <span class="xref">System.DateTime.MinValue</span>, which indicates that no date-time was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -305,7 +373,7 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     Either or both of the <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html#Argotic_Extensions_Core_FeedSynchronizationHistory_When">When</a> or <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html#Argotic_Extensions_Core_FeedSynchronizationHistory_By">By</a> properties <strong>must</strong> be present; it is invalid to have neither. 
     It is <em>recommended</em> that implementers specify both <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html#Argotic_Extensions_Core_FeedSynchronizationHistory_When">When</a> and <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html#Argotic_Extensions_Core_FeedSynchronizationHistory_By">By</a> properties whenever possible.
 </p>
-<p>The <see cref="!:DateTime"></see> value should be provided in Coordinated Universal Time (UTC).</p>
+<p>The <span class="xref">System.DateTime</span> value should be provided in Coordinated Universal Time (UTC).</p>
 </div>
   <h3 id="methods">Methods
   </h3>
@@ -359,21 +427,37 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationHistory.cs/#L284">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_FeedSynchronizationHistory_Equals_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.Equals*"></a>
-  <h4 id="Argotic_Extensions_Core_FeedSynchronizationHistory_Equals_Object_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationHistory_Equals_System_Object_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -386,9 +470,9 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -404,11 +488,13 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -441,16 +527,18 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationHistory.cs/#L156">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_FeedSynchronizationHistory_Load_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.Load*"></a>
-  <h4 id="Argotic_Extensions_Core_FeedSynchronizationHistory_Load_XPathNavigator_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.Load(XPathNavigator)">Load(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationHistory_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -468,9 +556,9 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
     </tbody>
@@ -491,9 +579,25 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Extensions_Core_FeedSynchronizationHistory_Load_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Extensions_Core_FeedSynchronizationHistory_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory_ToString.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -503,7 +607,7 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
   </span>
   <a id="Argotic_Extensions_Core_FeedSynchronizationHistory_ToString_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.ToString*"></a>
   <h4 id="Argotic_Extensions_Core_FeedSynchronizationHistory_ToString" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -521,24 +625,26 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Extensions_Core_FeedSynchronizationHistory_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_FeedSynchronizationHistory_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.FeedSynchronizationHistory.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/FeedSync/FeedSynchronizationHistory.cs/#L201">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_FeedSynchronizationHistory_WriteTo_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.WriteTo*"></a>
-  <h4 id="Argotic_Extensions_Core_FeedSynchronizationHistory_WriteTo_XmlWriter_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_FeedSynchronizationHistory_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Extensions.Core.FeedSynchronizationHistory.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationHistory.html">FeedSynchronizationHistory</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -556,9 +662,25 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
-        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -789,6 +911,10 @@ The default value is <see cref="!:DateTime.MinValue"></see>, which indicates tha
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
       <div><a class="xref" href="Argotic.Extensions.Core.FeedSynchronizationItem.html#Argotic_Extensions_Core_FeedSynchronizationItem_Histories">Histories</a></div>

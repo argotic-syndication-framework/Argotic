@@ -1,0 +1,189 @@
+﻿<!DOCTYPE html>
+<!--[if IE]><![endif]-->
+<html>
+  
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <title>How to generate Web Log Markup Language (BlogML) formatted content </title>
+    <meta name="viewport" content="width=device-width">
+    <meta name="title" content="How to generate Web Log Markup Language (BlogML) formatted content ">
+    <meta name="generator" content="docfx 2.37.2.0">
+    
+    <link rel="shortcut icon" href="../../favicon.ico">
+    <link rel="stylesheet" href="../../styles/docfx.vendor.css">
+    <link rel="stylesheet" href="../../styles/docfx.css">
+    <link rel="stylesheet" href="../../styles/main.css">
+    <meta property="docfx:navrel" content="../../toc.html">
+    <meta property="docfx:tocrel" content="../../Specialized_Content_Formats/toc.html">
+    
+    
+    
+  </head>
+  <body data-spy="scroll" data-target="#affix" data-offset="120">
+    <div id="wrapper">
+      <header>
+        
+        <nav id="autocollapse" class="navbar navbar-inverse ng-scope" role="navigation">
+          <div class="container">
+            <div class="navbar-header">
+              <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#navbar">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+              </button>
+              
+              <a class="navbar-brand" href="../../index.html">
+                <img id="logo" class="svg" src="../../logo.svg" alt="">
+              </a>
+            </div>
+            <div class="collapse navbar-collapse" id="navbar">
+              <form class="navbar-form navbar-right" role="search" id="search">
+                <div class="form-group">
+                  <input type="text" class="form-control" id="search-query" placeholder="Search" autocomplete="off">
+                </div>
+              </form>
+            </div>
+          </div>
+        </nav>
+        
+        <div class="subnav navbar navbar-default">
+          <div class="container hide-when-search" id="breadcrumb">
+            <ul class="breadcrumb">
+              <li></li>
+            </ul>
+          </div>
+        </div>
+      </header>
+      <div role="main" class="container body-content hide-when-search">
+        
+        <div class="sidenav hide-when-search">
+          <a class="btn toc-toggle collapse" data-toggle="collapse" href="#sidetoggle" aria-expanded="false" aria-controls="sidetoggle">Show / Hide Table of Contents</a>
+          <div class="sidetoggle collapse" id="sidetoggle">
+            <div id="sidetoc"></div>
+          </div>
+        </div>
+        <div class="article row grid-right">
+          <div class="col-md-10">
+            <article class="content wrap" id="_content" data-uid="">
+<h1 id="how-to-generate-web-log-markup-language-blogml-formatted-content">How to generate Web Log Markup Language (BlogML) formatted content</h1>
+
+<p><a href="http://blogml.org/">Web Log Markup Language</a> (BlogML) provides an open format derived from XML to store and restore the content of a blog. As the number of web log software platforms grows, there is a need to be able to import and export blog content in a portable, open format; and so the BlogML format was created to ease the difficulties faced when attempting to move web log content from one software platform to another.</p>
+<p>The classes that together compose the implementation of BlogML are located in the <em>Argotic.Syndication.Specialized</em> namespace. The primary framework entity that you will use when working with BlogML formated syndication resources is the <em>BlogMLDocument</em> class. This class implements the <em>ISyndicationResource</em> and <em>IExtensibleSyndicationObject</em> interfaces, and provides an API that maps closely to the syndication specification entities as well as methods for consuming and persisting syndicated web log content. The framework will by default automatically load any syndication extensions that are present in addition to the syndicated portable web log content and attempt to handle malformed XML data.</p>
+<p>One of the core principals of the framework is &quot;<strong>Read flexibly, Write strictly</strong>&quot;. The framework upholds this principal by consuming syndication resources as flexibly as possible, but always generates output that strictly matches the syndication format specification. This methodology ensures you can consume syndication resources with confidence while still publishing syndicated content that strictly conforms to its format specification.</p>
+<p>To create a new BlogML portable description of web log content, you simply instantiate a new instance of the <em>BlogMLDocument</em> class and utilize its properties and methods to describe the web log content you wish to syndicate. The framework API will as much as possible match the terminology used in the syndication format specification, which allows you to easily navigate the framework syndication entities.</p>
+<pre><code>using System.IO;
+using Argotic.Syndication.Specialized;
+
+BlogMLDocument document = new BlogMLDocument();
+
+document.RootUrl = new Uri(&quot;/blogs/default.aspx&quot;);
+document.GeneratedOn = new DateTime(2006, 9, 5, 18, 22, 10);
+document.Title = new BlogMLTextConstruct(&quot;BlogML 2.0 Example&quot;);
+document.Subtitle = new BlogMLTextConstruct(&quot;This is some sample blog content for BlogML 2.0&quot;);
+
+BlogMLAuthor administrator = new BlogMLAuthor();
+administrator.Id = &quot;2100&quot;;
+administrator.CreatedOn = new DateTime(2006, 8, 10, 8, 44, 35);
+administrator.LastModifiedOn = new DateTime(2006, 9, 4, 13, 46, 38);
+administrator.ApprovalStatus = BlogMLApprovalStatus.Approved;
+administrator.EmailAddress = &quot;someone@domain.com&quot;;
+administrator.Title = new BlogMLTextConstruct(&quot;admin&quot;);
+document.Authors.Add(administrator);
+
+document.ExtendedProperties.Add(&quot;CommentModeration&quot;, &quot;Anonymous&quot;);
+document.ExtendedProperties.Add(&quot;SendTrackback&quot;, &quot;yes&quot;);
+
+BlogMLCategory category1 = new BlogMLCategory();
+category1.Id = &quot;1018&quot;;
+category1.CreatedOn = new DateTime(2006, 9, 5, 17, 54, 58);
+category1.LastModifiedOn = new DateTime(2006, 9, 5, 17, 54, 58);
+category1.ApprovalStatus = BlogMLApprovalStatus.Approved;
+category1.Description = &quot;Sample Category 1&quot;;
+category1.ParentId = &quot;0&quot;;
+category1.Title = new BlogMLTextConstruct(&quot;Category 1&quot;);
+document.Categories.Add(category1);
+
+BlogMLCategory category2 = new BlogMLCategory();
+category2.Id = &quot;1019&quot;;
+category2.CreatedOn = new DateTime(2006, 9, 5, 17, 54, 59);
+category2.LastModifiedOn = new DateTime(2006, 9, 5, 17, 54, 59);
+category2.ApprovalStatus = BlogMLApprovalStatus.Approved;
+category2.Description = &quot;Sample Category 2&quot;;
+category2.ParentId = &quot;0&quot;;
+category2.Title = new BlogMLTextConstruct(&quot;Category 2&quot;);
+document.Categories.Add(category2);
+
+BlogMLCategory category3 = new BlogMLCategory();
+category3.Id = &quot;1020&quot;;
+category3.CreatedOn = new DateTime(2006, 9, 5, 17, 55, 0);
+category3.LastModifiedOn = new DateTime(2006, 9, 5, 17, 55, 0);
+category3.ApprovalStatus = BlogMLApprovalStatus.NotApproved;
+category3.Description = &quot;Sample Category 3&quot;;
+category3.ParentId = &quot;0&quot;;
+category3.Title = new BlogMLTextConstruct(&quot;Category 3&quot;);
+document.Categories.Add(category3);
+
+BlogMLPost post = new BlogMLPost();
+post.Id = &quot;34&quot;;
+post.CreatedOn = new DateTime(2006, 9, 5, 3, 19, 0);
+post.LastModifiedOn = new DateTime(2006, 9, 5, 3, 19, 0);
+post.ApprovalStatus = BlogMLApprovalStatus.Approved;
+post.Url = new Uri(&quot;/blogs/archive/2006/09/05/Sample-Blog-Post.aspx&quot;);
+post.PostType = BlogMLPostType.Normal;
+post.Views = &quot;0&quot;;
+post.Title = new BlogMLTextConstruct(&quot;Sample Blog Post&quot;);
+post.Content = new BlogMLTextConstruct(&quot;&lt;p&gt;This is &lt;b&gt;HTML encoded&lt;/b&gt; content.&amp;nbsp;&lt;/p&gt;&quot;, BlogMLContentType.Html);
+post.Name = new BlogMLTextConstruct(&quot;Sample Blog Post&quot;);
+
+post.Categories.Add(&quot;1018&quot;);
+post.Categories.Add(&quot;1020&quot;);
+
+post.Authors.Add(&quot;2100&quot;);
+
+BlogMLComment comment = new BlogMLComment();
+comment.Id = &quot;35&quot;;
+comment.CreatedOn = new DateTime(2006, 9, 5, 11, 36, 50);
+comment.LastModifiedOn  = new DateTime(2006, 9, 5, 11, 36, 50);
+comment.Title = new BlogMLTextConstruct(&quot;re: Sample Blog Post&quot;);
+comment.Content = new BlogMLTextConstruct(&quot;This is a test comment.&quot;);
+post.Comments.Add(comment);
+</code></pre>
+<p>The BlogML description generated in the above example represents an example of a categorized, multiple author web log and includes post comments.</p>
+</article>
+          </div>
+          
+          <div class="hidden-sm col-md-2" role="complementary">
+            <div class="sideaffix">
+              <div class="contribution">
+                <ul class="nav">
+                </ul>
+              </div>
+              <nav class="bs-docs-sidebar hidden-print hidden-xs hidden-sm affix" id="affix">
+              <!-- <p><a class="back-to-top" href="#top">Back to top</a><p> -->
+              </nav>
+            </div>
+          </div>
+        </div>
+      </div>
+      
+      <footer>
+        <div class="grad-bottom"></div>
+        <div class="footer">
+          <div class="container">
+            <span class="pull-right">
+              <a href="#top">Back to top</a>
+            </span>
+            
+            <span>Generated by <strong>DocFX</strong></span>
+          </div>
+        </div>
+      </footer>
+    </div>
+    
+    <script type="text/javascript" src="../../styles/docfx.vendor.js"></script>
+    <script type="text/javascript" src="../../styles/docfx.js"></script>
+    <script type="text/javascript" src="../../styles/main.js"></script>
+  </body>
+</html>

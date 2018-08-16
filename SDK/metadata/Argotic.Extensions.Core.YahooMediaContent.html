@@ -81,11 +81,31 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">YahooMediaContent</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.Core.html">Argotic.Extensions.Core</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
   <h5 id="Argotic_Extensions_Core_YahooMediaContent_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities</code></pre>
   </div>
   <h5 id="Argotic_Extensions_Core_YahooMediaContent_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>
@@ -145,16 +165,32 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">player</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent__ctor_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.%23ctor(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent__ctor_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.%23ctor(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs/#L142">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaContent__ctor_" data-uid="Argotic.Extensions.Core.YahooMediaContent.#ctor*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaContent__ctor_Uri_" data-uid="Argotic.Extensions.Core.YahooMediaContent.#ctor(Uri)">YahooMediaContent(Uri)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a> class using the supplied <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaContent__ctor_System_Uri_" data-uid="Argotic.Extensions.Core.YahooMediaContent.#ctor(System.Uri)">YahooMediaContent(Uri)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a> class using the supplied <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -172,9 +208,25 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">url</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the direct URL to this media object.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the direct URL to this media object.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">url</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -208,7 +260,7 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>The <em>kilobits</em> per second rate of this media object. The default value is <see cref="!:Int32.MinValue"></see>, which indicates that no bit-rate was specified.</p>
+        <td><p>The <em>kilobits</em> per second rate of this media object. The default value is <span class="xref">System.Int32.MinValue</span>, which indicates that no bit-rate was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -239,8 +291,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaCategory.html">YahooMediaCategory</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaCategory.html">YahooMediaCategory</a> objects that represent a taxonomy that gives an indication to the type of content for this media object.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaCategory.html">YahooMediaCategory</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaCategory.html">YahooMediaCategory</a> objects that represent a taxonomy that gives an indication to the type of content for this media object.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -273,7 +325,7 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>The number of audio channels in this media object. The default value is <see cref="!:Int32.MinValue"></see>, which indicates that no audio channels were specified.</p>
+        <td><p>The number of audio channels in this media object. The default value is <span class="xref">System.Int32.MinValue</span>, which indicates that no audio channels were specified.</p>
 </td>
       </tr>
     </tbody>
@@ -374,8 +426,8 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaCredit.html">YahooMediaCredit</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaCredit.html">YahooMediaCredit</a> objects that represent the entities that contributed to the creation of this media object.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaCredit.html">YahooMediaCredit</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaCredit.html">YahooMediaCredit</a> objects that represent the entities that contributed to the creation of this media object.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -446,8 +498,8 @@ and several entities can have the same role. These should appear as distinct <a 
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">TimeSpan</span></td>
-        <td><p>A <see cref="!:TimeSpan"></see> that represents the total playing time for this media object. The default value is <see cref="!:TimeSpan.MinValue"></see>, which indicates that no duration was specified.</p>
+        <td><span class="xref">System.TimeSpan</span></td>
+        <td><p>A <span class="xref">System.TimeSpan</span> that represents the total playing time for this media object. The default value is <span class="xref">System.TimeSpan.MinValue</span>, which indicates that no duration was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -512,7 +564,7 @@ The default value is <a class="xref" href="Argotic.Extensions.Core.YahooMediaExp
     <tbody>
       <tr>
         <td><span class="xref">System.Int64</span></td>
-        <td><p>The number of bytes this media object represents on disk. The default value is <see cref="!:Int64.MinValue"></see>, which indicates that no file size was specified.</p>
+        <td><p>The number of bytes this media object represents on disk. The default value is <span class="xref">System.Int64.MinValue</span>, which indicates that no file size was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -544,7 +596,7 @@ The default value is <a class="xref" href="Argotic.Extensions.Core.YahooMediaExp
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>The number of frames per second for this media object. The default value is <see cref="!:Int32.MinValue"></see>, which indicates that no frame-rate was specified.</p>
+        <td><p>The number of frames per second for this media object. The default value is <span class="xref">System.Int32.MinValue</span>, which indicates that no frame-rate was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -575,8 +627,8 @@ The default value is <a class="xref" href="Argotic.Extensions.Core.YahooMediaExp
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaHash.html">YahooMediaHash</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaHash.html">YahooMediaHash</a> objects that represent the hash digests for this media object.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaHash.html">YahooMediaHash</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaHash.html">YahooMediaHash</a> objects that represent the hash digests for this media object.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -612,7 +664,7 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>The height of this media object, typically in pixels. The default value is <see cref="!:Int32.MinValue"></see>, which indicates that no height was specified.</p>
+        <td><p>The height of this media object, typically in pixels. The default value is <span class="xref">System.Int32.MinValue</span>, which indicates that no height was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -678,8 +730,8 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <see cref="!:String"></see> objects that represent the relevant keywords that describe this media object.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <span class="xref">System.String</span> objects that represent the relevant keywords that describe this media object.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -714,8 +766,8 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">CultureInfo</span></td>
-        <td><p>A <see cref="!:CultureInfo"></see> that represents the primary language encapsulated in this media object.
+        <td><span class="xref">System.Globalization.CultureInfo</span></td>
+        <td><p>A <span class="xref">System.Globalization.CultureInfo</span> that represents the primary language encapsulated in this media object.
 The default value is a <strong>null</strong> reference, which indicates no language was specified.</p>
 </td>
       </tr>
@@ -817,8 +869,8 @@ The default value is <a class="xref" href="Argotic.Extensions.Core.YahooMediaMed
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaRating.html">YahooMediaRating</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaRating.html">YahooMediaRating</a> objects that represent the permissible audiences for this media object.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaRating.html">YahooMediaRating</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaRating.html">YahooMediaRating</a> objects that represent the permissible audiences for this media object.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -853,8 +905,8 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a> objects that represent restrictions to be placed on aggregators that are rendering this media object.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaRestriction.html">YahooMediaRestriction</a> objects that represent restrictions to be placed on aggregators that are rendering this media object.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -887,7 +939,7 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Decimal</span></td>
-        <td><p>The number of samples per second taken to create this media object. The default value is <see cref="!:Decimal.MinValue"></see>, which indicates that no sampling-rate was specified.</p>
+        <td><p>The number of samples per second taken to create this media object. The default value is <span class="xref">System.Decimal.MinValue</span>, which indicates that no sampling-rate was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -921,8 +973,8 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> objects that represent text transcript, closed captioning, or lyrics for this media object.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaText.html">YahooMediaText</a> objects that represent text transcript, closed captioning, or lyrics for this media object.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -959,8 +1011,8 @@ In such cases, it is encouraged, but not required, that the <a class="xref" href
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaThumbnail.html">YahooMediaThumbnail</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaThumbnail.html">YahooMediaThumbnail</a> objects that represent images that are representative of this media object.
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Extensions.Core.YahooMediaThumbnail.html">YahooMediaThumbnail</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.Core.YahooMediaThumbnail.html">YahooMediaThumbnail</a> objects that represent images that are representative of this media object.
 The default value is an <em>empty</em> collection.</p>
 </td>
       </tr>
@@ -1027,8 +1079,8 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the direct URL to this media object.</p>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the direct URL to this media object.</p>
 </td>
       </tr>
     </tbody>
@@ -1060,7 +1112,7 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>The width of this media object, typically in pixels. The default value is <see cref="!:Int32.MinValue"></see>, which indicates that no width was specified.</p>
+        <td><p>The width of this media object, typically in pixels. The default value is <span class="xref">System.Int32.MinValue</span>, which indicates that no width was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -1117,21 +1169,37 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs/#L871">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaContent_Equals_" data-uid="Argotic.Extensions.Core.YahooMediaContent.Equals*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaContent_Equals_Object_" data-uid="Argotic.Extensions.Core.YahooMediaContent.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaContent_Equals_System_Object_" data-uid="Argotic.Extensions.Core.YahooMediaContent.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1144,9 +1212,9 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -1162,11 +1230,13 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -1199,16 +1269,18 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs/#L685">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaContent_Load_" data-uid="Argotic.Extensions.Core.YahooMediaContent.Load*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaContent_Load_XPathNavigator_" data-uid="Argotic.Extensions.Core.YahooMediaContent.Load(XPathNavigator)">Load(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaContent_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Extensions.Core.YahooMediaContent.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1226,9 +1298,9 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
     </tbody>
@@ -1249,9 +1321,25 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Extensions_Core_YahooMediaContent_Load_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Extensions_Core_YahooMediaContent_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent_ToString.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -1261,7 +1349,7 @@ The default value is an <em>empty</em> collection.</p>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaContent_ToString_" data-uid="Argotic.Extensions.Core.YahooMediaContent.ToString*"></a>
   <h4 id="Argotic_Extensions_Core_YahooMediaContent_ToString" data-uid="Argotic.Extensions.Core.YahooMediaContent.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1279,24 +1367,26 @@ The default value is an <em>empty</em> collection.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Extensions_Core_YahooMediaContent_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaContent_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaContent.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaContent.cs/#L709">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaContent_WriteTo_" data-uid="Argotic.Extensions.Core.YahooMediaContent.WriteTo*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaContent_WriteTo_XmlWriter_" data-uid="Argotic.Extensions.Core.YahooMediaContent.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaContent_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Extensions.Core.YahooMediaContent.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaContent.html">YahooMediaContent</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1314,9 +1404,25 @@ The default value is an <em>empty</em> collection.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
-        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -1547,6 +1653,10 @@ The default value is an <em>empty</em> collection.</p>
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
       <div><span class="xref">Argotic.Extensions.Core.IYahooMediaCommonObjectEntities</span></div>

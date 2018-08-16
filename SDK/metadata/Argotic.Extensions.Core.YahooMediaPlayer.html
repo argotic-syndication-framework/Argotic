@@ -81,11 +81,31 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">YahooMediaPlayer</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.Core.html">Argotic.Extensions.Core</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
   <h5 id="Argotic_Extensions_Core_YahooMediaPlayer_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class YahooMediaPlayer : IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class YahooMediaPlayer : IComparable</code></pre>
   </div>
   <h5 id="Argotic_Extensions_Core_YahooMediaPlayer_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>
@@ -112,14 +132,14 @@
   </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer__ctor_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.%23ctor(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer__ctor_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.%23ctor(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaPlayer.cs/#L48">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaPlayer__ctor_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.#ctor*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer__ctor_Uri_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.#ctor(Uri)">YahooMediaPlayer(Uri)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a> class using the supplied <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer__ctor_System_Uri_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.#ctor(System.Uri)">YahooMediaPlayer(Uri)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a> class using the supplied <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -137,23 +157,39 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">url</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of this player console.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of this player console.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">url</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer__ctor_Uri_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.%23ctor(Uri%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer__ctor_System_Uri_System_Int32_System_Int32_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.%23ctor(System.Uri%2CSystem.Int32%2CSystem.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaPlayer.cs/#L60">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaPlayer__ctor_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.#ctor*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer__ctor_Uri_System_Int32_System_Int32_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.#ctor(Uri,System.Int32,System.Int32)">YahooMediaPlayer(Uri, Int32, Int32)</h4>
-  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a> class using the supplied <see cref="!:Uri"></see>, height and width.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer__ctor_System_Uri_System_Int32_System_Int32_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.#ctor(System.Uri,System.Int32,System.Int32)">YahooMediaPlayer(Uri, Int32, Int32)</h4>
+  <div class="markdown level1 summary"><p>Initializes a new instance of the <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a> class using the supplied <span class="xref">System.Uri</span>, height and width.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -171,9 +207,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">url</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of this player console.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of this player console.</p>
 </td>
       </tr>
       <tr>
@@ -186,6 +222,22 @@
         <td><span class="xref">System.Int32</span></td>
         <td><span class="parametername">width</span></td>
         <td><p>The width of the browser window that this player console should be opened in.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">url</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -219,7 +271,7 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>The height of the browser window that this player console should be opened in. The default value is <see cref="!:Int32.MinValue"></see>, which indicates that no height was specified.</p>
+        <td><p>The height of the browser window that this player console should be opened in. The default value is <span class="xref">System.Int32.MinValue</span>, which indicates that no height was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -250,8 +302,24 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of this player console that plays the media.</p>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of this player console that plays the media.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -283,7 +351,7 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Int32</span></td>
-        <td><p>The width of the browser window that this player console should be opened in. The default value is <see cref="!:Int32.MinValue"></see>, which indicates that no width was specified.</p>
+        <td><p>The width of the browser window that this player console should be opened in. The default value is <span class="xref">System.Int32.MinValue</span>, which indicates that no width was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -340,21 +408,37 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaPlayer.cs/#L259">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaPlayer_Equals_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.Equals*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer_Equals_Object_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer_Equals_System_Object_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -367,9 +451,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -385,11 +469,13 @@
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -422,16 +508,18 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer_Load_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.Load(XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer_Load_System_Xml_XPath_XPathNavigator_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.Load(System.Xml.XPath.XPathNavigator)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaPlayer.cs/#L126">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaPlayer_Load_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.Load*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer_Load_XPathNavigator_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.Load(XPathNavigator)">Load(XPathNavigator)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a> using the supplied <see cref="!:XPathNavigator"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer_Load_System_Xml_XPath_XPathNavigator_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.Load(System.Xml.XPath.XPathNavigator)">Load(XPathNavigator)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a> using the supplied <span class="xref">System.Xml.XPath.XPathNavigator</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -449,9 +537,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>The <see cref="!:XPathNavigator"></see> to extract information from.</p>
+        <td><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> to extract information from.</p>
 </td>
       </tr>
     </tbody>
@@ -472,9 +560,25 @@
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Extensions_Core_YahooMediaPlayer_Load_XPathNavigator__remarks">Remarks</h5>
+  <h5 id="Argotic_Extensions_Core_YahooMediaPlayer_Load_System_Xml_XPath_XPathNavigator__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method expects the supplied <code data-dev-comment-type="paramref" class="paramref">source</code> to be positioned on the XML element that represents a <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer_ToString.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -484,7 +588,7 @@
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaPlayer_ToString_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.ToString*"></a>
   <h4 id="Argotic_Extensions_Core_YahooMediaPlayer_ToString" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -502,24 +606,26 @@
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Extensions_Core_YahooMediaPlayer_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_YahooMediaPlayer_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.YahooMediaPlayer.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/YahooMedia/YahooMediaPlayer.cs/#L175">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_YahooMediaPlayer_WriteTo_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.WriteTo*"></a>
-  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer_WriteTo_XmlWriter_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a> to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_YahooMediaPlayer_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Extensions.Core.YahooMediaPlayer.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the current <a class="xref" href="Argotic.Extensions.Core.YahooMediaPlayer.html">YahooMediaPlayer</a> to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -537,9 +643,25 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
-        <td><p>The <see cref="!:XmlWriter"></see> to which you want to save.</p>
+        <td><p>The <span class="xref">System.Xml.XmlWriter</span> to which you want to save.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -770,6 +892,10 @@
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
 </article>
           </div>
           

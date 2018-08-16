@@ -81,11 +81,36 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">GenericSyndicationFeed</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Syndication.html">Argotic.Syndication</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Syndication_GenericSyndicationFeed_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class GenericSyndicationFeed : object</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class GenericSyndicationFeed</code></pre>
   </div>
   <h5 id="Argotic_Syndication_GenericSyndicationFeed_examples"><strong>Examples</strong></h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs" region="GenericSyndicationFeed"></code></pre>
@@ -137,8 +162,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a> objects that represent the categories associated with this feed.</p>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a> objects that represent the categories associated with this feed.</p>
 </td>
       </tr>
     </tbody>
@@ -234,15 +259,15 @@ The default value is an <strong>empty</strong> string, which indicates that no d
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a>&gt;</td>
-        <td><p>A <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a> objects that represent distinct content published in this feed.
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a> objects that represent distinct content published in this feed.
 The default value is an <strong>empty</strong> collection, which indictaes that no discrete content was published in this feed.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_GenericSyndicationFeed_Items_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a> objects is internally represented as a <see cref="!:Collection&lt;T>"></see> collection.</p>
+  <div class="markdown level1 remarks"><p>This <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a> objects is internally represented as a <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
@@ -270,8 +295,8 @@ The default value is an <strong>empty</strong> collection, which indictaes that 
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">CultureInfo</span></td>
-        <td><p>A <see cref="!:CultureInfo"></see> that represents the natural or formal language in which this feed's content is written.
+        <td><span class="xref">System.Globalization.CultureInfo</span></td>
+        <td><p>A <span class="xref">System.Globalization.CultureInfo</span> that represents the natural or formal language in which this feed's content is written.
 The default value is a <strong>null</strong> reference, which indicates that no natural or formal language was specified.</p>
 </td>
       </tr>
@@ -303,9 +328,9 @@ The default value is a <strong>null</strong> reference, which indicates that no 
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant.
-The default value is <see cref="!:DateTime.MinValue"></see>, which indicates that update date was specified.</p>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant.
+The default value is <span class="xref">System.DateTime.MinValue</span>, which indicates that update date was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -380,14 +405,14 @@ The default value is an <strong>empty</strong> string, which indicates that no t
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_CompareSequence_Collection_Argotic_Syndication_GenericSyndicationCategory__Collection_Argotic_Syndication_GenericSyndicationCategory__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.CompareSequence(Collection%7BArgotic.Syndication.GenericSyndicationCategory%7D%2CCollection%7BArgotic.Syndication.GenericSyndicationCategory%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Syndication_GenericSyndicationCategory__System_Collections_ObjectModel_Collection_Argotic_Syndication_GenericSyndicationCategory__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.CompareSequence(System.Collections.ObjectModel.Collection%7BArgotic.Syndication.GenericSyndicationCategory%7D%2CSystem.Collections.ObjectModel.Collection%7BArgotic.Syndication.GenericSyndicationCategory%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L284">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_CompareSequence_" data-uid="Argotic.Syndication.GenericSyndicationFeed.CompareSequence*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_CompareSequence_Collection_Argotic_Syndication_GenericSyndicationCategory__Collection_Argotic_Syndication_GenericSyndicationCategory__" data-uid="Argotic.Syndication.GenericSyndicationFeed.CompareSequence(Collection{Argotic.Syndication.GenericSyndicationCategory},Collection{Argotic.Syndication.GenericSyndicationCategory})">CompareSequence(Collection&lt;GenericSyndicationCategory&gt;, Collection&lt;GenericSyndicationCategory&gt;)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified <see cref="!:Collection&lt;GenericSyndicationCategory>"></see> collections.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Syndication_GenericSyndicationCategory__System_Collections_ObjectModel_Collection_Argotic_Syndication_GenericSyndicationCategory__" data-uid="Argotic.Syndication.GenericSyndicationFeed.CompareSequence(System.Collections.ObjectModel.Collection{Argotic.Syndication.GenericSyndicationCategory},System.Collections.ObjectModel.Collection{Argotic.Syndication.GenericSyndicationCategory})">CompareSequence(Collection&lt;GenericSyndicationCategory&gt;, Collection&lt;GenericSyndicationCategory&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collections.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -405,13 +430,13 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a>&gt;</td>
         <td><span class="parametername">source</span></td>
         <td><p>The first collection.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a>&gt;</td>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a>&gt;</td>
         <td><span class="parametername">target</span></td>
         <td><p>The second collection.</p>
 </td>
@@ -434,7 +459,7 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_CompareSequence_Collection_Argotic_Syndication_GenericSyndicationCategory__Collection_Argotic_Syndication_GenericSyndicationCategory___remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_CompareSequence_System_Collections_ObjectModel_Collection_Argotic_Syndication_GenericSyndicationCategory__System_Collections_ObjectModel_Collection_Argotic_Syndication_GenericSyndicationCategory___remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
 </p>
@@ -445,16 +470,37 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L326">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Create_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(Uri)">Create(Uri)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri)">Create(Uri)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -472,9 +518,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
     </tbody>
@@ -495,23 +541,44 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> is created using the default <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs" region="Create(Uri source)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_Uri_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(Uri%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L339">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Create_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(Uri,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <see cref="!:Uri"></see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <span class="xref">System.Uri</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -529,9 +596,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -558,16 +625,37 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L376">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Create_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(Uri,Argotic.Common.WebRequestOptions)">Create(Uri, WebRequestOptions)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <see cref="!:Uri"></see>, <see cref="!:ICredentials"></see>, and <see cref="!:IWebProxy"></see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri,Argotic.Common.WebRequestOptions)">Create(Uri, WebRequestOptions)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -585,9 +673,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -614,19 +702,40 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri_Argotic_Common_WebRequestOptions__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_Argotic_Common_WebRequestOptions__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> is created using the default <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(Uri%2CArgotic.Common.WebRequestOptions%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri%2CArgotic.Common.WebRequestOptions%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L409">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Create_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, WebRequestOptions, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <see cref="!:Uri"></see>, <see cref="!:ICredentials"></see>, <see cref="!:IWebProxy"></see>, and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, WebRequestOptions, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span>, and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -644,9 +753,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -679,16 +788,37 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_Uri_ICredentials_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(Uri%2CICredentials%2CIWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L360">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Create_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri_ICredentials_IWebProxy_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(Uri,ICredentials,IWebProxy)">Create(Uri, ICredentials, IWebProxy)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <see cref="!:Uri"></see>, <see cref="!:ICredentials"></see>, and <see cref="!:IWebProxy"></see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)">Create(Uri, ICredentials, IWebProxy)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -706,21 +836,21 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -741,19 +871,40 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri_ICredentials_IWebProxy__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> is created using the default <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(Uri%2CICredentials%2CIWebProxy%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L395">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Create_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(Uri,ICredentials,IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <see cref="!:Uri"></see>, <see cref="!:ICredentials"></see>, <see cref="!:IWebProxy"></see>, and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html">GenericSyndicationFeed</a> instance using the specified <span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span>, and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -771,21 +922,21 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
@@ -812,16 +963,37 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(System.IO.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L444">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Load_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_Stream_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(Stream)">Load(Stream)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_IO_Stream_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(System.IO.Stream)">Load(Stream)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -839,26 +1011,52 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
         <td><p>The <strong>Stream</strong> used to load the syndication resource.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_Stream__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_IO_Stream__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event will be raised.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> data does not conform to a supported syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_Stream_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(Stream%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_System_IO_Stream_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(System.IO.Stream%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L460">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Load_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_Stream_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(Stream,Argotic.Common.SyndicationResourceLoadSettings)">Load(Stream, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_IO_Stream_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)">Load(Stream, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -876,7 +1074,7 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
         <td><p>The <strong>Stream</strong> used to load the syndication resource.</p>
 </td>
@@ -889,24 +1087,50 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_Stream_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_IO_Stream_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event will be raised.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> data does not conform to a supported syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_String_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_System_String_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(System.String)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L427">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Load_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_String_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(String)">Load(String)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <see cref="!:String"></see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_String_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(System.String)">Load(String)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <span class="xref">System.String</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Load(String str)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Load(string str)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -919,26 +1143,52 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">String</span></td>
+        <td><span class="xref">System.String</span></td>
         <td><span class="parametername">str</span></td>
         <td><p>The <strong>String</strong> used to load the syndication resource.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_String__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_String__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event will be raised.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> data does not conform to a supported syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(System.Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L549">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Load_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(Uri,Argotic.Common.WebRequestOptions)">Load(Uri, WebRequestOptions)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(System.Uri,Argotic.Common.WebRequestOptions)">Load(Uri, WebRequestOptions)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -956,9 +1206,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the web resource used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the web resource used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
@@ -969,27 +1219,53 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_Argotic_Common_WebRequestOptions__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_Argotic_Common_WebRequestOptions__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <ul><li>
             After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event will be raised.
 </li></ul>
 </p>
 </div>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_Argotic_Common_WebRequestOptions__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_Argotic_Common_WebRequestOptions__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs" region="Load(Uri source, WebRequestOptions options)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to a supported syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(Uri%2CArgotic.Common.WebRequestOptions%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(System.Uri%2CArgotic.Common.WebRequestOptions%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L628">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Load_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)">Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see>, <see cref="!:IWebProxy">proxy</see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)">Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1007,9 +1283,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the web resource used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the web resource used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
@@ -1026,27 +1302,53 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <ul><li>
-            If <code data-dev-comment-type="paramref" class="paramref">settings</code> has a <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html#Argotic_Common_SyndicationResourceLoadSettings_CharacterEncoding">CharacterEncoding</a> of <see cref="!:System.Text.Encoding.UTF8"></see> 
+            If <code data-dev-comment-type="paramref" class="paramref">settings</code> has a <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html#Argotic_Common_SyndicationResourceLoadSettings_CharacterEncoding">CharacterEncoding</a> of <span class="xref">System.Text.Encoding.UTF8</span> 
             the character encoding of the <code data-dev-comment-type="paramref" class="paramref">source</code> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
-            If automatic detection fails, a character encoding of <see cref="!:System.Text.Encoding.UTF8"></see> is used by default.
+            If automatic detection fails, a character encoding of <span class="xref">System.Text.Encoding.UTF8</span> is used by default.
 </li><li>
     After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event will be raised.
 </li></ul>
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to a supported syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_Uri_ICredentials_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(Uri%2CICredentials%2CIWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L517">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Load_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_ICredentials_IWebProxy_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(Uri,ICredentials,IWebProxy)">Load(Uri, ICredentials, IWebProxy)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)">Load(Uri, ICredentials, IWebProxy)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1064,50 +1366,76 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the web resource used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the web resource used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_ICredentials_IWebProxy__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <ul><li>
              If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.
 </li><li>
-    If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <see cref="!:WebRequest"></see> default proxy settings.
+    If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <span class="xref">System.Net.WebRequest</span> default proxy settings.
 </li><li>
     After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event will be raised.
 </li></ul>
 </p>
 </div>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_ICredentials_IWebProxy__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\GenericSyndicationFeedExample.cs" region="Load(Uri source, ICredentials credentials, IWebProxy proxy)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to a supported syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(Uri%2CICredentials%2CIWebProxy%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Load(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L596">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_Load_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(Uri,ICredentials,IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)">Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see>, <see cref="!:IWebProxy">proxy</see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.GenericSyndicationFeed.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)">Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1125,21 +1453,21 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the web resource used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the web resource used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
@@ -1150,36 +1478,62 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <ul><li>
              If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.
 </li><li>
-    If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <see cref="!:WebRequest"></see> default proxy settings.
+    If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <span class="xref">System.Net.WebRequest</span> default proxy settings.
 </li><li>
-    If <code data-dev-comment-type="paramref" class="paramref">settings</code> has a <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html#Argotic_Common_SyndicationResourceLoadSettings_CharacterEncoding">CharacterEncoding</a> of <see cref="!:System.Text.Encoding.UTF8"></see> 
+    If <code data-dev-comment-type="paramref" class="paramref">settings</code> has a <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html#Argotic_Common_SyndicationResourceLoadSettings_CharacterEncoding">CharacterEncoding</a> of <span class="xref">System.Text.Encoding.UTF8</span> 
     the character encoding of the <code data-dev-comment-type="paramref" class="paramref">source</code> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
-    If automatic detection fails, a character encoding of <see cref="!:System.Text.Encoding.UTF8"></see> is used by default.
+    If automatic detection fails, a character encoding of <span class="xref">System.Text.Encoding.UTF8</span> is used by default.
 </li><li>
     After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event will be raised.
 </li></ul>
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to a supported syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.LoadAsync(Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CArgotic.Common.WebRequestOptions%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.LoadAsync(System.Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CArgotic.Common.WebRequestOptions%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L858">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_Object_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync(Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> instance asynchronously using the specified <see cref="!:Uri"></see>, <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>, <see cref="!:ICredentials"></see>, and <see cref="!:IWebProxy"></see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_System_Object_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> instance asynchronously using the specified <span class="xref">System.Uri</span>, <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>, <span class="xref">System.Net.ICredentials</span>, and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1192,9 +1546,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -1210,38 +1564,64 @@ The default value is an <strong>empty</strong> string, which indicates that no t
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">userToken</span></td>
         <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_Object__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_System_Object__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event. 
-    You can cancel a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel">LoadAsyncCancel()</a> method.
+    You can cancel a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel">LoadAsyncCancel()</a> method.
 </p>
 <p>
-    After calling <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, 
-    you must wait for the load operation to complete before attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Object_">LoadAsync(Uri, Object)</a> method.
+    After calling <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, 
+    you must wait for the load operation to complete before attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_System_Object_">LoadAsync(Uri, Object)</a> method.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> has a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.LoadAsync(Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CICredentials%2CIWebProxy%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.LoadAsync(System.Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L833">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync(Uri,Argotic.Common.SyndicationResourceLoadSettings,ICredentials,IWebProxy,Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> instance asynchronously using the specified <see cref="!:Uri"></see>, <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>, <see cref="!:ICredentials"></see>, and <see cref="!:IWebProxy"></see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> instance asynchronously using the specified <span class="xref">System.Uri</span>, <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>, <span class="xref">System.Net.ICredentials</span>, and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1254,9 +1634,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -1266,50 +1646,76 @@ The default value is an <strong>empty</strong> string, which indicates that no t
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">userToken</span></td>
         <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event. 
-    You can cancel a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel">LoadAsyncCancel()</a> method.
+    You can cancel a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel">LoadAsyncCancel()</a> method.
 </p>
 <p>
-    After calling <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, 
-    you must wait for the load operation to complete before attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Object_">LoadAsync(Uri, Object)</a> method.
+    After calling <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, 
+    you must wait for the load operation to complete before attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_System_Object_">LoadAsync(Uri, Object)</a> method.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> has a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.LoadAsync(Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.LoadAsync(System.Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L803">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Object_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync(Uri,Argotic.Common.SyndicationResourceLoadSettings,Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, Object)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> instance asynchronously using the specified <see cref="!:Uri"></see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Object_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, Object)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> instance asynchronously using the specified <span class="xref">System.Uri</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1322,9 +1728,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -1334,38 +1740,64 @@ The default value is an <strong>empty</strong> string, which indicates that no t
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">userToken</span></td>
         <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Object__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Object__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event. 
-    You can cancel a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel">LoadAsyncCancel()</a> method.
+    You can cancel a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel">LoadAsyncCancel()</a> method.
 </p>
 <p>
-    After calling <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, you must wait for the load operation to complete before 
-    attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, Object)</a> method.
+    After calling <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, you must wait for the load operation to complete before 
+    attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, Object)</a> method.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> has a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.LoadAsync(Uri%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.LoadAsync(System.Uri%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationFeed.cs/#L779">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Object_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync(Uri,Object)">LoadAsync(Uri, Object)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> instance asynchronously using the specified <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_System_Object_" data-uid="Argotic.Syndication.GenericSyndicationFeed.LoadAsync(System.Uri,System.Object)">LoadAsync(Uri, Object)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> instance asynchronously using the specified <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, Object userToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, object userToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1378,35 +1810,61 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">userToken</span></td>
         <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Object__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_System_Object__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> is loaded using the default <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 <p>
     To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Loaded">Loaded</a> event. 
-    You can cancel a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel">LoadAsyncCancel()</a> method.
+    You can cancel a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel">LoadAsyncCancel()</a> method.
 </p>
 <p>
-    After calling <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, you must wait for the load operation to complete before 
-    attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Object_">LoadAsync(Uri, Object)</a> method.
+    After calling <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, you must wait for the load operation to complete before 
+    attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_System_Object_">LoadAsync(Uri, Object)</a> method.
 </p>
 </div>
-  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Object__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_System_Object__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs" region="LoadAsync(Uri source, Object userToken)"></code></pre>
 <pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rss\RssFeedExample.cs" region="FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Syndication.RssFeed.html">RssFeed</a> has a <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.LoadAsyncCancel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -1424,7 +1882,7 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     <pre><code class="lang-csharp hljs">public void LoadAsyncCancel()</code></pre>
   </div>
   <h5 id="Argotic_Syndication_GenericSyndicationFeed_LoadAsyncCancel_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Use the LoadAsyncCancel method to cancel a pending <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_Uri_Object_">LoadAsync(Uri, Object)</a> operation.
+  <div class="markdown level1 remarks"><p>Use the LoadAsyncCancel method to cancel a pending <a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_LoadAsync_System_Uri_System_Object_">LoadAsync(Uri, Object)</a> operation.
 If there is a load operation in progress, this method releases resources used to execute the load operation.
 If there is no load operation pending, this method does nothing.</p>
 </div>
@@ -1496,6 +1954,22 @@ If there is no load operation pending, this method does nothing.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">feed</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationFeed_Parse_Argotic_Syndication_OpmlDocument_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationFeed.Parse(Argotic.Syndication.OpmlDocument)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -1528,6 +2002,22 @@ feedFormat to Opml and feedResource to omplDocument</p>
         <td><a class="xref" href="Argotic.Syndication.OpmlDocument.html">OpmlDocument</a></td>
         <td><span class="parametername">opmlDocument</span></td>
         <td></td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">feed</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
       </tr>
     </tbody>
   </table>
@@ -1565,6 +2055,22 @@ feedFormat to Opml and feedResource to omplDocument</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">feed</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="events">Events
   </h3>
   <span class="small pull-right mobile-hide">
@@ -1592,14 +2098,14 @@ feedFormat to Opml and feedResource to omplDocument</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_GenericSyndicationFeed_Loaded_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Load_Uri_ICredentials_IWebProxy_">Load(Uri, ICredentials, IWebProxy)</a></div>
+      <div><a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_">Load(Uri, ICredentials, IWebProxy)</a></div>
   </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">

@@ -81,11 +81,35 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">SyndicationDateTimeUtility</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Common.html">Argotic.Common</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Common.dll</h6>
   <h5 id="Argotic_Common_SyndicationDateTimeUtility_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class SyndicationDateTimeUtility : object</code></pre>
+    <pre><code class="lang-csharp hljs">public static class SyndicationDateTimeUtility</code></pre>
   </div>
   <h5 id="Argotic_Common_SyndicationDateTimeUtility_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>See <a href="http://www.ietf.org/rfc/rfc0822.txt">RFC #822: Standard for ARPA Internet Text Messages (Date and Time Specification)</a>
@@ -103,7 +127,7 @@ the date-time formats implemented in the <a class="xref" href="Argotic.Common.Sy
   </span>
   <a id="Argotic_Common_SyndicationDateTimeUtility_ParseRfc3339DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime*"></a>
   <h4 id="Argotic_Common_SyndicationDateTimeUtility_ParseRfc3339DateTime_System_String_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ParseRfc3339DateTime(System.String)">ParseRfc3339DateTime(String)</h4>
-  <div class="markdown level1 summary"><p>Converts the specified string representation of a RFC-3339 formatted date to its <see cref="!:DateTime"></see> equivalent.</p>
+  <div class="markdown level1 summary"><p>Converts the specified string representation of a RFC-3339 formatted date to its <span class="xref">System.DateTime</span> equivalent.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -138,8 +162,34 @@ the date-time formats implemented in the <a class="xref" href="Argotic.Common.Sy
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
-        <td><p>A <see cref="!:DateTime"></see> equivalent to the RFC-3339 formatted date contained in <code data-dev-comment-type="paramref" class="paramref">value</code>.</p>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><p>A <span class="xref">System.DateTime</span> equivalent to the RFC-3339 formatted date contained in <code data-dev-comment-type="paramref" class="paramref">value</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is not a recognized as a RFC-3339 formatted date.</p>
 </td>
       </tr>
     </tbody>
@@ -153,7 +203,7 @@ the date-time formats implemented in the <a class="xref" href="Argotic.Common.Sy
   </span>
   <a id="Argotic_Common_SyndicationDateTimeUtility_ParseRfc822DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime*"></a>
   <h4 id="Argotic_Common_SyndicationDateTimeUtility_ParseRfc822DateTime_System_String_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ParseRfc822DateTime(System.String)">ParseRfc822DateTime(String)</h4>
-  <div class="markdown level1 summary"><p>Converts the specified string representation of a RFC-822 formatted date to its <see cref="!:DateTime"></see> equivalent.</p>
+  <div class="markdown level1 summary"><p>Converts the specified string representation of a RFC-822 formatted date to its <span class="xref">System.DateTime</span> equivalent.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -188,22 +238,48 @@ the date-time formats implemented in the <a class="xref" href="Argotic.Common.Sy
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
-        <td><p>A <see cref="!:DateTime"></see> equivalent to the RFC-822 formatted date contained in <code data-dev-comment-type="paramref" class="paramref">value</code>.</p>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><p>A <span class="xref">System.DateTime</span> equivalent to the RFC-822 formatted date contained in <code data-dev-comment-type="paramref" class="paramref">value</code>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is an empty string.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is not a recognized as a RFC-822 formatted date.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDateTimeUtility_ToRfc3339DateTime_DateTime_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime(DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDateTimeUtility_ToRfc3339DateTime_System_DateTime_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime(System.DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDateTimeUtility.cs/#L47">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDateTimeUtility_ToRfc3339DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime*"></a>
-  <h4 id="Argotic_Common_SyndicationDateTimeUtility_ToRfc3339DateTime_DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime(DateTime)">ToRfc3339DateTime(DateTime)</h4>
-  <div class="markdown level1 summary"><p>Converts the value of the supplied <see cref="!:DateTime"></see> object to its equivalent RFC-3339 date string representation.</p>
+  <h4 id="Argotic_Common_SyndicationDateTimeUtility_ToRfc3339DateTime_System_DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ToRfc3339DateTime(System.DateTime)">ToRfc3339DateTime(DateTime)</h4>
+  <div class="markdown level1 summary"><p>Converts the value of the supplied <span class="xref">System.DateTime</span> object to its equivalent RFC-3339 date string representation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -221,9 +297,9 @@ the date-time formats implemented in the <a class="xref" href="Argotic.Common.Sy
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">utcDateTime</span></td>
-        <td><p>The UTC <see cref="!:DateTime"></see> object to convert.</p>
+        <td><p>The UTC <span class="xref">System.DateTime</span> object to convert.</p>
 </td>
       </tr>
     </tbody>
@@ -239,21 +315,21 @@ the date-time formats implemented in the <a class="xref" href="Argotic.Common.Sy
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A string that contains the RFC-3339 date string representation of the supplied <see cref="!:DateTime"></see> object.</p>
+        <td><p>A string that contains the RFC-3339 date string representation of the supplied <span class="xref">System.DateTime</span> object.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDateTimeUtility_ToRfc822DateTime_DateTime_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime(DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDateTimeUtility_ToRfc822DateTime_System_DateTime_.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime(System.DateTime)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDateTimeUtility.cs/#L231">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDateTimeUtility_ToRfc822DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime*"></a>
-  <h4 id="Argotic_Common_SyndicationDateTimeUtility_ToRfc822DateTime_DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime(DateTime)">ToRfc822DateTime(DateTime)</h4>
-  <div class="markdown level1 summary"><p>Converts the value of the supplied <see cref="!:DateTime"></see> object to its equivalent RFC-822 date string representation.</p>
+  <h4 id="Argotic_Common_SyndicationDateTimeUtility_ToRfc822DateTime_System_DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.ToRfc822DateTime(System.DateTime)">ToRfc822DateTime(DateTime)</h4>
+  <div class="markdown level1 summary"><p>Converts the value of the supplied <span class="xref">System.DateTime</span> object to its equivalent RFC-822 date string representation.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -271,9 +347,9 @@ the date-time formats implemented in the <a class="xref" href="Argotic.Common.Sy
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">dateTime</span></td>
-        <td><p>The <see cref="!:DateTime"></see> object to convert.</p>
+        <td><p>The <span class="xref">System.DateTime</span> object to convert.</p>
 </td>
       </tr>
     </tbody>
@@ -289,21 +365,21 @@ the date-time formats implemented in the <a class="xref" href="Argotic.Common.Sy
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A string that contains the RFC-822 date string representation of the supplied <see cref="!:DateTime"></see> object.</p>
+        <td><p>A string that contains the RFC-822 date string representation of the supplied <span class="xref">System.DateTime</span> object.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDateTimeUtility_TryParseRfc3339DateTime_System_String_DateTime__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime(System.String%2CDateTime%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDateTimeUtility_TryParseRfc3339DateTime_System_String_System_DateTime__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime(System.String%2CSystem.DateTime%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDateTimeUtility.cs/#L72">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDateTimeUtility_TryParseRfc3339DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime*"></a>
-  <h4 id="Argotic_Common_SyndicationDateTimeUtility_TryParseRfc3339DateTime_System_String_DateTime__" data-uid="Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime(System.String,DateTime@)">TryParseRfc3339DateTime(String, out DateTime)</h4>
-  <div class="markdown level1 summary"><p>Converts the specified string representation of a RFC-3339 formatted date to its <see cref="!:DateTime"></see> equivalent.</p>
+  <h4 id="Argotic_Common_SyndicationDateTimeUtility_TryParseRfc3339DateTime_System_String_System_DateTime__" data-uid="Argotic.Common.SyndicationDateTimeUtility.TryParseRfc3339DateTime(System.String,System.DateTime@)">TryParseRfc3339DateTime(String, out DateTime)</h4>
+  <div class="markdown level1 summary"><p>Converts the specified string representation of a RFC-3339 formatted date to its <span class="xref">System.DateTime</span> equivalent.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -327,9 +403,9 @@ the date-time formats implemented in the <a class="xref" href="Argotic.Common.Sy
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">result</span></td>
-        <td><p>When this method returns, contains the <see cref="!:DateTime"></see> value equivalent to the date and time contained in <code data-dev-comment-type="paramref" class="paramref">value</code>, if the conversion succeeded, or <see cref="!:DateTime.MinValue">MinValue</see> if the conversion failed.
+        <td><p>When this method returns, contains the <span class="xref">System.DateTime</span> value equivalent to the date and time contained in <code data-dev-comment-type="paramref" class="paramref">value</code>, if the conversion succeeded, or <span class="xref">System.DateTime.MinValue</span> if the conversion failed.
 The conversion fails if the <code data-dev-comment-type="paramref" class="paramref">value</code> parameter is a <strong>null</strong> or empty string, or does not contain a valid string representation of a RFC-3339 formatted date.
 This parameter is passed uninitialized.</p>
 </td>
@@ -354,14 +430,14 @@ This parameter is passed uninitialized.</p>
   </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDateTimeUtility_TryParseRfc822DateTime_System_String_DateTime__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime(System.String%2CDateTime%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_SyndicationDateTimeUtility_TryParseRfc822DateTime_System_String_System_DateTime__.md&amp;value=---%0Auid%3A%20Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime(System.String%2CSystem.DateTime%40)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/SyndicationDateTimeUtility.cs/#L249">View Source</a>
   </span>
   <a id="Argotic_Common_SyndicationDateTimeUtility_TryParseRfc822DateTime_" data-uid="Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime*"></a>
-  <h4 id="Argotic_Common_SyndicationDateTimeUtility_TryParseRfc822DateTime_System_String_DateTime__" data-uid="Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime(System.String,DateTime@)">TryParseRfc822DateTime(String, out DateTime)</h4>
-  <div class="markdown level1 summary"><p>Converts the specified string representation of a RFC-822 formatted date to its <see cref="!:DateTime"></see> equivalent.</p>
+  <h4 id="Argotic_Common_SyndicationDateTimeUtility_TryParseRfc822DateTime_System_String_System_DateTime__" data-uid="Argotic.Common.SyndicationDateTimeUtility.TryParseRfc822DateTime(System.String,System.DateTime@)">TryParseRfc822DateTime(String, out DateTime)</h4>
+  <div class="markdown level1 summary"><p>Converts the specified string representation of a RFC-822 formatted date to its <span class="xref">System.DateTime</span> equivalent.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -385,9 +461,9 @@ This parameter is passed uninitialized.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">DateTime</span></td>
+        <td><span class="xref">System.DateTime</span></td>
         <td><span class="parametername">result</span></td>
-        <td><p>When this method returns, contains the <see cref="!:DateTime"></see> value equivalent to the date and time contained in <code data-dev-comment-type="paramref" class="paramref">value</code>, if the conversion succeeded, or <see cref="!:DateTime.MinValue">MinValue</see> if the conversion failed.
+        <td><p>When this method returns, contains the <span class="xref">System.DateTime</span> value equivalent to the date and time contained in <code data-dev-comment-type="paramref" class="paramref">value</code>, if the conversion succeeded, or <span class="xref">System.DateTime.MinValue</span> if the conversion failed.
 The conversion fails if the <code data-dev-comment-type="paramref" class="paramref">value</code> parameter is a <strong>null</strong> or empty string, or does not contain a valid string representation of a RFC-822 formatted date.
 This parameter is passed uninitialized.</p>
 </td>

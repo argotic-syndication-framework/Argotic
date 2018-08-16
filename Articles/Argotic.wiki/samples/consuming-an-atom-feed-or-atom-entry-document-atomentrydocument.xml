@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+  <id>http://localhost/</id>
+  <title>Atom Entry Document</title>
+  <updated>2008-02-27T16:22:13.45-08:00</updated>
+  <summary>A stand-alone Atom Entry Document.</summary>
+  <author>
+    <name>Brian William Kuhn</name>
+  </author>
+  <link href="http://localhost/entries/SimpleAtomEntry.aspx" rel="alternate" />
+</entry>

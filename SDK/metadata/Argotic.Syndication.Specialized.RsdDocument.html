@@ -86,11 +86,36 @@
     <div><a class="xref" href="Argotic.Common.ISyndicationResource.html">ISyndicationResource</a></div>
     <div><a class="xref" href="Argotic.Extensions.IExtensibleSyndicationObject.html">IExtensibleSyndicationObject</a></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Syndication.Specialized.html">Argotic.Syndication.Specialized</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Syndication_Specialized_RsdDocument_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class RsdDocument : object, ISyndicationResource, IExtensibleSyndicationObject</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject</code></pre>
   </div>
   <h5 id="Argotic_Syndication_Specialized_RsdDocument_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>
@@ -151,8 +176,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the homepage of the engine that is providing these discovery services.</p>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the homepage of the engine that is providing these discovery services.</p>
 </td>
       </tr>
     </tbody>
@@ -215,15 +240,31 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
-        <td><p>A <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects that represent syndication extensions applied to this syndication entity.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_Specialized_RsdDocument_Extensions_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <see cref="!:Collection&lt;T>"></see> collection.</p>
+  <div class="markdown level1 remarks"><p>This <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> objects is internally represented as a <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Format.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Format%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -314,8 +355,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents homepage of the web site that is hosting these discovery services.</p>
+        <td><span class="xref">System.Uri</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents homepage of the web site that is hosting these discovery services.</p>
 </td>
       </tr>
     </tbody>
@@ -346,15 +387,31 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IEnumerable</span>&lt;<a class="xref" href="Argotic.Syndication.Specialized.RsdApplicationInterface.html">RsdApplicationInterface</a>&gt;</td>
-        <td><p>A <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Syndication.Specialized.RsdApplicationInterface.html">RsdApplicationInterface</a> objects that represents the application interfaces that comprise the discoverable services for this document.</p>
+        <td><span class="xref">System.Collections.Generic.IEnumerable</span>&lt;<a class="xref" href="Argotic.Syndication.Specialized.RsdApplicationInterface.html">RsdApplicationInterface</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Syndication.Specialized.RsdApplicationInterface.html">RsdApplicationInterface</a> objects that represents the application interfaces that comprise the discoverable services for this document.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_Specialized_RsdDocument_Interfaces_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>This <see cref="!:IEnumerable&lt;T>"></see> collection of <a class="xref" href="Argotic.Syndication.Specialized.RsdApplicationInterface.html">RsdApplicationInterface</a> objects is internally represented as a <see cref="!:Collection&lt;T>"></see> collection.</p>
+  <div class="markdown level1 remarks"><p>This <span class="xref">System.Collections.Generic.IEnumerable&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Syndication.Specialized.RsdApplicationInterface.html">RsdApplicationInterface</a> objects is internally represented as a <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Item_System_Int32_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Item(System.Int32)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -405,6 +462,32 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">index</code> is less than zero.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentOutOfRangeException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">index</code> is equal to or greater than the count for <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Interfaces">Interfaces</a>.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Version.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Version%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -431,7 +514,7 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Version</span></td>
+        <td><span class="xref">System.Version</span></td>
         <td><p>The <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Version">Version</a> of the <a class="xref" href="Argotic.Common.SyndicationContentFormat.html">SyndicationContentFormat</a> that this syndication resource conforms to. The default value is <strong>2.0</strong>.</p>
 </td>
       </tr>
@@ -489,6 +572,22 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_AddInterface_Argotic_Syndication_Specialized_RsdApplicationInterface_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.AddInterface(Argotic.Syndication.Specialized.RsdApplicationInterface)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -539,16 +638,32 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">api</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L329">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Create_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(Uri)">Create(Uri)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri)">Create(Uri)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -566,9 +681,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
     </tbody>
@@ -589,23 +704,44 @@
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> is created using the default <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="Create(Uri source)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_Uri_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(Uri%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L342">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Create_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(Uri,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <see cref="!:Uri"></see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <span class="xref">System.Uri</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -623,9 +759,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -652,16 +788,37 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L379">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Create_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(Uri,Argotic.Common.WebRequestOptions)">Create(Uri, WebRequestOptions)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <see cref="!:Uri"></see>, <see cref="!:ICredentials"></see>, and <see cref="!:IWebProxy"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri,Argotic.Common.WebRequestOptions)">Create(Uri, WebRequestOptions)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -679,9 +836,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -708,19 +865,40 @@
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri_Argotic_Common_WebRequestOptions__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_Argotic_Common_WebRequestOptions__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> is created using the default <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(Uri%2CArgotic.Common.WebRequestOptions%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri%2CArgotic.Common.WebRequestOptions%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L412">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Create_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, WebRequestOptions, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <see cref="!:Uri"></see>, <see cref="!:ICredentials"></see>, <see cref="!:IWebProxy"></see>, and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, WebRequestOptions, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span>, and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -738,9 +916,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -773,16 +951,37 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_Uri_ICredentials_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(Uri%2CICredentials%2CIWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L363">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Create_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri_ICredentials_IWebProxy_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(Uri,ICredentials,IWebProxy)">Create(Uri, ICredentials, IWebProxy)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <see cref="!:Uri"></see>, <see cref="!:ICredentials"></see>, and <see cref="!:IWebProxy"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)">Create(Uri, ICredentials, IWebProxy)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -800,21 +999,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
@@ -835,19 +1034,40 @@
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri_ICredentials_IWebProxy__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> is created using the default <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(Uri%2CICredentials%2CIWebProxy%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L398">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Create_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(Uri,ICredentials,IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <see cref="!:Uri"></see>, <see cref="!:ICredentials"></see>, <see cref="!:IWebProxy"></see>, and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Create_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Create(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)">Create(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Creates a new <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance using the specified <span class="xref">System.Uri</span>, <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span>, and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -865,21 +1085,21 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
@@ -906,6 +1126,27 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_CreateNavigator.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.CreateNavigator%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -915,7 +1156,7 @@
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_CreateNavigator_" data-uid="Argotic.Syndication.Specialized.RsdDocument.CreateNavigator*"></a>
   <h4 id="Argotic_Syndication_Specialized_RsdDocument_CreateNavigator" data-uid="Argotic.Syndication.Specialized.RsdDocument.CreateNavigator">CreateNavigator()</h4>
-  <div class="markdown level1 summary"><p>Initializes a read-only <see cref="!:XPathNavigator"></see> object for navigating through nodes in this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a>.</p>
+  <div class="markdown level1 summary"><p>Initializes a read-only <span class="xref">System.Xml.XPath.XPathNavigator</span> object for navigating through nodes in this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -932,25 +1173,25 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XPathNavigator</span></td>
-        <td><p>A read-only <see cref="!:XPathNavigator"></see> object.</p>
+        <td><span class="xref">System.Xml.XPath.XPathNavigator</span></td>
+        <td><p>A read-only <span class="xref">System.Xml.XPath.XPathNavigator</span> object.</p>
 </td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_Specialized_RsdDocument_CreateNavigator_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The <see cref="!:XPathNavigator"></see> is positioned on the root element of the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a>.
-If there is no root element, the <see cref="!:XPathNavigator"></see> is positioned on the first element in the XML representation of the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a>.</p>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.Xml.XPath.XPathNavigator</span> is positioned on the root element of the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a>.
+If there is no root element, the <span class="xref">System.Xml.XPath.XPathNavigator</span> is positioned on the first element in the XML representation of the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a>.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.FindExtension(Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.FindExtension(System.Predicate%7BArgotic.Extensions.ISyndicationExtension%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L678">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_FindExtension_" data-uid="Argotic.Syndication.Specialized.RsdDocument.FindExtension*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Syndication.Specialized.RsdDocument.FindExtension(Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension__" data-uid="Argotic.Syndication.Specialized.RsdDocument.FindExtension(System.Predicate{Argotic.Extensions.ISyndicationExtension})">FindExtension(Predicate&lt;ISyndicationExtension&gt;)</h4>
   <div class="markdown level1 summary"><p>Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Extensions">Extensions</a> collection.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -969,9 +1210,9 @@ If there is no root element, the <see cref="!:XPathNavigator"></see> is position
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
+        <td><span class="xref">System.Predicate</span>&lt;<a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>&gt;</td>
         <td><span class="parametername">match</span></td>
-        <td><p>The <see cref="!:Predicate&lt;ISyndicationExtension>"></see> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
+        <td><p>The <span class="xref">System.Predicate&lt;T&gt;</span> delegate that defines the conditions of the <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a> to search for.</p>
 </td>
       </tr>
     </tbody>
@@ -992,105 +1233,37 @@ If there is no root element, the <see cref="!:XPathNavigator"></see> is position
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_FindExtension_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>The <see cref="!:Predicate&lt;ISyndicationExtension>"></see> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
-The elements of the current <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Extensions">Extensions</a> are individually passed to the <see cref="!:Predicate&lt;ISyndicationExtension>"></see> delegate, moving forward in
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_FindExtension_System_Predicate_Argotic_Extensions_ISyndicationExtension___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>The <span class="xref">System.Predicate&lt;T&gt;</span> is a delegate to a method that returns <strong>true</strong> if the object passed to it matches the conditions defined in the delegate.
+The elements of the current <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Extensions">Extensions</a> are individually passed to the <span class="xref">System.Predicate&lt;T&gt;</span> delegate, moving forward in
 the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Extensions">Extensions</a>, starting with the first element and ending with the last element. Processing is stopped when a match is found.</p>
 </div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L795">View Source</a>
-  </span>
-  <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_IXPathNavigable_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(IXPathNavigable)">Load(IXPathNavigable)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <see cref="!:IXPathNavigable"></see>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Load(IXPathNavigable source)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
+  <h5 class="exceptions">Exceptions</h5>
   <table class="table table-bordered table-striped table-condensed">
     <thead>
       <tr>
         <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
+        <th>Condition</th>
       </tr>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The <strong>IXPathNavigable</strong> used to load the syndication resource.</p>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">match</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_IXPathNavigable__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.</p>
-</div>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_IXPathNavigable__examples">Examples</h5>
-  <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="Load(IXPathNavigable source)"></code></pre>
-<p></code></pre><p>
-
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_IXPathNavigable_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(IXPathNavigable%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L811">View Source</a>
-  </span>
-  <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_IXPathNavigable_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)">Load(IXPathNavigable, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <see cref="!:IXPathNavigable"></see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The <strong>IXPathNavigable</strong> used to load the syndication resource.</p>
-</td>
-      </tr>
-      <tr>
-        <td><a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a></td>
-        <td><span class="parametername">settings</span></td>
-        <td><p>The <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object used to configure the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance. This value can be <strong>null</strong>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_IXPathNavigable_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.IO.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L840">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_Stream_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(Stream)">Load(Stream)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_IO_Stream_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.IO.Stream)">Load(Stream)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1108,30 +1281,56 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
         <td><p>The <strong>Stream</strong> used to load the syndication resource.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_Stream__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_IO_Stream__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.</p>
 </div>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_Stream__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_IO_Stream__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="Load(Stream stream)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_Stream_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(Stream%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_IO_Stream_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.IO.Stream%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L856">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_Stream_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(Stream,Argotic.Common.SyndicationResourceLoadSettings)">Load(Stream, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_IO_Stream_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.IO.Stream,Argotic.Common.SyndicationResourceLoadSettings)">Load(Stream, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1149,7 +1348,7 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
         <td><p>The <strong>Stream</strong> used to load the syndication resource.</p>
 </td>
@@ -1162,19 +1361,45 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_Stream_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_IO_Stream_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_Argotic_Common_WebRequestOptions_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.Uri%2CArgotic.Common.WebRequestOptions)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L983">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(Uri,Argotic.Common.WebRequestOptions)">Load(Uri, WebRequestOptions)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_Argotic_Common_WebRequestOptions_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.Uri,Argotic.Common.WebRequestOptions)">Load(Uri, WebRequestOptions)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1192,9 +1417,9 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the web resource used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the web resource used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
@@ -1205,27 +1430,53 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_Argotic_Common_WebRequestOptions__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_Argotic_Common_WebRequestOptions__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <ul><li>
             After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.
 </li></ul>
 </p>
 </div>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_Argotic_Common_WebRequestOptions__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_Argotic_Common_WebRequestOptions__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="Load(Uri source, WebRequestOptions options)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(Uri%2CArgotic.Common.WebRequestOptions%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.Uri%2CArgotic.Common.WebRequestOptions%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L1062">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)">Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see>, <see cref="!:IWebProxy">proxy</see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.Uri,Argotic.Common.WebRequestOptions,Argotic.Common.SyndicationResourceLoadSettings)">Load(Uri, WebRequestOptions, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1243,9 +1494,9 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the web resource used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the web resource used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
@@ -1262,27 +1513,53 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_Argotic_Common_WebRequestOptions_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <ul><li>
-            If <code data-dev-comment-type="paramref" class="paramref">settings</code> has a <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html#Argotic_Common_SyndicationResourceLoadSettings_CharacterEncoding">CharacterEncoding</a> of <see cref="!:System.Text.Encoding.UTF8"></see> 
+            If <code data-dev-comment-type="paramref" class="paramref">settings</code> has a <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html#Argotic_Common_SyndicationResourceLoadSettings_CharacterEncoding">CharacterEncoding</a> of <span class="xref">System.Text.Encoding.UTF8</span> 
             the character encoding of the <code data-dev-comment-type="paramref" class="paramref">source</code> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
-            If automatic detection fails, a character encoding of <see cref="!:System.Text.Encoding.UTF8"></see> is used by default.
+            If automatic detection fails, a character encoding of <span class="xref">System.Text.Encoding.UTF8</span> is used by default.
 </li><li>
     After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.
 </li></ul>
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_Uri_ICredentials_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(Uri%2CICredentials%2CIWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L951">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_ICredentials_IWebProxy_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(Uri,ICredentials,IWebProxy)">Load(Uri, ICredentials, IWebProxy)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see> and <see cref="!:IWebProxy">proxy</see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy)">Load(Uri, ICredentials, IWebProxy)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span> and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1300,50 +1577,76 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the web resource used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the web resource used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_ICredentials_IWebProxy__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <ul><li>
              If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.
 </li><li>
-    If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <see cref="!:WebRequest"></see> default proxy settings.
+    If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <span class="xref">System.Net.WebRequest</span> default proxy settings.
 </li><li>
     After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.
 </li></ul>
 </p>
 </div>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_ICredentials_IWebProxy__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="Load(Uri source, ICredentials credentials, IWebProxy proxy)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(Uri%2CICredentials%2CIWebProxy%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.Uri%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L1030">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(Uri,ICredentials,IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)">Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <see cref="!:Uri"></see> using the specified <see cref="!:ICredentials">credentials</see>, <see cref="!:IWebProxy">proxy</see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.Uri,System.Net.ICredentials,System.Net.IWebProxy,Argotic.Common.SyndicationResourceLoadSettings)">Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the supplied <span class="xref">System.Uri</span> using the specified <span class="xref">System.Net.ICredentials</span>, <span class="xref">System.Net.IWebProxy</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1361,21 +1664,21 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that points to the location of the web resource used to load the syndication resource.</p>
+        <td><p>A <span class="xref">System.Uri</span> that points to the location of the web resource used to load the syndication resource.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> resource when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
@@ -1386,31 +1689,57 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_Uri_ICredentials_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Uri_System_Net_ICredentials_System_Net_IWebProxy_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
 <ul><li>
              If <code data-dev-comment-type="paramref" class="paramref">credentials</code> is <strong>null</strong>, request is made using the default application credentials.
 </li><li>
-    If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <see cref="!:WebRequest"></see> default proxy settings.
+    If <code data-dev-comment-type="paramref" class="paramref">proxy</code> is <strong>null</strong>, request is made using the <span class="xref">System.Net.WebRequest</span> default proxy settings.
 </li><li>
-    If <code data-dev-comment-type="paramref" class="paramref">settings</code> has a <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html#Argotic_Common_SyndicationResourceLoadSettings_CharacterEncoding">CharacterEncoding</a> of <see cref="!:System.Text.Encoding.UTF8"></see> 
+    If <code data-dev-comment-type="paramref" class="paramref">settings</code> has a <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html#Argotic_Common_SyndicationResourceLoadSettings_CharacterEncoding">CharacterEncoding</a> of <span class="xref">System.Text.Encoding.UTF8</span> 
     the character encoding of the <code data-dev-comment-type="paramref" class="paramref">source</code> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
-    If automatic detection fails, a character encoding of <see cref="!:System.Text.Encoding.UTF8"></see> is used by default.
+    If automatic detection fails, a character encoding of <span class="xref">System.Text.Encoding.UTF8</span> is used by default.
 </li><li>
     After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.
 </li></ul>
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.Xml.XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L887">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_XmlReader_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(XmlReader)">Load(XmlReader)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <see cref="!:XmlReader"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XmlReader_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.Xml.XmlReader)">Load(XmlReader)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <span class="xref">System.Xml.XmlReader</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1428,30 +1757,56 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlReader</span></td>
+        <td><span class="xref">System.Xml.XmlReader</span></td>
         <td><span class="parametername">reader</span></td>
         <td><p>The <strong>XmlReader</strong> used to load the syndication resource.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_XmlReader__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XmlReader__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.</p>
 </div>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_XmlReader__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XmlReader__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="Load(XmlReader reader)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_XmlReader_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(XmlReader%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XmlReader_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.Xml.XmlReader%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L903">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_XmlReader_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(XmlReader,Argotic.Common.SyndicationResourceLoadSettings)">Load(XmlReader, SyndicationResourceLoadSettings)</h4>
-  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <see cref="!:XmlReader"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XmlReader_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.Xml.XmlReader,Argotic.Common.SyndicationResourceLoadSettings)">Load(XmlReader, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <span class="xref">System.Xml.XmlReader</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1469,7 +1824,7 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlReader</span></td>
+        <td><span class="xref">System.Xml.XmlReader</span></td>
         <td><span class="parametername">reader</span></td>
         <td><p>The <strong>XmlReader</strong> used to load the syndication resource.</p>
 </td>
@@ -1482,24 +1837,50 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_XmlReader_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XmlReader_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.LoadAsync(Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CArgotic.Common.WebRequestOptions%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XPath_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.Xml.XPath.IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L531">View Source</a>
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L795">View Source</a>
   </span>
-  <a id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_Object_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync(Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance asynchronously using the specified <see cref="!:Uri"></see>, <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>, <see cref="!:ICredentials"></see>, and <see cref="!:IWebProxy"></see>.</p>
+  <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XPath_IXPathNavigable_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.Xml.XPath.IXPathNavigable)">Load(IXPathNavigable)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <span class="xref">System.Xml.XPath.IXPathNavigable</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public void Load(IXPathNavigable source)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1512,9 +1893,145 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>The <strong>IXPathNavigable</strong> used to load the syndication resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XPath_IXPathNavigable__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.</p>
+</div>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XPath_IXPathNavigable__examples">Examples</h5>
+  <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="Load(IXPathNavigable source)"></code></pre>
+<p></code></pre><p>
+
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XPath_IXPathNavigable_Argotic_Common_SyndicationResourceLoadSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Load(System.Xml.XPath.IXPathNavigable%2CArgotic.Common.SyndicationResourceLoadSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L811">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_Specialized_RsdDocument_Load_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load*"></a>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XPath_IXPathNavigable_Argotic_Common_SyndicationResourceLoadSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Load(System.Xml.XPath.IXPathNavigable,Argotic.Common.SyndicationResourceLoadSettings)">Load(IXPathNavigable, SyndicationResourceLoadSettings)</h4>
+  <div class="markdown level1 summary"><p>Loads the syndication resource from the specified <span class="xref">System.Xml.XPath.IXPathNavigable</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <strong>IXPathNavigable</strong> used to load the syndication resource.</p>
+</td>
+      </tr>
+      <tr>
+        <td><a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a></td>
+        <td><span class="parametername">settings</span></td>
+        <td><p>The <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a> object used to configure the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance. This value can be <strong>null</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XPath_IXPathNavigable_Argotic_Common_SyndicationResourceLoadSettings__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>After the load operation has successfully completed, the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event will be raised.</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the document remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>There is a load or parse error in the XML. In this case, the document remains empty.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.LoadAsync(System.Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CArgotic.Common.WebRequestOptions%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L531">View Source</a>
+  </span>
+  <a id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync*"></a>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_System_Object_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,Argotic.Common.WebRequestOptions,System.Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, WebRequestOptions, Object)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance asynchronously using the specified <span class="xref">System.Uri</span>, <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>, <span class="xref">System.Net.ICredentials</span>, and <span class="xref">System.Net.IWebProxy</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Uri</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -1530,38 +2047,64 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">userToken</span></td>
         <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_Object__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_Argotic_Common_WebRequestOptions_System_Object__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event. 
-    You can cancel a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel">LoadAsyncCancel()</a> method.
+    You can cancel a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel">LoadAsyncCancel()</a> method.
 </p>
 <p>
-    After calling <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, 
-    you must wait for the load operation to complete before attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Object_">LoadAsync(Uri, Object)</a> method.
+    After calling <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, 
+    you must wait for the load operation to complete before attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_System_Object_">LoadAsync(Uri, Object)</a> method.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> has a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.LoadAsync(Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CICredentials%2CIWebProxy%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.LoadAsync(System.Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CSystem.Net.ICredentials%2CSystem.Net.IWebProxy%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L506">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync(Uri,Argotic.Common.SyndicationResourceLoadSettings,ICredentials,IWebProxy,Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance asynchronously using the specified <see cref="!:Uri"></see>, <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>, <see cref="!:ICredentials"></see>, and <see cref="!:IWebProxy"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Net.ICredentials,System.Net.IWebProxy,System.Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance asynchronously using the specified <span class="xref">System.Uri</span>, <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>, <span class="xref">System.Net.ICredentials</span>, and <span class="xref">System.Net.IWebProxy</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1574,9 +2117,9 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -1586,50 +2129,76 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
 </td>
       </tr>
       <tr>
-        <td><span class="xref">ICredentials</span></td>
+        <td><span class="xref">System.Net.ICredentials</span></td>
         <td><span class="parametername">credentials</span></td>
-        <td><p>A <see cref="!:ICredentials"></see> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.ICredentials</span> that provides the proper set of credentials to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">IWebProxy</span></td>
+        <td><span class="xref">System.Net.IWebProxy</span></td>
         <td><span class="parametername">proxy</span></td>
-        <td><p>A <see cref="!:IWebProxy"></see> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
+        <td><p>A <span class="xref">System.Net.IWebProxy</span> that provides proxy access to the <code data-dev-comment-type="paramref" class="paramref">source</code> when required. This value can be <strong>null</strong>.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">userToken</span></td>
         <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event. 
-    You can cancel a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel">LoadAsyncCancel()</a> method.
+    You can cancel a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel">LoadAsyncCancel()</a> method.
 </p>
 <p>
-    After calling <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, 
-    you must wait for the load operation to complete before attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Object_">LoadAsync(Uri, Object)</a> method.
+    After calling <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, 
+    you must wait for the load operation to complete before attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_System_Object_">LoadAsync(Uri, Object)</a> method.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> has a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.LoadAsync(Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.LoadAsync(System.Uri%2CArgotic.Common.SyndicationResourceLoadSettings%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L476">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Object_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync(Uri,Argotic.Common.SyndicationResourceLoadSettings,Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, Object)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance asynchronously using the specified <see cref="!:Uri"></see> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Object_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync(System.Uri,Argotic.Common.SyndicationResourceLoadSettings,System.Object)">LoadAsync(Uri, SyndicationResourceLoadSettings, Object)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance asynchronously using the specified <span class="xref">System.Uri</span> and <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1642,9 +2211,9 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
@@ -1654,38 +2223,64 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">userToken</span></td>
         <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Object__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Object__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event. 
-    You can cancel a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel">LoadAsyncCancel()</a> method.
+    You can cancel a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel">LoadAsyncCancel()</a> method.
 </p>
 <p>
-    After calling <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, you must wait for the load operation to complete before 
-    attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, Object)</a> method.
+    After calling <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, you must wait for the load operation to complete before 
+    attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, Object)</a> method.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> has a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.LoadAsync(Uri%2CObject)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.LoadAsync(System.Uri%2CSystem.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L452">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Object_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync(Uri,Object)">LoadAsync(Uri, Object)</h4>
-  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance asynchronously using the specified <see cref="!:Uri"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_System_Object_" data-uid="Argotic.Syndication.Specialized.RsdDocument.LoadAsync(System.Uri,System.Object)">LoadAsync(Uri, Object)</h4>
+  <div class="markdown level1 summary"><p>Loads this <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance asynchronously using the specified <span class="xref">System.Uri</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, Object userToken)</code></pre>
+    <pre><code class="lang-csharp hljs">public void LoadAsync(Uri source, object userToken)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -1698,35 +2293,61 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Uri</span></td>
+        <td><span class="xref">System.Uri</span></td>
         <td><span class="parametername">source</span></td>
-        <td><p>A <see cref="!:Uri"></see> that represents the URL of the syndication resource XML data.</p>
+        <td><p>A <span class="xref">System.Uri</span> that represents the URL of the syndication resource XML data.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">userToken</span></td>
         <td><p>A user-defined object that is passed to the method invoked when the asynchronous operation completes.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Object__remarks">Remarks</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_System_Object__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>The <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> is loaded using the default <a class="xref" href="Argotic.Common.SyndicationResourceLoadSettings.html">SyndicationResourceLoadSettings</a>.</p>
 <p>
     To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Loaded">Loaded</a> event. 
-    You can cancel a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel">LoadAsyncCancel()</a> method.
+    You can cancel a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> operation by calling the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel">LoadAsyncCancel()</a> method.
 </p>
 <p>
-    After calling <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Argotic_Common_SyndicationResourceLoadSettings_ICredentials_IWebProxy_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, you must wait for the load operation to complete before 
-    attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Object_">LoadAsync(Uri, Object)</a> method.
+    After calling <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a>, you must wait for the load operation to complete before 
+    attempting to load the syndication resource using the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_System_Object_">LoadAsync(Uri, Object)</a> method.
 </p>
 </div>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Object__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_System_Object__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="LoadAsync(Uri source, Object userToken)"></code></pre>
 <pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.FormatException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> data does not conform to the expected syndication content format. In this case, the feed remains empty.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.InvalidOperationException</span></td>
+        <td><p>This <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> has a <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_Argotic_Common_SyndicationResourceLoadSettings_System_Net_ICredentials_System_Net_IWebProxy_System_Object_">LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)</a> call in progress.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.LoadAsyncCancel%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -1744,7 +2365,7 @@ the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argot
     <pre><code class="lang-csharp hljs">public void LoadAsyncCancel()</code></pre>
   </div>
   <h5 id="Argotic_Syndication_Specialized_RsdDocument_LoadAsyncCancel_remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>Use the LoadAsyncCancel method to cancel a pending <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_Uri_Object_">LoadAsync(Uri, Object)</a> operation.
+  <div class="markdown level1 remarks"><p>Use the LoadAsyncCancel method to cancel a pending <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_LoadAsync_System_Uri_System_Object_">LoadAsync(Uri, Object)</a> operation.
 If there is a load operation in progress, this method releases resources used to execute the load operation.
 If there is no load operation pending, this method does nothing.</p>
 </div>
@@ -1835,6 +2456,22 @@ If there is no load operation pending, this method does nothing.</p>
   <h5 id="Argotic_Syndication_Specialized_RsdDocument_RemoveExtension_Argotic_Extensions_ISyndicationExtension__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>If the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Extensions">Extensions</a> collection of the current instance does not contain the specified <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>, will return <strong>false</strong>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_RemoveInterface_Argotic_Syndication_Specialized_RsdApplicationInterface_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.RemoveInterface(Argotic.Syndication.Specialized.RsdApplicationInterface)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -1888,16 +2525,32 @@ If there is no load operation pending, this method does nothing.</p>
   <h5 id="Argotic_Syndication_Specialized_RsdDocument_RemoveInterface_Argotic_Syndication_Specialized_RsdApplicationInterface__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>If the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Interfaces">Interfaces</a> collection of the current instance does not contain the specified <a class="xref" href="Argotic.Syndication.Specialized.RsdApplicationInterface.html">RsdApplicationInterface</a>, will return <strong>false</strong>.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">api</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Save_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Save(Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Save_System_IO_Stream_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Save(System.IO.Stream)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L1095">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Save_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Save_Stream_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save(Stream)">Save(Stream)</h4>
-  <div class="markdown level1 summary"><p>Saves the syndication resource to the specified <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Save_System_IO_Stream_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save(System.IO.Stream)">Save(Stream)</h4>
+  <div class="markdown level1 summary"><p>Saves the syndication resource to the specified <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1915,27 +2568,48 @@ If there is no load operation pending, this method does nothing.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
         <td><p>The <strong>Stream</strong> to which you want to save the syndication resource.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Save_Stream__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Save_System_IO_Stream__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="Save(Stream stream)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>The operation would not result in well formed XML for the syndication resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Save_Stream_Argotic_Common_SyndicationResourceSaveSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Save(Stream%2CArgotic.Common.SyndicationResourceSaveSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Save_System_IO_Stream_Argotic_Common_SyndicationResourceSaveSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Save(System.IO.Stream%2CArgotic.Common.SyndicationResourceSaveSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L1107">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Save_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Save_Stream_Argotic_Common_SyndicationResourceSaveSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save(Stream,Argotic.Common.SyndicationResourceSaveSettings)">Save(Stream, SyndicationResourceSaveSettings)</h4>
-  <div class="markdown level1 summary"><p>Saves the syndication resource to the specified <see cref="!:Stream"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Save_System_IO_Stream_Argotic_Common_SyndicationResourceSaveSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save(System.IO.Stream,Argotic.Common.SyndicationResourceSaveSettings)">Save(Stream, SyndicationResourceSaveSettings)</h4>
+  <div class="markdown level1 summary"><p>Saves the syndication resource to the specified <span class="xref">System.IO.Stream</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1953,7 +2627,7 @@ If there is no load operation pending, this method does nothing.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Stream</span></td>
+        <td><span class="xref">System.IO.Stream</span></td>
         <td><span class="parametername">stream</span></td>
         <td><p>The <strong>Stream</strong> to which you want to save the syndication resource.</p>
 </td>
@@ -1966,16 +2640,37 @@ If there is no load operation pending, this method does nothing.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">stream</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>The operation would not result in well formed XML for the syndication resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Save_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Save(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Save_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Save(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L1140">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Save_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Save_XmlWriter_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save(XmlWriter)">Save(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Saves the syndication resource to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Save_System_Xml_XmlWriter_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save(System.Xml.XmlWriter)">Save(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Saves the syndication resource to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -1993,27 +2688,48 @@ If there is no load operation pending, this method does nothing.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
         <td><p>The <strong>XmlWriter</strong> to which you want to save the syndication resource.</p>
 </td>
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Save_XmlWriter__examples">Examples</h5>
+  <h5 id="Argotic_Syndication_Specialized_RsdDocument_Save_System_Xml_XmlWriter__examples">Examples</h5>
   <pre><code><pre><code source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Rsd\RsdDocumentExample.cs" region="Save(XmlWriter writer)"></code></pre>
 <p></code></pre><p>
 
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>The operation would not result in well formed XML for the syndication resource.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Save_XmlWriter_Argotic_Common_SyndicationResourceSaveSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Save(XmlWriter%2CArgotic.Common.SyndicationResourceSaveSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_Specialized_RsdDocument_Save_System_Xml_XmlWriter_Argotic_Common_SyndicationResourceSaveSettings_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.Specialized.RsdDocument.Save(System.Xml.XmlWriter%2CArgotic.Common.SyndicationResourceSaveSettings)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/Specialized/Rsd/RsdDocument.cs/#L1154">View Source</a>
   </span>
   <a id="Argotic_Syndication_Specialized_RsdDocument_Save_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save*"></a>
-  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Save_XmlWriter_Argotic_Common_SyndicationResourceSaveSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save(XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)">Save(XmlWriter, SyndicationResourceSaveSettings)</h4>
-  <div class="markdown level1 summary"><p>Saves the syndication resource to the specified <see cref="!:XmlWriter"></see> and <a class="xref" href="Argotic.Common.SyndicationResourceSaveSettings.html">SyndicationResourceSaveSettings</a>.</p>
+  <h4 id="Argotic_Syndication_Specialized_RsdDocument_Save_System_Xml_XmlWriter_Argotic_Common_SyndicationResourceSaveSettings_" data-uid="Argotic.Syndication.Specialized.RsdDocument.Save(System.Xml.XmlWriter,Argotic.Common.SyndicationResourceSaveSettings)">Save(XmlWriter, SyndicationResourceSaveSettings)</h4>
+  <div class="markdown level1 summary"><p>Saves the syndication resource to the specified <span class="xref">System.Xml.XmlWriter</span> and <a class="xref" href="Argotic.Common.SyndicationResourceSaveSettings.html">SyndicationResourceSaveSettings</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -2031,7 +2747,7 @@ If there is no load operation pending, this method does nothing.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
         <td><p>The <strong>XmlWriter</strong> to which you want to save the syndication resource.</p>
 </td>
@@ -2040,6 +2756,32 @@ If there is no load operation pending, this method does nothing.</p>
         <td><a class="xref" href="Argotic.Common.SyndicationResourceSaveSettings.html">SyndicationResourceSaveSettings</a></td>
         <td><span class="parametername">settings</span></td>
         <td><p>The <a class="xref" href="Argotic.Common.SyndicationResourceSaveSettings.html">SyndicationResourceSaveSettings</a> object used to configure the persistance of the <a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html">RsdDocument</a> instance.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">settings</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Xml.XmlException</span></td>
+        <td><p>The operation would not result in well formed XML for the syndication resource.</p>
 </td>
       </tr>
     </tbody>
@@ -2071,15 +2813,15 @@ If there is no load operation pending, this method does nothing.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">EventHandler</span>&lt;<a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a>&gt;</td>
+        <td><span class="xref">System.EventHandler</span>&lt;<a class="xref" href="Argotic.Common.SyndicationResourceLoadedEventArgs.html">SyndicationResourceLoadedEventArgs</a>&gt;</td>
         <td></td>
       </tr>
     </tbody>
   </table>
   <h5 id="Argotic_Syndication_Specialized_RsdDocument_Loaded_seealso">See Also</h5>
   <div class="seealso">
-      <div><a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Load_IXPathNavigable_">Load(IXPathNavigable)</a></div>
-      <div><a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Load_XmlReader_">Load(XmlReader)</a></div>
+      <div><a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XPath_IXPathNavigable_">Load(IXPathNavigable)</a></div>
+      <div><a class="xref" href="Argotic.Syndication.Specialized.RsdDocument.html#Argotic_Syndication_Specialized_RsdDocument_Load_System_Xml_XmlReader_">Load(XmlReader)</a></div>
   </div>
   <h3 id="implements">Implements</h3>
   <div>

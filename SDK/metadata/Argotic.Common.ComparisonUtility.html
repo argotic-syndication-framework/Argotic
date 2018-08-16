@@ -81,11 +81,35 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">ComparisonUtility</span></div>
   </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetHashCode()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ToString()</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Common.html">Argotic.Common</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Common.dll</h6>
   <h5 id="Argotic_Common_ComparisonUtility_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static class ComparisonUtility : object</code></pre>
+    <pre><code class="lang-csharp hljs">public static class ComparisonUtility</code></pre>
   </div>
   <h5 id="Argotic_Common_ComparisonUtility_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>Primary used within this framework to determine the lexical relationship between generic collections.</p>
@@ -94,494 +118,13 @@
   </h3>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_Collection_DayOfWeek__Collection_DayOfWeek__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(Collection%7BDayOfWeek%7D%2CCollection%7BDayOfWeek%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L35">View Source</a>
-  </span>
-  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
-  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_DayOfWeek__Collection_DayOfWeek__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(Collection{DayOfWeek},Collection{DayOfWeek})">CompareSequence(Collection&lt;DayOfWeek&gt;, Collection&lt;DayOfWeek&gt;)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;DayOfWeek&gt; source, Collection&lt;DayOfWeek&gt; target)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">DayOfWeek</span>&gt;</td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The first collection.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">DayOfWeek</span>&gt;</td>
-        <td><span class="parametername">target</span></td>
-        <td><p>The second collection.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_DayOfWeek__Collection_DayOfWeek___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
-</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_Collection_System_Int32__Collection_System_Int32__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(Collection%7BSystem.Int32%7D%2CCollection%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L80">View Source</a>
-  </span>
-  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
-  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_System_Int32__Collection_System_Int32__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(Collection{System.Int32},Collection{System.Int32})">CompareSequence(Collection&lt;Int32&gt;, Collection&lt;Int32&gt;)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;int&gt; source, Collection&lt;int&gt; target)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The first collection.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
-        <td><span class="parametername">target</span></td>
-        <td><p>The second collection.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_System_Int32__Collection_System_Int32___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
-</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_Collection_System_Int64__Collection_System_Int64__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(Collection%7BSystem.Int64%7D%2CCollection%7BSystem.Int64%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L125">View Source</a>
-  </span>
-  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
-  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_System_Int64__Collection_System_Int64__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(Collection{System.Int64},Collection{System.Int64})">CompareSequence(Collection&lt;Int64&gt;, Collection&lt;Int64&gt;)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;long&gt; source, Collection&lt;long&gt; target)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The first collection.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
-        <td><span class="parametername">target</span></td>
-        <td><p>The second collection.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_System_Int64__Collection_System_Int64___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
-</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_Collection_System_String__Collection_System_String__StringComparison_.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(Collection%7BSystem.String%7D%2CCollection%7BSystem.String%7D%2CStringComparison)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L171">View Source</a>
-  </span>
-  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
-  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_System_String__Collection_System_String__StringComparison_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(Collection{System.String},Collection{System.String},StringComparison)">CompareSequence(Collection&lt;String&gt;, Collection&lt;String&gt;, StringComparison)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;string&gt; source, Collection&lt;string&gt; target, StringComparison comparisonType)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The first collection.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
-        <td><span class="parametername">target</span></td>
-        <td><p>The second collection.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">StringComparison</span></td>
-        <td><span class="parametername">comparisonType</span></td>
-        <td><p>Specifies the culture, case, and sort rules to be used when determining the lexical relationship.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_System_String__Collection_System_String__StringComparison__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
-</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_Collection_Type__Collection_Type__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(Collection%7BType%7D%2CCollection%7BType%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L216">View Source</a>
-  </span>
-  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
-  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_Type__Collection_Type__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(Collection{Type},Collection{Type})">CompareSequence(Collection&lt;Type&gt;, Collection&lt;Type&gt;)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;Type&gt; source, Collection&lt;Type&gt; target)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">Type</span>&gt;</td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The first collection.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">Type</span>&gt;</td>
-        <td><span class="parametername">target</span></td>
-        <td><p>The second collection.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_Type__Collection_Type___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
-</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_Collection_Uri__Collection_Uri__StringComparison_.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(Collection%7BUri%7D%2CCollection%7BUri%7D%2CStringComparison)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L262">View Source</a>
-  </span>
-  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
-  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_Uri__Collection_Uri__StringComparison_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(Collection{Uri},Collection{Uri},StringComparison)">CompareSequence(Collection&lt;Uri&gt;, Collection&lt;Uri&gt;, StringComparison)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;Uri&gt; source, Collection&lt;Uri&gt; target, StringComparison comparisonType)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">Uri</span>&gt;</td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The first collection.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">Uri</span>&gt;</td>
-        <td><span class="parametername">target</span></td>
-        <td><p>The second collection.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">StringComparison</span></td>
-        <td><span class="parametername">comparisonType</span></td>
-        <td><p>Specifies the culture, case, and sort rules to be used when determining the lexical relationship.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_Uri__Collection_Uri__StringComparison__remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
-</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_Collection_XPathNavigator__Collection_XPathNavigator__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(Collection%7BXPathNavigator%7D%2CCollection%7BXPathNavigator%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L307">View Source</a>
-  </span>
-  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
-  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_XPathNavigator__Collection_XPathNavigator__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(Collection{XPathNavigator},Collection{XPathNavigator})">CompareSequence(Collection&lt;XPathNavigator&gt;, Collection&lt;XPathNavigator&gt;)</h4>
-  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;XPathNavigator&gt; source, Collection&lt;XPathNavigator&gt; target)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">XPathNavigator</span>&gt;</td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The first collection.</p>
-</td>
-      </tr>
-      <tr>
-        <td><span class="xref">Collection</span>&lt;<span class="xref">XPathNavigator</span>&gt;</td>
-        <td><span class="parametername">target</span></td>
-        <td><p>The second collection.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Int32</span></td>
-        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_Collection_XPathNavigator__Collection_XPathNavigator___remarks">Remarks</h5>
-  <div class="markdown level1 remarks"><p>
-    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
-</p>
-<p>
-    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
-</p>
-</div>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_Dictionary_System_String_System_String__Dictionary_System_String_System_String__StringComparison_.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(Dictionary%7BSystem.String%2CSystem.String%7D%2CDictionary%7BSystem.String%2CSystem.String%7D%2CStringComparison)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__System_StringComparison_.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D%2CSystem.Collections.Generic.Dictionary%7BSystem.String%2CSystem.String%7D%2CSystem.StringComparison)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L353">View Source</a>
   </span>
   <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
-  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_Dictionary_System_String_System_String__Dictionary_System_String_System_String__StringComparison_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(Dictionary{System.String,System.String},Dictionary{System.String,System.String},StringComparison)">CompareSequence(Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;, StringComparison)</h4>
+  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__System_StringComparison_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.Generic.Dictionary{System.String,System.String},System.Collections.Generic.Dictionary{System.String,System.String},System.StringComparison)">CompareSequence(Dictionary&lt;String, String&gt;, Dictionary&lt;String, String&gt;, StringComparison)</h4>
   <div class="markdown level1 summary"><p>Compares two specified generic dictionaries.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
@@ -600,19 +143,19 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">source</span></td>
         <td><p>The first collection.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
+        <td><span class="xref">System.Collections.Generic.Dictionary</span>&lt;<span class="xref">System.String</span>, <span class="xref">System.String</span>&gt;</td>
         <td><span class="parametername">target</span></td>
         <td><p>The second collection.</p>
 </td>
       </tr>
       <tr>
-        <td><span class="xref">StringComparison</span></td>
+        <td><span class="xref">System.StringComparison</span></td>
         <td><span class="parametername">comparisonType</span></td>
         <td><p>Specifies the culture, case, and sort rules to be used when determining the lexical relationship.</p>
 </td>
@@ -635,7 +178,7 @@
       </tr>
     </tbody>
   </table>
-  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_Dictionary_System_String_System_String__Dictionary_System_String_System_String__StringComparison__remarks">Remarks</h5>
+  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_Generic_Dictionary_System_String_System_String__System_Collections_Generic_Dictionary_System_String_System_String__System_StringComparison__remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>
     If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
 </p>
@@ -646,6 +189,655 @@
     If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
 </p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_DayOfWeek__System_Collections_ObjectModel_Collection_System_DayOfWeek__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection%7BSystem.DayOfWeek%7D%2CSystem.Collections.ObjectModel.Collection%7BSystem.DayOfWeek%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L35">View Source</a>
+  </span>
+  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
+  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_DayOfWeek__System_Collections_ObjectModel_Collection_System_DayOfWeek__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.DayOfWeek},System.Collections.ObjectModel.Collection{System.DayOfWeek})">CompareSequence(Collection&lt;DayOfWeek&gt;, Collection&lt;DayOfWeek&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;DayOfWeek&gt; source, Collection&lt;DayOfWeek&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.DayOfWeek</span>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.DayOfWeek</span>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_DayOfWeek__System_Collections_ObjectModel_Collection_System_DayOfWeek___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Int32__System_Collections_ObjectModel_Collection_System_Int32__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection%7BSystem.Int32%7D%2CSystem.Collections.ObjectModel.Collection%7BSystem.Int32%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L80">View Source</a>
+  </span>
+  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
+  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Int32__System_Collections_ObjectModel_Collection_System_Int32__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Int32},System.Collections.ObjectModel.Collection{System.Int32})">CompareSequence(Collection&lt;Int32&gt;, Collection&lt;Int32&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;int&gt; source, Collection&lt;int&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Int32</span>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Int32__System_Collections_ObjectModel_Collection_System_Int32___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Int64__System_Collections_ObjectModel_Collection_System_Int64__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection%7BSystem.Int64%7D%2CSystem.Collections.ObjectModel.Collection%7BSystem.Int64%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L125">View Source</a>
+  </span>
+  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
+  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Int64__System_Collections_ObjectModel_Collection_System_Int64__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Int64},System.Collections.ObjectModel.Collection{System.Int64})">CompareSequence(Collection&lt;Int64&gt;, Collection&lt;Int64&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;long&gt; source, Collection&lt;long&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Int64</span>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Int64__System_Collections_ObjectModel_Collection_System_Int64___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_String__System_Collections_ObjectModel_Collection_System_String__System_StringComparison_.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection%7BSystem.String%7D%2CSystem.Collections.ObjectModel.Collection%7BSystem.String%7D%2CSystem.StringComparison)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L171">View Source</a>
+  </span>
+  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
+  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_String__System_Collections_ObjectModel_Collection_System_String__System_StringComparison_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.String},System.Collections.ObjectModel.Collection{System.String},System.StringComparison)">CompareSequence(Collection&lt;String&gt;, Collection&lt;String&gt;, StringComparison)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;string&gt; source, Collection&lt;string&gt; target, StringComparison comparisonType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.String</span>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.StringComparison</span></td>
+        <td><span class="parametername">comparisonType</span></td>
+        <td><p>Specifies the culture, case, and sort rules to be used when determining the lexical relationship.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_String__System_Collections_ObjectModel_Collection_System_String__System_StringComparison__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Type__System_Collections_ObjectModel_Collection_System_Type__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection%7BSystem.Type%7D%2CSystem.Collections.ObjectModel.Collection%7BSystem.Type%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L216">View Source</a>
+  </span>
+  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
+  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Type__System_Collections_ObjectModel_Collection_System_Type__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Type},System.Collections.ObjectModel.Collection{System.Type})">CompareSequence(Collection&lt;Type&gt;, Collection&lt;Type&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;Type&gt; source, Collection&lt;Type&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Type</span>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Type</span>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Type__System_Collections_ObjectModel_Collection_System_Type___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Uri__System_Collections_ObjectModel_Collection_System_Uri__System_StringComparison_.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection%7BSystem.Uri%7D%2CSystem.Collections.ObjectModel.Collection%7BSystem.Uri%7D%2CSystem.StringComparison)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L262">View Source</a>
+  </span>
+  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
+  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Uri__System_Collections_ObjectModel_Collection_System_Uri__System_StringComparison_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Uri},System.Collections.ObjectModel.Collection{System.Uri},System.StringComparison)">CompareSequence(Collection&lt;Uri&gt;, Collection&lt;Uri&gt;, StringComparison)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;Uri&gt; source, Collection&lt;Uri&gt; target, StringComparison comparisonType)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Uri</span>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Uri</span>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.StringComparison</span></td>
+        <td><span class="parametername">comparisonType</span></td>
+        <td><p>Specifies the culture, case, and sort rules to be used when determining the lexical relationship.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Uri__System_Collections_ObjectModel_Collection_System_Uri__System_StringComparison__remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Xml_XPath_XPathNavigator__System_Collections_ObjectModel_Collection_System_Xml_XPath_XPathNavigator__.md&amp;value=---%0Auid%3A%20Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection%7BSystem.Xml.XPath.XPathNavigator%7D%2CSystem.Collections.ObjectModel.Collection%7BSystem.Xml.XPath.XPathNavigator%7D)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Common/ComparisonUtility.cs/#L307">View Source</a>
+  </span>
+  <a id="Argotic_Common_ComparisonUtility_CompareSequence_" data-uid="Argotic.Common.ComparisonUtility.CompareSequence*"></a>
+  <h4 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Xml_XPath_XPathNavigator__System_Collections_ObjectModel_Collection_System_Xml_XPath_XPathNavigator__" data-uid="Argotic.Common.ComparisonUtility.CompareSequence(System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator},System.Collections.ObjectModel.Collection{System.Xml.XPath.XPathNavigator})">CompareSequence(Collection&lt;XPathNavigator&gt;, Collection&lt;XPathNavigator&gt;)</h4>
+  <div class="markdown level1 summary"><p>Compares two specified generic collections.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public static int CompareSequence(Collection&lt;XPathNavigator&gt; source, Collection&lt;XPathNavigator&gt; target)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Xml.XPath.XPathNavigator</span>&gt;</td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The first collection.</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<span class="xref">System.Xml.XPath.XPathNavigator</span>&gt;</td>
+        <td><span class="parametername">target</span></td>
+        <td><p>The second collection.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Int32</span></td>
+        <td><p>A 32-bit signed integer indicating the lexical relationship between the two comparands.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 id="Argotic_Common_ComparisonUtility_CompareSequence_System_Collections_ObjectModel_Collection_System_Xml_XPath_XPathNavigator__System_Collections_ObjectModel_Collection_System_Xml_XPath_XPathNavigator___remarks">Remarks</h5>
+  <div class="markdown level1 remarks"><p>
+    If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>greater than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>1</strong>.
+</p>
+<p>
+    If the <code data-dev-comment-type="paramref" class="paramref">source</code> has an element count that is <em>less than</em> the <code data-dev-comment-type="paramref" class="paramref">target</code> element count, returns <strong>-1</strong>.
+</p>
+</div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">target</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
 </article>
           </div>
           

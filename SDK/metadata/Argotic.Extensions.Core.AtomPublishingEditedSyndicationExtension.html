@@ -85,8 +85,8 @@
   <div classs="implements">
     <h5>Implements</h5>
     <div><a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a></div>
-    <div><span class="xref">IXmlSerializable</span></div>
-    <div><span class="xref">IComparable</span></div>
+    <div><span class="xref">System.Xml.Serialization.IXmlSerializable</span></div>
+    <div><span class="xref">System.IComparable</span></div>
   </div>
   <div class="inheritedMembers">
     <h5>Inherited Members</h5>
@@ -115,29 +115,42 @@
       <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_OnExtensionLoaded_Argotic_Extensions_SyndicationExtensionLoadedEventArgs_">SyndicationExtension.OnExtensionLoaded(SyndicationExtensionLoadedEventArgs)</a>
     </div>
     <div>
-      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_CreateNamespaceManager_XPathNavigator_">SyndicationExtension.CreateNamespaceManager(XPathNavigator)</a>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_CreateNamespaceManager_System_Xml_XPath_XPathNavigator_">SyndicationExtension.CreateNamespaceManager(XPathNavigator)</a>
     </div>
     <div>
-      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_ExistsInSource_XPathNavigator_">SyndicationExtension.ExistsInSource(XPathNavigator)</a>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_ExistsInSource_System_Xml_XPath_XPathNavigator_">SyndicationExtension.ExistsInSource(XPathNavigator)</a>
     </div>
     <div>
-      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteXmlNamespaceDeclaration_XmlWriter_">SyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)</a>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteXmlNamespaceDeclaration_System_Xml_XmlWriter_">SyndicationExtension.WriteXmlNamespaceDeclaration(XmlWriter)</a>
     </div>
     <div>
       <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_GetSchema">SyndicationExtension.GetSchema()</a>
     </div>
     <div>
-      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_ReadXml_XmlReader_">SyndicationExtension.ReadXml(XmlReader)</a>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_ReadXml_System_Xml_XmlReader_">SyndicationExtension.ReadXml(XmlReader)</a>
     </div>
     <div>
-      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteXml_XmlWriter_">SyndicationExtension.WriteXml(XmlWriter)</a>
+      <a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteXml_System_Xml_XmlWriter_">SyndicationExtension.WriteXml(XmlWriter)</a>
+    </div>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
     </div>
   </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Extensions.Core.html">Argotic.Extensions.Core</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Extensions.dll</h6>
   <h5 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, ISyndicationExtension, IXmlSerializable, IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, ISyndicationExtension, IXmlSerializable, IComparable</code></pre>
   </div>
   <h5 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_remarks"><strong>Remarks</strong></h5>
   <div class="markdown level0 remarks"><p>
@@ -210,6 +223,22 @@
 Its purpose is to prevent property naming collisions between the base <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a> class and any custom properties that
 are defined for the custom syndication extension.</p>
 </div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">value</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="methods">Methods
   </h3>
   <span class="small pull-right mobile-hide">
@@ -262,21 +291,37 @@ are defined for the custom syndication extension.</p>
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/AtomPublishing/AtomPublishingEditedSyndicationExtension.cs/#L194">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Equals_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Equals*"></a>
-  <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Equals_Object_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Equals_System_Object_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -289,9 +334,9 @@ are defined for the custom syndication extension.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -307,11 +352,13 @@ are defined for the custom syndication extension.</p>
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -344,68 +391,18 @@ are defined for the custom syndication extension.</p>
       </tr>
     </tbody>
   </table>
-  <span class="small pull-right mobile-hide">
-    <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load(IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
-  </span>
-  <span class="small pull-right mobile-hide">
-    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/AtomPublishing/AtomPublishingEditedSyndicationExtension.cs/#L90">View Source</a>
-  </span>
-  <a id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load*"></a>
-  <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_IXPathNavigable_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load(IXPathNavigable)">Load(IXPathNavigable)</h4>
-  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <see cref="!:IXPathNavigable"></see>.</p>
-</div>
-  <div class="markdown level1 conceptual"></div>
-  <h5 class="decalaration">Declaration</h5>
-  <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Load(IXPathNavigable source)</code></pre>
-  </div>
-  <h5 class="parameters">Parameters</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Name</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">IXPathNavigable</span></td>
-        <td><span class="parametername">source</span></td>
-        <td><p>The <strong>IXPathNavigable</strong> used to load this <a class="xref" href="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html">AtomPublishingEditedSyndicationExtension</a>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
-  <h5 class="returns">Returns</h5>
-  <table class="table table-bordered table-striped table-condensed">
-    <thead>
-      <tr>
-        <th>Type</th>
-        <th>Description</th>
-      </tr>
-    </thead>
-    <tbody>
-      <tr>
-        <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html">AtomPublishingEditedSyndicationExtension</a> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.</p>
-</td>
-      </tr>
-    </tbody>
-  </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Load_IXPathNavigable_">SyndicationExtension.Load(IXPathNavigable)</a></div>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load(XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_System_Xml_XmlReader_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load(System.Xml.XmlReader)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/AtomPublishing/AtomPublishingEditedSyndicationExtension.cs/#L108">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load*"></a>
-  <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_XmlReader_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load(XmlReader)">Load(XmlReader)</h4>
-  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <see cref="!:XmlReader"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_System_Xml_XmlReader_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load(System.Xml.XmlReader)">Load(XmlReader)</h4>
+  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <span class="xref">System.Xml.XmlReader</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -423,7 +420,7 @@ are defined for the custom syndication extension.</p>
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlReader</span></td>
+        <td><span class="xref">System.Xml.XmlReader</span></td>
         <td><span class="parametername">reader</span></td>
         <td><p>The <strong>XmlReader</strong> used to load this <a class="xref" href="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html">AtomPublishingEditedSyndicationExtension</a>.</p>
 </td>
@@ -447,7 +444,91 @@ are defined for the custom syndication extension.</p>
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Load_XmlReader_">SyndicationExtension.Load(XmlReader)</a></div>
+  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Load_System_Xml_XmlReader_">SyndicationExtension.Load(XmlReader)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">reader</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <span class="small pull-right mobile-hide">
+    <span class="divider">|</span>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+  </span>
+  <span class="small pull-right mobile-hide">
+    <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/AtomPublishing/AtomPublishingEditedSyndicationExtension.cs/#L90">View Source</a>
+  </span>
+  <a id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load*"></a>
+  <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)">Load(IXPathNavigable)</h4>
+  <div class="markdown level1 summary"><p>Initializes the syndication extension using the supplied <span class="xref">System.Xml.XPath.IXPathNavigable</span>.</p>
+</div>
+  <div class="markdown level1 conceptual"></div>
+  <h5 class="decalaration">Declaration</h5>
+  <div class="codewrapper">
+    <pre><code class="lang-csharp hljs">public override bool Load(IXPathNavigable source)</code></pre>
+  </div>
+  <h5 class="parameters">Parameters</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Name</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Xml.XPath.IXPathNavigable</span></td>
+        <td><span class="parametername">source</span></td>
+        <td><p>The <strong>IXPathNavigable</strong> used to load this <a class="xref" href="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html">AtomPublishingEditedSyndicationExtension</a>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="returns">Returns</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Description</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.Boolean</span></td>
+        <td><p><strong>true</strong> if the <a class="xref" href="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html">AtomPublishingEditedSyndicationExtension</a> was able to be initialized using the supplied <code data-dev-comment-type="paramref" class="paramref">source</code>; otherwise <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_Load_System_Xml_XPath_IXPathNavigable_">SyndicationExtension.Load(IXPathNavigable)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">source</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_MatchByType_Argotic_Extensions_ISyndicationExtension_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.MatchByType(Argotic.Extensions.ISyndicationExtension)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -458,7 +539,7 @@ are defined for the custom syndication extension.</p>
   <a id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_MatchByType_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.MatchByType*"></a>
   <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_MatchByType_Argotic_Extensions_ISyndicationExtension_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.MatchByType(Argotic.Extensions.ISyndicationExtension)">MatchByType(ISyndicationExtension)</h4>
   <div class="markdown level1 summary"><p>Predicate delegate that returns a value indicating if the supplied <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>
-represents the same <see cref="!:Type"></see> as this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>.</p>
+represents the same <span class="xref">System.Type</span> as this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -494,7 +575,23 @@ represents the same <see cref="!:Type"></see> as this <a class="xref" href="Argo
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">extension</code> is the same <see cref="!:Type"></see> as this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the <code data-dev-comment-type="paramref" class="paramref">extension</code> is the same <span class="xref">System.Type</span> as this <a class="xref" href="Argotic.Extensions.SyndicationExtension.html">SyndicationExtension</a>; otherwise, <strong>false</strong>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">extension</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -508,7 +605,7 @@ represents the same <see cref="!:Type"></see> as this <a class="xref" href="Argo
   </span>
   <a id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_ToString_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.ToString*"></a>
   <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_ToString" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html">AtomPublishingEditedSyndicationExtension</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html">AtomPublishingEditedSyndicationExtension</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -526,24 +623,26 @@ represents the same <see cref="!:Type"></see> as this <a class="xref" href="Argo
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html">AtomPublishingEditedSyndicationExtension</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.html">AtomPublishingEditedSyndicationExtension</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns the XML representation for the current instance.</p>
 </div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_WriteTo_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.WriteTo(XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_WriteTo_System_Xml_XmlWriter_.md&amp;value=---%0Auid%3A%20Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.WriteTo(System.Xml.XmlWriter)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Extensions/Core/AtomPublishing/AtomPublishingEditedSyndicationExtension.cs/#L121">View Source</a>
   </span>
   <a id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_WriteTo_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.WriteTo*"></a>
-  <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_WriteTo_XmlWriter_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.WriteTo(XmlWriter)">WriteTo(XmlWriter)</h4>
-  <div class="markdown level1 summary"><p>Writes the syndication extension to the specified <see cref="!:XmlWriter"></see>.</p>
+  <h4 id="Argotic_Extensions_Core_AtomPublishingEditedSyndicationExtension_WriteTo_System_Xml_XmlWriter_" data-uid="Argotic.Extensions.Core.AtomPublishingEditedSyndicationExtension.WriteTo(System.Xml.XmlWriter)">WriteTo(XmlWriter)</h4>
+  <div class="markdown level1 summary"><p>Writes the syndication extension to the specified <span class="xref">System.Xml.XmlWriter</span>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -561,7 +660,7 @@ represents the same <see cref="!:Type"></see> as this <a class="xref" href="Argo
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">XmlWriter</span></td>
+        <td><span class="xref">System.Xml.XmlWriter</span></td>
         <td><span class="parametername">writer</span></td>
         <td><p>The <strong>XmlWriter</strong> to which you want to write the syndication extension.</p>
 </td>
@@ -569,7 +668,23 @@ represents the same <see cref="!:Type"></see> as this <a class="xref" href="Argo
     </tbody>
   </table>
   <h5 class="overrides">Overrides</h5>
-  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteTo_XmlWriter_">SyndicationExtension.WriteTo(XmlWriter)</a></div>
+  <div><a class="xref" href="Argotic.Extensions.SyndicationExtension.html#Argotic_Extensions_SyndicationExtension_WriteTo_System_Xml_XmlWriter_">SyndicationExtension.WriteTo(XmlWriter)</a></div>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">writer</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="operators">Operators
   </h3>
   <span class="small pull-right mobile-hide">
@@ -801,10 +916,10 @@ represents the same <see cref="!:Type"></see> as this <a class="xref" href="Argo
       <a class="xref" href="Argotic.Extensions.ISyndicationExtension.html">ISyndicationExtension</a>
   </div>
   <div>
-      <span class="xref">IXmlSerializable</span>
+      <span class="xref">System.Xml.Serialization.IXmlSerializable</span>
   </div>
   <div>
-      <span class="xref">IComparable</span>
+      <span class="xref">System.IComparable</span>
   </div>
 </article>
           </div>

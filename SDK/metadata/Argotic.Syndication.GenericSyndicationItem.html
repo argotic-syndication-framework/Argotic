@@ -81,11 +81,31 @@
     <div class="level0"><span class="xref">System.Object</span></div>
     <div class="level1"><span class="xref">GenericSyndicationItem</span></div>
   </div>
+  <div classs="implements">
+    <h5>Implements</h5>
+    <div><span class="xref">System.IComparable</span></div>
+  </div>
+  <div class="inheritedMembers">
+    <h5>Inherited Members</h5>
+    <div>
+      <span class="xref">System.Object.Equals(System.Object, System.Object)</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.GetType()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.MemberwiseClone()</span>
+    </div>
+    <div>
+      <span class="xref">System.Object.ReferenceEquals(System.Object, System.Object)</span>
+    </div>
+  </div>
   <h6><strong>Namespace</strong>: <a class="xref" href="Argotic.Syndication.html">Argotic.Syndication</a></h6>
   <h6><strong>Assembly</strong>: Argotic.Core.dll</h6>
   <h5 id="Argotic_Syndication_GenericSyndicationItem_syntax">Syntax</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public class GenericSyndicationItem : IComparable</code></pre>
+    <pre><code class="lang-csharp hljs">[Serializable]
+public class GenericSyndicationItem : IComparable</code></pre>
   </div>
   <h3 id="constructors">Constructors
   </h3>
@@ -119,6 +139,22 @@
         <td><a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a></td>
         <td><span class="parametername">entry</span></td>
         <td><p>The <a class="xref" href="Argotic.Syndication.AtomEntry.html">AtomEntry</a> to build an abstraction against.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">entry</code> is a null reference (Nothing in Visual Basic).</p>
 </td>
       </tr>
     </tbody>
@@ -157,6 +193,22 @@
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentNullException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">item</code> is a null reference (Nothing in Visual Basic).</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <h3 id="properties">Properties
   </h3>
   <span class="small pull-right mobile-hide">
@@ -185,8 +237,8 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Collection</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a>&gt;</td>
-        <td><p>A <see cref="!:Collection&lt;T>"></see> collection of <a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a> objects that represent the categories associated with this item.</p>
+        <td><span class="xref">System.Collections.ObjectModel.Collection</span>&lt;<a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a>&gt;</td>
+        <td><p>A <span class="xref">System.Collections.ObjectModel.Collection&lt;T&gt;</span> collection of <a class="xref" href="Argotic.Syndication.GenericSyndicationCategory.html">GenericSyndicationCategory</a> objects that represent the categories associated with this item.</p>
 </td>
       </tr>
     </tbody>
@@ -217,9 +269,9 @@
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">DateTime</span></td>
-        <td><p>A <see cref="!:DateTime"></see> object that represents a date-time indicating an instant in time associated with an event early in the life cycle of this item.
-The default value is <see cref="!:DateTime.MinValue"></see>, which indicates that publication date was specified.</p>
+        <td><span class="xref">System.DateTime</span></td>
+        <td><p>A <span class="xref">System.DateTime</span> object that represents a date-time indicating an instant in time associated with an event early in the life cycle of this item.
+The default value is <span class="xref">System.DateTime.MinValue</span>, which indicates that publication date was specified.</p>
 </td>
       </tr>
     </tbody>
@@ -352,21 +404,37 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
+  <h5 class="exceptions">Exceptions</h5>
+  <table class="table table-bordered table-striped table-condensed">
+    <thead>
+      <tr>
+        <th>Type</th>
+        <th>Condition</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <td><span class="xref">System.ArgumentException</span></td>
+        <td><p>The <code data-dev-comment-type="paramref" class="paramref">obj</code> is not the expected <span class="xref">System.Type</span>.</p>
+</td>
+      </tr>
+    </tbody>
+  </table>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
-    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationItem_Equals_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationItem.Equals(Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
+    <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationItem_Equals_System_Object_.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationItem.Equals(System.Object)%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
   </span>
   <span class="small pull-right mobile-hide">
     <a href="https://github.com/endjin/Argotic/blob/develop/Solutions/Argotic.Core/Syndication/GenericSyndicationItem.cs/#L169">View Source</a>
   </span>
   <a id="Argotic_Syndication_GenericSyndicationItem_Equals_" data-uid="Argotic.Syndication.GenericSyndicationItem.Equals*"></a>
-  <h4 id="Argotic_Syndication_GenericSyndicationItem_Equals_Object_" data-uid="Argotic.Syndication.GenericSyndicationItem.Equals(Object)">Equals(Object)</h4>
-  <div class="markdown level1 summary"><p>Determines whether the specified <see cref="!:Object"></see> is equal to the current instance.</p>
+  <h4 id="Argotic_Syndication_GenericSyndicationItem_Equals_System_Object_" data-uid="Argotic.Syndication.GenericSyndicationItem.Equals(System.Object)">Equals(Object)</h4>
+  <div class="markdown level1 summary"><p>Determines whether the specified <span class="xref">System.Object</span> is equal to the current instance.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
   <div class="codewrapper">
-    <pre><code class="lang-csharp hljs">public override bool Equals(Object obj)</code></pre>
+    <pre><code class="lang-csharp hljs">public override bool Equals(object obj)</code></pre>
   </div>
   <h5 class="parameters">Parameters</h5>
   <table class="table table-bordered table-striped table-condensed">
@@ -379,9 +447,9 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     </thead>
     <tbody>
       <tr>
-        <td><span class="xref">Object</span></td>
+        <td><span class="xref">System.Object</span></td>
         <td><span class="parametername">obj</span></td>
-        <td><p>The <see cref="!:Object"></see> to compare with the current instance.</p>
+        <td><p>The <span class="xref">System.Object</span> to compare with the current instance.</p>
 </td>
       </tr>
     </tbody>
@@ -397,11 +465,13 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     <tbody>
       <tr>
         <td><span class="xref">System.Boolean</span></td>
-        <td><p><strong>true</strong> if the specified <see cref="!:Object"></see> is equal to the current instance; otherwise, <strong>false</strong>.</p>
+        <td><p><strong>true</strong> if the specified <span class="xref">System.Object</span> is equal to the current instance; otherwise, <strong>false</strong>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.Equals(System.Object)</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationItem_GetHashCode.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationItem.GetHashCode%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -434,6 +504,8 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.GetHashCode()</span></div>
   <span class="small pull-right mobile-hide">
     <span class="divider">|</span>
     <a href="https://github.com/endjin/Argotic/new/develop/apiSpec/new?filename=Argotic_Syndication_GenericSyndicationItem_ToString.md&amp;value=---%0Auid%3A%20Argotic.Syndication.GenericSyndicationItem.ToString%0Asummary%3A%20'*You%20can%20override%20summary%20for%20the%20API%20here%20using%20*MARKDOWN*%20syntax'%0A---%0A%0A*Please%20type%20below%20more%20information%20about%20this%20API%3A*%0A%0A">Improve this Doc</a>
@@ -443,7 +515,7 @@ The default value is an <strong>empty</strong> string, which indicates that no t
   </span>
   <a id="Argotic_Syndication_GenericSyndicationItem_ToString_" data-uid="Argotic.Syndication.GenericSyndicationItem.ToString*"></a>
   <h4 id="Argotic_Syndication_GenericSyndicationItem_ToString" data-uid="Argotic.Syndication.GenericSyndicationItem.ToString">ToString()</h4>
-  <div class="markdown level1 summary"><p>Returns a <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a>.</p>
+  <div class="markdown level1 summary"><p>Returns a <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a>.</p>
 </div>
   <div class="markdown level1 conceptual"></div>
   <h5 class="decalaration">Declaration</h5>
@@ -461,11 +533,13 @@ The default value is an <strong>empty</strong> string, which indicates that no t
     <tbody>
       <tr>
         <td><span class="xref">System.String</span></td>
-        <td><p>A <see cref="!:String"></see> that represents the current <a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a>.</p>
+        <td><p>A <span class="xref">System.String</span> that represents the current <a class="xref" href="Argotic.Syndication.GenericSyndicationItem.html">GenericSyndicationItem</a>.</p>
 </td>
       </tr>
     </tbody>
   </table>
+  <h5 class="overrides">Overrides</h5>
+  <div><span class="xref">System.Object.ToString()</span></div>
   <h5 id="Argotic_Syndication_GenericSyndicationItem_ToString_remarks">Remarks</h5>
   <div class="markdown level1 remarks"><p>This method returns a human-readable representation for the current instance.</p>
 </div>
@@ -695,6 +769,10 @@ The default value is an <strong>empty</strong> string, which indicates that no t
       </tr>
     </tbody>
   </table>
+  <h3 id="implements">Implements</h3>
+  <div>
+      <span class="xref">System.IComparable</span>
+  </div>
   <h3 id="seealso">See Also</h3>
   <div class="seealso">
       <div><a class="xref" href="Argotic.Syndication.GenericSyndicationFeed.html#Argotic_Syndication_GenericSyndicationFeed_Items">Items</a></div>

@@ -32,7 +32,7 @@ We produce two free weekly newsletters; [Azure Weekly](https://azureweekly.info)
 
 Keep up with everything that's going on at endjin via our [blog](https://blogs.endjin.com/), follow us on [Twitter](https://twitter.com/endjin), or [LinkedIn](https://www.linkedin.com/company/1671851/).
 
-Our other Open Source projects can be found on [our website](https://endjin.com/open-source)
+Our other Open Source projects can be found on [our website](https://endjin.com/open-source).
 
 ## Code of conduct
 

@@ -1,19 +1,23 @@
-# Starter pipeline
-# Start with a minimal pipeline that you can customize to build and deploy your code.
-# Add steps that build, run tests, deploy, and more:
-# https://aka.ms/yaml
-
 trigger:
-- master
+  branches:
+    include:
+    - master
+    - feature/*
+  tags:
+    include:
+    - '*'
 
-pool:
-  vmImage: 'ubuntu-latest'
+resources:
+  repositories:
+    - repository: recommended_practices
+      type: github
+      name: endjin/Endjin.RecommendedPractices.AzureDevopsPipelines.GitHub
+      endpoint: corvus-dotnet-github
 
-steps:
-- script: echo Hello, world!
-  displayName: 'Run a one-line script'
-
-- script: |
-    echo Add other tasks to build, test, and deploy your project.
-    echo See https://aka.ms/yaml
-  displayName: 'Run a multi-line script'
+jobs:
+- template: templates/build.and.release.yml@recommended_practices
+  parameters:
+    vmImage: 'ubuntu-latest'
+    service_connection_nuget_org: $(Endjin_Service_Connection_NuGet_Org)
+    service_connection_github: $(Endjin_Service_Connection_GitHub)
+    solution_to_build: $(Endjin_Solution_To_Build)

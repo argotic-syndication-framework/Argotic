@@ -2,25 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netstandard2.1</TargetFramework>
-    <SignAssembly>true</SignAssembly>
-    <AssemblyOriginatorKeyFile>Argotic.snk</AssemblyOriginatorKeyFile>
-    <DelaySign>false</DelaySign>
-    <ApplicationIcon>Argotic.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0.0</Version>
     <Product>Argotic Syndication Framework</Product>
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
-    <Description></Description>
-    <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Brian William Kuhn, endjin</Authors>
-    <Company>Brian William Kuhn, endjin</Company>
   </PropertyGroup>
 
-  <ItemGroup>
-    <Compile Remove="Configuration\Provider\XmlSyndicationResourceProvider.cs" />
-    <Compile Remove="Syndication\SyndicationManager.cs" />
-  </ItemGroup>
+  <PropertyGroup>
+    <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
+    <PackageDescription></PackageDescription>
+    <PackageTags></PackageTags>
+    <PackageReleaseNotes></PackageReleaseNotes>
+  </PropertyGroup>
 
   <ItemGroup>
     <PackageReference Include="System.Configuration.ConfigurationManager" Version="4.7.0" />

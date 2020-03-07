@@ -3,14 +3,8 @@
   <PropertyGroup>
     <TargetFramework>netcoreapp3.1</TargetFramework>
     <IsPackable>false</IsPackable>
-    <ApplicationIcon>Argotic.ico</ApplicationIcon>
-    <AssemblyVersion>1.0.0.0</AssemblyVersion>
-    <FileVersion>1.0.0.0</FileVersion>
-    <Version>1.0.0.0</Version>
     <Product>Argotic Syndication Framework</Product>
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
-    <Description></Description>
-    <NeutralLanguage>en-US</NeutralLanguage>
     <Authors>Brian William Kuhn, endjin</Authors>
   </PropertyGroup>
 

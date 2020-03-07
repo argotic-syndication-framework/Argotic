@@ -62,7 +62,7 @@ namespace Argotic.Extensions.Tests
 		{
 			AtomPublishingControlSyndicationExtension target = CreateExtension1();
 			object obj = CreateExtension1();
-			int expected = 0; 
+			int expected = 0;
 			int actual;
 			actual = target.CompareTo(obj);
 			Assert.AreEqual(expected, actual);

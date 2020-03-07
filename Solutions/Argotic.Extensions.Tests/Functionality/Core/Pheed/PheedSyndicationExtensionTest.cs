@@ -109,25 +109,8 @@ namespace Argotic.Extensions.Tests
 
             using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc))
             {
-#if false
-//var document  = new XPathDocument(reader);
-//var nav = document.CreateNavigator();
-//nav.Select("//item");
-				do
-				{
-					if (!reader.Read())
-						break;
-				} while (reader.NodeType != XmlNodeType.EndElement || reader.Name != "webMaster");
-
-				
-				bool expected = true;
-				bool actual;
-				actual = target.Load(reader);
-				Assert.AreEqual(expected, actual);
-#else
                 RssFeed feed = new RssFeed();
                 feed.Load(reader);
-#endif
             }
         }
 
@@ -144,7 +127,6 @@ namespace Argotic.Extensions.Tests
             Assert.AreEqual(expected, actual);
         }
 
-
         [TestMethod]
         public void Pheed_FullTest()
         {
@@ -154,11 +136,6 @@ namespace Argotic.Extensions.Tests
             {
                 RssFeed feed = new RssFeed();
                 feed.Load(reader);
-
-                //				 Assert.IsTrue(feed.Channel.HasExtensions);
-                //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension,
-                //						 typeof(PheedSyndicationExtension));
-
                 Assert.AreEqual(1, feed.Channel.Items.Count());
                 var item = feed.Channel.Items.Single();
                 Assert.IsTrue(item.HasExtensions);
@@ -300,6 +277,7 @@ namespace Argotic.Extensions.Tests
             var nyc = new PheedSyndicationExtension();
             nyc.Context.Source = new Uri("http://www.example.com");
             nyc.Context.Thumbnail = new Uri("http://www.example.com/thumbnail.jpg");
+
             return nyc;
         }
 
@@ -308,6 +286,7 @@ namespace Argotic.Extensions.Tests
             var nyc = new PheedSyndicationExtension();
             nyc.Context.Source = new Uri("http://www.example.net");
             nyc.Context.Thumbnail = new Uri("http://www.example.net/thumbnail.png");
+
             return nyc;
         }
 
@@ -316,6 +295,7 @@ namespace Argotic.Extensions.Tests
             var nyc = new PheedSyndicationExtensionContext();
             nyc.Source = new Uri("http://www.example.com");
             nyc.Thumbnail = new Uri("http://www.example.com/thumbnail.jpg");
+
             return nyc;
         }
     }

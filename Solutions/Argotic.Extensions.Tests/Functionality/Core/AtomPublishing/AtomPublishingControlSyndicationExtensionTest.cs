@@ -16,14 +16,9 @@ namespace Argotic.Extensions.Tests
 	[TestClass()]
 	public class AtomPublishingControlSyndicationExtensionTest
 	{
-
-		const string namespc = @"xmlns:app=""http://www.w3.org/2007/app""";
-
-		private const string nycText = "<control xml:base=\"http://www.example.com/control.html\" xml:lang=\"en-US\" xmlns=\"http://www.w3.org/2007/app\">\r\n"+
-										"  <draft>yes</draft>\r\n" +
-										"</control>";
-
-		private const string strExtXml = "<app:control xml:base=\"http://www.example.com/control.html\" xml:lang=\"en-US\"><app:draft>yes</app:draft></app:control>";
+		private string namespc = @"xmlns:app=""http://www.w3.org/2007/app""";
+		private string nycText = $@"<control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US"" xmlns=""http://www.w3.org/2007/app"">{Environment.NewLine}  <draft>yes</draft>{Environment.NewLine}</control>";
+		private string strExtXml = @"<app:control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US""><app:draft>yes</app:draft></app:control>";
 
 		private TestContext testContextInstance;
 
@@ -105,30 +100,13 @@ namespace Argotic.Extensions.Tests
 			AtomPublishingControlSyndicationExtension target = new AtomPublishingControlSyndicationExtension(); // TODO: Initialize to an appropriate value
 			var nt = new NameTable();
 			var ns = new XmlNamespaceManager(nt);
-			 var xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
-			 var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+			var xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Preserve);
+			var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
 			using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
 			{
-#if false
-				//var document  = new XPathDocument(reader);
-				//var nav = document.CreateNavigator();
-				//nav.Select("//item");
-				do
-				{
-					if (!reader.Read())
-						break;
-				} while (reader.NodeType != XmlNodeType.EndElement || reader.Name != "webMaster");
-
-				
-				bool expected = true;
-				bool actual;
-				actual = target.Load(reader);
-				Assert.AreEqual(expected, actual);
-#else
 				RssFeed feed = new RssFeed();
 				feed.Load(reader);
-#endif
 			}
 		}
 
@@ -189,8 +167,7 @@ namespace Argotic.Extensions.Tests
 		{
 			AtomPublishingControlSyndicationExtension target = CreateExtension1();
 			string expected = nycText;
-			string actual;
-			actual = target.ToString();
+			string actual = target.ToString();
 			Assert.AreEqual(expected, actual);
 		}
 

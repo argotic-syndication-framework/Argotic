@@ -19,7 +19,7 @@ namespace Argotic.Extensions.Tests
     {
         const string namespc = @"xmlns:photo=""http://www.pheed.com/pheed/""";
 
-        private const string nycText = "<thumbnail xmlns=\"http://www.pheed.com/pheed/\">http://www.example.com/thumbnail.jpg</thumbnail>\r\n"
+        private string nycText = "<thumbnail xmlns=\"http://www.pheed.com/pheed/\">http://www.example.com/thumbnail.jpg</thumbnail>" + Environment.NewLine
                                        + "<imgsrc xmlns=\"http://www.pheed.com/pheed/\">http://www.example.com/</imgsrc>";
 
 

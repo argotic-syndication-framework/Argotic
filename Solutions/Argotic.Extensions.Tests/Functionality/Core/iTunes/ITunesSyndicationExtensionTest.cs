@@ -18,15 +18,18 @@ namespace Argotic.Extensions.Tests
 
         const string namespc = @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd""";
 
-        private const string nycText = "<subtitle xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">That song you like.</subtitle>\r\n"
-                                       + "<author xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">BigStar</author>\r\n"
-                                       + "<summary xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">Duh... That song you like</summary>\r\n"
-                                       + "<owner xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">\r\n  <email>owner@bigstar.com</email>\r\n  <name>BigStar's Guy</name>\r\n</owner>\r\n"
-                                       + "<image href=\"http://www.eexample.com/image.jpg\" xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" />\r\n"
-                                       + "<duration xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">00:03:21</duration>\r\n"
-                                       + "<keywords xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">loud,good for parties</keywords>\r\n"
-                                       + "<explicit xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">clean</explicit>\r\n"
-                                       + "<category text=\"Rock\" xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" />\r\n"
+        private string nycText = "<subtitle xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">That song you like.</subtitle>" + Environment.NewLine
+                                       + "<author xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">BigStar</author>" + Environment.NewLine
+                                       + "<summary xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">Duh... That song you like</summary>" + Environment.NewLine
+                                       + "<owner xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">" + Environment.NewLine
+                                       + "<email>owner@bigstar.com</email>" + Environment.NewLine
+                                       + "  <name>BigStar's Guy</name>" + Environment.NewLine
+                                       + "</owner>" + Environment.NewLine
+                                       + "<image href=\"http://www.eexample.com/image.jpg\" xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" />" + Environment.NewLine
+                                       + "<duration xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">00:03:21</duration>" + Environment.NewLine
+                                       + "<keywords xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">loud,good for parties</keywords>" + Environment.NewLine
+                                       + "<explicit xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">clean</explicit>" + Environment.NewLine
+                                       + "<category text=\"Rock\" xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" />" + Environment.NewLine
                                        + "<category text=\"Folk\" xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" />";
 
         private const string strExtXml = "<itunes:subtitle>That song you like.</itunes:subtitle><itunes:author>BigStar</itunes:author>"
@@ -142,25 +145,8 @@ namespace Argotic.Extensions.Tests
 
             using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc))
             {
-#if false
-//var document  = new XPathDocument(reader);
-//var nav = document.CreateNavigator();
-//nav.Select("//item");
-				do
-				{
-					if (!reader.Read())
-						break;
-				} while (reader.NodeType != XmlNodeType.EndElement || reader.Name != "webMaster");
-
-				
-				bool expected = true;
-				bool actual;
-				actual = target.Load(reader);
-				Assert.AreEqual(expected, actual);
-#else
                 RssFeed feed = new RssFeed();
                 feed.Load(reader);
-#endif
             }
         }
 

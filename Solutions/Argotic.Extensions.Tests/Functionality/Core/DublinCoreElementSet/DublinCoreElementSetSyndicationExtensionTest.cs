@@ -6,7 +6,6 @@ using Argotic.Syndication;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using System.Globalization;
 using System.Linq;
-using System.Xml.XPath;
 
 namespace Argotic.Extensions.Tests
 {
@@ -19,20 +18,20 @@ namespace Argotic.Extensions.Tests
 	{
 		const string namespc = @"xmlns:dc=""http://purl.org/dc/elements/1.1/""";
 
-		private const string nycText = "<contributor xmlns=\"http://purl.org/dc/elements/1.1/\">Helper</contributor>\r\n"+
-			"<coverage xmlns=\"http://purl.org/dc/elements/1.1/\">US</coverage>\r\n"+
-			"<creator xmlns=\"http://purl.org/dc/elements/1.1/\">The Big Guy</creator>\r\n"+
-			"<date xmlns=\"http://purl.org/dc/elements/1.1/\">2010-08-01T00:00:00.00Z</date>\r\n"+
-			"<description xmlns=\"http://purl.org/dc/elements/1.1/\">That kind of thing</description>\r\n"+
-			"<format xmlns=\"http://purl.org/dc/elements/1.1/\">CDROM</format>\r\n"+
-			"<identifier xmlns=\"http://purl.org/dc/elements/1.1/\">MYTESTCDROM-1</identifier>\r\n"+
-			"<language xmlns=\"http://purl.org/dc/elements/1.1/\">en-US</language>\r\n"+
-			"<publisher xmlns=\"http://purl.org/dc/elements/1.1/\">MeMeMe</publisher>\r\n"+
-			"<relation xmlns=\"http://purl.org/dc/elements/1.1/\">MYTESTCDROM-2</relation>\r\n"+
-			"<rights xmlns=\"http://purl.org/dc/elements/1.1/\">Copyright 2010</rights>\r\n"+
-			"<source xmlns=\"http://purl.org/dc/elements/1.1/\">Out of Me Head</source>\r\n"+
-			"<subject xmlns=\"http://purl.org/dc/elements/1.1/\">Test data (Stupid variety)</subject>\r\n"+
-			"<title xmlns=\"http://purl.org/dc/elements/1.1/\">Stupid test data</title>\r\n"+
+		private string nycText = "<contributor xmlns=\"http://purl.org/dc/elements/1.1/\">Helper</contributor>" + Environment.NewLine +
+			"<coverage xmlns=\"http://purl.org/dc/elements/1.1/\">US</coverage>" + Environment.NewLine +
+			"<creator xmlns=\"http://purl.org/dc/elements/1.1/\">The Big Guy</creator>" + Environment.NewLine +
+			"<date xmlns=\"http://purl.org/dc/elements/1.1/\">2010-08-01T00:00:00.00Z</date>" + Environment.NewLine +
+			"<description xmlns=\"http://purl.org/dc/elements/1.1/\">That kind of thing</description>" + Environment.NewLine +
+			"<format xmlns=\"http://purl.org/dc/elements/1.1/\">CDROM</format>" + Environment.NewLine +
+			"<identifier xmlns=\"http://purl.org/dc/elements/1.1/\">MYTESTCDROM-1</identifier>" + Environment.NewLine +
+			"<language xmlns=\"http://purl.org/dc/elements/1.1/\">en-US</language>" + Environment.NewLine +
+			"<publisher xmlns=\"http://purl.org/dc/elements/1.1/\">MeMeMe</publisher>" + Environment.NewLine +
+			"<relation xmlns=\"http://purl.org/dc/elements/1.1/\">MYTESTCDROM-2</relation>" + Environment.NewLine +
+			"<rights xmlns=\"http://purl.org/dc/elements/1.1/\">Copyright 2010</rights>" + Environment.NewLine +
+			"<source xmlns=\"http://purl.org/dc/elements/1.1/\">Out of Me Head</source>" + Environment.NewLine +
+			"<subject xmlns=\"http://purl.org/dc/elements/1.1/\">Test data (Stupid variety)</subject>" + Environment.NewLine +
+			"<title xmlns=\"http://purl.org/dc/elements/1.1/\">Stupid test data</title>" + Environment.NewLine +
 			"<type xmlns=\"http://purl.org/dc/elements/1.1/\">PhysicalObject</type>";
 
 		private const string strExtXml = "<dc:contributor>Helper</dc:contributor>"
@@ -154,25 +153,8 @@ namespace Argotic.Extensions.Tests
 
 			using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
 			{
-#if false
-				//var document  = new XPathDocument(reader);
-				//var nav = document.CreateNavigator();
-				//nav.Select("//item");
-				do
-				{
-					if (!reader.Read())
-						break;
-				} while (reader.NodeType != XmlNodeType.EndElement || reader.Name != "webMaster");
-
-				
-				bool expected = true;
-				bool actual;
-				actual = target.Load(reader);
-				Assert.AreEqual(expected, actual);
-#else
 				RssFeed feed = new RssFeed();
 				feed.Load(reader);
-#endif
 			}
 		}
 
@@ -197,10 +179,6 @@ namespace Argotic.Extensions.Tests
 	            RssFeed feed = new RssFeed();
 	            feed.Load(reader);
 
-	            //				 Assert.IsTrue(feed.Channel.HasExtensions);
-	            //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
-	            //						 typeof(DublinCoreElementSetSyndicationExtension));
-
 	            Assert.AreEqual(1, feed.Channel.Items.Count());
 	            var item = feed.Channel.Items.Single();
 	            Assert.IsTrue(item.HasExtensions);
@@ -209,7 +187,6 @@ namespace Argotic.Extensions.Tests
 	            Assert.IsInstanceOfType(
 	                item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
 	                typeof(DublinCoreElementSetSyndicationExtension));
-
 	        }
 	    }
 
@@ -328,11 +305,9 @@ namespace Argotic.Extensions.Tests
 		public void DublinCoreElementSet_ContextTest()
 		{
 			DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-			DublinCoreElementSetSyndicationExtensionContext expected =CreateContext1();
-			DublinCoreElementSetSyndicationExtensionContext actual;
-//			target.Context = expected;
-			actual = target.Context;
-			var b = actual.Equals(expected);
+			DublinCoreElementSetSyndicationExtensionContext expected = CreateContext1();
+			DublinCoreElementSetSyndicationExtensionContext actual = target.Context;
+
 			Assert.AreEqual(expected, actual);
 			Assert.Inconclusive("Verify the correctness of this test method.");
 		}
@@ -355,11 +330,14 @@ namespace Argotic.Extensions.Tests
 			dub.Context.Subject = "Test data (Stupid variety)";
 			dub.Context.Title = "Stupid test data";
 			dub.Context.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
+
 			return dub;
 		}
+
 		private DublinCoreElementSetSyndicationExtension CreateExtension2()
 		{
 			var dub = new DublinCoreElementSetSyndicationExtension();
+
 			dub.Context.Contributor = "Helper-er";
 			dub.Context.Coverage = "US";
 			dub.Context.Creator = "The Not-So-Big Guy";
@@ -375,12 +353,14 @@ namespace Argotic.Extensions.Tests
 			dub.Context.Subject = "Test data (Son of)";
 			dub.Context.Title = "More Stupid test data";
 			dub.Context.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
+
 			return dub;
 		}
 
 		public static DublinCoreElementSetSyndicationExtensionContext CreateContext1()
 		{
 			var dub = new DublinCoreElementSetSyndicationExtensionContext();
+
 			dub.Contributor = "";
 			dub.Coverage = "";
 			dub.Creator = "";
@@ -396,6 +376,7 @@ namespace Argotic.Extensions.Tests
 			dub.Subject = "";
 			dub.Title = "";
 			dub.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
+
 			return dub;
 		}
 	}

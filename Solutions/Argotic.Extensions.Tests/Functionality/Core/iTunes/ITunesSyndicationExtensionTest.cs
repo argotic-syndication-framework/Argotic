@@ -1,13 +1,13 @@
-﻿using Argotic.Extensions.Core;
-using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
-using System.Linq;
-using System.Xml;
-
-namespace Argotic.Extensions.Tests
+﻿namespace Argotic.Extensions.Tests
 {
+    using Argotic.Extensions.Core;
+    using Argotic.Syndication;
+    using Microsoft.VisualStudio.TestTools.UnitTesting;
+    using System;
+    using System.IO;
+    using System.Linq;
+    using System.Xml;
+
     /// <summary>
     ///This is a test class for ITunesSyndicationExtensionTest and is intended
     ///to contain all ITunesSyndicationExtensionTest Unit Tests
@@ -22,7 +22,7 @@ namespace Argotic.Extensions.Tests
                                        + "<author xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">BigStar</author>" + Environment.NewLine
                                        + "<summary xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">Duh... That song you like</summary>" + Environment.NewLine
                                        + "<owner xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">" + Environment.NewLine
-                                       + "<email>owner@bigstar.com</email>" + Environment.NewLine
+                                       + "  <email>owner@bigstar.com</email>" + Environment.NewLine
                                        + "  <name>BigStar's Guy</name>" + Environment.NewLine
                                        + "</owner>" + Environment.NewLine
                                        + "<image href=\"http://www.eexample.com/image.jpg\" xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\" />" + Environment.NewLine

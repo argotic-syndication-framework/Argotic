@@ -1,14 +1,14 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using Argotic.Extensions.Core;
-using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Globalization;
-using System.Linq;
-
-namespace Argotic.Extensions.Tests
+﻿namespace Argotic.Extensions.Tests
 {
+	using System;
+	using System.IO;
+	using System.Xml;
+	using Argotic.Extensions.Core;
+	using Argotic.Syndication;
+	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using System.Globalization;
+	using System.Linq;
+
 	/// <summary>
 	///This is a test class for DublinCoreElementSetSyndicationExtensionTest and is intended
 	///to contain all DublinCoreElementSetSyndicationExtensionTest Unit Tests

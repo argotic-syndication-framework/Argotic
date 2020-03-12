@@ -1,14 +1,14 @@
-﻿using Argotic.Extensions.Core;
-using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
-using System.Linq;
-using System.Xml;
-using System.Globalization;
-
-namespace Argotic.Extensions.Tests
+﻿namespace Argotic.Extensions.Tests
 {
+	using Argotic.Extensions.Core;
+	using Argotic.Syndication;
+	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using System;
+	using System.IO;
+	using System.Linq;
+	using System.Xml;
+	using System.Globalization;
+
 	/// <summary>
 	///This is a test class for AtomPublishingControlSyndicationExtensionTest and is intended
 	///to contain all AtomPublishingControlSyndicationExtensionTest Unit Tests
@@ -58,8 +58,7 @@ namespace Argotic.Extensions.Tests
 			AtomPublishingControlSyndicationExtension target = CreateExtension1();
 			object obj = CreateExtension1();
 			int expected = 0;
-			int actual;
-			actual = target.CompareTo(obj);
+			int actual = target.CompareTo(obj);
 			Assert.AreEqual(expected, actual);
 		}
 
@@ -73,8 +72,7 @@ namespace Argotic.Extensions.Tests
 			AtomPublishingControlSyndicationExtension target = CreateExtension1();
 			object obj = CreateExtension1();
 			bool expected = true;
-			bool actual;
-			actual = target.Equals(obj);
+			bool actual = target.Equals(obj);
 			Assert.AreEqual(expected, actual);
 		}
 
@@ -86,8 +84,7 @@ namespace Argotic.Extensions.Tests
 		{
 			AtomPublishingControlSyndicationExtension target = CreateExtension1();
 			int expected = -1862124151;
-			int actual;
-			actual = target.GetHashCode();
+			int actual = target.GetHashCode();
 			Assert.AreEqual(expected, actual);
 		}
 
@@ -114,7 +111,6 @@ namespace Argotic.Extensions.Tests
 	    public void AtomPublishingControl_CreateXmlTest()
 	    {
 	        var itunes = CreateExtension1();
-
 	        var actual = ExtensionTestUtil.AddExtensionToXml(itunes).Trim();
 	        string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml).Trim();
 	        Assert.AreEqual(expected, actual);
@@ -129,11 +125,6 @@ namespace Argotic.Extensions.Tests
 			 {
 				 RssFeed feed = new RssFeed();
 				 feed.Load(reader);
-
-				 //				 Assert.IsTrue(feed.Channel.HasExtensions);
-				 //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension,
-				 //						 typeof(AtomPublishingControlSyndicationExtension));
-
 				 Assert.AreEqual(1, feed.Channel.Items.Count());
 				 var item = feed.Channel.Items.Single();
 				 var ext = item.HasExtensions;
@@ -142,7 +133,6 @@ namespace Argotic.Extensions.Tests
 				 Assert.IsNotNull(itemExtension);
 				 Assert.IsInstanceOfType(item.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension,
 				  typeof(AtomPublishingControlSyndicationExtension));
-
 			 }
 		}
 
@@ -154,8 +144,7 @@ namespace Argotic.Extensions.Tests
 		{
 			ISyndicationExtension extension = CreateExtension1();
 			bool expected = true;
-			bool actual;
-			actual = AtomPublishingControlSyndicationExtension.MatchByType(extension);
+			bool actual = AtomPublishingControlSyndicationExtension.MatchByType(extension);
 			Assert.AreEqual(expected, actual);
 		}
 
@@ -180,7 +169,6 @@ namespace Argotic.Extensions.Tests
 			using(var sw = new StringWriter())
 			using (XmlWriter writer = new XmlTextWriter(sw))
 			{
-
 				var target = CreateExtension1();
 				target.WriteTo(writer);
 				var output = sw.ToString();
@@ -197,8 +185,7 @@ namespace Argotic.Extensions.Tests
 			AtomPublishingControlSyndicationExtension first = CreateExtension1();
 			AtomPublishingControlSyndicationExtension second = CreateExtension2();
 			bool expected = false; 
-			bool actual;
-			actual = (first == second);
+			bool actual = first == second;
 			Assert.AreEqual(expected, actual);
 		}
 
@@ -207,8 +194,7 @@ namespace Argotic.Extensions.Tests
 			AtomPublishingControlSyndicationExtension first = CreateExtension1();
 			AtomPublishingControlSyndicationExtension second = CreateExtension1();
 			bool expected = true;
-			bool actual;
-			actual = (first == second);
+			bool actual = first == second;
 			Assert.AreEqual(expected, actual);
 		}
 
@@ -221,8 +207,7 @@ namespace Argotic.Extensions.Tests
 			AtomPublishingControlSyndicationExtension first = CreateExtension1();
 			AtomPublishingControlSyndicationExtension second = CreateExtension2();
 			bool expected = false; 
-			bool actual = false;
-			actual = (first > second);
+			bool actual = first > second;
 			Assert.AreEqual(expected, actual);
 		}
 
@@ -235,7 +220,7 @@ namespace Argotic.Extensions.Tests
 			AtomPublishingControlSyndicationExtension first = CreateExtension1();
 			AtomPublishingControlSyndicationExtension second = CreateExtension2();
 			bool expected = true;
-			bool actual = (first != second);
+			bool actual = first != second;
 			Assert.AreEqual(expected, actual);
 		}
 
@@ -247,9 +232,8 @@ namespace Argotic.Extensions.Tests
 		{
 			AtomPublishingControlSyndicationExtension first = CreateExtension1();
 			AtomPublishingControlSyndicationExtension second = CreateExtension2();
-			bool expected = true; 
-			bool actual;
-			actual = (first < second);
+			bool expected = true;
+			bool actual = first < second;
 			Assert.AreEqual(expected, actual);
 		}
 
@@ -260,11 +244,8 @@ namespace Argotic.Extensions.Tests
 		public void AtomPublishingControl_ContextTest()
 		{
 			AtomPublishingControlSyndicationExtension target = CreateExtension1();
-			AtomPublishingControlSyndicationExtensionContext expected =CreateContext1();
-			AtomPublishingControlSyndicationExtensionContext actual;
-//			target.Context = expected;
-			actual = target.Context;
-			var b = actual.Equals(expected);
+			AtomPublishingControlSyndicationExtensionContext expected = CreateContext1();
+			AtomPublishingControlSyndicationExtensionContext actual = target.Context;
 			Assert.AreEqual(expected, actual);
 			Assert.Inconclusive("Verify the correctness of this test method.");
 		}
@@ -281,8 +262,6 @@ namespace Argotic.Extensions.Tests
               }
             };
 
-		    //			nyc.Context.AddExtension()
-
 			return nyc;
 		}
 
@@ -292,15 +271,13 @@ namespace Argotic.Extensions.Tests
 			nyc.Context.BaseUri = new Uri("http://www.example.net/control.html");
 			nyc.Context.IsDraft = false;
 			nyc.Context.Language = new CultureInfo("fr-CA");
+
 			return nyc;
 		}
 
 		public static AtomPublishingControlSyndicationExtensionContext CreateContext1()
 		{
-			var nyc = new AtomPublishingControlSyndicationExtensionContext();
-			//nyc.Latitude = 40;
-			//nyc.Longitude = -74;
-			return nyc;
+			return new AtomPublishingControlSyndicationExtensionContext();
 		}
 	}
 }

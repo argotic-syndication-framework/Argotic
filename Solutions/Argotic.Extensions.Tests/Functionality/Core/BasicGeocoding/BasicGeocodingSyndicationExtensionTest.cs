@@ -1,15 +1,13 @@
-﻿using System;
-using System.IO;
-using System.Xml;
-using Argotic.Extensions.Core;
-using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System.Globalization;
-using System.Linq;
-using System.Xml.XPath;
-
-namespace Argotic.Extensions.Tests
+﻿namespace Argotic.Extensions.Tests
 {
+	using System;
+	using System.IO;
+	using System.Xml;
+	using Argotic.Extensions.Core;
+	using Argotic.Syndication;
+	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using System.Linq;
+
 	/// <summary>
 	///This is a test class for BasicGeocodingSyndicationExtensionTest and is intended
 	///to contain all BasicGeocodingSyndicationExtensionTest Unit Tests

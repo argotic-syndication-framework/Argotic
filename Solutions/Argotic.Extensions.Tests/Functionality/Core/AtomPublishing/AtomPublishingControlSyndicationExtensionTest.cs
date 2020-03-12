@@ -1,14 +1,14 @@
-﻿using Argotic.Extensions.Core;
-using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
-using System;
-using System.IO;
-using System.Linq;
-using System.Xml;
-using System.Globalization;
-
-namespace Argotic.Extensions.Tests
+﻿namespace Argotic.Extensions.Tests
 {
+	using Argotic.Extensions.Core;
+	using Argotic.Syndication;
+	using Microsoft.VisualStudio.TestTools.UnitTesting;
+	using System;
+	using System.IO;
+	using System.Linq;
+	using System.Xml;
+	using System.Globalization;
+
 	/// <summary>
 	///This is a test class for AtomPublishingControlSyndicationExtensionTest and is intended
 	///to contain all AtomPublishingControlSyndicationExtensionTest Unit Tests

@@ -10,6 +10,8 @@
     <PackageDescription></PackageDescription>
     <PackageTags></PackageTags>
     <PackageReleaseNotes></PackageReleaseNotes>
+    <IncludeSymbols>true</IncludeSymbols> 
+    <SymbolPackageFormat>snupkg</SymbolPackageFormat>
   </PropertyGroup>
 
   <ItemGroup>

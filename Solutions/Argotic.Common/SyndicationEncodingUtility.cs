@@ -203,29 +203,36 @@ namespace Argotic.Common
 
             using (WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, options))
             {
-                Stream stream                   = null;
-                HttpWebResponse httpResponse    = response as HttpWebResponse;
+                Stream stream = null;
+                HttpWebResponse httpResponse = response as HttpWebResponse;
 
                 if (httpResponse != null)
                 {
-                    string contentEncoding  = httpResponse.ContentEncoding.ToUpperInvariant();
+                    string contentEncoding = httpResponse.ContentEncoding?.ToUpperInvariant();
 
-                    if (contentEncoding.Contains("GZIP"))
+                    if(string.IsNullOrEmpty(contentEncoding))
                     {
-                        stream  = new GZipStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
-                    }
-                    else if (contentEncoding.Contains("DEFLATE"))
-                    {
-                        stream  = new DeflateStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
+                        stream = response.GetResponseStream();
                     }
                     else
                     {
-                        stream  = httpResponse.GetResponseStream();
+                        if (contentEncoding.Contains("GZIP"))
+                        {
+                            stream = new GZipStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
+                        }
+                        else if (contentEncoding.Contains("DEFLATE"))
+                        {
+                            stream = new DeflateStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
+                        }
+                        else
+                        {
+                            stream = httpResponse.GetResponseStream();
+                        }
                     }
                 }
                 else
                 {
-                    stream      = response.GetResponseStream();
+                    stream = response.GetResponseStream();
                 }
 
                 if (encoding != null)

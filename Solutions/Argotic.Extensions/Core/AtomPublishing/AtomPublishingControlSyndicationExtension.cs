@@ -89,9 +89,14 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
 		public override bool Load(IXPathNavigable source)
 		{
+			bool wasLoaded = false;
 			Guard.ArgumentNotNull(source, "source");
+			XPathNavigator navigator = source.CreateNavigator();
+			wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+			SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+			this.OnExtensionLoaded(args);
 
-			return this.Load(source, null);
+			return wasLoaded;
 		}
 
 	    /// <summary>
@@ -128,8 +133,9 @@ namespace Argotic.Extensions.Core
 		public override bool Load(XmlReader reader)
 		{
 			Guard.ArgumentNotNull(reader, "reader");
+			XPathDocument document = new XPathDocument(reader);
 
-			return this.Load(reader, null);
+			return this.Load(document.CreateNavigator());
 		}
 
 	    /// <summary>

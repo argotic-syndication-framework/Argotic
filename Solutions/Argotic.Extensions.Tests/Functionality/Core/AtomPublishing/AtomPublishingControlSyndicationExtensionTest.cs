@@ -91,7 +91,7 @@
 		/// <summary>
 		///A test for Load
 		///</summary>
-		[TestMethod, Ignore]
+		[TestMethod]
 		public void AtomPublishingControl_LoadTest()
 		{
 			AtomPublishingControlSyndicationExtension target = new AtomPublishingControlSyndicationExtension(); // TODO: Initialize to an appropriate value

@@ -31,6 +31,7 @@ namespace Argotic.Extensions.Core
 		/// Private member to hold specific information about the extension.
 		/// </summary>
 		private AtomPublishingControlSyndicationExtensionContext extensionContext   = new AtomPublishingControlSyndicationExtensionContext();
+
 	    /// <summary>
 		/// Initializes a new instance of the <see cref="AtomPublishingControlSyndicationExtension"/> class.
 		/// </summary>
@@ -38,6 +39,7 @@ namespace Argotic.Extensions.Core
 			: base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Control", "Extends syndication resource memebers to provide a means of specifying publishing control of published resources.")
 		{
 		}
+
 	    /// <summary>
 		/// Gets or sets the <see cref="AtomPublishingControlSyndicationExtensionContext"/> object associated with this extension.
 		/// </summary>
@@ -61,6 +63,7 @@ namespace Argotic.Extensions.Core
 				extensionContext = value;
 			}
 		}
+
 	    /// <summary>
 		/// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
 		/// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
@@ -81,7 +84,8 @@ namespace Argotic.Extensions.Core
 				return false;
 			}
 		}
-	    /// <summary>
+
+		/// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
 		/// </summary>
 		/// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="AtomPublishingControlSyndicationExtension"/>.</param>
@@ -94,7 +98,7 @@ namespace Argotic.Extensions.Core
 			return this.Load(source, null);
 		}
 
-	    /// <summary>
+		/// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
 		/// </summary>
 		/// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="AtomPublishingControlSyndicationExtension"/>.</param>
@@ -103,23 +107,27 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
 		public bool Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
 		{
-			bool wasLoaded  = false;
 			Guard.ArgumentNotNull(source, "source");
+			XPathNavigator navigator = source.CreateNavigator(); ;
 
-			if (settings == null)
+			bool wasLoaded;
+
+			if (settings != null)
 			{
-				settings    = new SyndicationResourceLoadSettings();
+				wasLoaded = Context.Load(navigator, CreateNamespaceManager(navigator), settings);
+			}
+			else
+			{
+				wasLoaded = Context.Load(navigator, CreateNamespaceManager(navigator));
 			}
 
-			XPathNavigator navigator    = source.CreateNavigator();
-			wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator), settings);
-			SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+			SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
 			this.OnExtensionLoaded(args);
 
 			return wasLoaded;
 		}
 
-	    /// <summary>
+		/// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
 		/// </summary>
 		/// <param name="reader">The <b>XmlReader</b> used to load this <see cref="AtomPublishingControlSyndicationExtension"/>.</param>
@@ -128,8 +136,9 @@ namespace Argotic.Extensions.Core
 		public override bool Load(XmlReader reader)
 		{
 			Guard.ArgumentNotNull(reader, "reader");
+			XPathDocument document = new XPathDocument(reader);
 
-			return this.Load(reader, null);
+			return this.Load(document.CreateNavigator());
 		}
 
 	    /// <summary>
@@ -147,6 +156,7 @@ namespace Argotic.Extensions.Core
 			{
 				settings = new SyndicationResourceLoadSettings();
 			}
+
 			XPathDocument document  = new XPathDocument(reader);
 
 			return this.Load(document.CreateNavigator(), settings);

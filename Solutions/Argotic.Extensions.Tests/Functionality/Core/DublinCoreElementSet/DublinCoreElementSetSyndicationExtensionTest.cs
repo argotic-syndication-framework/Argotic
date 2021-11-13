@@ -142,7 +142,7 @@
 		/// <summary>
 		///A test for Load
 		///</summary>
-		[TestMethod, Ignore]
+		[TestMethod]
 		public void DublinCoreElementSet_LoadTest()
 		{
 			DublinCoreElementSetSyndicationExtension target = new DublinCoreElementSetSyndicationExtension(); // TODO: Initialize to an appropriate value

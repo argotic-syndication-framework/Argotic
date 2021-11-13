@@ -31,6 +31,7 @@ namespace Argotic.Extensions.Core
 		/// Private member to hold specific information about the extension.
 		/// </summary>
 		private AtomPublishingControlSyndicationExtensionContext extensionContext   = new AtomPublishingControlSyndicationExtensionContext();
+
 	    /// <summary>
 		/// Initializes a new instance of the <see cref="AtomPublishingControlSyndicationExtension"/> class.
 		/// </summary>
@@ -38,6 +39,7 @@ namespace Argotic.Extensions.Core
 			: base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Control", "Extends syndication resource memebers to provide a means of specifying publishing control of published resources.")
 		{
 		}
+
 	    /// <summary>
 		/// Gets or sets the <see cref="AtomPublishingControlSyndicationExtensionContext"/> object associated with this extension.
 		/// </summary>
@@ -61,6 +63,7 @@ namespace Argotic.Extensions.Core
 				extensionContext = value;
 			}
 		}
+
 	    /// <summary>
 		/// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
 		/// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
@@ -81,6 +84,7 @@ namespace Argotic.Extensions.Core
 				return false;
 			}
 		}
+
 		/// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
 		/// </summary>
@@ -152,6 +156,7 @@ namespace Argotic.Extensions.Core
 			{
 				settings = new SyndicationResourceLoadSettings();
 			}
+
 			XPathDocument document  = new XPathDocument(reader);
 
 			return this.Load(document.CreateNavigator(), settings);

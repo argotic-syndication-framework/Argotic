@@ -81,7 +81,7 @@ namespace Argotic.Extensions.Core
 				return false;
 			}
 		}
-	    /// <summary>
+		/// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
 		/// </summary>
 		/// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="AtomPublishingControlSyndicationExtension"/>.</param>
@@ -89,17 +89,12 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
 		public override bool Load(IXPathNavigable source)
 		{
-			bool wasLoaded = false;
 			Guard.ArgumentNotNull(source, "source");
-			XPathNavigator navigator = source.CreateNavigator();
-			wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-			SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
-			this.OnExtensionLoaded(args);
 
-			return wasLoaded;
+			return this.Load(source, null);
 		}
 
-	    /// <summary>
+		/// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
 		/// </summary>
 		/// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="AtomPublishingControlSyndicationExtension"/>.</param>
@@ -108,23 +103,27 @@ namespace Argotic.Extensions.Core
 		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
 		public bool Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
 		{
-			bool wasLoaded  = false;
 			Guard.ArgumentNotNull(source, "source");
+			XPathNavigator navigator = source.CreateNavigator(); ;
 
-			if (settings == null)
+			bool wasLoaded;
+
+			if (settings != null)
 			{
-				settings    = new SyndicationResourceLoadSettings();
+				wasLoaded = Context.Load(navigator, CreateNamespaceManager(navigator), settings);
+			}
+			else
+			{
+				wasLoaded = Context.Load(navigator, CreateNamespaceManager(navigator));
 			}
 
-			XPathNavigator navigator    = source.CreateNavigator();
-			wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator), settings);
-			SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+			SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
 			this.OnExtensionLoaded(args);
 
 			return wasLoaded;
 		}
 
-	    /// <summary>
+		/// <summary>
 		/// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
 		/// </summary>
 		/// <param name="reader">The <b>XmlReader</b> used to load this <see cref="AtomPublishingControlSyndicationExtension"/>.</param>

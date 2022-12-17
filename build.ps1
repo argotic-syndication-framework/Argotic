@@ -71,7 +71,7 @@ param (
     [string] $BuildModulePath,
 
     [Parameter()]
-    [version] $BuildModuleVersion = "0.2.15",
+    [version] $BuildModuleVersion = "1.1.1",
 
     [Parameter()]
     [version] $InvokeBuildModuleVersion = "5.7.1"
@@ -128,7 +128,9 @@ $SkipBuild = $false
 $CleanBuild = $Clean
 $SkipTest = $false
 $SkipTestReport = $false
+$SkipAnalysis = $false
 $SkipPackage = $false
+$SkipPublish = $false
 
 
 #

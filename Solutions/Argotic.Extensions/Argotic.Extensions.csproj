@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
   <PropertyGroup>
-    <TargetFrameworks>netstandard2.1;netstandard2.0</TargetFrameworks>
+    <TargetFrameworks>netstandard2.1;netstandard2.0;net6.0;net7.0;</TargetFrameworks>
     <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
     <Description>Argotic Entity Extensibility Class Library, that contains the classes, interfaces, and enumerations that enable web content syndication extensibility.</Description>
     <Authors>Brian William Kuhn, endjin</Authors>

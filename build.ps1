@@ -71,10 +71,10 @@ param (
     [string] $BuildModulePath,
 
     [Parameter()]
-    [version] $BuildModuleVersion = "1.3.5",
+    [version] $BuildModuleVersion = "1.5.3",
 
     [Parameter()]
-    [version] $InvokeBuildModuleVersion = "5.7.1"
+    [version] $InvokeBuildModuleVersion = "5.10.3"
 )
 
 $ErrorActionPreference = $ErrorActionPreference ? $ErrorActionPreference : 'Stop'
@@ -127,7 +127,7 @@ $SkipVersion = $false
 $SkipBuild = $false
 $CleanBuild = $Clean
 $SkipTest = $false
-$SkipTestReport = $true     # Temporarily skip the test report due .NET 7 MSBuild issue
+$SkipTestReport = $false
 $SkipPackage = $false
 $SkipAnalysis = $false
 

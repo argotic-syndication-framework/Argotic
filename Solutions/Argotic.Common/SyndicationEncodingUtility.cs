@@ -5,10 +5,8 @@ using System.IO.Compression;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Xml;
 using System.Xml.XPath;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace Argotic.Common
 {

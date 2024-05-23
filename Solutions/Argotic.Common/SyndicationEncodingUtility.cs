@@ -572,6 +572,7 @@ namespace Argotic.Common
         {
             Guard.ArgumentNotNullOrEmptyString(content, "content");
 
+            // Adapted from https://stackoverflow.com/a/17735649
             StringBuilder result = new StringBuilder(content.Length);
             for (int i = 0; i < content.Length; i++)
             {

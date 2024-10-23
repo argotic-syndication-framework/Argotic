@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
-using System.Web;
+using System.Xml;
 using System.Xml.XPath;
 
 namespace Argotic.Common
@@ -568,11 +568,25 @@ namespace Argotic.Common
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         public static string RemoveInvalidXmlHexadecimalCharacters(string content)
         {
-            Regex invalidXmlHexadecimalCharacters = new Regex(@"[^\u0009\u000A\u000D\u0020-\uD7FF\uE000-\uFFFD]");
-
             Guard.ArgumentNotNullOrEmptyString(content, "content");
 
-            return invalidXmlHexadecimalCharacters.Replace(content, String.Empty);
+            // Adapted from https://stackoverflow.com/a/17735649
+            StringBuilder result = new StringBuilder(content.Length);
+            for (int i = 0; i < content.Length; i++)
+            {
+                if (XmlConvert.IsXmlChar(content[i]))
+                {
+                    result.Append(content[i]);
+                }
+                else if (i + 1 < content.Length && XmlConvert.IsXmlSurrogatePair(content[i + 1], content[i]))
+                {
+                    result.Append(content[i]);
+                    result.Append(content[i + 1]);
+                    i++;
+                }
+            }
+
+            return result.ToString();
         }
 
         /// <summary>

@@ -58,8 +58,8 @@ jobs:
     needs: prepareConfig
     uses: endjin/Endjin.RecommendedPractices.GitHubActions/.github/workflows/scripted-build-pipeline.yml@main
     with:
-      netSdkVersion: '7.0.x'
-      # additionalNetSdkVersion: ''
+      netSdkVersion: '9.x'
+      additionalNetSdkVersion: '8.x'
       # workflow_dispatch inputs are always strings, the type property is just for the UI
       forcePublish: ${{ github.event.inputs.forcePublish == 'true' || github.event_name == 'pull_request' }}
       skipCleanup: ${{ github.event.inputs.skipCleanup == 'true' }}

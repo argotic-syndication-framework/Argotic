@@ -10,7 +10,7 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <seealso cref="FeedSynchronizationItem.Histories"/>
 /// <seealso cref="FeedSynchronizationItem"/>
-[Serializable()]
+[Serializable]
 public class FeedSynchronizationHistory : IComparable
 {
 

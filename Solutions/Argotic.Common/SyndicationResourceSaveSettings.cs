@@ -6,7 +6,7 @@ namespace Argotic.Common;
 /// <summary>
 /// Specifies a set of features to support on a <see cref="ISyndicationResource"/> object persisted by the <see cref="ISyndicationResource.Save(Stream, SyndicationResourceSaveSettings)"/> method.
 /// </summary>
-[Serializable()]
+[Serializable]
 public sealed class SyndicationResourceSaveSettings : IComparable
 {
     /// <summary>

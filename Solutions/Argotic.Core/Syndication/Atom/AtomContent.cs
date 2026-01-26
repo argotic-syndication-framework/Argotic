@@ -69,7 +69,7 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
 {
     /// <summary>

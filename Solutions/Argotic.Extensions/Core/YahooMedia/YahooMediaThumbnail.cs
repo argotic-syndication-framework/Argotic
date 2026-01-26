@@ -14,7 +14,7 @@ namespace Argotic.Extensions.Core;
 ///         If multiple thumbnails are associated to a media object, and time coding is not at play, it is assumed that the images are in order of importance.
 ///     </para>
 /// </remarks>
-[Serializable()]
+[Serializable]
 public class YahooMediaThumbnail : IComparable
 {
 

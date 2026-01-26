@@ -25,7 +25,7 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
 {
     /// <summary>

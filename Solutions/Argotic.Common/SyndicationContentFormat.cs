@@ -5,7 +5,7 @@
 /// </summary>
 /// <seealso cref="EnumerationMetadataAttribute"/>
 /// <seealso cref="MimeMediaTypeAttribute"/>
-[Serializable()]
+[Serializable]
 public enum SyndicationContentFormat
 {
     /// <summary>

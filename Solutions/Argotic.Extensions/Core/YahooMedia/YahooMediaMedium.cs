@@ -6,7 +6,7 @@ namespace Argotic.Extensions.Core;
 /// Represents the type of a media object .
 /// </summary>
 /// <seealso cref="YahooMediaTextConstruct"/>
-[Serializable()]
+[Serializable]
 public enum YahooMediaMedium
 {
     /// <summary>

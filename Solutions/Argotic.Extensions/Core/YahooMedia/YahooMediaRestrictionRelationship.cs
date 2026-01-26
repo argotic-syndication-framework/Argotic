@@ -6,7 +6,7 @@ namespace Argotic.Extensions.Core;
 /// Indicates the type of relationship that a restriction represents.
 /// </summary>
 /// <seealso cref="YahooMediaRestriction"/>
-[Serializable()]
+[Serializable]
 public enum YahooMediaRestrictionRelationship
 {
     /// <summary>

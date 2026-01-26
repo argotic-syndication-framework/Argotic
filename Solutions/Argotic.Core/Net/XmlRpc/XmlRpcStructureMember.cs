@@ -8,7 +8,7 @@ namespace Argotic.Net;
 /// <summary>
 /// Represents a structured list member.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class XmlRpcStructureMember : IComparable
 {
     /// <summary>

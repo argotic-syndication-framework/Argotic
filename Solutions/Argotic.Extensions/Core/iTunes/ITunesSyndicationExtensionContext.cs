@@ -10,14 +10,14 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="ITunesSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class ITunesSyndicationExtensionContext
 {
 
     /// <summary>
     /// Private member to hold the name of the artist of the podcast.
     /// </summary>
-    private string extensionAuthor                                      = String.Empty;
+    private string extensionAuthor                                      = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating if the podcast is blocked from appearing in the iTunes Podcast directory.
     /// </summary>
@@ -53,11 +53,11 @@ public class ITunesSyndicationExtensionContext
     /// <summary>
     /// Private member to hold a brief synopsis of the podcast.
     /// </summary>
-    private string extensionSubtitle                                    = String.Empty;
+    private string extensionSubtitle                                    = string.Empty;
     /// <summary>
     /// Private member to hold the full description of the podcast.
     /// </summary>
-    private string extensionSummary                                     = String.Empty;
+    private string extensionSummary                                     = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtensionContext"/> class.
     /// </summary>
@@ -78,9 +78,9 @@ public class ITunesSyndicationExtensionContext
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                extensionAuthor = String.Empty;
+                extensionAuthor = string.Empty;
             }
             else
             {
@@ -255,9 +255,9 @@ public class ITunesSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionSubtitle = String.Empty;
+                extensionSubtitle = string.Empty;
             }
             else
             {
@@ -279,9 +279,9 @@ public class ITunesSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionSummary = String.Empty;
+                extensionSummary = string.Empty;
             }
             else
             {
@@ -333,17 +333,17 @@ public class ITunesSyndicationExtensionContext
             writer.WriteElementString("new-feed-url", xmlNamespace, this.NewFeedUrl.ToString());
         }
 
-        if (!String.IsNullOrEmpty(this.Subtitle))
+        if (!string.IsNullOrEmpty(this.Subtitle))
         {
             writer.WriteElementString("subtitle", xmlNamespace, this.Subtitle);
         }
 
-        if (!String.IsNullOrEmpty(this.Author))
+        if (!string.IsNullOrEmpty(this.Author))
         {
             writer.WriteElementString("author", xmlNamespace, this.Author);
         }
 
-        if (!String.IsNullOrEmpty(this.Summary))
+        if (!string.IsNullOrEmpty(this.Summary))
         {
             writer.WriteElementString("summary", xmlNamespace, this.Summary);
         }
@@ -362,10 +362,10 @@ public class ITunesSyndicationExtensionContext
 
         if (this.Duration != TimeSpan.MinValue)
         {
-            string hours    = this.Duration.Hours < 10 ? String.Concat("0", this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo);
-            string minutes  = this.Duration.Minutes < 10 ? String.Concat("0", this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo);
-            string seconds  = this.Duration.Seconds < 10 ? String.Concat("0", this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo);
-            string duration = String.Format(null, "{0}:{1}:{2}", hours, minutes, seconds);
+            string hours    = this.Duration.Hours < 10 ? string.Concat("0", this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo);
+            string minutes  = this.Duration.Minutes < 10 ? string.Concat("0", this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo);
+            string seconds  = this.Duration.Seconds < 10 ? string.Concat("0", this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo);
+            string duration = string.Format(null, "{0}:{1}:{2}", hours, minutes, seconds);
 
             writer.WriteElementString("duration", xmlNamespace, duration);
         }
@@ -375,7 +375,7 @@ public class ITunesSyndicationExtensionContext
             string[] keywords   = new string[this.Keywords.Count];
             this.Keywords.CopyTo(keywords, 0);
 
-            writer.WriteElementString("keywords", xmlNamespace, String.Join(",", keywords));
+            writer.WriteElementString("keywords", xmlNamespace, string.Join(",", keywords));
         }
 
         if (this.ExplicitMaterial != ITunesExplicitMaterial.None)
@@ -421,13 +421,13 @@ public class ITunesSyndicationExtensionContext
 
             XPathNodeIterator categoryIterator  = source.Select("itunes:category", manager);
 
-            if (authorNavigator != null && !String.IsNullOrEmpty(authorNavigator.Value))
+            if (authorNavigator != null && !string.IsNullOrEmpty(authorNavigator.Value))
             {
                 this.Author = authorNavigator.Value;
                 wasLoaded   = true;
             }
 
-            if (keywordsNavigator != null && !String.IsNullOrEmpty(keywordsNavigator.Value))
+            if (keywordsNavigator != null && !string.IsNullOrEmpty(keywordsNavigator.Value))
             {
                 if(keywordsNavigator.Value.Contains(","))
                 {
@@ -464,13 +464,13 @@ public class ITunesSyndicationExtensionContext
                 }
             }
 
-            if (subtitleNavigator != null && !String.IsNullOrEmpty(subtitleNavigator.Value))
+            if (subtitleNavigator != null && !string.IsNullOrEmpty(subtitleNavigator.Value))
             {
                 this.Subtitle   = subtitleNavigator.Value;
                 wasLoaded       = true;
             }
 
-            if (summaryNavigator != null && !String.IsNullOrEmpty(summaryNavigator.Value))
+            if (summaryNavigator != null && !string.IsNullOrEmpty(summaryNavigator.Value))
             {
                 this.Summary    = summaryNavigator.Value;
                 wasLoaded       = true;
@@ -513,14 +513,14 @@ public class ITunesSyndicationExtensionContext
             XPathNavigator durationNavigator    = source.SelectSingleNode("itunes:duration", manager);
             XPathNavigator explicitNavigator    = source.SelectSingleNode("itunes:explicit", manager);
 
-            if (blockNavigator != null && !String.IsNullOrEmpty(blockNavigator.Value))
+            if (blockNavigator != null && !string.IsNullOrEmpty(blockNavigator.Value))
             {
-                if(String.Compare(blockNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
+                if(string.Compare(blockNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     this.IsBlocked  = true;
                     wasLoaded       = true;
                 }
-                else if (String.Compare(blockNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(blockNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     this.IsBlocked  = false;
                     wasLoaded       = true;
@@ -529,8 +529,8 @@ public class ITunesSyndicationExtensionContext
 
             if (imageNavigator != null && imageNavigator.HasAttributes)
             {
-                string hrefAttribute    = imageNavigator.GetAttribute("href", String.Empty);
-                if (!String.IsNullOrEmpty(hrefAttribute))
+                string hrefAttribute    = imageNavigator.GetAttribute("href", string.Empty);
+                if (!string.IsNullOrEmpty(hrefAttribute))
                 {
                     if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri image))
                     {
@@ -540,7 +540,7 @@ public class ITunesSyndicationExtensionContext
                 }
             }
 
-            if (durationNavigator != null && !String.IsNullOrEmpty(durationNavigator.Value))
+            if (durationNavigator != null && !string.IsNullOrEmpty(durationNavigator.Value))
             {
                 TimeSpan duration   = ITunesSyndicationExtensionContext.ParseDuration(durationNavigator.Value);
                 if (duration != TimeSpan.MinValue)
@@ -550,7 +550,7 @@ public class ITunesSyndicationExtensionContext
                 }
             }
 
-            if (explicitNavigator != null && !String.IsNullOrEmpty(explicitNavigator.Value))
+            if (explicitNavigator != null && !string.IsNullOrEmpty(explicitNavigator.Value))
             {
                 ITunesExplicitMaterial explicitMaterial = ITunesSyndicationExtension.ExplicitMaterialByName(explicitNavigator.Value.Trim());
                 if (explicitMaterial != ITunesExplicitMaterial.None)
@@ -576,7 +576,7 @@ public class ITunesSyndicationExtensionContext
 
         if (!value.Contains(":"))
         {
-            if (Int32.TryParse(value, out int totalSeconds))
+            if (int.TryParse(value, out int totalSeconds))
             {
                 timeSpan    = new TimeSpan(0, 0, totalSeconds);
             }
@@ -594,7 +594,7 @@ public class ITunesSyndicationExtensionContext
 
             if (durationParts.Length == 2)
             {
-                if (Int32.TryParse(durationParts[0], out int minutes) && Int32.TryParse(durationParts[1], out int seconds))
+                if (int.TryParse(durationParts[0], out int minutes) && int.TryParse(durationParts[1], out int seconds))
                 {
                     timeSpan    = new TimeSpan(0, minutes, seconds);
                 }
@@ -605,7 +605,7 @@ public class ITunesSyndicationExtensionContext
                 string minutesValue = durationParts[1];
                 string secondsValue = durationParts[2];
 
-                if (Int32.TryParse(hoursValue, out int hours) && Int32.TryParse(minutesValue, out int minutes) && Int32.TryParse(secondsValue, out int seconds))
+                if (int.TryParse(hoursValue, out int hours) && int.TryParse(minutesValue, out int minutes) && int.TryParse(secondsValue, out int seconds))
                 {
                     timeSpan    = new TimeSpan(hours, minutes, seconds);
                 }

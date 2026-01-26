@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// Encapsulates specific information about an individual <see cref="PheedSyndicationExtension"/>.
 /// </summary>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pheed")]
-[Serializable()]
+[Serializable]
 public class PheedSyndicationExtensionContext
 {
     /// <summary>
@@ -134,7 +134,7 @@ public class PheedSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail != null ? this.Thumbnail.ToString() : String.Empty);
-        writer.WriteElementString("imgsrc", xmlNamespace, this.Source != null ? this.Source.ToString() : String.Empty);
+        writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail != null ? this.Thumbnail.ToString() : string.Empty);
+        writer.WriteElementString("imgsrc", xmlNamespace, this.Source != null ? this.Source.ToString() : string.Empty);
     }
 }

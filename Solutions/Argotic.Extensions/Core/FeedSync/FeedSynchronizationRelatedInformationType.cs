@@ -13,7 +13,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso cref="FeedSynchronizationRelatedInformation.RelationType"/>
 /// <seealso cref="FeedSynchronizationRelatedInformation"/>
-[Serializable()]
+[Serializable]
 public enum FeedSynchronizationRelatedInformationType
 {
     /// <summary>

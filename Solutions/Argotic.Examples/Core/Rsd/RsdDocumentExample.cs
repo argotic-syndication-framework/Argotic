@@ -33,7 +33,7 @@ public static class RsdDocumentExample
         document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
         document.AddInterface(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
 
-        RsdApplicationInterface conversantApi   = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, String.Empty);
+        RsdApplicationInterface conversantApi   = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty);
         conversantApi.Documentation             = new Uri("http://www.conversant.com/docs/api/");
         conversantApi.Notes                     = "Additional explanation here.";
         conversantApi.Settings.Add("service-specific-setting", "a value");
@@ -73,7 +73,7 @@ public static class RsdDocumentExample
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-    private static void ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+    private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
     {
         if(e.State != null)
         {

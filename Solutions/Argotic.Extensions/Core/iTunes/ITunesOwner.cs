@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// Represents information that will be used to contact the owner of a podcast for communication specifically about their podcast.
 /// </summary>
 /// <seealso cref="ITunesSyndicationExtensionContext"/>
-[Serializable()]
+[Serializable]
 public class ITunesOwner : IComparable
 {
 

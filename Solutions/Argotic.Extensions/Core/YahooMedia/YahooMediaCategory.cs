@@ -8,7 +8,7 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Represents a taxonomy that gives an indication of the type of media content, and its particular contents.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class YahooMediaCategory : IComparable
 {
 

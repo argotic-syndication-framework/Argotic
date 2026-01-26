@@ -11,7 +11,7 @@ namespace Argotic.Syndication.Specialized;
 /// Represents a post comment.
 /// </summary>
 /// <seealso cref="BlogMLPost.Comments"/>
-[Serializable()]
+[Serializable]
 public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndicationObject
 {
 

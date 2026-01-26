@@ -11,7 +11,7 @@ using System.Linq;
 ///This is a test class for BasicGeocodingSyndicationExtensionTest and is intended
 ///to contain all BasicGeocodingSyndicationExtensionTest Unit Tests
 ///</summary>
-[TestClass()]
+[TestClass]
 public class BasicGeocodingSyndicationExtensionTest
 {
 
@@ -43,7 +43,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for BasicGeocodingSyndicationExtension Constructor
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocodingSyndicationExtensionConstructorTest()
     {
         BasicGeocodingSyndicationExtension target = new BasicGeocodingSyndicationExtension();
@@ -54,7 +54,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for CompareTo
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_CompareToTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
@@ -68,10 +68,10 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for ConvertDecimalToDegreesMinutesSeconds
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_ConvertDecimalToDegreesMinutesSecondsTest()
     {
-        Decimal value = new Decimal(12.582438888888888888888888888889);
+        decimal value = new decimal(12.582438888888888888888888888889);
         string expected = "12°34'56.78\"";
         string actual;
         actual = BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(value);
@@ -81,12 +81,12 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for ConvertDegreesMinutesSecondsToDecimal
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ConvertDegreesMinutesSecondsToDecimalTest()
     {
         string degreesMinutesSeconds = "12°34'56.78\"";
-        Decimal expected = new Decimal(12.582438888888888888888888888889);
-        Decimal actual;
+        decimal expected = new decimal(12.582438888888888888888888888889);
+        decimal actual;
         actual = BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal(degreesMinutesSeconds);
         Assert.AreEqual((double)expected, (double)actual, 3e-6);
     }
@@ -94,7 +94,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for Equals
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_EqualsTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
@@ -194,7 +194,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for MatchByType
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_MatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
@@ -207,7 +207,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for ToString
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_ToStringTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
@@ -220,7 +220,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for WriteTo
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_WriteToTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
@@ -237,7 +237,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for op_Equality
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_op_EqualityTest_Failure()
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
@@ -261,7 +261,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for op_GreaterThan
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_op_GreaterThanTest()
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
@@ -275,7 +275,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for op_Inequality
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_op_InequalityTest()
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
@@ -288,7 +288,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for op_LessThan
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void BasicGeocoding_op_LessThanTest()
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
@@ -302,7 +302,7 @@ public class BasicGeocodingSyndicationExtensionTest
     /// <summary>
     ///A test for Context
     ///</summary>
-    [TestMethod(), Ignore]
+    [TestMethod, Ignore]
     public void BasicGeocoding_ContextTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();

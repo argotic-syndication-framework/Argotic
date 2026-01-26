@@ -16,7 +16,7 @@ namespace Argotic.Syndication.Specialized;
 ///     The attachment can be lazily stored as an URL or fully embedded in the body of the post by <i>base64</i> encoding. 
 ///     In both cases, the URL must be specified so that the implementor can figure out where to dump the attachment to.
 /// </remarks>
-[Serializable()]
+[Serializable]
 public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
 {
 

@@ -62,7 +62,7 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
             XPathNavigator homePageLinkNavigator    = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:homePageLink", manager);
             XPathNodeIterator apiIterator           = RsdUtility.SelectSafe(serviceNavigator, "rsd:apis/rsd:api", manager);
 
-            if (engineNameNavigator != null && !String.IsNullOrEmpty(engineNameNavigator.Value))
+            if (engineNameNavigator != null && !string.IsNullOrEmpty(engineNameNavigator.Value))
             {
                 resource.EngineName     = engineNameNavigator.Value;
             }

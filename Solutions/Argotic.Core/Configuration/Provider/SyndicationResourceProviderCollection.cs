@@ -41,7 +41,7 @@ public class SyndicationResourceProviderCollection : ProviderCollection, ICollec
             bool itemExists = false;
             foreach (SyndicationResourceProvider provider in this)
             {
-                if (String.Compare(provider.Name, item.Name, StringComparison.Ordinal) == 0)
+                if (string.Compare(provider.Name, item.Name, StringComparison.Ordinal) == 0)
                 {
                     itemExists  = true;
                     break;

@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pheed")]
-[Serializable()]
+[Serializable]
 public class PheedSyndicationExtension : SyndicationExtension, IComparable
 {
     /// <summary>

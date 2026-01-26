@@ -14,7 +14,7 @@ namespace Argotic.Extensions;
 /// <seealso cref="ISyndicationExtension"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XmlReader)"/>
-[Serializable()]
+[Serializable]
 public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
 {
 
@@ -25,7 +25,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication extension.
     /// </summary>
-    [NonSerialized()]
+    [NonSerialized]
     private XPathNavigator eventNavigator;
     /// <summary>
     /// Private member to hold the syndication extension that resulted from the load operation.

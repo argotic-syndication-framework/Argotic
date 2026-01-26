@@ -6,7 +6,7 @@ namespace Argotic.Extensions.Core;
 /// Represents the link relation type of a web resource.
 /// </summary>
 /// <seealso cref="FeedHistoryLinkRelation.RelationType"/>
-[Serializable()]
+[Serializable]
 public enum FeedHistoryLinkRelationType
 {
     /// <summary>

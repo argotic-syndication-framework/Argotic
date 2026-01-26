@@ -4,7 +4,7 @@
 /// Associates enumeration field description information with a target element. This class cannot be inherited.
 /// </summary>
 [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
-[Serializable()]
+[Serializable]
 public sealed class EnumerationMetadataAttribute : Attribute, IComparable
 {
     /// <summary>

@@ -7,7 +7,7 @@ namespace Argotic.Syndication;
 /// </summary>
 /// <seealso cref="GenericSyndicationFeed.Categories"/>
 /// <seealso cref="GenericSyndicationItem.Categories"/>
-[Serializable()]
+[Serializable]
 public class GenericSyndicationCategory : IComparable
 {
 

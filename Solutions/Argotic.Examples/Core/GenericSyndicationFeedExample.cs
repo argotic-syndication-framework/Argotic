@@ -23,7 +23,7 @@ public static class GenericSyndicationFeedExample
 
         foreach(GenericSyndicationCategory category in feed.Categories)
         {
-            if (String.Compare(category.Term, ".NET", StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(category.Term, ".NET", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 //  Process feed category
             }
@@ -39,7 +39,7 @@ public static class GenericSyndicationFeedExample
 
             foreach (GenericSyndicationCategory category in item.Categories)
             {
-                if (String.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     //  Process item category
                 }
@@ -72,7 +72,7 @@ public static class GenericSyndicationFeedExample
 
             foreach (GenericSyndicationCategory category in item.Categories)
             {
-                if (String.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     //  Process item category
                 }
@@ -98,7 +98,7 @@ public static class GenericSyndicationFeedExample
 
             foreach (GenericSyndicationCategory category in item.Categories)
             {
-                if (String.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(category.Term, "WCF", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     //  Process item category
                 }

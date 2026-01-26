@@ -15,7 +15,7 @@ public static class SyndicationDiscoveryUtility
     /// <summary>
     /// Private member to hold the default user agent sent by the framework when making HTTP web requests.
     /// </summary>
-    private static string frameworkUserAgent    = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
+    private static string frameworkUserAgent    = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
 
     /// <summary>
     /// Gets the raw user agent string used by the framework when sending web requests.
@@ -54,7 +54,7 @@ public static class SyndicationDiscoveryUtility
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         syndicationFormat = format;
                         break;
@@ -172,7 +172,7 @@ public static class SyndicationDiscoveryUtility
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         syndicationFormat = format;
                         break;
@@ -201,7 +201,7 @@ public static class SyndicationDiscoveryUtility
         Guard.ArgumentNotNull(navigator, "navigator");
 
         source  = navigator.CreateNavigator();
-        if (String.IsNullOrEmpty(source.LocalName))
+        if (string.IsNullOrEmpty(source.LocalName))
         {
             source.MoveToRoot();
             source.MoveToChild(XPathNodeType.Element);
@@ -220,7 +220,7 @@ public static class SyndicationDiscoveryUtility
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         syndicationFormat = format;
                         break;
@@ -253,9 +253,9 @@ public static class SyndicationDiscoveryUtility
             if (attribute.Groups != null && attribute.Groups.Count > 0)
             {
                 string name     = attribute.Groups[1].Value;
-                string value    = String.Empty;
+                string value    = string.Empty;
 
-                if (!String.IsNullOrEmpty(name))
+                if (!string.IsNullOrEmpty(name))
                 {
                     value       = attribute.Groups[2].Value;
                 }
@@ -751,13 +751,13 @@ public static class SyndicationDiscoveryUtility
                 string rel  = (string)linkAttributes["REL"];
                 string type = (string)linkAttributes["TYPE"];
 
-                if (String.Compare(rel, "alternate", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(rel, "alternate", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri url))
                     {
                         DiscoverableSyndicationEndpoint endpoint    = new DiscoverableSyndicationEndpoint();
                         endpoint.Source                             = url;
-                        if (!String.IsNullOrEmpty(type))
+                        if (!string.IsNullOrEmpty(type))
                         {
                             endpoint.ContentType                    = type;
                         }
@@ -765,7 +765,7 @@ public static class SyndicationDiscoveryUtility
                         if (linkAttributes.ContainsKey("TITLE"))
                         {
                             string title        = (string)linkAttributes["TITLE"];
-                            if (!String.IsNullOrEmpty(title))
+                            if (!string.IsNullOrEmpty(title))
                             {
                                 endpoint.Title  = title;
                             }
@@ -906,7 +906,7 @@ public static class SyndicationDiscoveryUtility
                 string href = (string)linkAttributes["HREF"];
                 string rel  = (string)linkAttributes["REL"];
 
-                if (String.Compare(rel, "pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(rel, "pingback", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     Uri uri;
                     if (Uri.TryCreate(href, UriKind.Absolute, out uri))
@@ -918,7 +918,7 @@ public static class SyndicationDiscoveryUtility
                         if (linkAttributes.ContainsKey("TYPE"))
                         {
                             string type     = (string)linkAttributes["TYPE"];
-                            if (!String.IsNullOrEmpty(type))
+                            if (!string.IsNullOrEmpty(type))
                             {
                                 pingbackAnchor.Attributes.Add("type", type);
                             }
@@ -926,7 +926,7 @@ public static class SyndicationDiscoveryUtility
                         if (linkAttributes.ContainsKey("TITLE"))
                         {
                             string title    = (string)linkAttributes["TITLE"];
-                            if (!String.IsNullOrEmpty(title))
+                            if (!string.IsNullOrEmpty(title))
                             {
                                 pingbackAnchor.Title    = title;
                             }
@@ -1056,7 +1056,7 @@ public static class SyndicationDiscoveryUtility
                     string name     = webResponse.Headers.Keys[i];
                     string value    = webResponse.Headers[i];
 
-                    if (String.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         Uri pingbackXmlRpcServer;
                         if(Uri.TryCreate(value, UriKind.Absolute, out pingbackXmlRpcServer))
@@ -1209,7 +1209,7 @@ public static class SyndicationDiscoveryUtility
                     string name     = webResponse.Headers.Keys[i];
                     string value    = webResponse.Headers[i];
 
-                    if (String.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         if(Uri.TryCreate(value, UriKind.Absolute, out Uri url))
                         {

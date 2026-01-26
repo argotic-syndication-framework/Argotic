@@ -75,7 +75,7 @@ internal static class AtomUtility
         XmlNamespaceManager manager = null;
         Guard.ArgumentNotNull(nameTable, "nameTable");
         manager = new XmlNamespaceManager(nameTable);
-        manager.AddNamespace("atom", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : ATOM_NAMESPACE);
+        manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : ATOM_NAMESPACE);
         manager.AddNamespace("app", ATOMPUB_NAMESPACE);
         manager.AddNamespace("xhtml", XHTML_NAMESPACE);
 
@@ -105,9 +105,9 @@ internal static class AtomUtility
         }
         result  = result | Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-        string sourceLanguageName   = source.Language != null ? source.Language.Name : String.Empty;
-        string targetLanguageName   = target.Language != null ? target.Language.Name : String.Empty;
-        result                      = result | String.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+        string sourceLanguageName   = source.Language != null ? source.Language.Name : string.Empty;
+        string targetLanguageName   = target.Language != null ? target.Language.Name : string.Empty;
+        result                      = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -127,7 +127,7 @@ internal static class AtomUtility
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
         string xmlBaseAttribute = source.GetAttribute("base", manager.LookupNamespace("xml"));
-        if (!String.IsNullOrEmpty(xmlBaseAttribute))
+        if (!string.IsNullOrEmpty(xmlBaseAttribute))
         {
             if (Uri.TryCreate(xmlBaseAttribute, UriKind.RelativeOrAbsolute, out Uri baseUri))
             {
@@ -136,7 +136,7 @@ internal static class AtomUtility
             }
         }
         string xmlLangAttribute = source.GetAttribute("lang", manager.LookupNamespace("xml"));
-        if (!String.IsNullOrEmpty(xmlLangAttribute))
+        if (!string.IsNullOrEmpty(xmlLangAttribute))
         {
             try
             {

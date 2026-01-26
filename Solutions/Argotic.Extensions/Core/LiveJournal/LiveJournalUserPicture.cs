@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// Represents the picture associated with a LiveJournal entry.
 /// </summary>
 /// <seealso cref="LiveJournalSyndicationExtensionContext.UserPicture"/>
-[Serializable()]
+[Serializable]
 public class LiveJournalUserPicture : IComparable
 {
 

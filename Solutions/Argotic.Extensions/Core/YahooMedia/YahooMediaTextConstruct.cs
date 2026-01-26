@@ -13,7 +13,7 @@ namespace Argotic.Extensions.Core;
 ///         This class is a generic representation for the <i>media:title</i> and <i>media:description</i> elements in the Yahoo media specificaton.
 ///     </para>
 /// </remarks>
-[Serializable()]
+[Serializable]
 public class YahooMediaTextConstruct : IComparable
 {
 

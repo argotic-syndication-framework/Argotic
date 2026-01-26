@@ -35,7 +35,7 @@ internal static class BlogMLUtility
     /// <returns>The approval status identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
     public static string ApprovalStatusAsString(BlogMLApprovalStatus status)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
         {
             if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
@@ -83,7 +83,7 @@ internal static class BlogMLUtility
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(value, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(value, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         approvalStatus  = status;
                         break;
@@ -118,7 +118,7 @@ internal static class BlogMLUtility
         }
         result  = source.ApprovalStatus.CompareTo(target.ApprovalStatus);
         result  = result | source.CreatedOn.CompareTo(target.CreatedOn);
-        result  = result | String.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
+        result  = result | string.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
         result  = result | source.LastModifiedOn.CompareTo(target.LastModifiedOn);
 
         if(source.Title != null && target.Title != null)
@@ -148,7 +148,7 @@ internal static class BlogMLUtility
         XmlNamespaceManager manager = null;
         Guard.ArgumentNotNull(nameTable, "nameTable");
         manager = new XmlNamespaceManager(nameTable);
-        manager.AddNamespace("blog", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
+        manager.AddNamespace("blog", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
 
         return manager;
     }
@@ -169,18 +169,18 @@ internal static class BlogMLUtility
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string idAttribute              = source.GetAttribute("id", String.Empty);
-            string dateCreatedAttribute     = source.GetAttribute("date-created", String.Empty);
-            string dateModifiedAttribute    = source.GetAttribute("date-modified", String.Empty);
-            string approvedAttribute        = source.GetAttribute("approved", String.Empty);
+            string idAttribute              = source.GetAttribute("id", string.Empty);
+            string dateCreatedAttribute     = source.GetAttribute("date-created", string.Empty);
+            string dateModifiedAttribute    = source.GetAttribute("date-modified", string.Empty);
+            string approvedAttribute        = source.GetAttribute("approved", string.Empty);
 
-            if (!String.IsNullOrEmpty(idAttribute))
+            if (!string.IsNullOrEmpty(idAttribute))
             {
                 target.Id                   = idAttribute;
                 wasLoaded                   = true;
             }
 
-            if (!String.IsNullOrEmpty(dateCreatedAttribute))
+            if (!string.IsNullOrEmpty(dateCreatedAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out DateTime createdOn))
                 {
@@ -194,7 +194,7 @@ internal static class BlogMLUtility
                 }
             }
 
-            if (!String.IsNullOrEmpty(dateModifiedAttribute))
+            if (!string.IsNullOrEmpty(dateModifiedAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateModifiedAttribute, out DateTime modifiedOn))
                 {
@@ -208,7 +208,7 @@ internal static class BlogMLUtility
                 }
             }
 
-            if (!String.IsNullOrEmpty(approvedAttribute))
+            if (!string.IsNullOrEmpty(approvedAttribute))
             {
                 BlogMLApprovalStatus status = BlogMLUtility.ApprovalStatusByValue(approvedAttribute);
                 if (status != BlogMLApprovalStatus.None)
@@ -255,18 +255,18 @@ internal static class BlogMLUtility
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string idAttribute              = source.GetAttribute("id", String.Empty);
-            string dateCreatedAttribute     = source.GetAttribute("date-created", String.Empty);
-            string dateModifiedAttribute    = source.GetAttribute("date-modified", String.Empty);
-            string approvedAttribute        = source.GetAttribute("approved", String.Empty);
+            string idAttribute              = source.GetAttribute("id", string.Empty);
+            string dateCreatedAttribute     = source.GetAttribute("date-created", string.Empty);
+            string dateModifiedAttribute    = source.GetAttribute("date-modified", string.Empty);
+            string approvedAttribute        = source.GetAttribute("approved", string.Empty);
 
-            if (!String.IsNullOrEmpty(idAttribute))
+            if (!string.IsNullOrEmpty(idAttribute))
             {
                 target.Id                   = idAttribute;
                 wasLoaded                   = true;
             }
 
-            if (!String.IsNullOrEmpty(dateCreatedAttribute))
+            if (!string.IsNullOrEmpty(dateCreatedAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out DateTime createdOn))
                 {
@@ -280,7 +280,7 @@ internal static class BlogMLUtility
                 }
             }
 
-            if (!String.IsNullOrEmpty(dateModifiedAttribute))
+            if (!string.IsNullOrEmpty(dateModifiedAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateModifiedAttribute, out DateTime modifiedOn))
                 {
@@ -294,7 +294,7 @@ internal static class BlogMLUtility
                 }
             }
 
-            if (!String.IsNullOrEmpty(approvedAttribute))
+            if (!string.IsNullOrEmpty(approvedAttribute))
             {
                 BlogMLApprovalStatus status = BlogMLUtility.ApprovalStatusByValue(approvedAttribute);
                 if (status != BlogMLApprovalStatus.None)
@@ -334,7 +334,7 @@ internal static class BlogMLUtility
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(writer, "writer");
 
-        if (!String.IsNullOrEmpty(source.Id))
+        if (!string.IsNullOrEmpty(source.Id))
         {
             writer.WriteAttributeString("id", source.Id);
         }

@@ -12,7 +12,7 @@ namespace Argotic.Syndication.Specialized;
 /// </summary>
 /// <seealso cref="ApmlDocument.Head"/>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
-[Serializable()]
+[Serializable]
 public class ApmlHead : IComparable, IExtensibleSyndicationObject
 {
 

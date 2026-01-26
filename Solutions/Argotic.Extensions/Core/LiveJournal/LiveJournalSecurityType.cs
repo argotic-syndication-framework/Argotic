@@ -7,7 +7,7 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <seealso cref="LiveJournalSecurity.Accessibility"/>
 /// <seealso cref="LiveJournalSecurity"/>
-[Serializable()]
+[Serializable]
 public enum LiveJournalSecurityType
 {
     /// <summary>

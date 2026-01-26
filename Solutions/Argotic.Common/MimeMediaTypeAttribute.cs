@@ -7,7 +7,7 @@
 ///     See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.
 /// </remarks>
 [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
-[Serializable()]
+[Serializable]
 public sealed class MimeMediaTypeAttribute : Attribute, IComparable
 {
     /// <summary>

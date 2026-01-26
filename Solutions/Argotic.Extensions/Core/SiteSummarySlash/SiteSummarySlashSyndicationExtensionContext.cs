@@ -10,22 +10,22 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="SiteSummarySlashSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class SiteSummarySlashSyndicationExtensionContext
 {
 
     /// <summary>
     /// Private member to hold the section name.
     /// </summary>
-    private string extensionSection     = String.Empty;
+    private string extensionSection     = string.Empty;
     /// <summary>
     /// Private member to hold the department name.
     /// </summary>
-    private string extensionDepartment  = String.Empty;
+    private string extensionDepartment  = string.Empty;
     /// <summary>
     /// Private member to hold the number of comments.
     /// </summary>
-    private int extensionComments       = Int32.MinValue;
+    private int extensionComments       = int.MinValue;
     /// <summary>
     /// Private member to hold the hit parade identifiers.
     /// </summary>
@@ -68,9 +68,9 @@ public class SiteSummarySlashSyndicationExtensionContext
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                extensionDepartment = String.Empty;
+                extensionDepartment = string.Empty;
             }
             else
             {
@@ -111,9 +111,9 @@ public class SiteSummarySlashSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionSection = String.Empty;
+                extensionSection = string.Empty;
             }
             else
             {
@@ -142,13 +142,13 @@ public class SiteSummarySlashSyndicationExtensionContext
             XPathNavigator commentsNavigator    = source.SelectSingleNode("slash:comments", manager);
             XPathNavigator hitParadeNavigator   = source.SelectSingleNode("slash:hit_parade", manager);
 
-            if (sectionNavigator != null && !String.IsNullOrEmpty(sectionNavigator.Value))
+            if (sectionNavigator != null && !string.IsNullOrEmpty(sectionNavigator.Value))
             {
                 this.Section    = sectionNavigator.Value;
                 wasLoaded       = true;
             }
 
-            if (departmentNavigator != null && !String.IsNullOrEmpty(departmentNavigator.Value))
+            if (departmentNavigator != null && !string.IsNullOrEmpty(departmentNavigator.Value))
             {
                 this.Department = departmentNavigator.Value;
                 wasLoaded       = true;
@@ -156,14 +156,14 @@ public class SiteSummarySlashSyndicationExtensionContext
 
             if (commentsNavigator != null)
             {
-                if (Int32.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int comments))
+                if (int.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int comments))
                 {
                     this.Comments   = comments;
                     wasLoaded       = true;
                 }
             }
 
-            if (hitParadeNavigator != null && !String.IsNullOrEmpty(hitParadeNavigator.Value))
+            if (hitParadeNavigator != null && !string.IsNullOrEmpty(hitParadeNavigator.Value))
             {
                 if (hitParadeNavigator.Value.Contains(","))
                 {
@@ -172,7 +172,7 @@ public class SiteSummarySlashSyndicationExtensionContext
                     {
                         foreach(string identifier in identifiers)
                         {
-                            if (Int32.TryParse(identifier, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int paradeId))
+                            if (int.TryParse(identifier, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int paradeId))
                             {
                                 this.HitParade.Add(paradeId);
                                 wasLoaded   = true;
@@ -182,7 +182,7 @@ public class SiteSummarySlashSyndicationExtensionContext
                 }
                 else
                 {
-                    if (Int32.TryParse(hitParadeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hitParade))
+                    if (int.TryParse(hitParadeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hitParade))
                     {
                         this.HitParade.Add(hitParade);
                         wasLoaded   = true;
@@ -206,21 +206,21 @@ public class SiteSummarySlashSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(!String.IsNullOrEmpty(this.Section))
+        if(!string.IsNullOrEmpty(this.Section))
         {
             writer.WriteStartElement("section", xmlNamespace);
             writer.WriteCData(this.Section);
             writer.WriteEndElement();
         }
 
-        if (!String.IsNullOrEmpty(this.Department))
+        if (!string.IsNullOrEmpty(this.Department))
         {
             writer.WriteStartElement("department", xmlNamespace);
             writer.WriteCData(this.Department);
             writer.WriteEndElement();
         }
 
-        if(this.Comments != Int32.MinValue)
+        if(this.Comments != int.MinValue)
         {
             writer.WriteElementString("comments", xmlNamespace, this.Comments.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
@@ -233,7 +233,7 @@ public class SiteSummarySlashSyndicationExtensionContext
                 hitParade[i]    = this.HitParade[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
             }
 
-            writer.WriteElementString("hit_parade", xmlNamespace, String.Join(",", hitParade));
+            writer.WriteElementString("hit_parade", xmlNamespace, string.Join(",", hitParade));
         }
     }
 }

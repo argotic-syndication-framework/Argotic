@@ -5,7 +5,7 @@ namespace Argotic.Common;
 /// <summary>
 /// Represents a discoverable syndication endpoint that is being broadcast by a web resource.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class DiscoverableSyndicationEndpoint : IComparable
 {
     /// <summary>

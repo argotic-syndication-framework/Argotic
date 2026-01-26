@@ -10,7 +10,7 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="AtomPublishingControlSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingCommonObjectAttributes, IExtensibleSyndicationObject
 {
 
@@ -210,14 +210,14 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         if(source.HasChildren)
         {
             XPathNavigator draftNavigator  = source.SelectSingleNode("app:draft", manager);
-            if (draftNavigator != null && !String.IsNullOrEmpty(draftNavigator.Value))
+            if (draftNavigator != null && !string.IsNullOrEmpty(draftNavigator.Value))
             {
-                if (String.Compare(draftNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(draftNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     this.IsDraft    = true;
                     wasLoaded       = true;
                 }
-                else if (String.Compare(draftNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(draftNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     this.IsDraft    = false;
                     wasLoaded       = true;

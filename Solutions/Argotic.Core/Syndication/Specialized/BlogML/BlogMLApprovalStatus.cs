@@ -5,7 +5,7 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents the approval status of a web log entity.
 /// </summary>
-[Serializable()]
+[Serializable]
 public enum BlogMLApprovalStatus
 {
     /// <summary>

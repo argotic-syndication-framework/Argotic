@@ -31,7 +31,7 @@ namespace Argotic.Publishing;
 /// </remarks>
 /// <seealso cref="ISyndicationExtension"/>
 /// <seealso cref="SyndicationExtension"/>
-[Serializable()]
+[Serializable]
 public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
 {
     /// <summary>

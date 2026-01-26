@@ -30,7 +30,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
-[Serializable()]
+[Serializable]
 public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
 {
 
@@ -61,7 +61,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the name of the engine that is providing the services being described.
     /// </summary>
-    private string documentServiceEngineName                = String.Empty;
+    private string documentServiceEngineName                = string.Empty;
     /// <summary>
     /// Private member to hold the URL to the home of the engine.
     /// </summary>
@@ -192,9 +192,9 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                documentServiceEngineName = String.Empty;
+                documentServiceEngineName = string.Empty;
             }
             else
             {
@@ -445,7 +445,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         />
     ///     </code>
     /// </example>
-    public void LoadAsync(Uri source, Object userToken)
+    public void LoadAsync(Uri source, object userToken)
     {
         this.LoadAsync(source, null, userToken);
     }
@@ -469,7 +469,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="RsdDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
     }
@@ -499,7 +499,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="RsdDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
     }
@@ -524,7 +524,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="RsdDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
@@ -1167,7 +1167,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         writer.WriteStartElement("service", RsdUtility.RsdNamespace);
 
-        if(!String.IsNullOrEmpty(this.EngineName))
+        if(!string.IsNullOrEmpty(this.EngineName))
         {
             writer.WriteElementString("engineName", RsdUtility.RsdNamespace, this.EngineName);
         }

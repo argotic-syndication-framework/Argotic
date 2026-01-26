@@ -31,7 +31,7 @@ public class TrackbackClient
     /// <summary>
     /// Private member to hold information such as the application name, version, host operating system, and language.
     /// </summary>
-    private string clientUserAgent  = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(TrackbackClient)).GetName().Version.ToString(4));
+    private string clientUserAgent  = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(TrackbackClient)).GetName().Version.ToString(4));
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
@@ -375,11 +375,11 @@ public class TrackbackClient
 
         if(this.Host == null)
         {
-            throw new InvalidOperationException(String.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
+            throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
         }
         else if (this.SendOperationInProgress)
         {
-            throw new InvalidOperationException(String.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
+            throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
         }
 
         WebRequest webRequest   = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
@@ -408,17 +408,17 @@ public class TrackbackClient
     /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, Object)"/> call in progress.</exception>
     //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
-    public void SendAsync(TrackbackMessage message, Object userToken)
+    public void SendAsync(TrackbackMessage message, object userToken)
     {
         Guard.ArgumentNotNull(message, "message");
 
         if (this.Host == null)
         {
-            throw new InvalidOperationException(String.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
+            throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
         }
         else if (this.SendOperationInProgress)
         {
-            throw new InvalidOperationException(String.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
+            throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
         }
 
         this.SendOperationInProgress    = true;
@@ -487,7 +487,7 @@ public class TrackbackClient
         httpRequest                     = (HttpWebRequest)HttpWebRequest.Create(host);
         httpRequest.Method              = "POST";
         httpRequest.ContentLength       = payloadData.Length;
-        httpRequest.ContentType         = String.Format(null, "application/x-www-form-urlencoded; charset={0}", message.Encoding.WebName);
+        httpRequest.ContentType         = string.Format(null, "application/x-www-form-urlencoded; charset={0}", message.Encoding.WebName);
         httpRequest.UserAgent           = userAgent;
         if (options != null) options.ApplyOptions(httpRequest);
 
@@ -519,7 +519,7 @@ public class TrackbackClient
                 this.Timeout    = clientConfiguration.Timeout;
             }
 
-            if (!String.IsNullOrEmpty(clientConfiguration.UserAgent))
+            if (!string.IsNullOrEmpty(clientConfiguration.UserAgent))
             {
                 this.UserAgent  = clientConfiguration.UserAgent;
             }

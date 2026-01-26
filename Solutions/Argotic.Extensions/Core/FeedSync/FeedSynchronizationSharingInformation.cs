@@ -13,7 +13,7 @@ namespace Argotic.Extensions.Core;
 ///     Endpoints that consume the feed <b>must not</b> republish the <see cref="FeedSynchronizationSharingInformation"/> or any of its sub-elements to other feed consumers.
 /// </remarks>
 /// <seealso cref="FeedSynchronizationSyndicationExtensionContext"/>
-[Serializable()]
+[Serializable]
 public class FeedSynchronizationSharingInformation : IComparable
 {
 

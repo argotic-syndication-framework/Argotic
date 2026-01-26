@@ -18,7 +18,7 @@ public static class BlogMLTextConstructExample
     {
         string contentType  = BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType.Html);    // html
 
-        if (String.Compare(contentType, "html", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Compare(contentType, "html", StringComparison.OrdinalIgnoreCase) == 0)
         {
         }
     }

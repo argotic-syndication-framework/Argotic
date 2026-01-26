@@ -8,7 +8,7 @@ namespace Argotic.Syndication;
 /// Represents a format agnostic view of the discrete content for a syndication feed.
 /// </summary>
 /// <seealso cref="GenericSyndicationFeed.Items"/>
-[Serializable()]
+[Serializable]
 public class GenericSyndicationItem : IComparable
 {
 

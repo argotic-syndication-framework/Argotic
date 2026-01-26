@@ -18,7 +18,7 @@ namespace Argotic.Net;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
 public class TrackbackResponse : IComparable
 {

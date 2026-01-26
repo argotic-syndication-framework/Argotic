@@ -18,7 +18,7 @@ namespace Argotic.Net;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 public class XmlRpcMessage : IComparable
 {
     /// <summary>

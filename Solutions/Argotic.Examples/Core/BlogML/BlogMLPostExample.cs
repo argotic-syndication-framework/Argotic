@@ -98,7 +98,7 @@ public static class BlogMLPostExample
     {
         string postType = BlogMLPost.PostTypeAsString(BlogMLPostType.Normal);   // normal
 
-        if (String.Compare(postType, "normal", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Compare(postType, "normal", StringComparison.OrdinalIgnoreCase) == 0)
         {
         }
     }

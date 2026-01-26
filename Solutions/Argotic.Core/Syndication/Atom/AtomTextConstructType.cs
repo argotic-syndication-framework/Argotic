@@ -9,7 +9,7 @@ namespace Argotic.Syndication;
 /// <remarks>
 ///     
 /// </remarks>
-[Serializable()]
+[Serializable]
 public enum AtomTextConstructType
 {
     /// <summary>

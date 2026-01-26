@@ -27,7 +27,7 @@ namespace Argotic.Publishing;
 ///         In addition, a <see cref="AtomMemberResources">collection</see> <i>may</i> appear in more than one <see cref="AtomWorkspace">workspace</see>.
 ///     </para>
 /// </remarks>
-[Serializable()]
+[Serializable]
 public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
 {
     /// <summary>

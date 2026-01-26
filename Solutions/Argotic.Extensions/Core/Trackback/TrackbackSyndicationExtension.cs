@@ -24,7 +24,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
-[Serializable()]
+[Serializable]
 public class TrackbackSyndicationExtension : SyndicationExtension, IComparable
 {
 

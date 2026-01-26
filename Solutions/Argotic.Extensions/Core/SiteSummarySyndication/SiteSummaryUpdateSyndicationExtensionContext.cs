@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="SiteSummaryUpdateSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class SiteSummaryUpdateSyndicationExtensionContext
 {
 
@@ -20,7 +20,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the frequency of updates in relation to the update period.
     /// </summary>
-    private int extensionUpdateFrequency                    = Int32.MinValue;
+    private int extensionUpdateFrequency                    = int.MinValue;
     /// <summary>
     /// Private member to hold a base date to be used in concert with period and frequency to calculate the publishing schedule.
     /// </summary>
@@ -114,7 +114,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
             XPathNavigator updateFrequencyNavigator = source.SelectSingleNode("sy:updateFrequency", manager);
             XPathNavigator updateBaseNavigator      = source.SelectSingleNode("sy:updateBase", manager);
 
-            if (updatePeriodNavigator != null && !String.IsNullOrEmpty(updatePeriodNavigator.Value))
+            if (updatePeriodNavigator != null && !string.IsNullOrEmpty(updatePeriodNavigator.Value))
             {
                 SiteSummaryUpdatePeriod period  = SiteSummaryUpdateSyndicationExtension.PeriodByName(updatePeriodNavigator.Value);
                 if (period != SiteSummaryUpdatePeriod.None)
@@ -126,7 +126,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
 
             if (updateFrequencyNavigator != null)
             {
-                if (Int32.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frequency))
+                if (int.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frequency))
                 {
                     this.Frequency  = frequency;
                     wasLoaded       = true;
@@ -163,7 +163,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
             writer.WriteElementString("updatePeriod", xmlNamespace, SiteSummaryUpdateSyndicationExtension.PeriodAsString(this.Period));
         }
 
-        if(this.Frequency != Int32.MinValue)
+        if(this.Frequency != int.MinValue)
         {
             writer.WriteElementString("updateFrequency", xmlNamespace, this.Frequency.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }

@@ -7,7 +7,7 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <seealso cref="SiteSummaryUpdateSyndicationExtensionContext.Period"/>
 /// <seealso cref="SiteSummaryUpdateSyndicationExtensionContext"/>
-[Serializable()]
+[Serializable]
 public enum SiteSummaryUpdatePeriod
 {
     /// <summary>

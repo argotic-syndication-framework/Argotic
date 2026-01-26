@@ -12,7 +12,7 @@ namespace Argotic.Net;
 /// </remarks>
 /// <seealso cref="XmlRpcClient.SendAsync(XmlRpcMessage, Object)"/>
 /// <seealso cref="XmlRpcClient"/>
-[Serializable()]
+[Serializable]
 public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
 {
     /// <summary>

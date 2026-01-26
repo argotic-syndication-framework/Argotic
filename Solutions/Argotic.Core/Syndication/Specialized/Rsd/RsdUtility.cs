@@ -38,7 +38,7 @@ internal static class RsdUtility
         XmlNamespaceManager manager = null;
         Guard.ArgumentNotNull(nameTable, "nameTable");
         manager = new XmlNamespaceManager(nameTable);
-        manager.AddNamespace("rsd", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : RSD_NAMESPACE);
+        manager.AddNamespace("rsd", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : RSD_NAMESPACE);
 
         return manager;
     }
@@ -71,7 +71,7 @@ internal static class RsdUtility
 
         if (iterator == null || iterator.Count <= 0)
         {
-            string safeXpath    = xpath.Replace("rsd:", String.Empty);
+            string safeXpath    = xpath.Replace("rsd:", string.Empty);
             iterator            = source.Select(safeXpath, resolver);
         }
 
@@ -106,7 +106,7 @@ internal static class RsdUtility
 
         if (navigator == null)
         {
-            string safeXpath    = xpath.Replace("rsd:", String.Empty);
+            string safeXpath    = xpath.Replace("rsd:", string.Empty);
             navigator           = source.SelectSingleNode(safeXpath, resolver);
         }
 

@@ -20,7 +20,7 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
 {
     /// <summary>

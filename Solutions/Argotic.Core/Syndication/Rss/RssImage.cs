@@ -20,7 +20,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-[Serializable()]
+[Serializable]
 public class RssImage : IComparable, IExtensibleSyndicationObject
 {
 

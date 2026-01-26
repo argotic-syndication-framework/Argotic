@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="SimpleListSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class SimpleListSyndicationExtensionContext
 {
 
@@ -109,7 +109,7 @@ public class SimpleListSyndicationExtensionContext
             XPathNavigator treatAsNavigator         = source.SelectSingleNode("cf:treatAs", manager);
             XPathNavigator listInformationNavigator = source.SelectSingleNode("cf:listinfo", manager);
 
-            if (treatAsNavigator != null && String.Compare(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase) == 0)
+            if (treatAsNavigator != null && string.Compare(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 this.TreatAsList    = true;
                 wasLoaded           = true;

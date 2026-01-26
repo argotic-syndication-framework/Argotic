@@ -5,7 +5,7 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents the entity encoding utilized by textual content constructs.
 /// </summary>
-[Serializable()]
+[Serializable]
 public enum BlogMLContentType
 {
     /// <summary>

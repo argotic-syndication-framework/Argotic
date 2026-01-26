@@ -10,7 +10,7 @@ namespace Argotic.Syndication;
 ///     For more information about the RssCloud application programming interface, see <a href="http://www.rssboard.org/rsscloud-interface">http://www.rssboard.org/rsscloud-interface</a>.
 /// </remarks>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-[Serializable()]
+[Serializable]
 public enum RssCloudProtocol
 {
     /// <summary>

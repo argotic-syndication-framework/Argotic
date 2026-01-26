@@ -35,7 +35,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
-[Serializable()]
+[Serializable]
 public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 {
 
@@ -402,7 +402,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         />
     ///     </code>
     /// </example>
-    public void LoadAsync(Uri source, Object userToken)
+    public void LoadAsync(Uri source, object userToken)
     {
         this.LoadAsync(source, null, userToken);
     }
@@ -426,7 +426,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
     }
@@ -456,7 +456,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
     }
@@ -481,7 +481,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)

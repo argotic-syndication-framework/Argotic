@@ -62,7 +62,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
             XPathNavigator homePageLinkNavigator    = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:homePageLink", manager);
             XPathNodeIterator apiIterator           = RsdUtility.SelectSafe(serviceNavigator, "rsd:apis/rsd:api", manager);
 
-            if (engineNameNavigator != null && !String.IsNullOrEmpty(engineNameNavigator.Value))
+            if (engineNameNavigator != null && !string.IsNullOrEmpty(engineNameNavigator.Value))
             {
                 resource.EngineName     = engineNameNavigator.Value;
             }
@@ -91,7 +91,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                     RsdApplicationInterface api = new RsdApplicationInterface();
                     counter++;
 
-                    string rpcLinkAttribute = apiIterator.Current.GetAttribute("rpcLink", String.Empty);
+                    string rpcLinkAttribute = apiIterator.Current.GetAttribute("rpcLink", string.Empty);
                     if (Uri.TryCreate(rpcLinkAttribute, UriKind.RelativeOrAbsolute, out Uri link))
                     {
                         api.Link    = link;

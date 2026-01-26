@@ -10,7 +10,7 @@ namespace Argotic.Extensions.Core;
 /// Encapsulates specific information about an individual <see cref="TrackbackSyndicationExtension"/>.
 /// </summary>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
-[Serializable()]
+[Serializable]
 public class TrackbackSyndicationExtensionContext
 {
 
@@ -125,7 +125,7 @@ public class TrackbackSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        writer.WriteElementString("ping", xmlNamespace, this.Ping != null ? this.Ping.ToString() : String.Empty);
+        writer.WriteElementString("ping", xmlNamespace, this.Ping != null ? this.Ping.ToString() : string.Empty);
 
         foreach (Uri about in this.Abouts)
         {

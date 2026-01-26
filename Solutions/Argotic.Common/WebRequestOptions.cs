@@ -9,7 +9,7 @@ namespace Argotic.Common;
 /// <summary>
 /// Holds options that should be applied to web requests.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class WebRequestOptions
 {
     /// <summary>
@@ -48,7 +48,7 @@ public class WebRequestOptions
     }
 
     private AuthenticationLevel? _authenticationLevel;
-    [NonSerialized()] private RequestCachePolicy _cachePolicy;
+    [NonSerialized] private RequestCachePolicy _cachePolicy;
     private string _connectionGroupName;
     private ICredentials _credentials;
     private WebHeaderCollection _headers;

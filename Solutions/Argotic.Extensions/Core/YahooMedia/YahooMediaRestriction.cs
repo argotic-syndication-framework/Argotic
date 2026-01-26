@@ -16,7 +16,7 @@ namespace Argotic.Extensions.Core;
 ///         Only one <see cref="YahooMediaRestriction"/> object of the same type can be applied to a media object, all others will be ignored.
 ///     </para>
 /// </remarks>
-[Serializable()]
+[Serializable]
 public class YahooMediaRestriction : IComparable
 {
 

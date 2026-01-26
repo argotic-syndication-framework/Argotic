@@ -10,8 +10,8 @@ namespace Argotic.Extensions.Core;
 /// <remarks>
 ///     For more information about the DCMI Type Vocabulary, see <a href="http://dublincore.org/documents/dcmi-type-vocabulary/">http://dublincore.org/documents/dcmi-type-vocabulary/</a>.
 /// </remarks>
-[Serializable()]
-[Flags()]
+[Serializable]
+[Flags]
 public enum DublinCoreTypeVocabularies
 {
     /// <summary>

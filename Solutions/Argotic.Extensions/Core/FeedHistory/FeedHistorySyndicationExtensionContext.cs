@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="FeedHistorySyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class FeedHistorySyndicationExtensionContext
 {
 
@@ -96,7 +96,7 @@ public class FeedHistorySyndicationExtensionContext
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
 
-        if (String.IsNullOrEmpty(manager.LookupNamespace("atom")))
+        if (string.IsNullOrEmpty(manager.LookupNamespace("atom")))
         {
             manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
         }
@@ -122,9 +122,9 @@ public class FeedHistorySyndicationExtensionContext
             {
                 while (linkIterator.MoveNext())
                 {
-                    string relAttribute = linkIterator.Current.GetAttribute("rel", String.Empty);
+                    string relAttribute = linkIterator.Current.GetAttribute("rel", string.Empty);
 
-                    if (!String.IsNullOrEmpty(relAttribute) && FeedHistorySyndicationExtension.LinkRelationTypeByName(relAttribute) != FeedHistoryLinkRelationType.None)
+                    if (!string.IsNullOrEmpty(relAttribute) && FeedHistorySyndicationExtension.LinkRelationTypeByName(relAttribute) != FeedHistoryLinkRelationType.None)
                     {
                         FeedHistoryLinkRelation relation    = new FeedHistoryLinkRelation();
                         if (relation.Load(linkIterator.Current))
@@ -154,12 +154,12 @@ public class FeedHistorySyndicationExtensionContext
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
         if (this.IsArchive)
         {
-            writer.WriteElementString("archive", xmlNamespace, String.Empty);
+            writer.WriteElementString("archive", xmlNamespace, string.Empty);
         }
 
         if (this.IsComplete)
         {
-            writer.WriteElementString("complete", xmlNamespace, String.Empty);
+            writer.WriteElementString("complete", xmlNamespace, string.Empty);
         }
 
         foreach (FeedHistoryLinkRelation relation in this.Relations)

@@ -13,7 +13,7 @@ namespace Argotic.Common;
 /// <seealso cref="ISyndicationResource"/>
 /// <seealso cref="ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"/>
 /// <seealso cref="ISyndicationResource.Load(System.Xml.XmlReader)"/>
-[Serializable()]
+[Serializable]
 public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
 {
     /// <summary>
@@ -23,7 +23,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication resource.
     /// </summary>
-    [NonSerialized()]
+    [NonSerialized]
     private XPathNavigator eventNavigator;
     /// <summary>
     /// Private member to hold the URI that the syndication resource information was retrieved from.

@@ -30,14 +30,14 @@ namespace Argotic.Extensions;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializable
 {
 
     /// <summary>
     /// Private member to hold the human-readable description of the syndication extension.
     /// </summary>
-    private string extensionDescription  = String.Empty;
+    private string extensionDescription  = string.Empty;
     /// <summary>
     /// Private member to hold a URL that points to documentation for the syndication extension.
     /// </summary>
@@ -45,7 +45,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <summary>
     /// Private member to hold the human-readable name of the syndication extension.
     /// </summary>
-    private string extensionName = String.Empty;
+    private string extensionName = string.Empty;
     /// <summary>
     /// Private member to hold the version of the specification that the syndication extension conforms to.
     /// </summary>
@@ -53,11 +53,11 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <summary>
     /// Private member to hold the XML namespace that is used when qualifying the syndication extension's element and attribute names.
     /// </summary>
-    private string extensionXmlNamespace = String.Empty;
+    private string extensionXmlNamespace = string.Empty;
     /// <summary>
     /// Private member to hold the prefix used to associate the syndication extension's element and attribute names with the syndication extension's XML namespace.
     /// </summary>
-    private string extensionXmlPrefix    = String.Empty;
+    private string extensionXmlPrefix    = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtension"/> class.
     /// </summary>
@@ -111,7 +111,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
 
         extensionDocumentation      = documentation;
         extensionName               = name.Trim();
-        if(!String.IsNullOrEmpty(description))
+        if(!string.IsNullOrEmpty(description))
         {
             extensionDescription    = description.Trim();
         }
@@ -227,13 +227,13 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
         manager = new XmlNamespaceManager(navigator.NameTable);
 
         Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-        string existingXmlNamespace             = String.Empty;
+        string existingXmlNamespace             = string.Empty;
         if (namespaces.ContainsKey(this.XmlPrefix))
         {
             existingXmlNamespace    = namespaces[this.XmlPrefix];
         }
 
-        manager.AddNamespace(this.XmlPrefix, !String.IsNullOrEmpty(existingXmlNamespace) ? existingXmlNamespace : this.XmlNamespace);
+        manager.AddNamespace(this.XmlPrefix, !string.IsNullOrEmpty(existingXmlNamespace) ? existingXmlNamespace : this.XmlNamespace);
 
         return manager;
     }

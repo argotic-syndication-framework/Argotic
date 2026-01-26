@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso cref="FeedSynchronizationSyndicationExtensionContext"/>
-[Serializable()]
+[Serializable]
 public class FeedSynchronizationItem : IComparable
 {
 

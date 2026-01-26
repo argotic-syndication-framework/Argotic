@@ -10,7 +10,7 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents an categorization taxonomy for published content.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndicationObject
 {
 

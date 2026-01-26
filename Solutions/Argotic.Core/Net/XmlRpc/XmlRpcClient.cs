@@ -37,7 +37,7 @@ public class XmlRpcClient
     /// <summary>
     /// Private member to hold information such as the application name, version, host operating system, and language.
     /// </summary>
-    private string clientUserAgent  = String.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient)).GetName().Version.ToString(4));
+    private string clientUserAgent  = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient)).GetName().Version.ToString(4));
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
@@ -321,7 +321,7 @@ public class XmlRpcClient
     /// </example>
     public static string ScalarTypeAsString(XmlRpcScalarValueType type)
     {
-        string name = String.Empty;
+        string name = string.Empty;
 
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(XmlRpcScalarValueType).GetFields())
         {
@@ -378,7 +378,7 @@ public class XmlRpcClient
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         valueType   = type;
                         break;
@@ -409,7 +409,7 @@ public class XmlRpcClient
     /// </remarks>
     public static bool TryParseValue(XPathNavigator source, out IXmlRpcValue value)
     {
-        if (source == null || String.Compare(source.Name, "value", StringComparison.OrdinalIgnoreCase) != 0)
+        if (source == null || string.Compare(source.Name, "value", StringComparison.OrdinalIgnoreCase) != 0)
         {
             value   = null;
             return false;
@@ -420,23 +420,23 @@ public class XmlRpcClient
             XPathNavigator navigator    = source.CreateNavigator();
             if (navigator.MoveToFirstChild())
             {
-                if (String.Compare(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
+                    if (int.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
                     {
                         value   = new XmlRpcScalarValue(scalar);
                         return true;
                     }
                 }
-                else if (String.Compare(navigator.Name, "int", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(navigator.Name, "int", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
+                    if (int.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
                     {
                         value   = new XmlRpcScalarValue(scalar);
                         return true;
                     }
                 }
-                else if (String.Compare(navigator.Name, "boolean", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(navigator.Name, "boolean", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     if (XmlRpcClient.TryParseBoolean(navigator.Value, out bool scalar))
                     {
@@ -444,20 +444,20 @@ public class XmlRpcClient
                         return true;
                     }
                 }
-                else if (String.Compare(navigator.Name, "string", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(navigator.Name, "string", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     value   = new XmlRpcScalarValue(navigator.Value);
                     return true;
                 }
-                else if (String.Compare(navigator.Name, "double", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(navigator.Name, "double", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (Double.TryParse(navigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out double scalar))
+                    if (double.TryParse(navigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out double scalar))
                     {
                         value   = new XmlRpcScalarValue(scalar);
                         return true;
                     }
                 }
-                else if (String.Compare(navigator.Name, "dateTime.iso8601", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(navigator.Name, "dateTime.iso8601", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(navigator.Value, out DateTime scalar))
                     {
@@ -465,9 +465,9 @@ public class XmlRpcClient
                         return true;
                     }
                 }
-                else if (String.Compare(navigator.Name, "base64", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(navigator.Name, "base64", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if(!String.IsNullOrEmpty(navigator.Value))
+                    if(!string.IsNullOrEmpty(navigator.Value))
                     {
                         try
                         {
@@ -482,7 +482,7 @@ public class XmlRpcClient
                         }
                     }
                 }
-                else if (String.Compare(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     XmlRpcStructureValue structure  = new XmlRpcStructureValue();
                     if (structure.Load(source))
@@ -491,7 +491,7 @@ public class XmlRpcClient
                         return true;
                     }
                 }
-                else if (String.Compare(navigator.Name, "array", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(navigator.Name, "array", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     XmlRpcArrayValue array  = new XmlRpcArrayValue();
                     if (array.Load(source))
@@ -502,7 +502,7 @@ public class XmlRpcClient
                 }
             }
         }
-        else if (!String.IsNullOrEmpty(source.Value))
+        else if (!string.IsNullOrEmpty(source.Value))
         {
             value   = new XmlRpcScalarValue(source.Value);
             return true;
@@ -525,22 +525,22 @@ public class XmlRpcClient
     /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
     internal static bool TryParseBoolean(string value, out bool result)
     {
-        if (String.Compare(value, "1", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Compare(value, "1", StringComparison.OrdinalIgnoreCase) == 0)
         {
             result  = true;
             return true;
         }
-        else if (String.Compare(value, "0", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Compare(value, "0", StringComparison.OrdinalIgnoreCase) == 0)
         {
             result  = false;
             return true;
         }
-        else if (String.Compare(value, "true", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Compare(value, "true", StringComparison.OrdinalIgnoreCase) == 0)
         {
             result  = true;
             return true;
         }
-        else if (String.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0)
         {
             result = false;
             return true;
@@ -623,11 +623,11 @@ public class XmlRpcClient
 
         if(this.Host == null)
         {
-            throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
+            throw new InvalidOperationException(string.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
         }
         else if (this.SendOperationInProgress)
         {
-            throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
+            throw new InvalidOperationException(string.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
         }
 
         WebRequest webRequest   = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
@@ -656,17 +656,17 @@ public class XmlRpcClient
     /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, Object)"/> call in progress.</exception>
     //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
-    public void SendAsync(XmlRpcMessage message, Object userToken)
+    public void SendAsync(XmlRpcMessage message, object userToken)
     {
         Guard.ArgumentNotNull(message, "message");
 
         if (this.Host == null)
         {
-            throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
+            throw new InvalidOperationException(string.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
         }
         else if (this.SendOperationInProgress)
         {
-            throw new InvalidOperationException(String.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
+            throw new InvalidOperationException(string.Format(null, "Unable to send XML-RPC message. The XmlRpcClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
         }
 
         this.SendOperationInProgress    = true;
@@ -741,7 +741,7 @@ public class XmlRpcClient
         httpRequest                     = (HttpWebRequest)HttpWebRequest.Create(host);
         httpRequest.Method              = "POST";
         httpRequest.ContentLength       = payloadData.Length;
-        httpRequest.ContentType         = String.Format(null, "text/xml; charset={0}", message.Encoding.WebName);
+        httpRequest.ContentType         = string.Format(null, "text/xml; charset={0}", message.Encoding.WebName);
         httpRequest.UserAgent           = userAgent;
         if (options != null) options.ApplyOptions(httpRequest);
 
@@ -773,7 +773,7 @@ public class XmlRpcClient
                 this.Timeout    = clientConfiguration.Timeout;
             }
 
-            if (!String.IsNullOrEmpty(clientConfiguration.UserAgent))
+            if (!string.IsNullOrEmpty(clientConfiguration.UserAgent))
             {
                 this.UserAgent  = clientConfiguration.UserAgent;
             }

@@ -86,7 +86,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator titleNavigator       = navigator.SelectSingleNode("title", manager);
         XPathNavigator languageNavigator    = navigator.SelectSingleNode("language", manager);
 
-        if (descriptionNavigator != null && !String.IsNullOrEmpty(descriptionNavigator.Value))
+        if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
             channel.Description = descriptionNavigator.Value;
         }
@@ -99,12 +99,12 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (titleNavigator != null && !String.IsNullOrEmpty(titleNavigator.Value))
+        if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
             channel.Title       = titleNavigator.Value;
         }
 
-        if (languageNavigator != null && !String.IsNullOrEmpty(languageNavigator.Value))
+        if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
         {
             try
             {
@@ -158,7 +158,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (skipDaysIterator.MoveNext())
             {
-                if (!String.IsNullOrEmpty(skipDaysIterator.Current.Value))
+                if (!string.IsNullOrEmpty(skipDaysIterator.Current.Value))
                 {
                     try
                     {
@@ -180,7 +180,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (skipHoursIterator.MoveNext())
             {
-                if (Int32.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
+                if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
                     hour    = hour - 1; // Convert to zero-based range
 
@@ -343,7 +343,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         }
         if (titleNavigator != null)
         {
-            if (!String.IsNullOrEmpty(titleNavigator.Value))
+            if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
                 image.Title     = titleNavigator.Value;
             }
@@ -362,14 +362,14 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         }
         if (heightNavigator != null)
         {
-            if (Int32.TryParse(heightNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
+            if (int.TryParse(heightNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
             {
                 image.Height    = height < RssImage.HeightMaximum ? height : RssImage.HeightMaximum;
             }
         }
         if (widthNavigator != null)
         {
-            if (Int32.TryParse(widthNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
+            if (int.TryParse(widthNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
             {
                 image.Width     = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
             }
@@ -404,7 +404,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (descriptionNavigator != null)
         {
-            if (!String.IsNullOrEmpty(descriptionNavigator.Value))
+            if (!string.IsNullOrEmpty(descriptionNavigator.Value))
             {
                 textInput.Description   = descriptionNavigator.Value;
             }
@@ -418,14 +418,14 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         }
         if (nameNavigator != null)
         {
-            if (!String.IsNullOrEmpty(nameNavigator.Value))
+            if (!string.IsNullOrEmpty(nameNavigator.Value))
             {
                 textInput.Name          = nameNavigator.Value;
             }
         }
         if (titleNavigator != null)
         {
-            if (!String.IsNullOrEmpty(titleNavigator.Value))
+            if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
                 textInput.Title         = titleNavigator.Value;
             }

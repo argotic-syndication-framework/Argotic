@@ -11,7 +11,7 @@ using System.Xml;
 ///This is a test class for ITunesSyndicationExtensionTest and is intended
 ///to contain all ITunesSyndicationExtensionTest Unit Tests
 ///</summary>
-[TestClass()]
+[TestClass]
 public class ITunesSyndicationExtensionTest
 {
 
@@ -58,7 +58,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for ITunesSyndicationExtension Constructor
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunesSyndicationExtensionConstructorTest()
     {
         ITunesSyndicationExtension target = new ITunesSyndicationExtension();
@@ -69,7 +69,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for CompareTo
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_CompareToTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
@@ -83,7 +83,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for ConvertDecimalToDegreesMinutesSeconds
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_ExplicitMaterialAsStringTest()
     {
         ITunesExplicitMaterial value = ITunesExplicitMaterial.Clean;
@@ -95,7 +95,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for ConvertDegreesMinutesSecondsToDecimal
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_ExplicitMaterialByNameTest()
     {
         ITunesExplicitMaterial expected = ITunesExplicitMaterial.Clean;
@@ -106,7 +106,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for Equals
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_EqualsTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
@@ -189,7 +189,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for MatchByType
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_MatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
@@ -202,7 +202,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for ToString
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_ToStringTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
@@ -215,7 +215,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for WriteTo
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_WriteToTest()
     {
         using (StringWriter sw = new StringWriter())
@@ -232,7 +232,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for op_Equality
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_op_EqualityTest_Failure()
     {
         ITunesSyndicationExtension first = CreateExtension1();
@@ -256,7 +256,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for op_GreaterThan
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_op_GreaterThanTest()
     {
         ITunesSyndicationExtension first = CreateExtension1();
@@ -270,7 +270,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for op_Inequality
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_op_InequalityTest()
     {
         ITunesSyndicationExtension first = CreateExtension1();
@@ -283,7 +283,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for op_LessThan
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void ITunes_op_LessThanTest()
     {
         ITunesSyndicationExtension first = CreateExtension1();
@@ -297,7 +297,7 @@ public class ITunesSyndicationExtensionTest
     /// <summary>
     ///A test for Context
     ///</summary>
-    [TestMethod(), Ignore]
+    [TestMethod, Ignore]
     public void ITunes_ContextTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();

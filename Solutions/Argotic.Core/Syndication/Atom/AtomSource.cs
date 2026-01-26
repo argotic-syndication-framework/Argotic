@@ -32,7 +32,7 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
 {
 

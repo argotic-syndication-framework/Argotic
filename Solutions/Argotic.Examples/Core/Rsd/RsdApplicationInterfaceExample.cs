@@ -29,7 +29,7 @@ public static class RsdApplicationInterfaceExample
         document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
         document.AddInterface(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
 
-        RsdApplicationInterface conversantApi   = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, String.Empty);
+        RsdApplicationInterface conversantApi   = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty);
         conversantApi.Documentation             = new Uri("http://www.conversant.com/docs/api/");
         conversantApi.Notes                     = "Additional explanation here.";
         conversantApi.Settings.Add("service-specific-setting", "a value");

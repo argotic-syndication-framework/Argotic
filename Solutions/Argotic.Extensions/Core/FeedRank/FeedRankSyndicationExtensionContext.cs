@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="FeedRankSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class FeedRankSyndicationExtensionContext
 {
 
@@ -24,11 +24,11 @@ public class FeedRankSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the language sensitive, human-readable label for the rank.
     /// </summary>
-    private string extensionLabel   = String.Empty;
+    private string extensionLabel   = string.Empty;
     /// <summary>
     /// Private member to hold the decimal value of the rank.
     /// </summary>
-    private decimal extensionValue  = Decimal.MinValue;
+    private decimal extensionValue  = decimal.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class.
     /// </summary>
@@ -77,9 +77,9 @@ public class FeedRankSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionLabel = String.Empty;
+                extensionLabel = string.Empty;
             }
             else
             {
@@ -143,11 +143,11 @@ public class FeedRankSyndicationExtensionContext
             {
                 if (rankNavigator.HasAttributes)
                 {
-                    string schemeAttribute  = rankNavigator.GetAttribute("scheme", String.Empty);
-                    string domainAttribute  = rankNavigator.GetAttribute("domain", String.Empty);
-                    string labelAttribute   = rankNavigator.GetAttribute("label", String.Empty);
+                    string schemeAttribute  = rankNavigator.GetAttribute("scheme", string.Empty);
+                    string domainAttribute  = rankNavigator.GetAttribute("domain", string.Empty);
+                    string labelAttribute   = rankNavigator.GetAttribute("label", string.Empty);
 
-                    if (!String.IsNullOrEmpty(schemeAttribute))
+                    if (!string.IsNullOrEmpty(schemeAttribute))
                     {
                         if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                         {
@@ -156,7 +156,7 @@ public class FeedRankSyndicationExtensionContext
                         }
                     }
 
-                    if (!String.IsNullOrEmpty(domainAttribute))
+                    if (!string.IsNullOrEmpty(domainAttribute))
                     {
                         if (Uri.TryCreate(domainAttribute, UriKind.RelativeOrAbsolute, out Uri domain))
                         {
@@ -165,16 +165,16 @@ public class FeedRankSyndicationExtensionContext
                         }
                     }
 
-                    if (!String.IsNullOrEmpty(labelAttribute))
+                    if (!string.IsNullOrEmpty(labelAttribute))
                     {
                         this.Label  = labelAttribute;
                         wasLoaded   = true;
                     }
                 }
 
-                if (!String.IsNullOrEmpty(rankNavigator.Value))
+                if (!string.IsNullOrEmpty(rankNavigator.Value))
                 {
-                    if (Decimal.TryParse(rankNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal value))
+                    if (decimal.TryParse(rankNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal value))
                     {
                         this.Value  = value;
                         wasLoaded   = true;
@@ -200,19 +200,19 @@ public class FeedRankSyndicationExtensionContext
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
         writer.WriteStartElement("rank", xmlNamespace);
 
-        writer.WriteAttributeString("scheme", xmlNamespace, this.Scheme != null ? this.Scheme.ToString() : String.Empty);
+        writer.WriteAttributeString("scheme", xmlNamespace, this.Scheme != null ? this.Scheme.ToString() : string.Empty);
 
         if(this.Domain != null)
         {
             writer.WriteAttributeString("domain", xmlNamespace, this.Domain.ToString());
         }
 
-        if (!String.IsNullOrEmpty(this.Label))
+        if (!string.IsNullOrEmpty(this.Label))
         {
             writer.WriteAttributeString("label", this.Label);
         }
 
-        if (this.Value != Decimal.MinValue)
+        if (this.Value != decimal.MinValue)
         {
             writer.WriteString(this.Value.ToString(NumberFormatInfo.InvariantInfo));
         }

@@ -61,7 +61,7 @@ public static class AtomEntryExample
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-    private static void EntryLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+    private static void EntryLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
     {
         if(e.State != null)
         {

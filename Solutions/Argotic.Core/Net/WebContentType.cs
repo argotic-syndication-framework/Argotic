@@ -11,7 +11,7 @@ namespace Argotic.Net;
 /// <remarks>
 ///     <para>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.</para>
 /// </remarks>
-[Serializable()]
+[Serializable]
 public class WebContentType : IComparable
 {
     /// <summary>

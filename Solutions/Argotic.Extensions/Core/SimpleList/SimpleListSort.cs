@@ -21,7 +21,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso cref="SimpleListSyndicationExtensionContext.Sorting"/>
-[Serializable()]
+[Serializable]
 public class SimpleListSort : IComparable
 {
 

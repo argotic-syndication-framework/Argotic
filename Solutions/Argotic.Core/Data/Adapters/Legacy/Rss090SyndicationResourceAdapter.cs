@@ -131,7 +131,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator linkNavigator        = navigator.SelectSingleNode("rss:link", manager);
         XPathNavigator titleNavigator       = navigator.SelectSingleNode("rss:title", manager);
 
-        if (descriptionNavigator != null && !String.IsNullOrEmpty(descriptionNavigator.Value))
+        if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
             channel.Description = descriptionNavigator.Value;
         }
@@ -144,7 +144,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (titleNavigator != null && !String.IsNullOrEmpty(titleNavigator.Value))
+        if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
             channel.Title       = titleNavigator.Value;
         }
@@ -185,7 +185,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (titleNavigator != null)
         {
-            if (!String.IsNullOrEmpty(titleNavigator.Value))
+            if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
                 image.Title     = titleNavigator.Value;
             }
@@ -228,7 +228,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (descriptionNavigator != null)
         {
-            if (!String.IsNullOrEmpty(descriptionNavigator.Value))
+            if (!string.IsNullOrEmpty(descriptionNavigator.Value))
             {
                 textInput.Description   = descriptionNavigator.Value;
             }
@@ -244,7 +244,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (nameNavigator != null)
         {
-            if (!String.IsNullOrEmpty(nameNavigator.Value))
+            if (!string.IsNullOrEmpty(nameNavigator.Value))
             {
                 textInput.Name          = nameNavigator.Value;
             }
@@ -252,7 +252,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (titleNavigator != null)
         {
-            if (!String.IsNullOrEmpty(titleNavigator.Value))
+            if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
                 textInput.Title         = titleNavigator.Value;
             }

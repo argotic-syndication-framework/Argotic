@@ -55,23 +55,23 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
             {
                 if (documentNavigator.HasAttributes)
                 {
-                    string fixedAttribute   = documentNavigator.GetAttribute("fixed", String.Empty);
-                    string schemeAttribute  = documentNavigator.GetAttribute("scheme", String.Empty);
-                    string hrefAttribute    = documentNavigator.GetAttribute("href", String.Empty);
+                    string fixedAttribute   = documentNavigator.GetAttribute("fixed", string.Empty);
+                    string schemeAttribute  = documentNavigator.GetAttribute("scheme", string.Empty);
+                    string hrefAttribute    = documentNavigator.GetAttribute("href", string.Empty);
 
-                    if (!String.IsNullOrEmpty(fixedAttribute))
+                    if (!string.IsNullOrEmpty(fixedAttribute))
                     {
-                        if (String.Compare(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Compare(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             resource.IsFixed    = true;
                         }
-                        else if (String.Compare(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (string.Compare(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase) == 0)
                         {
                             resource.IsFixed    = false;
                         }
                     }
 
-                    if (!String.IsNullOrEmpty(schemeAttribute))
+                    if (!string.IsNullOrEmpty(schemeAttribute))
                     {
                         if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                         {
@@ -79,7 +79,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                         }
                     }
 
-                    if (!String.IsNullOrEmpty(hrefAttribute))
+                    if (!string.IsNullOrEmpty(hrefAttribute))
                     {
                         if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                         {

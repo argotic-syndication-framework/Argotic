@@ -6,7 +6,7 @@ using Argotic.Syndication;
 ///This is a test class for GenericSyndicationFeedTest and is intended
 ///to contain all GenericSyndicationFeedTest Unit Tests
 ///</summary>
-[TestClass()]
+[TestClass]
 public class GenericSyndicationFeedTest
 {
     private string namespc = @"xmlns:app=""http://www.wdr.de/rss/1.0/modules/app/1.0/""";

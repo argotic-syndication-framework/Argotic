@@ -21,7 +21,7 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
 {
 

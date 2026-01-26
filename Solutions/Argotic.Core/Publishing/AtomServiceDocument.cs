@@ -30,7 +30,7 @@ namespace Argotic.Publishing;
 ///     </para>
 /// </remarks>
 /// <seealso cref="AtomCategoryDocument"/>
-[Serializable()]
+[Serializable]
 [MimeMediaType(Name = "application", SubName = "atomsvc+xml", Documentation = "http://bitworking.org/projects/atom/rfc5023.html#iana-atomsvc")]
 public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
 {
@@ -555,7 +555,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="AtomServiceDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, Object userToken)
+    public void LoadAsync(Uri source, object userToken)
     {
         this.LoadAsync(source, null, userToken);
     }
@@ -579,7 +579,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="AtomServiceDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
     }
@@ -609,7 +609,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="AtomServiceDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
     }
@@ -634,7 +634,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="AtomServiceDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
         Guard.ArgumentNotNull(source, "source");
 

@@ -6,7 +6,7 @@ namespace Argotic.Common;
 /// <summary>
 /// Represents metadata associated with a <see cref="ISyndicationResource">syndication resource</see>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class SyndicationResourceMetadata : IComparable
 {
     /// <summary>
@@ -24,7 +24,7 @@ public class SyndicationResourceMetadata : IComparable
     /// <summary>
     /// Private member to hold a XPath navigator that can be used to navigate the root element of the syndication resource.
     /// </summary>
-    [NonSerialized()]
+    [NonSerialized]
     private XPathNavigator resourceRootNode;
 
     /// <summary>

@@ -8,13 +8,13 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="LiveJournalSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class LiveJournalSyndicationExtensionContext
 {
     /// <summary>
     /// Private member to hold the current music.
     /// </summary>
-    private string extensionMusic   = String.Empty;
+    private string extensionMusic   = string.Empty;
     /// <summary>
     /// Private member to hold the current mood.
     /// </summary>
@@ -92,9 +92,9 @@ public class LiveJournalSyndicationExtensionContext
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                extensionMusic = String.Empty;
+                extensionMusic = string.Empty;
             }
             else
             {
@@ -164,7 +164,7 @@ public class LiveJournalSyndicationExtensionContext
             XPathNavigator userPictureNavigator     = source.SelectSingleNode("lj:userpic", manager);
             XPathNavigator preformattedNavigator    = source.SelectSingleNode("lj:preformatted", manager);
 
-            if (musicNavigator != null && !String.IsNullOrEmpty(musicNavigator.Value))
+            if (musicNavigator != null && !string.IsNullOrEmpty(musicNavigator.Value))
             {
                 this.Music  = musicNavigator.Value;
                 wasLoaded   = true;
@@ -222,7 +222,7 @@ public class LiveJournalSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if (!String.IsNullOrEmpty(this.Music))
+        if (!string.IsNullOrEmpty(this.Music))
         {
             writer.WriteStartElement("music", xmlNamespace);
             writer.WriteCData(this.Music);
@@ -241,7 +241,7 @@ public class LiveJournalSyndicationExtensionContext
 
         if (this.IsPreformatted)
         {
-            writer.WriteElementString("preformatted", xmlNamespace, String.Empty);
+            writer.WriteElementString("preformatted", xmlNamespace, string.Empty);
         }
     }
 }

@@ -12,7 +12,7 @@ namespace Argotic.Syndication.Specialized;
 /// </summary>
 /// <seealso cref="BlogMLPost.Trackbacks"/>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
-[Serializable()]
+[Serializable]
 public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSyndicationObject
 {
 

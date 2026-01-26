@@ -8,7 +8,7 @@ namespace Argotic.Net;
 /// <seealso cref="XmlRpcScalarValue.ValueType"/>
 /// <seealso cref="XmlRpcScalarValue"/>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-[Serializable()]
+[Serializable]
 public enum XmlRpcScalarValueType
 {
     /// <summary>

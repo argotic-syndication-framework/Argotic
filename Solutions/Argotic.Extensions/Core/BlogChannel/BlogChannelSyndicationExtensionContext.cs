@@ -8,7 +8,7 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="BlogChannelSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class BlogChannelSyndicationExtensionContext
 {
 

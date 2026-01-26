@@ -10,18 +10,18 @@ namespace Argotic.Extensions.Core;
 /// Encapsulates specific information about an individual <see cref="BasicGeocodingSyndicationExtension"/>.
 /// </summary>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Geocoding")]
-[Serializable()]
+[Serializable]
 public class BasicGeocodingSyndicationExtensionContext
 {
 
     /// <summary>
     /// Private member to hold the latitude spatial coordinate.
     /// </summary>
-    private decimal extensionLatitude   = Decimal.MinValue;
+    private decimal extensionLatitude   = decimal.MinValue;
     /// <summary>
     /// Private member to hold the longitude spatial coordinate.
     /// </summary>
-    private decimal extensionLongitude  = Decimal.MinValue;
+    private decimal extensionLongitude  = decimal.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtensionContext"/> class.
     /// </summary>
@@ -81,7 +81,7 @@ public class BasicGeocodingSyndicationExtensionContext
 
         if (latitudeNavigator != null)
         {
-            if (Decimal.TryParse(latitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal latitude))
+            if (decimal.TryParse(latitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal latitude))
             {
                 this.Latitude   = latitude;
                 wasLoaded       = true;
@@ -90,7 +90,7 @@ public class BasicGeocodingSyndicationExtensionContext
 
         if (longitudeNavigator != null)
         {
-            if (Decimal.TryParse(longitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal longitude))
+            if (decimal.TryParse(longitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal longitude))
             {
                 this.Longitude  = longitude;
                 wasLoaded       = true;
@@ -116,12 +116,12 @@ public class BasicGeocodingSyndicationExtensionContext
 
         formatProvider.NumberDecimalDigits      = 7;
         formatProvider.NumberDecimalSeparator   = NumberFormatInfo.InvariantInfo.NumberDecimalSeparator;
-        if (this.Latitude != Decimal.MinValue)
+        if (this.Latitude != decimal.MinValue)
         {
             writer.WriteElementString("lat", xmlNamespace, this.Latitude.ToString("N", formatProvider));
         }
 
-        if (this.Longitude != Decimal.MinValue)
+        if (this.Longitude != decimal.MinValue)
         {
             writer.WriteElementString("long", xmlNamespace, this.Longitude.ToString("N", formatProvider));
         }

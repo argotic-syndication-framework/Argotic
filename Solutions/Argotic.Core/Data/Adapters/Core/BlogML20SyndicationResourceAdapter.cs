@@ -51,10 +51,10 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if(blogNavigator.HasAttributes)
             {
-                string dateCreatedAttribute = blogNavigator.GetAttribute("date-created", String.Empty);
-                string rootUrlAttribute     = blogNavigator.GetAttribute("root-url", String.Empty);
+                string dateCreatedAttribute = blogNavigator.GetAttribute("date-created", string.Empty);
+                string rootUrlAttribute     = blogNavigator.GetAttribute("root-url", string.Empty);
 
-                if (!String.IsNullOrEmpty(dateCreatedAttribute))
+                if (!string.IsNullOrEmpty(dateCreatedAttribute))
                 {
                     if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out DateTime createdOn))
                     {
@@ -62,7 +62,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
                 }
 
-                if (!String.IsNullOrEmpty(rootUrlAttribute))
+                if (!string.IsNullOrEmpty(rootUrlAttribute))
                 {
                     if (Uri.TryCreate(rootUrlAttribute, UriKind.RelativeOrAbsolute, out Uri rootUrl))
                     {
@@ -146,10 +146,10 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             {
                 if (extendedPropertiesIterator.Current.HasAttributes)
                 {
-                    string propertyName     = extendedPropertiesIterator.Current.GetAttribute("name", String.Empty);
-                    string propertyValue    = extendedPropertiesIterator.Current.GetAttribute("value", String.Empty);
+                    string propertyName     = extendedPropertiesIterator.Current.GetAttribute("name", string.Empty);
+                    string propertyValue    = extendedPropertiesIterator.Current.GetAttribute("value", string.Empty);
 
-                    if (!String.IsNullOrEmpty(propertyName) && !document.ExtendedProperties.ContainsKey(propertyName))
+                    if (!string.IsNullOrEmpty(propertyName) && !document.ExtendedProperties.ContainsKey(propertyName))
                     {
                         document.ExtendedProperties.Add(propertyName, propertyValue);
                     }

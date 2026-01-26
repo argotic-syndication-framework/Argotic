@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 public class ITunesSyndicationExtension : SyndicationExtension, IComparable
 {
     /// <summary>

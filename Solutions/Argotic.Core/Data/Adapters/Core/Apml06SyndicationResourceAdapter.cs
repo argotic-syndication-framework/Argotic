@@ -58,8 +58,8 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if (bodyNavigator.HasAttributes)
             {
-                string defaultProfileAttribute  = bodyNavigator.GetAttribute("defaultprofile", String.Empty);
-                if (!String.IsNullOrEmpty(defaultProfileAttribute))
+                string defaultProfileAttribute  = bodyNavigator.GetAttribute("defaultprofile", string.Empty);
+                if (!string.IsNullOrEmpty(defaultProfileAttribute))
                 {
                     resource.DefaultProfileName = defaultProfileAttribute;
                 }

@@ -50,7 +50,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         Guard.ArgumentNotNull(nameTable, "nameTable");
 
         manager = new XmlNamespaceManager(nameTable);
-        manager.AddNamespace("atom", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : "http://purl.org/atom/ns#");
+        manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : "http://purl.org/atom/ns#");
         manager.AddNamespace("xhtml", AtomUtility.XhtmlNamespace);
 
         return manager;
@@ -139,7 +139,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     private static AtomContent CreateContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
         AtomContent content     = new AtomContent();
-        string modeAttribute    = String.Empty;
+        string modeAttribute    = string.Empty;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
@@ -149,28 +149,28 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            modeAttribute           = source.GetAttribute("mode", String.Empty);
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            modeAttribute           = source.GetAttribute("mode", string.Empty);
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 content.ContentType = typeAttribute;
             }
         }
 
-        if (String.Compare(modeAttribute, "xml", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Compare(modeAttribute, "xml", StringComparison.OrdinalIgnoreCase) == 0)
         {
             XPathNavigator xhtmlDivNavigator    = source.SelectSingleNode("xhtml:div", manager);
-            if (xhtmlDivNavigator != null && !String.IsNullOrEmpty(xhtmlDivNavigator.Value))
+            if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
                 content.Content = xhtmlDivNavigator.Value;
             }
-            else if (!String.IsNullOrEmpty(source.Value))
+            else if (!string.IsNullOrEmpty(source.Value))
             {
                 content.Content = source.Value;
             }
         }
-        else if (!String.IsNullOrEmpty(source.Value))
+        else if (!string.IsNullOrEmpty(source.Value))
         {
             content.Content     = source.Value;
         }
@@ -206,10 +206,10 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if(source.HasAttributes)
         {
-            string urlAttribute     = source.GetAttribute("url", String.Empty);
-            string versionAttribute = source.GetAttribute("version", String.Empty);
+            string urlAttribute     = source.GetAttribute("url", string.Empty);
+            string versionAttribute = source.GetAttribute("version", string.Empty);
 
-            if (!String.IsNullOrEmpty(urlAttribute))
+            if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri uri))
                 {
@@ -217,13 +217,13 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
             }
 
-            if (!String.IsNullOrEmpty(versionAttribute))
+            if (!string.IsNullOrEmpty(versionAttribute))
             {
                 generator.Version   = versionAttribute;
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             generator.Content       = source.Value;
         }
@@ -310,18 +310,18 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (source.HasAttributes)
         {
-            string modeAttribute    = source.GetAttribute("mode", String.Empty);
-            if (!String.IsNullOrEmpty(modeAttribute))
+            string modeAttribute    = source.GetAttribute("mode", string.Empty);
+            if (!string.IsNullOrEmpty(modeAttribute))
             {
-                if (String.Compare(modeAttribute, "base64", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(modeAttribute, "base64", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     content.TextType    = AtomTextConstructType.Text;
                 }
-                else if (String.Compare(modeAttribute, "escaped", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(modeAttribute, "escaped", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     content.TextType    = AtomTextConstructType.Html;
                 }
-                else if (String.Compare(modeAttribute, "xml", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(modeAttribute, "xml", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     content.TextType    = AtomTextConstructType.Xhtml;
                 }
@@ -335,16 +335,16 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         if (content.TextType == AtomTextConstructType.Xhtml)
         {
             XPathNavigator xhtmlDivNavigator    = source.SelectSingleNode("xhtml:div", manager);
-            if (xhtmlDivNavigator != null && !String.IsNullOrEmpty(xhtmlDivNavigator.Value))
+            if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
                 content.Content = xhtmlDivNavigator.Value;
             }
-            else if (!String.IsNullOrEmpty(source.Value))
+            else if (!string.IsNullOrEmpty(source.Value))
             {
                 content.Content = source.Value;
             }
         }
-        else if (!String.IsNullOrEmpty(source.Value))
+        else if (!string.IsNullOrEmpty(source.Value))
         {
             content.Content     = source.Value;
         }

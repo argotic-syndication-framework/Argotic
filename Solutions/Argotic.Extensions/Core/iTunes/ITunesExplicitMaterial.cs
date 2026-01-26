@@ -6,7 +6,7 @@ namespace Argotic.Extensions.Core;
 /// Represents the explicit language or adult content advisory information of an iTunes podcast.
 /// </summary>
 /// <seealso cref="ITunesSyndicationExtensionContext"/>
-[Serializable()]
+[Serializable]
 public enum ITunesExplicitMaterial
 {
     /// <summary>

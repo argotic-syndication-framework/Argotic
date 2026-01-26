@@ -9,14 +9,14 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="SiteSummaryContentSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class SiteSummaryContentSyndicationExtensionContext
 {
 
     /// <summary>
     /// Private member to hold the entity-encoded or CDATA-escaped version of the content of the item.
     /// </summary>
-    private string extensionEncoded = String.Empty;
+    private string extensionEncoded = string.Empty;
     /// <summary>
     /// Private member to hold the alternative versions of the item's content.
     /// </summary>
@@ -45,9 +45,9 @@ public class SiteSummaryContentSyndicationExtensionContext
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                extensionEncoded = String.Empty;
+                extensionEncoded = string.Empty;
             }
             else
             {
@@ -97,7 +97,7 @@ public class SiteSummaryContentSyndicationExtensionContext
             XPathNavigator encodedNavigator = source.SelectSingleNode("content:encoded", manager);
             XPathNavigator itemsNavigator   = source.SelectSingleNode("content:items", manager);
 
-            if (encodedNavigator != null && !String.IsNullOrEmpty(encodedNavigator.Value))
+            if (encodedNavigator != null && !string.IsNullOrEmpty(encodedNavigator.Value))
             {
                 this.Encoded    = encodedNavigator.Value;
                 wasLoaded       = true;
@@ -136,7 +136,7 @@ public class SiteSummaryContentSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(!String.IsNullOrEmpty(this.Encoded))
+        if(!string.IsNullOrEmpty(this.Encoded))
         {
             writer.WriteStartElement("encoded", xmlNamespace);
             writer.WriteCData(this.Encoded);

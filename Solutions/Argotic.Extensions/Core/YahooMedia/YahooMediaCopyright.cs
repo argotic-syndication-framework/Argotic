@@ -13,7 +13,7 @@ namespace Argotic.Extensions.Core;
 ///         If the media is operating under a <i>Creative Commons license</i>, the <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
 ///     </para>
 /// </remarks>
-[Serializable()]
+[Serializable]
 public class YahooMediaCopyright : IComparable
 {
 

@@ -12,7 +12,7 @@ using System.Linq;
 ///This is a test class for DublinCoreElementSetSyndicationExtensionTest and is intended
 ///to contain all DublinCoreElementSetSyndicationExtensionTest Unit Tests
 ///</summary>
-[TestClass()]
+[TestClass]
 public class DublinCoreElementSetSyndicationExtensionTest
 {
     const string namespc = @"xmlns:dc=""http://purl.org/dc/elements/1.1/""";
@@ -70,7 +70,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for DublinCoreElementSetSyndicationExtension Constructor
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSetSyndicationExtensionConstructorTest()
     {
         DublinCoreElementSetSyndicationExtension target = new DublinCoreElementSetSyndicationExtension();
@@ -81,7 +81,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for CompareTo
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSet_CompareToTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
@@ -103,7 +103,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for ConvertDegreesMinutesSecondsToDecimal
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCore_TypeVocabularyByName()
     {
         DublinCoreTypeVocabularies expected = DublinCoreTypeVocabularies.MovingImage;
@@ -114,7 +114,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for Equals
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSet_EqualsTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
@@ -192,7 +192,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for MatchByType
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSet_MatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
@@ -205,7 +205,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for ToString
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSet_ToStringTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
@@ -218,7 +218,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for WriteTo
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSet_WriteToTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
@@ -235,7 +235,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for op_Equality
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSet_op_EqualityTest_Failure()
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
@@ -259,7 +259,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for op_GreaterThan
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSet_op_GreaterThanTest()
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
@@ -273,7 +273,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for op_Inequality
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSet_op_InequalityTest()
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
@@ -286,7 +286,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for op_LessThan
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void DublinCoreElementSet_op_LessThanTest()
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
@@ -300,7 +300,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for Context
     ///</summary>
-    [TestMethod(), Ignore]
+    [TestMethod, Ignore]
     public void DublinCoreElementSet_ContextTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();

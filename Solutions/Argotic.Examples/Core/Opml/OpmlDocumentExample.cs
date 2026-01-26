@@ -69,7 +69,7 @@ public static class OpmlDocumentExample
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-    private static void ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+    private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
     {
         if (e.State != null)
         {

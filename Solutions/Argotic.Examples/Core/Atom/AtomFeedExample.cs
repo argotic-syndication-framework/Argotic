@@ -74,7 +74,7 @@ public static class AtomFeedExample
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-    private static void FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)
+    private static void FeedLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
     {
         if(e.State != null)
         {

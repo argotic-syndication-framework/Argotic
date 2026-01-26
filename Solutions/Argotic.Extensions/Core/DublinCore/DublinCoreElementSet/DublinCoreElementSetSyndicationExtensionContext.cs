@@ -9,22 +9,22 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="DublinCoreElementSetSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class DublinCoreElementSetSyndicationExtensionContext
 {
 
     /// <summary>
     /// Private member to hold the entity responsible for making contributions to the resource.
     /// </summary>
-    private string extensionContributor             = String.Empty;
+    private string extensionContributor             = string.Empty;
     /// <summary>
     /// Private member to hold the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
     /// </summary>
-    private string extensionCoverage                = String.Empty;
+    private string extensionCoverage                = string.Empty;
     /// <summary>
     /// Private member to hold the entity primarily responsible for making the resource.
     /// </summary>
-    private string extensionCreator                 = String.Empty;
+    private string extensionCreator                 = string.Empty;
     /// <summary>
     /// Private member to hold a point or period of time associated with an event in the lifecycle of the resource.
     /// </summary>
@@ -32,15 +32,15 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Private member to hold an account of the resource.
     /// </summary>
-    private string extensionDescription             = String.Empty;
+    private string extensionDescription             = string.Empty;
     /// <summary>
     /// Private member to hold the file format, physical medium, or dimensions of the resource.
     /// </summary>
-    private string extensionFormat                  = String.Empty;
+    private string extensionFormat                  = string.Empty;
     /// <summary>
     /// Private member to hold an unambiguous reference to the resource within a given context.
     /// </summary>
-    private string extensionIdentifier              = String.Empty;
+    private string extensionIdentifier              = string.Empty;
     /// <summary>
     /// Private member to hold the language of the resource.
     /// </summary>
@@ -48,27 +48,27 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the entity responsible for making the resource available.
     /// </summary>
-    private string extensionPublisher               = String.Empty;
+    private string extensionPublisher               = string.Empty;
     /// <summary>
     /// Private member to hold a related resource.
     /// </summary>
-    private string extensionRelation                = String.Empty;
+    private string extensionRelation                = string.Empty;
     /// <summary>
     /// Private member to hold information about rights held in and over the resource.
     /// </summary>
-    private string extensionRights                  = String.Empty;
+    private string extensionRights                  = string.Empty;
     /// <summary>
     /// Private member to hold a related resource from which the described resource is derived.
     /// </summary>
-    private string extesionSource                   = String.Empty;
+    private string extesionSource                   = string.Empty;
     /// <summary>
     /// Private member to hold the topic of the resource.
     /// </summary>
-    private string extensionSubject                 = String.Empty;
+    private string extensionSubject                 = string.Empty;
     /// <summary>
     /// Private member to hold the name given to the resource.
     /// </summary>
-    private string extensionTitle                   = String.Empty;
+    private string extensionTitle                   = string.Empty;
     /// <summary>
     /// Private member to hold the nature or genre of the resource.
     /// </summary>
@@ -96,9 +96,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionContributor = String.Empty;
+                extensionContributor = string.Empty;
             }
             else
             {
@@ -131,9 +131,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionCoverage = String.Empty;
+                extensionCoverage = string.Empty;
             }
             else
             {
@@ -158,9 +158,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionCreator = String.Empty;
+                extensionCreator = string.Empty;
             }
             else
             {
@@ -208,9 +208,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionDescription = String.Empty;
+                extensionDescription = string.Empty;
             }
             else
             {
@@ -236,9 +236,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionFormat = String.Empty;
+                extensionFormat = string.Empty;
             }
             else
             {
@@ -263,9 +263,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionIdentifier = String.Empty;
+                extensionIdentifier = string.Empty;
             }
             else
             {
@@ -311,9 +311,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionPublisher = String.Empty;
+                extensionPublisher = string.Empty;
             }
             else
             {
@@ -338,9 +338,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionRelation = String.Empty;
+                extensionRelation = string.Empty;
             }
             else
             {
@@ -365,9 +365,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionRights = String.Empty;
+                extensionRights = string.Empty;
             }
             else
             {
@@ -393,9 +393,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extesionSource = String.Empty;
+                extesionSource = string.Empty;
             }
             else
             {
@@ -422,9 +422,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionSubject = String.Empty;
+                extensionSubject = string.Empty;
             }
             else
             {
@@ -449,9 +449,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                extensionTitle = String.Empty;
+                extensionTitle = string.Empty;
             }
             else
             {
@@ -522,17 +522,17 @@ public class DublinCoreElementSetSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(!String.IsNullOrEmpty(this.Contributor))
+        if(!string.IsNullOrEmpty(this.Contributor))
         {
             writer.WriteElementString("contributor", xmlNamespace, this.Contributor);
         }
 
-        if (!String.IsNullOrEmpty(this.Coverage))
+        if (!string.IsNullOrEmpty(this.Coverage))
         {
             writer.WriteElementString("coverage", xmlNamespace, this.Coverage);
         }
 
-        if (!String.IsNullOrEmpty(this.Creator))
+        if (!string.IsNullOrEmpty(this.Creator))
         {
             writer.WriteElementString("creator", xmlNamespace, this.Creator);
         }
@@ -542,17 +542,17 @@ public class DublinCoreElementSetSyndicationExtensionContext
             writer.WriteElementString("date", xmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.Date));
         }
 
-        if (!String.IsNullOrEmpty(this.Description))
+        if (!string.IsNullOrEmpty(this.Description))
         {
             writer.WriteElementString("description", xmlNamespace, this.Description);
         }
 
-        if (!String.IsNullOrEmpty(this.Format))
+        if (!string.IsNullOrEmpty(this.Format))
         {
             writer.WriteElementString("format", xmlNamespace, this.Format);
         }
 
-        if (!String.IsNullOrEmpty(this.Identifier))
+        if (!string.IsNullOrEmpty(this.Identifier))
         {
             writer.WriteElementString("identifier", xmlNamespace, this.Identifier);
         }
@@ -562,32 +562,32 @@ public class DublinCoreElementSetSyndicationExtensionContext
             writer.WriteElementString("language", xmlNamespace, this.Language.Name);
         }
 
-        if (!String.IsNullOrEmpty(this.Publisher))
+        if (!string.IsNullOrEmpty(this.Publisher))
         {
             writer.WriteElementString("publisher", xmlNamespace, this.Publisher);
         }
 
-        if (!String.IsNullOrEmpty(this.Relation))
+        if (!string.IsNullOrEmpty(this.Relation))
         {
             writer.WriteElementString("relation", xmlNamespace, this.Relation);
         }
 
-        if (!String.IsNullOrEmpty(this.Rights))
+        if (!string.IsNullOrEmpty(this.Rights))
         {
             writer.WriteElementString("rights", xmlNamespace, this.Rights);
         }
 
-        if (!String.IsNullOrEmpty(this.Source))
+        if (!string.IsNullOrEmpty(this.Source))
         {
             writer.WriteElementString("source", xmlNamespace, this.Source);
         }
 
-        if (!String.IsNullOrEmpty(this.Subject))
+        if (!string.IsNullOrEmpty(this.Subject))
         {
             writer.WriteElementString("subject", xmlNamespace, this.Subject);
         }
 
-        if (!String.IsNullOrEmpty(this.Title))
+        if (!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteElementString("title", xmlNamespace, this.Title);
         }
@@ -620,13 +620,13 @@ public class DublinCoreElementSetSyndicationExtensionContext
         XPathNavigator rightsNavigator      = source.SelectSingleNode("dc:rights", manager);
         XPathNavigator titleNavigator       = source.SelectSingleNode("dc:title", manager);
 
-        if (contributorNavigator != null && !String.IsNullOrEmpty(contributorNavigator.Value))
+        if (contributorNavigator != null && !string.IsNullOrEmpty(contributorNavigator.Value))
         {
             this.Contributor    = contributorNavigator.Value;
             wasLoaded           = true;
         }
 
-        if (creatorNavigator != null && !String.IsNullOrEmpty(creatorNavigator.Value))
+        if (creatorNavigator != null && !string.IsNullOrEmpty(creatorNavigator.Value))
         {
             this.Creator    = creatorNavigator.Value;
             wasLoaded       = true;
@@ -641,13 +641,13 @@ public class DublinCoreElementSetSyndicationExtensionContext
             }
         }
 
-        if (descriptionNavigator != null && !String.IsNullOrEmpty(descriptionNavigator.Value))
+        if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
             this.Description    = descriptionNavigator.Value;
             wasLoaded           = true;
         }
 
-        if (languageNavigator != null && !String.IsNullOrEmpty(languageNavigator.Value))
+        if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
         {
             try
             {
@@ -661,19 +661,19 @@ public class DublinCoreElementSetSyndicationExtensionContext
             }
         }
 
-        if (publisherNavigator != null && !String.IsNullOrEmpty(publisherNavigator.Value))
+        if (publisherNavigator != null && !string.IsNullOrEmpty(publisherNavigator.Value))
         {
             this.Publisher  = publisherNavigator.Value;
             wasLoaded       = true;
         }
 
-        if (rightsNavigator != null && !String.IsNullOrEmpty(rightsNavigator.Value))
+        if (rightsNavigator != null && !string.IsNullOrEmpty(rightsNavigator.Value))
         {
             this.Rights = rightsNavigator.Value;
             wasLoaded   = true;
         }
 
-        if (titleNavigator != null && !String.IsNullOrEmpty(titleNavigator.Value))
+        if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
             this.Title  = titleNavigator.Value;
             wasLoaded   = true;
@@ -703,43 +703,43 @@ public class DublinCoreElementSetSyndicationExtensionContext
         XPathNavigator subjectNavigator     = source.SelectSingleNode("dc:subject", manager);
         XPathNavigator typeNavigator        = source.SelectSingleNode("dc:type", manager);
 
-        if (coverageNavigator != null && !String.IsNullOrEmpty(coverageNavigator.Value))
+        if (coverageNavigator != null && !string.IsNullOrEmpty(coverageNavigator.Value))
         {
             this.Coverage   = coverageNavigator.Value;
             wasLoaded       = true;
         }
 
-        if (formatNavigator != null && !String.IsNullOrEmpty(formatNavigator.Value))
+        if (formatNavigator != null && !string.IsNullOrEmpty(formatNavigator.Value))
         {
             this.Format = formatNavigator.Value;
             wasLoaded   = true;
         }
 
-        if (identifierNavigator != null && !String.IsNullOrEmpty(identifierNavigator.Value))
+        if (identifierNavigator != null && !string.IsNullOrEmpty(identifierNavigator.Value))
         {
             this.Identifier = identifierNavigator.Value;
             wasLoaded       = true;
         }
 
-        if (relationNavigator != null && !String.IsNullOrEmpty(relationNavigator.Value))
+        if (relationNavigator != null && !string.IsNullOrEmpty(relationNavigator.Value))
         {
             this.Relation   = relationNavigator.Value;
             wasLoaded       = true;
         }
 
-        if (sourceNavigator != null && !String.IsNullOrEmpty(sourceNavigator.Value))
+        if (sourceNavigator != null && !string.IsNullOrEmpty(sourceNavigator.Value))
         {
             this.Source = sourceNavigator.Value;
             wasLoaded   = true;
         }
 
-        if (subjectNavigator != null && !String.IsNullOrEmpty(subjectNavigator.Value))
+        if (subjectNavigator != null && !string.IsNullOrEmpty(subjectNavigator.Value))
         {
             this.Subject    = subjectNavigator.Value;
             wasLoaded       = true;
         }
 
-        if (typeNavigator != null && !String.IsNullOrEmpty(typeNavigator.Value))
+        if (typeNavigator != null && !string.IsNullOrEmpty(typeNavigator.Value))
         {
             DublinCoreTypeVocabularies typeVocabulary   = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName(typeNavigator.Value);
             if (typeVocabulary != DublinCoreTypeVocabularies.None)

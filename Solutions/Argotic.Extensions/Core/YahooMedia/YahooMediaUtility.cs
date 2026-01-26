@@ -502,7 +502,7 @@ internal static class YahooMediaUtility
             string[] keywords = new string[source.Keywords.Count];
             source.Keywords.CopyTo(keywords, 0);
 
-            writer.WriteElementString("keywords", extension.XmlNamespace, String.Join(",", keywords));
+            writer.WriteElementString("keywords", extension.XmlNamespace, string.Join(",", keywords));
         }
 
         foreach(YahooMediaCategory category in source.Categories)
@@ -726,7 +726,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (keywordNavigator != null && !String.IsNullOrEmpty(keywordNavigator.Value))
+            if (keywordNavigator != null && !string.IsNullOrEmpty(keywordNavigator.Value))
             {
                 if (keywordNavigator.Value.Contains(","))
                 {

@@ -286,8 +286,8 @@ public static class SyndicationEncodingUtility
 
         if(source.IsAbsoluteUri)
         {
-            if (String.Compare(source.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) == 0 ||
-                String.Compare(source.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(source.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) == 0 ||
+                string.Compare(source.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) == 0)
             {
                 HttpWebRequest httpRequest      = (HttpWebRequest)request;
                 httpRequest.UserAgent           = SyndicationDiscoveryUtility.FrameworkUserAgent;
@@ -379,7 +379,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is an empty string.</exception>
     public static string DecodeHtmlEscapedString(string escapedValue)
     {
-        string decodedResult = String.Empty;
+        string decodedResult = string.Empty;
 
         Guard.ArgumentNotNullOrEmptyString(escapedValue, "escapedValue");
 
@@ -406,7 +406,7 @@ public static class SyndicationEncodingUtility
     public static string EncodeInvalidXmlHexadecimalCharacters(string content)
     {
         Regex invalidXmlUnicodeCharacters   = new Regex(@"[\x01-\x08\x0B-\x0C\x0E-\x1F\xD800-\xDFFF\xFFFE-\xFFFF]");
-        string encodedContent               = String.Empty;
+        string encodedContent               = string.Empty;
 
         Guard.ArgumentNotNullOrEmptyString(content, "content");
 
@@ -596,18 +596,18 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static string EncodeSafeDirectoryName(string name)
     {
-        string directoryName    = String.Empty;
+        string directoryName    = string.Empty;
 
         Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-        directoryName   = name.Replace("\\", String.Empty);
-        directoryName   = directoryName.Replace("/", String.Empty);
-        directoryName   = directoryName.Replace(":", String.Empty);
-        directoryName   = directoryName.Replace("*", String.Empty);
-        directoryName   = directoryName.Replace("?", String.Empty);
-        directoryName   = directoryName.Replace("<", String.Empty);
-        directoryName   = directoryName.Replace(">", String.Empty);
-        directoryName   = directoryName.Replace("|", String.Empty);
+        directoryName   = name.Replace("\\", string.Empty);
+        directoryName   = directoryName.Replace("/", string.Empty);
+        directoryName   = directoryName.Replace(":", string.Empty);
+        directoryName   = directoryName.Replace("*", string.Empty);
+        directoryName   = directoryName.Replace("?", string.Empty);
+        directoryName   = directoryName.Replace("<", string.Empty);
+        directoryName   = directoryName.Replace(">", string.Empty);
+        directoryName   = directoryName.Replace("|", string.Empty);
 
         return directoryName;
     }

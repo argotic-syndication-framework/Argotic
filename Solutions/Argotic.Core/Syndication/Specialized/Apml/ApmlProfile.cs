@@ -20,7 +20,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
-[Serializable()]
+[Serializable]
 public class ApmlProfile : IComparable, IExtensibleSyndicationObject
 {
 

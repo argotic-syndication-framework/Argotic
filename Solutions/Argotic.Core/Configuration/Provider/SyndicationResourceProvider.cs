@@ -45,7 +45,7 @@ public abstract class SyndicationResourceProvider : ProviderBase
     /// <returns>A <see cref="SyndicationResourceCreateStatus"/> enumeration value indicating whether the syndication resource was created successfully.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    public abstract SyndicationResourceCreateStatus CreateResource(Object providerResourceKey, ISyndicationResource resource);
+    public abstract SyndicationResourceCreateStatus CreateResource(object providerResourceKey, ISyndicationResource resource);
 
     /// <summary>
     /// Removes a resource from the syndication data source.
@@ -53,7 +53,7 @@ public abstract class SyndicationResourceProvider : ProviderBase
     /// <param name="providerResourceKey">The unique identifier that identifies the resource to be removed.</param>
     /// <returns><b>true</b> if the syndication resource was successfully deleted; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference.</exception>
-    public abstract bool DeleteResource(Object providerResourceKey);
+    public abstract bool DeleteResource(object providerResourceKey);
 
     /// <summary>
     /// Gets resource information from the data source based on the unique identifier for the syndication resource.
@@ -61,7 +61,7 @@ public abstract class SyndicationResourceProvider : ProviderBase
     /// <param name="providerResourceKey">The unique identifier that identifies the syndication resource to get information for.</param>
     /// <returns>An object that implements the <see cref="ISyndicationResource"/> interface populated with the specified resources' information from the data source.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference.</exception>
-    public abstract ISyndicationResource GetResource(Object providerResourceKey);
+    public abstract ISyndicationResource GetResource(object providerResourceKey);
 
     /// <summary>
     /// Gets a collection of all the resources in the data source that conform to the specified <see cref="SyndicationContentFormat"/>.
@@ -116,5 +116,5 @@ public abstract class SyndicationResourceProvider : ProviderBase
     /// </param>
     /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    public abstract void UpdateResource(Object providerResourceKey, ISyndicationResource resource);
+    public abstract void UpdateResource(object providerResourceKey, ISyndicationResource resource);
 }

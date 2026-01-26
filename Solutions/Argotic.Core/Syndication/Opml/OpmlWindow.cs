@@ -9,7 +9,7 @@ namespace Argotic.Syndication;
 /// Represents the pixel location of the edges of the outline window for a <see cref="OpmlDocument"/>.
 /// </summary>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
-[Serializable()]
+[Serializable]
 public class OpmlWindow : IComparable
 {
 

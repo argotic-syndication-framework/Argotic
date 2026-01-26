@@ -22,7 +22,7 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable()]
+[Serializable]
 public class GenericSyndicationFeed
 {
     /// <summary>
@@ -36,11 +36,11 @@ public class GenericSyndicationFeed
     /// <summary>
     /// Private member to hold the title of the syndication feed.
     /// </summary>
-    private string feedTitle                                        = String.Empty;
+    private string feedTitle                                        = string.Empty;
     /// <summary>
     /// Private member to hold the description of the syndication feed.
     /// </summary>
-    private string feedDescription                                  = String.Empty;
+    private string feedDescription                                  = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.
     /// </summary>
@@ -419,7 +419,7 @@ public class GenericSyndicationFeed
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to a supported syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
-    public void Load(String str)
+    public void Load(string str)
     {
         Guard.ArgumentNotNull(str, "string");
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(str);
@@ -650,12 +650,12 @@ public class GenericSyndicationFeed
         feedResource            = feed;
         feedFormat              = SyndicationContentFormat.Atom;
 
-        if (feed.Title != null && !String.IsNullOrEmpty(feed.Title.Content))
+        if (feed.Title != null && !string.IsNullOrEmpty(feed.Title.Content))
         {
             feedTitle           = feed.Title.Content;
         }
 
-        if (feed.Subtitle != null && !String.IsNullOrEmpty(feed.Title.Content))
+        if (feed.Subtitle != null && !string.IsNullOrEmpty(feed.Title.Content))
         {
             feedDescription     = feed.Subtitle.Content;
         }
@@ -694,12 +694,12 @@ public class GenericSyndicationFeed
         feedResource            = feed;
         feedFormat              = SyndicationContentFormat.Rss;
 
-        if (!String.IsNullOrEmpty(feed.Channel.Title))
+        if (!string.IsNullOrEmpty(feed.Channel.Title))
         {
             feedTitle           = feed.Channel.Title;
         }
 
-        if (!String.IsNullOrEmpty(feed.Channel.Description))
+        if (!string.IsNullOrEmpty(feed.Channel.Description))
         {
             feedDescription     = feed.Channel.Description;
         }
@@ -771,7 +771,7 @@ public class GenericSyndicationFeed
     ///         />
     ///     </code>
     /// </example>
-    public void LoadAsync(Uri source, Object userToken)
+    public void LoadAsync(Uri source, object userToken)
     {
         this.LoadAsync(source, null, userToken);
     }
@@ -795,7 +795,7 @@ public class GenericSyndicationFeed
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
     }
@@ -825,7 +825,7 @@ public class GenericSyndicationFeed
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
     }
@@ -850,7 +850,7 @@ public class GenericSyndicationFeed
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)

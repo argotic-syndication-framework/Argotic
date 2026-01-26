@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// Represents the current mood of a LiveJournal entry.
 /// </summary>
 /// <seealso cref="LiveJournalSyndicationExtensionContext.Mood"/>
-[Serializable()]
+[Serializable]
 public class LiveJournalMood : IComparable
 {
 

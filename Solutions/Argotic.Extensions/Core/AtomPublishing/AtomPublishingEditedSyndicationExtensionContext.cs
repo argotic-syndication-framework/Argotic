@@ -8,7 +8,7 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="AtomPublishingEditedSyndicationExtension"/>.
 /// </summary>
-[Serializable()]
+[Serializable]
 public class AtomPublishingEditedSyndicationExtensionContext
 {
 
@@ -61,7 +61,7 @@ public class AtomPublishingEditedSyndicationExtensionContext
         if(source.HasChildren)
         {
             XPathNavigator editedNavigator  = source.SelectSingleNode("app:edited", manager);
-            if (editedNavigator != null && !String.IsNullOrEmpty(editedNavigator.Value))
+            if (editedNavigator != null && !string.IsNullOrEmpty(editedNavigator.Value))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(editedNavigator.Value, out DateTime editedOn))
                 {

@@ -6,7 +6,7 @@ using Argotic.Common;
 /// This is a test class for SyndicationEncodingUtilityTest and is intended
 /// to contain all SyndicationEncodingUtilityTest Unit Tests
 /// </summary>
-[TestClass()]
+[TestClass]
 public class SyndicationEncodingUtilityTest
 {
     /// <summary>

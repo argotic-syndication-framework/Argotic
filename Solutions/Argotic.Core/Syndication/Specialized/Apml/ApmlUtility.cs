@@ -37,7 +37,7 @@ internal static class ApmlUtility
         XmlNamespaceManager manager = null;
         Guard.ArgumentNotNull(nameTable, "nameTable");
         manager = new XmlNamespaceManager(nameTable);
-        manager.AddNamespace("apml", !String.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : APML_NAMESPACE);
+        manager.AddNamespace("apml", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : APML_NAMESPACE);
 
         return manager;
     }

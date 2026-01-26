@@ -10,7 +10,7 @@ namespace Argotic.Extensions.Core;
 /// Represents a categorization taxonomy that can be applied to a podcast.
 /// </summary>
 /// <seealso cref="ITunesSyndicationExtensionContext"/>
-[Serializable()]
+[Serializable]
 public class ITunesCategory : IComparable
 {
 

@@ -17,7 +17,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso cref="IYahooMediaCommonObjectEntities"/>
-[Serializable()]
+[Serializable]
 public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 {
 

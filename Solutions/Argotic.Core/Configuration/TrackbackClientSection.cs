@@ -16,7 +16,7 @@ public sealed class TrackbackClientSection : ConfigurationSection
     /// <summary>
     /// Private member to hold the client user agent configuration property for the section.
     /// </summary>
-    private static readonly ConfigurationProperty configurationSectionUserAgentProperty = new ConfigurationProperty("agent", typeof(System.String), String.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationSectionUserAgentProperty = new ConfigurationProperty("agent", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold the client network configuration property for the section.
     /// </summary>

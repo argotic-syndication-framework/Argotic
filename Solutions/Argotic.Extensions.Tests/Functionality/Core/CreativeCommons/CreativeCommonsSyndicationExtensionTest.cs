@@ -11,7 +11,7 @@ using System.Xml;
 ///This is a test class for CreativeCommonsSyndicationExtensionTest and is intended
 ///to contain all CreativeCommonsSyndicationExtensionTest Unit Tests
 ///</summary>
-[TestClass()]
+[TestClass]
 public class CreativeCommonsSyndicationExtensionTest
 {
 
@@ -44,7 +44,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for CreativeCommonsSyndicationExtension Constructor
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommonsSyndicationExtensionConstructorTest()
     {
         CreativeCommonsSyndicationExtension target = new CreativeCommonsSyndicationExtension();
@@ -55,7 +55,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for CompareTo
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommons_CompareToTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
@@ -70,7 +70,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for Equals
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommons_EqualsTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
@@ -169,7 +169,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for MatchByType
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommons_MatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
@@ -182,7 +182,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for ToString
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommons_ToStringTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
@@ -195,7 +195,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for WriteTo
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommons_WriteToTest()
     {
         using(StringWriter sw = new StringWriter())
@@ -212,7 +212,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for op_Equality
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommons_op_EqualityTest_Failure()
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
@@ -236,7 +236,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for op_GreaterThan
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommons_op_GreaterThanTest()
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
@@ -250,7 +250,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for op_Inequality
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommons_op_InequalityTest()
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
@@ -263,7 +263,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for op_LessThan
     ///</summary>
-    [TestMethod()]
+    [TestMethod]
     public void CreativeCommons_op_LessThanTest()
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
@@ -277,7 +277,7 @@ public class CreativeCommonsSyndicationExtensionTest
     /// <summary>
     ///A test for Context
     ///</summary>
-    [TestMethod(), Ignore]
+    [TestMethod, Ignore]
     public void CreativeCommons_ContextTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();

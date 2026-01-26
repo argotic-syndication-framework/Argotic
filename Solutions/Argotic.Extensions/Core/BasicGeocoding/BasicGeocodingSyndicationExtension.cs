@@ -25,7 +25,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Geocoding")]
-[Serializable()]
+[Serializable]
 public class BasicGeocodingSyndicationExtension : SyndicationExtension, IComparable
 {
     /// <summary>

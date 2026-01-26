@@ -10,7 +10,7 @@ namespace Argotic.Extensions.Core;
 /// Encapsulates specific information about an individual <see cref="PingbackSyndicationExtension"/>.
 /// </summary>
 [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
-[Serializable()]
+[Serializable]
 public class PingbackSyndicationExtensionContext
 {
 
@@ -158,8 +158,8 @@ public class PingbackSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        writer.WriteElementString("server", xmlNamespace, this.Server != null ? this.Server.ToString() : String.Empty);
-        writer.WriteElementString("target", xmlNamespace, this.Target != null ? this.Target.ToString() : String.Empty);
+        writer.WriteElementString("server", xmlNamespace, this.Server != null ? this.Server.ToString() : string.Empty);
+        writer.WriteElementString("target", xmlNamespace, this.Target != null ? this.Target.ToString() : string.Empty);
 
         foreach(Uri about in this.Abouts)
         {

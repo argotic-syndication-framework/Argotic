@@ -133,7 +133,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         {
             throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a \" seconds delimiter.", degreesMinutesSeconds));
         }
-        string degreesValue = degreesMinutesSeconds.Substring(0, degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase));
+        string degreesValue = degreesMinutesSeconds[..degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase)];
         string minutesValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) + 1, degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) - degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) - 1);
         string secondsValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) + 1, degreesMinutesSeconds.IndexOf("\"", StringComparison.OrdinalIgnoreCase) - degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) - 1);
 			

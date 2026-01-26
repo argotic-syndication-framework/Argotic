@@ -135,7 +135,7 @@ $SkipAnalysis = $false
 #
 # Build process configuration
 #
-$SolutionToBuild = (Resolve-Path (Join-Path $here ".\Solutions\Argotic.sln")).Path
+$SolutionToBuild = (Resolve-Path (Join-Path $here ".\Solutions\Argotic.slnx")).Path
 $ProjectsToPublish = @(
     # "Solutions/MySolution/MyWebSite/MyWebSite.csproj"
 )

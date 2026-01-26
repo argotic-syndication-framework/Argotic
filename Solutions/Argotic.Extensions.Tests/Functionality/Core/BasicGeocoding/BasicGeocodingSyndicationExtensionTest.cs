@@ -25,22 +25,6 @@ public class BasicGeocodingSyndicationExtensionTest
     public TestContext TestContext { get; set; }
 
     /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-        get
-        {
-            return testContextInstance;
-        }
-        set
-        {
-            testContextInstance = value;
-        }
-    }
-
-    /// <summary>
     ///A test for BasicGeocodingSyndicationExtension Constructor
     ///</summary>
     [TestMethod]

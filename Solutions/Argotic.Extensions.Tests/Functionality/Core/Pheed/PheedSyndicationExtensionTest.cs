@@ -19,26 +19,9 @@ public class PheedSyndicationExtensionTest
     private readonly string nycText = "<thumbnail xmlns=\"http://www.pheed.com/pheed/\">http://www.example.com/thumbnail.jpg</thumbnail>" + Environment.NewLine
                                                                                                                                           + "<imgsrc xmlns=\"http://www.pheed.com/pheed/\">http://www.example.com/</imgsrc>";
 
-
     private const string strExtXml = "<photo:thumbnail>http://www.example.com/thumbnail.jpg</photo:thumbnail><photo:imgsrc>http://www.example.com/</photo:imgsrc>";
 
     public TestContext TestContext { get; set; }
-
-    /// <summary>
-    ///Gets or sets the test context which provides
-    ///information about and functionality for the current test run.
-    ///</summary>
-    public TestContext TestContext
-    {
-        get
-        {
-            return testContextInstance;
-        }
-        set
-        {
-            testContextInstance = value;
-        }
-    }
 
     /// <summary>
     ///A test for PheedSyndicationExtension Constructor

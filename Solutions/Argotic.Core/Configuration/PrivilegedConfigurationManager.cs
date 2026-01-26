@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using System.Security.Permissions;
 using Argotic.Common;
 using Argotic.Configuration.Provider;
 
@@ -80,7 +79,6 @@ internal static class PrivilegedConfigurationManager
     /// <exception cref="ArgumentNullException">The <paramref name="sectionName"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="sectionName"/> is an empty string.</exception>
     /// <exception cref="ConfigurationErrorsException">A configuration file could not be loaded.</exception>
-    [SecurityPermission(SecurityAction.Demand)]
     internal static object GetSection(string sectionName)
     {
         ArgumentException.ThrowIfNullOrEmpty(sectionName);
@@ -95,7 +93,6 @@ internal static class PrivilegedConfigurationManager
     ///     A <see cref="XmlRpcClientSection"/> object that represents the syndication resource configuration information.
     ///     If no configuration section is defined for syndication resources, returns a <b>null</b> reference.
     /// </returns>
-    [SecurityPermission(SecurityAction.Demand)]
     internal static SyndicationResourceSection GetSyndicationResourceSection()
     {
         string sectionPath = "argotic.syndication";
@@ -118,7 +115,6 @@ internal static class PrivilegedConfigurationManager
     ///     A <see cref="XmlRpcClientSection"/> object that represents the Trackback client configuration information.
     ///     If no configuration section is defined for the client application, returns a <b>null</b> reference.
     /// </returns>
-    [SecurityPermission(SecurityAction.Demand)]
     internal static TrackbackClientSection GetTracbackClientSection()
     {
         string sectionPath = "argotic.net/clientSettings/trackback";
@@ -141,7 +137,6 @@ internal static class PrivilegedConfigurationManager
     ///     A <see cref="XmlRpcClientSection"/> object that represents the XML-RPC client configuration information.
     ///     If no configuration section is defined for the client application, returns a <b>null</b> reference.
     /// </returns>
-    [SecurityPermission(SecurityAction.Demand)]
     internal static XmlRpcClientSection GetXmlRpcClientSection()
     {
         string sectionPath = "argotic.net/clientSettings/xmlRpc";

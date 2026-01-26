@@ -8,8 +8,6 @@ namespace Argotic.Configuration.Provider;
 /// Provides a base implementation for the syndication resource extensible provider model.
 /// </summary>
 /// <seealso cref="Argotic.Common.ISyndicationResource"/>
-//[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-//[AspNetHostingPermissionAttribute(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 public abstract class SyndicationResourceProvider : ProviderBase
 {
     /// <summary>

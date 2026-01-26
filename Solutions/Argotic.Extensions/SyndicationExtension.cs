@@ -1,5 +1,4 @@
-﻿using System.Security.Permissions;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.Schema;
 using System.Xml.Serialization;
 using System.Xml.XPath;
@@ -18,9 +17,8 @@ namespace Argotic.Extensions;
 ///         it is <i>recommended</i> that custom syndication extensions inherit from the <see cref="SyndicationExtension"/> base class.
 ///     </para>
 ///     <para>
-///         If you choose to not inherit from the <see cref="SyndicationExtension"/> abstract base class, please be aware that the <see cref="SyndicationExtensionAdapter"/> class 
-///         internally calls the <see cref="Activator.CreateInstance(Type)"/> method, and so any custom syndication extension will need to have the 
-///         appropriate <see cref="SecurityPermissionAttribute"/> and <see cref="ReflectionPermissionAttribute"/> attributes applied as necessary.
+///         If you choose to not inherit from the <see cref="SyndicationExtension"/> abstract base class, please be aware that the <see cref="SyndicationExtensionAdapter"/> class
+///         internally calls the <see cref="Activator.CreateInstance(Type)"/> method.
 ///     </para>
 /// </remarks>
 /// <example>

@@ -3,7 +3,6 @@ using System.Collections.ObjectModel;
 using System.Collections.Specialized;
 using System.Configuration.Provider;
 using System.IO;
-using System.Security.Permissions;
 using System.Web;
 using System.Xml.XPath;
 
@@ -16,8 +15,6 @@ namespace Argotic.Configuration.Provider
     /// <summary>
     /// Manages storage of syndication resource information for applications in an XML file data store.
     /// </summary>
-    //[AspNetHostingPermissionAttribute(SecurityAction.InheritanceDemand, Level = AspNetHostingPermissionLevel.Minimal)]
-    //[AspNetHostingPermissionAttribute(SecurityAction.Demand, Level = AspNetHostingPermissionLevel.Minimal)]
     public class XmlSyndicationResourceProvider : SyndicationResourceProvider
     {
         #region PRIVATE/PROTECTED/PUBLIC MEMBERS

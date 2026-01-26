@@ -6,7 +6,6 @@ namespace Argotic.Configuration.Provider;
 /// <summary>
 /// Defines configuration settings to support the infrastructure for configuring and managing syndication resource details. This class cannot be inherited.
 /// </summary>
-//[AspNetHostingPermission(SecurityAction.LinkDemand, Level = AspNetHostingPermissionLevel.Minimal)]
 public sealed class SyndicationResourceSection : ConfigurationSection
 {
     /// <summary>

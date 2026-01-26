@@ -29,8 +29,8 @@ namespace Argotic.Data.Adapters
         /// <remarks>
         ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="BlogMLDocument"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
         {
         }
@@ -39,7 +39,7 @@ namespace Argotic.Data.Adapters
         /// Modifies the <see cref="BlogMLDocument"/> to match the data source.
         /// </summary>
         /// <param name="resource">The <see cref="BlogMLDocument"/> to be filled.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         public void Fill(BlogMLDocument resource)
         {
             Guard.ArgumentNotNull(resource, "resource");
@@ -114,10 +114,10 @@ namespace Argotic.Data.Adapters
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLDocument"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="document"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="document"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         private static void FillDocumentCollections(BlogMLDocument document, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(document, "document");

@@ -13,7 +13,7 @@ namespace Argotic.Net
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the TrackbackResponse class.">
     ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\TrackbackClientExample.cs"
+    ///             source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs"
     ///             region="TrackbackClient"
     ///         />
     ///     </code>
@@ -23,7 +23,7 @@ namespace Argotic.Net
     public class TrackbackResponse : IComparable
     {
         /// <summary>
-        /// Private member to hold a value indicating if the the Trackback ping request failed.
+        /// Private member to hold a value indicating if the Trackback ping request failed.
         /// </summary>
         private bool responseHasError;
         /// <summary>
@@ -35,7 +35,7 @@ namespace Argotic.Net
         /// Initializes a new instance of the <see cref="TrackbackResponse"/> class.
         /// </summary>
         /// <remarks>
-        ///     The default instance of the <see cref="TrackbackResponse"/> class represents the response to a succesful ping request.
+        ///     The default instance of the <see cref="TrackbackResponse"/> class represents the response to a successful ping request.
         /// </remarks>
         public TrackbackResponse()
         {
@@ -48,7 +48,7 @@ namespace Argotic.Net
         /// <remarks>
         ///     The <paramref name="errorMessage"/> <b>must</b> be provided in a <b>UTF-8</b> character encoding.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="errorMessage"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="errorMessage"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="errorMessage"/> is an empty string.</exception>
         public TrackbackResponse(string errorMessage)
         {
@@ -61,7 +61,7 @@ namespace Argotic.Net
         /// Initializes a new instance of the <see cref="TrackbackResponse"/> class using the supplied <see cref="WebResponse"/>.
         /// </summary>
         /// <param name="response">A <see cref="WebResponse"/> object that represents the Trackback server's response to the remote procedure call.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
         /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content type.</exception>
         /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content length.</exception>
         /// <exception cref="XmlException">The <paramref name="response"/> body does not represent a valid XML document, or an error was encountered in the XML data.</exception>
@@ -114,9 +114,9 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Gets a value indicating if the the Trackback ping request failed.
+        /// Gets a value indicating if the Trackback ping request failed.
         /// </summary>
-        /// <value><b>true</b> if the Trackback ping response contains an error indicator; otherwise <b>false</b>. The default value is <b>false</b>.</value>
+        /// <value><b>true</b> if the Trackback ping response contains an error indicator; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
         public bool HasError
         {
             get
@@ -129,11 +129,11 @@ namespace Argotic.Net
         /// Loads this <see cref="TrackbackResponse"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="TrackbackResponse"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="TrackbackResponse"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="TrackbackResponse"/>.</para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded  = false;
@@ -173,7 +173,7 @@ namespace Argotic.Net
         /// Saves the current <see cref="TrackbackResponse"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

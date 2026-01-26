@@ -50,7 +50,7 @@ namespace Argotic.Common
         /// Initializes a new instance of the <see cref="TrackbackDiscoveryMetadata"/> class using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the Trackback auto-discovery meta-data from.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
         public TrackbackDiscoveryMetadata(XPathNavigator navigator) : this()
         {
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -62,7 +62,7 @@ namespace Argotic.Common
         /// Gets or sets the Resource Description Framework (RDF) entity reference.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the Resource Description Framework (RDF) entity reference.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri About
         {
             get
@@ -81,7 +81,7 @@ namespace Argotic.Common
         /// Gets or sets the unique identifier for the discoverable web log entry.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the unique identifier for the discoverable web log entry.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Identifier
         {
             get
@@ -100,7 +100,7 @@ namespace Argotic.Common
         /// Gets or sets the Trackback ping notification endpoint for the discoverable web log entry.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the Trackback ping URL for the discoverable web log entry.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri PingUrl
         {
             get
@@ -143,11 +143,11 @@ namespace Argotic.Common
         /// Loads this <see cref="TrackbackDiscoveryMetadata"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the Trackback auto-discovery meta-data from.</param>
-        /// <returns><b>true</b> if Trackback auto-discovery meta-data was extracted from the <paramref name="navigator"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if Trackback auto-discovery meta-data was extracted from the <paramref name="navigator"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     Will return <b>false</b> if the <i>trackback:ping</i> attribute is not found on the <b>rdf:Description</b> element.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
         public bool Load(XPathNavigator navigator)
         {
             bool wasLoaded              = false;
@@ -218,7 +218,7 @@ namespace Argotic.Common
         /// Saves the current <see cref="TrackbackDiscoveryMetadata"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

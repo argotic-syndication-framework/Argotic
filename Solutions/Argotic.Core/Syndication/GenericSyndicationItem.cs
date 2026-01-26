@@ -32,7 +32,7 @@ namespace Argotic.Syndication
         /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
         /// </summary>
         /// <param name="entry">The <see cref="AtomEntry"/> to build an abstraction against.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
         public GenericSyndicationItem(AtomEntry entry)
         {
             Guard.ArgumentNotNull(entry, "entry");
@@ -43,7 +43,7 @@ namespace Argotic.Syndication
         /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="RssItem"/>.
         /// </summary>
         /// <param name="item">The <see cref="RssItem"/> to build an abstraction against.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference.</exception>
         public GenericSyndicationItem(RssItem item)
         {
             Guard.ArgumentNotNull(item, "item");
@@ -260,7 +260,7 @@ namespace Argotic.Syndication
         /// Loads the generic syndication item using the supplied <see cref="AtomEntry"/>.
         /// </summary>
         /// <param name="entry">The <see cref="AtomEntry"/> to build an abstraction against.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
         private void LoadFrom(AtomEntry entry)
         {
             Guard.ArgumentNotNull(entry, "entry");
@@ -299,7 +299,7 @@ namespace Argotic.Syndication
         /// Loads the generic syndication item using the supplied <see cref="RssItem"/>.
         /// </summary>
         /// <param name="item">The <see cref="RssItem"/> to build an abstraction against.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference.</exception>
         private void LoadFrom(RssItem item)
         {
             Guard.ArgumentNotNull(item, "item");

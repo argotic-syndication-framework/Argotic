@@ -18,7 +18,7 @@ namespace Argotic.Extensions.Core
 	/// <example>
 	///     <code lang="cs" title="The following code example demonstrates the usage of the DublinCoreElementSetSyndicationExtension class.">
 	///         <code 
-	///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\Core\DublinCoreElementSetSyndicationExtensionExample.cs" 
+	///             source="..\..\Argotic.Examples\\Extensions\Core\DublinCoreElementSetSyndicationExtensionExample.cs" 
 	///             region="DublinCoreElementSetSyndicationExtension"
 	///         />
 	///     </code>
@@ -43,11 +43,11 @@ namespace Argotic.Extensions.Core
 		/// </summary>
 		/// <value>A <see cref="DublinCoreElementSetSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
 		/// <remarks>
-		///     The <b>Context</b> encapsulates all of the syndication extension information that can be retrieved or written to an extended syndication entity. 
+		///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
 		///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
 		///     are defined for the custom syndication extension.
 		/// </remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
 		public DublinCoreElementSetSyndicationExtensionContext Context
 		{
 			get
@@ -68,7 +68,7 @@ namespace Argotic.Extensions.Core
 		/// </summary>
 		/// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
 		/// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
 		public static bool MatchByType(ISyndicationExtension extension)
 		{
 			Guard.ArgumentNotNull(extension, "extension");
@@ -86,7 +86,7 @@ namespace Argotic.Extensions.Core
 		/// Returns the type vocabulary identifier for the supplied <see cref="DublinCoreTypeVocabularies"/>.
 		/// </summary>
 		/// <param name="vocabulary">The <see cref="DublinCoreTypeVocabularies"/> to get the type vocabulary identifier for.</param>
-		/// <returns>The type vocabulary identifier for the supplied <paramref name="vocabulary"/>, otherwise returns an empty string.</returns>
+		/// <returns>The type vocabulary identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
 		public static string TypeVocabularyAsString(DublinCoreTypeVocabularies vocabulary)
 		{
 			string name = String.Empty;
@@ -118,9 +118,9 @@ namespace Argotic.Extensions.Core
 		/// Returns the <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified type vocabulary name.
 		/// </summary>
 		/// <param name="name">The name of the type vocabulary.</param>
-		/// <returns>A <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified string, otherwise returns <b>DublinCoreTypeVocabularies.None</b>.</returns>
+		/// <returns>A <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>DublinCoreTypeVocabularies.None</b>.</returns>
 		/// <remarks>This method disregards case of specified type vocabulary name.</remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
 		/// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
 		public static DublinCoreTypeVocabularies TypeVocabularyByName(string name)
 		{
@@ -153,8 +153,8 @@ namespace Argotic.Extensions.Core
 		/// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
 		/// </summary>
 		/// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="DublinCoreElementSetSyndicationExtension"/>.</param>
-		/// <returns><b>true</b> if the <see cref="DublinCoreElementSetSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <returns><b>true</b> if the <see cref="DublinCoreElementSetSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+		/// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
 		public override bool Load(IXPathNavigable source)
 		{
 			bool wasLoaded  = false;
@@ -171,8 +171,8 @@ namespace Argotic.Extensions.Core
 		/// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
 		/// </summary>
 		/// <param name="reader">The <b>XmlReader</b> used to load this <see cref="DublinCoreElementSetSyndicationExtension"/>.</param>
-		/// <returns><b>true</b> if the <see cref="DublinCoreElementSetSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
-		/// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <returns><b>true</b> if the <see cref="DublinCoreElementSetSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
+		/// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
 		public override bool Load(XmlReader reader)
 		{
 			Guard.ArgumentNotNull(reader, "reader");
@@ -185,7 +185,7 @@ namespace Argotic.Extensions.Core
 		/// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
 		/// </summary>
 		/// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
 		public override void WriteTo(XmlWriter writer)
 		{
 			Guard.ArgumentNotNull(writer, "writer");

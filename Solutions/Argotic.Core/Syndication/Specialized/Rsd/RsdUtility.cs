@@ -32,7 +32,7 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="nameTable">The table of atomized string objects.</param>
         /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
         public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
         {
             XmlNamespaceManager manager = null;
@@ -56,10 +56,10 @@ namespace Argotic.Syndication.Specialized
         ///     This method performs a safe XPath query for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided. 
         ///     If no result is found, this method then attempts the query without any prefixing by removing instances of <i>rsd:</i> from the supplied <paramref name="xpath"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference.</exception>
         public static XPathNodeIterator SelectSafe(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
         {
             XPathNodeIterator iterator = null;
@@ -85,16 +85,16 @@ namespace Argotic.Syndication.Specialized
         /// <param name="xpath">A <see cref="String"/> representing an XPath expression. May be <i>/</i> delimited query. Query shound <b>not</b> contain any prefixing.</param>
         /// <param name="resolver">The <see cref="IXmlNamespaceResolver"/> object used to resolve namespace prefixes in the XPath query.</param>
         /// <returns>
-        ///     An <see cref="XPathNavigator"/> object that contains the first matching node for the XPath query specified; otherwise <b>null</b> if there are no query results.
+        ///     An <see cref="XPathNavigator"/> object that contains the first matching node for the XPath query specified; Otherwise, <b>null</b> if there are no query results.
         /// </returns>
         /// <remarks>
         ///     This method performs a safe XPath query for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided. 
         ///     If no result is found, this method then attempts the query without any prefixing by removing instances of <i>rsd:</i> from the supplied <paramref name="xpath"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference.</exception>
         public static XPathNavigator SelectSafeSingleNode(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
         {
             XPathNavigator navigator = null;

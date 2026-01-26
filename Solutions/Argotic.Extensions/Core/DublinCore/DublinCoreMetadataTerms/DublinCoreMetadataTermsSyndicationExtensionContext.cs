@@ -130,7 +130,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         private string extensionIsPartOf                    = String.Empty;
         /// <summary>
-        /// Private member to hold a related resource that references, cites, or otherwise points to the described resource.
+        /// Private member to hold a related resource that references, cites, or Otherwise, points to the described resource.
         /// </summary>
         private string extensionIsReferencedBy              = String.Empty;
         /// <summary>
@@ -178,7 +178,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         private string extensionPublisher                   = String.Empty;
         /// <summary>
-        /// Private member to hold a related resource that is referenced, cited, or otherwise pointed to by the described resource.
+        /// Private member to hold a related resource that is referenced, cited, or Otherwise, pointed to by the described resource.
         /// </summary>
         private string extensionReferences                  = String.Empty;
         /// <summary>
@@ -712,7 +712,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>The date (often a range) that the resource became or will become available.</value>
         /// <remarks>
-        ///     When representing a date-time, it is recommended that the  <a href="http://www.ietf.org/rfc/rfc3339.txt">RFC #3339: Date and Time on the Internet (Timestamps)</a> format is used. 
+        ///     When representing a date-time, it is recommended that the <a href="http://www.ietf.org/rfc/rfc3339.txt">RFC #3339: Date and Time on the Internet (Timestamps)</a> format is used. 
         ///     The value of this property can represent either a single date-time that indicates the period in time the resource became available, or it may represent a delimited date range 
         ///     that indicates the start and end dates that the resource is or will be available.
         /// </remarks>
@@ -859,7 +859,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>The date (often a range) of validity of a resource.</value>
         /// <remarks>
-        ///     When representing a date-time, it is recommended that the  <a href="http://www.ietf.org/rfc/rfc3339.txt">RFC #3339: Date and Time on the Internet (Timestamps)</a> format is used. 
+        ///     When representing a date-time, it is recommended that the <a href="http://www.ietf.org/rfc/rfc3339.txt">RFC #3339: Date and Time on the Internet (Timestamps)</a> format is used. 
         ///     The value of this property can represent either a single date-time that indicates the period in time the resource is valid, or it may represent a delimited date range 
         ///     that indicates the start and end dates that the resource is or will be valid.
         /// </remarks>
@@ -1177,9 +1177,9 @@ namespace Argotic.Extensions.Core
         }
 
         /// <summary>
-        /// Gets or sets a related resource that references, cites, or otherwise points to the described resource.
+        /// Gets or sets a related resource that references, cites, or Otherwise, points to the described resource.
         /// </summary>
-        /// <value>A related resource that references, cites, or otherwise points to the described resource.</value>
+        /// <value>A related resource that references, cites, or Otherwise, points to the described resource.</value>
         /// <remarks>
         ///     This term is intended to be used with non-literal values as defined in the <a href="http://dublincore.org/documents/abstract-model/">DCMI Abstract Model</a>.
         /// </remarks>
@@ -1475,9 +1475,9 @@ namespace Argotic.Extensions.Core
         }
 
         /// <summary>
-        /// Gets or sets a related resource that is referenced, cited, or otherwise pointed to by the described resource.
+        /// Gets or sets a related resource that is referenced, cited, or Otherwise, pointed to by the described resource.
         /// </summary>
-        /// <value>A related resource that is referenced, cited, or otherwise pointed to by the described resource.</value>
+        /// <value>A related resource that is referenced, cited, or Otherwise, pointed to by the described resource.</value>
         /// <remarks>
         ///     <para>
         ///         This term is intended to be used with non-literal values as defined in the <a href="http://dublincore.org/documents/abstract-model/">DCMI Abstract Model</a>.
@@ -1856,9 +1856,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded  = false;
@@ -1894,8 +1894,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
         /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
@@ -1912,9 +1912,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         private bool LoadGroup1(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded = false;
@@ -2002,9 +2002,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         private bool LoadGroup2(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded = false;
@@ -2112,9 +2112,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         private bool LoadGroup3(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded = false;
@@ -2202,9 +2202,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         private bool LoadGroup4(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded = false;
@@ -2308,9 +2308,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         private bool LoadGroup5(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded = false;
@@ -2398,9 +2398,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         private bool LoadGroup6(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded = false;
@@ -2457,8 +2457,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
         /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         private void WriteGroup1(XmlWriter writer, string xmlNamespace)
         {
@@ -2520,8 +2520,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
         /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         private void WriteGroup2(XmlWriter writer, string xmlNamespace)
         {
@@ -2583,8 +2583,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
         /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         private void WriteGroup3(XmlWriter writer, string xmlNamespace)
         {
@@ -2646,8 +2646,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
         /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         private void WriteGroup4(XmlWriter writer, string xmlNamespace)
         {
@@ -2709,8 +2709,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
         /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         private void WriteGroup5(XmlWriter writer, string xmlNamespace)
         {

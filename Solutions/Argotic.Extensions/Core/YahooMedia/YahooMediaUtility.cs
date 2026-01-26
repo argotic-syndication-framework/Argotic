@@ -56,8 +56,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<YahooMediaCategory> source, Collection<YahooMediaCategory> target)
         {
             int result  = 0;
@@ -100,8 +100,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<YahooMediaContent> source, Collection<YahooMediaContent> target)
         {
             int result  = 0;
@@ -144,8 +144,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<YahooMediaCredit> source, Collection<YahooMediaCredit> target)
         {
             int result  = 0;
@@ -188,8 +188,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<YahooMediaGroup> source, Collection<YahooMediaGroup> target)
         {
             int result  = 0;
@@ -232,8 +232,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<YahooMediaHash> source, Collection<YahooMediaHash> target)
         {
             int result  = 0;
@@ -276,8 +276,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<YahooMediaRating> source, Collection<YahooMediaRating> target)
         {
             int result  = 0;
@@ -320,8 +320,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<YahooMediaRestriction> source, Collection<YahooMediaRestriction> target)
         {
             int result  = 0;
@@ -364,8 +364,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<YahooMediaText> source, Collection<YahooMediaText> target)
         {
             int result  = 0;
@@ -408,8 +408,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<YahooMediaThumbnail> source, Collection<YahooMediaThumbnail> target)
         {
             int result  = 0;
@@ -440,9 +440,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="target">The object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to be filled.</param>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract Yahoo media common entity information from.</param>
-        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static bool FillCommonObjectEntities(IYahooMediaCommonObjectEntities target, XPathNavigator source)
         {
             bool wasLoaded  = false;
@@ -470,8 +470,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">A object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to extract Yahoo media common entity information from.</param>
         /// <param name="writer">The <see cref="XmlWriter"/> to which the <paramref name="source"/> information will be written.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public static void WriteCommonObjectEntities(IYahooMediaCommonObjectEntities source, XmlWriter writer)
         {
             Guard.ArgumentNotNull(source, "source");
@@ -668,10 +668,10 @@ namespace Argotic.Extensions.Core
         /// <param name="target">The object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to be filled.</param>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract Yahoo media common entity information from.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed Yahoo media elements and attributes.</param>
-        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         private static bool FillCommonObjectEntityClasses(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded  = false;
@@ -757,10 +757,10 @@ namespace Argotic.Extensions.Core
         /// <param name="target">The object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to be filled.</param>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract Yahoo media common entity information from.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed Yahoo media elements and attributes.</param>
-        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         private static bool FillCommonObjectEntityCollectionsPrimary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded  = false;
@@ -837,10 +837,10 @@ namespace Argotic.Extensions.Core
         /// <param name="target">The object that implements the <see cref="IYahooMediaCommonObjectEntities"/> interface to be filled.</param>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract Yahoo media common entity information from.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed Yahoo media elements and attributes.</param>
-        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         private static bool FillCommonObjectEntityCollectionsSecondary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded  = false;

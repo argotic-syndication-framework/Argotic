@@ -56,9 +56,9 @@ namespace Argotic.Net
         /// <param name="credentials">A <see cref="ICredentials"/> that represents the authentication credentials utilized by the client when making the remote procedure call. This parameter may be <b>null</b>.</param>
         /// <param name="proxy">A <see cref="IWebProxy"/> that represents the web proxy utilized by the client to proxy the remote procedure call. This parameter may be <b>null</b>.</param>
         /// <param name="state">A <see cref="Object"/> containing state information that was passed to the asynchronous send operation. This parameter may be <b>null</b>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
         public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, ICredentials credentials, IWebProxy proxy, Object state)
         {
             Guard.ArgumentNotNull(host, "host");
@@ -80,9 +80,9 @@ namespace Argotic.Net
         /// <param name="response">An <see cref="XmlRpcResponse"/> that represents the response to the remote procedure call.</param>
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
         /// <param name="state">A <see cref="Object"/> containing state information that was passed to the asynchronous send operation. This parameter may be <b>null</b>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
         public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, WebRequestOptions options, Object state)
         {
             Guard.ArgumentNotNull(host, "host");
@@ -125,7 +125,7 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Gets the the location of the host computer that the remote procedure call was sent to.
+        /// Gets the location of the host computer that the remote procedure call was sent to.
         /// </summary>
         /// <value>
         ///     A <see cref="Uri"/> that represents the URL of the host computer used for the XML-RPC transaction.

@@ -16,7 +16,7 @@ namespace Argotic.Net
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the TrackbackClient class.">
     ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\TrackbackClientExample.cs"
+    ///             source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs"
     ///             region="TrackbackClient"
     ///         />
     ///     </code>
@@ -41,11 +41,11 @@ namespace Argotic.Net
         /// </summary>
         private TimeSpan clientTimeout  = TimeSpan.FromSeconds(15);
         /// <summary>
-        /// Private member to hold a value that indictaes if the client sends default credentials when making an Trackback ping request.
+        /// Private member to hold a value that indicates if the client sends default credentials when making a Trackback ping request.
         /// </summary>
         private bool clientUsesDefaultCredentials;
         /// <summary>
-        /// Private member to hold a value indicating if the client is in the process of sending an Trackback ping request.
+        /// Private member to hold a value indicating if the client is in the process of sending a Trackback ping request.
         /// </summary>
         private bool clientIsSending;
         /// <summary>
@@ -69,7 +69,7 @@ namespace Argotic.Net
         /// Initializes a new instance of the <see cref="TrackbackClient"/> class that sends Trackback pings using the specified Trackback server.
         /// </summary>
         /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
         public TrackbackClient(Uri host)
         {
             this.Initialize();
@@ -81,8 +81,8 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</param>
         /// <param name="userAgent">Information such as the application name, version, host operating system, and language.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
         public TrackbackClient(Uri host, string userAgent) : this(host)
         {
@@ -127,7 +127,7 @@ namespace Argotic.Net
         /// </summary>
         /// <value>
         ///     A <see cref="ICredentials"/> object that represents the authentication credentials provided by this client when making Trackback pings.
-        ///     The default is a null reference (Nothing in Visual Basic), which indicates no authentication information will be supplied to identify the maker of the request.
+        ///     The default is a null reference, which indicates no authentication information will be supplied to identify the maker of the request.
         /// </value>
         public ICredentials Credentials
         {
@@ -147,9 +147,9 @@ namespace Argotic.Net
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</value>
         /// <remarks>
-        ///     If <see cref="Host"/> is a null reference (Nothing in Visual Basic), <see cref="Host"/> is initialized using the settings in the application or machine configuration files.
+        ///     If <see cref="Host"/> is a null reference, <see cref="Host"/> is initialized using the settings in the application or machine configuration files.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Host
         {
             get
@@ -169,7 +169,7 @@ namespace Argotic.Net
         /// </summary>
         /// <value>
         ///     A <see cref="IWebProxy"/> object that represents the web proxy utilized by this client to proxy Trackback pings.
-        ///     The default is a null reference (Nothing in Visual Basic), which indicates no proxy will be used to proxy the request.
+        ///     The default is a null reference, which indicates no proxy will be used to proxy the request.
         /// </value>
         public IWebProxy Proxy
         {
@@ -191,8 +191,8 @@ namespace Argotic.Net
         /// <remarks>
         ///     If <see cref="Timeout"/> is equal to <see cref="TimeSpan.MinValue"/>, <see cref="Timeout"/> is initialized using the settings in the application or machine configuration files.
         /// </remarks>
-        /// <exception cref="ArgumentOutOfRangeException">The time out period is less than zero.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The time out period is greater than a year.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The time-out period is less than zero.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
         public TimeSpan Timeout
         {
             get
@@ -220,7 +220,7 @@ namespace Argotic.Net
         /// <summary>
         /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making Trackback pings.
         /// </summary>
-        /// <value><b>true</b> if the default credentials are used; otherwise <b>false</b>. The default value is <b>false</b>.</value>
+        /// <value><b>true</b> if the default credentials are used; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
         /// <remarks>
         ///     <para>
         ///         Some Trackback servers require that the client be authenticated before the server executes Trackback pings on its behalf.
@@ -254,7 +254,7 @@ namespace Argotic.Net
         /// Gets or sets information such as the client application name, version, host operating system, and language.
         /// </summary>
         /// <value>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string UserAgent
         {
@@ -273,7 +273,7 @@ namespace Argotic.Net
         /// <summary>
         /// Gets or sets a value indicating if the client asynchronous send operation was cancelled.
         /// </summary>
-        /// <value><b>true</b> if client asynchronous send operation has been cancelled, otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if client asynchronous send operation has been cancelled, Otherwise, <b>false</b>.</value>
         internal bool AsyncSendHasBeenCancelled
         {
             get
@@ -288,9 +288,9 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Gets or sets a value indicating if the client is in the process of sending an Trackback ping request.
+        /// Gets or sets a value indicating if the client is in the process of sending a Trackback ping request.
         /// </summary>
-        /// <value><b>true</b> if client is in the process of sending an Trackback ping request, otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if client is in the process of sending a Trackback ping request, Otherwise, <b>false</b>.</value>
         internal bool SendOperationInProgress
         {
             get
@@ -360,12 +360,12 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Sends the specified message to a Trackback server to execute an Trackback ping request.
+        /// Sends the specified message to a Trackback server to execute a Trackback ping request.
         /// </summary>
         /// <param name="message">A <see cref="TrackbackMessage"/> that represents the information needed to execute the Trackback ping request.</param>
         /// <returns>A <see cref="TrackbackResponse"/> that represents the server's response to the Trackback ping request.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, Object)"/> call in progress.</exception>
         public TrackbackResponse Send(TrackbackMessage message)
         {
@@ -393,7 +393,7 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Sends the specified message to an Trackback server to execute an Trackback ping request.
+        /// Sends the specified message to a Trackback server to execute a Trackback ping request.
         /// This method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.
         /// </summary>
         /// <param name="message">A <see cref="TrackbackMessage"/> that represents the information needed to execute the Trackback ping request.</param>
@@ -404,8 +404,8 @@ namespace Argotic.Net
         ///         You can cancel a <see cref="SendAsync(TrackbackMessage, Object)"/> operation by calling the <see cref="SendAsyncCancel()"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, Object)"/> call in progress.</exception>
         //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
         public void SendAsync(TrackbackMessage message, Object userToken)
@@ -433,11 +433,11 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Cancels an asynchronous operation to send an Trackback ping request.
+        /// Cancels an asynchronous operation to send a Trackback ping request.
         /// </summary>
         /// <remarks>
         ///     Use the <see cref="SendAsyncCancel()"/> method to cancel a pending <see cref="SendAsync(TrackbackMessage, Object)"/> operation.
-        ///     If there is an Trackback ping request waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.
+        ///     If there is a Trackback ping request waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.
         ///     If there is no send operation pending, this method does nothing.
         /// </remarks>
         public void SendAsyncCancel()
@@ -450,7 +450,7 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Initializes a new <see cref="WebRequest"/> suitable for sending an Trackback ping request using the supplied host, user agent, message, credentials, and proxy.
+        /// Initializes a new <see cref="WebRequest"/> suitable for sending a Trackback ping request using the supplied host, user agent, message, credentials, and proxy.
         /// </summary>
         /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</param>
         /// <param name="userAgent">Information such as the application name, version, host operating system, and language.</param>
@@ -459,10 +459,10 @@ namespace Argotic.Net
         ///     Controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making Trackback pings.
         /// </param>
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
         private static WebRequest CreateWebRequest(Uri host, string userAgent, TrackbackMessage message, bool useDefaultCredentials, WebRequestOptions options)
         {
             HttpWebRequest httpRequest  = null;

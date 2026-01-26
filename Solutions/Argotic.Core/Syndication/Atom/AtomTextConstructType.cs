@@ -19,7 +19,7 @@ namespace Argotic.Syndication
         None    = 0,
 
         /// <summary>
-        /// Indicates that the human-readable text is Hyper-Text Markup Language (HTML) encoded.
+        /// Indicates that the human-readable text is HyperText Markup Language (HTML) encoded.
         /// </summary>
         [EnumerationMetadata(DisplayName = "HTML", AlternateValue = "html")]
         Html    = 1,

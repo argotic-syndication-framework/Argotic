@@ -26,7 +26,7 @@ namespace Argotic.Extensions
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the SyndicationExtension abstract base class.">
     ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\SyndicationExtensionExample.cs" 
+    ///             source="..\..\Argotic.Examples\\Extensions\SyndicationExtensionExample.cs" 
     ///         />
     ///     </code>
     /// </example>
@@ -71,11 +71,11 @@ namespace Argotic.Extensions
         /// <param name="xmlPrefix">The prefix used to associate this syndication extension's element and attribute names with this syndication extension's XML namespace.</param>
         /// <param name="xmlNamespace">The XML namespace that is used when qualifying this syndication extension's element and attribute names.</param>
         /// <param name="version">The <see cref="Version"/> of the specification that this syndication extension conforms to.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlPrefix"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlPrefix"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlPrefix"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="version"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="version"/> is a null reference.</exception>
         protected SyndicationExtension(string xmlPrefix, string xmlNamespace, Version version)
         {
             Guard.ArgumentNotNullOrEmptyString(xmlPrefix, "xmlPrefix");
@@ -96,13 +96,13 @@ namespace Argotic.Extensions
         /// <param name="documentation">A <see cref="Uri"/> that points to the documentation for this syndication extension.</param>
         /// <param name="name">A human-readable name for this syndication extension.</param>
         /// <param name="description">A human-readable description for this syndication extension.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlPrefix"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlPrefix"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlPrefix"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="version"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="documentation"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="version"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="documentation"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         protected SyndicationExtension(string xmlPrefix, string xmlNamespace, Version version, Uri documentation, string name, string description) : this(xmlPrefix, xmlNamespace, version)
         {
@@ -219,7 +219,7 @@ namespace Argotic.Extensions
         ///     the associated XML namespace is used instead. This is to prevent collisions and is an attempt to gracefully handle the case where a XML namespace that 
         ///     is not per the extension's specification has been declared on the syndication resource.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
         public XmlNamespaceManager CreateNamespaceManager(XPathNavigator navigator)
         {
             XmlNamespaceManager manager = null;
@@ -242,7 +242,7 @@ namespace Argotic.Extensions
         /// Determines if the <see cref="SyndicationExtension"/> exists in the XML data in the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to parse.</param>
-        /// <returns><b>true</b> if the <see cref="SyndicationExtension"/> elements or attributes are present in the <paramref name="source"/>; otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="SyndicationExtension"/> elements or attributes are present in the <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         This method should be as lightweight as possible when determining if the <see cref="SyndicationExtension"/> or its related entities are present in the <paramref name="source"/>. 
@@ -273,7 +273,7 @@ namespace Argotic.Extensions
         /// Writes the prefixed XML namespace for the current syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the prefixed XML namespace declaration to.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteXmlNamespaceDeclaration(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
@@ -282,19 +282,19 @@ namespace Argotic.Extensions
 
         /// <summary>
         /// This method is reserved and <u>should not be used</u>. When implementing the <see cref="IXmlSerializable"/> interface, it is recommended 
-        /// that a <b>null</b> reference (Nothing in Visual Basic) is returned from this method, and instead, if 
+        /// that a <b>null</b> reference is returned from this method, and instead, if 
         /// specifying a custom schema is required, to apply the <see cref="XmlSchemaProviderAttribute"/> to the class.
         /// </summary>
         /// <returns>
         ///     A <see cref="XmlSchema"/> object that represents an in-memory representation of an XML Schema as specified 
         ///     in the <b>World Wide Web Consortium (W3C)</b> XML Schema <i>Structures</i> and <i>Datatypes</i> specifications. 
-        ///     The default return value for this method is a <b>null</b> reference (Nothing in Visual Basic).
+        ///     The default return value for this method is a <b>null</b> reference.
         /// </returns>
         /// <remarks>
         ///     <para>
         ///         When serializing or deserializing an object, the <see cref="XmlSerializer"/> class does not perform XML validation. 
         ///         For this reason, it is often safe to omit schema information by providing a trivial implementation of this method, 
-        ///         for example by returning a <b>null</b> reference (Nothing in Visual Basic).
+        ///         for example by returning a <b>null</b> reference.
         ///     </para>
         ///     <para>
         ///         Some .NET Framework types as well as legacy custom types implementing the <see cref="IXmlSerializable"/> interface may be using <see cref="IXmlSerializable.GetSchema()"/> 
@@ -311,7 +311,7 @@ namespace Argotic.Extensions
         /// Generates an object from its XML representation.
         /// </summary>
         /// <param name="reader">The <see cref="XmlReader"/> stream from which the object is deserialized.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         public void ReadXml(XmlReader reader)
         {
             Guard.ArgumentNotNull(reader, "reader");
@@ -323,7 +323,7 @@ namespace Argotic.Extensions
         /// Converts an object into its XML representation.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> stream to which the object is serialized.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteXml(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
@@ -335,7 +335,7 @@ namespace Argotic.Extensions
         /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
         /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication extension.</param>
-        /// <returns><b>true</b> if the <see cref="SyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="SyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         <b>Notes to Implementers:</b>
@@ -348,14 +348,14 @@ namespace Argotic.Extensions
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public abstract bool Load(IXPathNavigable source);
 
         /// <summary>
         /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
         /// </summary>
         /// <param name="reader">The <b>XmlReader</b> used to load the syndication extension.</param>
-        /// <returns><b>true</b> if the <see cref="SyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="SyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         <b>Notes to Implementers:</b>
@@ -374,14 +374,14 @@ namespace Argotic.Extensions
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         public abstract bool Load(XmlReader reader);
 
         /// <summary>
         /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public abstract void WriteTo(XmlWriter writer);
     }
 }

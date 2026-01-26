@@ -13,7 +13,7 @@ namespace Argotic.Net
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcResponse class.">
     ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs"
+    ///             source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs"
     ///             region="XmlRpcClient"
     ///         />
     ///     </code>
@@ -41,7 +41,7 @@ namespace Argotic.Net
         /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class using the supplied <see cref="IXmlRpcValue"/>.
         /// </summary>
         /// <param name="parameter">A <see cref="IXmlRpcValue"/> that represents the response value that was returned for the remote procedure call.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="parameter"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="parameter"/> is a null reference.</exception>
         public XmlRpcResponse(IXmlRpcValue parameter)
         {
             Guard.ArgumentNotNull(parameter, "parameter");
@@ -53,7 +53,7 @@ namespace Argotic.Net
         /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class using the supplied <see cref="XmlRpcStructureValue"/>.
         /// </summary>
         /// <param name="fault">A <see cref="XmlRpcStructureValue"/> that represents the response to the remote procedure call.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="fault"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="fault"/> is a null reference.</exception>
         public XmlRpcResponse(XmlRpcStructureValue fault)
         {
             Guard.ArgumentNotNull(fault, "fault");
@@ -81,7 +81,7 @@ namespace Argotic.Net
         /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class using the supplied <see cref="WebResponse"/>.
         /// </summary>
         /// <param name="response">A <see cref="WebResponse"/> object that represents the XML-RPC server's response to the remote procedure call.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
         /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content type.</exception>
         /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content length.</exception>
         /// <exception cref="XmlException">The <paramref name="response"/> body does not represent a valid XML document, or an error was encountered in the XML data.</exception>
@@ -158,11 +158,11 @@ namespace Argotic.Net
         /// Loads this <see cref="XmlRpcResponse"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="XmlRpcResponse"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="XmlRpcResponse"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcResponse"/>.</para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded  = false;
@@ -210,7 +210,7 @@ namespace Argotic.Net
         /// Saves the current <see cref="XmlRpcResponse"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

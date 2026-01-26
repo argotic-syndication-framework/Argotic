@@ -22,7 +22,7 @@ namespace Argotic.Common
         ///     The supplied <paramref name="xml"/> data is parsed to remove invalid XML characters that would normally prevent
         ///     a navigator from being created.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is an empty string.</exception>
         public static XPathNavigator CreateSafeNavigator(string xml)
         {
@@ -54,7 +54,7 @@ namespace Argotic.Common
         ///     The character encoding of the supplied <paramref name="stream"/> is automatically determined based on the <i>encoding</i> attribute of the XML document declaration.
         ///     If the character encoding cannot be determined, a default encoding of <see cref="Encoding.UTF8"/> is used.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         public static XPathNavigator CreateSafeNavigator(Stream stream)
         {
             Encoding encoding   = Encoding.UTF8;
@@ -82,8 +82,8 @@ namespace Argotic.Common
         ///     The supplied <paramref name="stream"/> XML data is parsed to remove invalid XML characters that would normally prevent
         ///     a navigator from being created.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="encoding"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="encoding"/> is a null reference.</exception>
         public static XPathNavigator CreateSafeNavigator(Stream stream, Encoding encoding)
         {
             Guard.ArgumentNotNull(stream, "stream");
@@ -104,7 +104,7 @@ namespace Argotic.Common
         ///     The supplied <paramref name="reader"/> XML data is parsed to remove invalid XML characters that would normally prevent
         ///     a navigator from being created.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         public static XPathNavigator CreateSafeNavigator(TextReader reader)
         {
             Guard.ArgumentNotNull(reader, "reader");
@@ -129,7 +129,7 @@ namespace Argotic.Common
         ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
         ///     a navigator from being created.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy)
         {
             return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy));
@@ -145,7 +145,7 @@ namespace Argotic.Common
         ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
         ///     a navigator from being created.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options)
         {
             return SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
@@ -171,9 +171,9 @@ namespace Argotic.Common
         /// </returns>
         /// <remarks>
         ///     If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
-        ///     Otherwise the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
+        ///     Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy, Encoding encoding)
         {
             return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy), encoding);
@@ -192,9 +192,9 @@ namespace Argotic.Common
         /// </returns>
         /// <remarks>
         ///     If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
-        ///     Otherwise the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
+        ///     Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options, Encoding encoding)
         {
             Guard.ArgumentNotNull(source, "source");
@@ -258,9 +258,9 @@ namespace Argotic.Common
         /// </param>
         /// <returns>
         ///     An <see cref="WebRequest"/> that makes a request to the <paramref name="source"/>. If unable to create a <see cref="WebRequest"/> for
-        ///     the specified <paramref name="source"/>, returns a <b>null</b> reference (Nothing in Visual Basic).
+        ///     the specified <paramref name="source"/>, returns a <b>null</b> reference.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static WebRequest CreateWebRequest(Uri source, ICredentials credentials, IWebProxy proxy)
         {
             return SyndicationEncodingUtility.CreateWebRequest(source, new WebRequestOptions(credentials, proxy));
@@ -273,9 +273,9 @@ namespace Argotic.Common
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
         /// <returns>
         ///     An <see cref="WebRequest"/> that makes a request to the <paramref name="source"/>. If unable to create a <see cref="WebRequest"/> for
-        ///     the specified <paramref name="source"/>, returns a <b>null</b> reference (Nothing in Visual Basic).
+        ///     the specified <paramref name="source"/>, returns a <b>null</b> reference.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static WebRequest CreateWebRequest(Uri source, WebRequestOptions options)
         {
             WebRequest request  = null;
@@ -313,9 +313,9 @@ namespace Argotic.Common
         /// </param>
         /// <returns>
         ///     An <see cref="WebResponse"/> that contains the response from the requested resource. If unable to create a <see cref="WebResponse"/> for
-        ///     the requested <paramref name="source"/>, returns a <b>null</b> reference (Nothing in Visual Basic).
+        ///     the requested <paramref name="source"/>, returns a <b>null</b> reference.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static WebResponse CreateWebResponse(Uri source, ICredentials credentials, IWebProxy proxy)
         {
             return SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials, proxy));
@@ -328,9 +328,9 @@ namespace Argotic.Common
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
         /// <returns>
         ///     An <see cref="WebResponse"/> that contains the response from the requested resource. If unable to create a <see cref="WebResponse"/> for
-        ///     the requested <paramref name="source"/>, returns a <b>null</b> reference (Nothing in Visual Basic).
+        ///     the requested <paramref name="source"/>, returns a <b>null</b> reference.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static WebResponse CreateWebResponse(Uri source, WebRequestOptions options)
         {
             WebResponse response    = null;
@@ -351,7 +351,7 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="encodedValue">The base64 encoded string to decode.</param>
         /// <returns>A <see cref="Stream"/> the represents the decoded result of the base64 encoded value.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is an empty string.</exception>
         public static Stream DecodeBase64String(string encodedValue)
         {
@@ -375,7 +375,7 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="escapedValue">The HTML escaped string to decode.</param>
         /// <returns>A string the represents the unescaped result of the HTML escaped value.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is an empty string.</exception>
         public static string DecodeHtmlEscapedString(string escapedValue)
         {
@@ -401,7 +401,7 @@ namespace Argotic.Common
         ///         and any Unicode character; excluding the surrogate blocks FFFE and FFFF.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         public static string EncodeInvalidXmlHexadecimalCharacters(string content)
         {
@@ -429,7 +429,7 @@ namespace Argotic.Common
         ///     A <see cref="Encoding"/> that represents character encoding of the Content-Type <i>charset</i> attribute.
         ///     If the <i>charset</i> attribute is unavailable or invalid, returns <b>null</b>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference.</exception>
         /*public static Encoding GetCharacterEncoding(HttpRequest request)
         {
             Encoding contentEncoding    = null;
@@ -483,7 +483,7 @@ namespace Argotic.Common
         ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data source.
         ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
         public static Encoding GetXmlEncoding(byte[] data)
         {
             Guard.ArgumentNotNull(data, "data");
@@ -502,7 +502,7 @@ namespace Argotic.Common
         ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data source.
         ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         public static Encoding GetXmlEncoding(Stream stream)
         {
             Guard.ArgumentNotNull(stream, "stream");
@@ -521,7 +521,7 @@ namespace Argotic.Common
         ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data.
         ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         public static Encoding GetXmlEncoding(string content)
         {
@@ -562,7 +562,7 @@ namespace Argotic.Common
         ///         and any Unicode character; excluding the surrogate blocks FFFE and FFFF.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         public static string RemoveInvalidXmlHexadecimalCharacters(string content)
         {
@@ -592,7 +592,7 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="name">The directory name to encode.</param>
         /// <returns>A string that can be safely used as an argument when <see cref="Directory.CreateDirectory(string)">creating a directory</see>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static string EncodeSafeDirectoryName(string name)
         {
@@ -617,7 +617,7 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="stream">The <see cref="Stream"/> to get an array of bytes for.</param>
         /// <returns>An array of bytes that represent the data of the supplied <paramref name="stream"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         private static byte[] GetStreamBytes(Stream stream)
         {
             int initialLength   = 32768;

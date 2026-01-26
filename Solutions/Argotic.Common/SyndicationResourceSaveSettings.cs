@@ -37,7 +37,7 @@ namespace Argotic.Common
         /// Gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
         /// <value>
-        ///     <b>true</b> if the syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities; otherwise <b>false</b>.
+        ///     <b>true</b> if the syndication extensions supported by the save operation are automatically determined based on the syndication extensions added to the syndication resource and its child entities; Otherwise, <b>false</b>.
         ///     The default value is <b>true</b>.
         /// </value>
         /// <remarks>
@@ -61,7 +61,7 @@ namespace Argotic.Common
         /// Gets or sets the character encoding to use when persisting a syndication resource.
         /// </summary>
         /// <value>A <see cref="Encoding"/> object that indicates the character encoding to use when persisting a syndication resource. The default value is <see cref="Encoding.UTF8"/>.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Encoding CharacterEncoding
         {
             get
@@ -79,7 +79,7 @@ namespace Argotic.Common
         /// <summary>
         /// Gets or sets a value indicating if syndication resource persist operations should attempt to minimize the physical size of the resulting output.
         /// </summary>
-        /// <value><b>true</b> if output size should be as small as possible; otherwise <b>false</b>. The default value is <b>false</b>.</value>
+        /// <value><b>true</b> if output size should be as small as possible; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
         public bool MinimizeOutputSize
         {
             get

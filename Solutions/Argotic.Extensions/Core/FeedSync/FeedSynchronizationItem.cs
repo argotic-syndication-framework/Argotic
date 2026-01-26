@@ -63,7 +63,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="id">The globally unique identifier for the item.</param>
         /// <param name="updates">The number of updates applied to this item.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="id"/> is an empty string.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="updates"/> is less than <b>1</b>.</exception>
         public FeedSynchronizationItem(string id, int updates)
@@ -78,10 +78,10 @@ namespace Argotic.Extensions.Core
         /// <param name="id">The globally unique identifier for the item.</param>
         /// <param name="updates">The number of updates applied to this item.</param>
         /// <param name="history">A <see cref="FeedSynchronizationHistory"/> object that represents the initial information about updates to this item.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="id"/> is an empty string.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="updates"/> is less than <b>1</b>.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="history"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="history"/> is a null reference.</exception>
         public FeedSynchronizationItem(string id, int updates, FeedSynchronizationHistory history) : this(id, updates)
         {
             Guard.ArgumentNotNull(history, "history");
@@ -149,7 +149,7 @@ namespace Argotic.Extensions.Core
         ///         Namespace Specific Strings (the NSS portion of a URN) in <a href="http://www.ietf.org/rfc/rfc2141.txt">RFC 2141</a>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string Id
         {
@@ -258,8 +258,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<FeedSynchronizationHistory> source, Collection<FeedSynchronizationHistory> target)
         {
             int result  = 0;
@@ -289,7 +289,7 @@ namespace Argotic.Extensions.Core
         /// Returns the conflict preservation identifier for the supplied <see cref="FeedSynchronizationConflictPreservationDirective"/>.
         /// </summary>
         /// <param name="directive">The <see cref="FeedSynchronizationConflictPreservationDirective"/> to get the conflict preservation identifier for.</param>
-        /// <returns>The conflict preservation identifier for the supplied <paramref name="vocabulary"/>, otherwise returns an empty string.</returns>
+        /// <returns>The conflict preservation identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
         public static string ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective directive)
         {
             string name = String.Empty;
@@ -321,9 +321,9 @@ namespace Argotic.Extensions.Core
         /// Returns the <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that corresponds to the specified conflict preservation name.
         /// </summary>
         /// <param name="name">The name of the conflict preservation.</param>
-        /// <returns>A <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that corresponds to the specified string, otherwise returns <b>FeedSynchronizationConflictPreservationDirective.None</b>.</returns>
+        /// <returns>A <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>FeedSynchronizationConflictPreservationDirective.None</b>.</returns>
         /// <remarks>This method disregards case of specified conflict preservation name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static FeedSynchronizationConflictPreservationDirective ConflictPreservationByName(string name)
         {
@@ -356,7 +356,7 @@ namespace Argotic.Extensions.Core
         /// Returns the tombstone status identifier for the supplied <see cref="FeedSynchronizationTombstoneStatus"/>.
         /// </summary>
         /// <param name="status">The <see cref="FeedSynchronizationTombstoneStatus"/> to get the tombstone status identifier for.</param>
-        /// <returns>The tombstone status identifier for the supplied <paramref name="vocabulary"/>, otherwise returns an empty string.</returns>
+        /// <returns>The tombstone status identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
         public static string TombstoneStatusAsString(FeedSynchronizationTombstoneStatus status)
         {
             string name = String.Empty;
@@ -388,9 +388,9 @@ namespace Argotic.Extensions.Core
         /// Returns the <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that corresponds to the specified tombstone status name.
         /// </summary>
         /// <param name="name">The name of the tombstone status.</param>
-        /// <returns>A <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that corresponds to the specified string, otherwise returns <b>FeedSynchronizationTombstoneStatus.None</b>.</returns>
+        /// <returns>A <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>FeedSynchronizationTombstoneStatus.None</b>.</returns>
         /// <remarks>This method disregards case of specified tombstone status name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static FeedSynchronizationTombstoneStatus TombstoneStatusByName(string name)
         {
@@ -423,11 +423,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="FeedSynchronizationItem"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="FeedSynchronizationItem"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="FeedSynchronizationItem"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="FeedSynchronizationItem"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -514,7 +514,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="FeedSynchronizationItem"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

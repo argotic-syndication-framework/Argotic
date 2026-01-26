@@ -41,7 +41,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="scheme">The <see cref="Uri"/> that describes the permanent, universally unique identifier for the ranking scheme.</param>
         /// <param name="value">The <see cref="Decimal"/> value of the rank.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="scheme"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="scheme"/> is a null reference.</exception>
         public FeedRankSyndicationExtensionContext(Uri scheme, decimal value)
         {
             this.Scheme = scheme;
@@ -92,7 +92,7 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking scheme.
         /// </summary>
         /// <value>The <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking scheme.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Scheme
         {
             get
@@ -128,9 +128,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="FeedRankSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="FeedRankSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="FeedRankSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded  = false;
@@ -194,8 +194,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
         /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {

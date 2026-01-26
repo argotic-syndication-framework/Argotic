@@ -74,10 +74,10 @@ namespace Argotic.Publishing
         /// <summary>
         /// Initializes a new instance of the <see cref="AtomMemberResources"/> class using the supplied <see cref="AtomTextConstruct"/>.
         /// </summary>
-        /// <param name="href">A <see cref="Uri"/> that represents a Internationalized Resource Identifier (IRI) that identifies the location of the collection.</param>
+        /// <param name="href">A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the location of the collection.</param>
         /// <param name="title">A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for the collection.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
         public AtomMemberResources(Uri href, AtomTextConstruct title) : this()
         {
             this.Uri    = href;
@@ -135,7 +135,7 @@ namespace Argotic.Publishing
         /// <remarks>
         ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<ISyndicationExtension> Extensions
         {
             get
@@ -157,7 +157,7 @@ namespace Argotic.Publishing
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
         public bool HasExtensions
         {
             get
@@ -170,8 +170,8 @@ namespace Argotic.Publishing
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded   = false;
@@ -196,7 +196,7 @@ namespace Argotic.Publishing
         ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
@@ -209,11 +209,11 @@ namespace Argotic.Publishing
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
@@ -264,7 +264,7 @@ namespace Argotic.Publishing
         /// <value>A <see cref="Collection{AtomCategoryDocument}"/> of <see cref="AtomCategoryDocument"/> objects that represent a list of categories that can be applied to members of this collection.</value>
         /// <remarks>
         ///     The server <i>may</i> reject attempts to create or store members whose categories are not present in its categories list.
-        ///     A <see cref="AtomMemberResources"/> that indicates the category set is open <b>should not</b> reject otherwise acceptable members whose categories are not in its categories list.
+        ///     A <see cref="AtomMemberResources"/> that indicates the category set is open <b>should not</b> reject Otherwise, acceptable members whose categories are not in its categories list.
         ///     The absence of <see cref="Categories"/> means that the category handling of the <see cref="AtomMemberResources"/> is unspecified.
         ///     A <see cref="AtomCategoryDocument.IsFixed">fixed</see> category list that contains zero categories indicates the <see cref="AtomMemberResources"/> does not accept category data.
         /// </remarks>
@@ -287,7 +287,7 @@ namespace Argotic.Publishing
         ///     A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this collection.
         ///     The default value is an empty <see cref="AtomTextConstruct"/>.
         /// </value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public AtomTextConstruct Title
         {
             get
@@ -305,12 +305,12 @@ namespace Argotic.Publishing
         /// <summary>
         /// Gets or sets an IRI that identifies the location of this <see cref="AtomMemberResources"/>.
         /// </summary>
-        /// <value>A <see cref="Uri"/> that represents a Internationalized Resource Identifier (IRI) that identifies the location of this <see cref="AtomMemberResources"/>.</value>
+        /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the location of this <see cref="AtomMemberResources"/>.</value>
         /// <remarks>
         ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
         ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Uri
         {
             get
@@ -342,8 +342,8 @@ namespace Argotic.Publishing
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<AtomAcceptedMediaRange> source, Collection<AtomAcceptedMediaRange> target)
         {
             int result  = 0;
@@ -382,7 +382,7 @@ namespace Argotic.Publishing
         ///     </para>
         ///     <para>An <see cref="AtomEntry"/> <b>must not</b> contain more than one <i>edit</i> link relation.</para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
         public static AtomLink CreateEditLink(Uri href)
         {
             Guard.ArgumentNotNull(href, "href");
@@ -394,7 +394,7 @@ namespace Argotic.Publishing
         /// Creates a new <see cref="AtomLink"/> that can be used to modify a media resource associated with an <see cref="AtomEntry"/> using the supplied <see cref="Uri"/>.
         /// </summary>
         /// <param name="href">A <see cref="Uri"/> that represents an IRI that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</param>
-        /// <returns>A <see cref="AtomLink"/> object that can be can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
+        /// <returns>A <see cref="AtomLink"/> object that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
         /// <remarks>
         ///     <para>
         ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies
@@ -411,7 +411,7 @@ namespace Argotic.Publishing
         ///         client <i>should</i> pick the first <i>edit-media</i> link relation in document order.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
         public static AtomLink CreateEditMediaLink(Uri href)
         {
             Guard.ArgumentNotNull(href, "href");
@@ -424,7 +424,7 @@ namespace Argotic.Publishing
         /// </summary>
         /// <param name="href">A <see cref="Uri"/> that represents an IRI that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</param>
         /// <param name="contentType">An advisory MIME media type that provides a hint about the type of the representation that is expected to be returned by the Web resource.</param>
-        /// <returns>A <see cref="AtomLink"/> object that can be can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
+        /// <returns>A <see cref="AtomLink"/> object that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
         /// <remarks>
         ///     <para>
         ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies
@@ -441,7 +441,7 @@ namespace Argotic.Publishing
         ///         client <i>should</i> pick the first <i>edit-media</i> link relation in document order.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
         public static AtomLink CreateEditMediaLink(Uri href, string contentType)
         {
             AtomLink link       = AtomMemberResources.CreateEditMediaLink(href);
@@ -455,7 +455,7 @@ namespace Argotic.Publishing
         /// <param name="href">A <see cref="Uri"/> that represents an IRI that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</param>
         /// <param name="contentType">An advisory MIME media type that provides a hint about the type of the representation that is expected to be returned by the Web resource.</param>
         /// <param name="contentLanguage">A <see cref="CultureInfo"/> that represents the natural or formal language in which this resource content is written.</param>
-        /// <returns>A <see cref="AtomLink"/> object that can be can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
+        /// <returns>A <see cref="AtomLink"/> object that can be used to modify a media resource associated with an <see cref="AtomEntry"/>.</returns>
         /// <remarks>
         ///     <para>
         ///         The <see cref="AtomLink"/> that is returned has a <see cref="AtomLink.Relation"/> of <b>edit-media</b>. The value of <i>edit-media</i> specifies
@@ -472,7 +472,7 @@ namespace Argotic.Publishing
         ///         client <i>should</i> pick the first <i>edit-media</i> link relation in document order.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateMemberEntryEditMediaLink(System.Uri,System.String)")]
         public static AtomLink CreateEditMediaLink(Uri href, string contentType, CultureInfo contentLanguage)
         {
@@ -487,7 +487,7 @@ namespace Argotic.Publishing
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
         /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public static bool MatchByType(ISyndicationExtension extension)
         {
             Guard.ArgumentNotNull(extension, "extension");
@@ -517,7 +517,7 @@ namespace Argotic.Publishing
         ///     </para>
         ///     <para>
         ///         Servers <i>may</i> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance,
-        ///         by using some or all of the words in the value for the last URI segment. Servers <i>may</i> also use the value when creating
+        ///         by using some or all the words in the value for the last URI segment. Servers <i>may</i> also use the value when creating
         ///         the <see cref="AtomId"/>, or as the <see cref="AtomEntry.Title">title</see> of a Media Link Entry.
         ///     </para>
         ///     <para>
@@ -525,7 +525,7 @@ namespace Argotic.Publishing
         ///         For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="characterSequence"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="characterSequence"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="characterSequence"/> is an empty string.</exception>
         public static string SlugEncode(string characterSequence)
         {
@@ -546,7 +546,7 @@ namespace Argotic.Publishing
         ///     </para>
         ///     <para>
         ///         Servers <i>may</i> use the value of the Slug header when creating the Member URI of the newly created Resource, for instance,
-        ///         by using some or all of the words in the value for the last URI segment. Servers <i>may</i> also use the value when creating
+        ///         by using some or all the words in the value for the last URI segment. Servers <i>may</i> also use the value when creating
         ///         the <see cref="AtomId"/>, or as the <see cref="AtomEntry.Title">title</see> of a Media Link Entry.
         ///     </para>
         ///     <para>
@@ -554,7 +554,7 @@ namespace Argotic.Publishing
         ///         For instance, a server might filter out some characters or replace accented letters with non-accented ones, replace spaces with underscores, change case, and so on.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="slug"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="slug"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="slug"/> is an empty string.</exception>
         public static string SlugDecode(string slug)
         {
@@ -567,11 +567,11 @@ namespace Argotic.Publishing
         /// Loads this <see cref="AtomMemberResources"/> using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
         /// <param name="source">The <see cref="IXPathNavigable"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomMemberResources"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public override bool Load(IXPathNavigable source)
         {
             bool wasLoaded              = false;
@@ -649,12 +649,12 @@ namespace Argotic.Publishing
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomMemberResources"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
@@ -674,8 +674,8 @@ namespace Argotic.Publishing
         /// Loads this <see cref="AtomMemberResources"/> using the supplied <see cref="XmlReader"/>.
         /// </summary>
         /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="AtomMemberResources"/>.</param>
-        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         public override bool Load(XmlReader reader)
         {
             Guard.ArgumentNotNull(reader, "reader");
@@ -688,8 +688,8 @@ namespace Argotic.Publishing
         /// </summary>
         /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="AtomMemberResources"/>.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         public bool Load(XmlReader reader, SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(reader, "reader");
@@ -707,7 +707,7 @@ namespace Argotic.Publishing
         /// Saves the current <see cref="AtomMemberResources"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public override void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

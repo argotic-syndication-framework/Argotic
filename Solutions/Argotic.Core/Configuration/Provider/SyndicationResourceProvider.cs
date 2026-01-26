@@ -1,4 +1,5 @@
 ﻿using System.Collections.ObjectModel;
+using System.Configuration.Provider;
 using Argotic.Common;
 
 namespace Argotic.Configuration.Provider
@@ -42,8 +43,8 @@ namespace Argotic.Configuration.Provider
         /// <param name="providerResourceKey">The unique identifier that identifies the resource within the syndication data source.</param>
         /// <param name="resource">The <see cref="ISyndicationResource"/> to be created within the data source.</param>
         /// <returns>A <see cref="SyndicationResourceCreateStatus"/> enumeration value indicating whether the syndication resource was created successfully.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         public abstract SyndicationResourceCreateStatus CreateResource(Object providerResourceKey, ISyndicationResource resource);
 
         /// <summary>
@@ -51,25 +52,25 @@ namespace Argotic.Configuration.Provider
         /// </summary>
         /// <param name="providerResourceKey">The unique identifier that identifies the resource to be removed.</param>
         /// <returns><b>true</b> if the syndication resource was successfully deleted; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference.</exception>
         public abstract bool DeleteResource(Object providerResourceKey);
 
         /// <summary>
         /// Gets resource information from the data source based on the unique identifier for the syndication resource.
         /// </summary>
         /// <param name="providerResourceKey">The unique identifier that identifies the syndication resource to get information for.</param>
-        /// <returns>An object that implements the <see cref="ISyndicationResource"/> interface populated with the specified resources's information from the data source.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns>An object that implements the <see cref="ISyndicationResource"/> interface populated with the specified resources' information from the data source.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference.</exception>
         public abstract ISyndicationResource GetResource(Object providerResourceKey);
 
         /// <summary>
         /// Gets a collection of all the resources in the data source that conform to the specified <see cref="SyndicationContentFormat"/>.
         /// </summary>
         /// <param name="format">A <see cref="SyndicationContentFormat"/> enumeration values that indicates the format of the resources to be returned.</param>
-        /// <returns>A <see cref="Collection{T}"/> of all of the syndication resources contained in the data source that conform to the specified <see cref="SyndicationContentFormat"/>.</returns>
+        /// <returns>A <see cref="Collection{T}"/> of all the syndication resources contained in the data source that conform to the specified <see cref="SyndicationContentFormat"/>.</returns>
         /// <remarks>
         ///     <para>
-        ///         <see cref="GetResources(SyndicationContentFormat)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property.
+        ///         <see cref="GetResources(SyndicationContentFormat)"/> returns a list of all the resources from the data source for the configured <see cref="ApplicationName"/> property.
         ///         Syndication resources are returned in order of last time they were updated in the data source.
         ///     </para>
         /// </remarks>
@@ -87,7 +88,7 @@ namespace Argotic.Configuration.Provider
         /// </returns>
         /// <remarks>
         ///     <para>
-        ///         <see cref="GetResources(int, int, out int)"/> returns a list of all of the resources from the data source for the configured <see cref="ApplicationName"/> property.
+        ///         <see cref="GetResources(int, int, out int)"/> returns a list of all the resources from the data source for the configured <see cref="ApplicationName"/> property.
         ///         Syndication resources are returned in order of last time they were updated in the data source.
         ///     </para>
         ///     <para>
@@ -113,8 +114,8 @@ namespace Argotic.Configuration.Provider
         /// <param name="resource">
         ///     An object that implements the <see cref="ISyndicationResource"/> interface that represents the updated information for the resource.
         /// </param>
-        /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="providerResourceKey"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         public abstract void UpdateResource(Object providerResourceKey, ISyndicationResource resource);
     }
 }

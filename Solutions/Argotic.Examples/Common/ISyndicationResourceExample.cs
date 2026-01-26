@@ -59,7 +59,7 @@ namespace Argotic.Examples
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
-        /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, Otherwise, <b>false</b>.</value>
         internal bool AsyncLoadHasBeenCancelled
         {
             get
@@ -76,7 +76,7 @@ namespace Argotic.Examples
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
-        /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if syndication resource is in the process of loading, Otherwise, <b>false</b>.</value>
         internal bool LoadOperationInProgress
         {
             get
@@ -146,7 +146,7 @@ namespace Argotic.Examples
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="MyCustomRssFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(IXPathNavigable source)
@@ -162,7 +162,7 @@ namespace Argotic.Examples
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="MyCustomRssFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
@@ -183,7 +183,7 @@ namespace Argotic.Examples
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="MyCustomRssFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Stream stream)
@@ -199,7 +199,7 @@ namespace Argotic.Examples
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="MyCustomRssFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Stream stream, SyndicationResourceLoadSettings settings)
@@ -222,7 +222,7 @@ namespace Argotic.Examples
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="MyCustomRssFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(XmlReader reader)
@@ -238,7 +238,7 @@ namespace Argotic.Examples
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="MyCustomRssFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
@@ -278,7 +278,7 @@ namespace Argotic.Examples
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
@@ -302,7 +302,7 @@ namespace Argotic.Examples
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Uri source, WebRequestOptions options)
@@ -337,7 +337,7 @@ namespace Argotic.Examples
         ///             <item>
         ///                 <description>
         ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/> 
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
+        ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used. 
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -349,7 +349,7 @@ namespace Argotic.Examples
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
@@ -369,7 +369,7 @@ namespace Argotic.Examples
         ///             <item>
         ///                 <description>
         ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/> 
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used. 
+        ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used. 
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -381,7 +381,7 @@ namespace Argotic.Examples
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
@@ -407,7 +407,7 @@ namespace Argotic.Examples
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         public void Save(Stream stream)
         {
@@ -419,7 +419,7 @@ namespace Argotic.Examples
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
         /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="MyCustomRssFeed"/> instance. This value can be <b>null</b>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         public void Save(Stream stream, SyndicationResourceSaveSettings settings)
         {
@@ -444,7 +444,7 @@ namespace Argotic.Examples
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         public void Save(XmlWriter writer)
         {
@@ -457,8 +457,8 @@ namespace Argotic.Examples
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
         /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="MyCustomRssFeed"/> instance.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
         {
@@ -487,7 +487,7 @@ namespace Argotic.Examples
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="MyCustomRssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, Object userToken)
@@ -511,7 +511,7 @@ namespace Argotic.Examples
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="MyCustomRssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
@@ -541,7 +541,7 @@ namespace Argotic.Examples
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="MyCustomRssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
@@ -566,7 +566,7 @@ namespace Argotic.Examples
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="MyCustomRssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
@@ -661,7 +661,7 @@ namespace Argotic.Examples
 
                                 //  Code to load the syndication resource using the XPathNavigator would go here.
                                 //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed; 
-                                //  otherwise you would utilize the feed's Load method.
+                                //  Otherwise, you would utilize the feed's Load method.
                                 feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                             }
                         }
@@ -696,9 +696,9 @@ namespace Argotic.Examples
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="MyCustomRssFeed.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
         {
@@ -708,7 +708,7 @@ namespace Argotic.Examples
 
             //  Code to load the syndication resource using the XPathNavigator would go here.
             //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed; 
-            //  otherwise you would utilize the feed's Load method.
+            //  Otherwise, you would utilize the feed's Load method.
             this.OnFeedLoaded(eventData);
         }
     }

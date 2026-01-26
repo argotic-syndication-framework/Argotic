@@ -23,7 +23,7 @@ namespace Argotic.Net
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcClient class.">
     ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\XmlRpcClientExample.cs"
+    ///             source="..\..\Argotic.Examples\Core\Net\XmlRpcClientExample.cs"
     ///             region="XmlRpcClient"
     ///         />
     ///     </code>
@@ -47,7 +47,7 @@ namespace Argotic.Net
         /// </summary>
         private TimeSpan clientTimeout  = TimeSpan.FromSeconds(15);
         /// <summary>
-        /// Private member to hold a value that indictaes if the client sends default credentials when making an XML-RPC call.
+        /// Private member to hold a value that indicates if the client sends default credentials when making an XML-RPC call.
         /// </summary>
         private bool clientUsesDefaultCredentials;
         /// <summary>
@@ -75,7 +75,7 @@ namespace Argotic.Net
         /// Initializes a new instance of the <see cref="XmlRpcClient"/> class that sends remote procedure calls using the specified XML-RPC server.
         /// </summary>
         /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
         public XmlRpcClient(Uri host)
         {
             this.Initialize();
@@ -88,8 +88,8 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</param>
         /// <param name="userAgent">Information such as the application name, version, host operating system, and language.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
         public XmlRpcClient(Uri host, string userAgent) : this(host)
         {
@@ -134,7 +134,7 @@ namespace Argotic.Net
         /// </summary>
         /// <value>
         ///     A <see cref="ICredentials"/> object that represents the authentication credentials provided by this client when making remote procedure calls.
-        ///     The default is a null reference (Nothing in Visual Basic), which indicates no authentication information will be supplied to identify the maker of the request.
+        ///     The default is a null reference, which indicates no authentication information will be supplied to identify the maker of the request.
         /// </value>
         public ICredentials Credentials
         {
@@ -154,9 +154,9 @@ namespace Argotic.Net
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</value>
         /// <remarks>
-        ///     If <see cref="Host"/> is a null reference (Nothing in Visual Basic), <see cref="Host"/> is initialized using the settings in the application or machine configuration files.
+        ///     If <see cref="Host"/> is a null reference, <see cref="Host"/> is initialized using the settings in the application or machine configuration files.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Host
         {
             get
@@ -176,7 +176,7 @@ namespace Argotic.Net
         /// </summary>
         /// <value>
         ///     A <see cref="IWebProxy"/> object that represents the web proxy utilized by this client to proxy remote procedure calls.
-        ///     The default is a null reference (Nothing in Visual Basic), which indicates no proxy will be used to proxy the request.
+        ///     The default is a null reference, which indicates no proxy will be used to proxy the request.
         /// </value>
         public IWebProxy Proxy
         {
@@ -192,11 +192,11 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time out.
+        /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time-out.
         /// </summary>
         /// <value>A <see cref="TimeSpan"/> that specifies the time-out period. The default value is 15 seconds.</value>
-        /// <exception cref="ArgumentOutOfRangeException">The time out period is less than zero.</exception>
-        /// <exception cref="ArgumentOutOfRangeException">The time out period is greater than a year.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The time-out period is less than zero.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
         public TimeSpan Timeout
         {
             get
@@ -224,7 +224,7 @@ namespace Argotic.Net
         /// <summary>
         /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making remote procedure calls.
         /// </summary>
-        /// <value><b>true</b> if the default credentials are used; otherwise <b>false</b>. The default value is <b>false</b>.</value>
+        /// <value><b>true</b> if the default credentials are used; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
         /// <remarks>
         ///     <para>
         ///         Some XML-RPC servers require that the client be authenticated before the server executes remote procedures on its behalf.
@@ -258,7 +258,7 @@ namespace Argotic.Net
         /// Gets or sets information such as the client application name, version, host operating system, and language.
         /// </summary>
         /// <value>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string UserAgent
         {
@@ -277,7 +277,7 @@ namespace Argotic.Net
         /// <summary>
         /// Gets or sets a value indicating if the client asynchronous send operation was cancelled.
         /// </summary>
-        /// <value><b>true</b> if client asynchronous send operation has been cancelled, otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if client asynchronous send operation has been cancelled, Otherwise, <b>false</b>.</value>
         internal bool AsyncSendHasBeenCancelled
         {
             get
@@ -294,7 +294,7 @@ namespace Argotic.Net
         /// <summary>
         /// Gets or sets a value indicating if the client is in the process of sending a remote procedure call.
         /// </summary>
-        /// <value><b>true</b> if client is in the process of sending a remote procedure call, otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if client is in the process of sending a remote procedure call, Otherwise, <b>false</b>.</value>
         internal bool SendOperationInProgress
         {
             get
@@ -312,7 +312,7 @@ namespace Argotic.Net
         /// Returns the scalar type identifier for the supplied <see cref="XmlRpcScalarValueType"/>.
         /// </summary>
         /// <param name="type">The <see cref="XmlRpcScalarValueType"/> to get the scalar type identifier for.</param>
-        /// <returns>The scalar type identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
+        /// <returns>The scalar type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
         /// <example>
         ///     <code
         ///         lang="cs"
@@ -351,9 +351,9 @@ namespace Argotic.Net
         /// Returns the <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified scalar type name.
         /// </summary>
         /// <param name="name">The name of the scalar type.</param>
-        /// <returns>A <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified string, otherwise returns <b>XmlRpcScalarValueType.None</b>.</returns>
+        /// <returns>A <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>XmlRpcScalarValueType.None</b>.</returns>
         /// <remarks>This method disregards case of specified scalar type name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         /// <example>
         ///     <code
@@ -401,7 +401,7 @@ namespace Argotic.Net
         /// </param>
         /// <returns>
         ///     <b>true</b> if <paramref name="source"/> was converted successfully; otherwise, <b>false</b>.
-        ///     This operation returns <b>false</b> if the <paramref name="source"/> parameter is a null reference (Nothing in Visual Basic),
+        ///     This operation returns <b>false</b> if the <paramref name="source"/> parameter is a null reference,
         ///     or represents XML data that is not in the expected format.
         /// </returns>
         /// <remarks>
@@ -524,7 +524,7 @@ namespace Argotic.Net
         /// <param name="result">
         ///     When this method returns, if the conversion succeeded, contains <b>true</b> if value is equivalent to <i>1</i>, <i>true</i> or <i>True</i>;
         ///     or <b>false</b> if value is equivalent to <i>0</i>, <i>false</i> or <i>False</i>. If the conversion failed, contains <b>false</b>.
-        ///     The conversion fails if value is a null reference (Nothing in Visual Basic) or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>.
+        ///     The conversion fails if value is a null reference or is not equivalent to <i>1</i>, <i>true</i>, <i>True</i>, <i>0</i>, <i>false</i> or <i>False</i>.
         ///     This parameter is passed uninitialized.
         /// </param>
         /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
@@ -617,8 +617,8 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="message">A <see cref="XmlRpcMessage"/> that represents the information needed to execute the remote procedure call.</param>
         /// <returns>A <see cref="XmlRpcResponse"/> that represents the server's response to the remote procedure call.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, Object)"/> call in progress.</exception>
         public XmlRpcResponse Send(XmlRpcMessage message)
         {
@@ -657,8 +657,8 @@ namespace Argotic.Net
         ///         You can cancel a <see cref="SendAsync(XmlRpcMessage, Object)"/> operation by calling the <see cref="SendAsyncCancel()"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
+        /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, Object)"/> call in progress.</exception>
         //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
         public void SendAsync(XmlRpcMessage message, Object userToken)
@@ -712,10 +712,10 @@ namespace Argotic.Net
         ///     Controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making remote procedure calls.
         /// </param>
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
         private static WebRequest CreateWebRequest(Uri host, string userAgent, XmlRpcMessage message, bool useDefaultCredentials, WebRequestOptions options)
         {
             HttpWebRequest httpRequest  = null;

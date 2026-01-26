@@ -29,8 +29,8 @@ namespace Argotic.Data.Adapters
         /// <remarks>
         ///     This class expects the supplied <paramref name="navigator"/> to be positioned on the XML element that represents a <see cref="RssFeed"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public Rss20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
         {
         }
@@ -39,7 +39,7 @@ namespace Argotic.Data.Adapters
         /// Modifies the <see cref="RssFeed"/> to match the data source.
         /// </summary>
         /// <param name="resource">The <see cref="RssFeed"/> to be filled.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         public void Fill(RssFeed resource)
         {
             Guard.ArgumentNotNull(resource, "resource");

@@ -46,8 +46,8 @@ namespace Argotic.Publishing
         ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this entry was modified in a way the publisher considers significant.
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </param>
-        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
         public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn) : base(id, title, updatedOn)
         {
         }
@@ -65,8 +65,8 @@ namespace Argotic.Publishing
         ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this entry was edited.
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </param>
-        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
         public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn) : this(id, title, updatedOn)
         {
             this.EditedOn   = editedOn;
@@ -86,8 +86,8 @@ namespace Argotic.Publishing
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </param>
         /// <param name="isDraft">A value indicating if client has requested to control the visibility of the entry.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
         public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn, bool isDraft) : this(id, title, updatedOn, editedOn)
         {
             this.IsDraft    = isDraft;
@@ -120,7 +120,7 @@ namespace Argotic.Publishing
         /// <summary>
         /// Gets or sets a value indicating if client has requested to control the visibility of this entry.
         /// </summary>
-        /// <value><b>true</b> if the client is requesting to control the visibility of this entry; otherwise <b>false</b>. The default value is <b>false</b>.</value>
+        /// <value><b>true</b> if the client is requesting to control the visibility of this entry; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
         /// <seealso cref="AtomPublishingControlSyndicationExtension"/>
         public bool IsDraft
         {
@@ -157,7 +157,7 @@ namespace Argotic.Publishing
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="AtomEntry.LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
@@ -182,7 +182,7 @@ namespace Argotic.Publishing
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="AtomEntry.LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
@@ -334,7 +334,7 @@ namespace Argotic.Publishing
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
         public new void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
@@ -381,7 +381,7 @@ namespace Argotic.Publishing
         ///             <item>
         ///                 <description>
         ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
+        ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used.
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -393,7 +393,7 @@ namespace Argotic.Publishing
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
         public new void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
@@ -413,7 +413,7 @@ namespace Argotic.Publishing
         ///             <item>
         ///                 <description>
         ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
+        ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used.
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -425,7 +425,7 @@ namespace Argotic.Publishing
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
         public new void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
@@ -450,8 +450,8 @@ namespace Argotic.Publishing
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
         /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomEntry"/> instance.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         public new void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
         {

@@ -11,11 +11,11 @@ using Argotic.Extensions;
 namespace Argotic.Syndication
 {
     /// <summary>
-    /// Represents an Atom syndication feed, including metadata about the feed, and some or all of the entries associated with it.
+    /// Represents an Atom syndication feed, including metadata about the feed, and some or all the entries associated with it.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///         Atom is an an XML-based Web content and metadata syndication format that describes lists of related information known as <i>feeds</i>.
+    ///         Atom is an XML-based Web content and metadata syndication format that describes lists of related information known as <i>feeds</i>.
     ///         Feeds are composed of a number of items, known as <i>entries</i>, each with an extensible set of attached metadata.
     ///     </para>
     ///     <para>
@@ -25,13 +25,13 @@ namespace Argotic.Syndication
     ///     <para>
     ///         If multiple <see cref="AtomEntry"/> objects with the same <see cref="AtomEntry.Id"/> value appear in an Atom Feed Document, they represent the same entry.
     ///         Their <see cref="AtomEntry.UpdatedOn"/> timestamps <i>should</i> be different. If an Atom Feed Document contains multiple entries with the same <see cref="AtomEntry.Id"/>,
-    ///         Atom Processors <u>may</u> choose to display all of them or some subset of them. One typical behavior would be to display only the entry with the latest <see cref="AtomEntry.UpdatedOn"/> timestamp.
+    ///         Atom Processors <u>may</u> choose to display all them or some subset of them. One typical behavior would be to display only the entry with the latest <see cref="AtomEntry.UpdatedOn"/> timestamp.
     ///     </para>
     /// </remarks>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the AtomFeed class.">
     ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+    ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
     ///             region="AtomFeed"
     ///         />
     ///     </code>
@@ -96,7 +96,7 @@ namespace Argotic.Syndication
         /// </summary>
         private AtomId feedId;
         /// <summary>
-        /// Private member to hold eferences from the feed to one or more Web resources.
+        /// Private member to hold references from the feed to one or more Web resources.
         /// </summary>
         private Collection<AtomLink> feedLinks;
         /// <summary>
@@ -108,7 +108,7 @@ namespace Argotic.Syndication
         /// </summary>
         private AtomTextConstruct feedRights;
         /// <summary>
-        /// Private member to hold inofmration that conveys a human-readable description or subtitle for the feed.
+        /// Private member to hold information that conveys a human-readable description or subtitle for the feed.
         /// </summary>
         private AtomTextConstruct feedSubtitle;
         /// <summary>
@@ -140,8 +140,8 @@ namespace Argotic.Syndication
         ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this feed was modified in a way the publisher considers significant.
         ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
         /// </param>
-        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
         public AtomFeed(AtomId id, AtomTextConstruct title, DateTime utcUpdatedOn)
         {
             this.Id         = id;
@@ -156,7 +156,7 @@ namespace Argotic.Syndication
         /// <returns>The <see cref="AtomEntry"/> at the specified index.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is less than zero.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is equal to or greater than the count for <see cref="AtomFeed.Entries"/>.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public AtomEntry this[int index]
         {
             get
@@ -179,9 +179,9 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     If no entry exists for the specified <paramref name="id"/>, returns a <b>null</b> reference.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="id"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="id"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public AtomEntry this[string id]
         {
             get
@@ -324,7 +324,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<ISyndicationExtension> Extensions
         {
             get
@@ -346,7 +346,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
         public bool HasExtensions
         {
             get
@@ -360,7 +360,7 @@ namespace Argotic.Syndication
         /// </summary>
         /// <value>A <see cref="Collection{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the authors of this feed.</value>
         /// <remarks>
-        ///     <para>A <see cref="AtomFeed"/> <b>must</b> contain one or more authors, unless all of the feeds's child <see cref="AtomEntry"/> objects contain at least one author.</para>
+        ///     <para>A <see cref="AtomFeed"/> <b>must</b> contain one or more authors, unless all the feeds' child <see cref="AtomEntry"/> objects contain at least one author.</para>
         ///     <para>
         ///         The <see cref="Authors"/> are considered to apply to any <see cref="AtomEntry"/> contained in this feed if the entry does not contain any authors and the entry's source does contain any authors.
         ///     </para>
@@ -416,7 +416,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     This <see cref="IEnumerable{T}"/> collection of <see cref="AtomEntry"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<AtomEntry> Entries
         {
             get
@@ -496,7 +496,7 @@ namespace Argotic.Syndication
         ///         content in their <see cref="AtomId"/> properties. It is suggested that the<see cref="AtomId"/> be stored along with the associated resource.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public AtomId Id
         {
             get
@@ -598,7 +598,7 @@ namespace Argotic.Syndication
         /// Gets or sets information that conveys a human-readable title for this feed.
         /// </summary>
         /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this feed.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public AtomTextConstruct Title
         {
             get
@@ -651,7 +651,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
         /// </summary>
-        /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, Otherwise, <b>false</b>.</value>
         internal bool AsyncLoadHasBeenCancelled
         {
             get
@@ -668,7 +668,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets a value indicating if the syndication resource is in the process of loading.
         /// </summary>
-        /// <value><b>true</b> if syndication resource is in the process of loading, otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if syndication resource is in the process of loading, Otherwise, <b>false</b>.</value>
         internal bool LoadOperationInProgress
         {
             get
@@ -699,8 +699,8 @@ namespace Argotic.Syndication
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<AtomCategory> source, Collection<AtomCategory> target)
         {
             int result  = 0;
@@ -744,8 +744,8 @@ namespace Argotic.Syndication
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<AtomLink> source, Collection<AtomLink> target)
         {
             int result  = 0;
@@ -789,8 +789,8 @@ namespace Argotic.Syndication
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<AtomPersonConstruct> source, Collection<AtomPersonConstruct> target)
         {
             int result  = 0;
@@ -834,8 +834,8 @@ namespace Argotic.Syndication
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<AtomTextConstruct> source, Collection<AtomTextConstruct> target)
         {
             int result  = 0;
@@ -870,12 +870,12 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     The <see cref="AtomFeed"/> is created using the default <see cref="SyndicationResourceLoadSettings"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Create method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="Create(Uri source)"
         ///         />
         ///     </code>
@@ -891,7 +891,7 @@ namespace Argotic.Syndication
         /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
         /// <returns>An <see cref="AtomFeed"/> object loaded using the <paramref name="source"/> data.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         public static AtomFeed Create(Uri source, SyndicationResourceLoadSettings settings)
         {
@@ -912,7 +912,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     The <see cref="AtomFeed"/> is created using the default <see cref="SyndicationResourceLoadSettings"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         public static AtomFeed Create(Uri source, ICredentials credentials, IWebProxy proxy)
         {
@@ -928,7 +928,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     The <see cref="AtomFeed"/> is created using the default <see cref="SyndicationResourceLoadSettings"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         public static AtomFeed Create(Uri source, WebRequestOptions options)
         {
@@ -947,7 +947,7 @@ namespace Argotic.Syndication
         /// </param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
         /// <returns>An <see cref="AtomFeed"/> object loaded using the <paramref name="source"/> data.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         public static AtomFeed Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
         {
@@ -961,7 +961,7 @@ namespace Argotic.Syndication
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
         /// <returns>An <see cref="AtomFeed"/> object loaded using the <paramref name="source"/> data.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         public static AtomFeed Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
         {
@@ -990,17 +990,17 @@ namespace Argotic.Syndication
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="AtomFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LoadAsync method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="LoadAsync(Uri source, Object userToken)"
         ///         />
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="FeedLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)"
         ///         />
         ///     </code>
@@ -1026,7 +1026,7 @@ namespace Argotic.Syndication
         ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="AtomFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
@@ -1056,7 +1056,7 @@ namespace Argotic.Syndication
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="AtomFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
@@ -1081,7 +1081,7 @@ namespace Argotic.Syndication
         ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="InvalidOperationException">This <see cref="AtomFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
         public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
@@ -1217,8 +1217,8 @@ namespace Argotic.Syndication
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded   = false;
@@ -1243,7 +1243,7 @@ namespace Argotic.Syndication
         ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
@@ -1256,11 +1256,11 @@ namespace Argotic.Syndication
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
@@ -1280,8 +1280,8 @@ namespace Argotic.Syndication
         /// Adds the supplied <see cref="AtomEntry"/> to the current instance's <see cref="Entries"/> collection.
         /// </summary>
         /// <param name="entry">The <see cref="AtomEntry"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="AtomEntry"/> was added to the <see cref="Entries"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="AtomEntry"/> was added to the <see cref="Entries"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
         public bool AddEntry(AtomEntry entry)
         {
             bool wasAdded   = false;
@@ -1298,11 +1298,11 @@ namespace Argotic.Syndication
         /// Removes the supplied <see cref="AtomEntry"/> from the current instance's <see cref="Entries"/> collection.
         /// </summary>
         /// <param name="entry">The <see cref="AtomEntry"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="AtomEntry"/> was removed from the <see cref="Entries"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="AtomEntry"/> was removed from the <see cref="Entries"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Entries"/> collection of the current instance does not contain the specified <see cref="AtomEntry"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
         public bool RemoveEntry(AtomEntry entry)
         {
             bool wasRemoved = false;
@@ -1355,13 +1355,13 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="Load(IXPathNavigable source)"
         ///         />
         ///     </code>
@@ -1379,7 +1379,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
@@ -1402,13 +1402,13 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="Load(Stream stream)"
         ///         />
         ///     </code>
@@ -1426,7 +1426,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Stream stream, SyndicationResourceLoadSettings settings)
@@ -1450,13 +1450,13 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="Load(XmlReader reader)"
         ///         />
         ///     </code>
@@ -1474,7 +1474,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event will be raised.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
@@ -1515,13 +1515,13 @@ namespace Argotic.Syndication
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="Load(Uri source, ICredentials credentials, IWebProxy proxy)"
         ///         />
         ///     </code>
@@ -1547,13 +1547,13 @@ namespace Argotic.Syndication
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="Load(Uri source, WebRequestOptions options)"
         ///         />
         ///     </code>
@@ -1590,7 +1590,7 @@ namespace Argotic.Syndication
         ///             <item>
         ///                 <description>
         ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
+        ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used.
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -1602,7 +1602,7 @@ namespace Argotic.Syndication
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
@@ -1622,7 +1622,7 @@ namespace Argotic.Syndication
         ///             <item>
         ///                 <description>
         ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
-        ///                     the character encoding of the <paramref name="source"/> will be attempt to be determined automatically, otherwise the specified character encoding will be used.
+        ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used.
         ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
         ///                 </description>
         ///             </item>
@@ -1634,7 +1634,7 @@ namespace Argotic.Syndication
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
         public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
@@ -1664,12 +1664,12 @@ namespace Argotic.Syndication
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="Save(Stream stream)"
         ///         />
         ///     </code>
@@ -1684,7 +1684,7 @@ namespace Argotic.Syndication
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
         /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomFeed"/> instance. This value can be <b>null</b>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         public void Save(Stream stream, SyndicationResourceSaveSettings settings)
         {
@@ -1710,12 +1710,12 @@ namespace Argotic.Syndication
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the Save method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomFeedExample.cs"
+        ///             source="..\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
         ///             region="Save(XmlWriter writer)"
         ///         />
         ///     </code>
@@ -1732,8 +1732,8 @@ namespace Argotic.Syndication
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
         /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="AtomFeed"/> instance.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
         {
@@ -1836,9 +1836,9 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     After the load operation has successfully completed, the <see cref="AtomFeed.Loaded"/> event is raised using the specified <paramref name="eventData"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference.</exception>
         /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
         private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
         {
@@ -1856,7 +1856,7 @@ namespace Argotic.Syndication
         /// Saves the current <see cref="AtomFeed"/> collection entities to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         private void WriteFeedCollections(XmlWriter writer)
         {
             SyndicationResourceSaveSettings settings    = new SyndicationResourceSaveSettings();
@@ -1889,7 +1889,7 @@ namespace Argotic.Syndication
         /// Saves the current <see cref="AtomFeed"/> optional entities to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         private void WriteFeedOptionals(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

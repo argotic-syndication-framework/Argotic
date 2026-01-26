@@ -42,7 +42,7 @@ namespace Argotic.Common
         /// Gets or sets a value indicating if auto-detection of supported syndication extensions is enabled.
         /// </summary>
         /// <value>
-        ///     <b>true</b> if the syndication extensions supported by the load operation are automatically determined based on the XML namespaces declared on a syndication resource; otherwise <b>false</b>.
+        ///     <b>true</b> if the syndication extensions supported by the load operation are automatically determined based on the XML namespaces declared on a syndication resource; Otherwise, <b>false</b>.
         ///     The default value is <b>true</b>.
         /// </value>
         /// <remarks>
@@ -66,7 +66,7 @@ namespace Argotic.Common
         /// Gets or sets the character encoding to use when parsing a syndication resource.
         /// </summary>
         /// <value>A <see cref="Encoding"/> object that indicates the character encoding to use when parsing a syndication resource. The default value is <see cref="Encoding.UTF8"/>.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Encoding CharacterEncoding
         {
             get
@@ -128,7 +128,7 @@ namespace Argotic.Common
         }
 
         /// <summary>
-        /// Gets or sets a value that specifies the amount of time after which asynchronous load operations will time out.
+        /// Gets or sets a value that specifies the amount of time after which asynchronous load operations will time-out.
         /// </summary>
         /// <value>An <see cref="TimeSpan"/> that specifies the time-out period. The default value is 15 seconds.</value>
         /// <exception cref="ArgumentOutOfRangeException">The time-out period is less than zero.</exception>

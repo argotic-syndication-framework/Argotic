@@ -1,10 +1,11 @@
 ﻿using System.ComponentModel;
+using System.Configuration;
 using System.Net;
 
 namespace Argotic.Configuration
 {
     /// <summary>
-    /// Represents the the network element in the Trackback <see cref="TrackbackClientSection">client configuration section</see>. This class cannot be inheritied.
+    /// Represents the network element in the Trackback <see cref="TrackbackClientSection">client configuration section</see>. This class cannot be inherited.
     /// </summary>
     /// <seealso cref="TrackbackClientSection"/>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]

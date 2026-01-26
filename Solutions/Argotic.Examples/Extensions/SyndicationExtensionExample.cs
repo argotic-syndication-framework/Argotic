@@ -53,7 +53,7 @@ namespace Argotic.Examples
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
         /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="MyCustomSyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public static bool MatchByType(ISyndicationExtension extension)
         {
             Guard.ArgumentNotNull(extension, "extension");
@@ -71,8 +71,8 @@ namespace Argotic.Examples
         /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
         /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="MyCustomSyndicationExtension"/>.</param>
-        /// <returns><b>true</b> if the <see cref="MyCustomSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="MyCustomSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public override bool Load(IXPathNavigable source)
         {
             bool wasLoaded  = false;
@@ -98,8 +98,8 @@ namespace Argotic.Examples
         /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
         /// </summary>
         /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="MyCustomSyndicationExtension"/>.</param>
-        /// <returns><b>true</b> if the <see cref="MyCustomSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="MyCustomSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         public override bool Load(XmlReader reader)
         {
             Guard.ArgumentNotNull(reader, "reader");
@@ -113,7 +113,7 @@ namespace Argotic.Examples
         /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public override void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

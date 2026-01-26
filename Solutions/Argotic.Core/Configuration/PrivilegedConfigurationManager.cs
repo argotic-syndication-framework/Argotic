@@ -1,4 +1,5 @@
-﻿using System.Security.Permissions;
+﻿using System.Configuration;
+using System.Security.Permissions;
 using Argotic.Common;
 using Argotic.Configuration.Provider;
 
@@ -58,7 +59,7 @@ namespace Argotic.Configuration
         /// <summary>
         /// Gets the <see cref="Object"/> used when locking acess to the XML-RPC configuration file section being managed.
         /// </summary>
-        /// <value>The <see cref="Object"/> used when locking acess to the  XML-RPC configuration file section being managed.</value>
+        /// <value>The <see cref="Object"/> used when locking acess to the XML-RPC configuration file section being managed.</value>
         internal static object XmlRpcSyncObject
         {
             get
@@ -75,8 +76,8 @@ namespace Argotic.Configuration
         /// Retrieves a specified configuration section for the current application's default configuration.
         /// </summary>
         /// <param name="sectionName">The configuration section path and name.</param>
-        /// <returns>The specified ConfigurationSection object, or a null reference (Nothing in Visual Basic) if the section does not exist.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="sectionName"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns>The specified ConfigurationSection object, or a null reference if the section does not exist.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="sectionName"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="sectionName"/> is an empty string.</exception>
         /// <exception cref="ConfigurationErrorsException">A configuration file could not be loaded.</exception>
         [SecurityPermission(SecurityAction.Demand)]

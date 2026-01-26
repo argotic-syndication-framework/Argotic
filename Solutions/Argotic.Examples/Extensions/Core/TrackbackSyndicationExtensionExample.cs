@@ -7,7 +7,7 @@ namespace Argotic.Examples
     /// Contains the code examples for the <see cref="TrackbackSyndicationExtension"/> class.
     /// </summary>
     /// <remarks>
-    ///     This class contains all of the code examples that are referenced by the <see cref="TrackbackSyndicationExtension"/> class. 
+    ///     This class contains all the code examples that are referenced by the <see cref="TrackbackSyndicationExtension"/> class. 
     ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]

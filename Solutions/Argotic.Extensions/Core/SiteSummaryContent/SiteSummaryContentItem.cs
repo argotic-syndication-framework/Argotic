@@ -53,7 +53,7 @@ namespace Argotic.Extensions.Core
         /// <remarks>
         ///     The value of this property <i>may</i> be entity-encoded, but will <b>always</b> be CDATA-escaped. 
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string Content
         {
@@ -94,7 +94,7 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the format of this item.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the format of this item.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Format
         {
             get
@@ -113,11 +113,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="SiteSummaryContentItem"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="SiteSummaryContentItem"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="SiteSummaryContentItem"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SiteSummaryContentItem"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -163,7 +163,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="SiteSummaryContentItem"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

@@ -15,7 +15,7 @@ namespace Argotic.Syndication.Specialized
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the ApmlSource class.">
     ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Apml\ApmlSourceExample.cs" 
+    ///             source="..\..\Argotic.Examples\Core\Apml\ApmlSourceExample.cs" 
     ///             region="ApmlSource" 
     ///         />
     ///     </code>
@@ -69,18 +69,18 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="key">The unique key for this source.</param>
         /// <param name="name">The friendly name of this source.</param>
-        /// <param name="type">The  MIME content type for this source.</param>
+        /// <param name="type">the MIME content type for this source.</param>
         /// <param name="value">The decimal score of this source.</param>
         /// <remarks>
         ///     This constructor is meant to be used when creating an <b>explicit</b> source. Explicit data is for items that are explicitly added by a user to represent something. 
         ///     For example, a user could edit their own APML file and add items they know they're interested in. 
         ///     For this reason the <see cref="From"/> and <see cref="UpdatedOn"/> properties are not necessary for explicit data items, because it's a manual process.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="key"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="key"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="key"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="type"/> is an empty string.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than -1.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than 1.</exception>
@@ -97,7 +97,7 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="key">The unique key for this source.</param>
         /// <param name="name">The friendly name of this source.</param>
-        /// <param name="type">The  MIME content type for this source.</param>
+        /// <param name="type">the MIME content type for this source.</param>
         /// <param name="value">The decimal score of this source.</param>
         /// <param name="from">The name of the entity that contributed this concept.</param>
         /// <remarks>
@@ -106,15 +106,15 @@ namespace Argotic.Syndication.Specialized
         ///     that may have a decay in certain applications. For this reason it is important to keep a track of when things were added/modified.
         /// </remarks>
         /// <param name="utcUpdatedOn">A <see cref="DateTime"/> object that indicates the last time this concept was updated.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="key"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="key"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="key"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="type"/> is an empty string.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than -1.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than 1.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="from"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="from"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="from"/> is an empty string.</exception>
         public ApmlSource(string key, string name, string type, decimal value, string from, DateTime utcUpdatedOn) : this(key, name, type, value)
         {
@@ -129,7 +129,7 @@ namespace Argotic.Syndication.Specialized
         /// <remarks>
         ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<ISyndicationExtension> Extensions
         {
             get
@@ -151,7 +151,7 @@ namespace Argotic.Syndication.Specialized
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
         public bool HasExtensions
         {
             get
@@ -203,7 +203,7 @@ namespace Argotic.Syndication.Specialized
         /// Gets or sets the unique key for this source.
         /// </summary>
         /// <value>The unique key for this source.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string Key
         {
@@ -222,11 +222,11 @@ namespace Argotic.Syndication.Specialized
         /// <summary>
         /// Gets or sets the MIME content type for this source.
         /// </summary>
-        /// <value>The  MIME content type for this source.</value>
+        /// <value>the MIME content type for this source.</value>
         /// <remarks>
         ///     See <a href="http://www.iana.org/assignments/media-types/">http://www.iana.org/assignments/media-types/</a> for a listing of registered MIME content types.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string MimeType
         {
@@ -246,7 +246,7 @@ namespace Argotic.Syndication.Specialized
         /// Gets or sets the friendly name of this source.
         /// </summary>
         /// <value>The friendly name of this source.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string Name
         {
@@ -306,8 +306,8 @@ namespace Argotic.Syndication.Specialized
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded   = false;
@@ -330,7 +330,7 @@ namespace Argotic.Syndication.Specialized
         ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
@@ -342,11 +342,11 @@ namespace Argotic.Syndication.Specialized
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
@@ -376,8 +376,8 @@ namespace Argotic.Syndication.Specialized
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<ApmlAuthor> source, Collection<ApmlAuthor> target)
         {
             int result  = 0;
@@ -406,11 +406,11 @@ namespace Argotic.Syndication.Specialized
         /// Loads this <see cref="ApmlSource"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="ApmlSource"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ApmlSource"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlSource"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -499,12 +499,12 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-        /// <returns><b>true</b> if the <see cref="ApmlSource"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ApmlSource"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlSource"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded              = false;
@@ -595,7 +595,7 @@ namespace Argotic.Syndication.Specialized
         /// Saves the current <see cref="ApmlSource"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

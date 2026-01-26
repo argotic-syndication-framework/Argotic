@@ -106,7 +106,7 @@ namespace Argotic.Extensions.Core
         /// <summary>
         /// Gets or sets a value indicating if this sortable property is the default sort order in the list.
         /// </summary>
-        /// <value><b>true</b> if this sortable property is the default sort order in the list; otherwise <b>false</b>. The default value is <b>false</b>.</value>
+        /// <value><b>true</b> if this sortable property is the default sort order in the list; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
         /// <remarks>
         ///     The items in the list <b>must</b> be already be sorted by the element, meaning the client <b>should not</b> expect to have to resort by this field if it displaying content directly from the list. 
         ///     The client <i>should</i> respect only the first <see cref="SimpleListSort"/> that has a <see cref="IsDefault"/> property with a value of <b>true</b> that it encounters.
@@ -178,7 +178,7 @@ namespace Argotic.Extensions.Core
         /// Returns the data type identifier for the supplied <see cref="SimpleListDataType"/>.
         /// </summary>
         /// <param name="type">The <see cref="SimpleListDataType"/> to get the data type identifier for.</param>
-        /// <returns>The data type identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
+        /// <returns>The data type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
         public static string DataTypeAsString(SimpleListDataType type)
         {
             string name = String.Empty;
@@ -210,9 +210,9 @@ namespace Argotic.Extensions.Core
         /// Returns the <see cref="SimpleListDataType"/> enumeration value that corresponds to the specified data type name.
         /// </summary>
         /// <param name="name">The name of the data type.</param>
-        /// <returns>A <see cref="SimpleListDataType"/> enumeration value that corresponds to the specified string, otherwise returns <b>SimpleListDataType.None</b>.</returns>
+        /// <returns>A <see cref="SimpleListDataType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>SimpleListDataType.None</b>.</returns>
         /// <remarks>This method disregards case of specified data type name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static SimpleListDataType DataTypeByName(string name)
         {
@@ -245,11 +245,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="SimpleListSort"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="SimpleListSort"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="SimpleListSort"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SimpleListSort"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -316,7 +316,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="SimpleListSort"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

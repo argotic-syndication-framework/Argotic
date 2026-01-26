@@ -38,7 +38,7 @@ namespace Argotic.Net
         ///     This constructor sets the <see cref="ValueType"/> property to be <see cref="XmlRpcScalarValueType.Base64"/>,
         ///     and sets the <see cref="Value"/> property using the supplied <paramref name="value"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public XmlRpcScalarValue(byte[] value)
         {
             Guard.ArgumentNotNull(value, "value");
@@ -124,7 +124,7 @@ namespace Argotic.Net
         /// <remarks>
         ///     <para>The <paramref name="value"/> should represent a <see cref="Type"/> that is appropriate for this parameter's <see cref="ValueType"/>.</para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public object Value
         {
             get
@@ -168,11 +168,11 @@ namespace Argotic.Net
         /// Loads this <see cref="XmlRpcScalarValue"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="XmlRpcScalarValue"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="XmlRpcScalarValue"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="XmlRpcScalarValue"/>.</para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded  = false;
@@ -221,7 +221,7 @@ namespace Argotic.Net
         /// Saves the current <see cref="XmlRpcScalarValue"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
@@ -402,7 +402,7 @@ namespace Argotic.Net
         /// <param name="type">The <see cref="XmlRpcScalarValueType"/> that indicates the expected data type for the scalar value.</param>
         /// <param name="scalar">The string representation of the scalar value.</param>
         /// <returns>An <see cref="Object"/> that represents the converted value for the specified <paramref name="type"/> and <paramref name="scalar"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is an empty string.</exception>
         private static object StringAsValue(XmlRpcScalarValueType type, string scalar)
         {

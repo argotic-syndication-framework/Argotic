@@ -42,7 +42,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="link">A <see cref="Uri"/> that represents the URI for this related feed.</param>
         /// <param name="type">A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration values that represents the type of the related feed.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference.</exception>
         /// <exception cref="ArgumentException">The <paramref name="type"/> is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
         public FeedSynchronizationRelatedInformation(Uri link, FeedSynchronizationRelatedInformationType type)
         {
@@ -56,7 +56,7 @@ namespace Argotic.Extensions.Core
         /// <param name="link">A <see cref="Uri"/> that represents the URI for this related feed.</param>
         /// <param name="type">A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration values that represents the type of the related feed.</param>
         /// <param name="title">The name or description of this related feed.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference.</exception>
         /// <exception cref="ArgumentException">The <paramref name="type"/> is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
         public FeedSynchronizationRelatedInformation(Uri link, FeedSynchronizationRelatedInformationType type, string title) : this(link, type)
         {
@@ -69,7 +69,7 @@ namespace Argotic.Extensions.Core
         /// <remarks>
         ///     The value <b>must not</b> be a relative reference.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Link
         {
             get
@@ -148,7 +148,7 @@ namespace Argotic.Extensions.Core
         /// Returns the relation type identifier for the supplied <see cref="FeedSynchronizationRelatedInformationType"/>.
         /// </summary>
         /// <param name="type">The <see cref="FeedSynchronizationRelatedInformationType"/> to get the relation type identifier for.</param>
-        /// <returns>The relation type identifier for the supplied <paramref name="vocabulary"/>, otherwise returns an empty string.</returns>
+        /// <returns>The relation type identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
         public static string RelationTypeAsString(FeedSynchronizationRelatedInformationType type)
         {
             string name = String.Empty;
@@ -180,9 +180,9 @@ namespace Argotic.Extensions.Core
         /// Returns the <see cref="FeedSynchronizationRelatedInformationType"/> enumeration value that corresponds to the specified relation type name.
         /// </summary>
         /// <param name="name">The name of the relation type.</param>
-        /// <returns>A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration value that corresponds to the specified string, otherwise returns <b>FeedSynchronizationRelatedInformationType.None</b>.</returns>
+        /// <returns>A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>FeedSynchronizationRelatedInformationType.None</b>.</returns>
         /// <remarks>This method disregards case of specified relation type name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static FeedSynchronizationRelatedInformationType RelationTypeByName(string name)
         {
@@ -215,11 +215,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="FeedSynchronizationRelatedInformation"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="FeedSynchronizationRelatedInformation"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="FeedSynchronizationRelatedInformation"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="FeedSynchronizationRelatedInformation"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -264,7 +264,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="FeedSynchronizationRelatedInformation"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

@@ -88,7 +88,7 @@ namespace Argotic.Extensions.Core
         ///         This <see cref="IEnumerable{T}"/> collection of <see cref="YahooMediaContent"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<YahooMediaContent> Contents
         {
             get
@@ -120,7 +120,7 @@ namespace Argotic.Extensions.Core
         ///         This <see cref="IEnumerable{T}"/> collection of <see cref="YahooMediaGroup"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<YahooMediaGroup> Groups
         {
             get
@@ -391,9 +391,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="YahooMediaSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="YahooMediaSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded  = false;
@@ -444,8 +444,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
         /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {
@@ -468,8 +468,8 @@ namespace Argotic.Extensions.Core
         /// Adds the supplied <see cref="YahooMediaContent"/> to the current instance's <see cref="Contents"/> collection.
         /// </summary>
         /// <param name="content">The <see cref="YahooMediaContent"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was added to the <see cref="Contents"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was added to the <see cref="Contents"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         public bool AddContent(YahooMediaContent content)
         {
             bool wasAdded   = false;
@@ -485,8 +485,8 @@ namespace Argotic.Extensions.Core
         /// Adds the supplied <see cref="YahooMediaGroup"/> to the current instance's <see cref="Groups"/> collection.
         /// </summary>
         /// <param name="group">The <see cref="YahooMediaGroup"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaGroup"/> was added to the <see cref="Groups"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="YahooMediaGroup"/> was added to the <see cref="Groups"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference.</exception>
         public bool AddGroup(YahooMediaGroup group)
         {
             bool wasAdded = false;
@@ -502,11 +502,11 @@ namespace Argotic.Extensions.Core
         /// Removes the supplied <see cref="YahooMediaContent"/> from the current instance's <see cref="Contents"/> collection.
         /// </summary>
         /// <param name="content">The <see cref="YahooMediaContent"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was removed from the <see cref="Contents"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was removed from the <see cref="Contents"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Contents"/> collection of the current instance does not contain the specified <see cref="YahooMediaContent"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         public bool RemoveContent(YahooMediaContent content)
         {
             bool wasRemoved = false;
@@ -525,11 +525,11 @@ namespace Argotic.Extensions.Core
         /// Removes the supplied <see cref="YahooMediaGroup"/> from the current instance's <see cref="Groups"/> collection.
         /// </summary>
         /// <param name="group">The <see cref="YahooMediaGroup"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaGroup"/> was removed from the <see cref="Groups"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="YahooMediaGroup"/> was removed from the <see cref="Groups"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Groups"/> collection of the current instance does not contain the specified <see cref="YahooMediaGroup"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference.</exception>
         public bool RemoveGroup(YahooMediaGroup group)
         {
             bool wasRemoved = false;

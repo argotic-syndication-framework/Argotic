@@ -14,7 +14,7 @@ namespace Argotic.Syndication
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the OpmlOutline class.">
     ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Opml\OpmlOutlineExample.cs" 
+    ///             source="..\..\Argotic.Examples\Core\Opml\OpmlOutlineExample.cs" 
     ///             region="OpmlOutline" 
     ///         />
     ///     </code>
@@ -75,7 +75,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     Textual values <i>may</i> contain encoded HTML markup.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
         public OpmlOutline(string text)
         {
@@ -88,7 +88,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<ISyndicationExtension> Extensions
         {
             get
@@ -110,7 +110,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
         public bool HasExtensions
         {
             get
@@ -208,7 +208,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets a value indicating if a breakpoint is set on this outline.
         /// </summary>
-        /// <value><b>true</b> if a breakpoint is set on this outline; otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if a breakpoint is set on this outline; Otherwise, <b>false</b>.</value>
         /// <remarks>
         ///     This property is mainly necessary for outlines used to edit scripts. If it's not present, the value is <b>false</b>.
         /// </remarks>
@@ -228,7 +228,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets a value indicating whether this outline is commented.
         /// </summary>
-        /// <value><b>true</b> if this outline is commented; otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if this outline is commented; Otherwise, <b>false</b>.</value>
         /// <remarks>
         ///     By convention if an outline is commented, all subordinate outlines are considered to also be commented. If it's not present, the value is <b>false</b>.
         /// </remarks>
@@ -248,7 +248,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets a value indicating if this outline represents an inclusion.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="ContentType"/> is <i>include</i> or <i>link</i>; otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if the <see cref="ContentType"/> is <i>include</i> or <i>link</i>; Otherwise, <b>false</b>.</value>
         /// <seealso cref="OpmlOutline.CreateInclusionOutline(string, Uri)"/>
         public bool IsInclusionOutline
         {
@@ -261,7 +261,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets a value indicating if this outline represents a subscription list.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="ContentType"/> is <i>rss</i> or <i>feed</i>; otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if the <see cref="ContentType"/> is <i>rss</i> or <i>feed</i>; Otherwise, <b>false</b>.</value>
         /// <seealso cref="OpmlOutline.CreateSubscriptionListOutline(string, string, Uri)"/>
         public bool IsSubscriptionListOutline
         {
@@ -294,7 +294,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     Textual values <i>may</i> contain encoded HTML markup.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string Text
         {
@@ -313,8 +313,8 @@ namespace Argotic.Syndication
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded   = false;
@@ -337,7 +337,7 @@ namespace Argotic.Syndication
         ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
@@ -349,11 +349,11 @@ namespace Argotic.Syndication
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
@@ -370,11 +370,11 @@ namespace Argotic.Syndication
         /// Loads this <see cref="OpmlOutline"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="OpmlOutline"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="OpmlOutline"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="OpmlOutline"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -423,12 +423,12 @@ namespace Argotic.Syndication
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-        /// <returns><b>true</b> if the <see cref="OpmlOutline"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="OpmlOutline"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="OpmlOutline"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded              = false;
@@ -478,7 +478,7 @@ namespace Argotic.Syndication
         /// Saves the current <see cref="OpmlOutline"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
@@ -547,8 +547,8 @@ namespace Argotic.Syndication
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<OpmlOutline> source, Collection<OpmlOutline> target)
         {
             int result  = 0;
@@ -590,12 +590,12 @@ namespace Argotic.Syndication
         ///     <para>The difference between <b>link</b> and <b>include</b> is that <i>link</i> may point to something that is displayed in a web browser, and <i>include</i> always points to an OPML file.</para>
         ///     <para>
         ///         This method will create an <see cref="OpmlOutline"/> with a <see cref="ContentType"/> of <b>include</b> if the <paramref name="url"/> ends with <i>.opml</i>, 
-        ///         otherwise the <see cref="ContentType"/> will have a value of <b>link</b>.
+        ///         Otherwise, the <see cref="ContentType"/> will have a value of <b>link</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
         public static OpmlOutline CreateInclusionOutline(string text, Uri url)
         {
             OpmlOutline outline = new OpmlOutline();
@@ -633,11 +633,11 @@ namespace Argotic.Syndication
         ///         that are arbitrarily structured. A validator may flag these files, warning that some processors may not understand and preserve the structure.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="type"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference.</exception>
         public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl)
         {
             return OpmlOutline.CreateSubscriptionListOutline(text, type, xmlUrl, null, String.Empty, String.Empty, String.Empty, null);
@@ -649,7 +649,7 @@ namespace Argotic.Syndication
         /// <param name="text">The textual content of the outline.</param>
         /// <param name="type">The syndication format of the feed being pointed to. Permissible values include <i>rss</i> or <i>feed</i>.</param>
         /// <param name="xmlUrl">A <see cref="Uri"/> that represents the http address of the feed.</param>
-        /// <param name="htmlUrl">A <see cref="Uri"/> that represents the web site that hosts the feed. This value can be <b>null</b>.</param>
+        /// <param name="htmlUrl">A <see cref="Uri"/> that represents the website that hosts the feed. This value can be <b>null</b>.</param>
         /// <param name="version">
         ///     The version of the syndication format for the feed that's being pointed to. 
         ///     Permissible values include <i>RSS</i>, <i>RSS1</i>, <i>scriptingNews</i>, or a custom version identifier for the feed. 
@@ -669,11 +669,11 @@ namespace Argotic.Syndication
         ///         that are arbitrarily structured. A validator may flag these files, warning that some processors may not understand and preserve the structure.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="type"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference.</exception>
         public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl, Uri htmlUrl, string version, string title, string description, CultureInfo language)
         {
             OpmlOutline outline = new OpmlOutline();
@@ -874,11 +874,11 @@ namespace Argotic.Syndication
         /// <summary>
         /// Loads this <see cref="OpmlOutline"/> using attributes defined on the supplied <see cref="XPathNavigator"/>.
         /// </summary>
-        /// <returns><b>true</b> if the <see cref="OpmlOutline"/> was initialized using the supplied <paramref name="attribute"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="OpmlOutline"/> was initialized using the supplied <paramref name="attribute"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="attribute"/> to be positioned on the XML element that represents a <see cref="OpmlOutline"/> attribute.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="attribute"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="attribute"/> is a null reference.</exception>
         private bool LoadAttribute(XPathNavigator attribute)
         {
             bool wasLoaded  = false;

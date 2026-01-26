@@ -73,7 +73,7 @@ namespace Argotic.Extensions
         /// Determines if the <see cref="ISyndicationExtension"/> exists in the XML data in the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to parse.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/>  elements or attributes are present in the <paramref name="source"/>; otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/>  elements or attributes are present in the <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         <b>Notes to Implementers:</b>
@@ -101,14 +101,14 @@ namespace Argotic.Extensions
         ///     the associated XML namespace is used instead. This is to prevent collisions and is an attempt to gracefully handle the case where a XML namespace that 
         ///     is not per the extension's specification has been declared on the syndication resource.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
         XmlNamespaceManager CreateNamespaceManager(XPathNavigator navigator);
 
         /// <summary>
         /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
         /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication extension.</param>
-        /// <returns><b>true</b> if the syndication extension was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the syndication extension was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         <b>Notes to Implementers:</b>
@@ -121,14 +121,14 @@ namespace Argotic.Extensions
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         bool Load(IXPathNavigable source);
 
         /// <summary>
         /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
         /// </summary>
         /// <param name="reader">The <b>XmlReader</b> used to load the syndication extension.</param>
-        /// <returns><b>true</b> if the syndication extension was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the syndication extension was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         <b>Notes to Implementers:</b>
@@ -147,21 +147,21 @@ namespace Argotic.Extensions
         ///         </list>
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         bool Load(XmlReader reader);
 
         /// <summary>
         /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         void WriteTo(XmlWriter writer);
 
         /// <summary>
         /// Writes the prefixed XML namespace for the current syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the prefixed XML namespace declaration to.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         void WriteXmlNamespaceDeclaration(XmlWriter writer);
     }
 }

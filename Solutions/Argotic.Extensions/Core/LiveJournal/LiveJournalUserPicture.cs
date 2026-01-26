@@ -44,8 +44,8 @@ namespace Argotic.Extensions.Core
         /// <param name="keyword"></param>
         /// <param name="width"></param>
         /// <param name="height"></param>
-        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="keyword"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="keyword"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="keyword"/> is an empty string.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="width"/> is greater than <b>100</b>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="height"/> is greater than <b>100</b>.</exception>
@@ -83,7 +83,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>The keyword or phrase associated with this picture.</value>
         /// <remarks>The value of this property is expected to be <i>plain text</i>, and so entity-ecoded text should be ommited.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string Keyword
         {
@@ -100,10 +100,10 @@ namespace Argotic.Extensions.Core
         }
 
         /// <summary>
-        /// Gets or sets the the URL this picture.
+        /// Gets or sets the URL this picture.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of a GIF, JPEG, or PNG for this picture.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Url
         {
             get
@@ -143,11 +143,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="LiveJournalUserPicture"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="LiveJournalUserPicture"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="LiveJournalUserPicture"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="LiveJournalUserPicture"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -215,7 +215,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="LiveJournalUserPicture"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

@@ -33,9 +33,9 @@ namespace Argotic.Common
         /// Returns the <see cref="SyndicationContentFormat"/> enumeration value that corresponds to the specified format name.
         /// </summary>
         /// <param name="name">The name of the syndication content format.</param>
-        /// <returns>A <see cref="SyndicationContentFormat"/> enumeration value that corresponds to the specified string, otherwise returns <b>SyndicationContentFormat.None</b>.</returns>
+        /// <returns>A <see cref="SyndicationContentFormat"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>SyndicationContentFormat.None</b>.</returns>
         /// <remarks>This method disregards case of specified format name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static SyndicationContentFormat SyndicationContentFormatByName(string name)
         {
@@ -74,11 +74,11 @@ namespace Argotic.Common
         ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
         ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the SyndicationContentFormatGet method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="SyndicationContentFormatGet(Uri source)"
         ///         />
         ///     </code>
@@ -100,7 +100,7 @@ namespace Argotic.Common
         ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
         ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static SyndicationContentFormat SyndicationContentFormatGet(Uri source, ICredentials credentials)
         {
             Guard.ArgumentNotNull(source, "source");
@@ -126,7 +126,7 @@ namespace Argotic.Common
         ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
         ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         public static SyndicationContentFormat SyndicationContentFormatGet(Stream stream)
         {
             Guard.ArgumentNotNull(stream, "stream");
@@ -149,7 +149,7 @@ namespace Argotic.Common
         ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
         ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         public static SyndicationContentFormat SyndicationContentFormatGet(XmlReader reader)
         {
             SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
@@ -192,7 +192,7 @@ namespace Argotic.Common
         ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
         ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
         public static SyndicationContentFormat SyndicationContentFormatGet(XPathNavigator navigator)
         {
             SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
@@ -237,7 +237,7 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="content">The HTML content to parse.</param>
         /// <returns>A <see cref="Hashtable"/> of the HTML attribute name/value pairs extracted the supplied <paramref name="content"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         private static Hashtable ExtractHtmlAttributes(string content)
         {
@@ -283,7 +283,7 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="content">The HTML markup to parse.</param>
         /// <returns>A collection of <see cref="Uri"/> instances that represent HTML anchor elements and header links in the supplied HTML markup.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         public static Collection<Uri> ExtractUrls(string content)
         {
@@ -336,7 +336,7 @@ namespace Argotic.Common
         ///     A <see cref="Uri"/> that represents the absolute base URI of the supplied <see cref="HttpRequest"/>.
         ///     If unable to build an absolute base <see cref="Uri"/>, returns the absolute URI of the supplied <see cref="HttpRequest"/>.
         /// </returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference.</exception>
         /*public static Uri GetAbsoluteBaseUri(HttpRequest xrequest)
         {
             Uri baseUri = null;
@@ -359,13 +359,13 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="source">A <see cref="Uri"/> that represents the source web resource that will be searched.</param>
         /// <param name="target">A <see cref="Uri"/> that represents the target web resource being searched for.</param>
-        /// <returns><b>true</b> if the <paramref name="source"/> contains at least one link to the <paramref name="target"/>, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="source"/> contains at least one link to the <paramref name="target"/>, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the SourceReferencesTarget method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="SourceReferencesTarget(Uri source, Uri target)"
         ///         />
         ///     </code>
@@ -376,7 +376,7 @@ namespace Argotic.Common
         }
 
         /// <summary>
-        /// Returns a value indicating if the source <see cref="Uri"/> references the target <see cref="Uri"/>, using the specifed <see cref="ICredentials">credentials</see>.
+        /// Returns a value indicating if the source <see cref="Uri"/> references the target <see cref="Uri"/>, using the specified <see cref="ICredentials">credentials</see>.
         /// </summary>
         /// <param name="source">A <see cref="Uri"/> that represents the source web resource that will be searched.</param>
         /// <param name="target">A <see cref="Uri"/> that represents the target web resource being searched for.</param>
@@ -384,9 +384,9 @@ namespace Argotic.Common
         ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
         ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
         /// </param>
-        /// <returns><b>true</b> if the <paramref name="source"/> contains at least one link to the <paramref name="target"/>, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="source"/> contains at least one link to the <paramref name="target"/>, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static bool SourceReferencesTarget(Uri source, Uri target, ICredentials credentials)
         {
             bool sourceContainsLinkToTarget = false;
@@ -427,14 +427,14 @@ namespace Argotic.Common
         /// Returns a value indicating if the supplied <see cref="Uri"/> exists.
         /// </summary>
         /// <param name="uri">The <see cref="Uri"/> to validate.</param>
-        /// <returns><b>true</b> if the <paramref name="uri"/> exists, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <paramref name="uri"/> exists, Otherwise, <b>false</b>.</returns>
         /// <remarks>
-        ///     This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is otherwise inaccessible.
+        ///     This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is Otherwise, inaccessible.
         /// </remarks>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the UriExists method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="UriExists(Uri uri)"
         ///         />
         ///     </code>
@@ -452,9 +452,9 @@ namespace Argotic.Common
         ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
         ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
         /// </param>
-        /// <returns><b>true</b> if the <paramref name="uri"/> exists, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <paramref name="uri"/> exists, Otherwise, <b>false</b>.</returns>
         /// <remarks>
-        ///     This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is otherwise inaccessible.
+        ///     This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is Otherwise, inaccessible.
         /// </remarks>
         public static bool UriExists(Uri uri, ICredentials credentials)
         {
@@ -489,12 +489,12 @@ namespace Argotic.Common
         /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
         /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
         /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
-        /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, otherwise <b>null</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, Otherwise, <b>null</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the ConditionalGet method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="ConditionalGet(Uri source, DateTime lastModified, string entityTag)"
         ///         />
         ///     </code>
@@ -514,8 +514,8 @@ namespace Argotic.Common
         ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
         ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
         /// </param>
-        /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, otherwise <b>null</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, Otherwise, <b>null</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials)
         {
             HttpWebResponse response    = null;
@@ -543,8 +543,8 @@ namespace Argotic.Common
         /// <param name="proxy">
         ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
         /// </param>
-        /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, otherwise <b>null</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, Otherwise, <b>null</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy)
         {
             return SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy));
@@ -557,8 +557,8 @@ namespace Argotic.Common
         /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
         /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, otherwise <b>null</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, Otherwise, <b>null</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options)
         {
             HttpWebResponse response    = null;
@@ -583,12 +583,12 @@ namespace Argotic.Common
         ///     When this method returns, contains the <see cref="HttpWebResponse"/> for the supplied <paramref name="source"/>, if the web resource has been modified, or <b>null</b> if the web resource has <u>not</u> been modified.
         ///     This parameter is passed uninitialized.
         /// </param>
-        /// <returns><b>true</b> if the <paramref name="source"/> has been modified, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="source"/> has been modified, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the TryConditionalGet method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="TryConditionalGet(Uri source, DateTime lastModified, string entityTag, out WebResponse response)"
         ///         />
         ///     </code>
@@ -612,8 +612,8 @@ namespace Argotic.Common
         ///     When this method returns, contains the <see cref="HttpWebResponse"/> for the supplied <paramref name="source"/>, if the web resource has been modified, or <b>null</b> if the web resource has <u>not</u> been modified.
         ///     This parameter is passed uninitialized.
         /// </param>
-        /// <returns><b>true</b> if the <paramref name="source"/> has been modified, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="source"/> has been modified, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, out HttpWebResponse response)
         {
             bool sourceHasBeenModified  = false;
@@ -668,8 +668,8 @@ namespace Argotic.Common
         ///     When this method returns, contains the <see cref="HttpWebResponse"/> for the supplied <paramref name="source"/>, if the web resource has been modified, or <b>null</b> if the web resource has <u>not</u> been modified.
         ///     This parameter is passed uninitialized.
         /// </param>
-        /// <returns><b>true</b> if the <paramref name="source"/> has been modified, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="source"/> has been modified, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy, out HttpWebResponse response)
         {
             return SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy), out response);
@@ -686,8 +686,8 @@ namespace Argotic.Common
         ///     When this method returns, contains the <see cref="HttpWebResponse"/> for the supplied <paramref name="source"/>, if the web resource has been modified, or <b>null</b> if the web resource has <u>not</u> been modified.
         ///     This parameter is passed uninitialized.
         /// </param>
-        /// <returns><b>true</b> if the <paramref name="source"/> has been modified, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="source"/> has been modified, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options, out HttpWebResponse response)
         {
             bool sourceHasBeenModified  = false;
@@ -736,7 +736,7 @@ namespace Argotic.Common
         ///     See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
         ///     further information about the auto-discovery of syndicated content.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
         {
@@ -798,7 +798,7 @@ namespace Argotic.Common
         ///     See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
         ///     further information about the auto-discovery of syndicated content.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(Stream stream)
         {
             Guard.ArgumentNotNull(stream, "stream");
@@ -812,7 +812,7 @@ namespace Argotic.Common
         /// <summary>
         /// Returns a collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the supplied <see cref="Uri"/>.
         /// </summary>
-        /// <param name="uri">A <see cref="Uri"/> that represents the URL of the  web resource to parse.</param>
+        /// <param name="uri">A <see cref="Uri"/> that represents the URL of the web resource to parse.</param>
         /// <returns>
         ///     A collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <paramref name="uri"/>.
         /// </returns>
@@ -820,11 +820,11 @@ namespace Argotic.Common
         ///     See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
         ///     further information about the auto-discovery of syndicated content.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LocateDiscoverableSyndicationEndpoints method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="LocateDiscoverableSyndicationEndpoints(Uri uri)"
         ///         />
         ///     </code>
@@ -850,7 +850,7 @@ namespace Argotic.Common
         ///     See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
         ///     further information about the auto-discovery of syndicated content.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         public static Collection<DiscoverableSyndicationEndpoint> LocateDiscoverableSyndicationEndpoints(Uri uri, ICredentials credentials)
         {
             Guard.ArgumentNotNull(uri, "uri");
@@ -892,7 +892,7 @@ namespace Argotic.Common
         ///         for more information about the pingback notification mechanism.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static HtmlAnchor ExtractPingbackNotificationServer(string content)
@@ -950,7 +950,7 @@ namespace Argotic.Common
         /// Returns a value indicating if the supplied <see cref="Uri"/> is a pingback enabled web resource.
         /// </summary>
         /// <param name="uri">The <see cref="Uri"/> to validate.</param>
-        /// <returns><b>true</b> if the <paramref name="uri"/> is pingback enabled, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <paramref name="uri"/> is pingback enabled, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         There are two mechanisms used when determining if a web resource is pingback enabled;
@@ -984,11 +984,11 @@ namespace Argotic.Common
         ///         for more information about the pingback notification mechanism.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the IsPingbackEnabled method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="IsPingbackEnabled(Uri uri)"
         ///         />
         ///     </code>
@@ -1007,7 +1007,7 @@ namespace Argotic.Common
         ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
         ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
         /// </param>
-        /// <returns><b>true</b> if the <paramref name="uri"/> is pingback enabled, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <paramref name="uri"/> is pingback enabled, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         There are two mechanisms used when determining if a web resource is pingback enabled;
@@ -1041,7 +1041,7 @@ namespace Argotic.Common
         ///         for more information about the pingback notification mechanism.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static bool IsPingbackEnabled(Uri uri, ICredentials credentials)
         {
@@ -1133,11 +1133,11 @@ namespace Argotic.Common
         ///         for more information about the pingback notification mechanism.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LocatePingbackNotificationServer method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="LocatePingbackNotificationServer(Uri uri)"
         ///         />
         ///     </code>
@@ -1194,7 +1194,7 @@ namespace Argotic.Common
         ///         for more information about the pingback notification mechanism.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
         public static Uri LocatePingbackNotificationServer(Uri uri, ICredentials credentials)
         {
@@ -1260,7 +1260,7 @@ namespace Argotic.Common
         ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
         ///     further information about the auto-discovery of Trackback ping URLs.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
@@ -1306,7 +1306,7 @@ namespace Argotic.Common
         ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
         ///     further information about the auto-discovery of Trackback ping URLs.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(Stream stream)
         {
@@ -1322,7 +1322,7 @@ namespace Argotic.Common
         /// Returns a value indicating if the supplied <see cref="Uri"/> is a trackback enabled web resource.
         /// </summary>
         /// <param name="uri">The <see cref="Uri"/> to validate.</param>
-        /// <returns><b>true</b> if the <paramref name="uri"/> is trackback enabled, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <paramref name="uri"/> is trackback enabled, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.
@@ -1357,11 +1357,11 @@ namespace Argotic.Common
         ///         further information about the auto-discovery of Trackback ping URLs.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the IsTrackbackEnabled method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="IsTrackbackEnabled(Uri uri)"
         ///         />
         ///     </code>
@@ -1380,7 +1380,7 @@ namespace Argotic.Common
         ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
         ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
         /// </param>
-        /// <returns><b>true</b> if the <paramref name="uri"/> is trackback enabled, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <paramref name="uri"/> is trackback enabled, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>
         ///         The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.
@@ -1415,7 +1415,7 @@ namespace Argotic.Common
         ///         further information about the auto-discovery of Trackback ping URLs.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static bool IsTrackbackEnabled(Uri uri, ICredentials credentials)
         {
@@ -1427,7 +1427,7 @@ namespace Argotic.Common
         /// <summary>
         /// Returns a collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent trackback ping URL endpoints for the supplied <see cref="Uri"/>.
         /// </summary>
-        /// <param name="uri">A <see cref="Uri"/> that represents the URL of the  web resource to parse.</param>
+        /// <param name="uri">A <see cref="Uri"/> that represents the URL of the web resource to parse.</param>
         /// <returns>
         ///     A collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent embedded Trackback ping URLs for the web resource located at the <paramref name="uri"/>.
         /// </returns>
@@ -1435,11 +1435,11 @@ namespace Argotic.Common
         ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
         ///     further information about the auto-discovery of Trackback ping URLs.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the LocateTrackbackNotificationServers method.">
         ///         <code
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Common\SyndicationDiscoveryUtilityExample.cs"
+        ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
         ///             region="LocateTrackbackNotificationServers(Uri uri)"
         ///         />
         ///     </code>
@@ -1466,7 +1466,7 @@ namespace Argotic.Common
         ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
         ///     further information about the auto-discovery of Trackback ping URLs.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
         public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri, ICredentials credentials)
         {

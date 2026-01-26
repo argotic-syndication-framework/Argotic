@@ -37,7 +37,7 @@ namespace Argotic.Extensions.Core
         /// Initializes a new instance of the <see cref="YahooMediaTextConstruct"/> class using the supplied text.
         /// </summary>
         /// <param name="text">The content of this human-readable text.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
         public YahooMediaTextConstruct(string text)
         {
@@ -49,7 +49,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="text">The content of this human-readable text.</param>
         /// <param name="type">An <see cref="YahooMediaTextConstruct"/> enumeration value that represents the entity encoding utilized by this human-readable text.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="text"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
         public YahooMediaTextConstruct(string text, YahooMediaTextConstructType type) : this(text)
         {
@@ -63,7 +63,7 @@ namespace Argotic.Extensions.Core
         /// <remarks>
         ///     All HTML <b>must</b> be entity-encoded.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string Content
         {
@@ -106,7 +106,7 @@ namespace Argotic.Extensions.Core
         /// Returns the entity encoding type identifier for the supplied <see cref="YahooMediaTextConstructType"/>.
         /// </summary>
         /// <param name="type">The <see cref="YahooMediaTextConstructType"/> to get the entity encoding type identifier for.</param>
-        /// <returns>The entity encoding type identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
+        /// <returns>The entity encoding type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
         public static string TextTypeAsString(YahooMediaTextConstructType type)
         {
             string name = String.Empty;
@@ -138,9 +138,9 @@ namespace Argotic.Extensions.Core
         /// Returns the <see cref="YahooMediaTextConstructType"/> enumeration value that corresponds to the specified entity encoding type name.
         /// </summary>
         /// <param name="name">The name of the entity encoding type.</param>
-        /// <returns>A <see cref="YahooMediaTextConstructType"/> enumeration value that corresponds to the specified string, otherwise returns <b>YahooMediaTextConstructType.None</b>.</returns>
+        /// <returns>A <see cref="YahooMediaTextConstructType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>YahooMediaTextConstructType.None</b>.</returns>
         /// <remarks>This method disregards case of specified entity encoding type name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static YahooMediaTextConstructType TextTypeByName(string name)
         {
@@ -173,11 +173,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="YahooMediaTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaTextConstruct"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="YahooMediaTextConstruct"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaTextConstruct"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -210,7 +210,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
         /// <param name="elementName">The local name of the text construct being written.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer, string elementName)
         {
             Guard.ArgumentNotNull(writer, "writer");

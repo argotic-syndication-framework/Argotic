@@ -34,7 +34,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="relation">A <see cref="FeedHistoryLinkRelationType"/> enumeration value that indicates the link relation type.</param>
         /// <param name="href">A <see cref="Uri"/> that represents the location this link relation points to.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
         public FeedHistoryLinkRelation(FeedHistoryLinkRelationType relation, Uri href)
         {
             this.RelationType   = relation;
@@ -63,8 +63,8 @@ namespace Argotic.Extensions.Core
         /// <summary>
         /// Gets or sets an IRI that identifies the location of this link relation.
         /// </summary>
-        /// <value>A <see cref="Uri"/> that represents a Internationalized Resource Identifier (IRI) that identifies the location of this link relation.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the location of this link relation.</value>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Uri
         {
             get
@@ -82,11 +82,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="FeedHistoryLinkRelation"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="FeedHistoryLinkRelation"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="FeedHistoryLinkRelation"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="FeedHistoryLinkRelation"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -124,7 +124,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="FeedHistoryLinkRelation"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

@@ -49,7 +49,7 @@ namespace Argotic.Common
         /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
         /// <param name="data">A <see cref="IXPathNavigable"/> object that represents the XML data that was used to load the syndication resource.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data) : this()
         {
             Guard.ArgumentNotNull(data, "data");
@@ -70,8 +70,8 @@ namespace Argotic.Common
         /// <param name="proxy">
         ///     The <see cref="IWebProxy"/> used to access the Internet resource. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
         /// </param>
-        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy) : this(data)
         {
             Guard.ArgumentNotNull(source, "source");
@@ -88,8 +88,8 @@ namespace Argotic.Common
         ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
         /// </param>
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options) : this(data)
         {
             Guard.ArgumentNotNull(source, "source");
@@ -112,8 +112,8 @@ namespace Argotic.Common
         ///     The <see cref="IWebProxy"/> used to access the Internet resource. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
         /// </param>
         /// <param name="state">The user-defined object that was passed to the asynchronous operation.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, Object state) : this(data, source, credentials, proxy)
         {
             eventUserToken  = state;
@@ -128,8 +128,8 @@ namespace Argotic.Common
         /// </param>
         /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
         /// <param name="state">The user-defined object that was passed to the asynchronous operation.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, Object state) : this(data, source, options)
         {
             eventUserToken  = state;

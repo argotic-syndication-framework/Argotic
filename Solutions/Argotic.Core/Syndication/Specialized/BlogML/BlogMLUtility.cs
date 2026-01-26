@@ -32,7 +32,7 @@ namespace Argotic.Syndication.Specialized
         /// Returns the approval status identifier for the supplied <see cref="BlogMLApprovalStatus"/>.
         /// </summary>
         /// <param name="status">The <see cref="BlogMLApprovalStatus"/> to get the text construct identifier for.</param>
-        /// <returns>The approval status identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
+        /// <returns>The approval status identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
         public static string ApprovalStatusAsString(BlogMLApprovalStatus status)
         {
             string name = String.Empty;
@@ -64,9 +64,9 @@ namespace Argotic.Syndication.Specialized
         /// Returns the <see cref="BlogMLApprovalStatus"/> enumeration value that corresponds to the specified approval status value.
         /// </summary>
         /// <param name="value">The value of the approval status identifier.</param>
-        /// <returns>A <see cref="BlogMLApprovalStatus"/> enumeration value that corresponds to the specified string, otherwise returns <b>BlogMLApprovalStatus.None</b>.</returns>
+        /// <returns>A <see cref="BlogMLApprovalStatus"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>BlogMLApprovalStatus.None</b>.</returns>
         /// <remarks>This method disregards case of specified approval status value.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static BlogMLApprovalStatus ApprovalStatusByValue(string value)
         {
@@ -142,7 +142,7 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="nameTable">The table of atomized string objects.</param>
         /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
         public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
         {
             XmlNamespaceManager manager = null;
@@ -158,9 +158,9 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="target">The object that implements the <see cref="IBlogMLCommonObject"/> interface to be filled.</param>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract BlogML common object information from.</param>
-        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source)
         {
             bool wasLoaded  = false;
@@ -244,10 +244,10 @@ namespace Argotic.Syndication.Specialized
         /// <param name="target">The object that implements the <see cref="IBlogMLCommonObject"/> interface to be filled.</param>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract BlogML common object information from.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill operation.</param>
-        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <paramref name="target"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded  = false;
@@ -331,8 +331,8 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="source">A object that implements the <see cref="IBlogMLCommonObject"/> interface to extract BlogML common object information from.</param>
         /// <param name="writer">The <see cref="XmlWriter"/> to which the <paramref name="source"/> information will be written.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public static void WriteCommonObjectAttributes(IBlogMLCommonObject source, XmlWriter writer)
         {
             Guard.ArgumentNotNull(source, "source");
@@ -364,8 +364,8 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="source">A object that implements the <see cref="IBlogMLCommonObject"/> interface to extract BlogML common object information from.</param>
         /// <param name="writer">The <see cref="XmlWriter"/> to which the <paramref name="source"/> information will be written.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public static void WriteCommonObjectElements(IBlogMLCommonObject source, XmlWriter writer)
         {
             Guard.ArgumentNotNull(source, "source");

@@ -31,14 +31,14 @@ namespace Argotic.Syndication
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                      If the value of the <see cref="ContentType"/> property is <b>xhtml</b>, the the value of the <see cref="Content"/> property <b>must</b> be a single XHTML div element
+    ///                      If the value of the <see cref="ContentType"/> property is <b>xhtml</b>, the value of the <see cref="Content"/> property <b>must</b> be a single XHTML div element
     ///                      and <i>should</i> be suitable for handling as XHTML. The XHTML div element itself <b>must not</b> be considered part of the content. Atom Processors that display the
     ///                      content <i>may</i> use the markup to aid in displaying it. The escaped versions of characters represent those characters, not markup.
     ///                 </description>
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                      If the value is an <a href="http://www.ietf.org/rfc/rfc3023.txt">XML media type</a> or ends with <b>+xml</b> or <b>/xml</b> (case insensitive),
+    ///                      If the value is an <a href="http://www.ietf.org/rfc/rfc3023.txt">XML media type</a> or ends with <b>+xml</b> or <b>/xml</b> (case-insensitive),
     ///                     the content <i>may</i> include child elements and <i>should</i> be suitable for handling as the indicated media type.
     ///                     If the <see cref="AtomContent.Source"/> is not provided, this would normally mean that the <see cref="AtomContent.Content"/> would contain a
     ///                     single child element that would serve as the root element of the XML document of the indicated type.
@@ -46,7 +46,7 @@ namespace Argotic.Syndication
     ///             </item>
     ///             <item>
     ///                 <description>
-    ///                      If the value begins with <b>text/</b> (case insensitive), the <see cref="AtomContent.Content"/> <b>must not</b> contain child elements.
+    ///                      If the value begins with <b>text/</b> (case-insensitive), the <see cref="AtomContent.Content"/> <b>must not</b> contain child elements.
     ///                 </description>
     ///             </item>
     ///             <item>
@@ -64,7 +64,7 @@ namespace Argotic.Syndication
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the AtomContent class.">
     ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Atom\AtomContentExample.cs"
+    ///             source="..\..\Argotic.Examples\Core\Atom\AtomContentExample.cs"
     ///             region="AtomContent"
     ///         />
     ///     </code>
@@ -200,7 +200,7 @@ namespace Argotic.Syndication
         /// <remarks>
         ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<ISyndicationExtension> Extensions
         {
             get
@@ -222,7 +222,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
         public bool HasExtensions
         {
             get
@@ -288,7 +288,7 @@ namespace Argotic.Syndication
         ///         </list>
         ///     </para>
         ///     <para>
-        ///         If the value is an <a href="http://www.ietf.org/rfc/rfc3023.txt">XML media type</a> or ends with <b>+xml</b> or <b>/xml</b> (case insensitive),
+        ///         If the value is an <a href="http://www.ietf.org/rfc/rfc3023.txt">XML media type</a> or ends with <b>+xml</b> or <b>/xml</b> (case-insensitive),
         ///         the content <i>may</i> include child elements and <i>should</i> be suitable for handling as the indicated media type.
         ///         If the <see cref="AtomContent.Source"/> is not provided, this would normally mean that the <see cref="AtomContent.Content"/> would contain a
         ///         single child element that would serve as the root element of the XML document of the indicated type.
@@ -298,7 +298,7 @@ namespace Argotic.Syndication
         ///         See <a href="http://www.ietf.org/rfc/rfc4288.txt">RFC 4288: Media Type Specifications and Registration Procedures</a> for more details.
         ///     </para>
         ///     <para>
-        ///         If the value begins with <b>text/</b> (case insensitive), the <see cref="AtomContent.Content"/> <b>must not</b> contain child elements.
+        ///         If the value begins with <b>text/</b> (case-insensitive), the <see cref="AtomContent.Content"/> <b>must not</b> contain child elements.
         ///     </para>
         ///     <para>
         ///         For all other values , the <see cref="AtomContent.Content"/> <b>must</b> be a valid Base64 encoding, as described in
@@ -335,7 +335,7 @@ namespace Argotic.Syndication
         /// <summary>
         /// Gets or sets an IRI that identifies the remote location of this content.
         /// </summary>
-        /// <value>A <see cref="Uri"/> that represents a Internationalized Resource Identifier (IRI) that identifies the remote location of this content.</value>
+        /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the remote location of this content.</value>
         /// <remarks>
         ///     <para>
         ///         If a <see cref="AtomContent.Source"/> property is specified, the <see cref="AtomContent.Content"/> property <b>must</b> be empty.
@@ -367,8 +367,8 @@ namespace Argotic.Syndication
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded   = false;
@@ -393,7 +393,7 @@ namespace Argotic.Syndication
         ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
@@ -406,11 +406,11 @@ namespace Argotic.Syndication
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
@@ -430,11 +430,11 @@ namespace Argotic.Syndication
         /// Loads this <see cref="AtomContent"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="AtomContent"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="AtomContent"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomContent"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -492,12 +492,12 @@ namespace Argotic.Syndication
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-        /// <returns><b>true</b> if the <see cref="AtomContent"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="AtomContent"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomContent"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded  = false;
@@ -517,7 +517,7 @@ namespace Argotic.Syndication
         /// Saves the current <see cref="AtomContent"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

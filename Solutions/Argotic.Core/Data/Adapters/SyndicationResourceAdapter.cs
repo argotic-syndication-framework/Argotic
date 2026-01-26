@@ -26,8 +26,8 @@ namespace Argotic.Data.Adapters
         /// </summary>
         /// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the syndication resource information.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="ISyndicationResource"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
         {
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -66,7 +66,7 @@ namespace Argotic.Data.Adapters
         /// </summary>
         /// <param name="resource">The <see cref="ISyndicationResource"/> to be filled.</param>
         /// <param name="format">The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that the <paramref name="resource"/> is expected to conform to.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         /// <exception cref="ArgumentException">The <paramref name="format"/> is equal to <see cref="SyndicationContentFormat.None"/>.</exception>
         /// <exception cref="FormatException">The <paramref name="resource"/> data does not conform to the specified <paramref name="format"/>.</exception>
         public void Fill(ISyndicationResource resource, SyndicationContentFormat format)
@@ -133,8 +133,8 @@ namespace Argotic.Data.Adapters
         /// </summary>
         /// <param name="resource">The Attention Profiling Markup Language (APML) <see cref="ISyndicationResource"/> to be filled.</param>
         /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
         private void FillApmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
             Guard.ArgumentNotNull(resource, "resource");
@@ -154,8 +154,8 @@ namespace Argotic.Data.Adapters
         /// </summary>
         /// <param name="resource">The Atom <see cref="ISyndicationResource"/> to be filled.</param>
         /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
         private void FillAtomResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
             Guard.ArgumentNotNull(resource, "resource");
@@ -196,8 +196,8 @@ namespace Argotic.Data.Adapters
         /// </summary>
         /// <param name="resource">The Atom Publishing Protocol <see cref="ISyndicationResource"/> to be filled.</param>
         /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
         private void FillAtomPublishingResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
             Guard.ArgumentNotNull(resource, "resource");
@@ -225,8 +225,8 @@ namespace Argotic.Data.Adapters
         /// </summary>
         /// <param name="resource">The BlogML <see cref="ISyndicationResource"/> to be filled.</param>
         /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
         private void FillBlogMLResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
             Guard.ArgumentNotNull(resource, "resource");
@@ -246,8 +246,8 @@ namespace Argotic.Data.Adapters
         /// </summary>
         /// <param name="resource">The Outline Processor Markup Language (OPML) <see cref="ISyndicationResource"/> to be filled.</param>
         /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
         private void FillOpmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
             Guard.ArgumentNotNull(resource, "resource");
@@ -277,8 +277,8 @@ namespace Argotic.Data.Adapters
         /// </summary>
         /// <param name="resource">The Really Simple Discovery (RSD) <see cref="ISyndicationResource"/> to be filled.</param>
         /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
         private void FillRsdResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
             Guard.ArgumentNotNull(resource, "resource");
@@ -304,8 +304,8 @@ namespace Argotic.Data.Adapters
         /// </summary>
         /// <param name="resource">The Really Simple Syndication (RSS) <see cref="ISyndicationResource"/> to be filled.</param>
         /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
         private void FillRssResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
         {
             Guard.ArgumentNotNull(resource, "resource");

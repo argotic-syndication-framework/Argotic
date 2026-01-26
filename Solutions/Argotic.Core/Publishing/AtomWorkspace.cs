@@ -62,7 +62,7 @@ namespace Argotic.Publishing
         /// Initializes a new instance of the <see cref="AtomWorkspace"/> class using the supplied <see cref="AtomTextConstruct"/>.
         /// </summary>
         /// <param name="title">A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for the workspace.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
         public AtomWorkspace(AtomTextConstruct title)
         {
             this.Title  = title;
@@ -73,8 +73,8 @@ namespace Argotic.Publishing
         /// </summary>
         /// <param name="title">A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for the workspace.</param>
         /// <param name="collections"></param>
-        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="collections"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="collections"/> is a null reference.</exception>
         public AtomWorkspace(AtomTextConstruct title, Collection<AtomMemberResources> collections)
         {
             this.Title  = title;
@@ -93,7 +93,7 @@ namespace Argotic.Publishing
         /// <returns>The <see cref="AtomMemberResources"/> available for editing at the specified index.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is less than zero.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The <paramref name="index"/> is equal to or greater than the count for <see cref="AtomWorkspace.Collections"/>.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public AtomMemberResources this[int index]
         {
             get
@@ -159,7 +159,7 @@ namespace Argotic.Publishing
         /// <remarks>
         ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<ISyndicationExtension> Extensions
         {
             get
@@ -181,7 +181,7 @@ namespace Argotic.Publishing
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
         public bool HasExtensions
         {
             get
@@ -194,8 +194,8 @@ namespace Argotic.Publishing
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded   = false;
@@ -220,7 +220,7 @@ namespace Argotic.Publishing
         ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
@@ -233,11 +233,11 @@ namespace Argotic.Publishing
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
@@ -261,7 +261,7 @@ namespace Argotic.Publishing
         ///     <para>This <see cref="IEnumerable{T}"/> collection of <see cref="AtomMemberResources"/> objects is internally represented as a <see cref="Collection{T}"/> collection.</para>
         ///     <para>The <see cref="Collections"/> for the <see cref="AtomWorkspace"/> can contain zero or more <see cref="AtomMemberResources"/> objects.</para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<AtomMemberResources> Collections
         {
             get
@@ -287,7 +287,7 @@ namespace Argotic.Publishing
         ///     A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this workspace.
         ///     The default value is an empty <see cref="AtomTextConstruct"/>.
         /// </value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public AtomTextConstruct Title
         {
             get
@@ -319,8 +319,8 @@ namespace Argotic.Publishing
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<AtomMemberResources> source, Collection<AtomMemberResources> target)
         {
             int result  = 0;
@@ -351,8 +351,8 @@ namespace Argotic.Publishing
         /// Adds the supplied <see cref="AtomMemberResources"/> to the <see cref="Collections"/> of the workspace.
         /// </summary>
         /// <param name="collection">The <see cref="AtomMemberResources"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was added to the <see cref="Collections"/> of the workspace, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was added to the <see cref="Collections"/> of the workspace, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference.</exception>
         public bool AddCollection(AtomMemberResources collection)
         {
             bool wasAdded   = false;
@@ -377,7 +377,7 @@ namespace Argotic.Publishing
         ///     The elements of the current <see cref="Collections"/> are individually passed to the <see cref="Predicate{AtomMemberResources}"/> delegate, moving forward in
         ///     the <see cref="Collections"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
         public AtomMemberResources FindCollection(Predicate<AtomMemberResources> match)
         {
             Guard.ArgumentNotNull(match, "match");
@@ -390,11 +390,11 @@ namespace Argotic.Publishing
         /// Loads this <see cref="AtomWorkspace"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="AtomWorkspace"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="AtomWorkspace"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomWorkspace"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -444,12 +444,12 @@ namespace Argotic.Publishing
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-        /// <returns><b>true</b> if the <see cref="AtomWorkspace"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="AtomWorkspace"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="AtomWorkspace"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded = false;
@@ -469,11 +469,11 @@ namespace Argotic.Publishing
         /// Removes the supplied <see cref="AtomMemberResources"/> from the <see cref="Collections"/> of the workspace.
         /// </summary>
         /// <param name="collection">The <see cref="AtomMemberResources"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was removed from the <see cref="Collections"/> of the workspace, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was removed from the <see cref="Collections"/> of the workspace, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Collections"/> of the workspace does not contain the specified <see cref="AtomMemberResources"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference.</exception>
         public bool RemoveCollection(AtomMemberResources collection)
         {
             bool wasRemoved = false;
@@ -493,7 +493,7 @@ namespace Argotic.Publishing
         /// Saves the current <see cref="AtomWorkspace"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

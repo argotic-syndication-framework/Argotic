@@ -1,4 +1,6 @@
-﻿namespace Argotic.Configuration.Provider
+﻿using System.Configuration.Provider;
+
+namespace Argotic.Configuration.Provider
 {
     /// <summary>
     /// Represents a collection of provider objects that inherit from <see cref="SyndicationResourceProvider"/>.

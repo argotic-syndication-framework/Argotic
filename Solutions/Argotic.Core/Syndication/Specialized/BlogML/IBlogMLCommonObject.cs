@@ -65,7 +65,7 @@
         /// Gets or sets the title of the web log entity.
         /// </summary>
         /// <value>A <see cref="BlogMLTextConstruct"/> object that represents the title of the web log entity.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         BlogMLTextConstruct Title
         {
             get;

@@ -23,7 +23,7 @@ namespace Argotic.Syndication
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
         /// </summary>
         /// <param name="term">A string that identifies the category.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="term"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="term"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
         public GenericSyndicationCategory(string term)
         {
@@ -36,7 +36,7 @@ namespace Argotic.Syndication
         /// </summary>
         /// <param name="term">A string that identifies this category.</param>
         /// <param name="scheme">A string that identifies the categorization scheme used by this category.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="term"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="term"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
         public GenericSyndicationCategory(string term, string scheme) : this(term)
         {
@@ -47,7 +47,7 @@ namespace Argotic.Syndication
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied <see cref="AtomCategory"/>.
         /// </summary>
         /// <param name="category">The <see cref="AtomCategory"/> to build an abstraction against.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference.</exception>
         public GenericSyndicationCategory(AtomCategory category)
         {
             Guard.ArgumentNotNull(category, "category");
@@ -71,7 +71,7 @@ namespace Argotic.Syndication
         /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied <see cref="RssCategory"/>.
         /// </summary>
         /// <param name="category">The <see cref="RssCategory"/> to build an abstraction against.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference.</exception>
         public GenericSyndicationCategory(RssCategory category)
         {
             Guard.ArgumentNotNull(category, "category");

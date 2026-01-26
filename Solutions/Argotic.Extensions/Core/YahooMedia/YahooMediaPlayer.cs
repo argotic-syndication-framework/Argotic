@@ -42,7 +42,7 @@ namespace Argotic.Extensions.Core
         /// Initializes a new instance of the <see cref="YahooMediaPlayer"/> class using the supplied <see cref="Uri"/>.
         /// </summary>
         /// <param name="url">A <see cref="Uri"/> that represents the URL of this player console.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
         public YahooMediaPlayer(Uri url)
         {
             this.Url    = url;
@@ -54,7 +54,7 @@ namespace Argotic.Extensions.Core
         /// <param name="url">A <see cref="Uri"/> that represents the URL of this player console.</param>
         /// <param name="height">The height of the browser window that this player console should be opened in.</param>
         /// <param name="width">The width of the browser window that this player console should be opened in.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
         public YahooMediaPlayer(Uri url, int height, int width) : this(url)
         {
             this.Height = height;
@@ -81,7 +81,7 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the location of this player console.
         /// </summary>
         /// <value>A <see cref="Uri"/> that represents the URL of this player console that plays the media.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Url
         {
             get
@@ -116,11 +116,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="YahooMediaPlayer"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaPlayer"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="YahooMediaPlayer"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaPlayer"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -169,7 +169,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="YahooMediaPlayer"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

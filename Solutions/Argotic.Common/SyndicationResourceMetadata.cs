@@ -31,7 +31,7 @@ namespace Argotic.Common
         /// Initializes a new instance of the <see cref="SyndicationResourceMetadata"/> class using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the syndication resource meta-data from.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
         public SyndicationResourceMetadata(XPathNavigator navigator)
         {
             Guard.ArgumentNotNull(navigator, "navigator");
@@ -101,8 +101,8 @@ namespace Argotic.Common
         /// <param name="navigator">The <see cref="XPathNavigator"/> to extract the XML attribute value from.</param>
         /// <param name="name">The name of the attribute to parse in the <paramref name="navigator"/>.</param>
         /// <returns>The <see cref="Version"/> represented by the value of the specified XML attribute. If unable to determine version, returns <b>null</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         protected static Version GetVersionFromAttribute(XPathNavigator navigator, string name)
         {
@@ -147,7 +147,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Attention Profiling Markup Language (APML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
@@ -186,7 +186,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
@@ -255,7 +255,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
@@ -295,7 +295,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
@@ -335,7 +335,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a  Web Log Markup Language (BlogML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseBlogMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
@@ -373,7 +373,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Microsummary Generator formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
@@ -411,7 +411,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a News Markup Language (NewsML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseNewsMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
@@ -441,7 +441,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a OpenSearch Description formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
         {
@@ -479,7 +479,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a  Outline Processor Markup Language (OPML) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseOpmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
@@ -510,7 +510,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Discovery (RSD) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseRsdResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
@@ -554,7 +554,7 @@ namespace Argotic.Common
         /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
         /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
         /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Syndication (RSS) formatted syndication resource; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
         protected static bool TryParseRssResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
@@ -605,7 +605,7 @@ namespace Argotic.Common
         /// Extracts the content format, version, and XML namespaces for a syndication resource from the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="resource">The <see cref="XPathNavigator"/> to extract the syndication resource meta-data from.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
         private void Load(XPathNavigator resource)
         {
             XPathNavigator navigator    = null;

@@ -19,7 +19,7 @@ namespace Argotic.Extensions.Core
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the SimpleListSyndicationExtension class.">
     ///         <code 
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Extensions\Core\SimpleListSyndicationExtensionExample.cs" 
+    ///             source="..\..\Argotic.Examples\\Extensions\Core\SimpleListSyndicationExtensionExample.cs" 
     ///             region="SimpleListSyndicationExtension"
     ///         />
     ///     </code>
@@ -45,11 +45,11 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <value>A <see cref="SimpleListSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
         /// <remarks>
-        ///     The <b>Context</b> encapsulates all of the syndication extension information that can be retrieved or written to an extended syndication entity. 
+        ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
         ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
         ///     are defined for the custom syndication extension.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public SimpleListSyndicationExtensionContext Context
         {
             get
@@ -81,8 +81,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<SimpleListGroup> source, Collection<SimpleListGroup> target)
         {
             int result  = 0;
@@ -125,8 +125,8 @@ namespace Argotic.Extensions.Core
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Collection<SimpleListSort> source, Collection<SimpleListSort> target)
         {
             int result  = 0;
@@ -158,7 +158,7 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
         /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public static bool MatchByType(ISyndicationExtension extension)
         {
             Guard.ArgumentNotNull(extension, "extension");
@@ -176,8 +176,8 @@ namespace Argotic.Extensions.Core
         /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
         /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="SimpleListSyndicationExtension"/>.</param>
-        /// <returns><b>true</b> if the <see cref="SimpleListSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="SimpleListSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public override bool Load(IXPathNavigable source)
         {
             bool wasLoaded  = false;
@@ -194,8 +194,8 @@ namespace Argotic.Extensions.Core
         /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
         /// </summary>
         /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="SimpleListSyndicationExtension"/>.</param>
-        /// <returns><b>true</b> if the <see cref="SimpleListSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="SimpleListSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
         public override bool Load(XmlReader reader)
         {
             Guard.ArgumentNotNull(reader, "reader");
@@ -208,7 +208,7 @@ namespace Argotic.Extensions.Core
         /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public override void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

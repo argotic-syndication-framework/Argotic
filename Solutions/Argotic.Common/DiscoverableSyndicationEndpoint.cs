@@ -33,8 +33,8 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="source">A <see cref="Uri"/> that represents the Uniform Resource Locator (URL) of the syndication endpoint.</param>
         /// <param name="contentType">The MIME content type that the syndicated resource conforms to.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
         public DiscoverableSyndicationEndpoint(Uri source, string contentType)
         {
@@ -48,8 +48,8 @@ namespace Argotic.Common
         /// <param name="source">A <see cref="Uri"/> that represents the Uniform Resource Locator (URL) of the syndication endpoint.</param>
         /// <param name="contentType">The MIME content type that the syndicated resource conforms to.</param>
         /// <param name="title">The title of the syndication endpoint.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
         public DiscoverableSyndicationEndpoint(Uri source, string contentType, string title)
         {
@@ -109,7 +109,7 @@ namespace Argotic.Common
         /// </summary>
         /// <value>The registered MIME type of the syndication endpoint.</value>
         /// <remarks>See <a href="http://www.iana.org/assignments/media-types/">http://www.iana.org/assignments/media-types/</a> for a listing of registered MIME types.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string ContentType
         {
@@ -131,7 +131,7 @@ namespace Argotic.Common
         /// </summary>
         /// <value>The <see cref="Uri"/> of the syndication endpoint.</value>
         /// <remarks>The <see cref="Uri"/>can be either <b>Relative</b> or <b>Absolute</b>. It is up to the caller to resolve the endpoint source as appropriate.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Uri Source
         {
             get
@@ -176,7 +176,7 @@ namespace Argotic.Common
         /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="Source">endpoint location</see>.
         /// </summary>
         /// <returns>A read-only <see cref="XPathNavigator"/> object for navigating the auto-discoverable syndicated content.</returns>
-        /// <exception cref="ArgumentNullException">The <see cref="Source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <see cref="Source"/> is a null reference.</exception>
         public XPathNavigator CreateNavigator()
         {
             Guard.ArgumentNotNull(this.Source, "Source");

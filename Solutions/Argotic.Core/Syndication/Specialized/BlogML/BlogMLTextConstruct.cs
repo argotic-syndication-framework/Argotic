@@ -73,7 +73,7 @@ namespace Argotic.Syndication.Specialized
         /// <remarks>
         ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public IEnumerable<ISyndicationExtension> Extensions
         {
             get
@@ -95,7 +95,7 @@ namespace Argotic.Syndication.Specialized
         /// <summary>
         /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
         /// </summary>
-        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, otherwise returns <b>false</b>.</value>
+        /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
         public bool HasExtensions
         {
             get
@@ -151,9 +151,9 @@ namespace Argotic.Syndication.Specialized
         /// <summary>
         /// Gets or sets a value indicating if the content of this text is escaped using a CDATA block.
         /// </summary>
-        /// <value><b>true</b> if the content of this text will be escaped using a CDATA block section; otherwise <b>false</b>. The default value is <b>true</b>.</value>
+        /// <value><b>true</b> if the content of this text will be escaped using a CDATA block section; Otherwise, <b>false</b>. The default value is <b>true</b>.</value>
         /// <remarks>
-        ///     <i>CDATA</i> sections are used to escape blocks of text containing characters which would otherwise be recognized as markup. 
+        ///     <i>CDATA</i> sections are used to escape blocks of text containing characters which would Otherwise, be recognized as markup. 
         ///     All tags and entity references are ignored by an XML processor that treats them just like any character data. 
         ///     <i>CDATA</i> blocks should be used when you want to include large blocks of special characters as character data, 
         ///     but you do not want to have to use entity references all the time.
@@ -174,11 +174,11 @@ namespace Argotic.Syndication.Specialized
         /// Returns the text construct identifier for the supplied <see cref="BlogMLContentType"/>.
         /// </summary>
         /// <param name="type">The <see cref="BlogMLContentType"/> to get the text construct identifier for.</param>
-        /// <returns>The text construct identifier for the supplied <paramref name="type"/>, otherwise returns an empty string.</returns>
+        /// <returns>The text construct identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the ConstructTypeAsString method.">
         ///         <code 
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLTextConstructExample.cs" 
+        ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLTextConstructExample.cs" 
         ///             region="ConstructTypeAsString(BlogMLContentType type)" 
         ///         />
         ///     </code>
@@ -214,14 +214,14 @@ namespace Argotic.Syndication.Specialized
         /// Returns the <see cref="BlogMLContentType"/> enumeration value that corresponds to the specified text construct type name.
         /// </summary>
         /// <param name="name">The name of the text construct type.</param>
-        /// <returns>A <see cref="BlogMLContentType"/> enumeration value that corresponds to the specified string, otherwise returns <b>BlogMLContentType.None</b>.</returns>
+        /// <returns>A <see cref="BlogMLContentType"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>BlogMLContentType.None</b>.</returns>
         /// <remarks>This method disregards case of specified text construct type name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         /// <example>
         ///     <code lang="cs" title="The following code example demonstrates the usage of the ConstructTypeByName method.">
         ///         <code 
-        ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\BlogML\BlogMLTextConstructExample.cs" 
+        ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLTextConstructExample.cs" 
         ///             region="ConstructTypeByName(string name)" 
         ///         />
         ///     </code>
@@ -257,8 +257,8 @@ namespace Argotic.Syndication.Specialized
         /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool AddExtension(ISyndicationExtension extension)
         {
             bool wasAdded   = false;
@@ -281,7 +281,7 @@ namespace Argotic.Syndication.Specialized
         ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
         ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
         public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
         {
             Guard.ArgumentNotNull(match, "match");
@@ -293,11 +293,11 @@ namespace Argotic.Syndication.Specialized
         /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
         /// </summary>
         /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public bool RemoveExtension(ISyndicationExtension extension)
         {
             bool wasRemoved = false;
@@ -315,11 +315,11 @@ namespace Argotic.Syndication.Specialized
         /// Loads this <see cref="BlogMLTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="BlogMLTextConstruct"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="BlogMLTextConstruct"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="BlogMLTextConstruct"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -352,12 +352,12 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
         /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
-        /// <returns><b>true</b> if the <see cref="ApmlApplication"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="ApmlApplication"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="ApmlApplication"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
         {
             bool wasLoaded  = false;
@@ -375,8 +375,8 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
         /// <param name="elementName">The local name of the text construct being written.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string elementName)
         {

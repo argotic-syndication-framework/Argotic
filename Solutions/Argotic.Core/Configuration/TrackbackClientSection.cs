@@ -1,9 +1,10 @@
 ﻿using System.ComponentModel;
+using System.Configuration;
 
 namespace Argotic.Configuration
 {
     /// <summary>
-    /// Represents the configuration section used to declarativly configure the <see cref="Argotic.Net.TrackbackClient"/> class. This class cannot be inheritied.
+    /// Represents the configuration section used to declaratively configure the <see cref="Argotic.Net.TrackbackClient"/> class. This class cannot be inherited.
     /// </summary>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public sealed class TrackbackClientSection : ConfigurationSection
@@ -49,7 +50,7 @@ namespace Argotic.Configuration
         }
 
         /// <summary>
-        /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time out.
+        /// Gets or sets a value that specifies the amount of time after which asynchronous send operations will time-out.
         /// </summary>
         /// <value>A <see cref="TimeSpan"/> that specifies the time-out period. The default value is 15 seconds.</value>
         [ConfigurationProperty("timeout", DefaultValue = "0:0:15.0", Options = ConfigurationPropertyOptions.None)]

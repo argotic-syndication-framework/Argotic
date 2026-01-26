@@ -13,7 +13,7 @@ namespace Argotic.Extensions.Core
     {
 
         /// <summary>
-        /// Private member to hold the URL of an OPML file containing the blogroll for the web site.
+        /// Private member to hold the URL of an OPML file containing the blogroll for the website.
         /// </summary>
         private Uri extensionBlogRoll;
         /// <summary>
@@ -53,9 +53,9 @@ namespace Argotic.Extensions.Core
         }
 
         /// <summary>
-        /// Gets or sets the URL of an OPML file containing the blogroll for the web site.
+        /// Gets or sets the URL of an OPML file containing the blogroll for the website.
         /// </summary>
-        /// <value>A <see cref="Uri"/> that represents the URL of an OPML file containing the blogroll for the web site.</value>
+        /// <value>A <see cref="Uri"/> that represents the URL of an OPML file containing the blogroll for the website.</value>
         public Uri BlogRoll
         {
             get
@@ -70,9 +70,9 @@ namespace Argotic.Extensions.Core
         }
 
         /// <summary>
-        /// Gets or sets the URL the web site's change tracking endpoint.
+        /// Gets or sets the URL the website's change tracking endpoint.
         /// </summary>
-        /// <value>A <see cref="Uri"/> that represents the URL the web site's change tracking endpoint.</value>
+        /// <value>A <see cref="Uri"/> that represents the URL the website's change tracking endpoint.</value>
         /// <remarks>
         ///     When a feed that contains this element updates, it pings a server that updates this file. 
         ///     The presence of this element indicates to aggregators that they only have to read the changes file to see if this feed has updated. 
@@ -113,9 +113,9 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="BlogChannelSyndicationExtensionContext"/>.</param>
         /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="BlogChannelSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; otherwise <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <returns><b>true</b> if the <see cref="BlogChannelSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
         public bool Load(XPathNavigator source, XmlNamespaceManager manager)
         {
             bool wasLoaded  = false;
@@ -177,8 +177,8 @@ namespace Argotic.Extensions.Core
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
         /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
         public void WriteTo(XmlWriter writer, string xmlNamespace)
         {

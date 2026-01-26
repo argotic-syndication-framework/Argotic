@@ -12,7 +12,7 @@ namespace Argotic.Net
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the TrackbackMessage class.">
     ///         <code
-    ///             source="..\..\Documentation\Microsoft .NET 3.5\CodeExamplesLibrary\Core\Net\TrackbackClientExample.cs"
+    ///             source="..\..\Argotic.Examples\Core\Net\TrackbackClientExample.cs"
     ///             region="TrackbackClient"
     ///         />
     ///     </code>
@@ -56,7 +56,7 @@ namespace Argotic.Net
         /// <remarks>
         ///     The <paramref name="permalink"/> should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "permalink")]
         public TrackbackMessage(Uri permalink)
         {
@@ -67,7 +67,7 @@ namespace Argotic.Net
         /// Gets or sets the <see cref="Encoding">character encoding</see> of this message.
         /// </summary>
         /// <value>A <see cref="Encoding"/> that specifies the character encoding of this message. The default value is <see cref="UTF8Encoding">UTF-8</see>.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         public Encoding Encoding
         {
             get
@@ -116,7 +116,7 @@ namespace Argotic.Net
         /// <remarks>
         ///     The permalink should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Permalink")]
         public Uri Permalink
         {
@@ -190,11 +190,11 @@ namespace Argotic.Net
         /// Loads this <see cref="TrackbackMessage"/> using the supplied <see cref="NameValueCollection"/>.
         /// </summary>
         /// <param name="source">The <see cref="NameValueCollection"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="TrackbackMessage"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="TrackbackMessage"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     <para>This method expects the supplied <paramref name="source"/> to be the <see cref="HttpRequest.Params">HTTP Request Parameters</see> or a similar subset.</para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(NameValueCollection source)
         {
             bool wasLoaded = false;
@@ -248,7 +248,7 @@ namespace Argotic.Net
         /// Saves the current <see cref="TrackbackMessage"/> to the specified <see cref="StreamWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="StreamWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(StreamWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

@@ -17,7 +17,7 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="value">A string containing an RFC-3339 formatted date to convert.</param>
         /// <returns>A <see cref="DateTime"/> equivalent to the RFC-3339 formatted date contained in <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         /// <exception cref="FormatException">The <paramref name="value"/> is not a recognized as a RFC-3339 formatted date.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
@@ -103,7 +103,7 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="value">A string containing an RFC-822 formatted date to convert.</param>
         /// <returns>A string containing an RFC-822 formatted date, with the <i>zone</i> component converted to its offset equivalent.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         /// <seealso cref="TryParseRfc822DateTime(string, out DateTime)"/>
         private static string ReplaceRfc822TimeZoneWithOffset(string value)
@@ -201,7 +201,7 @@ namespace Argotic.Common
         /// </summary>
         /// <param name="value">A string containing an RFC-822 formatted date to convert.</param>
         /// <returns>A <see cref="DateTime"/> equivalent to the RFC-822 formatted date contained in <paramref name="value"/>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         /// <exception cref="FormatException">The <paramref name="value"/> is not a recognized as an RFC-822 formatted date.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]

@@ -43,7 +43,7 @@ namespace Argotic.Extensions
         /// Initializes a new instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>.
         /// </summary>
         /// <param name="data">A <see cref="IXPathNavigable"/> object that represents the XML data that was used to load the syndication extension.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
         public SyndicationExtensionLoadedEventArgs(IXPathNavigable data) : this()
         {
             Guard.ArgumentNotNull(data, "data");
@@ -58,8 +58,8 @@ namespace Argotic.Extensions
         /// <param name="extension">
         ///     A <see cref="ISyndicationExtension"/> that represents the syndication extension after the load operation completed.
         /// </param>
-        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
         public SyndicationExtensionLoadedEventArgs(IXPathNavigable data, ISyndicationExtension extension) : this(data)
         {
             Guard.ArgumentNotNull(extension, "extension");

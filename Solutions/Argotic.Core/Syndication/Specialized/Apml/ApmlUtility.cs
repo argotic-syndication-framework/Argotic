@@ -31,7 +31,7 @@ namespace Argotic.Syndication.Specialized
         /// </summary>
         /// <param name="nameTable">The table of atomized string objects.</param>
         /// <returns>A <see cref="XmlNamespaceManager"/> that resolves prefixed XML namespaces and provides scope management for these namespaces.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
         public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
         {
             XmlNamespaceManager manager = null;

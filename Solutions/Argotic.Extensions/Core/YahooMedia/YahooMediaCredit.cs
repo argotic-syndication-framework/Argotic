@@ -41,7 +41,7 @@ namespace Argotic.Extensions.Core
         /// Initializes a new instance of the <see cref="YahooMediaCredit"/> class using the supplied entity name.
         /// </summary>
         /// <param name="entity">The name of the entity that contributed to the creation of the media object.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is an empty string.</exception>
         public YahooMediaCredit(string entity)
         {
@@ -67,7 +67,7 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the name of the entity that contributed to this media object.
         /// </summary>
         /// <value>The name of the entity that contributed to the creation of this media object.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string Entity
         {
@@ -137,11 +137,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="YahooMediaCredit"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaCredit"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="YahooMediaCredit"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaCredit"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -181,7 +181,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="YahooMediaCredit"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

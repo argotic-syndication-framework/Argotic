@@ -136,7 +136,7 @@ namespace Argotic.Extensions.Core
         /// Initializes a new instance of the <see cref="YahooMediaContent"/> class using the supplied <see cref="Uri"/>.
         /// </summary>
         /// <param name="url">A <see cref="Uri"/> that represents the direct URL to this media object.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
         public YahooMediaContent(Uri url)
         {
             Guard.ArgumentNotNull(url, "url");
@@ -148,7 +148,7 @@ namespace Argotic.Extensions.Core
         /// Initializes a new instance of the <see cref="YahooMediaContent"/> class using the supplied <see cref="YahooMediaPlayer"/>.
         /// </summary>
         /// <param name="player">A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media object can be accessed through.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="player"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="player"/> is a null reference.</exception>
         public YahooMediaContent(YahooMediaPlayer player)
         {
             Guard.ArgumentNotNull(player, "player");
@@ -308,7 +308,7 @@ namespace Argotic.Extensions.Core
         /// <summary>
         /// Gets or sets a value indicating if this media object is the default object in a group.
         /// </summary>
-        /// <value><b>true</b> if this media object is the default object that should be used for a <see cref="YahooMediaGroup"/>; otherwise <b>false</b>.</value>
+        /// <value><b>true</b> if this media object is the default object that should be used for a <see cref="YahooMediaGroup"/>; Otherwise, <b>false</b>.</value>
         /// <remarks>
         ///     There should <b>only</b> be one default media object per <see cref="YahooMediaGroup"/>.
         /// </remarks>
@@ -675,11 +675,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="YahooMediaContent"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaContent"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -703,7 +703,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="YahooMediaContent"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");
@@ -962,11 +962,11 @@ namespace Argotic.Extensions.Core
         /// Loads the primary properties of this <see cref="YahooMediaContent"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaContent"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         private bool LoadPrimary(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -1059,11 +1059,11 @@ namespace Argotic.Extensions.Core
         /// Loads the secondary properties of this <see cref="YahooMediaContent"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaContent"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         private bool LoadSecondary(XPathNavigator source)
         {
             bool wasLoaded              = false;

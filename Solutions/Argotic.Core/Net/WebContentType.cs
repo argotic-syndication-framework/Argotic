@@ -47,9 +47,9 @@ namespace Argotic.Net
         /// </summary>
         /// <param name="mediaType">The top-level media type used to declare the general type of data the media content represents.</param>
         /// <param name="mediaSubtype">The specific format for the general type of data the media content represents</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is a <b>null</b> reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is a <b>null</b> reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is an empty string.</exception>
         public WebContentType(string mediaType, string mediaSubtype)
         {
@@ -63,9 +63,9 @@ namespace Argotic.Net
         /// <param name="mediaType">The top-level media type used to declare the general type of data the media content represents.</param>
         /// <param name="mediaSubtype">The specific format for the general type of data the media content represents</param>
         /// <param name="discriminator">A string value that provides a means of discriminating the media content.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is a <b>null</b> reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is a <b>null</b> reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is an empty string.</exception>
         public WebContentType(string mediaType, string mediaSubtype, string discriminator) : this(mediaType, mediaSubtype)
         {
@@ -79,11 +79,11 @@ namespace Argotic.Net
         /// <param name="mediaSubtype">The specific format for the general type of data the media content represents</param>
         /// <param name="discriminator">A string value that provides a means of discriminating the media content.</param>
         /// <param name="characterSet">A <see cref="Encoding"/> object that represents the character encoding of the media content.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is a <b>null</b> reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaType"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is a <b>null</b> reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is an empty string.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="characterSet"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="characterSet"/> is a <b>null</b> reference.</exception>
         public WebContentType(string mediaType, string mediaSubtype, string discriminator, Encoding characterSet) : this(mediaType, mediaSubtype, discriminator)
         {
             Guard.ArgumentNotNull(characterSet, "characterSet");
@@ -100,7 +100,7 @@ namespace Argotic.Net
         /// </value>
         /// <remarks>
         ///     The <see cref="CharacterSet"/> property gets or sets the <i>charset</i> parameter within the <see cref="Parameters"/> collection.
-        ///     Specifiying <see cref="String.Empty"/> for the character encoding will remove the <i>charset</i> parameter from the <see cref="Parameters"/> collection.
+        ///     Specifying <see cref="String.Empty"/> for the character encoding will remove the <i>charset</i> parameter from the <see cref="Parameters"/> collection.
         /// </remarks>
         public string CharacterSet
         {
@@ -131,8 +131,8 @@ namespace Argotic.Net
         /// </value>
         /// <remarks>
         ///     The <see cref="Discriminator"/> property gets or sets the <i>type</i> parameter within the <see cref="Parameters"/> collection.
-        ///     The <i>type</i> parameter can be used to discrimiate between resource representations that share the same <see cref="MediaType"/> and <see cref="MediaSubtype"/>.
-        ///     Specifiying <see cref="String.Empty"/> for the type discriminator will remove the <i>type</i> parameter from the <see cref="Parameters"/> collection.
+        ///     The <i>type</i> parameter can be used to discriminate between resource representations that share the same <see cref="MediaType"/> and <see cref="MediaSubtype"/>.
+        ///     Specifying <see cref="String.Empty"/> for the type discriminator will remove the <i>type</i> parameter from the <see cref="Parameters"/> collection.
         /// </remarks>
         public string Discriminator
         {
@@ -159,7 +159,7 @@ namespace Argotic.Net
         /// </summary>
         /// <returns>
         ///     A <see cref="Encoding"/> object that represents the character encoding of this media content.
-        ///     If the <see cref="CharacterSet"/> is not specified, a <b>null</b> reference (Nothing in Visual Basic) is returned.
+        ///     If the <see cref="CharacterSet"/> is not specified, a <b>null</b> reference is returned.
         /// </returns>
         /// <exception cref="ArgumentException">The <see cref="CharacterSet"/> is not a valid code page name.</exception>
         /// <exception cref="ArgumentException">The code page indicated by <see cref="CharacterSet"/> is not supported by the underlying platform.</exception>
@@ -183,7 +183,7 @@ namespace Argotic.Net
         /// Gets or sets the top-level media type used to declare the general type of data this media content represents.
         /// </summary>
         /// <value>The top-level media type used to declare the general type of data this media content represents.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a <b>null</b> reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string MediaType
         {
@@ -203,7 +203,7 @@ namespace Argotic.Net
         /// Gets or sets the specific format for the general type of data this media content represents.
         /// </summary>
         /// <value>The specific format for the general type of data this media content represents.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a <b>null</b> reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a <b>null</b> reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string MediaSubtype
         {
@@ -257,8 +257,8 @@ namespace Argotic.Net
         ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
         ///     </para>
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
         public static int CompareSequence(Dictionary<string, string> source, Dictionary<string, string> target)
         {
             int result  = 0;

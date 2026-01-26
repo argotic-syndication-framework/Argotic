@@ -38,7 +38,7 @@ namespace Argotic.Extensions.Core
         /// Initializes a new instance of the <see cref="YahooMediaHash"/> class using the supplied hash digest value.
         /// </summary>
         /// <param name="value">The value of this hash.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public YahooMediaHash(string value)
         {
@@ -72,7 +72,7 @@ namespace Argotic.Extensions.Core
         /// Gets or sets the value of this hash.
         /// </summary>
         /// <value>The value of this hash.</value>
-        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         public string Value
         {
@@ -94,7 +94,7 @@ namespace Argotic.Extensions.Core
         /// <param name="stream">The input to compute the hash code for.</param>
         /// <param name="algorithm">A <see cref="YahooMediaHashAlgorithm"/> enumeration value that indicates the algorithm to use.</param>
         /// <returns>The <b>base64</b> encoded result of the computed hash code.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
         /// <exception cref="ArgumentException">The <paramref name="algorithm"/> is equal to <see cref="YahooMediaHashAlgorithm.None"/>.</exception>
         public static string GenerateHash(Stream stream, YahooMediaHashAlgorithm algorithm)
         {
@@ -125,7 +125,7 @@ namespace Argotic.Extensions.Core
         /// Returns the hash algorithm identifier for the supplied <see cref="YahooMediaHashAlgorithm"/>.
         /// </summary>
         /// <param name="algorithm">The <see cref="YahooMediaHashAlgorithm"/> to get the hash algorithm identifier for.</param>
-        /// <returns>The hash algorithm identifier for the supplied <paramref name="algorithm"/>, otherwise returns an empty string.</returns>
+        /// <returns>The hash algorithm identifier for the supplied <paramref name="algorithm"/>, Otherwise, returns an empty string.</returns>
         public static string HashAlgorithmAsString(YahooMediaHashAlgorithm algorithm)
         {
             string name = String.Empty;
@@ -157,9 +157,9 @@ namespace Argotic.Extensions.Core
         /// Returns the <see cref="YahooMediaHashAlgorithm"/> enumeration value that corresponds to the specified hash algorithm name.
         /// </summary>
         /// <param name="name">The name of the hash algorithm.</param>
-        /// <returns>A <see cref="YahooMediaHashAlgorithm"/> enumeration value that corresponds to the specified string, otherwise returns <b>YahooMediaHashAlgorithm.None</b>.</returns>
+        /// <returns>A <see cref="YahooMediaHashAlgorithm"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>YahooMediaHashAlgorithm.None</b>.</returns>
         /// <remarks>This method disregards case of specified hash algorithm name.</remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
         public static YahooMediaHashAlgorithm HashAlgorithmByName(string name)
         {
@@ -192,11 +192,11 @@ namespace Argotic.Extensions.Core
         /// Loads this <see cref="YahooMediaHash"/> using the supplied <see cref="XPathNavigator"/>.
         /// </summary>
         /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-        /// <returns><b>true</b> if the <see cref="YahooMediaHash"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
+        /// <returns><b>true</b> if the <see cref="YahooMediaHash"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
         /// <remarks>
         ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="YahooMediaHash"/>.
         /// </remarks>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
         public bool Load(XPathNavigator source)
         {
             bool wasLoaded              = false;
@@ -228,7 +228,7 @@ namespace Argotic.Extensions.Core
         /// Saves the current <see cref="YahooMediaHash"/> to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
         public void WriteTo(XmlWriter writer)
         {
             Guard.ArgumentNotNull(writer, "writer");

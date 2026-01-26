@@ -25,8 +25,8 @@ namespace Argotic.Extensions
 		/// </summary>
 		/// <param name="navigator">A read-only <see cref="XPathNavigator"/> object for navigating through the extended syndication resource information.</param>
 		/// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="IExtensibleSyndicationObject"/>.</param>
-		/// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference (Nothing in Visual Basic).</exception>
-		/// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
 		public SyndicationExtensionAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
 		{
 			Guard.ArgumentNotNull(navigator, "navigator");
@@ -108,8 +108,8 @@ namespace Argotic.Extensions
 		///    to fill a <see cref="SyndicationResourceSaveSettings.SupportedExtensions"/> collection when implementing the 
 		///    <see cref="ISyndicationResource.Save(XmlWriter, SyndicationResourceSaveSettings)"/> abstract method.
 		/// </remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference (Nothing in Visual Basic).</exception>
-		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference.</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
 		public static void FillExtensionTypes(IExtensibleSyndicationObject entity, Collection<Type> types)
 		{
 			Guard.ArgumentNotNull(entity, "entity");
@@ -140,7 +140,7 @@ namespace Argotic.Extensions
 		///     <para>Each <see cref="ISyndicationExtension"/> instance in the <see cref="Collection{T}"/> collection will be instantiated using its default constructor. </para>
 		///     <para>Types that are a null reference or do not implement the <see cref="ISyndicationExtension"/> interface are ignored.</para>
 		/// </remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
 		public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types)
 		{
 			Collection<ISyndicationExtension> extensions    = new Collection<ISyndicationExtension>();
@@ -170,11 +170,11 @@ namespace Argotic.Extensions
 		///     A <see cref="Collection{T}"/> collection of <see cref="ISyndicationExtension"/> objects instantiated using the supplied <paramref name="types"/> and <paramref name="manager"/>.
 		/// </returns>
 		/// <remarks>
-		///     This method instantiates all of the available native framework syndication extensions, and then filters them based on the XML namespaces and prefixes contained in the supplied <paramref name="namespaces"/>. 
+		///     This method instantiates all the available native framework syndication extensions, and then filters them based on the XML namespaces and prefixes contained in the supplied <paramref name="namespaces"/>. 
 		///     The user defined syndication extensions are then instantiated, and are added to the return collection if they do not already exist.
 		/// </remarks>
-		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference (Nothing in Visual Basic).</exception>
-		/// <exception cref="ArgumentNullException">The <paramref name="namespaces"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="namespaces"/> is a null reference.</exception>
 		public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types, Dictionary<string, string> namespaces)
 		{
 			Collection<ISyndicationExtension> supportedExtensions   = new Collection<ISyndicationExtension>();
@@ -211,8 +211,8 @@ namespace Argotic.Extensions
 		/// </summary>
 		/// <param name="extensions">A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent the syndication extensions to be written.</param>
 		/// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-		/// <exception cref="ArgumentNullException">The <paramref name="extensions"/> is a null reference (Nothing in Visual Basic).</exception>
-		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="extensions"/> is a null reference.</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
 		public static void WriteExtensionsTo(IEnumerable<ISyndicationExtension> extensions, XmlWriter writer)
 		{
 			Guard.ArgumentNotNull(extensions, "extensions");
@@ -229,8 +229,8 @@ namespace Argotic.Extensions
 		/// </summary>
 		/// <param name="types">A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent the syndication extensions to write prefixed XML namespace declarations for.</param>
 		/// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
-		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference (Nothing in Visual Basic).</exception>
-		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
 		public static void WriteXmlNamespaceDeclarations(Collection<Type> types, XmlWriter writer)
 		{
 			Guard.ArgumentNotNull(types, "types");
@@ -256,7 +256,7 @@ namespace Argotic.Extensions
 		///     when resolving prefixed syndication elements and attributes.
 		/// </remarks>
 		/// <param name="entity">The <see cref="IExtensibleSyndicationObject"/> to be filled.</param>
-		/// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference.</exception>
 		public void Fill(IExtensibleSyndicationObject entity)
 		{
 			Guard.ArgumentNotNull(entity, "entity");
@@ -270,8 +270,8 @@ namespace Argotic.Extensions
 		/// </summary>
 		/// <param name="entity">The <see cref="IExtensibleSyndicationObject"/> to be filled.</param>
 		/// <param name="manager">The <see cref="XmlNamespaceManager"/> used to resolve prefixed syndication elements and attributes.</param>
-		/// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference (Nothing in Visual Basic).</exception>
-		/// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference (Nothing in Visual Basic).</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference.</exception>
+		/// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
 		public void Fill(IExtensibleSyndicationObject entity, XmlNamespaceManager manager)
 		{
 			Collection<ISyndicationExtension> extensions    = new Collection<ISyndicationExtension>();

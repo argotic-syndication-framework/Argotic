@@ -57,7 +57,7 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
             }
 
             XPathNodeIterator outlineIterator   = documentNavigator.Select("body/outline", manager);
-            if (outlineIterator != null && outlineIterator.Count > 0)
+            if (outlineIterator is { Count: > 0 })
             {
                 int counter = 0;
                 while (outlineIterator.MoveNext())

@@ -168,7 +168,7 @@ public class SiteSummarySlashSyndicationExtensionContext
                 if (hitParadeNavigator.Value.Contains(","))
                 {
                     string[] identifiers    = hitParadeNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                    if (identifiers != null && identifiers.Length > 0)
+                    if (identifiers is { Length: > 0 })
                     {
                         foreach(string identifier in identifiers)
                         {

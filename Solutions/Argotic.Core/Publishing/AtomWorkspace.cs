@@ -422,7 +422,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
                 }
             }
 
-            if (collectionIterator != null && collectionIterator.Count > 0)
+            if (collectionIterator is { Count: > 0 })
             {
                 while (collectionIterator.MoveNext())
                 {

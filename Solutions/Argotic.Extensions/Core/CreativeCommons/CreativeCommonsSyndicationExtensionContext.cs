@@ -58,7 +58,7 @@ public class CreativeCommonsSyndicationExtensionContext
         if(source.HasChildren)
         {
             XPathNodeIterator licenseIterator   = source.Select("creativeCommons:license", manager);
-            if (licenseIterator != null && licenseIterator.Count > 0)
+            if (licenseIterator is { Count: > 0 })
             {
                 while (licenseIterator.MoveNext())
                 {

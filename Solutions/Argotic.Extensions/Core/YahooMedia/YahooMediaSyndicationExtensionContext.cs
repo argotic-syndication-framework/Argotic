@@ -404,7 +404,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
             XPathNodeIterator contentIterator   = source.Select("media:content", manager);
             XPathNodeIterator groupIterator     = source.Select("media:group", manager);
 
-            if (contentIterator != null && contentIterator.Count > 0)
+            if (contentIterator is { Count: > 0 })
             {
                 while (contentIterator.MoveNext())
                 {
@@ -417,7 +417,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
                 }
             }
 
-            if (groupIterator != null && groupIterator.Count > 0)
+            if (groupIterator is { Count: > 0 })
             {
                 while (groupIterator.MoveNext())
                 {

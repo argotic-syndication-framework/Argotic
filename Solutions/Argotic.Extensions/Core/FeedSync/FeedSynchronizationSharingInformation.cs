@@ -275,7 +275,7 @@ public class FeedSynchronizationSharingInformation : IComparable
         {
             XPathNodeIterator relatedIterator   = source.Select("sx:related", manager);
 
-            if (relatedIterator != null && relatedIterator.Count > 0)
+            if (relatedIterator is { Count: > 0 })
             {
                 while (relatedIterator.MoveNext())
                 {

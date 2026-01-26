@@ -66,7 +66,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
             }
 
             XPathNodeIterator profileIterator   = bodyNavigator.Select("apml:Profile", manager);
-            if (profileIterator != null && profileIterator.Count > 0)
+            if (profileIterator is { Count: > 0 })
             {
                 int counter = 0;
                 while (profileIterator.MoveNext())
@@ -87,7 +87,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
             }
 
             XPathNodeIterator applicationIterator   = bodyNavigator.Select("apml:Applications/apml:Application", manager);
-            if (applicationIterator != null && applicationIterator.Count > 0)
+            if (applicationIterator is { Count: > 0 })
             {
                 while (applicationIterator.MoveNext())
                 {

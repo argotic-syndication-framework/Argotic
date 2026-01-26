@@ -120,7 +120,7 @@ public class YahooMediaTextConstruct : IComparable
                 {
                     object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                    if (customAttributes != null && customAttributes.Length > 0)
+                    if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -153,7 +153,7 @@ public class YahooMediaTextConstruct : IComparable
                 YahooMediaTextConstructType type    = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes           = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 

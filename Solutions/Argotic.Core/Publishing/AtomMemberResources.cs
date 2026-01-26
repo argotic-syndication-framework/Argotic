@@ -616,7 +616,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
                 }
             }
 
-            if (acceptIterator != null && acceptIterator.Count > 0)
+            if (acceptIterator is { Count: > 0 })
             {
                 while (acceptIterator.MoveNext())
                 {
@@ -629,7 +629,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
                 }
             }
 
-            if (categoriesIterator != null && categoriesIterator.Count > 0)
+            if (categoriesIterator is { Count: > 0 })
             {
                 while (categoriesIterator.MoveNext())
                 {

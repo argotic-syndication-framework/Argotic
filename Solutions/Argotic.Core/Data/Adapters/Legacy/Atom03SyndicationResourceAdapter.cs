@@ -433,7 +433,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNodeIterator contributorIterator   = source.Select("atom:contributor", manager);
         XPathNodeIterator linkIterator          = source.Select("atom:link", manager);
 
-        if (authorIterator != null && authorIterator.Count > 0)
+        if (authorIterator is { Count: > 0 })
         {
             while (authorIterator.MoveNext())
             {
@@ -442,7 +442,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (contributorIterator != null && contributorIterator.Count > 0)
+        if (contributorIterator is { Count: > 0 })
         {
             while (contributorIterator.MoveNext())
             {
@@ -451,7 +451,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (linkIterator != null && linkIterator.Count > 0)
+        if (linkIterator is { Count: > 0 })
         {
             while (linkIterator.MoveNext())
             {
@@ -534,7 +534,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNodeIterator linkIterator          = source.Select("atom:link", manager);
         XPathNodeIterator entryIterator         = source.Select("atom:entry", manager);
 
-        if (authorIterator != null && authorIterator.Count > 0)
+        if (authorIterator is { Count: > 0 })
         {
             while (authorIterator.MoveNext())
             {
@@ -543,7 +543,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (contributorIterator != null && contributorIterator.Count > 0)
+        if (contributorIterator is { Count: > 0 })
         {
             while (contributorIterator.MoveNext())
             {
@@ -552,7 +552,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (entryIterator != null && entryIterator.Count > 0)
+        if (entryIterator is { Count: > 0 })
         {
             int counter = 0;
             while (entryIterator.MoveNext())
@@ -571,7 +571,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (linkIterator != null && linkIterator.Count > 0)
+        if (linkIterator is { Count: > 0 })
         {
             while (linkIterator.MoveNext())
             {

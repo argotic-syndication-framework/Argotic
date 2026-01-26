@@ -92,7 +92,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                 {
                     XPathNodeIterator categoryIterator = documentNavigator.Select("atom:category", manager);
 
-                    if (categoryIterator != null && categoryIterator.Count > 0)
+                    if (categoryIterator is { Count: > 0 })
                     {
                         while (categoryIterator.MoveNext())
                         {
@@ -131,7 +131,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
             {
                 XPathNodeIterator workspaceIterator = documentNavigator.Select("app:workspace", manager);
 
-                if (workspaceIterator != null && workspaceIterator.Count > 0)
+                if (workspaceIterator is { Count: > 0 })
                 {
                     while (workspaceIterator.MoveNext())
                     {

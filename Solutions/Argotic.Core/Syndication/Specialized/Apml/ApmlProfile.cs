@@ -351,7 +351,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
             if (implicitDataNavigator != null)
             {
                 XPathNodeIterator conceptsIterator  = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
-                if (conceptsIterator != null && conceptsIterator.Count > 0)
+                if (conceptsIterator is { Count: > 0 })
                 {
                     while (conceptsIterator.MoveNext())
                     {
@@ -365,7 +365,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 }
 
                 XPathNodeIterator sourcesIterator   = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
-                if (sourcesIterator != null && sourcesIterator.Count > 0)
+                if (sourcesIterator is { Count: > 0 })
                 {
                     while (sourcesIterator.MoveNext())
                     {
@@ -382,7 +382,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
             if (explicitDataNavigator != null)
             {
                 XPathNodeIterator conceptsIterator  = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
-                if (conceptsIterator != null && conceptsIterator.Count > 0)
+                if (conceptsIterator is { Count: > 0 })
                 {
                     while (conceptsIterator.MoveNext())
                     {
@@ -396,7 +396,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 }
 
                 XPathNodeIterator sourcesIterator   = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
-                if (sourcesIterator != null && sourcesIterator.Count > 0)
+                if (sourcesIterator is { Count: > 0 })
                 {
                     while (sourcesIterator.MoveNext())
                     {
@@ -449,7 +449,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
             if (implicitDataNavigator != null)
             {
                 XPathNodeIterator conceptsIterator  = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
-                if (conceptsIterator != null && conceptsIterator.Count > 0)
+                if (conceptsIterator is { Count: > 0 })
                 {
                     while (conceptsIterator.MoveNext())
                     {
@@ -463,7 +463,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 }
 
                 XPathNodeIterator sourcesIterator   = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
-                if (sourcesIterator != null && sourcesIterator.Count > 0)
+                if (sourcesIterator is { Count: > 0 })
                 {
                     while (sourcesIterator.MoveNext())
                     {
@@ -480,7 +480,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
             if (explicitDataNavigator != null)
             {
                 XPathNodeIterator conceptsIterator  = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
-                if (conceptsIterator != null && conceptsIterator.Count > 0)
+                if (conceptsIterator is { Count: > 0 })
                 {
                     while (conceptsIterator.MoveNext())
                     {
@@ -494,7 +494,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 }
 
                 XPathNodeIterator sourcesIterator   = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
-                if (sourcesIterator != null && sourcesIterator.Count > 0)
+                if (sourcesIterator is { Count: > 0 })
                 {
                     while (sourcesIterator.MoveNext())
                     {

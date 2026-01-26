@@ -253,7 +253,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNodeIterator skipHoursIterator = navigator.Select("skipHours/hour", manager);
         XPathNodeIterator itemIterator      = navigator.Select("item", manager);
 
-        if (skipDaysIterator != null && skipDaysIterator.Count > 0)
+        if (skipDaysIterator is { Count: > 0 })
         {
             while (skipDaysIterator.MoveNext())
             {
@@ -275,7 +275,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (skipHoursIterator != null && skipHoursIterator.Count > 0)
+        if (skipHoursIterator is { Count: > 0 })
         {
             while (skipHoursIterator.MoveNext())
             {
@@ -283,7 +283,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
                 {
                     hour    = hour - 1; // Convert to zero-based range
 
-                    if (!channel.SkipHours.Contains(hour) && (hour >= 0 && hour <= 23))
+                    if (!channel.SkipHours.Contains(hour) && hour is >= 0 and <= 23)
                     {
                         channel.SkipHours.Add(hour);
                     }
@@ -295,7 +295,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (itemIterator != null && itemIterator.Count > 0)
+        if (itemIterator is { Count: > 0 })
         {
             int counter = 0;
             while (itemIterator.MoveNext())
@@ -568,7 +568,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (enclosureIterator != null && enclosureIterator.Count > 0)
+        if (enclosureIterator is { Count: > 0 })
         {
             while (enclosureIterator.MoveNext())
             {
@@ -579,7 +579,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (categoryIterator != null && categoryIterator.Count > 0)
+        if (categoryIterator is { Count: > 0 })
         {
             while (categoryIterator.MoveNext())
             {

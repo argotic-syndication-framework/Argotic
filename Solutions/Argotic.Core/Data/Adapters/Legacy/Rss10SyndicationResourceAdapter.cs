@@ -70,7 +70,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
         }
 
         XPathNodeIterator itemIterator      = this.Navigator.Select("rdf:RDF/rss:item", manager);
-        if (itemIterator != null && itemIterator.Count > 0)
+        if (itemIterator is { Count: > 0 })
         {
             int counter = 0;
             while (itemIterator.MoveNext())

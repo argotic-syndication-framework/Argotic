@@ -541,7 +541,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (categoryIterator != null && categoryIterator.Count > 0)
+        if (categoryIterator is { Count: > 0 })
         {
             while (categoryIterator.MoveNext())
             {
@@ -553,7 +553,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (enclosureIterator != null && enclosureIterator.Count > 0)
+        if (enclosureIterator is { Count: > 0 })
         {
             while (enclosureIterator.MoveNext())
             {
@@ -659,7 +659,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
                 wasLoaded       = true;
             }
         }
-        if (categoryIterator != null && categoryIterator.Count > 0)
+        if (categoryIterator is { Count: > 0 })
         {
             while (categoryIterator.MoveNext())
             {
@@ -671,7 +671,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (enclosureIterator != null && enclosureIterator.Count > 0)
+        if (enclosureIterator is { Count: > 0 })
         {
             while (enclosureIterator.MoveNext())
             {

@@ -359,7 +359,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
         {
             XPathNodeIterator contentIterator   = source.Select("media:content", manager);
 
-            if (contentIterator != null && contentIterator.Count > 0)
+            if (contentIterator is { Count: > 0 })
             {
                 while (contentIterator.MoveNext())
                 {

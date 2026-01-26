@@ -122,7 +122,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
                 {
                     object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                    if (customAttributes != null && customAttributes.Length > 0)
+                    if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -155,7 +155,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
                 ITunesExplicitMaterial material = (ITunesExplicitMaterial)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 

@@ -414,7 +414,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
                     wasLoaded   = true;
                 }
 
-                if (settingIterator != null && settingIterator.Count > 0)
+                if (settingIterator is { Count: > 0 })
                 {
                     while (settingIterator.MoveNext())
                     {

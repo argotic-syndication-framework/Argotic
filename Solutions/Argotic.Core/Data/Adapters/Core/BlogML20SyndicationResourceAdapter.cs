@@ -128,7 +128,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNodeIterator categoriesIterator            = source.Select("blog:categories/blog:category", manager);
         XPathNodeIterator postsIterator                 = source.Select("blog:posts/blog:post", manager);
 
-        if (authorsIterator != null && authorsIterator.Count > 0)
+        if (authorsIterator is { Count: > 0 })
         {
             while (authorsIterator.MoveNext())
             {
@@ -140,7 +140,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (extendedPropertiesIterator != null && extendedPropertiesIterator.Count > 0)
+        if (extendedPropertiesIterator is { Count: > 0 })
         {
             while (extendedPropertiesIterator.MoveNext())
             {
@@ -157,7 +157,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (categoriesIterator != null && categoriesIterator.Count > 0)
+        if (categoriesIterator is { Count: > 0 })
         {
             while (categoriesIterator.MoveNext())
             {
@@ -169,7 +169,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (postsIterator != null && postsIterator.Count > 0)
+        if (postsIterator is { Count: > 0 })
         {
             int counter = 0;
             while (postsIterator.MoveNext())

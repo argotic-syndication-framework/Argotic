@@ -111,7 +111,7 @@ public class ITunesCategory : IComparable
         {
             XPathNodeIterator categoryIterator  = source.Select("itunes:category", manager);
 
-            if (categoryIterator != null && categoryIterator.Count > 0)
+            if (categoryIterator is { Count: > 0 })
             {
                 while (categoryIterator.MoveNext())
                 {

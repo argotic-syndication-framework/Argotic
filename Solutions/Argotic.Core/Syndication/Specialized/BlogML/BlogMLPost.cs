@@ -656,7 +656,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 {
                     object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                    if (customAttributes != null && customAttributes.Length > 0)
+                    if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -697,7 +697,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 BlogMLPostType type      = (BlogMLPostType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -1087,7 +1087,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         XPathNodeIterator attachmentsIterator   = source.Select("blog:attachments/blog:attachment", manager);
         XPathNodeIterator authorsIterator       = source.Select("blog:authors/blog:author", manager);
 
-        if (categoriesIterator != null && categoriesIterator.Count > 0)
+        if (categoriesIterator is { Count: > 0 })
         {
             while (categoriesIterator.MoveNext())
             {
@@ -1100,7 +1100,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             }
         }
 
-        if (commentsIterator != null && commentsIterator.Count > 0)
+        if (commentsIterator is { Count: > 0 })
         {
             while (commentsIterator.MoveNext())
             {
@@ -1113,7 +1113,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             }
         }
 
-        if (trackbacksIterator != null && trackbacksIterator.Count > 0)
+        if (trackbacksIterator is { Count: > 0 })
         {
             while (trackbacksIterator.MoveNext())
             {
@@ -1126,7 +1126,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             }
         }
 
-        if (attachmentsIterator != null && attachmentsIterator.Count > 0)
+        if (attachmentsIterator is { Count: > 0 })
         {
             while (attachmentsIterator.MoveNext())
             {
@@ -1139,7 +1139,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             }
         }
 
-        if (authorsIterator != null && authorsIterator.Count > 0)
+        if (authorsIterator is { Count: > 0 })
         {
             while (authorsIterator.MoveNext())
             {
@@ -1182,7 +1182,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         XPathNodeIterator attachmentsIterator   = source.Select("blog:attachments/blog:attachment", manager);
         XPathNodeIterator authorsIterator       = source.Select("blog:authors/blog:author", manager);
 
-        if (categoriesIterator != null && categoriesIterator.Count > 0)
+        if (categoriesIterator is { Count: > 0 })
         {
             while (categoriesIterator.MoveNext())
             {
@@ -1195,7 +1195,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             }
         }
 
-        if (commentsIterator != null && commentsIterator.Count > 0)
+        if (commentsIterator is { Count: > 0 })
         {
             while (commentsIterator.MoveNext())
             {
@@ -1208,7 +1208,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             }
         }
 
-        if (trackbacksIterator != null && trackbacksIterator.Count > 0)
+        if (trackbacksIterator is { Count: > 0 })
         {
             while (trackbacksIterator.MoveNext())
             {
@@ -1221,7 +1221,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             }
         }
 
-        if (attachmentsIterator != null && attachmentsIterator.Count > 0)
+        if (attachmentsIterator is { Count: > 0 })
         {
             while (attachmentsIterator.MoveNext())
             {
@@ -1234,7 +1234,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             }
         }
 
-        if (authorsIterator != null && authorsIterator.Count > 0)
+        if (authorsIterator is { Count: > 0 })
         {
             while (authorsIterator.MoveNext())
             {

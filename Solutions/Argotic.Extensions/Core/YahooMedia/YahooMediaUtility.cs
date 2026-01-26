@@ -775,7 +775,7 @@ internal static class YahooMediaUtility
             XPathNodeIterator ratingIterator        = source.Select("media:rating", manager);
             XPathNodeIterator thumbnailIterator     = source.Select("media:thumbnail", manager);
 
-            if (categoryIterator != null && categoryIterator.Count > 0)
+            if (categoryIterator is { Count: > 0 })
             {
                 while (categoryIterator.MoveNext())
                 {
@@ -788,7 +788,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (creditIterator != null && creditIterator.Count > 0)
+            if (creditIterator is { Count: > 0 })
             {
                 while (creditIterator.MoveNext())
                 {
@@ -801,7 +801,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (ratingIterator != null && ratingIterator.Count > 0)
+            if (ratingIterator is { Count: > 0 })
             {
                 while (ratingIterator.MoveNext())
                 {
@@ -814,7 +814,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (thumbnailIterator != null && thumbnailIterator.Count > 0)
+            if (thumbnailIterator is { Count: > 0 })
             {
                 while (thumbnailIterator.MoveNext())
                 {
@@ -854,7 +854,7 @@ internal static class YahooMediaUtility
             XPathNodeIterator restrictionIterator   = source.Select("media:restriction", manager);
             XPathNodeIterator textIterator          = source.Select("media:text", manager);
 
-            if (hashIterator != null && hashIterator.Count > 0)
+            if (hashIterator is { Count: > 0 })
             {
                 while (hashIterator.MoveNext())
                 {
@@ -867,7 +867,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (restrictionIterator != null && restrictionIterator.Count > 0)
+            if (restrictionIterator is { Count: > 0 })
             {
                 while (restrictionIterator.MoveNext())
                 {
@@ -880,7 +880,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (textIterator != null && textIterator.Count > 0)
+            if (textIterator is { Count: > 0 })
             {
                 while (textIterator.MoveNext())
                 {

@@ -83,7 +83,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
             }
 
-            if (apiIterator != null && apiIterator.Count > 0)
+            if (apiIterator is { Count: > 0 })
             {
                 int counter = 0;
                 while (apiIterator.MoveNext())

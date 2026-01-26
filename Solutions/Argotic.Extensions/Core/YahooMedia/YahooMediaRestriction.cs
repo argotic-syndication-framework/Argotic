@@ -122,7 +122,7 @@ public class YahooMediaRestriction : IComparable
                 {
                     object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                    if (customAttributes != null && customAttributes.Length > 0)
+                    if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -155,7 +155,7 @@ public class YahooMediaRestriction : IComparable
                 YahooMediaRestrictionRelationship relationship  = (YahooMediaRestrictionRelationship)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes                       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -189,7 +189,7 @@ public class YahooMediaRestriction : IComparable
                 {
                     object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                    if (customAttributes != null && customAttributes.Length > 0)
+                    if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -222,7 +222,7 @@ public class YahooMediaRestriction : IComparable
                 YahooMediaRestrictionType type  = (YahooMediaRestrictionType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 

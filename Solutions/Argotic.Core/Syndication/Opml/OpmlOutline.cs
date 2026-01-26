@@ -401,7 +401,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         if (source.HasChildren)
         {
             XPathNodeIterator outlinesIterator = source.Select("outline");
-            if (outlinesIterator != null && outlinesIterator.Count > 0)
+            if (outlinesIterator is { Count: > 0 })
             {
                 while (outlinesIterator.MoveNext())
                 {
@@ -455,7 +455,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         if (source.HasChildren)
         {
             XPathNodeIterator outlinesIterator = source.Select("outline");
-            if (outlinesIterator != null && outlinesIterator.Count > 0)
+            if (outlinesIterator is { Count: > 0 })
             {
                 while (outlinesIterator.MoveNext())
                 {

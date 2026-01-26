@@ -1030,7 +1030,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         XPathNodeIterator skipHoursIterator = source.Select("skipHours/hour", manager);
         XPathNodeIterator itemIterator      = source.Select("item", manager);
 
-        if (categoryIterator != null && categoryIterator.Count > 0)
+        if (categoryIterator is { Count: > 0 })
         {
             while (categoryIterator.MoveNext())
             {
@@ -1043,7 +1043,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (skipDaysIterator != null && skipDaysIterator.Count > 0)
+        if (skipDaysIterator is { Count: > 0 })
         {
             while (skipDaysIterator.MoveNext())
             {
@@ -1066,13 +1066,13 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (skipHoursIterator != null && skipHoursIterator.Count > 0)
+        if (skipHoursIterator is { Count: > 0 })
         {
             while (skipHoursIterator.MoveNext())
             {
                 if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
-                    if (!this.SkipHours.Contains(hour) && (hour >= 0 && hour <= 23))
+                    if (!this.SkipHours.Contains(hour) && hour is >= 0 and <= 23)
                     {
                         this.SkipHours.Add(hour);
                         wasLoaded   = true;
@@ -1085,7 +1085,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (itemIterator != null && itemIterator.Count > 0)
+        if (itemIterator is { Count: > 0 })
         {
             int counter = 0;
             while (itemIterator.MoveNext())
@@ -1264,7 +1264,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(settings, "settings");
         XPathNodeIterator atomLinkIterator      = source.Select("atom:link", manager);
 
-        if (atomLinkIterator != null && atomLinkIterator.Count > 0)
+        if (atomLinkIterator is { Count: > 0 })
         {
             while (atomLinkIterator.MoveNext())
             {

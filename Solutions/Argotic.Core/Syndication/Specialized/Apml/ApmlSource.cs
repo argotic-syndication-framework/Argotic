@@ -441,7 +441,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
             {
                 if (decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
                 {
-                    if (value >= decimal.MinusOne && value <= decimal.One)
+                    if (value is >= decimal.MinusOne and <= decimal.One)
                     {
                         this.Value  = value;
                         wasLoaded   = true;
@@ -475,7 +475,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         {
             XPathNodeIterator authorIterator    = source.Select("apml:Author", manager);
 
-            if (authorIterator != null && authorIterator.Count > 0)
+            if (authorIterator is { Count: > 0 })
             {
                 while (authorIterator.MoveNext())
                 {
@@ -534,7 +534,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
             {
                 if (decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
                 {
-                    if (value >= decimal.MinusOne && value <= decimal.One)
+                    if (value is >= decimal.MinusOne and <= decimal.One)
                     {
                         this.Value  = value;
                         wasLoaded   = true;
@@ -568,7 +568,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         {
             XPathNodeIterator authorIterator    = source.Select("apml:Author", manager);
 
-            if (authorIterator != null && authorIterator.Count > 0)
+            if (authorIterator is { Count: > 0 })
             {
                 while (authorIterator.MoveNext())
                 {

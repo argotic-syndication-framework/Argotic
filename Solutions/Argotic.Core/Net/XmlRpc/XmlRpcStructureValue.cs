@@ -184,7 +184,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
         if(source.HasChildren)
         {
             XPathNodeIterator memberIterator    = source.Select("struct/member");
-            if (memberIterator != null && memberIterator.Count > 0)
+            if (memberIterator is { Count: > 0 })
             {
                 while (memberIterator.MoveNext())
                 {

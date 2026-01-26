@@ -118,7 +118,7 @@ public class FeedHistorySyndicationExtensionContext
                 wasLoaded       = true;
             }
 
-            if (linkIterator != null && linkIterator.Count > 0)
+            if (linkIterator is { Count: > 0 })
             {
                 while (linkIterator.MoveNext())
                 {

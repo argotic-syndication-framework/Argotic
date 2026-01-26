@@ -531,7 +531,7 @@ public static class SyndicationEncodingUtility
         Guard.ArgumentNotNullOrEmptyString(content, "content");
 
         Match encodingMatch = Regex.Match(content, encodingPattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        if (encodingMatch != null && encodingMatch.Groups.Count > 0)
+        if (encodingMatch is { Groups.Count: > 0 })
         {
             Group group = encodingMatch.Groups["webName"];
             if (group != null)

@@ -207,7 +207,7 @@ public class XmlRpcMessage : IComparable
             if (parametersNavigator != null)
             {
                 XPathNodeIterator valueIterator = parametersNavigator.Select("param/value");
-                if (valueIterator != null && valueIterator.Count > 0)
+                if (valueIterator is { Count: > 0 })
                 {
                     while (valueIterator.MoveNext())
                     {

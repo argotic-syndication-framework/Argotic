@@ -103,10 +103,10 @@ public class SiteSummaryContentSyndicationExtensionContext
                 wasLoaded       = true;
             }
 
-            if (itemsNavigator != null && itemsNavigator.HasChildren)
+            if (itemsNavigator is { HasChildren: true })
             {
                 XPathNodeIterator itemIterator  = itemsNavigator.Select("content:item", manager);
-                if (itemIterator != null && itemIterator.Count > 0)
+                if (itemIterator is { Count: > 0 })
                 {
                     while (itemIterator.MoveNext())
                     {

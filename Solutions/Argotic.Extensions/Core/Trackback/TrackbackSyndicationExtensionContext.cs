@@ -97,7 +97,7 @@ public class TrackbackSyndicationExtensionContext
                 }
             }
 
-            if (aboutIterator != null && aboutIterator.Count > 0)
+            if (aboutIterator is { Count: > 0 })
             {
                 while (aboutIterator.MoveNext())
                 {

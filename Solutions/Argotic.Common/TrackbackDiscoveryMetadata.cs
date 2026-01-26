@@ -162,7 +162,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
         XPathNavigator descriptionNavigator = navigator.SelectSingleNode("rdf:RDF\rdf:Description", manager);
 
-        if (descriptionNavigator != null && descriptionNavigator.HasAttributes)
+        if (descriptionNavigator is { HasAttributes: true })
         {
             string aboutAttribute       = descriptionNavigator.GetAttribute("about", RDF_NAMESPACE);
             string identifierAttribute  = descriptionNavigator.GetAttribute("identifier", DUBLIN_CORE_NAMESPACE);

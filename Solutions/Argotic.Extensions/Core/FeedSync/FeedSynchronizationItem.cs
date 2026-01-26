@@ -303,7 +303,7 @@ public class FeedSynchronizationItem : IComparable
                 {
                     object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                    if (customAttributes != null && customAttributes.Length > 0)
+                    if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -336,7 +336,7 @@ public class FeedSynchronizationItem : IComparable
                 FeedSynchronizationConflictPreservationDirective directive  = (FeedSynchronizationConflictPreservationDirective)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes                                   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -370,7 +370,7 @@ public class FeedSynchronizationItem : IComparable
                 {
                     object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                    if (customAttributes != null && customAttributes.Length > 0)
+                    if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -403,7 +403,7 @@ public class FeedSynchronizationItem : IComparable
                 FeedSynchronizationTombstoneStatus status   = (FeedSynchronizationTombstoneStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes                   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -482,7 +482,7 @@ public class FeedSynchronizationItem : IComparable
             XPathNodeIterator historyIterator   = source.Select("sx:history", manager);
             XPathNavigator conflictsNavigator   = source.SelectSingleNode("sx:conflicts", manager);
 
-            if (historyIterator != null && historyIterator.Count > 0)
+            if (historyIterator is { Count: > 0 })
             {
                 while (historyIterator.MoveNext())
                 {
@@ -495,10 +495,10 @@ public class FeedSynchronizationItem : IComparable
                 }
             }
 
-            if (conflictsNavigator != null && conflictsNavigator.HasChildren)
+            if (conflictsNavigator is { HasChildren: true })
             {
                 XPathNodeIterator childrenIterator  = conflictsNavigator.SelectChildren(XPathNodeType.Element);
-                if (childrenIterator != null && childrenIterator.Count > 0)
+                if (childrenIterator is { Count: > 0 })
                 {
                     this.Conflicts.Add(childrenIterator.Current);
                     wasLoaded   = true;

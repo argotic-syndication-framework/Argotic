@@ -85,7 +85,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
                         SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                         object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
 
-                        if (customAttributes != null && customAttributes.Length > 0)
+                        if (customAttributes is { Length: > 0 })
                         {
                             MimeMediaTypeAttribute mediaType    = customAttributes[0] as MimeMediaTypeAttribute;
                             string contentType                  = string.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);

@@ -84,10 +84,10 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
         if(source.HasChildren)
         {
             XPathNavigator dataNavigator    = source.SelectSingleNode("array/data");
-            if (dataNavigator != null && dataNavigator.HasChildren)
+            if (dataNavigator is { HasChildren: true })
             {
                 XPathNodeIterator valueIterator = dataNavigator.Select("value");
-                if (valueIterator != null && valueIterator.Count > 0)
+                if (valueIterator is { Count: > 0 })
                 {
                     while (valueIterator.MoveNext())
                     {

@@ -476,7 +476,7 @@ public class ITunesSyndicationExtensionContext
                 wasLoaded       = true;
             }
 
-            if (categoryIterator != null && categoryIterator.Count > 0)
+            if (categoryIterator is { Count: > 0 })
             {
                 while (categoryIterator.MoveNext())
                 {
@@ -527,7 +527,7 @@ public class ITunesSyndicationExtensionContext
                 }
             }
 
-            if (imageNavigator != null && imageNavigator.HasAttributes)
+            if (imageNavigator is { HasAttributes: true })
             {
                 string hrefAttribute    = imageNavigator.GetAttribute("href", string.Empty);
                 if (!string.IsNullOrEmpty(hrefAttribute))

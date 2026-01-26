@@ -115,12 +115,12 @@ public class SimpleListSyndicationExtensionContext
                 wasLoaded           = true;
             }
 
-            if (listInformationNavigator != null && listInformationNavigator.HasChildren)
+            if (listInformationNavigator is { HasChildren: true })
             {
                 XPathNodeIterator sortIterator  = source.Select("cf:sort", manager);
                 XPathNodeIterator groupIterator = source.Select("cf:group", manager);
 
-                if (sortIterator != null && sortIterator.Count > 0)
+                if (sortIterator is { Count: > 0 })
                 {
                     while (sortIterator.MoveNext())
                     {
@@ -133,7 +133,7 @@ public class SimpleListSyndicationExtensionContext
                     }
                 }
 
-                if (groupIterator != null && groupIterator.Count > 0)
+                if (groupIterator is { Count: > 0 })
                 {
                     while (groupIterator.MoveNext())
                     {

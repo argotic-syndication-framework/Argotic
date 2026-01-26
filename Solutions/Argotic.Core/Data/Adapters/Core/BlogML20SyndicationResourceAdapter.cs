@@ -42,7 +42,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     public void Fill(BlogMLDocument resource)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
@@ -118,10 +118,10 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillDocumentCollections(BlogMLDocument document, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(document, "document");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(document);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNodeIterator authorsIterator = source.Select("blog:authors/blog:author", manager);
         XPathNodeIterator extendedPropertiesIterator = source.Select("blog:extended-properties/blog:property", manager);

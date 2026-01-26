@@ -84,7 +84,7 @@ public class FeedSynchronizationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="history"/> is a null reference.</exception>
     public FeedSynchronizationItem(string id, int updates, FeedSynchronizationHistory history) : this(id, updates)
     {
-        Guard.ArgumentNotNull(history, "history");
+        ArgumentNullException.ThrowIfNull(history);
         this.Histories.Add(history);
     }
     /// <summary>
@@ -160,7 +160,7 @@ public class FeedSynchronizationItem : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             synchronizationId = value.Trim();
         }
     }
@@ -237,7 +237,7 @@ public class FeedSynchronizationItem : IComparable
 
         set
         {
-            Guard.ArgumentNotLessThan(value, "value", 1);
+            ArgumentOutOfRangeException.ThrowIfLessThan(value, 1);
             synchronizationUpdates = value;
         }
     }
@@ -263,8 +263,8 @@ public class FeedSynchronizationItem : IComparable
     public static int CompareSequence(Collection<FeedSynchronizationHistory> source, Collection<FeedSynchronizationHistory> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -328,7 +328,7 @@ public class FeedSynchronizationItem : IComparable
     public static FeedSynchronizationConflictPreservationDirective ConflictPreservationByName(string name)
     {
         FeedSynchronizationConflictPreservationDirective preservationDirective = FeedSynchronizationConflictPreservationDirective.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationConflictPreservationDirective).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationConflictPreservationDirective))
@@ -395,7 +395,7 @@ public class FeedSynchronizationItem : IComparable
     public static FeedSynchronizationTombstoneStatus TombstoneStatusByName(string name)
     {
         FeedSynchronizationTombstoneStatus tombstoneStatus = FeedSynchronizationTombstoneStatus.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationTombstoneStatus).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationTombstoneStatus))
@@ -431,7 +431,7 @@ public class FeedSynchronizationItem : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasAttributes)
@@ -516,7 +516,7 @@ public class FeedSynchronizationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
         writer.WriteStartElement("sync", extension.XmlNamespace);
 

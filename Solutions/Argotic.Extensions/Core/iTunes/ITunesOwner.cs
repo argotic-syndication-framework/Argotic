@@ -98,7 +98,7 @@ public class ITunesOwner : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         ITunesSyndicationExtension extension = new ITunesSyndicationExtension();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
@@ -129,7 +129,7 @@ public class ITunesOwner : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         ITunesSyndicationExtension extension = new ITunesSyndicationExtension();
         writer.WriteStartElement("owner", extension.XmlNamespace);
 

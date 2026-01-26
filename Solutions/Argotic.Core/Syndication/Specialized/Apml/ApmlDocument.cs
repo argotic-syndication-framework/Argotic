@@ -98,7 +98,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             ((Collection<ApmlProfile>)this.Profiles)[index] = value;
         }
     }
@@ -143,7 +143,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -190,7 +190,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             documentDefaultProfileName = value.Trim();
         }
     }
@@ -221,7 +221,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             documentHead = value;
         }
     }
@@ -247,7 +247,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             documentProfiles = value;
         }
 
@@ -401,7 +401,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public static ApmlDocument Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
         ApmlDocument syndicationResource = new ApmlDocument();
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         syndicationResource.Load(source, options, settings);
 
         return syndicationResource;
@@ -518,7 +518,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="InvalidOperationException">This <see cref="ApmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
@@ -645,7 +645,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public bool AddExtension(ISyndicationExtension extension)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
 
@@ -667,7 +667,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
     }
@@ -684,7 +684,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public bool RemoveExtension(ISyndicationExtension extension)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -702,7 +702,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public bool AddProfile(ApmlProfile profile)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(profile, "profile");
+        ArgumentNullException.ThrowIfNull(profile);
 
         ((Collection<ApmlProfile>)this.Profiles).Add(profile);
         wasAdded = true;
@@ -722,7 +722,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public bool RemoveProfile(ApmlProfile profile)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(profile, "profile");
+        ArgumentNullException.ThrowIfNull(profile);
 
         if (((Collection<ApmlProfile>)this.Profiles).Contains(profile))
         {
@@ -798,7 +798,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
@@ -843,7 +843,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Stream stream, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
         if (settings != null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
@@ -890,7 +890,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
         this.Load(new XPathDocument(reader), settings);
     }
 
@@ -1050,7 +1050,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
         XPathNavigator navigator = null;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
@@ -1094,7 +1094,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings settings)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         if (settings == null)
         {
@@ -1127,7 +1127,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </example>
     public void Save(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         this.Save(writer, new SyndicationResourceSaveSettings());
     }
 
@@ -1141,8 +1141,8 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentNullException.ThrowIfNull(settings);
         writer.WriteStartElement("APML", ApmlUtility.ApmlNamespace);
         writer.WriteAttributeString("version", this.Version.ToString());
 
@@ -1237,9 +1237,9 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
     {
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(settings, "settings");
-        Guard.ArgumentNotNull(eventData, "eventData");
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(eventData);
         SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.Apml);
         this.OnDocumentLoaded(eventData);

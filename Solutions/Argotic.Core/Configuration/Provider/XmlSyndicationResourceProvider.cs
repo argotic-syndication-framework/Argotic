@@ -92,7 +92,7 @@ namespace Argotic.Configuration.Provider
 
             set
             {
-                Guard.ArgumentNotNullOrEmptyString(value, "value");
+                ArgumentException.ThrowIfNullOrEmpty(value);
                 providerDirectoryPath   = value.Trim();
             }
         }
@@ -165,7 +165,7 @@ namespace Argotic.Configuration.Provider
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
         private static ISyndicationResource BuildResource(SyndicationContentFormat format, Stream stream)
         {
-            Guard.ArgumentNotNull(stream, "stream");
+            ArgumentNullException.ThrowIfNull(stream);
 
             if (format == SyndicationContentFormat.Apml)
             {
@@ -294,7 +294,7 @@ namespace Argotic.Configuration.Provider
         {
             SyndicationContentFormat format = SyndicationContentFormat.None;
 
-            Guard.ArgumentNotNullOrEmptyString(fileExtension, "fileExtension");
+            ArgumentException.ThrowIfNullOrEmpty(fileExtension);
 
             if (String.Compare(fileExtension, ".apml", StringComparison.OrdinalIgnoreCase) == 0)
             {
@@ -443,8 +443,8 @@ namespace Argotic.Configuration.Provider
         {
             Guid resourceKey    = Guid.Empty;
 
-            Guard.ArgumentNotNull(providerResourceKey, "providerResourceKey");
-            Guard.ArgumentNotNull(resource, "resource");
+            ArgumentNullException.ThrowIfNull(providerResourceKey);
+            ArgumentNullException.ThrowIfNull(resource);
 
             if (!XmlSyndicationResourceProvider.TryParseGuid(providerResourceKey.ToString(), out resourceKey))
             {
@@ -471,7 +471,7 @@ namespace Argotic.Configuration.Provider
         {
             Guid resourceKey    = Guid.Empty;
 
-            Guard.ArgumentNotNull(providerResourceKey, "providerResourceKey");
+            ArgumentNullException.ThrowIfNull(providerResourceKey);
 
             if (!XmlSyndicationResourceProvider.TryParseGuid(providerResourceKey.ToString(), out resourceKey))
             {
@@ -497,7 +497,7 @@ namespace Argotic.Configuration.Provider
         {
             Guid resourceKey    = Guid.Empty;
 
-            Guard.ArgumentNotNull(providerResourceKey, "providerResourceKey");
+            ArgumentNullException.ThrowIfNull(providerResourceKey);
 
             if (!XmlSyndicationResourceProvider.TryParseGuid(providerResourceKey.ToString(), out resourceKey))
             {
@@ -570,8 +570,8 @@ namespace Argotic.Configuration.Provider
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
         public override Collection<ISyndicationResource> GetResources(int pageIndex, int pageSize, out int totalRecords)
         {
-            Guard.ArgumentNotLessThan(pageIndex, "pageIndex", 0);
-            Guard.ArgumentNotLessThan(pageSize, "pageSize", 1);
+            ArgumentOutOfRangeException.ThrowIfLessThan(pageIndex, 0);
+            ArgumentOutOfRangeException.ThrowIfLessThan(pageSize, 1);
 
             lock (providerSyncObject)
             {
@@ -595,8 +595,8 @@ namespace Argotic.Configuration.Provider
         {
             Guid resourceKey    = Guid.Empty;
 
-            Guard.ArgumentNotNull(providerResourceKey, "providerResourceKey");
-            Guard.ArgumentNotNull(resource, "resource");
+            ArgumentNullException.ThrowIfNull(providerResourceKey);
+            ArgumentNullException.ThrowIfNull(resource);
 
             if (!XmlSyndicationResourceProvider.TryParseGuid(providerResourceKey.ToString(), out resourceKey))
             {
@@ -619,7 +619,7 @@ namespace Argotic.Configuration.Provider
         /// <returns>A <see cref="SyndicationResourceCreateStatus"/> enumeration value that indicates the result of the adding the syndication resource to the data store.</returns>
         private SyndicationResourceCreateStatus ResourceAdd(Guid resourceKey, ISyndicationResource resource)
         {
-            Guard.ArgumentNotNull(resource, "resource");
+            ArgumentNullException.ThrowIfNull(resource);
 
             if (this.ResourceKeyExists(resourceKey))
             {
@@ -830,7 +830,7 @@ namespace Argotic.Configuration.Provider
         /// </remarks>
         private void ResourceUpdate(Guid resourceKey, ISyndicationResource resource)
         {
-            Guard.ArgumentNotNull(resource, "resource");
+            ArgumentNullException.ThrowIfNull(resource);
 
             if (!this.ResourceKeyExists(resourceKey))
             {

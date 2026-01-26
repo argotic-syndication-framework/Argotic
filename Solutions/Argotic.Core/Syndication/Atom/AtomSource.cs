@@ -183,7 +183,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -422,7 +422,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     public bool AddExtension(ISyndicationExtension extension)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
 
@@ -444,7 +444,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
     }
@@ -461,7 +461,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     public bool RemoveExtension(ISyndicationExtension extension)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -482,7 +482,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
         if (AtomUtility.FillCommonObjectAttributes(this, source))
         {
@@ -546,8 +546,8 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
         wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -562,7 +562,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("source", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
@@ -866,8 +866,8 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         XPathNodeIterator authorIterator = source.Select("atom:author", manager);
         XPathNodeIterator contributorIterator = source.Select("atom:contributor", manager);
         XPathNodeIterator categoryIterator = source.Select("atom:category", manager);
@@ -942,8 +942,8 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         XPathNavigator generatorNavigator = source.SelectSingleNode("atom:generator", manager);
         XPathNavigator iconNavigator = source.SelectSingleNode("atom:icon", manager);
         XPathNavigator logoNavigator = source.SelectSingleNode("atom:logo", manager);

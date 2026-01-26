@@ -34,7 +34,7 @@ public class SyndicationResourceMetadata : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     public SyndicationResourceMetadata(XPathNavigator navigator)
     {
-        Guard.ArgumentNotNull(navigator, "navigator");
+        ArgumentNullException.ThrowIfNull(navigator);
 
         this.Load(navigator);
     }
@@ -108,8 +108,8 @@ public class SyndicationResourceMetadata : IComparable
     {
         Version version = null;
 
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentException.ThrowIfNullOrEmpty(name);
 
         string value = navigator.GetAttribute(name, string.Empty);
 
@@ -155,7 +155,7 @@ public class SyndicationResourceMetadata : IComparable
         bool resourceConformsToFormat = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("apml", "http://www.apml.org/apml-0.6");
@@ -193,7 +193,7 @@ public class SyndicationResourceMetadata : IComparable
         bool resourceConformsToFormat = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
@@ -262,7 +262,7 @@ public class SyndicationResourceMetadata : IComparable
         bool resourceConformsToFormat = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
@@ -302,7 +302,7 @@ public class SyndicationResourceMetadata : IComparable
         bool resourceConformsToFormat = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
@@ -342,7 +342,7 @@ public class SyndicationResourceMetadata : IComparable
         bool resourceConformsToFormat = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("blogML", "http://www.blogml.com/2006/09/BlogML");
@@ -380,7 +380,7 @@ public class SyndicationResourceMetadata : IComparable
         bool resourceConformsToFormat = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("micro", "http://www.mozilla.org/microsummaries/0.1");
@@ -417,7 +417,7 @@ public class SyndicationResourceMetadata : IComparable
     {
         bool resourceConformsToFormat = false;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         version = null;
         if ((navigator = resource.SelectSingleNode("NewsML")) != null)
@@ -448,7 +448,7 @@ public class SyndicationResourceMetadata : IComparable
         bool resourceConformsToFormat = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("search", "http://a9.com/-/spec/opensearch/1.1/");
@@ -486,7 +486,7 @@ public class SyndicationResourceMetadata : IComparable
     {
         bool resourceConformsToFormat = false;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         version = null;
         if ((navigator = resource.SelectSingleNode("opml")) != null)
@@ -518,7 +518,7 @@ public class SyndicationResourceMetadata : IComparable
         bool resourceConformsToFormat = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("rsd", "http://archipelago.phrasewise.com/rsd");
@@ -562,7 +562,7 @@ public class SyndicationResourceMetadata : IComparable
         bool resourceConformsToFormat = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
@@ -608,7 +608,7 @@ public class SyndicationResourceMetadata : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     private void Load(XPathNavigator resource)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         Dictionary<string, string> namespaces = (Dictionary<string, string>)resource.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
         foreach (string prefix in namespaces.Keys)

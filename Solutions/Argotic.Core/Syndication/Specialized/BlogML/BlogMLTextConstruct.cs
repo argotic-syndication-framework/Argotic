@@ -87,7 +87,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -229,7 +229,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     public static BlogMLContentType ConstructTypeByName(string name)
     {
         BlogMLContentType constructType = BlogMLContentType.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLContentType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(BlogMLContentType))
@@ -262,7 +262,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     public bool AddExtension(ISyndicationExtension extension)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
 
@@ -284,7 +284,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
     }
@@ -301,7 +301,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     public bool RemoveExtension(ISyndicationExtension extension)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -323,7 +323,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string typeAttribute = source.GetAttribute("type", string.Empty);
@@ -361,8 +361,8 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
         wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -380,8 +380,8 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="elementName"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string elementName)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(elementName, "elementName");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(elementName);
         writer.WriteStartElement(elementName, BlogMLUtility.BlogMLNamespace);
 
         if (this.ContentType != BlogMLContentType.None)

@@ -159,7 +159,7 @@ public class TrackbackClient
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             clientHost = value;
         }
     }
@@ -265,7 +265,7 @@ public class TrackbackClient
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             clientUserAgent = value.Trim();
         }
     }
@@ -371,7 +371,7 @@ public class TrackbackClient
     {
         TrackbackResponse response = null;
 
-        Guard.ArgumentNotNull(message, "message");
+        ArgumentNullException.ThrowIfNull(message);
 
         if (this.Host == null)
         {
@@ -408,7 +408,7 @@ public class TrackbackClient
     //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
     public void SendAsync(TrackbackMessage message, object userToken)
     {
-        Guard.ArgumentNotNull(message, "message");
+        ArgumentNullException.ThrowIfNull(message);
 
         if (this.Host == null)
         {
@@ -466,9 +466,9 @@ public class TrackbackClient
         HttpWebRequest httpRequest = null;
         byte[] payloadData;
 
-        Guard.ArgumentNotNull(host, "host");
-        Guard.ArgumentNotNullOrEmptyString(userAgent, "userAgent");
-        Guard.ArgumentNotNull(message, "message");
+        ArgumentNullException.ThrowIfNull(host);
+        ArgumentException.ThrowIfNullOrEmpty(userAgent);
+        ArgumentNullException.ThrowIfNull(message);
 
         using (MemoryStream stream = new MemoryStream())
         {

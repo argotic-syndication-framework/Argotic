@@ -41,7 +41,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public XmlRpcScalarValue(byte[] value)
     {
-        Guard.ArgumentNotNull(value, "value");
+        ArgumentNullException.ThrowIfNull(value);
 
         this.ValueType = XmlRpcScalarValueType.Base64;
         this.Value = value;
@@ -134,7 +134,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             scalarParameterValue = value;
         }
     }
@@ -177,7 +177,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (source.HasChildren)
         {
@@ -224,7 +224,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("value");
 
@@ -408,7 +408,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     {
         object result = string.Empty;
 
-        Guard.ArgumentNotNullOrEmptyString(scalar, "scalar");
+        ArgumentException.ThrowIfNullOrEmpty(scalar);
 
         switch (type)
         {

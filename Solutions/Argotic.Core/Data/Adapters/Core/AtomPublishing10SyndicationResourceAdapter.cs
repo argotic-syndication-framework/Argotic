@@ -42,7 +42,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     public void Fill(AtomCategoryDocument resource)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
@@ -118,7 +118,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     public void Fill(AtomServiceDocument resource)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 

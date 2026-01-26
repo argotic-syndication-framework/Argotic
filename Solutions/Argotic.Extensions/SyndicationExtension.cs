@@ -78,9 +78,9 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <exception cref="ArgumentNullException">The <paramref name="version"/> is a null reference.</exception>
     protected SyndicationExtension(string xmlPrefix, string xmlNamespace, Version version)
     {
-        Guard.ArgumentNotNullOrEmptyString(xmlPrefix, "xmlPrefix");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        Guard.ArgumentNotNull(version, "version");
+        ArgumentException.ThrowIfNullOrEmpty(xmlPrefix);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
+        ArgumentNullException.ThrowIfNull(version);
 
         extensionXmlPrefix = xmlPrefix.Trim();
         extensionXmlNamespace = xmlNamespace.Trim();
@@ -106,8 +106,8 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     protected SyndicationExtension(string xmlPrefix, string xmlNamespace, Version version, Uri documentation, string name, string description) : this(xmlPrefix, xmlNamespace, version)
     {
-        Guard.ArgumentNotNull(documentation, "documentation");
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentNullException.ThrowIfNull(documentation);
+        ArgumentException.ThrowIfNullOrEmpty(name);
 
         extensionDocumentation = documentation;
         extensionName = name.Trim();
@@ -223,7 +223,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     public XmlNamespaceManager CreateNamespaceManager(XPathNavigator navigator)
     {
         XmlNamespaceManager manager = null;
-        Guard.ArgumentNotNull(navigator, "navigator");
+        ArgumentNullException.ThrowIfNull(navigator);
         manager = new XmlNamespaceManager(navigator.NameTable);
 
         Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -254,7 +254,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     public virtual bool ExistsInSource(XPathNavigator source)
     {
         bool extensionExists = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         Dictionary<string, string> namespaces = (Dictionary<string, string>)source.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
         if (namespaces.ContainsValue(this.XmlNamespace))
@@ -276,7 +276,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteXmlNamespaceDeclaration(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         writer.WriteAttributeString("xmlns", this.XmlPrefix, null, this.XmlNamespace);
     }
 
@@ -314,7 +314,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public void ReadXml(XmlReader reader)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
 
         this.Load(reader);
     }
@@ -326,7 +326,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteXml(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         this.WriteTo(writer);
     }

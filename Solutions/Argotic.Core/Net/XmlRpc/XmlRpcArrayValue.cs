@@ -33,7 +33,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="iterator"/> is a null reference.</exception>
     public XmlRpcArrayValue(XPathNodeIterator iterator)
     {
-        Guard.ArgumentNotNull(iterator, "iterator");
+        ArgumentNullException.ThrowIfNull(iterator);
 
         if (iterator.Count > 0)
         {
@@ -79,7 +79,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (source.HasChildren)
         {
@@ -111,7 +111,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("value");
 

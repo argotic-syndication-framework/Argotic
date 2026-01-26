@@ -61,9 +61,9 @@ public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
     public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, ICredentials credentials, IWebProxy proxy, object state)
     {
-        Guard.ArgumentNotNull(host, "host");
-        Guard.ArgumentNotNull(message, "message");
-        Guard.ArgumentNotNull(response, "response");
+        ArgumentNullException.ThrowIfNull(host);
+        ArgumentNullException.ThrowIfNull(message);
+        ArgumentNullException.ThrowIfNull(response);
 
         eventHost = host;
         eventMessage = message;
@@ -85,9 +85,9 @@ public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
     public XmlRpcMessageSentEventArgs(Uri host, XmlRpcMessage message, XmlRpcResponse response, WebRequestOptions options, object state)
     {
-        Guard.ArgumentNotNull(host, "host");
-        Guard.ArgumentNotNull(message, "message");
-        Guard.ArgumentNotNull(response, "response");
+        ArgumentNullException.ThrowIfNull(host);
+        ArgumentNullException.ThrowIfNull(message);
+        ArgumentNullException.ThrowIfNull(response);
 
         eventHost = host;
         eventMessage = message;

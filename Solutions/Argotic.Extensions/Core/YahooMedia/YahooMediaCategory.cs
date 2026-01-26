@@ -70,7 +70,7 @@ public class YahooMediaCategory : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             categoryContent = value.Trim();
         }
     }
@@ -132,7 +132,7 @@ public class YahooMediaCategory : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string schemeAttribute = source.GetAttribute("scheme", string.Empty);
@@ -170,7 +170,7 @@ public class YahooMediaCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("category", extension.XmlNamespace);
 

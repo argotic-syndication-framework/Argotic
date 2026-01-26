@@ -46,7 +46,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
     public SyndicationExtensionLoadedEventArgs(IXPathNavigable data) : this()
     {
-        Guard.ArgumentNotNull(data, "data");
+        ArgumentNullException.ThrowIfNull(data);
 
         eventNavigator = data.CreateNavigator();
     }
@@ -62,7 +62,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public SyndicationExtensionLoadedEventArgs(IXPathNavigable data, ISyndicationExtension extension) : this(data)
     {
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         eventExtension = extension;
     }

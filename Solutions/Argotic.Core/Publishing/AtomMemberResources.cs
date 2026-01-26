@@ -149,7 +149,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -176,7 +176,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         bool wasAdded = false;
 
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
@@ -199,7 +199,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
 
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
@@ -218,7 +218,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         bool wasRemoved = false;
 
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
@@ -297,7 +297,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             collectionTitle = value;
         }
     }
@@ -320,7 +320,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             collectionResourceLocation = value;
         }
     }
@@ -348,8 +348,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -385,7 +385,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
     public static AtomLink CreateEditLink(Uri href)
     {
-        Guard.ArgumentNotNull(href, "href");
+        ArgumentNullException.ThrowIfNull(href);
 
         return new AtomLink(href, "edit");
     }
@@ -414,7 +414,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
     public static AtomLink CreateEditMediaLink(Uri href)
     {
-        Guard.ArgumentNotNull(href, "href");
+        ArgumentNullException.ThrowIfNull(href);
 
         return new AtomLink(href, "edit-media");
     }
@@ -490,7 +490,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         if (extension.GetType() == typeof(AtomMemberResources))
         {
@@ -529,7 +529,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="characterSequence"/> is an empty string.</exception>
     public static string SlugEncode(string characterSequence)
     {
-        Guard.ArgumentNotNullOrEmptyString(characterSequence, "characterSequence");
+        ArgumentException.ThrowIfNullOrEmpty(characterSequence);
 
         return System.Web.HttpUtility.UrlEncode(characterSequence, System.Text.Encoding.UTF8).Replace("+", " ");
     }
@@ -558,7 +558,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="slug"/> is an empty string.</exception>
     public static string SlugDecode(string slug)
     {
-        Guard.ArgumentNotNullOrEmptyString(slug, "slug");
+        ArgumentException.ThrowIfNullOrEmpty(slug);
 
         return System.Web.HttpUtility.UrlDecode(slug, System.Text.Encoding.UTF8);
     }
@@ -576,7 +576,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         XPathNavigator navigator = source.CreateNavigator();
 
@@ -658,8 +658,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
 
         wasLoaded = this.Load(source);
 
@@ -677,7 +677,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public override bool Load(XmlReader reader)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
 
         return this.Load(reader, null);
     }
@@ -691,7 +691,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public bool Load(XmlReader reader, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
 
         if (settings == null)
         {
@@ -709,7 +709,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public override void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("collection", AtomUtility.AtomPublishingNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);

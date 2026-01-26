@@ -36,7 +36,7 @@ internal static class RsdUtility
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         XmlNamespaceManager manager = null;
-        Guard.ArgumentNotNull(nameTable, "nameTable");
+        ArgumentNullException.ThrowIfNull(nameTable);
         manager = new XmlNamespaceManager(nameTable);
         manager.AddNamespace("rsd", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : RSD_NAMESPACE);
 
@@ -63,9 +63,9 @@ internal static class RsdUtility
     public static XPathNodeIterator SelectSafe(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
     {
         XPathNodeIterator iterator = null;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNullOrEmptyString(xpath, "xpath");
-        Guard.ArgumentNotNull(resolver, "resolver");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentException.ThrowIfNullOrEmpty(xpath);
+        ArgumentNullException.ThrowIfNull(resolver);
 
         iterator = source.Select(xpath, resolver);
 
@@ -98,9 +98,9 @@ internal static class RsdUtility
     public static XPathNavigator SelectSafeSingleNode(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
     {
         XPathNavigator navigator = null;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNullOrEmptyString(xpath, "xpath");
-        Guard.ArgumentNotNull(resolver, "resolver");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentException.ThrowIfNullOrEmpty(xpath);
+        ArgumentNullException.ThrowIfNull(resolver);
 
         navigator = source.SelectSingleNode(xpath, resolver);
 

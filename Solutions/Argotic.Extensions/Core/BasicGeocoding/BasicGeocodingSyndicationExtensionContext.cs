@@ -74,8 +74,8 @@ public class BasicGeocodingSyndicationExtensionContext
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         XPathNavigator latitudeNavigator = source.SelectSingleNode("geo:lat", manager);
         XPathNavigator longitudeNavigator = source.SelectSingleNode("geo:long", manager);
 
@@ -111,8 +111,8 @@ public class BasicGeocodingSyndicationExtensionContext
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
         NumberFormatInfo formatProvider = new NumberFormatInfo();
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
 
         formatProvider.NumberDecimalDigits = 7;
         formatProvider.NumberDecimalSeparator = NumberFormatInfo.InvariantInfo.NumberDecimalSeparator;

@@ -44,7 +44,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     public void Fill(RssFeed resource)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
 
@@ -76,10 +76,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillCategory(RssCategory category, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(category, "category");
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(category);
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         if (navigator.HasAttributes)
         {
@@ -112,10 +112,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillCloud(RssCloud cloud, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(cloud, "cloud");
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(cloud);
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         if (navigator.HasAttributes)
         {
@@ -175,10 +175,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillChannel(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(channel, "channel");
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(channel);
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNavigator descriptionNavigator = navigator.SelectSingleNode("description", manager);
         XPathNavigator linkNavigator = navigator.SelectSingleNode("link", manager);
@@ -244,10 +244,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillChannelCollections(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(channel, "channel");
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(channel);
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNodeIterator skipDaysIterator = navigator.Select("skipDays/day", manager);
         XPathNodeIterator skipHoursIterator = navigator.Select("skipHours/hour", manager);
@@ -328,10 +328,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillChannelOptionals(RssChannel channel, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(channel, "channel");
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(channel);
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNavigator copyrightNavigator = navigator.SelectSingleNode("copyright", manager);
         XPathNavigator managingEditorNavigator = navigator.SelectSingleNode("managingEditor", manager);
@@ -404,10 +404,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillEnclosure(RssEnclosure enclosure, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(enclosure, "enclosure");
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(enclosure);
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         if (navigator.HasAttributes)
         {
@@ -448,10 +448,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillImage(RssImage image, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(image, "image");
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(image);
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNavigator linkNavigator = navigator.SelectSingleNode("link", manager);
         XPathNavigator titleNavigator = navigator.SelectSingleNode("title", manager);
@@ -519,10 +519,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillItem(RssItem item, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(item, "item");
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(item);
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNavigator titleNavigator = navigator.SelectSingleNode("title", manager);
         XPathNavigator linkNavigator = navigator.SelectSingleNode("link", manager);
@@ -607,10 +607,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillTextInput(RssTextInput textInput, XPathNavigator navigator, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(textInput, "textInput");
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(textInput);
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNavigator descriptionNavigator = navigator.SelectSingleNode("description", manager);
         XPathNavigator linkNavigator = navigator.SelectSingleNode("link", manager);

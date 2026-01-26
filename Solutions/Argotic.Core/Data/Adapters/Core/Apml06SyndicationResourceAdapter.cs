@@ -43,7 +43,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     public void Fill(ApmlDocument resource)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(this.Navigator.NameTable);
 

@@ -201,7 +201,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             commonObjectBaseTitle = value;
         }
     }
@@ -226,7 +226,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -326,7 +326,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             postContent = value;
         }
     }
@@ -476,8 +476,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public static int CompareSequence(Collection<BlogMLAttachment> source, Collection<BlogMLAttachment> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -520,8 +520,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public static int CompareSequence(Collection<BlogMLAuthor> source, Collection<BlogMLAuthor> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -564,8 +564,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public static int CompareSequence(Collection<BlogMLComment> source, Collection<BlogMLComment> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -608,8 +608,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public static int CompareSequence(Collection<BlogMLTrackback> source, Collection<BlogMLTrackback> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -689,7 +689,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public static BlogMLPostType PostTypeByName(string name)
     {
         BlogMLPostType postType = BlogMLPostType.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLPostType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(BlogMLPostType))
@@ -721,7 +721,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public bool AddExtension(ISyndicationExtension extension)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
 
@@ -743,7 +743,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
     }
@@ -760,7 +760,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public bool RemoveExtension(ISyndicationExtension extension)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -781,7 +781,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
         if (BlogMLUtility.FillCommonObject(this, source))
         {
@@ -878,8 +878,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
         if (BlogMLUtility.FillCommonObject(this, source, settings))
         {
@@ -971,7 +971,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("post", BlogMLUtility.BlogMLNamespace);
         BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
@@ -1078,9 +1078,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(post, "post");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(post);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         XPathNodeIterator categoriesIterator = source.Select("blog:categories/blog:category", manager);
         XPathNodeIterator commentsIterator = source.Select("blog:comments/blog:comment", manager);
         XPathNodeIterator trackbacksIterator = source.Select("blog:trackbacks/blog:trackback", manager);
@@ -1172,10 +1172,10 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(post, "post");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(post);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
         XPathNodeIterator categoriesIterator = source.Select("blog:categories/blog:category", manager);
         XPathNodeIterator commentsIterator = source.Select("blog:comments/blog:comment", manager);
         XPathNodeIterator trackbacksIterator = source.Select("blog:trackbacks/blog:trackback", manager);

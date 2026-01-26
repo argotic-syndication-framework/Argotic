@@ -60,7 +60,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             extensionContext = value;
         }
     }
@@ -107,7 +107,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     public static YahooMediaExpression ExpressionByName(string name)
     {
         YahooMediaExpression mediaExpression = YahooMediaExpression.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
 
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaExpression).GetFields())
         {
@@ -141,7 +141,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (extension.GetType() == typeof(YahooMediaSyndicationExtension))
         {
             return true;
@@ -195,7 +195,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     public static YahooMediaMedium MediumByName(string name)
     {
         YahooMediaMedium mediaMedium = YahooMediaMedium.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
 
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaMedium).GetFields())
         {
@@ -228,7 +228,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(IXPathNavigable source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
         SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
@@ -245,7 +245,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public override bool Load(XmlReader reader)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
         XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
@@ -258,7 +258,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public override void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
 

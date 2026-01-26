@@ -43,7 +43,7 @@ public class LiveJournalMood : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             moodContent = value.Trim();
         }
     }
@@ -77,7 +77,7 @@ public class LiveJournalMood : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string idAttribute = source.GetAttribute("id", string.Empty);
@@ -107,7 +107,7 @@ public class LiveJournalMood : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         LiveJournalSyndicationExtension extension = new LiveJournalSyndicationExtension();
         writer.WriteStartElement("mood", extension.XmlNamespace);
 

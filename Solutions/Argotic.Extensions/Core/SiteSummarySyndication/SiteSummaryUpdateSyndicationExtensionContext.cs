@@ -70,7 +70,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
 
         set
         {
-            Guard.ArgumentNotLessThan(value, "value", 1);
+            ArgumentOutOfRangeException.ThrowIfLessThan(value, 1);
             extensionUpdateFrequency = value;
         }
     }
@@ -106,8 +106,8 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator updatePeriodNavigator = source.SelectSingleNode("sy:updatePeriod", manager);
@@ -156,8 +156,8 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         if (this.Period != SiteSummaryUpdatePeriod.None)
         {
             writer.WriteElementString("updatePeriod", xmlNamespace, SiteSummaryUpdateSyndicationExtension.PeriodAsString(this.Period));

@@ -187,7 +187,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
         {
@@ -457,8 +457,8 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public new void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentNullException.ThrowIfNull(settings);
 
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
 

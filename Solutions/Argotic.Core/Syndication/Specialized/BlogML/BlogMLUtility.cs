@@ -71,7 +71,7 @@ internal static class BlogMLUtility
     public static BlogMLApprovalStatus ApprovalStatusByValue(string value)
     {
         BlogMLApprovalStatus approvalStatus = BlogMLApprovalStatus.None;
-        Guard.ArgumentNotNullOrEmptyString(value, "value");
+        ArgumentException.ThrowIfNullOrEmpty(value);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
         {
             if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
@@ -146,7 +146,7 @@ internal static class BlogMLUtility
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         XmlNamespaceManager manager = null;
-        Guard.ArgumentNotNull(nameTable, "nameTable");
+        ArgumentNullException.ThrowIfNull(nameTable);
         manager = new XmlNamespaceManager(nameTable);
         manager.AddNamespace("blog", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
 
@@ -164,8 +164,8 @@ internal static class BlogMLUtility
     public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(target, "target");
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(target);
+        ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
@@ -249,9 +249,9 @@ internal static class BlogMLUtility
     public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(target, "target");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(target);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
@@ -331,8 +331,8 @@ internal static class BlogMLUtility
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public static void WriteCommonObjectAttributes(IBlogMLCommonObject source, XmlWriter writer)
     {
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(writer);
 
         if (!string.IsNullOrEmpty(source.Id))
         {
@@ -364,8 +364,8 @@ internal static class BlogMLUtility
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public static void WriteCommonObjectElements(IBlogMLCommonObject source, XmlWriter writer)
     {
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(writer);
         if (source.Title != null)
         {
             source.Title.WriteTo(writer, "title");

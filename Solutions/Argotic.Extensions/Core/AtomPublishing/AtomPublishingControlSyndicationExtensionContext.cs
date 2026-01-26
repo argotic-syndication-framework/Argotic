@@ -101,7 +101,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -142,7 +142,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     public bool AddExtension(ISyndicationExtension extension)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
 
@@ -164,7 +164,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
     }
@@ -181,7 +181,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     public bool RemoveExtension(ISyndicationExtension extension)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -201,8 +201,8 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (AtomPublishingUtility.FillCommonObjectAttributes(this, source))
         {
             wasLoaded = true;
@@ -245,9 +245,9 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     public bool Load(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
         wasLoaded = this.Load(source, manager);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -265,8 +265,8 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         writer.WriteStartElement("control", xmlNamespace);
         AtomPublishingUtility.WriteCommonObjectAttributes(this, writer);
 

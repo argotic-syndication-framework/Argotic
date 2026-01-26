@@ -57,7 +57,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             extensionContext = value;
         }
     }
@@ -71,7 +71,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         if (extension.GetType() == typeof(AtomPublishingControlSyndicationExtension))
         {
@@ -91,7 +91,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         return this.Load(source, null);
     }
@@ -105,7 +105,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator(); ;
 
         bool wasLoaded;
@@ -133,7 +133,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public override bool Load(XmlReader reader)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
         XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
@@ -148,7 +148,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public bool Load(XmlReader reader, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
 
         if (settings == null)
         {
@@ -167,7 +167,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public override void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         this.Context.WriteTo(writer, this.XmlNamespace);
     }

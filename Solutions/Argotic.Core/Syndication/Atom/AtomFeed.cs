@@ -166,7 +166,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             ((Collection<AtomEntry>)this.Entries)[index] = value;
         }
     }
@@ -186,7 +186,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         get
         {
-            Guard.ArgumentNotNullOrEmptyString(id, "id");
+            ArgumentException.ThrowIfNullOrEmpty(id);
 
             AtomEntry result = null;
             Uri uri = new Uri(id, UriKind.RelativeOrAbsolute);
@@ -218,8 +218,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(id, "id");
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(id);
+            ArgumentNullException.ThrowIfNull(value);
 
             Collection<AtomEntry> entries = (Collection<AtomEntry>)this.Entries;
             Uri uri = new Uri(id, UriKind.RelativeOrAbsolute);
@@ -338,7 +338,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -430,7 +430,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             feedEntries = value;
         }
 
@@ -506,7 +506,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             feedId = value;
         }
     }
@@ -608,7 +608,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             feedTitle = value;
         }
     }
@@ -705,8 +705,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -750,8 +750,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -795,8 +795,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -840,8 +840,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -967,7 +967,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         AtomFeed syndicationResource = new AtomFeed();
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         syndicationResource.Load(source, options, settings);
 
@@ -1086,7 +1086,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="InvalidOperationException">This <see cref="AtomFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
         {
@@ -1225,7 +1225,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         bool wasAdded = false;
 
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
@@ -1248,7 +1248,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
 
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
@@ -1267,7 +1267,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         bool wasRemoved = false;
 
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
@@ -1288,7 +1288,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         bool wasAdded = false;
 
-        Guard.ArgumentNotNull(entry, "entry");
+        ArgumentNullException.ThrowIfNull(entry);
 
         ((Collection<AtomEntry>)this.Entries).Add(entry);
         wasAdded = true;
@@ -1309,7 +1309,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         bool wasRemoved = false;
 
-        Guard.ArgumentNotNull(entry, "entry");
+        ArgumentNullException.ThrowIfNull(entry);
 
         if (((Collection<AtomEntry>)this.Entries).Contains(entry))
         {
@@ -1386,7 +1386,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
         {
@@ -1433,7 +1433,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Stream stream, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         if (settings != null)
         {
@@ -1481,7 +1481,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
 
         this.Load(new XPathDocument(reader), settings);
     }
@@ -1643,7 +1643,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         XPathNavigator navigator = null;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
         {
@@ -1690,7 +1690,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings settings)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         if (settings == null)
         {
@@ -1724,7 +1724,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// </example>
     public void Save(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         this.Save(writer, new SyndicationResourceSaveSettings());
     }
@@ -1739,8 +1739,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentNullException.ThrowIfNull(settings);
 
         writer.WriteStartElement("feed", AtomUtility.AtomNamespace);
         // writer.WriteAttributeString("version", this.Version.ToString());
@@ -1844,9 +1844,9 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
     {
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(settings, "settings");
-        Guard.ArgumentNotNull(eventData, "eventData");
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(eventData);
 
         SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.Atom);
@@ -1866,7 +1866,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
             AutoDetectExtensions = false
         };
 
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         foreach (AtomLink link in this.Links)
         {
@@ -1896,7 +1896,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     private void WriteFeedOptionals(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         if (this.Generator != null)
         {

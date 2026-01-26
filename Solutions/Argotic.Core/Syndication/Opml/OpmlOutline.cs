@@ -102,7 +102,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -305,7 +305,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             outlineText = value.Trim();
         }
     }
@@ -318,7 +318,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     public bool AddExtension(ISyndicationExtension extension)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
 
@@ -340,7 +340,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
     }
@@ -357,7 +357,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     public bool RemoveExtension(ISyndicationExtension extension)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -378,7 +378,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             XPathNavigator attributesNavigator = source.CreateNavigator();
@@ -432,7 +432,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             XPathNavigator attributesNavigator = source.CreateNavigator();
@@ -481,7 +481,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("outline");
 
         writer.WriteAttributeString("text", this.Text);
@@ -552,8 +552,8 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     public static int CompareSequence(Collection<OpmlOutline> source, Collection<OpmlOutline> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -599,8 +599,8 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     public static OpmlOutline CreateInclusionOutline(string text, Uri url)
     {
         OpmlOutline outline = new OpmlOutline();
-        Guard.ArgumentNotNullOrEmptyString(text, "text");
-        Guard.ArgumentNotNull(url, "url");
+        ArgumentException.ThrowIfNullOrEmpty(text);
+        ArgumentNullException.ThrowIfNull(url);
 
         outline.Text = text;
         if (url.ToString().EndsWith(".opml", StringComparison.OrdinalIgnoreCase))
@@ -677,9 +677,9 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl, Uri htmlUrl, string version, string title, string description, CultureInfo language)
     {
         OpmlOutline outline = new OpmlOutline();
-        Guard.ArgumentNotNullOrEmptyString(text, "text");
-        Guard.ArgumentNotNullOrEmptyString(type, "type");
-        Guard.ArgumentNotNull(xmlUrl, "xmlUrl");
+        ArgumentException.ThrowIfNullOrEmpty(text);
+        ArgumentException.ThrowIfNullOrEmpty(type);
+        ArgumentNullException.ThrowIfNull(xmlUrl);
 
         outline.Text = text;
         outline.ContentType = type;
@@ -882,7 +882,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     private bool LoadAttribute(XPathNavigator attribute)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(attribute, "attribute");
+        ArgumentNullException.ThrowIfNull(attribute);
 
         if (string.IsNullOrEmpty(attribute.Value))
         {

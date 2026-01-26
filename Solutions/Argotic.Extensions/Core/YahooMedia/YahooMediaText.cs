@@ -77,7 +77,7 @@ public class YahooMediaText : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             textContent = value.Trim();
         }
     }
@@ -219,7 +219,7 @@ public class YahooMediaText : IComparable
     public static YahooMediaTextConstructType TextTypeByName(string name)
     {
         YahooMediaTextConstructType constructType = YahooMediaTextConstructType.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaTextConstructType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaTextConstructType))
@@ -255,7 +255,7 @@ public class YahooMediaText : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string typeAttribute = source.GetAttribute("type", string.Empty);
@@ -322,7 +322,7 @@ public class YahooMediaText : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("text", extension.XmlNamespace);
 

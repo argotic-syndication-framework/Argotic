@@ -94,7 +94,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -125,7 +125,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             textInputDescription = value.Trim();
         }
     }
@@ -144,7 +144,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             textInputLink = value;
         }
     }
@@ -168,7 +168,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             textInputName = value.Trim();
         }
     }
@@ -188,7 +188,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             textInputTitle = value.Trim();
         }
     }
@@ -201,7 +201,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     public bool AddExtension(ISyndicationExtension extension)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
 
@@ -223,7 +223,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
     }
@@ -240,7 +240,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     public bool RemoveExtension(ISyndicationExtension extension)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -261,7 +261,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
         XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
         XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
@@ -318,8 +318,8 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
         wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -334,7 +334,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("textInput");
 
         writer.WriteElementString("description", this.Description);

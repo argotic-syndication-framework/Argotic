@@ -79,7 +79,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         this.Title = title;
 
-        Guard.ArgumentNotNull(collections, "collections");
+        ArgumentNullException.ThrowIfNull(collections);
         foreach (AtomMemberResources collection in collections)
         {
             this.AddCollection(collection);
@@ -103,7 +103,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             ((Collection<AtomMemberResources>)this.Collections)[index] = value;
         }
     }
@@ -173,7 +173,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -200,7 +200,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         bool wasAdded = false;
 
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
@@ -223,7 +223,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
 
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
@@ -242,7 +242,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         bool wasRemoved = false;
 
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
@@ -275,7 +275,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             workspaceCollections = value;
         }
     }
@@ -297,7 +297,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             workspaceTitle = value;
         }
     }
@@ -325,8 +325,8 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -357,7 +357,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         bool wasAdded = false;
 
-        Guard.ArgumentNotNull(collection, "collection");
+        ArgumentNullException.ThrowIfNull(collection);
 
         ((Collection<AtomMemberResources>)this.Collections).Add(collection);
         wasAdded = true;
@@ -380,7 +380,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public AtomMemberResources FindCollection(Predicate<AtomMemberResources> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
 
         List<AtomMemberResources> list = new List<AtomMemberResources>(this.Collections);
         return list.Find(match);
@@ -399,7 +399,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
 
@@ -454,8 +454,8 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
 
         wasLoaded = this.Load(source);
 
@@ -478,7 +478,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         bool wasRemoved = false;
 
-        Guard.ArgumentNotNull(collection, "collection");
+        ArgumentNullException.ThrowIfNull(collection);
 
         if (((Collection<AtomMemberResources>)this.Collections).Contains(collection))
         {
@@ -496,7 +496,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("workspace", AtomUtility.AtomPublishingNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);

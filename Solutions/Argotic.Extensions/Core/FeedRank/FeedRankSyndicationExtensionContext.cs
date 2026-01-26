@@ -102,7 +102,7 @@ public class FeedRankSyndicationExtensionContext
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             extensionScheme = value;
         }
     }
@@ -134,8 +134,8 @@ public class FeedRankSyndicationExtensionContext
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator rankNavigator = source.SelectSingleNode("re:rank", manager);
@@ -196,8 +196,8 @@ public class FeedRankSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         writer.WriteStartElement("rank", xmlNamespace);
 
         writer.WriteAttributeString("scheme", xmlNamespace, this.Scheme != null ? this.Scheme.ToString() : string.Empty);

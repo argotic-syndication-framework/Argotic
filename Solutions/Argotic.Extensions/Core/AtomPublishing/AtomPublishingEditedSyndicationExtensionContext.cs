@@ -56,8 +56,8 @@ public class AtomPublishingEditedSyndicationExtensionContext
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator editedNavigator = source.SelectSingleNode("app:edited", manager);
@@ -84,8 +84,8 @@ public class AtomPublishingEditedSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         if (this.EditedOn != DateTime.MinValue)
         {
             writer.WriteElementString("edited", xmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.EditedOn));

@@ -134,7 +134,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             ((Collection<RssItem>)this.Channel.Items)[index] = value;
         }
     }
@@ -154,7 +154,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            Guard.ArgumentNotNullOrEmptyString(guid, "guid");
+            ArgumentException.ThrowIfNullOrEmpty(guid);
 
             RssItem result = null;
 
@@ -172,8 +172,8 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(guid, "guid");
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(guid);
+            ArgumentNullException.ThrowIfNull(value);
 
             Collection<RssItem> items = (Collection<RssItem>)this.Channel.Items;
 
@@ -210,7 +210,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -240,7 +240,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             feedChannel = value;
         }
     }
@@ -323,8 +323,8 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     public static int CompareSequence(Collection<RssCategory> source, Collection<RssCategory> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -449,7 +449,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     public static RssFeed Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
         RssFeed syndicationResource = new RssFeed();
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         syndicationResource.Load(source, options, settings);
 
         return syndicationResource;
@@ -566,7 +566,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
@@ -691,7 +691,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     public bool AddExtension(ISyndicationExtension extension)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
 
@@ -713,7 +713,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
     }
@@ -730,7 +730,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     public bool RemoveExtension(ISyndicationExtension extension)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -805,7 +805,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
@@ -850,7 +850,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Stream stream, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
         if (settings != null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
@@ -897,7 +897,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
         this.Load(new XPathDocument(reader), settings);
     }
 
@@ -1057,7 +1057,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
         XPathNavigator navigator = null;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
@@ -1101,7 +1101,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings settings)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         if (settings == null)
         {
@@ -1135,7 +1135,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// </example>
     public void Save(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         this.Save(writer, new SyndicationResourceSaveSettings());
     }
 
@@ -1149,8 +1149,8 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentNullException.ThrowIfNull(settings);
         writer.WriteStartElement("rss");
         writer.WriteAttributeString("version", this.Version.ToString());
 
@@ -1229,9 +1229,9 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
     {
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(settings, "settings");
-        Guard.ArgumentNotNull(eventData, "eventData");
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(eventData);
         SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.Rss);
         this.OnFeedLoaded(eventData);

@@ -61,8 +61,8 @@ internal static class YahooMediaUtility
     public static int CompareSequence(Collection<YahooMediaCategory> source, Collection<YahooMediaCategory> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -105,8 +105,8 @@ internal static class YahooMediaUtility
     public static int CompareSequence(Collection<YahooMediaContent> source, Collection<YahooMediaContent> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -149,8 +149,8 @@ internal static class YahooMediaUtility
     public static int CompareSequence(Collection<YahooMediaCredit> source, Collection<YahooMediaCredit> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -193,8 +193,8 @@ internal static class YahooMediaUtility
     public static int CompareSequence(Collection<YahooMediaGroup> source, Collection<YahooMediaGroup> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -237,8 +237,8 @@ internal static class YahooMediaUtility
     public static int CompareSequence(Collection<YahooMediaHash> source, Collection<YahooMediaHash> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -281,8 +281,8 @@ internal static class YahooMediaUtility
     public static int CompareSequence(Collection<YahooMediaRating> source, Collection<YahooMediaRating> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -325,8 +325,8 @@ internal static class YahooMediaUtility
     public static int CompareSequence(Collection<YahooMediaRestriction> source, Collection<YahooMediaRestriction> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -369,8 +369,8 @@ internal static class YahooMediaUtility
     public static int CompareSequence(Collection<YahooMediaText> source, Collection<YahooMediaText> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -413,8 +413,8 @@ internal static class YahooMediaUtility
     public static int CompareSequence(Collection<YahooMediaThumbnail> source, Collection<YahooMediaThumbnail> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -446,8 +446,8 @@ internal static class YahooMediaUtility
     public static bool FillCommonObjectEntities(IYahooMediaCommonObjectEntities target, XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(target, "target");
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(target);
+        ArgumentNullException.ThrowIfNull(source);
         YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         wasLoaded = YahooMediaUtility.FillCommonObjectEntityClasses(target, source, manager);
@@ -474,8 +474,8 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public static void WriteCommonObjectEntities(IYahooMediaCommonObjectEntities source, XmlWriter writer)
     {
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(writer);
         YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         if (source.Title != null)
         {
@@ -675,9 +675,9 @@ internal static class YahooMediaUtility
     private static bool FillCommonObjectEntityClasses(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(target, "target");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(target);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator titleNavigator = source.SelectSingleNode("media:title", manager);
@@ -764,9 +764,9 @@ internal static class YahooMediaUtility
     private static bool FillCommonObjectEntityCollectionsPrimary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(target, "target");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(target);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
 
         if (source.HasChildren)
         {
@@ -844,9 +844,9 @@ internal static class YahooMediaUtility
     private static bool FillCommonObjectEntityCollectionsSecondary(IYahooMediaCommonObjectEntities target, XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(target, "target");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(target);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
 
         if (source.HasChildren)
         {

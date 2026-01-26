@@ -52,7 +52,7 @@ public class TrackbackResponse : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="errorMessage"/> is an empty string.</exception>
     public TrackbackResponse(string errorMessage)
     {
-        Guard.ArgumentNotNullOrEmptyString(errorMessage, "errorMessage");
+        ArgumentException.ThrowIfNullOrEmpty(errorMessage);
 
         responseErrorMessage = errorMessage;
     }
@@ -67,7 +67,7 @@ public class TrackbackResponse : IComparable
     /// <exception cref="XmlException">The <paramref name="response"/> body does not represent a valid XML document, or an error was encountered in the XML data.</exception>
     public TrackbackResponse(WebResponse response)
     {
-        Guard.ArgumentNotNull(response, "response");
+        ArgumentNullException.ThrowIfNull(response);
 
         if (string.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
         {
@@ -136,7 +136,7 @@ public class TrackbackResponse : IComparable
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (source.HasChildren)
         {
@@ -174,7 +174,7 @@ public class TrackbackResponse : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("response");
 

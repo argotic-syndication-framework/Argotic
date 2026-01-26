@@ -29,8 +29,8 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public SyndicationExtensionAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(settings);
 
         adapterNavigator = navigator;
         adapterSettings = settings;
@@ -112,8 +112,8 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
     public static void FillExtensionTypes(IExtensibleSyndicationObject entity, Collection<Type> types)
     {
-        Guard.ArgumentNotNull(entity, "entity");
-        Guard.ArgumentNotNull(types, "types");
+        ArgumentNullException.ThrowIfNull(entity);
+        ArgumentNullException.ThrowIfNull(types);
 
         if (entity.HasExtensions)
         {
@@ -144,7 +144,7 @@ public class SyndicationExtensionAdapter
     public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types)
     {
         Collection<ISyndicationExtension> extensions = [];
-        Guard.ArgumentNotNull(types, "types");
+        ArgumentNullException.ThrowIfNull(types);
 
         foreach (Type type in types)
         {
@@ -178,8 +178,8 @@ public class SyndicationExtensionAdapter
     public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types, Dictionary<string, string> namespaces)
     {
         Collection<ISyndicationExtension> supportedExtensions = [];
-        Guard.ArgumentNotNull(types, "types");
-        Guard.ArgumentNotNull(namespaces, "namespaces");
+        ArgumentNullException.ThrowIfNull(types);
+        ArgumentNullException.ThrowIfNull(namespaces);
 
         Collection<ISyndicationExtension> nativeExtensions = SyndicationExtensionAdapter.GetExtensions(SyndicationExtensionAdapter.FrameworkExtensions);
 
@@ -215,8 +215,8 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public static void WriteExtensionsTo(IEnumerable<ISyndicationExtension> extensions, XmlWriter writer)
     {
-        Guard.ArgumentNotNull(extensions, "extensions");
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(extensions);
+        ArgumentNullException.ThrowIfNull(writer);
 
         foreach (ISyndicationExtension extension in extensions)
         {
@@ -233,8 +233,8 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public static void WriteXmlNamespaceDeclarations(Collection<Type> types, XmlWriter writer)
     {
-        Guard.ArgumentNotNull(types, "types");
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(types);
+        ArgumentNullException.ThrowIfNull(writer);
 
         foreach (Type type in types)
         {
@@ -259,7 +259,7 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference.</exception>
     public void Fill(IExtensibleSyndicationObject entity)
     {
-        Guard.ArgumentNotNull(entity, "entity");
+        ArgumentNullException.ThrowIfNull(entity);
         XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
 
         this.Fill(entity, manager);
@@ -275,8 +275,8 @@ public class SyndicationExtensionAdapter
     public void Fill(IExtensibleSyndicationObject entity, XmlNamespaceManager manager)
     {
         Collection<ISyndicationExtension> extensions = [];
-        Guard.ArgumentNotNull(entity, "entity");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(entity);
+        ArgumentNullException.ThrowIfNull(manager);
 
         if (this.Settings.AutoDetectExtensions)
         {

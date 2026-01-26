@@ -35,7 +35,7 @@ public static class SyndicationDiscoveryUtility
     {
         SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
 
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
 
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
         {
@@ -97,7 +97,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static SyndicationContentFormat SyndicationContentFormatGet(Uri source, ICredentials credentials)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials));
         if (response != null)
@@ -121,7 +121,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     public static SyndicationContentFormat SyndicationContentFormatGet(Stream stream)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         XmlReaderSettings settings = new XmlReaderSettings
         {
@@ -146,7 +146,7 @@ public static class SyndicationDiscoveryUtility
     {
         SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
 
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
 
         XmlDocument document = new XmlDocument();
         document.Load(reader);
@@ -190,7 +190,7 @@ public static class SyndicationDiscoveryUtility
         SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
         XPathNavigator source = null;
 
-        Guard.ArgumentNotNull(navigator, "navigator");
+        ArgumentNullException.ThrowIfNull(navigator);
 
         source = navigator.CreateNavigator();
         if (string.IsNullOrEmpty(source.LocalName))
@@ -236,7 +236,7 @@ public static class SyndicationDiscoveryUtility
         Hashtable hashtable = new Hashtable();
         Regex attributePattern = new Regex("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
 
-        Guard.ArgumentNotNullOrEmptyString(content, "content");
+        ArgumentException.ThrowIfNullOrEmpty(content);
 
         MatchCollection attributes = attributePattern.Matches(content);
 
@@ -283,7 +283,7 @@ public static class SyndicationDiscoveryUtility
         Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
         Regex anchorPattern = new Regex("<a[^>]+", RegexOptions.IgnoreCase);
 
-        Guard.ArgumentNotNullOrEmptyString(content, "content");
+        ArgumentException.ThrowIfNullOrEmpty(content);
 
         MatchCollection links = linkPattern.Matches(content);
 
@@ -331,7 +331,7 @@ public static class SyndicationDiscoveryUtility
     {
         Uri baseUri = null;
 
-        Guard.ArgumentNotNull(request, "request");
+        ArgumentNullException.ThrowIfNull(request);
 
         string baseUrlString    = request.Url.AbsoluteUri.Replace(request.Url.PathAndQuery, String.Empty);
         baseUrlString           = String.Concat(baseUrlString, "/", request.ApplicationPath.TrimStart('/'));
@@ -381,8 +381,8 @@ public static class SyndicationDiscoveryUtility
     {
         bool sourceContainsLinkToTarget = false;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials));
         if (response != null)
@@ -596,7 +596,7 @@ public static class SyndicationDiscoveryUtility
     {
         bool sourceHasBeenModified = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
         httpRequest.UserAgent = frameworkUserAgent;
@@ -670,7 +670,7 @@ public static class SyndicationDiscoveryUtility
     {
         bool sourceHasBeenModified = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
         httpRequest.UserAgent = frameworkUserAgent;
@@ -721,7 +721,7 @@ public static class SyndicationDiscoveryUtility
         Collection<DiscoverableSyndicationEndpoint> results = [];
         Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
 
-        Guard.ArgumentNotNullOrEmptyString(content, "content");
+        ArgumentException.ThrowIfNullOrEmpty(content);
 
         MatchCollection links = linkPattern.Matches(content);
 
@@ -780,7 +780,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(Stream stream)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         using StreamReader reader = new StreamReader(stream);
         return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(reader.ReadToEnd());
@@ -830,7 +830,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     public static Collection<DiscoverableSyndicationEndpoint> LocateDiscoverableSyndicationEndpoints(Uri uri, ICredentials credentials)
     {
-        Guard.ArgumentNotNull(uri, "uri");
+        ArgumentNullException.ThrowIfNull(uri);
 
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
         if (webResponse == null)
@@ -873,7 +873,7 @@ public static class SyndicationDiscoveryUtility
         HtmlAnchor pingbackAnchor = null;
         Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
 
-        Guard.ArgumentNotNullOrEmptyString(content, "content");
+        ArgumentException.ThrowIfNullOrEmpty(content);
 
         MatchCollection links = linkPattern.Matches(content);
 
@@ -1022,7 +1022,7 @@ public static class SyndicationDiscoveryUtility
     {
         bool isPingbackEnabled = false;
 
-        Guard.ArgumentNotNull(uri, "uri");
+        ArgumentNullException.ThrowIfNull(uri);
 
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
         if (webResponse == null)
@@ -1171,7 +1171,7 @@ public static class SyndicationDiscoveryUtility
     {
         Uri pingbackXmlRpcServer = null;
 
-        Guard.ArgumentNotNull(uri, "uri");
+        ArgumentNullException.ThrowIfNull(uri);
 
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
         if (webResponse == null)
@@ -1234,7 +1234,7 @@ public static class SyndicationDiscoveryUtility
         Regex rdfPattern = new Regex("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
 
-        Guard.ArgumentNotNullOrEmptyString(content, "content");
+        ArgumentException.ThrowIfNullOrEmpty(content);
 
         manager.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
         manager.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
@@ -1273,7 +1273,7 @@ public static class SyndicationDiscoveryUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(Stream stream)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         using StreamReader reader = new StreamReader(stream);
         return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(reader.ReadToEnd());
@@ -1380,7 +1380,7 @@ public static class SyndicationDiscoveryUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static bool IsTrackbackEnabled(Uri uri, ICredentials credentials)
     {
-        Guard.ArgumentNotNull(uri, "uri");
+        ArgumentNullException.ThrowIfNull(uri);
 
         return (SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, credentials).Count > 0);
     }
@@ -1431,7 +1431,7 @@ public static class SyndicationDiscoveryUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri, ICredentials credentials)
     {
-        Guard.ArgumentNotNull(uri, "uri");
+        ArgumentNullException.ThrowIfNull(uri);
 
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
         if (webResponse == null)

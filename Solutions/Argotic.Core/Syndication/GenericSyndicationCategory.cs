@@ -27,7 +27,7 @@ public class GenericSyndicationCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
     public GenericSyndicationCategory(string term)
     {
-        Guard.ArgumentNotNullOrEmptyString(term, "term");
+        ArgumentException.ThrowIfNullOrEmpty(term);
         categoryTerm = term;
     }
 
@@ -50,7 +50,7 @@ public class GenericSyndicationCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference.</exception>
     public GenericSyndicationCategory(AtomCategory category)
     {
-        Guard.ArgumentNotNull(category, "category");
+        ArgumentNullException.ThrowIfNull(category);
 
         if (category.Scheme != null)
         {
@@ -74,7 +74,7 @@ public class GenericSyndicationCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference.</exception>
     public GenericSyndicationCategory(RssCategory category)
     {
-        Guard.ArgumentNotNull(category, "category");
+        ArgumentNullException.ThrowIfNull(category);
         if (!string.IsNullOrEmpty(category.Domain))
         {
             categoryScheme = category.Domain.Trim();

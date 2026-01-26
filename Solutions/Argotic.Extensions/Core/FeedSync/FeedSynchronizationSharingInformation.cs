@@ -207,8 +207,8 @@ public class FeedSynchronizationSharingInformation : IComparable
     public static int CompareSequence(Collection<FeedSynchronizationRelatedInformation> source, Collection<FeedSynchronizationRelatedInformation> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -240,7 +240,7 @@ public class FeedSynchronizationSharingInformation : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasAttributes)
@@ -299,7 +299,7 @@ public class FeedSynchronizationSharingInformation : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
         writer.WriteStartElement("sharing", extension.XmlNamespace);
 

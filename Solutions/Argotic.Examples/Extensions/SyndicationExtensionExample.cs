@@ -56,7 +56,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         if (extension.GetType() == typeof(MyCustomSyndicationExtension))
         {
@@ -76,7 +76,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(IXPathNavigable source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         if (navigator.HasAttributes)
         {
@@ -102,7 +102,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public override bool Load(XmlReader reader)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
 
         XPathDocument document = new XPathDocument(reader);
 
@@ -116,7 +116,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public override void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("CustomExtension", this.XmlNamespace);
 

@@ -73,7 +73,7 @@ internal static class AtomUtility
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         XmlNamespaceManager manager = null;
-        Guard.ArgumentNotNull(nameTable, "nameTable");
+        ArgumentNullException.ThrowIfNull(nameTable);
         manager = new XmlNamespaceManager(nameTable);
         manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : ATOM_NAMESPACE);
         manager.AddNamespace("app", ATOMPUB_NAMESPACE);
@@ -123,8 +123,8 @@ internal static class AtomUtility
     public static bool FillCommonObjectAttributes(IAtomCommonObjectAttributes target, XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(target, "target");
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(target);
+        ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
         string xmlBaseAttribute = source.GetAttribute("base", manager.LookupNamespace("xml"));
         if (!string.IsNullOrEmpty(xmlBaseAttribute))
@@ -162,8 +162,8 @@ internal static class AtomUtility
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public static void WriteCommonObjectAttributes(IAtomCommonObjectAttributes source, XmlWriter writer)
     {
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(writer);
         if (source.BaseUri != null)
         {
             writer.WriteAttributeString("xml", "base", XML_NAMESPACE, source.BaseUri.ToString());

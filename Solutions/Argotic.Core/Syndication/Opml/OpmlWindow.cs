@@ -130,7 +130,7 @@ public class OpmlWindow : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         XPathNavigator windowTopNavigator = source.SelectSingleNode("windowTop");
         XPathNavigator windowLeftNavigator = source.SelectSingleNode("windowLeft");
         XPathNavigator windowBottomNavigator = source.SelectSingleNode("windowBottom");
@@ -182,7 +182,7 @@ public class OpmlWindow : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         if (this.Top != int.MinValue)
         {
             writer.WriteElementString("windowTop", this.Top.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));

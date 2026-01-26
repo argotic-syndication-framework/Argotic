@@ -65,7 +65,7 @@ public class TrackbackSyndicationExtensionContext
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             extensionPing = value;
         }
     }
@@ -81,8 +81,8 @@ public class TrackbackSyndicationExtensionContext
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator pingNavigator = source.SelectSingleNode("trackback:ping", manager);
@@ -123,8 +123,8 @@ public class TrackbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         writer.WriteElementString("ping", xmlNamespace, this.Ping != null ? this.Ping.ToString() : string.Empty);
 
         foreach (Uri about in this.Abouts)

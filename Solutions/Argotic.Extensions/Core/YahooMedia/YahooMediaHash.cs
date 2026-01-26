@@ -83,7 +83,7 @@ public class YahooMediaHash : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             hashValue = value;
         }
     }
@@ -101,7 +101,7 @@ public class YahooMediaHash : IComparable
         string base64EncodedHash = string.Empty;
         MD5 md5 = MD5.Create();
         SHA1 sha1 = SHA1.Create();
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
         if (algorithm == YahooMediaHashAlgorithm.None)
         {
             throw new ArgumentException(string.Format(null, "Unable to generate a hash value for the {0} algorithm.", algorithm), nameof(algorithm));
@@ -164,7 +164,7 @@ public class YahooMediaHash : IComparable
     public static YahooMediaHashAlgorithm HashAlgorithmByName(string name)
     {
         YahooMediaHashAlgorithm hashAlgorithm = YahooMediaHashAlgorithm.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaHashAlgorithm).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaHashAlgorithm))
@@ -200,7 +200,7 @@ public class YahooMediaHash : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string algorithmAttribute = source.GetAttribute("algo", string.Empty);
@@ -231,7 +231,7 @@ public class YahooMediaHash : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("hash", extension.XmlNamespace);
 

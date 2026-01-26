@@ -47,7 +47,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(nameTable, "nameTable");
+        ArgumentNullException.ThrowIfNull(nameTable);
 
         manager = new XmlNamespaceManager(nameTable);
         manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : "http://purl.org/atom/ns#");
@@ -63,7 +63,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     public void Fill(AtomEntry resource)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
@@ -82,7 +82,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     public void Fill(AtomFeed resource)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         XmlNamespaceManager manager = Atom03SyndicationResourceAdapter.CreateNamespaceManager(this.Navigator.NameTable);
 
@@ -141,9 +141,9 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         AtomContent content = new AtomContent();
         string modeAttribute = string.Empty;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         AtomUtility.FillCommonObjectAttributes(content, source);
 
@@ -198,9 +198,9 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         AtomGenerator generator = new AtomGenerator();
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         AtomUtility.FillCommonObjectAttributes(generator, source);
 
@@ -251,9 +251,9 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         AtomPersonConstruct person = new AtomPersonConstruct();
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         AtomUtility.FillCommonObjectAttributes(person, source);
 
@@ -302,9 +302,9 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         AtomTextConstruct content = new AtomTextConstruct();
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         AtomUtility.FillCommonObjectAttributes(content, source);
 
@@ -371,10 +371,10 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillEntry(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(entry, "entry");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(entry);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         AtomUtility.FillCommonObjectAttributes(entry, source);
 
@@ -424,10 +424,10 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillEntryCollections(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(entry, "entry");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(entry);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNodeIterator authorIterator = source.Select("atom:author", manager);
         XPathNodeIterator contributorIterator = source.Select("atom:contributor", manager);
@@ -480,10 +480,10 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillEntryOptionals(AtomEntry entry, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(entry, "entry");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(entry);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNavigator contentNavigator = source.SelectSingleNode("atom:content", manager);
         XPathNavigator createdNavigator = source.SelectSingleNode("atom:created", manager);
@@ -524,10 +524,10 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillFeedCollections(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(feed, "feed");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(feed);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNodeIterator authorIterator = source.Select("atom:author", manager);
         XPathNodeIterator contributorIterator = source.Select("atom:contributor", manager);
@@ -600,10 +600,10 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static void FillFeedOptionals(AtomFeed feed, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(feed, "feed");
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(feed);
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
+        ArgumentNullException.ThrowIfNull(settings);
 
         XPathNavigator generatorNavigator = source.SelectSingleNode("atom:generator", manager);
         XPathNavigator copyrightNavigator = source.SelectSingleNode("atom:copyright", manager);

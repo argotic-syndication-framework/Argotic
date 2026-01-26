@@ -56,7 +56,7 @@ public class XmlRpcStructureMember : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             memberName = value.Trim();
         }
     }
@@ -75,7 +75,7 @@ public class XmlRpcStructureMember : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             memberValue = value;
         }
     }
@@ -93,7 +93,7 @@ public class XmlRpcStructureMember : IComparable
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (source.HasChildren)
         {
@@ -126,7 +126,7 @@ public class XmlRpcStructureMember : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("member");
 

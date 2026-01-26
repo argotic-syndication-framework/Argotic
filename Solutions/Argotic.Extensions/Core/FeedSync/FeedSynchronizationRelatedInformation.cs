@@ -79,7 +79,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             relatedInformationLink = value;
         }
     }
@@ -187,7 +187,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
     public static FeedSynchronizationRelatedInformationType RelationTypeByName(string name)
     {
         FeedSynchronizationRelatedInformationType relationType = FeedSynchronizationRelatedInformationType.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationRelatedInformationType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationRelatedInformationType))
@@ -223,7 +223,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string linkAttribute = source.GetAttribute("link", string.Empty);
@@ -266,7 +266,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
         writer.WriteStartElement("related", extension.XmlNamespace);
 

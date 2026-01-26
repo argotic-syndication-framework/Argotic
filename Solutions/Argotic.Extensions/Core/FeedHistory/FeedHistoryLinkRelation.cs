@@ -74,7 +74,7 @@ public class FeedHistoryLinkRelation : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             linkRelationLocation = value;
         }
     }
@@ -90,7 +90,7 @@ public class FeedHistoryLinkRelation : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string hrefAttribute = source.GetAttribute("href", string.Empty);
@@ -126,7 +126,7 @@ public class FeedHistoryLinkRelation : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("link", "http://www.w3.org/2005/Atom");
 
         writer.WriteAttributeString("href", this.Uri != null ? this.Uri.ToString() : string.Empty);

@@ -120,7 +120,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
 
             endpointMediaType = value.Trim();
         }
@@ -141,7 +141,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
 
             endpointSource = value;
         }
@@ -179,7 +179,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
     /// <exception cref="ArgumentNullException">The <see cref="Source"/> is a null reference.</exception>
     public XPathNavigator CreateNavigator()
     {
-        Guard.ArgumentNotNull(this.Source, "Source");
+        ArgumentNullException.ThrowIfNull(this.Source);
 
         return SyndicationEncodingUtility.CreateSafeNavigator(this.Source, new WebRequestOptions());
     }

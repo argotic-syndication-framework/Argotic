@@ -26,7 +26,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is an empty string.</exception>
     public static XPathNavigator CreateSafeNavigator(string xml)
     {
-        Guard.ArgumentNotNullOrEmptyString(xml, "xml");
+        ArgumentException.ThrowIfNullOrEmpty(xml);
 
         string safeXml = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(xml);
 
@@ -55,7 +55,7 @@ public static class SyndicationEncodingUtility
     {
         Encoding encoding = Encoding.UTF8;
 
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         byte[] buffer = SyndicationEncodingUtility.GetStreamBytes(stream);
 
@@ -79,8 +79,8 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="encoding"/> is a null reference.</exception>
     public static XPathNavigator CreateSafeNavigator(Stream stream, Encoding encoding)
     {
-        Guard.ArgumentNotNull(stream, "stream");
-        Guard.ArgumentNotNull(encoding, "encoding");
+        ArgumentNullException.ThrowIfNull(stream);
+        ArgumentNullException.ThrowIfNull(encoding);
 
         using StreamReader reader = new StreamReader(stream, encoding);
         return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
@@ -98,7 +98,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public static XPathNavigator CreateSafeNavigator(TextReader reader)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
 
         return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
     }
@@ -188,7 +188,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options, Encoding encoding)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, options);
         Stream stream;
@@ -266,7 +266,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static WebRequest CreateWebRequest(Uri source, WebRequestOptions options)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         WebRequest request = WebRequest.Create(source);
 
@@ -325,7 +325,7 @@ public static class SyndicationEncodingUtility
     {
         WebResponse response = null;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         WebRequest webRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
         if (webRequest != null)
@@ -345,7 +345,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="encodedValue"/> is an empty string.</exception>
     public static Stream DecodeBase64String(string encodedValue)
     {
-        Guard.ArgumentNotNullOrEmptyString(encodedValue, "encodedValue");
+        ArgumentException.ThrowIfNullOrEmpty(encodedValue);
 
         byte[] data = Convert.FromBase64String(encodedValue);
         MemoryStream stream = new MemoryStream(data);
@@ -367,7 +367,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="escapedValue"/> is an empty string.</exception>
     public static string DecodeHtmlEscapedString(string escapedValue)
     {
-        Guard.ArgumentNotNullOrEmptyString(escapedValue, "escapedValue");
+        ArgumentException.ThrowIfNullOrEmpty(escapedValue);
 
         string decodedResult = System.Web.HttpUtility.HtmlDecode(escapedValue);
         decodedResult = System.Web.HttpUtility.UrlDecode(decodedResult);
@@ -393,7 +393,7 @@ public static class SyndicationEncodingUtility
     {
         Regex invalidXmlUnicodeCharacters = new Regex(@"[\x01-\x08\x0B-\x0C\x0E-\x1F\xD800-\xDFFF\xFFFE-\xFFFF]");
 
-        Guard.ArgumentNotNullOrEmptyString(content, "content");
+        ArgumentException.ThrowIfNullOrEmpty(content);
 
         string encodedContent = content;
 
@@ -419,7 +419,7 @@ public static class SyndicationEncodingUtility
     {
         Encoding contentEncoding    = null;
 
-        Guard.ArgumentNotNull(request, "request");
+        ArgumentNullException.ThrowIfNull(request);
 
         if (!String.IsNullOrEmpty(request.ContentType))
         {
@@ -471,7 +471,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
     public static Encoding GetXmlEncoding(byte[] data)
     {
-        Guard.ArgumentNotNull(data, "data");
+        ArgumentNullException.ThrowIfNull(data);
 
         using MemoryStream stream = new MemoryStream(data);
         return SyndicationEncodingUtility.GetXmlEncoding(stream);
@@ -488,7 +488,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     public static Encoding GetXmlEncoding(Stream stream)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         using StreamReader reader = new StreamReader(stream);
         return SyndicationEncodingUtility.GetXmlEncoding(reader.ReadToEnd());
@@ -509,7 +509,7 @@ public static class SyndicationEncodingUtility
         Encoding encoding = Encoding.UTF8;
         string encodingPattern = @"^<\?xml.+?encoding\s*=\s*(?:""(?<webName>[^""]*)""|(?<webName>\S+)).*?\?>";
 
-        Guard.ArgumentNotNullOrEmptyString(content, "content");
+        ArgumentException.ThrowIfNullOrEmpty(content);
 
         Match encodingMatch = Regex.Match(content, encodingPattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
         if (encodingMatch is { Groups.Count: > 0 })
@@ -547,7 +547,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static string RemoveInvalidXmlHexadecimalCharacters(string content)
     {
-        Guard.ArgumentNotNullOrEmptyString(content, "content");
+        ArgumentException.ThrowIfNullOrEmpty(content);
 
         // Adapted from https://stackoverflow.com/a/17735649
         StringBuilder result = new StringBuilder(content.Length);
@@ -577,7 +577,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static string EncodeSafeDirectoryName(string name)
     {
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
 
         string directoryName = name.Replace("\\", string.Empty);
         directoryName = directoryName.Replace("/", string.Empty);
@@ -603,7 +603,7 @@ public static class SyndicationEncodingUtility
         int read = 0;
         int chunk;
 
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         byte[] buffer = new byte[initialLength];
 

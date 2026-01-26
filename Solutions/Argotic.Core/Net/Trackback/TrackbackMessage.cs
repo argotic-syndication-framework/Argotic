@@ -77,7 +77,7 @@ public class TrackbackMessage : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             messageEncoding = value;
         }
     }
@@ -127,7 +127,7 @@ public class TrackbackMessage : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             messageUrl = value;
         }
     }
@@ -199,7 +199,7 @@ public class TrackbackMessage : IComparable
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (source.Count > 0)
         {
@@ -250,7 +250,7 @@ public class TrackbackMessage : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(StreamWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.Write(string.Format(null, "url={0}", this.Permalink != null ? this.Permalink.ToString() : string.Empty));
 

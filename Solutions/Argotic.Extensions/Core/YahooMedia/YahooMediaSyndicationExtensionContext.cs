@@ -102,7 +102,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             extensionContents = value;
         }
     }
@@ -134,7 +134,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             extensionGroups = value;
         }
     }
@@ -397,8 +397,8 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNodeIterator contentIterator = source.Select("media:content", manager);
@@ -449,8 +449,8 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         foreach (YahooMediaContent content in this.Contents)
         {
             content.WriteTo(writer);
@@ -473,7 +473,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     public bool AddContent(YahooMediaContent content)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(content, "content");
+        ArgumentNullException.ThrowIfNull(content);
 
         ((Collection<YahooMediaContent>)this.Contents).Add(content);
         wasAdded = true;
@@ -490,7 +490,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     public bool AddGroup(YahooMediaGroup group)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(group, "group");
+        ArgumentNullException.ThrowIfNull(group);
 
         ((Collection<YahooMediaGroup>)this.Groups).Add(group);
         wasAdded = true;
@@ -510,7 +510,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     public bool RemoveContent(YahooMediaContent content)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(content, "content");
+        ArgumentNullException.ThrowIfNull(content);
 
         if (((Collection<YahooMediaContent>)this.Contents).Contains(content))
         {
@@ -533,7 +533,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     public bool RemoveGroup(YahooMediaGroup group)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(group, "group");
+        ArgumentNullException.ThrowIfNull(group);
 
         if (((Collection<YahooMediaGroup>)this.Groups).Contains(group))
         {

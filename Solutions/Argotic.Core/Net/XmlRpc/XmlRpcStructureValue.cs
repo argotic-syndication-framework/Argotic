@@ -33,7 +33,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="iterator"/> is a null reference.</exception>
     public XmlRpcStructureValue(XPathNodeIterator iterator)
     {
-        Guard.ArgumentNotNull(iterator, "iterator");
+        ArgumentNullException.ThrowIfNull(iterator);
 
         if (iterator.Count > 0)
         {
@@ -64,7 +64,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     {
         get
         {
-            Guard.ArgumentNotNullOrEmptyString(name, "name");
+            ArgumentException.ThrowIfNullOrEmpty(name);
 
             XmlRpcStructureMember result = null;
 
@@ -82,8 +82,8 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(name, "name");
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(name);
+            ArgumentNullException.ThrowIfNull(value);
 
             for (int i = 0; i < this.Members.Count; i++)
             {
@@ -139,8 +139,8 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -179,7 +179,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (source.HasChildren)
         {
@@ -208,7 +208,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("value");
 

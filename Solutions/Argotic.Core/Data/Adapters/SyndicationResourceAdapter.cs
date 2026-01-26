@@ -30,8 +30,8 @@ public class SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(settings);
 
         adapterNavigator = navigator;
         adapterSettings = settings;
@@ -71,7 +71,7 @@ public class SyndicationResourceAdapter
     /// <exception cref="FormatException">The <paramref name="resource"/> data does not conform to the specified <paramref name="format"/>.</exception>
     public void Fill(ISyndicationResource resource, SyndicationContentFormat format)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
         if (format == SyndicationContentFormat.None)
         {
             throw new ArgumentException(string.Format(null, "The specified syndication content format of {0} is invalid.", format), nameof(format));
@@ -137,8 +137,8 @@ public class SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
     private void FillApmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
-        Guard.ArgumentNotNull(resource, "resource");
-        Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
+        ArgumentNullException.ThrowIfNull(resource);
+        ArgumentNullException.ThrowIfNull(resourceMetadata);
 
         ApmlDocument apmlDocument = resource as ApmlDocument;
 
@@ -158,8 +158,8 @@ public class SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
     private void FillAtomResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
-        Guard.ArgumentNotNull(resource, "resource");
-        Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
+        ArgumentNullException.ThrowIfNull(resource);
+        ArgumentNullException.ThrowIfNull(resourceMetadata);
 
         AtomFeed atomFeed = resource as AtomFeed;
         AtomEntry atomEntry = resource as AtomEntry;
@@ -200,8 +200,8 @@ public class SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
     private void FillAtomPublishingResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
-        Guard.ArgumentNotNull(resource, "resource");
-        Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
+        ArgumentNullException.ThrowIfNull(resource);
+        ArgumentNullException.ThrowIfNull(resourceMetadata);
 
         AtomCategoryDocument categoryDocument = resource as AtomCategoryDocument;
         AtomServiceDocument serviceDocument = resource as AtomServiceDocument;
@@ -229,8 +229,8 @@ public class SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
     private void FillBlogMLResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
-        Guard.ArgumentNotNull(resource, "resource");
-        Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
+        ArgumentNullException.ThrowIfNull(resource);
+        ArgumentNullException.ThrowIfNull(resourceMetadata);
 
         BlogMLDocument blogMLDocument = resource as BlogMLDocument;
         BlogML20SyndicationResourceAdapter blogML20Adapter = new BlogML20SyndicationResourceAdapter(this.Navigator, this.Settings);
@@ -250,8 +250,8 @@ public class SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
     private void FillOpmlResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
-        Guard.ArgumentNotNull(resource, "resource");
-        Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
+        ArgumentNullException.ThrowIfNull(resource);
+        ArgumentNullException.ThrowIfNull(resourceMetadata);
 
         OpmlDocument opmlDocument = resource as OpmlDocument;
         Opml20SyndicationResourceAdapter opml20Adapter = new Opml20SyndicationResourceAdapter(this.Navigator, this.Settings);
@@ -281,8 +281,8 @@ public class SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
     private void FillRsdResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
-        Guard.ArgumentNotNull(resource, "resource");
-        Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
+        ArgumentNullException.ThrowIfNull(resource);
+        ArgumentNullException.ThrowIfNull(resourceMetadata);
 
         RsdDocument rsdDocument = resource as RsdDocument;
 
@@ -308,8 +308,8 @@ public class SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
     private void FillRssResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
     {
-        Guard.ArgumentNotNull(resource, "resource");
-        Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
+        ArgumentNullException.ThrowIfNull(resource);
+        ArgumentNullException.ThrowIfNull(resourceMetadata);
 
         RssFeed rssFeed = resource as RssFeed;
 

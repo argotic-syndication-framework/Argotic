@@ -1862,8 +1862,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         wasLoaded = this.LoadGroup1(source, manager);
         if (this.LoadGroup2(source, manager))
         {
@@ -1899,8 +1899,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         this.WriteGroup1(writer, xmlNamespace);
         this.WriteGroup2(writer, xmlNamespace);
         this.WriteGroup3(writer, xmlNamespace);
@@ -1918,8 +1918,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     private bool LoadGroup1(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator abstractNavigator = source.SelectSingleNode("dcterms:abstract", manager);
@@ -2008,8 +2008,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     private bool LoadGroup2(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator contributorNavigator = source.SelectSingleNode("dcterms:contributor", manager);
@@ -2113,8 +2113,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     private bool LoadGroup3(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator extentNavigator = source.SelectSingleNode("dcterms:extent", manager);
@@ -2203,8 +2203,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     private bool LoadGroup4(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator isReplacedByNavigator = source.SelectSingleNode("dcterms:isReplacedBy", manager);
@@ -2307,8 +2307,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     private bool LoadGroup5(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator publisherNavigator = source.SelectSingleNode("dcterms:publisher", manager);
@@ -2397,8 +2397,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     private bool LoadGroup6(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
             XPathNavigator tableOfContentsNavigator = source.SelectSingleNode("dcterms:tableOfContents", manager);
@@ -2455,8 +2455,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     private void WriteGroup1(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         if (!string.IsNullOrEmpty(this.Abstract))
         {
             writer.WriteElementString("abstract", xmlNamespace, this.Abstract);
@@ -2518,8 +2518,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     private void WriteGroup2(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         if (!string.IsNullOrEmpty(this.Contributor))
         {
             writer.WriteElementString("contributor", xmlNamespace, this.Contributor);
@@ -2581,8 +2581,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     private void WriteGroup3(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         if (!string.IsNullOrEmpty(this.Extent))
         {
             writer.WriteElementString("extent", xmlNamespace, this.Extent);
@@ -2644,8 +2644,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     private void WriteGroup4(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         if (!string.IsNullOrEmpty(this.IsReplacedBy))
         {
             writer.WriteElementString("isReplacedBy", xmlNamespace, this.IsReplacedBy);
@@ -2707,8 +2707,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     private void WriteGroup5(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         if (!string.IsNullOrEmpty(this.Publisher))
         {
             writer.WriteElementString("publisher", xmlNamespace, this.Publisher);

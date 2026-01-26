@@ -129,7 +129,7 @@ public class LiveJournalSecurity : IComparable
     public static LiveJournalSecurityType AccessibilityByName(string name)
     {
         LiveJournalSecurityType accessLevel = LiveJournalSecurityType.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(LiveJournalSecurityType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(LiveJournalSecurityType))
@@ -165,7 +165,7 @@ public class LiveJournalSecurity : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string typeAttribute = source.GetAttribute("type", string.Empty);
@@ -201,7 +201,7 @@ public class LiveJournalSecurity : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         LiveJournalSyndicationExtension extension = new LiveJournalSyndicationExtension();
         writer.WriteStartElement("security", extension.XmlNamespace);
 

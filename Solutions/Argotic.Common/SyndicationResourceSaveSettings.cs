@@ -71,7 +71,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             characterEncoding = value;
         }
     }

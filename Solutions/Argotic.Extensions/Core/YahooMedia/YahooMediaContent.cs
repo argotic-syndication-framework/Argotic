@@ -139,7 +139,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
     public YahooMediaContent(Uri url)
     {
-        Guard.ArgumentNotNull(url, "url");
+        ArgumentNullException.ThrowIfNull(url);
 
         this.Url = url;
     }
@@ -151,7 +151,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <exception cref="ArgumentNullException">The <paramref name="player"/> is a null reference.</exception>
     public YahooMediaContent(YahooMediaPlayer player)
     {
-        Guard.ArgumentNotNull(player, "player");
+        ArgumentNullException.ThrowIfNull(player);
 
         this.Player = player;
     }
@@ -683,7 +683,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         wasLoaded = this.LoadPrimary(source);
 
         if (this.LoadSecondary(source))
@@ -706,7 +706,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("content", extension.XmlNamespace);
 
@@ -970,7 +970,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     private bool LoadPrimary(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string urlAttribute = source.GetAttribute("url", string.Empty);
@@ -1064,7 +1064,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     private bool LoadSecondary(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string frameRateAttribute = source.GetAttribute("framerate", string.Empty);

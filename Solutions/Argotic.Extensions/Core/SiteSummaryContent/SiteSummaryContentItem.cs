@@ -64,7 +64,7 @@ public class SiteSummaryContentItem : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             itemContent = value.Trim();
         }
     }
@@ -104,7 +104,7 @@ public class SiteSummaryContentItem : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             itemFormat = value;
         }
     }
@@ -121,7 +121,7 @@ public class SiteSummaryContentItem : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         SiteSummaryContentSyndicationExtension extension = new SiteSummaryContentSyndicationExtension();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
@@ -164,7 +164,7 @@ public class SiteSummaryContentItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         SiteSummaryContentSyndicationExtension extension = new SiteSummaryContentSyndicationExtension();
         writer.WriteStartElement("item", extension.XmlNamespace);
 

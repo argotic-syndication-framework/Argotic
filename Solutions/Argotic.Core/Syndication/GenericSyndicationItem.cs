@@ -35,7 +35,7 @@ public class GenericSyndicationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
     public GenericSyndicationItem(AtomEntry entry)
     {
-        Guard.ArgumentNotNull(entry, "entry");
+        ArgumentNullException.ThrowIfNull(entry);
         this.LoadFrom(entry);
     }
 
@@ -46,7 +46,7 @@ public class GenericSyndicationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference.</exception>
     public GenericSyndicationItem(RssItem item)
     {
-        Guard.ArgumentNotNull(item, "item");
+        ArgumentNullException.ThrowIfNull(item);
         this.LoadFrom(item);
     }
     /// <summary>
@@ -263,7 +263,7 @@ public class GenericSyndicationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
     private void LoadFrom(AtomEntry entry)
     {
-        Guard.ArgumentNotNull(entry, "entry");
+        ArgumentNullException.ThrowIfNull(entry);
 
         if (entry.Title != null && !string.IsNullOrEmpty(entry.Title.Content))
         {
@@ -302,7 +302,7 @@ public class GenericSyndicationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference.</exception>
     private void LoadFrom(RssItem item)
     {
-        Guard.ArgumentNotNull(item, "item");
+        ArgumentNullException.ThrowIfNull(item);
         if (!string.IsNullOrEmpty(item.Title))
         {
             itemTitle = item.Title.Trim();

@@ -52,7 +52,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
     public SyndicationResourceLoadedEventArgs(IXPathNavigable data) : this()
     {
-        Guard.ArgumentNotNull(data, "data");
+        ArgumentNullException.ThrowIfNull(data);
 
         eventNavigator = data.CreateNavigator();
     }
@@ -74,7 +74,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy) : this(data)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         eventSource = source;
         eventOptions = new WebRequestOptions(credentials, proxy);
@@ -92,7 +92,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options) : this(data)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         eventSource = source;
         eventOptions = options ?? new WebRequestOptions();

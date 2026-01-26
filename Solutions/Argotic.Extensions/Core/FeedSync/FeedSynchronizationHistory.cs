@@ -109,7 +109,7 @@ public class FeedSynchronizationHistory : IComparable
 
         set
         {
-            Guard.ArgumentNotLessThan(value, "value", 1);
+            ArgumentOutOfRangeException.ThrowIfLessThan(value, 1);
             historySequence = value;
         }
     }
@@ -154,7 +154,7 @@ public class FeedSynchronizationHistory : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string sequenceAttribute = source.GetAttribute("sequence", string.Empty);
@@ -196,7 +196,7 @@ public class FeedSynchronizationHistory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
 
         writer.WriteStartElement("history", extension.XmlNamespace);

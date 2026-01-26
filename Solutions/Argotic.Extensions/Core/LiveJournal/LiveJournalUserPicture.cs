@@ -73,7 +73,7 @@ public class LiveJournalUserPicture : IComparable
 
         set
         {
-            Guard.ArgumentNotGreaterThan(value, "value", 100);
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 100);
             userPictureHeight = value;
         }
     }
@@ -94,7 +94,7 @@ public class LiveJournalUserPicture : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             userPictureKeywords = value.Trim();
         }
     }
@@ -113,7 +113,7 @@ public class LiveJournalUserPicture : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             userPictureUrl = value;
         }
     }
@@ -135,7 +135,7 @@ public class LiveJournalUserPicture : IComparable
 
         set
         {
-            Guard.ArgumentNotGreaterThan(value, "value", 100);
+            ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 100);
             userPictureWidth = value;
         }
     }
@@ -151,7 +151,7 @@ public class LiveJournalUserPicture : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         LiveJournalSyndicationExtension extension = new LiveJournalSyndicationExtension();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
@@ -215,7 +215,7 @@ public class LiveJournalUserPicture : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         LiveJournalSyndicationExtension extension = new LiveJournalSyndicationExtension();
         writer.WriteStartElement("userpic", extension.XmlNamespace);
 

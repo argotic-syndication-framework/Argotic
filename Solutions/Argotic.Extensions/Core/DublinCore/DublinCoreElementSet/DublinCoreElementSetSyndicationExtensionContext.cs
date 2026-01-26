@@ -498,8 +498,8 @@ public class DublinCoreElementSetSyndicationExtensionContext
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         wasLoaded = this.LoadCommon(source, manager);
 
         if (this.LoadOptionals(source, manager))
@@ -520,8 +520,8 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         if (!string.IsNullOrEmpty(this.Contributor))
         {
             writer.WriteElementString("contributor", xmlNamespace, this.Contributor);
@@ -609,8 +609,8 @@ public class DublinCoreElementSetSyndicationExtensionContext
     private bool LoadCommon(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         XPathNavigator contributorNavigator = source.SelectSingleNode("dc:contributor", manager);
         XPathNavigator creatorNavigator = source.SelectSingleNode("dc:creator", manager);
         XPathNavigator dateNavigator = source.SelectSingleNode("dc:date", manager);
@@ -693,8 +693,8 @@ public class DublinCoreElementSetSyndicationExtensionContext
     private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
         XPathNavigator coverageNavigator = source.SelectSingleNode("dc:coverage", manager);
         XPathNavigator formatNavigator = source.SelectSingleNode("dc:format", manager);
         XPathNavigator identifierNavigator = source.SelectSingleNode("dc:identifier", manager);

@@ -166,7 +166,7 @@ public class XmlRpcClient
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             clientHost = value;
         }
     }
@@ -269,7 +269,7 @@ public class XmlRpcClient
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             clientUserAgent = value.Trim();
         }
     }
@@ -365,7 +365,7 @@ public class XmlRpcClient
     {
         XmlRpcScalarValueType valueType = XmlRpcScalarValueType.None;
 
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
 
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(XmlRpcScalarValueType).GetFields())
         {
@@ -619,7 +619,7 @@ public class XmlRpcClient
     {
         XmlRpcResponse response = null;
 
-        Guard.ArgumentNotNull(message, "message");
+        ArgumentNullException.ThrowIfNull(message);
 
         if (this.Host == null)
         {
@@ -656,7 +656,7 @@ public class XmlRpcClient
     //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
     public void SendAsync(XmlRpcMessage message, object userToken)
     {
-        Guard.ArgumentNotNull(message, "message");
+        ArgumentNullException.ThrowIfNull(message);
 
         if (this.Host == null)
         {
@@ -714,9 +714,9 @@ public class XmlRpcClient
         HttpWebRequest httpRequest = null;
         byte[] payloadData;
 
-        Guard.ArgumentNotNull(host, "host");
-        Guard.ArgumentNotNullOrEmptyString(userAgent, "userAgent");
-        Guard.ArgumentNotNull(message, "message");
+        ArgumentNullException.ThrowIfNull(host);
+        ArgumentException.ThrowIfNullOrEmpty(userAgent);
+        ArgumentNullException.ThrowIfNull(message);
 
         using (MemoryStream stream = new MemoryStream())
         {

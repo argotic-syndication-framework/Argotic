@@ -53,7 +53,7 @@ public class TrackbackDiscoveryMetadata : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     public TrackbackDiscoveryMetadata(XPathNavigator navigator) : this()
     {
-        Guard.ArgumentNotNull(navigator, "navigator");
+        ArgumentNullException.ThrowIfNull(navigator);
 
         this.Load(navigator);
     }
@@ -72,7 +72,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             trackbackDiscoveryAbout = value;
         }
     }
@@ -91,7 +91,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             trackbackDiscoveryIdentifier = value;
         }
     }
@@ -110,7 +110,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             trackbackDiscoveryPingEndpoint = value;
         }
     }
@@ -153,7 +153,7 @@ public class TrackbackDiscoveryMetadata : IComparable
         bool wasLoaded = false;
         XmlNamespaceManager manager = null;
 
-        Guard.ArgumentNotNull(navigator, "navigator");
+        ArgumentNullException.ThrowIfNull(navigator);
 
         manager = new XmlNamespaceManager(navigator.NameTable);
         manager.AddNamespace("rdf", RDF_NAMESPACE);
@@ -218,7 +218,7 @@ public class TrackbackDiscoveryMetadata : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("rdf", "RDF", RDF_NAMESPACE);
         writer.WriteAttributeString("xmlns", "dc", null, DUBLIN_CORE_NAMESPACE);

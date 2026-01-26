@@ -43,7 +43,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     public void Fill(RsdDocument resource)
     {
-        Guard.ArgumentNotNull(resource, "resource");
+        ArgumentNullException.ThrowIfNull(resource);
 
         XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(this.Navigator.NameTable);
 

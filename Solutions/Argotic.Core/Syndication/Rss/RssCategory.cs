@@ -71,7 +71,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public RssCategory(Collection<string> value)
     {
-        Guard.ArgumentNotNull(value, "value");
+        ArgumentNullException.ThrowIfNull(value);
         if (value.Count > 0)
         {
             string[] hierarchy = new string[value.Count];
@@ -112,7 +112,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -187,7 +187,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     public bool AddExtension(ISyndicationExtension extension)
     {
         bool wasAdded = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
 
@@ -209,7 +209,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
     }
@@ -226,7 +226,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     public bool RemoveExtension(ISyndicationExtension extension)
     {
         bool wasRemoved = false;
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
@@ -247,7 +247,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (!string.IsNullOrEmpty(source.Value))
         {
             this.Value = source.Value;
@@ -281,8 +281,8 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(settings);
         wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -297,7 +297,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("category");
 
         if (!string.IsNullOrEmpty(this.Domain))

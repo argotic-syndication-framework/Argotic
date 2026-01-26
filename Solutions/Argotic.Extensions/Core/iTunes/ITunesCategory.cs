@@ -77,7 +77,7 @@ public class ITunesCategory : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             categoryText = value.Trim();
         }
     }
@@ -94,7 +94,7 @@ public class ITunesCategory : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         ITunesSyndicationExtension extension = new ITunesSyndicationExtension();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasAttributes)
@@ -135,7 +135,7 @@ public class ITunesCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         ITunesSyndicationExtension extension = new ITunesSyndicationExtension();
         writer.WriteStartElement("category", extension.XmlNamespace);
 

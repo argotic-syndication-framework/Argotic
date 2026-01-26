@@ -95,7 +95,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="categories"/> is a null reference.</exception>
     public AtomCategoryDocument(Collection<AtomCategory> categories)
     {
-        Guard.ArgumentNotNull(categories, "categories");
+        ArgumentNullException.ThrowIfNull(categories);
 
         foreach (AtomCategory category in categories)
         {
@@ -140,7 +140,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             ((Collection<AtomCategory>)this.Categories)[index] = value;
         }
     }
@@ -233,7 +233,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             objectSyndicationExtensions = value;
         }
     }
@@ -260,7 +260,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         bool wasAdded = false;
 
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
         wasAdded = true;
@@ -283,7 +283,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
 
         List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
         return list.Find(match);
@@ -302,7 +302,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         bool wasRemoved = false;
 
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
 
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
@@ -354,7 +354,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             documentCategories = value;
         }
     }
@@ -506,8 +506,8 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -625,7 +625,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         AtomCategoryDocument syndicationResource = new AtomCategoryDocument();
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         syndicationResource.Load(source, options, settings);
 
@@ -732,7 +732,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
         {
@@ -871,7 +871,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         bool wasAdded = false;
 
-        Guard.ArgumentNotNull(category, "category");
+        ArgumentNullException.ThrowIfNull(category);
 
         ((Collection<AtomCategory>)this.Categories).Add(category);
         wasAdded = true;
@@ -894,7 +894,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
     public AtomCategory FindCategory(Predicate<AtomCategory> match)
     {
-        Guard.ArgumentNotNull(match, "match");
+        ArgumentNullException.ThrowIfNull(match);
 
         List<AtomCategory> list = new List<AtomCategory>(this.Categories);
         return list.Find(match);
@@ -913,7 +913,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         bool wasRemoved = false;
 
-        Guard.ArgumentNotNull(category, "category");
+        ArgumentNullException.ThrowIfNull(category);
 
         if (((Collection<AtomCategory>)this.Categories).Contains(category))
         {
@@ -982,7 +982,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
         {
@@ -1021,7 +1021,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Stream stream, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         if (settings != null)
         {
@@ -1061,7 +1061,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
 
         this.Load(new XPathDocument(reader), settings);
     }
@@ -1207,7 +1207,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         XPathNavigator navigator = null;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
         {
@@ -1246,7 +1246,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(Stream stream, SyndicationResourceSaveSettings settings)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
 
         if (settings == null)
         {
@@ -1272,7 +1272,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         this.Save(writer, new SyndicationResourceSaveSettings());
     }
@@ -1287,8 +1287,8 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
     public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNull(settings, "settings");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentNullException.ThrowIfNull(settings);
 
         writer.WriteStartElement("categories", AtomUtility.AtomPublishingNamespace);
         // writer.WriteAttributeString("version", this.Version.ToString());
@@ -1346,9 +1346,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
     {
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(settings, "settings");
-        Guard.ArgumentNotNull(eventData, "eventData");
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(eventData);
 
         SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.AtomCategoryDocument);

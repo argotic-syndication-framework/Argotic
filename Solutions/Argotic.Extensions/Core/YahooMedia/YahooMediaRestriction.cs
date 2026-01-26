@@ -147,7 +147,7 @@ public class YahooMediaRestriction : IComparable
     public static YahooMediaRestrictionRelationship RelationshipByName(string name)
     {
         YahooMediaRestrictionRelationship restrictionRelationship = YahooMediaRestrictionRelationship.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionRelationship).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaRestrictionRelationship))
@@ -214,7 +214,7 @@ public class YahooMediaRestriction : IComparable
     public static YahooMediaRestrictionType RestrictionTypeByName(string name)
     {
         YahooMediaRestrictionType restrictionType = YahooMediaRestrictionType.None;
-        Guard.ArgumentNotNullOrEmptyString(name, "name");
+        ArgumentException.ThrowIfNullOrEmpty(name);
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaRestrictionType))
@@ -250,7 +250,7 @@ public class YahooMediaRestriction : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string relationshipAttribute = source.GetAttribute("relationship", string.Empty);
@@ -308,7 +308,7 @@ public class YahooMediaRestriction : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("restriction", extension.XmlNamespace);
 

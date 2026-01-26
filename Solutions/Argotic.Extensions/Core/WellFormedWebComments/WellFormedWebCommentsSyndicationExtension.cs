@@ -59,7 +59,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             extensionContext = value;
         }
     }
@@ -73,7 +73,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public static bool MatchByType(ISyndicationExtension extension)
     {
-        Guard.ArgumentNotNull(extension, "extension");
+        ArgumentNullException.ThrowIfNull(extension);
         if (extension.GetType() == typeof(WellFormedWebCommentsSyndicationExtension))
         {
             return true;
@@ -93,7 +93,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     public override bool Load(IXPathNavigable source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
         SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
@@ -110,7 +110,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public override bool Load(XmlReader reader)
     {
-        Guard.ArgumentNotNull(reader, "reader");
+        ArgumentNullException.ThrowIfNull(reader);
         XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
@@ -123,7 +123,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public override void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
 

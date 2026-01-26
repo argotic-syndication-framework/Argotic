@@ -68,7 +68,7 @@ public class PingbackSyndicationExtensionContext
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             extensionServer = value;
         }
     }
@@ -87,7 +87,7 @@ public class PingbackSyndicationExtensionContext
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             extensionTarget = value;
         }
     }
@@ -103,8 +103,8 @@ public class PingbackSyndicationExtensionContext
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(manager, "manager");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(manager);
 
         if (source.HasChildren)
         {
@@ -156,8 +156,8 @@ public class PingbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        Guard.ArgumentNotNull(writer, "writer");
-        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        ArgumentNullException.ThrowIfNull(writer);
+        ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         writer.WriteElementString("server", xmlNamespace, this.Server != null ? this.Server.ToString() : string.Empty);
         writer.WriteElementString("target", xmlNamespace, this.Target != null ? this.Target.ToString() : string.Empty);
 

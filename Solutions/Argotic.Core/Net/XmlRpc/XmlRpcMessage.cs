@@ -62,7 +62,7 @@ public class XmlRpcMessage : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="parameters"/> is a null reference.</exception>
     public XmlRpcMessage(string methodName, Collection<IXmlRpcValue> parameters) : this(methodName)
     {
-        Guard.ArgumentNotNull(parameters, "parameters");
+        ArgumentNullException.ThrowIfNull(parameters);
 
         foreach (IXmlRpcValue parameter in parameters)
         {
@@ -84,7 +84,7 @@ public class XmlRpcMessage : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             messageEncoding = value;
         }
     }
@@ -104,7 +104,7 @@ public class XmlRpcMessage : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             messageMethodName = value.Trim();
         }
     }
@@ -151,8 +151,8 @@ public class XmlRpcMessage : IComparable
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -191,7 +191,7 @@ public class XmlRpcMessage : IComparable
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (source.HasChildren)
         {
@@ -231,7 +231,7 @@ public class XmlRpcMessage : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("methodCall");
 

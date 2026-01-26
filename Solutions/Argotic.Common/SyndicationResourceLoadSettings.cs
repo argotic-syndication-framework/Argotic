@@ -69,7 +69,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable
 
         set
         {
-            Guard.ArgumentNotNull(value, "value");
+            ArgumentNullException.ThrowIfNull(value);
             characterEncoding = value;
         }
     }
@@ -92,7 +92,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable
 
         set
         {
-            Guard.ArgumentNotLessThan(value, "value", 0);
+            ArgumentOutOfRangeException.ThrowIfLessThan(value, 0);
             maximumEntitiesToRetrieve = value;
         }
     }

@@ -134,7 +134,7 @@ public class SimpleListGroup : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (source.HasAttributes)
         {
             string namespaceAttribute = source.GetAttribute("ns", string.Empty);
@@ -173,7 +173,7 @@ public class SimpleListGroup : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         SimpleListSyndicationExtension extension = new SimpleListSyndicationExtension();
         writer.WriteStartElement("group", extension.XmlNamespace);
 

@@ -44,7 +44,7 @@ public class XmlRpcResponse : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="parameter"/> is a null reference.</exception>
     public XmlRpcResponse(IXmlRpcValue parameter)
     {
-        Guard.ArgumentNotNull(parameter, "parameter");
+        ArgumentNullException.ThrowIfNull(parameter);
 
         responseParameter = parameter;
     }
@@ -56,7 +56,7 @@ public class XmlRpcResponse : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="fault"/> is a null reference.</exception>
     public XmlRpcResponse(XmlRpcStructureValue fault)
     {
-        Guard.ArgumentNotNull(fault, "fault");
+        ArgumentNullException.ThrowIfNull(fault);
 
         responseFault = fault;
     }
@@ -87,7 +87,7 @@ public class XmlRpcResponse : IComparable
     /// <exception cref="XmlException">The <paramref name="response"/> body does not represent a valid XML document, or an error was encountered in the XML data.</exception>
     public XmlRpcResponse(WebResponse response)
     {
-        Guard.ArgumentNotNull(response, "response");
+        ArgumentNullException.ThrowIfNull(response);
 
         if (string.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
         {
@@ -165,7 +165,7 @@ public class XmlRpcResponse : IComparable
     {
         bool wasLoaded = false;
 
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
 
         if (source.HasChildren)
         {
@@ -210,7 +210,7 @@ public class XmlRpcResponse : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
 
         writer.WriteStartElement("methodResponse");
 

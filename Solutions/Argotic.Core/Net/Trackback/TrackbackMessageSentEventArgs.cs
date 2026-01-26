@@ -62,9 +62,9 @@ public class TrackbackMessageSentEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
     public TrackbackMessageSentEventArgs(Uri host, TrackbackMessage message, TrackbackResponse response, ICredentials credentials, IWebProxy proxy, object state)
     {
-        Guard.ArgumentNotNull(host, "host");
-        Guard.ArgumentNotNull(message, "message");
-        Guard.ArgumentNotNull(response, "response");
+        ArgumentNullException.ThrowIfNull(host);
+        ArgumentNullException.ThrowIfNull(message);
+        ArgumentNullException.ThrowIfNull(response);
 
         eventHost = host;
         eventMessage = message;
@@ -86,9 +86,9 @@ public class TrackbackMessageSentEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
     public TrackbackMessageSentEventArgs(Uri host, TrackbackMessage message, TrackbackResponse response, WebRequestOptions options, object state)
     {
-        Guard.ArgumentNotNull(host, "host");
-        Guard.ArgumentNotNull(message, "message");
-        Guard.ArgumentNotNull(response, "response");
+        ArgumentNullException.ThrowIfNull(host);
+        ArgumentNullException.ThrowIfNull(message);
+        ArgumentNullException.ThrowIfNull(response);
 
         eventHost = host;
         eventMessage = message;

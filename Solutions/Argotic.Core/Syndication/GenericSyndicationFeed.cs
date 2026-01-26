@@ -279,8 +279,8 @@ public class GenericSyndicationFeed
     public static int CompareSequence(Collection<GenericSyndicationCategory> source, Collection<GenericSyndicationCategory> target)
     {
         int result = 0;
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {
@@ -404,7 +404,7 @@ public class GenericSyndicationFeed
     public static GenericSyndicationFeed Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
         GenericSyndicationFeed syndicationResource = new GenericSyndicationFeed();
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         syndicationResource.Load(source, options, settings);
 
         return syndicationResource;
@@ -421,7 +421,7 @@ public class GenericSyndicationFeed
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(string str)
     {
-        Guard.ArgumentNotNull(str, "string");
+        ArgumentNullException.ThrowIfNull(str);
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(str);
         this.Load(navigator, new SyndicationResourceLoadSettings(), new SyndicationResourceLoadedEventArgs(navigator));
     }
@@ -454,7 +454,7 @@ public class GenericSyndicationFeed
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Stream stream, SyndicationResourceLoadSettings settings)
     {
-        Guard.ArgumentNotNull(stream, "stream");
+        ArgumentNullException.ThrowIfNull(stream);
         XPathNavigator navigator = null;
         if (settings != null)
         {
@@ -623,7 +623,7 @@ public class GenericSyndicationFeed
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
         XPathNavigator navigator = null;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
@@ -646,7 +646,7 @@ public class GenericSyndicationFeed
     /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference.</exception>
     public void Parse(AtomFeed feed)
     {
-        Guard.ArgumentNotNull(feed, "feed");
+        ArgumentNullException.ThrowIfNull(feed);
         feedResource = feed;
         feedFormat = SyndicationContentFormat.Atom;
 
@@ -690,7 +690,7 @@ public class GenericSyndicationFeed
     /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference.</exception>
     public void Parse(RssFeed feed)
     {
-        Guard.ArgumentNotNull(feed, "feed");
+        ArgumentNullException.ThrowIfNull(feed);
         feedResource = feed;
         feedFormat = SyndicationContentFormat.Rss;
 
@@ -736,7 +736,7 @@ public class GenericSyndicationFeed
     /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference.</exception>
     public void Parse(OpmlDocument opmlDocument)
     {
-        Guard.ArgumentNotNull(opmlDocument, "opmlDocument");
+        ArgumentNullException.ThrowIfNull(opmlDocument);
         feedResource = opmlDocument;
         feedFormat = SyndicationContentFormat.Opml;
     }
@@ -852,7 +852,7 @@ public class GenericSyndicationFeed
     /// <exception cref="InvalidOperationException">This <see cref="RssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
@@ -999,9 +999,9 @@ public class GenericSyndicationFeed
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
     {
-        Guard.ArgumentNotNull(navigator, "navigator");
-        Guard.ArgumentNotNull(settings, "settings");
-        Guard.ArgumentNotNull(eventData, "eventData");
+        ArgumentNullException.ThrowIfNull(navigator);
+        ArgumentNullException.ThrowIfNull(settings);
+        ArgumentNullException.ThrowIfNull(eventData);
         SyndicationResourceMetadata metadata = new SyndicationResourceMetadata(navigator);
 
         if (metadata.Format == SyndicationContentFormat.Atom)

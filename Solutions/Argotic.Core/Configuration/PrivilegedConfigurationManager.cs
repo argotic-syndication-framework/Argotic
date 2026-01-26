@@ -83,7 +83,7 @@ internal static class PrivilegedConfigurationManager
     [SecurityPermission(SecurityAction.Demand)]
     internal static object GetSection(string sectionName)
     {
-        Guard.ArgumentNotNullOrEmptyString(sectionName, "sectionName");
+        ArgumentException.ThrowIfNullOrEmpty(sectionName);
 
         return ConfigurationManager.GetSection(sectionName);
     }

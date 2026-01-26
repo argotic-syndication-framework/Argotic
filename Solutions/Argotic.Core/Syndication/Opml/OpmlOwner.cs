@@ -147,7 +147,7 @@ public class OpmlOwner : IComparable
     public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
-        Guard.ArgumentNotNull(source, "source");
+        ArgumentNullException.ThrowIfNull(source);
         XPathNavigator ownerNameNavigator = source.SelectSingleNode("ownerName");
         XPathNavigator ownerEmailNavigator = source.SelectSingleNode("ownerEmail");
         XPathNavigator ownerIdNavigator = source.SelectSingleNode("ownerId");
@@ -183,7 +183,7 @@ public class OpmlOwner : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     public void WriteTo(XmlWriter writer)
     {
-        Guard.ArgumentNotNull(writer, "writer");
+        ArgumentNullException.ThrowIfNull(writer);
         if (!string.IsNullOrEmpty(this.Name))
         {
             writer.WriteElementString("ownerName", this.Name);

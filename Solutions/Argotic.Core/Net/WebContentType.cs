@@ -86,7 +86,7 @@ public class WebContentType : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="characterSet"/> is a <b>null</b> reference.</exception>
     public WebContentType(string mediaType, string mediaSubtype, string discriminator, Encoding characterSet) : this(mediaType, mediaSubtype, discriminator)
     {
-        Guard.ArgumentNotNull(characterSet, "characterSet");
+        ArgumentNullException.ThrowIfNull(characterSet);
 
         this.CharacterSet = characterSet.WebName;
     }
@@ -194,7 +194,7 @@ public class WebContentType : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             webContentMediaType = value.Trim();
         }
     }
@@ -214,7 +214,7 @@ public class WebContentType : IComparable
 
         set
         {
-            Guard.ArgumentNotNullOrEmptyString(value, "value");
+            ArgumentException.ThrowIfNullOrEmpty(value);
             webContentMediaSubType = value.Trim();
         }
     }
@@ -263,8 +263,8 @@ public class WebContentType : IComparable
     {
         int result = 0;
 
-        Guard.ArgumentNotNull(source, "source");
-        Guard.ArgumentNotNull(target, "target");
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(target);
 
         if (source.Count == target.Count)
         {

@@ -61,7 +61,7 @@ public static class SyndicationEncodingUtility
         encoding = SyndicationEncodingUtility.GetXmlEncoding(buffer);
 
         using MemoryStream memoryStream = new(buffer);
-        return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
+        return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, Encoding.UTF8);
     }
 
     /// <summary>

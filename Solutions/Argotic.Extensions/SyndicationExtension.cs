@@ -198,9 +198,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <param name="e">A <see cref="SyndicationExtensionLoadedEventArgs"/> that contains the event data.</param>
     protected virtual void OnExtensionLoaded(SyndicationExtensionLoadedEventArgs e)
     {
-        EventHandler<SyndicationExtensionLoadedEventArgs> handler = Loaded;
-
-        if (handler != null)
+        if (Loaded is { } handler)
         {
             handler(this, e);
         }

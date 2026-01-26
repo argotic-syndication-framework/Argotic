@@ -48,7 +48,7 @@ public static class GenericSyndicationFeedExample
 
         if (feed.Format == SyndicationContentFormat.Rss)
         {
-            if (feed.Resource is RssFeed rssFeed)
+            if (feed.Resource is RssFeed)
             {
                 //  Process RSS format specific information
             }

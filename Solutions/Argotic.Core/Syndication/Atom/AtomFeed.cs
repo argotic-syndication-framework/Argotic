@@ -1779,11 +1779,6 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     private void WriteFeedCollections(XmlWriter writer)
     {
-        SyndicationResourceSaveSettings settings = new()
-        {
-            AutoDetectExtensions = false
-        };
-
         ArgumentNullException.ThrowIfNull(writer);
 
         foreach (AtomLink link in this.Links)

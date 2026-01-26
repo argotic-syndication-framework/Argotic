@@ -110,7 +110,7 @@ public static class SyndicationDiscoveryUtilityExample
             and some amount of time passes. Consumer can now use a conditional GET operation to determine if
             the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
         */
-        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, out HttpWebResponse conditionalResponse))
+        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, out _))
         {
             // Web resource has been modified since last retrieval, consumer would process the new data.
         }

@@ -30,7 +30,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
 [Serializable]
 public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
 {
@@ -195,10 +194,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 

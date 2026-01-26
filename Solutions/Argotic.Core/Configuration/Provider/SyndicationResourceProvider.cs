@@ -102,7 +102,6 @@ public abstract class SyndicationResourceProvider : ProviderBase
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="pageIndex"/> is <i>less than</i> zero.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="pageSize"/> is <i>less than or equal to</i> zero.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "2#")]
     public abstract Collection<ISyndicationResource> GetResources(int pageIndex, int pageSize, out int totalRecords);
 
     /// <summary>

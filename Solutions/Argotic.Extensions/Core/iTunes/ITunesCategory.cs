@@ -51,10 +51,7 @@ public class ITunesCategory : IComparable
     {
         get
         {
-            if (categorySubcategories == null)
-            {
-                categorySubcategories = [];
-            }
+            categorySubcategories ??= [];
             return categorySubcategories;
         }
     }

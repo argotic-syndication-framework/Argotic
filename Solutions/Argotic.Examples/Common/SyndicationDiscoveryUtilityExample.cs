@@ -111,8 +111,7 @@ public static class SyndicationDiscoveryUtilityExample
             and some amount of time passes. Consumer can now use a conditional GET operation to determine if
             the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
         */
-        HttpWebResponse conditionalResponse = null;
-        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, out conditionalResponse))
+        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, out HttpWebResponse conditionalResponse))
         {
             // Web resource has been modified since last retrieval, consumer would process the new data.
         }
@@ -143,7 +142,6 @@ public static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.IsPingbackEnabled(Uri) method
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static void IsPingbackEnabledExample()
     {
         Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
@@ -157,7 +155,6 @@ public static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.LocatePingbackNotificationServer(Uri)  method
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static void LocatePingbackNotificationServerExample()
     {
         Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
@@ -177,7 +174,6 @@ public static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.IsTrackbackEnabled(Uri) method
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static void IsTrackbackEnabledExample()
     {
         Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
@@ -191,7 +187,6 @@ public static class SyndicationDiscoveryUtilityExample
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(Uri) method
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static void LocateTrackbackNotificationServersExample()
     {
         Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");

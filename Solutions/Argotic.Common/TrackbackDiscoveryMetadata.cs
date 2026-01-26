@@ -6,7 +6,6 @@ namespace Argotic.Common;
 /// <summary>
 /// Represents metadata about a web log entry that allows clients to auto-discover the TrackBack ping URL for that entry.
 /// </summary>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
 [Serializable]
 public class TrackbackDiscoveryMetadata : IComparable
 {

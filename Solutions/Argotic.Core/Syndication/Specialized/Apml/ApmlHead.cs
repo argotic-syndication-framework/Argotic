@@ -11,7 +11,6 @@ namespace Argotic.Syndication.Specialized;
 /// Represents the basic administrative information of an <see cref="ApmlDocument"/>.
 /// </summary>
 /// <seealso cref="ApmlDocument.Head"/>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
 [Serializable]
 public class ApmlHead : IComparable, IExtensibleSyndicationObject
 {

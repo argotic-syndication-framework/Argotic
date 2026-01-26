@@ -19,7 +19,6 @@ namespace Argotic.Data.Adapters;
 ///     </para>
 ///     <para>This syndication resource adapter is designed to fill <see cref="RsdDocument"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSD 0.6 specification.</para>
 /// </remarks>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
 public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
 {
     /// <summary>

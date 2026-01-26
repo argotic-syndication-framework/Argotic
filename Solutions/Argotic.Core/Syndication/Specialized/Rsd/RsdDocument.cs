@@ -29,7 +29,6 @@ namespace Argotic.Syndication.Specialized;
 ///         />
 ///     </code>
 /// </example>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
 [Serializable]
 public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
 {
@@ -197,10 +196,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (documentInterfaces == null)
-            {
-                documentInterfaces = [];
-            }
+            documentInterfaces ??= [];
             return documentInterfaces;
         }
 

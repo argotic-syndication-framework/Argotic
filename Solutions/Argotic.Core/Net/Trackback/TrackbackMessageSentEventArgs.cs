@@ -13,7 +13,6 @@ namespace Argotic.Net;
 /// <seealso cref="TrackbackClient.SendAsync(TrackbackMessage, Object)"/>
 /// <seealso cref="TrackbackClient"/>
 [Serializable]
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
 public class TrackbackMessageSentEventArgs : EventArgs, IComparable
 {
     /// <summary>

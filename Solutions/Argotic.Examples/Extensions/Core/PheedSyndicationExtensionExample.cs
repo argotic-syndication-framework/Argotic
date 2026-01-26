@@ -10,7 +10,6 @@ namespace Argotic.Examples;
 ///     This class contains all the code examples that are referenced by the <see cref="PheedSyndicationExtension"/> class. 
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pheed")]
 public static class PheedSyndicationExtensionExample
 {
     /// <summary>

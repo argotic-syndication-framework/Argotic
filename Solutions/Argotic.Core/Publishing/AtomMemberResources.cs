@@ -470,7 +470,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateMemberEntryEditMediaLink(System.Uri,System.String)")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)")]
     public static AtomLink CreateEditMediaLink(Uri href, string contentType, CultureInfo contentLanguage)
     {
         AtomLink link = AtomMemberResources.CreateEditMediaLink(href, contentType);

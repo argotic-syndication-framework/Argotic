@@ -148,8 +148,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a Attention Profiling Markup Language (APML) formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Apml")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -187,7 +185,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -256,7 +253,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -296,7 +292,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a Atom formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -335,7 +330,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a  Web Log Markup Language (BlogML) formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseBlogMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -372,7 +366,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a Microsummary Generator formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -409,7 +402,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a News Markup Language (NewsML) formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseNewsMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -439,7 +431,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a OpenSearch Description formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -476,8 +467,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a  Outline Processor Markup Language (OPML) formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseOpmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -507,8 +496,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Discovery (RSD) formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseRsdResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
@@ -550,8 +537,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
     /// <returns><b>true</b> if <paramref name="resource"/> represents a Really Simple Syndication (RSS) formatted syndication resource; otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Design", "CA1021:AvoidOutParameters", MessageId = "1#")]
     protected static bool TryParseRssResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;

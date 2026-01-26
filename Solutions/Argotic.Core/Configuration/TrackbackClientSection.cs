@@ -6,7 +6,6 @@ namespace Argotic.Configuration;
 /// <summary>
 /// Represents the configuration section used to declaratively configure the <see cref="Argotic.Net.TrackbackClient"/> class. This class cannot be inherited.
 /// </summary>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
 public sealed class TrackbackClientSection : ConfigurationSection
 {
     /// <summary>

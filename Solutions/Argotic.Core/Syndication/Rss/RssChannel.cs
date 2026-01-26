@@ -21,7 +21,6 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
 public class RssChannel : IComparable, IExtensibleSyndicationObject
 {
 

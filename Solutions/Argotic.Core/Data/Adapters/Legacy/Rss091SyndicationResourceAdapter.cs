@@ -20,7 +20,6 @@ namespace Argotic.Data.Adapters;
 ///     </para>
 ///     <para>This syndication resource adapter is designed to fill <see cref="RssFeed"/> objects using a <see cref="XPathNavigator"/> that represents XML data that conforms to the RSS 0.91 specification.</para>
 /// </remarks>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
 public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 {
     /// <summary>

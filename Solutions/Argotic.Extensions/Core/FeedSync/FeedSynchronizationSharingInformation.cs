@@ -97,10 +97,7 @@ public class FeedSynchronizationSharingInformation : IComparable
     {
         get
         {
-            if (sharingInformationRelations == null)
-            {
-                sharingInformationRelations = [];
-            }
+            sharingInformationRelations ??= [];
             return sharingInformationRelations;
         }
     }

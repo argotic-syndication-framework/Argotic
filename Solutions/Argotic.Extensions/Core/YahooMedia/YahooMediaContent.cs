@@ -475,10 +475,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectCredits == null)
-            {
-                mediaObjectCredits = [];
-            }
+            mediaObjectCredits ??= [];
             return mediaObjectCredits;
         }
     }

@@ -16,7 +16,6 @@ namespace Argotic.Net;
 ///     </code>
 /// </example>
 [Serializable]
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
 public class TrackbackMessage : IComparable
 {
     /// <summary>
@@ -55,7 +54,6 @@ public class TrackbackMessage : IComparable
     ///     The <paramref name="permalink"/> should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "permalink")]
     public TrackbackMessage(Uri permalink)
     {
         this.Permalink = permalink;
@@ -115,7 +113,6 @@ public class TrackbackMessage : IComparable
     ///     The permalink should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Permalink")]
     public Uri Permalink
     {
         get

@@ -21,7 +21,6 @@ namespace Argotic.Net;
 ///         />
 ///     </code>
 /// </example>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
 public class TrackbackClient
 {
     /// <summary>
@@ -97,7 +96,6 @@ public class TrackbackClient
     ///         This is the preferred technique for handling <see cref="SendCompleted"/> in a derived class.
     ///     </para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
     protected virtual void OnMessageSent(TrackbackMessageSentEventArgs e)
     {
         this.SendCompleted?.Invoke(this, e);

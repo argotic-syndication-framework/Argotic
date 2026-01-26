@@ -8,7 +8,6 @@ namespace Argotic.Configuration;
 /// Represents the network element in the Trackback <see cref="TrackbackClientSection">client configuration section</see>. This class cannot be inherited.
 /// </summary>
 /// <seealso cref="TrackbackClientSection"/>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
 public sealed class TrackbackClientNetworkElement : ConfigurationElement
 {
     /// <summary>

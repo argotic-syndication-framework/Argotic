@@ -39,10 +39,7 @@ public class SimpleListSyndicationExtensionContext
     {
         get
         {
-            if (extensionGroups == null)
-            {
-                extensionGroups = [];
-            }
+            extensionGroups ??= [];
             return extensionGroups;
         }
     }

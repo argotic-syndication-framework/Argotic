@@ -9,7 +9,6 @@ namespace Argotic.Examples;
 /// <summary>
 /// Example implementation of the <see cref="ISyndicationResource"/> interface.
 /// </summary>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rss")]
 public class MyCustomRssFeed : ISyndicationResource
 {
 

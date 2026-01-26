@@ -24,7 +24,6 @@ public enum YahooMediaHashAlgorithm
     /// <summary>
     /// Indicates that the <b>Secure Hash Algorithm 1</b> algorithm was used to generate the hash.
     /// </summary>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Sha")]
     [EnumerationMetadata(DisplayName = "SHA-1", AlternateValue = "sha-1")]
     Sha1 = 2
 }

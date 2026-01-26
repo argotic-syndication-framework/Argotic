@@ -104,7 +104,6 @@ public class XmlRpcClient
     ///         This is the preferred technique for handling <see cref="SendCompleted"/> in a derived class.
     ///     </para>
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
     protected virtual void OnMessageSent(XmlRpcMessageSentEventArgs e)
     {
         this.SendCompleted?.Invoke(this, e);

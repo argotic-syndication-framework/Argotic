@@ -19,7 +19,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
 [Serializable]
 public class OpmlOutline : IComparable, IExtensibleSyndicationObject
 {

@@ -117,10 +117,7 @@ public class FeedSynchronizationItem : IComparable
     {
         get
         {
-            if (synchronizationHistories == null)
-            {
-                synchronizationHistories = [];
-            }
+            synchronizationHistories ??= [];
             return synchronizationHistories;
         }
     }

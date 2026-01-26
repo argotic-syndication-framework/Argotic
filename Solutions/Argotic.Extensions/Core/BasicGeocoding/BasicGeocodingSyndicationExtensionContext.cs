@@ -9,7 +9,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="BasicGeocodingSyndicationExtension"/>.
 /// </summary>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Geocoding")]
 [Serializable]
 public class BasicGeocodingSyndicationExtensionContext
 {

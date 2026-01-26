@@ -8,7 +8,6 @@ namespace Argotic.Syndication;
 /// <summary>
 /// Represents the owner of an <see cref="OpmlDocument"/>.
 /// </summary>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
 [Serializable]
 public class OpmlOwner : IComparable
 {

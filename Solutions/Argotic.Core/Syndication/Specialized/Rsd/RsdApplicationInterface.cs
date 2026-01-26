@@ -19,7 +19,6 @@ namespace Argotic.Syndication.Specialized;
 ///         />
 ///     </code>
 /// </example>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rsd")]
 [Serializable]
 public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
 {

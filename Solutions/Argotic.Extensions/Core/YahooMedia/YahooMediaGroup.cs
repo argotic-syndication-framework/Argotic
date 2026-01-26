@@ -101,10 +101,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectCategories == null)
-            {
-                mediaObjectCategories = [];
-            }
+            mediaObjectCategories ??= [];
             return mediaObjectCategories;
         }
     }

@@ -9,7 +9,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="TrackbackSyndicationExtension"/>.
 /// </summary>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
 [Serializable]
 public class TrackbackSyndicationExtensionContext
 {
@@ -38,7 +37,6 @@ public class TrackbackSyndicationExtensionContext
     ///     A <see cref="Collection{T}"/> collection of <see cref="Uri"/> objects that represent trackbacks that were pinged in reference. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Abouts")]
     public Collection<Uri> Abouts
     {
         get

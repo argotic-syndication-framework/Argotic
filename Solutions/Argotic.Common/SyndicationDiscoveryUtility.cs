@@ -860,7 +860,6 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static HtmlAnchor ExtractPingbackNotificationServer(string content)
     {
         HtmlAnchor pingbackAnchor = null;
@@ -960,7 +959,6 @@ public static class SyndicationDiscoveryUtility
     ///         />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static bool IsPingbackEnabled(Uri uri)
     {
         return SyndicationDiscoveryUtility.IsPingbackEnabled(uri, null);
@@ -1009,7 +1007,6 @@ public static class SyndicationDiscoveryUtility
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static bool IsPingbackEnabled(Uri uri, ICredentials credentials)
     {
         bool isPingbackEnabled = false;
@@ -1104,7 +1101,6 @@ public static class SyndicationDiscoveryUtility
     ///         />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static Uri LocatePingbackNotificationServer(Uri uri)
     {
         return SyndicationDiscoveryUtility.LocatePingbackNotificationServer(uri, null);
@@ -1157,7 +1153,6 @@ public static class SyndicationDiscoveryUtility
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static Uri LocatePingbackNotificationServer(Uri uri, ICredentials credentials)
     {
         Uri pingbackXmlRpcServer = null;
@@ -1218,7 +1213,6 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
         Collection<TrackbackDiscoveryMetadata> results = new Collection<TrackbackDiscoveryMetadata>();
@@ -1261,7 +1255,6 @@ public static class SyndicationDiscoveryUtility
     ///     further information about the auto-discovery of Trackback ping URLs.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(Stream stream)
     {
         ArgumentNullException.ThrowIfNull(stream);
@@ -1318,7 +1311,6 @@ public static class SyndicationDiscoveryUtility
     ///         />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static bool IsTrackbackEnabled(Uri uri)
     {
         return SyndicationDiscoveryUtility.IsTrackbackEnabled(uri, null);
@@ -1368,7 +1360,6 @@ public static class SyndicationDiscoveryUtility
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static bool IsTrackbackEnabled(Uri uri, ICredentials credentials)
     {
         ArgumentNullException.ThrowIfNull(uri);
@@ -1396,7 +1387,6 @@ public static class SyndicationDiscoveryUtility
     ///         />
     ///     </code>
     /// </example>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri)
     {
         return SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, null);
@@ -1419,7 +1409,6 @@ public static class SyndicationDiscoveryUtility
     ///     further information about the auto-discovery of Trackback ping URLs.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri, ICredentials credentials)
     {
         ArgumentNullException.ThrowIfNull(uri);

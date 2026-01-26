@@ -304,7 +304,6 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// Gets the trackbacks for this post.
     /// </summary>
     /// <value>A <see cref="Collection{T}"/> collection of <see cref="BlogMLTrackback"/> objects that represent the trackbacks for this post.</value>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackbacks")]
     public Collection<BlogMLTrackback> Trackbacks
     {
         get

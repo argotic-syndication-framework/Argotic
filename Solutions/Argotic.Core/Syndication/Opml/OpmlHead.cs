@@ -10,7 +10,6 @@ namespace Argotic.Syndication;
 /// <summary>
 /// Represents the header information for an <see cref="OpmlDocument"/>.
 /// </summary>
-[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Opml")]
 [Serializable]
 public class OpmlHead : IComparable, IExtensibleSyndicationObject
 {

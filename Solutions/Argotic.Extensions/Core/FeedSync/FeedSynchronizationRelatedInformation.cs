@@ -114,7 +114,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
         {
             if (value == FeedSynchronizationRelatedInformationType.None)
             {
-                throw new ArgumentException(string.Format(null, "The specified relation type of {0} is invalid.", value), "value");
+                throw new ArgumentException(string.Format(null, "The specified relation type of {0} is invalid.", value), nameof(value));
             }
             relatedInformationType = value;
         }
@@ -336,7 +336,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
         }
         else
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
         }
     }
 

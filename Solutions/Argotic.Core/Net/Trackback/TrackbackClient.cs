@@ -204,11 +204,11 @@ public class TrackbackClient
         {
             if (value.TotalMilliseconds < 0)
             {
-                throw new ArgumentOutOfRangeException("value");
+                throw new ArgumentOutOfRangeException(nameof(value));
             }
             else if (value > TimeSpan.FromDays(365))
             {
-                throw new ArgumentOutOfRangeException("value");
+                throw new ArgumentOutOfRangeException(nameof(value));
             }
             else
             {

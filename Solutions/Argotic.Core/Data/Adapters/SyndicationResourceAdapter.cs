@@ -74,7 +74,7 @@ public class SyndicationResourceAdapter
         Guard.ArgumentNotNull(resource, "resource");
         if (format == SyndicationContentFormat.None)
         {
-            throw new ArgumentException(string.Format(null, "The specified syndication content format of {0} is invalid.", format), "format");
+            throw new ArgumentException(string.Format(null, "The specified syndication content format of {0} is invalid.", format), nameof(format));
         }
 
         SyndicationResourceMetadata resourceMetadata    = new SyndicationResourceMetadata(this.Navigator);

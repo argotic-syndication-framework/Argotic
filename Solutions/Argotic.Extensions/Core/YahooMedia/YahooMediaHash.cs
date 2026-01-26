@@ -104,7 +104,7 @@ public class YahooMediaHash : IComparable
         Guard.ArgumentNotNull(stream, "stream");
         if (algorithm == YahooMediaHashAlgorithm.None)
         {
-            throw new ArgumentException(string.Format(null, "Unable to generate a hash value for the {0} algorithm.", algorithm), "algorithm");
+            throw new ArgumentException(string.Format(null, "Unable to generate a hash value for the {0} algorithm.", algorithm), nameof(algorithm));
         }
 
         if(algorithm == YahooMediaHashAlgorithm.MD5)
@@ -303,7 +303,7 @@ public class YahooMediaHash : IComparable
         }
         else
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
         }
     }
 

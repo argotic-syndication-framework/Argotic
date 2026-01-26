@@ -144,11 +144,11 @@ public sealed class SyndicationResourceLoadSettings : IComparable
         {
             if (value.TotalMilliseconds < 0)
             {
-                throw new ArgumentOutOfRangeException("value");
+                throw new ArgumentOutOfRangeException(nameof(value));
             }
             else if (value > TimeSpan.FromDays(365))
             {
-                throw new ArgumentOutOfRangeException("value");
+                throw new ArgumentOutOfRangeException(nameof(value));
             }
             else
             {
@@ -196,7 +196,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable
         }
         else
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
         }
     }
 

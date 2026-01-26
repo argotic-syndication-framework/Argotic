@@ -349,4 +349,9 @@ MigrationBackup/
 # Ionide (cross platform F# VS Code tools) working folder
 .ionide/
 .idea/
+
+_codeCoverage/
+coverage.cobertura.xml
+.zf/extensions
 .endjin/
+*.sbom.*

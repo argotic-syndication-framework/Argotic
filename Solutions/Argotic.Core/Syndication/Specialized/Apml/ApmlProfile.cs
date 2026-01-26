@@ -31,7 +31,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the unique name of the profile.
     /// </summary>
-    private string profileName  = String.Empty;
+    private string profileName  = string.Empty;
     /// <summary>
     /// Private member to hold the implicit concepts of the profile.
     /// </summary>
@@ -335,8 +335,8 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string nameAttribute    = source.GetAttribute("name", String.Empty);
-            if (!String.IsNullOrEmpty(nameAttribute))
+            string nameAttribute    = source.GetAttribute("name", string.Empty);
+            if (!string.IsNullOrEmpty(nameAttribute))
             {
                 this.Name   = nameAttribute;
                 wasLoaded   = true;
@@ -433,8 +433,8 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string nameAttribute    = source.GetAttribute("name", String.Empty);
-            if (!String.IsNullOrEmpty(nameAttribute))
+            string nameAttribute    = source.GetAttribute("name", string.Empty);
+            if (!string.IsNullOrEmpty(nameAttribute))
             {
                 this.Name   = nameAttribute;
                 wasLoaded   = true;
@@ -632,22 +632,22 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
             result      = result | ApmlProfile.CompareSequence(this.ExplicitSources, value.ExplicitSources);
             result      = result | ApmlProfile.CompareSequence(this.ImplicitConcepts, value.ImplicitConcepts);
             result      = result | ApmlProfile.CompareSequence(this.ImplicitSources, value.ImplicitSources);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is ApmlProfile))
         {

@@ -31,11 +31,11 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the textual content of the outline.
     /// </summary>
-    private string outlineText          = String.Empty;
+    private string outlineText          = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating how the outline's attributes are interpreted.
     /// </summary>
-    private string outlineType          = String.Empty;
+    private string outlineType          = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating whether the outline is commented or not.
     /// </summary>
@@ -171,9 +171,9 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                outlineType = String.Empty;
+                outlineType = string.Empty;
             }
             else
             {
@@ -254,7 +254,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            return (String.Compare(this.ContentType, "include", StringComparison.OrdinalIgnoreCase) == 0 || String.Compare(this.ContentType, "link", StringComparison.OrdinalIgnoreCase) == 0);
+            return (string.Compare(this.ContentType, "include", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(this.ContentType, "link", StringComparison.OrdinalIgnoreCase) == 0);
         }
     }
 
@@ -267,7 +267,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            return (String.Compare(this.ContentType, "rss", StringComparison.OrdinalIgnoreCase) == 0 || String.Compare(this.ContentType, "feed", StringComparison.OrdinalIgnoreCase) == 0);
+            return (string.Compare(this.ContentType, "rss", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(this.ContentType, "feed", StringComparison.OrdinalIgnoreCase) == 0);
         }
     }
 
@@ -486,7 +486,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
 
         writer.WriteAttributeString("text", this.Text);
 
-        if (!String.IsNullOrEmpty(this.ContentType))
+        if (!string.IsNullOrEmpty(this.ContentType))
         {
             writer.WriteAttributeString("type", this.ContentType);
         }
@@ -511,7 +511,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
             string[] categories = new string[this.Categories.Count];
             this.Categories.CopyTo(categories, 0);
 
-            writer.WriteAttributeString("category", String.Join(",", categories));
+            writer.WriteAttributeString("category", string.Join(",", categories));
         }
 
         if (this.Attributes.Count > 0)
@@ -640,7 +640,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference.</exception>
     public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl)
     {
-        return OpmlOutline.CreateSubscriptionListOutline(text, type, xmlUrl, null, String.Empty, String.Empty, String.Empty, null);
+        return OpmlOutline.CreateSubscriptionListOutline(text, type, xmlUrl, null, string.Empty, string.Empty, string.Empty, null);
     }
 
     /// <summary>
@@ -690,17 +690,17 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
             outline.Attributes.Add("htmlUrl", htmlUrl.ToString());
         }
 
-        if (!String.IsNullOrEmpty(version))
+        if (!string.IsNullOrEmpty(version))
         {
             outline.Attributes.Add("version", version.Trim());
         }
 
-        if (!String.IsNullOrEmpty(title))
+        if (!string.IsNullOrEmpty(title))
         {
             outline.Attributes.Add("title", title.Trim());
         }
 
-        if (!String.IsNullOrEmpty(description))
+        if (!string.IsNullOrEmpty(description))
         {
             outline.Attributes.Add("description", description.Trim());
         }
@@ -757,11 +757,11 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
             result      = result | this.CreatedOn.CompareTo(value.CreatedOn);
             result      = result | this.HasBreakpoint.CompareTo(value.HasBreakpoint);
             result      = result | this.IsCommented.CompareTo(value.IsCommented);
-            result      = result | String.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
 
             result      = result | ComparisonUtility.CompareSequence(this.Attributes, value.Attributes, StringComparison.OrdinalIgnoreCase);
             result      = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
@@ -771,16 +771,16 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is OpmlOutline))
         {
@@ -884,38 +884,38 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         bool wasLoaded  = false;
         Guard.ArgumentNotNull(attribute, "attribute");
 
-        if (String.IsNullOrEmpty(attribute.Value))
+        if (string.IsNullOrEmpty(attribute.Value))
         {
             return false;
         }
 
-        if (String.Compare(attribute.Name, "text", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Compare(attribute.Name, "text", StringComparison.OrdinalIgnoreCase) == 0)
         {
             this.Text   = attribute.Value;
             wasLoaded   = true;
         }
-        else if (String.Compare(attribute.Name, "type", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Compare(attribute.Name, "type", StringComparison.OrdinalIgnoreCase) == 0)
         {
             this.ContentType    = attribute.Value;
             wasLoaded           = true;
         }
-        else if (String.Compare(attribute.Name, "isComment", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Compare(attribute.Name, "isComment", StringComparison.OrdinalIgnoreCase) == 0)
         {
-            if (Boolean.TryParse(attribute.Value, out bool isComment))
+            if (bool.TryParse(attribute.Value, out bool isComment))
             {
                 this.IsCommented    = isComment;
                 wasLoaded           = true;
             }
         }
-        else if (String.Compare(attribute.Name, "isBreakpoint", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Compare(attribute.Name, "isBreakpoint", StringComparison.OrdinalIgnoreCase) == 0)
         {
-            if (Boolean.TryParse(attribute.Value, out bool isBreakpoint))
+            if (bool.TryParse(attribute.Value, out bool isBreakpoint))
             {
                 this.HasBreakpoint  = isBreakpoint;
                 wasLoaded           = true;
             }
         }
-        else if (String.Compare(attribute.Name, "created", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Compare(attribute.Name, "created", StringComparison.OrdinalIgnoreCase) == 0)
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(attribute.Value, out DateTime created))
             {
@@ -923,7 +923,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
                 wasLoaded       = true;
             }
         }
-        else if (String.Compare(attribute.Name, "category", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Compare(attribute.Name, "category", StringComparison.OrdinalIgnoreCase) == 0)
         {
             if (attribute.Value.Contains(","))
             {

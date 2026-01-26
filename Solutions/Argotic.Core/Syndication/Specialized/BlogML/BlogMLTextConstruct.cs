@@ -21,7 +21,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the content of the text.
     /// </summary>
-    private string textConstructContent                 = String.Empty;
+    private string textConstructContent                 = string.Empty;
     /// <summary>
     /// Private member to hold entity encoding utilized by the text.
     /// </summary>
@@ -117,9 +117,9 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                textConstructContent = String.Empty;
+                textConstructContent = string.Empty;
             }
             else
             {
@@ -185,7 +185,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// </example>
     public static string ConstructTypeAsString(BlogMLContentType type)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLContentType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(BlogMLContentType))
@@ -241,7 +241,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         constructType   = type;
                         break;
@@ -326,8 +326,8 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            if (!String.IsNullOrEmpty(typeAttribute))
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 BlogMLContentType type  = BlogMLTextConstruct.ConstructTypeByName(typeAttribute);
                 if (type != BlogMLContentType.None)
@@ -338,7 +338,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             this.Content    = source.Value;
             wasLoaded       = true;
@@ -389,7 +389,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
             writer.WriteAttributeString("type", BlogMLTextConstruct.ConstructTypeAsString(this.ContentType));
         }
 
-        if (!String.IsNullOrEmpty(this.Content))
+        if (!string.IsNullOrEmpty(this.Content))
         {
             if(this.EscapeContent)
             {
@@ -451,23 +451,23 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
             result      = result | this.ContentType.CompareTo(value.ContentType);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is BlogMLTextConstruct))
         {

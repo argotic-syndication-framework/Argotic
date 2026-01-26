@@ -167,15 +167,15 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Version.CompareTo(value.Version);
-            result      = result | String.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result      = result | String.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            result      = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result      = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
             result      = result | Uri.Compare(this.Context.Domain, value.Context.Domain, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Context.Label, value.Context.Label, StringComparison.Ordinal);
+            result      = result | string.Compare(this.Context.Label, value.Context.Label, StringComparison.Ordinal);
             result      = result | Uri.Compare(this.Context.Scheme, value.Context.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
             result      = result | this.Context.Value.CompareTo(value.Context.Value);
 
@@ -183,16 +183,16 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is FeedRankSyndicationExtension))
         {

@@ -25,9 +25,9 @@ internal static class PrivilegedConfigurationManager
     private static object configurationManagerSyndicationResourceSyncObject;
 
     /// <summary>
-    /// Gets the <see cref="Object"/> used when locking acess to the syndication resource configuration file section being managed.
+    /// Gets the <see cref="object"/> used when locking acess to the syndication resource configuration file section being managed.
     /// </summary>
-    /// <value>The <see cref="Object"/> used when locking acess to the syndication resource configuration file section being managed.</value>
+    /// <value>The <see cref="object"/> used when locking acess to the syndication resource configuration file section being managed.</value>
     internal static object SyndicationSyncObject
     {
         get
@@ -41,9 +41,9 @@ internal static class PrivilegedConfigurationManager
     }
 
     /// <summary>
-    /// Gets the <see cref="Object"/> used when locking acess to the Trackback configuration file section being managed.
+    /// Gets the <see cref="object"/> used when locking acess to the Trackback configuration file section being managed.
     /// </summary>
-    /// <value>The <see cref="Object"/> used when locking acess to the Trackback configuration file section being managed.</value>
+    /// <value>The <see cref="object"/> used when locking acess to the Trackback configuration file section being managed.</value>
     internal static object TrackbackSyncObject
     {
         get
@@ -57,9 +57,9 @@ internal static class PrivilegedConfigurationManager
     }
 
     /// <summary>
-    /// Gets the <see cref="Object"/> used when locking acess to the XML-RPC configuration file section being managed.
+    /// Gets the <see cref="object"/> used when locking acess to the XML-RPC configuration file section being managed.
     /// </summary>
-    /// <value>The <see cref="Object"/> used when locking acess to the XML-RPC configuration file section being managed.</value>
+    /// <value>The <see cref="object"/> used when locking acess to the XML-RPC configuration file section being managed.</value>
     internal static object XmlRpcSyncObject
     {
         get

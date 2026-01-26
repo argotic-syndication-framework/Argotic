@@ -32,11 +32,11 @@ public class SimpleListGroup : IComparable
     /// <summary>
     /// Private member to hold the name of the groupable property.
     /// </summary>
-    private string groupElement = String.Empty;
+    private string groupElement = string.Empty;
     /// <summary>
     /// Private member to hold a human-readable name for the groupable property.
     /// </summary>
-    private string groupLabel   = String.Empty;
+    private string groupLabel   = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="SimpleListGroup"/> class.
     /// </summary>
@@ -61,9 +61,9 @@ public class SimpleListGroup : IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                groupElement = String.Empty;
+                groupElement = string.Empty;
             }
             else
             {
@@ -91,9 +91,9 @@ public class SimpleListGroup : IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                groupLabel = String.Empty;
+                groupLabel = string.Empty;
             }
             else
             {
@@ -137,11 +137,11 @@ public class SimpleListGroup : IComparable
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string namespaceAttribute   = source.GetAttribute("ns", String.Empty);
-            string elementAttribute     = source.GetAttribute("element", String.Empty);
-            string labelAttribute       = source.GetAttribute("label", String.Empty);
+            string namespaceAttribute   = source.GetAttribute("ns", string.Empty);
+            string elementAttribute     = source.GetAttribute("element", string.Empty);
+            string labelAttribute       = source.GetAttribute("label", string.Empty);
 
-            if (!String.IsNullOrEmpty(namespaceAttribute))
+            if (!string.IsNullOrEmpty(namespaceAttribute))
             {
                 if (Uri.TryCreate(namespaceAttribute, UriKind.RelativeOrAbsolute, out Uri elementNamespace))
                 {
@@ -150,13 +150,13 @@ public class SimpleListGroup : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(elementAttribute))
+            if (!string.IsNullOrEmpty(elementAttribute))
             {
                 this.Element    = elementAttribute;
                 wasLoaded       = true;
             }
 
-            if (!String.IsNullOrEmpty(labelAttribute))
+            if (!string.IsNullOrEmpty(labelAttribute))
             {
                 this.Label  = labelAttribute;
                 wasLoaded   = true;
@@ -182,12 +182,12 @@ public class SimpleListGroup : IComparable
             writer.WriteAttributeString("ns", this.Namespace.ToString());
         }
 
-        if (!String.IsNullOrEmpty(this.Element))
+        if (!string.IsNullOrEmpty(this.Element))
         {
             writer.WriteAttributeString("element", this.Element);
         }
 
-        if (!String.IsNullOrEmpty(this.Label))
+        if (!string.IsNullOrEmpty(this.Label))
         {
             writer.WriteAttributeString("label", this.Label);
         }
@@ -241,24 +241,24 @@ public class SimpleListGroup : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Element, value.Element, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Element, value.Element, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Namespace, value.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is SimpleListGroup))
         {

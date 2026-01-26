@@ -31,11 +31,11 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the unique name for the application.
     /// </summary>
-    private string applicationName  = String.Empty;
+    private string applicationName  = string.Empty;
     /// <summary>
     /// Private member to hold the textual data of the application.
     /// </summary>
-    private string applicationData  = String.Empty;
+    private string applicationData  = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="ApmlApplication"/> class.
     /// </summary>
@@ -107,9 +107,9 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                applicationData = String.Empty;
+                applicationData = string.Empty;
             }
             else
             {
@@ -209,16 +209,16 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string nameAttribute    = source.GetAttribute("name", String.Empty);
+            string nameAttribute    = source.GetAttribute("name", string.Empty);
 
-            if (!String.IsNullOrEmpty(nameAttribute))
+            if (!string.IsNullOrEmpty(nameAttribute))
             {
                 this.Name   = nameAttribute;
                 wasLoaded   = true;
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             this.Data   = source.Value;
             wasLoaded   = true;
@@ -262,7 +262,7 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
 
         writer.WriteAttributeString("name", this.Name);
 
-        if (!String.IsNullOrEmpty(this.Data))
+        if (!string.IsNullOrEmpty(this.Data))
         {
             writer.WriteString(this.Data);
         }
@@ -315,23 +315,23 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.Data, value.Data, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Data, value.Data, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is ApmlApplication))
         {

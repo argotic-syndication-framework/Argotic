@@ -172,24 +172,24 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
         if (value != null)
         {
             int result  = this.Context.Comments.CompareTo(value.Context.Comments);
-            result      = result | String.Compare(this.Context.Department, value.Context.Department, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Context.Section, value.Context.Section, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Context.Department, value.Context.Department, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Context.Section, value.Context.Section, StringComparison.OrdinalIgnoreCase);
             result      = result | ComparisonUtility.CompareSequence(this.Context.HitParade, value.Context.HitParade);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is SiteSummarySlashSyndicationExtension))
         {

@@ -32,23 +32,23 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the unique key for the source.
     /// </summary>
-    private string sourceKey            = String.Empty;
+    private string sourceKey            = string.Empty;
     /// <summary>
     /// Private member to hold the friendly name of the source.
     /// </summary>
-    private string sourceName           = String.Empty;
+    private string sourceName           = string.Empty;
     /// <summary>
     /// Private member to hold the decimal score of the source.
     /// </summary>
-    private decimal sourceValue         = Decimal.MinValue;
+    private decimal sourceValue         = decimal.MinValue;
     /// <summary>
     /// Private member to hold the MIME type of the source.
     /// </summary>
-    private string sourceType           = String.Empty;
+    private string sourceType           = string.Empty;
     /// <summary>
     /// Private member to hold the name of the entity that contributed the source.
     /// </summary>
-    private string sourceFrom           = String.Empty;
+    private string sourceFrom           = string.Empty;
     /// <summary>
     /// Private member to hold a date indicating the last time the source was updated.
     /// </summary>
@@ -188,9 +188,9 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                sourceFrom = String.Empty;
+                sourceFrom = string.Empty;
             }
             else
             {
@@ -297,8 +297,8 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotLessThan(value, "value", Decimal.MinusOne);
-            Guard.ArgumentNotGreaterThan(value, "value", Decimal.One);
+            Guard.ArgumentNotLessThan(value, "value", decimal.MinusOne);
+            Guard.ArgumentNotGreaterThan(value, "value", decimal.One);
             sourceValue = value;
         }
     }
@@ -418,30 +418,30 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string keyAttribute     = source.GetAttribute("key", String.Empty);
-            string nameAttribute    = source.GetAttribute("name", String.Empty);
-            string valueAttribute   = source.GetAttribute("value", String.Empty);
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            string fromAttribute    = source.GetAttribute("from", String.Empty);
-            string updatedAttribute = source.GetAttribute("updated", String.Empty);
+            string keyAttribute     = source.GetAttribute("key", string.Empty);
+            string nameAttribute    = source.GetAttribute("name", string.Empty);
+            string valueAttribute   = source.GetAttribute("value", string.Empty);
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string fromAttribute    = source.GetAttribute("from", string.Empty);
+            string updatedAttribute = source.GetAttribute("updated", string.Empty);
 
-            if (!String.IsNullOrEmpty(keyAttribute))
+            if (!string.IsNullOrEmpty(keyAttribute))
             {
                 this.Key    = keyAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(nameAttribute))
+            if (!string.IsNullOrEmpty(nameAttribute))
             {
                 this.Name   = nameAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(valueAttribute))
+            if (!string.IsNullOrEmpty(valueAttribute))
             {
-                if (Decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
+                if (decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
                 {
-                    if (value >= Decimal.MinusOne && value <= Decimal.One)
+                    if (value >= decimal.MinusOne && value <= decimal.One)
                     {
                         this.Value  = value;
                         wasLoaded   = true;
@@ -449,19 +449,19 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
                 }
             }
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 this.MimeType   = typeAttribute;
                 wasLoaded       = true;
             }
 
-            if (!String.IsNullOrEmpty(fromAttribute))
+            if (!string.IsNullOrEmpty(fromAttribute))
             {
                 this.From   = fromAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(updatedAttribute))
+            if (!string.IsNullOrEmpty(updatedAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedAttribute, out DateTime updatedOn))
                 {
@@ -511,30 +511,30 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string keyAttribute     = source.GetAttribute("key", String.Empty);
-            string nameAttribute    = source.GetAttribute("name", String.Empty);
-            string valueAttribute   = source.GetAttribute("value", String.Empty);
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            string fromAttribute    = source.GetAttribute("from", String.Empty);
-            string updatedAttribute = source.GetAttribute("updated", String.Empty);
+            string keyAttribute     = source.GetAttribute("key", string.Empty);
+            string nameAttribute    = source.GetAttribute("name", string.Empty);
+            string valueAttribute   = source.GetAttribute("value", string.Empty);
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string fromAttribute    = source.GetAttribute("from", string.Empty);
+            string updatedAttribute = source.GetAttribute("updated", string.Empty);
 
-            if (!String.IsNullOrEmpty(keyAttribute))
+            if (!string.IsNullOrEmpty(keyAttribute))
             {
                 this.Key    = keyAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(nameAttribute))
+            if (!string.IsNullOrEmpty(nameAttribute))
             {
                 this.Name   = nameAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(valueAttribute))
+            if (!string.IsNullOrEmpty(valueAttribute))
             {
-                if (Decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
+                if (decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
                 {
-                    if (value >= Decimal.MinusOne && value <= Decimal.One)
+                    if (value >= decimal.MinusOne && value <= decimal.One)
                     {
                         this.Value  = value;
                         wasLoaded   = true;
@@ -542,19 +542,19 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
                 }
             }
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 this.MimeType   = typeAttribute;
                 wasLoaded       = true;
             }
 
-            if (!String.IsNullOrEmpty(fromAttribute))
+            if (!string.IsNullOrEmpty(fromAttribute))
             {
                 this.From   = fromAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(updatedAttribute))
+            if (!string.IsNullOrEmpty(updatedAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedAttribute, out DateTime updatedOn))
                 {
@@ -602,7 +602,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         writer.WriteAttributeString("value", this.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
         writer.WriteAttributeString("type", this.MimeType);
 
-        if (!String.IsNullOrEmpty(this.From))
+        if (!string.IsNullOrEmpty(this.From))
         {
             writer.WriteAttributeString("from", this.From);
         }
@@ -666,10 +666,10 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result  = ApmlSource.CompareSequence(this.Authors, value.Authors);
-            result      = result | String.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
             result      = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
             result      = result | this.Value.CompareTo(value.Value);
 
@@ -677,16 +677,16 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is ApmlSource))
         {

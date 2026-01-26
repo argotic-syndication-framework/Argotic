@@ -28,11 +28,11 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <summary>
     /// Private member to hold the number of bytes the media object represents on disk.
     /// </summary>
-    private long contentFileSize                    = Int64.MinValue;
+    private long contentFileSize                    = long.MinValue;
     /// <summary>
     /// Private member to hold the MIME type of the media object.
     /// </summary>
-    private string contentMimeType                  = String.Empty;
+    private string contentMimeType                  = string.Empty;
     /// <summary>
     /// Private member to hold the type of the media object.
     /// </summary>
@@ -48,19 +48,19 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <summary>
     /// Private member to hold the kilobits per second rate of the media object.
     /// </summary>
-    private int contentBitrate                      = Int32.MinValue;
+    private int contentBitrate                      = int.MinValue;
     /// <summary>
     /// Private member to hold the number of frames per second for the media object.
     /// </summary>
-    private int contentFramerate                    = Int32.MinValue;
+    private int contentFramerate                    = int.MinValue;
     /// <summary>
     /// Private member to hold the number of samples per second taken to create the media object.
     /// </summary>
-    private decimal contentSamplingrate             = Decimal.MinValue;
+    private decimal contentSamplingrate             = decimal.MinValue;
     /// <summary>
     /// Private member to hold the number of audio channels in the media object.
     /// </summary>
-    private int contentChannels                     = Int32.MinValue;
+    private int contentChannels                     = int.MinValue;
     /// <summary>
     /// Private member to hold the total play time for the media object.
     /// </summary>
@@ -68,11 +68,11 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <summary>
     /// Private member to hold the height of the media object.
     /// </summary>
-    private int contentHeight                       = Int32.MinValue;
+    private int contentHeight                       = int.MinValue;
     /// <summary>
     /// Private member to hold the width of the media object.
     /// </summary>
-    private int contentWidth                        = Int32.MinValue;
+    private int contentWidth                        = int.MinValue;
     /// <summary>
     /// Private member to hold the primary language encapsulated in the media object.
     /// </summary>
@@ -206,9 +206,9 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                contentMimeType = String.Empty;
+                contentMimeType = string.Empty;
             }
             else
             {
@@ -715,12 +715,12 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
             writer.WriteAttributeString("url", this.Url.ToString());
         }
 
-        if (this.FileSize != Int64.MinValue)
+        if (this.FileSize != long.MinValue)
         {
             writer.WriteAttributeString("fileSize", this.FileSize.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if(!String.IsNullOrEmpty(this.ContentType))
+        if(!string.IsNullOrEmpty(this.ContentType))
         {
             writer.WriteAttributeString("type", this.ContentType);
         }
@@ -740,22 +740,22 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
             writer.WriteAttributeString("expression", YahooMediaSyndicationExtension.ExpressionAsString(this.Expression));
         }
 
-        if (this.Bitrate != Int32.MinValue)
+        if (this.Bitrate != int.MinValue)
         {
             writer.WriteAttributeString("bitrate", this.Bitrate.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.FrameRate != Int32.MinValue)
+        if (this.FrameRate != int.MinValue)
         {
             writer.WriteAttributeString("framerate", this.FrameRate.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.SamplingRate != Decimal.MinValue)
+        if (this.SamplingRate != decimal.MinValue)
         {
             writer.WriteAttributeString("samplingrate", this.SamplingRate.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.Channels != Int32.MinValue)
+        if (this.Channels != int.MinValue)
         {
             writer.WriteAttributeString("channels", this.Channels.ToString(NumberFormatInfo.InvariantInfo));
         }
@@ -765,12 +765,12 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
             writer.WriteAttributeString("duration", this.Duration.TotalSeconds.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.Height != Int32.MinValue)
+        if (this.Height != int.MinValue)
         {
             writer.WriteAttributeString("height", this.Height.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.Width != Int32.MinValue)
+        if (this.Width != int.MinValue)
         {
             writer.WriteAttributeString("width", this.Width.ToString(NumberFormatInfo.InvariantInfo));
         }
@@ -834,7 +834,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         {
             int result  = this.Bitrate.CompareTo(value.Bitrate);
             result      = result | this.Channels.CompareTo(value.Channels);
-            result      = result | String.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Duration.CompareTo(value.Duration);
             result      = result | this.Expression.CompareTo(value.Expression);
             result      = result | this.FileSize.CompareTo(value.FileSize);
@@ -842,9 +842,9 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
             result      = result | this.Height.CompareTo(value.Height);
             result      = result | this.IsDefault.CompareTo(value.IsDefault);
 
-            string sourceLanguageName   = this.Language != null ? this.Language.Name : String.Empty;
-            string targetLanguageName   = value.Language != null ? value.Language.Name : String.Empty;
-            result      = result | String.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+            string sourceLanguageName   = this.Language != null ? this.Language.Name : string.Empty;
+            string targetLanguageName   = value.Language != null ? value.Language.Name : string.Empty;
+            result      = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
             result      = result | this.Medium.CompareTo(value.Medium);
             result      = result | this.SamplingRate.CompareTo(value.SamplingRate);
@@ -857,16 +857,16 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is YahooMediaContent))
         {
@@ -973,15 +973,15 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string urlAttribute             = source.GetAttribute("url", String.Empty);
-            string fileSizeAttribute        = source.GetAttribute("fileSize", String.Empty);
-            string typeAttribute            = source.GetAttribute("type", String.Empty);
-            string mediumAttribute          = source.GetAttribute("medium", String.Empty);
-            string isDefaultAttribute       = source.GetAttribute("isDefault", String.Empty);
-            string expressionAttribute      = source.GetAttribute("expression", String.Empty);
-            string bitrateAttribute         = source.GetAttribute("bitrate", String.Empty);
+            string urlAttribute             = source.GetAttribute("url", string.Empty);
+            string fileSizeAttribute        = source.GetAttribute("fileSize", string.Empty);
+            string typeAttribute            = source.GetAttribute("type", string.Empty);
+            string mediumAttribute          = source.GetAttribute("medium", string.Empty);
+            string isDefaultAttribute       = source.GetAttribute("isDefault", string.Empty);
+            string expressionAttribute      = source.GetAttribute("expression", string.Empty);
+            string bitrateAttribute         = source.GetAttribute("bitrate", string.Empty);
 
-            if (!String.IsNullOrEmpty(urlAttribute))
+            if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
@@ -990,22 +990,22 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
                 }
             }
 
-            if (!String.IsNullOrEmpty(fileSizeAttribute))
+            if (!string.IsNullOrEmpty(fileSizeAttribute))
             {
-                if (Int64.TryParse(fileSizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long fileSize))
+                if (long.TryParse(fileSizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long fileSize))
                 {
                     this.FileSize   = fileSize;
                     wasLoaded       = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 this.ContentType    = typeAttribute;
                 wasLoaded           = true;
             }
 
-            if (!String.IsNullOrEmpty(mediumAttribute))
+            if (!string.IsNullOrEmpty(mediumAttribute))
             {
                 YahooMediaMedium medium = YahooMediaSyndicationExtension.MediumByName(mediumAttribute);
                 if (medium != YahooMediaMedium.None)
@@ -1015,21 +1015,21 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
                 }
             }
 
-            if (!String.IsNullOrEmpty(isDefaultAttribute))
+            if (!string.IsNullOrEmpty(isDefaultAttribute))
             {
-                if(String.Compare(isDefaultAttribute, "true", StringComparison.OrdinalIgnoreCase) == 0)
+                if(string.Compare(isDefaultAttribute, "true", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     this.IsDefault  = true;
                     wasLoaded       = true;
                 }
-                else if (String.Compare(isDefaultAttribute, "false", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(isDefaultAttribute, "false", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     this.IsDefault  = false;
                     wasLoaded       = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(expressionAttribute))
+            if (!string.IsNullOrEmpty(expressionAttribute))
             {
                 YahooMediaExpression expression = YahooMediaSyndicationExtension.ExpressionByName(expressionAttribute);
                 if (expression != YahooMediaExpression.None)
@@ -1039,9 +1039,9 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
                 }
             }
 
-            if (!String.IsNullOrEmpty(bitrateAttribute))
+            if (!string.IsNullOrEmpty(bitrateAttribute))
             {
-                if (Int32.TryParse(bitrateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int bitrate))
+                if (int.TryParse(bitrateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int bitrate))
                 {
                     this.Bitrate    = bitrate;
                     wasLoaded       = true;
@@ -1067,44 +1067,44 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string frameRateAttribute       = source.GetAttribute("framerate", String.Empty);
-            string samplingRateAttribute    = source.GetAttribute("samplingrate", String.Empty);
-            string channelsAttribute        = source.GetAttribute("channels", String.Empty);
-            string durationAttribute        = source.GetAttribute("duration", String.Empty);
-            string heightAttribute          = source.GetAttribute("height", String.Empty);
-            string widthAttribute           = source.GetAttribute("width", String.Empty);
-            string languageAttribute        = source.GetAttribute("lang", String.Empty);
+            string frameRateAttribute       = source.GetAttribute("framerate", string.Empty);
+            string samplingRateAttribute    = source.GetAttribute("samplingrate", string.Empty);
+            string channelsAttribute        = source.GetAttribute("channels", string.Empty);
+            string durationAttribute        = source.GetAttribute("duration", string.Empty);
+            string heightAttribute          = source.GetAttribute("height", string.Empty);
+            string widthAttribute           = source.GetAttribute("width", string.Empty);
+            string languageAttribute        = source.GetAttribute("lang", string.Empty);
 
-            if (!String.IsNullOrEmpty(frameRateAttribute))
+            if (!string.IsNullOrEmpty(frameRateAttribute))
             {
-                if (Int32.TryParse(frameRateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frameRate))
+                if (int.TryParse(frameRateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frameRate))
                 {
                     this.FrameRate  = frameRate;
                     wasLoaded       = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(samplingRateAttribute))
+            if (!string.IsNullOrEmpty(samplingRateAttribute))
             {
-                if (Decimal.TryParse(samplingRateAttribute, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal samplingRate))
+                if (decimal.TryParse(samplingRateAttribute, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal samplingRate))
                 {
                     this.SamplingRate   = samplingRate;
                     wasLoaded           = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(channelsAttribute))
+            if (!string.IsNullOrEmpty(channelsAttribute))
             {
-                if (Int32.TryParse(channelsAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int channels))
+                if (int.TryParse(channelsAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int channels))
                 {
                     this.Channels   = channels;
                     wasLoaded       = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(durationAttribute))
+            if (!string.IsNullOrEmpty(durationAttribute))
             {
-                if (Int32.TryParse(durationAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int seconds))
+                if (int.TryParse(durationAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int seconds))
                 {
                     this.Duration   = new TimeSpan(0, 0, seconds);
                     wasLoaded       = true;
@@ -1116,25 +1116,25 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
                 }
             }
 
-            if (!String.IsNullOrEmpty(heightAttribute))
+            if (!string.IsNullOrEmpty(heightAttribute))
             {
-                if (Int32.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
+                if (int.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
                 {
                     this.Height = height;
                     wasLoaded   = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(widthAttribute))
+            if (!string.IsNullOrEmpty(widthAttribute))
             {
-                if (Int32.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
+                if (int.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
                 {
                     this.Width  = width;
                     wasLoaded   = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(languageAttribute))
+            if (!string.IsNullOrEmpty(languageAttribute))
             {
                 try
                 {

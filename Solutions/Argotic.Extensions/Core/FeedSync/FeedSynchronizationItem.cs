@@ -30,7 +30,7 @@ public class FeedSynchronizationItem : IComparable
     /// <summary>
     /// Private member to hold the globally unique identifier for the item.
     /// </summary>
-    private string synchronizationId    = String.Empty;
+    private string synchronizationId    = string.Empty;
     /// <summary>
     /// Private member to hold the number of updates applied to an item.
     /// </summary>
@@ -292,7 +292,7 @@ public class FeedSynchronizationItem : IComparable
     /// <returns>The conflict preservation identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
     public static string ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective directive)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationConflictPreservationDirective).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationConflictPreservationDirective))
@@ -340,7 +340,7 @@ public class FeedSynchronizationItem : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         preservationDirective = directive;
                         break;
@@ -359,7 +359,7 @@ public class FeedSynchronizationItem : IComparable
     /// <returns>The tombstone status identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
     public static string TombstoneStatusAsString(FeedSynchronizationTombstoneStatus status)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationTombstoneStatus).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationTombstoneStatus))
@@ -407,7 +407,7 @@ public class FeedSynchronizationItem : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         tombstoneStatus = status;
                         break;
@@ -436,27 +436,27 @@ public class FeedSynchronizationItem : IComparable
         XmlNamespaceManager manager                         = extension.CreateNamespaceManager(source);
         if (source.HasAttributes)
         {
-            string idAttribute          = source.GetAttribute("id", String.Empty);
-            string updatesAttribute     = source.GetAttribute("updates", String.Empty);
-            string deletedAttribute     = source.GetAttribute("deleted", String.Empty);
-            string noConflictsAttribute = source.GetAttribute("noconflicts", String.Empty);
+            string idAttribute          = source.GetAttribute("id", string.Empty);
+            string updatesAttribute     = source.GetAttribute("updates", string.Empty);
+            string deletedAttribute     = source.GetAttribute("deleted", string.Empty);
+            string noConflictsAttribute = source.GetAttribute("noconflicts", string.Empty);
 
-            if (!String.IsNullOrEmpty(idAttribute))
+            if (!string.IsNullOrEmpty(idAttribute))
             {
                 this.Id     = idAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(updatesAttribute))
+            if (!string.IsNullOrEmpty(updatesAttribute))
             {
-                if (Int32.TryParse(updatesAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int updates))
+                if (int.TryParse(updatesAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int updates))
                 {
                     this.Updates    = updates;
                     wasLoaded       = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(deletedAttribute))
+            if (!string.IsNullOrEmpty(deletedAttribute))
             {
                 FeedSynchronizationTombstoneStatus status   = FeedSynchronizationItem.TombstoneStatusByName(deletedAttribute);
                 if (status != FeedSynchronizationTombstoneStatus.None)
@@ -466,7 +466,7 @@ public class FeedSynchronizationItem : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(noConflictsAttribute))
+            if (!string.IsNullOrEmpty(noConflictsAttribute))
             {
                 FeedSynchronizationConflictPreservationDirective directive  = FeedSynchronizationItem.ConflictPreservationByName(noConflictsAttribute);
                 if (directive != FeedSynchronizationConflictPreservationDirective.None)
@@ -597,7 +597,7 @@ public class FeedSynchronizationItem : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Id, value.Id, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Id, value.Id, StringComparison.OrdinalIgnoreCase);
             result      = result | this.ConflictPreservation.CompareTo(value.ConflictPreservation);
             result      = result | this.TombstoneStatus.CompareTo(value.TombstoneStatus);
             result      = result | this.Updates.CompareTo(value.Updates);
@@ -608,16 +608,16 @@ public class FeedSynchronizationItem : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is FeedSynchronizationItem))
         {

@@ -42,7 +42,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Private member to hold the content of the human-readable text.
     /// </summary>
-    private string textConstructContent             = String.Empty;
+    private string textConstructContent             = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomTextConstruct"/> class.
     /// </summary>
@@ -158,9 +158,9 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                textConstructContent = String.Empty;
+                textConstructContent = string.Empty;
             }
             else
             {
@@ -201,7 +201,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
     /// </example>
     public static string ConstructTypeAsString(AtomTextConstructType type)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(AtomTextConstructType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(AtomTextConstructType))
@@ -256,7 +256,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         constructType = type;
                         break;
@@ -344,8 +344,8 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
         }
         if (source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            if (!String.IsNullOrEmpty(typeAttribute))
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 AtomTextConstructType type = AtomTextConstruct.ConstructTypeByName(typeAttribute);
                 if (type != AtomTextConstructType.None)
@@ -359,18 +359,18 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
         if(this.TextType == AtomTextConstructType.Xhtml)
         {
             XPathNavigator xhtmlDivNavigator    = source.SelectSingleNode("xhtml:div", manager);
-            if (xhtmlDivNavigator != null && !String.IsNullOrEmpty(xhtmlDivNavigator.Value))
+            if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
                 this.Content    = xhtmlDivNavigator.Value;
                 wasLoaded       = true;
             }
         }
-        else if (this.TextType == AtomTextConstructType.Html && !String.IsNullOrEmpty(source.InnerXml))
+        else if (this.TextType == AtomTextConstructType.Html && !string.IsNullOrEmpty(source.InnerXml))
         {
             this.Content    = source.InnerXml;
             wasLoaded       = true;
         }
-        else if (!String.IsNullOrEmpty(source.Value))
+        else if (!string.IsNullOrEmpty(source.Value))
         {
             this.Content    = source.Value;
             wasLoaded       = true;
@@ -417,7 +417,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
         writer.WriteStartElement(elementName, AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (this.TextType == AtomTextConstructType.Xhtml && String.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
+        if (this.TextType == AtomTextConstructType.Xhtml && string.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
         {
             writer.WriteAttributeString("xmlns", "xhtml", null, AtomUtility.XhtmlNamespace);
         }
@@ -486,7 +486,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
 
         if (value != null)
         {
-            int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
             result      = result | this.TextType.CompareTo(value.TextType);
 
             result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
@@ -495,16 +495,16 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is AtomTextConstruct))
         {

@@ -31,15 +31,15 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the unique key for the author.
     /// </summary>
-    private string authorKey            = String.Empty;
+    private string authorKey            = string.Empty;
     /// <summary>
     /// Private member to hold the decimal score of the author.
     /// </summary>
-    private decimal authorValue         = Decimal.MinValue;
+    private decimal authorValue         = decimal.MinValue;
     /// <summary>
     /// Private member to hold the name of the entity that contributed the author.
     /// </summary>
-    private string authorFrom           = String.Empty;
+    private string authorFrom           = string.Empty;
     /// <summary>
     /// Private member to hold a date indicating the last time the author was updated.
     /// </summary>
@@ -146,9 +146,9 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                authorFrom = String.Empty;
+                authorFrom = string.Empty;
             }
             else
             {
@@ -212,8 +212,8 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            Guard.ArgumentNotLessThan(value, "value", Decimal.MinusOne);
-            Guard.ArgumentNotGreaterThan(value, "value", Decimal.One);
+            Guard.ArgumentNotLessThan(value, "value", decimal.MinusOne);
+            Guard.ArgumentNotGreaterThan(value, "value", decimal.One);
             authorValue = value;
         }
     }
@@ -289,22 +289,22 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string keyAttribute     = source.GetAttribute("key", String.Empty);
-            string valueAttribute   = source.GetAttribute("value", String.Empty);
-            string fromAttribute    = source.GetAttribute("from", String.Empty);
-            string updatedAttribute = source.GetAttribute("updated", String.Empty);
+            string keyAttribute     = source.GetAttribute("key", string.Empty);
+            string valueAttribute   = source.GetAttribute("value", string.Empty);
+            string fromAttribute    = source.GetAttribute("from", string.Empty);
+            string updatedAttribute = source.GetAttribute("updated", string.Empty);
 
-            if (!String.IsNullOrEmpty(keyAttribute))
+            if (!string.IsNullOrEmpty(keyAttribute))
             {
                 this.Key    = keyAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(valueAttribute))
+            if (!string.IsNullOrEmpty(valueAttribute))
             {
-                if (Decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
+                if (decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
                 {
-                    if (value >= Decimal.MinusOne && value <= Decimal.One)
+                    if (value >= decimal.MinusOne && value <= decimal.One)
                     {
                         this.Value  = value;
                         wasLoaded   = true;
@@ -312,13 +312,13 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
                 }
             }
 
-            if (!String.IsNullOrEmpty(fromAttribute))
+            if (!string.IsNullOrEmpty(fromAttribute))
             {
                 this.From   = fromAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(updatedAttribute))
+            if (!string.IsNullOrEmpty(updatedAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedAttribute, out DateTime updatedOn))
                 {
@@ -367,7 +367,7 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
         writer.WriteAttributeString("key", this.Key);
         writer.WriteAttributeString("value", this.Value.ToString("0.00", System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if (!String.IsNullOrEmpty(this.From))
+        if (!string.IsNullOrEmpty(this.From))
         {
             writer.WriteAttributeString("from", this.From);
         }
@@ -425,8 +425,8 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
             result      = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
             result      = result | this.Value.CompareTo(value.Value);
 
@@ -434,16 +434,16 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is ApmlAuthor))
         {

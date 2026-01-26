@@ -46,7 +46,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     /// <summary>
     /// Private member to hold a human-readable name for the generating agent.
     /// </summary>
-    private string generatorText    = String.Empty;
+    private string generatorText    = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomGenerator"/> class.
@@ -205,9 +205,9 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                generatorVersion = String.Empty;
+                generatorVersion = string.Empty;
             }
             else
             {
@@ -301,10 +301,10 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
 
         if(source.HasAttributes)
         {
-            string uriAttribute     = source.GetAttribute("uri", String.Empty);
-            string versionAttribute = source.GetAttribute("version", String.Empty);
+            string uriAttribute     = source.GetAttribute("uri", string.Empty);
+            string versionAttribute = source.GetAttribute("version", string.Empty);
 
-            if (!String.IsNullOrEmpty(uriAttribute))
+            if (!string.IsNullOrEmpty(uriAttribute))
             {
                 if (Uri.TryCreate(uriAttribute, UriKind.RelativeOrAbsolute, out Uri uri))
                 {
@@ -313,14 +313,14 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
                 }
             }
 
-            if (!String.IsNullOrEmpty(versionAttribute))
+            if (!string.IsNullOrEmpty(versionAttribute))
             {
                 this.Version    = versionAttribute;
                 wasLoaded       = true;
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             this.Content        = source.Value;
             wasLoaded           = true;
@@ -372,7 +372,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
             writer.WriteAttributeString("uri", this.Uri.ToString());
         }
 
-        if (!String.IsNullOrEmpty(this.Version))
+        if (!string.IsNullOrEmpty(this.Version))
         {
             writer.WriteAttributeString("version", this.Version);
         }
@@ -431,9 +431,9 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
 
         if (value != null)
         {
-            int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Version, value.Version, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Version, value.Version, StringComparison.OrdinalIgnoreCase);
 
             result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
@@ -441,16 +441,16 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is AtomGenerator))
         {

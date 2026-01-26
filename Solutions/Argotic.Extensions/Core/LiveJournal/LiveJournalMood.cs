@@ -16,11 +16,11 @@ public class LiveJournalMood : IComparable
     /// <summary>
     /// Private member to hold the textual content of the current mood.
     /// </summary>
-    private string moodContent  = String.Empty;
+    private string moodContent  = string.Empty;
     /// <summary>
     /// Private member to hold a site specific identifier for the current mood.
     /// </summary>
-    private int moodIdentifier  = Int32.MinValue;
+    private int moodIdentifier  = int.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalMood"/> class.
     /// </summary>
@@ -80,10 +80,10 @@ public class LiveJournalMood : IComparable
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string idAttribute  = source.GetAttribute("id", String.Empty);
-            if (!String.IsNullOrEmpty(idAttribute))
+            string idAttribute  = source.GetAttribute("id", string.Empty);
+            if (!string.IsNullOrEmpty(idAttribute))
             {
-                if (Int32.TryParse(idAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int id))
+                if (int.TryParse(idAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int id))
                 {
                     this.Id     = id;
                     wasLoaded   = true;
@@ -91,7 +91,7 @@ public class LiveJournalMood : IComparable
             }
         }
 
-        if(!String.IsNullOrEmpty(source.Value))
+        if(!string.IsNullOrEmpty(source.Value))
         {
             this.Content    = source.Value;
             wasLoaded       = true;
@@ -111,7 +111,7 @@ public class LiveJournalMood : IComparable
         LiveJournalSyndicationExtension extension   = new LiveJournalSyndicationExtension();
         writer.WriteStartElement("mood", extension.XmlNamespace);
 
-        if(this.Id != Int32.MinValue)
+        if(this.Id != int.MinValue)
         {
             writer.WriteAttributeString("id", this.Id.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
@@ -168,22 +168,22 @@ public class LiveJournalMood : IComparable
         if (value != null)
         {
             int result  = this.Id.CompareTo(value.Id);
-            result      = result | String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is LiveJournalMood))
         {

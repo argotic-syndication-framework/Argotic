@@ -29,7 +29,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
-    private string commonObjectBaseId                           = String.Empty;
+    private string commonObjectBaseId                           = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the web log entity information was created.
     /// </summary>
@@ -89,7 +89,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <summary>
     /// Private member to hold views of the post.
     /// </summary>
-    private string postViews                                    = String.Empty;
+    private string postViews                                    = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLPost"/> class.
     /// </summary>
@@ -153,9 +153,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                commonObjectBaseId = String.Empty;
+                commonObjectBaseId = string.Empty;
             }
             else
             {
@@ -444,9 +444,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                postViews = String.Empty;
+                postViews = string.Empty;
             }
             else
             {
@@ -645,7 +645,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// </example>
     public static string PostTypeAsString(BlogMLPostType type)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLPostType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(BlogMLPostType))
@@ -701,7 +701,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         postType    = type;
                         break;
@@ -789,11 +789,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         }
         if(source.HasAttributes)
         {
-            string postUrlAttribute = source.GetAttribute("post-url", String.Empty);
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            string viewsAttribute   = source.GetAttribute("views", String.Empty);
+            string postUrlAttribute = source.GetAttribute("post-url", string.Empty);
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string viewsAttribute   = source.GetAttribute("views", string.Empty);
 
-            if (!String.IsNullOrEmpty(postUrlAttribute))
+            if (!string.IsNullOrEmpty(postUrlAttribute))
             {
                 if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
@@ -802,7 +802,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 }
             }
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 BlogMLPostType type = BlogMLPost.PostTypeByName(typeAttribute);
                 if (type != BlogMLPostType.None)
@@ -812,7 +812,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 }
             }
 
-            if (!String.IsNullOrEmpty(viewsAttribute))
+            if (!string.IsNullOrEmpty(viewsAttribute))
             {
                 this.Views  = viewsAttribute;
                 wasLoaded   = true;
@@ -887,11 +887,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         }
         if(source.HasAttributes)
         {
-            string postUrlAttribute = source.GetAttribute("post-url", String.Empty);
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            string viewsAttribute   = source.GetAttribute("views", String.Empty);
+            string postUrlAttribute = source.GetAttribute("post-url", string.Empty);
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string viewsAttribute   = source.GetAttribute("views", string.Empty);
 
-            if (!String.IsNullOrEmpty(postUrlAttribute))
+            if (!string.IsNullOrEmpty(postUrlAttribute))
             {
                 if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
@@ -900,7 +900,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 }
             }
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 BlogMLPostType type = BlogMLPost.PostTypeByName(typeAttribute);
                 if (type != BlogMLPostType.None)
@@ -910,7 +910,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 }
             }
 
-            if (!String.IsNullOrEmpty(viewsAttribute))
+            if (!string.IsNullOrEmpty(viewsAttribute))
             {
                 this.Views  = viewsAttribute;
                 wasLoaded   = true;
@@ -987,7 +987,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         writer.WriteAttributeString("hasexcerpt", this.HasExcerpt ? "true" : "false");
 
-        if (!String.IsNullOrEmpty(this.Views))
+        if (!string.IsNullOrEmpty(this.Views))
         {
             writer.WriteAttributeString("views", this.Views);
         }
@@ -1091,8 +1091,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (categoriesIterator.MoveNext())
             {
-                string referenceId  = categoriesIterator.Current.GetAttribute("ref", String.Empty);
-                if (!String.IsNullOrEmpty(referenceId))
+                string referenceId  = categoriesIterator.Current.GetAttribute("ref", string.Empty);
+                if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Categories.Add(referenceId);
                     wasLoaded       = true;
@@ -1143,8 +1143,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (authorsIterator.MoveNext())
             {
-                string referenceId  = authorsIterator.Current.GetAttribute("ref", String.Empty);
-                if (!String.IsNullOrEmpty(referenceId))
+                string referenceId  = authorsIterator.Current.GetAttribute("ref", string.Empty);
+                if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Authors.Add(referenceId);
                     wasLoaded       = true;
@@ -1186,8 +1186,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (categoriesIterator.MoveNext())
             {
-                string referenceId  = categoriesIterator.Current.GetAttribute("ref", String.Empty);
-                if (!String.IsNullOrEmpty(referenceId))
+                string referenceId  = categoriesIterator.Current.GetAttribute("ref", string.Empty);
+                if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Categories.Add(referenceId);
                     wasLoaded       = true;
@@ -1238,8 +1238,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (authorsIterator.MoveNext())
             {
-                string referenceId  = authorsIterator.Current.GetAttribute("ref", String.Empty);
-                if (!String.IsNullOrEmpty(referenceId))
+                string referenceId  = authorsIterator.Current.GetAttribute("ref", string.Empty);
+                if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Authors.Add(referenceId);
                     wasLoaded       = true;
@@ -1321,7 +1321,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             result      = result | this.PostType.CompareTo(value.PostType);
             result      = result | BlogMLPost.CompareSequence(this.Trackbacks, value.Trackbacks);
             result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
 
             result      = result | BlogMLUtility.CompareCommonObjects(this, value);
 
@@ -1329,16 +1329,16 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is BlogMLPost))
         {

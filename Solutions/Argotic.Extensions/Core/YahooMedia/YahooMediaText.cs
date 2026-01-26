@@ -39,7 +39,7 @@ public class YahooMediaText : IComparable
     /// <summary>
     /// Private member to hold the text transcript, closed captioning, or lyrics for the media content.
     /// </summary>
-    private string textContent                      = String.Empty;
+    private string textContent                      = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaText"/> class.
@@ -183,7 +183,7 @@ public class YahooMediaText : IComparable
     /// <returns>The entity encoding type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
     public static string TextTypeAsString(YahooMediaTextConstructType type)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaTextConstructType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaTextConstructType))
@@ -231,7 +231,7 @@ public class YahooMediaText : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         constructType = type;
                         break;
@@ -258,12 +258,12 @@ public class YahooMediaText : IComparable
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string typeAttribute        = source.GetAttribute("type", String.Empty);
-            string languageAttribute    = source.GetAttribute("lang", String.Empty);
-            string startAttribute       = source.GetAttribute("start", String.Empty);
-            string endAttribute         = source.GetAttribute("end", String.Empty);
+            string typeAttribute        = source.GetAttribute("type", string.Empty);
+            string languageAttribute    = source.GetAttribute("lang", string.Empty);
+            string startAttribute       = source.GetAttribute("start", string.Empty);
+            string endAttribute         = source.GetAttribute("end", string.Empty);
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 YahooMediaTextConstructType type = YahooMediaTextConstruct.TextTypeByName(typeAttribute);
                 if (type != YahooMediaTextConstructType.None)
@@ -273,7 +273,7 @@ public class YahooMediaText : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(languageAttribute))
+            if (!string.IsNullOrEmpty(languageAttribute))
             {
                 try
                 {
@@ -287,7 +287,7 @@ public class YahooMediaText : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(startAttribute))
+            if (!string.IsNullOrEmpty(startAttribute))
             {
                 if (TimeSpan.TryParse(startAttribute, out TimeSpan start))
                 {
@@ -296,7 +296,7 @@ public class YahooMediaText : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(endAttribute))
+            if (!string.IsNullOrEmpty(endAttribute))
             {
                 if (TimeSpan.TryParse(endAttribute, out TimeSpan end))
                 {
@@ -306,7 +306,7 @@ public class YahooMediaText : IComparable
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             this.Content    = source.Value;
             wasLoaded       = true;
@@ -346,7 +346,7 @@ public class YahooMediaText : IComparable
             writer.WriteAttributeString("end", this.End.ToString());
         }
 
-        if (!String.IsNullOrEmpty(this.Content))
+        if (!string.IsNullOrEmpty(this.Content))
         {
             writer.WriteString(this.Content);
         }
@@ -400,12 +400,12 @@ public class YahooMediaText : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
             result      = result | this.End.CompareTo(value.End);
 
-            string sourceLanguageName   = this.Language != null ? this.Language.Name : String.Empty;
-            string targetLanguageName   = value.Language != null ? value.Language.Name : String.Empty;
-            result      = result | String.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+            string sourceLanguageName   = this.Language != null ? this.Language.Name : string.Empty;
+            string targetLanguageName   = value.Language != null ? value.Language.Name : string.Empty;
+            result      = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
             result      = result | this.Start.CompareTo(value.Start);
             result      = result | this.TextType.CompareTo(value.TextType);
@@ -414,16 +414,16 @@ public class YahooMediaText : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is YahooMediaText))
         {

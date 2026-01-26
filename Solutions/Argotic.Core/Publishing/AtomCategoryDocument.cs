@@ -651,7 +651,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, Object userToken)
+    public void LoadAsync(Uri source, object userToken)
     {
         this.LoadAsync(source, null, userToken);
     }
@@ -675,7 +675,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
     }
@@ -705,7 +705,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
     {
         this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
     }
@@ -730,7 +730,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="InvalidOperationException">This <see cref="AtomCategoryDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, Object userToken)
+    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
     {
         Guard.ArgumentNotNull(source, "source");
 
@@ -1411,16 +1411,16 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is AtomCategoryDocument))
         {

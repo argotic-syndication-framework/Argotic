@@ -124,7 +124,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable
     /// </remarks>
     public override string ToString()
     {
-        return String.Format(null, "[SyndicationResourceSaveSettings(CharacterEncoding = \"{0}\", MinimizeOutputSize = \"{1}\", Autodetect = \"{2}\", SupportedExtensions = \"{3}\")]", this.CharacterEncoding.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        return string.Format(null, "[SyndicationResourceSaveSettings(CharacterEncoding = \"{0}\", MinimizeOutputSize = \"{1}\", Autodetect = \"{2}\", SupportedExtensions = \"{3}\")]", this.CharacterEncoding.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
     }
 
     /// <summary>
@@ -144,7 +144,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
             result      = result | this.MinimizeOutputSize.CompareTo(value.MinimizeOutputSize);
             result      = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
             result      = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
@@ -153,16 +153,16 @@ public sealed class SyndicationResourceSaveSettings : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is SyndicationResourceSaveSettings))
         {

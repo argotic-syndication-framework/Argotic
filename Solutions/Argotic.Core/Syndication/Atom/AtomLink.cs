@@ -44,11 +44,11 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <summary>
     /// Private member to hold a value that indicates the link relation type.
     /// </summary>
-    private string linkRelation     = String.Empty;
+    private string linkRelation     = string.Empty;
     /// <summary>
     /// Private member to hold an advisory media type for the Web resource.
     /// </summary>
-    private string linkMediaType    = String.Empty;
+    private string linkMediaType    = string.Empty;
     /// <summary>
     /// Private member to hold the natural language of the Web resource.
     /// </summary>
@@ -56,11 +56,11 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <summary>
     /// Private member to hold human-readable information about the Web resource.
     /// </summary>
-    private string linkTitle        = String.Empty;
+    private string linkTitle        = string.Empty;
     /// <summary>
     /// Private member to hold an advisory length of the resource content in octets.
     /// </summary>
-    private long linkLength         = Int64.MinValue;
+    private long linkLength         = long.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomLink"/> class.
     /// </summary>
@@ -245,9 +245,9 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                linkMediaType = String.Empty;
+                linkMediaType = string.Empty;
             }
             else
             {
@@ -337,9 +337,9 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                linkRelation = String.Empty;
+                linkRelation = string.Empty;
             }
             else
             {
@@ -365,9 +365,9 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                linkTitle = String.Empty;
+                linkTitle = string.Empty;
             }
             else
             {
@@ -474,14 +474,14 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         }
         if(source.HasAttributes)
         {
-            string hrefAttribute        = source.GetAttribute("href", String.Empty);
-            string relAttribute         = source.GetAttribute("rel", String.Empty);
-            string typeAttribute        = source.GetAttribute("type", String.Empty);
-            string hreflangAttribute    = source.GetAttribute("hreflang", String.Empty);
-            string titleAttribute       = source.GetAttribute("title", String.Empty);
-            string lengthAttribute      = source.GetAttribute("length", String.Empty);
+            string hrefAttribute        = source.GetAttribute("href", string.Empty);
+            string relAttribute         = source.GetAttribute("rel", string.Empty);
+            string typeAttribute        = source.GetAttribute("type", string.Empty);
+            string hreflangAttribute    = source.GetAttribute("hreflang", string.Empty);
+            string titleAttribute       = source.GetAttribute("title", string.Empty);
+            string lengthAttribute      = source.GetAttribute("length", string.Empty);
 
-            if (!String.IsNullOrEmpty(hrefAttribute))
+            if (!string.IsNullOrEmpty(hrefAttribute))
             {
                 if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                 {
@@ -490,19 +490,19 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
                 }
             }
 
-            if (!String.IsNullOrEmpty(relAttribute))
+            if (!string.IsNullOrEmpty(relAttribute))
             {
                 this.Relation       = relAttribute;
                 wasLoaded           = true;
             }
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 this.ContentType    = typeAttribute;
                 wasLoaded           = true;
             }
 
-            if (!String.IsNullOrEmpty(hreflangAttribute))
+            if (!string.IsNullOrEmpty(hreflangAttribute))
             {
                 try
                 {
@@ -516,15 +516,15 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
                 }
             }
 
-            if (!String.IsNullOrEmpty(titleAttribute))
+            if (!string.IsNullOrEmpty(titleAttribute))
             {
                 this.Title          = titleAttribute;
                 wasLoaded           = true;
             }
 
-            if (!String.IsNullOrEmpty(lengthAttribute))
+            if (!string.IsNullOrEmpty(lengthAttribute))
             {
-                if (Int64.TryParse(lengthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long length))
+                if (long.TryParse(lengthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long length))
                 {
                     this.Length     = length;
                     wasLoaded       = true;
@@ -569,14 +569,14 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         writer.WriteStartElement("link", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        writer.WriteAttributeString("href", this.Uri != null ? this.Uri.ToString() : String.Empty);
+        writer.WriteAttributeString("href", this.Uri != null ? this.Uri.ToString() : string.Empty);
 
-        if(!String.IsNullOrEmpty(this.Relation))
+        if(!string.IsNullOrEmpty(this.Relation))
         {
             writer.WriteAttributeString("rel", this.Relation);
         }
 
-        if (!String.IsNullOrEmpty(this.ContentType))
+        if (!string.IsNullOrEmpty(this.ContentType))
         {
             writer.WriteAttributeString("type", this.ContentType);
         }
@@ -586,12 +586,12 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
             writer.WriteAttributeString("hreflang", this.ContentLanguage.Name);
         }
 
-        if (!String.IsNullOrEmpty(this.Title))
+        if (!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteAttributeString("title", this.Title);
         }
 
-        if(this.Length != Int64.MinValue)
+        if(this.Length != long.MinValue)
         {
             writer.WriteAttributeString("length", this.Length.ToString(NumberFormatInfo.InvariantInfo));
         }
@@ -645,14 +645,14 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         if (value != null)
         {
             int result  = this.Length.CompareTo(value.Length);
-            result      = result | String.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Relation, value.Relation, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Relation, value.Relation, StringComparison.OrdinalIgnoreCase);
 
-            string sourceLanguageName   = this.ContentLanguage != null ? this.ContentLanguage.Name : String.Empty;
-            string targetLanguageName   = value.ContentLanguage != null ? value.ContentLanguage.Name : String.Empty;
-            result      = result | String.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+            string sourceLanguageName   = this.ContentLanguage != null ? this.ContentLanguage.Name : string.Empty;
+            string targetLanguageName   = value.ContentLanguage != null ? value.ContentLanguage.Name : string.Empty;
+            result      = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
@@ -661,16 +661,16 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is AtomLink))
         {

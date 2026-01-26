@@ -16,11 +16,11 @@ public class ITunesOwner : IComparable
     /// <summary>
     /// Private member to hold the email address of the owner.
     /// </summary>
-    private string ownerEmailAddress    = String.Empty;
+    private string ownerEmailAddress    = string.Empty;
     /// <summary>
     /// Private member to hold the name of the owner.
     /// </summary>
-    private string ownerName            = String.Empty;
+    private string ownerName            = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesOwner"/> class.
     /// </summary>
@@ -52,9 +52,9 @@ public class ITunesOwner : IComparable
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                ownerEmailAddress = String.Empty;
+                ownerEmailAddress = string.Empty;
             }
             else
             {
@@ -76,9 +76,9 @@ public class ITunesOwner : IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                ownerName = String.Empty;
+                ownerName = string.Empty;
             }
             else
             {
@@ -106,13 +106,13 @@ public class ITunesOwner : IComparable
             XPathNavigator emailNavigator   = source.SelectSingleNode("itunes:email", manager);
             XPathNavigator nameNavigator    = source.SelectSingleNode("itunes:name", manager);
 
-            if (emailNavigator != null && !String.IsNullOrEmpty(emailNavigator.Value))
+            if (emailNavigator != null && !string.IsNullOrEmpty(emailNavigator.Value))
             {
                 this.EmailAddress   = emailNavigator.Value;
                 wasLoaded           = true;
             }
 
-            if (nameNavigator != null && !String.IsNullOrEmpty(nameNavigator.Value))
+            if (nameNavigator != null && !string.IsNullOrEmpty(nameNavigator.Value))
             {
                 this.Name   = nameNavigator.Value;
                 wasLoaded   = true;
@@ -133,12 +133,12 @@ public class ITunesOwner : IComparable
         ITunesSyndicationExtension extension    = new ITunesSyndicationExtension();
         writer.WriteStartElement("owner", extension.XmlNamespace);
 
-        if(!String.IsNullOrEmpty(this.EmailAddress))
+        if(!string.IsNullOrEmpty(this.EmailAddress))
         {
             writer.WriteElementString("email", extension.XmlNamespace, this.EmailAddress);
         }
 
-        if (!String.IsNullOrEmpty(this.Name))
+        if (!string.IsNullOrEmpty(this.Name))
         {
             writer.WriteElementString("name", extension.XmlNamespace, this.Name);
         }
@@ -190,23 +190,23 @@ public class ITunesOwner : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is ITunesOwner))
         {

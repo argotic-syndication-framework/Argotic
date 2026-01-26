@@ -36,11 +36,11 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold character data that provides the name of the feed.
     /// </summary>
-    private string channelTitle             = String.Empty;
+    private string channelTitle             = string.Empty;
     /// <summary>
     /// Private member to hold character data that provides a human-readable characterization or summary of the feed.
     /// </summary>
-    private string channelDescription       = String.Empty;
+    private string channelDescription       = string.Empty;
     /// <summary>
     /// Private member to hold categories or tags to which the channel belongs.
     /// </summary>
@@ -52,7 +52,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the human-readable copyright statement that applies to the feed.
     /// </summary>
-    private string channelCopyrightNotice   = String.Empty;
+    private string channelCopyrightNotice   = string.Empty;
     /// <summary>
     /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
     /// </summary>
@@ -60,7 +60,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold a value that credits the software that created the feed.
     /// </summary>
-    private string channelGenerator         = String.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4));
+    private string channelGenerator         = string.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4));
     /// <summary>
     /// Private member to hold the graphical logo for the feed.
     /// </summary>
@@ -76,7 +76,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the e-mail address of the person to contact regarding the editorial content of the feed.
     /// </summary>
-    private string channelManagingEditor    = String.Empty;
+    private string channelManagingEditor    = string.Empty;
     /// <summary>
     /// Private member to hold the publication date and time of the feed's content.
     /// </summary>
@@ -84,7 +84,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold an advisory label for the content in a feed.
     /// </summary>
-    private string channelRating            = String.Empty;
+    private string channelRating            = string.Empty;
     /// <summary>
     /// Private member to hold the days of the week during which the feed is not updated.
     /// </summary>
@@ -100,11 +100,11 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the maximum number of minutes to cache the data before an aggregator should request it again.
     /// </summary>
-    private int channelTimeToLive           = Int32.MinValue;
+    private int channelTimeToLive           = int.MinValue;
     /// <summary>
     /// Private member to hold the e-mail address of the person to contact about technical issues regarding the feed.
     /// </summary>
-    private string channelWebmaster         = String.Empty;
+    private string channelWebmaster         = string.Empty;
     /// <summary>
     /// Private member to hold the collection of items that comprise the distinct content published in the feed.
     /// </summary>
@@ -252,9 +252,9 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                channelCopyrightNotice = String.Empty;
+                channelCopyrightNotice = string.Empty;
             }
             else
             {
@@ -311,9 +311,9 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                channelGenerator = String.Empty;
+                channelGenerator = string.Empty;
             }
             else
             {
@@ -446,9 +446,9 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                channelManagingEditor = String.Empty;
+                channelManagingEditor = string.Empty;
             }
             else
             {
@@ -499,9 +499,9 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                channelRating   = String.Empty;
+                channelRating   = string.Empty;
             }
             else
             {
@@ -657,9 +657,9 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                channelWebmaster = String.Empty;
+                channelWebmaster = string.Empty;
             }
             else
             {
@@ -803,7 +803,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         XPathNavigator linkNavigator            = source.SelectSingleNode("link", manager);
         XPathNavigator titleNavigator           = source.SelectSingleNode("title", manager);
 
-        if (descriptionNavigator != null && !String.IsNullOrEmpty(descriptionNavigator.Value))
+        if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
             this.Description    = descriptionNavigator.Value;
             wasLoaded           = true;
@@ -818,7 +818,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (titleNavigator != null && !String.IsNullOrEmpty(titleNavigator.Value))
+        if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
             this.Title          = titleNavigator.Value;
             wasLoaded           = true;
@@ -855,7 +855,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("channel");
         writer.WriteElementString("title", this.Title);
-        writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : String.Empty);
+        writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
         writer.WriteElementString("description", this.Description);
 
         if(this.Cloud != null)
@@ -863,14 +863,14 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             this.Cloud.WriteTo(writer);
         }
 
-        if(!String.IsNullOrEmpty(this.Copyright))
+        if(!string.IsNullOrEmpty(this.Copyright))
         {
             writer.WriteElementString("copyright", this.Copyright);
         }
 
         writer.WriteElementString("docs", RssChannel.Documentation.ToString());
 
-        if (!String.IsNullOrEmpty(this.Generator))
+        if (!string.IsNullOrEmpty(this.Generator))
         {
             writer.WriteElementString("generator", this.Generator);
         }
@@ -890,7 +890,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("lastBuildDate", SyndicationDateTimeUtility.ToRfc822DateTime(this.LastBuildDate));
         }
 
-        if (!String.IsNullOrEmpty(this.ManagingEditor))
+        if (!string.IsNullOrEmpty(this.ManagingEditor))
         {
             writer.WriteElementString("managingEditor", this.ManagingEditor);
         }
@@ -900,7 +900,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("pubDate", SyndicationDateTimeUtility.ToRfc822DateTime(this.PublicationDate));
         }
 
-        if (!String.IsNullOrEmpty(this.Rating))
+        if (!string.IsNullOrEmpty(this.Rating))
         {
             writer.WriteElementString("rating", this.Rating);
         }
@@ -910,12 +910,12 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             this.TextInput.WriteTo(writer);
         }
 
-        if (this.TimeToLive != Int32.MinValue)
+        if (this.TimeToLive != int.MinValue)
         {
             writer.WriteElementString("ttl", this.TimeToLive.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if (!String.IsNullOrEmpty(this.Webmaster))
+        if (!string.IsNullOrEmpty(this.Webmaster))
         {
             writer.WriteElementString("webMaster", this.Webmaster);
         }
@@ -1047,7 +1047,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             while (skipDaysIterator.MoveNext())
             {
-                if (!String.IsNullOrEmpty(skipDaysIterator.Current.Value))
+                if (!string.IsNullOrEmpty(skipDaysIterator.Current.Value))
                 {
                     try
                     {
@@ -1070,7 +1070,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             while (skipHoursIterator.MoveNext())
             {
-                if (Int32.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
+                if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
                     if (!this.SkipHours.Contains(hour) && (hour >= 0 && hour <= 23))
                     {
@@ -1172,7 +1172,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (languageNavigator != null && !String.IsNullOrEmpty(languageNavigator.Value))
+        if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
         {
             try
             {
@@ -1228,7 +1228,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         if (timeToLiveNavigator != null)
         {
-            if (Int32.TryParse(timeToLiveNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int timeToLive))
+            if (int.TryParse(timeToLiveNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int timeToLive))
             {
                 this.TimeToLive     = timeToLive;
                 wasLoaded           = true;
@@ -1270,11 +1270,11 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             {
                 if (atomLinkIterator.Current.HasAttributes)
                 {
-                    string relAttribute     = atomLinkIterator.Current.GetAttribute("rel", String.Empty);
-                    if (String.Compare(relAttribute, "self", StringComparison.OrdinalIgnoreCase) == 0)
+                    string relAttribute     = atomLinkIterator.Current.GetAttribute("rel", string.Empty);
+                    if (string.Compare(relAttribute, "self", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        string hrefAttribute    = atomLinkIterator.Current.GetAttribute("href", String.Empty);
-                        if (!String.IsNullOrEmpty(hrefAttribute))
+                        string hrefAttribute    = atomLinkIterator.Current.GetAttribute("href", string.Empty);
+                        if (!string.IsNullOrEmpty(hrefAttribute))
                         {
                             if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri atomLink))
                             {
@@ -1335,17 +1335,17 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.Copyright, value.Copyright, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Copyright, value.Copyright, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
             result      = result | this.LastBuildDate.CompareTo(value.LastBuildDate);
             result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.ManagingEditor, value.ManagingEditor, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.ManagingEditor, value.ManagingEditor, StringComparison.OrdinalIgnoreCase);
             result      = result | this.PublicationDate.CompareTo(value.PublicationDate);
-            result      = result | String.Compare(this.Rating, value.Rating, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Rating, value.Rating, StringComparison.OrdinalIgnoreCase);
             result      = result | this.TimeToLive.CompareTo(value.TimeToLive);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Webmaster, value.Webmaster, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Webmaster, value.Webmaster, StringComparison.OrdinalIgnoreCase);
 
             if (this.Cloud != null)
             {
@@ -1369,7 +1369,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             {
                 if (value.Language != null)
                 {
-                    result  = result | String.Compare(this.Language.Name, value.Language.Name, StringComparison.OrdinalIgnoreCase);
+                    result  = result | string.Compare(this.Language.Name, value.Language.Name, StringComparison.OrdinalIgnoreCase);
                 }
                 else
                 {
@@ -1399,16 +1399,16 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is RssChannel))
         {

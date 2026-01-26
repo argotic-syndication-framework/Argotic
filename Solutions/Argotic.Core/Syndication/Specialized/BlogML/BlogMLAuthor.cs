@@ -21,7 +21,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
-    private string commonObjectBaseId                           = String.Empty;
+    private string commonObjectBaseId                           = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the web log entity information was created.
     /// </summary>
@@ -41,7 +41,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
     /// <summary>
     /// Private member to hold the email address for the author.
     /// </summary>
-    private string authorEmailAddress                           = String.Empty;
+    private string authorEmailAddress                           = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLAuthor"/> class.
     /// </summary>
@@ -105,9 +105,9 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                commonObjectBaseId = String.Empty;
+                commonObjectBaseId = string.Empty;
             }
             else
             {
@@ -207,9 +207,9 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                authorEmailAddress = String.Empty;
+                authorEmailAddress = string.Empty;
             }
             else
             {
@@ -294,9 +294,9 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
         }
         if(source.HasAttributes)
         {
-            string emailAttribute   = source.GetAttribute("email", String.Empty);
+            string emailAttribute   = source.GetAttribute("email", string.Empty);
 
-            if (!String.IsNullOrEmpty(emailAttribute))
+            if (!string.IsNullOrEmpty(emailAttribute))
             {
                 this.EmailAddress   = emailAttribute;
                 wasLoaded           = true;
@@ -328,9 +328,9 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
         }
         if(source.HasAttributes)
         {
-            string emailAttribute   = source.GetAttribute("email", String.Empty);
+            string emailAttribute   = source.GetAttribute("email", string.Empty);
 
-            if (!String.IsNullOrEmpty(emailAttribute))
+            if (!string.IsNullOrEmpty(emailAttribute))
             {
                 this.EmailAddress   = emailAttribute;
                 wasLoaded           = true;
@@ -353,7 +353,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
         writer.WriteStartElement("author", BlogMLUtility.BlogMLNamespace);
         BlogMLUtility.WriteCommonObjectAttributes(this, writer);
             
-        if(!String.IsNullOrEmpty(this.EmailAddress))
+        if(!string.IsNullOrEmpty(this.EmailAddress))
         {
             writer.WriteAttributeString("email", this.EmailAddress);
         }
@@ -410,7 +410,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
 
         if (value != null)
         {
-            int result  = String.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
 
             result      = result | BlogMLUtility.CompareCommonObjects(this, value);
 
@@ -418,16 +418,16 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is BlogMLAuthor))
         {

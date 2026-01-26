@@ -21,7 +21,7 @@ public class YahooMediaCredit : IComparable
     /// <summary>
     /// Private member to hold the role the entity played.
     /// </summary>
-    private string creditRole       = String.Empty;
+    private string creditRole       = string.Empty;
     /// <summary>
     /// Private member to hold the URI that identifies the role scheme.
     /// </summary>
@@ -29,7 +29,7 @@ public class YahooMediaCredit : IComparable
     /// <summary>
     /// Private member to hold the name of the entity that contributed to the creation of the media object.
     /// </summary>
-    private string creditEntityName = String.Empty;
+    private string creditEntityName = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaCredit"/> class.
     /// </summary>
@@ -101,9 +101,9 @@ public class YahooMediaCredit : IComparable
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                creditRole = String.Empty;
+                creditRole = string.Empty;
             }
             else
             {
@@ -148,16 +148,16 @@ public class YahooMediaCredit : IComparable
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string roleAttribute    = source.GetAttribute("role", String.Empty);
-            string schemeAttribute  = source.GetAttribute("scheme", String.Empty);
+            string roleAttribute    = source.GetAttribute("role", string.Empty);
+            string schemeAttribute  = source.GetAttribute("scheme", string.Empty);
 
-            if (!String.IsNullOrEmpty(roleAttribute))
+            if (!string.IsNullOrEmpty(roleAttribute))
             {
                 this.Role   = roleAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(schemeAttribute))
+            if (!string.IsNullOrEmpty(schemeAttribute))
             {
                 if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                 {
@@ -167,7 +167,7 @@ public class YahooMediaCredit : IComparable
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             this.Entity = source.Value;
             wasLoaded   = true;
@@ -187,7 +187,7 @@ public class YahooMediaCredit : IComparable
         YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("credit", extension.XmlNamespace);
 
-        if (!String.IsNullOrEmpty(this.Role))
+        if (!string.IsNullOrEmpty(this.Role))
         {
             writer.WriteAttributeString("role", this.Role);
         }
@@ -197,7 +197,7 @@ public class YahooMediaCredit : IComparable
             writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }
 
-        if (!String.IsNullOrEmpty(this.Entity))
+        if (!string.IsNullOrEmpty(this.Entity))
         {
             writer.WriteString(this.Entity);
         }
@@ -251,24 +251,24 @@ public class YahooMediaCredit : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Entity, value.Entity, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Role, value.Role, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Entity, value.Entity, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Role, value.Role, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is YahooMediaCredit))
         {

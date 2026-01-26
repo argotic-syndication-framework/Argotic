@@ -25,11 +25,11 @@ public class WebContentType : IComparable
     /// <summary>
     /// Private member to hold the type of the media content.
     /// </summary>
-    private string webContentMediaType          = String.Empty;
+    private string webContentMediaType          = string.Empty;
     /// <summary>
     /// Private member to hold the subtype of the media content.
     /// </summary>
-    private string webContentMediaSubType       = String.Empty;
+    private string webContentMediaSubType       = string.Empty;
     /// <summary>
     /// Private member to hold additional parameters applied to the media content.
     /// </summary>
@@ -106,12 +106,12 @@ public class WebContentType : IComparable
     {
         get
         {
-            return this.Parameters.ContainsKey(CHARSET_PARAMETER_NAME) ? this.Parameters[CHARSET_PARAMETER_NAME] : String.Empty;
+            return this.Parameters.ContainsKey(CHARSET_PARAMETER_NAME) ? this.Parameters[CHARSET_PARAMETER_NAME] : string.Empty;
         }
 
         set
         {
-            if (!String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
                 this.Parameters[CHARSET_PARAMETER_NAME] = value.Trim();
             }
@@ -138,12 +138,12 @@ public class WebContentType : IComparable
     {
         get
         {
-            return this.Parameters.ContainsKey(TYPE_PARAMETER_NAME) ? this.Parameters[TYPE_PARAMETER_NAME] : String.Empty;
+            return this.Parameters.ContainsKey(TYPE_PARAMETER_NAME) ? this.Parameters[TYPE_PARAMETER_NAME] : string.Empty;
         }
 
         set
         {
-            if (!String.IsNullOrEmpty(value))
+            if (!string.IsNullOrEmpty(value))
             {
                 this.Parameters[TYPE_PARAMETER_NAME] = value.Trim();
             }
@@ -170,7 +170,7 @@ public class WebContentType : IComparable
             Encoding encoding   = null;
             string characterSet = this.CharacterSet;
 
-            if (!String.IsNullOrEmpty(characterSet))
+            if (!string.IsNullOrEmpty(characterSet))
             {
                 encoding    = Encoding.GetEncoding(characterSet);
             }
@@ -272,7 +272,7 @@ public class WebContentType : IComparable
             {
                 if(target.ContainsKey(key))
                 {
-                    result  = result | String.Compare(source[key], target[key], StringComparison.Ordinal);
+                    result  = result | string.Compare(source[key], target[key], StringComparison.Ordinal);
                 }
                 else
                 {
@@ -305,23 +305,23 @@ public class WebContentType : IComparable
     {
         StringBuilder builder   = new StringBuilder();
 
-        builder.Append(String.Format(null, "{0}/{1}", this.MediaType.ToLowerInvariant(), this.MediaSubtype));
+        builder.Append(string.Format(null, "{0}/{1}", this.MediaType.ToLowerInvariant(), this.MediaSubtype));
 
-        if(!String.IsNullOrEmpty(this.Discriminator))
+        if(!string.IsNullOrEmpty(this.Discriminator))
         {
-            builder.Append(String.Format(null, ";{0}={1}", TYPE_PARAMETER_NAME, this.Discriminator));
+            builder.Append(string.Format(null, ";{0}={1}", TYPE_PARAMETER_NAME, this.Discriminator));
         }
-        if (!String.IsNullOrEmpty(this.CharacterSet))
+        if (!string.IsNullOrEmpty(this.CharacterSet))
         {
-            builder.Append(String.Format(null, ";{0}={1}", CHARSET_PARAMETER_NAME, this.CharacterSet));
+            builder.Append(string.Format(null, ";{0}={1}", CHARSET_PARAMETER_NAME, this.CharacterSet));
         }
 
         foreach(string parameterName in this.Parameters.Keys)
         {
-            string parameterValue   = !String.IsNullOrEmpty(this.Parameters[parameterName]) ? this.Parameters[parameterName].Trim() : String.Empty;
-            if (String.Compare(parameterName, TYPE_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0 && String.Compare(parameterName, CHARSET_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0)
+            string parameterValue   = !string.IsNullOrEmpty(this.Parameters[parameterName]) ? this.Parameters[parameterName].Trim() : string.Empty;
+            if (string.Compare(parameterName, TYPE_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0 && string.Compare(parameterName, CHARSET_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0)
             {
-                builder.Append(String.Format(null, ";{0}={1}", parameterName, parameterValue));
+                builder.Append(string.Format(null, ";{0}={1}", parameterName, parameterValue));
             }
         }
 
@@ -345,24 +345,24 @@ public class WebContentType : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.MediaType, value.MediaType, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.MediaSubtype, value.MediaSubtype, StringComparison.Ordinal);
+            int result  = string.Compare(this.MediaType, value.MediaType, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.MediaSubtype, value.MediaSubtype, StringComparison.Ordinal);
             result      = result | WebContentType.CompareSequence(this.Parameters, value.Parameters);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is WebContentType))
         {

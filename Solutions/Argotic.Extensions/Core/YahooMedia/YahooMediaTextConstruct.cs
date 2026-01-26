@@ -24,7 +24,7 @@ public class YahooMediaTextConstruct : IComparable
     /// <summary>
     /// Private member to hold the content of the human-readable text.
     /// </summary>
-    private string textConstructContent                     = String.Empty;
+    private string textConstructContent                     = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaTextConstruct"/> class.
@@ -109,7 +109,7 @@ public class YahooMediaTextConstruct : IComparable
     /// <returns>The entity encoding type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
     public static string TextTypeAsString(YahooMediaTextConstructType type)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaTextConstructType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaTextConstructType))
@@ -157,7 +157,7 @@ public class YahooMediaTextConstruct : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         constructType = type;
                         break;
@@ -184,8 +184,8 @@ public class YahooMediaTextConstruct : IComparable
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            if (!String.IsNullOrEmpty(typeAttribute))
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 YahooMediaTextConstructType type    = YahooMediaTextConstruct.TextTypeByName(typeAttribute);
                 if (type != YahooMediaTextConstructType.None)
@@ -196,7 +196,7 @@ public class YahooMediaTextConstruct : IComparable
             }
         }
 
-        if(!String.IsNullOrEmpty(source.Value))
+        if(!string.IsNullOrEmpty(source.Value))
         {
             this.Content    = source.Value;
             wasLoaded       = true;
@@ -222,7 +222,7 @@ public class YahooMediaTextConstruct : IComparable
             writer.WriteAttributeString("type", YahooMediaTextConstruct.TextTypeAsString(this.TextType));
         }
 
-        if(!String.IsNullOrEmpty(this.Content))
+        if(!string.IsNullOrEmpty(this.Content))
         {
             writer.WriteString(this.Content);
         }
@@ -276,23 +276,23 @@ public class YahooMediaTextConstruct : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
             result      = result | this.TextType.CompareTo(value.TextType);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is YahooMediaTextConstruct))
         {

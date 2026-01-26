@@ -23,7 +23,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
-    private string commonObjectBaseId                           = String.Empty;
+    private string commonObjectBaseId                           = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the web log entity information was created.
     /// </summary>
@@ -106,9 +106,9 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                commonObjectBaseId = String.Empty;
+                commonObjectBaseId = string.Empty;
             }
             else
             {
@@ -289,9 +289,9 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
         }
         if(source.HasAttributes)
         {
-            string urlAttribute = source.GetAttribute("url", String.Empty);
+            string urlAttribute = source.GetAttribute("url", string.Empty);
 
-            if (!String.IsNullOrEmpty(urlAttribute))
+            if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
@@ -326,9 +326,9 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
         }
         if(source.HasAttributes)
         {
-            string urlAttribute = source.GetAttribute("url", String.Empty);
+            string urlAttribute = source.GetAttribute("url", string.Empty);
 
-            if (!String.IsNullOrEmpty(urlAttribute))
+            if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
@@ -354,7 +354,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
         writer.WriteStartElement("trackback", BlogMLUtility.BlogMLNamespace);
         BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
-        writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : String.Empty);
+        writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
 
         BlogMLUtility.WriteCommonObjectElements(this, writer);
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
@@ -414,16 +414,16 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is BlogMLTrackback))
         {

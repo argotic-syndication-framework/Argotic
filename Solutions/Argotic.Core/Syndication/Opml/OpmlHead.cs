@@ -22,7 +22,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the title of the document.
     /// </summary>
-    private string headTitle                = String.Empty;
+    private string headTitle                = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the document was created.
     /// </summary>
@@ -42,7 +42,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold a number indicating which line of the outline is displayed on the top line of the window.
     /// </summary>
-    private int headVerticalScrollState     = Int32.MinValue;
+    private int headVerticalScrollState     = int.MinValue;
     /// <summary>
     /// Private member to hold information that describes the owner of the document.
     /// </summary>
@@ -206,9 +206,9 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                headTitle = String.Empty;
+                headTitle = string.Empty;
             }
             else
             {
@@ -366,14 +366,14 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             this.Owner  = owner;
         }
 
-        if (expansionStateNavigator != null && !String.IsNullOrEmpty(expansionStateNavigator.Value))
+        if (expansionStateNavigator != null && !string.IsNullOrEmpty(expansionStateNavigator.Value))
         {
             if (expansionStateNavigator.Value.Contains(","))
             {
                 string[] expansionStates    = expansionStateNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 foreach (string expansionState in expansionStates)
                 {
-                    if (Int32.TryParse(expansionState.Trim(), System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int state))
+                    if (int.TryParse(expansionState.Trim(), System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int state))
                     {
                         this.ExpansionState.Add(state);
                         wasLoaded   = true;
@@ -382,7 +382,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             }
             else
             {
-                if (Int32.TryParse(expansionStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int expansionState))
+                if (int.TryParse(expansionStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int expansionState))
                 {
                     this.ExpansionState.Add(expansionState);
                     wasLoaded                   = true;
@@ -392,7 +392,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
 
         if (verticalScrollStateNavigator != null)
         {
-            if (Int32.TryParse(verticalScrollStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int verticalScrollState))
+            if (int.TryParse(verticalScrollStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int verticalScrollState))
             {
                 this.VerticalScrollState    = verticalScrollState;
                 wasLoaded                   = true;
@@ -441,7 +441,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("head");
 
-        if(!String.IsNullOrEmpty(this.Title))
+        if(!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteElementString("title", this.Title);
         }
@@ -476,10 +476,10 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             {
                 values[i]   = expansionStates[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
             }
-            writer.WriteElementString("expansionState", String.Join(",", values));
+            writer.WriteElementString("expansionState", string.Join(",", values));
         }
 
-        if (this.VerticalScrollState != Int32.MinValue)
+        if (this.VerticalScrollState != int.MinValue)
         {
             writer.WriteElementString("vertScrollState", this.VerticalScrollState.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
@@ -544,16 +544,16 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is OpmlHead))
         {

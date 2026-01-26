@@ -35,7 +35,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold character data that provides a human-readable description of the image.
     /// </summary>
-    private string imageTitle           = String.Empty;
+    private string imageTitle           = string.Empty;
     /// <summary>
     /// Private member to hold the URL of the image.
     /// </summary>
@@ -43,15 +43,15 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold character data that provides a human-readable characterization of the site linked to the image.
     /// </summary>
-    private string imageDescription = String.Empty;
+    private string imageDescription = string.Empty;
     /// <summary>
     /// Private member to hold the height, in pixels, of the image.
     /// </summary>
-    private int imageHeight             = Int32.MinValue;
+    private int imageHeight             = int.MinValue;
     /// <summary>
     /// Private member to hold the width, in pixels, of the image.
     /// </summary>
-    private int imageWidth              = Int32.MinValue;
+    private int imageWidth              = int.MinValue;
     /// <summary>
     /// Private member to hold maximum permissible height of an image.
     /// </summary>
@@ -193,9 +193,9 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                imageDescription = String.Empty;
+                imageDescription = string.Empty;
             }
             else
             {
@@ -405,7 +405,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         }
         if (titleNavigator != null)
         {
-            if (!String.IsNullOrEmpty(titleNavigator.Value))
+            if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
                 this.Title  = titleNavigator.Value;
                 wasLoaded   = true;
@@ -427,7 +427,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         }
         if (heightNavigator != null)
         {
-            if (Int32.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int height))
+            if (int.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int height))
             {
                 this.Height = height < RssImage.HeightMaximum ? height : RssImage.HeightMaximum;
                 wasLoaded   = true;
@@ -435,7 +435,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         }
         if (widthNavigator != null)
         {
-            if (Int32.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int width))
+            if (int.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int width))
             {
                 this.Width  = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
                 wasLoaded   = true;
@@ -478,19 +478,19 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("image");
 
-        writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : String.Empty);
+        writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
         writer.WriteElementString("title", this.Title);
-        writer.WriteElementString("url", this.Url != null ? this.Url.ToString() : String.Empty);
+        writer.WriteElementString("url", this.Url != null ? this.Url.ToString() : string.Empty);
 
-        if(!String.IsNullOrEmpty(this.Description))
+        if(!string.IsNullOrEmpty(this.Description))
         {
             writer.WriteElementString("description", this.Description);
         }
-        if (this.Height != Int32.MinValue)
+        if (this.Height != int.MinValue)
         {
             writer.WriteElementString("height", this.Height.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
-        if (this.Width != Int32.MinValue)
+        if (this.Width != int.MinValue)
         {
             writer.WriteElementString("width", this.Width.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
@@ -543,10 +543,10 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Height.CompareTo(value.Height);
             result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Width.CompareTo(value.Width);
 
@@ -554,16 +554,16 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is RssImage))
         {

@@ -89,13 +89,13 @@ public class XmlRpcResponse : IComparable
     {
         Guard.ArgumentNotNull(response, "response");
 
-        if (String.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
+        if (string.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
         {
-            throw new ArgumentException(String.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), "response");
+            throw new ArgumentException(string.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), "response");
         }
         else if (response.ContentLength <= 0)
         {
-            throw new ArgumentException(String.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), "response");
+            throw new ArgumentException(string.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), "response");
         }
 
         using (Stream stream = response.GetResponseStream())
@@ -304,7 +304,7 @@ public class XmlRpcResponse : IComparable
             {
                 if (value.Parameter != null)
                 {
-                    result  = result | String.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
+                    result  = result | string.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
                 }
                 else
                 {
@@ -320,16 +320,16 @@ public class XmlRpcResponse : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is XmlRpcResponse))
         {

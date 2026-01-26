@@ -25,7 +25,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
     /// <summary>
     /// Private member to hold the name or description of the related feed.
     /// </summary>
-    private string relatedInformationTitle                                      = String.Empty;
+    private string relatedInformationTitle                                      = string.Empty;
     /// <summary>
     /// Private member to hold the type of the related feed.
     /// </summary>
@@ -114,7 +114,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
         {
             if (value == FeedSynchronizationRelatedInformationType.None)
             {
-                throw new ArgumentException(String.Format(null, "The specified relation type of {0} is invalid.", value), "value");
+                throw new ArgumentException(string.Format(null, "The specified relation type of {0} is invalid.", value), "value");
             }
             relatedInformationType = value;
         }
@@ -133,9 +133,9 @@ public class FeedSynchronizationRelatedInformation : IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                relatedInformationTitle = String.Empty;
+                relatedInformationTitle = string.Empty;
             }
             else
             {
@@ -151,7 +151,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
     /// <returns>The relation type identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
     public static string RelationTypeAsString(FeedSynchronizationRelatedInformationType type)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationRelatedInformationType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationRelatedInformationType))
@@ -199,7 +199,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         relationType    = type;
                         break;
@@ -226,11 +226,11 @@ public class FeedSynchronizationRelatedInformation : IComparable
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string linkAttribute    = source.GetAttribute("link", String.Empty);
-            string titleAttribute   = source.GetAttribute("title", String.Empty);
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
+            string linkAttribute    = source.GetAttribute("link", string.Empty);
+            string titleAttribute   = source.GetAttribute("title", string.Empty);
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
 
-            if (!String.IsNullOrEmpty(linkAttribute))
+            if (!string.IsNullOrEmpty(linkAttribute))
             {
                 if (Uri.TryCreate(linkAttribute, UriKind.Absolute, out Uri link))
                 {
@@ -239,13 +239,13 @@ public class FeedSynchronizationRelatedInformation : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(titleAttribute))
+            if (!string.IsNullOrEmpty(titleAttribute))
             {
                 this.Title  = titleAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 FeedSynchronizationRelatedInformationType type  = FeedSynchronizationRelatedInformation.RelationTypeByName(typeAttribute);
                 if (type != FeedSynchronizationRelatedInformationType.None)
@@ -270,8 +270,8 @@ public class FeedSynchronizationRelatedInformation : IComparable
         FeedSynchronizationSyndicationExtension extension   = new FeedSynchronizationSyndicationExtension();
         writer.WriteStartElement("related", extension.XmlNamespace);
 
-        writer.WriteAttributeString("link", extension.XmlNamespace, this.Link != null ? this.Link.ToString() : String.Empty);
-        if(!String.IsNullOrEmpty(this.Title))
+        writer.WriteAttributeString("link", extension.XmlNamespace, this.Link != null ? this.Link.ToString() : string.Empty);
+        if(!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteAttributeString("title", extension.XmlNamespace, this.Title);
         }
@@ -327,23 +327,23 @@ public class FeedSynchronizationRelatedInformation : IComparable
         if (value != null)
         {
             int result  = Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
             result      = result | this.RelationType.CompareTo(value.RelationType);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is FeedSynchronizationRelatedInformation))
         {

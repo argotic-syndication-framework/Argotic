@@ -31,11 +31,11 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the MIME type of the attachment.
     /// </summary>
-    private string attachmentMimeType                           = String.Empty;
+    private string attachmentMimeType                           = string.Empty;
     /// <summary>
     /// Private member to hold the size of the attachment.
     /// </summary>
-    private long attachmentSize                                 = Int64.MinValue;
+    private long attachmentSize                                 = long.MinValue;
     /// <summary>
     /// Private member to hold a relative or fully qualified URL to the attachment.
     /// </summary>
@@ -47,7 +47,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the attachment resource content.
     /// </summary>
-    private string attachmentContent                            = String.Empty;
+    private string attachmentContent                            = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLAttachment"/> class.
     /// </summary>
@@ -109,9 +109,9 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                attachmentContent = String.Empty;
+                attachmentContent = string.Empty;
             }
             else
             {
@@ -279,37 +279,37 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string embeddedAttribute    = source.GetAttribute("embedded", String.Empty);
-            string mimeTypeAttribute    = source.GetAttribute("mime-type", String.Empty);
-            string sizeAttribute        = source.GetAttribute("size", String.Empty);
-            string externalUriAttribute = source.GetAttribute("external-uri", String.Empty);
-            string urlAttribute         = source.GetAttribute("url", String.Empty);
+            string embeddedAttribute    = source.GetAttribute("embedded", string.Empty);
+            string mimeTypeAttribute    = source.GetAttribute("mime-type", string.Empty);
+            string sizeAttribute        = source.GetAttribute("size", string.Empty);
+            string externalUriAttribute = source.GetAttribute("external-uri", string.Empty);
+            string urlAttribute         = source.GetAttribute("url", string.Empty);
 
-            if (!String.IsNullOrEmpty(embeddedAttribute))
+            if (!string.IsNullOrEmpty(embeddedAttribute))
             {
-                if (Boolean.TryParse(embeddedAttribute, out bool isEmbedded))
+                if (bool.TryParse(embeddedAttribute, out bool isEmbedded))
                 {
                     this.IsEmbedded = isEmbedded;
                     wasLoaded       = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(mimeTypeAttribute))
+            if (!string.IsNullOrEmpty(mimeTypeAttribute))
             {
                 this.MimeType   = mimeTypeAttribute;
                 wasLoaded       = true;
             }
 
-            if (!String.IsNullOrEmpty(sizeAttribute))
+            if (!string.IsNullOrEmpty(sizeAttribute))
             {
-                if (Int64.TryParse(sizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long size))
+                if (long.TryParse(sizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long size))
                 {
                     this.Size   = size;
                     wasLoaded   = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(externalUriAttribute))
+            if (!string.IsNullOrEmpty(externalUriAttribute))
             {
                 if (Uri.TryCreate(externalUriAttribute, UriKind.RelativeOrAbsolute, out Uri externalUri))
                 {
@@ -318,7 +318,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
                 }
             }
 
-            if (!String.IsNullOrEmpty(urlAttribute))
+            if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
@@ -328,7 +328,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             this.Content    = source.Value;
             wasLoaded       = true;
@@ -373,7 +373,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
         writer.WriteAttributeString("embedded", this.IsEmbedded ? "true" : "false");
         writer.WriteAttributeString("mime-type", this.MimeType);
 
-        if(this.Size != Int64.MinValue)
+        if(this.Size != long.MinValue)
         {
             writer.WriteAttributeString("size", this.Size.ToString(NumberFormatInfo.InvariantInfo));
         }
@@ -388,7 +388,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
             writer.WriteAttributeString("url", this.Url.ToString());
         }
 
-        if(!String.IsNullOrEmpty(this.Content))
+        if(!string.IsNullOrEmpty(this.Content))
         {
             writer.WriteString(this.Content);
         }
@@ -441,10 +441,10 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.ExternalUri, value.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
             result      = result | this.IsEmbedded.CompareTo(value.IsEmbedded);
-            result      = result | String.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Size.CompareTo(value.Size);
             result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
@@ -452,16 +452,16 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is BlogMLAttachment))
         {

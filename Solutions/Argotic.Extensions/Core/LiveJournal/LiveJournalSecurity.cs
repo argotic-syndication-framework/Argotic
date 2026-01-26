@@ -20,7 +20,7 @@ public class LiveJournalSecurity : IComparable
     /// <summary>
     /// Private member to hold an integer indicating the friend-groups mask.
     /// </summary>
-    private int securityMask                        = Int32.MinValue;
+    private int securityMask                        = int.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalSecurity"/> class.
     /// </summary>
@@ -93,7 +93,7 @@ public class LiveJournalSecurity : IComparable
     /// <returns>The access level identifier for the supplied <paramref name="level"/>, Otherwise, returns an empty string.</returns>
     public static string AccessibilityAsString(LiveJournalSecurityType level)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(LiveJournalSecurityType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(LiveJournalSecurityType))
@@ -141,7 +141,7 @@ public class LiveJournalSecurity : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         accessLevel = level;
                         break;
@@ -168,10 +168,10 @@ public class LiveJournalSecurity : IComparable
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            string maskAttribute    = source.GetAttribute("mask", String.Empty);
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string maskAttribute    = source.GetAttribute("mask", string.Empty);
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 LiveJournalSecurityType accessLevel = LiveJournalSecurity.AccessibilityByName(typeAttribute);
                 if (accessLevel != LiveJournalSecurityType.None)
@@ -181,9 +181,9 @@ public class LiveJournalSecurity : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(maskAttribute))
+            if (!string.IsNullOrEmpty(maskAttribute))
             {
-                if (Int32.TryParse(maskAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int mask))
+                if (int.TryParse(maskAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int mask))
                 {
                     this.Mask   = mask;
                     wasLoaded   = true;
@@ -207,7 +207,7 @@ public class LiveJournalSecurity : IComparable
 
         writer.WriteAttributeString("type", LiveJournalSecurity.AccessibilityAsString(this.Accessibility));
             
-        if(this.Mask != Int32.MinValue)
+        if(this.Mask != int.MinValue)
         {
             writer.WriteAttributeString("mask", this.Mask.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
@@ -268,16 +268,16 @@ public class LiveJournalSecurity : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is LiveJournalSecurity))
         {

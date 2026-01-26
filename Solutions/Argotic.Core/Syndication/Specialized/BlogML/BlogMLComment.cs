@@ -22,7 +22,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
-    private string commonObjectBaseId                           = String.Empty;
+    private string commonObjectBaseId                           = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the web log entity information was created.
     /// </summary>
@@ -46,11 +46,11 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// <summary>
     /// Private member to hold the author's name for the comment.
     /// </summary>
-    private string commentUserName                              = String.Empty;
+    private string commentUserName                              = string.Empty;
     /// <summary>
     /// Private member to hold the author's email address for the comment.
     /// </summary>
-    private string commentUserEmailAddress                      = String.Empty;
+    private string commentUserEmailAddress                      = string.Empty;
     /// <summary>
     /// Private member to hold the author's homepage or web log address for the comment.
     /// </summary>
@@ -118,9 +118,9 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                commonObjectBaseId = String.Empty;
+                commonObjectBaseId = string.Empty;
             }
             else
             {
@@ -239,9 +239,9 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                commentUserEmailAddress = String.Empty;
+                commentUserEmailAddress = string.Empty;
             }
             else
             {
@@ -363,23 +363,23 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
         }
         if(source.HasAttributes)
         {
-            string userNameAttribute    = source.GetAttribute("user-name", String.Empty);
-            string userEmailAttribute   = source.GetAttribute("user-email", String.Empty);
-            string userUrlAttribute     = source.GetAttribute("user-url", String.Empty);
+            string userNameAttribute    = source.GetAttribute("user-name", string.Empty);
+            string userEmailAttribute   = source.GetAttribute("user-email", string.Empty);
+            string userUrlAttribute     = source.GetAttribute("user-url", string.Empty);
 
-            if (!String.IsNullOrEmpty(userNameAttribute))
+            if (!string.IsNullOrEmpty(userNameAttribute))
             {
                 this.UserName   = userNameAttribute;
                 wasLoaded       = true;
             }
 
-            if (!String.IsNullOrEmpty(userEmailAttribute))
+            if (!string.IsNullOrEmpty(userEmailAttribute))
             {
                 this.UserEmailAddress   = userEmailAttribute;
                 wasLoaded               = true;
             }
 
-            if (!String.IsNullOrEmpty(userUrlAttribute))
+            if (!string.IsNullOrEmpty(userUrlAttribute))
             {
                 if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
@@ -431,23 +431,23 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
 
         if(source.HasAttributes)
         {
-            string userNameAttribute    = source.GetAttribute("user-name", String.Empty);
-            string userEmailAttribute   = source.GetAttribute("user-email", String.Empty);
-            string userUrlAttribute     = source.GetAttribute("user-url", String.Empty);
+            string userNameAttribute    = source.GetAttribute("user-name", string.Empty);
+            string userEmailAttribute   = source.GetAttribute("user-email", string.Empty);
+            string userUrlAttribute     = source.GetAttribute("user-url", string.Empty);
 
-            if (!String.IsNullOrEmpty(userNameAttribute))
+            if (!string.IsNullOrEmpty(userNameAttribute))
             {
                 this.UserName   = userNameAttribute;
                 wasLoaded       = true;
             }
 
-            if (!String.IsNullOrEmpty(userEmailAttribute))
+            if (!string.IsNullOrEmpty(userEmailAttribute))
             {
                 this.UserEmailAddress   = userEmailAttribute;
                 wasLoaded               = true;
             }
 
-            if (!String.IsNullOrEmpty(userUrlAttribute))
+            if (!string.IsNullOrEmpty(userUrlAttribute))
             {
                 if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
@@ -490,7 +490,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
 
         writer.WriteAttributeString("user-name", this.UserName);
 
-        if(!String.IsNullOrEmpty(this.UserEmailAddress))
+        if(!string.IsNullOrEmpty(this.UserEmailAddress))
         {
             writer.WriteAttributeString("user-email", this.UserEmailAddress);
         }
@@ -552,8 +552,8 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
         if (value != null)
         {
             int result  = this.Content.CompareTo(value.Content);
-            result      = result | String.Compare(this.UserEmailAddress, value.UserEmailAddress, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.UserName, value.UserName, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.UserEmailAddress, value.UserEmailAddress, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.UserName, value.UserName, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.UserUrl, value.UserUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             result      = result | BlogMLUtility.CompareCommonObjects(this, value);
@@ -562,16 +562,16 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is BlogMLComment))
         {

@@ -30,7 +30,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the name of the application interface.
     /// </summary>
-    private string interfaceName        = String.Empty;
+    private string interfaceName        = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating if the application interface is preferred.
     /// </summary>
@@ -42,7 +42,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold custom data that is passed to the application interface.
     /// </summary>
-    private string interfaceWeblogId    = String.Empty;
+    private string interfaceWeblogId    = string.Empty;
     /// <summary>
     /// Private member to hold the location of the documentation for the application interface.
     /// </summary>
@@ -50,7 +50,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold human readable text that explains the features and settings for the application interface.
     /// </summary>
-    private string interfaceNotes       = String.Empty;
+    private string interfaceNotes       = string.Empty;
     /// <summary>
     /// Private member to hold service specific settings for the application interface.
     /// </summary>
@@ -228,9 +228,9 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                interfaceNotes = String.Empty;
+                interfaceNotes = string.Empty;
             }
             else
             {
@@ -268,9 +268,9 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                interfaceWeblogId = String.Empty;
+                interfaceWeblogId = string.Empty;
             }
             else
             {
@@ -353,27 +353,27 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
         XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string nameAttribute        = source.GetAttribute("name", String.Empty);
-            string preferredAttribute   = source.GetAttribute("preferred", String.Empty);
-            string apiLinkAttribute     = source.GetAttribute("apiLink", String.Empty);
-            string blogIdAttribute      = source.GetAttribute("blogID", String.Empty);
+            string nameAttribute        = source.GetAttribute("name", string.Empty);
+            string preferredAttribute   = source.GetAttribute("preferred", string.Empty);
+            string apiLinkAttribute     = source.GetAttribute("apiLink", string.Empty);
+            string blogIdAttribute      = source.GetAttribute("blogID", string.Empty);
 
-            if (!String.IsNullOrEmpty(nameAttribute))
+            if (!string.IsNullOrEmpty(nameAttribute))
             {
                 this.Name   = nameAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(preferredAttribute))
+            if (!string.IsNullOrEmpty(preferredAttribute))
             {
-                if (Boolean.TryParse(preferredAttribute, out bool isPreferred))
+                if (bool.TryParse(preferredAttribute, out bool isPreferred))
                 {
                     this.IsPreferred    = isPreferred;
                     wasLoaded           = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(apiLinkAttribute))
+            if (!string.IsNullOrEmpty(apiLinkAttribute))
             {
                 if (Uri.TryCreate(apiLinkAttribute, UriKind.RelativeOrAbsolute, out Uri link))
                 {
@@ -382,7 +382,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
                 }
             }
 
-            if (!String.IsNullOrEmpty(blogIdAttribute))
+            if (!string.IsNullOrEmpty(blogIdAttribute))
             {
                 this.WeblogId   = blogIdAttribute;
                 wasLoaded       = true;
@@ -418,7 +418,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
                 {
                     while (settingIterator.MoveNext())
                     {
-                        string settingName  = settingIterator.Current.GetAttribute("name", String.Empty);
+                        string settingName  = settingIterator.Current.GetAttribute("name", string.Empty);
                         string settingValue = settingIterator.Current.Value;
 
                         if(!this.Settings.ContainsKey(settingName))
@@ -469,10 +469,10 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
 
         writer.WriteAttributeString("name", this.Name);
         writer.WriteAttributeString("preferred", this.IsPreferred ? "true" : "false");
-        writer.WriteAttributeString("apiLink", this.Link != null ? this.Link.ToString() : String.Empty);
+        writer.WriteAttributeString("apiLink", this.Link != null ? this.Link.ToString() : string.Empty);
         writer.WriteAttributeString("blogID", this.WeblogId);
 
-        if(this.Documentation != null || !String.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
+        if(this.Documentation != null || !string.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
         {
             writer.WriteStartElement("settings", RsdUtility.RsdNamespace);
 
@@ -481,7 +481,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
                 writer.WriteElementString("docs", RsdUtility.RsdNamespace, this.Documentation.ToString());
             }
 
-            if (!String.IsNullOrEmpty(this.Notes))
+            if (!string.IsNullOrEmpty(this.Notes))
             {
                 writer.WriteElementString("notes", RsdUtility.RsdNamespace, this.Notes);
             }
@@ -550,25 +550,25 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
             int result  = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
             result      = result | this.IsPreferred.CompareTo(value.IsPreferred);
             result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
             result      = result | ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
-            result      = result | String.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is RsdApplicationInterface))
         {

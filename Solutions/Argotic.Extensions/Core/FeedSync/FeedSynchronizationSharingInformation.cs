@@ -20,11 +20,11 @@ public class FeedSynchronizationSharingInformation : IComparable
     /// <summary>
     /// Private member to hold a lower bound of items contained within the feed.
     /// </summary>
-    private string sharingInformationSince      = String.Empty;
+    private string sharingInformationSince      = string.Empty;
     /// <summary>
     /// Private member to hold an upper bound of items contained within the feed.
     /// </summary>
-    private string sharingInformationUntil      = String.Empty;
+    private string sharingInformationUntil      = string.Empty;
     /// <summary>
     /// Private member to hold the publisher suggested date-time before which subscribers should read the feed in order to avoid missing item updates.
     /// </summary>
@@ -134,9 +134,9 @@ public class FeedSynchronizationSharingInformation : IComparable
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                sharingInformationSince = String.Empty;
+                sharingInformationSince = string.Empty;
             }
             else
             {
@@ -174,9 +174,9 @@ public class FeedSynchronizationSharingInformation : IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                sharingInformationUntil = String.Empty;
+                sharingInformationUntil = string.Empty;
             }
             else
             {
@@ -245,23 +245,23 @@ public class FeedSynchronizationSharingInformation : IComparable
         XmlNamespaceManager manager                         = extension.CreateNamespaceManager(source);
         if (source.HasAttributes)
         {
-            string sinceAttribute   = source.GetAttribute("since", String.Empty);
-            string untilAttribute   = source.GetAttribute("until", String.Empty);
-            string expiresAttribute = source.GetAttribute("expires", String.Empty);
+            string sinceAttribute   = source.GetAttribute("since", string.Empty);
+            string untilAttribute   = source.GetAttribute("until", string.Empty);
+            string expiresAttribute = source.GetAttribute("expires", string.Empty);
 
-            if (!String.IsNullOrEmpty(sinceAttribute))
+            if (!string.IsNullOrEmpty(sinceAttribute))
             {
                 this.Since  = sinceAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(untilAttribute))
+            if (!string.IsNullOrEmpty(untilAttribute))
             {
                 this.Until  = untilAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(expiresAttribute))
+            if (!string.IsNullOrEmpty(expiresAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(expiresAttribute, out DateTime expiresOn))
                 {
@@ -303,12 +303,12 @@ public class FeedSynchronizationSharingInformation : IComparable
         FeedSynchronizationSyndicationExtension extension   = new FeedSynchronizationSyndicationExtension();
         writer.WriteStartElement("sharing", extension.XmlNamespace);
 
-        if(!String.IsNullOrEmpty(this.Since))
+        if(!string.IsNullOrEmpty(this.Since))
         {
             writer.WriteAttributeString("since", this.Since);
         }
 
-        if (!String.IsNullOrEmpty(this.Until))
+        if (!string.IsNullOrEmpty(this.Until))
         {
             writer.WriteAttributeString("until", this.Until);
         }
@@ -374,23 +374,23 @@ public class FeedSynchronizationSharingInformation : IComparable
         {
             int result  = this.ExpiresOn.CompareTo(value.ExpiresOn);
             result      = result | FeedSynchronizationSharingInformation.CompareSequence(this.Relations, value.Relations);
-            result      = result | String.Compare(this.Since, value.Since, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Until, value.Until, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Since, value.Since, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Until, value.Until, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is FeedSynchronizationSharingInformation))
         {

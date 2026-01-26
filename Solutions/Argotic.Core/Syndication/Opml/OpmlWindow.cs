@@ -16,19 +16,19 @@ public class OpmlWindow : IComparable
     /// <summary>
     /// Private member to hold pixel location of the top edge of the window.
     /// </summary>
-    private int windowTop       = Int32.MinValue;
+    private int windowTop       = int.MinValue;
     /// <summary>
     /// Private member to hold pixel location of the left edge of the window.
     /// </summary>
-    private int windowLeft      = Int32.MinValue;
+    private int windowLeft      = int.MinValue;
     /// <summary>
     /// Private member to hold pixel location of the bottom edge of the window.
     /// </summary>
-    private int windowBottom    = Int32.MinValue;
+    private int windowBottom    = int.MinValue;
     /// <summary>
     /// Private member to hold pixel location of the right edge of the window.
     /// </summary>
-    private int windowRight     = Int32.MinValue;
+    private int windowRight     = int.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlWindow"/> class.
     /// </summary>
@@ -138,7 +138,7 @@ public class OpmlWindow : IComparable
 
         if (windowTopNavigator != null)
         {
-            if (Int32.TryParse(windowTopNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int top))
+            if (int.TryParse(windowTopNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int top))
             {
                 this.Top    = top;
                 wasLoaded   = true;
@@ -147,7 +147,7 @@ public class OpmlWindow : IComparable
 
         if (windowLeftNavigator != null)
         {
-            if (Int32.TryParse(windowLeftNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int left))
+            if (int.TryParse(windowLeftNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int left))
             {
                 this.Left   = left;
                 wasLoaded   = true;
@@ -156,7 +156,7 @@ public class OpmlWindow : IComparable
 
         if (windowBottomNavigator != null)
         {
-            if (Int32.TryParse(windowBottomNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int bottom))
+            if (int.TryParse(windowBottomNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int bottom))
             {
                 this.Bottom = bottom;
                 wasLoaded   = true;
@@ -165,7 +165,7 @@ public class OpmlWindow : IComparable
 
         if (windowRightNavigator != null)
         {
-            if (Int32.TryParse(windowRightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int right))
+            if (int.TryParse(windowRightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int right))
             {
                 this.Right  = right;
                 wasLoaded   = true;
@@ -183,22 +183,22 @@ public class OpmlWindow : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        if(this.Top != Int32.MinValue)
+        if(this.Top != int.MinValue)
         {
             writer.WriteElementString("windowTop", this.Top.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.Left != Int32.MinValue)
+        if (this.Left != int.MinValue)
         {
             writer.WriteElementString("windowLeft", this.Left.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.Bottom != Int32.MinValue)
+        if (this.Bottom != int.MinValue)
         {
             writer.WriteElementString("windowBottom", this.Bottom.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.Right != Int32.MinValue)
+        if (this.Right != int.MinValue)
         {
             writer.WriteElementString("windowRight", this.Right.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
@@ -257,16 +257,16 @@ public class OpmlWindow : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is OpmlWindow))
         {

@@ -34,11 +34,11 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the host name or IP address of the web service that monitors updates to the feed.
     /// </summary>
-    private string cloudDomain              = String.Empty;
+    private string cloudDomain              = string.Empty;
     /// <summary>
     /// Private member to hold the web service's path.
     /// </summary>
-    private string cloudPath                = String.Empty;
+    private string cloudPath                = string.Empty;
     /// <summary>
     /// Private member to hold the web service's TCP port.
     /// </summary>
@@ -50,7 +50,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold message format the web service employs.
     /// </summary>
-    private string cloudRegisterProcedure   = String.Empty;
+    private string cloudRegisterProcedure   = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssCloud"/> class.
     /// </summary>
@@ -197,7 +197,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
         {
             if (value == RssCloudProtocol.None)
             {
-                throw new ArgumentException(String.Format(null, "The specified cloud protocol of {0} is invalid.", value), "value");
+                throw new ArgumentException(string.Format(null, "The specified cloud protocol of {0} is invalid.", value), "value");
             }
             cloudProtocol = value;
         }
@@ -237,7 +237,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// </example>
     public static string CloudProtocolAsString(RssCloudProtocol protocol)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(RssCloudProtocol).GetFields())
         {
             if (fieldInfo.FieldType == typeof(RssCloudProtocol))
@@ -293,7 +293,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         cloudProtocol   = protocol;
                         break;
@@ -376,27 +376,27 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string domain               = source.GetAttribute("domain", String.Empty);
-            string path                 = source.GetAttribute("path", String.Empty);
-            string port                 = source.GetAttribute("port", String.Empty);
-            string protocol             = source.GetAttribute("protocol", String.Empty);
-            string registerProcedure    = source.GetAttribute("registerProcedure", String.Empty);
+            string domain               = source.GetAttribute("domain", string.Empty);
+            string path                 = source.GetAttribute("path", string.Empty);
+            string port                 = source.GetAttribute("port", string.Empty);
+            string protocol             = source.GetAttribute("protocol", string.Empty);
+            string registerProcedure    = source.GetAttribute("registerProcedure", string.Empty);
 
-            if (!String.IsNullOrEmpty(domain))
+            if (!string.IsNullOrEmpty(domain))
             {
                 this.Domain             = domain;
                 wasLoaded               = true;
             }
 
-            if (!String.IsNullOrEmpty(path))
+            if (!string.IsNullOrEmpty(path))
             {
                 this.Path               = path;
                 wasLoaded               = true;
             }
 
-            if (!String.IsNullOrEmpty(port))
+            if (!string.IsNullOrEmpty(port))
             {
-                if (Int32.TryParse(port, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int tcpPort))
+                if (int.TryParse(port, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int tcpPort))
                 {
                     if (tcpPort > 0)
                     {
@@ -406,7 +406,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
                 }
             }
 
-            if (!String.IsNullOrEmpty(protocol))
+            if (!string.IsNullOrEmpty(protocol))
             {
                 RssCloudProtocol serviceProtocol    = RssCloud.CloudProtocolByName(protocol);
                 if (serviceProtocol != RssCloudProtocol.None)
@@ -416,7 +416,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
                 }
             }
 
-            if (!String.IsNullOrEmpty(registerProcedure))
+            if (!string.IsNullOrEmpty(registerProcedure))
             {
                 this.RegisterProcedure  = registerProcedure;
                 wasLoaded               = true;
@@ -513,26 +513,26 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Path, value.Path, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Path, value.Path, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Port.CompareTo(value.Port);
             result      = result | this.Protocol.CompareTo(value.Protocol);
-            result      = result | String.Compare(this.RegisterProcedure, value.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.RegisterProcedure, value.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is RssCloud))
         {

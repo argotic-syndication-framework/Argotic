@@ -20,15 +20,15 @@ public class LiveJournalUserPicture : IComparable
     /// <summary>
     /// Private member to hold the keyword (phrase) associated with the picture.
     /// </summary>
-    private string userPictureKeywords  = String.Empty;
+    private string userPictureKeywords  = string.Empty;
     /// <summary>
     /// Private member to hold the image width.
     /// </summary>
-    private int userPictureWidth        = Int32.MinValue;
+    private int userPictureWidth        = int.MinValue;
     /// <summary>
     /// Private member to hold the image height.
     /// </summary>
-    private int userPictureHeight       = Int32.MinValue;
+    private int userPictureHeight       = int.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalUserPicture"/> class.
     /// </summary>
@@ -172,7 +172,7 @@ public class LiveJournalUserPicture : IComparable
                 }
             }
 
-            if (keywordNavigator != null && !String.IsNullOrEmpty(keywordNavigator.Value))
+            if (keywordNavigator != null && !string.IsNullOrEmpty(keywordNavigator.Value))
             {
                 this.Keyword    = keywordNavigator.Value;
                 wasLoaded       = true;
@@ -180,7 +180,7 @@ public class LiveJournalUserPicture : IComparable
 
             if (widthNavigator != null)
             {
-                if (Int32.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int width))
+                if (int.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int width))
                 {
                     if (width > 100)
                     {
@@ -193,7 +193,7 @@ public class LiveJournalUserPicture : IComparable
 
             if (heightNavigator != null)
             {
-                if (Int32.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int height))
+                if (int.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int height))
                 {
                     if (height > 100)
                     {
@@ -219,10 +219,10 @@ public class LiveJournalUserPicture : IComparable
         LiveJournalSyndicationExtension extension   = new LiveJournalSyndicationExtension();
         writer.WriteStartElement("userpic", extension.XmlNamespace);
 
-        writer.WriteElementString("url", extension.XmlNamespace, this.Url != null ? this.Url.ToString() : String.Empty);
+        writer.WriteElementString("url", extension.XmlNamespace, this.Url != null ? this.Url.ToString() : string.Empty);
         writer.WriteElementString("keyword", extension.XmlNamespace, this.Keyword);
-        writer.WriteElementString("width", extension.XmlNamespace, this.Width != Int32.MinValue ? this.Width.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");
-        writer.WriteElementString("height", extension.XmlNamespace, this.Height != Int32.MinValue ? this.Height.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");
+        writer.WriteElementString("width", extension.XmlNamespace, this.Width != int.MinValue ? this.Width.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");
+        writer.WriteElementString("height", extension.XmlNamespace, this.Height != int.MinValue ? this.Height.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");
 
         writer.WriteEndElement();
     }
@@ -274,7 +274,7 @@ public class LiveJournalUserPicture : IComparable
         if (value != null)
         {
             int result  = this.Height.CompareTo(value.Height);
-            result      = result | String.Compare(this.Keyword, value.Keyword, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Keyword, value.Keyword, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Width.CompareTo(value.Width);
 
@@ -282,16 +282,16 @@ public class LiveJournalUserPicture : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is LiveJournalUserPicture))
         {

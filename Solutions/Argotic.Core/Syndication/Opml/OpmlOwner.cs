@@ -16,11 +16,11 @@ public class OpmlOwner : IComparable
     /// <summary>
     /// Private member to hold the name of the owner of the document.
     /// </summary>
-    private string ownerName    = String.Empty;
+    private string ownerName    = string.Empty;
     /// <summary>
     /// Private member to hold email address of the owner of the document.
     /// </summary>
-    private string ownerEmail   = String.Empty;
+    private string ownerEmail   = string.Empty;
     /// <summary>
     /// Private member to hold the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
     /// </summary>
@@ -78,9 +78,9 @@ public class OpmlOwner : IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                ownerEmail = String.Empty;
+                ownerEmail = string.Empty;
             }
             else
             {
@@ -125,9 +125,9 @@ public class OpmlOwner : IComparable
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                ownerName   = String.Empty;
+                ownerName   = string.Empty;
             }
             else
             {
@@ -184,12 +184,12 @@ public class OpmlOwner : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        if(!String.IsNullOrEmpty(this.Name))
+        if(!string.IsNullOrEmpty(this.Name))
         {
             writer.WriteElementString("ownerName", this.Name);
         }
 
-        if (!String.IsNullOrEmpty(this.EmailAddress))
+        if (!string.IsNullOrEmpty(this.EmailAddress))
         {
             writer.WriteElementString("ownerEmail", this.EmailAddress);
         }
@@ -244,24 +244,24 @@ public class OpmlOwner : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Id, value.Id, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is OpmlOwner))
         {

@@ -25,7 +25,7 @@ public class FeedSynchronizationHistory : IComparable
     /// <summary>
     /// Private member to hold the text value that uniquely identifies the endpoint that made the modification.
     /// </summary>
-    private string historyBy        = String.Empty;
+    private string historyBy        = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationHistory"/> class.
     /// </summary>
@@ -80,9 +80,9 @@ public class FeedSynchronizationHistory : IComparable
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                historyBy = String.Empty;
+                historyBy = string.Empty;
             }
             else
             {
@@ -157,20 +157,20 @@ public class FeedSynchronizationHistory : IComparable
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string sequenceAttribute    = source.GetAttribute("sequence", String.Empty);
-            string whenAttribute        = source.GetAttribute("when", String.Empty);
-            string byAttribute          = source.GetAttribute("by", String.Empty);
+            string sequenceAttribute    = source.GetAttribute("sequence", string.Empty);
+            string whenAttribute        = source.GetAttribute("when", string.Empty);
+            string byAttribute          = source.GetAttribute("by", string.Empty);
 
-            if (!String.IsNullOrEmpty(sequenceAttribute))
+            if (!string.IsNullOrEmpty(sequenceAttribute))
             {
-                if (Int32.TryParse(sequenceAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int sequence))
+                if (int.TryParse(sequenceAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int sequence))
                 {
                     this.Sequence   = sequence;
                     wasLoaded       = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(whenAttribute))
+            if (!string.IsNullOrEmpty(whenAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(whenAttribute, out DateTime when))
                 {
@@ -179,7 +179,7 @@ public class FeedSynchronizationHistory : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(byAttribute))
+            if (!string.IsNullOrEmpty(byAttribute))
             {
                 this.By     = byAttribute;
                 wasLoaded   = true;
@@ -207,7 +207,7 @@ public class FeedSynchronizationHistory : IComparable
             writer.WriteAttributeString("when", SyndicationDateTimeUtility.ToRfc3339DateTime(this.When));
         }
 
-        if(!String.IsNullOrEmpty(this.By))
+        if(!string.IsNullOrEmpty(this.By))
         {
             writer.WriteAttributeString("when", this.By);
         }
@@ -260,7 +260,7 @@ public class FeedSynchronizationHistory : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.By, value.By, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.By, value.By, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Sequence.CompareTo(value.Sequence);
             result      = result | this.When.CompareTo(value.When);
 
@@ -268,16 +268,16 @@ public class FeedSynchronizationHistory : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is FeedSynchronizationHistory))
         {

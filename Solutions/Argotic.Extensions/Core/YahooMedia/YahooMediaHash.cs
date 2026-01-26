@@ -25,7 +25,7 @@ public class YahooMediaHash : IComparable
     /// <summary>
     /// Private member to hold the hash value.
     /// </summary>
-    private string hashValue                        = String.Empty;
+    private string hashValue                        = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaHash"/> class.
@@ -98,13 +98,13 @@ public class YahooMediaHash : IComparable
     /// <exception cref="ArgumentException">The <paramref name="algorithm"/> is equal to <see cref="YahooMediaHashAlgorithm.None"/>.</exception>
     public static string GenerateHash(Stream stream, YahooMediaHashAlgorithm algorithm)
     {
-        string base64EncodedHash    = String.Empty;
+        string base64EncodedHash    = string.Empty;
         MD5 md5                     = MD5.Create();
         SHA1 sha1                   = SHA1.Create();
         Guard.ArgumentNotNull(stream, "stream");
         if (algorithm == YahooMediaHashAlgorithm.None)
         {
-            throw new ArgumentException(String.Format(null, "Unable to generate a hash value for the {0} algorithm.", algorithm), "algorithm");
+            throw new ArgumentException(string.Format(null, "Unable to generate a hash value for the {0} algorithm.", algorithm), "algorithm");
         }
 
         if(algorithm == YahooMediaHashAlgorithm.MD5)
@@ -128,7 +128,7 @@ public class YahooMediaHash : IComparable
     /// <returns>The hash algorithm identifier for the supplied <paramref name="algorithm"/>, Otherwise, returns an empty string.</returns>
     public static string HashAlgorithmAsString(YahooMediaHashAlgorithm algorithm)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaHashAlgorithm).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaHashAlgorithm))
@@ -176,7 +176,7 @@ public class YahooMediaHash : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         hashAlgorithm   = algorithm;
                         break;
@@ -203,8 +203,8 @@ public class YahooMediaHash : IComparable
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string algorithmAttribute   = source.GetAttribute("algo", String.Empty);
-            if (!String.IsNullOrEmpty(algorithmAttribute))
+            string algorithmAttribute   = source.GetAttribute("algo", string.Empty);
+            if (!string.IsNullOrEmpty(algorithmAttribute))
             {
                 YahooMediaHashAlgorithm algorithm   = YahooMediaHash.HashAlgorithmByName(algorithmAttribute);
                 if (algorithm != YahooMediaHashAlgorithm.None)
@@ -215,7 +215,7 @@ public class YahooMediaHash : IComparable
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             this.Value  = source.Value;
             wasLoaded   = true;
@@ -240,7 +240,7 @@ public class YahooMediaHash : IComparable
             writer.WriteAttributeString("algo", YahooMediaHash.HashAlgorithmAsString(this.Algorithm));
         }
 
-        if(!String.IsNullOrEmpty(this.Value))
+        if(!string.IsNullOrEmpty(this.Value))
         {
             writer.WriteString(this.Value);
         }
@@ -295,22 +295,22 @@ public class YahooMediaHash : IComparable
         if (value != null)
         {
             int result  = this.Algorithm.CompareTo(value.Algorithm);
-            result      = result | String.Compare(this.Value, value.Value, StringComparison.Ordinal);
+            result      = result | string.Compare(this.Value, value.Value, StringComparison.Ordinal);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is YahooMediaHash))
         {

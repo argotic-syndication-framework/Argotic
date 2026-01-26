@@ -48,7 +48,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <summary>
     /// Private member to hold the value of the accepted media range.
     /// </summary>
-    private string acceptedMediaRangeValue  = String.Empty;
+    private string acceptedMediaRangeValue  = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class.
@@ -259,9 +259,9 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                acceptedMediaRangeValue = String.Empty;
+                acceptedMediaRangeValue = string.Empty;
             }
             else
             {
@@ -290,7 +290,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
             wasLoaded = true;
         }
 
-        this.MediaRange = !String.IsNullOrEmpty(source.Value) ? source.Value.Trim() : String.Empty;
+        this.MediaRange = !string.IsNullOrEmpty(source.Value) ? source.Value.Trim() : string.Empty;
         wasLoaded       = true;
 
         return wasLoaded;
@@ -334,7 +334,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
         writer.WriteStartElement("accept", AtomUtility.AtomPublishingNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if(!String.IsNullOrEmpty(this.MediaRange))
+        if(!string.IsNullOrEmpty(this.MediaRange))
         {
             writer.WriteString(this.MediaRange);
         }
@@ -391,23 +391,23 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
 
         if (value != null)
         {
-            int result  = String.Compare(this.MediaRange, value.MediaRange, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.MediaRange, value.MediaRange, StringComparison.OrdinalIgnoreCase);
             result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is AtomAcceptedMediaRange))
         {

@@ -31,7 +31,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold character data that provides a human-readable label explaining the form's purpose.
     /// </summary>
-    private string textInputDescription = String.Empty;
+    private string textInputDescription = string.Empty;
     /// <summary>
     /// Private member to hold the URL of the CGI script that handles the query.
     /// </summary>
@@ -39,11 +39,11 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the name of the form component that contains the query.
     /// </summary>
-    private string textInputName        = String.Empty;
+    private string textInputName        = string.Empty;
     /// <summary>
     /// Private member to hold a value that labels the button used to submit the query.
     /// </summary>
-    private string textInputTitle       = String.Empty;
+    private string textInputTitle       = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssTextInput"/> class.
     /// </summary>
@@ -270,7 +270,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
 
         if (descriptionNavigator != null)
         {
-            if (!String.IsNullOrEmpty(descriptionNavigator.Value))
+            if (!string.IsNullOrEmpty(descriptionNavigator.Value))
             {
                 this.Description    = descriptionNavigator.Value;
                 wasLoaded           = true;
@@ -286,7 +286,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
         }
         if (nameNavigator != null)
         {
-            if (!String.IsNullOrEmpty(nameNavigator.Value))
+            if (!string.IsNullOrEmpty(nameNavigator.Value))
             {
                 this.Name           = nameNavigator.Value;
                 wasLoaded           = true;
@@ -294,7 +294,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
         }
         if (titleNavigator != null)
         {
-            if (!String.IsNullOrEmpty(titleNavigator.Value))
+            if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
                 this.Title          = titleNavigator.Value;
                 wasLoaded           = true;
@@ -338,7 +338,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
         writer.WriteStartElement("textInput");
 
         writer.WriteElementString("description", this.Description);
-        writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : String.Empty);
+        writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
         writer.WriteElementString("name", this.Name);
         writer.WriteElementString("title", this.Title);
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
@@ -390,25 +390,25 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is RssTextInput))
         {

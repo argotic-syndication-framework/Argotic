@@ -70,9 +70,9 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <seealso cref="ConvertDegreesMinutesSecondsToDecimal(string)"/>
     public static string ConvertDecimalToDegreesMinutesSeconds(decimal value)
     {
-        string degreesPart  = String.Empty;
-        string minutesPart  = String.Empty;
-        string secondsPart  = String.Empty;
+        string degreesPart  = string.Empty;
+        string minutesPart  = string.Empty;
+        string secondsPart  = string.Empty;
         decimal multiplier  = (decimal)60;
 
         string degreesAsString  = value.ToString(NumberFormatInfo.InvariantInfo);
@@ -84,9 +84,9 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
             {
                 degreesPart = degreesParts[0];
 
-                if (Decimal.TryParse("." + degreesParts[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal fractionalValue))
+                if (decimal.TryParse("." + degreesParts[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal fractionalValue))
                 {
-                    decimal minutes = Decimal.Multiply(fractionalValue, multiplier);
+                    decimal minutes = decimal.Multiply(fractionalValue, multiplier);
 
                     string minutesAsString  = minutes.ToString(NumberFormatInfo.InvariantInfo);
                     if (minutesAsString.Contains("."))
@@ -96,10 +96,10 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
                         {
                             minutesPart = minutesParts[0];
 
-                            if (Decimal.TryParse("." + minutesParts[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out fractionalValue))
+                            if (decimal.TryParse("." + minutesParts[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out fractionalValue))
                             {
-                                decimal seconds = Decimal.Multiply(fractionalValue, multiplier);
-                                secondsPart     = Decimal.Round(seconds, 2).ToString(NumberFormatInfo.InvariantInfo);
+                                decimal seconds = decimal.Multiply(fractionalValue, multiplier);
+                                secondsPart     = decimal.Round(seconds, 2).ToString(NumberFormatInfo.InvariantInfo);
                             }
                         }
                     }
@@ -107,7 +107,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
             }
         }
 
-        return String.Format(null, "{0}°{1}'{2}\"", degreesPart, minutesPart, secondsPart);
+        return string.Format(null, "{0}°{1}'{2}\"", degreesPart, minutesPart, secondsPart);
     }
 
     /// <summary>
@@ -123,15 +123,15 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         Guard.ArgumentNotNullOrEmptyString(degreesMinutesSeconds, "degreesMinutesSeconds");
         if (!degreesMinutesSeconds.Contains("°"))
         {
-            throw new FormatException(String.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ° degrees delimiter.", degreesMinutesSeconds));
+            throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ° degrees delimiter.", degreesMinutesSeconds));
         }
         else if (!degreesMinutesSeconds.Contains("'"))
         {
-            throw new FormatException(String.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ' minutes delimiter.", degreesMinutesSeconds));
+            throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ' minutes delimiter.", degreesMinutesSeconds));
         }
         else if (!degreesMinutesSeconds.Contains("\""))
         {
-            throw new FormatException(String.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a \" seconds delimiter.", degreesMinutesSeconds));
+            throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a \" seconds delimiter.", degreesMinutesSeconds));
         }
         string degreesValue = degreesMinutesSeconds.Substring(0, degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase));
         string minutesValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) + 1, degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) - degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) - 1);
@@ -139,20 +139,20 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
 			
         degreesValue        = degreesValue.Trim();
         minutesValue        = minutesValue.Trim();
-        secondsValue        = secondsValue.Replace("N", String.Empty).Replace("S", String.Empty).Replace("E", String.Empty).Replace("W", String.Empty);
+        secondsValue        = secondsValue.Replace("N", string.Empty).Replace("S", string.Empty).Replace("E", string.Empty).Replace("W", string.Empty);
         secondsValue        = secondsValue.Trim();
 
-        if (!Decimal.TryParse(degreesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal degrees))
+        if (!decimal.TryParse(degreesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal degrees))
         {
-            throw new FormatException(String.Format(null, "The supplied degrees of {0} does not represent an integer.", degreesValue));
+            throw new FormatException(string.Format(null, "The supplied degrees of {0} does not represent an integer.", degreesValue));
         }
-        if (!Decimal.TryParse(minutesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal minutes))
+        if (!decimal.TryParse(minutesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal minutes))
         {
-            throw new FormatException(String.Format(null, "The supplied minutes of {0} does not represent an integer.", minutesValue));
+            throw new FormatException(string.Format(null, "The supplied minutes of {0} does not represent an integer.", minutesValue));
         }
-        if (!Decimal.TryParse(secondsValue, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal seconds))
+        if (!decimal.TryParse(secondsValue, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal seconds))
         {
-            throw new FormatException(String.Format(null, "The supplied seconds of {0} does not represent a floating point number.", secondsValue));
+            throw new FormatException(string.Format(null, "The supplied seconds of {0} does not represent a floating point number.", secondsValue));
         }
         return (degrees + (minutes/60) + (seconds/3600));
     }
@@ -267,12 +267,12 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
 
         if (value != null)
         {
-            int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Version.CompareTo(value.Version);
-            result      = result | String.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result      = result | String.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            result      = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result      = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
             result      = result | this.Context.Latitude.CompareTo(value.Context.Latitude);
             result      = result | this.Context.Longitude.CompareTo(value.Context.Longitude);
@@ -281,16 +281,16 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is BasicGeocodingSyndicationExtension))
         {

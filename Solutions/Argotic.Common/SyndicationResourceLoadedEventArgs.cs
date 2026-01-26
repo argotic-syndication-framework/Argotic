@@ -36,7 +36,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold an object containing state information that was passed to the asynchronous load operation.
     /// </summary>
-    private Object eventUserToken;
+    private object eventUserToken;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.
@@ -114,7 +114,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <param name="state">The user-defined object that was passed to the asynchronous operation.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, Object state) : this(data, source, credentials, proxy)
+    public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, object state) : this(data, source, credentials, proxy)
     {
         eventUserToken  = state;
     }
@@ -130,7 +130,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <param name="state">The user-defined object that was passed to the asynchronous operation.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, Object state) : this(data, source, options)
+    public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, object state) : this(data, source, options)
     {
         eventUserToken  = state;
     }
@@ -211,14 +211,14 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     }
 
     /// <summary>
-    /// Gets an <see cref="Object"/> containing state information that was passed to the asynchronous load operation.
+    /// Gets an <see cref="object"/> containing state information that was passed to the asynchronous load operation.
     /// </summary>
     /// <value>
-    ///     A <see cref="Object"/> containing state information that was passed to the asynchronous load operation.
+    ///     A <see cref="object"/> containing state information that was passed to the asynchronous load operation.
     ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource or no user token provided, returns <b>null</b>.
     /// </value>
     /// <seealso cref="ISyndicationResource.LoadAsync(Uri, Object)"/>
-    public Object State
+    public object State
     {
         get
         {
@@ -235,13 +235,13 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// </remarks>
     public override string ToString()
     {
-        string source       = this.Source != null ? this.Source.ToString() : String.Empty;
-        string data         = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-        string credentials  = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-        string proxy        = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-        string state        = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
+        string source       = this.Source != null ? this.Source.ToString() : string.Empty;
+        string data         = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string credentials  = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string proxy        = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string state        = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
-        return String.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
+        return string.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
     }
 
     /// <summary>
@@ -262,23 +262,23 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
         if (value != null)
         {
             int result  = 0;
-            result      = result | String.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is SyndicationResourceLoadedEventArgs))
         {

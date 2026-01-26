@@ -13,11 +13,11 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
     /// <summary>
     /// Private member to hold the MIME media type name.
     /// </summary>
-    private string mimeMediaTypeName    = String.Empty;
+    private string mimeMediaTypeName    = string.Empty;
     /// <summary>
     /// Private member to hold the MIME media subtype name.
     /// </summary>
-    private string mimeMediaSubTypeName = String.Empty;
+    private string mimeMediaSubTypeName = string.Empty;
     /// <summary>
     /// Private member to hold a URI that points to the documentation the describes the MIME media type.
     /// </summary>
@@ -38,7 +38,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
     {
         get
         {
-            return mimeMediaDocumentation != null ? mimeMediaDocumentation.ToString() : String.Empty;
+            return mimeMediaDocumentation != null ? mimeMediaDocumentation.ToString() : string.Empty;
         }
 
         set
@@ -74,9 +74,9 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                mimeMediaTypeName = String.Empty;
+                mimeMediaTypeName = string.Empty;
             }
             else
             {
@@ -98,9 +98,9 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                mimeMediaSubTypeName = String.Empty;
+                mimeMediaSubTypeName = string.Empty;
             }
             else
             {
@@ -118,7 +118,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
     /// </remarks>
     public override string ToString()
     {
-        return String.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation.ToString() : String.Empty);
+        return string.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation.ToString() : string.Empty);
     }
 
     /// <summary>
@@ -138,24 +138,24 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is MimeMediaTypeAttribute))
         {

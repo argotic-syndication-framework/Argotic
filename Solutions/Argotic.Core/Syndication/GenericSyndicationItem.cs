@@ -15,11 +15,11 @@ public class GenericSyndicationItem : IComparable
     /// <summary>
     /// Private member to hold the title of the syndication item.
     /// </summary>
-    private string itemTitle                                        = String.Empty;
+    private string itemTitle                                        = string.Empty;
     /// <summary>
     /// Private member to hold the summary of the syndication item.
     /// </summary>
-    private string itemSummary                                      = String.Empty;
+    private string itemSummary                                      = string.Empty;
     /// <summary>
     /// Private member to hold the publication date of the item.
     /// </summary>
@@ -130,7 +130,7 @@ public class GenericSyndicationItem : IComparable
     /// </remarks>
     public override string ToString()
     {
-        return String.Format(null, "GenericSyndicationItem(Title = {0}, Summary = {1}, PublishedOn = {2})", this.Title, this.Summary, this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : String.Empty);
+        return string.Format(null, "GenericSyndicationItem(Title = {0}, Summary = {1}, PublishedOn = {2})", this.Title, this.Summary, this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty);
     }
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -149,23 +149,23 @@ public class GenericSyndicationItem : IComparable
         if (value != null)
         {
             int result  = GenericSyndicationFeed.CompareSequence(this.Categories, value.Categories);
-            result      = result | String.Compare(this.Summary, value.Summary, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Summary, value.Summary, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is GenericSyndicationItem))
         {
@@ -265,7 +265,7 @@ public class GenericSyndicationItem : IComparable
     {
         Guard.ArgumentNotNull(entry, "entry");
 
-        if (entry.Title != null && !String.IsNullOrEmpty(entry.Title.Content))
+        if (entry.Title != null && !string.IsNullOrEmpty(entry.Title.Content))
         {
             itemTitle       = entry.Title.Content.Trim();
         }
@@ -279,11 +279,11 @@ public class GenericSyndicationItem : IComparable
             itemPublishedOn = entry.UpdatedOn;
         }
 
-        if (entry.Summary != null && !String.IsNullOrEmpty(entry.Summary.Content))
+        if (entry.Summary != null && !string.IsNullOrEmpty(entry.Summary.Content))
         {
             itemSummary     = entry.Summary.Content.Trim();
         }
-        else if (entry.Content != null && !String.IsNullOrEmpty(entry.Content.Content))
+        else if (entry.Content != null && !string.IsNullOrEmpty(entry.Content.Content))
         {
             itemSummary     = entry.Content.Content.Trim();
         }
@@ -303,7 +303,7 @@ public class GenericSyndicationItem : IComparable
     private void LoadFrom(RssItem item)
     {
         Guard.ArgumentNotNull(item, "item");
-        if (!String.IsNullOrEmpty(item.Title))
+        if (!string.IsNullOrEmpty(item.Title))
         {
             itemTitle       = item.Title.Trim();
         }
@@ -313,7 +313,7 @@ public class GenericSyndicationItem : IComparable
             itemPublishedOn = item.PublicationDate;
         }
 
-        if (!String.IsNullOrEmpty(item.Description))
+        if (!string.IsNullOrEmpty(item.Description))
         {
             itemSummary     = item.Description.Trim();
         }

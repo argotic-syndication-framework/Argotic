@@ -15,7 +15,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Private member to hold the value of the custom syndication extension's attribute.
     /// </summary>
-    private string customExtensionAttribute = String.Empty;
+    private string customExtensionAttribute = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
     /// </summary>
@@ -37,9 +37,9 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                customExtensionAttribute = String.Empty;
+                customExtensionAttribute = string.Empty;
             }
             else
             {
@@ -80,8 +80,8 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
         XPathNavigator navigator    = source.CreateNavigator();
         if (navigator.HasAttributes)
         {
-            string myAttribute      = navigator.GetAttribute("someAttribute", String.Empty);
-            if (!String.IsNullOrEmpty(myAttribute))
+            string myAttribute      = navigator.GetAttribute("someAttribute", string.Empty);
+            if (!string.IsNullOrEmpty(myAttribute))
             {
                 this.MyAttribute    = myAttribute;
                 wasLoaded           = true;
@@ -120,7 +120,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
 
         writer.WriteStartElement("CustomExtension", this.XmlNamespace);
 
-        if(!String.IsNullOrEmpty(this.MyAttribute))
+        if(!string.IsNullOrEmpty(this.MyAttribute))
         {
             writer.WriteAttributeString("someAttribute", this.MyAttribute);
         }
@@ -173,30 +173,30 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
         if (value != null)
         {
             // Base class properties
-            int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Version.CompareTo(value.Version);
-            result      = result | String.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result      = result | String.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            result      = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result      = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
             // Custom extension properties
-            result      = result | String.Compare(this.MyAttribute, value.MyAttribute, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.MyAttribute, value.MyAttribute, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is MyCustomSyndicationExtension))
         {

@@ -21,7 +21,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
-    private string commonObjectBaseId                           = String.Empty;
+    private string commonObjectBaseId                           = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the web log entity information was created.
     /// </summary>
@@ -41,11 +41,11 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
     /// <summary>
     /// Private member to hold the reference key to the parent of the category.
     /// </summary>
-    private string categoryParentIdentifier                     = String.Empty;
+    private string categoryParentIdentifier                     = string.Empty;
     /// <summary>
     /// Private member to hold the description of the category.
     /// </summary>
-    private string categoryDescription                          = String.Empty;
+    private string categoryDescription                          = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLCategory"/> class.
     /// </summary>
@@ -109,9 +109,9 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                commonObjectBaseId = String.Empty;
+                commonObjectBaseId = string.Empty;
             }
             else
             {
@@ -211,9 +211,9 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                categoryDescription = String.Empty;
+                categoryDescription = string.Empty;
             }
             else
             {
@@ -235,9 +235,9 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                categoryParentIdentifier = String.Empty;
+                categoryParentIdentifier = string.Empty;
             }
             else
             {
@@ -321,16 +321,16 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
         }
         if(source.HasAttributes)
         {
-            string parentRefAttribute   = source.GetAttribute("parentref", String.Empty);
-            string descriptionAttribute = source.GetAttribute("description", String.Empty);
+            string parentRefAttribute   = source.GetAttribute("parentref", string.Empty);
+            string descriptionAttribute = source.GetAttribute("description", string.Empty);
 
-            if (!String.IsNullOrEmpty(parentRefAttribute))
+            if (!string.IsNullOrEmpty(parentRefAttribute))
             {
                 this.ParentId       = parentRefAttribute;
                 wasLoaded           = true;
             }
 
-            if (!String.IsNullOrEmpty(descriptionAttribute))
+            if (!string.IsNullOrEmpty(descriptionAttribute))
             {
                 this.Description    = descriptionAttribute;
                 wasLoaded           = true;
@@ -362,16 +362,16 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
         }
         if(source.HasAttributes)
         {
-            string parentRefAttribute   = source.GetAttribute("parentref", String.Empty);
-            string descriptionAttribute = source.GetAttribute("description", String.Empty);
+            string parentRefAttribute   = source.GetAttribute("parentref", string.Empty);
+            string descriptionAttribute = source.GetAttribute("description", string.Empty);
 
-            if (!String.IsNullOrEmpty(parentRefAttribute))
+            if (!string.IsNullOrEmpty(parentRefAttribute))
             {
                 this.ParentId       = parentRefAttribute;
                 wasLoaded           = true;
             }
 
-            if (!String.IsNullOrEmpty(descriptionAttribute))
+            if (!string.IsNullOrEmpty(descriptionAttribute))
             {
                 this.Description    = descriptionAttribute;
                 wasLoaded           = true;
@@ -394,12 +394,12 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
         writer.WriteStartElement("category", BlogMLUtility.BlogMLNamespace);
         BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (!String.IsNullOrEmpty(this.ParentId))
+        if (!string.IsNullOrEmpty(this.ParentId))
         {
             writer.WriteAttributeString("parentref", this.ParentId);
         }
 
-        if(!String.IsNullOrEmpty(this.Description))
+        if(!string.IsNullOrEmpty(this.Description))
         {
             writer.WriteAttributeString("description", this.Description);
         }
@@ -454,8 +454,8 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
 
         if (value != null)
         {
-            int result  = String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.ParentId, value.ParentId, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.ParentId, value.ParentId, StringComparison.OrdinalIgnoreCase);
 
             result      = result | BlogMLUtility.CompareCommonObjects(this, value);
 
@@ -463,16 +463,16 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is BlogMLCategory))
         {

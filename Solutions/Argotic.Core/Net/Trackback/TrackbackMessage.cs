@@ -28,15 +28,15 @@ public class TrackbackMessage : IComparable
     /// <summary>
     /// Private member to hold the title of the entry.
     /// </summary>
-    private string messageTitle         = String.Empty;
+    private string messageTitle         = string.Empty;
     /// <summary>
     /// Private member to hold an excerpt of the entry.
     /// </summary>
-    private string messageExcerpt       = String.Empty;
+    private string messageExcerpt       = string.Empty;
     /// <summary>
     /// Private member to hold the name of the weblog to which the entry was posted.
     /// </summary>
-    private string messageWeblogName    = String.Empty;
+    private string messageWeblogName    = string.Empty;
     /// <summary>
     /// Private member to hold the permalink for the entry.
     /// </summary>
@@ -98,9 +98,9 @@ public class TrackbackMessage : IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                messageExcerpt = String.Empty;
+                messageExcerpt = string.Empty;
             }
             else
             {
@@ -148,9 +148,9 @@ public class TrackbackMessage : IComparable
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                messageTitle = String.Empty;
+                messageTitle = string.Empty;
             }
             else
             {
@@ -175,9 +175,9 @@ public class TrackbackMessage : IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                messageWeblogName = String.Empty;
+                messageWeblogName = string.Empty;
             }
             else
             {
@@ -203,9 +203,9 @@ public class TrackbackMessage : IComparable
 
         if (source.Count > 0)
         {
-            foreach (String parameterName in source.AllKeys)
+            foreach (string parameterName in source.AllKeys)
             {
-                if (String.Compare(parameterName, "url", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(parameterName, "url", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     if (Uri.TryCreate(source[parameterName], UriKind.RelativeOrAbsolute, out Uri url))
                     {
@@ -213,25 +213,25 @@ public class TrackbackMessage : IComparable
                         wasLoaded       = true;
                     }
                 }
-                else if (String.Compare(parameterName, "title", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(parameterName, "title", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (!String.IsNullOrEmpty(source[parameterName]))
+                    if (!string.IsNullOrEmpty(source[parameterName]))
                     {
                         this.Title  = source[parameterName];
                         wasLoaded   = true;
                     }
                 }
-                else if (String.Compare(parameterName, "excerpt", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(parameterName, "excerpt", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (!String.IsNullOrEmpty(source[parameterName]))
+                    if (!string.IsNullOrEmpty(source[parameterName]))
                     {
                         this.Excerpt    = source[parameterName];
                         wasLoaded       = true;
                     }
                 }
-                else if (String.Compare(parameterName, "blog_name", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(parameterName, "blog_name", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (!String.IsNullOrEmpty(source[parameterName]))
+                    if (!string.IsNullOrEmpty(source[parameterName]))
                     {
                         this.WeblogName = source[parameterName];
                         wasLoaded       = true;
@@ -252,21 +252,21 @@ public class TrackbackMessage : IComparable
     {
         Guard.ArgumentNotNull(writer, "writer");
 
-        writer.Write(String.Format(null, "url={0}", this.Permalink != null ? this.Permalink.ToString() : String.Empty));
+        writer.Write(string.Format(null, "url={0}", this.Permalink != null ? this.Permalink.ToString() : string.Empty));
 
-        if(!String.IsNullOrEmpty(this.Title))
+        if(!string.IsNullOrEmpty(this.Title))
         {
-            writer.Write(String.Format(null, "&title={0}", HttpUtility.UrlEncode(this.Title)));
+            writer.Write(string.Format(null, "&title={0}", HttpUtility.UrlEncode(this.Title)));
         }
 
-        if (!String.IsNullOrEmpty(this.WeblogName))
+        if (!string.IsNullOrEmpty(this.WeblogName))
         {
-            writer.Write(String.Format(null, "&blog_name={0}", HttpUtility.UrlEncode(this.WeblogName)));
+            writer.Write(string.Format(null, "&blog_name={0}", HttpUtility.UrlEncode(this.WeblogName)));
         }
 
-        if (!String.IsNullOrEmpty(this.Excerpt))
+        if (!string.IsNullOrEmpty(this.Excerpt))
         {
-            writer.Write(String.Format(null, "&excerpt={0}", HttpUtility.UrlEncode(this.Excerpt)));
+            writer.Write(string.Format(null, "&excerpt={0}", HttpUtility.UrlEncode(this.Excerpt)));
         }
     }
 
@@ -312,26 +312,26 @@ public class TrackbackMessage : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Permalink, value.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is TrackbackMessage))
         {

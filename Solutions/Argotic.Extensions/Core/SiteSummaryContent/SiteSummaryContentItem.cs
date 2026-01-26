@@ -16,7 +16,7 @@ public class SiteSummaryContentItem : IComparable
     /// <summary>
     /// Private member to hold the textual content of the item.
     /// </summary>
-    private string itemContent  = String.Empty;
+    private string itemContent  = string.Empty;
     /// <summary>
     /// Private member to hold a URI representing the format of the item.
     /// </summary>
@@ -148,7 +148,7 @@ public class SiteSummaryContentItem : IComparable
             }
         }
 
-        if(!String.IsNullOrEmpty(source.Value))
+        if(!string.IsNullOrEmpty(source.Value))
         {
             this.Content    = source.Value;
             wasLoaded       = true;
@@ -168,7 +168,7 @@ public class SiteSummaryContentItem : IComparable
         SiteSummaryContentSyndicationExtension extension    = new SiteSummaryContentSyndicationExtension();
         writer.WriteStartElement("item", extension.XmlNamespace);
 
-        writer.WriteElementString("format", extension.XmlNamespace, this.Format != null ? this.Format.ToString() : String.Empty);
+        writer.WriteElementString("format", extension.XmlNamespace, this.Format != null ? this.Format.ToString() : string.Empty);
 
         if(this.Encoding != null)
         {
@@ -226,7 +226,7 @@ public class SiteSummaryContentItem : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Encoding, value.Encoding, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
             result      = result | Uri.Compare(this.Format, value.Format, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
@@ -234,16 +234,16 @@ public class SiteSummaryContentItem : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is SiteSummaryContentItem))
         {

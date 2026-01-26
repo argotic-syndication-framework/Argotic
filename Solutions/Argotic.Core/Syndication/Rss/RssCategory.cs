@@ -32,11 +32,11 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold a slash-delimited string that identifies a hierarchical position in the taxonomy.
     /// </summary>
-    private string categoryValue    = String.Empty;
+    private string categoryValue    = string.Empty;
     /// <summary>
     /// Private member to hold a value that identifies the taxonomy in which the category is placed.
     /// </summary>
-    private string categoryDomain   = String.Empty;
+    private string categoryDomain   = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssCategory"/> class.
     /// </summary>
@@ -77,7 +77,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
             string[] hierarchy  = new string[value.Count];
             value.CopyTo(hierarchy, 0);
 
-            this.Value  = String.Join("/", hierarchy);
+            this.Value  = string.Join("/", hierarchy);
         }
     }
 
@@ -141,9 +141,9 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                categoryDomain  = String.Empty;
+                categoryDomain  = string.Empty;
             }
             else
             {
@@ -168,9 +168,9 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                categoryValue   = String.Empty;
+                categoryValue   = string.Empty;
             }
             else
             {
@@ -248,7 +248,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     {
         bool wasLoaded              = false;
         Guard.ArgumentNotNull(source, "source");
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             this.Value  = source.Value;
             wasLoaded   = true;
@@ -256,8 +256,8 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
 
         if(source.HasAttributes)
         {
-            string domain   = source.GetAttribute("domain", String.Empty);
-            if(!String.IsNullOrEmpty(domain))
+            string domain   = source.GetAttribute("domain", string.Empty);
+            if(!string.IsNullOrEmpty(domain))
             {
                 this.Domain = domain;
                 wasLoaded   = true;
@@ -300,7 +300,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("category");
 
-        if(!String.IsNullOrEmpty(this.Domain))
+        if(!string.IsNullOrEmpty(this.Domain))
         {
             writer.WriteAttributeString("domain", this.Domain);
         }
@@ -355,23 +355,23 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is RssCategory))
         {

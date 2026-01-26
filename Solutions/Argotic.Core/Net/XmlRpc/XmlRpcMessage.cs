@@ -24,7 +24,7 @@ public class XmlRpcMessage : IComparable
     /// <summary>
     /// Private member to hold the name of the method to be called.
     /// </summary>
-    private string messageMethodName    = String.Empty;
+    private string messageMethodName    = string.Empty;
     /// <summary>
     /// Private member to hold the method parameters.
     /// </summary>
@@ -198,7 +198,7 @@ public class XmlRpcMessage : IComparable
             XPathNavigator methodNameNavigator  = source.SelectSingleNode("methodName");
             XPathNavigator parametersNavigator  = source.SelectSingleNode("params");
 
-            if (methodNameNavigator != null && !String.IsNullOrEmpty(methodNameNavigator.Value))
+            if (methodNameNavigator != null && !string.IsNullOrEmpty(methodNameNavigator.Value))
             {
                 this.MethodName = methodNameNavigator.Value;
                 wasLoaded       = true;
@@ -299,24 +299,24 @@ public class XmlRpcMessage : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
             result      = result | XmlRpcMessage.CompareSequence(this.Parameters, value.Parameters);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is XmlRpcMessage))
         {

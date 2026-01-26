@@ -10,11 +10,11 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable
     /// <summary>
     ///  Private member to hold the display name for the attributed field.
     /// </summary>
-    private string enumMetadataDisplayName      = String.Empty;
+    private string enumMetadataDisplayName      = string.Empty;
     /// <summary>
     /// Private member to hold the alterate textual value for the attributed field.
     /// </summary>
-    private string enumMetadataAlternateValue   = String.Empty;
+    private string enumMetadataAlternateValue   = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EnumerationMetadataAttribute"/> class.
@@ -36,9 +36,9 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                enumMetadataAlternateValue = String.Empty;
+                enumMetadataAlternateValue = string.Empty;
             }
             else
             {
@@ -60,9 +60,9 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                enumMetadataDisplayName = String.Empty;
+                enumMetadataDisplayName = string.Empty;
             }
             else
             {
@@ -80,7 +80,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable
     /// </remarks>
     public override string ToString()
     {
-        return String.Format(null, "[EnumerationMetadata(DisplayName = \"{0}\", AlternateValue=\"{1}\")]", this.DisplayName, this.AlternateValue);
+        return string.Format(null, "[EnumerationMetadata(DisplayName = \"{0}\", AlternateValue=\"{1}\")]", this.DisplayName, this.AlternateValue);
     }
 
     /// <summary>
@@ -100,23 +100,23 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.AlternateValue, value.AlternateValue, StringComparison.Ordinal);
-            result      = result | String.Compare(this.DisplayName, value.DisplayName, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.AlternateValue, value.AlternateValue, StringComparison.Ordinal);
+            result      = result | string.Compare(this.DisplayName, value.DisplayName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is EnumerationMetadataAttribute))
         {

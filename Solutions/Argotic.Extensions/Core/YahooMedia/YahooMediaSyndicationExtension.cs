@@ -71,7 +71,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>The content expression identifier for the supplied <paramref name="expression"/>, Otherwise, returns an empty string.</returns>
     public static string ExpressionAsString(YahooMediaExpression expression)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaExpression).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaExpression))
@@ -120,7 +120,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         mediaExpression = expression;
                         break;
@@ -159,7 +159,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>The content medium identifier for the supplied <paramref name="medium"/>, Otherwise, returns an empty string.</returns>
     public static string MediumAsString(YahooMediaMedium medium)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaMedium).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaMedium))
@@ -208,7 +208,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         mediaMedium = medium;
                         break;
@@ -317,16 +317,16 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is YahooMediaSyndicationExtension))
         {

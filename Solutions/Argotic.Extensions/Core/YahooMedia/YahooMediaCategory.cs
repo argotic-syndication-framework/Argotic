@@ -19,11 +19,11 @@ public class YahooMediaCategory : IComparable
     /// <summary>
     /// Private member to hold the human readable label for the category that can be displayed in end user applications.
     /// </summary>
-    private string categoryLabel    = String.Empty;
+    private string categoryLabel    = string.Empty;
     /// <summary>
     /// Private member to hold the categorization taxonomy for the media object.
     /// </summary>
-    private string categoryContent  = String.Empty;
+    private string categoryContent  = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaCategory"/> class.
@@ -88,9 +88,9 @@ public class YahooMediaCategory : IComparable
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                categoryLabel = String.Empty;
+                categoryLabel = string.Empty;
             }
             else
             {
@@ -135,10 +135,10 @@ public class YahooMediaCategory : IComparable
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string schemeAttribute  = source.GetAttribute("scheme", String.Empty);
-            string labelAttribute   = source.GetAttribute("label", String.Empty);
+            string schemeAttribute  = source.GetAttribute("scheme", string.Empty);
+            string labelAttribute   = source.GetAttribute("label", string.Empty);
 
-            if (!String.IsNullOrEmpty(schemeAttribute))
+            if (!string.IsNullOrEmpty(schemeAttribute))
             {
                 if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                 {
@@ -147,14 +147,14 @@ public class YahooMediaCategory : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(labelAttribute))
+            if (!string.IsNullOrEmpty(labelAttribute))
             {
                 this.Label  = labelAttribute;
                 wasLoaded   = true;
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             this.Content    = source.Value;
             wasLoaded       = true;
@@ -184,7 +184,7 @@ public class YahooMediaCategory : IComparable
             writer.WriteAttributeString("label", this.Label);
         }
 
-        if (!String.IsNullOrEmpty(this.Content))
+        if (!string.IsNullOrEmpty(this.Content))
         {
             writer.WriteString(this.Content);
         }
@@ -238,24 +238,24 @@ public class YahooMediaCategory : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is YahooMediaCategory))
         {

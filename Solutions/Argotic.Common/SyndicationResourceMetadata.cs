@@ -111,9 +111,9 @@ public class SyndicationResourceMetadata : IComparable
         Guard.ArgumentNotNull(navigator, "navigator");
         Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-        string value    = navigator.GetAttribute(name, String.Empty);
+        string value    = navigator.GetAttribute(name, string.Empty);
 
-        if (!String.IsNullOrEmpty(value))
+        if (!string.IsNullOrEmpty(value))
         {
             try
             {
@@ -537,7 +537,7 @@ public class SyndicationResourceMetadata : IComparable
                     version = new Version(1, 0);
                 }
             }
-            else if (String.Compare(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) == 0 && version != null)
+            else if (string.Compare(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) == 0 && version != null)
             {
                 //  Most web log software actually fails to provide the default XML namespace per RSD spec, so this is a hack/compromise
                 resourceConformsToFormat    = true;
@@ -702,11 +702,11 @@ public class SyndicationResourceMetadata : IComparable
     public override string ToString()
     {
         string format       = this.Format.ToString();
-        string version      = this.Version != null ? this.Version.ToString() : String.Empty;
-        string namespaces   = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-        string resource     = this.Resource != null ? this.Resource.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
+        string version      = this.Version != null ? this.Version.ToString() : string.Empty;
+        string namespaces   = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string resource     = this.Resource != null ? this.Resource.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
-        return String.Format(null, "[SyndicationResourceMetadata(Format = \"{0}\", Version = \"{1}\", Namespaces = \"{2}\", Resource = \"{3}\")]", format, version, namespaces, resource);
+        return string.Format(null, "[SyndicationResourceMetadata(Format = \"{0}\", Version = \"{1}\", Namespaces = \"{2}\", Resource = \"{3}\")]", format, version, namespaces, resource);
     }
 
     /// <summary>
@@ -752,7 +752,7 @@ public class SyndicationResourceMetadata : IComparable
 
             if (this.Resource != null && value.Resource != null)
             {
-                result  = result | String.Compare(this.Resource.OuterXml, value.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
+                result  = result | string.Compare(this.Resource.OuterXml, value.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
             }
             else if (this.Resource != null && value.Resource == null)
             {
@@ -767,16 +767,16 @@ public class SyndicationResourceMetadata : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is SyndicationResourceMetadata))
         {

@@ -111,7 +111,7 @@ public class YahooMediaRestriction : IComparable
     /// <returns>The relationship identifier for the supplied <paramref name="relationship"/>, Otherwise, returns an empty string.</returns>
     public static string RelationshipAsString(YahooMediaRestrictionRelationship relationship)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionRelationship).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaRestrictionRelationship))
@@ -159,7 +159,7 @@ public class YahooMediaRestriction : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         restrictionRelationship = relationship;
                         break;
@@ -178,7 +178,7 @@ public class YahooMediaRestriction : IComparable
     /// <returns>The restriction type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
     public static string RestrictionTypeAsString(YahooMediaRestrictionType type)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaRestrictionType))
@@ -226,7 +226,7 @@ public class YahooMediaRestriction : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         restrictionType = type;
                         break;
@@ -253,10 +253,10 @@ public class YahooMediaRestriction : IComparable
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string relationshipAttribute    = source.GetAttribute("relationship", String.Empty);
-            string typeAttribute            = source.GetAttribute("type", String.Empty);
+            string relationshipAttribute    = source.GetAttribute("relationship", string.Empty);
+            string typeAttribute            = source.GetAttribute("type", string.Empty);
 
-            if (!String.IsNullOrEmpty(relationshipAttribute))
+            if (!string.IsNullOrEmpty(relationshipAttribute))
             {
                 YahooMediaRestrictionRelationship relationship  = YahooMediaRestriction.RelationshipByName(relationshipAttribute);
                 if (relationship != YahooMediaRestrictionRelationship.None)
@@ -266,7 +266,7 @@ public class YahooMediaRestriction : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 YahooMediaRestrictionType type  = YahooMediaRestriction.RestrictionTypeByName(typeAttribute);
                 if (type != YahooMediaRestrictionType.None)
@@ -277,7 +277,7 @@ public class YahooMediaRestriction : IComparable
             }
         }
 
-        if (!String.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
             if (source.Value.Contains(" "))
             {
@@ -327,7 +327,7 @@ public class YahooMediaRestriction : IComparable
             string[] entities   = new string[this.Entities.Count];
             this.Entities.CopyTo(entities, 0);
 
-            writer.WriteString(String.Join(" ", entities));
+            writer.WriteString(string.Join(" ", entities));
         }
 
         writer.WriteEndElement();
@@ -387,16 +387,16 @@ public class YahooMediaRestriction : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is YahooMediaRestriction))
         {

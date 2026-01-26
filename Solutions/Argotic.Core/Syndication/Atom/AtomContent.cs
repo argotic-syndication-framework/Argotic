@@ -87,11 +87,11 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
     /// <summary>
     /// Private member to hold the local content of the entry.
     /// </summary>
-    private string contentValue         = String.Empty;
+    private string contentValue         = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating the entity encoding of the content.
     /// </summary>
-    private string contentMediaType     = String.Empty;
+    private string contentMediaType     = string.Empty;
     /// <summary>
     /// Private member to hold an IRI that identifies the remote location of the content.
     /// </summary>
@@ -247,9 +247,9 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                contentValue = String.Empty;
+                contentValue = string.Empty;
             }
             else
             {
@@ -321,9 +321,9 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                contentMediaType = String.Empty;
+                contentMediaType = string.Empty;
             }
             else
             {
@@ -450,15 +450,15 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
 
         if (source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", String.Empty);
-            string sourceAttribute  = source.GetAttribute("src", String.Empty);
+            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string sourceAttribute  = source.GetAttribute("src", string.Empty);
 
-            if (!String.IsNullOrEmpty(typeAttribute))
+            if (!string.IsNullOrEmpty(typeAttribute))
             {
                 this.ContentType    = typeAttribute;
                 wasLoaded           = true;
             }
-            if (!String.IsNullOrEmpty(sourceAttribute))
+            if (!string.IsNullOrEmpty(sourceAttribute))
             {
                 if (Uri.TryCreate(sourceAttribute, UriKind.RelativeOrAbsolute, out Uri src))
                 {
@@ -468,16 +468,16 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
             }
         }
 
-        if (String.Compare(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Compare(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) == 0)
         {
             XPathNavigator xhtmlDivNavigator    = source.SelectSingleNode("xhtml:div", manager);
-            if (xhtmlDivNavigator != null && !String.IsNullOrEmpty(xhtmlDivNavigator.Value))
+            if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
                 this.Content    = xhtmlDivNavigator.InnerXml;
                 wasLoaded       = true;
             }
         }
-        else if (!String.IsNullOrEmpty(source.Value))
+        else if (!string.IsNullOrEmpty(source.Value))
         {
             this.Content    = source.Value;
             wasLoaded       = true;
@@ -524,7 +524,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
         writer.WriteStartElement("content", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if(!String.IsNullOrEmpty(this.ContentType))
+        if(!string.IsNullOrEmpty(this.ContentType))
         {
             writer.WriteAttributeString("type", this.ContentType);
         }
@@ -533,14 +533,14 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
             writer.WriteAttributeString("src", this.Source.ToString());
         }
 
-        if (String.Compare(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) == 0 && String.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
+        if (string.Compare(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) == 0 && string.IsNullOrEmpty(writer.LookupPrefix(AtomUtility.XhtmlNamespace)))
         {
             writer.WriteAttributeString("xmlns", "xhtml", null, AtomUtility.XhtmlNamespace);
         }
 
-        if(!String.IsNullOrEmpty(this.Content))
+        if(!string.IsNullOrEmpty(this.Content))
         {
-            if (String.Compare(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Compare(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase) == 0)
             {
                 writer.WriteStartElement("div", AtomUtility.XhtmlNamespace);
                 writer.WriteString(this.Content);
@@ -604,8 +604,8 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
 
         if (value != null)
         {
-            int result  = String.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
@@ -614,16 +614,16 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is AtomContent))
         {

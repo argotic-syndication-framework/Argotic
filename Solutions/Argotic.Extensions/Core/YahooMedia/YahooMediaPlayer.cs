@@ -25,11 +25,11 @@ public class YahooMediaPlayer : IComparable
     /// <summary>
     /// Private member to hold the height of the browser window that the player console should be opened in.
     /// </summary>
-    private int playerHeight    = Int32.MinValue;
+    private int playerHeight    = int.MinValue;
     /// <summary>
     /// Private member to hold the with of the browser window that the player console should be opened in.
     /// </summary>
-    private int playerWidth     = Int32.MinValue;
+    private int playerWidth     = int.MinValue;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaPlayer"/> class.
@@ -127,11 +127,11 @@ public class YahooMediaPlayer : IComparable
         Guard.ArgumentNotNull(source, "source");
         if(source.HasAttributes)
         {
-            string urlAttribute     = source.GetAttribute("url", String.Empty);
-            string heightAttribute  = source.GetAttribute("height", String.Empty);
-            string widthAttribute   = source.GetAttribute("width", String.Empty);
+            string urlAttribute     = source.GetAttribute("url", string.Empty);
+            string heightAttribute  = source.GetAttribute("height", string.Empty);
+            string widthAttribute   = source.GetAttribute("width", string.Empty);
 
-            if (!String.IsNullOrEmpty(urlAttribute))
+            if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
@@ -140,18 +140,18 @@ public class YahooMediaPlayer : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(heightAttribute))
+            if (!string.IsNullOrEmpty(heightAttribute))
             {
-                if (Int32.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
+                if (int.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
                 {
                     this.Height = height;
                     wasLoaded   = true;
                 }
             }
 
-            if (!String.IsNullOrEmpty(widthAttribute))
+            if (!string.IsNullOrEmpty(widthAttribute))
             {
-                if (Int32.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
+                if (int.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
                 {
                     this.Width  = width;
                     wasLoaded   = true;
@@ -173,14 +173,14 @@ public class YahooMediaPlayer : IComparable
         YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("player", extension.XmlNamespace);
 
-        writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : String.Empty);
+        writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
 
-        if (this.Height != Int32.MinValue)
+        if (this.Height != int.MinValue)
         {
             writer.WriteAttributeString("height", this.Height.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.Width != Int32.MinValue)
+        if (this.Width != int.MinValue)
         {
             writer.WriteAttributeString("width", this.Width.ToString(NumberFormatInfo.InvariantInfo));
         }
@@ -242,16 +242,16 @@ public class YahooMediaPlayer : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is YahooMediaPlayer))
         {

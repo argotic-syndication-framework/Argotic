@@ -111,7 +111,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>The explicit material identifier for the supplied <paramref name="material"/>, Otherwise, returns an empty string.</returns>
     public static string ExplicitMaterialAsString(ITunesExplicitMaterial material)
     {
-        string name = String.Empty;
+        string name = string.Empty;
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(ITunesExplicitMaterial).GetFields())
         {
             if (fieldInfo.FieldType == typeof(ITunesExplicitMaterial))
@@ -159,7 +159,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (String.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
                         explicitMaterial    = material;
                         break;
@@ -277,7 +277,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.Context.Author, value.Context.Author, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Context.Author, value.Context.Author, StringComparison.OrdinalIgnoreCase);
             result      = result | ITunesSyndicationExtension.CompareSequence(this.Context.Categories, value.Context.Categories);
             result      = result | this.Context.Duration.CompareTo(value.Context.Duration);
             result      = result | this.Context.ExplicitMaterial.CompareTo(value.Context.ExplicitMaterial);
@@ -286,23 +286,23 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
             result      = result | ComparisonUtility.CompareSequence(this.Context.Keywords, value.Context.Keywords, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Context.NewFeedUrl, value.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
             result      = result | this.Context.Owner.CompareTo(value.Context.Owner);
-            result      = result | String.Compare(this.Context.Subtitle, value.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Context.Summary, value.Context.Summary, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Context.Subtitle, value.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Context.Summary, value.Context.Summary, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is ITunesSyndicationExtension))
         {

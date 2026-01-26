@@ -39,7 +39,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     /// <summary>
     /// Private member to hold a string that identifies the category to which the entry or feed belongs.
     /// </summary>
-    private string categoryTerm     = String.Empty;
+    private string categoryTerm     = string.Empty;
     /// <summary>
     /// Private member to hold an IRI that identifies a categorization scheme.
     /// </summary>
@@ -47,7 +47,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     /// <summary>
     /// Private member to hold a human-readable label for display in end-user applications.
     /// </summary>
-    private string categoryLabel    = String.Empty;
+    private string categoryLabel    = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomCategory"/> class.
@@ -168,9 +168,9 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                categoryLabel = String.Empty;
+                categoryLabel = string.Empty;
             }
             else
             {
@@ -305,17 +305,17 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
 
         if(source.HasAttributes)
         {
-            string termAttribute    = source.GetAttribute("term", String.Empty);
-            string schemeAttribute  = source.GetAttribute("scheme", String.Empty);
-            string labelAttribute   = source.GetAttribute("label", String.Empty);
+            string termAttribute    = source.GetAttribute("term", string.Empty);
+            string schemeAttribute  = source.GetAttribute("scheme", string.Empty);
+            string labelAttribute   = source.GetAttribute("label", string.Empty);
 
-            if(!String.IsNullOrEmpty(termAttribute))
+            if(!string.IsNullOrEmpty(termAttribute))
             {
                 this.Term   = termAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(schemeAttribute))
+            if (!string.IsNullOrEmpty(schemeAttribute))
             {
                 if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                 {
@@ -324,7 +324,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
                 }
             }
 
-            if (!String.IsNullOrEmpty(labelAttribute))
+            if (!string.IsNullOrEmpty(labelAttribute))
             {
                 this.Label  = labelAttribute;
                 wasLoaded   = true;
@@ -379,7 +379,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
             writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }
 
-        if(!String.IsNullOrEmpty(this.Label))
+        if(!string.IsNullOrEmpty(this.Label))
         {
             writer.WriteAttributeString("label", this.Label);
         }
@@ -436,9 +436,9 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
 
         if (value != null)
         {
-            int result  = String.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
 
             result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
@@ -446,16 +446,16 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is AtomCategory))
         {

@@ -25,7 +25,7 @@ public class TrackbackDiscoveryMetadata : IComparable
     /// <summary>
     /// Private member to hold the title of the discoverable web log entry.
     /// </summary>
-    private string trackbackDiscoveryTitle  = String.Empty;
+    private string trackbackDiscoveryTitle  = string.Empty;
     /// <summary>
     /// Private member to hold Resource Description Framework entity reference.
     /// </summary>
@@ -128,9 +128,9 @@ public class TrackbackDiscoveryMetadata : IComparable
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                trackbackDiscoveryTitle = String.Empty;
+                trackbackDiscoveryTitle = string.Empty;
             }
             else
             {
@@ -169,12 +169,12 @@ public class TrackbackDiscoveryMetadata : IComparable
             string titleAttribute       = descriptionNavigator.GetAttribute("title", DUBLIN_CORE_NAMESPACE);
             string pingAttribute        = descriptionNavigator.GetAttribute("ping", TRACKBACK_NAMESPACE);
 
-            if (String.IsNullOrEmpty(pingAttribute))
+            if (string.IsNullOrEmpty(pingAttribute))
             {
                 return false;
             }
 
-            if (!String.IsNullOrEmpty(aboutAttribute))
+            if (!string.IsNullOrEmpty(aboutAttribute))
             {
                 if (Uri.TryCreate(aboutAttribute, UriKind.RelativeOrAbsolute, out Uri about))
                 {
@@ -183,7 +183,7 @@ public class TrackbackDiscoveryMetadata : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(identifierAttribute))
+            if (!string.IsNullOrEmpty(identifierAttribute))
             {
                 if (Uri.TryCreate(identifierAttribute, UriKind.RelativeOrAbsolute, out Uri identifier))
                 {
@@ -192,13 +192,13 @@ public class TrackbackDiscoveryMetadata : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(titleAttribute))
+            if (!string.IsNullOrEmpty(titleAttribute))
             {
                 this.Title  = titleAttribute;
                 wasLoaded   = true;
             }
 
-            if (!String.IsNullOrEmpty(pingAttribute))
+            if (!string.IsNullOrEmpty(pingAttribute))
             {
                 if (Uri.TryCreate(pingAttribute, UriKind.RelativeOrAbsolute, out Uri ping))
                 {
@@ -225,10 +225,10 @@ public class TrackbackDiscoveryMetadata : IComparable
         writer.WriteAttributeString("xmlns", "trackback", null, TRACKBACK_NAMESPACE);
 
         writer.WriteStartElement("rdf", "Description", RDF_NAMESPACE);
-        writer.WriteAttributeString("rdf", "about", RDF_NAMESPACE, this.About != null ? this.About.ToString() : String.Empty);
-        writer.WriteAttributeString("dc", "identifier", DUBLIN_CORE_NAMESPACE, this.Identifier != null ? this.Identifier.ToString() : String.Empty);
-        writer.WriteAttributeString("dc", "title", DUBLIN_CORE_NAMESPACE, !String.IsNullOrEmpty(this.Title) ? this.Title : String.Empty);
-        writer.WriteAttributeString("trackback", "ping", TRACKBACK_NAMESPACE, this.PingUrl != null ? this.PingUrl.ToString() : String.Empty);
+        writer.WriteAttributeString("rdf", "about", RDF_NAMESPACE, this.About != null ? this.About.ToString() : string.Empty);
+        writer.WriteAttributeString("dc", "identifier", DUBLIN_CORE_NAMESPACE, this.Identifier != null ? this.Identifier.ToString() : string.Empty);
+        writer.WriteAttributeString("dc", "title", DUBLIN_CORE_NAMESPACE, !string.IsNullOrEmpty(this.Title) ? this.Title : string.Empty);
+        writer.WriteAttributeString("trackback", "ping", TRACKBACK_NAMESPACE, this.PingUrl != null ? this.PingUrl.ToString() : string.Empty);
         writer.WriteEndElement();
 
         writer.WriteFullEndElement();
@@ -284,22 +284,22 @@ public class TrackbackDiscoveryMetadata : IComparable
             int result  = Uri.Compare(this.About, value.About, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Identifier, value.Identifier, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.PingUrl, value.PingUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is TrackbackDiscoveryMetadata))
         {

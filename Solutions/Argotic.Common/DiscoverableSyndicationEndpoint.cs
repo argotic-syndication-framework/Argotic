@@ -11,11 +11,11 @@ public class DiscoverableSyndicationEndpoint : IComparable
     /// <summary>
     /// Private member to hold the content MIME type of the syndication endpoint.
     /// </summary>
-    private string endpointMediaType    = String.Empty;
+    private string endpointMediaType    = string.Empty;
     /// <summary>
     /// Private member to hold the title of the syndication endpoint.
     /// </summary>
-    private string endpointTitle        = String.Empty;
+    private string endpointTitle        = string.Empty;
     /// <summary>
     /// Private member to hold the Uniform Resource Locator (URL) of the syndication endpoint.
     /// </summary>
@@ -72,7 +72,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
         {
             SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
 
-            if (String.IsNullOrEmpty(this.ContentType))
+            if (string.IsNullOrEmpty(this.ContentType))
             {
                 return SyndicationContentFormat.None;
             }
@@ -88,9 +88,9 @@ public class DiscoverableSyndicationEndpoint : IComparable
                         if (customAttributes != null && customAttributes.Length > 0)
                         {
                             MimeMediaTypeAttribute mediaType    = customAttributes[0] as MimeMediaTypeAttribute;
-                            string contentType                  = String.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
+                            string contentType                  = string.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
 
-                            if (String.Compare(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase) == 0)
+                            if (string.Compare(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase) == 0)
                             {
                                 syndicationFormat   = format;
                                 break;
@@ -161,9 +161,9 @@ public class DiscoverableSyndicationEndpoint : IComparable
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                endpointTitle   = String.Empty;
+                endpointTitle   = string.Empty;
             }
             else
             {
@@ -193,7 +193,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
     /// </remarks>
     public override string ToString()
     {
-        return String.Format(null, "<link rel=\"alternate\" type=\"{0}\" title=\"{1}\" href=\"{2}\" />", this.ContentType, this.Title, this.Source != null ? this.Source.ToString() : String.Empty);
+        return string.Format(null, "<link rel=\"alternate\" type=\"{0}\" title=\"{1}\" href=\"{2}\" />", this.ContentType, this.Title, this.Source != null ? this.Source.ToString() : string.Empty);
     }
 
     /// <summary>
@@ -213,24 +213,24 @@ public class DiscoverableSyndicationEndpoint : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is DiscoverableSyndicationEndpoint))
         {

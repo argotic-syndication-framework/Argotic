@@ -14,7 +14,7 @@ public class XmlRpcStructureMember : IComparable
     /// <summary>
     /// Private member to hold the name of the structure member.
     /// </summary>
-    private string memberName   = String.Empty;
+    private string memberName   = string.Empty;
     /// <summary>
     /// Private member to hold the value of the structure member.
     /// </summary>
@@ -100,7 +100,7 @@ public class XmlRpcStructureMember : IComparable
             XPathNavigator nameNavigator    = source.SelectSingleNode("name");
             XPathNavigator valueNavigator   = source.SelectSingleNode("value");
 
-            if (nameNavigator != null && !String.IsNullOrEmpty(nameNavigator.Value))
+            if (nameNavigator != null && !string.IsNullOrEmpty(nameNavigator.Value))
             {
                 this.Name   = nameNavigator.Value;
                 wasLoaded   = true;
@@ -138,7 +138,7 @@ public class XmlRpcStructureMember : IComparable
         }
         else
         {
-            writer.WriteElementString("value", String.Empty);
+            writer.WriteElementString("value", string.Empty);
         }
 
         writer.WriteEndElement();
@@ -191,22 +191,22 @@ public class XmlRpcStructureMember : IComparable
 
         if (value != null)
         {
-            int result  = String.Compare(this.ToString(), value.ToString(), StringComparison.Ordinal);
+            int result  = string.Compare(this.ToString(), value.ToString(), StringComparison.Ordinal);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is XmlRpcStructureMember))
         {

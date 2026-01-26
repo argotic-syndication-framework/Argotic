@@ -33,7 +33,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the e-mail address of the person who wrote the item.
     /// </summary>
-    private string itemAuthor               = String.Empty;
+    private string itemAuthor               = string.Empty;
     /// <summary>
     /// Private member to hold categories or tags to which the item belongs.
     /// </summary>
@@ -45,7 +45,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold character data that contains the item's full content or a summary of its contents.
     /// </summary>
-    private string itemDescription          = String.Empty;
+    private string itemDescription          = string.Empty;
     /// <summary>
     /// Private member to hold media objects such as an audio, video, or executable file that are associated with the item.
     /// </summary>
@@ -69,7 +69,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold character data that provides the item's headline.
     /// </summary>
-    private string itemTitle                = String.Empty;
+    private string itemTitle                = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssItem"/> class.
     /// </summary>
@@ -137,9 +137,9 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                itemAuthor = String.Empty;
+                itemAuthor = string.Empty;
             }
             else
             {
@@ -207,9 +207,9 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(String.IsNullOrEmpty(value))
+            if(string.IsNullOrEmpty(value))
             {
-                itemDescription = String.Empty;
+                itemDescription = string.Empty;
             }
             else
             {
@@ -698,12 +698,12 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("item");
 
-        if (!String.IsNullOrEmpty(this.Title))
+        if (!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteElementString("title", this.Title);
         }
 
-        if (!String.IsNullOrEmpty(this.Description))
+        if (!string.IsNullOrEmpty(this.Description))
         {
             writer.WriteElementString("description", this.Description);
         }
@@ -713,7 +713,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("link", this.Link.ToString());
         }
 
-        if(!String.IsNullOrEmpty(this.Author))
+        if(!string.IsNullOrEmpty(this.Author))
         {
             writer.WriteElementString("author", this.Author);
         }
@@ -797,12 +797,12 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (value != null)
         {
-            int result  = String.Compare(this.Author, value.Author, StringComparison.OrdinalIgnoreCase);
+            int result  = string.Compare(this.Author, value.Author, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Comments, value.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
             result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
             result      = result | this.PublicationDate.CompareTo(value.PublicationDate);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             if(this.Guid != null)
             {
@@ -829,16 +829,16 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is RssItem))
         {

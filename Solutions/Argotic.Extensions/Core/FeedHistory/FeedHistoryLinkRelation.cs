@@ -93,10 +93,10 @@ public class FeedHistoryLinkRelation : IComparable
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string hrefAttribute    = source.GetAttribute("href", String.Empty);
-            string relAttribute     = source.GetAttribute("rel", String.Empty);
+            string hrefAttribute    = source.GetAttribute("href", string.Empty);
+            string relAttribute     = source.GetAttribute("rel", string.Empty);
 
-            if (!String.IsNullOrEmpty(hrefAttribute))
+            if (!string.IsNullOrEmpty(hrefAttribute))
             {
                 if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                 {
@@ -105,7 +105,7 @@ public class FeedHistoryLinkRelation : IComparable
                 }
             }
 
-            if (!String.IsNullOrEmpty(relAttribute))
+            if (!string.IsNullOrEmpty(relAttribute))
             {
                 FeedHistoryLinkRelationType relationType    = FeedHistorySyndicationExtension.LinkRelationTypeByName(relAttribute);
                 if (relationType != FeedHistoryLinkRelationType.None)
@@ -129,8 +129,8 @@ public class FeedHistoryLinkRelation : IComparable
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("link", "http://www.w3.org/2005/Atom");
 
-        writer.WriteAttributeString("href", this.Uri != null ? this.Uri.ToString() : String.Empty);
-        writer.WriteAttributeString("rel", this.RelationType != FeedHistoryLinkRelationType.None ? FeedHistorySyndicationExtension.LinkRelationTypeAsString(this.RelationType) : String.Empty);
+        writer.WriteAttributeString("href", this.Uri != null ? this.Uri.ToString() : string.Empty);
+        writer.WriteAttributeString("rel", this.RelationType != FeedHistoryLinkRelationType.None ? FeedHistorySyndicationExtension.LinkRelationTypeAsString(this.RelationType) : string.Empty);
 
         writer.WriteEndElement();
     }
@@ -188,16 +188,16 @@ public class FeedHistoryLinkRelation : IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is FeedHistoryLinkRelation))
         {

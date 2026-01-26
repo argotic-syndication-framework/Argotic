@@ -23,15 +23,15 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the title of the document.
     /// </summary>
-    private string headTitle            = String.Empty;
+    private string headTitle            = string.Empty;
     /// <summary>
     /// Private member to hold a value that credits the software that created the document.
     /// </summary>
-    private string headGenerator        = String.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(ApmlHead)).GetName().Version.ToString(4));
+    private string headGenerator        = string.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(ApmlHead)).GetName().Version.ToString(4));
     /// <summary>
     /// Private member to hold email address of the owner of the document.
     /// </summary>
-    private string headUserEmailAddress = String.Empty;
+    private string headUserEmailAddress = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the document was created.
     /// </summary>
@@ -123,9 +123,9 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                headUserEmailAddress = String.Empty;
+                headUserEmailAddress = string.Empty;
             }
             else
             {
@@ -147,9 +147,9 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                headGenerator = String.Empty;
+                headGenerator = string.Empty;
             }
             else
             {
@@ -171,9 +171,9 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if (String.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                headTitle = String.Empty;
+                headTitle = string.Empty;
             }
             else
             {
@@ -320,17 +320,17 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("Head", ApmlUtility.ApmlNamespace);
 
-        if(!String.IsNullOrEmpty(this.Title))
+        if(!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteElementString("Title", ApmlUtility.ApmlNamespace, this.Title);
         }
 
-        if (!String.IsNullOrEmpty(this.Generator))
+        if (!string.IsNullOrEmpty(this.Generator))
         {
             writer.WriteElementString("Generator", ApmlUtility.ApmlNamespace, this.Generator);
         }
 
-        if (!String.IsNullOrEmpty(this.EmailAddress))
+        if (!string.IsNullOrEmpty(this.EmailAddress))
         {
             writer.WriteElementString("UserEmail", ApmlUtility.ApmlNamespace, this.EmailAddress);
         }
@@ -389,24 +389,24 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result  = this.CreatedOn.CompareTo(value.CreatedOn);
-            result      = result | String.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
-            result      = result | String.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
+            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is ApmlHead))
         {

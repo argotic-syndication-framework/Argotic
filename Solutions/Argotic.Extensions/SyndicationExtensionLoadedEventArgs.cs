@@ -114,13 +114,13 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     /// </remarks>
     public override string ToString()
     {
-        string name         = this.Extension != null ? this.Extension.Name : String.Empty;
-        string prefix       = this.Extension != null ? this.Extension.XmlPrefix : String.Empty;
-        string xmlNamespace = this.Extension != null ? this.Extension.XmlNamespace : String.Empty;
-        string extension    = this.Extension != null ? this.Extension.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
-        string data         = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : String.Empty;
+        string name         = this.Extension != null ? this.Extension.Name : string.Empty;
+        string prefix       = this.Extension != null ? this.Extension.XmlPrefix : string.Empty;
+        string xmlNamespace = this.Extension != null ? this.Extension.XmlNamespace : string.Empty;
+        string extension    = this.Extension != null ? this.Extension.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string data         = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
-        return String.Format(null, "[SyndicationExtensionLoadedEventArgs(Name = \"{0}\", Prefix = \"{1}\", Namespace = \"{2}\", Extension = \"{3}\", Data = \"{4}\")]", name, prefix, xmlNamespace, extension, data);
+        return string.Format(null, "[SyndicationExtensionLoadedEventArgs(Name = \"{0}\", Prefix = \"{1}\", Namespace = \"{2}\", Extension = \"{3}\", Data = \"{4}\")]", name, prefix, xmlNamespace, extension, data);
     }
 
     /// <summary>
@@ -145,7 +145,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
             {
                 if(value.Data != null)
                 {
-                    result  = result | String.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.Ordinal);
+                    result  = result | string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.Ordinal);
                 }
                 else
                 {
@@ -161,7 +161,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
             {
                 if (value.Extension != null)
                 {
-                    result  = result | String.Compare(this.Extension.ToString(), value.Extension.ToString(), StringComparison.Ordinal);
+                    result  = result | string.Compare(this.Extension.ToString(), value.Extension.ToString(), StringComparison.Ordinal);
                 }
                 else
                 {
@@ -177,16 +177,16 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
         }
         else
         {
-            throw new ArgumentException(String.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), "obj");
         }
     }
 
     /// <summary>
-    /// Determines whether the specified <see cref="Object"/> is equal to the current instance.
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
-    /// <param name="obj">The <see cref="Object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="Object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(Object obj)
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object obj)
     {
         if (!(obj is SyndicationExtensionLoadedEventArgs))
         {

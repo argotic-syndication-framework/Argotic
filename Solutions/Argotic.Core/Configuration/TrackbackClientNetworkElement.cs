@@ -2,183 +2,182 @@
 using System.Configuration;
 using System.Net;
 
-namespace Argotic.Configuration
+namespace Argotic.Configuration;
+
+/// <summary>
+/// Represents the network element in the Trackback <see cref="TrackbackClientSection">client configuration section</see>. This class cannot be inherited.
+/// </summary>
+/// <seealso cref="TrackbackClientSection"/>
+[System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
+public sealed class TrackbackClientNetworkElement : ConfigurationElement
 {
     /// <summary>
-    /// Represents the network element in the Trackback <see cref="TrackbackClientSection">client configuration section</see>. This class cannot be inherited.
+    /// Private member to hold the client host configuration property for the element.
     /// </summary>
-    /// <seealso cref="TrackbackClientSection"/>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
-    public sealed class TrackbackClientNetworkElement : ConfigurationElement
+    private static readonly ConfigurationProperty configurationSectionHostProperty                  = new ConfigurationProperty("host", typeof(System.Uri), null, new UriTypeConverter(), null, ConfigurationPropertyOptions.None);
+    /// <summary>
+    /// Private member to hold the client default credentials configuration property for the element.
+    /// </summary>
+    private static readonly ConfigurationProperty configurationElementDefaultCredentialsProperty    = new ConfigurationProperty("defaultCredentials", typeof(System.Boolean), false, new BooleanConverter(), null, ConfigurationPropertyOptions.None);
+    /// <summary>
+    /// Private member to hold the client user name configuration property for the element.
+    /// </summary>
+    private static readonly ConfigurationProperty configurationElementUserNameProperty              = new ConfigurationProperty("userName", typeof(System.String), String.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
+    /// <summary>
+    /// Private member to hold the client password configuration property for the element.
+    /// </summary>
+    private static readonly ConfigurationProperty configurationElementPasswordProperty              = new ConfigurationProperty("password", typeof(System.String), String.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
+    /// <summary>
+    /// Private member to hold the client domain configuration property for the element.
+    /// </summary>
+    private static readonly ConfigurationProperty configurationElementDomainProperty                = new ConfigurationProperty("domain", typeof(System.String), String.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
+    /// <summary>
+    /// Private member to hold a collection of configuration element properties for the element.
+    /// </summary>
+    private static ConfigurationPropertyCollection configurationElementProperties                   = new ConfigurationPropertyCollection();
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="TrackbackClientNetworkElement"/> class.
+    /// </summary>
+    public TrackbackClientNetworkElement()
     {
-        /// <summary>
-        /// Private member to hold the client host configuration property for the element.
-        /// </summary>
-        private static readonly ConfigurationProperty configurationSectionHostProperty                  = new ConfigurationProperty("host", typeof(System.Uri), null, new UriTypeConverter(), null, ConfigurationPropertyOptions.None);
-        /// <summary>
-        /// Private member to hold the client default credentials configuration property for the element.
-        /// </summary>
-        private static readonly ConfigurationProperty configurationElementDefaultCredentialsProperty    = new ConfigurationProperty("defaultCredentials", typeof(System.Boolean), false, new BooleanConverter(), null, ConfigurationPropertyOptions.None);
-        /// <summary>
-        /// Private member to hold the client user name configuration property for the element.
-        /// </summary>
-        private static readonly ConfigurationProperty configurationElementUserNameProperty              = new ConfigurationProperty("userName", typeof(System.String), String.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
-        /// <summary>
-        /// Private member to hold the client password configuration property for the element.
-        /// </summary>
-        private static readonly ConfigurationProperty configurationElementPasswordProperty              = new ConfigurationProperty("password", typeof(System.String), String.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
-        /// <summary>
-        /// Private member to hold the client domain configuration property for the element.
-        /// </summary>
-        private static readonly ConfigurationProperty configurationElementDomainProperty                = new ConfigurationProperty("domain", typeof(System.String), String.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
-        /// <summary>
-        /// Private member to hold a collection of configuration element properties for the element.
-        /// </summary>
-        private static ConfigurationPropertyCollection configurationElementProperties                   = new ConfigurationPropertyCollection();
+        configurationElementProperties.Add(configurationSectionHostProperty);
+        configurationElementProperties.Add(configurationElementDefaultCredentialsProperty);
+        configurationElementProperties.Add(configurationElementUserNameProperty);
+        configurationElementProperties.Add(configurationElementPasswordProperty);
+        configurationElementProperties.Add(configurationElementDomainProperty);
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="TrackbackClientNetworkElement"/> class.
-        /// </summary>
-        public TrackbackClientNetworkElement()
+    /// <summary>
+    /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="System.Net.CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent with requests.
+    /// </summary>
+    /// <value><b>true</b> indicates that default user credentials will be used to access the Trackback server; otherwise, <b>false</b>.</value>
+    [ConfigurationProperty("defaultCredentials", DefaultValue = false, Options = ConfigurationPropertyOptions.None)]
+    [TypeConverter(typeof(System.Boolean))]
+    public bool DefaultCredentials
+    {
+        get
         {
-            configurationElementProperties.Add(configurationSectionHostProperty);
-            configurationElementProperties.Add(configurationElementDefaultCredentialsProperty);
-            configurationElementProperties.Add(configurationElementUserNameProperty);
-            configurationElementProperties.Add(configurationElementPasswordProperty);
-            configurationElementProperties.Add(configurationElementDomainProperty);
+            return (bool)base[configurationElementDefaultCredentialsProperty];
         }
-
-        /// <summary>
-        /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="System.Net.CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent with requests.
-        /// </summary>
-        /// <value><b>true</b> indicates that default user credentials will be used to access the Trackback server; otherwise, <b>false</b>.</value>
-        [ConfigurationProperty("defaultCredentials", DefaultValue = false, Options = ConfigurationPropertyOptions.None)]
-        [TypeConverter(typeof(System.Boolean))]
-        public bool DefaultCredentials
+        set
         {
-            get
-            {
-                return (bool)base[configurationElementDefaultCredentialsProperty];
-            }
-            set
-            {
-                base[configurationElementDefaultCredentialsProperty] = value;
-            }
+            base[configurationElementDefaultCredentialsProperty] = value;
         }
+    }
 
-        /// <summary>
-        /// Gets or sets the domain or computer name that verifies the network credentials.
-        /// </summary>
-        /// <value>A string that represents the domain or computer name that verifies the network credentials.</value>
-        /// <seealso cref="NetworkCredential.Domain"/>
-        [ConfigurationProperty("domain", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
-        public string Domain
+    /// <summary>
+    /// Gets or sets the domain or computer name that verifies the network credentials.
+    /// </summary>
+    /// <value>A string that represents the domain or computer name that verifies the network credentials.</value>
+    /// <seealso cref="NetworkCredential.Domain"/>
+    [ConfigurationProperty("domain", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+    public string Domain
+    {
+        get
         {
-            get
-            {
-                return (string)base[configurationElementDomainProperty];
-            }
-            set
-            {
-                base[configurationElementDomainProperty] = value;
-            }
+            return (string)base[configurationElementDomainProperty];
         }
-
-        /// <summary>
-        /// Gets or sets the location of the host computer that client Trackback pings will be sent to.
-        /// </summary>
-        /// <value>A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</value>
-        [ConfigurationProperty("host", DefaultValue = null, Options = ConfigurationPropertyOptions.None)]
-        [TypeConverter(typeof(System.Uri))]
-        public Uri Host
+        set
         {
-            get
-            {
-                return (Uri)base[configurationSectionHostProperty];
-            }
-            set
-            {
-                base[configurationSectionHostProperty] = value;
-            }
+            base[configurationElementDomainProperty] = value;
         }
+    }
 
-        /// <summary>
-        /// Gets or sets the user password to use to connect to a Trackback server.
-        /// </summary>
-        /// <value>A string that represents the password to use to connect to a Trackback server.</value>
-        /// <seealso cref="NetworkCredential.Password"/>
-        [ConfigurationProperty("password", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
-        public string Password
+    /// <summary>
+    /// Gets or sets the location of the host computer that client Trackback pings will be sent to.
+    /// </summary>
+    /// <value>A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</value>
+    [ConfigurationProperty("host", DefaultValue = null, Options = ConfigurationPropertyOptions.None)]
+    [TypeConverter(typeof(System.Uri))]
+    public Uri Host
+    {
+        get
         {
-            get
-            {
-                return (string)base[configurationElementPasswordProperty];
-            }
-            set
-            {
-                base[configurationElementPasswordProperty] = value;
-            }
+            return (Uri)base[configurationSectionHostProperty];
         }
-
-        /// <summary>
-        /// Gets or sets the user name to connect to a Trackback server.
-        /// </summary>
-        /// <value>A string that represents the user name to connect to a Trackback server.</value>
-        /// <seealso cref="NetworkCredential.UserName"/>
-        [ConfigurationProperty("userName", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
-        public string UserName
+        set
         {
-            get
-            {
-                return (string)base[configurationElementUserNameProperty];
-            }
-            set
-            {
-                base[configurationElementUserNameProperty] = value;
-            }
+            base[configurationSectionHostProperty] = value;
         }
+    }
 
-        /// <summary>
-        /// Returns a <see cref="NetworkCredential"/> for the configured user name, password, and domain.
-        /// </summary>
-        /// <returns>
-        ///     A <see cref="NetworkCredential"/> object initialized using the curent <see cref="UserName"/>, <see cref="Password"/>, and <see cref="Domain"/>.
-        /// </returns>
-        /// <remarks>
-        ///     If <see cref="UserName"/> is a null or empty string, returns a <b>null</b> reference.
-        /// </remarks>
-        public NetworkCredential Credential
+    /// <summary>
+    /// Gets or sets the user password to use to connect to a Trackback server.
+    /// </summary>
+    /// <value>A string that represents the password to use to connect to a Trackback server.</value>
+    /// <seealso cref="NetworkCredential.Password"/>
+    [ConfigurationProperty("password", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+    public string Password
+    {
+        get
         {
-            get
-            {
-                NetworkCredential credential    = null;
+            return (string)base[configurationElementPasswordProperty];
+        }
+        set
+        {
+            base[configurationElementPasswordProperty] = value;
+        }
+    }
 
-                if (!String.IsNullOrEmpty(this.UserName))
+    /// <summary>
+    /// Gets or sets the user name to connect to a Trackback server.
+    /// </summary>
+    /// <value>A string that represents the user name to connect to a Trackback server.</value>
+    /// <seealso cref="NetworkCredential.UserName"/>
+    [ConfigurationProperty("userName", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
+    public string UserName
+    {
+        get
+        {
+            return (string)base[configurationElementUserNameProperty];
+        }
+        set
+        {
+            base[configurationElementUserNameProperty] = value;
+        }
+    }
+
+    /// <summary>
+    /// Returns a <see cref="NetworkCredential"/> for the configured user name, password, and domain.
+    /// </summary>
+    /// <returns>
+    ///     A <see cref="NetworkCredential"/> object initialized using the curent <see cref="UserName"/>, <see cref="Password"/>, and <see cref="Domain"/>.
+    /// </returns>
+    /// <remarks>
+    ///     If <see cref="UserName"/> is a null or empty string, returns a <b>null</b> reference.
+    /// </remarks>
+    public NetworkCredential Credential
+    {
+        get
+        {
+            NetworkCredential credential    = null;
+
+            if (!String.IsNullOrEmpty(this.UserName))
+            {
+                if (!String.IsNullOrEmpty(this.Domain))
                 {
-                    if (!String.IsNullOrEmpty(this.Domain))
-                    {
-                        credential  = new NetworkCredential(this.UserName, this.Password, this.Domain);
-                    }
-                    else
-                    {
-                        credential  = new NetworkCredential(this.UserName, this.Password);
-                    }
+                    credential  = new NetworkCredential(this.UserName, this.Password, this.Domain);
                 }
-
-                return credential;
+                else
+                {
+                    credential  = new NetworkCredential(this.UserName, this.Password);
+                }
             }
+
+            return credential;
         }
+    }
 
-        /// <summary>
-        /// Gets the configuration properties for this element.
-        /// </summary>
-        /// <value>A <see cref="ConfigurationPropertyCollection"/> object that represents the configuration properties for this element.</value>
-        protected override ConfigurationPropertyCollection Properties
+    /// <summary>
+    /// Gets the configuration properties for this element.
+    /// </summary>
+    /// <value>A <see cref="ConfigurationPropertyCollection"/> object that represents the configuration properties for this element.</value>
+    protected override ConfigurationPropertyCollection Properties
+    {
+        get
         {
-            get
-            {
-                return configurationElementProperties;
-            }
+            return configurationElementProperties;
         }
     }
 }

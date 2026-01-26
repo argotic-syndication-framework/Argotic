@@ -5,239 +5,238 @@ using System.Xml.XPath;
 
 using Argotic.Common;
 
-namespace Argotic.Extensions.Core
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Encapsulates specific information about an individual <see cref="SiteSummarySlashSyndicationExtension"/>.
+/// </summary>
+[Serializable()]
+public class SiteSummarySlashSyndicationExtensionContext
 {
+
     /// <summary>
-    /// Encapsulates specific information about an individual <see cref="SiteSummarySlashSyndicationExtension"/>.
+    /// Private member to hold the section name.
     /// </summary>
-    [Serializable()]
-    public class SiteSummarySlashSyndicationExtensionContext
+    private string extensionSection     = String.Empty;
+    /// <summary>
+    /// Private member to hold the department name.
+    /// </summary>
+    private string extensionDepartment  = String.Empty;
+    /// <summary>
+    /// Private member to hold the number of comments.
+    /// </summary>
+    private int extensionComments       = Int32.MinValue;
+    /// <summary>
+    /// Private member to hold the hit parade identifiers.
+    /// </summary>
+    private Collection<int> extensionHitParade;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SiteSummarySlashSyndicationExtensionContext"/> class.
+    /// </summary>
+    public SiteSummarySlashSyndicationExtensionContext()
     {
+    }
 
-        /// <summary>
-        /// Private member to hold the section name.
-        /// </summary>
-        private string extensionSection     = String.Empty;
-        /// <summary>
-        /// Private member to hold the department name.
-        /// </summary>
-        private string extensionDepartment  = String.Empty;
-        /// <summary>
-        /// Private member to hold the number of comments.
-        /// </summary>
-        private int extensionComments       = Int32.MinValue;
-        /// <summary>
-        /// Private member to hold the hit parade identifiers.
-        /// </summary>
-        private Collection<int> extensionHitParade;
-
-        /// <summary>
-        /// Initializes a new instance of the <see cref="SiteSummarySlashSyndicationExtensionContext"/> class.
-        /// </summary>
-        public SiteSummarySlashSyndicationExtensionContext()
+    /// <summary>
+    /// Gets or sets the number of comments.
+    /// </summary>
+    /// <value>The number of comments. The default value is <see cref="Int32.MinValue"/>, which indicates that no comment count was specified.</value>
+    public int Comments
+    {
+        get
         {
+            return extensionComments;
         }
 
-        /// <summary>
-        /// Gets or sets the number of comments.
-        /// </summary>
-        /// <value>The number of comments. The default value is <see cref="Int32.MinValue"/>, which indicates that no comment count was specified.</value>
-        public int Comments
+        set
         {
-            get
-            {
-                return extensionComments;
-            }
+            extensionComments = value;
+        }
+    }
 
-            set
-            {
-                extensionComments = value;
-            }
+    /// <summary>
+    /// Gets or sets the name of the department.
+    /// </summary>
+    /// <value>The name of the department.</value>
+    public string Department
+    {
+        get
+        {
+            return extensionDepartment;
         }
 
-        /// <summary>
-        /// Gets or sets the name of the department.
-        /// </summary>
-        /// <value>The name of the department.</value>
-        public string Department
+        set
         {
-            get
+            if(String.IsNullOrEmpty(value))
             {
-                return extensionDepartment;
+                extensionDepartment = String.Empty;
             }
-
-            set
+            else
             {
-                if(String.IsNullOrEmpty(value))
-                {
-                    extensionDepartment = String.Empty;
-                }
-                else
-                {
-                    extensionDepartment = value.Trim();
-                }
+                extensionDepartment = value.Trim();
             }
         }
+    }
 
-        /// <summary>
-        /// Gets the hit parade identifiers.
-        /// </summary>
-        /// <value>
-        ///     A <see cref="Collection{T}"/> collection of <see cref="Int32"/> objects that represent the hit parade identifiers. 
-        ///     The default value is an <i>empty</i> collection.
-        /// </value>
-        public Collection<int> HitParade
+    /// <summary>
+    /// Gets the hit parade identifiers.
+    /// </summary>
+    /// <value>
+    ///     A <see cref="Collection{T}"/> collection of <see cref="Int32"/> objects that represent the hit parade identifiers. 
+    ///     The default value is an <i>empty</i> collection.
+    /// </value>
+    public Collection<int> HitParade
+    {
+        get
         {
-            get
+            if (extensionHitParade == null)
             {
-                if (extensionHitParade == null)
-                {
-                    extensionHitParade = new Collection<int>();
-                }
-                return extensionHitParade;
+                extensionHitParade = new Collection<int>();
             }
+            return extensionHitParade;
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the name of the section.
+    /// </summary>
+    /// <value>The name of the section.</value>
+    public string Section
+    {
+        get
+        {
+            return extensionSection;
         }
 
-        /// <summary>
-        /// Gets or sets the name of the section.
-        /// </summary>
-        /// <value>The name of the section.</value>
-        public string Section
+        set
         {
-            get
+            if (String.IsNullOrEmpty(value))
             {
-                return extensionSection;
+                extensionSection = String.Empty;
             }
-
-            set
+            else
             {
-                if (String.IsNullOrEmpty(value))
-                {
-                    extensionSection = String.Empty;
-                }
-                else
-                {
-                    extensionSection = value.Trim();
-                }
+                extensionSection = value.Trim();
             }
         }
+    }
 
-        /// <summary>
-        /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
-        /// </summary>
-        /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="SiteSummarySlashSyndicationExtensionContext"/>.</param>
-        /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
-        /// <returns><b>true</b> if the <see cref="SiteSummarySlashSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
-        /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-        public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    /// <summary>
+    /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <b>XPathNavigator</b> used to load this <see cref="SiteSummarySlashSyndicationExtensionContext"/>.</param>
+    /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed syndication extension elements and attributes.</param>
+    /// <returns><b>true</b> if the <see cref="SiteSummarySlashSyndicationExtensionContext"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
+    public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    {
+        bool wasLoaded  = false;
+        Guard.ArgumentNotNull(source, "source");
+        Guard.ArgumentNotNull(manager, "manager");
+        if(source.HasChildren)
         {
-            bool wasLoaded  = false;
-            Guard.ArgumentNotNull(source, "source");
-            Guard.ArgumentNotNull(manager, "manager");
-            if(source.HasChildren)
-            {
-                XPathNavigator sectionNavigator     = source.SelectSingleNode("slash:section", manager);
-                XPathNavigator departmentNavigator  = source.SelectSingleNode("slash:department", manager);
-                XPathNavigator commentsNavigator    = source.SelectSingleNode("slash:comments", manager);
-                XPathNavigator hitParadeNavigator   = source.SelectSingleNode("slash:hit_parade", manager);
+            XPathNavigator sectionNavigator     = source.SelectSingleNode("slash:section", manager);
+            XPathNavigator departmentNavigator  = source.SelectSingleNode("slash:department", manager);
+            XPathNavigator commentsNavigator    = source.SelectSingleNode("slash:comments", manager);
+            XPathNavigator hitParadeNavigator   = source.SelectSingleNode("slash:hit_parade", manager);
 
-                if (sectionNavigator != null && !String.IsNullOrEmpty(sectionNavigator.Value))
+            if (sectionNavigator != null && !String.IsNullOrEmpty(sectionNavigator.Value))
+            {
+                this.Section    = sectionNavigator.Value;
+                wasLoaded       = true;
+            }
+
+            if (departmentNavigator != null && !String.IsNullOrEmpty(departmentNavigator.Value))
+            {
+                this.Department = departmentNavigator.Value;
+                wasLoaded       = true;
+            }
+
+            if (commentsNavigator != null)
+            {
+                int comments;
+                if (Int32.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out comments))
                 {
-                    this.Section    = sectionNavigator.Value;
+                    this.Comments   = comments;
                     wasLoaded       = true;
                 }
+            }
 
-                if (departmentNavigator != null && !String.IsNullOrEmpty(departmentNavigator.Value))
+            if (hitParadeNavigator != null && !String.IsNullOrEmpty(hitParadeNavigator.Value))
+            {
+                if (hitParadeNavigator.Value.Contains(","))
                 {
-                    this.Department = departmentNavigator.Value;
-                    wasLoaded       = true;
-                }
-
-                if (commentsNavigator != null)
-                {
-                    int comments;
-                    if (Int32.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out comments))
+                    string[] identifiers    = hitParadeNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    if (identifiers != null && identifiers.Length > 0)
                     {
-                        this.Comments   = comments;
-                        wasLoaded       = true;
-                    }
-                }
-
-                if (hitParadeNavigator != null && !String.IsNullOrEmpty(hitParadeNavigator.Value))
-                {
-                    if (hitParadeNavigator.Value.Contains(","))
-                    {
-                        string[] identifiers    = hitParadeNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                        if (identifiers != null && identifiers.Length > 0)
+                        foreach(string identifier in identifiers)
                         {
-                            foreach(string identifier in identifiers)
+                            int paradeId;
+                            if (Int32.TryParse(identifier, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out paradeId))
                             {
-                                int paradeId;
-                                if (Int32.TryParse(identifier, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out paradeId))
-                                {
-                                    this.HitParade.Add(paradeId);
-                                    wasLoaded   = true;
-                                }
+                                this.HitParade.Add(paradeId);
+                                wasLoaded   = true;
                             }
                         }
                     }
-                    else
+                }
+                else
+                {
+                    int hitParade;
+                    if (Int32.TryParse(hitParadeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hitParade))
                     {
-                        int hitParade;
-                        if (Int32.TryParse(hitParadeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hitParade))
-                        {
-                            this.HitParade.Add(hitParade);
-                            wasLoaded   = true;
-                        }
+                        this.HitParade.Add(hitParade);
+                        wasLoaded   = true;
                     }
                 }
             }
-
-            return wasLoaded;
         }
 
-        /// <summary>
-        /// Writes the current context to the specified <see cref="XmlWriter"/>.
-        /// </summary>
-        /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
-        /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
-        /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
-        /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
-        public void WriteTo(XmlWriter writer, string xmlNamespace)
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Writes the current context to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the current context.</param>
+    /// <param name="xmlNamespace">The XML namespace used to qualify prefixed syndication extension elements and attributes.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
+    public void WriteTo(XmlWriter writer, string xmlNamespace)
+    {
+        Guard.ArgumentNotNull(writer, "writer");
+        Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
+        if(!String.IsNullOrEmpty(this.Section))
         {
-            Guard.ArgumentNotNull(writer, "writer");
-            Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-            if(!String.IsNullOrEmpty(this.Section))
+            writer.WriteStartElement("section", xmlNamespace);
+            writer.WriteCData(this.Section);
+            writer.WriteEndElement();
+        }
+
+        if (!String.IsNullOrEmpty(this.Department))
+        {
+            writer.WriteStartElement("department", xmlNamespace);
+            writer.WriteCData(this.Department);
+            writer.WriteEndElement();
+        }
+
+        if(this.Comments != Int32.MinValue)
+        {
+            writer.WriteElementString("comments", xmlNamespace, this.Comments.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        }
+
+        if(this.HitParade.Count > 0)
+        {
+            string[] hitParade = new string[this.HitParade.Count];
+            for (int i = 0; i < this.HitParade.Count; i++)
             {
-                writer.WriteStartElement("section", xmlNamespace);
-                writer.WriteCData(this.Section);
-                writer.WriteEndElement();
+                hitParade[i]    = this.HitParade[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
             }
 
-            if (!String.IsNullOrEmpty(this.Department))
-            {
-                writer.WriteStartElement("department", xmlNamespace);
-                writer.WriteCData(this.Department);
-                writer.WriteEndElement();
-            }
-
-            if(this.Comments != Int32.MinValue)
-            {
-                writer.WriteElementString("comments", xmlNamespace, this.Comments.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
-            }
-
-            if(this.HitParade.Count > 0)
-            {
-                string[] hitParade = new string[this.HitParade.Count];
-                for (int i = 0; i < this.HitParade.Count; i++)
-                {
-                    hitParade[i]    = this.HitParade[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
-                }
-
-                writer.WriteElementString("hit_parade", xmlNamespace, String.Join(",", hitParade));
-            }
+            writer.WriteElementString("hit_parade", xmlNamespace, String.Join(",", hitParade));
         }
     }
 }

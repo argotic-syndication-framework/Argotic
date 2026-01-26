@@ -2,43 +2,42 @@
 using System.Globalization;
 using System.Xml;
 
-namespace Argotic.Extensions.Tests
+namespace Argotic.Extensions.Tests;
+
+internal static class ExtensionTestUtil
 {
-	internal static class ExtensionTestUtil
-	{
-		internal static string AddExtensionToXml(SyndicationExtension ext)
-		{
-			RssFeed feed = new RssFeed(new Uri("http://www.example.com"), "Argotic - Extension Test");
-			feed.Channel.Description = "Test of an extension";
-			feed.Channel.ManagingEditor = "editor@example.com";
-			feed.Channel.Webmaster = "webmaster@example.com";
-			feed.Channel.Language = CultureInfo.CreateSpecificCulture("en-US");
+    internal static string AddExtensionToXml(SyndicationExtension ext)
+    {
+        RssFeed feed = new RssFeed(new Uri("http://www.example.com"), "Argotic - Extension Test");
+        feed.Channel.Description = "Test of an extension";
+        feed.Channel.ManagingEditor = "editor@example.com";
+        feed.Channel.Webmaster = "webmaster@example.com";
+        feed.Channel.Language = CultureInfo.CreateSpecificCulture("en-US");
 
-			RssItem item = new RssItem();
-			item.Title = "Item #1";
-			item.Link = new Uri("http://www.example.com/item1.htm");
-			item.Description = "text for First Item";
+        RssItem item = new RssItem();
+        item.Title = "Item #1";
+        item.Link = new Uri("http://www.example.com/item1.htm");
+        item.Description = "text for First Item";
 
-			item.PublicationDate = new DateTime(2010, 8, 1, 0, 0, 1);
-			feed.Channel.AddItem(item);
+        item.PublicationDate = new DateTime(2010, 8, 1, 0, 0, 1);
+        feed.Channel.AddItem(item);
 
-			//			var firstItem = feed.Channel.Items.First();
-			//			firstItem.AddExtension(geo);
-			item.AddExtension(ext);
+        //			var firstItem = feed.Channel.Items.First();
+        //			firstItem.AddExtension(geo);
+        item.AddExtension(ext);
 
-			using (var sw = new StringWriter())
-			using (var tw = new XmlTextWriter(sw))
-			{
-				feed.Save(tw);
-				return sw.ToString();
-			}
-		}
+        using (var sw = new StringWriter())
+        using (var tw = new XmlTextWriter(sw))
+        {
+            feed.Save(tw);
+            return sw.ToString();
+        }
+    }
 
-		private const string strFullXml1 = @"<rss version=""2.0"" {0}><channel><title>Argotic - Extension Test</title><link>http://www.example.com/</link><description>Test of an extension</description><docs>http://www.rssboard.org/rss-specification</docs><generator>Argotic Syndication Framework {1}, http://www.codeplex.com/Argotic</generator><language>en-US</language><managingEditor>editor@example.com</managingEditor><webMaster>webmaster@example.com</webMaster><item><title>Item #1</title><description>text for First Item</description><link>http://www.example.com/item1.htm</link><pubDate>Sun, 01 Aug 2010 00:00:01 GMT</pubDate>{2}</item></channel></rss>";
+    private const string strFullXml1 = @"<rss version=""2.0"" {0}><channel><title>Argotic - Extension Test</title><link>http://www.example.com/</link><description>Test of an extension</description><docs>http://www.rssboard.org/rss-specification</docs><generator>Argotic Syndication Framework {1}, http://www.codeplex.com/Argotic</generator><language>en-US</language><managingEditor>editor@example.com</managingEditor><webMaster>webmaster@example.com</webMaster><item><title>Item #1</title><description>text for First Item</description><link>http://www.example.com/item1.htm</link><pubDate>Sun, 01 Aug 2010 00:00:01 GMT</pubDate>{2}</item></channel></rss>";
 
-		internal static string GetWrappedXml(string namespc, string strExt)
-		{
-			return string.Format(strFullXml1, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version.ToString(), strExt);
-		}
-	}
+    internal static string GetWrappedXml(string namespc, string strExt)
+    {
+        return string.Format(strFullXml1, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version.ToString(), strExt);
+    }
 }

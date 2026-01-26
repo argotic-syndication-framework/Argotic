@@ -543,4 +543,44 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
 
         return (first.CompareTo(second) > 0);
     }
+
+    /// <summary>
+    /// Determines if first operand is less than or equal to the second operand.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
+    public static bool operator <=(AtomTextConstruct first, AtomTextConstruct second)
+    {
+        if (object.Equals(first, null) && object.Equals(second, null))
+        {
+            return true;
+        }
+        else if (object.Equals(first, null) && !object.Equals(second, null))
+        {
+            return true;
+        }
+
+        return (first.CompareTo(second) <= 0);
+    }
+
+    /// <summary>
+    /// Determines if first operand is greater than or equal to the second operand.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
+    public static bool operator >=(AtomTextConstruct first, AtomTextConstruct second)
+    {
+        if (object.Equals(first, null) && object.Equals(second, null))
+        {
+            return true;
+        }
+        else if (object.Equals(first, null) && !object.Equals(second, null))
+        {
+            return false;
+        }
+
+        return (first.CompareTo(second) >= 0);
+    }
 }

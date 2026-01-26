@@ -233,7 +233,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     private static Hashtable ExtractHtmlAttributes(string content)
     {
-        Hashtable hashtable = new Hashtable();
+        Hashtable hashtable = [];
         Regex attributePattern = new Regex("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -888,8 +888,7 @@ public static class SyndicationDiscoveryUtility
 
                 if (string.Compare(rel, "pingback", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    Uri uri;
-                    if (Uri.TryCreate(href, UriKind.Absolute, out uri))
+                    if (Uri.TryCreate(href, UriKind.Absolute, out Uri uri))
                     {
                         pingbackAnchor = new HtmlAnchor
                         {

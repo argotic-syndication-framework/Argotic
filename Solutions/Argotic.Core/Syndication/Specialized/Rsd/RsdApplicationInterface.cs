@@ -219,7 +219,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
         {
             if (interfaceSettings == null)
             {
-                interfaceSettings = new Dictionary<string, string>();
+                interfaceSettings = [];
             }
             return interfaceSettings;
         }

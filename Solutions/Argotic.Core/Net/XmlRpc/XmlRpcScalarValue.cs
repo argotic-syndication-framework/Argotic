@@ -446,8 +446,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
         switch (type)
         {
             case XmlRpcScalarValueType.Base64:
-                byte[] data = scalar as byte[];
-                if (data != null)
+                if (scalar is byte[] data)
                 {
                     value = Convert.ToBase64String(data, Base64FormattingOptions.None);
                 }

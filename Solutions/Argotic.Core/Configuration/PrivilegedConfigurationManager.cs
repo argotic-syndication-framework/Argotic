@@ -99,8 +99,7 @@ internal static class PrivilegedConfigurationManager
 
         lock (PrivilegedConfigurationManager.SyndicationSyncObject)
         {
-            SyndicationResourceSection section = PrivilegedConfigurationManager.GetSection(sectionPath) as SyndicationResourceSection;
-            if (section == null)
+            if (PrivilegedConfigurationManager.GetSection(sectionPath) is not SyndicationResourceSection section)
             {
                 return null;
             }
@@ -121,8 +120,7 @@ internal static class PrivilegedConfigurationManager
 
         lock (PrivilegedConfigurationManager.TrackbackSyncObject)
         {
-            TrackbackClientSection section = PrivilegedConfigurationManager.GetSection(sectionPath) as TrackbackClientSection;
-            if (section == null)
+            if (PrivilegedConfigurationManager.GetSection(sectionPath) is not TrackbackClientSection section)
             {
                 return null;
             }
@@ -143,8 +141,7 @@ internal static class PrivilegedConfigurationManager
 
         lock (PrivilegedConfigurationManager.XmlRpcSyncObject)
         {
-            XmlRpcClientSection section = PrivilegedConfigurationManager.GetSection(sectionPath) as XmlRpcClientSection;
-            if (section == null)
+            if (PrivilegedConfigurationManager.GetSection(sectionPath) is not XmlRpcClientSection section)
             {
                 return null;
             }

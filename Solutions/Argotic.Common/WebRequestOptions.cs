@@ -205,14 +205,12 @@ public class WebRequestOptions
         if (Timeout != null) request.Timeout = Timeout.Value;
         if (UseDefaultCredentials != null) request.UseDefaultCredentials = UseDefaultCredentials.Value;
 
-        FtpWebRequest ftpRequest = request as FtpWebRequest;
-        if (ftpRequest != null)
+        if (request is FtpWebRequest ftpRequest)
         {
             ApplyFtpOptions(ftpRequest);
         }
 
-        HttpWebRequest httpRequest = request as HttpWebRequest;
-        if (httpRequest != null)
+        if (request is HttpWebRequest httpRequest)
         {
             ApplyHttpOptions(httpRequest);
         }

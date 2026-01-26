@@ -16,7 +16,7 @@ public class SyndicationResourceMetadata : IComparable
     /// <summary>
     /// Private member to hold the XML namespaces declared in the syndication resource's root element.
     /// </summary>
-    private Dictionary<string, string> resourceNamespaces = new Dictionary<string, string>();
+    private Dictionary<string, string> resourceNamespaces = [];
     /// <summary>
     /// Private member to hold the version of the syndication specification that the resource conforms to.
     /// </summary>
@@ -778,7 +778,7 @@ public class SyndicationResourceMetadata : IComparable
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is SyndicationResourceMetadata))
+        if (obj is not SyndicationResourceMetadata)
         {
             return false;
         }

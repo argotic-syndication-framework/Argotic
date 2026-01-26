@@ -120,7 +120,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         {
             if (outlineAttributes == null)
             {
-                outlineAttributes = new Dictionary<string, string>();
+                outlineAttributes = [];
             }
             return outlineAttributes;
         }

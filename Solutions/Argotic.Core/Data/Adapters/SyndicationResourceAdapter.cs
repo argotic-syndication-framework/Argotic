@@ -204,7 +204,6 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
         AtomCategoryDocument categoryDocument = resource as AtomCategoryDocument;
-        AtomServiceDocument serviceDocument = resource as AtomServiceDocument;
 
         if (resourceMetadata.Version == new Version("1.0"))
         {
@@ -213,7 +212,7 @@ public class SyndicationResourceAdapter
             {
                 atomPublishing10Adapter.Fill(categoryDocument);
             }
-            else if (serviceDocument != null)
+            else if (resource is AtomServiceDocument serviceDocument)
             {
                 atomPublishing10Adapter.Fill(serviceDocument);
             }

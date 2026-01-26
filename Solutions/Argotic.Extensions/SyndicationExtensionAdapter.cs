@@ -150,8 +150,7 @@ public class SyndicationExtensionAdapter
         {
             if (type != null)
             {
-                ISyndicationExtension extension = Activator.CreateInstance(type) as ISyndicationExtension;
-                if (extension != null)
+                if (Activator.CreateInstance(type) is ISyndicationExtension extension)
                 {
                     extensions.Add(extension);
                 }
@@ -240,8 +239,7 @@ public class SyndicationExtensionAdapter
         {
             if (type != null)
             {
-                ISyndicationExtension extension = Activator.CreateInstance(type) as ISyndicationExtension;
-                if (extension != null)
+                if (Activator.CreateInstance(type) is ISyndicationExtension extension)
                 {
                     extension.WriteXmlNamespaceDeclaration(writer);
                 }

@@ -207,7 +207,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             if (documentExtendedProperties == null)
             {
-                documentExtendedProperties = new Dictionary<string, string>();
+                documentExtendedProperties = [];
             }
             return documentExtendedProperties;
         }

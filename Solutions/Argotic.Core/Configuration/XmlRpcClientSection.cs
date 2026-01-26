@@ -23,7 +23,7 @@ public sealed class XmlRpcClientSection : ConfigurationSection
     /// <summary>
     /// Private member to hold a collection of configuration properties for the section.
     /// </summary>
-    private static readonly ConfigurationPropertyCollection configurationSectionProperties = new ConfigurationPropertyCollection();
+    private static readonly ConfigurationPropertyCollection configurationSectionProperties = [];
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcClientSection"/> class.

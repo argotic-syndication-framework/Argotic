@@ -34,7 +34,7 @@ public sealed class TrackbackClientNetworkElement : ConfigurationElement
     /// <summary>
     /// Private member to hold a collection of configuration element properties for the element.
     /// </summary>
-    private static readonly ConfigurationPropertyCollection configurationElementProperties = new ConfigurationPropertyCollection();
+    private static readonly ConfigurationPropertyCollection configurationElementProperties = [];
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackClientNetworkElement"/> class.

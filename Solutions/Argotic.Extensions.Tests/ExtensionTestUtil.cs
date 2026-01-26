@@ -8,18 +8,25 @@ internal static class ExtensionTestUtil
 {
     internal static string AddExtensionToXml(SyndicationExtension ext)
     {
-        RssFeed feed = new RssFeed(new Uri("http://www.example.com"), "Argotic - Extension Test");
-        feed.Channel.Description = "Test of an extension";
-        feed.Channel.ManagingEditor = "editor@example.com";
-        feed.Channel.Webmaster = "webmaster@example.com";
-        feed.Channel.Language = CultureInfo.CreateSpecificCulture("en-US");
+        RssFeed feed = new RssFeed(new Uri("http://www.example.com"), "Argotic - Extension Test")
+        {
+            Channel =
+            {
+                Description = "Test of an extension",
+                ManagingEditor = "editor@example.com",
+                Webmaster = "webmaster@example.com",
+                Language = CultureInfo.CreateSpecificCulture("en-US")
+            }
+        };
 
-        RssItem item = new RssItem();
-        item.Title = "Item #1";
-        item.Link = new Uri("http://www.example.com/item1.htm");
-        item.Description = "text for First Item";
+        RssItem item = new RssItem
+        {
+            Title = "Item #1",
+            Link = new Uri("http://www.example.com/item1.htm"),
+            Description = "text for First Item",
+            PublicationDate = new DateTime(2010, 8, 1, 0, 0, 1)
+        };
 
-        item.PublicationDate = new DateTime(2010, 8, 1, 0, 0, 1);
         feed.Channel.AddItem(item);
 
         //			var firstItem = feed.Channel.Items.First();

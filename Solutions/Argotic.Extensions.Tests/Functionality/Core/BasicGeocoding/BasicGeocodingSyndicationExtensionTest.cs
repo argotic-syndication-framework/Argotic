@@ -157,9 +157,14 @@ public class BasicGeocodingSyndicationExtensionTest
     [TestMethod]
     public void BasicGeocoding_CreateXmlTest()
     {
-        BasicGeocodingSyndicationExtension geo = new BasicGeocodingSyndicationExtension();
-        geo.Context.Latitude = 41.0m;
-        geo.Context.Longitude = -74.12m;
+        BasicGeocodingSyndicationExtension geo = new BasicGeocodingSyndicationExtension
+        {
+            Context =
+            {
+                Latitude = 41.0m,
+                Longitude = -74.12m
+            }
+        };
 
         string actual = ExtensionTestUtil.AddExtensionToXml(geo);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
@@ -317,24 +322,36 @@ public class BasicGeocodingSyndicationExtensionTest
 
     private BasicGeocodingSyndicationExtension CreateExtension1()
     {
-        BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension();
-        nyc.Context.Latitude = 40;
-        nyc.Context.Longitude = -74;
+        BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension
+        {
+            Context =
+            {
+                Latitude = 40,
+                Longitude = -74
+            }
+        };
         return nyc;
     }
     private BasicGeocodingSyndicationExtension CreateExtension2()
     {
-        BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension();
-        nyc.Context.Latitude = 43;
-        nyc.Context.Longitude = -80;
+        BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension
+        {
+            Context =
+            {
+                Latitude = 43,
+                Longitude = -80
+            }
+        };
         return nyc;
     }
 
     public static BasicGeocodingSyndicationExtensionContext CreateContext1()
     {
-        BasicGeocodingSyndicationExtensionContext nyc = new BasicGeocodingSyndicationExtensionContext();
-        nyc.Latitude = 40;
-        nyc.Longitude = -74;
+        BasicGeocodingSyndicationExtensionContext nyc = new BasicGeocodingSyndicationExtensionContext
+        {
+            Latitude = 40,
+            Longitude = -74
+        };
         return nyc;
     }
 }

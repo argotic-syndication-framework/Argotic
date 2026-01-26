@@ -716,10 +716,12 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
 
                     using (StreamReader streamReader = new StreamReader(stream, encoding))
                     {
-                        XmlReaderSettings readerSettings    = new XmlReaderSettings();
-                        readerSettings.IgnoreComments       = true;
-                        readerSettings.IgnoreWhitespace     = true;
-                        readerSettings.DtdProcessing = DtdProcessing.Ignore;
+                        XmlReaderSettings readerSettings    = new XmlReaderSettings
+                        {
+                            IgnoreComments = true,
+                            IgnoreWhitespace = true,
+                            DtdProcessing = DtdProcessing.Ignore
+                        };
 
                         using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                         {
@@ -838,10 +840,12 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     {
         using(MemoryStream stream = new MemoryStream())
         {
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.ConformanceLevel   = ConformanceLevel.Document;
-            settings.Indent             = true;
-            settings.OmitXmlDeclaration = false;
+            XmlWriterSettings settings  = new XmlWriterSettings
+            {
+                ConformanceLevel = ConformanceLevel.Document,
+                Indent = true,
+                OmitXmlDeclaration = false
+            };
 
             using(XmlWriter writer = XmlWriter.Create(stream, settings))
             {
@@ -1155,10 +1159,12 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
             settings    = new SyndicationResourceSaveSettings();
         }
 
-        XmlWriterSettings writerSettings    = new XmlWriterSettings();
-        writerSettings.OmitXmlDeclaration   = false;
-        writerSettings.Indent               = !settings.MinimizeOutputSize;
-        writerSettings.Encoding             = settings.CharacterEncoding;
+        XmlWriterSettings writerSettings    = new XmlWriterSettings
+        {
+            OmitXmlDeclaration = false,
+            Indent = !settings.MinimizeOutputSize,
+            Encoding = settings.CharacterEncoding
+        };
 
         using (XmlWriter writer = XmlWriter.Create(stream, writerSettings))
         {

@@ -21,24 +21,25 @@ public static class AtomFeedExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed();
-
-        feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
-        feed.Title      = new AtomTextConstruct("Example Feed");
-        feed.UpdatedOn  = new DateTime(2003, 12, 13, 18, 30, 2);
+        AtomFeed feed   = new AtomFeed
+        {
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+        };
 
         feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
-        AtomEntry entry = new AtomEntry();
-
-        entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-        entry.Title     = new AtomTextConstruct("Atom-Powered Robots Run Amok");
-        entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
-
-        entry.Summary   = new AtomTextConstruct("Some text.");
+        AtomEntry entry = new AtomEntry
+        {
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
+            Summary = new AtomTextConstruct("Some text.")
+        };
 
         feed.AddEntry(entry);
     }
@@ -129,9 +130,11 @@ public static class AtomFeedExample
 
         using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read))
         {
-            XmlReaderSettings settings  = new XmlReaderSettings();
-            settings.IgnoreComments     = true;
-            settings.IgnoreWhitespace   = true;
+            XmlReaderSettings settings  = new XmlReaderSettings
+            {
+                IgnoreComments = true,
+                IgnoreWhitespace = true
+            };
 
             using(XmlReader reader = XmlReader.Create(stream, settings))
             {
@@ -193,8 +196,10 @@ public static class AtomFeedExample
 
         using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write))
         {
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.Indent             = true;
+            XmlWriterSettings settings  = new XmlWriterSettings
+            {
+                Indent = true
+            };
 
             using(XmlWriter writer = XmlWriter.Create(stream, settings))
             {

@@ -114,10 +114,14 @@ public class PheedSyndicationExtensionTest
     [TestMethod]
     public void Pheed_CreateXmlTest()
     {
-        PheedSyndicationExtension pheed = new PheedSyndicationExtension();
-
-        pheed.Context.Source = new Uri("http://www.example.com");
-        pheed.Context.Thumbnail = new Uri("http://www.example.com/thumbnail.jpg");
+        PheedSyndicationExtension pheed = new PheedSyndicationExtension
+        {
+            Context =
+            {
+                Source = new Uri("http://www.example.com"),
+                Thumbnail = new Uri("http://www.example.com/thumbnail.jpg")
+            }
+        };
 
         string actual = ExtensionTestUtil.AddExtensionToXml(pheed);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
@@ -271,27 +275,39 @@ public class PheedSyndicationExtensionTest
 
     private PheedSyndicationExtension CreateExtension1()
     {
-        PheedSyndicationExtension nyc = new PheedSyndicationExtension();
-        nyc.Context.Source = new Uri("http://www.example.com");
-        nyc.Context.Thumbnail = new Uri("http://www.example.com/thumbnail.jpg");
+        PheedSyndicationExtension nyc = new PheedSyndicationExtension
+        {
+            Context =
+            {
+                Source = new Uri("http://www.example.com"),
+                Thumbnail = new Uri("http://www.example.com/thumbnail.jpg")
+            }
+        };
 
         return nyc;
     }
 
     private PheedSyndicationExtension CreateExtension2()
     {
-        PheedSyndicationExtension nyc = new PheedSyndicationExtension();
-        nyc.Context.Source = new Uri("http://www.example.net");
-        nyc.Context.Thumbnail = new Uri("http://www.example.net/thumbnail.png");
+        PheedSyndicationExtension nyc = new PheedSyndicationExtension
+        {
+            Context =
+            {
+                Source = new Uri("http://www.example.net"),
+                Thumbnail = new Uri("http://www.example.net/thumbnail.png")
+            }
+        };
 
         return nyc;
     }
 
     public static PheedSyndicationExtensionContext CreateContext1()
     {
-        PheedSyndicationExtensionContext nyc = new PheedSyndicationExtensionContext();
-        nyc.Source = new Uri("http://www.example.com");
-        nyc.Thumbnail = new Uri("http://www.example.com/thumbnail.jpg");
+        PheedSyndicationExtensionContext nyc = new PheedSyndicationExtensionContext
+        {
+            Source = new Uri("http://www.example.com"),
+            Thumbnail = new Uri("http://www.example.com/thumbnail.jpg")
+        };
 
         return nyc;
     }

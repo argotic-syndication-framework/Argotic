@@ -924,10 +924,12 @@ public class GenericSyndicationFeed
 
                     using (StreamReader streamReader = new StreamReader(stream, encoding))
                     {
-                        XmlReaderSettings readerSettings    = new XmlReaderSettings();
-                        readerSettings.IgnoreComments       = true;
-                        readerSettings.IgnoreWhitespace     = true;
-                        readerSettings.DtdProcessing = DtdProcessing.Ignore;
+                        XmlReaderSettings readerSettings    = new XmlReaderSettings
+                        {
+                            IgnoreComments = true,
+                            IgnoreWhitespace = true,
+                            DtdProcessing = DtdProcessing.Ignore
+                        };
 
                         using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                         {

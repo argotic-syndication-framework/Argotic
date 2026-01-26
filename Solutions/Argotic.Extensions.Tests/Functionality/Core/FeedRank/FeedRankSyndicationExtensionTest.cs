@@ -286,31 +286,43 @@ public class FeedRankSyndicationExtensionTest
 
     private FeedRankSyndicationExtension CreateExtension1()
     {
-        FeedRankSyndicationExtension re = new FeedRankSyndicationExtension();
-        re.Context.Domain = new Uri("http://example.com");
-        re.Context.Label = "Title";
-        re.Context.Scheme = new Uri("http://example.com/scheme.txt");
-        re.Context.Value = 1.0m;
+        FeedRankSyndicationExtension re = new FeedRankSyndicationExtension
+        {
+            Context =
+            {
+                Domain = new Uri("http://example.com"),
+                Label = "Title",
+                Scheme = new Uri("http://example.com/scheme.txt"),
+                Value = 1.0m
+            }
+        };
         return re;
     }
 
     private FeedRankSyndicationExtension CreateExtension2()
     {
-        FeedRankSyndicationExtension re = new FeedRankSyndicationExtension();
-        re.Context.Domain = new Uri("http://example.net");
-        re.Context.Label = "label";
-        re.Context.Scheme = new Uri("http://example.net/scheme.html");
-        re.Context.Value = 2.0m;
+        FeedRankSyndicationExtension re = new FeedRankSyndicationExtension
+        {
+            Context =
+            {
+                Domain = new Uri("http://example.net"),
+                Label = "label",
+                Scheme = new Uri("http://example.net/scheme.html"),
+                Value = 2.0m
+            }
+        };
         return re;
     }
 
     public static FeedRankSyndicationExtensionContext CreateContext1()
     {
-        FeedRankSyndicationExtensionContext re = new FeedRankSyndicationExtensionContext();
-        re.Domain = new Uri("");
-        re.Label = "";
-        re.Scheme = new Uri("");
-        re.Value = 1.0m;
+        FeedRankSyndicationExtensionContext re = new FeedRankSyndicationExtensionContext
+        {
+            Domain = new Uri(""),
+            Label = "",
+            Scheme = new Uri(""),
+            Value = 1.0m
+        };
         return re;
     }
 }

@@ -17,14 +17,18 @@ public static class OpmlOutlineExample
     /// </summary>
     public static void ClassExample()
     {
-        OpmlDocument document   = new OpmlDocument();
-
-        document.Head.Title                 = "Example OPML List";
-        document.Head.CreatedOn             = new DateTime(2005, 6, 18, 12, 11, 52);
-        document.Head.ModifiedOn            = new DateTime(2005, 7, 2, 21, 42, 48);
-        document.Head.Owner                 = new OpmlOwner("John Doe", "john.doe@example.com");
-        document.Head.VerticalScrollState   = 1;
-        document.Head.Window                = new OpmlWindow(61, 304, 562, 842);
+        OpmlDocument document   = new OpmlDocument
+        {
+            Head =
+            {
+                Title = "Example OPML List",
+                CreatedOn = new DateTime(2005, 6, 18, 12, 11, 52),
+                ModifiedOn = new DateTime(2005, 7, 2, 21, 42, 48),
+                Owner = new OpmlOwner("John Doe", "john.doe@example.com"),
+                VerticalScrollState = 1,
+                Window = new OpmlWindow(61, 304, 562, 842)
+            }
+        };
 
         // Create outline that contains child outlines
         OpmlOutline containerOutline    = new OpmlOutline("Feeds");

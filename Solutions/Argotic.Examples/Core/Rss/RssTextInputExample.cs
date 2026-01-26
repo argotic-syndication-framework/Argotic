@@ -17,12 +17,15 @@ public static class RssTextInputExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed();
-
-        feed.Channel.Title          = "Dallas Times-Herald";
-        feed.Channel.Link           = new Uri("http://dallas.example.com");
-        feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
-
-        feed.Channel.TextInput      = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
+        RssFeed feed    = new RssFeed
+        {
+            Channel =
+            {
+                Title = "Dallas Times-Herald",
+                Link = new Uri("http://dallas.example.com"),
+                Description = "Current headlines from the Dallas Times-Herald newspaper",
+                TextInput = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry")
+            }
+        };
     }
 }

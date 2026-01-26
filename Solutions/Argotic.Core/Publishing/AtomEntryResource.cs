@@ -267,10 +267,12 @@ public class AtomEntryResource : AtomEntry
 
                     using (StreamReader streamReader = new StreamReader(stream, encoding))
                     {
-                        XmlReaderSettings readerSettings    = new XmlReaderSettings();
-                        readerSettings.IgnoreComments       = true;
-                        readerSettings.IgnoreWhitespace     = true;
-                        readerSettings.DtdProcessing = DtdProcessing.Ignore;
+                        XmlReaderSettings readerSettings    = new XmlReaderSettings
+                        {
+                            IgnoreComments = true,
+                            IgnoreWhitespace = true,
+                            DtdProcessing = DtdProcessing.Ignore
+                        };
 
                         using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                         {
@@ -464,8 +466,13 @@ public class AtomEntryResource : AtomEntry
         {
             if (!list.Exists(AtomPublishingEditedSyndicationExtension.MatchByType))
             {
-                AtomPublishingEditedSyndicationExtension editedExtension    = new AtomPublishingEditedSyndicationExtension();
-                editedExtension.Context.EditedOn                            = this.EditedOn;
+                AtomPublishingEditedSyndicationExtension editedExtension    = new AtomPublishingEditedSyndicationExtension
+                    {
+                        Context =
+                        {
+                            EditedOn = this.EditedOn
+                        }
+                    };
                 this.AddExtension(editedExtension);
             }
         }
@@ -474,8 +481,13 @@ public class AtomEntryResource : AtomEntry
         {
             if (!list.Exists(AtomPublishingControlSyndicationExtension.MatchByType))
             {
-                AtomPublishingControlSyndicationExtension controlExtension  = new AtomPublishingControlSyndicationExtension();
-                controlExtension.Context.IsDraft                            = this.IsDraft;
+                AtomPublishingControlSyndicationExtension controlExtension  = new AtomPublishingControlSyndicationExtension
+                    {
+                        Context =
+                        {
+                            IsDraft = this.IsDraft
+                        }
+                    };
                 this.AddExtension(controlExtension);
             }
         }

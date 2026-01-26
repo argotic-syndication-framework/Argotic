@@ -16,11 +16,12 @@ public static class AtomGeneratorExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed();
-
-        feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
-        feed.Title      = new AtomTextConstruct("Example Feed");
-        feed.UpdatedOn  = new DateTime(2003, 12, 13, 18, 30, 2);
+        AtomFeed feed   = new AtomFeed
+        {
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+        };
 
         feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
@@ -28,18 +29,20 @@ public static class AtomGeneratorExample
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
         //  Identify the software used to generate the feed
-        AtomGenerator generator = new AtomGenerator("Example Toolkit");
-        generator.Uri           = new Uri("/myblog.php");
-        generator.Version       = "1.0";
+        AtomGenerator generator = new AtomGenerator("Example Toolkit")
+        {
+            Uri = new Uri("/myblog.php"),
+            Version = "1.0"
+        };
         feed.Generator          = generator;
 
-        AtomEntry entry = new AtomEntry();
-
-        entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-        entry.Title     = new AtomTextConstruct("Atom-Powered Robots Run Amok");
-        entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
-
-        entry.Summary   = new AtomTextConstruct("Some text.");
+        AtomEntry entry = new AtomEntry
+        {
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
+            Summary = new AtomTextConstruct("Some text.")
+        };
 
         feed.AddEntry(entry);
     }

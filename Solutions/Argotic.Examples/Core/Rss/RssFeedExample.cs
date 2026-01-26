@@ -23,11 +23,15 @@ public static class RssFeedExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed();
-
-        feed.Channel.Title          = "Dallas Times-Herald";
-        feed.Channel.Link           = new Uri("http://dallas.example.com");
-        feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
+        RssFeed feed    = new RssFeed
+        {
+            Channel =
+            {
+                Title = "Dallas Times-Herald",
+                Link = new Uri("http://dallas.example.com"),
+                Description = "Current headlines from the Dallas Times-Herald newspaper"
+            }
+        };
 
         feed.Channel.Categories.Add(new RssCategory("Media"));
         feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
@@ -36,10 +40,12 @@ public static class RssFeedExample
         feed.Channel.Copyright          = "Copyright 2007 Dallas Times-Herald";
         feed.Channel.Generator          = "Microsoft Spaces v1.1";
 
-        RssImage image                  = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"));
-        image.Description               = "Read the Dallas Times-Herald";
-        image.Height                    = 32;
-        image.Width                     = 96;
+        RssImage image                  = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
+            {
+                Description = "Read the Dallas Times-Herald",
+                Height = 32,
+                Width = 96
+            };
         feed.Channel.Image              = image;
 
         feed.Channel.Language           = new CultureInfo("en-US");
@@ -61,11 +67,13 @@ public static class RssFeedExample
         feed.Channel.TimeToLive         = 60;
         feed.Channel.Webmaster          = "helpdesk@dallas.example.com";
 
-        RssItem item        = new RssItem();
-        item.Title          = "Seventh Heaven! Ryan Hurls Another No Hitter";
-        item.Link           = new Uri("http://dallas.example.com/1991/05/02/nolan.htm");
-        item.Description    = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.";
-        item.Author         = "jbb@dallas.example.com (Joe Bob Briggs)";
+        RssItem item        = new RssItem
+        {
+            Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
+            Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),
+            Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.",
+            Author = "jbb@dallas.example.com (Joe Bob Briggs)"
+        };
 
         item.Categories.Add(new RssCategory("sports"));
         item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
@@ -168,9 +176,11 @@ public static class RssFeedExample
 
         using (Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read))
         {
-            XmlReaderSettings settings  = new XmlReaderSettings();
-            settings.IgnoreComments     = true;
-            settings.IgnoreWhitespace   = true;
+            XmlReaderSettings settings  = new XmlReaderSettings
+            {
+                IgnoreComments = true,
+                IgnoreWhitespace = true
+            };
 
             using(XmlReader reader = XmlReader.Create(stream, settings))
             {
@@ -232,8 +242,10 @@ public static class RssFeedExample
 
         using (Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write))
         {
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.Indent             = true;
+            XmlWriterSettings settings  = new XmlWriterSettings
+            {
+                Indent = true
+            };
 
             using(XmlWriter writer = XmlWriter.Create(stream, settings))
             {

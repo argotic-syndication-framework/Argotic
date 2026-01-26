@@ -17,13 +17,16 @@ public static class RssCloudExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed();
-
-        feed.Channel.Title          = "Dallas Times-Herald";
-        feed.Channel.Link           = new Uri("http://dallas.example.com");
-        feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
-
-        feed.Channel.Cloud          = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
+        RssFeed feed    = new RssFeed
+        {
+            Channel =
+            {
+                Title = "Dallas Times-Herald",
+                Link = new Uri("http://dallas.example.com"),
+                Description = "Current headlines from the Dallas Times-Herald newspaper",
+                Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify")
+            }
+        };
     }
     /// <summary>
     /// Provides example code for the RssCloud.CloudProtocolAsString(RssCloudProtocol) method

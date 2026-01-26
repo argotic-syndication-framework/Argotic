@@ -16,27 +16,31 @@ public static class AtomTextConstructExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed();
-
-        feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
-        feed.Title      = new AtomTextConstruct("Example Feed");
-        feed.UpdatedOn  = new DateTime(2003, 12, 13, 18, 30, 2);
+        AtomFeed feed   = new AtomFeed
+        {
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+        };
 
         feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
-        AtomEntry entry = new AtomEntry();
-
-        entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-        entry.Title     = new AtomTextConstruct("Atom-Powered Robots Run Amok");
-        entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
+        AtomEntry entry = new AtomEntry
+        {
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+        };
 
         //  Provide summary as entity escaped html
-        AtomTextConstruct summary   = new AtomTextConstruct();
-        summary.Content             = "AT&amp;amp;T bought &lt;b&gt;by SBC&lt;/b&gt;!";
-        summary.TextType            = AtomTextConstructType.Html;
+        AtomTextConstruct summary   = new AtomTextConstruct
+        {
+            Content = "AT&amp;amp;T bought &lt;b&gt;by SBC&lt;/b&gt;!",
+            TextType = AtomTextConstructType.Html
+        };
         entry.Summary               = summary;
 
         feed.AddEntry(entry);

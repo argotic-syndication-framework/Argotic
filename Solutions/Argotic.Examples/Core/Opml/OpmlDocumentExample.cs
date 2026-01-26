@@ -22,14 +22,18 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void ClassExample()
     {
-        OpmlDocument document   = new OpmlDocument();
-
-        document.Head.Title                 = "Example OPML List";
-        document.Head.CreatedOn             = new DateTime(2005, 6, 18, 12, 11, 52);
-        document.Head.ModifiedOn            = new DateTime(2005, 7, 2, 21, 42, 48);
-        document.Head.Owner                 = new OpmlOwner("John Doe", "john.doe@example.com");
-        document.Head.VerticalScrollState   = 1;
-        document.Head.Window                = new OpmlWindow(61, 304, 562, 842);
+        OpmlDocument document   = new OpmlDocument
+        {
+            Head =
+            {
+                Title = "Example OPML List",
+                CreatedOn = new DateTime(2005, 6, 18, 12, 11, 52),
+                ModifiedOn = new DateTime(2005, 7, 2, 21, 42, 48),
+                Owner = new OpmlOwner("John Doe", "john.doe@example.com"),
+                VerticalScrollState = 1,
+                Window = new OpmlWindow(61, 304, 562, 842)
+            }
+        };
 
         OpmlOutline containerOutline    = new OpmlOutline("Feeds");
         containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
@@ -124,9 +128,11 @@ public static class OpmlDocumentExample
 
         using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read))
         {
-            XmlReaderSettings settings  = new XmlReaderSettings();
-            settings.IgnoreComments     = true;
-            settings.IgnoreWhitespace   = true;
+            XmlReaderSettings settings  = new XmlReaderSettings
+            {
+                IgnoreComments = true,
+                IgnoreWhitespace = true
+            };
 
             using(XmlReader reader = XmlReader.Create(stream, settings))
             {
@@ -188,8 +194,10 @@ public static class OpmlDocumentExample
 
         using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write))
         {
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.Indent             = true;
+            XmlWriterSettings settings  = new XmlWriterSettings
+            {
+                Indent = true
+            };
 
             using(XmlWriter writer = XmlWriter.Create(stream, settings))
             {

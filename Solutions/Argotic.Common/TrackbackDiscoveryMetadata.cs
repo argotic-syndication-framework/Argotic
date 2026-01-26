@@ -245,10 +245,12 @@ public class TrackbackDiscoveryMetadata : IComparable
     {
         using (MemoryStream stream = new MemoryStream())
         {
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.Indent             = true;
-            settings.OmitXmlDeclaration = true;
-            settings.ConformanceLevel   = ConformanceLevel.Fragment;
+            XmlWriterSettings settings  = new XmlWriterSettings
+            {
+                Indent = true,
+                OmitXmlDeclaration = true,
+                ConformanceLevel = ConformanceLevel.Fragment
+            };
 
             using(XmlWriter writer = XmlWriter.Create(stream, settings))
             {

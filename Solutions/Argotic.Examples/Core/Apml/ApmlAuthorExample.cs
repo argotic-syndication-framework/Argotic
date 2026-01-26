@@ -17,16 +17,22 @@ public static class ApmlAuthorExample
     /// </summary>
     public static void ClassExample()
     {
-        ApmlDocument document       = new ApmlDocument();
-        document.DefaultProfileName = "Work";
+        ApmlDocument document       = new ApmlDocument
+        {
+            DefaultProfileName = "Work",
+            Head =
+            {
+                Title = "Example APML file for apml.org",
+                Generator = "Written by Hand",
+                EmailAddress = "sample@apml.org",
+                CreatedOn = new DateTime(2007, 3, 11, 13, 55, 0)
+            }
+        };
 
-        document.Head.Title         = "Example APML file for apml.org";
-        document.Head.Generator     = "Written by Hand";
-        document.Head.EmailAddress  = "sample@apml.org";
-        document.Head.CreatedOn     = new DateTime(2007, 3, 11, 13, 55, 0);
-
-        ApmlProfile homeProfile     = new ApmlProfile();
-        homeProfile.Name            = "Home";
+        ApmlProfile homeProfile     = new ApmlProfile
+        {
+            Name = "Home"
+        };
 
         homeProfile.ImplicitConcepts.Add(new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
         homeProfile.ImplicitConcepts.Add(new ApmlConcept("content distribution", 0.97m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
@@ -43,13 +49,15 @@ public static class ApmlAuthorExample
         homeProfile.ImplicitConcepts.Add(new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
         homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
-        ApmlSource apmlSpecSource   = new ApmlSource();
-        apmlSpecSource.Key          = "http://feeds.feedburner.com/apmlspec";
-        apmlSpecSource.Name         = "APML.org";
-        apmlSpecSource.Value        = 1.00m;
-        apmlSpecSource.MimeType     = "application/rss+xml";
-        apmlSpecSource.From         = "GatheringTool.com";
-        apmlSpecSource.UpdatedOn    = new DateTime(2007, 3, 11, 13, 55, 0);
+        ApmlSource apmlSpecSource   = new ApmlSource
+        {
+            Key = "http://feeds.feedburner.com/apmlspec",
+            Name = "APML.org",
+            Value = 1.00m,
+            MimeType = "application/rss+xml",
+            From = "GatheringTool.com",
+            UpdatedOn = new DateTime(2007, 3, 11, 13, 55, 0)
+        };
 
         //  Identify the author of the implicit source
         apmlSpecSource.Authors.Add(new ApmlAuthor("Sample", 0.5m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
@@ -58,11 +66,13 @@ public static class ApmlAuthorExample
 
         homeProfile.ExplicitConcepts.Add(new ApmlConcept("direct attention", 0.99m));
 
-        ApmlSource techCrunchSource = new ApmlSource();
-        techCrunchSource.Key        = "http://feeds.feedburner.com/TechCrunch";
-        techCrunchSource.Name       = "Techcrunch";
-        techCrunchSource.Value      = 0.4m;
-        techCrunchSource.MimeType   = "application/rss+xml";
+        ApmlSource techCrunchSource = new ApmlSource
+        {
+            Key = "http://feeds.feedburner.com/TechCrunch",
+            Name = "Techcrunch",
+            Value = 0.4m,
+            MimeType = "application/rss+xml"
+        };
 
         //  Identify the author of the explicit source
         techCrunchSource.Authors.Add(new ApmlAuthor("ExplicitSample", 0.5m));
@@ -71,16 +81,20 @@ public static class ApmlAuthorExample
 
         document.AddProfile(homeProfile);
 
-        ApmlProfile workProfile     = new ApmlProfile();
-        workProfile.Name            = "Work";
+        ApmlProfile workProfile     = new ApmlProfile
+        {
+            Name = "Work"
+        };
 
         homeProfile.ExplicitConcepts.Add(new ApmlConcept("Golf", 0.2m));
 
-        ApmlSource workTechCrunchSource = new ApmlSource();
-        workTechCrunchSource.Key        = "http://feeds.feedburner.com/TechCrunch";
-        workTechCrunchSource.Name       = "Techcrunch";
-        workTechCrunchSource.Value      = 0.4m;
-        workTechCrunchSource.MimeType   = "application/atom+xml";
+        ApmlSource workTechCrunchSource = new ApmlSource
+        {
+            Key = "http://feeds.feedburner.com/TechCrunch",
+            Name = "Techcrunch",
+            Value = 0.4m,
+            MimeType = "application/atom+xml"
+        };
 
         //  Identify the author of the explicit source
         workTechCrunchSource.Authors.Add(new ApmlAuthor("ProfessionalBlogger", 0.5m));
@@ -89,8 +103,10 @@ public static class ApmlAuthorExample
 
         document.AddProfile(workProfile);
 
-        ApmlApplication sampleApplication   = new ApmlApplication("sample.com");
-        sampleApplication.Data              = "<SampleAppEl />";
+        ApmlApplication sampleApplication   = new ApmlApplication("sample.com")
+        {
+            Data = "<SampleAppEl />"
+        };
 
         document.Applications.Add(sampleApplication);
     }

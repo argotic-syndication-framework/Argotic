@@ -100,12 +100,14 @@ public class XmlRpcResponse : IComparable
 
         using (Stream stream = response.GetResponseStream())
         {
-            XmlReaderSettings settings              = new XmlReaderSettings();
-            settings.ConformanceLevel               = ConformanceLevel.Document;
-            settings.IgnoreComments                 = true;
-            settings.IgnoreProcessingInstructions   = true;
-            settings.IgnoreWhitespace               = true;
-            settings.DtdProcessing = DtdProcessing.Ignore;
+            XmlReaderSettings settings              = new XmlReaderSettings
+            {
+                ConformanceLevel = ConformanceLevel.Document,
+                IgnoreComments = true,
+                IgnoreProcessingInstructions = true,
+                IgnoreWhitespace = true,
+                DtdProcessing = DtdProcessing.Ignore
+            };
 
             using (XmlReader reader = XmlReader.Create(stream, settings))
             {
@@ -246,10 +248,12 @@ public class XmlRpcResponse : IComparable
     {
         using(MemoryStream stream = new MemoryStream())
         {
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.ConformanceLevel   = ConformanceLevel.Fragment;
-            settings.Indent             = true;
-            settings.OmitXmlDeclaration = true;
+            XmlWriterSettings settings  = new XmlWriterSettings
+            {
+                ConformanceLevel = ConformanceLevel.Fragment,
+                Indent = true,
+                OmitXmlDeclaration = true
+            };
 
             using(XmlWriter writer = XmlWriter.Create(stream, settings))
             {

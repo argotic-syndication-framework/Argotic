@@ -21,11 +21,12 @@ public static class AtomEntryExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomEntry entry = new AtomEntry();
-
-        entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-        entry.Title     = new AtomTextConstruct("Atom Entry Document");
-        entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
+        AtomEntry entry = new AtomEntry
+        {
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom Entry Document"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+        };
 
         entry.Authors.Add(new AtomPersonConstruct("John Doe"));
         entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
@@ -110,9 +111,11 @@ public static class AtomEntryExample
 
         using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read))
         {
-            XmlReaderSettings settings  = new XmlReaderSettings();
-            settings.IgnoreComments     = true;
-            settings.IgnoreWhitespace   = true;
+            XmlReaderSettings settings  = new XmlReaderSettings
+            {
+                IgnoreComments = true,
+                IgnoreWhitespace = true
+            };
 
             using(XmlReader reader = XmlReader.Create(stream, settings))
             {
@@ -168,8 +171,10 @@ public static class AtomEntryExample
 
         using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write))
         {
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.Indent             = true;
+            XmlWriterSettings settings  = new XmlWriterSettings
+            {
+                Indent = true
+            };
 
             using(XmlWriter writer = XmlWriter.Create(stream, settings))
             {

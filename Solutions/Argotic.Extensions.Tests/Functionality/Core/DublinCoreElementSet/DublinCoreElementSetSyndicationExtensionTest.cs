@@ -313,68 +313,78 @@ public class DublinCoreElementSetSyndicationExtensionTest
 
     private DublinCoreElementSetSyndicationExtension CreateExtension1()
     {
-        DublinCoreElementSetSyndicationExtension dub = new DublinCoreElementSetSyndicationExtension();
-        dub.Context.Contributor = "Helper";
-        dub.Context.Coverage = "US";
-        dub.Context.Creator = "The Big Guy";
-        dub.Context.Date = new DateTime(2010, 8, 1);
-        dub.Context.Description = "That kind of thing";
-        dub.Context.Format = "CDROM";
-        dub.Context.Identifier = "MYTESTCDROM-1";
-        dub.Context.Language = new CultureInfo("en-US");
-        dub.Context.Publisher = "MeMeMe";
-        dub.Context.Relation = "MYTESTCDROM-2";
-        dub.Context.Rights = "Copyright 2010";
-        dub.Context.Source = "Out of Me Head";
-        dub.Context.Subject = "Test data (Stupid variety)";
-        dub.Context.Title = "Stupid test data";
-        dub.Context.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
+        DublinCoreElementSetSyndicationExtension dub = new DublinCoreElementSetSyndicationExtension
+        {
+            Context =
+            {
+                Contributor = "Helper",
+                Coverage = "US",
+                Creator = "The Big Guy",
+                Date = new DateTime(2010, 8, 1),
+                Description = "That kind of thing",
+                Format = "CDROM",
+                Identifier = "MYTESTCDROM-1",
+                Language = new CultureInfo("en-US"),
+                Publisher = "MeMeMe",
+                Relation = "MYTESTCDROM-2",
+                Rights = "Copyright 2010",
+                Source = "Out of Me Head",
+                Subject = "Test data (Stupid variety)",
+                Title = "Stupid test data",
+                TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject
+            }
+        };
 
         return dub;
     }
 
     private DublinCoreElementSetSyndicationExtension CreateExtension2()
     {
-        DublinCoreElementSetSyndicationExtension dub = new DublinCoreElementSetSyndicationExtension();
-
-        dub.Context.Contributor = "Helper-er";
-        dub.Context.Coverage = "US";
-        dub.Context.Creator = "The Not-So-Big Guy";
-        dub.Context.Date = new DateTime(2010, 8, 1);
-        dub.Context.Description = "This kind of thing";
-        dub.Context.Format = "CDROM";
-        dub.Context.Identifier = "MYTESTCDROM-2";
-        dub.Context.Language = new CultureInfo("en-US");
-        dub.Context.Publisher = "MeMyselfI";
-        dub.Context.Relation = "MYTESTCDROM-1";
-        dub.Context.Rights = "Copyright 2010";
-        dub.Context.Source = "Nowheres, man";
-        dub.Context.Subject = "Test data (Son of)";
-        dub.Context.Title = "More Stupid test data";
-        dub.Context.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
+        DublinCoreElementSetSyndicationExtension dub = new DublinCoreElementSetSyndicationExtension
+        {
+            Context =
+            {
+                Contributor = "Helper-er",
+                Coverage = "US",
+                Creator = "The Not-So-Big Guy",
+                Date = new DateTime(2010, 8, 1),
+                Description = "This kind of thing",
+                Format = "CDROM",
+                Identifier = "MYTESTCDROM-2",
+                Language = new CultureInfo("en-US"),
+                Publisher = "MeMyselfI",
+                Relation = "MYTESTCDROM-1",
+                Rights = "Copyright 2010",
+                Source = "Nowheres, man",
+                Subject = "Test data (Son of)",
+                Title = "More Stupid test data",
+                TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject
+            }
+        };
 
         return dub;
     }
 
     public static DublinCoreElementSetSyndicationExtensionContext CreateContext1()
     {
-        DublinCoreElementSetSyndicationExtensionContext dub = new DublinCoreElementSetSyndicationExtensionContext();
-
-        dub.Contributor = "";
-        dub.Coverage = "";
-        dub.Creator = "";
-        dub.Date = new DateTime(2010, 8, 1);
-        dub.Description = "";
-        dub.Format = "";
-        dub.Identifier = "";
-        dub.Language = new CultureInfo("US-en");
-        dub.Publisher = "";
-        dub.Relation = "";
-        dub.Rights = "";
-        dub.Source = "";
-        dub.Subject = "";
-        dub.Title = "";
-        dub.TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject;
+        DublinCoreElementSetSyndicationExtensionContext dub = new DublinCoreElementSetSyndicationExtensionContext
+            {
+                Contributor = "",
+                Coverage = "",
+                Creator = "",
+                Date = new DateTime(2010, 8, 1),
+                Description = "",
+                Format = "",
+                Identifier = "",
+                Language = new CultureInfo("US-en"),
+                Publisher = "",
+                Relation = "",
+                Rights = "",
+                Source = "",
+                Subject = "",
+                Title = "",
+                TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject
+            };
 
         return dub;
     }

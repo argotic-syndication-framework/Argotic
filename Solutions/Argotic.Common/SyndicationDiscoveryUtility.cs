@@ -50,7 +50,7 @@ public static class SyndicationDiscoveryUtility
                 SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -131,9 +131,11 @@ public static class SyndicationDiscoveryUtility
     {
         Guard.ArgumentNotNull(stream, "stream");
 
-        XmlReaderSettings settings  = new XmlReaderSettings();
-        settings.IgnoreComments     = true;
-        settings.IgnoreWhitespace   = true;
+        XmlReaderSettings settings  = new XmlReaderSettings
+        {
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
         using(XmlReader reader = XmlReader.Create(stream, settings))
         {
@@ -168,7 +170,7 @@ public static class SyndicationDiscoveryUtility
                 SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -216,7 +218,7 @@ public static class SyndicationDiscoveryUtility
                 SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
                 object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes != null && customAttributes.Length > 0)
+                if (customAttributes is { Length: > 0 })
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
@@ -250,7 +252,7 @@ public static class SyndicationDiscoveryUtility
 
         foreach (Match attribute in attributes)
         {
-            if (attribute.Groups != null && attribute.Groups.Count > 0)
+            if (attribute.Groups is { Count: > 0 })
             {
                 string name     = attribute.Groups[1].Value;
                 string value    = string.Empty;
@@ -402,7 +404,7 @@ public static class SyndicationDiscoveryUtility
                     {
                         Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(reader.ReadToEnd());
 
-                        if (links != null && links.Count > 0)
+                        if (links is { Count: > 0 })
                         {
                             foreach (Uri link in links)
                             {
@@ -467,7 +469,7 @@ public static class SyndicationDiscoveryUtility
         {
             using (WebResponse response = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials)))
             {
-                if (response != null && response.ContentLength > 0)
+                if (response is { ContentLength: > 0 })
                 {
                     uriExists   = true;
                 }
@@ -755,8 +757,10 @@ public static class SyndicationDiscoveryUtility
                 {
                     if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri url))
                     {
-                        DiscoverableSyndicationEndpoint endpoint    = new DiscoverableSyndicationEndpoint();
-                        endpoint.Source                             = url;
+                        DiscoverableSyndicationEndpoint endpoint    = new DiscoverableSyndicationEndpoint
+                            {
+                                Source = url
+                            };
                         if (!string.IsNullOrEmpty(type))
                         {
                             endpoint.ContentType                    = type;
@@ -911,8 +915,10 @@ public static class SyndicationDiscoveryUtility
                     Uri uri;
                     if (Uri.TryCreate(href, UriKind.Absolute, out uri))
                     {
-                        pingbackAnchor      = new HtmlAnchor();
-                        pingbackAnchor.HRef = href;
+                        pingbackAnchor      = new HtmlAnchor
+                        {
+                            HRef = href
+                        };
                         pingbackAnchor.Attributes.Add("rel", rel);
 
                         if (linkAttributes.ContainsKey("TYPE"))
@@ -1049,7 +1055,7 @@ public static class SyndicationDiscoveryUtility
                 return false;
             }
 
-            if (webResponse.Headers != null && webResponse.Headers.Count > 0)
+            if (webResponse.Headers is { Count: > 0 })
             {
                 for (int i = 0; i < webResponse.Headers.Count; i++)
                 {
@@ -1202,7 +1208,7 @@ public static class SyndicationDiscoveryUtility
                 return null;
             }
 
-            if (webResponse.Headers != null && webResponse.Headers.Count > 0)
+            if (webResponse.Headers is { Count: > 0 })
             {
                 for (int i = 0; i < webResponse.Headers.Count; i++)
                 {

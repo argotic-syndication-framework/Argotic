@@ -17,20 +17,26 @@ public static class RssCategoryExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed();
-
-        feed.Channel.Title          = "Dallas Times-Herald";
-        feed.Channel.Link           = new Uri("http://dallas.example.com");
-        feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
+        RssFeed feed    = new RssFeed
+        {
+            Channel =
+            {
+                Title = "Dallas Times-Herald",
+                Link = new Uri("http://dallas.example.com"),
+                Description = "Current headlines from the Dallas Times-Herald newspaper"
+            }
+        };
 
         feed.Channel.Categories.Add(new RssCategory("Media"));
         feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
 
-        RssItem item        = new RssItem();
-        item.Title          = "Seventh Heaven! Ryan Hurls Another No Hitter";
-        item.Link           = new Uri("http://dallas.example.com/1991/05/02/nolan.htm");
-        item.Description    = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.";
-        item.Author         = "jbb@dallas.example.com (Joe Bob Briggs)";
+        RssItem item        = new RssItem
+        {
+            Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
+            Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),
+            Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.",
+            Author = "jbb@dallas.example.com (Joe Bob Briggs)"
+        };
 
         item.Categories.Add(new RssCategory("sports"));
         item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));

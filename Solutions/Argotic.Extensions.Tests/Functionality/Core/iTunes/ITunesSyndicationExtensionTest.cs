@@ -312,9 +312,14 @@ public class ITunesSyndicationExtensionTest
 
     private ITunesSyndicationExtension CreateExtension1()
     {
-        ITunesSyndicationExtension nyc = new ITunesSyndicationExtension();
+        ITunesSyndicationExtension nyc = new ITunesSyndicationExtension
+        {
+            Context =
+            {
+                Author = "BigStar"
+            }
+        };
 
-        nyc.Context.Author = "BigStar";
         nyc.Context.Categories.Add(new ITunesCategory("Rock"));
         nyc.Context.Categories.Add(new ITunesCategory("Folk"));
         nyc.Context.Duration = new TimeSpan(0, 3, 21);
@@ -333,8 +338,13 @@ public class ITunesSyndicationExtensionTest
 
     private ITunesSyndicationExtension CreateExtension2()
     {
-        ITunesSyndicationExtension nyc = new ITunesSyndicationExtension();
-        nyc.Context.Author = "NewStar";
+        ITunesSyndicationExtension nyc = new ITunesSyndicationExtension
+        {
+            Context =
+            {
+                Author = "NewStar"
+            }
+        };
         nyc.Context.Categories.Add(new ITunesCategory("Dance"));
         nyc.Context.Categories.Add(new ITunesCategory("Funk"));
         nyc.Context.Duration = new TimeSpan(0, 4, 32);

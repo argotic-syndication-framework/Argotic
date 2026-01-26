@@ -722,11 +722,13 @@ public class XmlRpcClient
 
         using(MemoryStream stream = new MemoryStream())
         {
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.ConformanceLevel   = ConformanceLevel.Document;
-            settings.Encoding           = message.Encoding;
-            settings.Indent             = true;
-            settings.OmitXmlDeclaration = false;
+            XmlWriterSettings settings  = new XmlWriterSettings
+            {
+                ConformanceLevel = ConformanceLevel.Document,
+                Encoding = message.Encoding,
+                Indent = true,
+                OmitXmlDeclaration = false
+            };
 
             using(XmlWriter writer = XmlWriter.Create(stream, settings))
             {

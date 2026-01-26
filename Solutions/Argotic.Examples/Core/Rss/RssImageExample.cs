@@ -17,16 +17,22 @@ public static class RssImageExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed();
+        RssFeed feed    = new RssFeed
+        {
+            Channel =
+            {
+                Title = "Dallas Times-Herald",
+                Link = new Uri("http://dallas.example.com"),
+                Description = "Current headlines from the Dallas Times-Herald newspaper"
+            }
+        };
 
-        feed.Channel.Title          = "Dallas Times-Herald";
-        feed.Channel.Link           = new Uri("http://dallas.example.com");
-        feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
-
-        RssImage image              = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"));
-        image.Description           = "Read the Dallas Times-Herald";
-        image.Height                = 32;
-        image.Width                 = 96;
+        RssImage image              = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
+            {
+                Description = "Read the Dallas Times-Herald",
+                Height = 32,
+                Width = 96
+            };
         feed.Channel.Image          = image;
     }
 }

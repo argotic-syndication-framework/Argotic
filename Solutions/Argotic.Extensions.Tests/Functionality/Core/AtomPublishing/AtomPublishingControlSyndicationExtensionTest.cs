@@ -266,10 +266,15 @@ public class AtomPublishingControlSyndicationExtensionTest
 
     private AtomPublishingControlSyndicationExtension CreateExtension2()
     {
-        AtomPublishingControlSyndicationExtension nyc = new AtomPublishingControlSyndicationExtension();
-        nyc.Context.BaseUri = new Uri("http://www.example.net/control.html");
-        nyc.Context.IsDraft = false;
-        nyc.Context.Language = new CultureInfo("fr-CA");
+        AtomPublishingControlSyndicationExtension nyc = new AtomPublishingControlSyndicationExtension
+        {
+            Context =
+            {
+                BaseUri = new Uri("http://www.example.net/control.html"),
+                IsDraft = false,
+                Language = new CultureInfo("fr-CA")
+            }
+        };
 
         return nyc;
     }

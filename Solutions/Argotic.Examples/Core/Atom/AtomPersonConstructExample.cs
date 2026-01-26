@@ -16,11 +16,12 @@ public static class AtomPersonConstructExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed();
-
-        feed.Id         = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
-        feed.Title      = new AtomTextConstruct("Example Feed");
-        feed.UpdatedOn  = new DateTime(2003, 12, 13, 18, 30, 2);
+        AtomFeed feed   = new AtomFeed
+        {
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+        };
 
         feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
         feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
@@ -31,19 +32,21 @@ public static class AtomPersonConstructExample
         //  Identify the contributors to the feed
         feed.Contributors.Add(new AtomPersonConstruct("Jane Doe"));
 
-        AtomPersonConstruct contributor = new AtomPersonConstruct();
-        contributor.EmailAddress        = "some.person@example.org";
-        contributor.Name                = "Some Person";
-        contributor.Uri                 = new Uri("http://example.org/somePerson");
+        AtomPersonConstruct contributor = new AtomPersonConstruct
+        {
+            EmailAddress = "some.person@example.org",
+            Name = "Some Person",
+            Uri = new Uri("http://example.org/somePerson")
+        };
         feed.Contributors.Add(contributor);
 
-        AtomEntry entry = new AtomEntry();
-
-        entry.Id        = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a"));
-        entry.Title     = new AtomTextConstruct("Atom-Powered Robots Run Amok");
-        entry.UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2);
-
-        entry.Summary   = new AtomTextConstruct("Some text.");
+        AtomEntry entry = new AtomEntry
+        {
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
+            Summary = new AtomTextConstruct("Some text.")
+        };
 
         //  Identify the author of the entry
         entry.Authors.Add(new AtomPersonConstruct("Jane Doe"));

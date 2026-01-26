@@ -18,11 +18,15 @@ public static class RssChannelExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed();
-
-        feed.Channel.Title          = "Dallas Times-Herald";
-        feed.Channel.Link           = new Uri("http://dallas.example.com");
-        feed.Channel.Description    = "Current headlines from the Dallas Times-Herald newspaper";
+        RssFeed feed    = new RssFeed
+        {
+            Channel =
+            {
+                Title = "Dallas Times-Herald",
+                Link = new Uri("http://dallas.example.com"),
+                Description = "Current headlines from the Dallas Times-Herald newspaper"
+            }
+        };
 
         feed.Channel.Categories.Add(new RssCategory("Media"));
         feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
@@ -31,10 +35,12 @@ public static class RssChannelExample
         feed.Channel.Copyright          = "Copyright 2007 Dallas Times-Herald";
         feed.Channel.Generator          = "Microsoft Spaces v1.1";
 
-        RssImage image                  = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"));
-        image.Description               = "Read the Dallas Times-Herald";
-        image.Height                    = 32;
-        image.Width                     = 96;
+        RssImage image                  = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
+            {
+                Description = "Read the Dallas Times-Herald",
+                Height = 32,
+                Width = 96
+            };
         feed.Channel.Image              = image;
 
         feed.Channel.Language           = new CultureInfo("en-US");

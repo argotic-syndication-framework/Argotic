@@ -204,10 +204,12 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     {
         using(MemoryStream stream = new MemoryStream())
         {
-            XmlWriterSettings settings  = new XmlWriterSettings();
-            settings.ConformanceLevel   = ConformanceLevel.Fragment;
-            settings.Indent             = true;
-            settings.OmitXmlDeclaration = true;
+            XmlWriterSettings settings  = new XmlWriterSettings
+            {
+                ConformanceLevel = ConformanceLevel.Fragment,
+                Indent = true,
+                OmitXmlDeclaration = true
+            };
 
             using(XmlWriter writer = XmlWriter.Create(stream, settings))
             {

@@ -243,10 +243,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     {
         get
         {
-            if (postComments == null)
-            {
-                postComments = [];
-            }
+            postComments ??= [];
             return postComments;
         }
     }

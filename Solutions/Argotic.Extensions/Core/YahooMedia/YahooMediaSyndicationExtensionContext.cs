@@ -77,10 +77,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (extensionContents == null)
-            {
-                extensionContents = [];
-            }
+            extensionContents ??= [];
             return extensionContents;
         }
 

@@ -75,10 +75,7 @@ public class ITunesSyndicationExtensionContext
     {
         get
         {
-            if (extensionCategories == null)
-            {
-                extensionCategories = [];
-            }
+            extensionCategories ??= [];
             return extensionCategories;
         }
     }

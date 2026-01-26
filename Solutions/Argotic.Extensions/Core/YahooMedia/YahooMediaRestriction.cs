@@ -62,10 +62,7 @@ public class YahooMediaRestriction : IComparable
     {
         get
         {
-            if (restrictionEntities == null)
-            {
-                restrictionEntities = [];
-            }
+            restrictionEntities ??= [];
             return restrictionEntities;
         }
     }

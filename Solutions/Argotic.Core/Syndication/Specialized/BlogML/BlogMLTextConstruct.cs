@@ -70,10 +70,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 

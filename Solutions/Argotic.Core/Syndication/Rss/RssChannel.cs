@@ -207,10 +207,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (channelCategories == null)
-            {
-                channelCategories = [];
-            }
+            channelCategories ??= [];
             return channelCategories;
         }
     }

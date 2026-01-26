@@ -292,10 +292,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 

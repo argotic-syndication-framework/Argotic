@@ -43,10 +43,7 @@ public class TrackbackSyndicationExtensionContext
     {
         get
         {
-            if (extensionAbouts == null)
-            {
-                extensionAbouts = [];
-            }
+            extensionAbouts ??= [];
             return extensionAbouts;
         }
     }

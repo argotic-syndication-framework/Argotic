@@ -153,10 +153,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (documentApplications == null)
-            {
-                documentApplications = [];
-            }
+            documentApplications ??= [];
             return documentApplications;
         }
     }

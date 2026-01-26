@@ -147,10 +147,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (profileImplicitSources == null)
-            {
-                profileImplicitSources = [];
-            }
+            profileImplicitSources ??= [];
             return profileImplicitSources;
         }
     }

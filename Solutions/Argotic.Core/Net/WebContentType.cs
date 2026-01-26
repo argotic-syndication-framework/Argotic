@@ -232,10 +232,7 @@ public class WebContentType : IComparable
     {
         get
         {
-            if (webContentMediaParameters == null)
-            {
-                webContentMediaParameters = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            }
+            webContentMediaParameters ??= new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             return webContentMediaParameters;
         }
     }

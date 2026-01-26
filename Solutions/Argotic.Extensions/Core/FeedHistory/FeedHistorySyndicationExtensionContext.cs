@@ -44,10 +44,7 @@ public class FeedHistorySyndicationExtensionContext
     {
         get
         {
-            if (extensionLinkRelations == null)
-            {
-                extensionLinkRelations = [];
-            }
+            extensionLinkRelations ??= [];
 
             return extensionLinkRelations;
         }

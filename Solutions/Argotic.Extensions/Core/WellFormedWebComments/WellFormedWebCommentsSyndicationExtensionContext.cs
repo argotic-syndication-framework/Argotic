@@ -59,10 +59,7 @@ public class WellFormedWebCommentsSyndicationExtensionContext
             }
 
             // Early in specification, there was a typo that incorrectly named the comment feed element, this handles the scenario where publisher used incorrect element name
-            if (commentRssNavigator == null)
-            {
-                commentRssNavigator = source.SelectSingleNode("wfw:commentRSS", manager);
-            }
+            commentRssNavigator ??= source.SelectSingleNode("wfw:commentRSS", manager);
 
             if (commentRssNavigator != null)
             {

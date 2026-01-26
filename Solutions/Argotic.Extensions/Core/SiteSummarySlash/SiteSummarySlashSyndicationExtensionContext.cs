@@ -75,10 +75,7 @@ public class SiteSummarySlashSyndicationExtensionContext
     {
         get
         {
-            if (extensionHitParade == null)
-            {
-                extensionHitParade = [];
-            }
+            extensionHitParade ??= [];
             return extensionHitParade;
         }
     }

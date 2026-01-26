@@ -128,10 +128,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 

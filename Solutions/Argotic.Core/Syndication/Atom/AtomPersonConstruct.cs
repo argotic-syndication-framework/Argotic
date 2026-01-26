@@ -86,10 +86,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 

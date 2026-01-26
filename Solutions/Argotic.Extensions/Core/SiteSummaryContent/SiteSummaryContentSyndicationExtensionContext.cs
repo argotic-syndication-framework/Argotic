@@ -71,10 +71,7 @@ public class SiteSummaryContentSyndicationExtensionContext
     {
         get
         {
-            if (extensionItems == null)
-            {
-                extensionItems = [];
-            }
+            extensionItems ??= [];
             return extensionItems;
         }
     }

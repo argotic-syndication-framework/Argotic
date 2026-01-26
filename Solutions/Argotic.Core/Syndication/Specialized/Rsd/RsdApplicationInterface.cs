@@ -217,10 +217,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (interfaceSettings == null)
-            {
-                interfaceSettings = [];
-            }
+            interfaceSettings ??= [];
             return interfaceSettings;
         }
     }

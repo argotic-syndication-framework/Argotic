@@ -150,10 +150,7 @@ public class GenericSyndicationFeed
     {
         get
         {
-            if (feedItems == null)
-            {
-                feedItems = [];
-            }
+            feedItems ??= [];
             return feedItems;
         }
     }

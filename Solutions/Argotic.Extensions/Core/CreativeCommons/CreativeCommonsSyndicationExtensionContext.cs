@@ -35,10 +35,7 @@ public class CreativeCommonsSyndicationExtensionContext
     {
         get
         {
-            if (extensionLicenses == null)
-            {
-                extensionLicenses = [];
-            }
+            extensionLicenses ??= [];
             return extensionLicenses;
         }
     }

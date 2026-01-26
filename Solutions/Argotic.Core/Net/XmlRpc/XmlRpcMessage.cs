@@ -120,10 +120,7 @@ public class XmlRpcMessage : IComparable
     {
         get
         {
-            if (messageParameters == null)
-            {
-                messageParameters = [];
-            }
+            messageParameters ??= [];
             return messageParameters;
         }
     }

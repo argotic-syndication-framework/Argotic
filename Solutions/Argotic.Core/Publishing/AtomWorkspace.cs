@@ -164,10 +164,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 

@@ -158,10 +158,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (itemCategories == null)
-            {
-                itemCategories = [];
-            }
+            itemCategories ??= [];
             return itemCategories;
         }
     }

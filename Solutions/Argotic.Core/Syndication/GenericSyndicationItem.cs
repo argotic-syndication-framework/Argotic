@@ -59,10 +59,7 @@ public class GenericSyndicationItem : IComparable
     {
         get
         {
-            if (itemCategories == null)
-            {
-                itemCategories = [];
-            }
+            itemCategories ??= [];
             return itemCategories;
         }
     }

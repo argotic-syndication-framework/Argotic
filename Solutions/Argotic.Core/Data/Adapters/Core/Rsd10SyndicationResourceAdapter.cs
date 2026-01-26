@@ -47,13 +47,9 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager);
-
-        if (serviceNavigator == null)
-        {
-            //  dasBlog places an empty default XML namespace on the <service> element, this is a hack/compromise
-            serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/service", manager);
-        }
+        XPathNavigator serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager) ??
+                                          //  dasBlog places an empty default XML namespace on the <service> element, this is a hack/compromise
+                                          RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/service", manager);
 
         if (serviceNavigator != null)
         {

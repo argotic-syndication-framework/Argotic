@@ -46,10 +46,7 @@ public class PingbackSyndicationExtensionContext
     {
         get
         {
-            if (extensionAbouts == null)
-            {
-                extensionAbouts = [];
-            }
+            extensionAbouts ??= [];
             return extensionAbouts;
         }
     }

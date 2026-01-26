@@ -58,10 +58,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
     {
         get
         {
-            if (arrayValues == null)
-            {
-                arrayValues = [];
-            }
+            arrayValues ??= [];
             return arrayValues;
         }
     }

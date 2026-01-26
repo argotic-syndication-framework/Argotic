@@ -17,7 +17,7 @@ public static class RssCategoryExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed
+        RssFeed feed = new RssFeed
         {
             Channel =
             {
@@ -30,7 +30,7 @@ public static class RssCategoryExample
         feed.Channel.Categories.Add(new RssCategory("Media"));
         feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
 
-        RssItem item        = new RssItem
+        RssItem item = new RssItem
         {
             Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
             Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),

@@ -96,17 +96,17 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
         {
             if (fieldInfo.FieldType == typeof(SiteSummaryUpdatePeriod))
             {
-                SiteSummaryUpdatePeriod updatePeriod    = (SiteSummaryUpdatePeriod)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                SiteSummaryUpdatePeriod updatePeriod = (SiteSummaryUpdatePeriod)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (updatePeriod == period)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -126,14 +126,14 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static SiteSummaryUpdatePeriod PeriodByName(string name)
     {
-        SiteSummaryUpdatePeriod updatePeriod    = SiteSummaryUpdatePeriod.None;
+        SiteSummaryUpdatePeriod updatePeriod = SiteSummaryUpdatePeriod.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(SiteSummaryUpdatePeriod).GetFields())
         {
             if (fieldInfo.FieldType == typeof(SiteSummaryUpdatePeriod))
             {
-                SiteSummaryUpdatePeriod period  = (SiteSummaryUpdatePeriod)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                SiteSummaryUpdatePeriod period = (SiteSummaryUpdatePeriod)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -158,11 +158,11 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -177,7 +177,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -203,14 +203,14 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -234,13 +234,13 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
         {
             return 1;
         }
-        SiteSummaryUpdateSyndicationExtension value  = obj as SiteSummaryUpdateSyndicationExtension;
+        SiteSummaryUpdateSyndicationExtension value = obj as SiteSummaryUpdateSyndicationExtension;
 
         if (value != null)
         {
-            int result  = this.Context.Base.CompareTo(value.Context.Base);
-            result      = result | this.Context.Frequency.CompareTo(value.Context.Frequency);
-            result      = result | this.Context.Period.CompareTo(value.Context.Period);
+            int result = this.Context.Base.CompareTo(value.Context.Base);
+            result = result | this.Context.Frequency.CompareTo(value.Context.Frequency);
+            result = result | this.Context.Period.CompareTo(value.Context.Period);
 
             return result;
         }
@@ -271,7 +271,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

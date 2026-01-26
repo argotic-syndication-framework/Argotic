@@ -10,11 +10,11 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable
     /// <summary>
     ///  Private member to hold the display name for the attributed field.
     /// </summary>
-    private string enumMetadataDisplayName      = string.Empty;
+    private string enumMetadataDisplayName = string.Empty;
     /// <summary>
     /// Private member to hold the alternate textual value for the attributed field.
     /// </summary>
-    private string enumMetadataAlternateValue   = string.Empty;
+    private string enumMetadataAlternateValue = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="EnumerationMetadataAttribute"/> class.
@@ -96,12 +96,12 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable
             return 1;
         }
 
-        EnumerationMetadataAttribute value  = obj as EnumerationMetadataAttribute;
+        EnumerationMetadataAttribute value = obj as EnumerationMetadataAttribute;
 
         if (value != null)
         {
-            int result  = string.Compare(this.AlternateValue, value.AlternateValue, StringComparison.Ordinal);
-            result      = result | string.Compare(this.DisplayName, value.DisplayName, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.AlternateValue, value.AlternateValue, StringComparison.Ordinal);
+            result = result | string.Compare(this.DisplayName, value.DisplayName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -132,7 +132,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

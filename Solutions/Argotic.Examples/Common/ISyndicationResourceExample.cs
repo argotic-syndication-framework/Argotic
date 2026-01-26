@@ -16,11 +16,11 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static readonly SyndicationContentFormat feedFormat  = SyndicationContentFormat.Rss;
+    private static readonly SyndicationContentFormat feedFormat = SyndicationContentFormat.Rss;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static readonly Version feedVersion                  = new Version(3, 0);
+    private static readonly Version feedVersion = new Version(3, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -120,14 +120,14 @@ public class MyCustomRssFeed : ISyndicationResource
     public XPathNavigator CreateNavigator()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Document,
             Indent = true,
             OmitXmlDeclaration = false
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.Save(writer);
             writer.Flush();
@@ -135,7 +135,7 @@ public class MyCustomRssFeed : ISyndicationResource
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        XPathDocument document  = new XPathDocument(stream);
+        XPathDocument document = new XPathDocument(stream);
         return document.CreateNavigator();
     }
 
@@ -170,9 +170,9 @@ public class MyCustomRssFeed : ISyndicationResource
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
-        XPathNavigator navigator    = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator();
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
     }
 
@@ -386,7 +386,7 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator    = null;
+        XPathNavigator navigator = null;
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
@@ -394,11 +394,11 @@ public class MyCustomRssFeed : ISyndicationResource
         }
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
         }
         else
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
         }
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
     }
@@ -427,9 +427,9 @@ public class MyCustomRssFeed : ISyndicationResource
 
         if (settings == null)
         {
-            settings    = new SyndicationResourceSaveSettings();
+            settings = new SyndicationResourceSaveSettings();
         }
-        XmlWriterSettings writerSettings    = new XmlWriterSettings
+        XmlWriterSettings writerSettings = new XmlWriterSettings
         {
             OmitXmlDeclaration = false,
             Indent = !settings.MinimizeOutputSize,
@@ -574,21 +574,21 @@ public class MyCustomRssFeed : ISyndicationResource
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
         if (this.LoadOperationInProgress)
         {
             throw new InvalidOperationException();
         }
-        this.LoadOperationInProgress    = true;
-        this.AsyncLoadHasBeenCancelled  = false;
+        this.LoadOperationInProgress = true;
+        this.AsyncLoadHasBeenCancelled = false;
 
-            
-        asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
+
+        asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-            
-        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
+
+        object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
     }
@@ -605,7 +605,7 @@ public class MyCustomRssFeed : ISyndicationResource
     {
         if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
         {
-            this.AsyncLoadHasBeenCancelled  = true;
+            this.AsyncLoadHasBeenCancelled = true;
             asyncHttpWebRequest.Abort();
         }
     }
@@ -615,22 +615,22 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <param name="result">The result of the asynchronous operation.</param>
     private static void AsyncLoadCallback(IAsyncResult result)
     {
-        System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
-        XPathNavigator navigator                    = null;
-        WebRequest httpWebRequest                   = null;
-        MyCustomRssFeed feed                        = null;
-        Uri source                                  = null;
-        WebRequestOptions options                   = null;
-        SyndicationResourceLoadSettings settings    = null;
+        System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+        XPathNavigator navigator = null;
+        WebRequest httpWebRequest = null;
+        MyCustomRssFeed feed = null;
+        Uri source = null;
+        WebRequestOptions options = null;
+        SyndicationResourceLoadSettings settings = null;
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest      = parameters[0] as WebRequest;
-            feed                = parameters[1] as MyCustomRssFeed;
-            source              = parameters[2] as Uri;
-            settings            = parameters[3] as SyndicationResourceLoadSettings;
-            options             = parameters[4] as WebRequestOptions;
-            object userToken    = parameters[5];
+            httpWebRequest = parameters[0] as WebRequest;
+            feed = parameters[1] as MyCustomRssFeed;
+            source = parameters[2] as Uri;
+            settings = parameters[3] as SyndicationResourceLoadSettings;
+            options = parameters[4] as WebRequestOptions;
+            object userToken = parameters[5];
             if (feed != null)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
@@ -638,12 +638,12 @@ public class MyCustomRssFeed : ISyndicationResource
                 {
                     if (settings != null)
                     {
-                        encoding    = settings.CharacterEncoding;
+                        encoding = settings.CharacterEncoding;
                     }
 
                     using (StreamReader streamReader = new StreamReader(stream, encoding))
                     {
-                        XmlReaderSettings readerSettings    = new XmlReaderSettings
+                        XmlReaderSettings readerSettings = new XmlReaderSettings
                         {
                             IgnoreComments = true,
                             IgnoreWhitespace = true,
@@ -654,11 +654,11 @@ public class MyCustomRssFeed : ISyndicationResource
                         {
                             if (encoding == System.Text.Encoding.UTF8)
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                             }
                             else
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                             }
 
                             //  Code to load the syndication resource using the XPathNavigator would go here.
@@ -668,7 +668,7 @@ public class MyCustomRssFeed : ISyndicationResource
                         }
                     }
                 }
-                feed.LoadOperationInProgress    = false;
+                feed.LoadOperationInProgress = false;
             }
         }
     }
@@ -687,7 +687,7 @@ public class MyCustomRssFeed : ISyndicationResource
                 asyncHttpWebRequest.Abort();
             }
         }
-        this.LoadOperationInProgress    = false;
+        this.LoadOperationInProgress = false;
     }
     /// <summary>
     /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.

@@ -37,7 +37,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <summary>
     /// Private member to hold the human-readable description of the syndication extension.
     /// </summary>
-    private string extensionDescription  = string.Empty;
+    private string extensionDescription = string.Empty;
     /// <summary>
     /// Private member to hold a URL that points to documentation for the syndication extension.
     /// </summary>
@@ -57,7 +57,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <summary>
     /// Private member to hold the prefix used to associate the syndication extension's element and attribute names with the syndication extension's XML namespace.
     /// </summary>
-    private string extensionXmlPrefix    = string.Empty;
+    private string extensionXmlPrefix = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtension"/> class.
     /// </summary>
@@ -81,10 +81,10 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
         Guard.ArgumentNotNullOrEmptyString(xmlPrefix, "xmlPrefix");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
         Guard.ArgumentNotNull(version, "version");
-            
-        extensionXmlPrefix      = xmlPrefix.Trim();
-        extensionXmlNamespace   = xmlNamespace.Trim();
-        extensionVersion        = version;
+
+        extensionXmlPrefix = xmlPrefix.Trim();
+        extensionXmlNamespace = xmlNamespace.Trim();
+        extensionVersion = version;
     }
 
     /// <summary>
@@ -109,11 +109,11 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
         Guard.ArgumentNotNull(documentation, "documentation");
         Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-        extensionDocumentation      = documentation;
-        extensionName               = name.Trim();
-        if(!string.IsNullOrEmpty(description))
+        extensionDocumentation = documentation;
+        extensionName = name.Trim();
+        if (!string.IsNullOrEmpty(description))
         {
-            extensionDescription    = description.Trim();
+            extensionDescription = description.Trim();
         }
     }
 
@@ -200,7 +200,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <param name="e">A <see cref="SyndicationExtensionLoadedEventArgs"/> that contains the event data.</param>
     protected virtual void OnExtensionLoaded(SyndicationExtensionLoadedEventArgs e)
     {
-        EventHandler<SyndicationExtensionLoadedEventArgs> handler   = null;
+        EventHandler<SyndicationExtensionLoadedEventArgs> handler = null;
         handler = this.Loaded;
 
         if (handler != null)
@@ -226,11 +226,11 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
         Guard.ArgumentNotNull(navigator, "navigator");
         manager = new XmlNamespaceManager(navigator.NameTable);
 
-        Dictionary<string, string> namespaces   = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-        string existingXmlNamespace             = string.Empty;
+        Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+        string existingXmlNamespace = string.Empty;
         if (namespaces.ContainsKey(this.XmlPrefix))
         {
-            existingXmlNamespace    = namespaces[this.XmlPrefix];
+            existingXmlNamespace = namespaces[this.XmlPrefix];
         }
 
         manager.AddNamespace(this.XmlPrefix, !string.IsNullOrEmpty(existingXmlNamespace) ? existingXmlNamespace : this.XmlNamespace);
@@ -255,8 +255,8 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     {
         bool extensionExists = false;
         Guard.ArgumentNotNull(source, "source");
-        Dictionary<string, string> namespaces   = (Dictionary<string, string>)source.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
-            
+        Dictionary<string, string> namespaces = (Dictionary<string, string>)source.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
         if (namespaces.ContainsValue(this.XmlNamespace))
         {
             extensionExists = true;

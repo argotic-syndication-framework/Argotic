@@ -17,7 +17,7 @@ public static class ApmlSourceExample
     /// </summary>
     public static void ClassExample()
     {
-        ApmlDocument document       = new ApmlDocument
+        ApmlDocument document = new ApmlDocument
         {
             DefaultProfileName = "Work",
             Head =
@@ -29,7 +29,7 @@ public static class ApmlSourceExample
             }
         };
 
-        ApmlProfile homeProfile     = new ApmlProfile
+        ApmlProfile homeProfile = new ApmlProfile
         {
             Name = "Home"
         };
@@ -50,7 +50,7 @@ public static class ApmlSourceExample
         homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
         //  Define the implicit source associated to this profile
-        ApmlSource apmlSpecSource   = new ApmlSource
+        ApmlSource apmlSpecSource = new ApmlSource
         {
             Key = "http://feeds.feedburner.com/apmlspec",
             Name = "APML.org",
@@ -79,7 +79,7 @@ public static class ApmlSourceExample
 
         document.AddProfile(homeProfile);
 
-        ApmlProfile workProfile     = new ApmlProfile
+        ApmlProfile workProfile = new ApmlProfile
         {
             Name = "Work"
         };
@@ -100,7 +100,7 @@ public static class ApmlSourceExample
 
         document.AddProfile(workProfile);
 
-        ApmlApplication sampleApplication   = new ApmlApplication("sample.com")
+        ApmlApplication sampleApplication = new ApmlApplication("sample.com")
         {
             Data = "<SampleAppEl />"
         };

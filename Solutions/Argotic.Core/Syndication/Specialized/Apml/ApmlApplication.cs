@@ -31,11 +31,11 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the unique name for the application.
     /// </summary>
-    private string applicationName  = string.Empty;
+    private string applicationName = string.Empty;
     /// <summary>
     /// Private member to hold the textual data of the application.
     /// </summary>
-    private string applicationData  = string.Empty;
+    private string applicationData = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="ApmlApplication"/> class.
     /// </summary>
@@ -52,7 +52,7 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public ApmlApplication(string name)
     {
-        this.Name   = name;
+        this.Name = name;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -107,7 +107,7 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 applicationData = string.Empty;
             }
@@ -145,10 +145,10 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -189,7 +189,7 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -205,23 +205,23 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string nameAttribute    = source.GetAttribute("name", string.Empty);
+            string nameAttribute = source.GetAttribute("name", string.Empty);
 
             if (!string.IsNullOrEmpty(nameAttribute))
             {
-                this.Name   = nameAttribute;
-                wasLoaded   = true;
+                this.Name = nameAttribute;
+                wasLoaded = true;
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Data   = source.Value;
-            wasLoaded   = true;
+            this.Data = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -240,10 +240,10 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -280,14 +280,14 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -311,12 +311,12 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        ApmlApplication value  = obj as ApmlApplication;
+        ApmlApplication value = obj as ApmlApplication;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Data, value.Data, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Data, value.Data, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -347,7 +347,7 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

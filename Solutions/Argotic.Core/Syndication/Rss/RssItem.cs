@@ -33,7 +33,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the e-mail address of the person who wrote the item.
     /// </summary>
-    private string itemAuthor               = string.Empty;
+    private string itemAuthor = string.Empty;
     /// <summary>
     /// Private member to hold categories or tags to which the item belongs.
     /// </summary>
@@ -45,7 +45,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold character data that contains the item's full content or a summary of its contents.
     /// </summary>
-    private string itemDescription          = string.Empty;
+    private string itemDescription = string.Empty;
     /// <summary>
     /// Private member to hold media objects such as an audio, video, or executable file that are associated with the item.
     /// </summary>
@@ -61,7 +61,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the publication date and time of the item.
     /// </summary>
-    private DateTime itemPublicationDate    = DateTime.MinValue;
+    private DateTime itemPublicationDate = DateTime.MinValue;
     /// <summary>
     /// Private member to hold information about the source feed that the item was republished from.
     /// </summary>
@@ -69,7 +69,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold character data that provides the item's headline.
     /// </summary>
-    private string itemTitle                = string.Empty;
+    private string itemTitle = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssItem"/> class.
     /// </summary>
@@ -207,7 +207,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 itemDescription = string.Empty;
             }
@@ -354,10 +354,10 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -403,7 +403,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -429,7 +429,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<RssEnclosure> source, Collection<RssEnclosure> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -437,7 +437,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -462,53 +462,53 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
-        XPathNavigator authorNavigator      = source.SelectSingleNode("author", manager);
-        XPathNavigator commentsNavigator    = source.SelectSingleNode("comments", manager);
+        XPathNavigator authorNavigator = source.SelectSingleNode("author", manager);
+        XPathNavigator commentsNavigator = source.SelectSingleNode("comments", manager);
         XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator guidNavigator        = source.SelectSingleNode("guid", manager);
-        XPathNavigator linkNavigator        = source.SelectSingleNode("link", manager);
+        XPathNavigator guidNavigator = source.SelectSingleNode("guid", manager);
+        XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
         XPathNavigator publicationNavigator = source.SelectSingleNode("pubDate", manager);
-        XPathNavigator sourceNavigator      = source.SelectSingleNode("source", manager);
-        XPathNavigator titleNavigator       = source.SelectSingleNode("title", manager);
+        XPathNavigator sourceNavigator = source.SelectSingleNode("source", manager);
+        XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
 
-        XPathNodeIterator categoryIterator  = source.Select("category", manager);
+        XPathNodeIterator categoryIterator = source.Select("category", manager);
         XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);
         if (titleNavigator != null)
         {
-            this.Title          = titleNavigator.Value;
-            wasLoaded           = true;
+            this.Title = titleNavigator.Value;
+            wasLoaded = true;
         }
 
         if (descriptionNavigator != null)
         {
-            this.Description    = descriptionNavigator.Value;
-            wasLoaded           = true;
+            this.Description = descriptionNavigator.Value;
+            wasLoaded = true;
         }
 
         if (linkNavigator != null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                this.Link       = link;
-                wasLoaded       = true;
+                this.Link = link;
+                wasLoaded = true;
             }
         }
 
         if (authorNavigator != null)
         {
-            this.Author         = authorNavigator.Value;
-            wasLoaded           = true;
+            this.Author = authorNavigator.Value;
+            wasLoaded = true;
         }
 
         if (commentsNavigator != null)
         {
             if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri comments))
             {
-                this.Comments   = comments;
-                wasLoaded       = true;
+                this.Comments = comments;
+                wasLoaded = true;
             }
         }
 
@@ -517,8 +517,8 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             RssGuid guid = new RssGuid();
             if (guid.Load(guidNavigator))
             {
-                this.Guid       = guid;
-                wasLoaded       = true;
+                this.Guid = guid;
+                wasLoaded = true;
             }
         }
 
@@ -526,18 +526,18 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out DateTime publicationDate))
             {
-                this.PublicationDate    = publicationDate;
-                wasLoaded               = true;
+                this.PublicationDate = publicationDate;
+                wasLoaded = true;
             }
         }
 
         if (sourceNavigator != null)
         {
-            RssSource sourceFeed    = new RssSource();
+            RssSource sourceFeed = new RssSource();
             if (sourceFeed.Load(sourceNavigator))
             {
-                this.Source     = sourceFeed;
-                wasLoaded       = true;
+                this.Source = sourceFeed;
+                wasLoaded = true;
             }
         }
 
@@ -557,7 +557,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             while (enclosureIterator.MoveNext())
             {
-                RssEnclosure enclosure  = new RssEnclosure();
+                RssEnclosure enclosure = new RssEnclosure();
                 if (enclosure.Load(enclosureIterator.Current))
                 {
                     this.Enclosures.Add(enclosure);
@@ -581,53 +581,53 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
         XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
-        XPathNavigator authorNavigator      = source.SelectSingleNode("author", manager);
-        XPathNavigator commentsNavigator    = source.SelectSingleNode("comments", manager);
+        XPathNavigator authorNavigator = source.SelectSingleNode("author", manager);
+        XPathNavigator commentsNavigator = source.SelectSingleNode("comments", manager);
         XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator guidNavigator        = source.SelectSingleNode("guid", manager);
-        XPathNavigator linkNavigator        = source.SelectSingleNode("link", manager);
+        XPathNavigator guidNavigator = source.SelectSingleNode("guid", manager);
+        XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
         XPathNavigator publicationNavigator = source.SelectSingleNode("pubDate", manager);
-        XPathNavigator sourceNavigator      = source.SelectSingleNode("source", manager);
-        XPathNavigator titleNavigator       = source.SelectSingleNode("title", manager);
+        XPathNavigator sourceNavigator = source.SelectSingleNode("source", manager);
+        XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
 
-        XPathNodeIterator categoryIterator  = source.Select("category", manager);
+        XPathNodeIterator categoryIterator = source.Select("category", manager);
         XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);
         if (titleNavigator != null)
         {
-            this.Title          = titleNavigator.Value;
-            wasLoaded           = true;
+            this.Title = titleNavigator.Value;
+            wasLoaded = true;
         }
 
         if (descriptionNavigator != null)
         {
-            this.Description    = descriptionNavigator.Value;
-            wasLoaded           = true;
+            this.Description = descriptionNavigator.Value;
+            wasLoaded = true;
         }
 
         if (linkNavigator != null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                this.Link       = link;
-                wasLoaded       = true;
+                this.Link = link;
+                wasLoaded = true;
             }
         }
         if (authorNavigator != null)
         {
-            this.Author         = authorNavigator.Value;
-            wasLoaded           = true;
+            this.Author = authorNavigator.Value;
+            wasLoaded = true;
         }
 
         if (commentsNavigator != null)
         {
             if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri comments))
             {
-                this.Comments   = comments;
-                wasLoaded       = true;
+                this.Comments = comments;
+                wasLoaded = true;
             }
         }
 
@@ -636,8 +636,8 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             RssGuid guid = new RssGuid();
             if (guid.Load(guidNavigator, settings))
             {
-                this.Guid       = guid;
-                wasLoaded       = true;
+                this.Guid = guid;
+                wasLoaded = true;
             }
         }
 
@@ -645,18 +645,18 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out DateTime publicationDate))
             {
-                this.PublicationDate    = publicationDate;
-                wasLoaded               = true;
+                this.PublicationDate = publicationDate;
+                wasLoaded = true;
             }
         }
 
         if (sourceNavigator != null)
         {
-            RssSource sourceFeed    = new RssSource();
+            RssSource sourceFeed = new RssSource();
             if (sourceFeed.Load(sourceNavigator, settings))
             {
-                this.Source     = sourceFeed;
-                wasLoaded       = true;
+                this.Source = sourceFeed;
+                wasLoaded = true;
             }
         }
         if (categoryIterator is { Count: > 0 })
@@ -675,7 +675,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             while (enclosureIterator.MoveNext())
             {
-                RssEnclosure enclosure  = new RssEnclosure();
+                RssEnclosure enclosure = new RssEnclosure();
                 if (enclosure.Load(enclosureIterator.Current, settings))
                 {
                     this.Enclosures.Add(enclosure);
@@ -713,12 +713,12 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("link", this.Link.ToString());
         }
 
-        if(!string.IsNullOrEmpty(this.Author))
+        if (!string.IsNullOrEmpty(this.Author))
         {
             writer.WriteElementString("author", this.Author);
         }
-            
-        if(this.Comments != null)
+
+        if (this.Comments != null)
         {
             writer.WriteElementString("comments", this.Comments.ToString());
         }
@@ -738,7 +738,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             this.Source.WriteTo(writer);
         }
 
-        foreach(RssCategory category in this.Categories)
+        foreach (RssCategory category in this.Categories)
         {
             category.WriteTo(writer);
         }
@@ -761,14 +761,14 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -793,37 +793,37 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             return 1;
         }
 
-        RssItem value  = obj as RssItem;
+        RssItem value = obj as RssItem;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Author, value.Author, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Comments, value.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.PublicationDate.CompareTo(value.PublicationDate);
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Author, value.Author, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Comments, value.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | this.PublicationDate.CompareTo(value.PublicationDate);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
-            if(this.Guid != null)
+            if (this.Guid != null)
             {
-                result  = result | this.Guid.CompareTo(value.Guid);
+                result = result | this.Guid.CompareTo(value.Guid);
             }
             else if (this.Guid == null && value.Guid != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             if (this.Source != null)
             {
-                result  = result | this.Source.CompareTo(value.Source);
+                result = result | this.Source.CompareTo(value.Source);
             }
             else if (this.Source == null && value.Source != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
-            result      = result | RssFeed.CompareSequence(this.Categories, value.Categories);
-            result      = result | RssItem.CompareSequence(this.Enclosures, value.Enclosures);
+            result = result | RssFeed.CompareSequence(this.Categories, value.Categories);
+            result = result | RssItem.CompareSequence(this.Enclosures, value.Enclosures);
 
             return result;
         }
@@ -854,7 +854,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

@@ -88,11 +88,11 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -107,7 +107,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -132,14 +132,14 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -163,21 +163,21 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
         {
             return 1;
         }
-        FeedRankSyndicationExtension value  = obj as FeedRankSyndicationExtension;
+        FeedRankSyndicationExtension value = obj as FeedRankSyndicationExtension;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Version.CompareTo(value.Version);
-            result      = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result      = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Version.CompareTo(value.Version);
+            result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
-            result      = result | Uri.Compare(this.Context.Domain, value.Context.Domain, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Context.Label, value.Context.Label, StringComparison.Ordinal);
-            result      = result | Uri.Compare(this.Context.Scheme, value.Context.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
-            result      = result | this.Context.Value.CompareTo(value.Context.Value);
+            result = result | Uri.Compare(this.Context.Domain, value.Context.Domain, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Context.Label, value.Context.Label, StringComparison.Ordinal);
+            result = result | Uri.Compare(this.Context.Scheme, value.Context.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            result = result | this.Context.Value.CompareTo(value.Context.Value);
 
             return result;
         }

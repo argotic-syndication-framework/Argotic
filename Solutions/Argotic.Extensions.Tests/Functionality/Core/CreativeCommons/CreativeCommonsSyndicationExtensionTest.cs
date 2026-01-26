@@ -17,13 +17,13 @@ public class CreativeCommonsSyndicationExtensionTest
 
     const string namespc = @"xmlns:creativeCommons=""http://backend.userland.com/creativeCommonsRssModule""";
 
-    private const string nycText =  "<license xmlns=\"http://backend.userland.com/creativeCommonsRssModule\">http://www.example.com/license1.html</license>"+
+    private const string nycText = "<license xmlns=\"http://backend.userland.com/creativeCommonsRssModule\">http://www.example.com/license1.html</license>" +
                                     "<license xmlns=\"http://backend.userland.com/creativeCommonsRssModule\">http://www.example.com/license2.html</license>";
 
     private const string strExtXml = "<creativeCommons:license>http://www.example.com/license1.html</creativeCommons:license>"
-                                     +"<creativeCommons:license>http://www.example.com/license2.html</creativeCommons:license>";
+                                     + "<creativeCommons:license>http://www.example.com/license2.html</creativeCommons:license>";
 
-    private TestContext testContextInstance;
+    public TestContext TestContext { get; set; }
 
     /// <summary>
     ///Gets or sets the test context which provides
@@ -60,7 +60,7 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        int expected = 0; 
+        int expected = 0;
         int actual;
         actual = target.CompareTo(obj);
         Assert.AreEqual(expected, actual);
@@ -103,7 +103,7 @@ public class CreativeCommonsSyndicationExtensionTest
         CreativeCommonsSyndicationExtension target = new CreativeCommonsSyndicationExtension(); // TODO: Initialize to an appropriate value
         NameTable nt = new NameTable();
         XmlNamespaceManager ns = new XmlNamespaceManager(nt);
-        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
+        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
@@ -198,7 +198,7 @@ public class CreativeCommonsSyndicationExtensionTest
         CreativeCommonsSyndicationExtension target = CreateExtension1();
         target.WriteTo(writer);
         string output = sw.ToString();
-        Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
+        Assert.AreEqual(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
     }
 
     /// <summary>
@@ -209,7 +209,7 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool expected = false; 
+        bool expected = false;
         bool actual;
         actual = (first == second);
         Assert.AreEqual(expected, actual);
@@ -233,7 +233,7 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool expected = false; 
+        bool expected = false;
         bool actual = false;
         actual = (first > second);
         Assert.AreEqual(expected, actual);
@@ -260,7 +260,7 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool expected = true; 
+        bool expected = true;
         bool actual;
         actual = (first < second);
         Assert.AreEqual(expected, actual);
@@ -273,9 +273,9 @@ public class CreativeCommonsSyndicationExtensionTest
     public void CreativeCommons_ContextTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
-        CreativeCommonsSyndicationExtensionContext expected =CreateContext1();
+        CreativeCommonsSyndicationExtensionContext expected = CreateContext1();
         CreativeCommonsSyndicationExtensionContext actual;
-//			target.Context = expected;
+        //			target.Context = expected;
         actual = target.Context;
         bool b = actual.Equals(expected);
         Assert.AreEqual(expected, actual);

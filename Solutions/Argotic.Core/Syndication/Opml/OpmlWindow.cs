@@ -16,19 +16,19 @@ public class OpmlWindow : IComparable
     /// <summary>
     /// Private member to hold pixel location of the top edge of the window.
     /// </summary>
-    private int windowTop       = int.MinValue;
+    private int windowTop = int.MinValue;
     /// <summary>
     /// Private member to hold pixel location of the left edge of the window.
     /// </summary>
-    private int windowLeft      = int.MinValue;
+    private int windowLeft = int.MinValue;
     /// <summary>
     /// Private member to hold pixel location of the bottom edge of the window.
     /// </summary>
-    private int windowBottom    = int.MinValue;
+    private int windowBottom = int.MinValue;
     /// <summary>
     /// Private member to hold pixel location of the right edge of the window.
     /// </summary>
-    private int windowRight     = int.MinValue;
+    private int windowRight = int.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlWindow"/> class.
     /// </summary>
@@ -46,10 +46,10 @@ public class OpmlWindow : IComparable
     /// <param name="right">The pixel location of the right edge of this window.</param>
     public OpmlWindow(int top, int left, int bottom, int right)
     {
-        this.Bottom     = bottom;
-        this.Left       = left;
-        this.Right      = right;
-        this.Top        = top;
+        this.Bottom = bottom;
+        this.Left = left;
+        this.Right = right;
+        this.Top = top;
     }
     /// <summary>
     /// Gets or sets the pixel location of the bottom edge of this window.
@@ -129,19 +129,19 @@ public class OpmlWindow : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator windowTopNavigator       = source.SelectSingleNode("windowTop");
-        XPathNavigator windowLeftNavigator      = source.SelectSingleNode("windowLeft");
-        XPathNavigator windowBottomNavigator    = source.SelectSingleNode("windowBottom");
-        XPathNavigator windowRightNavigator     = source.SelectSingleNode("windowRight");
+        XPathNavigator windowTopNavigator = source.SelectSingleNode("windowTop");
+        XPathNavigator windowLeftNavigator = source.SelectSingleNode("windowLeft");
+        XPathNavigator windowBottomNavigator = source.SelectSingleNode("windowBottom");
+        XPathNavigator windowRightNavigator = source.SelectSingleNode("windowRight");
 
         if (windowTopNavigator != null)
         {
             if (int.TryParse(windowTopNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int top))
             {
-                this.Top    = top;
-                wasLoaded   = true;
+                this.Top = top;
+                wasLoaded = true;
             }
         }
 
@@ -149,8 +149,8 @@ public class OpmlWindow : IComparable
         {
             if (int.TryParse(windowLeftNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int left))
             {
-                this.Left   = left;
-                wasLoaded   = true;
+                this.Left = left;
+                wasLoaded = true;
             }
         }
 
@@ -159,7 +159,7 @@ public class OpmlWindow : IComparable
             if (int.TryParse(windowBottomNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int bottom))
             {
                 this.Bottom = bottom;
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
@@ -167,8 +167,8 @@ public class OpmlWindow : IComparable
         {
             if (int.TryParse(windowRightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int right))
             {
-                this.Right  = right;
-                wasLoaded   = true;
+                this.Right = right;
+                wasLoaded = true;
             }
         }
 
@@ -183,7 +183,7 @@ public class OpmlWindow : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        if(this.Top != int.MinValue)
+        if (this.Top != int.MinValue)
         {
             writer.WriteElementString("windowTop", this.Top.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
@@ -213,14 +213,14 @@ public class OpmlWindow : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -244,14 +244,14 @@ public class OpmlWindow : IComparable
         {
             return 1;
         }
-        OpmlWindow value  = obj as OpmlWindow;
+        OpmlWindow value = obj as OpmlWindow;
 
         if (value != null)
         {
-            int result  = this.Bottom.CompareTo(value.Bottom);
-            result      = result | this.Left.CompareTo(value.Left);
-            result      = result | this.Right.CompareTo(value.Right);
-            result      = result | this.Top.CompareTo(value.Top);
+            int result = this.Bottom.CompareTo(value.Bottom);
+            result = result | this.Left.CompareTo(value.Left);
+            result = result | this.Right.CompareTo(value.Right);
+            result = result | this.Top.CompareTo(value.Top);
 
             return result;
         }
@@ -282,7 +282,7 @@ public class OpmlWindow : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

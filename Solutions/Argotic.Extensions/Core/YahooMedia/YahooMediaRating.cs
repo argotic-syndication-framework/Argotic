@@ -19,7 +19,7 @@ public class YahooMediaRating : IComparable
     /// <summary>
     /// Private member to hold the permissible audience value.
     /// </summary>
-    private string ratingContent    = string.Empty;
+    private string ratingContent = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaRating"/> class.
@@ -36,7 +36,7 @@ public class YahooMediaRating : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="audience"/> is an empty string.</exception>
     public YahooMediaRating(string audience)
     {
-        this.Content    = audience;
+        this.Content = audience;
     }
 
     /// <summary>
@@ -129,25 +129,25 @@ public class YahooMediaRating : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string schemeAttribute  = source.GetAttribute("scheme", string.Empty);
+            string schemeAttribute = source.GetAttribute("scheme", string.Empty);
             if (!string.IsNullOrEmpty(schemeAttribute))
             {
                 if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                 {
                     this.Scheme = scheme;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content    = source.Value;
-            wasLoaded       = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -161,15 +161,15 @@ public class YahooMediaRating : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("rating", extension.XmlNamespace);
 
-        if(this.Scheme != null)
+        if (this.Scheme != null)
         {
             writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }
 
-        if(!string.IsNullOrEmpty(this.Content))
+        if (!string.IsNullOrEmpty(this.Content))
         {
             writer.WriteString(this.Content);
         }
@@ -187,14 +187,14 @@ public class YahooMediaRating : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -219,12 +219,12 @@ public class YahooMediaRating : IComparable
         {
             return 1;
         }
-        YahooMediaRating value  = obj as YahooMediaRating;
+        YahooMediaRating value = obj as YahooMediaRating;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }
@@ -255,7 +255,7 @@ public class YahooMediaRating : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

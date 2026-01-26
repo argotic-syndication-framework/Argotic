@@ -38,7 +38,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// <summary>
     /// Private member to hold a human-readable name for the person.
     /// </summary>
-    private string personConstructName              = string.Empty;
+    private string personConstructName = string.Empty;
     /// <summary>
     /// Private member to hold an IRI associated with the person.
     /// </summary>
@@ -46,7 +46,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// <summary>
     /// Private member to hold an e-mail address associated with the person.
     /// </summary>
-    private string personConstructEmailAddress      = string.Empty;
+    private string personConstructEmailAddress = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomPersonConstruct"/> class.
     /// </summary>
@@ -63,7 +63,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public AtomPersonConstruct(string name)
     {
-        this.Name   = name;
+        this.Name = name;
     }
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
@@ -223,10 +223,10 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -267,7 +267,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -283,36 +283,36 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
         if (AtomUtility.FillCommonObjectAttributes(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
-        XPathNavigator nameNavigator    = source.SelectSingleNode("atom:name", manager);
-        XPathNavigator uriNavigator     = source.SelectSingleNode("atom:uri", manager);
-        XPathNavigator emailNavigator   = source.SelectSingleNode("atom:email", manager);
+        XPathNavigator nameNavigator = source.SelectSingleNode("atom:name", manager);
+        XPathNavigator uriNavigator = source.SelectSingleNode("atom:uri", manager);
+        XPathNavigator emailNavigator = source.SelectSingleNode("atom:email", manager);
 
         if (nameNavigator != null)
         {
-            this.Name           = nameNavigator.Value;
-            wasLoaded           = true;
+            this.Name = nameNavigator.Value;
+            wasLoaded = true;
         }
 
         if (uriNavigator != null)
         {
             if (Uri.TryCreate(uriNavigator.Value, UriKind.RelativeOrAbsolute, out Uri uri))
             {
-                this.Uri        = uri;
-                wasLoaded       = true;
+                this.Uri = uri;
+                wasLoaded = true;
             }
         }
 
         if (emailNavigator != null)
         {
-            this.EmailAddress   = emailNavigator.Value;
-            wasLoaded           = true;
+            this.EmailAddress = emailNavigator.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -331,10 +331,10 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -358,12 +358,12 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
 
         writer.WriteElementString("name", AtomUtility.AtomNamespace, this.Name);
 
-        if(this.Uri != null)
+        if (this.Uri != null)
         {
             writer.WriteElementString("uri", AtomUtility.AtomNamespace, this.Uri.ToString());
         }
 
-        if(!string.IsNullOrEmpty(this.EmailAddress))
+        if (!string.IsNullOrEmpty(this.EmailAddress))
         {
             writer.WriteElementString("email", AtomUtility.AtomNamespace, this.EmailAddress);
         }
@@ -381,14 +381,14 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer, "PersonConstruct");
         }
@@ -412,15 +412,15 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
         {
             return 1;
         }
-        AtomPersonConstruct value  = obj as AtomPersonConstruct;
+        AtomPersonConstruct value = obj as AtomPersonConstruct;
 
         if (value != null)
         {
-            int result  = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -451,7 +451,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

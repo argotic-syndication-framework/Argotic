@@ -25,19 +25,19 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <summary>
     /// Private member to hold the title of the web log entity.
     /// </summary>
-    private BlogMLTextConstruct commonObjectBaseTitle           = new BlogMLTextConstruct();
+    private BlogMLTextConstruct commonObjectBaseTitle = new BlogMLTextConstruct();
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
-    private string commonObjectBaseId                           = string.Empty;
+    private string commonObjectBaseId = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the web log entity information was created.
     /// </summary>
-    private DateTime commonObjectBaseCreatedOn                  = DateTime.MinValue;
+    private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold a date-time indicating when the web log entity information was last modified.
     /// </summary>
-    private DateTime commonObjectBaseLastModifiedOn             = DateTime.MinValue;
+    private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold a value indicating the web log entity approval status.
     /// </summary>
@@ -49,7 +49,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <summary>
     /// Private member to hold the textual content of the post.
     /// </summary>
-    private BlogMLTextConstruct postContent                     = new BlogMLTextConstruct();
+    private BlogMLTextConstruct postContent = new BlogMLTextConstruct();
     /// <summary>
     /// Private member to hold the name of the post.
     /// </summary>
@@ -85,11 +85,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <summary>
     /// Private member to hold the type of web log entry the post represents.
     /// </summary>
-    private BlogMLPostType postType                             = BlogMLPostType.None;
+    private BlogMLPostType postType = BlogMLPostType.None;
     /// <summary>
     /// Private member to hold views of the post.
     /// </summary>
-    private string postViews                                    = string.Empty;
+    private string postViews = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLPost"/> class.
     /// </summary>
@@ -153,7 +153,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 commonObjectBaseId = string.Empty;
             }
@@ -475,7 +475,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<BlogMLAttachment> source, Collection<BlogMLAttachment> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -483,7 +483,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -519,7 +519,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<BlogMLAuthor> source, Collection<BlogMLAuthor> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -527,7 +527,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -563,7 +563,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<BlogMLComment> source, Collection<BlogMLComment> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -571,7 +571,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -607,7 +607,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<BlogMLTrackback> source, Collection<BlogMLTrackback> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -615,7 +615,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -654,13 +654,13 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
                 if (postType == type)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -694,8 +694,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             if (fieldInfo.FieldType == typeof(BlogMLPostType))
             {
-                BlogMLPostType type      = (BlogMLPostType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                BlogMLPostType type = (BlogMLPostType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -703,7 +703,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
                     if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        postType    = type;
+                        postType = type;
                         break;
                     }
                 }
@@ -720,10 +720,10 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -764,7 +764,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -780,25 +780,25 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
         if (BlogMLUtility.FillCommonObject(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
             string postUrlAttribute = source.GetAttribute("post-url", string.Empty);
-            string typeAttribute    = source.GetAttribute("type", string.Empty);
-            string viewsAttribute   = source.GetAttribute("views", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
+            string viewsAttribute = source.GetAttribute("views", string.Empty);
 
             if (!string.IsNullOrEmpty(postUrlAttribute))
             {
                 if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
-                    this.Url    = url;
-                    wasLoaded   = true;
+                    this.Url = url;
+                    wasLoaded = true;
                 }
             }
 
@@ -807,41 +807,41 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 BlogMLPostType type = BlogMLPost.PostTypeByName(typeAttribute);
                 if (type != BlogMLPostType.None)
                 {
-                    this.PostType   = type;
-                    wasLoaded       = true;
+                    this.PostType = type;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(viewsAttribute))
             {
-                this.Views  = viewsAttribute;
-                wasLoaded   = true;
+                this.Views = viewsAttribute;
+                wasLoaded = true;
             }
         }
 
         if (source.HasChildren)
         {
-            XPathNavigator contentNavigator     = source.SelectSingleNode("blog:content", manager);
-            XPathNavigator postNameNavigator    = source.SelectSingleNode("blog:post-name", manager);
-            XPathNavigator excerptNavigator     = source.SelectSingleNode("blog:excerpt", manager);
+            XPathNavigator contentNavigator = source.SelectSingleNode("blog:content", manager);
+            XPathNavigator postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
+            XPathNavigator excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
 
             if (contentNavigator != null)
             {
                 BlogMLTextConstruct content = new BlogMLTextConstruct();
                 if (content.Load(contentNavigator))
                 {
-                    this.Content    = content;
-                    wasLoaded       = true;
+                    this.Content = content;
+                    wasLoaded = true;
                 }
             }
 
             if (postNameNavigator != null)
             {
-                BlogMLTextConstruct name    = new BlogMLTextConstruct();
+                BlogMLTextConstruct name = new BlogMLTextConstruct();
                 if (name.Load(postNameNavigator))
                 {
-                    this.Name   = name;
-                    wasLoaded   = true;
+                    this.Name = name;
+                    wasLoaded = true;
                 }
             }
 
@@ -850,14 +850,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 BlogMLTextConstruct excerpt = new BlogMLTextConstruct();
                 if (excerpt.Load(excerptNavigator))
                 {
-                    this.Excerpt    = excerpt;
-                    wasLoaded       = true;
+                    this.Excerpt = excerpt;
+                    wasLoaded = true;
                 }
             }
 
             if (BlogMLPost.FillPostCollections(this, source, manager))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
@@ -877,26 +877,26 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(source.NameTable);
         if (BlogMLUtility.FillCommonObject(this, source, settings))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
             string postUrlAttribute = source.GetAttribute("post-url", string.Empty);
-            string typeAttribute    = source.GetAttribute("type", string.Empty);
-            string viewsAttribute   = source.GetAttribute("views", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
+            string viewsAttribute = source.GetAttribute("views", string.Empty);
 
             if (!string.IsNullOrEmpty(postUrlAttribute))
             {
                 if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
-                    this.Url    = url;
-                    wasLoaded   = true;
+                    this.Url = url;
+                    wasLoaded = true;
                 }
             }
 
@@ -905,41 +905,41 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 BlogMLPostType type = BlogMLPost.PostTypeByName(typeAttribute);
                 if (type != BlogMLPostType.None)
                 {
-                    this.PostType   = type;
-                    wasLoaded       = true;
+                    this.PostType = type;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(viewsAttribute))
             {
-                this.Views  = viewsAttribute;
-                wasLoaded   = true;
+                this.Views = viewsAttribute;
+                wasLoaded = true;
             }
         }
 
         if (source.HasChildren)
         {
-            XPathNavigator contentNavigator     = source.SelectSingleNode("blog:content", manager);
-            XPathNavigator postNameNavigator    = source.SelectSingleNode("blog:post-name", manager);
-            XPathNavigator excerptNavigator     = source.SelectSingleNode("blog:excerpt", manager);
+            XPathNavigator contentNavigator = source.SelectSingleNode("blog:content", manager);
+            XPathNavigator postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
+            XPathNavigator excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
 
             if (contentNavigator != null)
             {
                 BlogMLTextConstruct content = new BlogMLTextConstruct();
                 if (content.Load(contentNavigator, settings))
                 {
-                    this.Content    = content;
-                    wasLoaded       = true;
+                    this.Content = content;
+                    wasLoaded = true;
                 }
             }
 
             if (postNameNavigator != null)
             {
-                BlogMLTextConstruct name    = new BlogMLTextConstruct();
+                BlogMLTextConstruct name = new BlogMLTextConstruct();
                 if (name.Load(postNameNavigator, settings))
                 {
-                    this.Name   = name;
-                    wasLoaded   = true;
+                    this.Name = name;
+                    wasLoaded = true;
                 }
             }
 
@@ -948,14 +948,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 BlogMLTextConstruct excerpt = new BlogMLTextConstruct();
                 if (excerpt.Load(excerptNavigator, settings))
                 {
-                    this.Excerpt    = excerpt;
-                    wasLoaded       = true;
+                    this.Excerpt = excerpt;
+                    wasLoaded = true;
                 }
             }
 
             if (BlogMLPost.FillPostCollections(this, source, manager, settings))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
@@ -975,7 +975,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         writer.WriteStartElement("post", BlogMLUtility.BlogMLNamespace);
         BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
-        if(this.Url != null)
+        if (this.Url != null)
         {
             writer.WriteAttributeString("post-url", this.Url.ToString());
         }
@@ -996,7 +996,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         this.Content.WriteTo(writer, "content");
 
-        if(this.Name != null)
+        if (this.Name != null)
         {
             this.Name.WriteTo(writer, "post-name");
         }
@@ -1006,10 +1006,10 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
             this.Excerpt.WriteTo(writer, "excerpt");
         }
 
-        if(this.Categories.Count > 0)
+        if (this.Categories.Count > 0)
         {
             writer.WriteStartElement("categories", BlogMLUtility.BlogMLNamespace);
-            foreach(string category in this.Categories)
+            foreach (string category in this.Categories)
             {
                 writer.WriteStartElement("category", BlogMLUtility.BlogMLNamespace);
                 writer.WriteAttributeString("ref", category);
@@ -1077,25 +1077,25 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(post, "post");
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        XPathNodeIterator categoriesIterator    = source.Select("blog:categories/blog:category", manager);
-        XPathNodeIterator commentsIterator      = source.Select("blog:comments/blog:comment", manager);
-        XPathNodeIterator trackbacksIterator    = source.Select("blog:trackbacks/blog:trackback", manager);
-        XPathNodeIterator attachmentsIterator   = source.Select("blog:attachments/blog:attachment", manager);
-        XPathNodeIterator authorsIterator       = source.Select("blog:authors/blog:author", manager);
+        XPathNodeIterator categoriesIterator = source.Select("blog:categories/blog:category", manager);
+        XPathNodeIterator commentsIterator = source.Select("blog:comments/blog:comment", manager);
+        XPathNodeIterator trackbacksIterator = source.Select("blog:trackbacks/blog:trackback", manager);
+        XPathNodeIterator attachmentsIterator = source.Select("blog:attachments/blog:attachment", manager);
+        XPathNodeIterator authorsIterator = source.Select("blog:authors/blog:author", manager);
 
         if (categoriesIterator is { Count: > 0 })
         {
             while (categoriesIterator.MoveNext())
             {
-                string referenceId  = categoriesIterator.Current.GetAttribute("ref", string.Empty);
+                string referenceId = categoriesIterator.Current.GetAttribute("ref", string.Empty);
                 if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Categories.Add(referenceId);
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1104,11 +1104,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (commentsIterator.MoveNext())
             {
-                BlogMLComment comment   = new BlogMLComment();
+                BlogMLComment comment = new BlogMLComment();
                 if (comment.Load(commentsIterator.Current))
                 {
                     post.Comments.Add(comment);
-                    wasLoaded           = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1117,11 +1117,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (trackbacksIterator.MoveNext())
             {
-                BlogMLTrackback trackback   = new BlogMLTrackback();
+                BlogMLTrackback trackback = new BlogMLTrackback();
                 if (trackback.Load(trackbacksIterator.Current))
                 {
                     post.Trackbacks.Add(trackback);
-                    wasLoaded               = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1134,7 +1134,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 if (attachment.Load(attachmentsIterator.Current))
                 {
                     post.Attachments.Add(attachment);
-                    wasLoaded               = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1143,11 +1143,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (authorsIterator.MoveNext())
             {
-                string referenceId  = authorsIterator.Current.GetAttribute("ref", string.Empty);
+                string referenceId = authorsIterator.Current.GetAttribute("ref", string.Empty);
                 if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Authors.Add(referenceId);
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1171,26 +1171,26 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(post, "post");
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
         Guard.ArgumentNotNull(settings, "settings");
-        XPathNodeIterator categoriesIterator    = source.Select("blog:categories/blog:category", manager);
-        XPathNodeIterator commentsIterator      = source.Select("blog:comments/blog:comment", manager);
-        XPathNodeIterator trackbacksIterator    = source.Select("blog:trackbacks/blog:trackback", manager);
-        XPathNodeIterator attachmentsIterator   = source.Select("blog:attachments/blog:attachment", manager);
-        XPathNodeIterator authorsIterator       = source.Select("blog:authors/blog:author", manager);
+        XPathNodeIterator categoriesIterator = source.Select("blog:categories/blog:category", manager);
+        XPathNodeIterator commentsIterator = source.Select("blog:comments/blog:comment", manager);
+        XPathNodeIterator trackbacksIterator = source.Select("blog:trackbacks/blog:trackback", manager);
+        XPathNodeIterator attachmentsIterator = source.Select("blog:attachments/blog:attachment", manager);
+        XPathNodeIterator authorsIterator = source.Select("blog:authors/blog:author", manager);
 
         if (categoriesIterator is { Count: > 0 })
         {
             while (categoriesIterator.MoveNext())
             {
-                string referenceId  = categoriesIterator.Current.GetAttribute("ref", string.Empty);
+                string referenceId = categoriesIterator.Current.GetAttribute("ref", string.Empty);
                 if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Categories.Add(referenceId);
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1199,11 +1199,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (commentsIterator.MoveNext())
             {
-                BlogMLComment comment   = new BlogMLComment();
+                BlogMLComment comment = new BlogMLComment();
                 if (comment.Load(commentsIterator.Current, settings))
                 {
                     post.Comments.Add(comment);
-                    wasLoaded           = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1212,11 +1212,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (trackbacksIterator.MoveNext())
             {
-                BlogMLTrackback trackback   = new BlogMLTrackback();
+                BlogMLTrackback trackback = new BlogMLTrackback();
                 if (trackback.Load(trackbacksIterator.Current, settings))
                 {
                     post.Trackbacks.Add(trackback);
-                    wasLoaded               = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1229,7 +1229,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 if (attachment.Load(attachmentsIterator.Current, settings))
                 {
                     post.Attachments.Add(attachment);
-                    wasLoaded               = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1238,11 +1238,11 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (authorsIterator.MoveNext())
             {
-                string referenceId  = authorsIterator.Current.GetAttribute("ref", string.Empty);
+                string referenceId = authorsIterator.Current.GetAttribute("ref", string.Empty);
                 if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Authors.Add(referenceId);
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -1259,14 +1259,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -1290,40 +1290,40 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             return 1;
         }
-        BlogMLPost value  = obj as BlogMLPost;
+        BlogMLPost value = obj as BlogMLPost;
 
         if (value != null)
         {
-            int result  = BlogMLPost.CompareSequence(this.Attachments, value.Attachments);
-            result      = result | ComparisonUtility.CompareSequence(this.Authors, value.Authors, StringComparison.OrdinalIgnoreCase);
-            result      = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
-            result      = result | BlogMLPost.CompareSequence(this.Comments, value.Comments);
-            result      = result | this.Content.CompareTo(value.Content);
+            int result = BlogMLPost.CompareSequence(this.Attachments, value.Attachments);
+            result = result | ComparisonUtility.CompareSequence(this.Authors, value.Authors, StringComparison.OrdinalIgnoreCase);
+            result = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
+            result = result | BlogMLPost.CompareSequence(this.Comments, value.Comments);
+            result = result | this.Content.CompareTo(value.Content);
 
             if (this.Excerpt != null)
             {
-                result  = result | this.Excerpt.CompareTo(value.Excerpt);
+                result = result | this.Excerpt.CompareTo(value.Excerpt);
             }
             else if (value.Excerpt != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             if (this.Name != null)
             {
-                result  = result | this.Name.CompareTo(value.Name);
+                result = result | this.Name.CompareTo(value.Name);
             }
             else if (value.Name != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
-            result      = result | this.PostType.CompareTo(value.PostType);
-            result      = result | BlogMLPost.CompareSequence(this.Trackbacks, value.Trackbacks);
-            result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
+            result = result | this.PostType.CompareTo(value.PostType);
+            result = result | BlogMLPost.CompareSequence(this.Trackbacks, value.Trackbacks);
+            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | BlogMLUtility.CompareCommonObjects(this, value);
+            result = result | BlogMLUtility.CompareCommonObjects(this, value);
 
             return result;
         }
@@ -1354,7 +1354,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

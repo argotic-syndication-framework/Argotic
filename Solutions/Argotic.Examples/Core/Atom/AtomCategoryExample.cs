@@ -16,7 +16,7 @@ public static class AtomCategoryExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed
+        AtomFeed feed = new AtomFeed
         {
             Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
             Title = new AtomTextConstruct("Example Feed"),
@@ -40,7 +40,7 @@ public static class AtomCategoryExample
         };
 
         //  Categorize the feed entry
-        AtomCategory entryCategory  = new AtomCategory
+        AtomCategory entryCategory = new AtomCategory
         {
             Label = "Baseball",
             Scheme = new Uri("http://example.org/scheme/category"),

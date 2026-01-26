@@ -46,7 +46,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     /// <summary>
     /// Private member to hold a human-readable name for the generating agent.
     /// </summary>
-    private string generatorText    = string.Empty;
+    private string generatorText = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomGenerator"/> class.
@@ -63,7 +63,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public AtomGenerator(string content)
     {
-        this.Content    = content;
+        this.Content = content;
     }
 
     /// <summary>
@@ -205,7 +205,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 generatorVersion = string.Empty;
             }
@@ -224,12 +224,12 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
 
         Guard.ArgumentNotNull(extension, "extension");
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -273,7 +273,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -290,40 +290,40 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
         if (AtomUtility.FillCommonObjectAttributes(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string uriAttribute     = source.GetAttribute("uri", string.Empty);
+            string uriAttribute = source.GetAttribute("uri", string.Empty);
             string versionAttribute = source.GetAttribute("version", string.Empty);
 
             if (!string.IsNullOrEmpty(uriAttribute))
             {
                 if (Uri.TryCreate(uriAttribute, UriKind.RelativeOrAbsolute, out Uri uri))
                 {
-                    this.Uri    = uri;
-                    wasLoaded   = true;
+                    this.Uri = uri;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(versionAttribute))
             {
-                this.Version    = versionAttribute;
-                wasLoaded       = true;
+                this.Version = versionAttribute;
+                wasLoaded = true;
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content        = source.Value;
-            wasLoaded           = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -342,12 +342,12 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
 
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
 
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -367,7 +367,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
         writer.WriteStartElement("generator", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if(this.Uri != null)
+        if (this.Uri != null)
         {
             writer.WriteAttributeString("uri", this.Uri.ToString());
         }
@@ -394,14 +394,14 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -427,15 +427,15 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
             return 1;
         }
 
-        AtomGenerator value  = obj as AtomGenerator;
+        AtomGenerator value = obj as AtomGenerator;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Version, value.Version, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Version, value.Version, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -466,7 +466,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

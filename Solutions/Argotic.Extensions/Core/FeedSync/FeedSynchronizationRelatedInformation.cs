@@ -25,11 +25,11 @@ public class FeedSynchronizationRelatedInformation : IComparable
     /// <summary>
     /// Private member to hold the name or description of the related feed.
     /// </summary>
-    private string relatedInformationTitle                                      = string.Empty;
+    private string relatedInformationTitle = string.Empty;
     /// <summary>
     /// Private member to hold the type of the related feed.
     /// </summary>
-    private FeedSynchronizationRelatedInformationType relatedInformationType    = FeedSynchronizationRelatedInformationType.None;
+    private FeedSynchronizationRelatedInformationType relatedInformationType = FeedSynchronizationRelatedInformationType.None;
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationRelatedInformation"/> class.
     /// </summary>
@@ -46,8 +46,8 @@ public class FeedSynchronizationRelatedInformation : IComparable
     /// <exception cref="ArgumentException">The <paramref name="type"/> is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
     public FeedSynchronizationRelatedInformation(Uri link, FeedSynchronizationRelatedInformationType type)
     {
-        this.Link           = link;
-        this.RelationType   = type;
+        this.Link = link;
+        this.RelationType = type;
     }
 
     /// <summary>
@@ -60,7 +60,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
     /// <exception cref="ArgumentException">The <paramref name="type"/> is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
     public FeedSynchronizationRelatedInformation(Uri link, FeedSynchronizationRelatedInformationType type, string title) : this(link, type)
     {
-        this.Title  = title;
+        this.Title = title;
     }
     /// <summary>
     /// Gets or sets the URI for this related feed.
@@ -156,17 +156,17 @@ public class FeedSynchronizationRelatedInformation : IComparable
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationRelatedInformationType))
             {
-                FeedSynchronizationRelatedInformationType relationType  = (FeedSynchronizationRelatedInformationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                FeedSynchronizationRelatedInformationType relationType = (FeedSynchronizationRelatedInformationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (relationType == type)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -186,14 +186,14 @@ public class FeedSynchronizationRelatedInformation : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static FeedSynchronizationRelatedInformationType RelationTypeByName(string name)
     {
-        FeedSynchronizationRelatedInformationType relationType  = FeedSynchronizationRelatedInformationType.None;
+        FeedSynchronizationRelatedInformationType relationType = FeedSynchronizationRelatedInformationType.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationRelatedInformationType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationRelatedInformationType))
             {
-                FeedSynchronizationRelatedInformationType type  = (FeedSynchronizationRelatedInformationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes                       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                FeedSynchronizationRelatedInformationType type = (FeedSynchronizationRelatedInformationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -201,7 +201,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
 
                     if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        relationType    = type;
+                        relationType = type;
                         break;
                     }
                 }
@@ -222,36 +222,36 @@ public class FeedSynchronizationRelatedInformation : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string linkAttribute    = source.GetAttribute("link", string.Empty);
-            string titleAttribute   = source.GetAttribute("title", string.Empty);
-            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string linkAttribute = source.GetAttribute("link", string.Empty);
+            string titleAttribute = source.GetAttribute("title", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
 
             if (!string.IsNullOrEmpty(linkAttribute))
             {
                 if (Uri.TryCreate(linkAttribute, UriKind.Absolute, out Uri link))
                 {
-                    this.Link   = link;
-                    wasLoaded   = true;
+                    this.Link = link;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(titleAttribute))
             {
-                this.Title  = titleAttribute;
-                wasLoaded   = true;
+                this.Title = titleAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(typeAttribute))
             {
-                FeedSynchronizationRelatedInformationType type  = FeedSynchronizationRelatedInformation.RelationTypeByName(typeAttribute);
+                FeedSynchronizationRelatedInformationType type = FeedSynchronizationRelatedInformation.RelationTypeByName(typeAttribute);
                 if (type != FeedSynchronizationRelatedInformationType.None)
                 {
-                    this.RelationType   = type;
-                    wasLoaded           = true;
+                    this.RelationType = type;
+                    wasLoaded = true;
                 }
             }
         }
@@ -267,11 +267,11 @@ public class FeedSynchronizationRelatedInformation : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        FeedSynchronizationSyndicationExtension extension   = new FeedSynchronizationSyndicationExtension();
+        FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
         writer.WriteStartElement("related", extension.XmlNamespace);
 
         writer.WriteAttributeString("link", extension.XmlNamespace, this.Link != null ? this.Link.ToString() : string.Empty);
-        if(!string.IsNullOrEmpty(this.Title))
+        if (!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteAttributeString("title", extension.XmlNamespace, this.Title);
         }
@@ -290,14 +290,14 @@ public class FeedSynchronizationRelatedInformation : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -322,13 +322,13 @@ public class FeedSynchronizationRelatedInformation : IComparable
         {
             return 1;
         }
-        FeedSynchronizationRelatedInformation value  = obj as FeedSynchronizationRelatedInformation;
+        FeedSynchronizationRelatedInformation value = obj as FeedSynchronizationRelatedInformation;
 
         if (value != null)
         {
-            int result  = Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.RelationType.CompareTo(value.RelationType);
+            int result = Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result = result | this.RelationType.CompareTo(value.RelationType);
 
             return result;
         }
@@ -359,7 +359,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

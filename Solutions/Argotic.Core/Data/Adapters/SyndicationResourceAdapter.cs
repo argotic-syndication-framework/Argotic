@@ -19,7 +19,7 @@ public class SyndicationResourceAdapter
     /// <summary>
     /// Private member to hold the XPathNavigator used to configure the load of a syndication resource.
     /// </summary>
-    private readonly SyndicationResourceLoadSettings adapterSettings  = new SyndicationResourceLoadSettings();
+    private readonly SyndicationResourceLoadSettings adapterSettings = new SyndicationResourceLoadSettings();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -33,8 +33,8 @@ public class SyndicationResourceAdapter
         Guard.ArgumentNotNull(navigator, "navigator");
         Guard.ArgumentNotNull(settings, "settings");
 
-        adapterNavigator    = navigator;
-        adapterSettings     = settings;
+        adapterNavigator = navigator;
+        adapterSettings = settings;
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ public class SyndicationResourceAdapter
             throw new ArgumentException(string.Format(null, "The specified syndication content format of {0} is invalid.", format), nameof(format));
         }
 
-        SyndicationResourceMetadata resourceMetadata    = new SyndicationResourceMetadata(this.Navigator);
+        SyndicationResourceMetadata resourceMetadata = new SyndicationResourceMetadata(this.Navigator);
 
         if (format != resourceMetadata.Format)
         {
@@ -140,11 +140,11 @@ public class SyndicationResourceAdapter
         Guard.ArgumentNotNull(resource, "resource");
         Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-        ApmlDocument apmlDocument   = resource as ApmlDocument;
+        ApmlDocument apmlDocument = resource as ApmlDocument;
 
         if (resourceMetadata.Version == new Version("0.6"))
         {
-            Apml06SyndicationResourceAdapter apml06Adapter  = new Apml06SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Apml06SyndicationResourceAdapter apml06Adapter = new Apml06SyndicationResourceAdapter(this.Navigator, this.Settings);
             apml06Adapter.Fill(apmlDocument);
         }
     }
@@ -161,12 +161,12 @@ public class SyndicationResourceAdapter
         Guard.ArgumentNotNull(resource, "resource");
         Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-        AtomFeed atomFeed   = resource as AtomFeed;
+        AtomFeed atomFeed = resource as AtomFeed;
         AtomEntry atomEntry = resource as AtomEntry;
 
         if (resourceMetadata.Version == new Version("1.0"))
         {
-            Atom10SyndicationResourceAdapter atom10Adapter  = new Atom10SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Atom10SyndicationResourceAdapter atom10Adapter = new Atom10SyndicationResourceAdapter(this.Navigator, this.Settings);
             if (atomFeed != null)
             {
                 atom10Adapter.Fill(atomFeed);
@@ -179,7 +179,7 @@ public class SyndicationResourceAdapter
 
         if (resourceMetadata.Version == new Version("0.3"))
         {
-            Atom03SyndicationResourceAdapter atom03Adapter  = new Atom03SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Atom03SyndicationResourceAdapter atom03Adapter = new Atom03SyndicationResourceAdapter(this.Navigator, this.Settings);
             if (atomFeed != null)
             {
                 atom03Adapter.Fill(atomFeed);
@@ -203,12 +203,12 @@ public class SyndicationResourceAdapter
         Guard.ArgumentNotNull(resource, "resource");
         Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-        AtomCategoryDocument categoryDocument   = resource as AtomCategoryDocument;
-        AtomServiceDocument serviceDocument     = resource as AtomServiceDocument;
+        AtomCategoryDocument categoryDocument = resource as AtomCategoryDocument;
+        AtomServiceDocument serviceDocument = resource as AtomServiceDocument;
 
         if (resourceMetadata.Version == new Version("1.0"))
         {
-            AtomPublishing10SyndicationResourceAdapter atomPublishing10Adapter  = new AtomPublishing10SyndicationResourceAdapter(this.Navigator, this.Settings);
+            AtomPublishing10SyndicationResourceAdapter atomPublishing10Adapter = new AtomPublishing10SyndicationResourceAdapter(this.Navigator, this.Settings);
             if (categoryDocument != null)
             {
                 atomPublishing10Adapter.Fill(categoryDocument);
@@ -232,8 +232,8 @@ public class SyndicationResourceAdapter
         Guard.ArgumentNotNull(resource, "resource");
         Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-        BlogMLDocument blogMLDocument                       = resource as BlogMLDocument;
-        BlogML20SyndicationResourceAdapter blogML20Adapter  = new BlogML20SyndicationResourceAdapter(this.Navigator, this.Settings);
+        BlogMLDocument blogMLDocument = resource as BlogMLDocument;
+        BlogML20SyndicationResourceAdapter blogML20Adapter = new BlogML20SyndicationResourceAdapter(this.Navigator, this.Settings);
 
         if (resourceMetadata.Version == new Version("2.0"))
         {
@@ -253,8 +253,8 @@ public class SyndicationResourceAdapter
         Guard.ArgumentNotNull(resource, "resource");
         Guard.ArgumentNotNull(resourceMetadata, "resourceMetadata");
 
-        OpmlDocument opmlDocument                       = resource as OpmlDocument;
-        Opml20SyndicationResourceAdapter opml20Adapter  = new Opml20SyndicationResourceAdapter(this.Navigator, this.Settings);
+        OpmlDocument opmlDocument = resource as OpmlDocument;
+        Opml20SyndicationResourceAdapter opml20Adapter = new Opml20SyndicationResourceAdapter(this.Navigator, this.Settings);
 
         if (resourceMetadata.Version == new Version("2.0"))
         {
@@ -288,13 +288,13 @@ public class SyndicationResourceAdapter
 
         if (resourceMetadata.Version == new Version("1.0"))
         {
-            Rsd10SyndicationResourceAdapter rsd10Adapter    = new Rsd10SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Rsd10SyndicationResourceAdapter rsd10Adapter = new Rsd10SyndicationResourceAdapter(this.Navigator, this.Settings);
             rsd10Adapter.Fill(rsdDocument);
         }
 
         if (resourceMetadata.Version == new Version("0.6"))
         {
-            Rsd06SyndicationResourceAdapter rsd06Adapter    = new Rsd06SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Rsd06SyndicationResourceAdapter rsd06Adapter = new Rsd06SyndicationResourceAdapter(this.Navigator, this.Settings);
             rsd06Adapter.Fill(rsdDocument);
         }
     }
@@ -315,31 +315,31 @@ public class SyndicationResourceAdapter
 
         if (resourceMetadata.Version == new Version("2.0"))
         {
-            Rss20SyndicationResourceAdapter rss20Adapter    = new Rss20SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Rss20SyndicationResourceAdapter rss20Adapter = new Rss20SyndicationResourceAdapter(this.Navigator, this.Settings);
             rss20Adapter.Fill(rssFeed);
         }
 
         if (resourceMetadata.Version == new Version("1.0"))
         {
-            Rss10SyndicationResourceAdapter rss10Adapter    = new Rss10SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Rss10SyndicationResourceAdapter rss10Adapter = new Rss10SyndicationResourceAdapter(this.Navigator, this.Settings);
             rss10Adapter.Fill(rssFeed);
         }
 
         if (resourceMetadata.Version == new Version("0.92"))
         {
-            Rss092SyndicationResourceAdapter rss092Adapter  = new Rss092SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Rss092SyndicationResourceAdapter rss092Adapter = new Rss092SyndicationResourceAdapter(this.Navigator, this.Settings);
             rss092Adapter.Fill(rssFeed);
         }
 
         if (resourceMetadata.Version == new Version("0.91"))
         {
-            Rss091SyndicationResourceAdapter rss091Adapter  = new Rss091SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Rss091SyndicationResourceAdapter rss091Adapter = new Rss091SyndicationResourceAdapter(this.Navigator, this.Settings);
             rss091Adapter.Fill(rssFeed);
         }
 
         if (resourceMetadata.Version == new Version("0.9"))
         {
-            Rss090SyndicationResourceAdapter rss090Adapter  = new Rss090SyndicationResourceAdapter(this.Navigator, this.Settings);
+            Rss090SyndicationResourceAdapter rss090Adapter = new Rss090SyndicationResourceAdapter(this.Navigator, this.Settings);
             rss090Adapter.Fill(rssFeed);
         }
     }

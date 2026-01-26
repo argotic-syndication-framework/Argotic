@@ -13,19 +13,19 @@ public class TrackbackDiscoveryMetadata : IComparable
     /// <summary>
     /// Private member to hold the XML namespace for Resource Description Framework (RDF) entities.
     /// </summary>
-    private const string RDF_NAMESPACE          = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+    private const string RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
     /// <summary>
     /// Private member to hold the XML namespace for Dublin Core entities.
     /// </summary>
-    private const string DUBLIN_CORE_NAMESPACE  = "http://purl.org/dc/elements/1.1/";
+    private const string DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/elements/1.1/";
     /// <summary>
     /// Private member to hold the XML namespace for Trackback entities.
     /// </summary>
-    private const string TRACKBACK_NAMESPACE    = "http://madskills.com/public/xml/rss/module/trackback/";
+    private const string TRACKBACK_NAMESPACE = "http://madskills.com/public/xml/rss/module/trackback/";
     /// <summary>
     /// Private member to hold the title of the discoverable web log entry.
     /// </summary>
-    private string trackbackDiscoveryTitle  = string.Empty;
+    private string trackbackDiscoveryTitle = string.Empty;
     /// <summary>
     /// Private member to hold Resource Description Framework entity reference.
     /// </summary>
@@ -128,7 +128,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 trackbackDiscoveryTitle = string.Empty;
             }
@@ -150,7 +150,7 @@ public class TrackbackDiscoveryMetadata : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     public bool Load(XPathNavigator navigator)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         XmlNamespaceManager manager = null;
 
         Guard.ArgumentNotNull(navigator, "navigator");
@@ -164,10 +164,10 @@ public class TrackbackDiscoveryMetadata : IComparable
 
         if (descriptionNavigator is { HasAttributes: true })
         {
-            string aboutAttribute       = descriptionNavigator.GetAttribute("about", RDF_NAMESPACE);
-            string identifierAttribute  = descriptionNavigator.GetAttribute("identifier", DUBLIN_CORE_NAMESPACE);
-            string titleAttribute       = descriptionNavigator.GetAttribute("title", DUBLIN_CORE_NAMESPACE);
-            string pingAttribute        = descriptionNavigator.GetAttribute("ping", TRACKBACK_NAMESPACE);
+            string aboutAttribute = descriptionNavigator.GetAttribute("about", RDF_NAMESPACE);
+            string identifierAttribute = descriptionNavigator.GetAttribute("identifier", DUBLIN_CORE_NAMESPACE);
+            string titleAttribute = descriptionNavigator.GetAttribute("title", DUBLIN_CORE_NAMESPACE);
+            string pingAttribute = descriptionNavigator.GetAttribute("ping", TRACKBACK_NAMESPACE);
 
             if (string.IsNullOrEmpty(pingAttribute))
             {
@@ -178,8 +178,8 @@ public class TrackbackDiscoveryMetadata : IComparable
             {
                 if (Uri.TryCreate(aboutAttribute, UriKind.RelativeOrAbsolute, out Uri about))
                 {
-                    this.About  = about;
-                    wasLoaded   = true;
+                    this.About = about;
+                    wasLoaded = true;
                 }
             }
 
@@ -188,22 +188,22 @@ public class TrackbackDiscoveryMetadata : IComparable
                 if (Uri.TryCreate(identifierAttribute, UriKind.RelativeOrAbsolute, out Uri identifier))
                 {
                     this.Identifier = identifier;
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(titleAttribute))
             {
-                this.Title  = titleAttribute;
-                wasLoaded   = true;
+                this.Title = titleAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(pingAttribute))
             {
                 if (Uri.TryCreate(pingAttribute, UriKind.RelativeOrAbsolute, out Uri ping))
                 {
-                    this.PingUrl    = ping;
-                    wasLoaded       = true;
+                    this.PingUrl = ping;
+                    wasLoaded = true;
                 }
             }
         }
@@ -244,21 +244,21 @@ public class TrackbackDiscoveryMetadata : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             Indent = true,
             OmitXmlDeclaration = true,
             ConformanceLevel = ConformanceLevel.Fragment
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using(StreamReader reader = new StreamReader(stream))
+        using (StreamReader reader = new StreamReader(stream))
         {
             return reader.ReadToEnd();
         }
@@ -277,14 +277,14 @@ public class TrackbackDiscoveryMetadata : IComparable
             return 1;
         }
 
-        TrackbackDiscoveryMetadata value  = obj as TrackbackDiscoveryMetadata;
+        TrackbackDiscoveryMetadata value = obj as TrackbackDiscoveryMetadata;
 
         if (value != null)
         {
-            int result  = Uri.Compare(this.About, value.About, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Identifier, value.Identifier, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.PingUrl, value.PingUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            int result = Uri.Compare(this.About, value.About, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Identifier, value.Identifier, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.PingUrl, value.PingUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -315,7 +315,7 @@ public class TrackbackDiscoveryMetadata : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

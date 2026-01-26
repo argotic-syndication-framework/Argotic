@@ -24,7 +24,7 @@ public class YahooMediaCopyright : IComparable
     /// <summary>
     /// Private member to hold the textual copyright notice.
     /// </summary>
-    private string copyrightText    = string.Empty;
+    private string copyrightText = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaCopyright"/> class.
@@ -39,7 +39,7 @@ public class YahooMediaCopyright : IComparable
     /// <param name="text">The human-readable copyright information.</param>
     public YahooMediaCopyright(string text)
     {
-        this.Text   = text;
+        this.Text = text;
     }
 
     /// <summary>
@@ -55,7 +55,7 @@ public class YahooMediaCopyright : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 copyrightText = string.Empty;
             }
@@ -93,25 +93,25 @@ public class YahooMediaCopyright : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
             string urlAttribute = source.GetAttribute("url", string.Empty);
             if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
-                    this.Url    = url;
-                    wasLoaded   = true;
+                    this.Url = url;
+                    wasLoaded = true;
                 }
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Text   = source.Value;
-            wasLoaded   = true;
+            this.Text = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -125,15 +125,15 @@ public class YahooMediaCopyright : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("copyright", extension.XmlNamespace);
 
-        if(this.Url != null)
+        if (this.Url != null)
         {
             writer.WriteAttributeString("url", this.Url.ToString());
         }
 
-        if(!string.IsNullOrEmpty(this.Text))
+        if (!string.IsNullOrEmpty(this.Text))
         {
             writer.WriteString(this.Text);
         }
@@ -151,14 +151,14 @@ public class YahooMediaCopyright : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -183,12 +183,12 @@ public class YahooMediaCopyright : IComparable
         {
             return 1;
         }
-        YahooMediaCopyright value  = obj as YahooMediaCopyright;
+        YahooMediaCopyright value = obj as YahooMediaCopyright;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -219,7 +219,7 @@ public class YahooMediaCopyright : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

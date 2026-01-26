@@ -46,7 +46,7 @@ public class XmlRpcResponse : IComparable
     {
         Guard.ArgumentNotNull(parameter, "parameter");
 
-        responseParameter   = parameter;
+        responseParameter = parameter;
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public class XmlRpcResponse : IComparable
     {
         Guard.ArgumentNotNull(fault, "fault");
 
-        responseFault   = fault;
+        responseFault = fault;
     }
 
     /// <summary>
@@ -69,12 +69,12 @@ public class XmlRpcResponse : IComparable
     public XmlRpcResponse(int faultCode, string faultMessage)
     {
         XmlRpcStructureValue faultStructure = new XmlRpcStructureValue();
-        XmlRpcStructureMember codeMember    = new XmlRpcStructureMember("faultCode", new XmlRpcScalarValue(faultCode));
-        XmlRpcStructureMember stringMember  = new XmlRpcStructureMember("faultString", new XmlRpcScalarValue(faultMessage));
+        XmlRpcStructureMember codeMember = new XmlRpcStructureMember("faultCode", new XmlRpcScalarValue(faultCode));
+        XmlRpcStructureMember stringMember = new XmlRpcStructureMember("faultString", new XmlRpcScalarValue(faultMessage));
         faultStructure.Members.Add(codeMember);
         faultStructure.Members.Add(stringMember);
 
-        responseFault   = faultStructure;
+        responseFault = faultStructure;
     }
 
     /// <summary>
@@ -99,7 +99,7 @@ public class XmlRpcResponse : IComparable
         }
 
         using Stream stream = response.GetResponseStream();
-        XmlReaderSettings settings              = new XmlReaderSettings
+        XmlReaderSettings settings = new XmlReaderSettings
         {
             ConformanceLevel = ConformanceLevel.Document,
             IgnoreComments = true,
@@ -109,10 +109,10 @@ public class XmlRpcResponse : IComparable
         };
 
         using XmlReader reader = XmlReader.Create(stream, settings);
-        XPathDocument document  = new XPathDocument(reader);
-        XPathNavigator source   = document.CreateNavigator();
+        XPathDocument document = new XPathDocument(reader);
+        XPathNavigator source = document.CreateNavigator();
 
-        XPathNavigator methodResponseNavigator  = source.SelectSingleNode("methodResponse");
+        XPathNavigator methodResponseNavigator = source.SelectSingleNode("methodResponse");
         if (methodResponseNavigator != null)
         {
             this.Load(methodResponseNavigator);
@@ -163,38 +163,38 @@ public class XmlRpcResponse : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
         if (source.HasChildren)
         {
-            XPathNavigator parametersNavigator  = source.SelectSingleNode("params");
-            XPathNavigator faultNavigator       = source.SelectSingleNode("fault");
+            XPathNavigator parametersNavigator = source.SelectSingleNode("params");
+            XPathNavigator faultNavigator = source.SelectSingleNode("fault");
 
             if (parametersNavigator != null)
             {
-                XPathNavigator valueNavigator   = parametersNavigator.SelectSingleNode("param/value");
+                XPathNavigator valueNavigator = parametersNavigator.SelectSingleNode("param/value");
                 if (valueNavigator != null)
                 {
                     if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue value))
                     {
-                        responseParameter   = value;
-                        wasLoaded           = true;
+                        responseParameter = value;
+                        wasLoaded = true;
                     }
                 }
             }
 
             if (faultNavigator != null)
             {
-                XPathNavigator structNavigator  = faultNavigator.SelectSingleNode("value");
+                XPathNavigator structNavigator = faultNavigator.SelectSingleNode("value");
                 if (structNavigator != null)
                 {
-                    XmlRpcStructureValue structure  = new XmlRpcStructureValue();
+                    XmlRpcStructureValue structure = new XmlRpcStructureValue();
                     if (structure.Load(structNavigator))
                     {
-                        responseFault   = structure;
-                        wasLoaded       = true;
+                        responseFault = structure;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -214,7 +214,7 @@ public class XmlRpcResponse : IComparable
 
         writer.WriteStartElement("methodResponse");
 
-        if(this.Parameter != null)
+        if (this.Parameter != null)
         {
             writer.WriteStartElement("params");
             writer.WriteStartElement("param");
@@ -243,14 +243,14 @@ public class XmlRpcResponse : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -276,42 +276,42 @@ public class XmlRpcResponse : IComparable
             return 1;
         }
 
-        XmlRpcResponse value  = obj as XmlRpcResponse;
+        XmlRpcResponse value = obj as XmlRpcResponse;
 
         if (value != null)
         {
-            int result  = 0;
+            int result = 0;
 
-            if(this.Fault != null)
+            if (this.Fault != null)
             {
                 if (value.Fault != null)
                 {
-                    result  = result | this.Fault.CompareTo(value.Fault);
+                    result = result | this.Fault.CompareTo(value.Fault);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
-            else if(value.Fault != null)
+            else if (value.Fault != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             if (this.Parameter != null)
             {
                 if (value.Parameter != null)
                 {
-                    result  = result | string.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
+                    result = result | string.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (value.Parameter != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             return result;
@@ -343,7 +343,7 @@ public class XmlRpcResponse : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

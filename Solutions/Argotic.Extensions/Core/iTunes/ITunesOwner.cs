@@ -16,11 +16,11 @@ public class ITunesOwner : IComparable
     /// <summary>
     /// Private member to hold the email address of the owner.
     /// </summary>
-    private string ownerEmailAddress    = string.Empty;
+    private string ownerEmailAddress = string.Empty;
     /// <summary>
     /// Private member to hold the name of the owner.
     /// </summary>
-    private string ownerName            = string.Empty;
+    private string ownerName = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesOwner"/> class.
     /// </summary>
@@ -36,8 +36,8 @@ public class ITunesOwner : IComparable
     /// <param name="name">The name of this owner.</param>
     public ITunesOwner(string emailAddress, string name)
     {
-        this.EmailAddress   = emailAddress;
-        this.Name           = name;
+        this.EmailAddress = emailAddress;
+        this.Name = name;
     }
     /// <summary>
     /// Gets or sets the email address of this owner.
@@ -52,7 +52,7 @@ public class ITunesOwner : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 ownerEmailAddress = string.Empty;
             }
@@ -97,25 +97,25 @@ public class ITunesOwner : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        ITunesSyndicationExtension extension    = new ITunesSyndicationExtension();
-        XmlNamespaceManager manager             = extension.CreateNamespaceManager(source);
+        ITunesSyndicationExtension extension = new ITunesSyndicationExtension();
+        XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
         {
-            XPathNavigator emailNavigator   = source.SelectSingleNode("itunes:email", manager);
-            XPathNavigator nameNavigator    = source.SelectSingleNode("itunes:name", manager);
+            XPathNavigator emailNavigator = source.SelectSingleNode("itunes:email", manager);
+            XPathNavigator nameNavigator = source.SelectSingleNode("itunes:name", manager);
 
             if (emailNavigator != null && !string.IsNullOrEmpty(emailNavigator.Value))
             {
-                this.EmailAddress   = emailNavigator.Value;
-                wasLoaded           = true;
+                this.EmailAddress = emailNavigator.Value;
+                wasLoaded = true;
             }
 
             if (nameNavigator != null && !string.IsNullOrEmpty(nameNavigator.Value))
             {
-                this.Name   = nameNavigator.Value;
-                wasLoaded   = true;
+                this.Name = nameNavigator.Value;
+                wasLoaded = true;
             }
         }
 
@@ -130,10 +130,10 @@ public class ITunesOwner : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        ITunesSyndicationExtension extension    = new ITunesSyndicationExtension();
+        ITunesSyndicationExtension extension = new ITunesSyndicationExtension();
         writer.WriteStartElement("owner", extension.XmlNamespace);
 
-        if(!string.IsNullOrEmpty(this.EmailAddress))
+        if (!string.IsNullOrEmpty(this.EmailAddress))
         {
             writer.WriteElementString("email", extension.XmlNamespace, this.EmailAddress);
         }
@@ -155,14 +155,14 @@ public class ITunesOwner : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -186,12 +186,12 @@ public class ITunesOwner : IComparable
         {
             return 1;
         }
-        ITunesOwner value  = obj as ITunesOwner;
+        ITunesOwner value = obj as ITunesOwner;
 
         if (value != null)
         {
-            int result  = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -222,7 +222,7 @@ public class ITunesOwner : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

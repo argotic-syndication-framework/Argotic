@@ -18,7 +18,7 @@ public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold instance of event with no event data.
     /// </summary>
-    private static readonly XmlRpcMessageSentEventArgs emptyEventArguments  = new XmlRpcMessageSentEventArgs();
+    private static readonly XmlRpcMessageSentEventArgs emptyEventArguments = new XmlRpcMessageSentEventArgs();
     /// <summary>
     /// Private member to hold the remote procedure call payload that was sent.
     /// </summary>
@@ -65,11 +65,11 @@ public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
         Guard.ArgumentNotNull(message, "message");
         Guard.ArgumentNotNull(response, "response");
 
-        eventHost           = host;
-        eventMessage        = message;
-        eventResponse       = response;
-        eventOptions        = new WebRequestOptions(credentials, proxy);
-        eventUserToken      = state;
+        eventHost = host;
+        eventMessage = message;
+        eventResponse = response;
+        eventOptions = new WebRequestOptions(credentials, proxy);
+        eventUserToken = state;
     }
 
     /// <summary>
@@ -89,11 +89,11 @@ public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
         Guard.ArgumentNotNull(message, "message");
         Guard.ArgumentNotNull(response, "response");
 
-        eventHost           = host;
-        eventMessage        = message;
-        eventResponse       = response;
-        eventOptions        = options ?? new WebRequestOptions();
-        eventUserToken      = state;
+        eventHost = host;
+        eventMessage = message;
+        eventResponse = response;
+        eventOptions = options ?? new WebRequestOptions();
+        eventUserToken = state;
     }
 
     /// <summary>
@@ -204,12 +204,12 @@ public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
     /// </remarks>
     public override string ToString()
     {
-        string host         = this.Host != null ? this.Host.ToString() : string.Empty;
-        string message      = this.Message != null ? this.Message.ToString() : string.Empty;
-        string response     = this.Response != null ? this.Response.ToString() : string.Empty;
-        string credentials  = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string proxy        = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string state        = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string host = this.Host != null ? this.Host.ToString() : string.Empty;
+        string message = this.Message != null ? this.Message.ToString() : string.Empty;
+        string response = this.Response != null ? this.Response.ToString() : string.Empty;
+        string credentials = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string proxy = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string state = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
         return string.Format(null, "[XmlRpcMessageSentEventArgs(Host = \"{0}\", Message = \"{1}\", Response = \"{2}\", Credentials = \"{3}\", Proxy = \"{4}\", State = \"{5}\")]", host, message, response, credentials, proxy, state);
     }
@@ -227,14 +227,14 @@ public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
             return 1;
         }
 
-        XmlRpcMessageSentEventArgs value  = obj as XmlRpcMessageSentEventArgs;
+        XmlRpcMessageSentEventArgs value = obj as XmlRpcMessageSentEventArgs;
 
         if (value != null)
         {
-            int result  = 0;
-            result      = result | this.Message.CompareTo(value.Message);
-            result      = result | this.Response.CompareTo(value.Response);
-            result      = result | Uri.Compare(this.Host, value.Host, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            int result = 0;
+            result = result | this.Message.CompareTo(value.Message);
+            result = result | this.Response.CompareTo(value.Response);
+            result = result | Uri.Compare(this.Host, value.Host, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -265,7 +265,7 @@ public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

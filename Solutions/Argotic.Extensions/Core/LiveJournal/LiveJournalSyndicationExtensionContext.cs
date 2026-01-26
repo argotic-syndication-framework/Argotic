@@ -14,7 +14,7 @@ public class LiveJournalSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the current music.
     /// </summary>
-    private string extensionMusic   = string.Empty;
+    private string extensionMusic = string.Empty;
     /// <summary>
     /// Private member to hold the current mood.
     /// </summary>
@@ -92,7 +92,7 @@ public class LiveJournalSyndicationExtensionContext
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 extensionMusic = string.Empty;
             }
@@ -153,57 +153,57 @@ public class LiveJournalSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator musicNavigator           = source.SelectSingleNode("lj:music", manager);
-            XPathNavigator moodNavigator            = source.SelectSingleNode("lj:mood", manager);
-            XPathNavigator securityNavigator        = source.SelectSingleNode("lj:security", manager);
-            XPathNavigator userPictureNavigator     = source.SelectSingleNode("lj:userpic", manager);
-            XPathNavigator preformattedNavigator    = source.SelectSingleNode("lj:preformatted", manager);
+            XPathNavigator musicNavigator = source.SelectSingleNode("lj:music", manager);
+            XPathNavigator moodNavigator = source.SelectSingleNode("lj:mood", manager);
+            XPathNavigator securityNavigator = source.SelectSingleNode("lj:security", manager);
+            XPathNavigator userPictureNavigator = source.SelectSingleNode("lj:userpic", manager);
+            XPathNavigator preformattedNavigator = source.SelectSingleNode("lj:preformatted", manager);
 
             if (musicNavigator != null && !string.IsNullOrEmpty(musicNavigator.Value))
             {
-                this.Music  = musicNavigator.Value;
-                wasLoaded   = true;
+                this.Music = musicNavigator.Value;
+                wasLoaded = true;
             }
 
             if (moodNavigator != null)
             {
-                LiveJournalMood mood    = new LiveJournalMood();
+                LiveJournalMood mood = new LiveJournalMood();
                 if (mood.Load(moodNavigator))
                 {
-                    this.Mood   = mood;
-                    wasLoaded   = true;
+                    this.Mood = mood;
+                    wasLoaded = true;
                 }
             }
 
             if (securityNavigator != null)
             {
-                LiveJournalSecurity security    = new LiveJournalSecurity();
+                LiveJournalSecurity security = new LiveJournalSecurity();
                 if (security.Load(securityNavigator))
                 {
-                    this.Security   = security;
-                    wasLoaded       = true;
+                    this.Security = security;
+                    wasLoaded = true;
                 }
             }
 
             if (userPictureNavigator != null)
             {
-                LiveJournalUserPicture userPicture  = new LiveJournalUserPicture();
+                LiveJournalUserPicture userPicture = new LiveJournalUserPicture();
                 if (userPicture.Load(userPictureNavigator))
                 {
-                    this.UserPicture    = userPicture;
-                    wasLoaded           = true;
+                    this.UserPicture = userPicture;
+                    wasLoaded = true;
                 }
             }
 
             if (preformattedNavigator != null)
             {
                 this.IsPreformatted = true;
-                wasLoaded           = true;
+                wasLoaded = true;
             }
         }
 
@@ -229,7 +229,7 @@ public class LiveJournalSyndicationExtensionContext
             writer.WriteEndElement();
         }
 
-        if(this.Mood != null)
+        if (this.Mood != null)
         {
             this.Mood.WriteTo(writer);
         }

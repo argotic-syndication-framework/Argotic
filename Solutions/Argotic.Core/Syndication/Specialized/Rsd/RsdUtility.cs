@@ -15,7 +15,7 @@ internal static class RsdUtility
     /// <summary>
     /// Private member to hold the Really Simple Discoverability (RSD) 1.0 namespace identifier.
     /// </summary>
-    private const string RSD_NAMESPACE  = "http://archipelago.phrasewise.com/rsd";
+    private const string RSD_NAMESPACE = "http://archipelago.phrasewise.com/rsd";
     /// <summary>
     /// Gets the XML namespace URI for the Really Simple Discoverability (RSD) 1.0 specification.
     /// </summary>
@@ -67,12 +67,12 @@ internal static class RsdUtility
         Guard.ArgumentNotNullOrEmptyString(xpath, "xpath");
         Guard.ArgumentNotNull(resolver, "resolver");
 
-        iterator    = source.Select(xpath, resolver);
+        iterator = source.Select(xpath, resolver);
 
         if (iterator is not { Count: > 0 })
         {
-            string safeXpath    = xpath.Replace("rsd:", string.Empty);
-            iterator            = source.Select(safeXpath, resolver);
+            string safeXpath = xpath.Replace("rsd:", string.Empty);
+            iterator = source.Select(safeXpath, resolver);
         }
 
         return iterator;
@@ -102,12 +102,12 @@ internal static class RsdUtility
         Guard.ArgumentNotNullOrEmptyString(xpath, "xpath");
         Guard.ArgumentNotNull(resolver, "resolver");
 
-        navigator   = source.SelectSingleNode(xpath, resolver);
+        navigator = source.SelectSingleNode(xpath, resolver);
 
         if (navigator == null)
         {
-            string safeXpath    = xpath.Replace("rsd:", string.Empty);
-            navigator           = source.SelectSingleNode(safeXpath, resolver);
+            string safeXpath = xpath.Replace("rsd:", string.Empty);
+            navigator = source.SelectSingleNode(safeXpath, resolver);
         }
 
         return navigator;

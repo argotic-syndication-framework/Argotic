@@ -31,7 +31,7 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the title of the source feed.
     /// </summary>
-    private string sourceTitle  = string.Empty;
+    private string sourceTitle = string.Empty;
     /// <summary>
     /// Private member to hold the URL of the source feed.
     /// </summary>
@@ -50,7 +50,7 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
     public RssSource(Uri url)
     {
-        this.Url    = url;
+        this.Url = url;
     }
 
     /// <summary>
@@ -61,7 +61,7 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
     public RssSource(Uri url, string title) : this(url)
     {
-        this.Title  = title;
+        this.Title = title;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -143,10 +143,10 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -187,7 +187,7 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -203,26 +203,26 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string urlAttribute     = source.GetAttribute("url", string.Empty);
+            string urlAttribute = source.GetAttribute("url", string.Empty);
 
             if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
-                    this.Url        = url;
-                    wasLoaded       = true;
+                    this.Url = url;
+                    wasLoaded = true;
                 }
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Title  = source.Value;
-            wasLoaded   = true;
+            this.Title = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -241,10 +241,10 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -263,7 +263,7 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
 
         writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
 
-        if(!string.IsNullOrEmpty(this.Title))
+        if (!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteValue(this.Title);
         }
@@ -281,14 +281,14 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -312,12 +312,12 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        RssSource value  = obj as RssSource;
+        RssSource value = obj as RssSource;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -348,7 +348,7 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

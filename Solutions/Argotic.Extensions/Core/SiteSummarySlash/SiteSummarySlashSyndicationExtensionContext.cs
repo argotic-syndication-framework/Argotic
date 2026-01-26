@@ -17,15 +17,15 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the section name.
     /// </summary>
-    private string extensionSection     = string.Empty;
+    private string extensionSection = string.Empty;
     /// <summary>
     /// Private member to hold the department name.
     /// </summary>
-    private string extensionDepartment  = string.Empty;
+    private string extensionDepartment = string.Empty;
     /// <summary>
     /// Private member to hold the number of comments.
     /// </summary>
-    private int extensionComments       = int.MinValue;
+    private int extensionComments = int.MinValue;
     /// <summary>
     /// Private member to hold the hit parade identifiers.
     /// </summary>
@@ -68,7 +68,7 @@ public class SiteSummarySlashSyndicationExtensionContext
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 extensionDepartment = string.Empty;
             }
@@ -132,34 +132,34 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator sectionNavigator     = source.SelectSingleNode("slash:section", manager);
-            XPathNavigator departmentNavigator  = source.SelectSingleNode("slash:department", manager);
-            XPathNavigator commentsNavigator    = source.SelectSingleNode("slash:comments", manager);
-            XPathNavigator hitParadeNavigator   = source.SelectSingleNode("slash:hit_parade", manager);
+            XPathNavigator sectionNavigator = source.SelectSingleNode("slash:section", manager);
+            XPathNavigator departmentNavigator = source.SelectSingleNode("slash:department", manager);
+            XPathNavigator commentsNavigator = source.SelectSingleNode("slash:comments", manager);
+            XPathNavigator hitParadeNavigator = source.SelectSingleNode("slash:hit_parade", manager);
 
             if (sectionNavigator != null && !string.IsNullOrEmpty(sectionNavigator.Value))
             {
-                this.Section    = sectionNavigator.Value;
-                wasLoaded       = true;
+                this.Section = sectionNavigator.Value;
+                wasLoaded = true;
             }
 
             if (departmentNavigator != null && !string.IsNullOrEmpty(departmentNavigator.Value))
             {
                 this.Department = departmentNavigator.Value;
-                wasLoaded       = true;
+                wasLoaded = true;
             }
 
             if (commentsNavigator != null)
             {
                 if (int.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int comments))
                 {
-                    this.Comments   = comments;
-                    wasLoaded       = true;
+                    this.Comments = comments;
+                    wasLoaded = true;
                 }
             }
 
@@ -167,15 +167,15 @@ public class SiteSummarySlashSyndicationExtensionContext
             {
                 if (hitParadeNavigator.Value.Contains(","))
                 {
-                    string[] identifiers    = hitParadeNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    string[] identifiers = hitParadeNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     if (identifiers is { Length: > 0 })
                     {
-                        foreach(string identifier in identifiers)
+                        foreach (string identifier in identifiers)
                         {
                             if (int.TryParse(identifier, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int paradeId))
                             {
                                 this.HitParade.Add(paradeId);
-                                wasLoaded   = true;
+                                wasLoaded = true;
                             }
                         }
                     }
@@ -185,7 +185,7 @@ public class SiteSummarySlashSyndicationExtensionContext
                     if (int.TryParse(hitParadeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hitParade))
                     {
                         this.HitParade.Add(hitParade);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -206,7 +206,7 @@ public class SiteSummarySlashSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(!string.IsNullOrEmpty(this.Section))
+        if (!string.IsNullOrEmpty(this.Section))
         {
             writer.WriteStartElement("section", xmlNamespace);
             writer.WriteCData(this.Section);
@@ -220,17 +220,17 @@ public class SiteSummarySlashSyndicationExtensionContext
             writer.WriteEndElement();
         }
 
-        if(this.Comments != int.MinValue)
+        if (this.Comments != int.MinValue)
         {
             writer.WriteElementString("comments", xmlNamespace, this.Comments.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        if(this.HitParade.Count > 0)
+        if (this.HitParade.Count > 0)
         {
             string[] hitParade = new string[this.HitParade.Count];
             for (int i = 0; i < this.HitParade.Count; i++)
             {
-                hitParade[i]    = this.HitParade[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
+                hitParade[i] = this.HitParade[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
             }
 
             writer.WriteElementString("hit_parade", xmlNamespace, string.Join(",", hitParade));

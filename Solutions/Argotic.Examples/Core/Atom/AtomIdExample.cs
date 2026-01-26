@@ -16,7 +16,7 @@ public static class AtomIdExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed
+        AtomFeed feed = new AtomFeed
         {
             //  Identifies the feed using a universally unique and permanent URI
             Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),

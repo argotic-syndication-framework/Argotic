@@ -31,7 +31,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the unique name of the profile.
     /// </summary>
-    private string profileName  = string.Empty;
+    private string profileName = string.Empty;
     /// <summary>
     /// Private member to hold the implicit concepts of the profile.
     /// </summary>
@@ -182,10 +182,10 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -227,7 +227,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -253,7 +253,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<ApmlConcept> source, Collection<ApmlConcept> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -261,7 +261,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -330,27 +330,27 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string nameAttribute    = source.GetAttribute("name", string.Empty);
+            string nameAttribute = source.GetAttribute("name", string.Empty);
             if (!string.IsNullOrEmpty(nameAttribute))
             {
-                this.Name   = nameAttribute;
-                wasLoaded   = true;
+                this.Name = nameAttribute;
+                wasLoaded = true;
             }
         }
 
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator implicitDataNavigator    = source.SelectSingleNode("apml:ImplicitData", manager);
-            XPathNavigator explicitDataNavigator    = source.SelectSingleNode("apml:ExplicitData", manager);
+            XPathNavigator implicitDataNavigator = source.SelectSingleNode("apml:ImplicitData", manager);
+            XPathNavigator explicitDataNavigator = source.SelectSingleNode("apml:ExplicitData", manager);
 
             if (implicitDataNavigator != null)
             {
-                XPathNodeIterator conceptsIterator  = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
+                XPathNodeIterator conceptsIterator = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                 if (conceptsIterator is { Count: > 0 })
                 {
                     while (conceptsIterator.MoveNext())
@@ -359,21 +359,21 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                         if (concept.Load(conceptsIterator.Current))
                         {
                             this.ImplicitConcepts.Add(concept);
-                            wasLoaded       = true;
+                            wasLoaded = true;
                         }
                     }
                 }
 
-                XPathNodeIterator sourcesIterator   = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
+                XPathNodeIterator sourcesIterator = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
                 if (sourcesIterator is { Count: > 0 })
                 {
                     while (sourcesIterator.MoveNext())
                     {
-                        ApmlSource attentionSource  = new ApmlSource();
+                        ApmlSource attentionSource = new ApmlSource();
                         if (attentionSource.Load(sourcesIterator.Current))
                         {
                             this.ImplicitSources.Add(attentionSource);
-                            wasLoaded               = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -381,7 +381,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
 
             if (explicitDataNavigator != null)
             {
-                XPathNodeIterator conceptsIterator  = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
+                XPathNodeIterator conceptsIterator = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                 if (conceptsIterator is { Count: > 0 })
                 {
                     while (conceptsIterator.MoveNext())
@@ -390,21 +390,21 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                         if (concept.Load(conceptsIterator.Current))
                         {
                             this.ExplicitConcepts.Add(concept);
-                            wasLoaded       = true;
+                            wasLoaded = true;
                         }
                     }
                 }
 
-                XPathNodeIterator sourcesIterator   = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
+                XPathNodeIterator sourcesIterator = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
                 if (sourcesIterator is { Count: > 0 })
                 {
                     while (sourcesIterator.MoveNext())
                     {
-                        ApmlSource attentionSource  = new ApmlSource();
+                        ApmlSource attentionSource = new ApmlSource();
                         if (attentionSource.Load(sourcesIterator.Current))
                         {
                             this.ExplicitSources.Add(attentionSource);
-                            wasLoaded               = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -427,28 +427,28 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string nameAttribute    = source.GetAttribute("name", string.Empty);
+            string nameAttribute = source.GetAttribute("name", string.Empty);
             if (!string.IsNullOrEmpty(nameAttribute))
             {
-                this.Name   = nameAttribute;
-                wasLoaded   = true;
+                this.Name = nameAttribute;
+                wasLoaded = true;
             }
         }
 
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator implicitDataNavigator    = source.SelectSingleNode("apml:ImplicitData", manager);
-            XPathNavigator explicitDataNavigator    = source.SelectSingleNode("apml:ExplicitData", manager);
+            XPathNavigator implicitDataNavigator = source.SelectSingleNode("apml:ImplicitData", manager);
+            XPathNavigator explicitDataNavigator = source.SelectSingleNode("apml:ExplicitData", manager);
 
             if (implicitDataNavigator != null)
             {
-                XPathNodeIterator conceptsIterator  = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
+                XPathNodeIterator conceptsIterator = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                 if (conceptsIterator is { Count: > 0 })
                 {
                     while (conceptsIterator.MoveNext())
@@ -457,21 +457,21 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                         if (concept.Load(conceptsIterator.Current, settings))
                         {
                             this.ImplicitConcepts.Add(concept);
-                            wasLoaded       = true;
+                            wasLoaded = true;
                         }
                     }
                 }
 
-                XPathNodeIterator sourcesIterator   = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
+                XPathNodeIterator sourcesIterator = implicitDataNavigator.Select("apml:Sources/apml:Source", manager);
                 if (sourcesIterator is { Count: > 0 })
                 {
                     while (sourcesIterator.MoveNext())
                     {
-                        ApmlSource attentionSource  = new ApmlSource();
+                        ApmlSource attentionSource = new ApmlSource();
                         if (attentionSource.Load(sourcesIterator.Current, settings))
                         {
                             this.ImplicitSources.Add(attentionSource);
-                            wasLoaded               = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -479,7 +479,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
 
             if (explicitDataNavigator != null)
             {
-                XPathNodeIterator conceptsIterator  = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
+                XPathNodeIterator conceptsIterator = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                 if (conceptsIterator is { Count: > 0 })
                 {
                     while (conceptsIterator.MoveNext())
@@ -488,21 +488,21 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                         if (concept.Load(conceptsIterator.Current, settings))
                         {
                             this.ExplicitConcepts.Add(concept);
-                            wasLoaded       = true;
+                            wasLoaded = true;
                         }
                     }
                 }
 
-                XPathNodeIterator sourcesIterator   = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
+                XPathNodeIterator sourcesIterator = explicitDataNavigator.Select("apml:Sources/apml:Source", manager);
                 if (sourcesIterator is { Count: > 0 })
                 {
                     while (sourcesIterator.MoveNext())
                     {
-                        ApmlSource attentionSource  = new ApmlSource();
+                        ApmlSource attentionSource = new ApmlSource();
                         if (attentionSource.Load(sourcesIterator.Current, settings))
                         {
                             this.ExplicitSources.Add(attentionSource);
-                            wasLoaded               = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -526,7 +526,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
 
         writer.WriteAttributeString("name", this.Name);
 
-        if(this.ImplicitConcepts.Count > 0 || this.ImplicitSources.Count > 0)
+        if (this.ImplicitConcepts.Count > 0 || this.ImplicitSources.Count > 0)
         {
             writer.WriteStartElement("ImplicitData", ApmlUtility.ApmlNamespace);
 
@@ -593,14 +593,14 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -624,15 +624,15 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        ApmlProfile value  = obj as ApmlProfile;
+        ApmlProfile value = obj as ApmlProfile;
 
         if (value != null)
         {
-            int result  = ApmlProfile.CompareSequence(this.ExplicitConcepts, value.ExplicitConcepts);
-            result      = result | ApmlProfile.CompareSequence(this.ExplicitSources, value.ExplicitSources);
-            result      = result | ApmlProfile.CompareSequence(this.ImplicitConcepts, value.ImplicitConcepts);
-            result      = result | ApmlProfile.CompareSequence(this.ImplicitSources, value.ImplicitSources);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            int result = ApmlProfile.CompareSequence(this.ExplicitConcepts, value.ExplicitConcepts);
+            result = result | ApmlProfile.CompareSequence(this.ExplicitSources, value.ExplicitSources);
+            result = result | ApmlProfile.CompareSequence(this.ImplicitConcepts, value.ImplicitConcepts);
+            result = result | ApmlProfile.CompareSequence(this.ImplicitSources, value.ImplicitSources);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -663,7 +663,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

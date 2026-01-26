@@ -24,11 +24,11 @@ public class FeedRankSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the language sensitive, human-readable label for the rank.
     /// </summary>
-    private string extensionLabel   = string.Empty;
+    private string extensionLabel = string.Empty;
     /// <summary>
     /// Private member to hold the decimal value of the rank.
     /// </summary>
-    private decimal extensionValue  = decimal.MinValue;
+    private decimal extensionValue = decimal.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class.
     /// </summary>
@@ -45,7 +45,7 @@ public class FeedRankSyndicationExtensionContext
     public FeedRankSyndicationExtensionContext(Uri scheme, decimal value)
     {
         this.Scheme = scheme;
-        this.Value  = value;
+        this.Value = value;
     }
     /// <summary>
     /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.
@@ -133,26 +133,26 @@ public class FeedRankSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
         if (source.HasChildren)
         {
-            XPathNavigator rankNavigator    = source.SelectSingleNode("re:rank", manager);
+            XPathNavigator rankNavigator = source.SelectSingleNode("re:rank", manager);
             if (rankNavigator != null)
             {
                 if (rankNavigator.HasAttributes)
                 {
-                    string schemeAttribute  = rankNavigator.GetAttribute("scheme", string.Empty);
-                    string domainAttribute  = rankNavigator.GetAttribute("domain", string.Empty);
-                    string labelAttribute   = rankNavigator.GetAttribute("label", string.Empty);
+                    string schemeAttribute = rankNavigator.GetAttribute("scheme", string.Empty);
+                    string domainAttribute = rankNavigator.GetAttribute("domain", string.Empty);
+                    string labelAttribute = rankNavigator.GetAttribute("label", string.Empty);
 
                     if (!string.IsNullOrEmpty(schemeAttribute))
                     {
                         if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                         {
                             this.Scheme = scheme;
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
 
@@ -161,14 +161,14 @@ public class FeedRankSyndicationExtensionContext
                         if (Uri.TryCreate(domainAttribute, UriKind.RelativeOrAbsolute, out Uri domain))
                         {
                             this.Domain = domain;
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
 
                     if (!string.IsNullOrEmpty(labelAttribute))
                     {
-                        this.Label  = labelAttribute;
-                        wasLoaded   = true;
+                        this.Label = labelAttribute;
+                        wasLoaded = true;
                     }
                 }
 
@@ -176,8 +176,8 @@ public class FeedRankSyndicationExtensionContext
                 {
                     if (decimal.TryParse(rankNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal value))
                     {
-                        this.Value  = value;
-                        wasLoaded   = true;
+                        this.Value = value;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -202,7 +202,7 @@ public class FeedRankSyndicationExtensionContext
 
         writer.WriteAttributeString("scheme", xmlNamespace, this.Scheme != null ? this.Scheme.ToString() : string.Empty);
 
-        if(this.Domain != null)
+        if (this.Domain != null)
         {
             writer.WriteAttributeString("domain", xmlNamespace, this.Domain.ToString());
         }

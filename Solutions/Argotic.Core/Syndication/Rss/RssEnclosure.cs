@@ -38,11 +38,11 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the size of the media object in bytes.
     /// </summary>
-    private long enclosureLength    = long.MinValue;
+    private long enclosureLength = long.MinValue;
     /// <summary>
     /// Private member to hold the media object's MIME media type.
     /// </summary>
-    private string enclosureType    = string.Empty;
+    private string enclosureType = string.Empty;
     /// <summary>
     /// Private member to hold the URL of the media object.
     /// </summary>
@@ -67,9 +67,9 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
     public RssEnclosure(long length, string type, Uri url)
     {
-        this.ContentType    = type;
-        this.Length         = length;
-        this.Url            = url;
+        this.ContentType = type;
+        this.Length = length;
+        this.Url = url;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -187,10 +187,10 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -231,7 +231,7 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -247,13 +247,13 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string lengthAttribute  = source.GetAttribute("length", string.Empty);
-            string typeAttribute    = source.GetAttribute("type", string.Empty);
-            string urlAttribute     = source.GetAttribute("url", string.Empty);
+            string lengthAttribute = source.GetAttribute("length", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
+            string urlAttribute = source.GetAttribute("url", string.Empty);
 
             if (!string.IsNullOrEmpty(lengthAttribute))
             {
@@ -267,22 +267,22 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
                     {
                         this.Length = 0;
                     }
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(typeAttribute))
             {
-                this.ContentType    = typeAttribute;
-                wasLoaded           = true;
+                this.ContentType = typeAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
-                    this.Url        = url;
-                    wasLoaded       = true;
+                    this.Url = url;
+                    wasLoaded = true;
                 }
             }
         }
@@ -303,10 +303,10 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -340,14 +340,14 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -371,13 +371,13 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        RssEnclosure value  = obj as RssEnclosure;
+        RssEnclosure value = obj as RssEnclosure;
 
         if (value != null)
         {
-            int result  = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Length.CompareTo(value.Length);
-            result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Length.CompareTo(value.Length);
+            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -408,7 +408,7 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

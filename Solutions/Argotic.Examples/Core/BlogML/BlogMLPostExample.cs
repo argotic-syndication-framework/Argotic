@@ -24,7 +24,7 @@ public static class BlogMLPostExample
             Subtitle = new BlogMLTextConstruct("This is some sample blog content for BlogML 2.0")
         };
 
-        BlogMLAuthor administrator      = new BlogMLAuthor
+        BlogMLAuthor administrator = new BlogMLAuthor
         {
             Id = "2100",
             CreatedOn = new DateTime(2006, 8, 10, 8, 44, 35),
@@ -38,7 +38,7 @@ public static class BlogMLPostExample
         document.ExtendedProperties.Add("CommentModeration", "Anonymous");
         document.ExtendedProperties.Add("SendTrackback", "yes");
 
-        BlogMLCategory category1    = new BlogMLCategory
+        BlogMLCategory category1 = new BlogMLCategory
         {
             Id = "1018",
             CreatedOn = new DateTime(2006, 9, 5, 17, 54, 58),
@@ -50,7 +50,7 @@ public static class BlogMLPostExample
         };
         document.Categories.Add(category1);
 
-        BlogMLCategory category2    = new BlogMLCategory
+        BlogMLCategory category2 = new BlogMLCategory
         {
             Id = "1019",
             CreatedOn = new DateTime(2006, 9, 5, 17, 54, 59),
@@ -62,7 +62,7 @@ public static class BlogMLPostExample
         };
         document.Categories.Add(category2);
 
-        BlogMLCategory category3    = new BlogMLCategory
+        BlogMLCategory category3 = new BlogMLCategory
         {
             Id = "1020",
             CreatedOn = new DateTime(2006, 9, 5, 17, 55, 0),
@@ -75,7 +75,7 @@ public static class BlogMLPostExample
         document.Categories.Add(category3);
 
         //  Create a blog entry
-        BlogMLPost post         = new BlogMLPost
+        BlogMLPost post = new BlogMLPost
         {
             Id = "34",
             CreatedOn = new DateTime(2006, 9, 5, 3, 19, 0),
@@ -94,7 +94,7 @@ public static class BlogMLPostExample
 
         post.Authors.Add("2100");
 
-        BlogMLComment comment   = new BlogMLComment
+        BlogMLComment comment = new BlogMLComment
         {
             Id = "35",
             CreatedOn = new DateTime(2006, 9, 5, 11, 36, 50),

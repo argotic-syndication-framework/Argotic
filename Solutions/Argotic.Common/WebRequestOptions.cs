@@ -15,7 +15,7 @@ public class WebRequestOptions
     /// <summary>
     /// Initializes a new instance of the <see cref="WebRequestOptions"/> class.
     /// </summary>
-    public WebRequestOptions() : this(null, null) {}
+    public WebRequestOptions() : this(null, null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebRequestOptions"/> class using the specified <see cref="ICredentials">credentials</see>.
@@ -23,7 +23,7 @@ public class WebRequestOptions
     /// <param name="credentials">
     ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the source resource when required. This value can be <b>null</b>.
     /// </param>
-    public WebRequestOptions(ICredentials credentials) : this(credentials, null) {}
+    public WebRequestOptions(ICredentials credentials) : this(credentials, null) { }
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebRequestOptions"/> class using the specified <see cref="ICredentials">credentials</see> and  <see cref="IWebProxy">proxy</see>.
@@ -36,14 +36,14 @@ public class WebRequestOptions
     /// </param>
     public WebRequestOptions(ICredentials credentials, IWebProxy proxy)
     {
-        _allowAutoRedirect  = true;
-        _keepAlive          = true;
-        _credentials        = credentials;
+        _allowAutoRedirect = true;
+        _keepAlive = true;
+        _credentials = credentials;
         _proxy = proxy;
 
         if (credentials == null)
         {
-            _useDefaultCredentials  = true;
+            _useDefaultCredentials = true;
         }
     }
 
@@ -345,16 +345,16 @@ public class WebRequestOptions
     /// <param name="request">A <see cref="WebRequest"/> that should be configured.</param>
     public void ApplyOptions(WebRequest request)
     {
-        if (AuthenticationLevel != null)    request.AuthenticationLevel     = AuthenticationLevel.Value;
-        if (CachePolicy != null)            request.CachePolicy             = CachePolicy;
-        if (ConnectionGroupName != null)    request.ConnectionGroupName     = ConnectionGroupName;
-        if (Credentials != null)            request.Credentials             = Credentials;
-        if (Headers != null)                request.Headers                 = Headers;
-        if (ImpersonationLevel != null)     request.ImpersonationLevel      = ImpersonationLevel.Value;
-        if (PreAuthenticate != null)        request.PreAuthenticate         = PreAuthenticate.Value;
-        if (Proxy != null)                  request.Proxy                   = Proxy;
-        if (Timeout != null)                request.Timeout                 = Timeout.Value;
-        if (UseDefaultCredentials != null)  request.UseDefaultCredentials   = UseDefaultCredentials.Value;
+        if (AuthenticationLevel != null) request.AuthenticationLevel = AuthenticationLevel.Value;
+        if (CachePolicy != null) request.CachePolicy = CachePolicy;
+        if (ConnectionGroupName != null) request.ConnectionGroupName = ConnectionGroupName;
+        if (Credentials != null) request.Credentials = Credentials;
+        if (Headers != null) request.Headers = Headers;
+        if (ImpersonationLevel != null) request.ImpersonationLevel = ImpersonationLevel.Value;
+        if (PreAuthenticate != null) request.PreAuthenticate = PreAuthenticate.Value;
+        if (Proxy != null) request.Proxy = Proxy;
+        if (Timeout != null) request.Timeout = Timeout.Value;
+        if (UseDefaultCredentials != null) request.UseDefaultCredentials = UseDefaultCredentials.Value;
 
         FtpWebRequest ftpRequest = request as FtpWebRequest;
         if (ftpRequest != null)
@@ -368,43 +368,43 @@ public class WebRequestOptions
             ApplyHttpOptions(httpRequest);
         }
     }
-        
+
     private void ApplyFtpOptions(FtpWebRequest ftpRequest)
     {
-        if (ContentOffset != null)  ftpRequest.ContentOffset    = ContentOffset.Value;
-        if (EnableSsl != null)      ftpRequest.EnableSsl        = EnableSsl.Value;
-        if (RenameTo != null)       ftpRequest.RenameTo         = RenameTo;
-        if (UseBinary != null)      ftpRequest.UseBinary        = UseBinary.Value;
-        if (UsePassive != null)     ftpRequest.UsePassive       = UsePassive.Value;
+        if (ContentOffset != null) ftpRequest.ContentOffset = ContentOffset.Value;
+        if (EnableSsl != null) ftpRequest.EnableSsl = EnableSsl.Value;
+        if (RenameTo != null) ftpRequest.RenameTo = RenameTo;
+        if (UseBinary != null) ftpRequest.UseBinary = UseBinary.Value;
+        if (UsePassive != null) ftpRequest.UsePassive = UsePassive.Value;
 
-        if (ClientCertificates != null) ftpRequest.ClientCertificates   = ClientCertificates;
-        if (KeepAlive != null)          ftpRequest.KeepAlive            = KeepAlive.Value;
-        if (ReadWriteTimeout != null)   ftpRequest.ReadWriteTimeout     = ReadWriteTimeout.Value;
+        if (ClientCertificates != null) ftpRequest.ClientCertificates = ClientCertificates;
+        if (KeepAlive != null) ftpRequest.KeepAlive = KeepAlive.Value;
+        if (ReadWriteTimeout != null) ftpRequest.ReadWriteTimeout = ReadWriteTimeout.Value;
     }
-        
+
     private void ApplyHttpOptions(HttpWebRequest httpRequest)
     {
-        if (Accept != null)                                 httpRequest.Accept                                  = Accept;
-        if (AllowAutoRedirect != null)                      httpRequest.AllowAutoRedirect                       = AllowAutoRedirect.Value;
-        if (AllowWriteStreamBuffering != null)              httpRequest.AllowWriteStreamBuffering               = AllowWriteStreamBuffering.Value;
-        if (AutomaticDecompression != null)                 httpRequest.AutomaticDecompression                  = AutomaticDecompression.Value;
-        if (Connection != null)                             httpRequest.Connection                              = Connection;
-        if (ContinueDelegate != null)                       httpRequest.ContinueDelegate                        = ContinueDelegate;
-        if (CookieContainer != null)                        httpRequest.CookieContainer                         = CookieContainer;
-        if (Expect != null)                                 httpRequest.Expect                                  = Expect;
-        if (MaximumAutomaticRedirections != null)           httpRequest.MaximumAutomaticRedirections            = MaximumAutomaticRedirections.Value;
-        if (MaximumResponseHeadersLength != null)           httpRequest.MaximumResponseHeadersLength            = MaximumResponseHeadersLength.Value;
-        if (MediaType != null)                              httpRequest.MediaType                               = MediaType;
-        if (Pipelined != null)                              httpRequest.Pipelined                               = Pipelined.Value;
-        if (ProtocolVersion != null)                        httpRequest.ProtocolVersion                         = ProtocolVersion;
-        if (Referer != null)                                httpRequest.Referer                                 = Referer;
-        if (SendChunked != null)                            httpRequest.SendChunked                             = SendChunked.Value;
-        if (TransferEncoding != null)                       httpRequest.TransferEncoding                        = TransferEncoding;
-        if (UnsafeAuthenticatedConnectionSharing != null)   httpRequest.UnsafeAuthenticatedConnectionSharing    = UnsafeAuthenticatedConnectionSharing.Value;
-        if (UserAgent != null)                              httpRequest.UserAgent                               = UserAgent;
+        if (Accept != null) httpRequest.Accept = Accept;
+        if (AllowAutoRedirect != null) httpRequest.AllowAutoRedirect = AllowAutoRedirect.Value;
+        if (AllowWriteStreamBuffering != null) httpRequest.AllowWriteStreamBuffering = AllowWriteStreamBuffering.Value;
+        if (AutomaticDecompression != null) httpRequest.AutomaticDecompression = AutomaticDecompression.Value;
+        if (Connection != null) httpRequest.Connection = Connection;
+        if (ContinueDelegate != null) httpRequest.ContinueDelegate = ContinueDelegate;
+        if (CookieContainer != null) httpRequest.CookieContainer = CookieContainer;
+        if (Expect != null) httpRequest.Expect = Expect;
+        if (MaximumAutomaticRedirections != null) httpRequest.MaximumAutomaticRedirections = MaximumAutomaticRedirections.Value;
+        if (MaximumResponseHeadersLength != null) httpRequest.MaximumResponseHeadersLength = MaximumResponseHeadersLength.Value;
+        if (MediaType != null) httpRequest.MediaType = MediaType;
+        if (Pipelined != null) httpRequest.Pipelined = Pipelined.Value;
+        if (ProtocolVersion != null) httpRequest.ProtocolVersion = ProtocolVersion;
+        if (Referer != null) httpRequest.Referer = Referer;
+        if (SendChunked != null) httpRequest.SendChunked = SendChunked.Value;
+        if (TransferEncoding != null) httpRequest.TransferEncoding = TransferEncoding;
+        if (UnsafeAuthenticatedConnectionSharing != null) httpRequest.UnsafeAuthenticatedConnectionSharing = UnsafeAuthenticatedConnectionSharing.Value;
+        if (UserAgent != null) httpRequest.UserAgent = UserAgent;
 
-        if (ClientCertificates != null) httpRequest.ClientCertificates  = ClientCertificates;
-        if (KeepAlive != null)          httpRequest.KeepAlive           = KeepAlive.Value;
-        if (ReadWriteTimeout != null)   httpRequest.ReadWriteTimeout    = ReadWriteTimeout.Value;
+        if (ClientCertificates != null) httpRequest.ClientCertificates = ClientCertificates;
+        if (KeepAlive != null) httpRequest.KeepAlive = KeepAlive.Value;
+        if (ReadWriteTimeout != null) httpRequest.ReadWriteTimeout = ReadWriteTimeout.Value;
     }
 }

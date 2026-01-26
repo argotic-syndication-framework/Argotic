@@ -36,11 +36,11 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat documentFormat  = SyndicationContentFormat.BlogML;
+    private static SyndicationContentFormat documentFormat = SyndicationContentFormat.BlogML;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version documentVersion                  = new Version(2, 0);
+    private static Version documentVersion = new Version(2, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -60,7 +60,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the title of the web log.
     /// </summary>
-    private BlogMLTextConstruct documentTitle               = new BlogMLTextConstruct();
+    private BlogMLTextConstruct documentTitle = new BlogMLTextConstruct();
     /// <summary>
     /// Private member to hold the sub-title of the web log.
     /// </summary>
@@ -84,7 +84,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the creation date of this web log storage media.
     /// </summary>
-    private DateTime documentCreationDate   = DateTime.MinValue;
+    private DateTime documentCreationDate = DateTime.MinValue;
     /// <summary>
     /// Private member to hold the base URL of the web log. 
     /// </summary>
@@ -321,7 +321,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         set
         {
-            if(value == null)
+            if (value == null)
             {
                 documentSubtitle = null;
             }
@@ -619,21 +619,21 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
         if (this.LoadOperationInProgress)
         {
             throw new InvalidOperationException();
         }
-        this.LoadOperationInProgress    = true;
-        this.AsyncLoadHasBeenCancelled  = false;
+        this.LoadOperationInProgress = true;
+        this.AsyncLoadHasBeenCancelled = false;
 
-            
-        asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
+
+        asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-            
-        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
+
+        object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
     }
@@ -650,7 +650,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
         {
-            this.AsyncLoadHasBeenCancelled  = true;
+            this.AsyncLoadHasBeenCancelled = true;
             asyncHttpWebRequest.Abort();
         }
     }
@@ -660,22 +660,22 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <param name="result">The result of the asynchronous operation.</param>
     private static void AsyncLoadCallback(IAsyncResult result)
     {
-        System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
-        XPathNavigator navigator                    = null;
-        WebRequest httpWebRequest                   = null;
-        BlogMLDocument document                     = null;
-        Uri source                                  = null;
-        WebRequestOptions options                   = null;
-        SyndicationResourceLoadSettings settings    = null;
+        System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+        XPathNavigator navigator = null;
+        WebRequest httpWebRequest = null;
+        BlogMLDocument document = null;
+        Uri source = null;
+        WebRequestOptions options = null;
+        SyndicationResourceLoadSettings settings = null;
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest      = parameters[0] as WebRequest;
-            document            = parameters[1] as BlogMLDocument;
-            source              = parameters[2] as Uri;
-            settings            = parameters[3] as SyndicationResourceLoadSettings;
-            options             = parameters[4] as WebRequestOptions;
-            object userToken    = parameters[5];
+            httpWebRequest = parameters[0] as WebRequest;
+            document = parameters[1] as BlogMLDocument;
+            source = parameters[2] as Uri;
+            settings = parameters[3] as SyndicationResourceLoadSettings;
+            options = parameters[4] as WebRequestOptions;
+            object userToken = parameters[5];
             if (document != null)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
@@ -683,12 +683,12 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
                 {
                     if (settings != null)
                     {
-                        encoding    = settings.CharacterEncoding;
+                        encoding = settings.CharacterEncoding;
                     }
 
                     using (StreamReader streamReader = new StreamReader(stream, encoding))
                     {
-                        XmlReaderSettings readerSettings    = new XmlReaderSettings
+                        XmlReaderSettings readerSettings = new XmlReaderSettings
                         {
                             IgnoreComments = true,
                             IgnoreWhitespace = true,
@@ -699,19 +699,19 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
                         {
                             if (encoding == System.Text.Encoding.UTF8)
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                             }
                             else
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                             }
-                            SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                            SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                             adapter.Fill(document, SyndicationContentFormat.BlogML);
                             document.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                         }
                     }
                 }
-                document.LoadOperationInProgress    = false;
+                document.LoadOperationInProgress = false;
             }
         }
     }
@@ -730,7 +730,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
                 asyncHttpWebRequest.Abort();
             }
         }
-        this.LoadOperationInProgress    = false;
+        this.LoadOperationInProgress = false;
     }
     /// <summary>
     /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
@@ -740,10 +740,10 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -784,7 +784,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -797,11 +797,11 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="post"/> is a null reference.</exception>
     public bool AddPost(BlogMLPost post)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(post, "post");
 
         ((Collection<BlogMLPost>)this.Posts).Add(post);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -823,7 +823,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         if (((Collection<BlogMLPost>)this.Posts).Contains(post))
         {
             ((Collection<BlogMLPost>)this.Posts).Remove(post);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -839,14 +839,14 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     public XPathNavigator CreateNavigator()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Document,
             Indent = true,
             OmitXmlDeclaration = false
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.Save(writer);
             writer.Flush();
@@ -854,7 +854,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        XPathDocument document  = new XPathDocument(stream);
+        XPathDocument document = new XPathDocument(stream);
         return document.CreateNavigator();
     }
 
@@ -897,9 +897,9 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
-        XPathNavigator navigator    = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator();
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
     }
 
@@ -1145,7 +1145,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator    = null;
+        XPathNavigator navigator = null;
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
@@ -1153,11 +1153,11 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         }
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
         }
         else
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
         }
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
     }
@@ -1194,9 +1194,9 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         if (settings == null)
         {
-            settings    = new SyndicationResourceSaveSettings();
+            settings = new SyndicationResourceSaveSettings();
         }
-        XmlWriterSettings writerSettings    = new XmlWriterSettings
+        XmlWriterSettings writerSettings = new XmlWriterSettings
         {
             OmitXmlDeclaration = false,
             Indent = !settings.MinimizeOutputSize,
@@ -1248,7 +1248,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         }
         SyndicationExtensionAdapter.WriteXmlNamespaceDeclarations(settings.SupportedExtensions, writer);
 
-        if(this.GeneratedOn != DateTime.MinValue)
+        if (this.GeneratedOn != DateTime.MinValue)
         {
             writer.WriteAttributeString("date-created", SyndicationDateTimeUtility.ToRfc3339DateTime(this.GeneratedOn));
         }
@@ -1258,7 +1258,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
             writer.WriteAttributeString("root-url", this.RootUrl.ToString());
         }
 
-        if(this.Title != null)
+        if (this.Title != null)
         {
             this.Title.WriteTo(writer, "title");
         }
@@ -1268,7 +1268,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
             this.Subtitle.WriteTo(writer, "sub-title");
         }
 
-        if(this.Authors.Count > 0)
+        if (this.Authors.Count > 0)
         {
             writer.WriteStartElement("authors", BlogMLUtility.BlogMLNamespace);
             foreach (BlogMLAuthor author in this.Authors)
@@ -1419,7 +1419,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(navigator, "navigator");
         Guard.ArgumentNotNull(settings, "settings");
         Guard.ArgumentNotNull(eventData, "eventData");
-        SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.BlogML);
         this.OnDocumentLoaded(eventData);
     }

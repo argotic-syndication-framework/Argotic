@@ -30,11 +30,11 @@ public class FeedSynchronizationItem : IComparable
     /// <summary>
     /// Private member to hold the globally unique identifier for the item.
     /// </summary>
-    private string synchronizationId    = string.Empty;
+    private string synchronizationId = string.Empty;
     /// <summary>
     /// Private member to hold the number of updates applied to an item.
     /// </summary>
-    private int synchronizationUpdates  = 1;
+    private int synchronizationUpdates = 1;
     /// <summary>
     /// Private member to hold a value indicating that the item has been deleted and is a tombstone.
     /// </summary>
@@ -68,8 +68,8 @@ public class FeedSynchronizationItem : IComparable
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="updates"/> is less than <b>1</b>.</exception>
     public FeedSynchronizationItem(string id, int updates)
     {
-        this.Id         = id;
-        this.Updates    = updates;
+        this.Id = id;
+        this.Updates = updates;
     }
 
     /// <summary>
@@ -262,7 +262,7 @@ public class FeedSynchronizationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<FeedSynchronizationHistory> source, Collection<FeedSynchronizationHistory> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -270,7 +270,7 @@ public class FeedSynchronizationItem : IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -297,17 +297,17 @@ public class FeedSynchronizationItem : IComparable
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationConflictPreservationDirective))
             {
-                FeedSynchronizationConflictPreservationDirective preservationDirective  = (FeedSynchronizationConflictPreservationDirective)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                FeedSynchronizationConflictPreservationDirective preservationDirective = (FeedSynchronizationConflictPreservationDirective)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (preservationDirective == directive)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -327,14 +327,14 @@ public class FeedSynchronizationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static FeedSynchronizationConflictPreservationDirective ConflictPreservationByName(string name)
     {
-        FeedSynchronizationConflictPreservationDirective preservationDirective  = FeedSynchronizationConflictPreservationDirective.None;
+        FeedSynchronizationConflictPreservationDirective preservationDirective = FeedSynchronizationConflictPreservationDirective.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationConflictPreservationDirective).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationConflictPreservationDirective))
             {
-                FeedSynchronizationConflictPreservationDirective directive  = (FeedSynchronizationConflictPreservationDirective)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes                                   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                FeedSynchronizationConflictPreservationDirective directive = (FeedSynchronizationConflictPreservationDirective)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -364,17 +364,17 @@ public class FeedSynchronizationItem : IComparable
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationTombstoneStatus))
             {
-                FeedSynchronizationTombstoneStatus tombstoneStatus  = (FeedSynchronizationTombstoneStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                FeedSynchronizationTombstoneStatus tombstoneStatus = (FeedSynchronizationTombstoneStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (tombstoneStatus == status)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -394,14 +394,14 @@ public class FeedSynchronizationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static FeedSynchronizationTombstoneStatus TombstoneStatusByName(string name)
     {
-        FeedSynchronizationTombstoneStatus tombstoneStatus  = FeedSynchronizationTombstoneStatus.None;
+        FeedSynchronizationTombstoneStatus tombstoneStatus = FeedSynchronizationTombstoneStatus.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationTombstoneStatus).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedSynchronizationTombstoneStatus))
             {
-                FeedSynchronizationTombstoneStatus status   = (FeedSynchronizationTombstoneStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes                   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                FeedSynchronizationTombstoneStatus status = (FeedSynchronizationTombstoneStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -430,78 +430,78 @@ public class FeedSynchronizationItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        FeedSynchronizationSyndicationExtension extension   = new FeedSynchronizationSyndicationExtension();
-        XmlNamespaceManager manager                         = extension.CreateNamespaceManager(source);
+        FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
+        XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasAttributes)
         {
-            string idAttribute          = source.GetAttribute("id", string.Empty);
-            string updatesAttribute     = source.GetAttribute("updates", string.Empty);
-            string deletedAttribute     = source.GetAttribute("deleted", string.Empty);
+            string idAttribute = source.GetAttribute("id", string.Empty);
+            string updatesAttribute = source.GetAttribute("updates", string.Empty);
+            string deletedAttribute = source.GetAttribute("deleted", string.Empty);
             string noConflictsAttribute = source.GetAttribute("noconflicts", string.Empty);
 
             if (!string.IsNullOrEmpty(idAttribute))
             {
-                this.Id     = idAttribute;
-                wasLoaded   = true;
+                this.Id = idAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(updatesAttribute))
             {
                 if (int.TryParse(updatesAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int updates))
                 {
-                    this.Updates    = updates;
-                    wasLoaded       = true;
+                    this.Updates = updates;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(deletedAttribute))
             {
-                FeedSynchronizationTombstoneStatus status   = FeedSynchronizationItem.TombstoneStatusByName(deletedAttribute);
+                FeedSynchronizationTombstoneStatus status = FeedSynchronizationItem.TombstoneStatusByName(deletedAttribute);
                 if (status != FeedSynchronizationTombstoneStatus.None)
                 {
-                    this.TombstoneStatus    = status;
-                    wasLoaded               = true;
+                    this.TombstoneStatus = status;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(noConflictsAttribute))
             {
-                FeedSynchronizationConflictPreservationDirective directive  = FeedSynchronizationItem.ConflictPreservationByName(noConflictsAttribute);
+                FeedSynchronizationConflictPreservationDirective directive = FeedSynchronizationItem.ConflictPreservationByName(noConflictsAttribute);
                 if (directive != FeedSynchronizationConflictPreservationDirective.None)
                 {
-                    this.ConflictPreservation   = directive;
-                    wasLoaded                   = true;
+                    this.ConflictPreservation = directive;
+                    wasLoaded = true;
                 }
             }
         }
 
         if (source.HasChildren)
         {
-            XPathNodeIterator historyIterator   = source.Select("sx:history", manager);
-            XPathNavigator conflictsNavigator   = source.SelectSingleNode("sx:conflicts", manager);
+            XPathNodeIterator historyIterator = source.Select("sx:history", manager);
+            XPathNavigator conflictsNavigator = source.SelectSingleNode("sx:conflicts", manager);
 
             if (historyIterator is { Count: > 0 })
             {
                 while (historyIterator.MoveNext())
                 {
-                    FeedSynchronizationHistory history  = new FeedSynchronizationHistory();
+                    FeedSynchronizationHistory history = new FeedSynchronizationHistory();
                     if (history.Load(historyIterator.Current))
                     {
                         this.Histories.Add(history);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
 
             if (conflictsNavigator is { HasChildren: true })
             {
-                XPathNodeIterator childrenIterator  = conflictsNavigator.SelectChildren(XPathNodeType.Element);
+                XPathNodeIterator childrenIterator = conflictsNavigator.SelectChildren(XPathNodeType.Element);
                 if (childrenIterator is { Count: > 0 })
                 {
                     this.Conflicts.Add(childrenIterator.Current);
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -517,7 +517,7 @@ public class FeedSynchronizationItem : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        FeedSynchronizationSyndicationExtension extension   = new FeedSynchronizationSyndicationExtension();
+        FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
         writer.WriteStartElement("sync", extension.XmlNamespace);
 
         writer.WriteAttributeString("id", this.Id);
@@ -533,12 +533,12 @@ public class FeedSynchronizationItem : IComparable
             writer.WriteAttributeString("noconflicts", FeedSynchronizationItem.ConflictPreservationAsString(this.ConflictPreservation));
         }
 
-        foreach(FeedSynchronizationHistory history in this.Histories)
+        foreach (FeedSynchronizationHistory history in this.Histories)
         {
             history.WriteTo(writer);
         }
 
-        if(this.Conflicts.Count > 0)
+        if (this.Conflicts.Count > 0)
         {
             writer.WriteStartElement("conflicts", extension.XmlNamespace);
             foreach (XPathNavigator conflict in this.Conflicts)
@@ -561,14 +561,14 @@ public class FeedSynchronizationItem : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -593,16 +593,16 @@ public class FeedSynchronizationItem : IComparable
         {
             return 1;
         }
-        FeedSynchronizationItem value  = obj as FeedSynchronizationItem;
+        FeedSynchronizationItem value = obj as FeedSynchronizationItem;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Id, value.Id, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.ConflictPreservation.CompareTo(value.ConflictPreservation);
-            result      = result | this.TombstoneStatus.CompareTo(value.TombstoneStatus);
-            result      = result | this.Updates.CompareTo(value.Updates);
-            result      = result | FeedSynchronizationItem.CompareSequence(this.Histories, value.Histories);
-            result      = result | ComparisonUtility.CompareSequence(this.Conflicts, value.Conflicts);
+            int result = string.Compare(this.Id, value.Id, StringComparison.OrdinalIgnoreCase);
+            result = result | this.ConflictPreservation.CompareTo(value.ConflictPreservation);
+            result = result | this.TombstoneStatus.CompareTo(value.TombstoneStatus);
+            result = result | this.Updates.CompareTo(value.Updates);
+            result = result | FeedSynchronizationItem.CompareSequence(this.Histories, value.Histories);
+            result = result | ComparisonUtility.CompareSequence(this.Conflicts, value.Conflicts);
 
             return result;
         }
@@ -633,7 +633,7 @@ public class FeedSynchronizationItem : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

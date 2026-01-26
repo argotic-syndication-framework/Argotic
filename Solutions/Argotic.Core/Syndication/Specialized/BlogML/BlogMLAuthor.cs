@@ -17,19 +17,19 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
     /// <summary>
     /// Private member to hold the title of the web log entity.
     /// </summary>
-    private BlogMLTextConstruct commonObjectBaseTitle           = new BlogMLTextConstruct();
+    private BlogMLTextConstruct commonObjectBaseTitle = new BlogMLTextConstruct();
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
-    private string commonObjectBaseId                           = string.Empty;
+    private string commonObjectBaseId = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the web log entity information was created.
     /// </summary>
-    private DateTime commonObjectBaseCreatedOn                  = DateTime.MinValue;
+    private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold a date-time indicating when the web log entity information was last modified.
     /// </summary>
-    private DateTime commonObjectBaseLastModifiedOn             = DateTime.MinValue;
+    private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold a value indicating the web log entity approval status.
     /// </summary>
@@ -41,7 +41,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
     /// <summary>
     /// Private member to hold the email address for the author.
     /// </summary>
-    private string authorEmailAddress                           = string.Empty;
+    private string authorEmailAddress = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLAuthor"/> class.
     /// </summary>
@@ -105,7 +105,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 commonObjectBaseId = string.Empty;
             }
@@ -225,10 +225,10 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -269,7 +269,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -286,20 +286,20 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (BlogMLUtility.FillCommonObject(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string emailAttribute   = source.GetAttribute("email", string.Empty);
+            string emailAttribute = source.GetAttribute("email", string.Empty);
 
             if (!string.IsNullOrEmpty(emailAttribute))
             {
-                this.EmailAddress   = emailAttribute;
-                wasLoaded           = true;
+                this.EmailAddress = emailAttribute;
+                wasLoaded = true;
             }
         }
 
@@ -319,21 +319,21 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
         if (BlogMLUtility.FillCommonObject(this, source, settings))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string emailAttribute   = source.GetAttribute("email", string.Empty);
+            string emailAttribute = source.GetAttribute("email", string.Empty);
 
             if (!string.IsNullOrEmpty(emailAttribute))
             {
-                this.EmailAddress   = emailAttribute;
-                wasLoaded           = true;
+                this.EmailAddress = emailAttribute;
+                wasLoaded = true;
             }
         }
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
@@ -352,8 +352,8 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("author", BlogMLUtility.BlogMLNamespace);
         BlogMLUtility.WriteCommonObjectAttributes(this, writer);
-            
-        if(!string.IsNullOrEmpty(this.EmailAddress))
+
+        if (!string.IsNullOrEmpty(this.EmailAddress))
         {
             writer.WriteAttributeString("email", this.EmailAddress);
         }
@@ -374,14 +374,14 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -406,13 +406,13 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
         {
             return 1;
         }
-        BlogMLAuthor value  = obj as BlogMLAuthor;
+        BlogMLAuthor value = obj as BlogMLAuthor;
 
         if (value != null)
         {
-            int result  = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | BlogMLUtility.CompareCommonObjects(this, value);
+            result = result | BlogMLUtility.CompareCommonObjects(this, value);
 
             return result;
         }
@@ -443,7 +443,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

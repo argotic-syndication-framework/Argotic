@@ -16,19 +16,19 @@ internal static class AtomUtility
     /// <summary>
     /// Private member to hold the Atom 1.0 namespace identifier.
     /// </summary>
-    private const string ATOM_NAMESPACE     = "http://www.w3.org/2005/Atom";
+    private const string ATOM_NAMESPACE = "http://www.w3.org/2005/Atom";
     /// <summary>
     /// Private member to hold the Atom Publishing Protocol 1.0 namespace identifier.
     /// </summary>
-    private const string ATOMPUB_NAMESPACE  = "http://www.w3.org/2007/app";
+    private const string ATOMPUB_NAMESPACE = "http://www.w3.org/2007/app";
     /// <summary>
     /// Private member to hold the XHTML namespace identifier.
     /// </summary>
-    private const string XHTML_NAMESPACE    = "http://www.w3.org/1999/xhtml";
+    private const string XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
     /// <summary>
     /// Private member to hold the XML 1.1 namespace identifier.
     /// </summary>
-    private const string XML_NAMESPACE      = "http://www.w3.org/XML/1998/namespace";
+    private const string XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace";
     /// <summary>
     /// Gets the XML namespace URI for the Atom 1.0 specification.
     /// </summary>
@@ -90,7 +90,7 @@ internal static class AtomUtility
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
     public static int CompareCommonObjectAttributes(IAtomCommonObjectAttributes source, IAtomCommonObjectAttributes target)
     {
-        int result  = 0;
+        int result = 0;
         if (source == null && target == null)
         {
             return 0;
@@ -103,11 +103,11 @@ internal static class AtomUtility
         {
             return -1;
         }
-        result  = result | Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result = result | Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-        string sourceLanguageName   = source.Language != null ? source.Language.Name : string.Empty;
-        string targetLanguageName   = target.Language != null ? target.Language.Name : string.Empty;
-        result                      = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+        string sourceLanguageName = source.Language != null ? source.Language.Name : string.Empty;
+        string targetLanguageName = target.Language != null ? target.Language.Name : string.Empty;
+        result = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -122,7 +122,7 @@ internal static class AtomUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static bool FillCommonObjectAttributes(IAtomCommonObjectAttributes target, XPathNavigator source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(target, "target");
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
@@ -131,8 +131,8 @@ internal static class AtomUtility
         {
             if (Uri.TryCreate(xmlBaseAttribute, UriKind.RelativeOrAbsolute, out Uri baseUri))
             {
-                target.BaseUri  = baseUri;
-                wasLoaded       = true;
+                target.BaseUri = baseUri;
+                wasLoaded = true;
             }
         }
         string xmlLangAttribute = source.GetAttribute("lang", manager.LookupNamespace("xml"));
@@ -140,9 +140,9 @@ internal static class AtomUtility
         {
             try
             {
-                CultureInfo language    = new CultureInfo(source.XmlLang);
-                target.Language         = language;
-                wasLoaded               = true;
+                CultureInfo language = new CultureInfo(source.XmlLang);
+                target.Language = language;
+                wasLoaded = true;
             }
             catch (ArgumentException)
             {

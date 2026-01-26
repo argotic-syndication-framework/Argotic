@@ -351,23 +351,23 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
-        XmlNamespaceManager manager                 = extension.CreateNamespaceManager(source);
-        if(source.HasChildren)
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+        XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
+        if (source.HasChildren)
         {
-            XPathNodeIterator contentIterator   = source.Select("media:content", manager);
+            XPathNodeIterator contentIterator = source.Select("media:content", manager);
 
             if (contentIterator is { Count: > 0 })
             {
                 while (contentIterator.MoveNext())
                 {
-                    YahooMediaContent content   = new YahooMediaContent();
+                    YahooMediaContent content = new YahooMediaContent();
                     if (content.Load(contentIterator.Current))
                     {
                         this.Contents.Add(content);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -375,7 +375,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
 
         if (YahooMediaUtility.FillCommonObjectEntities(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -389,7 +389,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("group", extension.XmlNamespace);
 
         foreach (YahooMediaContent content in this.Contents)
@@ -412,14 +412,14 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -444,13 +444,13 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
         {
             return 1;
         }
-        YahooMediaGroup value  = obj as YahooMediaGroup;
+        YahooMediaGroup value = obj as YahooMediaGroup;
 
         if (value != null)
         {
-            int result  = YahooMediaUtility.CompareSequence(this.Contents, value.Contents);
+            int result = YahooMediaUtility.CompareSequence(this.Contents, value.Contents);
 
-            result      = result | YahooMediaUtility.CompareCommonObjectEntities(this, value);
+            result = result | YahooMediaUtility.CompareCommonObjectEntities(this, value);
 
             return result;
         }
@@ -481,7 +481,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

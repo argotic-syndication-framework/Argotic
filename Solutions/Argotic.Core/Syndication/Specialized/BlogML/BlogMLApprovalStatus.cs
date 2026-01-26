@@ -12,13 +12,13 @@ public enum BlogMLApprovalStatus
     /// No approval status specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// Indicates that the web log entity is approved.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Approved", AlternateValue = "true")]
-    Approved    = 1,
+    Approved = 1,
 
     /// <summary>
     /// Indicates that the web log entity is not approved.

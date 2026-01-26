@@ -93,11 +93,11 @@ public class TrackbackSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -112,7 +112,7 @@ public class TrackbackSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -137,14 +137,14 @@ public class TrackbackSyndicationExtension : SyndicationExtension, IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -170,12 +170,12 @@ public class TrackbackSyndicationExtension : SyndicationExtension, IComparable
             return 1;
         }
 
-        TrackbackSyndicationExtension value  = obj as TrackbackSyndicationExtension;
+        TrackbackSyndicationExtension value = obj as TrackbackSyndicationExtension;
 
         if (value != null)
         {
-            int result  = Uri.Compare(this.Context.Ping, value.Context.Ping, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | ComparisonUtility.CompareSequence(this.Context.Abouts, value.Context.Abouts, StringComparison.OrdinalIgnoreCase);
+            int result = Uri.Compare(this.Context.Ping, value.Context.Ping, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | ComparisonUtility.CompareSequence(this.Context.Abouts, value.Context.Abouts, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -206,7 +206,7 @@ public class TrackbackSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

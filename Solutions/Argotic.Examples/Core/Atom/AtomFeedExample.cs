@@ -21,7 +21,7 @@ public static class AtomFeedExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed
+        AtomFeed feed = new AtomFeed
         {
             Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
             Title = new AtomTextConstruct("Example Feed"),
@@ -48,9 +48,9 @@ public static class AtomFeedExample
     /// </summary>
     public static void CreateExample()
     {
-        AtomFeed feed   = AtomFeed.Create(new Uri("http://news.google.com/?output=atom"));
-            
-        foreach(AtomEntry entry in feed.Entries)
+        AtomFeed feed = AtomFeed.Create(new Uri("http://news.google.com/?output=atom"));
+
+        foreach (AtomEntry entry in feed.Entries)
         {
             if (entry.PublishedOn >= DateTime.Today)
             {
@@ -63,7 +63,7 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadAsyncExample()
     {
-        AtomFeed feed   = new AtomFeed();
+        AtomFeed feed = new AtomFeed();
 
         feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
 
@@ -77,7 +77,7 @@ public static class AtomFeedExample
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
     private static void FeedLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
     {
-        if(e.State != null)
+        if (e.State != null)
         {
         }
     }
@@ -86,9 +86,9 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source    = new XPathDocument("http://news.google.com/?output=atom");
+        XPathDocument source = new XPathDocument("http://news.google.com/?output=atom");
 
-        AtomFeed feed   = new AtomFeed();
+        AtomFeed feed = new AtomFeed();
         feed.Load(source);
 
         foreach (AtomEntry entry in feed.Entries)
@@ -105,7 +105,7 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadStreamExample()
     {
-        AtomFeed feed   = new AtomFeed();
+        AtomFeed feed = new AtomFeed();
 
         using Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read);
         feed.Load(stream);
@@ -124,10 +124,10 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadXmlReaderExample()
     {
-        AtomFeed feed   = new AtomFeed();
+        AtomFeed feed = new AtomFeed();
 
         using Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read);
-        XmlReaderSettings settings  = new XmlReaderSettings
+        XmlReaderSettings settings = new XmlReaderSettings
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -150,8 +150,8 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadUriExample()
     {
-        AtomFeed feed   = new AtomFeed();
-        Uri source      = new Uri("http://news.google.com/?output=atom");
+        AtomFeed feed = new AtomFeed();
+        Uri source = new Uri("http://news.google.com/?output=atom");
 
         feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -169,7 +169,7 @@ public static class AtomFeedExample
     /// </summary>
     public static void SaveStreamExample()
     {
-        AtomFeed feed   = new AtomFeed();
+        AtomFeed feed = new AtomFeed();
 
         //  Modify feed state using public properties and methods
 
@@ -182,12 +182,12 @@ public static class AtomFeedExample
     /// </summary>
     public static void SaveXmlWriterExample()
     {
-        AtomFeed feed   = new AtomFeed();
+        AtomFeed feed = new AtomFeed();
 
         //  Modify feed state using public properties and methods
 
         using Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write);
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             Indent = true
         };

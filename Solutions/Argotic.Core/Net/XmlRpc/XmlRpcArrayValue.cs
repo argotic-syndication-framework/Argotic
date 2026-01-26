@@ -77,13 +77,13 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator dataNavigator    = source.SelectSingleNode("array/data");
+            XPathNavigator dataNavigator = source.SelectSingleNode("array/data");
             if (dataNavigator is { HasChildren: true })
             {
                 XPathNodeIterator valueIterator = dataNavigator.Select("value");
@@ -94,7 +94,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
                         if (XmlRpcClient.TryParseValue(valueIterator.Current, out IXmlRpcValue value))
                         {
                             this.Values.Add(value);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -118,7 +118,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
         writer.WriteStartElement("array");
 
         writer.WriteStartElement("data");
-        foreach(IXmlRpcValue value in this.Values)
+        foreach (IXmlRpcValue value in this.Values)
         {
             value.WriteTo(writer);
         }
@@ -139,14 +139,14 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -172,11 +172,11 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
             return 1;
         }
 
-        XmlRpcArrayValue value  = obj as XmlRpcArrayValue;
+        XmlRpcArrayValue value = obj as XmlRpcArrayValue;
 
         if (value != null)
         {
-            int result  = XmlRpcMessage.CompareSequence(this.Values, value.Values);
+            int result = XmlRpcMessage.CompareSequence(this.Values, value.Values);
 
             return result;
         }
@@ -207,7 +207,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

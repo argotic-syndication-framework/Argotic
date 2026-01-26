@@ -31,7 +31,7 @@ public class TrackbackClient
     /// <summary>
     /// Private member to hold information such as the application name, version, host operating system, and language.
     /// </summary>
-    private string clientUserAgent  = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(TrackbackClient)).GetName().Version.ToString(4));
+    private string clientUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(TrackbackClient)).GetName().Version.ToString(4));
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
@@ -39,7 +39,7 @@ public class TrackbackClient
     /// <summary>
     /// Private member to hold a value that specifies the amount of time after which an asynchronous send operation times out.
     /// </summary>
-    private TimeSpan clientTimeout  = TimeSpan.FromSeconds(15);
+    private TimeSpan clientTimeout = TimeSpan.FromSeconds(15);
     /// <summary>
     /// Private member to hold a value that indicates if the client sends default credentials when making a Trackback ping request.
     /// </summary>
@@ -73,7 +73,7 @@ public class TrackbackClient
     public TrackbackClient(Uri host)
     {
         this.Initialize();
-        this.Host   = host;
+        this.Host = host;
     }
 
     /// <summary>
@@ -86,7 +86,7 @@ public class TrackbackClient
     /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
     public TrackbackClient(Uri host, string userAgent) : this(host)
     {
-        this.UserAgent  = userAgent;
+        this.UserAgent = userAgent;
     }
 
     /// <summary>
@@ -112,7 +112,7 @@ public class TrackbackClient
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
     protected virtual void OnMessageSent(TrackbackMessageSentEventArgs e)
     {
-        EventHandler<TrackbackMessageSentEventArgs> handler    = null;
+        EventHandler<TrackbackMessageSentEventArgs> handler = null;
 
         handler = this.SendCompleted;
 
@@ -212,7 +212,7 @@ public class TrackbackClient
             }
             else
             {
-                clientTimeout   = value;
+                clientTimeout = value;
             }
         }
     }
@@ -310,33 +310,33 @@ public class TrackbackClient
     /// <param name="result">The result of the asynchronous operation.</param>
     private static void AsyncSendCallback(IAsyncResult result)
     {
-        TrackbackResponse response      = null;
-        WebRequest httpWebRequest       = null;
-        TrackbackClient client          = null;
-        Uri host                        = null;
-        TrackbackMessage message        = null;
-        WebRequestOptions options       = null;
-        object userToken                = null;
+        TrackbackResponse response = null;
+        WebRequest httpWebRequest = null;
+        TrackbackClient client = null;
+        Uri host = null;
+        TrackbackMessage message = null;
+        WebRequestOptions options = null;
+        object userToken = null;
 
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest      = parameters[0] as WebRequest;
-            client              = parameters[1] as TrackbackClient;
-            host                = parameters[2] as Uri;
-            message             = parameters[3] as TrackbackMessage;
-            options             = parameters[4] as WebRequestOptions;
-            userToken           = parameters[5];
+            httpWebRequest = parameters[0] as WebRequest;
+            client = parameters[1] as TrackbackClient;
+            host = parameters[2] as Uri;
+            message = parameters[3] as TrackbackMessage;
+            options = parameters[4] as WebRequestOptions;
+            userToken = parameters[5];
 
             if (client != null)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
 
-                response    = new TrackbackResponse(httpWebResponse);
+                response = new TrackbackResponse(httpWebResponse);
 
                 client.OnMessageSent(new TrackbackMessageSentEventArgs(host, message, response, options, userToken));
 
-                client.SendOperationInProgress  = false;
+                client.SendOperationInProgress = false;
             }
         }
     }
@@ -356,7 +356,7 @@ public class TrackbackClient
             }
         }
 
-        this.SendOperationInProgress    = false;
+        this.SendOperationInProgress = false;
     }
 
     /// <summary>
@@ -369,11 +369,11 @@ public class TrackbackClient
     /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, Object)"/> call in progress.</exception>
     public TrackbackResponse Send(TrackbackMessage message)
     {
-        TrackbackResponse response   = null;
+        TrackbackResponse response = null;
 
         Guard.ArgumentNotNull(message, "message");
 
-        if(this.Host == null)
+        if (this.Host == null)
         {
             throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
         }
@@ -382,10 +382,10 @@ public class TrackbackClient
             throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
         }
 
-        WebRequest webRequest   = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
+        WebRequest webRequest = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
         using WebResponse webResponse = (WebResponse)webRequest.GetResponse();
-        response    = new TrackbackResponse(webResponse);
+        response = new TrackbackResponse(webResponse);
 
         return response;
     }
@@ -419,12 +419,12 @@ public class TrackbackClient
             throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
         }
 
-        this.SendOperationInProgress    = true;
-        this.AsyncSendHasBeenCancelled  = false;
+        this.SendOperationInProgress = true;
+        this.AsyncSendHasBeenCancelled = false;
 
         asyncHttpWebRequest = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
-        object[] state      = [asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken];
+        object[] state = [asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncSendCallback), state);
 
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);
@@ -442,7 +442,7 @@ public class TrackbackClient
     {
         if (this.SendOperationInProgress && !this.AsyncSendHasBeenCancelled)
         {
-            this.AsyncSendHasBeenCancelled  = true;
+            this.AsyncSendHasBeenCancelled = true;
             asyncHttpWebRequest.Abort();
         }
     }
@@ -463,16 +463,16 @@ public class TrackbackClient
     /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
     private static WebRequest CreateWebRequest(Uri host, string userAgent, TrackbackMessage message, bool useDefaultCredentials, WebRequestOptions options)
     {
-        HttpWebRequest httpRequest  = null;
+        HttpWebRequest httpRequest = null;
         byte[] payloadData;
 
         Guard.ArgumentNotNull(host, "host");
         Guard.ArgumentNotNullOrEmptyString(userAgent, "userAgent");
         Guard.ArgumentNotNull(message, "message");
 
-        using(MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new MemoryStream())
         {
-            using(StreamWriter writer = new StreamWriter(stream, message.Encoding))
+            using (StreamWriter writer = new StreamWriter(stream, message.Encoding))
             {
                 message.WriteTo(writer);
                 writer.Flush();
@@ -482,16 +482,16 @@ public class TrackbackClient
             }
         }
 
-        httpRequest                     = (HttpWebRequest)HttpWebRequest.Create(host);
-        httpRequest.Method              = "POST";
-        httpRequest.ContentLength       = payloadData.Length;
-        httpRequest.ContentType         = string.Format(null, "application/x-www-form-urlencoded; charset={0}", message.Encoding.WebName);
-        httpRequest.UserAgent           = userAgent;
+        httpRequest = (HttpWebRequest)HttpWebRequest.Create(host);
+        httpRequest.Method = "POST";
+        httpRequest.ContentLength = payloadData.Length;
+        httpRequest.ContentType = string.Format(null, "application/x-www-form-urlencoded; charset={0}", message.Encoding.WebName);
+        httpRequest.UserAgent = userAgent;
         if (options != null) options.ApplyOptions(httpRequest);
 
-        if(useDefaultCredentials)
+        if (useDefaultCredentials)
         {
-            httpRequest.Credentials     = CredentialCache.DefaultCredentials;
+            httpRequest.Credentials = CredentialCache.DefaultCredentials;
         }
 
         using (Stream stream = httpRequest.GetRequestStream())
@@ -508,32 +508,32 @@ public class TrackbackClient
     /// <seealso cref="XmlRpcClientSection"/>
     private void Initialize()
     {
-        TrackbackClientSection clientConfiguration  = PrivilegedConfigurationManager.GetTracbackClientSection();
+        TrackbackClientSection clientConfiguration = PrivilegedConfigurationManager.GetTracbackClientSection();
 
         if (clientConfiguration != null)
         {
-            if(clientConfiguration.Timeout.TotalMilliseconds > 0 && clientConfiguration.Timeout < TimeSpan.FromDays(365))
+            if (clientConfiguration.Timeout.TotalMilliseconds > 0 && clientConfiguration.Timeout < TimeSpan.FromDays(365))
             {
-                this.Timeout    = clientConfiguration.Timeout;
+                this.Timeout = clientConfiguration.Timeout;
             }
 
             if (!string.IsNullOrEmpty(clientConfiguration.UserAgent))
             {
-                this.UserAgent  = clientConfiguration.UserAgent;
+                this.UserAgent = clientConfiguration.UserAgent;
             }
 
             if (clientConfiguration.Network != null)
             {
-                this.UseDefaultCredentials  = clientConfiguration.Network.DefaultCredentials;
+                this.UseDefaultCredentials = clientConfiguration.Network.DefaultCredentials;
 
                 if (clientConfiguration.Network.Credential != null)
                 {
-                    this.Credentials    = clientConfiguration.Network.Credential;
+                    this.Credentials = clientConfiguration.Network.Credential;
                 }
 
                 if (clientConfiguration.Network.Host != null)
                 {
-                    this.Host   = clientConfiguration.Network.Host;
+                    this.Host = clientConfiguration.Network.Host;
                 }
             }
         }

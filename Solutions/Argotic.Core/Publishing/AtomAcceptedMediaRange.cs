@@ -48,7 +48,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <summary>
     /// Private member to hold the value of the accepted media range.
     /// </summary>
-    private string acceptedMediaRangeValue  = string.Empty;
+    private string acceptedMediaRangeValue = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class.
@@ -156,12 +156,12 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
 
         Guard.ArgumentNotNull(extension, "extension");
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -205,7 +205,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -281,7 +281,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
@@ -291,7 +291,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
         }
 
         this.MediaRange = !string.IsNullOrEmpty(source.Value) ? source.Value.Trim() : string.Empty;
-        wasLoaded       = true;
+        wasLoaded = true;
 
         return wasLoaded;
     }
@@ -314,7 +314,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
 
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
 
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -334,7 +334,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
         writer.WriteStartElement("accept", AtomUtility.AtomPublishingNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if(!string.IsNullOrEmpty(this.MediaRange))
+        if (!string.IsNullOrEmpty(this.MediaRange))
         {
             writer.WriteString(this.MediaRange);
         }
@@ -354,14 +354,14 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -387,12 +387,12 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
             return 1;
         }
 
-        AtomAcceptedMediaRange value  = obj as AtomAcceptedMediaRange;
+        AtomAcceptedMediaRange value = obj as AtomAcceptedMediaRange;
 
         if (value != null)
         {
-            int result  = string.Compare(this.MediaRange, value.MediaRange, StringComparison.OrdinalIgnoreCase);
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            int result = string.Compare(this.MediaRange, value.MediaRange, StringComparison.OrdinalIgnoreCase);
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -423,7 +423,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

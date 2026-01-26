@@ -30,7 +30,7 @@ public static class AtomEntryExample
 
         entry.Authors.Add(new AtomPersonConstruct("John Doe"));
         entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
-        entry.Summary   = new AtomTextConstruct("A stand-alone Atom Entry Document.");
+        entry.Summary = new AtomTextConstruct("A stand-alone Atom Entry Document.");
     }
     /// <summary>
     /// Provides example code for the AtomEntry.Create(Uri) method
@@ -64,7 +64,7 @@ public static class AtomEntryExample
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
     private static void EntryLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
     {
-        if(e.State != null)
+        if (e.State != null)
         {
         }
     }
@@ -73,9 +73,9 @@ public static class AtomEntryExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source    = new XPathDocument("http://example.org/blog/1234");
+        XPathDocument source = new XPathDocument("http://example.org/blog/1234");
 
-        AtomEntry entry         = new AtomEntry();
+        AtomEntry entry = new AtomEntry();
         entry.Load(source);
 
         if (entry.UpdatedOn >= DateTime.Today)
@@ -108,7 +108,7 @@ public static class AtomEntryExample
         AtomEntry entry = new AtomEntry();
 
         using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read);
-        XmlReaderSettings settings  = new XmlReaderSettings
+        XmlReaderSettings settings = new XmlReaderSettings
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -129,7 +129,7 @@ public static class AtomEntryExample
     public static void LoadUriExample()
     {
         AtomEntry entry = new AtomEntry();
-        Uri source      = new Uri("http://example.org/blog/1234");
+        Uri source = new Uri("http://example.org/blog/1234");
 
         entry.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -162,7 +162,7 @@ public static class AtomEntryExample
         //  Modify entry state using public properties and methods
 
         using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write);
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             Indent = true
         };

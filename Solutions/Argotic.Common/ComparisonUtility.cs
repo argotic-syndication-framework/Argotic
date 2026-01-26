@@ -32,7 +32,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<DayOfWeek> source, Collection<DayOfWeek> target)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -77,7 +77,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<int> source, Collection<int> target)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -122,7 +122,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<long> source, Collection<long> target)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -168,7 +168,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<string> source, Collection<string> target, StringComparison comparisonType)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -177,7 +177,7 @@ public static class ComparisonUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | string.Compare(source[i], target[i], comparisonType);
+                result = result | string.Compare(source[i], target[i], comparisonType);
             }
         }
         else if (source.Count > target.Count)
@@ -259,7 +259,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<Uri> source, Collection<Uri> target, StringComparison comparisonType)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -350,7 +350,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Dictionary<string, string> source, Dictionary<string, string> target, StringComparison comparisonType)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -361,7 +361,7 @@ public static class ComparisonUtility
             {
                 if (target.ContainsKey(key))
                 {
-                    result  = result | string.Compare(source[key], target[key], comparisonType);
+                    result = result | string.Compare(source[key], target[key], comparisonType);
                 }
                 else
                 {

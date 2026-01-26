@@ -25,11 +25,11 @@ public class YahooMediaPlayer : IComparable
     /// <summary>
     /// Private member to hold the height of the browser window that the player console should be opened in.
     /// </summary>
-    private int playerHeight    = int.MinValue;
+    private int playerHeight = int.MinValue;
     /// <summary>
     /// Private member to hold the with of the browser window that the player console should be opened in.
     /// </summary>
-    private int playerWidth     = int.MinValue;
+    private int playerWidth = int.MinValue;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaPlayer"/> class.
@@ -45,7 +45,7 @@ public class YahooMediaPlayer : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
     public YahooMediaPlayer(Uri url)
     {
-        this.Url    = url;
+        this.Url = url;
     }
 
     /// <summary>
@@ -58,7 +58,7 @@ public class YahooMediaPlayer : IComparable
     public YahooMediaPlayer(Uri url, int height, int width) : this(url)
     {
         this.Height = height;
-        this.Width  = width;
+        this.Width = width;
     }
     /// <summary>
     /// Gets or sets the height of the browser window that this player console should be opened in.
@@ -123,20 +123,20 @@ public class YahooMediaPlayer : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string urlAttribute     = source.GetAttribute("url", string.Empty);
-            string heightAttribute  = source.GetAttribute("height", string.Empty);
-            string widthAttribute   = source.GetAttribute("width", string.Empty);
+            string urlAttribute = source.GetAttribute("url", string.Empty);
+            string heightAttribute = source.GetAttribute("height", string.Empty);
+            string widthAttribute = source.GetAttribute("width", string.Empty);
 
             if (!string.IsNullOrEmpty(urlAttribute))
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
-                    this.Url    = url;
-                    wasLoaded   = true;
+                    this.Url = url;
+                    wasLoaded = true;
                 }
             }
 
@@ -145,7 +145,7 @@ public class YahooMediaPlayer : IComparable
                 if (int.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
                 {
                     this.Height = height;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -153,8 +153,8 @@ public class YahooMediaPlayer : IComparable
             {
                 if (int.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
                 {
-                    this.Width  = width;
-                    wasLoaded   = true;
+                    this.Width = width;
+                    wasLoaded = true;
                 }
             }
         }
@@ -170,7 +170,7 @@ public class YahooMediaPlayer : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("player", extension.XmlNamespace);
 
         writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
@@ -198,14 +198,14 @@ public class YahooMediaPlayer : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -230,13 +230,13 @@ public class YahooMediaPlayer : IComparable
         {
             return 1;
         }
-        YahooMediaPlayer value  = obj as YahooMediaPlayer;
+        YahooMediaPlayer value = obj as YahooMediaPlayer;
 
         if (value != null)
         {
-            int result  = this.Height.CompareTo(value.Height);
-            result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Width.CompareTo(value.Width);
+            int result = this.Height.CompareTo(value.Height);
+            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Width.CompareTo(value.Width);
 
             return result;
         }
@@ -267,7 +267,7 @@ public class YahooMediaPlayer : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

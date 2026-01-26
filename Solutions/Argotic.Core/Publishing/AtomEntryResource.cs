@@ -24,7 +24,7 @@ public class AtomEntryResource : AtomEntry
     /// <summary>
     /// Private member to hold the last time the entry was edited. If the entry has not been edited yet, indicates the time the entry was created.
     /// </summary>
-    private DateTime entryResourceEditedOn  = DateTime.MinValue;
+    private DateTime entryResourceEditedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold a value indicating if the client is requesting to control the visibility of the entry.
     /// </summary>
@@ -69,7 +69,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
     public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn) : this(id, title, updatedOn)
     {
-        this.EditedOn   = editedOn;
+        this.EditedOn = editedOn;
     }
 
     /// <summary>
@@ -90,7 +90,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
     public AtomEntryResource(AtomId id, AtomTextConstruct title, DateTime updatedOn, DateTime editedOn, bool isDraft) : this(id, title, updatedOn, editedOn)
     {
-        this.IsDraft    = isDraft;
+        this.IsDraft = isDraft;
     }
 
     /// <summary>
@@ -191,7 +191,7 @@ public class AtomEntryResource : AtomEntry
 
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
 
         if (this.LoadOperationInProgress)
@@ -199,14 +199,14 @@ public class AtomEntryResource : AtomEntry
             throw new InvalidOperationException();
         }
 
-        this.LoadOperationInProgress    = true;
+        this.LoadOperationInProgress = true;
 
-        this.AsyncLoadHasBeenCancelled  = false;
+        this.AsyncLoadHasBeenCancelled = false;
 
-        asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
+        asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
+        object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
 
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
@@ -236,23 +236,23 @@ public class AtomEntryResource : AtomEntry
     /// <param name="result">The result of the asynchronous operation.</param>
     private static void AsyncLoadCallback(IAsyncResult result)
     {
-        System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
-        XPathNavigator navigator                    = null;
-        WebRequest httpWebRequest                   = null;
-        AtomEntryResource entry                     = null;
-        Uri source                                  = null;
-        WebRequestOptions options                   = null;
-        SyndicationResourceLoadSettings settings    = null;
+        System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+        XPathNavigator navigator = null;
+        WebRequest httpWebRequest = null;
+        AtomEntryResource entry = null;
+        Uri source = null;
+        WebRequestOptions options = null;
+        SyndicationResourceLoadSettings settings = null;
 
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest      = parameters[0] as WebRequest;
-            entry               = parameters[1] as AtomEntryResource;
-            source              = parameters[2] as Uri;
-            settings            = parameters[3] as SyndicationResourceLoadSettings;
-            options             = parameters[4] as WebRequestOptions;
-            object userToken    = parameters[5];
+            httpWebRequest = parameters[0] as WebRequest;
+            entry = parameters[1] as AtomEntryResource;
+            source = parameters[2] as Uri;
+            settings = parameters[3] as SyndicationResourceLoadSettings;
+            options = parameters[4] as WebRequestOptions;
+            object userToken = parameters[5];
 
             if (entry != null)
             {
@@ -262,12 +262,12 @@ public class AtomEntryResource : AtomEntry
                 {
                     if (settings != null)
                     {
-                        encoding    = settings.CharacterEncoding;
+                        encoding = settings.CharacterEncoding;
                     }
 
                     using (StreamReader streamReader = new StreamReader(stream, encoding))
                     {
-                        XmlReaderSettings readerSettings    = new XmlReaderSettings
+                        XmlReaderSettings readerSettings = new XmlReaderSettings
                         {
                             IgnoreComments = true,
                             IgnoreWhitespace = true,
@@ -278,26 +278,26 @@ public class AtomEntryResource : AtomEntry
                         {
                             if (encoding == System.Text.Encoding.UTF8)
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                             }
                             else
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                             }
 
-                            SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                            SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                             adapter.Fill(entry, SyndicationContentFormat.Atom);
 
-                            AtomPublishingEditedSyndicationExtension editedExtension    = entry.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+                            AtomPublishingEditedSyndicationExtension editedExtension = entry.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
                             if (editedExtension != null)
                             {
-                                entry.EditedOn  = editedExtension.Context.EditedOn;
+                                entry.EditedOn = editedExtension.Context.EditedOn;
                             }
 
-                            AtomPublishingControlSyndicationExtension controlExtension  = entry.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+                            AtomPublishingControlSyndicationExtension controlExtension = entry.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
                             if (controlExtension != null)
                             {
-                                entry.IsDraft   = controlExtension.Context.IsDraft;
+                                entry.IsDraft = controlExtension.Context.IsDraft;
                             }
 
                             entry.OnEntryLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
@@ -305,7 +305,7 @@ public class AtomEntryResource : AtomEntry
                     }
                 }
 
-                entry.LoadOperationInProgress    = false;
+                entry.LoadOperationInProgress = false;
             }
         }
     }
@@ -325,7 +325,7 @@ public class AtomEntryResource : AtomEntry
             }
         }
 
-        this.LoadOperationInProgress    = false;
+        this.LoadOperationInProgress = false;
     }
 
     /// <summary>
@@ -343,16 +343,16 @@ public class AtomEntryResource : AtomEntry
     {
         base.Load(source, settings);
 
-        AtomPublishingEditedSyndicationExtension editedExtension    = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+        AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
         if (editedExtension != null)
         {
-            this.EditedOn   = editedExtension.Context.EditedOn;
+            this.EditedOn = editedExtension.Context.EditedOn;
         }
 
-        AtomPublishingControlSyndicationExtension controlExtension  = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+        AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
         if (controlExtension != null)
         {
-            this.IsDraft    = controlExtension.Context.IsDraft;
+            this.IsDraft = controlExtension.Context.IsDraft;
         }
     }
 
@@ -434,16 +434,16 @@ public class AtomEntryResource : AtomEntry
     {
         base.Load(source, options, settings);
 
-        AtomPublishingEditedSyndicationExtension editedExtension    = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+        AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
         if (editedExtension != null)
         {
-            this.EditedOn   = editedExtension.Context.EditedOn;
+            this.EditedOn = editedExtension.Context.EditedOn;
         }
 
-        AtomPublishingControlSyndicationExtension controlExtension  = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+        AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
         if (controlExtension != null)
         {
-            this.IsDraft    = controlExtension.Context.IsDraft;
+            this.IsDraft = controlExtension.Context.IsDraft;
         }
     }
 
@@ -460,34 +460,34 @@ public class AtomEntryResource : AtomEntry
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNull(settings, "settings");
 
-        List<ISyndicationExtension> list    = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
 
-        if(this.EditedOn != DateTime.MinValue)
+        if (this.EditedOn != DateTime.MinValue)
         {
             if (!list.Exists(AtomPublishingEditedSyndicationExtension.MatchByType))
             {
-                AtomPublishingEditedSyndicationExtension editedExtension    = new AtomPublishingEditedSyndicationExtension
-                    {
-                        Context =
+                AtomPublishingEditedSyndicationExtension editedExtension = new AtomPublishingEditedSyndicationExtension
+                {
+                    Context =
                         {
                             EditedOn = this.EditedOn
                         }
-                    };
+                };
                 this.AddExtension(editedExtension);
             }
         }
 
-        if(this.IsDraft)
+        if (this.IsDraft)
         {
             if (!list.Exists(AtomPublishingControlSyndicationExtension.MatchByType))
             {
-                AtomPublishingControlSyndicationExtension controlExtension  = new AtomPublishingControlSyndicationExtension
-                    {
-                        Context =
+                AtomPublishingControlSyndicationExtension controlExtension = new AtomPublishingControlSyndicationExtension
+                {
+                    Context =
                         {
                             IsDraft = this.IsDraft
                         }
-                    };
+                };
                 this.AddExtension(controlExtension);
             }
         }

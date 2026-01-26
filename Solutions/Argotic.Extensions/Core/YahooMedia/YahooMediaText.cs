@@ -23,7 +23,7 @@ public class YahooMediaText : IComparable
     /// <summary>
     /// Private member to hold the type of the embedded text.
     /// </summary>
-    private YahooMediaTextConstructType textType    = YahooMediaTextConstructType.None;
+    private YahooMediaTextConstructType textType = YahooMediaTextConstructType.None;
     /// <summary>
     /// Private member to hold the primary language encapsulated in the media object.
     /// </summary>
@@ -31,15 +31,15 @@ public class YahooMediaText : IComparable
     /// <summary>
     /// Private member to hold the start time offset that the text starts being relevant to the media object.
     /// </summary>
-    private TimeSpan textStart                      = TimeSpan.MinValue;
+    private TimeSpan textStart = TimeSpan.MinValue;
     /// <summary>
     /// Private member to hold the end time offset that the text stops being relevant to the media object.
     /// </summary>
-    private TimeSpan textEnd                        = TimeSpan.MinValue;
+    private TimeSpan textEnd = TimeSpan.MinValue;
     /// <summary>
     /// Private member to hold the text transcript, closed captioning, or lyrics for the media content.
     /// </summary>
-    private string textContent                      = string.Empty;
+    private string textContent = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaText"/> class.
@@ -56,7 +56,7 @@ public class YahooMediaText : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
     public YahooMediaText(string text)
     {
-        this.Content    = text;
+        this.Content = text;
     }
 
     /// <summary>
@@ -188,17 +188,17 @@ public class YahooMediaText : IComparable
         {
             if (fieldInfo.FieldType == typeof(YahooMediaTextConstructType))
             {
-                YahooMediaTextConstructType constructType   = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                YahooMediaTextConstructType constructType = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (constructType == type)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -218,14 +218,14 @@ public class YahooMediaText : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaTextConstructType TextTypeByName(string name)
     {
-        YahooMediaTextConstructType constructType   = YahooMediaTextConstructType.None;
+        YahooMediaTextConstructType constructType = YahooMediaTextConstructType.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaTextConstructType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaTextConstructType))
             {
-                YahooMediaTextConstructType type    = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes           = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                YahooMediaTextConstructType type = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -254,22 +254,22 @@ public class YahooMediaText : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string typeAttribute        = source.GetAttribute("type", string.Empty);
-            string languageAttribute    = source.GetAttribute("lang", string.Empty);
-            string startAttribute       = source.GetAttribute("start", string.Empty);
-            string endAttribute         = source.GetAttribute("end", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
+            string languageAttribute = source.GetAttribute("lang", string.Empty);
+            string startAttribute = source.GetAttribute("start", string.Empty);
+            string endAttribute = source.GetAttribute("end", string.Empty);
 
             if (!string.IsNullOrEmpty(typeAttribute))
             {
                 YahooMediaTextConstructType type = YahooMediaTextConstruct.TextTypeByName(typeAttribute);
                 if (type != YahooMediaTextConstructType.None)
                 {
-                    this.TextType   = type;
-                    wasLoaded       = true;
+                    this.TextType = type;
+                    wasLoaded = true;
                 }
             }
 
@@ -277,9 +277,9 @@ public class YahooMediaText : IComparable
             {
                 try
                 {
-                    CultureInfo language    = new CultureInfo(languageAttribute);
-                    this.Language           = language;
-                    wasLoaded               = true;
+                    CultureInfo language = new CultureInfo(languageAttribute);
+                    this.Language = language;
+                    wasLoaded = true;
                 }
                 catch (ArgumentException)
                 {
@@ -291,8 +291,8 @@ public class YahooMediaText : IComparable
             {
                 if (TimeSpan.TryParse(startAttribute, out TimeSpan start))
                 {
-                    this.Start  = start;
-                    wasLoaded   = true;
+                    this.Start = start;
+                    wasLoaded = true;
                 }
             }
 
@@ -300,16 +300,16 @@ public class YahooMediaText : IComparable
             {
                 if (TimeSpan.TryParse(endAttribute, out TimeSpan end))
                 {
-                    this.End    = end;
-                    wasLoaded   = true;
+                    this.End = end;
+                    wasLoaded = true;
                 }
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content    = source.Value;
-            wasLoaded       = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -323,7 +323,7 @@ public class YahooMediaText : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("text", extension.XmlNamespace);
 
         if (this.TextType != YahooMediaTextConstructType.None)
@@ -364,14 +364,14 @@ public class YahooMediaText : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -396,19 +396,19 @@ public class YahooMediaText : IComparable
         {
             return 1;
         }
-        YahooMediaText value  = obj as YahooMediaText;
+        YahooMediaText value = obj as YahooMediaText;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.End.CompareTo(value.End);
+            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result = result | this.End.CompareTo(value.End);
 
-            string sourceLanguageName   = this.Language != null ? this.Language.Name : string.Empty;
-            string targetLanguageName   = value.Language != null ? value.Language.Name : string.Empty;
-            result      = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+            string sourceLanguageName = this.Language != null ? this.Language.Name : string.Empty;
+            string targetLanguageName = value.Language != null ? value.Language.Name : string.Empty;
+            result = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | this.Start.CompareTo(value.Start);
-            result      = result | this.TextType.CompareTo(value.TextType);
+            result = result | this.Start.CompareTo(value.Start);
+            result = result | this.TextType.CompareTo(value.TextType);
 
             return result;
         }
@@ -439,7 +439,7 @@ public class YahooMediaText : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

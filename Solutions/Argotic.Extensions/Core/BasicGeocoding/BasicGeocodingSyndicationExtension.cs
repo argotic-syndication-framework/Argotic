@@ -70,16 +70,16 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <seealso cref="ConvertDegreesMinutesSecondsToDecimal(string)"/>
     public static string ConvertDecimalToDegreesMinutesSeconds(decimal value)
     {
-        string degreesPart  = string.Empty;
-        string minutesPart  = string.Empty;
-        string secondsPart  = string.Empty;
-        decimal multiplier  = (decimal)60;
+        string degreesPart = string.Empty;
+        string minutesPart = string.Empty;
+        string secondsPart = string.Empty;
+        decimal multiplier = (decimal)60;
 
-        string degreesAsString  = value.ToString(NumberFormatInfo.InvariantInfo);
-			
-        if(degreesAsString.Contains("."))
+        string degreesAsString = value.ToString(NumberFormatInfo.InvariantInfo);
+
+        if (degreesAsString.Contains("."))
         {
-            string[] degreesParts   = degreesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] degreesParts = degreesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             if (degreesParts.Length == 2)
             {
                 degreesPart = degreesParts[0];
@@ -88,10 +88,10 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
                 {
                     decimal minutes = decimal.Multiply(fractionalValue, multiplier);
 
-                    string minutesAsString  = minutes.ToString(NumberFormatInfo.InvariantInfo);
+                    string minutesAsString = minutes.ToString(NumberFormatInfo.InvariantInfo);
                     if (minutesAsString.Contains("."))
                     {
-                        string[] minutesParts   = minutesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                        string[] minutesParts = minutesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                         if (minutesParts.Length == 2)
                         {
                             minutesPart = minutesParts[0];
@@ -99,7 +99,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
                             if (decimal.TryParse("." + minutesParts[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out fractionalValue))
                             {
                                 decimal seconds = decimal.Multiply(fractionalValue, multiplier);
-                                secondsPart     = decimal.Round(seconds, 2).ToString(NumberFormatInfo.InvariantInfo);
+                                secondsPart = decimal.Round(seconds, 2).ToString(NumberFormatInfo.InvariantInfo);
                             }
                         }
                     }
@@ -136,11 +136,11 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         string degreesValue = degreesMinutesSeconds[..degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase)];
         string minutesValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) + 1, degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) - degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) - 1);
         string secondsValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) + 1, degreesMinutesSeconds.IndexOf("\"", StringComparison.OrdinalIgnoreCase) - degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) - 1);
-			
-        degreesValue        = degreesValue.Trim();
-        minutesValue        = minutesValue.Trim();
-        secondsValue        = secondsValue.Replace("N", string.Empty).Replace("S", string.Empty).Replace("E", string.Empty).Replace("W", string.Empty);
-        secondsValue        = secondsValue.Trim();
+
+        degreesValue = degreesValue.Trim();
+        minutesValue = minutesValue.Trim();
+        secondsValue = secondsValue.Replace("N", string.Empty).Replace("S", string.Empty).Replace("E", string.Empty).Replace("W", string.Empty);
+        secondsValue = secondsValue.Trim();
 
         if (!decimal.TryParse(degreesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal degrees))
         {
@@ -154,7 +154,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         {
             throw new FormatException(string.Format(null, "The supplied seconds of {0} does not represent a floating point number.", secondsValue));
         }
-        return (degrees + (minutes/60) + (seconds/3600));
+        return (degrees + (minutes / 60) + (seconds / 3600));
     }
 
     /// <summary>
@@ -184,11 +184,11 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -203,10 +203,10 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
-//			return this.Load(document);
+        //			return this.Load(document);
     }
 
     /// <summary>
@@ -230,14 +230,14 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -263,19 +263,19 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
             return 1;
         }
 
-        BasicGeocodingSyndicationExtension value  = obj as BasicGeocodingSyndicationExtension;
+        BasicGeocodingSyndicationExtension value = obj as BasicGeocodingSyndicationExtension;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Version.CompareTo(value.Version);
-            result      = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result      = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Version.CompareTo(value.Version);
+            result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
-            result      = result | this.Context.Latitude.CompareTo(value.Context.Latitude);
-            result      = result | this.Context.Longitude.CompareTo(value.Context.Longitude);
+            result = result | this.Context.Latitude.CompareTo(value.Context.Latitude);
+            result = result | this.Context.Longitude.CompareTo(value.Context.Longitude);
 
             return result;
         }

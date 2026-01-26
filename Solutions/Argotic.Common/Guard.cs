@@ -31,7 +31,7 @@ public static class Guard
     /// </remarks>
     public static void ArgumentNotNullOrEmptyString(string value, string name)
     {
-        if(string.IsNullOrEmpty(value))
+        if (string.IsNullOrEmpty(value))
         {
             throw new ArgumentNullException(name);
         }

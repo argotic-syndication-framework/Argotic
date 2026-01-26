@@ -39,7 +39,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
         {
             while (iterator.MoveNext())
             {
-                XmlRpcStructureMember member    = new XmlRpcStructureMember();
+                XmlRpcStructureMember member = new XmlRpcStructureMember();
                 if (member.Load(iterator.Current))
                 {
                     this.Members.Add(member);
@@ -66,13 +66,13 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
         {
             Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-            XmlRpcStructureMember result    = null;
+            XmlRpcStructureMember result = null;
 
             foreach (XmlRpcStructureMember member in this.Members)
             {
                 if (string.Compare(member.Name, name, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    result  = member;
+                    result = member;
                     break;
                 }
             }
@@ -87,7 +87,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
 
             for (int i = 0; i < this.Members.Count; i++)
             {
-                XmlRpcStructureMember member    = this.Members[i];
+                XmlRpcStructureMember member = this.Members[i];
                 if (string.Compare(member.Name, name, StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     this.Members[i] = value;
@@ -137,7 +137,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<XmlRpcStructureMember> source, Collection<XmlRpcStructureMember> target)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -146,10 +146,10 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                XmlRpcStructureMember member    = source[i];
+                XmlRpcStructureMember member = source[i];
                 if (!target.Contains(member))
                 {
-                    result  = -1;
+                    result = -1;
                     break;
                 }
             }
@@ -177,22 +177,22 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNodeIterator memberIterator    = source.Select("struct/member");
+            XPathNodeIterator memberIterator = source.Select("struct/member");
             if (memberIterator is { Count: > 0 })
             {
                 while (memberIterator.MoveNext())
                 {
-                    XmlRpcStructureMember member   = new XmlRpcStructureMember();
+                    XmlRpcStructureMember member = new XmlRpcStructureMember();
                     if (member.Load(memberIterator.Current))
                     {
                         this.Members.Add(member);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -213,7 +213,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
         writer.WriteStartElement("value");
 
         writer.WriteStartElement("struct");
-        foreach(XmlRpcStructureMember member in this.Members)
+        foreach (XmlRpcStructureMember member in this.Members)
         {
             member.WriteTo(writer);
         }
@@ -232,14 +232,14 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -265,11 +265,11 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
             return 1;
         }
 
-        XmlRpcStructureValue value  = obj as XmlRpcStructureValue;
+        XmlRpcStructureValue value = obj as XmlRpcStructureValue;
 
         if (value != null)
         {
-            int result  = XmlRpcStructureValue.CompareSequence(this.Members, value.Members);
+            int result = XmlRpcStructureValue.CompareSequence(this.Members, value.Members);
 
             return result;
         }
@@ -300,7 +300,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

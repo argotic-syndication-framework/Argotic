@@ -17,13 +17,13 @@ public enum FeedSynchronizationTombstoneStatus
     /// No deletion status specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// The item has been deleted.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Deleted", AlternateValue = "true")]
-    Deleted  = 1,
+    Deleted = 1,
 
     /// <summary>
     /// The item has not been deleted.

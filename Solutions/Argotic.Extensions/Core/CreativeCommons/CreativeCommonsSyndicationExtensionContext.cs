@@ -52,12 +52,12 @@ public class CreativeCommonsSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNodeIterator licenseIterator   = source.Select("creativeCommons:license", manager);
+            XPathNodeIterator licenseIterator = source.Select("creativeCommons:license", manager);
             if (licenseIterator is { Count: > 0 })
             {
                 while (licenseIterator.MoveNext())
@@ -65,7 +65,7 @@ public class CreativeCommonsSyndicationExtensionContext
                     if (Uri.TryCreate(licenseIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri license))
                     {
                         this.Licenses.Add(license);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -86,9 +86,9 @@ public class CreativeCommonsSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(this.Licenses.Count > 0)
+        if (this.Licenses.Count > 0)
         {
-            foreach(Uri license in this.Licenses)
+            foreach (Uri license in this.Licenses)
             {
                 writer.WriteElementString("license", xmlNamespace, license.ToString());
             }

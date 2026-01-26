@@ -29,7 +29,7 @@ public static class BlogMLDocumentExample
             Subtitle = new BlogMLTextConstruct("This is some sample blog content for BlogML 2.0")
         };
 
-        BlogMLAuthor administrator      = new BlogMLAuthor
+        BlogMLAuthor administrator = new BlogMLAuthor
         {
             Id = "2100",
             CreatedOn = new DateTime(2006, 8, 10, 8, 44, 35),
@@ -43,7 +43,7 @@ public static class BlogMLDocumentExample
         document.ExtendedProperties.Add("CommentModeration", "Anonymous");
         document.ExtendedProperties.Add("SendTrackback", "yes");
 
-        BlogMLCategory category1    = new BlogMLCategory
+        BlogMLCategory category1 = new BlogMLCategory
         {
             Id = "1018",
             CreatedOn = new DateTime(2006, 9, 5, 17, 54, 58),
@@ -55,7 +55,7 @@ public static class BlogMLDocumentExample
         };
         document.Categories.Add(category1);
 
-        BlogMLCategory category2    = new BlogMLCategory
+        BlogMLCategory category2 = new BlogMLCategory
         {
             Id = "1019",
             CreatedOn = new DateTime(2006, 9, 5, 17, 54, 59),
@@ -67,7 +67,7 @@ public static class BlogMLDocumentExample
         };
         document.Categories.Add(category2);
 
-        BlogMLCategory category3    = new BlogMLCategory
+        BlogMLCategory category3 = new BlogMLCategory
         {
             Id = "1020",
             CreatedOn = new DateTime(2006, 9, 5, 17, 55, 0),
@@ -79,7 +79,7 @@ public static class BlogMLDocumentExample
         };
         document.Categories.Add(category3);
 
-        BlogMLPost post         = new BlogMLPost
+        BlogMLPost post = new BlogMLPost
         {
             Id = "34",
             CreatedOn = new DateTime(2006, 9, 5, 3, 19, 0),
@@ -98,7 +98,7 @@ public static class BlogMLDocumentExample
 
         post.Authors.Add("2100");
 
-        BlogMLComment comment   = new BlogMLComment
+        BlogMLComment comment = new BlogMLComment
         {
             Id = "35",
             CreatedOn = new DateTime(2006, 9, 5, 11, 36, 50),
@@ -128,7 +128,7 @@ public static class BlogMLDocumentExample
     /// </summary>
     public static void LoadAsyncExample()
     {
-        BlogMLDocument document   = new BlogMLDocument();
+        BlogMLDocument document = new BlogMLDocument();
 
         document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
@@ -142,7 +142,7 @@ public static class BlogMLDocumentExample
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
     private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
     {
-        if(e.State != null)
+        if (e.State != null)
         {
         }
     }
@@ -152,7 +152,7 @@ public static class BlogMLDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source    = new XPathDocument("http://www.example.org/blog/blogML.axd");
+        XPathDocument source = new XPathDocument("http://www.example.org/blog/blogML.axd");
 
         BlogMLDocument document = new BlogMLDocument();
         document.Load(source);
@@ -193,7 +193,7 @@ public static class BlogMLDocumentExample
         BlogMLDocument document = new BlogMLDocument();
 
         using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Open, FileAccess.Read);
-        XmlReaderSettings settings  = new XmlReaderSettings
+        XmlReaderSettings settings = new XmlReaderSettings
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -217,7 +217,7 @@ public static class BlogMLDocumentExample
     public static void LoadUriExample()
     {
         BlogMLDocument document = new BlogMLDocument();
-        Uri source              = new Uri("http://www.example.org/blog/blogML.axd");
+        Uri source = new Uri("http://www.example.org/blog/blogML.axd");
 
         document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -253,7 +253,7 @@ public static class BlogMLDocumentExample
         //  Modify document state using public properties and methods
 
         using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Create, FileAccess.Write);
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             Indent = true
         };

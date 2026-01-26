@@ -44,9 +44,9 @@ public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         Guard.ArgumentNotNull(resource, "resource");
 
-        XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator feedNavigator    = this.Navigator.SelectSingleNode("rss", manager);
+        XPathNavigator feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
 
         if (feedNavigator != null)
         {

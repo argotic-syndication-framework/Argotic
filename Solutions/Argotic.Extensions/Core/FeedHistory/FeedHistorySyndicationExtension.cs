@@ -84,7 +84,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<FeedHistoryLinkRelation> source, Collection<FeedHistoryLinkRelation> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -92,7 +92,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -119,17 +119,17 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
         {
             if (fieldInfo.FieldType == typeof(FeedHistoryLinkRelationType))
             {
-                FeedHistoryLinkRelationType relationType    = (FeedHistoryLinkRelationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                FeedHistoryLinkRelationType relationType = (FeedHistoryLinkRelationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (relationType == relation)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -149,14 +149,14 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static FeedHistoryLinkRelationType LinkRelationTypeByName(string name)
     {
-        FeedHistoryLinkRelationType relationType    = FeedHistoryLinkRelationType.None;
+        FeedHistoryLinkRelationType relationType = FeedHistoryLinkRelationType.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedHistoryLinkRelationType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(FeedHistoryLinkRelationType))
             {
-                FeedHistoryLinkRelationType relation    = (FeedHistoryLinkRelationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes               = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                FeedHistoryLinkRelationType relation = (FeedHistoryLinkRelationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -164,7 +164,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
 
                     if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        relationType    = relation;
+                        relationType = relation;
                         break;
                     }
                 }
@@ -202,11 +202,11 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -221,7 +221,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -247,14 +247,14 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -279,20 +279,20 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
         {
             return 1;
         }
-        FeedHistorySyndicationExtension value  = obj as FeedHistorySyndicationExtension;
+        FeedHistorySyndicationExtension value = obj as FeedHistorySyndicationExtension;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Version.CompareTo(value.Version);
-            result      = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result      = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Version.CompareTo(value.Version);
+            result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
-            result      = result | this.Context.IsArchive.CompareTo(value.Context.IsArchive);
-            result      = result | this.Context.IsComplete.CompareTo(value.Context.IsComplete);
-            result      = result | FeedHistorySyndicationExtension.CompareSequence(this.Context.Relations, value.Context.Relations);
+            result = result | this.Context.IsArchive.CompareTo(value.Context.IsArchive);
+            result = result | this.Context.IsComplete.CompareTo(value.Context.IsComplete);
+            result = result | FeedHistorySyndicationExtension.CompareSequence(this.Context.Relations, value.Context.Relations);
 
             return result;
         }
@@ -323,7 +323,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

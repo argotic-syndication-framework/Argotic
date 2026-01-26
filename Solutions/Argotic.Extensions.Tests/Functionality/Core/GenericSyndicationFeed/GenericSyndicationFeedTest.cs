@@ -18,7 +18,7 @@ public class GenericSyndicationFeedTest
                                      + "<app:componenttitle>Videos 1. Bundesliga</app:componenttitle>"
                                      + "<app:highlight>nein</app:highlight>";
 
-    private TestContext testContextInstance;
+    public TestContext TestContext { get; set; }
 
     /// <summary>
     ///Gets or sets the test context which provides

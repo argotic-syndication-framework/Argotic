@@ -21,7 +21,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// <summary>
     /// Private member to hold the type of scalar value the parameter represents.
     /// </summary>
-    private XmlRpcScalarValueType scalarParameterType   = XmlRpcScalarValueType.None;
+    private XmlRpcScalarValueType scalarParameterType = XmlRpcScalarValueType.None;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class.
@@ -43,8 +43,8 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     {
         Guard.ArgumentNotNull(value, "value");
 
-        this.ValueType  = XmlRpcScalarValueType.Base64;
-        this.Value      = value;
+        this.ValueType = XmlRpcScalarValueType.Base64;
+        this.Value = value;
     }
 
     /// <summary>
@@ -57,8 +57,8 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// </remarks>
     public XmlRpcScalarValue(bool value)
     {
-        this.ValueType  = XmlRpcScalarValueType.Boolean;
-        this.Value      = value;
+        this.ValueType = XmlRpcScalarValueType.Boolean;
+        this.Value = value;
     }
 
     /// <summary>
@@ -71,8 +71,8 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// </remarks>
     public XmlRpcScalarValue(DateTime value)
     {
-        this.ValueType  = XmlRpcScalarValueType.DateTime;
-        this.Value      = value;
+        this.ValueType = XmlRpcScalarValueType.DateTime;
+        this.Value = value;
     }
 
     /// <summary>
@@ -85,8 +85,8 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// </remarks>
     public XmlRpcScalarValue(double value)
     {
-        this.ValueType  = XmlRpcScalarValueType.Double;
-        this.Value      = value;
+        this.ValueType = XmlRpcScalarValueType.Double;
+        this.Value = value;
     }
 
     /// <summary>
@@ -99,8 +99,8 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// </remarks>
     public XmlRpcScalarValue(int value)
     {
-        this.ValueType  = XmlRpcScalarValueType.Integer;
-        this.Value      = value;
+        this.ValueType = XmlRpcScalarValueType.Integer;
+        this.Value = value;
     }
 
     /// <summary>
@@ -113,8 +113,8 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// </remarks>
     public XmlRpcScalarValue(string value)
     {
-        this.ValueType  = XmlRpcScalarValueType.String;
-        this.Value      = !string.IsNullOrEmpty(value) ? value : string.Empty;
+        this.ValueType = XmlRpcScalarValueType.String;
+        this.Value = !string.IsNullOrEmpty(value) ? value : string.Empty;
     }
 
     /// <summary>
@@ -175,33 +175,33 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
             if (source.MoveToFirstChild())
             {
-                XmlRpcScalarValueType type  = XmlRpcScalarValueType.None;
+                XmlRpcScalarValueType type = XmlRpcScalarValueType.None;
                 if (string.Compare(source.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     // Framework prefers the <int> designator for integers, so this handles when the <i4> designator is utilized.
-                    type    = XmlRpcScalarValueType.Integer;
+                    type = XmlRpcScalarValueType.Integer;
                 }
                 else
                 {
-                    type    = XmlRpcClient.ScalarTypeByName(source.Name);
+                    type = XmlRpcClient.ScalarTypeByName(source.Name);
                 }
 
                 if (type != XmlRpcScalarValueType.None)
                 {
-                    this.ValueType      = type;
-                    if(!string.IsNullOrEmpty(source.Value))
+                    this.ValueType = type;
+                    if (!string.IsNullOrEmpty(source.Value))
                     {
-                        this.Value      = XmlRpcScalarValue.StringAsValue(type, source.Value);
+                        this.Value = XmlRpcScalarValue.StringAsValue(type, source.Value);
                     }
-                    wasLoaded           = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -209,8 +209,8 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
         {
             if (!string.IsNullOrEmpty(source.Value))
             {
-                this.Value  = source.Value;
-                wasLoaded   = true;
+                this.Value = source.Value;
+                wasLoaded = true;
             }
         }
 
@@ -252,14 +252,14 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -285,11 +285,11 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
             return 1;
         }
 
-        XmlRpcScalarValue value  = obj as XmlRpcScalarValue;
+        XmlRpcScalarValue value = obj as XmlRpcScalarValue;
 
         if (value != null)
         {
-            int result  = string.Compare(this.ToString(), value.ToString(), StringComparison.Ordinal);
+            int result = string.Compare(this.ToString(), value.ToString(), StringComparison.Ordinal);
 
             return result;
         }
@@ -320,7 +320,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }
@@ -406,37 +406,37 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is an empty string.</exception>
     private static object StringAsValue(XmlRpcScalarValueType type, string scalar)
     {
-        object result   = string.Empty;
+        object result = string.Empty;
 
         Guard.ArgumentNotNullOrEmptyString(scalar, "scalar");
 
         switch (type)
         {
             case XmlRpcScalarValueType.Base64:
-                result      = Convert.FromBase64String(scalar);
+                result = Convert.FromBase64String(scalar);
                 break;
 
             case XmlRpcScalarValueType.Boolean:
                 if (XmlRpcClient.TryParseBoolean(scalar, out bool boolean))
                 {
-                    result  = boolean;
+                    result = boolean;
                 }
                 break;
 
             case XmlRpcScalarValueType.DateTime:
-                result      = SyndicationDateTimeUtility.ParseRfc3339DateTime(scalar);
+                result = SyndicationDateTimeUtility.ParseRfc3339DateTime(scalar);
                 break;
 
             case XmlRpcScalarValueType.Double:
-                result      = double.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
+                result = double.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
                 break;
 
             case XmlRpcScalarValueType.Integer:
-                result      = int.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
+                result = int.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
                 break;
 
             case XmlRpcScalarValueType.String:
-                result      = scalar.Trim();
+                result = scalar.Trim();
                 break;
         }
 
@@ -451,7 +451,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// <returns>The string representation of the current instance's <see cref="Value"/>, based on its <see cref="ValueType"/>.</returns>
     private static string ValueAsString(XmlRpcScalarValueType type, object scalar)
     {
-        string value    = string.Empty;
+        string value = string.Empty;
 
         if (scalar == null)
         {
@@ -464,32 +464,32 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
                 byte[] data = scalar as byte[];
                 if (data != null)
                 {
-                    value   = Convert.ToBase64String(data, Base64FormattingOptions.None);
+                    value = Convert.ToBase64String(data, Base64FormattingOptions.None);
                 }
                 else
                 {
-                    value   = Convert.ToString(scalar, CultureInfo.InvariantCulture);
+                    value = Convert.ToString(scalar, CultureInfo.InvariantCulture);
                 }
                 break;
 
             case XmlRpcScalarValueType.Boolean:
-                value   = Convert.ToBoolean(scalar, CultureInfo.InvariantCulture) ? "1" : "0";
+                value = Convert.ToBoolean(scalar, CultureInfo.InvariantCulture) ? "1" : "0";
                 break;
 
             case XmlRpcScalarValueType.DateTime:
-                value   = SyndicationDateTimeUtility.ToRfc3339DateTime(Convert.ToDateTime(scalar, DateTimeFormatInfo.InvariantInfo));
+                value = SyndicationDateTimeUtility.ToRfc3339DateTime(Convert.ToDateTime(scalar, DateTimeFormatInfo.InvariantInfo));
                 break;
 
             case XmlRpcScalarValueType.Double:
-                value   = Convert.ToDouble(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
+                value = Convert.ToDouble(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
                 break;
 
             case XmlRpcScalarValueType.Integer:
-                value   = Convert.ToInt32(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
+                value = Convert.ToInt32(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
                 break;
 
             case XmlRpcScalarValueType.String:
-                value   = Convert.ToString(scalar, CultureInfo.InvariantCulture).Trim();
+                value = Convert.ToString(scalar, CultureInfo.InvariantCulture).Trim();
                 break;
         }
 

@@ -84,7 +84,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<SiteSummaryContentItem> source, Collection<SiteSummaryContentItem> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -92,7 +92,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -135,11 +135,11 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -154,7 +154,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -180,14 +180,14 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -212,12 +212,12 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
         {
             return 1;
         }
-        SiteSummaryContentSyndicationExtension value  = obj as SiteSummaryContentSyndicationExtension;
+        SiteSummaryContentSyndicationExtension value = obj as SiteSummaryContentSyndicationExtension;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Context.Encoded, value.Context.Encoded, StringComparison.Ordinal);
-            result      = result | SiteSummaryContentSyndicationExtension.CompareSequence(this.Context.Items, value.Context.Items);
+            int result = string.Compare(this.Context.Encoded, value.Context.Encoded, StringComparison.Ordinal);
+            result = result | SiteSummaryContentSyndicationExtension.CompareSequence(this.Context.Items, value.Context.Items);
 
             return result;
         }
@@ -248,7 +248,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

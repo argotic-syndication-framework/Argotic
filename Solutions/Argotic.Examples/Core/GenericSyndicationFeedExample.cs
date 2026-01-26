@@ -21,7 +21,7 @@ public static class GenericSyndicationFeedExample
     {
         GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
 
-        foreach(GenericSyndicationCategory category in feed.Categories)
+        foreach (GenericSyndicationCategory category in feed.Categories)
         {
             if (string.Compare(category.Term, ".NET", StringComparison.OrdinalIgnoreCase) == 0)
             {
@@ -46,7 +46,7 @@ public static class GenericSyndicationFeedExample
             }
         }
 
-        if(feed.Format == SyndicationContentFormat.Rss)
+        if (feed.Format == SyndicationContentFormat.Rss)
         {
             RssFeed rssFeed = feed.Resource as RssFeed;
             if (rssFeed != null)
@@ -85,7 +85,7 @@ public static class GenericSyndicationFeedExample
     public static void LoadUriExample()
     {
         GenericSyndicationFeed feed = new GenericSyndicationFeed();
-        Uri source                  = new Uri("http://feeds.feedburner.com/OppositionallyDefiant");
+        Uri source = new Uri("http://feeds.feedburner.com/OppositionallyDefiant");
 
         feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 

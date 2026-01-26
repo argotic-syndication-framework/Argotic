@@ -91,11 +91,11 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -110,7 +110,7 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -135,14 +135,14 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -167,14 +167,14 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
         {
             return 1;
         }
-        SiteSummarySlashSyndicationExtension value  = obj as SiteSummarySlashSyndicationExtension;
+        SiteSummarySlashSyndicationExtension value = obj as SiteSummarySlashSyndicationExtension;
 
         if (value != null)
         {
-            int result  = this.Context.Comments.CompareTo(value.Context.Comments);
-            result      = result | string.Compare(this.Context.Department, value.Context.Department, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Context.Section, value.Context.Section, StringComparison.OrdinalIgnoreCase);
-            result      = result | ComparisonUtility.CompareSequence(this.Context.HitParade, value.Context.HitParade);
+            int result = this.Context.Comments.CompareTo(value.Context.Comments);
+            result = result | string.Compare(this.Context.Department, value.Context.Department, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Context.Section, value.Context.Section, StringComparison.OrdinalIgnoreCase);
+            result = result | ComparisonUtility.CompareSequence(this.Context.HitParade, value.Context.HitParade);
 
             return result;
         }
@@ -205,7 +205,7 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

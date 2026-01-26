@@ -92,7 +92,7 @@ public class FeedHistorySyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
 
@@ -100,22 +100,22 @@ public class FeedHistorySyndicationExtensionContext
         {
             manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
         }
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator archiveNavigator     = source.SelectSingleNode("fh:archive", manager);
-            XPathNavigator completeNavigator    = source.SelectSingleNode("fh:complete", manager);
-            XPathNodeIterator linkIterator      = source.Select("atom:link", manager);
+            XPathNavigator archiveNavigator = source.SelectSingleNode("fh:archive", manager);
+            XPathNavigator completeNavigator = source.SelectSingleNode("fh:complete", manager);
+            XPathNodeIterator linkIterator = source.Select("atom:link", manager);
 
             if (archiveNavigator != null)
             {
-                this.IsArchive  = true;
-                wasLoaded       = true;
+                this.IsArchive = true;
+                wasLoaded = true;
             }
 
             if (completeNavigator != null)
             {
                 this.IsComplete = true;
-                wasLoaded       = true;
+                wasLoaded = true;
             }
 
             if (linkIterator is { Count: > 0 })
@@ -126,11 +126,11 @@ public class FeedHistorySyndicationExtensionContext
 
                     if (!string.IsNullOrEmpty(relAttribute) && FeedHistorySyndicationExtension.LinkRelationTypeByName(relAttribute) != FeedHistoryLinkRelationType.None)
                     {
-                        FeedHistoryLinkRelation relation    = new FeedHistoryLinkRelation();
+                        FeedHistoryLinkRelation relation = new FeedHistoryLinkRelation();
                         if (relation.Load(linkIterator.Current))
                         {
                             this.Relations.Add(relation);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }

@@ -25,7 +25,7 @@ public static class XmlRpcClientExample
         };
 
         // Construct a Pingback peer-to-peer notification XML-RPC message
-        XmlRpcMessage message   = new XmlRpcMessage("pingback.ping")
+        XmlRpcMessage message = new XmlRpcMessage("pingback.ping")
         {
             Encoding = Encoding.UTF8
         };
@@ -40,8 +40,8 @@ public static class XmlRpcClientExample
         {
             if (response.Fault != null)
             {
-                XmlRpcStructureMember faultCode     = response.Fault["faultCode"];
-                XmlRpcStructureMember faultMessage  = response.Fault["faultString"];
+                XmlRpcStructureMember faultCode = response.Fault["faultCode"];
+                XmlRpcStructureMember faultMessage = response.Fault["faultString"];
 
                 if (faultCode != null && faultMessage != null)
                 {
@@ -50,7 +50,7 @@ public static class XmlRpcClientExample
             }
             else
             {
-                XmlRpcScalarValue successInformation    = response.Parameter as XmlRpcScalarValue;
+                XmlRpcScalarValue successInformation = response.Parameter as XmlRpcScalarValue;
                 if (successInformation != null)
                 {
                     // Pingback request was successful, return should be a string containing information the server deems useful.

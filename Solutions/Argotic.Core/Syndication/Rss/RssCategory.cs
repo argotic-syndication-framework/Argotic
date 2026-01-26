@@ -32,11 +32,11 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold a slash-delimited string that identifies a hierarchical position in the taxonomy.
     /// </summary>
-    private string categoryValue    = string.Empty;
+    private string categoryValue = string.Empty;
     /// <summary>
     /// Private member to hold a value that identifies the taxonomy in which the category is placed.
     /// </summary>
-    private string categoryDomain   = string.Empty;
+    private string categoryDomain = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssCategory"/> class.
     /// </summary>
@@ -51,7 +51,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <param name="value">A slash-delimited string that identifies a hierarchical position in the taxonomy.</param>
     public RssCategory(string value)
     {
-        this.Value  = value;
+        this.Value = value;
     }
 
     /// <summary>
@@ -74,10 +74,10 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(value, "value");
         if (value.Count > 0)
         {
-            string[] hierarchy  = new string[value.Count];
+            string[] hierarchy = new string[value.Count];
             value.CopyTo(hierarchy, 0);
 
-            this.Value  = string.Join("/", hierarchy);
+            this.Value = string.Join("/", hierarchy);
         }
     }
 
@@ -141,13 +141,13 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                categoryDomain  = string.Empty;
+                categoryDomain = string.Empty;
             }
             else
             {
-                categoryDomain  = value.Trim();
+                categoryDomain = value.Trim();
             }
         }
     }
@@ -170,11 +170,11 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
         {
             if (string.IsNullOrEmpty(value))
             {
-                categoryValue   = string.Empty;
+                categoryValue = string.Empty;
             }
             else
             {
-                categoryValue   = value.Trim();
+                categoryValue = value.Trim();
             }
         }
     }
@@ -186,10 +186,10 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -230,7 +230,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -246,21 +246,21 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Value  = source.Value;
-            wasLoaded   = true;
+            this.Value = source.Value;
+            wasLoaded = true;
         }
 
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string domain   = source.GetAttribute("domain", string.Empty);
-            if(!string.IsNullOrEmpty(domain))
+            string domain = source.GetAttribute("domain", string.Empty);
+            if (!string.IsNullOrEmpty(domain))
             {
                 this.Domain = domain;
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
@@ -280,10 +280,10 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -300,7 +300,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("category");
 
-        if(!string.IsNullOrEmpty(this.Domain))
+        if (!string.IsNullOrEmpty(this.Domain))
         {
             writer.WriteAttributeString("domain", this.Domain);
         }
@@ -320,14 +320,14 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -351,12 +351,12 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        RssCategory value  = obj as RssCategory;
+        RssCategory value = obj as RssCategory;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -387,7 +387,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

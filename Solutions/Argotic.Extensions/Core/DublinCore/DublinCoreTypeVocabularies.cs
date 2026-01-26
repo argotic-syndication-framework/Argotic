@@ -18,7 +18,7 @@ public enum DublinCoreTypeVocabularies
     /// No type vocabulary specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None                = 0,
+    None = 0,
 
     /// <summary>
     /// The type represents an aggregation of resources.
@@ -27,7 +27,7 @@ public enum DublinCoreTypeVocabularies
     ///     A collection is described as a group; its parts may also be separately described.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Collection", AlternateValue = "Collection")]
-    Collection          = 1,
+    Collection = 1,
 
     /// <summary>
     /// The type represents data encoded in a defined structure.
@@ -36,7 +36,7 @@ public enum DublinCoreTypeVocabularies
     ///     Examples include lists, tables, and databases. A dataset may be useful for direct machine processing.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Dataset", AlternateValue = "Dataset")]
-    DataSet             = 2,
+    DataSet = 2,
 
     /// <summary>
     /// The type represents a non-persistent, time-based occurrence.
@@ -46,7 +46,7 @@ public enum DublinCoreTypeVocabularies
     ///     Examples include an exhibition, webcast, conference, workshop, open day, performance, battle, trial, wedding, tea party, conflagration.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Event", AlternateValue = "Event")]
-    Event               = 4,
+    Event = 4,
 
     /// <summary>
     /// The type represents a visual representation other than text.
@@ -56,7 +56,7 @@ public enum DublinCoreTypeVocabularies
     ///     Note that <see cref="Image"/> may include both electronic and physical representations.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Image", AlternateValue = "Image")]
-    Image               = 8,
+    Image = 8,
 
     /// <summary>
     /// The type represents a resource requiring interaction from the user to be understood, executed, or experienced.
@@ -75,7 +75,7 @@ public enum DublinCoreTypeVocabularies
     ///     Instances of the type <see cref="MovingImage">Moving Image</see> must also be describable as instances of the broader type <see cref="Image"/>.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Moving Image", AlternateValue = "MovingImage")]
-    MovingImage         = 32,
+    MovingImage = 32,
 
     /// <summary>
     /// The type represents an inanimate, three-dimensional object or substance.
@@ -84,7 +84,7 @@ public enum DublinCoreTypeVocabularies
     ///     Note that digital representations of, or surrogates for, these objects should use <see cref="Image"/>, <see cref="Text"/> or one of the other types.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Physical Object", AlternateValue = "PhysicalObject")]
-    PhysicalObject      = 64,
+    PhysicalObject = 64,
 
     /// <summary>
     /// The type represents a system that provides one or more functions.
@@ -93,7 +93,7 @@ public enum DublinCoreTypeVocabularies
     ///     Examples include a photocopying service, a banking service, an authentication service, interlibrary loans, a Z39.50 or Web server.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Service", AlternateValue = "Service")]
-    Service             = 128,
+    Service = 128,
 
     /// <summary>
     /// The type represents a computer program in source or compiled form.
@@ -102,7 +102,7 @@ public enum DublinCoreTypeVocabularies
     ///     Examples include a C source file, Microsoft Windows executable, or Perl script.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Software", AlternateValue = "Software")]
-    Software            = 256,
+    Software = 256,
 
     /// <summary>
     /// The type represents a resource primarily intended to be heard.
@@ -111,7 +111,7 @@ public enum DublinCoreTypeVocabularies
     ///     Examples include a music playback file format, an audio compact disc, and recorded speech or sounds.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Sound", AlternateValue = "Sound")]
-    Sound               = 512,
+    Sound = 512,
 
     /// <summary>
     /// The type represents a static visual representation.
@@ -122,7 +122,7 @@ public enum DublinCoreTypeVocabularies
     ///     Instances of the type <see cref="StillImage">Still Image</see> must also be describable as instances of the broader type <see cref="Image"/>.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Still Image", AlternateValue = "StillImage")]
-    StillImage          = 1024,
+    StillImage = 1024,
 
     /// <summary>
     /// The type represents a resource consisting primarily of words for reading.
@@ -132,5 +132,5 @@ public enum DublinCoreTypeVocabularies
     ///     Note that facsimiles or images of texts are still of the genre <see cref="Text"/>.
     /// </remarks>
     [EnumerationMetadata(DisplayName = "Text", AlternateValue = "Text")]
-    Text                = 2048
+    Text = 2048
 }

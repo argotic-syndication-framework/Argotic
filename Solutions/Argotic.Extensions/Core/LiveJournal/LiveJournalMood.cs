@@ -16,11 +16,11 @@ public class LiveJournalMood : IComparable
     /// <summary>
     /// Private member to hold the textual content of the current mood.
     /// </summary>
-    private string moodContent  = string.Empty;
+    private string moodContent = string.Empty;
     /// <summary>
     /// Private member to hold a site specific identifier for the current mood.
     /// </summary>
-    private int moodIdentifier  = int.MinValue;
+    private int moodIdentifier = int.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalMood"/> class.
     /// </summary>
@@ -76,25 +76,25 @@ public class LiveJournalMood : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string idAttribute  = source.GetAttribute("id", string.Empty);
+            string idAttribute = source.GetAttribute("id", string.Empty);
             if (!string.IsNullOrEmpty(idAttribute))
             {
                 if (int.TryParse(idAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int id))
                 {
-                    this.Id     = id;
-                    wasLoaded   = true;
+                    this.Id = id;
+                    wasLoaded = true;
                 }
             }
         }
 
-        if(!string.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content    = source.Value;
-            wasLoaded       = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -108,10 +108,10 @@ public class LiveJournalMood : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        LiveJournalSyndicationExtension extension   = new LiveJournalSyndicationExtension();
+        LiveJournalSyndicationExtension extension = new LiveJournalSyndicationExtension();
         writer.WriteStartElement("mood", extension.XmlNamespace);
 
-        if(this.Id != int.MinValue)
+        if (this.Id != int.MinValue)
         {
             writer.WriteAttributeString("id", this.Id.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
@@ -131,14 +131,14 @@ public class LiveJournalMood : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -163,12 +163,12 @@ public class LiveJournalMood : IComparable
         {
             return 1;
         }
-        LiveJournalMood value  = obj as LiveJournalMood;
+        LiveJournalMood value = obj as LiveJournalMood;
 
         if (value != null)
         {
-            int result  = this.Id.CompareTo(value.Id);
-            result      = result | string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            int result = this.Id.CompareTo(value.Id);
+            result = result | string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -199,7 +199,7 @@ public class LiveJournalMood : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

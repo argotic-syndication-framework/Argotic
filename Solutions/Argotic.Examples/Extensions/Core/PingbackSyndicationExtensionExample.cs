@@ -19,10 +19,10 @@ public static class PingbackSyndicationExtensionExample
     public static void ClassExample()
     {
         // Framework auto-discovers supported extensions based on XML namespace attributes (xmlns) defined on root of resource
-        RssFeed feed    = RssFeed.Create(new Uri("http://www.example.com/feed.aspx?format=rss"));
+        RssFeed feed = RssFeed.Create(new Uri("http://www.example.com/feed.aspx?format=rss"));
 
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
-        if(feed.Channel.HasExtensions)
+        if (feed.Channel.HasExtensions)
         {
             PingbackSyndicationExtension channelExtension = feed.Channel.FindExtension(PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension;
             if (channelExtension != null)
@@ -31,7 +31,7 @@ public static class PingbackSyndicationExtensionExample
             }
         }
 
-        foreach(RssItem item in feed.Channel.Items)
+        foreach (RssItem item in feed.Channel.Items)
         {
             if (item.HasExtensions)
             {

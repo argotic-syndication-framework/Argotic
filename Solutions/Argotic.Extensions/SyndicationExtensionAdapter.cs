@@ -18,7 +18,7 @@ public class SyndicationExtensionAdapter
     /// <summary>
     /// Private member to hold the XPathNavigator used to configure the load of a syndication extension.
     /// </summary>
-    private readonly SyndicationResourceLoadSettings adapterSettings  = new SyndicationResourceLoadSettings();
+    private readonly SyndicationResourceLoadSettings adapterSettings = new SyndicationResourceLoadSettings();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtensionAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -32,8 +32,8 @@ public class SyndicationExtensionAdapter
         Guard.ArgumentNotNull(navigator, "navigator");
         Guard.ArgumentNotNull(settings, "settings");
 
-        adapterNavigator    = navigator;
-        adapterSettings     = settings;
+        adapterNavigator = navigator;
+        adapterSettings = settings;
     }
     /// <summary>
     /// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
@@ -47,7 +47,7 @@ public class SyndicationExtensionAdapter
         {
             Collection<Type> extensions = [];
 #if true
-            foreach(Type type in  Assembly.GetExecutingAssembly()
+            foreach (Type type in Assembly.GetExecutingAssembly()
                         .GetExportedTypes()
                         .Where(t => typeof(SyndicationExtension).IsAssignableFrom(t) && t != typeof(SyndicationExtension)))
                 extensions.Add(type);
@@ -121,7 +121,7 @@ public class SyndicationExtensionAdapter
             {
                 if (extension != null)
                 {
-                    Type type   = extension.GetType();
+                    Type type = extension.GetType();
                     if (!types.Contains(type))
                     {
                         types.Add(type);
@@ -143,10 +143,10 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
     public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types)
     {
-        Collection<ISyndicationExtension> extensions    = [];
+        Collection<ISyndicationExtension> extensions = [];
         Guard.ArgumentNotNull(types, "types");
 
-        foreach(Type type in types)
+        foreach (Type type in types)
         {
             if (type != null)
             {
@@ -177,11 +177,11 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="namespaces"/> is a null reference.</exception>
     public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types, Dictionary<string, string> namespaces)
     {
-        Collection<ISyndicationExtension> supportedExtensions   = [];
+        Collection<ISyndicationExtension> supportedExtensions = [];
         Guard.ArgumentNotNull(types, "types");
         Guard.ArgumentNotNull(namespaces, "namespaces");
 
-        Collection<ISyndicationExtension> nativeExtensions  = SyndicationExtensionAdapter.GetExtensions(SyndicationExtensionAdapter.FrameworkExtensions);
+        Collection<ISyndicationExtension> nativeExtensions = SyndicationExtensionAdapter.GetExtensions(SyndicationExtensionAdapter.FrameworkExtensions);
 
         foreach (ISyndicationExtension extension in nativeExtensions)
         {
@@ -194,7 +194,7 @@ public class SyndicationExtensionAdapter
             }
         }
 
-        Collection<ISyndicationExtension> userExtensions    = SyndicationExtensionAdapter.GetExtensions(types);
+        Collection<ISyndicationExtension> userExtensions = SyndicationExtensionAdapter.GetExtensions(types);
         foreach (ISyndicationExtension extension in userExtensions)
         {
             if (!supportedExtensions.Contains(extension))
@@ -274,24 +274,24 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public void Fill(IExtensibleSyndicationObject entity, XmlNamespaceManager manager)
     {
-        Collection<ISyndicationExtension> extensions    = [];
+        Collection<ISyndicationExtension> extensions = [];
         Guard.ArgumentNotNull(entity, "entity");
         Guard.ArgumentNotNull(manager, "manager");
 
         if (this.Settings.AutoDetectExtensions)
         {
-            extensions  = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions, (Dictionary<string, string>)this.Navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml));
+            extensions = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions, (Dictionary<string, string>)this.Navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml));
         }
         else
         {
-            extensions  = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions);
+            extensions = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions);
         }
 
         foreach (ISyndicationExtension extension in extensions)
         {
             if (extension.ExistsInSource(this.Navigator) && extension.GetType() != entity.GetType())
             {
-                ISyndicationExtension instance  = (ISyndicationExtension)Activator.CreateInstance(extension.GetType());
+                ISyndicationExtension instance = (ISyndicationExtension)Activator.CreateInstance(extension.GetType());
 
                 if (instance.Load(this.Navigator))
                 {

@@ -15,19 +15,19 @@ public class GenericSyndicationItem : IComparable
     /// <summary>
     /// Private member to hold the title of the syndication item.
     /// </summary>
-    private string itemTitle                                        = string.Empty;
+    private string itemTitle = string.Empty;
     /// <summary>
     /// Private member to hold the summary of the syndication item.
     /// </summary>
-    private string itemSummary                                      = string.Empty;
+    private string itemSummary = string.Empty;
     /// <summary>
     /// Private member to hold the publication date of the item.
     /// </summary>
-    private DateTime itemPublishedOn                                = DateTime.MinValue;
+    private DateTime itemPublishedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold the collection of categories associated with the item.
     /// </summary>
-    private Collection<GenericSyndicationCategory> itemCategories   = [];
+    private Collection<GenericSyndicationCategory> itemCategories = [];
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
     /// </summary>
@@ -61,7 +61,7 @@ public class GenericSyndicationItem : IComparable
         {
             if (itemCategories == null)
             {
-                itemCategories  = [];
+                itemCategories = [];
             }
             return itemCategories;
         }
@@ -144,13 +144,13 @@ public class GenericSyndicationItem : IComparable
         {
             return 1;
         }
-        GenericSyndicationItem value  = obj as GenericSyndicationItem;
+        GenericSyndicationItem value = obj as GenericSyndicationItem;
 
         if (value != null)
         {
-            int result  = GenericSyndicationFeed.CompareSequence(this.Categories, value.Categories);
-            result      = result | string.Compare(this.Summary, value.Summary, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            int result = GenericSyndicationFeed.CompareSequence(this.Categories, value.Categories);
+            result = result | string.Compare(this.Summary, value.Summary, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -181,7 +181,7 @@ public class GenericSyndicationItem : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }
@@ -267,7 +267,7 @@ public class GenericSyndicationItem : IComparable
 
         if (entry.Title != null && !string.IsNullOrEmpty(entry.Title.Content))
         {
-            itemTitle       = entry.Title.Content.Trim();
+            itemTitle = entry.Title.Content.Trim();
         }
 
         if (entry.PublishedOn != DateTime.MinValue)
@@ -281,16 +281,16 @@ public class GenericSyndicationItem : IComparable
 
         if (entry.Summary != null && !string.IsNullOrEmpty(entry.Summary.Content))
         {
-            itemSummary     = entry.Summary.Content.Trim();
+            itemSummary = entry.Summary.Content.Trim();
         }
         else if (entry.Content != null && !string.IsNullOrEmpty(entry.Content.Content))
         {
-            itemSummary     = entry.Content.Content.Trim();
+            itemSummary = entry.Content.Content.Trim();
         }
 
         foreach (AtomCategory category in entry.Categories)
         {
-            GenericSyndicationCategory genericCategory  = new GenericSyndicationCategory(category);
+            GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
             itemCategories.Add(genericCategory);
         }
     }
@@ -305,7 +305,7 @@ public class GenericSyndicationItem : IComparable
         Guard.ArgumentNotNull(item, "item");
         if (!string.IsNullOrEmpty(item.Title))
         {
-            itemTitle       = item.Title.Trim();
+            itemTitle = item.Title.Trim();
         }
 
         if (item.PublicationDate != DateTime.MinValue)
@@ -315,12 +315,12 @@ public class GenericSyndicationItem : IComparable
 
         if (!string.IsNullOrEmpty(item.Description))
         {
-            itemSummary     = item.Description.Trim();
+            itemSummary = item.Description.Trim();
         }
 
         foreach (RssCategory category in item.Categories)
         {
-            GenericSyndicationCategory genericCategory  = new GenericSyndicationCategory(category);
+            GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
             itemCategories.Add(genericCategory);
         }
     }

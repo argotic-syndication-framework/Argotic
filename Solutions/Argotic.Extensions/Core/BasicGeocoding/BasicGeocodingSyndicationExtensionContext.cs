@@ -17,11 +17,11 @@ public class BasicGeocodingSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the latitude spatial coordinate.
     /// </summary>
-    private decimal extensionLatitude   = decimal.MinValue;
+    private decimal extensionLatitude = decimal.MinValue;
     /// <summary>
     /// Private member to hold the longitude spatial coordinate.
     /// </summary>
-    private decimal extensionLongitude  = decimal.MinValue;
+    private decimal extensionLongitude = decimal.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtensionContext"/> class.
     /// </summary>
@@ -73,18 +73,18 @@ public class BasicGeocodingSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        XPathNavigator latitudeNavigator    = source.SelectSingleNode("geo:lat", manager);
-        XPathNavigator longitudeNavigator   = source.SelectSingleNode("geo:long", manager);
+        XPathNavigator latitudeNavigator = source.SelectSingleNode("geo:lat", manager);
+        XPathNavigator longitudeNavigator = source.SelectSingleNode("geo:long", manager);
 
         if (latitudeNavigator != null)
         {
             if (decimal.TryParse(latitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal latitude))
             {
-                this.Latitude   = latitude;
-                wasLoaded       = true;
+                this.Latitude = latitude;
+                wasLoaded = true;
             }
         }
 
@@ -92,8 +92,8 @@ public class BasicGeocodingSyndicationExtensionContext
         {
             if (decimal.TryParse(longitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal longitude))
             {
-                this.Longitude  = longitude;
-                wasLoaded       = true;
+                this.Longitude = longitude;
+                wasLoaded = true;
             }
         }
 
@@ -114,8 +114,8 @@ public class BasicGeocodingSyndicationExtensionContext
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
 
-        formatProvider.NumberDecimalDigits      = 7;
-        formatProvider.NumberDecimalSeparator   = NumberFormatInfo.InvariantInfo.NumberDecimalSeparator;
+        formatProvider.NumberDecimalDigits = 7;
+        formatProvider.NumberDecimalSeparator = NumberFormatInfo.InvariantInfo.NumberDecimalSeparator;
         if (this.Latitude != decimal.MinValue)
         {
             writer.WriteElementString("lat", xmlNamespace, this.Latitude.ToString("N", formatProvider));

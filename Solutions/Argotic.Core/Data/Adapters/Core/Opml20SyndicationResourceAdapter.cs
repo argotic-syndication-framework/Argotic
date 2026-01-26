@@ -45,18 +45,18 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         Guard.ArgumentNotNull(resource, "resource");
 
-        XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("opml", manager);
+        XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("opml", manager);
         if (documentNavigator != null)
         {
-            XPathNavigator headNavigator    = documentNavigator.SelectSingleNode("head", manager);
+            XPathNavigator headNavigator = documentNavigator.SelectSingleNode("head", manager);
             if (headNavigator != null)
             {
                 resource.Head.Load(headNavigator, this.Settings);
             }
 
-            XPathNodeIterator outlineIterator   = documentNavigator.Select("body/outline", manager);
+            XPathNodeIterator outlineIterator = documentNavigator.Select("body/outline", manager);
             if (outlineIterator is { Count: > 0 })
             {
                 int counter = 0;

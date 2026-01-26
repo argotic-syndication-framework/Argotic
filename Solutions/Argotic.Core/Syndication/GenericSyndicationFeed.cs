@@ -32,19 +32,19 @@ public class GenericSyndicationFeed
     /// <summary>
     /// Private member to hold the type of syndication format that the syndication feed implements.
     /// </summary>
-    private SyndicationContentFormat feedFormat                     = SyndicationContentFormat.None;
+    private SyndicationContentFormat feedFormat = SyndicationContentFormat.None;
     /// <summary>
     /// Private member to hold the title of the syndication feed.
     /// </summary>
-    private string feedTitle                                        = string.Empty;
+    private string feedTitle = string.Empty;
     /// <summary>
     /// Private member to hold the description of the syndication feed.
     /// </summary>
-    private string feedDescription                                  = string.Empty;
+    private string feedDescription = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.
     /// </summary>
-    private DateTime feedLastUpdatedOn                              = DateTime.MinValue;
+    private DateTime feedLastUpdatedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold the natural or formal language in which the feed content is written.
     /// </summary>
@@ -52,11 +52,11 @@ public class GenericSyndicationFeed
     /// <summary>
     /// Private member to hold the collection of categories associated with the feed.
     /// </summary>
-    private Collection<GenericSyndicationCategory> feedCategories   = [];
+    private Collection<GenericSyndicationCategory> feedCategories = [];
     /// <summary>
     /// Private member to hold the collection of items that comprise the distinct content published in the feed.
     /// </summary>
-    private IEnumerable<GenericSyndicationItem> feedItems           = new Collection<GenericSyndicationItem>();
+    private IEnumerable<GenericSyndicationItem> feedItems = new Collection<GenericSyndicationItem>();
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -278,7 +278,7 @@ public class GenericSyndicationFeed
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<GenericSyndicationCategory> source, Collection<GenericSyndicationCategory> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -286,7 +286,7 @@ public class GenericSyndicationFeed
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -403,7 +403,7 @@ public class GenericSyndicationFeed
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     public static GenericSyndicationFeed Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        GenericSyndicationFeed syndicationResource  = new GenericSyndicationFeed();
+        GenericSyndicationFeed syndicationResource = new GenericSyndicationFeed();
         Guard.ArgumentNotNull(source, "source");
         syndicationResource.Load(source, options, settings);
 
@@ -423,7 +423,7 @@ public class GenericSyndicationFeed
     {
         Guard.ArgumentNotNull(str, "string");
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(str);
-        this.Load(navigator,  new SyndicationResourceLoadSettings(),  new SyndicationResourceLoadedEventArgs(navigator));
+        this.Load(navigator, new SyndicationResourceLoadSettings(), new SyndicationResourceLoadedEventArgs(navigator));
     }
 
     /// <summary>
@@ -455,14 +455,14 @@ public class GenericSyndicationFeed
     public void Load(Stream stream, SyndicationResourceLoadSettings settings)
     {
         Guard.ArgumentNotNull(stream, "stream");
-        XPathNavigator navigator    = null;
+        XPathNavigator navigator = null;
         if (settings != null)
         {
-            navigator   = SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding);
         }
         else
         {
-            navigator   = SyndicationEncodingUtility.CreateSafeNavigator(stream);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);
         }
         this.Load(navigator, settings == null ? new SyndicationResourceLoadSettings() : settings, new SyndicationResourceLoadedEventArgs(navigator));
     }
@@ -622,7 +622,7 @@ public class GenericSyndicationFeed
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator    = null;
+        XPathNavigator navigator = null;
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
@@ -630,11 +630,11 @@ public class GenericSyndicationFeed
         }
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
         }
         else
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
         }
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
     }
@@ -647,38 +647,38 @@ public class GenericSyndicationFeed
     public void Parse(AtomFeed feed)
     {
         Guard.ArgumentNotNull(feed, "feed");
-        feedResource            = feed;
-        feedFormat              = SyndicationContentFormat.Atom;
+        feedResource = feed;
+        feedFormat = SyndicationContentFormat.Atom;
 
         if (feed.Title != null && !string.IsNullOrEmpty(feed.Title.Content))
         {
-            feedTitle           = feed.Title.Content;
+            feedTitle = feed.Title.Content;
         }
 
         if (feed.Subtitle != null && !string.IsNullOrEmpty(feed.Title.Content))
         {
-            feedDescription     = feed.Subtitle.Content;
+            feedDescription = feed.Subtitle.Content;
         }
 
         if (feed.UpdatedOn != DateTime.MinValue)
         {
-            feedLastUpdatedOn   = feed.UpdatedOn;
+            feedLastUpdatedOn = feed.UpdatedOn;
         }
 
-        if(feed.Language != null)
+        if (feed.Language != null)
         {
-            feedLanguage        = feed.Language;
+            feedLanguage = feed.Language;
         }
 
-        foreach(AtomCategory category in feed.Categories)
+        foreach (AtomCategory category in feed.Categories)
         {
-            GenericSyndicationCategory genericCategory  = new GenericSyndicationCategory(category);
+            GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
             feedCategories.Add(genericCategory);
         }
 
-        foreach(AtomEntry entry in feed.Entries)
+        foreach (AtomEntry entry in feed.Entries)
         {
-            GenericSyndicationItem genericItem  = new GenericSyndicationItem(entry);
+            GenericSyndicationItem genericItem = new GenericSyndicationItem(entry);
             ((Collection<GenericSyndicationItem>)feedItems).Add(genericItem);
         }
     }
@@ -691,38 +691,38 @@ public class GenericSyndicationFeed
     public void Parse(RssFeed feed)
     {
         Guard.ArgumentNotNull(feed, "feed");
-        feedResource            = feed;
-        feedFormat              = SyndicationContentFormat.Rss;
+        feedResource = feed;
+        feedFormat = SyndicationContentFormat.Rss;
 
         if (!string.IsNullOrEmpty(feed.Channel.Title))
         {
-            feedTitle           = feed.Channel.Title;
+            feedTitle = feed.Channel.Title;
         }
 
         if (!string.IsNullOrEmpty(feed.Channel.Description))
         {
-            feedDescription     = feed.Channel.Description;
+            feedDescription = feed.Channel.Description;
         }
 
         if (feed.Channel.LastBuildDate != DateTime.MinValue)
         {
-            feedLastUpdatedOn   = feed.Channel.LastBuildDate;
+            feedLastUpdatedOn = feed.Channel.LastBuildDate;
         }
 
         if (feed.Channel.Language != null)
         {
-            feedLanguage        = feed.Channel.Language;
+            feedLanguage = feed.Channel.Language;
         }
 
         foreach (RssCategory category in feed.Channel.Categories)
         {
-            GenericSyndicationCategory genericCategory  = new GenericSyndicationCategory(category);
+            GenericSyndicationCategory genericCategory = new GenericSyndicationCategory(category);
             feedCategories.Add(genericCategory);
         }
 
         foreach (RssItem item in feed.Channel.Items)
         {
-            GenericSyndicationItem genericItem  = new GenericSyndicationItem(item);
+            GenericSyndicationItem genericItem = new GenericSyndicationItem(item);
             ((Collection<GenericSyndicationItem>)feedItems).Add(genericItem);
         }
     }
@@ -855,21 +855,21 @@ public class GenericSyndicationFeed
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
         if (this.LoadOperationInProgress)
         {
             throw new InvalidOperationException();
         }
-        this.LoadOperationInProgress    = true;
-        this.AsyncLoadHasBeenCancelled  = false;
+        this.LoadOperationInProgress = true;
+        this.AsyncLoadHasBeenCancelled = false;
 
-            
-        asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
+
+        asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-            
-        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
+
+        object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
     }
@@ -886,7 +886,7 @@ public class GenericSyndicationFeed
     {
         if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
         {
-            this.AsyncLoadHasBeenCancelled  = true;
+            this.AsyncLoadHasBeenCancelled = true;
             asyncHttpWebRequest.Abort();
         }
     }
@@ -896,22 +896,22 @@ public class GenericSyndicationFeed
     /// <param name="result">The result of the asynchronous operation.</param>
     private static void AsyncLoadCallback(IAsyncResult result)
     {
-        System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
-        XPathNavigator navigator                    = null;
-        WebRequest httpWebRequest                   = null;
-        GenericSyndicationFeed feed                 = null;
-        Uri source                                  = null;
-        WebRequestOptions options                   = null;
-        SyndicationResourceLoadSettings settings    = null;
+        System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+        XPathNavigator navigator = null;
+        WebRequest httpWebRequest = null;
+        GenericSyndicationFeed feed = null;
+        Uri source = null;
+        WebRequestOptions options = null;
+        SyndicationResourceLoadSettings settings = null;
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest      = parameters[0] as WebRequest;
-            feed                = parameters[1] as GenericSyndicationFeed;
-            source              = parameters[2] as Uri;
-            settings            = parameters[3] as SyndicationResourceLoadSettings;
-            options             = parameters[4] as WebRequestOptions;
-            object userToken    = parameters[5];
+            httpWebRequest = parameters[0] as WebRequest;
+            feed = parameters[1] as GenericSyndicationFeed;
+            source = parameters[2] as Uri;
+            settings = parameters[3] as SyndicationResourceLoadSettings;
+            options = parameters[4] as WebRequestOptions;
+            object userToken = parameters[5];
             if (feed != null)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
@@ -919,12 +919,12 @@ public class GenericSyndicationFeed
                 {
                     if (settings != null)
                     {
-                        encoding    = settings.CharacterEncoding;
+                        encoding = settings.CharacterEncoding;
                     }
 
                     using (StreamReader streamReader = new StreamReader(stream, encoding))
                     {
-                        XmlReaderSettings readerSettings    = new XmlReaderSettings
+                        XmlReaderSettings readerSettings = new XmlReaderSettings
                         {
                             IgnoreComments = true,
                             IgnoreWhitespace = true,
@@ -935,26 +935,26 @@ public class GenericSyndicationFeed
                         {
                             if (encoding == System.Text.Encoding.UTF8)
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                             }
                             else
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                             }
-                            SyndicationResourceMetadata metadata    = new SyndicationResourceMetadata(navigator);
+                            SyndicationResourceMetadata metadata = new SyndicationResourceMetadata(navigator);
 
                             if (metadata.Format == SyndicationContentFormat.Atom)
                             {
-                                AtomFeed atomFeed                   = new AtomFeed();
-                                SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                                AtomFeed atomFeed = new AtomFeed();
+                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                                 adapter.Fill(atomFeed, SyndicationContentFormat.Atom);
 
                                 feed.Parse(atomFeed);
                             }
                             else if (metadata.Format == SyndicationContentFormat.Rss)
                             {
-                                RssFeed rssFeed                     = new RssFeed();
-                                SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                                RssFeed rssFeed = new RssFeed();
+                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                                 adapter.Fill(rssFeed, SyndicationContentFormat.Rss);
 
                                 feed.Parse(rssFeed);
@@ -963,7 +963,7 @@ public class GenericSyndicationFeed
                         }
                     }
                 }
-                feed.LoadOperationInProgress    = false;
+                feed.LoadOperationInProgress = false;
             }
         }
     }
@@ -982,7 +982,7 @@ public class GenericSyndicationFeed
                 asyncHttpWebRequest.Abort();
             }
         }
-        this.LoadOperationInProgress    = false;
+        this.LoadOperationInProgress = false;
     }
     /// <summary>
     /// Loads the generic syndication feed using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -1002,20 +1002,20 @@ public class GenericSyndicationFeed
         Guard.ArgumentNotNull(navigator, "navigator");
         Guard.ArgumentNotNull(settings, "settings");
         Guard.ArgumentNotNull(eventData, "eventData");
-        SyndicationResourceMetadata metadata    = new SyndicationResourceMetadata(navigator);
+        SyndicationResourceMetadata metadata = new SyndicationResourceMetadata(navigator);
 
         if (metadata.Format == SyndicationContentFormat.Atom)
         {
-            AtomFeed feed                       = new AtomFeed();
-            SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+            AtomFeed feed = new AtomFeed();
+            SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
             adapter.Fill(feed, SyndicationContentFormat.Atom);
 
             this.Parse(feed);
         }
         else if (metadata.Format == SyndicationContentFormat.Rss)
         {
-            RssFeed feed                        = new RssFeed();
-            SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+            RssFeed feed = new RssFeed();
+            SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
             adapter.Fill(feed, SyndicationContentFormat.Rss);
 
             this.Parse(feed);

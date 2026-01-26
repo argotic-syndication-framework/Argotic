@@ -13,13 +13,13 @@ public enum YahooMediaExpression
     /// No media expression specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// The media object represents the full version.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    Full    = 1,
+    Full = 1,
 
     /// <summary>
     /// he media object represents a continuous stream.
@@ -31,5 +31,5 @@ public enum YahooMediaExpression
     /// The media object represents a sample version.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    Sample  = 3
+    Sample = 3
 }

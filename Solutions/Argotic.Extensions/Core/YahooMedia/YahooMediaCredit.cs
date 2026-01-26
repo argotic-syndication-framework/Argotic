@@ -21,7 +21,7 @@ public class YahooMediaCredit : IComparable
     /// <summary>
     /// Private member to hold the role the entity played.
     /// </summary>
-    private string creditRole       = string.Empty;
+    private string creditRole = string.Empty;
     /// <summary>
     /// Private member to hold the URI that identifies the role scheme.
     /// </summary>
@@ -101,7 +101,7 @@ public class YahooMediaCredit : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 creditRole = string.Empty;
             }
@@ -144,17 +144,17 @@ public class YahooMediaCredit : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string roleAttribute    = source.GetAttribute("role", string.Empty);
-            string schemeAttribute  = source.GetAttribute("scheme", string.Empty);
+            string roleAttribute = source.GetAttribute("role", string.Empty);
+            string schemeAttribute = source.GetAttribute("scheme", string.Empty);
 
             if (!string.IsNullOrEmpty(roleAttribute))
             {
-                this.Role   = roleAttribute;
-                wasLoaded   = true;
+                this.Role = roleAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(schemeAttribute))
@@ -162,7 +162,7 @@ public class YahooMediaCredit : IComparable
                 if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                 {
                     this.Scheme = scheme;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -170,7 +170,7 @@ public class YahooMediaCredit : IComparable
         if (!string.IsNullOrEmpty(source.Value))
         {
             this.Entity = source.Value;
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -184,7 +184,7 @@ public class YahooMediaCredit : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("credit", extension.XmlNamespace);
 
         if (!string.IsNullOrEmpty(this.Role))
@@ -215,14 +215,14 @@ public class YahooMediaCredit : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -247,13 +247,13 @@ public class YahooMediaCredit : IComparable
         {
             return 1;
         }
-        YahooMediaCredit value  = obj as YahooMediaCredit;
+        YahooMediaCredit value = obj as YahooMediaCredit;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Entity, value.Entity, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Role, value.Role, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            int result = string.Compare(this.Entity, value.Entity, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Role, value.Role, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }
@@ -284,7 +284,7 @@ public class YahooMediaCredit : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

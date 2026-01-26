@@ -45,27 +45,27 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         Guard.ArgumentNotNull(resource, "resource");
 
-        XmlNamespaceManager manager     = ApmlUtility.CreateNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator headNavigator    = this.Navigator.SelectSingleNode("apml:APML/apml:Head", manager);
+        XPathNavigator headNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Head", manager);
         if (headNavigator != null)
         {
             resource.Head.Load(headNavigator, this.Settings);
         }
 
-        XPathNavigator bodyNavigator    = this.Navigator.SelectSingleNode("apml:APML/apml:Body", manager);
+        XPathNavigator bodyNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Body", manager);
         if (bodyNavigator != null)
         {
             if (bodyNavigator.HasAttributes)
             {
-                string defaultProfileAttribute  = bodyNavigator.GetAttribute("defaultprofile", string.Empty);
+                string defaultProfileAttribute = bodyNavigator.GetAttribute("defaultprofile", string.Empty);
                 if (!string.IsNullOrEmpty(defaultProfileAttribute))
                 {
                     resource.DefaultProfileName = defaultProfileAttribute;
                 }
             }
 
-            XPathNodeIterator profileIterator   = bodyNavigator.Select("apml:Profile", manager);
+            XPathNodeIterator profileIterator = bodyNavigator.Select("apml:Profile", manager);
             if (profileIterator is { Count: > 0 })
             {
                 int counter = 0;
@@ -86,7 +86,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
             }
 
-            XPathNodeIterator applicationIterator   = bodyNavigator.Select("apml:Applications/apml:Application", manager);
+            XPathNodeIterator applicationIterator = bodyNavigator.Select("apml:Applications/apml:Application", manager);
             if (applicationIterator is { Count: > 0 })
             {
                 while (applicationIterator.MoveNext())

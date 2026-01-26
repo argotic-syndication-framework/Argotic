@@ -38,7 +38,7 @@ public class ITunesCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
     public ITunesCategory(string text)
     {
-        this.Text   = text;
+        this.Text = text;
     }
 
     /// <summary>
@@ -78,7 +78,7 @@ public class ITunesCategory : IComparable
         set
         {
             Guard.ArgumentNotNullOrEmptyString(value, "value");
-            categoryText    = value.Trim();
+            categoryText = value.Trim();
         }
     }
 
@@ -93,23 +93,23 @@ public class ITunesCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        ITunesSyndicationExtension extension    = new ITunesSyndicationExtension();
-        XmlNamespaceManager manager             = extension.CreateNamespaceManager(source);
+        ITunesSyndicationExtension extension = new ITunesSyndicationExtension();
+        XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasAttributes)
         {
-            string textAttribute    = source.GetAttribute("text", string.Empty);
+            string textAttribute = source.GetAttribute("text", string.Empty);
             if (!string.IsNullOrEmpty(textAttribute))
             {
-                this.Text   = textAttribute;
-                wasLoaded   = true;
+                this.Text = textAttribute;
+                wasLoaded = true;
             }
         }
 
         if (source.HasChildren)
         {
-            XPathNodeIterator categoryIterator  = source.Select("itunes:category", manager);
+            XPathNodeIterator categoryIterator = source.Select("itunes:category", manager);
 
             if (categoryIterator is { Count: > 0 })
             {
@@ -119,7 +119,7 @@ public class ITunesCategory : IComparable
                     if (category.Load(categoryIterator.Current))
                     {
                         this.Categories.Add(category);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -136,14 +136,14 @@ public class ITunesCategory : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        ITunesSyndicationExtension extension    = new ITunesSyndicationExtension();
+        ITunesSyndicationExtension extension = new ITunesSyndicationExtension();
         writer.WriteStartElement("category", extension.XmlNamespace);
 
         writer.WriteAttributeString("text", this.Text);
 
         if (this.Categories.Count > 0)
         {
-            foreach(ITunesCategory category in this.Categories)
+            foreach (ITunesCategory category in this.Categories)
             {
                 category.WriteTo(writer);
             }
@@ -162,14 +162,14 @@ public class ITunesCategory : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -194,13 +194,13 @@ public class ITunesCategory : IComparable
         {
             return 1;
         }
-        ITunesCategory value  = obj as ITunesCategory;
+        ITunesCategory value = obj as ITunesCategory;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
-            result      = result | ITunesSyndicationExtension.CompareSequence(this.Categories, value.Categories);
-                
+            int result = string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
+            result = result | ITunesSyndicationExtension.CompareSequence(this.Categories, value.Categories);
+
             return result;
         }
         else
@@ -230,7 +230,7 @@ public class ITunesCategory : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

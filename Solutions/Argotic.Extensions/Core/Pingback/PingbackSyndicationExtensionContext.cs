@@ -102,14 +102,14 @@ public class PingbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
 
         if (source.HasChildren)
         {
-            XPathNavigator serverNavigator  = source.SelectSingleNode("pingback:server", manager);
-            XPathNavigator targetNavigator  = source.SelectSingleNode("pingback:target", manager);
+            XPathNavigator serverNavigator = source.SelectSingleNode("pingback:server", manager);
+            XPathNavigator targetNavigator = source.SelectSingleNode("pingback:target", manager);
             XPathNodeIterator aboutIterator = source.Select("pingback:about", manager);
 
             if (serverNavigator != null)
@@ -117,7 +117,7 @@ public class PingbackSyndicationExtensionContext
                 if (Uri.TryCreate(serverNavigator.Value, UriKind.RelativeOrAbsolute, out Uri server))
                 {
                     this.Server = server;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -126,7 +126,7 @@ public class PingbackSyndicationExtensionContext
                 if (Uri.TryCreate(targetNavigator.Value, UriKind.RelativeOrAbsolute, out Uri target))
                 {
                     this.Target = target;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -137,7 +137,7 @@ public class PingbackSyndicationExtensionContext
                     if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri about))
                     {
                         this.Abouts.Add(about);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -161,7 +161,7 @@ public class PingbackSyndicationExtensionContext
         writer.WriteElementString("server", xmlNamespace, this.Server != null ? this.Server.ToString() : string.Empty);
         writer.WriteElementString("target", xmlNamespace, this.Target != null ? this.Target.ToString() : string.Empty);
 
-        foreach(Uri about in this.Abouts)
+        foreach (Uri about in this.Abouts)
         {
             if (about != null)
             {

@@ -42,11 +42,11 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat documentFormat  = SyndicationContentFormat.Opml;
+    private static SyndicationContentFormat documentFormat = SyndicationContentFormat.Opml;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version documentVersion                  = new Version(2, 0);
+    private static Version documentVersion = new Version(2, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -66,7 +66,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold header information for the document.
     /// </summary>
-    private OpmlHead documentHead                           = new OpmlHead();
+    private OpmlHead documentHead = new OpmlHead();
     /// <summary>
     /// Private member to hold the collection of outlines that comprise the published content of the document.
     /// </summary>
@@ -486,7 +486,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
 
         if (this.LoadOperationInProgress)
@@ -494,14 +494,14 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
             throw new InvalidOperationException();
         }
 
-        this.LoadOperationInProgress    = true;
-        this.AsyncLoadHasBeenCancelled  = false;
+        this.LoadOperationInProgress = true;
+        this.AsyncLoadHasBeenCancelled = false;
 
-            
-        asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
+
+        asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
+        object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
     }
@@ -518,7 +518,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
         {
-            this.AsyncLoadHasBeenCancelled  = true;
+            this.AsyncLoadHasBeenCancelled = true;
             asyncHttpWebRequest.Abort();
         }
     }
@@ -528,22 +528,22 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <param name="result">The result of the asynchronous operation.</param>
     private static void AsyncLoadCallback(IAsyncResult result)
     {
-        System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
-        XPathNavigator navigator                    = null;
-        WebRequest httpWebRequest                   = null;
-        OpmlDocument document                       = null;
-        Uri source                                  = null;
-        WebRequestOptions options                   = null;
-        SyndicationResourceLoadSettings settings    = null;
+        System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+        XPathNavigator navigator = null;
+        WebRequest httpWebRequest = null;
+        OpmlDocument document = null;
+        Uri source = null;
+        WebRequestOptions options = null;
+        SyndicationResourceLoadSettings settings = null;
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest      = parameters[0] as WebRequest;
-            document            = parameters[1] as OpmlDocument;
-            source              = parameters[2] as Uri;
-            settings            = parameters[3] as SyndicationResourceLoadSettings;
-            options             = parameters[4] as WebRequestOptions;
-            object userToken    = parameters[5];
+            httpWebRequest = parameters[0] as WebRequest;
+            document = parameters[1] as OpmlDocument;
+            source = parameters[2] as Uri;
+            settings = parameters[3] as SyndicationResourceLoadSettings;
+            options = parameters[4] as WebRequestOptions;
+            object userToken = parameters[5];
             if (document != null)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
@@ -551,12 +551,12 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
                 {
                     if (settings != null)
                     {
-                        encoding    = settings.CharacterEncoding;
+                        encoding = settings.CharacterEncoding;
                     }
 
                     using (StreamReader streamReader = new StreamReader(stream, encoding))
                     {
-                        XmlReaderSettings readerSettings    = new XmlReaderSettings
+                        XmlReaderSettings readerSettings = new XmlReaderSettings
                         {
                             IgnoreComments = true,
                             IgnoreWhitespace = true,
@@ -567,19 +567,19 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
                         {
                             if (encoding == System.Text.Encoding.UTF8)
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                             }
                             else
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                             }
-                            SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                            SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                             adapter.Fill(document, SyndicationContentFormat.Opml);
                             document.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                         }
                     }
                 }
-                document.LoadOperationInProgress    = false;
+                document.LoadOperationInProgress = false;
             }
         }
     }
@@ -598,7 +598,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
                 asyncHttpWebRequest.Abort();
             }
         }
-        this.LoadOperationInProgress    = false;
+        this.LoadOperationInProgress = false;
     }
     /// <summary>
     /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
@@ -608,10 +608,10 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -652,7 +652,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -665,10 +665,10 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="outline"/> is a null reference.</exception>
     public bool AddOutline(OpmlOutline outline)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(outline, "outline");
         ((Collection<OpmlOutline>)this.Outlines).Add(outline);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -689,7 +689,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         if (((Collection<OpmlOutline>)this.Outlines).Contains(outline))
         {
             ((Collection<OpmlOutline>)this.Outlines).Remove(outline);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -706,14 +706,14 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public XPathNavigator CreateNavigator()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Document,
             Indent = true,
             OmitXmlDeclaration = false
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.Save(writer);
             writer.Flush();
@@ -721,7 +721,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        XPathDocument document  = new XPathDocument(stream);
+        XPathDocument document = new XPathDocument(stream);
         return document.CreateNavigator();
     }
 
@@ -764,9 +764,9 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
-        XPathNavigator navigator    = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator();
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
     }
 
@@ -1012,7 +1012,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator    = null;
+        XPathNavigator navigator = null;
         Guard.ArgumentNotNull(source, "source");
         if (settings == null)
         {
@@ -1021,11 +1021,11 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
         }
         else
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
         }
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
     }
@@ -1062,10 +1062,10 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         if (settings == null)
         {
-            settings    = new SyndicationResourceSaveSettings();
+            settings = new SyndicationResourceSaveSettings();
         }
 
-        XmlWriterSettings writerSettings    = new XmlWriterSettings
+        XmlWriterSettings writerSettings = new XmlWriterSettings
         {
             OmitXmlDeclaration = false,
             Indent = !settings.MinimizeOutputSize,
@@ -1115,7 +1115,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
 
-            if(this.Head != null)
+            if (this.Head != null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Head, settings.SupportedExtensions);
             }
@@ -1132,14 +1132,14 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         }
         SyndicationExtensionAdapter.WriteXmlNamespaceDeclarations(settings.SupportedExtensions, writer);
 
-        if(this.Head != null)
+        if (this.Head != null)
         {
             this.Head.WriteTo(writer);
         }
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         writer.WriteStartElement("body");
-        foreach(OpmlOutline outline in this.Outlines)
+        foreach (OpmlOutline outline in this.Outlines)
         {
             outline.WriteTo(writer);
         }
@@ -1165,7 +1165,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(navigator, "navigator");
         Guard.ArgumentNotNull(settings, "settings");
         Guard.ArgumentNotNull(eventData, "eventData");
-        SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.Opml);
         this.OnDocumentLoaded(eventData);
     }

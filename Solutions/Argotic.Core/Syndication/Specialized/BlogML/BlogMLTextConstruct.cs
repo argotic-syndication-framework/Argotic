@@ -21,15 +21,15 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the content of the text.
     /// </summary>
-    private string textConstructContent                 = string.Empty;
+    private string textConstructContent = string.Empty;
     /// <summary>
     /// Private member to hold entity encoding utilized by the text.
     /// </summary>
-    private BlogMLContentType textConstructType         = BlogMLContentType.None;
+    private BlogMLContentType textConstructType = BlogMLContentType.None;
     /// <summary>
     /// Private member to hold a value indicating if the text construct escapes content using a CDATA block.
     /// </summary>
-    private bool textConstructEscapesContent            = true;
+    private bool textConstructEscapesContent = true;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLTextConstruct"/> class.
     /// </summary>
@@ -47,8 +47,8 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// </remarks>
     public BlogMLTextConstruct(string content)
     {
-        this.Content        = content;
-        this.ContentType    = BlogMLContentType.Text;
+        this.Content = content;
+        this.ContentType = BlogMLContentType.Text;
     }
 
     /// <summary>
@@ -62,8 +62,8 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// </remarks>
     public BlogMLTextConstruct(string content, BlogMLContentType encoding)
     {
-        this.Content        = content;
-        this.ContentType    = encoding;
+        this.Content = content;
+        this.ContentType = encoding;
     }
 
     /// <summary>
@@ -144,7 +144,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            textConstructType   = value;
+            textConstructType = value;
         }
     }
 
@@ -194,13 +194,13 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
 
                 if (constructType == type)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -234,8 +234,8 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
         {
             if (fieldInfo.FieldType == typeof(BlogMLContentType))
             {
-                BlogMLContentType type      = (BlogMLContentType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                BlogMLContentType type = (BlogMLContentType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -243,7 +243,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
 
                     if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        constructType   = type;
+                        constructType = type;
                         break;
                     }
                 }
@@ -261,10 +261,10 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -305,7 +305,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -322,26 +322,26 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
             if (!string.IsNullOrEmpty(typeAttribute))
             {
-                BlogMLContentType type  = BlogMLTextConstruct.ConstructTypeByName(typeAttribute);
+                BlogMLContentType type = BlogMLTextConstruct.ConstructTypeByName(typeAttribute);
                 if (type != BlogMLContentType.None)
                 {
-                    this.ContentType   = type;
-                    wasLoaded       = true;
+                    this.ContentType = type;
+                    wasLoaded = true;
                 }
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content    = source.Value;
-            wasLoaded       = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -360,10 +360,10 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -391,7 +391,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
 
         if (!string.IsNullOrEmpty(this.Content))
         {
-            if(this.EscapeContent)
+            if (this.EscapeContent)
             {
                 writer.WriteCData(this.Content);
             }
@@ -415,14 +415,14 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer, "TextConstruct");
         }
@@ -447,12 +447,12 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        BlogMLTextConstruct value  = obj as BlogMLTextConstruct;
+        BlogMLTextConstruct value = obj as BlogMLTextConstruct;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.ContentType.CompareTo(value.ContentType);
+            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result = result | this.ContentType.CompareTo(value.ContentType);
 
             return result;
         }
@@ -483,7 +483,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

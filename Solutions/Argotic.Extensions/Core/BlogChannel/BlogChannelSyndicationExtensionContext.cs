@@ -118,22 +118,22 @@ public class BlogChannelSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator blogRollNavigator        = source.SelectSingleNode("blogChannel:blogRoll", manager);
+            XPathNavigator blogRollNavigator = source.SelectSingleNode("blogChannel:blogRoll", manager);
             XPathNavigator mySubscriptionsNavigator = source.SelectSingleNode("blogChannel:mySubscriptions", manager);
-            XPathNavigator blinkNavigator           = source.SelectSingleNode("blogChannel:blink", manager);
-            XPathNavigator changesNavigator         = source.SelectSingleNode("blogChannel:changes", manager);
+            XPathNavigator blinkNavigator = source.SelectSingleNode("blogChannel:blink", manager);
+            XPathNavigator changesNavigator = source.SelectSingleNode("blogChannel:changes", manager);
 
             if (blogRollNavigator != null)
             {
                 if (Uri.TryCreate(blogRollNavigator.Value, UriKind.RelativeOrAbsolute, out Uri blogRoll))
                 {
-                    this.BlogRoll   = blogRoll;
-                    wasLoaded       = true;
+                    this.BlogRoll = blogRoll;
+                    wasLoaded = true;
                 }
             }
 
@@ -141,8 +141,8 @@ public class BlogChannelSyndicationExtensionContext
             {
                 if (Uri.TryCreate(mySubscriptionsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri mySubscriptions))
                 {
-                    this.MySubscriptions    = mySubscriptions;
-                    wasLoaded               = true;
+                    this.MySubscriptions = mySubscriptions;
+                    wasLoaded = true;
                 }
             }
 
@@ -150,8 +150,8 @@ public class BlogChannelSyndicationExtensionContext
             {
                 if (Uri.TryCreate(blinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri blink))
                 {
-                    this.Blink  = blink;
-                    wasLoaded   = true;
+                    this.Blink = blink;
+                    wasLoaded = true;
                 }
             }
 
@@ -159,8 +159,8 @@ public class BlogChannelSyndicationExtensionContext
             {
                 if (Uri.TryCreate(changesNavigator.Value, UriKind.RelativeOrAbsolute, out Uri changes))
                 {
-                    this.Changes    = changes;
-                    wasLoaded       = true;
+                    this.Changes = changes;
+                    wasLoaded = true;
                 }
             }
         }
@@ -180,7 +180,7 @@ public class BlogChannelSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(this.BlogRoll != null)
+        if (this.BlogRoll != null)
         {
             writer.WriteElementString("blogRoll", xmlNamespace, this.BlogRoll.ToString());
         }

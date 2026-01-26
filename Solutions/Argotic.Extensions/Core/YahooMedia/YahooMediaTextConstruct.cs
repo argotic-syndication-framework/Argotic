@@ -20,11 +20,11 @@ public class YahooMediaTextConstruct : IComparable
     /// <summary>
     /// Private member to hold the entity encoding utilized by the human-readable text.
     /// </summary>
-    private YahooMediaTextConstructType textConstructType   = YahooMediaTextConstructType.None;
+    private YahooMediaTextConstructType textConstructType = YahooMediaTextConstructType.None;
     /// <summary>
     /// Private member to hold the content of the human-readable text.
     /// </summary>
-    private string textConstructContent                     = string.Empty;
+    private string textConstructContent = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaTextConstruct"/> class.
@@ -41,7 +41,7 @@ public class YahooMediaTextConstruct : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
     public YahooMediaTextConstruct(string text)
     {
-        this.Content    = text;
+        this.Content = text;
     }
 
     /// <summary>
@@ -53,7 +53,7 @@ public class YahooMediaTextConstruct : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
     public YahooMediaTextConstruct(string text, YahooMediaTextConstructType type) : this(text)
     {
-        this.TextType   = type;
+        this.TextType = type;
     }
 
     /// <summary>
@@ -114,17 +114,17 @@ public class YahooMediaTextConstruct : IComparable
         {
             if (fieldInfo.FieldType == typeof(YahooMediaTextConstructType))
             {
-                YahooMediaTextConstructType constructType   = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                YahooMediaTextConstructType constructType = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (constructType == type)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -144,14 +144,14 @@ public class YahooMediaTextConstruct : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaTextConstructType TextTypeByName(string name)
     {
-        YahooMediaTextConstructType constructType   = YahooMediaTextConstructType.None;
+        YahooMediaTextConstructType constructType = YahooMediaTextConstructType.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaTextConstructType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaTextConstructType))
             {
-                YahooMediaTextConstructType type    = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes           = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                YahooMediaTextConstructType type = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -180,26 +180,26 @@ public class YahooMediaTextConstruct : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
             if (!string.IsNullOrEmpty(typeAttribute))
             {
-                YahooMediaTextConstructType type    = YahooMediaTextConstruct.TextTypeByName(typeAttribute);
+                YahooMediaTextConstructType type = YahooMediaTextConstruct.TextTypeByName(typeAttribute);
                 if (type != YahooMediaTextConstructType.None)
                 {
-                    this.TextType   = type;
-                    wasLoaded       = true;
+                    this.TextType = type;
+                    wasLoaded = true;
                 }
             }
         }
 
-        if(!string.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content    = source.Value;
-            wasLoaded       = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -214,15 +214,15 @@ public class YahooMediaTextConstruct : IComparable
     public void WriteTo(XmlWriter writer, string elementName)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement(elementName, extension.XmlNamespace);
 
-        if(this.TextType != YahooMediaTextConstructType.None)
+        if (this.TextType != YahooMediaTextConstructType.None)
         {
             writer.WriteAttributeString("type", YahooMediaTextConstruct.TextTypeAsString(this.TextType));
         }
 
-        if(!string.IsNullOrEmpty(this.Content))
+        if (!string.IsNullOrEmpty(this.Content))
         {
             writer.WriteString(this.Content);
         }
@@ -240,14 +240,14 @@ public class YahooMediaTextConstruct : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer, "generic");
         }
@@ -272,12 +272,12 @@ public class YahooMediaTextConstruct : IComparable
         {
             return 1;
         }
-        YahooMediaTextConstruct value  = obj as YahooMediaTextConstruct;
+        YahooMediaTextConstruct value = obj as YahooMediaTextConstruct;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.TextType.CompareTo(value.TextType);
+            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result = result | this.TextType.CompareTo(value.TextType);
 
             return result;
         }
@@ -308,7 +308,7 @@ public class YahooMediaTextConstruct : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

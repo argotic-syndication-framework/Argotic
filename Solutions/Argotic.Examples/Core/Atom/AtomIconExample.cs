@@ -16,7 +16,7 @@ public static class AtomIconExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed
+        AtomFeed feed = new AtomFeed
         {
             Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
             Title = new AtomTextConstruct("Example Feed"),
@@ -29,7 +29,7 @@ public static class AtomIconExample
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
         //  Provide iconic visual identification for the feed
-        feed.Icon       = new AtomIcon(new Uri("/icon.jpg"));
+        feed.Icon = new AtomIcon(new Uri("/icon.jpg"));
 
         AtomEntry entry = new AtomEntry
         {

@@ -91,11 +91,11 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -110,7 +110,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -135,14 +135,14 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -167,60 +167,60 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
         {
             return 1;
         }
-        LiveJournalSyndicationExtension value  = obj as LiveJournalSyndicationExtension;
+        LiveJournalSyndicationExtension value = obj as LiveJournalSyndicationExtension;
 
         if (value != null)
         {
-            int result  = this.Context.IsPreformatted.CompareTo(value.Context.IsPreformatted);
+            int result = this.Context.IsPreformatted.CompareTo(value.Context.IsPreformatted);
 
             if (this.Context.Mood != null)
             {
                 if (value.Context.Mood != null)
                 {
-                    result  = result | this.Context.Mood.CompareTo(value.Context.Mood);
+                    result = result | this.Context.Mood.CompareTo(value.Context.Mood);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (this.Context.Mood == null && value.Context.Mood != null)
             {
-                result      = result | -1;
+                result = result | -1;
             }
 
-            result      = result | string.Compare(this.Context.Music, value.Context.Music, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Context.Music, value.Context.Music, StringComparison.OrdinalIgnoreCase);
 
             if (this.Context.Security != null)
             {
                 if (value.Context.Security != null)
                 {
-                    result  = result | this.Context.Security.CompareTo(value.Context.Security);
+                    result = result | this.Context.Security.CompareTo(value.Context.Security);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (this.Context.Security == null && value.Context.Security != null)
             {
-                result      = result | -1;
+                result = result | -1;
             }
 
             if (this.Context.UserPicture != null)
             {
                 if (value.Context.UserPicture != null)
                 {
-                    result  = result | this.Context.UserPicture.CompareTo(value.Context.UserPicture);
+                    result = result | this.Context.UserPicture.CompareTo(value.Context.UserPicture);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (this.Context.UserPicture == null && value.Context.UserPicture != null)
             {
-                result      = result | -1;
+                result = result | -1;
             }
 
             return result;
@@ -252,7 +252,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

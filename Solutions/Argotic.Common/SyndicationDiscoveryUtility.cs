@@ -15,7 +15,7 @@ public static class SyndicationDiscoveryUtility
     /// <summary>
     /// Private member to hold the default user agent sent by the framework when making HTTP web requests.
     /// </summary>
-    private static readonly string frameworkUserAgent    = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
+    private static readonly string frameworkUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
 
     /// <summary>
     /// Gets the raw user agent string used by the framework when sending web requests.
@@ -39,7 +39,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static SyndicationContentFormat SyndicationContentFormatByName(string name)
     {
-        SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
+        SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
 
         Guard.ArgumentNotNullOrEmptyString(name, "name");
 
@@ -48,7 +48,7 @@ public static class SyndicationDiscoveryUtility
             if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
             {
                 SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -129,7 +129,7 @@ public static class SyndicationDiscoveryUtility
     {
         Guard.ArgumentNotNull(stream, "stream");
 
-        XmlReaderSettings settings  = new XmlReaderSettings
+        XmlReaderSettings settings = new XmlReaderSettings
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -150,21 +150,21 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public static SyndicationContentFormat SyndicationContentFormatGet(XmlReader reader)
     {
-        SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
+        SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
 
         Guard.ArgumentNotNull(reader, "reader");
 
-        XmlDocument document    = new XmlDocument();
+        XmlDocument document = new XmlDocument();
         document.Load(reader);
 
-        string rootElementName  = document.DocumentElement.LocalName;
+        string rootElementName = document.DocumentElement.LocalName;
 
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
         {
             if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
             {
                 SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -193,26 +193,26 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     public static SyndicationContentFormat SyndicationContentFormatGet(XPathNavigator navigator)
     {
-        SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
-        XPathNavigator source                       = null;
+        SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
+        XPathNavigator source = null;
 
         Guard.ArgumentNotNull(navigator, "navigator");
 
-        source  = navigator.CreateNavigator();
+        source = navigator.CreateNavigator();
         if (string.IsNullOrEmpty(source.LocalName))
         {
             source.MoveToRoot();
             source.MoveToChild(XPathNodeType.Element);
         }
 
-        string rootElementName  = source.LocalName;
+        string rootElementName = source.LocalName;
 
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
         {
             if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
             {
                 SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -239,32 +239,32 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     private static Hashtable ExtractHtmlAttributes(string content)
     {
-        Hashtable hashtable     = new Hashtable();
-        Regex attributePattern  = new Regex("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
+        Hashtable hashtable = new Hashtable();
+        Regex attributePattern = new Regex("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
 
         Guard.ArgumentNotNullOrEmptyString(content, "content");
 
-        MatchCollection attributes  = attributePattern.Matches(content);
+        MatchCollection attributes = attributePattern.Matches(content);
 
         foreach (Match attribute in attributes)
         {
             if (attribute.Groups is { Count: > 0 })
             {
-                string name     = attribute.Groups[1].Value;
-                string value    = string.Empty;
+                string name = attribute.Groups[1].Value;
+                string value = string.Empty;
 
                 if (!string.IsNullOrEmpty(name))
                 {
-                    value       = attribute.Groups[2].Value;
+                    value = attribute.Groups[2].Value;
                 }
                 else
                 {
-                    name        = attribute.Groups[3].Value;
-                    value       = attribute.Groups[4].Value;
+                    name = attribute.Groups[3].Value;
+                    value = attribute.Groups[4].Value;
                 }
 
-                name            = name.ToUpperInvariant().Trim();
-                value           = value.Trim();
+                name = name.ToUpperInvariant().Trim();
+                value = value.Trim();
 
                 if (!hashtable.ContainsKey(name))
                 {
@@ -286,14 +286,14 @@ public static class SyndicationDiscoveryUtility
     public static Collection<Uri> ExtractUrls(string content)
     {
         Collection<Uri> results = [];
-        Regex linkPattern       = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
-        Regex anchorPattern     = new Regex("<a[^>]+", RegexOptions.IgnoreCase);
+        Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
+        Regex anchorPattern = new Regex("<a[^>]+", RegexOptions.IgnoreCase);
 
         Guard.ArgumentNotNullOrEmptyString(content, "content");
 
         MatchCollection links = linkPattern.Matches(content);
 
-        foreach(Match link in links)
+        foreach (Match link in links)
         {
             Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
@@ -448,7 +448,7 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     public static bool UriExists(Uri uri, ICredentials credentials)
     {
-        bool uriExists  = false;
+        bool uriExists = false;
 
         if (uri == null)
         {
@@ -460,12 +460,12 @@ public static class SyndicationDiscoveryUtility
             using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
             if (response is { ContentLength: > 0 })
             {
-                uriExists   = true;
+                uriExists = true;
             }
         }
         catch (WebException)
         {
-            uriExists   = false;
+            uriExists = false;
         }
 
         return uriExists;
@@ -600,13 +600,13 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, out HttpWebResponse response)
     {
-        bool sourceHasBeenModified  = false;
+        bool sourceHasBeenModified = false;
 
         Guard.ArgumentNotNull(source, "source");
 
-        HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
-        httpRequest.UserAgent           = frameworkUserAgent;
-        httpRequest.IfModifiedSince     = lastModified;
+        HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
+        httpRequest.UserAgent = frameworkUserAgent;
+        httpRequest.IfModifiedSince = lastModified;
         httpRequest.Headers.Add(HttpRequestHeader.IfNoneMatch, entityTag);
         new WebRequestOptions(credentials).ApplyOptions(httpRequest);
 
@@ -616,15 +616,15 @@ public static class SyndicationDiscoveryUtility
 
             if (DateTime.Compare(response.LastModified, lastModified) != 0)
             {
-                sourceHasBeenModified   = true;
+                sourceHasBeenModified = true;
             }
         }
         catch (WebException webException)
         {
             if (webException.Response != null && ((HttpWebResponse)webException.Response).StatusCode == HttpStatusCode.NotModified)
             {
-                sourceHasBeenModified   = false;
-                response                = null;
+                sourceHasBeenModified = false;
+                response = null;
             }
             else
             {
@@ -674,31 +674,31 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options, out HttpWebResponse response)
     {
-        bool sourceHasBeenModified  = false;
+        bool sourceHasBeenModified = false;
 
         Guard.ArgumentNotNull(source, "source");
 
-        HttpWebRequest httpRequest      = (HttpWebRequest)HttpWebRequest.Create(source);
-        httpRequest.UserAgent           = frameworkUserAgent;
-        httpRequest.IfModifiedSince     = lastModified;
+        HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
+        httpRequest.UserAgent = frameworkUserAgent;
+        httpRequest.IfModifiedSince = lastModified;
         httpRequest.Headers.Add(HttpRequestHeader.IfNoneMatch, entityTag);
         if (options != null) options.ApplyOptions(httpRequest);
 
         try
         {
-            response    = (HttpWebResponse)httpRequest.GetResponse();
+            response = (HttpWebResponse)httpRequest.GetResponse();
 
             if (DateTime.Compare(response.LastModified, lastModified) != 0)
             {
-                sourceHasBeenModified   = true;
+                sourceHasBeenModified = true;
             }
         }
         catch (WebException webException)
         {
             if (webException.Response != null && ((HttpWebResponse)webException.Response).StatusCode == HttpStatusCode.NotModified)
             {
-                sourceHasBeenModified   = false;
-                response                = null;
+                sourceHasBeenModified = false;
+                response = null;
             }
             else
             {
@@ -725,41 +725,41 @@ public static class SyndicationDiscoveryUtility
     public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
     {
         Collection<DiscoverableSyndicationEndpoint> results = [];
-        Regex linkPattern                                   = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
+        Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
 
         Guard.ArgumentNotNullOrEmptyString(content, "content");
 
-        MatchCollection links   = linkPattern.Matches(content);
+        MatchCollection links = linkPattern.Matches(content);
 
-        foreach(Match link in links)
+        foreach (Match link in links)
         {
             Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
             if (linkAttributes.ContainsKey("HREF") && linkAttributes.ContainsKey("REL") && linkAttributes.ContainsKey("TYPE"))
             {
                 string href = (string)linkAttributes["HREF"];
-                string rel  = (string)linkAttributes["REL"];
+                string rel = (string)linkAttributes["REL"];
                 string type = (string)linkAttributes["TYPE"];
 
                 if (string.Compare(rel, "alternate", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri url))
                     {
-                        DiscoverableSyndicationEndpoint endpoint    = new DiscoverableSyndicationEndpoint
-                            {
-                                Source = url
-                            };
+                        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint
+                        {
+                            Source = url
+                        };
                         if (!string.IsNullOrEmpty(type))
                         {
-                            endpoint.ContentType                    = type;
+                            endpoint.ContentType = type;
                         }
 
                         if (linkAttributes.ContainsKey("TITLE"))
                         {
-                            string title        = (string)linkAttributes["TITLE"];
+                            string title = (string)linkAttributes["TITLE"];
                             if (!string.IsNullOrEmpty(title))
                             {
-                                endpoint.Title  = title;
+                                endpoint.Title = title;
                             }
                         }
 
@@ -876,28 +876,28 @@ public static class SyndicationDiscoveryUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static HtmlAnchor ExtractPingbackNotificationServer(string content)
     {
-        HtmlAnchor pingbackAnchor   = null;
-        Regex linkPattern           = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
+        HtmlAnchor pingbackAnchor = null;
+        Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
 
         Guard.ArgumentNotNullOrEmptyString(content, "content");
 
-        MatchCollection links   = linkPattern.Matches(content);
+        MatchCollection links = linkPattern.Matches(content);
 
-        foreach(Match link in links)
+        foreach (Match link in links)
         {
             Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
             if (linkAttributes.ContainsKey("HREF") && linkAttributes.ContainsKey("REL"))
             {
                 string href = (string)linkAttributes["HREF"];
-                string rel  = (string)linkAttributes["REL"];
+                string rel = (string)linkAttributes["REL"];
 
                 if (string.Compare(rel, "pingback", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     Uri uri;
                     if (Uri.TryCreate(href, UriKind.Absolute, out uri))
                     {
-                        pingbackAnchor      = new HtmlAnchor
+                        pingbackAnchor = new HtmlAnchor
                         {
                             HRef = href
                         };
@@ -905,7 +905,7 @@ public static class SyndicationDiscoveryUtility
 
                         if (linkAttributes.ContainsKey("TYPE"))
                         {
-                            string type     = (string)linkAttributes["TYPE"];
+                            string type = (string)linkAttributes["TYPE"];
                             if (!string.IsNullOrEmpty(type))
                             {
                                 pingbackAnchor.Attributes.Add("type", type);
@@ -913,10 +913,10 @@ public static class SyndicationDiscoveryUtility
                         }
                         if (linkAttributes.ContainsKey("TITLE"))
                         {
-                            string title    = (string)linkAttributes["TITLE"];
+                            string title = (string)linkAttributes["TITLE"];
                             if (!string.IsNullOrEmpty(title))
                             {
-                                pingbackAnchor.Title    = title;
+                                pingbackAnchor.Title = title;
                             }
                         }
                     }
@@ -1026,7 +1026,7 @@ public static class SyndicationDiscoveryUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static bool IsPingbackEnabled(Uri uri, ICredentials credentials)
     {
-        bool isPingbackEnabled      = false;
+        bool isPingbackEnabled = false;
 
         Guard.ArgumentNotNull(uri, "uri");
 
@@ -1040,15 +1040,15 @@ public static class SyndicationDiscoveryUtility
         {
             for (int i = 0; i < webResponse.Headers.Count; i++)
             {
-                string name     = webResponse.Headers.Keys[i];
-                string value    = webResponse.Headers[i];
+                string name = webResponse.Headers.Keys[i];
+                string value = webResponse.Headers[i];
 
                 if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     Uri pingbackXmlRpcServer;
-                    if(Uri.TryCreate(value, UriKind.Absolute, out pingbackXmlRpcServer))
+                    if (Uri.TryCreate(value, UriKind.Absolute, out pingbackXmlRpcServer))
                     {
-                        isPingbackEnabled   = true;
+                        isPingbackEnabled = true;
                     }
                     break;
                 }
@@ -1062,7 +1062,7 @@ public static class SyndicationDiscoveryUtility
 
             if (link != null)
             {
-                isPingbackEnabled   = true;
+                isPingbackEnabled = true;
             }
         }
 
@@ -1175,7 +1175,7 @@ public static class SyndicationDiscoveryUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Pingback")]
     public static Uri LocatePingbackNotificationServer(Uri uri, ICredentials credentials)
     {
-        Uri pingbackXmlRpcServer    = null;
+        Uri pingbackXmlRpcServer = null;
 
         Guard.ArgumentNotNull(uri, "uri");
 
@@ -1189,14 +1189,14 @@ public static class SyndicationDiscoveryUtility
         {
             for (int i = 0; i < webResponse.Headers.Count; i++)
             {
-                string name     = webResponse.Headers.Keys[i];
-                string value    = webResponse.Headers[i];
+                string name = webResponse.Headers.Keys[i];
+                string value = webResponse.Headers[i];
 
                 if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if(Uri.TryCreate(value, UriKind.Absolute, out Uri url))
+                    if (Uri.TryCreate(value, UriKind.Absolute, out Uri url))
                     {
-                        pingbackXmlRpcServer    = url;
+                        pingbackXmlRpcServer = url;
                     }
                     break;
                 }
@@ -1212,7 +1212,7 @@ public static class SyndicationDiscoveryUtility
             {
                 if (Uri.TryCreate(link.HRef, UriKind.Absolute, out Uri href))
                 {
-                    pingbackXmlRpcServer    = href;
+                    pingbackXmlRpcServer = href;
                 }
             }
         }
@@ -1236,9 +1236,9 @@ public static class SyndicationDiscoveryUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
-        Collection<TrackbackDiscoveryMetadata> results  = [];
-        Regex rdfPattern                                = new Regex("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        XmlNamespaceManager manager                     = new XmlNamespaceManager(new NameTable());
+        Collection<TrackbackDiscoveryMetadata> results = [];
+        Regex rdfPattern = new Regex("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
 
         Guard.ArgumentNotNullOrEmptyString(content, "content");
 
@@ -1246,15 +1246,15 @@ public static class SyndicationDiscoveryUtility
         manager.AddNamespace("dc", "http://purl.org/dc/elements/1.1/");
         manager.AddNamespace("trackback", "http://madskills.com/public/xml/rss/module/trackback/");
 
-        MatchCollection embeddedRdfs    = rdfPattern.Matches(content);
+        MatchCollection embeddedRdfs = rdfPattern.Matches(content);
 
         foreach (Match embeddedRdf in embeddedRdfs)
         {
             using StringReader reader = new StringReader(embeddedRdf.Value);
-            XPathDocument document      = new XPathDocument(reader);
-            XPathNavigator navigator    = document.CreateNavigator();
+            XPathDocument document = new XPathDocument(reader);
+            XPathNavigator navigator = document.CreateNavigator();
 
-            TrackbackDiscoveryMetadata trackbackMetadata    = new TrackbackDiscoveryMetadata();
+            TrackbackDiscoveryMetadata trackbackMetadata = new TrackbackDiscoveryMetadata();
             if (trackbackMetadata.Load(navigator))
             {
                 results.Add(trackbackMetadata);

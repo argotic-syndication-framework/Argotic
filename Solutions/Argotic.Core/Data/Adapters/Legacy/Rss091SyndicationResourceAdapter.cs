@@ -46,9 +46,9 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         Guard.ArgumentNotNull(resource, "resource");
 
-        XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator feedNavigator    = this.Navigator.SelectSingleNode("rss", manager);
+        XPathNavigator feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
 
         if (feedNavigator != null)
         {
@@ -82,9 +82,9 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         Guard.ArgumentNotNull(settings, "settings");
 
         XPathNavigator descriptionNavigator = navigator.SelectSingleNode("description", manager);
-        XPathNavigator linkNavigator        = navigator.SelectSingleNode("link", manager);
-        XPathNavigator titleNavigator       = navigator.SelectSingleNode("title", manager);
-        XPathNavigator languageNavigator    = navigator.SelectSingleNode("language", manager);
+        XPathNavigator linkNavigator = navigator.SelectSingleNode("link", manager);
+        XPathNavigator titleNavigator = navigator.SelectSingleNode("title", manager);
+        XPathNavigator languageNavigator = navigator.SelectSingleNode("language", manager);
 
         if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
@@ -95,21 +95,21 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                channel.Link    = link;
+                channel.Link = link;
             }
         }
 
         if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
-            channel.Title       = titleNavigator.Value;
+            channel.Title = titleNavigator.Value;
         }
 
         if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
         {
             try
             {
-                CultureInfo language    = new CultureInfo(languageNavigator.Value);
-                channel.Language        = language;
+                CultureInfo language = new CultureInfo(languageNavigator.Value);
+                channel.Language = language;
             }
             catch (ArgumentException)
             {
@@ -117,10 +117,10 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        XPathNavigator imageNavigator   = navigator.SelectSingleNode("image", manager);
+        XPathNavigator imageNavigator = navigator.SelectSingleNode("image", manager);
         if (imageNavigator != null)
         {
-            channel.Image               = new RssImage();
+            channel.Image = new RssImage();
             Rss091SyndicationResourceAdapter.FillImage(channel.Image, imageNavigator, manager, settings);
         }
 
@@ -150,9 +150,9 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         Guard.ArgumentNotNull(manager, "manager");
         Guard.ArgumentNotNull(settings, "settings");
 
-        XPathNodeIterator skipDaysIterator  = navigator.Select("skipDays/day", manager);
+        XPathNodeIterator skipDaysIterator = navigator.Select("skipDays/day", manager);
         XPathNodeIterator skipHoursIterator = navigator.Select("skipHours/hour", manager);
-        XPathNodeIterator itemIterator      = navigator.Select("item", manager);
+        XPathNodeIterator itemIterator = navigator.Select("item", manager);
 
         if (skipDaysIterator is { Count: > 0 })
         {
@@ -182,7 +182,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
             {
                 if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
-                    hour    = hour - 1; // Convert to zero-based range
+                    hour = hour - 1; // Convert to zero-based range
 
                     if (!channel.SkipHours.Contains(hour) && hour is >= 0 and <= 23)
                     {
@@ -209,25 +209,25 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
                     break;
                 }
 
-                XPathNavigator titleNavigator       = itemIterator.Current.SelectSingleNode("title", manager);
-                XPathNavigator linkNavigator        = itemIterator.Current.SelectSingleNode("link", manager);
+                XPathNavigator titleNavigator = itemIterator.Current.SelectSingleNode("title", manager);
+                XPathNavigator linkNavigator = itemIterator.Current.SelectSingleNode("link", manager);
                 XPathNavigator descriptionNavigator = itemIterator.Current.SelectSingleNode("description", manager);
 
                 if (titleNavigator != null)
                 {
-                    item.Title          = titleNavigator.Value;
+                    item.Title = titleNavigator.Value;
                 }
 
                 if (descriptionNavigator != null)
                 {
-                    item.Description    = descriptionNavigator.Value;
+                    item.Description = descriptionNavigator.Value;
                 }
 
                 if (linkNavigator != null)
                 {
                     if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
                     {
-                        item.Link       = link;
+                        item.Link = link;
                     }
                 }
 
@@ -257,27 +257,27 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         Guard.ArgumentNotNull(manager, "manager");
         Guard.ArgumentNotNull(settings, "settings");
 
-        XPathNavigator copyrightNavigator       = navigator.SelectSingleNode("copyright", manager);
-        XPathNavigator managingEditorNavigator  = navigator.SelectSingleNode("managingEditor", manager);
-        XPathNavigator webMasterNavigator       = navigator.SelectSingleNode("webMaster", manager);
-        XPathNavigator ratingNavigator          = navigator.SelectSingleNode("rating", manager);
-        XPathNavigator publicationNavigator     = navigator.SelectSingleNode("pubDate", manager);
-        XPathNavigator lastBuildDateNavigator   = navigator.SelectSingleNode("lastBuildDate", manager);
-        XPathNavigator textInputNavigator       = navigator.SelectSingleNode("textInput", manager);
+        XPathNavigator copyrightNavigator = navigator.SelectSingleNode("copyright", manager);
+        XPathNavigator managingEditorNavigator = navigator.SelectSingleNode("managingEditor", manager);
+        XPathNavigator webMasterNavigator = navigator.SelectSingleNode("webMaster", manager);
+        XPathNavigator ratingNavigator = navigator.SelectSingleNode("rating", manager);
+        XPathNavigator publicationNavigator = navigator.SelectSingleNode("pubDate", manager);
+        XPathNavigator lastBuildDateNavigator = navigator.SelectSingleNode("lastBuildDate", manager);
+        XPathNavigator textInputNavigator = navigator.SelectSingleNode("textInput", manager);
 
         if (copyrightNavigator != null)
         {
-            channel.Copyright           = copyrightNavigator.Value;
+            channel.Copyright = copyrightNavigator.Value;
         }
 
         if (managingEditorNavigator != null)
         {
-            channel.ManagingEditor      = managingEditorNavigator.Value;
+            channel.ManagingEditor = managingEditorNavigator.Value;
         }
 
         if (webMasterNavigator != null)
         {
-            channel.Webmaster           = webMasterNavigator.Value;
+            channel.Webmaster = webMasterNavigator.Value;
         }
 
         if (ratingNavigator != null)
@@ -297,13 +297,13 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(lastBuildDateNavigator.Value, out DateTime lastBuildDate))
             {
-                channel.LastBuildDate   = lastBuildDate;
+                channel.LastBuildDate = lastBuildDate;
             }
         }
 
         if (textInputNavigator != null)
         {
-            channel.TextInput           = new RssTextInput();
+            channel.TextInput = new RssTextInput();
             Rss091SyndicationResourceAdapter.FillTextInput(channel.TextInput, textInputNavigator, manager, settings);
         }
     }
@@ -326,52 +326,52 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         Guard.ArgumentNotNull(manager, "manager");
         Guard.ArgumentNotNull(settings, "settings");
 
-        XPathNavigator linkNavigator    = navigator.SelectSingleNode("link", manager);
-        XPathNavigator titleNavigator   = navigator.SelectSingleNode("title", manager);
-        XPathNavigator urlNavigator     = navigator.SelectSingleNode("url", manager);
+        XPathNavigator linkNavigator = navigator.SelectSingleNode("link", manager);
+        XPathNavigator titleNavigator = navigator.SelectSingleNode("title", manager);
+        XPathNavigator urlNavigator = navigator.SelectSingleNode("url", manager);
 
         XPathNavigator descriptionNavigator = navigator.SelectSingleNode("description", manager);
-        XPathNavigator heightNavigator      = navigator.SelectSingleNode("height", manager);
-        XPathNavigator widthNavigator       = navigator.SelectSingleNode("width", manager);
+        XPathNavigator heightNavigator = navigator.SelectSingleNode("height", manager);
+        XPathNavigator widthNavigator = navigator.SelectSingleNode("width", manager);
 
         if (linkNavigator != null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                image.Link      = link;
+                image.Link = link;
             }
         }
         if (titleNavigator != null)
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
-                image.Title     = titleNavigator.Value;
+                image.Title = titleNavigator.Value;
             }
         }
         if (urlNavigator != null)
         {
             if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
             {
-                image.Url       = url;
+                image.Url = url;
             }
         }
 
         if (descriptionNavigator != null)
         {
-            image.Description   = descriptionNavigator.Value;
+            image.Description = descriptionNavigator.Value;
         }
         if (heightNavigator != null)
         {
             if (int.TryParse(heightNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
             {
-                image.Height    = height < RssImage.HeightMaximum ? height : RssImage.HeightMaximum;
+                image.Height = height < RssImage.HeightMaximum ? height : RssImage.HeightMaximum;
             }
         }
         if (widthNavigator != null)
         {
             if (int.TryParse(widthNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
             {
-                image.Width     = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
+                image.Width = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
             }
         }
 
@@ -398,36 +398,36 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         Guard.ArgumentNotNull(settings, "settings");
 
         XPathNavigator descriptionNavigator = navigator.SelectSingleNode("description", manager);
-        XPathNavigator linkNavigator        = navigator.SelectSingleNode("link", manager);
-        XPathNavigator nameNavigator        = navigator.SelectSingleNode("name", manager);
-        XPathNavigator titleNavigator       = navigator.SelectSingleNode("title", manager);
+        XPathNavigator linkNavigator = navigator.SelectSingleNode("link", manager);
+        XPathNavigator nameNavigator = navigator.SelectSingleNode("name", manager);
+        XPathNavigator titleNavigator = navigator.SelectSingleNode("title", manager);
 
         if (descriptionNavigator != null)
         {
             if (!string.IsNullOrEmpty(descriptionNavigator.Value))
             {
-                textInput.Description   = descriptionNavigator.Value;
+                textInput.Description = descriptionNavigator.Value;
             }
         }
         if (linkNavigator != null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                textInput.Link          = link;
+                textInput.Link = link;
             }
         }
         if (nameNavigator != null)
         {
             if (!string.IsNullOrEmpty(nameNavigator.Value))
             {
-                textInput.Name          = nameNavigator.Value;
+                textInput.Name = nameNavigator.Value;
             }
         }
         if (titleNavigator != null)
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
-                textInput.Title         = titleNavigator.Value;
+                textInput.Title = titleNavigator.Value;
             }
         }
 

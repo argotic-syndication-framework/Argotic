@@ -21,7 +21,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold instance of event with no event data.
     /// </summary>
-    private static readonly SyndicationExtensionLoadedEventArgs emptyEventArguments  = new SyndicationExtensionLoadedEventArgs();
+    private static readonly SyndicationExtensionLoadedEventArgs emptyEventArguments = new SyndicationExtensionLoadedEventArgs();
     /// <summary>
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication extension.
     /// </summary>
@@ -48,7 +48,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     {
         Guard.ArgumentNotNull(data, "data");
 
-        eventNavigator  = data.CreateNavigator();
+        eventNavigator = data.CreateNavigator();
     }
 
     /// <summary>
@@ -64,7 +64,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     {
         Guard.ArgumentNotNull(extension, "extension");
 
-        eventExtension  = extension;
+        eventExtension = extension;
     }
     /// <summary>
     /// Represents an syndication extension loaded event with no event data.
@@ -114,11 +114,11 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     /// </remarks>
     public override string ToString()
     {
-        string name         = this.Extension != null ? this.Extension.Name : string.Empty;
-        string prefix       = this.Extension != null ? this.Extension.XmlPrefix : string.Empty;
+        string name = this.Extension != null ? this.Extension.Name : string.Empty;
+        string prefix = this.Extension != null ? this.Extension.XmlPrefix : string.Empty;
         string xmlNamespace = this.Extension != null ? this.Extension.XmlNamespace : string.Empty;
-        string extension    = this.Extension != null ? this.Extension.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string data         = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string extension = this.Extension != null ? this.Extension.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string data = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
         return string.Format(null, "[SyndicationExtensionLoadedEventArgs(Name = \"{0}\", Prefix = \"{1}\", Namespace = \"{2}\", Extension = \"{3}\", Data = \"{4}\")]", name, prefix, xmlNamespace, extension, data);
     }
@@ -135,42 +135,42 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
         {
             return 1;
         }
-        SyndicationExtensionLoadedEventArgs value  = obj as SyndicationExtensionLoadedEventArgs;
+        SyndicationExtensionLoadedEventArgs value = obj as SyndicationExtensionLoadedEventArgs;
 
         if (value != null)
         {
-            int result  = 0;
+            int result = 0;
 
             if (this.Data != null)
             {
-                if(value.Data != null)
+                if (value.Data != null)
                 {
-                    result  = result | string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.Ordinal);
+                    result = result | string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.Ordinal);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (value.Data != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             if (this.Extension != null)
             {
                 if (value.Extension != null)
                 {
-                    result  = result | string.Compare(this.Extension.ToString(), value.Extension.ToString(), StringComparison.Ordinal);
+                    result = result | string.Compare(this.Extension.ToString(), value.Extension.ToString(), StringComparison.Ordinal);
                 }
                 else
                 {
-                    result  = result | 1;
+                    result = result | 1;
                 }
             }
             else if (value.Extension != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             return result;
@@ -202,7 +202,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

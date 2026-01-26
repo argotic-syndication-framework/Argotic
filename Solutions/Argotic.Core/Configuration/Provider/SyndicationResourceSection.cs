@@ -12,15 +12,15 @@ public sealed class SyndicationResourceSection : ConfigurationSection
     /// <summary>
     /// Private member to hold the default provider configuration property for the section.
     /// </summary>
-    private static readonly ConfigurationProperty configurationSectionDefaultProviderProperty   = new ConfigurationProperty("defaultProvider", typeof(string), "XmlSyndicationResourceProvider", new StringConverter(), new StringValidator(1), ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationSectionDefaultProviderProperty = new ConfigurationProperty("defaultProvider", typeof(string), "XmlSyndicationResourceProvider", new StringConverter(), new StringValidator(1), ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold the providers configuration property for the section.
     /// </summary>
-    private static readonly ConfigurationProperty configurationSectionProvidersProperty         = new ConfigurationProperty("providers", typeof(ProviderSettingsCollection), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationSectionProvidersProperty = new ConfigurationProperty("providers", typeof(ProviderSettingsCollection), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold a collection of configuration properties for the section.
     /// </summary>
-    private static readonly ConfigurationPropertyCollection configurationSectionProperties               = new ConfigurationPropertyCollection();
+    private static readonly ConfigurationPropertyCollection configurationSectionProperties = new ConfigurationPropertyCollection();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceSection"/> class.
@@ -40,7 +40,7 @@ public sealed class SyndicationResourceSection : ConfigurationSection
     ///     An empty string ("") is not a valid value for the <see cref="DefaultProvider"/> property.
     /// </remarks>
     [ConfigurationProperty("defaultProvider", DefaultValue = "XmlSyndicationResourceProvider", Options = ConfigurationPropertyOptions.None)]
-    [StringValidator(MinLength=1)]
+    [StringValidator(MinLength = 1)]
     public string DefaultProvider
     {
         get

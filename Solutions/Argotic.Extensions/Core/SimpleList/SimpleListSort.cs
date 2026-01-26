@@ -32,11 +32,11 @@ public class SimpleListSort : IComparable
     /// <summary>
     /// Private member to hold the name of the sortable property.
     /// </summary>
-    private string sortElement              = string.Empty;
+    private string sortElement = string.Empty;
     /// <summary>
     /// Private member to hold a human-readable name for the sortable property.
     /// </summary>
-    private string sortLabel                = string.Empty;
+    private string sortLabel = string.Empty;
     /// <summary>
     /// Private member to hold the data-type of the sortable property.
     /// </summary>
@@ -92,7 +92,7 @@ public class SimpleListSort : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 sortElement = string.Empty;
             }
@@ -190,13 +190,13 @@ public class SimpleListSort : IComparable
 
                 if (dataType == type)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -222,8 +222,8 @@ public class SimpleListSort : IComparable
         {
             if (fieldInfo.FieldType == typeof(SimpleListDataType))
             {
-                SimpleListDataType type     = (SimpleListDataType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                SimpleListDataType type = (SimpleListDataType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -252,35 +252,35 @@ public class SimpleListSort : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string namespaceAttribute   = source.GetAttribute("ns", string.Empty);
-            string elementAttribute     = source.GetAttribute("element", string.Empty);
-            string labelAttribute       = source.GetAttribute("label", string.Empty);
-            string dataTypeAttribute    = source.GetAttribute("data-type", string.Empty);
-            string defaultAttribute     = source.GetAttribute("default", string.Empty);
+            string namespaceAttribute = source.GetAttribute("ns", string.Empty);
+            string elementAttribute = source.GetAttribute("element", string.Empty);
+            string labelAttribute = source.GetAttribute("label", string.Empty);
+            string dataTypeAttribute = source.GetAttribute("data-type", string.Empty);
+            string defaultAttribute = source.GetAttribute("default", string.Empty);
 
             if (!string.IsNullOrEmpty(namespaceAttribute))
             {
                 if (Uri.TryCreate(namespaceAttribute, UriKind.RelativeOrAbsolute, out Uri elementNamespace))
                 {
-                    this.Namespace  = elementNamespace;
-                    wasLoaded       = true;
+                    this.Namespace = elementNamespace;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(elementAttribute))
             {
-                this.Element    = elementAttribute;
-                wasLoaded       = true;
+                this.Element = elementAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(labelAttribute))
             {
-                this.Label  = labelAttribute;
-                wasLoaded   = true;
+                this.Label = labelAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(dataTypeAttribute))
@@ -288,8 +288,8 @@ public class SimpleListSort : IComparable
                 SimpleListDataType dataType = SimpleListSort.DataTypeByName(dataTypeAttribute);
                 if (dataType != SimpleListDataType.None)
                 {
-                    this.DataType   = dataType;
-                    wasLoaded       = true;
+                    this.DataType = dataType;
+                    wasLoaded = true;
                 }
             }
 
@@ -297,13 +297,13 @@ public class SimpleListSort : IComparable
             {
                 if (string.Compare(defaultAttribute, "true", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    this.IsDefault  = true;
-                    wasLoaded       = true;
+                    this.IsDefault = true;
+                    wasLoaded = true;
                 }
                 else if (string.Compare(defaultAttribute, "false", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    this.IsDefault  = false;
-                    wasLoaded       = true;
+                    this.IsDefault = false;
+                    wasLoaded = true;
                 }
             }
         }
@@ -319,15 +319,15 @@ public class SimpleListSort : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        SimpleListSyndicationExtension extension    = new SimpleListSyndicationExtension();
+        SimpleListSyndicationExtension extension = new SimpleListSyndicationExtension();
         writer.WriteStartElement("sort", extension.XmlNamespace);
 
-        if(this.Namespace != null)
+        if (this.Namespace != null)
         {
             writer.WriteAttributeString("ns", this.Namespace.ToString());
         }
 
-        if(!string.IsNullOrEmpty(this.Element))
+        if (!string.IsNullOrEmpty(this.Element))
         {
             writer.WriteAttributeString("element", this.Element);
         }
@@ -342,7 +342,7 @@ public class SimpleListSort : IComparable
             writer.WriteAttributeString("data-type", SimpleListSort.DataTypeAsString(this.DataType));
         }
 
-        if(this.IsDefault)
+        if (this.IsDefault)
         {
             writer.WriteAttributeString("default", "true");
         }
@@ -360,14 +360,14 @@ public class SimpleListSort : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -392,15 +392,15 @@ public class SimpleListSort : IComparable
         {
             return 1;
         }
-        SimpleListSort value  = obj as SimpleListSort;
+        SimpleListSort value = obj as SimpleListSort;
 
         if (value != null)
         {
-            int result  = this.DataType.CompareTo(value.DataType);
-            result      = result | string.Compare(this.Element, value.Element, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.IsDefault.CompareTo(value.IsDefault);
-            result      = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Namespace, value.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            int result = this.DataType.CompareTo(value.DataType);
+            result = result | string.Compare(this.Element, value.Element, StringComparison.OrdinalIgnoreCase);
+            result = result | this.IsDefault.CompareTo(value.IsDefault);
+            result = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Namespace, value.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }
@@ -431,7 +431,7 @@ public class SimpleListSort : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

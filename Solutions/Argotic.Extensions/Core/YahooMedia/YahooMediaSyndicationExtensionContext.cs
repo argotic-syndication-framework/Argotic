@@ -396,23 +396,23 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNodeIterator contentIterator   = source.Select("media:content", manager);
-            XPathNodeIterator groupIterator     = source.Select("media:group", manager);
+            XPathNodeIterator contentIterator = source.Select("media:content", manager);
+            XPathNodeIterator groupIterator = source.Select("media:group", manager);
 
             if (contentIterator is { Count: > 0 })
             {
                 while (contentIterator.MoveNext())
                 {
-                    YahooMediaContent content   = new YahooMediaContent();
+                    YahooMediaContent content = new YahooMediaContent();
                     if (content.Load(contentIterator.Current))
                     {
                         this.AddContent(content);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -421,11 +421,11 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
             {
                 while (groupIterator.MoveNext())
                 {
-                    YahooMediaGroup group   = new YahooMediaGroup();
+                    YahooMediaGroup group = new YahooMediaGroup();
                     if (group.Load(groupIterator.Current))
                     {
                         this.AddGroup(group);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -433,7 +433,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
 
         if (YahooMediaUtility.FillCommonObjectEntities(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -451,7 +451,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        foreach(YahooMediaContent content in this.Contents)
+        foreach (YahooMediaContent content in this.Contents)
         {
             content.WriteTo(writer);
         }
@@ -472,11 +472,11 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     public bool AddContent(YahooMediaContent content)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(content, "content");
 
         ((Collection<YahooMediaContent>)this.Contents).Add(content);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -515,7 +515,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         if (((Collection<YahooMediaContent>)this.Contents).Contains(content))
         {
             ((Collection<YahooMediaContent>)this.Contents).Remove(content);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;

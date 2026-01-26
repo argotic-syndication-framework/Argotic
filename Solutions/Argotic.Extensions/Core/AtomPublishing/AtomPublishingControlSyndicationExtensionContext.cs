@@ -141,10 +141,10 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -185,7 +185,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -200,31 +200,31 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
         if (AtomPublishingUtility.FillCommonObjectAttributes(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator draftNavigator  = source.SelectSingleNode("app:draft", manager);
+            XPathNavigator draftNavigator = source.SelectSingleNode("app:draft", manager);
             if (draftNavigator != null && !string.IsNullOrEmpty(draftNavigator.Value))
             {
                 if (string.Compare(draftNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    this.IsDraft    = true;
-                    wasLoaded       = true;
+                    this.IsDraft = true;
+                    wasLoaded = true;
                 }
                 else if (string.Compare(draftNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    this.IsDraft    = false;
-                    wasLoaded       = true;
+                    this.IsDraft = false;
+                    wasLoaded = true;
                 }
                 else
                 {
-                    this.IsDraft    = false;
+                    this.IsDraft = false;
                 }
             }
         }
@@ -244,11 +244,11 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source, manager);
+        wasLoaded = this.Load(source, manager);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 

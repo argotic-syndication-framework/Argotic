@@ -34,22 +34,22 @@ public class DublinCoreElementSetSyndicationExtensionTest
                                       "<type xmlns=\"http://purl.org/dc/elements/1.1/\">PhysicalObject</type>";
 
     private const string strExtXml = "<dc:contributor>Helper</dc:contributor>"
-                                     +"<dc:coverage>US</dc:coverage>"
-                                     +"<dc:creator>The Big Guy</dc:creator>"
-                                     +"<dc:date>2010-08-01T00:00:00.00Z</dc:date>"
-                                     +"<dc:description>That kind of thing</dc:description>"
-                                     +"<dc:format>CDROM</dc:format>"
-                                     +"<dc:identifier>MYTESTCDROM-1</dc:identifier>"
-                                     +"<dc:language>en-US</dc:language>"
-                                     +"<dc:publisher>MeMeMe</dc:publisher>"
-                                     +"<dc:relation>MYTESTCDROM-2</dc:relation>"
-                                     +"<dc:rights>Copyright 2010</dc:rights>"
-                                     +"<dc:source>Out of Me Head</dc:source>"
-                                     +"<dc:subject>Test data (Stupid variety)</dc:subject>"
-                                     +"<dc:title>Stupid test data</dc:title>"
-                                     +"<dc:type>PhysicalObject</dc:type>";
+                                     + "<dc:coverage>US</dc:coverage>"
+                                     + "<dc:creator>The Big Guy</dc:creator>"
+                                     + "<dc:date>2010-08-01T00:00:00.00Z</dc:date>"
+                                     + "<dc:description>That kind of thing</dc:description>"
+                                     + "<dc:format>CDROM</dc:format>"
+                                     + "<dc:identifier>MYTESTCDROM-1</dc:identifier>"
+                                     + "<dc:language>en-US</dc:language>"
+                                     + "<dc:publisher>MeMeMe</dc:publisher>"
+                                     + "<dc:relation>MYTESTCDROM-2</dc:relation>"
+                                     + "<dc:rights>Copyright 2010</dc:rights>"
+                                     + "<dc:source>Out of Me Head</dc:source>"
+                                     + "<dc:subject>Test data (Stupid variety)</dc:subject>"
+                                     + "<dc:title>Stupid test data</dc:title>"
+                                     + "<dc:type>PhysicalObject</dc:type>";
 
-    private TestContext testContextInstance;
+    public TestContext TestContext { get; set; }
 
     /// <summary>
     ///Gets or sets the test context which provides
@@ -86,7 +86,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        int expected = 0; 
+        int expected = 0;
         int actual;
         actual = target.CompareTo(obj);
         Assert.AreEqual(expected, actual);
@@ -128,7 +128,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     /// <summary>
     ///A test for GetHashCode
     ///</summary>
-    [TestMethod,Ignore]
+    [TestMethod, Ignore]
     public void DublinCoreElementSet_GetHashCodeTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
@@ -147,7 +147,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         DublinCoreElementSetSyndicationExtension target = new DublinCoreElementSetSyndicationExtension(); // TODO: Initialize to an appropriate value
         NameTable nt = new NameTable();
         XmlNamespaceManager ns = new XmlNamespaceManager(nt);
-        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
+        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
@@ -233,7 +233,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool expected = false; 
+        bool expected = false;
         bool actual;
         actual = (first == second);
         Assert.AreEqual(expected, actual);
@@ -257,7 +257,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool expected = false; 
+        bool expected = false;
         bool actual = false;
         actual = (first > second);
         Assert.AreEqual(expected, actual);
@@ -284,7 +284,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool expected = true; 
+        bool expected = true;
         bool actual;
         actual = (first < second);
         Assert.AreEqual(expected, actual);
@@ -361,23 +361,23 @@ public class DublinCoreElementSetSyndicationExtensionTest
     public static DublinCoreElementSetSyndicationExtensionContext CreateContext1()
     {
         DublinCoreElementSetSyndicationExtensionContext dub = new DublinCoreElementSetSyndicationExtensionContext
-            {
-                Contributor = "",
-                Coverage = "",
-                Creator = "",
-                Date = new DateTime(2010, 8, 1),
-                Description = "",
-                Format = "",
-                Identifier = "",
-                Language = new CultureInfo("US-en"),
-                Publisher = "",
-                Relation = "",
-                Rights = "",
-                Source = "",
-                Subject = "",
-                Title = "",
-                TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject
-            };
+        {
+            Contributor = "",
+            Coverage = "",
+            Creator = "",
+            Date = new DateTime(2010, 8, 1),
+            Description = "",
+            Format = "",
+            Identifier = "",
+            Language = new CultureInfo("US-en"),
+            Publisher = "",
+            Relation = "",
+            Rights = "",
+            Source = "",
+            Subject = "",
+            Title = "",
+            TypeVocabulary = DublinCoreTypeVocabularies.PhysicalObject
+        };
 
         return dub;
     }

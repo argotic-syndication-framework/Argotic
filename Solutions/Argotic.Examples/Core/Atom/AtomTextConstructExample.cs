@@ -16,7 +16,7 @@ public static class AtomTextConstructExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed
+        AtomFeed feed = new AtomFeed
         {
             Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
             Title = new AtomTextConstruct("Example Feed"),
@@ -36,12 +36,12 @@ public static class AtomTextConstructExample
         };
 
         //  Provide summary as entity escaped html
-        AtomTextConstruct summary   = new AtomTextConstruct
+        AtomTextConstruct summary = new AtomTextConstruct
         {
             Content = "AT&amp;amp;T bought &lt;b&gt;by SBC&lt;/b&gt;!",
             TextType = AtomTextConstructType.Html
         };
-        entry.Summary               = summary;
+        entry.Summary = summary;
 
         feed.AddEntry(entry);
     }

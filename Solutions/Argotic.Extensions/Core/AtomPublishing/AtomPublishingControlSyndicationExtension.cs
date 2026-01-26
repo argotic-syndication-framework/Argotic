@@ -28,7 +28,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private AtomPublishingControlSyndicationExtensionContext extensionContext   = new AtomPublishingControlSyndicationExtensionContext();
+    private AtomPublishingControlSyndicationExtensionContext extensionContext = new AtomPublishingControlSyndicationExtensionContext();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingControlSyndicationExtension"/> class.
@@ -155,7 +155,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
             settings = new SyndicationResourceLoadSettings();
         }
 
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator(), settings);
     }
@@ -181,14 +181,14 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -213,19 +213,19 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
             return 1;
         }
 
-        AtomPublishingControlSyndicationExtension value  = obj as AtomPublishingControlSyndicationExtension;
+        AtomPublishingControlSyndicationExtension value = obj as AtomPublishingControlSyndicationExtension;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Version.CompareTo(value.Version);
-            result      = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result      = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Version.CompareTo(value.Version);
+            result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
-            result      = result | AtomPublishingUtility.CompareCommonObjectAttributes(this.Context, value.Context);
-            result      = result | this.Context.IsDraft.CompareTo(value.Context.IsDraft);
+            result = result | AtomPublishingUtility.CompareCommonObjectAttributes(this.Context, value.Context);
+            result = result | this.Context.IsDraft.CompareTo(value.Context.IsDraft);
 
             return result;
         }

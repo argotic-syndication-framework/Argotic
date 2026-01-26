@@ -95,7 +95,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <summary>
     /// Private member to hold a value indicating the most recent instant in time when the source was modified in a way the publisher considers significant.
     /// </summary>
-    private DateTime sourceUpdatedOn    = DateTime.MinValue;
+    private DateTime sourceUpdatedOn = DateTime.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomSource"/> class.
     /// </summary>
@@ -115,9 +115,9 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// </param>
     public AtomSource(AtomId id, AtomTextConstruct title, DateTime utcUpdatedOn)
     {
-        this.Id         = id;
-        this.Title      = title;
-        this.UpdatedOn  = utcUpdatedOn;
+        this.Id = id;
+        this.Title = title;
+        this.UpdatedOn = utcUpdatedOn;
     }
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
@@ -421,10 +421,10 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -465,7 +465,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -481,32 +481,32 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
         if (AtomUtility.FillCommonObjectAttributes(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
-        XPathNavigator idNavigator              = source.SelectSingleNode("atom:id", manager);
-        XPathNavigator titleNavigator           = source.SelectSingleNode("atom:title", manager);
-        XPathNavigator updatedNavigator         = source.SelectSingleNode("atom:updated", manager);
+        XPathNavigator idNavigator = source.SelectSingleNode("atom:id", manager);
+        XPathNavigator titleNavigator = source.SelectSingleNode("atom:title", manager);
+        XPathNavigator updatedNavigator = source.SelectSingleNode("atom:updated", manager);
 
         if (idNavigator != null)
         {
-            this.Id         = new AtomId();
+            this.Id = new AtomId();
             if (this.Id.Load(idNavigator))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
         if (titleNavigator != null)
         {
-            this.Title      = new AtomTextConstruct();
+            this.Title = new AtomTextConstruct();
             if (this.Title.Load(titleNavigator))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
@@ -514,19 +514,19 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out DateTime updatedOn))
             {
-                this.UpdatedOn  = updatedOn;
-                wasLoaded       = true;
+                this.UpdatedOn = updatedOn;
+                wasLoaded = true;
             }
         }
 
-        if(this.LoadOptionals(source, manager))
+        if (this.LoadOptionals(source, manager))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         if (this.LoadCollections(source, manager))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -545,10 +545,10 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -566,7 +566,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         writer.WriteStartElement("source", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if(this.Id != null)
+        if (this.Id != null)
         {
             this.Id.WriteTo(writer);
         }
@@ -606,7 +606,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
             this.Subtitle.WriteTo(writer, "subtitle");
         }
 
-        foreach(AtomPersonConstruct author in this.Authors)
+        foreach (AtomPersonConstruct author in this.Authors)
         {
             author.WriteTo(writer, "author");
         }
@@ -639,14 +639,14 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -670,82 +670,82 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             return 1;
         }
-        AtomSource value  = obj as AtomSource;
+        AtomSource value = obj as AtomSource;
 
         if (value != null)
         {
-            int result  = AtomFeed.CompareSequence(this.Authors, value.Authors);
-            result      = result | AtomFeed.CompareSequence(this.Categories, value.Categories);
-            result      = result | AtomFeed.CompareSequence(this.Contributors, value.Contributors);
+            int result = AtomFeed.CompareSequence(this.Authors, value.Authors);
+            result = result | AtomFeed.CompareSequence(this.Categories, value.Categories);
+            result = result | AtomFeed.CompareSequence(this.Contributors, value.Contributors);
 
             if (this.Generator != null)
             {
-                result  = result | this.Generator.CompareTo(value.Generator);
+                result = result | this.Generator.CompareTo(value.Generator);
             }
-            else if(value.Generator != null)
+            else if (value.Generator != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             if (this.Icon != null)
             {
-                result  = result | this.Icon.CompareTo(value.Icon);
+                result = result | this.Icon.CompareTo(value.Icon);
             }
-            else if(value.Icon != null)
+            else if (value.Icon != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             if (this.Id != null)
             {
-                result  = result | this.Id.CompareTo(value.Id);
+                result = result | this.Id.CompareTo(value.Id);
             }
-            else if(value.Id != null)
+            else if (value.Id != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
-            result      = result | AtomFeed.CompareSequence(this.Links, value.Links);
-                
+            result = result | AtomFeed.CompareSequence(this.Links, value.Links);
+
             if (this.Logo != null)
             {
-                result  = result | this.Logo.CompareTo(value.Logo);
+                result = result | this.Logo.CompareTo(value.Logo);
             }
-            else if(value.Logo != null)
+            else if (value.Logo != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             if (this.Rights != null)
             {
-                result  = result | this.Rights.CompareTo(value.Rights);
+                result = result | this.Rights.CompareTo(value.Rights);
             }
-            else if(value.Rights != null)
+            else if (value.Rights != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             if (this.Subtitle != null)
             {
-                result  = result | this.Subtitle.CompareTo(value.Subtitle);
+                result = result | this.Subtitle.CompareTo(value.Subtitle);
             }
             else if (value.Subtitle != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
             if (this.Title != null)
             {
-                result  = result | this.Title.CompareTo(value.Title);
+                result = result | this.Title.CompareTo(value.Title);
             }
             else if (value.Title != null)
             {
-                result  = result | -1;
+                result = result | -1;
             }
 
-            result      = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
+            result = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
 
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -776,7 +776,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }
@@ -865,23 +865,23 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        XPathNodeIterator authorIterator        = source.Select("atom:author", manager);
-        XPathNodeIterator contributorIterator   = source.Select("atom:contributor", manager);
-        XPathNodeIterator categoryIterator      = source.Select("atom:category", manager);
-        XPathNodeIterator linkIterator          = source.Select("atom:link", manager);
+        XPathNodeIterator authorIterator = source.Select("atom:author", manager);
+        XPathNodeIterator contributorIterator = source.Select("atom:contributor", manager);
+        XPathNodeIterator categoryIterator = source.Select("atom:category", manager);
+        XPathNodeIterator linkIterator = source.Select("atom:link", manager);
 
         if (authorIterator is { Count: > 0 })
         {
             while (authorIterator.MoveNext())
             {
-                AtomPersonConstruct author  = new AtomPersonConstruct();
+                AtomPersonConstruct author = new AtomPersonConstruct();
                 if (author.Load(authorIterator.Current))
                 {
                     this.Authors.Add(author);
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -890,11 +890,11 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             while (categoryIterator.MoveNext())
             {
-                AtomCategory category   = new AtomCategory();
+                AtomCategory category = new AtomCategory();
                 if (category.Load(categoryIterator.Current))
                 {
                     this.Categories.Add(category);
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -907,7 +907,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
                 if (contributor.Load(contributorIterator.Current))
                 {
                     this.Contributors.Add(contributor);
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -916,11 +916,11 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             while (linkIterator.MoveNext())
             {
-                AtomLink link   = new AtomLink();
+                AtomLink link = new AtomLink();
                 if (link.Load(linkIterator.Current))
                 {
                     this.Links.Add(link);
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -941,57 +941,57 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        XPathNavigator generatorNavigator       = source.SelectSingleNode("atom:generator", manager);
-        XPathNavigator iconNavigator            = source.SelectSingleNode("atom:icon", manager);
-        XPathNavigator logoNavigator            = source.SelectSingleNode("atom:logo", manager);
-        XPathNavigator rightsNavigator          = source.SelectSingleNode("atom:rights", manager);
-        XPathNavigator subtitleNavigator        = source.SelectSingleNode("atom:subtitle", manager);
+        XPathNavigator generatorNavigator = source.SelectSingleNode("atom:generator", manager);
+        XPathNavigator iconNavigator = source.SelectSingleNode("atom:icon", manager);
+        XPathNavigator logoNavigator = source.SelectSingleNode("atom:logo", manager);
+        XPathNavigator rightsNavigator = source.SelectSingleNode("atom:rights", manager);
+        XPathNavigator subtitleNavigator = source.SelectSingleNode("atom:subtitle", manager);
 
         if (generatorNavigator != null)
         {
-            this.Generator  = new AtomGenerator();
+            this.Generator = new AtomGenerator();
             if (this.Generator.Load(generatorNavigator))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
         if (iconNavigator != null)
         {
-            this.Icon       = new AtomIcon();
+            this.Icon = new AtomIcon();
             if (this.Icon.Load(iconNavigator))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
         if (logoNavigator != null)
         {
-            this.Logo       = new AtomLogo();
+            this.Logo = new AtomLogo();
             if (this.Logo.Load(logoNavigator))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
         if (rightsNavigator != null)
         {
-            this.Rights     = new AtomTextConstruct();
+            this.Rights = new AtomTextConstruct();
             if (this.Rights.Load(rightsNavigator))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
         if (subtitleNavigator != null)
         {
-            this.Subtitle   = new AtomTextConstruct();
+            this.Subtitle = new AtomTextConstruct();
             if (this.Subtitle.Load(subtitleNavigator))
             {
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 

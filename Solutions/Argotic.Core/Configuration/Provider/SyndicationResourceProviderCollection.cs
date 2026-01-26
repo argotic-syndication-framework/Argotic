@@ -43,7 +43,7 @@ public class SyndicationResourceProviderCollection : ProviderCollection, ICollec
             {
                 if (string.Compare(provider.Name, item.Name, StringComparison.Ordinal) == 0)
                 {
-                    itemExists  = true;
+                    itemExists = true;
                     break;
                 }
             }

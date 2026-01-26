@@ -19,7 +19,7 @@ public class FeedRankSyndicationExtensionTest
     private const string writeToText = "<rank d1p1:scheme=\"http://example.com/scheme.txt\" d1p1:domain=\"http://example.com/\" label=\"Title\" xmlns:d1p1=\"http://purl.org/atompub/rank/1.0\" xmlns=\"http://purl.org/atompub/rank/1.0\">1.0</rank>";
     private const string strExtXml = "<re:rank re:scheme=\"http://example.com/scheme.txt\" re:domain=\"http://example.com/\" label=\"Title\">1.0</re:rank>";
 
-    private TestContext testContextInstance;
+    public TestContext TestContext { get; set; }
 
     /// <summary>
     ///Gets or sets the test context which provides

@@ -34,23 +34,23 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the host name or IP address of the web service that monitors updates to the feed.
     /// </summary>
-    private string cloudDomain              = string.Empty;
+    private string cloudDomain = string.Empty;
     /// <summary>
     /// Private member to hold the web service's path.
     /// </summary>
-    private string cloudPath                = string.Empty;
+    private string cloudPath = string.Empty;
     /// <summary>
     /// Private member to hold the web service's TCP port.
     /// </summary>
-    private int cloudPort                   = 80;
+    private int cloudPort = 80;
     /// <summary>
     /// Private member to hold the protocol utilized by the web service.
     /// </summary>
-    private RssCloudProtocol cloudProtocol  = RssCloudProtocol.XmlRpc;
+    private RssCloudProtocol cloudProtocol = RssCloudProtocol.XmlRpc;
     /// <summary>
     /// Private member to hold message format the web service employs.
     /// </summary>
-    private string cloudRegisterProcedure   = string.Empty;
+    private string cloudRegisterProcedure = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssCloud"/> class.
     /// </summary>
@@ -76,11 +76,11 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="registerProcedure"/> is an empty string.</exception>
     public RssCloud(string domain, string path, int port, RssCloudProtocol protocol, string registerProcedure)
     {
-        this.Domain             = domain;
-        this.Path               = path;
-        this.Port               = port;
-        this.Protocol           = protocol;
-        this.RegisterProcedure  = registerProcedure;
+        this.Domain = domain;
+        this.Path = path;
+        this.Port = port;
+        this.Protocol = protocol;
+        this.RegisterProcedure = registerProcedure;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -242,17 +242,17 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
         {
             if (fieldInfo.FieldType == typeof(RssCloudProtocol))
             {
-                RssCloudProtocol cloudProtocol  = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                RssCloudProtocol cloudProtocol = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (cloudProtocol == protocol)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -280,14 +280,14 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// </example>
     public static RssCloudProtocol CloudProtocolByName(string name)
     {
-        RssCloudProtocol cloudProtocol  = RssCloudProtocol.None;
+        RssCloudProtocol cloudProtocol = RssCloudProtocol.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(RssCloudProtocol).GetFields())
         {
             if (fieldInfo.FieldType == typeof(RssCloudProtocol))
             {
-                RssCloudProtocol protocol   = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                RssCloudProtocol protocol = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -295,7 +295,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
 
                     if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        cloudProtocol   = protocol;
+                        cloudProtocol = protocol;
                         break;
                     }
                 }
@@ -312,10 +312,10 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -356,7 +356,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -372,26 +372,26 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string domain               = source.GetAttribute("domain", string.Empty);
-            string path                 = source.GetAttribute("path", string.Empty);
-            string port                 = source.GetAttribute("port", string.Empty);
-            string protocol             = source.GetAttribute("protocol", string.Empty);
-            string registerProcedure    = source.GetAttribute("registerProcedure", string.Empty);
+            string domain = source.GetAttribute("domain", string.Empty);
+            string path = source.GetAttribute("path", string.Empty);
+            string port = source.GetAttribute("port", string.Empty);
+            string protocol = source.GetAttribute("protocol", string.Empty);
+            string registerProcedure = source.GetAttribute("registerProcedure", string.Empty);
 
             if (!string.IsNullOrEmpty(domain))
             {
-                this.Domain             = domain;
-                wasLoaded               = true;
+                this.Domain = domain;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(path))
             {
-                this.Path               = path;
-                wasLoaded               = true;
+                this.Path = path;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(port))
@@ -400,26 +400,26 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
                 {
                     if (tcpPort > 0)
                     {
-                        this.Port       = tcpPort;
-                        wasLoaded       = true;
+                        this.Port = tcpPort;
+                        wasLoaded = true;
                     }
                 }
             }
 
             if (!string.IsNullOrEmpty(protocol))
             {
-                RssCloudProtocol serviceProtocol    = RssCloud.CloudProtocolByName(protocol);
+                RssCloudProtocol serviceProtocol = RssCloud.CloudProtocolByName(protocol);
                 if (serviceProtocol != RssCloudProtocol.None)
                 {
-                    this.Protocol       = serviceProtocol;
-                    wasLoaded           = true;
+                    this.Protocol = serviceProtocol;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(registerProcedure))
             {
-                this.RegisterProcedure  = registerProcedure;
-                wasLoaded               = true;
+                this.RegisterProcedure = registerProcedure;
+                wasLoaded = true;
             }
         }
 
@@ -439,10 +439,10 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -478,14 +478,14 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -509,15 +509,15 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        RssCloud value  = obj as RssCloud;
+        RssCloud value = obj as RssCloud;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Path, value.Path, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Port.CompareTo(value.Port);
-            result      = result | this.Protocol.CompareTo(value.Protocol);
-            result      = result | string.Compare(this.RegisterProcedure, value.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Path, value.Path, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Port.CompareTo(value.Port);
+            result = result | this.Protocol.CompareTo(value.Protocol);
+            result = result | string.Compare(this.RegisterProcedure, value.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -548,7 +548,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

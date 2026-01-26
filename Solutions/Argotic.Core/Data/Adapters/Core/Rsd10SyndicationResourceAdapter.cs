@@ -45,7 +45,7 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         Guard.ArgumentNotNull(resource, "resource");
 
-        XmlNamespaceManager manager     = RsdUtility.CreateNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
         XPathNavigator serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager);
 
@@ -57,14 +57,14 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (serviceNavigator != null)
         {
-            XPathNavigator engineNameNavigator      = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineName", manager);
-            XPathNavigator engineLinkNavigator      = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineLink", manager);
-            XPathNavigator homePageLinkNavigator    = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:homePageLink", manager);
-            XPathNodeIterator apiIterator           = RsdUtility.SelectSafe(serviceNavigator, "rsd:apis/rsd:api", manager);
+            XPathNavigator engineNameNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineName", manager);
+            XPathNavigator engineLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineLink", manager);
+            XPathNavigator homePageLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:homePageLink", manager);
+            XPathNodeIterator apiIterator = RsdUtility.SelectSafe(serviceNavigator, "rsd:apis/rsd:api", manager);
 
             if (engineNameNavigator != null && !string.IsNullOrEmpty(engineNameNavigator.Value))
             {
-                resource.EngineName     = engineNameNavigator.Value;
+                resource.EngineName = engineNameNavigator.Value;
             }
 
             if (engineLinkNavigator != null)
@@ -79,7 +79,7 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
             {
                 if (Uri.TryCreate(homePageLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri homepage))
                 {
-                    resource.Homepage   = homepage;
+                    resource.Homepage = homepage;
                 }
             }
 

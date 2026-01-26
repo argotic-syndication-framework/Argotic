@@ -150,17 +150,17 @@ public sealed class XmlRpcClientNetworkElement : ConfigurationElement
     {
         get
         {
-            NetworkCredential credential    = null;
+            NetworkCredential credential = null;
 
             if (!string.IsNullOrEmpty(this.UserName))
             {
                 if (!string.IsNullOrEmpty(this.Domain))
                 {
-                    credential  = new NetworkCredential(this.UserName, this.Password, this.Domain);
+                    credential = new NetworkCredential(this.UserName, this.Password, this.Domain);
                 }
                 else
                 {
-                    credential  = new NetworkCredential(this.UserName, this.Password);
+                    credential = new NetworkCredential(this.UserName, this.Password);
                 }
             }
 

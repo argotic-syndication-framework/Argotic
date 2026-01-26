@@ -19,11 +19,11 @@ public class YahooMediaCategory : IComparable
     /// <summary>
     /// Private member to hold the human readable label for the category that can be displayed in end user applications.
     /// </summary>
-    private string categoryLabel    = string.Empty;
+    private string categoryLabel = string.Empty;
     /// <summary>
     /// Private member to hold the categorization taxonomy for the media object.
     /// </summary>
-    private string categoryContent  = string.Empty;
+    private string categoryContent = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaCategory"/> class.
@@ -40,7 +40,7 @@ public class YahooMediaCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
     public YahooMediaCategory(string text)
     {
-        this.Content    = text;
+        this.Content = text;
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ public class YahooMediaCategory : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 categoryLabel = string.Empty;
             }
@@ -131,33 +131,33 @@ public class YahooMediaCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string schemeAttribute  = source.GetAttribute("scheme", string.Empty);
-            string labelAttribute   = source.GetAttribute("label", string.Empty);
+            string schemeAttribute = source.GetAttribute("scheme", string.Empty);
+            string labelAttribute = source.GetAttribute("label", string.Empty);
 
             if (!string.IsNullOrEmpty(schemeAttribute))
             {
                 if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                 {
                     this.Scheme = scheme;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(labelAttribute))
             {
-                this.Label  = labelAttribute;
-                wasLoaded   = true;
+                this.Label = labelAttribute;
+                wasLoaded = true;
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content    = source.Value;
-            wasLoaded       = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -171,7 +171,7 @@ public class YahooMediaCategory : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("category", extension.XmlNamespace);
 
         if (this.Scheme != null)
@@ -202,14 +202,14 @@ public class YahooMediaCategory : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -234,13 +234,13 @@ public class YahooMediaCategory : IComparable
         {
             return 1;
         }
-        YahooMediaCategory value  = obj as YahooMediaCategory;
+        YahooMediaCategory value = obj as YahooMediaCategory;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }
@@ -271,7 +271,7 @@ public class YahooMediaCategory : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

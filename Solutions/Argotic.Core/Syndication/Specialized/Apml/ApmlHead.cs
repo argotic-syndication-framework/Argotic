@@ -23,11 +23,11 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the title of the document.
     /// </summary>
-    private string headTitle            = string.Empty;
+    private string headTitle = string.Empty;
     /// <summary>
     /// Private member to hold a value that credits the software that created the document.
     /// </summary>
-    private string headGenerator        = string.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(ApmlHead)).GetName().Version.ToString(4));
+    private string headGenerator = string.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(ApmlHead)).GetName().Version.ToString(4));
     /// <summary>
     /// Private member to hold email address of the owner of the document.
     /// </summary>
@@ -35,7 +35,7 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold a date-time indicating when the document was created.
     /// </summary>
-    private DateTime headCreatedOn      = DateTime.MinValue;
+    private DateTime headCreatedOn = DateTime.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="ApmlHead"/> class.
     /// </summary>
@@ -50,8 +50,8 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
     /// <param name="utcCreatedOn">A <see cref="DateTime"/> object that indicates when this document was created.</param>
     public ApmlHead(string title, DateTime utcCreatedOn)
     {
-        this.CreatedOn  = utcCreatedOn;
-        this.Title      = title;
+        this.CreatedOn = utcCreatedOn;
+        this.Title = title;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -189,10 +189,10 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -233,7 +233,7 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -249,38 +249,38 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
-        XPathNavigator titleNavigator       = source.SelectSingleNode("apml:Title", manager);
-        XPathNavigator generatorNavigator   = source.SelectSingleNode("apml:Generator", manager);
-        XPathNavigator userEmailNavigator   = source.SelectSingleNode("apml:UserEmail", manager);
+        XPathNavigator titleNavigator = source.SelectSingleNode("apml:Title", manager);
+        XPathNavigator generatorNavigator = source.SelectSingleNode("apml:Generator", manager);
+        XPathNavigator userEmailNavigator = source.SelectSingleNode("apml:UserEmail", manager);
         XPathNavigator dateCreatedNavigator = source.SelectSingleNode("apml:DateCreated", manager);
 
         if (titleNavigator != null)
         {
-            this.Title  = titleNavigator.Value;
-            wasLoaded   = true;
+            this.Title = titleNavigator.Value;
+            wasLoaded = true;
         }
 
         if (generatorNavigator != null)
         {
-            this.Generator  = generatorNavigator.Value;
-            wasLoaded       = true;
+            this.Generator = generatorNavigator.Value;
+            wasLoaded = true;
         }
 
         if (userEmailNavigator != null)
         {
-            this.EmailAddress   = userEmailNavigator.Value;
-            wasLoaded           = true;
+            this.EmailAddress = userEmailNavigator.Value;
+            wasLoaded = true;
         }
 
         if (dateCreatedNavigator != null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedNavigator.Value, out DateTime createdOn))
             {
-                this.CreatedOn  = createdOn;
-                wasLoaded       = true;
+                this.CreatedOn = createdOn;
+                wasLoaded = true;
             }
         }
 
@@ -300,10 +300,10 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -320,7 +320,7 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("Head", ApmlUtility.ApmlNamespace);
 
-        if(!string.IsNullOrEmpty(this.Title))
+        if (!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteElementString("Title", ApmlUtility.ApmlNamespace, this.Title);
         }
@@ -353,14 +353,14 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -384,14 +384,14 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        ApmlHead value  = obj as ApmlHead;
+        ApmlHead value = obj as ApmlHead;
 
         if (value != null)
         {
-            int result  = this.CreatedOn.CompareTo(value.CreatedOn);
-            result      = result | string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            int result = this.CreatedOn.CompareTo(value.CreatedOn);
+            result = result | string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -422,7 +422,7 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

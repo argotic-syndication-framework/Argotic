@@ -16,7 +16,7 @@ public class SiteSummaryContentItem : IComparable
     /// <summary>
     /// Private member to hold the textual content of the item.
     /// </summary>
-    private string itemContent  = string.Empty;
+    private string itemContent = string.Empty;
     /// <summary>
     /// Private member to hold a URI representing the format of the item.
     /// </summary>
@@ -120,21 +120,21 @@ public class SiteSummaryContentItem : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        SiteSummaryContentSyndicationExtension extension    = new SiteSummaryContentSyndicationExtension();
-        XmlNamespaceManager manager                         = extension.CreateNamespaceManager(source);
+        SiteSummaryContentSyndicationExtension extension = new SiteSummaryContentSyndicationExtension();
+        XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
         {
-            XPathNavigator formatNavigator      = source.SelectSingleNode("content:format", manager);
-            XPathNavigator encodingNavigator    = source.SelectSingleNode("content:encoding", manager);
+            XPathNavigator formatNavigator = source.SelectSingleNode("content:format", manager);
+            XPathNavigator encodingNavigator = source.SelectSingleNode("content:encoding", manager);
 
             if (formatNavigator != null)
             {
                 if (Uri.TryCreate(formatNavigator.Value, UriKind.RelativeOrAbsolute, out Uri format))
                 {
                     this.Format = format;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -142,16 +142,16 @@ public class SiteSummaryContentItem : IComparable
             {
                 if (Uri.TryCreate(encodingNavigator.Value, UriKind.RelativeOrAbsolute, out Uri encoding))
                 {
-                    this.Encoding   = encoding;
-                    wasLoaded       = true;
+                    this.Encoding = encoding;
+                    wasLoaded = true;
                 }
             }
         }
 
-        if(!string.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content    = source.Value;
-            wasLoaded       = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -165,12 +165,12 @@ public class SiteSummaryContentItem : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        SiteSummaryContentSyndicationExtension extension    = new SiteSummaryContentSyndicationExtension();
+        SiteSummaryContentSyndicationExtension extension = new SiteSummaryContentSyndicationExtension();
         writer.WriteStartElement("item", extension.XmlNamespace);
 
         writer.WriteElementString("format", extension.XmlNamespace, this.Format != null ? this.Format.ToString() : string.Empty);
 
-        if(this.Encoding != null)
+        if (this.Encoding != null)
         {
             writer.WriteElementString("encoding", extension.XmlNamespace, this.Encoding.ToString());
         }
@@ -190,14 +190,14 @@ public class SiteSummaryContentItem : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -222,13 +222,13 @@ public class SiteSummaryContentItem : IComparable
         {
             return 1;
         }
-        SiteSummaryContentItem value  = obj as SiteSummaryContentItem;
+        SiteSummaryContentItem value = obj as SiteSummaryContentItem;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Encoding, value.Encoding, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
-            result      = result | Uri.Compare(this.Format, value.Format, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Encoding, value.Encoding, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            result = result | Uri.Compare(this.Format, value.Format, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }
@@ -259,7 +259,7 @@ public class SiteSummaryContentItem : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

@@ -17,7 +17,7 @@ public static class RsdApplicationInterfaceExample
     /// </summary>
     public static void ClassExample()
     {
-        RsdDocument document    = new RsdDocument
+        RsdDocument document = new RsdDocument
         {
             EngineName = "Blog Munging CMS",
             EngineLink = new Uri("http://www.blogmunging.com/"),
@@ -30,11 +30,11 @@ public static class RsdApplicationInterfaceExample
         document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
         document.AddInterface(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
 
-        RsdApplicationInterface conversantApi   = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty)
-            {
-                Documentation = new Uri("http://www.conversant.com/docs/api/"),
-                Notes = "Additional explanation here."
-            };
+        RsdApplicationInterface conversantApi = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty)
+        {
+            Documentation = new Uri("http://www.conversant.com/docs/api/"),
+            Notes = "Additional explanation here."
+        };
         conversantApi.Settings.Add("service-specific-setting", "a value");
         conversantApi.Settings.Add("another-setting", "another value");
         document.AddInterface(conversantApi);

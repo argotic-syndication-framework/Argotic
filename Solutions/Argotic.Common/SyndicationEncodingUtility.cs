@@ -26,15 +26,15 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is an empty string.</exception>
     public static XPathNavigator CreateSafeNavigator(string xml)
     {
-        XPathNavigator navigator    = null;
+        XPathNavigator navigator = null;
 
         Guard.ArgumentNotNullOrEmptyString(xml, "xml");
 
-        string safeXml  = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(xml);
+        string safeXml = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(xml);
 
         using StringReader reader = new StringReader(safeXml);
-        XPathDocument document  = new XPathDocument(reader);
-        navigator               = document.CreateNavigator();
+        XPathDocument document = new XPathDocument(reader);
+        navigator = document.CreateNavigator();
 
         return navigator;
     }
@@ -55,14 +55,14 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     public static XPathNavigator CreateSafeNavigator(Stream stream)
     {
-        Encoding encoding   = Encoding.UTF8;
-        byte[] buffer       = null;
+        Encoding encoding = Encoding.UTF8;
+        byte[] buffer = null;
 
         Guard.ArgumentNotNull(stream, "stream");
 
-        buffer      = SyndicationEncodingUtility.GetStreamBytes(stream);
+        buffer = SyndicationEncodingUtility.GetStreamBytes(stream);
 
-        encoding    = SyndicationEncodingUtility.GetXmlEncoding(buffer);
+        encoding = SyndicationEncodingUtility.GetXmlEncoding(buffer);
 
         using MemoryStream memoryStream = new MemoryStream(buffer);
         return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
@@ -201,7 +201,7 @@ public static class SyndicationEncodingUtility
         {
             string contentEncoding = httpResponse.ContentEncoding?.ToUpperInvariant();
 
-            if(string.IsNullOrEmpty(contentEncoding))
+            if (string.IsNullOrEmpty(contentEncoding))
             {
                 stream = response.GetResponseStream();
             }
@@ -270,20 +270,20 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static WebRequest CreateWebRequest(Uri source, WebRequestOptions options)
     {
-        WebRequest request  = null;
+        WebRequest request = null;
 
         Guard.ArgumentNotNull(source, "source");
 
-        request             = WebRequest.Create(source);
+        request = WebRequest.Create(source);
 
-        if(source.IsAbsoluteUri)
+        if (source.IsAbsoluteUri)
         {
             if (string.Compare(source.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) == 0 ||
                 string.Compare(source.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) == 0)
             {
-                HttpWebRequest httpRequest      = (HttpWebRequest)request;
-                httpRequest.UserAgent           = SyndicationDiscoveryUtility.FrameworkUserAgent;
-                request                         = httpRequest;
+                HttpWebRequest httpRequest = (HttpWebRequest)request;
+                httpRequest.UserAgent = SyndicationDiscoveryUtility.FrameworkUserAgent;
+                request = httpRequest;
             }
         }
 
@@ -325,14 +325,14 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static WebResponse CreateWebResponse(Uri source, WebRequestOptions options)
     {
-        WebResponse response    = null;
+        WebResponse response = null;
 
         Guard.ArgumentNotNull(source, "source");
 
-        WebRequest webRequest   = SyndicationEncodingUtility.CreateWebRequest(source, options);
+        WebRequest webRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
         if (webRequest != null)
         {
-            response    = webRequest.GetResponse();
+            response = webRequest.GetResponse();
         }
 
         return response;
@@ -352,7 +352,7 @@ public static class SyndicationEncodingUtility
         Guard.ArgumentNotNullOrEmptyString(encodedValue, "encodedValue");
 
         byte[] data = Convert.FromBase64String(encodedValue);
-        stream      = new MemoryStream(data);
+        stream = new MemoryStream(data);
 
         if (stream.CanSeek)
         {
@@ -375,8 +375,8 @@ public static class SyndicationEncodingUtility
 
         Guard.ArgumentNotNullOrEmptyString(escapedValue, "escapedValue");
 
-        decodedResult   = System.Web.HttpUtility.HtmlDecode(escapedValue);
-        decodedResult   = System.Web.HttpUtility.UrlDecode(decodedResult);
+        decodedResult = System.Web.HttpUtility.HtmlDecode(escapedValue);
+        decodedResult = System.Web.HttpUtility.UrlDecode(decodedResult);
 
         return decodedResult;
     }
@@ -397,17 +397,17 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static string EncodeInvalidXmlHexadecimalCharacters(string content)
     {
-        Regex invalidXmlUnicodeCharacters   = new Regex(@"[\x01-\x08\x0B-\x0C\x0E-\x1F\xD800-\xDFFF\xFFFE-\xFFFF]");
-        string encodedContent               = string.Empty;
+        Regex invalidXmlUnicodeCharacters = new Regex(@"[\x01-\x08\x0B-\x0C\x0E-\x1F\xD800-\xDFFF\xFFFE-\xFFFF]");
+        string encodedContent = string.Empty;
 
         Guard.ArgumentNotNullOrEmptyString(content, "content");
 
-        encodedContent  = content;
+        encodedContent = content;
 
         MatchCollection matches = invalidXmlUnicodeCharacters.Matches(encodedContent);
         foreach (Match match in matches)
         {
-            encodedContent  = encodedContent.Replace(match.Value, Convert.ToUInt32(match.Value, 16).ToString(NumberFormatInfo.InvariantInfo));
+            encodedContent = encodedContent.Replace(match.Value, Convert.ToUInt32(match.Value, 16).ToString(NumberFormatInfo.InvariantInfo));
         }
 
         return encodedContent;
@@ -513,8 +513,8 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Encoding GetXmlEncoding(string content)
     {
-        Encoding encoding       = Encoding.UTF8;
-        string encodingPattern  = @"^<\?xml.+?encoding\s*=\s*(?:""(?<webName>[^""]*)""|(?<webName>\S+)).*?\?>";
+        Encoding encoding = Encoding.UTF8;
+        string encodingPattern = @"^<\?xml.+?encoding\s*=\s*(?:""(?<webName>[^""]*)""|(?<webName>\S+)).*?\?>";
 
         Guard.ArgumentNotNullOrEmptyString(content, "content");
 
@@ -526,11 +526,11 @@ public static class SyndicationEncodingUtility
             {
                 try
                 {
-                    encoding    = Encoding.GetEncoding(group.Value);
+                    encoding = Encoding.GetEncoding(group.Value);
                 }
                 catch (ArgumentException)
                 {
-                    encoding    = Encoding.UTF8;
+                    encoding = Encoding.UTF8;
                 }
             }
         }
@@ -584,18 +584,18 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static string EncodeSafeDirectoryName(string name)
     {
-        string directoryName    = string.Empty;
+        string directoryName = string.Empty;
 
         Guard.ArgumentNotNullOrEmptyString(name, "name");
 
-        directoryName   = name.Replace("\\", string.Empty);
-        directoryName   = directoryName.Replace("/", string.Empty);
-        directoryName   = directoryName.Replace(":", string.Empty);
-        directoryName   = directoryName.Replace("*", string.Empty);
-        directoryName   = directoryName.Replace("?", string.Empty);
-        directoryName   = directoryName.Replace("<", string.Empty);
-        directoryName   = directoryName.Replace(">", string.Empty);
-        directoryName   = directoryName.Replace("|", string.Empty);
+        directoryName = name.Replace("\\", string.Empty);
+        directoryName = directoryName.Replace("/", string.Empty);
+        directoryName = directoryName.Replace(":", string.Empty);
+        directoryName = directoryName.Replace("*", string.Empty);
+        directoryName = directoryName.Replace("?", string.Empty);
+        directoryName = directoryName.Replace("<", string.Empty);
+        directoryName = directoryName.Replace(">", string.Empty);
+        directoryName = directoryName.Replace("|", string.Empty);
 
         return directoryName;
     }
@@ -608,13 +608,13 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     private static byte[] GetStreamBytes(Stream stream)
     {
-        int initialLength   = 32768;
-        int read            = 0;
+        int initialLength = 32768;
+        int read = 0;
         int chunk;
 
         Guard.ArgumentNotNull(stream, "stream");
 
-        byte[] buffer   = new byte[initialLength];
+        byte[] buffer = new byte[initialLength];
 
         while ((chunk = stream.Read(buffer, read, buffer.Length - read)) > 0)
         {
@@ -622,22 +622,22 @@ public static class SyndicationEncodingUtility
 
             if (read == buffer.Length)
             {
-                int nextByte    = stream.ReadByte();
+                int nextByte = stream.ReadByte();
 
                 if (nextByte == -1)
                 {
                     return buffer;
                 }
 
-                byte[] newBuffer    = new byte[buffer.Length * 2];
+                byte[] newBuffer = new byte[buffer.Length * 2];
                 Array.Copy(buffer, newBuffer, buffer.Length);
-                newBuffer[read]     = (byte)nextByte;
-                buffer              = newBuffer;
+                newBuffer[read] = (byte)nextByte;
+                buffer = newBuffer;
                 read++;
             }
         }
 
-        byte[] result  = new byte[read];
+        byte[] result = new byte[read];
         Array.Copy(buffer, result, read);
 
         return result;

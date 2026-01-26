@@ -17,7 +17,7 @@ public static class OpmlOutlineExample
     /// </summary>
     public static void ClassExample()
     {
-        OpmlDocument document   = new OpmlDocument
+        OpmlDocument document = new OpmlDocument
         {
             Head =
             {
@@ -31,7 +31,7 @@ public static class OpmlOutlineExample
         };
 
         // Create outline that contains child outlines
-        OpmlOutline containerOutline    = new OpmlOutline("Feeds");
+        OpmlOutline containerOutline = new OpmlOutline("Feeds");
         containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
         containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
         document.AddOutline(containerOutline);

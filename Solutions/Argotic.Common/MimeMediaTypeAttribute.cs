@@ -13,7 +13,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
     /// <summary>
     /// Private member to hold the MIME media type name.
     /// </summary>
-    private string mimeMediaTypeName    = string.Empty;
+    private string mimeMediaTypeName = string.Empty;
     /// <summary>
     /// Private member to hold the MIME media subtype name.
     /// </summary>
@@ -134,13 +134,13 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
             return 1;
         }
 
-        MimeMediaTypeAttribute value  = obj as MimeMediaTypeAttribute;
+        MimeMediaTypeAttribute value = obj as MimeMediaTypeAttribute;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -171,7 +171,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

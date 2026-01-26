@@ -19,7 +19,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold instance of event with no event data.
     /// </summary>
-    private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments  = new SyndicationResourceLoadedEventArgs();
+    private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments = new SyndicationResourceLoadedEventArgs();
     /// <summary>
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication resource.
     /// </summary>
@@ -54,7 +54,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     {
         Guard.ArgumentNotNull(data, "data");
 
-        eventNavigator  = data.CreateNavigator();
+        eventNavigator = data.CreateNavigator();
     }
 
     /// <summary>
@@ -76,8 +76,8 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     {
         Guard.ArgumentNotNull(source, "source");
 
-        eventSource         = source;
-        eventOptions        = new WebRequestOptions(credentials, proxy);
+        eventSource = source;
+        eventOptions = new WebRequestOptions(credentials, proxy);
     }
 
     /// <summary>
@@ -94,8 +94,8 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     {
         Guard.ArgumentNotNull(source, "source");
 
-        eventSource         = source;
-        eventOptions        = options ?? new WebRequestOptions();
+        eventSource = source;
+        eventOptions = options ?? new WebRequestOptions();
     }
 
     /// <summary>
@@ -116,7 +116,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, object state) : this(data, source, credentials, proxy)
     {
-        eventUserToken  = state;
+        eventUserToken = state;
     }
 
     /// <summary>
@@ -132,7 +132,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, object state) : this(data, source, options)
     {
-        eventUserToken  = state;
+        eventUserToken = state;
     }
 
     /// <summary>
@@ -235,11 +235,11 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// </remarks>
     public override string ToString()
     {
-        string source       = this.Source != null ? this.Source.ToString() : string.Empty;
-        string data         = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string credentials  = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string proxy        = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string state        = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string source = this.Source != null ? this.Source.ToString() : string.Empty;
+        string data = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string credentials = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string proxy = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string state = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
         return string.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
     }
@@ -257,13 +257,13 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
             return 1;
         }
 
-        SyndicationResourceLoadedEventArgs value  = obj as SyndicationResourceLoadedEventArgs;
+        SyndicationResourceLoadedEventArgs value = obj as SyndicationResourceLoadedEventArgs;
 
         if (value != null)
         {
-            int result  = 0;
-            result      = result | string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            int result = 0;
+            result = result | string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -294,7 +294,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

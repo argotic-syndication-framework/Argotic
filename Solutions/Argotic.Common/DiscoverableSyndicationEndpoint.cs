@@ -11,11 +11,11 @@ public class DiscoverableSyndicationEndpoint : IComparable
     /// <summary>
     /// Private member to hold the content MIME type of the syndication endpoint.
     /// </summary>
-    private string endpointMediaType    = string.Empty;
+    private string endpointMediaType = string.Empty;
     /// <summary>
     /// Private member to hold the title of the syndication endpoint.
     /// </summary>
-    private string endpointTitle        = string.Empty;
+    private string endpointTitle = string.Empty;
     /// <summary>
     /// Private member to hold the Uniform Resource Locator (URL) of the syndication endpoint.
     /// </summary>
@@ -38,8 +38,8 @@ public class DiscoverableSyndicationEndpoint : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
     public DiscoverableSyndicationEndpoint(Uri source, string contentType)
     {
-        this.ContentType    = contentType;
-        this.Source         = source;
+        this.ContentType = contentType;
+        this.Source = source;
     }
 
     /// <summary>
@@ -53,9 +53,9 @@ public class DiscoverableSyndicationEndpoint : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="contentType"/> is an empty string.</exception>
     public DiscoverableSyndicationEndpoint(Uri source, string contentType, string title)
     {
-        this.ContentType    = contentType;
-        this.Source         = source;
-        this.Title          = title;
+        this.ContentType = contentType;
+        this.Source = source;
+        this.Title = title;
     }
 
     /// <summary>
@@ -70,7 +70,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
     {
         get
         {
-            SyndicationContentFormat syndicationFormat  = SyndicationContentFormat.None;
+            SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
 
             if (string.IsNullOrEmpty(this.ContentType))
             {
@@ -83,16 +83,16 @@ public class DiscoverableSyndicationEndpoint : IComparable
                     if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
                     {
                         SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                        object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
+                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
 
                         if (customAttributes is { Length: > 0 })
                         {
-                            MimeMediaTypeAttribute mediaType    = customAttributes[0] as MimeMediaTypeAttribute;
-                            string contentType                  = string.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
+                            MimeMediaTypeAttribute mediaType = customAttributes[0] as MimeMediaTypeAttribute;
+                            string contentType = string.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
 
                             if (string.Compare(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase) == 0)
                             {
-                                syndicationFormat   = format;
+                                syndicationFormat = format;
                                 break;
                             }
                         }
@@ -122,7 +122,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
         {
             Guard.ArgumentNotNullOrEmptyString(value, "value");
 
-            endpointMediaType   = value.Trim();
+            endpointMediaType = value.Trim();
         }
     }
 
@@ -143,7 +143,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
         {
             Guard.ArgumentNotNull(value, "value");
 
-            endpointSource  = value;
+            endpointSource = value;
         }
     }
 
@@ -161,13 +161,13 @@ public class DiscoverableSyndicationEndpoint : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                endpointTitle   = string.Empty;
+                endpointTitle = string.Empty;
             }
             else
             {
-                endpointTitle   = value.Trim();
+                endpointTitle = value.Trim();
             }
         }
     }
@@ -209,13 +209,13 @@ public class DiscoverableSyndicationEndpoint : IComparable
             return 1;
         }
 
-        DiscoverableSyndicationEndpoint value  = obj as DiscoverableSyndicationEndpoint;
+        DiscoverableSyndicationEndpoint value = obj as DiscoverableSyndicationEndpoint;
 
         if (value != null)
         {
-            int result  = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -246,7 +246,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

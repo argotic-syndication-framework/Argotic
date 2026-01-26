@@ -19,7 +19,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     private readonly string nycText = $@"<control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US"" xmlns=""http://www.w3.org/2007/app"">{Environment.NewLine}  <draft>yes</draft>{Environment.NewLine}</control>";
     private readonly string strExtXml = @"<app:control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US""><app:draft>yes</app:draft></app:control>";
 
-    private TestContext testContextInstance;
+    public TestContext TestContext { get; set; }
 
     /// <summary>
     ///Gets or sets the test context which provides
@@ -166,7 +166,7 @@ public class AtomPublishingControlSyndicationExtensionTest
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         target.WriteTo(writer);
         string output = sw.ToString();
-        Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
+        Assert.AreEqual(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
     }
 
     /// <summary>
@@ -177,7 +177,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
-        bool expected = false; 
+        bool expected = false;
         bool actual = first == second;
         Assert.AreEqual(expected, actual);
     }
@@ -199,7 +199,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
-        bool expected = false; 
+        bool expected = false;
         bool actual = first > second;
         Assert.AreEqual(expected, actual);
     }

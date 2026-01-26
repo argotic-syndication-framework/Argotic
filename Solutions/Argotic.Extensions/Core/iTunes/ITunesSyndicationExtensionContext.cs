@@ -17,7 +17,7 @@ public class ITunesSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the name of the artist of the podcast.
     /// </summary>
-    private string extensionAuthor                                      = string.Empty;
+    private string extensionAuthor = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating if the podcast is blocked from appearing in the iTunes Podcast directory.
     /// </summary>
@@ -29,7 +29,7 @@ public class ITunesSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the total duration of the podcast.
     /// </summary>
-    private TimeSpan extensionDuration                                  = TimeSpan.MinValue;
+    private TimeSpan extensionDuration = TimeSpan.MinValue;
     /// <summary>
     /// Private member to hold a value indicating if the podcast contains explicit material.
     /// </summary>
@@ -53,11 +53,11 @@ public class ITunesSyndicationExtensionContext
     /// <summary>
     /// Private member to hold a brief synopsis of the podcast.
     /// </summary>
-    private string extensionSubtitle                                    = string.Empty;
+    private string extensionSubtitle = string.Empty;
     /// <summary>
     /// Private member to hold the full description of the podcast.
     /// </summary>
-    private string extensionSummary                                     = string.Empty;
+    private string extensionSummary = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtensionContext"/> class.
     /// </summary>
@@ -78,7 +78,7 @@ public class ITunesSyndicationExtensionContext
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 extensionAuthor = string.Empty;
             }
@@ -300,17 +300,17 @@ public class ITunesSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(this.LoadCommon(source, manager))
+        if (this.LoadCommon(source, manager))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         if (this.LoadOptionals(source, manager))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -362,9 +362,9 @@ public class ITunesSyndicationExtensionContext
 
         if (this.Duration != TimeSpan.MinValue)
         {
-            string hours    = this.Duration.Hours < 10 ? string.Concat("0", this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo);
-            string minutes  = this.Duration.Minutes < 10 ? string.Concat("0", this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo);
-            string seconds  = this.Duration.Seconds < 10 ? string.Concat("0", this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo);
+            string hours = this.Duration.Hours < 10 ? string.Concat("0", this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo);
+            string minutes = this.Duration.Minutes < 10 ? string.Concat("0", this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo);
+            string seconds = this.Duration.Seconds < 10 ? string.Concat("0", this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo);
             string duration = string.Format(null, "{0}:{1}:{2}", hours, minutes, seconds);
 
             writer.WriteElementString("duration", xmlNamespace, duration);
@@ -372,7 +372,7 @@ public class ITunesSyndicationExtensionContext
 
         if (this.Keywords.Count > 0)
         {
-            string[] keywords   = new string[this.Keywords.Count];
+            string[] keywords = new string[this.Keywords.Count];
             this.Keywords.CopyTo(keywords, 0);
 
             writer.WriteElementString("keywords", xmlNamespace, string.Join(",", keywords));
@@ -390,7 +390,7 @@ public class ITunesSyndicationExtensionContext
 
         if (this.Categories.Count > 0)
         {
-            foreach(ITunesCategory category in this.Categories)
+            foreach (ITunesCategory category in this.Categories)
             {
                 category.WriteTo(writer);
             }
@@ -407,41 +407,41 @@ public class ITunesSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     private bool LoadCommon(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
         if (source.HasChildren)
         {
-            XPathNavigator authorNavigator      = source.SelectSingleNode("itunes:author", manager);
-            XPathNavigator keywordsNavigator    = source.SelectSingleNode("itunes:keywords", manager);
-            XPathNavigator newFeedUrlNavigator  = source.SelectSingleNode("itunes:new-feed-url", manager);
-            XPathNavigator ownerNavigator       = source.SelectSingleNode("itunes:owner", manager);
-            XPathNavigator subtitleNavigator    = source.SelectSingleNode("itunes:subtitle", manager);
-            XPathNavigator summaryNavigator     = source.SelectSingleNode("itunes:summary", manager);
+            XPathNavigator authorNavigator = source.SelectSingleNode("itunes:author", manager);
+            XPathNavigator keywordsNavigator = source.SelectSingleNode("itunes:keywords", manager);
+            XPathNavigator newFeedUrlNavigator = source.SelectSingleNode("itunes:new-feed-url", manager);
+            XPathNavigator ownerNavigator = source.SelectSingleNode("itunes:owner", manager);
+            XPathNavigator subtitleNavigator = source.SelectSingleNode("itunes:subtitle", manager);
+            XPathNavigator summaryNavigator = source.SelectSingleNode("itunes:summary", manager);
 
-            XPathNodeIterator categoryIterator  = source.Select("itunes:category", manager);
+            XPathNodeIterator categoryIterator = source.Select("itunes:category", manager);
 
             if (authorNavigator != null && !string.IsNullOrEmpty(authorNavigator.Value))
             {
                 this.Author = authorNavigator.Value;
-                wasLoaded   = true;
+                wasLoaded = true;
             }
 
             if (keywordsNavigator != null && !string.IsNullOrEmpty(keywordsNavigator.Value))
             {
-                if(keywordsNavigator.Value.Contains(","))
+                if (keywordsNavigator.Value.Contains(","))
                 {
-                    string[] keywords   = keywordsNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    string[] keywords = keywordsNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     foreach (string keyword in keywords)
                     {
                         this.Keywords.Add(keyword);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
                 else
                 {
                     this.Keywords.Add(keywordsNavigator.Value);
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -450,30 +450,30 @@ public class ITunesSyndicationExtensionContext
                 if (Uri.TryCreate(newFeedUrlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri newFeedUrl))
                 {
                     this.NewFeedUrl = newFeedUrl;
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
             }
 
             if (ownerNavigator != null)
             {
-                ITunesOwner owner   = new ITunesOwner();
+                ITunesOwner owner = new ITunesOwner();
                 if (owner.Load(ownerNavigator))
                 {
-                    this.Owner  = owner;
-                    wasLoaded   = true;
+                    this.Owner = owner;
+                    wasLoaded = true;
                 }
             }
 
             if (subtitleNavigator != null && !string.IsNullOrEmpty(subtitleNavigator.Value))
             {
-                this.Subtitle   = subtitleNavigator.Value;
-                wasLoaded       = true;
+                this.Subtitle = subtitleNavigator.Value;
+                wasLoaded = true;
             }
 
             if (summaryNavigator != null && !string.IsNullOrEmpty(summaryNavigator.Value))
             {
-                this.Summary    = summaryNavigator.Value;
-                wasLoaded       = true;
+                this.Summary = summaryNavigator.Value;
+                wasLoaded = true;
             }
 
             if (categoryIterator is { Count: > 0 })
@@ -484,7 +484,7 @@ public class ITunesSyndicationExtensionContext
                     if (category.Load(categoryIterator.Current))
                     {
                         this.Categories.Add(category);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -503,50 +503,50 @@ public class ITunesSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
         if (source.HasChildren)
         {
-            XPathNavigator blockNavigator       = source.SelectSingleNode("itunes:block", manager);
-            XPathNavigator imageNavigator       = source.SelectSingleNode("itunes:image", manager);
-            XPathNavigator durationNavigator    = source.SelectSingleNode("itunes:duration", manager);
-            XPathNavigator explicitNavigator    = source.SelectSingleNode("itunes:explicit", manager);
+            XPathNavigator blockNavigator = source.SelectSingleNode("itunes:block", manager);
+            XPathNavigator imageNavigator = source.SelectSingleNode("itunes:image", manager);
+            XPathNavigator durationNavigator = source.SelectSingleNode("itunes:duration", manager);
+            XPathNavigator explicitNavigator = source.SelectSingleNode("itunes:explicit", manager);
 
             if (blockNavigator != null && !string.IsNullOrEmpty(blockNavigator.Value))
             {
-                if(string.Compare(blockNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(blockNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    this.IsBlocked  = true;
-                    wasLoaded       = true;
+                    this.IsBlocked = true;
+                    wasLoaded = true;
                 }
                 else if (string.Compare(blockNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    this.IsBlocked  = false;
-                    wasLoaded       = true;
+                    this.IsBlocked = false;
+                    wasLoaded = true;
                 }
             }
 
             if (imageNavigator is { HasAttributes: true })
             {
-                string hrefAttribute    = imageNavigator.GetAttribute("href", string.Empty);
+                string hrefAttribute = imageNavigator.GetAttribute("href", string.Empty);
                 if (!string.IsNullOrEmpty(hrefAttribute))
                 {
                     if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri image))
                     {
-                        this.Image  = image;
-                        wasLoaded   = true;
+                        this.Image = image;
+                        wasLoaded = true;
                     }
                 }
             }
 
             if (durationNavigator != null && !string.IsNullOrEmpty(durationNavigator.Value))
             {
-                TimeSpan duration   = ITunesSyndicationExtensionContext.ParseDuration(durationNavigator.Value);
+                TimeSpan duration = ITunesSyndicationExtensionContext.ParseDuration(durationNavigator.Value);
                 if (duration != TimeSpan.MinValue)
                 {
-                    this.Duration   = duration;
-                    wasLoaded       = true;
+                    this.Duration = duration;
+                    wasLoaded = true;
                 }
             }
 
@@ -555,8 +555,8 @@ public class ITunesSyndicationExtensionContext
                 ITunesExplicitMaterial explicitMaterial = ITunesSyndicationExtension.ExplicitMaterialByName(explicitNavigator.Value.Trim());
                 if (explicitMaterial != ITunesExplicitMaterial.None)
                 {
-                    this.ExplicitMaterial   = explicitMaterial;
-                    wasLoaded               = true;
+                    this.ExplicitMaterial = explicitMaterial;
+                    wasLoaded = true;
                 }
             }
         }
@@ -572,48 +572,48 @@ public class ITunesSyndicationExtensionContext
     /// <remarks>Value can be formatted as an integer, HH:MM:SS, H:MM:SS, MM:SS, or M:SS.</remarks>
     private static TimeSpan ParseDuration(string value)
     {
-        TimeSpan timeSpan   = TimeSpan.MinValue;
+        TimeSpan timeSpan = TimeSpan.MinValue;
 
         if (!value.Contains(":"))
         {
             if (int.TryParse(value, out int totalSeconds))
             {
-                timeSpan    = new TimeSpan(0, 0, totalSeconds);
+                timeSpan = new TimeSpan(0, 0, totalSeconds);
             }
             else
             {
                 if (TimeSpan.TryParse(value, out TimeSpan duration))
                 {
-                    timeSpan    = duration;
+                    timeSpan = duration;
                 }
             }
         }
         else
         {
-            string[] durationParts  = value.Split(":".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] durationParts = value.Split(":".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
 
             if (durationParts.Length == 2)
             {
                 if (int.TryParse(durationParts[0], out int minutes) && int.TryParse(durationParts[1], out int seconds))
                 {
-                    timeSpan    = new TimeSpan(0, minutes, seconds);
+                    timeSpan = new TimeSpan(0, minutes, seconds);
                 }
             }
             else if (durationParts.Length >= 3)
             {
-                string hoursValue   = durationParts[0];
+                string hoursValue = durationParts[0];
                 string minutesValue = durationParts[1];
                 string secondsValue = durationParts[2];
 
                 if (int.TryParse(hoursValue, out int hours) && int.TryParse(minutesValue, out int minutes) && int.TryParse(secondsValue, out int seconds))
                 {
-                    timeSpan    = new TimeSpan(hours, minutes, seconds);
+                    timeSpan = new TimeSpan(hours, minutes, seconds);
                 }
                 else
                 {
                     if (TimeSpan.TryParse(value, out TimeSpan duration))
                     {
-                        timeSpan    = duration;
+                        timeSpan = duration;
                     }
                 }
             }

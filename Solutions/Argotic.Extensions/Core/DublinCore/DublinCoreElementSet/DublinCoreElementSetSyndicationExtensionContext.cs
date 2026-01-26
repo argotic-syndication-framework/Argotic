@@ -16,31 +16,31 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the entity responsible for making contributions to the resource.
     /// </summary>
-    private string extensionContributor             = string.Empty;
+    private string extensionContributor = string.Empty;
     /// <summary>
     /// Private member to hold the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
     /// </summary>
-    private string extensionCoverage                = string.Empty;
+    private string extensionCoverage = string.Empty;
     /// <summary>
     /// Private member to hold the entity primarily responsible for making the resource.
     /// </summary>
-    private string extensionCreator                 = string.Empty;
+    private string extensionCreator = string.Empty;
     /// <summary>
     /// Private member to hold a point or period of time associated with an event in the lifecycle of the resource.
     /// </summary>
-    private DateTime extensionDate                  = DateTime.MinValue;
+    private DateTime extensionDate = DateTime.MinValue;
     /// <summary>
     /// Private member to hold an account of the resource.
     /// </summary>
-    private string extensionDescription             = string.Empty;
+    private string extensionDescription = string.Empty;
     /// <summary>
     /// Private member to hold the file format, physical medium, or dimensions of the resource.
     /// </summary>
-    private string extensionFormat                  = string.Empty;
+    private string extensionFormat = string.Empty;
     /// <summary>
     /// Private member to hold an unambiguous reference to the resource within a given context.
     /// </summary>
-    private string extensionIdentifier              = string.Empty;
+    private string extensionIdentifier = string.Empty;
     /// <summary>
     /// Private member to hold the language of the resource.
     /// </summary>
@@ -48,31 +48,31 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the entity responsible for making the resource available.
     /// </summary>
-    private string extensionPublisher               = string.Empty;
+    private string extensionPublisher = string.Empty;
     /// <summary>
     /// Private member to hold a related resource.
     /// </summary>
-    private string extensionRelation                = string.Empty;
+    private string extensionRelation = string.Empty;
     /// <summary>
     /// Private member to hold information about rights held in and over the resource.
     /// </summary>
-    private string extensionRights                  = string.Empty;
+    private string extensionRights = string.Empty;
     /// <summary>
     /// Private member to hold a related resource from which the described resource is derived.
     /// </summary>
-    private string extesionSource                   = string.Empty;
+    private string extesionSource = string.Empty;
     /// <summary>
     /// Private member to hold the topic of the resource.
     /// </summary>
-    private string extensionSubject                 = string.Empty;
+    private string extensionSubject = string.Empty;
     /// <summary>
     /// Private member to hold the name given to the resource.
     /// </summary>
-    private string extensionTitle                   = string.Empty;
+    private string extensionTitle = string.Empty;
     /// <summary>
     /// Private member to hold the nature or genre of the resource.
     /// </summary>
-    private DublinCoreTypeVocabularies extensionType  = DublinCoreTypeVocabularies.None;
+    private DublinCoreTypeVocabularies extensionType = DublinCoreTypeVocabularies.None;
     /// <summary>
     /// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> class.
     /// </summary>
@@ -497,14 +497,14 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        wasLoaded   = this.LoadCommon(source, manager);
+        wasLoaded = this.LoadCommon(source, manager);
 
         if (this.LoadOptionals(source, manager))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -522,7 +522,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(!string.IsNullOrEmpty(this.Contributor))
+        if (!string.IsNullOrEmpty(this.Contributor))
         {
             writer.WriteElementString("contributor", xmlNamespace, this.Contributor);
         }
@@ -608,52 +608,52 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     private bool LoadCommon(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
         XPathNavigator contributorNavigator = source.SelectSingleNode("dc:contributor", manager);
-        XPathNavigator creatorNavigator     = source.SelectSingleNode("dc:creator", manager);
-        XPathNavigator dateNavigator        = source.SelectSingleNode("dc:date", manager);
+        XPathNavigator creatorNavigator = source.SelectSingleNode("dc:creator", manager);
+        XPathNavigator dateNavigator = source.SelectSingleNode("dc:date", manager);
         XPathNavigator descriptionNavigator = source.SelectSingleNode("dc:description", manager);
-        XPathNavigator languageNavigator    = source.SelectSingleNode("dc:language", manager);
-        XPathNavigator publisherNavigator   = source.SelectSingleNode("dc:publisher", manager);
-        XPathNavigator rightsNavigator      = source.SelectSingleNode("dc:rights", manager);
-        XPathNavigator titleNavigator       = source.SelectSingleNode("dc:title", manager);
+        XPathNavigator languageNavigator = source.SelectSingleNode("dc:language", manager);
+        XPathNavigator publisherNavigator = source.SelectSingleNode("dc:publisher", manager);
+        XPathNavigator rightsNavigator = source.SelectSingleNode("dc:rights", manager);
+        XPathNavigator titleNavigator = source.SelectSingleNode("dc:title", manager);
 
         if (contributorNavigator != null && !string.IsNullOrEmpty(contributorNavigator.Value))
         {
-            this.Contributor    = contributorNavigator.Value;
-            wasLoaded           = true;
+            this.Contributor = contributorNavigator.Value;
+            wasLoaded = true;
         }
 
         if (creatorNavigator != null && !string.IsNullOrEmpty(creatorNavigator.Value))
         {
-            this.Creator    = creatorNavigator.Value;
-            wasLoaded       = true;
+            this.Creator = creatorNavigator.Value;
+            wasLoaded = true;
         }
 
         if (dateNavigator != null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateNavigator.Value, out DateTime date))
             {
-                this.Date   = date;
-                wasLoaded   = true;
+                this.Date = date;
+                wasLoaded = true;
             }
         }
 
         if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
-            this.Description    = descriptionNavigator.Value;
-            wasLoaded           = true;
+            this.Description = descriptionNavigator.Value;
+            wasLoaded = true;
         }
 
         if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
         {
             try
             {
-                CultureInfo language    = new CultureInfo(languageNavigator.Value);
-                this.Language           = language;
-                wasLoaded               = true;
+                CultureInfo language = new CultureInfo(languageNavigator.Value);
+                this.Language = language;
+                wasLoaded = true;
             }
             catch (ArgumentException)
             {
@@ -663,20 +663,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         if (publisherNavigator != null && !string.IsNullOrEmpty(publisherNavigator.Value))
         {
-            this.Publisher  = publisherNavigator.Value;
-            wasLoaded       = true;
+            this.Publisher = publisherNavigator.Value;
+            wasLoaded = true;
         }
 
         if (rightsNavigator != null && !string.IsNullOrEmpty(rightsNavigator.Value))
         {
             this.Rights = rightsNavigator.Value;
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
-            this.Title  = titleNavigator.Value;
-            wasLoaded   = true;
+            this.Title = titleNavigator.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -692,60 +692,60 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        XPathNavigator coverageNavigator    = source.SelectSingleNode("dc:coverage", manager);
-        XPathNavigator formatNavigator      = source.SelectSingleNode("dc:format", manager);
-        XPathNavigator identifierNavigator  = source.SelectSingleNode("dc:identifier", manager);
-        XPathNavigator relationNavigator    = source.SelectSingleNode("dc:relation", manager);
-        XPathNavigator sourceNavigator      = source.SelectSingleNode("dc:source", manager);
-        XPathNavigator subjectNavigator     = source.SelectSingleNode("dc:subject", manager);
-        XPathNavigator typeNavigator        = source.SelectSingleNode("dc:type", manager);
+        XPathNavigator coverageNavigator = source.SelectSingleNode("dc:coverage", manager);
+        XPathNavigator formatNavigator = source.SelectSingleNode("dc:format", manager);
+        XPathNavigator identifierNavigator = source.SelectSingleNode("dc:identifier", manager);
+        XPathNavigator relationNavigator = source.SelectSingleNode("dc:relation", manager);
+        XPathNavigator sourceNavigator = source.SelectSingleNode("dc:source", manager);
+        XPathNavigator subjectNavigator = source.SelectSingleNode("dc:subject", manager);
+        XPathNavigator typeNavigator = source.SelectSingleNode("dc:type", manager);
 
         if (coverageNavigator != null && !string.IsNullOrEmpty(coverageNavigator.Value))
         {
-            this.Coverage   = coverageNavigator.Value;
-            wasLoaded       = true;
+            this.Coverage = coverageNavigator.Value;
+            wasLoaded = true;
         }
 
         if (formatNavigator != null && !string.IsNullOrEmpty(formatNavigator.Value))
         {
             this.Format = formatNavigator.Value;
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         if (identifierNavigator != null && !string.IsNullOrEmpty(identifierNavigator.Value))
         {
             this.Identifier = identifierNavigator.Value;
-            wasLoaded       = true;
+            wasLoaded = true;
         }
 
         if (relationNavigator != null && !string.IsNullOrEmpty(relationNavigator.Value))
         {
-            this.Relation   = relationNavigator.Value;
-            wasLoaded       = true;
+            this.Relation = relationNavigator.Value;
+            wasLoaded = true;
         }
 
         if (sourceNavigator != null && !string.IsNullOrEmpty(sourceNavigator.Value))
         {
             this.Source = sourceNavigator.Value;
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
         if (subjectNavigator != null && !string.IsNullOrEmpty(subjectNavigator.Value))
         {
-            this.Subject    = subjectNavigator.Value;
-            wasLoaded       = true;
+            this.Subject = subjectNavigator.Value;
+            wasLoaded = true;
         }
 
         if (typeNavigator != null && !string.IsNullOrEmpty(typeNavigator.Value))
         {
-            DublinCoreTypeVocabularies typeVocabulary   = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName(typeNavigator.Value);
+            DublinCoreTypeVocabularies typeVocabulary = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName(typeNavigator.Value);
             if (typeVocabulary != DublinCoreTypeVocabularies.None)
             {
                 this.TypeVocabulary = typeVocabulary;
-                wasLoaded           = true;
+                wasLoaded = true;
             }
         }
 

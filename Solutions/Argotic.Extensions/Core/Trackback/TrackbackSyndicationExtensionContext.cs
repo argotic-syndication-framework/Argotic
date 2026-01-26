@@ -80,20 +80,20 @@ public class TrackbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
         if (source.HasChildren)
         {
-            XPathNavigator pingNavigator    = source.SelectSingleNode("trackback:ping", manager);
+            XPathNavigator pingNavigator = source.SelectSingleNode("trackback:ping", manager);
             XPathNodeIterator aboutIterator = source.Select("trackback:about", manager);
 
             if (pingNavigator != null)
             {
                 if (Uri.TryCreate(pingNavigator.Value, UriKind.RelativeOrAbsolute, out Uri ping))
                 {
-                    this.Ping   = ping;
-                    wasLoaded   = true;
+                    this.Ping = ping;
+                    wasLoaded = true;
                 }
             }
 
@@ -104,7 +104,7 @@ public class TrackbackSyndicationExtensionContext
                     if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri about))
                     {
                         this.Abouts.Add(about);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }

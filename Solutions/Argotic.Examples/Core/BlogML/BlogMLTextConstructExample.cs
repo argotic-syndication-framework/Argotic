@@ -16,7 +16,7 @@ public static class BlogMLTextConstructExample
     /// </summary>
     public static void ConstructTypeAsStringExample()
     {
-        string contentType  = BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType.Html);    // html
+        string contentType = BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType.Html);    // html
 
         if (string.Compare(contentType, "html", StringComparison.OrdinalIgnoreCase) == 0)
         {
@@ -28,7 +28,7 @@ public static class BlogMLTextConstructExample
     /// </summary>
     public static void ConstructTypeByNameExample()
     {
-        BlogMLContentType contentType   = BlogMLTextConstruct.ConstructTypeByName("html");
+        BlogMLContentType contentType = BlogMLTextConstruct.ConstructTypeByName("html");
 
         if (contentType == BlogMLContentType.Html)
         {

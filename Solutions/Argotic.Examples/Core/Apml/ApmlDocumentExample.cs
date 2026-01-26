@@ -22,7 +22,7 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void ClassExample()
     {
-        ApmlDocument document       = new ApmlDocument
+        ApmlDocument document = new ApmlDocument
         {
             DefaultProfileName = "Work",
             Head =
@@ -34,7 +34,7 @@ public static class ApmlDocumentExample
             }
         };
 
-        ApmlProfile homeProfile     = new ApmlProfile
+        ApmlProfile homeProfile = new ApmlProfile
         {
             Name = "Home"
         };
@@ -55,7 +55,7 @@ public static class ApmlDocumentExample
         homeProfile.ImplicitConcepts.Add(new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
         homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
-        ApmlSource apmlSpecSource   = new ApmlSource
+        ApmlSource apmlSpecSource = new ApmlSource
         {
             Key = "http://feeds.feedburner.com/apmlspec",
             Name = "APML.org",
@@ -84,7 +84,7 @@ public static class ApmlDocumentExample
 
         document.AddProfile(homeProfile);
 
-        ApmlProfile workProfile     = new ApmlProfile
+        ApmlProfile workProfile = new ApmlProfile
         {
             Name = "Work"
         };
@@ -105,7 +105,7 @@ public static class ApmlDocumentExample
 
         document.AddProfile(workProfile);
 
-        ApmlApplication sampleApplication   = new ApmlApplication("sample.com")
+        ApmlApplication sampleApplication = new ApmlApplication("sample.com")
         {
             Data = "<SampleAppEl />"
         };
@@ -117,7 +117,7 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void CreateExample()
     {
-        ApmlDocument document   = ApmlDocument.Create(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"));
+        ApmlDocument document = ApmlDocument.Create(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"));
 
         foreach (ApmlProfile profile in document.Profiles)
         {
@@ -133,7 +133,7 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void LoadAsyncExample()
     {
-        ApmlDocument document   = new ApmlDocument();
+        ApmlDocument document = new ApmlDocument();
 
         document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
@@ -147,7 +147,7 @@ public static class ApmlDocumentExample
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
     private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
     {
-        if(e.State != null)
+        if (e.State != null)
         {
         }
     }
@@ -156,9 +156,9 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source    = new XPathDocument("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
+        XPathDocument source = new XPathDocument("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
 
-        ApmlDocument document   = new ApmlDocument();
+        ApmlDocument document = new ApmlDocument();
         document.Load(source);
 
         foreach (ApmlProfile profile in document.Profiles)
@@ -176,7 +176,7 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void LoadStreamExample()
     {
-        ApmlDocument document   = new ApmlDocument();
+        ApmlDocument document = new ApmlDocument();
 
         using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read);
         document.Load(stream);
@@ -196,10 +196,10 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void LoadXmlReaderExample()
     {
-        ApmlDocument document   = new ApmlDocument();
+        ApmlDocument document = new ApmlDocument();
 
         using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read);
-        XmlReaderSettings settings  = new XmlReaderSettings
+        XmlReaderSettings settings = new XmlReaderSettings
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -223,8 +223,8 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void LoadUriExample()
     {
-        ApmlDocument document   = new ApmlDocument();
-        Uri source              = new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
+        ApmlDocument document = new ApmlDocument();
+        Uri source = new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
 
         document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -243,7 +243,7 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void SaveStreamExample()
     {
-        ApmlDocument document   = new ApmlDocument();
+        ApmlDocument document = new ApmlDocument();
 
         //  Modify document state using public properties and methods
 
@@ -256,12 +256,12 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void SaveXmlWriterExample()
     {
-        ApmlDocument document   = new ApmlDocument();
+        ApmlDocument document = new ApmlDocument();
 
         //  Modify document state using public properties and methods
 
         using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write);
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             Indent = true
         };

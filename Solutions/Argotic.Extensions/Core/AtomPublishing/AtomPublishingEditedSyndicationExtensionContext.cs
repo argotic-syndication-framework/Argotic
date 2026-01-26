@@ -15,7 +15,7 @@ public class AtomPublishingEditedSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the last time a resource was edited. If the resource has not been edited yet, indicates the time the resource was created.
     /// </summary>
-    private DateTime extensionEditedOn  = DateTime.MinValue;
+    private DateTime extensionEditedOn = DateTime.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtensionContext"/> class.
     /// </summary>
@@ -55,18 +55,18 @@ public class AtomPublishingEditedSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator editedNavigator  = source.SelectSingleNode("app:edited", manager);
+            XPathNavigator editedNavigator = source.SelectSingleNode("app:edited", manager);
             if (editedNavigator != null && !string.IsNullOrEmpty(editedNavigator.Value))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(editedNavigator.Value, out DateTime editedOn))
                 {
-                    this.EditedOn   = editedOn;
-                    wasLoaded       = true;
+                    this.EditedOn = editedOn;
+                    wasLoaded = true;
                 }
             }
         }

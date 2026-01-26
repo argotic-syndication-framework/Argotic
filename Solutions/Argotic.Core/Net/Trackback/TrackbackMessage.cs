@@ -24,19 +24,19 @@ public class TrackbackMessage : IComparable
     /// <summary>
     /// Private member to hold the character encoding of the message.
     /// </summary>
-    private Encoding messageEncoding    = Encoding.UTF8;
+    private Encoding messageEncoding = Encoding.UTF8;
     /// <summary>
     /// Private member to hold the title of the entry.
     /// </summary>
-    private string messageTitle         = string.Empty;
+    private string messageTitle = string.Empty;
     /// <summary>
     /// Private member to hold an excerpt of the entry.
     /// </summary>
-    private string messageExcerpt       = string.Empty;
+    private string messageExcerpt = string.Empty;
     /// <summary>
     /// Private member to hold the name of the weblog to which the entry was posted.
     /// </summary>
-    private string messageWeblogName    = string.Empty;
+    private string messageWeblogName = string.Empty;
     /// <summary>
     /// Private member to hold the permalink for the entry.
     /// </summary>
@@ -60,7 +60,7 @@ public class TrackbackMessage : IComparable
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "permalink")]
     public TrackbackMessage(Uri permalink)
     {
-        this.Permalink  = permalink;
+        this.Permalink = permalink;
     }
 
     /// <summary>
@@ -148,7 +148,7 @@ public class TrackbackMessage : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 messageTitle = string.Empty;
             }
@@ -209,24 +209,24 @@ public class TrackbackMessage : IComparable
                 {
                     if (Uri.TryCreate(source[parameterName], UriKind.RelativeOrAbsolute, out Uri url))
                     {
-                        this.Permalink  = url;
-                        wasLoaded       = true;
+                        this.Permalink = url;
+                        wasLoaded = true;
                     }
                 }
                 else if (string.Compare(parameterName, "title", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     if (!string.IsNullOrEmpty(source[parameterName]))
                     {
-                        this.Title  = source[parameterName];
-                        wasLoaded   = true;
+                        this.Title = source[parameterName];
+                        wasLoaded = true;
                     }
                 }
                 else if (string.Compare(parameterName, "excerpt", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     if (!string.IsNullOrEmpty(source[parameterName]))
                     {
-                        this.Excerpt    = source[parameterName];
-                        wasLoaded       = true;
+                        this.Excerpt = source[parameterName];
+                        wasLoaded = true;
                     }
                 }
                 else if (string.Compare(parameterName, "blog_name", StringComparison.OrdinalIgnoreCase) == 0)
@@ -234,7 +234,7 @@ public class TrackbackMessage : IComparable
                     if (!string.IsNullOrEmpty(source[parameterName]))
                     {
                         this.WeblogName = source[parameterName];
-                        wasLoaded       = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -254,7 +254,7 @@ public class TrackbackMessage : IComparable
 
         writer.Write(string.Format(null, "url={0}", this.Permalink != null ? this.Permalink.ToString() : string.Empty));
 
-        if(!string.IsNullOrEmpty(this.Title))
+        if (!string.IsNullOrEmpty(this.Title))
         {
             writer.Write(string.Format(null, "&title={0}", HttpUtility.UrlEncode(this.Title)));
         }
@@ -306,15 +306,15 @@ public class TrackbackMessage : IComparable
             return 1;
         }
 
-        TrackbackMessage value  = obj as TrackbackMessage;
+        TrackbackMessage value = obj as TrackbackMessage;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Permalink, value.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Permalink, value.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -345,7 +345,7 @@ public class TrackbackMessage : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

@@ -45,7 +45,7 @@ public class SiteSummaryContentSyndicationExtensionContext
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 extensionEncoded = string.Empty;
             }
@@ -89,23 +89,23 @@ public class SiteSummaryContentSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
             XPathNavigator encodedNavigator = source.SelectSingleNode("content:encoded", manager);
-            XPathNavigator itemsNavigator   = source.SelectSingleNode("content:items", manager);
+            XPathNavigator itemsNavigator = source.SelectSingleNode("content:items", manager);
 
             if (encodedNavigator != null && !string.IsNullOrEmpty(encodedNavigator.Value))
             {
-                this.Encoded    = encodedNavigator.Value;
-                wasLoaded       = true;
+                this.Encoded = encodedNavigator.Value;
+                wasLoaded = true;
             }
 
             if (itemsNavigator is { HasChildren: true })
             {
-                XPathNodeIterator itemIterator  = itemsNavigator.Select("content:item", manager);
+                XPathNodeIterator itemIterator = itemsNavigator.Select("content:item", manager);
                 if (itemIterator is { Count: > 0 })
                 {
                     while (itemIterator.MoveNext())
@@ -114,7 +114,7 @@ public class SiteSummaryContentSyndicationExtensionContext
                         if (item.Load(itemIterator.Current))
                         {
                             this.Items.Add(item);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -136,17 +136,17 @@ public class SiteSummaryContentSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(!string.IsNullOrEmpty(this.Encoded))
+        if (!string.IsNullOrEmpty(this.Encoded))
         {
             writer.WriteStartElement("encoded", xmlNamespace);
             writer.WriteCData(this.Encoded);
             writer.WriteEndElement();
         }
 
-        if(this.Items.Count > 0)
+        if (this.Items.Count > 0)
         {
             writer.WriteStartElement("items", xmlNamespace);
-            foreach(SiteSummaryContentItem item in this.Items)
+            foreach (SiteSummaryContentItem item in this.Items)
             {
                 item.WriteTo(writer);
             }

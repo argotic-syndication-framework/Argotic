@@ -16,11 +16,11 @@ public class LiveJournalSecurity : IComparable
     /// <summary>
     /// Private member to hold security type indicator.
     /// </summary>
-    private LiveJournalSecurityType securityType    = LiveJournalSecurityType.Public;
+    private LiveJournalSecurityType securityType = LiveJournalSecurityType.Public;
     /// <summary>
     /// Private member to hold an integer indicating the friend-groups mask.
     /// </summary>
-    private int securityMask                        = int.MinValue;
+    private int securityMask = int.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalSecurity"/> class.
     /// </summary>
@@ -35,7 +35,7 @@ public class LiveJournalSecurity : IComparable
     /// <param name="accessType">A <see cref="LiveJournalSecurityType"/> enumeration value that represents the access type.</param>
     public LiveJournalSecurity(LiveJournalSecurityType accessType)
     {
-        this.Accessibility  = accessType;
+        this.Accessibility = accessType;
     }
 
     /// <summary>
@@ -45,8 +45,8 @@ public class LiveJournalSecurity : IComparable
     /// <param name="mask">An integer indicating the friend-groups mask.</param>
     public LiveJournalSecurity(LiveJournalSecurityType accessType, int mask)
     {
-        this.Accessibility  = accessType;
-        this.Mask           = mask;
+        this.Accessibility = accessType;
+        this.Mask = mask;
     }
     /// <summary>
     /// Gets or sets the accessibility type.
@@ -102,13 +102,13 @@ public class LiveJournalSecurity : IComparable
 
                 if (accessLevel == level)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -134,8 +134,8 @@ public class LiveJournalSecurity : IComparable
         {
             if (fieldInfo.FieldType == typeof(LiveJournalSecurityType))
             {
-                LiveJournalSecurityType level   = (LiveJournalSecurityType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                LiveJournalSecurityType level = (LiveJournalSecurityType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -164,20 +164,20 @@ public class LiveJournalSecurity : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", string.Empty);
-            string maskAttribute    = source.GetAttribute("mask", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
+            string maskAttribute = source.GetAttribute("mask", string.Empty);
 
             if (!string.IsNullOrEmpty(typeAttribute))
             {
                 LiveJournalSecurityType accessLevel = LiveJournalSecurity.AccessibilityByName(typeAttribute);
                 if (accessLevel != LiveJournalSecurityType.None)
                 {
-                    this.Accessibility  = accessLevel;
-                    wasLoaded           = true;
+                    this.Accessibility = accessLevel;
+                    wasLoaded = true;
                 }
             }
 
@@ -185,8 +185,8 @@ public class LiveJournalSecurity : IComparable
             {
                 if (int.TryParse(maskAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int mask))
                 {
-                    this.Mask   = mask;
-                    wasLoaded   = true;
+                    this.Mask = mask;
+                    wasLoaded = true;
                 }
             }
         }
@@ -202,12 +202,12 @@ public class LiveJournalSecurity : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        LiveJournalSyndicationExtension extension   = new LiveJournalSyndicationExtension();
+        LiveJournalSyndicationExtension extension = new LiveJournalSyndicationExtension();
         writer.WriteStartElement("security", extension.XmlNamespace);
 
         writer.WriteAttributeString("type", LiveJournalSecurity.AccessibilityAsString(this.Accessibility));
-            
-        if(this.Mask != int.MinValue)
+
+        if (this.Mask != int.MinValue)
         {
             writer.WriteAttributeString("mask", this.Mask.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
@@ -225,14 +225,14 @@ public class LiveJournalSecurity : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -257,12 +257,12 @@ public class LiveJournalSecurity : IComparable
         {
             return 1;
         }
-        LiveJournalSecurity value  = obj as LiveJournalSecurity;
+        LiveJournalSecurity value = obj as LiveJournalSecurity;
 
         if (value != null)
         {
-            int result  = this.Accessibility.CompareTo(value.Accessibility);
-            result      = this.Mask.CompareTo(value.Mask);
+            int result = this.Accessibility.CompareTo(value.Accessibility);
+            result = this.Mask.CompareTo(value.Mask);
 
             return result;
         }
@@ -293,7 +293,7 @@ public class LiveJournalSecurity : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

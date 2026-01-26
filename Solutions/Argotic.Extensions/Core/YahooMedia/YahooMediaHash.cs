@@ -21,11 +21,11 @@ public class YahooMediaHash : IComparable
     /// <summary>
     /// Private member to hold the algorithm used to create the hash.
     /// </summary>
-    private YahooMediaHashAlgorithm hashAlgorithm   = YahooMediaHashAlgorithm.None;
+    private YahooMediaHashAlgorithm hashAlgorithm = YahooMediaHashAlgorithm.None;
     /// <summary>
     /// Private member to hold the hash value.
     /// </summary>
-    private string hashValue                        = string.Empty;
+    private string hashValue = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaHash"/> class.
@@ -42,7 +42,7 @@ public class YahooMediaHash : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public YahooMediaHash(string value)
     {
-        this.Value  = value;
+        this.Value = value;
     }
 
     /// <summary>
@@ -98,24 +98,24 @@ public class YahooMediaHash : IComparable
     /// <exception cref="ArgumentException">The <paramref name="algorithm"/> is equal to <see cref="YahooMediaHashAlgorithm.None"/>.</exception>
     public static string GenerateHash(Stream stream, YahooMediaHashAlgorithm algorithm)
     {
-        string base64EncodedHash    = string.Empty;
-        MD5 md5                     = MD5.Create();
-        SHA1 sha1                   = SHA1.Create();
+        string base64EncodedHash = string.Empty;
+        MD5 md5 = MD5.Create();
+        SHA1 sha1 = SHA1.Create();
         Guard.ArgumentNotNull(stream, "stream");
         if (algorithm == YahooMediaHashAlgorithm.None)
         {
             throw new ArgumentException(string.Format(null, "Unable to generate a hash value for the {0} algorithm.", algorithm), nameof(algorithm));
         }
 
-        if(algorithm == YahooMediaHashAlgorithm.MD5)
+        if (algorithm == YahooMediaHashAlgorithm.MD5)
         {
-            byte[] hash         = md5.ComputeHash(stream);
-            base64EncodedHash   = Convert.ToBase64String(hash);
+            byte[] hash = md5.ComputeHash(stream);
+            base64EncodedHash = Convert.ToBase64String(hash);
         }
         else if (algorithm == YahooMediaHashAlgorithm.Sha1)
         {
-            byte[] hash         = sha1.ComputeHash(stream);
-            base64EncodedHash   = Convert.ToBase64String(hash);
+            byte[] hash = sha1.ComputeHash(stream);
+            base64EncodedHash = Convert.ToBase64String(hash);
         }
 
         return base64EncodedHash;
@@ -133,17 +133,17 @@ public class YahooMediaHash : IComparable
         {
             if (fieldInfo.FieldType == typeof(YahooMediaHashAlgorithm))
             {
-                YahooMediaHashAlgorithm hashAlgorithm   = (YahooMediaHashAlgorithm)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                YahooMediaHashAlgorithm hashAlgorithm = (YahooMediaHashAlgorithm)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (hashAlgorithm == algorithm)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -163,14 +163,14 @@ public class YahooMediaHash : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaHashAlgorithm HashAlgorithmByName(string name)
     {
-        YahooMediaHashAlgorithm hashAlgorithm   = YahooMediaHashAlgorithm.None;
+        YahooMediaHashAlgorithm hashAlgorithm = YahooMediaHashAlgorithm.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaHashAlgorithm).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaHashAlgorithm))
             {
-                YahooMediaHashAlgorithm algorithm   = (YahooMediaHashAlgorithm)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes           = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                YahooMediaHashAlgorithm algorithm = (YahooMediaHashAlgorithm)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -178,7 +178,7 @@ public class YahooMediaHash : IComparable
 
                     if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        hashAlgorithm   = algorithm;
+                        hashAlgorithm = algorithm;
                         break;
                     }
                 }
@@ -199,26 +199,26 @@ public class YahooMediaHash : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string algorithmAttribute   = source.GetAttribute("algo", string.Empty);
+            string algorithmAttribute = source.GetAttribute("algo", string.Empty);
             if (!string.IsNullOrEmpty(algorithmAttribute))
             {
-                YahooMediaHashAlgorithm algorithm   = YahooMediaHash.HashAlgorithmByName(algorithmAttribute);
+                YahooMediaHashAlgorithm algorithm = YahooMediaHash.HashAlgorithmByName(algorithmAttribute);
                 if (algorithm != YahooMediaHashAlgorithm.None)
                 {
-                    this.Algorithm  = algorithm;
-                    wasLoaded       = true;
+                    this.Algorithm = algorithm;
+                    wasLoaded = true;
                 }
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Value  = source.Value;
-            wasLoaded   = true;
+            this.Value = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -232,15 +232,15 @@ public class YahooMediaHash : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("hash", extension.XmlNamespace);
 
-        if(this.Algorithm != YahooMediaHashAlgorithm.None)
+        if (this.Algorithm != YahooMediaHashAlgorithm.None)
         {
             writer.WriteAttributeString("algo", YahooMediaHash.HashAlgorithmAsString(this.Algorithm));
         }
 
-        if(!string.IsNullOrEmpty(this.Value))
+        if (!string.IsNullOrEmpty(this.Value))
         {
             writer.WriteString(this.Value);
         }
@@ -258,14 +258,14 @@ public class YahooMediaHash : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -290,12 +290,12 @@ public class YahooMediaHash : IComparable
         {
             return 1;
         }
-        YahooMediaHash value  = obj as YahooMediaHash;
+        YahooMediaHash value = obj as YahooMediaHash;
 
         if (value != null)
         {
-            int result  = this.Algorithm.CompareTo(value.Algorithm);
-            result      = result | string.Compare(this.Value, value.Value, StringComparison.Ordinal);
+            int result = this.Algorithm.CompareTo(value.Algorithm);
+            result = result | string.Compare(this.Value, value.Value, StringComparison.Ordinal);
 
             return result;
         }
@@ -326,7 +326,7 @@ public class YahooMediaHash : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

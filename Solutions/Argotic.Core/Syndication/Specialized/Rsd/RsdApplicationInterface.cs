@@ -30,7 +30,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the name of the application interface.
     /// </summary>
-    private string interfaceName        = string.Empty;
+    private string interfaceName = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating if the application interface is preferred.
     /// </summary>
@@ -42,7 +42,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold custom data that is passed to the application interface.
     /// </summary>
-    private string interfaceWeblogId    = string.Empty;
+    private string interfaceWeblogId = string.Empty;
     /// <summary>
     /// Private member to hold the location of the documentation for the application interface.
     /// </summary>
@@ -50,7 +50,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold human readable text that explains the features and settings for the application interface.
     /// </summary>
-    private string interfaceNotes       = string.Empty;
+    private string interfaceNotes = string.Empty;
     /// <summary>
     /// Private member to hold service specific settings for the application interface.
     /// </summary>
@@ -74,10 +74,10 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="link"/> is a null reference.</exception>
     public RsdApplicationInterface(string name, Uri link, bool isPreferred, string weblogId)
     {
-        this.IsPreferred    = isPreferred;
-        this.Link           = link;
-        this.Name           = name;
-        this.WeblogId       = weblogId;
+        this.IsPreferred = isPreferred;
+        this.Link = link;
+        this.Name = name;
+        this.WeblogId = weblogId;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -268,7 +268,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 interfaceWeblogId = string.Empty;
             }
@@ -287,10 +287,10 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -331,7 +331,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -348,28 +348,28 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(source.NameTable);
         if (source.HasAttributes)
         {
-            string nameAttribute        = source.GetAttribute("name", string.Empty);
-            string preferredAttribute   = source.GetAttribute("preferred", string.Empty);
-            string apiLinkAttribute     = source.GetAttribute("apiLink", string.Empty);
-            string blogIdAttribute      = source.GetAttribute("blogID", string.Empty);
+            string nameAttribute = source.GetAttribute("name", string.Empty);
+            string preferredAttribute = source.GetAttribute("preferred", string.Empty);
+            string apiLinkAttribute = source.GetAttribute("apiLink", string.Empty);
+            string blogIdAttribute = source.GetAttribute("blogID", string.Empty);
 
             if (!string.IsNullOrEmpty(nameAttribute))
             {
-                this.Name   = nameAttribute;
-                wasLoaded   = true;
+                this.Name = nameAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(preferredAttribute))
             {
                 if (bool.TryParse(preferredAttribute, out bool isPreferred))
                 {
-                    this.IsPreferred    = isPreferred;
-                    wasLoaded           = true;
+                    this.IsPreferred = isPreferred;
+                    wasLoaded = true;
                 }
             }
 
@@ -377,54 +377,54 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
             {
                 if (Uri.TryCreate(apiLinkAttribute, UriKind.RelativeOrAbsolute, out Uri link))
                 {
-                    this.Link   = link;
-                    wasLoaded   = true;
+                    this.Link = link;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(blogIdAttribute))
             {
-                this.WeblogId   = blogIdAttribute;
-                wasLoaded       = true;
+                this.WeblogId = blogIdAttribute;
+                wasLoaded = true;
             }
         }
 
         if (source.HasChildren)
         {
-            XPathNavigator settingsNavigator        = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
+            XPathNavigator settingsNavigator = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
 
             if (settingsNavigator != null)
             {
-                XPathNavigator docsNavigator        = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
-                XPathNavigator notesNavigator       = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
-                XPathNodeIterator settingIterator   = RsdUtility.SelectSafe(settingsNavigator, "rsd:setting", manager);
+                XPathNavigator docsNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
+                XPathNavigator notesNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
+                XPathNodeIterator settingIterator = RsdUtility.SelectSafe(settingsNavigator, "rsd:setting", manager);
 
                 if (docsNavigator != null)
                 {
                     if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri documentation))
                     {
-                        this.Documentation  = documentation;
-                        wasLoaded           = true;
+                        this.Documentation = documentation;
+                        wasLoaded = true;
                     }
                 }
 
                 if (notesNavigator != null)
                 {
-                    this.Notes  = notesNavigator.Value;
-                    wasLoaded   = true;
+                    this.Notes = notesNavigator.Value;
+                    wasLoaded = true;
                 }
 
                 if (settingIterator is { Count: > 0 })
                 {
                     while (settingIterator.MoveNext())
                     {
-                        string settingName  = settingIterator.Current.GetAttribute("name", string.Empty);
+                        string settingName = settingIterator.Current.GetAttribute("name", string.Empty);
                         string settingValue = settingIterator.Current.Value;
 
-                        if(!this.Settings.ContainsKey(settingName))
+                        if (!this.Settings.ContainsKey(settingName))
                         {
                             this.Settings.Add(settingName, settingValue);
-                            wasLoaded       = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -447,10 +447,10 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -472,7 +472,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
         writer.WriteAttributeString("apiLink", this.Link != null ? this.Link.ToString() : string.Empty);
         writer.WriteAttributeString("blogID", this.WeblogId);
 
-        if(this.Documentation != null || !string.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
+        if (this.Documentation != null || !string.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
         {
             writer.WriteStartElement("settings", RsdUtility.RsdNamespace);
 
@@ -486,7 +486,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
                 writer.WriteElementString("notes", RsdUtility.RsdNamespace, this.Notes);
             }
 
-            foreach(string settingName in this.Settings.Keys)
+            foreach (string settingName in this.Settings.Keys)
             {
                 writer.WriteStartElement("setting", RsdUtility.RsdNamespace);
                 writer.WriteAttributeString("name", settingName);
@@ -511,14 +511,14 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -543,17 +543,17 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        RsdApplicationInterface value  = obj as RsdApplicationInterface;
+        RsdApplicationInterface value = obj as RsdApplicationInterface;
 
         if (value != null)
         {
-            int result  = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.IsPreferred.CompareTo(value.IsPreferred);
-            result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
-            result      = result | ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
-            result      = result | string.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
+            int result = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | this.IsPreferred.CompareTo(value.IsPreferred);
+            result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
+            result = result | ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
+            result = result | string.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -584,7 +584,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

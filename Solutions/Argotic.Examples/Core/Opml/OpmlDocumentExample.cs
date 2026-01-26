@@ -22,7 +22,7 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void ClassExample()
     {
-        OpmlDocument document   = new OpmlDocument
+        OpmlDocument document = new OpmlDocument
         {
             Head =
             {
@@ -35,7 +35,7 @@ public static class OpmlDocumentExample
             }
         };
 
-        OpmlOutline containerOutline    = new OpmlOutline("Feeds");
+        OpmlOutline containerOutline = new OpmlOutline("Feeds");
         containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
         containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
         document.AddOutline(containerOutline);
@@ -45,7 +45,7 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void CreateExample()
     {
-        OpmlDocument document   = OpmlDocument.Create(new Uri("http://blog.oppositionallydefiant.com/opml.axd"));
+        OpmlDocument document = OpmlDocument.Create(new Uri("http://blog.oppositionallydefiant.com/opml.axd"));
 
         foreach (OpmlOutline outline in document.Outlines)
         {
@@ -61,7 +61,7 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void LoadAsyncExample()
     {
-        OpmlDocument document   = new OpmlDocument();
+        OpmlDocument document = new OpmlDocument();
 
         document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
@@ -84,9 +84,9 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source    = new XPathDocument("http://blog.oppositionallydefiant.com/opml.axd");
+        XPathDocument source = new XPathDocument("http://blog.oppositionallydefiant.com/opml.axd");
 
-        OpmlDocument document   = new OpmlDocument();
+        OpmlDocument document = new OpmlDocument();
         document.Load(source);
 
         foreach (OpmlOutline outline in document.Outlines)
@@ -103,7 +103,7 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void LoadStreamExample()
     {
-        OpmlDocument document   = new OpmlDocument();
+        OpmlDocument document = new OpmlDocument();
 
         using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read);
         document.Load(stream);
@@ -122,10 +122,10 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void LoadXmlReaderExample()
     {
-        OpmlDocument document   = new OpmlDocument();
+        OpmlDocument document = new OpmlDocument();
 
         using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read);
-        XmlReaderSettings settings  = new XmlReaderSettings
+        XmlReaderSettings settings = new XmlReaderSettings
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -148,8 +148,8 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void LoadUriExample()
     {
-        OpmlDocument document   = new OpmlDocument();
-        Uri source              = new Uri("http://blog.oppositionallydefiant.com/opml.axd");
+        OpmlDocument document = new OpmlDocument();
+        Uri source = new Uri("http://blog.oppositionallydefiant.com/opml.axd");
 
         document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -167,7 +167,7 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void SaveStreamExample()
     {
-        OpmlDocument document   = new OpmlDocument();
+        OpmlDocument document = new OpmlDocument();
 
         //  Modify document state using public properties and methods
 
@@ -180,12 +180,12 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void SaveXmlWriterExample()
     {
-        OpmlDocument document   = new OpmlDocument();
+        OpmlDocument document = new OpmlDocument();
 
         //  Modify document state using public properties and methods
 
         using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write);
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             Indent = true
         };

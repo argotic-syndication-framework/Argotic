@@ -20,17 +20,17 @@ public enum FeedSynchronizationRelatedInformationType
     /// No relation type specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None        = 0,
+    None = 0,
 
     /// <summary>
     /// The <see cref="FeedSynchronizationRelatedInformation.Link"/> points to a feed whose contents are being incorporated into this feed by the publisher.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Aggregated", AlternateValue = "aggregated")]
-    Aggregated  = 1,
+    Aggregated = 1,
 
     /// <summary>
     /// The <see cref="FeedSynchronizationRelatedInformation.Link"/> points to a feed that contains the complete collection of items for this feed.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Complete", AlternateValue = "complete")]
-    Complete    = 2
+    Complete = 2
 }

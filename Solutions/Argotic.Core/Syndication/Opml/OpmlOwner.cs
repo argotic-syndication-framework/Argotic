@@ -16,11 +16,11 @@ public class OpmlOwner : IComparable
     /// <summary>
     /// Private member to hold the name of the owner of the document.
     /// </summary>
-    private string ownerName    = string.Empty;
+    private string ownerName = string.Empty;
     /// <summary>
     /// Private member to hold email address of the owner of the document.
     /// </summary>
-    private string ownerEmail   = string.Empty;
+    private string ownerEmail = string.Empty;
     /// <summary>
     /// Private member to hold the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
     /// </summary>
@@ -39,7 +39,7 @@ public class OpmlOwner : IComparable
     /// <param name="name">The name of the owner of this document.</param>
     public OpmlOwner(string name)
     {
-        this.Name   = name;
+        this.Name = name;
     }
 
     /// <summary>
@@ -49,7 +49,7 @@ public class OpmlOwner : IComparable
     /// <param name="emailAddress">The email address of the owner of this document.</param>
     public OpmlOwner(string name, string emailAddress) : this(name)
     {
-        this.EmailAddress   = emailAddress;
+        this.EmailAddress = emailAddress;
     }
 
     /// <summary>
@@ -63,7 +63,7 @@ public class OpmlOwner : IComparable
     /// </param>
     public OpmlOwner(string name, string emailAddress, Uri id) : this(name, emailAddress)
     {
-        this.Id             = id;
+        this.Id = id;
     }
     /// <summary>
     /// Gets or sets the email address of the owner of this document.
@@ -125,13 +125,13 @@ public class OpmlOwner : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
-                ownerName   = string.Empty;
+                ownerName = string.Empty;
             }
             else
             {
-                ownerName   = value.Trim();
+                ownerName = value.Trim();
             }
         }
     }
@@ -146,30 +146,30 @@ public class OpmlOwner : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator ownerNameNavigator   = source.SelectSingleNode("ownerName");
-        XPathNavigator ownerEmailNavigator  = source.SelectSingleNode("ownerEmail");
-        XPathNavigator ownerIdNavigator     = source.SelectSingleNode("ownerId");
+        XPathNavigator ownerNameNavigator = source.SelectSingleNode("ownerName");
+        XPathNavigator ownerEmailNavigator = source.SelectSingleNode("ownerEmail");
+        XPathNavigator ownerIdNavigator = source.SelectSingleNode("ownerId");
 
         if (ownerNameNavigator != null)
         {
-            this.Name           = ownerNameNavigator.Value;
-            wasLoaded           = true;
+            this.Name = ownerNameNavigator.Value;
+            wasLoaded = true;
         }
 
         if (ownerEmailNavigator != null)
         {
-            this.EmailAddress   = ownerEmailNavigator.Value;
-            wasLoaded           = true;
+            this.EmailAddress = ownerEmailNavigator.Value;
+            wasLoaded = true;
         }
 
         if (ownerIdNavigator != null)
         {
             if (Uri.TryCreate(ownerIdNavigator.Value, UriKind.RelativeOrAbsolute, out Uri id))
             {
-                this.Id     = id;
-                wasLoaded   = true;
+                this.Id = id;
+                wasLoaded = true;
             }
         }
 
@@ -184,7 +184,7 @@ public class OpmlOwner : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        if(!string.IsNullOrEmpty(this.Name))
+        if (!string.IsNullOrEmpty(this.Name))
         {
             writer.WriteElementString("ownerName", this.Name);
         }
@@ -209,14 +209,14 @@ public class OpmlOwner : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -240,13 +240,13 @@ public class OpmlOwner : IComparable
         {
             return 1;
         }
-        OpmlOwner value  = obj as OpmlOwner;
+        OpmlOwner value = obj as OpmlOwner;
 
         if (value != null)
         {
-            int result  = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Id, value.Id, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Id, value.Id, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -277,7 +277,7 @@ public class OpmlOwner : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

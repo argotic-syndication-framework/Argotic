@@ -44,9 +44,9 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
     {
         Guard.ArgumentNotNull(resource, "resource");
 
-        XmlNamespaceManager manager     = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("app:categories", manager);
+        XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("app:categories", manager);
         if (documentNavigator != null)
         {
             AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);
@@ -55,19 +55,19 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
             {
                 if (documentNavigator.HasAttributes)
                 {
-                    string fixedAttribute   = documentNavigator.GetAttribute("fixed", string.Empty);
-                    string schemeAttribute  = documentNavigator.GetAttribute("scheme", string.Empty);
-                    string hrefAttribute    = documentNavigator.GetAttribute("href", string.Empty);
+                    string fixedAttribute = documentNavigator.GetAttribute("fixed", string.Empty);
+                    string schemeAttribute = documentNavigator.GetAttribute("scheme", string.Empty);
+                    string hrefAttribute = documentNavigator.GetAttribute("href", string.Empty);
 
                     if (!string.IsNullOrEmpty(fixedAttribute))
                     {
                         if (string.Compare(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            resource.IsFixed    = true;
+                            resource.IsFixed = true;
                         }
                         else if (string.Compare(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase) == 0)
                         {
-                            resource.IsFixed    = false;
+                            resource.IsFixed = false;
                         }
                     }
 
@@ -75,7 +75,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                     {
                         if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                         {
-                            resource.Scheme     = scheme;
+                            resource.Scheme = scheme;
                         }
                     }
 
@@ -83,7 +83,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                     {
                         if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                         {
-                            resource.Uri        = href;
+                            resource.Uri = href;
                         }
                     }
                 }
@@ -96,7 +96,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                     {
                         while (categoryIterator.MoveNext())
                         {
-                            AtomCategory category   = new AtomCategory();
+                            AtomCategory category = new AtomCategory();
                             if (category.Load(categoryIterator.Current, this.Settings))
                             {
                                 resource.AddCategory(category);
@@ -120,9 +120,9 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
     {
         Guard.ArgumentNotNull(resource, "resource");
 
-        XmlNamespaceManager manager     = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator documentNavigator    = this.Navigator.SelectSingleNode("app:service", manager);
+        XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("app:service", manager);
         if (documentNavigator != null)
         {
             AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);

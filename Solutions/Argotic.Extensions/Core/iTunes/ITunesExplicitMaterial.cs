@@ -13,23 +13,23 @@ public enum ITunesExplicitMaterial
     /// No explicit material designation specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// The podcast has no explicit language or adult content included anywhere in its episodes. 
     /// </summary>
     [EnumerationMetadata(DisplayName = "Clean", AlternateValue = "clean")]
-    Clean   = 1,
+    Clean = 1,
 
     /// <summary>
     /// The podcast explicit material advisory was not provided by the publisher.
     /// </summary>
     [EnumerationMetadata(DisplayName = "No", AlternateValue = "no")]
-    No      = 2,
+    No = 2,
 
     /// <summary>
     /// The podcast has explicit language or adult content included in its episodes. 
     /// </summary>
     [EnumerationMetadata(DisplayName = "Yes", AlternateValue = "yes")]
-    Yes     = 3
+    Yes = 3
 }

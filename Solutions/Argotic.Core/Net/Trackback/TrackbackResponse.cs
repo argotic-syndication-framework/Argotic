@@ -54,7 +54,7 @@ public class TrackbackResponse : IComparable
     {
         Guard.ArgumentNotNullOrEmptyString(errorMessage, "errorMessage");
 
-        responseErrorMessage    = errorMessage;
+        responseErrorMessage = errorMessage;
     }
 
     /// <summary>
@@ -79,7 +79,7 @@ public class TrackbackResponse : IComparable
         }
 
         using Stream stream = response.GetResponseStream();
-        XmlReaderSettings settings              = new XmlReaderSettings
+        XmlReaderSettings settings = new XmlReaderSettings
         {
             ConformanceLevel = ConformanceLevel.Document,
             IgnoreComments = true,
@@ -89,10 +89,10 @@ public class TrackbackResponse : IComparable
         };
 
         using XmlReader reader = XmlReader.Create(stream, settings);
-        XPathDocument document  = new XPathDocument(reader);
-        XPathNavigator source   = document.CreateNavigator();
+        XPathDocument document = new XPathDocument(reader);
+        XPathNavigator source = document.CreateNavigator();
 
-        XPathNavigator responseNavigator    = source.SelectSingleNode("response");
+        XPathNavigator responseNavigator = source.SelectSingleNode("response");
         if (responseNavigator != null)
         {
             this.Load(responseNavigator);
@@ -134,33 +134,33 @@ public class TrackbackResponse : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
         if (source.HasChildren)
         {
-            XPathNavigator errorNavigator   = source.SelectSingleNode("error");
+            XPathNavigator errorNavigator = source.SelectSingleNode("error");
             XPathNavigator messageNavigator = source.SelectSingleNode("message");
 
             if (errorNavigator != null)
             {
-                if(string.Compare(errorNavigator.Value, "0", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Compare(errorNavigator.Value, "0", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    responseHasError    = false;
-                    wasLoaded           = true;
+                    responseHasError = false;
+                    wasLoaded = true;
                 }
-                else if(string.Compare(errorNavigator.Value, "1", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Compare(errorNavigator.Value, "1", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    responseHasError    = true;
-                    wasLoaded           = true;
+                    responseHasError = true;
+                    wasLoaded = true;
                 }
             }
 
             if (messageNavigator != null)
             {
-                responseErrorMessage    = !string.IsNullOrEmpty(messageNavigator.Value) ? messageNavigator.Value : string.Empty;
-                wasLoaded               = true;
+                responseErrorMessage = !string.IsNullOrEmpty(messageNavigator.Value) ? messageNavigator.Value : string.Empty;
+                wasLoaded = true;
             }
         }
 
@@ -201,14 +201,14 @@ public class TrackbackResponse : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -234,12 +234,12 @@ public class TrackbackResponse : IComparable
             return 1;
         }
 
-        TrackbackResponse value  = obj as TrackbackResponse;
+        TrackbackResponse value = obj as TrackbackResponse;
 
         if (value != null)
         {
-            int result  = string.Compare(this.ErrorMessage, value.ErrorMessage, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.HasError.CompareTo(value.HasError);
+            int result = string.Compare(this.ErrorMessage, value.ErrorMessage, StringComparison.OrdinalIgnoreCase);
+            result = result | this.HasError.CompareTo(value.HasError);
 
             return result;
         }
@@ -270,7 +270,7 @@ public class TrackbackResponse : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

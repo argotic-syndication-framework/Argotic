@@ -42,7 +42,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Private member to hold the content of the human-readable text.
     /// </summary>
-    private string textConstructContent             = string.Empty;
+    private string textConstructContent = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomTextConstruct"/> class.
     /// </summary>
@@ -60,7 +60,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
     /// </remarks>
     public AtomTextConstruct(string content)
     {
-        this.Content    = content;
+        this.Content = content;
     }
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
@@ -185,7 +185,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
 
         set
         {
-            textConstructType   = value;
+            textConstructType = value;
         }
     }
     /// <summary>
@@ -210,13 +210,13 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
 
                 if (constructType == type)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -249,8 +249,8 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
         {
             if (fieldInfo.FieldType == typeof(AtomTextConstructType))
             {
-                AtomTextConstructType type  = (AtomTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                AtomTextConstructType type = (AtomTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -275,10 +275,10 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -319,7 +319,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -335,45 +335,45 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(source.NameTable);
         if (AtomUtility.FillCommonObjectAttributes(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
         if (source.HasAttributes)
         {
-            string typeAttribute    = source.GetAttribute("type", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
             if (!string.IsNullOrEmpty(typeAttribute))
             {
                 AtomTextConstructType type = AtomTextConstruct.ConstructTypeByName(typeAttribute);
                 if (type != AtomTextConstructType.None)
                 {
-                    this.TextType   = type;
-                    wasLoaded       = true;
+                    this.TextType = type;
+                    wasLoaded = true;
                 }
             }
         }
 
-        if(this.TextType == AtomTextConstructType.Xhtml)
+        if (this.TextType == AtomTextConstructType.Xhtml)
         {
-            XPathNavigator xhtmlDivNavigator    = source.SelectSingleNode("xhtml:div", manager);
+            XPathNavigator xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
             if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
-                this.Content    = xhtmlDivNavigator.Value;
-                wasLoaded       = true;
+                this.Content = xhtmlDivNavigator.Value;
+                wasLoaded = true;
             }
         }
         else if (this.TextType == AtomTextConstructType.Html && !string.IsNullOrEmpty(source.InnerXml))
         {
-            this.Content    = source.InnerXml;
-            wasLoaded       = true;
+            this.Content = source.InnerXml;
+            wasLoaded = true;
         }
         else if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content    = source.Value;
-            wasLoaded       = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -392,10 +392,10 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -451,14 +451,14 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer, "TextConstruct");
         }
@@ -482,14 +482,14 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
         {
             return 1;
         }
-        AtomTextConstruct value  = obj as AtomTextConstruct;
+        AtomTextConstruct value = obj as AtomTextConstruct;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.TextType.CompareTo(value.TextType);
+            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result = result | this.TextType.CompareTo(value.TextType);
 
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -520,7 +520,7 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

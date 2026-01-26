@@ -17,15 +17,15 @@ public class FeedSynchronizationHistory : IComparable
     /// <summary>
     /// Private member to hold the sequencing of individual updates for the purposes of conflict detection.
     /// </summary>
-    private int historySequence     = 1;
+    private int historySequence = 1;
     /// <summary>
     /// Private member to hold the date-time for the device that performed the item modification.
     /// </summary>
-    private DateTime historyWhen    = DateTime.MinValue;
+    private DateTime historyWhen = DateTime.MinValue;
     /// <summary>
     /// Private member to hold the text value that uniquely identifies the endpoint that made the modification.
     /// </summary>
-    private string historyBy        = string.Empty;
+    private string historyBy = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationHistory"/> class.
     /// </summary>
@@ -40,7 +40,7 @@ public class FeedSynchronizationHistory : IComparable
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="sequence"/> is less than <b>1</b>.</exception>
     public FeedSynchronizationHistory(int sequence)
     {
-        this.Sequence   = sequence;
+        this.Sequence = sequence;
     }
 
     /// <summary>
@@ -52,8 +52,8 @@ public class FeedSynchronizationHistory : IComparable
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="sequence"/> is less than <b>1</b>.</exception>
     public FeedSynchronizationHistory(int sequence, DateTime utcWhen, string by) : this(sequence)
     {
-        this.When   = utcWhen;
-        this.By     = by;
+        this.When = utcWhen;
+        this.By = by;
     }
 
     /// <summary>
@@ -80,7 +80,7 @@ public class FeedSynchronizationHistory : IComparable
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 historyBy = string.Empty;
             }
@@ -153,20 +153,20 @@ public class FeedSynchronizationHistory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string sequenceAttribute    = source.GetAttribute("sequence", string.Empty);
-            string whenAttribute        = source.GetAttribute("when", string.Empty);
-            string byAttribute          = source.GetAttribute("by", string.Empty);
+            string sequenceAttribute = source.GetAttribute("sequence", string.Empty);
+            string whenAttribute = source.GetAttribute("when", string.Empty);
+            string byAttribute = source.GetAttribute("by", string.Empty);
 
             if (!string.IsNullOrEmpty(sequenceAttribute))
             {
                 if (int.TryParse(sequenceAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int sequence))
                 {
-                    this.Sequence   = sequence;
-                    wasLoaded       = true;
+                    this.Sequence = sequence;
+                    wasLoaded = true;
                 }
             }
 
@@ -174,15 +174,15 @@ public class FeedSynchronizationHistory : IComparable
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(whenAttribute, out DateTime when))
                 {
-                    this.When   = when;
-                    wasLoaded   = true;
+                    this.When = when;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(byAttribute))
             {
-                this.By     = byAttribute;
-                wasLoaded   = true;
+                this.By = byAttribute;
+                wasLoaded = true;
             }
         }
 
@@ -197,17 +197,17 @@ public class FeedSynchronizationHistory : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        FeedSynchronizationSyndicationExtension extension   = new FeedSynchronizationSyndicationExtension();
+        FeedSynchronizationSyndicationExtension extension = new FeedSynchronizationSyndicationExtension();
 
         writer.WriteStartElement("history", extension.XmlNamespace);
         writer.WriteAttributeString("sequence", this.Sequence.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
 
-        if(this.When != DateTime.MinValue)
+        if (this.When != DateTime.MinValue)
         {
             writer.WriteAttributeString("when", SyndicationDateTimeUtility.ToRfc3339DateTime(this.When));
         }
 
-        if(!string.IsNullOrEmpty(this.By))
+        if (!string.IsNullOrEmpty(this.By))
         {
             writer.WriteAttributeString("when", this.By);
         }
@@ -225,14 +225,14 @@ public class FeedSynchronizationHistory : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -256,13 +256,13 @@ public class FeedSynchronizationHistory : IComparable
         {
             return 1;
         }
-        FeedSynchronizationHistory value  = obj as FeedSynchronizationHistory;
+        FeedSynchronizationHistory value = obj as FeedSynchronizationHistory;
 
         if (value != null)
         {
-            int result  = string.Compare(this.By, value.By, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Sequence.CompareTo(value.Sequence);
-            result      = result | this.When.CompareTo(value.When);
+            int result = string.Compare(this.By, value.By, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Sequence.CompareTo(value.Sequence);
+            result = result | this.When.CompareTo(value.When);
 
             return result;
         }
@@ -293,7 +293,7 @@ public class FeedSynchronizationHistory : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

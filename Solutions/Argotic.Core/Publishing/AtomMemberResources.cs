@@ -53,7 +53,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <summary>
     /// Private member to hold a human-readable title for the collection.
     /// </summary>
-    private AtomTextConstruct collectionTitle   = new AtomTextConstruct();
+    private AtomTextConstruct collectionTitle = new AtomTextConstruct();
     /// <summary>
     /// Private member to hold a list of categories that can be applied to members of the collection.
     /// </summary>
@@ -80,8 +80,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
     public AtomMemberResources(Uri href, AtomTextConstruct title) : this()
     {
-        this.Uri    = href;
-        this.Title  = title;
+        this.Uri = href;
+        this.Title = title;
     }
 
     /// <summary>
@@ -174,12 +174,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
 
         Guard.ArgumentNotNull(extension, "extension");
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -223,7 +223,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -346,7 +346,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<AtomAcceptedMediaRange> source, Collection<AtomAcceptedMediaRange> target)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -355,7 +355,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -444,8 +444,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
     public static AtomLink CreateEditMediaLink(Uri href, string contentType)
     {
-        AtomLink link       = AtomMemberResources.CreateEditMediaLink(href);
-        link.ContentType    = contentType;
+        AtomLink link = AtomMemberResources.CreateEditMediaLink(href);
+        link.ContentType = contentType;
         return link;
     }
 
@@ -476,8 +476,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)"), System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateMemberEntryEditMediaLink(System.Uri,System.String)")]
     public static AtomLink CreateEditMediaLink(Uri href, string contentType, CultureInfo contentLanguage)
     {
-        AtomLink link           = AtomMemberResources.CreateEditMediaLink(href, contentType);
-        link.ContentLanguage    = contentLanguage;
+        AtomLink link = AtomMemberResources.CreateEditMediaLink(href, contentType);
+        link.ContentLanguage = contentLanguage;
         return link;
     }
 
@@ -574,11 +574,11 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
-        XPathNavigator navigator    = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator();
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -589,30 +589,30 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
         if (navigator.HasAttributes)
         {
-            string hrefAttribute    = navigator.GetAttribute("href", string.Empty);
+            string hrefAttribute = navigator.GetAttribute("href", string.Empty);
 
             if (!string.IsNullOrEmpty(hrefAttribute))
             {
                 if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                 {
-                    this.Uri    = href;
-                    wasLoaded   = true;
+                    this.Uri = href;
+                    wasLoaded = true;
                 }
             }
         }
 
         if (navigator.HasChildren)
         {
-            XPathNavigator titleNavigator           = navigator.SelectSingleNode("atom:title", manager);
-            XPathNodeIterator acceptIterator        = navigator.Select("app:accept", manager);
-            XPathNodeIterator categoriesIterator    = navigator.Select("app:categories", manager);
+            XPathNavigator titleNavigator = navigator.SelectSingleNode("atom:title", manager);
+            XPathNodeIterator acceptIterator = navigator.Select("app:accept", manager);
+            XPathNodeIterator categoriesIterator = navigator.Select("app:categories", manager);
 
             if (titleNavigator != null)
             {
-                this.Title  = new AtomTextConstruct();
+                this.Title = new AtomTextConstruct();
                 if (this.Title.Load(titleNavigator))
                 {
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -620,11 +620,11 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
             {
                 while (acceptIterator.MoveNext())
                 {
-                    AtomAcceptedMediaRange mediaRange   = new AtomAcceptedMediaRange();
+                    AtomAcceptedMediaRange mediaRange = new AtomAcceptedMediaRange();
                     if (mediaRange.Load(acceptIterator.Current))
                     {
                         this.Accepts.Add(mediaRange);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -635,7 +635,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
                 {
                     AtomCategoryDocument categories = new AtomCategoryDocument();
                     categories.Load(categoriesIterator.Current);
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -661,7 +661,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
 
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
 
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -749,14 +749,14 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -782,14 +782,14 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
             return 1;
         }
 
-        AtomMemberResources value  = obj as AtomMemberResources;
+        AtomMemberResources value = obj as AtomMemberResources;
 
         if (value != null)
         {
-            int result  = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Title.CompareTo(value.Title);
-            result      = result | AtomMemberResources.CompareSequence(this.Accepts, value.Accepts);
-            result      = result | AtomCategoryDocument.CompareSequence(this.Categories, value.Categories);
+            int result = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Title.CompareTo(value.Title);
+            result = result | AtomMemberResources.CompareSequence(this.Accepts, value.Accepts);
+            result = result | AtomCategoryDocument.CompareSequence(this.Categories, value.Categories);
 
             return result;
         }
@@ -820,7 +820,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

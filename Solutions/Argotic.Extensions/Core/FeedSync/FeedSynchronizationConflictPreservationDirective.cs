@@ -14,13 +14,13 @@ public enum FeedSynchronizationConflictPreservationDirective
     /// No conflict preservation processing directive specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// Conflict preservation <b>must not</b> be performed for the item.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Ignore", AlternateValue = "true")]
-    Ignore  = 1,
+    Ignore = 1,
 
     /// <summary>
     /// Conflict preservation <b>must</b> be performed for the item.

@@ -13,7 +13,7 @@ public enum YahooMediaRestrictionType
     /// No restriction type specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// Indicates that restrictions are be placed based on country code.
@@ -25,5 +25,5 @@ public enum YahooMediaRestrictionType
     /// Indicates that restrictions are be placed based on URI.
     /// </summary>
     [EnumerationMetadata(DisplayName = "URI", AlternateValue = "uri")]
-    Uri    = 2
+    Uri = 2
 }

@@ -17,7 +17,7 @@ public static class RssTextInputExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed
+        RssFeed feed = new RssFeed
         {
             Channel =
             {

@@ -84,21 +84,21 @@ public class FeedSynchronizationSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
         if (source.HasChildren)
         {
             XPathNavigator sharingNavigator = source.SelectSingleNode("sx:sharing", manager);
-            XPathNavigator syncNavigator    = source.SelectSingleNode("sx:sync", manager);
+            XPathNavigator syncNavigator = source.SelectSingleNode("sx:sync", manager);
 
             if (sharingNavigator != null)
             {
-                FeedSynchronizationSharingInformation sharing   = new FeedSynchronizationSharingInformation();
+                FeedSynchronizationSharingInformation sharing = new FeedSynchronizationSharingInformation();
                 if (sharing.Load(sharingNavigator))
                 {
-                    this.Sharing    = sharing;
-                    wasLoaded       = true;
+                    this.Sharing = sharing;
+                    wasLoaded = true;
                 }
             }
 
@@ -107,8 +107,8 @@ public class FeedSynchronizationSyndicationExtensionContext
                 FeedSynchronizationItem synchronization = new FeedSynchronizationItem();
                 if (synchronization.Load(syncNavigator))
                 {
-                    this.Synchronization    = synchronization;
-                    wasLoaded               = true;
+                    this.Synchronization = synchronization;
+                    wasLoaded = true;
                 }
             }
         }
@@ -128,7 +128,7 @@ public class FeedSynchronizationSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(this.Sharing != null)
+        if (this.Sharing != null)
         {
             this.Sharing.WriteTo(writer);
         }

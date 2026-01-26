@@ -23,11 +23,11 @@ public class YahooMediaRestriction : IComparable
     /// <summary>
     /// Private member to hold the type of relationship that the restriction represents.
     /// </summary>
-    private YahooMediaRestrictionRelationship restrictionRelationship   = YahooMediaRestrictionRelationship.None;
+    private YahooMediaRestrictionRelationship restrictionRelationship = YahooMediaRestrictionRelationship.None;
     /// <summary>
     /// Private member to hold the type of media that a restriction applies to.
     /// </summary>
-    private YahooMediaRestrictionType restrictionType                   = YahooMediaRestrictionType.None;
+    private YahooMediaRestrictionType restrictionType = YahooMediaRestrictionType.None;
     /// <summary>
     /// Private member to hold the entities the restriction applies to.
     /// </summary>
@@ -116,17 +116,17 @@ public class YahooMediaRestriction : IComparable
         {
             if (fieldInfo.FieldType == typeof(YahooMediaRestrictionRelationship))
             {
-                YahooMediaRestrictionRelationship restrictionRelationship   = (YahooMediaRestrictionRelationship)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                YahooMediaRestrictionRelationship restrictionRelationship = (YahooMediaRestrictionRelationship)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (restrictionRelationship == relationship)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -146,14 +146,14 @@ public class YahooMediaRestriction : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaRestrictionRelationship RelationshipByName(string name)
     {
-        YahooMediaRestrictionRelationship restrictionRelationship   = YahooMediaRestrictionRelationship.None;
+        YahooMediaRestrictionRelationship restrictionRelationship = YahooMediaRestrictionRelationship.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionRelationship).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaRestrictionRelationship))
             {
-                YahooMediaRestrictionRelationship relationship  = (YahooMediaRestrictionRelationship)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes                       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                YahooMediaRestrictionRelationship relationship = (YahooMediaRestrictionRelationship)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -183,17 +183,17 @@ public class YahooMediaRestriction : IComparable
         {
             if (fieldInfo.FieldType == typeof(YahooMediaRestrictionType))
             {
-                YahooMediaRestrictionType restrictionType   = (YahooMediaRestrictionType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                YahooMediaRestrictionType restrictionType = (YahooMediaRestrictionType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (restrictionType == type)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -213,14 +213,14 @@ public class YahooMediaRestriction : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaRestrictionType RestrictionTypeByName(string name)
     {
-        YahooMediaRestrictionType restrictionType   = YahooMediaRestrictionType.None;
+        YahooMediaRestrictionType restrictionType = YahooMediaRestrictionType.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionType).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaRestrictionType))
             {
-                YahooMediaRestrictionType type  = (YahooMediaRestrictionType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                YahooMediaRestrictionType type = (YahooMediaRestrictionType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -249,30 +249,30 @@ public class YahooMediaRestriction : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string relationshipAttribute    = source.GetAttribute("relationship", string.Empty);
-            string typeAttribute            = source.GetAttribute("type", string.Empty);
+            string relationshipAttribute = source.GetAttribute("relationship", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
 
             if (!string.IsNullOrEmpty(relationshipAttribute))
             {
-                YahooMediaRestrictionRelationship relationship  = YahooMediaRestriction.RelationshipByName(relationshipAttribute);
+                YahooMediaRestrictionRelationship relationship = YahooMediaRestriction.RelationshipByName(relationshipAttribute);
                 if (relationship != YahooMediaRestrictionRelationship.None)
                 {
-                    this.Relationship   = relationship;
-                    wasLoaded           = true;
+                    this.Relationship = relationship;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(typeAttribute))
             {
-                YahooMediaRestrictionType type  = YahooMediaRestriction.RestrictionTypeByName(typeAttribute);
+                YahooMediaRestrictionType type = YahooMediaRestriction.RestrictionTypeByName(typeAttribute);
                 if (type != YahooMediaRestrictionType.None)
                 {
                     this.EntityType = type;
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -281,20 +281,20 @@ public class YahooMediaRestriction : IComparable
         {
             if (source.Value.Contains(" "))
             {
-                string[] entities   = source.Value.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                string[] entities = source.Value.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 if (entities.Length > 0)
                 {
-                    foreach(string entity in entities)
+                    foreach (string entity in entities)
                     {
                         this.Entities.Add(entity);
                     }
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
             else
             {
                 this.Entities.Add(source.Value);
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
 
@@ -309,10 +309,10 @@ public class YahooMediaRestriction : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        YahooMediaSyndicationExtension extension    = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         writer.WriteStartElement("restriction", extension.XmlNamespace);
 
-        if(this.Relationship != YahooMediaRestrictionRelationship.None)
+        if (this.Relationship != YahooMediaRestrictionRelationship.None)
         {
             writer.WriteAttributeString("relationship", YahooMediaRestriction.RelationshipAsString(this.Relationship));
         }
@@ -322,9 +322,9 @@ public class YahooMediaRestriction : IComparable
             writer.WriteAttributeString("type", YahooMediaRestriction.RestrictionTypeAsString(this.EntityType));
         }
 
-        if(this.Entities.Count > 0)
+        if (this.Entities.Count > 0)
         {
-            string[] entities   = new string[this.Entities.Count];
+            string[] entities = new string[this.Entities.Count];
             this.Entities.CopyTo(entities, 0);
 
             writer.WriteString(string.Join(" ", entities));
@@ -343,14 +343,14 @@ public class YahooMediaRestriction : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -375,13 +375,13 @@ public class YahooMediaRestriction : IComparable
         {
             return 1;
         }
-        YahooMediaRestriction value  = obj as YahooMediaRestriction;
+        YahooMediaRestriction value = obj as YahooMediaRestriction;
 
         if (value != null)
         {
-            int result  = ComparisonUtility.CompareSequence(this.Entities, value.Entities, StringComparison.Ordinal);
-            result      = result | this.EntityType.CompareTo(value.EntityType);
-            result      = result | this.Relationship.CompareTo(value.Relationship);
+            int result = ComparisonUtility.CompareSequence(this.Entities, value.Entities, StringComparison.Ordinal);
+            result = result | this.EntityType.CompareTo(value.EntityType);
+            result = result | this.Relationship.CompareTo(value.Relationship);
 
             return result;
         }
@@ -412,7 +412,7 @@ public class YahooMediaRestriction : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

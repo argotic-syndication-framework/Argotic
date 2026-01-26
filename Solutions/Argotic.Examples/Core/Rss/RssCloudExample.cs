@@ -17,7 +17,7 @@ public static class RssCloudExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed
+        RssFeed feed = new RssFeed
         {
             Channel =
             {
@@ -45,7 +45,7 @@ public static class RssCloudExample
     /// </summary>
     public static void ProtocolByNameExample()
     {
-        RssCloudProtocol protocol   = RssCloud.CloudProtocolByName("xml-rpc");
+        RssCloudProtocol protocol = RssCloud.CloudProtocolByName("xml-rpc");
 
         if (protocol == RssCloudProtocol.XmlRpc)
         {

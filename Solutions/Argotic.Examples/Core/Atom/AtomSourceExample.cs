@@ -16,7 +16,7 @@ public static class AtomSourceExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed
+        AtomFeed feed = new AtomFeed
         {
             Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
             Title = new AtomTextConstruct("Example Feed"),
@@ -37,14 +37,14 @@ public static class AtomSourceExample
         };
 
         //  Entry was copied from another feed, so preserve source meta-data
-        AtomSource source   = new AtomSource
+        AtomSource source = new AtomSource
         {
             Id = new AtomId(new Uri("http://example2.org/")),
             Title = new AtomTextConstruct("Fourty-Two"),
             UpdatedOn = new DateTime(2003, 11, 13, 18, 30, 2),
             Rights = new AtomTextConstruct("© 2003 Example, Inc.")
         };
-        entry.Source        = source;
+        entry.Source = source;
 
         feed.AddEntry(entry);
     }

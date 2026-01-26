@@ -44,11 +44,11 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <summary>
     /// Private member to hold a value that indicates the link relation type.
     /// </summary>
-    private string linkRelation     = string.Empty;
+    private string linkRelation = string.Empty;
     /// <summary>
     /// Private member to hold an advisory media type for the Web resource.
     /// </summary>
-    private string linkMediaType    = string.Empty;
+    private string linkMediaType = string.Empty;
     /// <summary>
     /// Private member to hold the natural language of the Web resource.
     /// </summary>
@@ -56,11 +56,11 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <summary>
     /// Private member to hold human-readable information about the Web resource.
     /// </summary>
-    private string linkTitle        = string.Empty;
+    private string linkTitle = string.Empty;
     /// <summary>
     /// Private member to hold an advisory length of the resource content in octets.
     /// </summary>
-    private long linkLength         = long.MinValue;
+    private long linkLength = long.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomLink"/> class.
     /// </summary>
@@ -76,7 +76,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
     public AtomLink(Uri href)
     {
-        this.Uri    = href;
+        this.Uri = href;
     }
 
     /// <summary>
@@ -124,7 +124,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
     public AtomLink(Uri href, string relation) : this(href)
     {
-        this.Relation   = relation;
+        this.Relation = relation;
     }
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
@@ -337,7 +337,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 linkRelation = string.Empty;
             }
@@ -406,10 +406,10 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -450,7 +450,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -466,49 +466,49 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (AtomUtility.FillCommonObjectAttributes(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string hrefAttribute        = source.GetAttribute("href", string.Empty);
-            string relAttribute         = source.GetAttribute("rel", string.Empty);
-            string typeAttribute        = source.GetAttribute("type", string.Empty);
-            string hreflangAttribute    = source.GetAttribute("hreflang", string.Empty);
-            string titleAttribute       = source.GetAttribute("title", string.Empty);
-            string lengthAttribute      = source.GetAttribute("length", string.Empty);
+            string hrefAttribute = source.GetAttribute("href", string.Empty);
+            string relAttribute = source.GetAttribute("rel", string.Empty);
+            string typeAttribute = source.GetAttribute("type", string.Empty);
+            string hreflangAttribute = source.GetAttribute("hreflang", string.Empty);
+            string titleAttribute = source.GetAttribute("title", string.Empty);
+            string lengthAttribute = source.GetAttribute("length", string.Empty);
 
             if (!string.IsNullOrEmpty(hrefAttribute))
             {
                 if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                 {
-                    this.Uri        = href;
-                    wasLoaded       = true;
+                    this.Uri = href;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(relAttribute))
             {
-                this.Relation       = relAttribute;
-                wasLoaded           = true;
+                this.Relation = relAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(typeAttribute))
             {
-                this.ContentType    = typeAttribute;
-                wasLoaded           = true;
+                this.ContentType = typeAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(hreflangAttribute))
             {
                 try
                 {
-                    CultureInfo language    = new CultureInfo(hreflangAttribute);
-                    this.ContentLanguage    = language;
-                    wasLoaded               = true;
+                    CultureInfo language = new CultureInfo(hreflangAttribute);
+                    this.ContentLanguage = language;
+                    wasLoaded = true;
                 }
                 catch (ArgumentException)
                 {
@@ -518,16 +518,16 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
 
             if (!string.IsNullOrEmpty(titleAttribute))
             {
-                this.Title          = titleAttribute;
-                wasLoaded           = true;
+                this.Title = titleAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(lengthAttribute))
             {
                 if (long.TryParse(lengthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long length))
                 {
-                    this.Length     = length;
-                    wasLoaded       = true;
+                    this.Length = length;
+                    wasLoaded = true;
                 }
             }
         }
@@ -548,10 +548,10 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -571,7 +571,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
 
         writer.WriteAttributeString("href", this.Uri != null ? this.Uri.ToString() : string.Empty);
 
-        if(!string.IsNullOrEmpty(this.Relation))
+        if (!string.IsNullOrEmpty(this.Relation))
         {
             writer.WriteAttributeString("rel", this.Relation);
         }
@@ -591,7 +591,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
             writer.WriteAttributeString("title", this.Title);
         }
 
-        if(this.Length != long.MinValue)
+        if (this.Length != long.MinValue)
         {
             writer.WriteAttributeString("length", this.Length.ToString(NumberFormatInfo.InvariantInfo));
         }
@@ -609,14 +609,14 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -640,22 +640,22 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         {
             return 1;
         }
-        AtomLink value  = obj as AtomLink;
+        AtomLink value = obj as AtomLink;
 
         if (value != null)
         {
-            int result  = this.Length.CompareTo(value.Length);
-            result      = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Relation, value.Relation, StringComparison.OrdinalIgnoreCase);
+            int result = this.Length.CompareTo(value.Length);
+            result = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Relation, value.Relation, StringComparison.OrdinalIgnoreCase);
 
-            string sourceLanguageName   = this.ContentLanguage != null ? this.ContentLanguage.Name : string.Empty;
-            string targetLanguageName   = value.ContentLanguage != null ? value.ContentLanguage.Name : string.Empty;
-            result      = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+            string sourceLanguageName = this.ContentLanguage != null ? this.ContentLanguage.Name : string.Empty;
+            string targetLanguageName = value.ContentLanguage != null ? value.ContentLanguage.Name : string.Empty;
+            result = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -686,7 +686,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

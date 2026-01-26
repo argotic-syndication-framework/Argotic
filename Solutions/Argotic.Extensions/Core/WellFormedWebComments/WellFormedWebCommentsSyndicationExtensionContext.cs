@@ -73,20 +73,20 @@ public class WellFormedWebCommentsSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator commentNavigator     = source.SelectSingleNode("wfw:comment", manager);
-            XPathNavigator commentRssNavigator  = source.SelectSingleNode("wfw:commentRss", manager);
+            XPathNavigator commentNavigator = source.SelectSingleNode("wfw:comment", manager);
+            XPathNavigator commentRssNavigator = source.SelectSingleNode("wfw:commentRss", manager);
 
             if (commentNavigator != null)
             {
                 if (Uri.TryCreate(commentNavigator.Value, UriKind.RelativeOrAbsolute, out Uri comments))
                 {
-                    this.Comments   = comments;
-                    wasLoaded       = true;
+                    this.Comments = comments;
+                    wasLoaded = true;
                 }
             }
 
@@ -100,8 +100,8 @@ public class WellFormedWebCommentsSyndicationExtensionContext
             {
                 if (Uri.TryCreate(commentRssNavigator.Value, UriKind.RelativeOrAbsolute, out Uri commentsFeed))
                 {
-                    this.CommentsFeed   = commentsFeed;
-                    wasLoaded           = true;
+                    this.CommentsFeed = commentsFeed;
+                    wasLoaded = true;
                 }
             }
         }
@@ -121,7 +121,7 @@ public class WellFormedWebCommentsSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(this.Comments != null)
+        if (this.Comments != null)
         {
             writer.WriteElementString("comment", xmlNamespace, this.Comments.ToString());
         }

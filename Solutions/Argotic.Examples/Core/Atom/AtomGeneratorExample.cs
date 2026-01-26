@@ -16,7 +16,7 @@ public static class AtomGeneratorExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed   = new AtomFeed
+        AtomFeed feed = new AtomFeed
         {
             Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
             Title = new AtomTextConstruct("Example Feed"),
@@ -34,7 +34,7 @@ public static class AtomGeneratorExample
             Uri = new Uri("/myblog.php"),
             Version = "1.0"
         };
-        feed.Generator          = generator;
+        feed.Generator = generator;
 
         AtomEntry entry = new AtomEntry
         {

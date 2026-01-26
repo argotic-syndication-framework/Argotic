@@ -37,7 +37,7 @@ public class ITunesSyndicationExtensionTest
                                      + "<itunes:duration>00:03:21</itunes:duration><itunes:keywords>loud,good for parties</itunes:keywords><itunes:explicit>clean</itunes:explicit>"
                                      + "<itunes:category text=\"Rock\" /><itunes:category text=\"Folk\" />";
 
-    private TestContext testContextInstance;
+    public TestContext TestContext { get; set; }
 
     /// <summary>
     ///Gets or sets the test context which provides

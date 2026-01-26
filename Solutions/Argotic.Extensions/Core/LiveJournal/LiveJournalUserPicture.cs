@@ -20,15 +20,15 @@ public class LiveJournalUserPicture : IComparable
     /// <summary>
     /// Private member to hold the keyword (phrase) associated with the picture.
     /// </summary>
-    private string userPictureKeywords  = string.Empty;
+    private string userPictureKeywords = string.Empty;
     /// <summary>
     /// Private member to hold the image width.
     /// </summary>
-    private int userPictureWidth        = int.MinValue;
+    private int userPictureWidth = int.MinValue;
     /// <summary>
     /// Private member to hold the image height.
     /// </summary>
-    private int userPictureHeight       = int.MinValue;
+    private int userPictureHeight = int.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalUserPicture"/> class.
     /// </summary>
@@ -51,10 +51,10 @@ public class LiveJournalUserPicture : IComparable
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="height"/> is greater than <b>100</b>.</exception>
     public LiveJournalUserPicture(Uri url, string keyword, int width, int height)
     {
-        this.Url        = url;
-        this.Keyword    = keyword;
-        this.Width      = width;
-        this.Height     = height;
+        this.Url = url;
+        this.Keyword = keyword;
+        this.Width = width;
+        this.Height = height;
     }
     /// <summary>
     /// Gets or sets the height of this picture.
@@ -132,7 +132,7 @@ public class LiveJournalUserPicture : IComparable
         {
             return userPictureWidth;
         }
-            
+
         set
         {
             Guard.ArgumentNotGreaterThan(value, "value", 100);
@@ -150,32 +150,32 @@ public class LiveJournalUserPicture : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
 
-        LiveJournalSyndicationExtension extension   = new LiveJournalSyndicationExtension();
-        XmlNamespaceManager manager                 = extension.CreateNamespaceManager(source);
+        LiveJournalSyndicationExtension extension = new LiveJournalSyndicationExtension();
+        XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
 
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator urlNavigator     = source.SelectSingleNode("url", manager);
+            XPathNavigator urlNavigator = source.SelectSingleNode("url", manager);
             XPathNavigator keywordNavigator = source.SelectSingleNode("keyword", manager);
-            XPathNavigator widthNavigator   = source.SelectSingleNode("width", manager);
-            XPathNavigator heightNavigator  = source.SelectSingleNode("height", manager);
+            XPathNavigator widthNavigator = source.SelectSingleNode("width", manager);
+            XPathNavigator heightNavigator = source.SelectSingleNode("height", manager);
 
             if (urlNavigator != null)
             {
                 if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
                 {
-                    this.Url    = url;
-                    wasLoaded   = true;
+                    this.Url = url;
+                    wasLoaded = true;
                 }
             }
 
             if (keywordNavigator != null && !string.IsNullOrEmpty(keywordNavigator.Value))
             {
-                this.Keyword    = keywordNavigator.Value;
-                wasLoaded       = true;
+                this.Keyword = keywordNavigator.Value;
+                wasLoaded = true;
             }
 
             if (widthNavigator != null)
@@ -186,8 +186,8 @@ public class LiveJournalUserPicture : IComparable
                     {
                         width = 100;
                     }
-                    this.Width  = width;
-                    wasLoaded   = true;
+                    this.Width = width;
+                    wasLoaded = true;
                 }
             }
 
@@ -200,7 +200,7 @@ public class LiveJournalUserPicture : IComparable
                         height = 100;
                     }
                     this.Height = height;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -216,7 +216,7 @@ public class LiveJournalUserPicture : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        LiveJournalSyndicationExtension extension   = new LiveJournalSyndicationExtension();
+        LiveJournalSyndicationExtension extension = new LiveJournalSyndicationExtension();
         writer.WriteStartElement("userpic", extension.XmlNamespace);
 
         writer.WriteElementString("url", extension.XmlNamespace, this.Url != null ? this.Url.ToString() : string.Empty);
@@ -237,14 +237,14 @@ public class LiveJournalUserPicture : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -269,14 +269,14 @@ public class LiveJournalUserPicture : IComparable
         {
             return 1;
         }
-        LiveJournalUserPicture value  = obj as LiveJournalUserPicture;
+        LiveJournalUserPicture value = obj as LiveJournalUserPicture;
 
         if (value != null)
         {
-            int result  = this.Height.CompareTo(value.Height);
-            result      = result | string.Compare(this.Keyword, value.Keyword, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Width.CompareTo(value.Width);
+            int result = this.Height.CompareTo(value.Height);
+            result = result | string.Compare(this.Keyword, value.Keyword, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Width.CompareTo(value.Width);
 
             return result;
         }
@@ -307,7 +307,7 @@ public class LiveJournalUserPicture : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

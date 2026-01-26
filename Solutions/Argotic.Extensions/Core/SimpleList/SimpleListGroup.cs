@@ -36,7 +36,7 @@ public class SimpleListGroup : IComparable
     /// <summary>
     /// Private member to hold a human-readable name for the groupable property.
     /// </summary>
-    private string groupLabel   = string.Empty;
+    private string groupLabel = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="SimpleListGroup"/> class.
     /// </summary>
@@ -133,33 +133,33 @@ public class SimpleListGroup : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string namespaceAttribute   = source.GetAttribute("ns", string.Empty);
-            string elementAttribute     = source.GetAttribute("element", string.Empty);
-            string labelAttribute       = source.GetAttribute("label", string.Empty);
+            string namespaceAttribute = source.GetAttribute("ns", string.Empty);
+            string elementAttribute = source.GetAttribute("element", string.Empty);
+            string labelAttribute = source.GetAttribute("label", string.Empty);
 
             if (!string.IsNullOrEmpty(namespaceAttribute))
             {
                 if (Uri.TryCreate(namespaceAttribute, UriKind.RelativeOrAbsolute, out Uri elementNamespace))
                 {
-                    this.Namespace  = elementNamespace;
-                    wasLoaded       = true;
+                    this.Namespace = elementNamespace;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(elementAttribute))
             {
-                this.Element    = elementAttribute;
-                wasLoaded       = true;
+                this.Element = elementAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(labelAttribute))
             {
-                this.Label  = labelAttribute;
-                wasLoaded   = true;
+                this.Label = labelAttribute;
+                wasLoaded = true;
             }
         }
 
@@ -174,7 +174,7 @@ public class SimpleListGroup : IComparable
     public void WriteTo(XmlWriter writer)
     {
         Guard.ArgumentNotNull(writer, "writer");
-        SimpleListSyndicationExtension extension    = new SimpleListSyndicationExtension();
+        SimpleListSyndicationExtension extension = new SimpleListSyndicationExtension();
         writer.WriteStartElement("group", extension.XmlNamespace);
 
         if (this.Namespace != null)
@@ -205,14 +205,14 @@ public class SimpleListGroup : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -237,13 +237,13 @@ public class SimpleListGroup : IComparable
         {
             return 1;
         }
-        SimpleListGroup value  = obj as SimpleListGroup;
+        SimpleListGroup value = obj as SimpleListGroup;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Element, value.Element, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Namespace, value.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            int result = string.Compare(this.Element, value.Element, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Namespace, value.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }
@@ -274,7 +274,7 @@ public class SimpleListGroup : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

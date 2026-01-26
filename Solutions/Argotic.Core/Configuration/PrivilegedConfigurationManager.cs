@@ -102,7 +102,7 @@ internal static class PrivilegedConfigurationManager
 
         lock (PrivilegedConfigurationManager.SyndicationSyncObject)
         {
-            SyndicationResourceSection section   = PrivilegedConfigurationManager.GetSection(sectionPath) as SyndicationResourceSection;
+            SyndicationResourceSection section = PrivilegedConfigurationManager.GetSection(sectionPath) as SyndicationResourceSection;
             if (section == null)
             {
                 return null;
@@ -125,7 +125,7 @@ internal static class PrivilegedConfigurationManager
 
         lock (PrivilegedConfigurationManager.TrackbackSyncObject)
         {
-            TrackbackClientSection section  = PrivilegedConfigurationManager.GetSection(sectionPath) as TrackbackClientSection;
+            TrackbackClientSection section = PrivilegedConfigurationManager.GetSection(sectionPath) as TrackbackClientSection;
             if (section == null)
             {
                 return null;
@@ -144,7 +144,7 @@ internal static class PrivilegedConfigurationManager
     [SecurityPermission(SecurityAction.Demand)]
     internal static XmlRpcClientSection GetXmlRpcClientSection()
     {
-        string sectionPath  = "argotic.net/clientSettings/xmlRpc";
+        string sectionPath = "argotic.net/clientSettings/xmlRpc";
 
         lock (PrivilegedConfigurationManager.XmlRpcSyncObject)
         {

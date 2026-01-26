@@ -17,7 +17,7 @@ public static class RssSourceExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed
+        RssFeed feed = new RssFeed
         {
             Channel =
             {
@@ -27,7 +27,7 @@ public static class RssSourceExample
             }
         };
 
-        RssItem item        = new RssItem
+        RssItem item = new RssItem
         {
             Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
             Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),

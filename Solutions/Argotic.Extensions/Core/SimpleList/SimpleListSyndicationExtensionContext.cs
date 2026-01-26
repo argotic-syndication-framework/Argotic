@@ -101,23 +101,23 @@ public class SimpleListSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator treatAsNavigator         = source.SelectSingleNode("cf:treatAs", manager);
+            XPathNavigator treatAsNavigator = source.SelectSingleNode("cf:treatAs", manager);
             XPathNavigator listInformationNavigator = source.SelectSingleNode("cf:listinfo", manager);
 
             if (treatAsNavigator != null && string.Compare(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase) == 0)
             {
-                this.TreatAsList    = true;
-                wasLoaded           = true;
+                this.TreatAsList = true;
+                wasLoaded = true;
             }
 
             if (listInformationNavigator is { HasChildren: true })
             {
-                XPathNodeIterator sortIterator  = source.Select("cf:sort", manager);
+                XPathNodeIterator sortIterator = source.Select("cf:sort", manager);
                 XPathNodeIterator groupIterator = source.Select("cf:group", manager);
 
                 if (sortIterator is { Count: > 0 })
@@ -128,7 +128,7 @@ public class SimpleListSyndicationExtensionContext
                         if (sort.Load(sortIterator.Current))
                         {
                             this.Sorting.Add(sort);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -137,11 +137,11 @@ public class SimpleListSyndicationExtensionContext
                 {
                     while (groupIterator.MoveNext())
                     {
-                        SimpleListGroup group   = new SimpleListGroup();
+                        SimpleListGroup group = new SimpleListGroup();
                         if (group.Load(groupIterator.Current))
                         {
                             this.Grouping.Add(group);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -163,12 +163,12 @@ public class SimpleListSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(this.TreatAsList)
+        if (this.TreatAsList)
         {
             writer.WriteElementString("treatAs", xmlNamespace, "list");
         }
 
-        if(this.Grouping.Count > 0 || this.Sorting.Count > 0)
+        if (this.Grouping.Count > 0 || this.Sorting.Count > 0)
         {
             writer.WriteStartElement("listinfo", xmlNamespace);
 

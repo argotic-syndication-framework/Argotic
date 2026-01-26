@@ -22,19 +22,19 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the title of the document.
     /// </summary>
-    private string headTitle                = string.Empty;
+    private string headTitle = string.Empty;
     /// <summary>
     /// Private member to hold a date-time indicating when the document was created.
     /// </summary>
-    private DateTime headCreatedOn          = DateTime.MinValue;
+    private DateTime headCreatedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold a date-time indicating when the document was last modified.
     /// </summary>
-    private DateTime headModifiedOn         = DateTime.MinValue;
+    private DateTime headModifiedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold the http address of the documentation the OPML document conforms to.
     /// </summary>
-    private Uri headDocumentation    = new Uri("http://www.opml.org/spec2");
+    private Uri headDocumentation = new Uri("http://www.opml.org/spec2");
     /// <summary>
     /// Private member to hold a collection of line numbers that are expanded.
     /// </summary>
@@ -42,7 +42,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold a number indicating which line of the outline is displayed on the top line of the window.
     /// </summary>
-    private int headVerticalScrollState     = int.MinValue;
+    private int headVerticalScrollState = int.MinValue;
     /// <summary>
     /// Private member to hold information that describes the owner of the document.
     /// </summary>
@@ -182,7 +182,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(value == null)
+            if (value == null)
             {
                 headOwner = null;
             }
@@ -268,10 +268,10 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -312,7 +312,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -328,26 +328,26 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator titleNavigator               = source.SelectSingleNode("title");
-        XPathNavigator dateCreatedNavigator         = source.SelectSingleNode("dateCreated");
-        XPathNavigator dateModifiedNavigator        = source.SelectSingleNode("dateModified");
-        XPathNavigator expansionStateNavigator      = source.SelectSingleNode("expansionState");
+        XPathNavigator titleNavigator = source.SelectSingleNode("title");
+        XPathNavigator dateCreatedNavigator = source.SelectSingleNode("dateCreated");
+        XPathNavigator dateModifiedNavigator = source.SelectSingleNode("dateModified");
+        XPathNavigator expansionStateNavigator = source.SelectSingleNode("expansionState");
         XPathNavigator verticalScrollStateNavigator = source.SelectSingleNode("vertScrollState");
 
         if (titleNavigator != null)
         {
-            this.Title  = titleNavigator.Value;
-            wasLoaded   = true;
+            this.Title = titleNavigator.Value;
+            wasLoaded = true;
         }
 
         if (dateCreatedNavigator != null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(dateCreatedNavigator.Value, out DateTime createdOn))
             {
-                this.CreatedOn  = createdOn;
-                wasLoaded       = true;
+                this.CreatedOn = createdOn;
+                wasLoaded = true;
             }
         }
 
@@ -356,27 +356,27 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(dateModifiedNavigator.Value, out DateTime modifiedOn))
             {
                 this.ModifiedOn = modifiedOn;
-                wasLoaded       = true;
+                wasLoaded = true;
             }
         }
 
         OpmlOwner owner = new OpmlOwner();
         if (owner.Load(source))
         {
-            this.Owner  = owner;
+            this.Owner = owner;
         }
 
         if (expansionStateNavigator != null && !string.IsNullOrEmpty(expansionStateNavigator.Value))
         {
             if (expansionStateNavigator.Value.Contains(","))
             {
-                string[] expansionStates    = expansionStateNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                string[] expansionStates = expansionStateNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 foreach (string expansionState in expansionStates)
                 {
                     if (int.TryParse(expansionState.Trim(), System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int state))
                     {
                         this.ExpansionState.Add(state);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -385,7 +385,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
                 if (int.TryParse(expansionStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int expansionState))
                 {
                     this.ExpansionState.Add(expansionState);
-                    wasLoaded                   = true;
+                    wasLoaded = true;
                 }
             }
         }
@@ -394,12 +394,12 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
         {
             if (int.TryParse(verticalScrollStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int verticalScrollState))
             {
-                this.VerticalScrollState    = verticalScrollState;
-                wasLoaded                   = true;
+                this.VerticalScrollState = verticalScrollState;
+                wasLoaded = true;
             }
         }
 
-        OpmlWindow window   = new OpmlWindow();
+        OpmlWindow window = new OpmlWindow();
         if (window.Load(source))
         {
             this.Window = window;
@@ -421,10 +421,10 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -441,7 +441,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNull(writer, "writer");
         writer.WriteStartElement("head");
 
-        if(!string.IsNullOrEmpty(this.Title))
+        if (!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteElementString("title", this.Title);
         }
@@ -456,7 +456,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("dateModified", SyndicationDateTimeUtility.ToRfc822DateTime(this.ModifiedOn));
         }
 
-        if(this.Owner != null)
+        if (this.Owner != null)
         {
             this.Owner.WriteTo(writer);
         }
@@ -466,15 +466,15 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("docs", this.Documentation.ToString());
         }
 
-        if(this.ExpansionState.Count > 0)
+        if (this.ExpansionState.Count > 0)
         {
-            string[] values         = new string[this.ExpansionState.Count];
-            int[] expansionStates   = new int[this.ExpansionState.Count];
+            string[] values = new string[this.ExpansionState.Count];
+            int[] expansionStates = new int[this.ExpansionState.Count];
             this.ExpansionState.CopyTo(expansionStates, 0);
 
             for (int i = 0; i < expansionStates.Length; i++)
             {
-                values[i]   = expansionStates[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
+                values[i] = expansionStates[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
             }
             writer.WriteElementString("expansionState", string.Join(",", values));
         }
@@ -502,14 +502,14 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -533,12 +533,12 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        OpmlHead value  = obj as OpmlHead;
+        OpmlHead value = obj as OpmlHead;
 
         if (value != null)
         {
             int result = 0; //String.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-                
+
 
             return result;
         }
@@ -569,7 +569,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

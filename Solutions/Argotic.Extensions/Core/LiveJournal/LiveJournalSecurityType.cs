@@ -14,7 +14,7 @@ public enum LiveJournalSecurityType
     /// No access level specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// The LiveJournal entry is accessible to friends of the author. 
@@ -32,5 +32,5 @@ public enum LiveJournalSecurityType
     /// The LiveJournal entry is publicly accessible. 
     /// </summary>
     [EnumerationMetadata(DisplayName = "Public", AlternateValue = "public")]
-    Public  = 3
+    Public = 3
 }

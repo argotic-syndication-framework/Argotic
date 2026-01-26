@@ -31,11 +31,11 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the textual content of the outline.
     /// </summary>
-    private string outlineText          = string.Empty;
+    private string outlineText = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating how the outline's attributes are interpreted.
     /// </summary>
-    private string outlineType          = string.Empty;
+    private string outlineType = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating whether the outline is commented or not.
     /// </summary>
@@ -47,7 +47,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold a date-time that indicates when the outline was created.
     /// </summary>
-    private DateTime outlineCreatedOn   = DateTime.MinValue;
+    private DateTime outlineCreatedOn = DateTime.MinValue;
     /// <summary>
     /// Private member to hold a collection that describes the categorization taxonomy applied to the outline.
     /// </summary>
@@ -79,7 +79,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="text"/> is an empty string.</exception>
     public OpmlOutline(string text)
     {
-        this.Text   = text;
+        this.Text = text;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -317,10 +317,10 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -361,7 +361,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -377,7 +377,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
@@ -386,13 +386,13 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
             {
                 if (this.LoadAttribute(attributesNavigator))
                 {
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
                 while (attributesNavigator.MoveToNextAttribute())
                 {
                     if (this.LoadAttribute(attributesNavigator))
                     {
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -409,7 +409,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
                     if (outline.Load(outlinesIterator.Current))
                     {
                         this.Outlines.Add(outline);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -431,7 +431,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
@@ -440,13 +440,13 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
             {
                 if (this.LoadAttribute(attributesNavigator))
                 {
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
                 while (attributesNavigator.MoveToNextAttribute())
                 {
                     if (this.LoadAttribute(attributesNavigator))
                     {
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -463,7 +463,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
                     if (outline.Load(outlinesIterator.Current, settings))
                     {
                         this.Outlines.Add(outline);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -522,7 +522,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        foreach(OpmlOutline outline in this.Outlines)
+        foreach (OpmlOutline outline in this.Outlines)
         {
             outline.WriteTo(writer);
         }
@@ -551,7 +551,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<OpmlOutline> source, Collection<OpmlOutline> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -559,7 +559,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -602,7 +602,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNullOrEmptyString(text, "text");
         Guard.ArgumentNotNull(url, "url");
 
-        outline.Text            = text;
+        outline.Text = text;
         if (url.ToString().EndsWith(".opml", StringComparison.OrdinalIgnoreCase))
         {
             outline.ContentType = "include";
@@ -681,7 +681,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         Guard.ArgumentNotNullOrEmptyString(type, "type");
         Guard.ArgumentNotNull(xmlUrl, "xmlUrl");
 
-        outline.Text        = text;
+        outline.Text = text;
         outline.ContentType = type;
         outline.Attributes.Add("xmlUrl", xmlUrl.ToString());
 
@@ -722,14 +722,14 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -753,20 +753,20 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        OpmlOutline value  = obj as OpmlOutline;
+        OpmlOutline value = obj as OpmlOutline;
 
         if (value != null)
         {
-            int result  = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.CreatedOn.CompareTo(value.CreatedOn);
-            result      = result | this.HasBreakpoint.CompareTo(value.HasBreakpoint);
-            result      = result | this.IsCommented.CompareTo(value.IsCommented);
-            result      = result | string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            result = result | this.CreatedOn.CompareTo(value.CreatedOn);
+            result = result | this.HasBreakpoint.CompareTo(value.HasBreakpoint);
+            result = result | this.IsCommented.CompareTo(value.IsCommented);
+            result = result | string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | ComparisonUtility.CompareSequence(this.Attributes, value.Attributes, StringComparison.OrdinalIgnoreCase);
-            result      = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
-            result      = result | OpmlOutline.CompareSequence(this.Outlines, value.Outlines);
-                
+            result = result | ComparisonUtility.CompareSequence(this.Attributes, value.Attributes, StringComparison.OrdinalIgnoreCase);
+            result = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
+            result = result | OpmlOutline.CompareSequence(this.Outlines, value.Outlines);
+
             return result;
         }
         else
@@ -796,7 +796,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }
@@ -881,7 +881,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="attribute"/> is a null reference.</exception>
     private bool LoadAttribute(XPathNavigator attribute)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(attribute, "attribute");
 
         if (string.IsNullOrEmpty(attribute.Value))
@@ -891,36 +891,36 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
 
         if (string.Compare(attribute.Name, "text", StringComparison.OrdinalIgnoreCase) == 0)
         {
-            this.Text   = attribute.Value;
-            wasLoaded   = true;
+            this.Text = attribute.Value;
+            wasLoaded = true;
         }
         else if (string.Compare(attribute.Name, "type", StringComparison.OrdinalIgnoreCase) == 0)
         {
-            this.ContentType    = attribute.Value;
-            wasLoaded           = true;
+            this.ContentType = attribute.Value;
+            wasLoaded = true;
         }
         else if (string.Compare(attribute.Name, "isComment", StringComparison.OrdinalIgnoreCase) == 0)
         {
             if (bool.TryParse(attribute.Value, out bool isComment))
             {
-                this.IsCommented    = isComment;
-                wasLoaded           = true;
+                this.IsCommented = isComment;
+                wasLoaded = true;
             }
         }
         else if (string.Compare(attribute.Name, "isBreakpoint", StringComparison.OrdinalIgnoreCase) == 0)
         {
             if (bool.TryParse(attribute.Value, out bool isBreakpoint))
             {
-                this.HasBreakpoint  = isBreakpoint;
-                wasLoaded           = true;
+                this.HasBreakpoint = isBreakpoint;
+                wasLoaded = true;
             }
         }
         else if (string.Compare(attribute.Name, "created", StringComparison.OrdinalIgnoreCase) == 0)
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(attribute.Value, out DateTime created))
             {
-                this.CreatedOn  = created;
-                wasLoaded       = true;
+                this.CreatedOn = created;
+                wasLoaded = true;
             }
         }
         else if (string.Compare(attribute.Name, "category", StringComparison.OrdinalIgnoreCase) == 0)

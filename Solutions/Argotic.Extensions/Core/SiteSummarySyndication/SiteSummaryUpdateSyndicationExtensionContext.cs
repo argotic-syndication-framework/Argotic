@@ -16,15 +16,15 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the period over which the feed format is updated.
     /// </summary>
-    private SiteSummaryUpdatePeriod extensionUpdatePeriod   = SiteSummaryUpdatePeriod.None;
+    private SiteSummaryUpdatePeriod extensionUpdatePeriod = SiteSummaryUpdatePeriod.None;
     /// <summary>
     /// Private member to hold the frequency of updates in relation to the update period.
     /// </summary>
-    private int extensionUpdateFrequency                    = int.MinValue;
+    private int extensionUpdateFrequency = int.MinValue;
     /// <summary>
     /// Private member to hold a base date to be used in concert with period and frequency to calculate the publishing schedule.
     /// </summary>
-    private DateTime extensionUpdateBase                    = DateTime.MinValue;
+    private DateTime extensionUpdateBase = DateTime.MinValue;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> class.
@@ -67,7 +67,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
         {
             return extensionUpdateFrequency;
         }
-            
+
         set
         {
             Guard.ArgumentNotLessThan(value, "value", 1);
@@ -105,22 +105,22 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator updatePeriodNavigator    = source.SelectSingleNode("sy:updatePeriod", manager);
+            XPathNavigator updatePeriodNavigator = source.SelectSingleNode("sy:updatePeriod", manager);
             XPathNavigator updateFrequencyNavigator = source.SelectSingleNode("sy:updateFrequency", manager);
-            XPathNavigator updateBaseNavigator      = source.SelectSingleNode("sy:updateBase", manager);
+            XPathNavigator updateBaseNavigator = source.SelectSingleNode("sy:updateBase", manager);
 
             if (updatePeriodNavigator != null && !string.IsNullOrEmpty(updatePeriodNavigator.Value))
             {
-                SiteSummaryUpdatePeriod period  = SiteSummaryUpdateSyndicationExtension.PeriodByName(updatePeriodNavigator.Value);
+                SiteSummaryUpdatePeriod period = SiteSummaryUpdateSyndicationExtension.PeriodByName(updatePeriodNavigator.Value);
                 if (period != SiteSummaryUpdatePeriod.None)
                 {
                     this.Period = period;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -128,8 +128,8 @@ public class SiteSummaryUpdateSyndicationExtensionContext
             {
                 if (int.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frequency))
                 {
-                    this.Frequency  = frequency;
-                    wasLoaded       = true;
+                    this.Frequency = frequency;
+                    wasLoaded = true;
                 }
             }
 
@@ -137,8 +137,8 @@ public class SiteSummaryUpdateSyndicationExtensionContext
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updateBaseNavigator.Value, out DateTime updateBase))
                 {
-                    this.Base   = updateBase;
-                    wasLoaded   = true;
+                    this.Base = updateBase;
+                    wasLoaded = true;
                 }
             }
         }
@@ -158,17 +158,17 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     {
         Guard.ArgumentNotNull(writer, "writer");
         Guard.ArgumentNotNullOrEmptyString(xmlNamespace, "xmlNamespace");
-        if(this.Period != SiteSummaryUpdatePeriod.None)
+        if (this.Period != SiteSummaryUpdatePeriod.None)
         {
             writer.WriteElementString("updatePeriod", xmlNamespace, SiteSummaryUpdateSyndicationExtension.PeriodAsString(this.Period));
         }
 
-        if(this.Frequency != int.MinValue)
+        if (this.Frequency != int.MinValue)
         {
             writer.WriteElementString("updateFrequency", xmlNamespace, this.Frequency.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        if(this.Base != DateTime.MinValue)
+        if (this.Base != DateTime.MinValue)
         {
             writer.WriteElementString("updateBase", xmlNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.Base));
         }

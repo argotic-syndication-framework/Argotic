@@ -35,7 +35,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold character data that provides a human-readable description of the image.
     /// </summary>
-    private string imageTitle           = string.Empty;
+    private string imageTitle = string.Empty;
     /// <summary>
     /// Private member to hold the URL of the image.
     /// </summary>
@@ -47,34 +47,34 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the height, in pixels, of the image.
     /// </summary>
-    private int imageHeight             = int.MinValue;
+    private int imageHeight = int.MinValue;
     /// <summary>
     /// Private member to hold the width, in pixels, of the image.
     /// </summary>
-    private int imageWidth              = int.MinValue;
+    private int imageWidth = int.MinValue;
     /// <summary>
     /// Private member to hold maximum permissible height of an image.
     /// </summary>
-    private const int MAX_HEIGHT        = 400;
+    private const int MAX_HEIGHT = 400;
     /// <summary>
     /// Private member to hold maximum permissible width of an image.
     /// </summary>
-    private const int MAX_WIDTH         = 144;
+    private const int MAX_WIDTH = 144;
     /// <summary>
     /// Private member to hold default height of an image.
     /// </summary>
-    private const int DEFAULT_HEIGHT    = 31;
+    private const int DEFAULT_HEIGHT = 31;
     /// <summary>
     /// Private member to hold default width of an image.
     /// </summary>
-    private const int DEFAULT_WIDTH     = 88;
+    private const int DEFAULT_WIDTH = 88;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssImage"/> class.
     /// </summary>
     public RssImage()
     {
 
-            
+
     }
 
     /// <summary>
@@ -89,9 +89,9 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
     public RssImage(Uri link, string title, Uri url)
     {
-        this.Link   = link;
-        this.Title  = title;
-        this.Url    = url;
+        this.Link = link;
+        this.Title = title;
+        this.Url = url;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -193,7 +193,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 imageDescription = string.Empty;
             }
@@ -323,10 +323,10 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -367,7 +367,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -384,61 +384,61 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
-        XPathNavigator linkNavigator    = source.SelectSingleNode("link", manager);
-        XPathNavigator titleNavigator   = source.SelectSingleNode("title", manager);
-        XPathNavigator urlNavigator     = source.SelectSingleNode("url", manager);
+        XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
+        XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator urlNavigator = source.SelectSingleNode("url", manager);
 
         XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator heightNavigator      = source.SelectSingleNode("height", manager);
-        XPathNavigator widthNavigator       = source.SelectSingleNode("width", manager);
+        XPathNavigator heightNavigator = source.SelectSingleNode("height", manager);
+        XPathNavigator widthNavigator = source.SelectSingleNode("width", manager);
 
         if (linkNavigator != null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                this.Link   = link;
-                wasLoaded   = true;
+                this.Link = link;
+                wasLoaded = true;
             }
         }
         if (titleNavigator != null)
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
-                this.Title  = titleNavigator.Value;
-                wasLoaded   = true;
+                this.Title = titleNavigator.Value;
+                wasLoaded = true;
             }
         }
         if (urlNavigator != null)
         {
             if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
             {
-                this.Url    = url;
-                wasLoaded   = true;
+                this.Url = url;
+                wasLoaded = true;
             }
         }
 
         if (descriptionNavigator != null)
         {
-            this.Description    = descriptionNavigator.Value;
-            wasLoaded           = true;
+            this.Description = descriptionNavigator.Value;
+            wasLoaded = true;
         }
         if (heightNavigator != null)
         {
             if (int.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int height))
             {
                 this.Height = height < RssImage.HeightMaximum ? height : RssImage.HeightMaximum;
-                wasLoaded   = true;
+                wasLoaded = true;
             }
         }
         if (widthNavigator != null)
         {
             if (int.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int width))
             {
-                this.Width  = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
-                wasLoaded   = true;
+                this.Width = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
+                wasLoaded = true;
             }
         }
 
@@ -458,10 +458,10 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -482,7 +482,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         writer.WriteElementString("title", this.Title);
         writer.WriteElementString("url", this.Url != null ? this.Url.ToString() : string.Empty);
 
-        if(!string.IsNullOrEmpty(this.Description))
+        if (!string.IsNullOrEmpty(this.Description))
         {
             writer.WriteElementString("description", this.Description);
         }
@@ -508,14 +508,14 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -539,16 +539,16 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        RssImage value  = obj as RssImage;
+        RssImage value = obj as RssImage;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Height.CompareTo(value.Height);
-            result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Width.CompareTo(value.Width);
+            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Height.CompareTo(value.Height);
+            result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Width.CompareTo(value.Width);
 
             return result;
         }
@@ -579,7 +579,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

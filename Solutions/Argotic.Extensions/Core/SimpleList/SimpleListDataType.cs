@@ -15,23 +15,23 @@ public enum SimpleListDataType
     /// No data-type specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// The data type of the simple list property represents a date-time value.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Date", AlternateValue = "date")]
-    Date    = 1,
+    Date = 1,
 
     /// <summary>
     /// The data type of the simple list property represents a numeric value.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Number", AlternateValue = "number")]
-    Number  = 2,
+    Number = 2,
 
     /// <summary>
     /// The data type of the simple list property represents a textual value.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Text", AlternateValue = "text")]
-    Text    = 3
+    Text = 3
 }

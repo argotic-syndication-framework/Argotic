@@ -14,11 +14,11 @@ public class GenericSyndicationCategory : IComparable
     /// <summary>
     /// Private member to hold a string that identifies a hierarchical position in the taxonomy.
     /// </summary>
-    private string categoryTerm     = string.Empty;
+    private string categoryTerm = string.Empty;
     /// <summary>
     /// Private member to hold a string that identifies the categorization scheme.
     /// </summary>
-    private string categoryScheme   = string.Empty;
+    private string categoryScheme = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
     /// </summary>
@@ -28,7 +28,7 @@ public class GenericSyndicationCategory : IComparable
     public GenericSyndicationCategory(string term)
     {
         Guard.ArgumentNotNullOrEmptyString(term, "term");
-        categoryTerm    = term;
+        categoryTerm = term;
     }
 
     /// <summary>
@@ -40,7 +40,7 @@ public class GenericSyndicationCategory : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
     public GenericSyndicationCategory(string term, string scheme) : this(term)
     {
-        categoryScheme  = scheme;
+        categoryScheme = scheme;
     }
 
     /// <summary>
@@ -54,16 +54,16 @@ public class GenericSyndicationCategory : IComparable
 
         if (category.Scheme != null)
         {
-            categoryScheme  = category.Scheme.ToString();
+            categoryScheme = category.Scheme.ToString();
         }
 
         if (!string.IsNullOrEmpty(category.Term))
         {
-            categoryTerm    = category.Term.Trim();
+            categoryTerm = category.Term.Trim();
         }
         else if (!string.IsNullOrEmpty(category.Label))
         {
-            categoryTerm    = category.Label.Trim();
+            categoryTerm = category.Label.Trim();
         }
     }
 
@@ -75,14 +75,14 @@ public class GenericSyndicationCategory : IComparable
     public GenericSyndicationCategory(RssCategory category)
     {
         Guard.ArgumentNotNull(category, "category");
-        if(!string.IsNullOrEmpty(category.Domain))
+        if (!string.IsNullOrEmpty(category.Domain))
         {
-            categoryScheme  = category.Domain.Trim();
+            categoryScheme = category.Domain.Trim();
         }
 
         if (!string.IsNullOrEmpty(category.Value))
         {
-            categoryTerm    = category.Value.Trim();
+            categoryTerm = category.Value.Trim();
         }
     }
     /// <summary>
@@ -131,12 +131,12 @@ public class GenericSyndicationCategory : IComparable
         {
             return 1;
         }
-        GenericSyndicationCategory value  = obj as GenericSyndicationCategory;
+        GenericSyndicationCategory value = obj as GenericSyndicationCategory;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Scheme, value.Scheme, StringComparison.Ordinal);
-            result      = result | string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Scheme, value.Scheme, StringComparison.Ordinal);
+            result = result | string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -167,7 +167,7 @@ public class GenericSyndicationCategory : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

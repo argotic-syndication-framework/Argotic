@@ -17,7 +17,7 @@ public static class ApmlProfileExample
     /// </summary>
     public static void ClassExample()
     {
-        ApmlDocument document       = new ApmlDocument
+        ApmlDocument document = new ApmlDocument
         {
             DefaultProfileName = "Work",
             Head =
@@ -30,7 +30,7 @@ public static class ApmlProfileExample
         };
 
         //  Create home attention profile
-        ApmlProfile homeProfile     = new ApmlProfile
+        ApmlProfile homeProfile = new ApmlProfile
         {
             Name = "Home"
         };
@@ -50,7 +50,7 @@ public static class ApmlProfileExample
         homeProfile.ImplicitConcepts.Add(new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
         homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
-        ApmlSource apmlSpecSource   = new ApmlSource
+        ApmlSource apmlSpecSource = new ApmlSource
         {
             Key = "http://feeds.feedburner.com/apmlspec",
             Name = "APML.org",
@@ -79,7 +79,7 @@ public static class ApmlProfileExample
         document.AddProfile(homeProfile);
 
         //  Create work attention profile
-        ApmlProfile workProfile     = new ApmlProfile
+        ApmlProfile workProfile = new ApmlProfile
         {
             Name = "Work"
         };
@@ -99,7 +99,7 @@ public static class ApmlProfileExample
 
         document.AddProfile(workProfile);
 
-        ApmlApplication sampleApplication   = new ApmlApplication("sample.com")
+        ApmlApplication sampleApplication = new ApmlApplication("sample.com")
         {
             Data = "<SampleAppEl />"
         };

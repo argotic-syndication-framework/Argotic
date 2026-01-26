@@ -21,15 +21,15 @@ public class WebContentType : IComparable
     /// <summary>
     /// Private member to hold the well known name for the type discriminator parameter.
     /// </summary>
-    private const string TYPE_PARAMETER_NAME    = "type";
+    private const string TYPE_PARAMETER_NAME = "type";
     /// <summary>
     /// Private member to hold the type of the media content.
     /// </summary>
-    private string webContentMediaType          = string.Empty;
+    private string webContentMediaType = string.Empty;
     /// <summary>
     /// Private member to hold the subtype of the media content.
     /// </summary>
-    private string webContentMediaSubType       = string.Empty;
+    private string webContentMediaSubType = string.Empty;
     /// <summary>
     /// Private member to hold additional parameters applied to the media content.
     /// </summary>
@@ -53,8 +53,8 @@ public class WebContentType : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is an empty string.</exception>
     public WebContentType(string mediaType, string mediaSubtype)
     {
-        this.MediaType      = mediaType;
-        this.MediaSubtype   = mediaSubtype;
+        this.MediaType = mediaType;
+        this.MediaSubtype = mediaSubtype;
     }
 
     /// <summary>
@@ -69,7 +69,7 @@ public class WebContentType : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="mediaSubtype"/> is an empty string.</exception>
     public WebContentType(string mediaType, string mediaSubtype, string discriminator) : this(mediaType, mediaSubtype)
     {
-        this.Discriminator  = discriminator;
+        this.Discriminator = discriminator;
     }
 
     /// <summary>
@@ -88,7 +88,7 @@ public class WebContentType : IComparable
     {
         Guard.ArgumentNotNull(characterSet, "characterSet");
 
-        this.CharacterSet   = characterSet.WebName;
+        this.CharacterSet = characterSet.WebName;
     }
 
     /// <summary>
@@ -167,12 +167,12 @@ public class WebContentType : IComparable
     {
         get
         {
-            Encoding encoding   = null;
+            Encoding encoding = null;
             string characterSet = this.CharacterSet;
 
             if (!string.IsNullOrEmpty(characterSet))
             {
-                encoding    = Encoding.GetEncoding(characterSet);
+                encoding = Encoding.GetEncoding(characterSet);
             }
 
             return encoding;
@@ -261,22 +261,22 @@ public class WebContentType : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Dictionary<string, string> source, Dictionary<string, string> target)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
         if (source.Count == target.Count)
         {
-            foreach(string key in source.Keys)
+            foreach (string key in source.Keys)
             {
-                if(target.ContainsKey(key))
+                if (target.ContainsKey(key))
                 {
-                    result  = result | string.Compare(source[key], target[key], StringComparison.Ordinal);
+                    result = result | string.Compare(source[key], target[key], StringComparison.Ordinal);
                 }
                 else
                 {
-                    result  = result | - 1;
+                    result = result | -1;
                     break;
                 }
             }
@@ -303,11 +303,11 @@ public class WebContentType : IComparable
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
     public override string ToString()
     {
-        StringBuilder builder   = new StringBuilder();
+        StringBuilder builder = new StringBuilder();
 
         builder.Append(string.Format(null, "{0}/{1}", this.MediaType.ToLowerInvariant(), this.MediaSubtype));
 
-        if(!string.IsNullOrEmpty(this.Discriminator))
+        if (!string.IsNullOrEmpty(this.Discriminator))
         {
             builder.Append(string.Format(null, ";{0}={1}", TYPE_PARAMETER_NAME, this.Discriminator));
         }
@@ -316,9 +316,9 @@ public class WebContentType : IComparable
             builder.Append(string.Format(null, ";{0}={1}", CHARSET_PARAMETER_NAME, this.CharacterSet));
         }
 
-        foreach(string parameterName in this.Parameters.Keys)
+        foreach (string parameterName in this.Parameters.Keys)
         {
-            string parameterValue   = !string.IsNullOrEmpty(this.Parameters[parameterName]) ? this.Parameters[parameterName].Trim() : string.Empty;
+            string parameterValue = !string.IsNullOrEmpty(this.Parameters[parameterName]) ? this.Parameters[parameterName].Trim() : string.Empty;
             if (string.Compare(parameterName, TYPE_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0 && string.Compare(parameterName, CHARSET_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0)
             {
                 builder.Append(string.Format(null, ";{0}={1}", parameterName, parameterValue));
@@ -341,13 +341,13 @@ public class WebContentType : IComparable
             return 1;
         }
 
-        WebContentType value  = obj as WebContentType;
+        WebContentType value = obj as WebContentType;
 
         if (value != null)
         {
-            int result  = string.Compare(this.MediaType, value.MediaType, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.MediaSubtype, value.MediaSubtype, StringComparison.Ordinal);
-            result      = result | WebContentType.CompareSequence(this.Parameters, value.Parameters);
+            int result = string.Compare(this.MediaType, value.MediaType, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.MediaSubtype, value.MediaSubtype, StringComparison.Ordinal);
+            result = result | WebContentType.CompareSequence(this.Parameters, value.Parameters);
 
             return result;
         }
@@ -378,7 +378,7 @@ public class WebContentType : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

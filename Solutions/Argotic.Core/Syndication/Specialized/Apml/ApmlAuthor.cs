@@ -31,19 +31,19 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the unique key for the author.
     /// </summary>
-    private string authorKey            = string.Empty;
+    private string authorKey = string.Empty;
     /// <summary>
     /// Private member to hold the decimal score of the author.
     /// </summary>
-    private decimal authorValue         = decimal.MinValue;
+    private decimal authorValue = decimal.MinValue;
     /// <summary>
     /// Private member to hold the name of the entity that contributed the author.
     /// </summary>
-    private string authorFrom           = string.Empty;
+    private string authorFrom = string.Empty;
     /// <summary>
     /// Private member to hold a date indicating the last time the author was updated.
     /// </summary>
-    private DateTime authorUpdatedOn    = DateTime.MinValue;
+    private DateTime authorUpdatedOn = DateTime.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="ApmlAuthor"/> class.
     /// </summary>
@@ -68,8 +68,8 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than 1.</exception>
     public ApmlAuthor(string key, decimal value)
     {
-        this.Key        = key;
-        this.Value      = value;
+        this.Key = key;
+        this.Value = value;
     }
 
     /// <summary>
@@ -93,8 +93,8 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     public ApmlAuthor(string key, decimal value, string from, DateTime utcUpdatedOn) : this(key, value)
     {
         Guard.ArgumentNotNullOrEmptyString(from, "from");
-        this.From       = from;
-        this.UpdatedOn  = utcUpdatedOn;
+        this.From = from;
+        this.UpdatedOn = utcUpdatedOn;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -225,10 +225,10 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -269,7 +269,7 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -285,19 +285,19 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string keyAttribute     = source.GetAttribute("key", string.Empty);
-            string valueAttribute   = source.GetAttribute("value", string.Empty);
-            string fromAttribute    = source.GetAttribute("from", string.Empty);
+            string keyAttribute = source.GetAttribute("key", string.Empty);
+            string valueAttribute = source.GetAttribute("value", string.Empty);
+            string fromAttribute = source.GetAttribute("from", string.Empty);
             string updatedAttribute = source.GetAttribute("updated", string.Empty);
 
             if (!string.IsNullOrEmpty(keyAttribute))
             {
-                this.Key    = keyAttribute;
-                wasLoaded   = true;
+                this.Key = keyAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(valueAttribute))
@@ -306,24 +306,24 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
                 {
                     if (value is >= decimal.MinusOne and <= decimal.One)
                     {
-                        this.Value  = value;
-                        wasLoaded   = true;
+                        this.Value = value;
+                        wasLoaded = true;
                     }
                 }
             }
 
             if (!string.IsNullOrEmpty(fromAttribute))
             {
-                this.From   = fromAttribute;
-                wasLoaded   = true;
+                this.From = fromAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(updatedAttribute))
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedAttribute, out DateTime updatedOn))
                 {
-                    this.UpdatedOn  = updatedOn;
-                    wasLoaded       = true;
+                    this.UpdatedOn = updatedOn;
+                    wasLoaded = true;
                 }
             }
         }
@@ -344,10 +344,10 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -390,14 +390,14 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -421,14 +421,14 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        ApmlAuthor value  = obj as ApmlAuthor;
+        ApmlAuthor value = obj as ApmlAuthor;
 
         if (value != null)
         {
-            int result  = string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
-            result      = result | this.Value.CompareTo(value.Value);
+            int result = string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
+            result = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
+            result = result | this.Value.CompareTo(value.Value);
 
             return result;
         }
@@ -459,7 +459,7 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

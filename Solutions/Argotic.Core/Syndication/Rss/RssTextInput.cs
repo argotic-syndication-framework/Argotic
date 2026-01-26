@@ -39,11 +39,11 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the name of the form component that contains the query.
     /// </summary>
-    private string textInputName        = string.Empty;
+    private string textInputName = string.Empty;
     /// <summary>
     /// Private member to hold a value that labels the button used to submit the query.
     /// </summary>
-    private string textInputTitle       = string.Empty;
+    private string textInputTitle = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssTextInput"/> class.
     /// </summary>
@@ -68,10 +68,10 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="title"/> is an empty string.</exception>
     public RssTextInput(string description, Uri link, string name, string title)
     {
-        this.Description    = description;
-        this.Link           = link;
-        this.Name           = name;
-        this.Title          = title;
+        this.Description = description;
+        this.Link = link;
+        this.Name = name;
+        this.Title = title;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -200,10 +200,10 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -244,7 +244,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -260,44 +260,44 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
         XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator linkNavigator        = source.SelectSingleNode("link", manager);
-        XPathNavigator nameNavigator        = source.SelectSingleNode("name", manager);
-        XPathNavigator titleNavigator       = source.SelectSingleNode("title", manager);
+        XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
+        XPathNavigator nameNavigator = source.SelectSingleNode("name", manager);
+        XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
 
         if (descriptionNavigator != null)
         {
             if (!string.IsNullOrEmpty(descriptionNavigator.Value))
             {
-                this.Description    = descriptionNavigator.Value;
-                wasLoaded           = true;
+                this.Description = descriptionNavigator.Value;
+                wasLoaded = true;
             }
         }
         if (linkNavigator != null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                this.Link           = link;
-                wasLoaded           = true;
+                this.Link = link;
+                wasLoaded = true;
             }
         }
         if (nameNavigator != null)
         {
             if (!string.IsNullOrEmpty(nameNavigator.Value))
             {
-                this.Name           = nameNavigator.Value;
-                wasLoaded           = true;
+                this.Name = nameNavigator.Value;
+                wasLoaded = true;
             }
         }
         if (titleNavigator != null)
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
-                this.Title          = titleNavigator.Value;
-                wasLoaded           = true;
+                this.Title = titleNavigator.Value;
+                wasLoaded = true;
             }
         }
 
@@ -317,10 +317,10 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -355,14 +355,14 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -386,14 +386,14 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        RssTextInput value  = obj as RssTextInput;
+        RssTextInput value = obj as RssTextInput;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -424,7 +424,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

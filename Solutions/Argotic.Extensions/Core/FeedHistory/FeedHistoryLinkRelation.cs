@@ -20,7 +20,7 @@ public class FeedHistoryLinkRelation : IComparable
     /// <summary>
     /// Private member to hold a value that indicates the type of the link relation.
     /// </summary>
-    private FeedHistoryLinkRelationType linkRelationType    = FeedHistoryLinkRelationType.None;
+    private FeedHistoryLinkRelationType linkRelationType = FeedHistoryLinkRelationType.None;
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedHistoryLinkRelation"/> class.
     /// </summary>
@@ -37,8 +37,8 @@ public class FeedHistoryLinkRelation : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
     public FeedHistoryLinkRelation(FeedHistoryLinkRelationType relation, Uri href)
     {
-        this.RelationType   = relation;
-        this.Uri            = href;
+        this.RelationType = relation;
+        this.Uri = href;
     }
     /// <summary>
     /// Gets or sets a value that indicates the type of this link relation.
@@ -89,29 +89,29 @@ public class FeedHistoryLinkRelation : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (source.HasAttributes)
         {
-            string hrefAttribute    = source.GetAttribute("href", string.Empty);
-            string relAttribute     = source.GetAttribute("rel", string.Empty);
+            string hrefAttribute = source.GetAttribute("href", string.Empty);
+            string relAttribute = source.GetAttribute("rel", string.Empty);
 
             if (!string.IsNullOrEmpty(hrefAttribute))
             {
                 if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                 {
-                    this.Uri        = href;
-                    wasLoaded       = true;
+                    this.Uri = href;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(relAttribute))
             {
-                FeedHistoryLinkRelationType relationType    = FeedHistorySyndicationExtension.LinkRelationTypeByName(relAttribute);
+                FeedHistoryLinkRelationType relationType = FeedHistorySyndicationExtension.LinkRelationTypeByName(relAttribute);
                 if (relationType != FeedHistoryLinkRelationType.None)
                 {
-                    this.RelationType   = relationType;
-                    wasLoaded           = true;
+                    this.RelationType = relationType;
+                    wasLoaded = true;
                 }
             }
         }
@@ -145,14 +145,14 @@ public class FeedHistoryLinkRelation : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -177,12 +177,12 @@ public class FeedHistoryLinkRelation : IComparable
         {
             return 1;
         }
-        FeedHistoryLinkRelation value  = obj as FeedHistoryLinkRelation;
+        FeedHistoryLinkRelation value = obj as FeedHistoryLinkRelation;
 
         if (value != null)
         {
-            int result  = this.RelationType.CompareTo(value.RelationType);
-            result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            int result = this.RelationType.CompareTo(value.RelationType);
+            result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -213,7 +213,7 @@ public class FeedHistoryLinkRelation : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

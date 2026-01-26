@@ -24,7 +24,7 @@ public class XmlRpcMessage : IComparable
     /// <summary>
     /// Private member to hold the name of the method to be called.
     /// </summary>
-    private string messageMethodName    = string.Empty;
+    private string messageMethodName = string.Empty;
     /// <summary>
     /// Private member to hold the method parameters.
     /// </summary>
@@ -32,7 +32,7 @@ public class XmlRpcMessage : IComparable
     /// <summary>
     /// Private member to hold the character encoding of the message.
     /// </summary>
-    private Encoding messageEncoding    = Encoding.UTF8;
+    private Encoding messageEncoding = Encoding.UTF8;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class.
@@ -64,7 +64,7 @@ public class XmlRpcMessage : IComparable
     {
         Guard.ArgumentNotNull(parameters, "parameters");
 
-        foreach(IXmlRpcValue parameter in parameters)
+        foreach (IXmlRpcValue parameter in parameters)
         {
             this.Parameters.Add(parameter);
         }
@@ -105,7 +105,7 @@ public class XmlRpcMessage : IComparable
         set
         {
             Guard.ArgumentNotNullOrEmptyString(value, "value");
-            messageMethodName   = value.Trim();
+            messageMethodName = value.Trim();
         }
     }
 
@@ -149,7 +149,7 @@ public class XmlRpcMessage : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<IXmlRpcValue> source, Collection<IXmlRpcValue> target)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -158,10 +158,10 @@ public class XmlRpcMessage : IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                IXmlRpcValue value  = source[i];
-                if(!target.Contains(value))
+                IXmlRpcValue value = source[i];
+                if (!target.Contains(value))
                 {
-                    result  = -1;
+                    result = -1;
                     break;
                 }
             }
@@ -195,13 +195,13 @@ public class XmlRpcMessage : IComparable
 
         if (source.HasChildren)
         {
-            XPathNavigator methodNameNavigator  = source.SelectSingleNode("methodName");
-            XPathNavigator parametersNavigator  = source.SelectSingleNode("params");
+            XPathNavigator methodNameNavigator = source.SelectSingleNode("methodName");
+            XPathNavigator parametersNavigator = source.SelectSingleNode("params");
 
             if (methodNameNavigator != null && !string.IsNullOrEmpty(methodNameNavigator.Value))
             {
                 this.MethodName = methodNameNavigator.Value;
-                wasLoaded       = true;
+                wasLoaded = true;
             }
 
             if (parametersNavigator != null)
@@ -214,7 +214,7 @@ public class XmlRpcMessage : IComparable
                         if (XmlRpcClient.TryParseValue(valueIterator.Current, out IXmlRpcValue value))
                         {
                             this.Parameters.Add(value);
-                            wasLoaded   = true;
+                            wasLoaded = true;
                         }
                     }
                 }
@@ -237,10 +237,10 @@ public class XmlRpcMessage : IComparable
 
         writer.WriteElementString("methodName", this.MethodName);
 
-        if(this.Parameters.Count > 0)
+        if (this.Parameters.Count > 0)
         {
             writer.WriteStartElement("params");
-            foreach(IXmlRpcValue value in this.Parameters)
+            foreach (IXmlRpcValue value in this.Parameters)
             {
                 writer.WriteStartElement("param");
                 value.WriteTo(writer);
@@ -262,14 +262,14 @@ public class XmlRpcMessage : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -295,13 +295,13 @@ public class XmlRpcMessage : IComparable
             return 1;
         }
 
-        XmlRpcMessage value  = obj as XmlRpcMessage;
+        XmlRpcMessage value = obj as XmlRpcMessage;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
-            result      = result | XmlRpcMessage.CompareSequence(this.Parameters, value.Parameters);
+            int result = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
+            result = result | XmlRpcMessage.CompareSequence(this.Parameters, value.Parameters);
 
             return result;
         }
@@ -332,7 +332,7 @@ public class XmlRpcMessage : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

@@ -45,7 +45,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <summary>
     /// Private member to hold a human-readable title for the workspace.
     /// </summary>
-    private AtomTextConstruct workspaceTitle    = new AtomTextConstruct();
+    private AtomTextConstruct workspaceTitle = new AtomTextConstruct();
     /// <summary>
     /// Private member to hold the collections associated to this workspace.
     /// </summary>
@@ -65,7 +65,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
     public AtomWorkspace(AtomTextConstruct title)
     {
-        this.Title  = title;
+        this.Title = title;
     }
 
     /// <summary>
@@ -77,7 +77,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="collections"/> is a null reference.</exception>
     public AtomWorkspace(AtomTextConstruct title, Collection<AtomMemberResources> collections)
     {
-        this.Title  = title;
+        this.Title = title;
 
         Guard.ArgumentNotNull(collections, "collections");
         foreach (AtomMemberResources collection in collections)
@@ -198,12 +198,12 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
 
         Guard.ArgumentNotNull(extension, "extension");
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -247,7 +247,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -323,7 +323,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<AtomMemberResources> source, Collection<AtomMemberResources> target)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -332,7 +332,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -355,12 +355,12 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference.</exception>
     public bool AddCollection(AtomMemberResources collection)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
 
         Guard.ArgumentNotNull(collection, "collection");
 
         ((Collection<AtomMemberResources>)this.Collections).Add(collection);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -397,7 +397,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
@@ -408,17 +408,17 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
             wasLoaded = true;
         }
 
-        if(source.HasChildren)
+        if (source.HasChildren)
         {
-            XPathNavigator titleNavigator           = source.SelectSingleNode("atom:title", manager);
-            XPathNodeIterator collectionIterator    = source.Select("app:collection", manager);
+            XPathNavigator titleNavigator = source.SelectSingleNode("atom:title", manager);
+            XPathNodeIterator collectionIterator = source.Select("app:collection", manager);
 
             if (titleNavigator != null)
             {
-                this.Title  = new AtomTextConstruct();
+                this.Title = new AtomTextConstruct();
                 if (this.Title.Load(titleNavigator))
                 {
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
@@ -426,11 +426,11 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
             {
                 while (collectionIterator.MoveNext())
                 {
-                    AtomMemberResources collection   = new AtomMemberResources();
+                    AtomMemberResources collection = new AtomMemberResources();
                     if (collection.Load(collectionIterator.Current))
                     {
                         this.AddCollection(collection);
-                        wasLoaded   = true;
+                        wasLoaded = true;
                     }
                 }
             }
@@ -457,7 +457,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
 
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
 
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -483,7 +483,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         if (((Collection<AtomMemberResources>)this.Collections).Contains(collection))
         {
             ((Collection<AtomMemberResources>)this.Collections).Remove(collection);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -506,7 +506,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
             this.Title.WriteTo(writer, "title");
         }
 
-        foreach(AtomMemberResources collection in this.Collections)
+        foreach (AtomMemberResources collection in this.Collections)
         {
             collection.WriteTo(writer);
         }
@@ -526,14 +526,14 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -559,13 +559,13 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
             return 1;
         }
 
-        AtomWorkspace value  = obj as AtomWorkspace;
+        AtomWorkspace value = obj as AtomWorkspace;
 
         if (value != null)
         {
-            int result  = this.Title.CompareTo(value.Title);
-            result      = result | AtomWorkspace.CompareSequence(((Collection<AtomMemberResources>)this.Collections), ((Collection<AtomMemberResources>)value.Collections));
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            int result = this.Title.CompareTo(value.Title);
+            result = result | AtomWorkspace.CompareSequence(((Collection<AtomMemberResources>)this.Collections), ((Collection<AtomMemberResources>)value.Collections));
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -596,7 +596,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

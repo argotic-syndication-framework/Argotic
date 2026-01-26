@@ -76,17 +76,17 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
         {
             if (fieldInfo.FieldType == typeof(YahooMediaExpression))
             {
-                YahooMediaExpression mediaExpression    = (YahooMediaExpression)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                YahooMediaExpression mediaExpression = (YahooMediaExpression)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (mediaExpression == expression)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -106,7 +106,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaExpression ExpressionByName(string name)
     {
-        YahooMediaExpression mediaExpression    = YahooMediaExpression.None;
+        YahooMediaExpression mediaExpression = YahooMediaExpression.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
 
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaExpression).GetFields())
@@ -114,7 +114,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
             if (fieldInfo.FieldType == typeof(YahooMediaExpression))
             {
                 YahooMediaExpression expression = (YahooMediaExpression)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes       = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -164,17 +164,17 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
         {
             if (fieldInfo.FieldType == typeof(YahooMediaMedium))
             {
-                YahooMediaMedium mediaMedium    = (YahooMediaMedium)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                YahooMediaMedium mediaMedium = (YahooMediaMedium)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
 
                 if (mediaMedium == medium)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -194,15 +194,15 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaMedium MediumByName(string name)
     {
-        YahooMediaMedium mediaMedium    = YahooMediaMedium.None;
+        YahooMediaMedium mediaMedium = YahooMediaMedium.None;
         Guard.ArgumentNotNullOrEmptyString(name, "name");
 
         foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaMedium).GetFields())
         {
             if (fieldInfo.FieldType == typeof(YahooMediaMedium))
             {
-                YahooMediaMedium medium     = (YahooMediaMedium)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                YahooMediaMedium medium = (YahooMediaMedium)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -227,11 +227,11 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -246,7 +246,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -272,14 +272,14 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -304,14 +304,14 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
         {
             return 1;
         }
-        YahooMediaSyndicationExtension value  = obj as YahooMediaSyndicationExtension;
+        YahooMediaSyndicationExtension value = obj as YahooMediaSyndicationExtension;
 
         if (value != null)
         {
-            int result  = YahooMediaUtility.CompareSequence((Collection<YahooMediaContent>)this.Context.Contents, (Collection<YahooMediaContent>)value.Context.Contents);
-            result      = result | YahooMediaUtility.CompareSequence((Collection<YahooMediaGroup>)this.Context.Groups, (Collection<YahooMediaGroup>)value.Context.Groups);
-                
-            result      = result | YahooMediaUtility.CompareCommonObjectEntities(this.Context, value.Context);
+            int result = YahooMediaUtility.CompareSequence((Collection<YahooMediaContent>)this.Context.Contents, (Collection<YahooMediaContent>)value.Context.Contents);
+            result = result | YahooMediaUtility.CompareSequence((Collection<YahooMediaGroup>)this.Context.Groups, (Collection<YahooMediaGroup>)value.Context.Groups);
+
+            result = result | YahooMediaUtility.CompareCommonObjectEntities(this.Context, value.Context);
 
             return result;
         }
@@ -342,7 +342,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

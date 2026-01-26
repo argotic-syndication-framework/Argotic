@@ -31,11 +31,11 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the MIME type of the attachment.
     /// </summary>
-    private string attachmentMimeType                           = string.Empty;
+    private string attachmentMimeType = string.Empty;
     /// <summary>
     /// Private member to hold the size of the attachment.
     /// </summary>
-    private long attachmentSize                                 = long.MinValue;
+    private long attachmentSize = long.MinValue;
     /// <summary>
     /// Private member to hold a relative or fully qualified URL to the attachment.
     /// </summary>
@@ -47,7 +47,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the attachment resource content.
     /// </summary>
-    private string attachmentContent                            = string.Empty;
+    private string attachmentContent = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLAttachment"/> class.
     /// </summary>
@@ -109,13 +109,13 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 attachmentContent = string.Empty;
             }
             else
             {
-                attachmentContent   = value.Trim();
+                attachmentContent = value.Trim();
             }
         }
     }
@@ -215,10 +215,10 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -259,7 +259,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -275,37 +275,37 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string embeddedAttribute    = source.GetAttribute("embedded", string.Empty);
-            string mimeTypeAttribute    = source.GetAttribute("mime-type", string.Empty);
-            string sizeAttribute        = source.GetAttribute("size", string.Empty);
+            string embeddedAttribute = source.GetAttribute("embedded", string.Empty);
+            string mimeTypeAttribute = source.GetAttribute("mime-type", string.Empty);
+            string sizeAttribute = source.GetAttribute("size", string.Empty);
             string externalUriAttribute = source.GetAttribute("external-uri", string.Empty);
-            string urlAttribute         = source.GetAttribute("url", string.Empty);
+            string urlAttribute = source.GetAttribute("url", string.Empty);
 
             if (!string.IsNullOrEmpty(embeddedAttribute))
             {
                 if (bool.TryParse(embeddedAttribute, out bool isEmbedded))
                 {
                     this.IsEmbedded = isEmbedded;
-                    wasLoaded       = true;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(mimeTypeAttribute))
             {
-                this.MimeType   = mimeTypeAttribute;
-                wasLoaded       = true;
+                this.MimeType = mimeTypeAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(sizeAttribute))
             {
                 if (long.TryParse(sizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long size))
                 {
-                    this.Size   = size;
-                    wasLoaded   = true;
+                    this.Size = size;
+                    wasLoaded = true;
                 }
             }
 
@@ -313,8 +313,8 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
             {
                 if (Uri.TryCreate(externalUriAttribute, UriKind.RelativeOrAbsolute, out Uri externalUri))
                 {
-                    this.ExternalUri    = externalUri;
-                    wasLoaded           = true;
+                    this.ExternalUri = externalUri;
+                    wasLoaded = true;
                 }
             }
 
@@ -322,16 +322,16 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
             {
                 if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
-                    this.Url    = url;
-                    wasLoaded   = true;
+                    this.Url = url;
+                    wasLoaded = true;
                 }
             }
         }
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Content    = source.Value;
-            wasLoaded       = true;
+            this.Content = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -350,10 +350,10 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -373,12 +373,12 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
         writer.WriteAttributeString("embedded", this.IsEmbedded ? "true" : "false");
         writer.WriteAttributeString("mime-type", this.MimeType);
 
-        if(this.Size != long.MinValue)
+        if (this.Size != long.MinValue)
         {
             writer.WriteAttributeString("size", this.Size.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if(this.ExternalUri != null)
+        if (this.ExternalUri != null)
         {
             writer.WriteAttributeString("external-uri", this.ExternalUri.ToString());
         }
@@ -388,7 +388,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
             writer.WriteAttributeString("url", this.Url.ToString());
         }
 
-        if(!string.IsNullOrEmpty(this.Content))
+        if (!string.IsNullOrEmpty(this.Content))
         {
             writer.WriteString(this.Content);
         }
@@ -406,14 +406,14 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -437,16 +437,16 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        BlogMLAttachment value  = obj as BlogMLAttachment;
+        BlogMLAttachment value = obj as BlogMLAttachment;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.ExternalUri, value.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.IsEmbedded.CompareTo(value.IsEmbedded);
-            result      = result | string.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Size.CompareTo(value.Size);
-            result      = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.ExternalUri, value.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | this.IsEmbedded.CompareTo(value.IsEmbedded);
+            result = result | string.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Size.CompareTo(value.Size);
+            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -477,7 +477,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

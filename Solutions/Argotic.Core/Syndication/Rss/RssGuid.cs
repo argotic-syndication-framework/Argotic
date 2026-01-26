@@ -40,11 +40,11 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold a string value that uniquely identifies the item.
     /// </summary>
-    private string guidIdentifier   = string.Empty;
+    private string guidIdentifier = string.Empty;
     /// <summary>
     /// Private member to hold a value indicating if the guid represents a permanent URL.
     /// </summary>
-    private bool guidIsPermalink    = true;
+    private bool guidIsPermalink = true;
     /// <summary>
     /// Initializes a new instance of the <see cref="RssGuid"/> class.
     /// </summary>
@@ -61,7 +61,7 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public RssGuid(string value)
     {
-        this.Value  = value;
+        this.Value = value;
     }
 
     /// <summary>
@@ -73,7 +73,7 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public RssGuid(string value, bool isPermanentUrl) : this(value)
     {
-        this.IsPermanentLink    = isPermanentUrl;
+        this.IsPermanentLink = isPermanentUrl;
     }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
@@ -171,10 +171,10 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -215,7 +215,7 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -234,7 +234,7 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     {
         bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
             string permalinkAttribute = source.GetAttribute("isPermaLink", string.Empty);
 
@@ -242,16 +242,16 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
             {
                 if (bool.TryParse(permalinkAttribute, out bool isPermaLink))
                 {
-                    this.IsPermanentLink    = isPermaLink;
-                    wasLoaded               = true;
+                    this.IsPermanentLink = isPermaLink;
+                    wasLoaded = true;
                 }
             }
         }
 
-        if(!string.IsNullOrEmpty(source.Value))
+        if (!string.IsNullOrEmpty(source.Value))
         {
-            this.Value  = source.Value;
-            wasLoaded   = true;
+            this.Value = source.Value;
+            wasLoaded = true;
         }
 
         return wasLoaded;
@@ -270,10 +270,10 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -306,14 +306,14 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -337,12 +337,12 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
         {
             return 1;
         }
-        RssGuid value  = obj as RssGuid;
+        RssGuid value = obj as RssGuid;
 
         if (value != null)
         {
-            int result  = this.IsPermanentLink.CompareTo(value.IsPermanentLink);
-            result      = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
+            int result = this.IsPermanentLink.CompareTo(value.IsPermanentLink);
+            result = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }
@@ -373,7 +373,7 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

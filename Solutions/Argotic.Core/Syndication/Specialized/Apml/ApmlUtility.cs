@@ -14,7 +14,7 @@ internal static class ApmlUtility
     /// <summary>
     /// Private member to hold the Attention Profiling Markup Language (APML) 0.6 namespace identifier.
     /// </summary>
-    private const string APML_NAMESPACE  = "http://www.apml.org/apml-0.6";
+    private const string APML_NAMESPACE = "http://www.apml.org/apml-0.6";
     /// <summary>
     /// Gets the XML namespace URI for the Attention Profiling Markup Language (APML) 0.6 specification.
     /// </summary>

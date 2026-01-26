@@ -17,7 +17,7 @@ public static class RssImageExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed    = new RssFeed
+        RssFeed feed = new RssFeed
         {
             Channel =
             {
@@ -27,12 +27,12 @@ public static class RssImageExample
             }
         };
 
-        RssImage image              = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
-            {
-                Description = "Read the Dallas Times-Herald",
-                Height = 32,
-                Width = 96
-            };
-        feed.Channel.Image          = image;
+        RssImage image = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
+        {
+            Description = "Read the Dallas Times-Herald",
+            Height = 32,
+            Width = 96
+        };
+        feed.Channel.Image = image;
     }
 }

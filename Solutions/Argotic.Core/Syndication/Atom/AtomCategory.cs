@@ -39,7 +39,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     /// <summary>
     /// Private member to hold a string that identifies the category to which the entry or feed belongs.
     /// </summary>
-    private string categoryTerm     = string.Empty;
+    private string categoryTerm = string.Empty;
     /// <summary>
     /// Private member to hold an IRI that identifies a categorization scheme.
     /// </summary>
@@ -47,7 +47,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     /// <summary>
     /// Private member to hold a human-readable label for display in end-user applications.
     /// </summary>
-    private string categoryLabel    = string.Empty;
+    private string categoryLabel = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomCategory"/> class.
@@ -64,7 +64,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
     public AtomCategory(string term)
     {
-        this.Term   = term;
+        this.Term = term;
     }
 
     /// <summary>
@@ -168,7 +168,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
 
         set
         {
-            if(string.IsNullOrEmpty(value))
+            if (string.IsNullOrEmpty(value))
             {
                 categoryLabel = string.Empty;
             }
@@ -228,12 +228,12 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
 
         Guard.ArgumentNotNull(extension, "extension");
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -277,7 +277,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -294,25 +294,25 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
         if (AtomUtility.FillCommonObjectAttributes(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
 
-        if(source.HasAttributes)
+        if (source.HasAttributes)
         {
-            string termAttribute    = source.GetAttribute("term", string.Empty);
-            string schemeAttribute  = source.GetAttribute("scheme", string.Empty);
-            string labelAttribute   = source.GetAttribute("label", string.Empty);
+            string termAttribute = source.GetAttribute("term", string.Empty);
+            string schemeAttribute = source.GetAttribute("scheme", string.Empty);
+            string labelAttribute = source.GetAttribute("label", string.Empty);
 
-            if(!string.IsNullOrEmpty(termAttribute))
+            if (!string.IsNullOrEmpty(termAttribute))
             {
-                this.Term   = termAttribute;
-                wasLoaded   = true;
+                this.Term = termAttribute;
+                wasLoaded = true;
             }
 
             if (!string.IsNullOrEmpty(schemeAttribute))
@@ -320,14 +320,14 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
                 if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                 {
                     this.Scheme = scheme;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
 
             if (!string.IsNullOrEmpty(labelAttribute))
             {
-                this.Label  = labelAttribute;
-                wasLoaded   = true;
+                this.Label = labelAttribute;
+                wasLoaded = true;
             }
         }
 
@@ -347,12 +347,12 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
 
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
 
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
@@ -379,7 +379,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
             writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }
 
-        if(!string.IsNullOrEmpty(this.Label))
+        if (!string.IsNullOrEmpty(this.Label))
         {
             writer.WriteAttributeString("label", this.Label);
         }
@@ -399,14 +399,14 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -432,15 +432,15 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
             return 1;
         }
 
-        AtomCategory value  = obj as AtomCategory;
+        AtomCategory value = obj as AtomCategory;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -471,7 +471,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

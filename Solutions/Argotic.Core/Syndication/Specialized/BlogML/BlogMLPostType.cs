@@ -12,7 +12,7 @@ public enum BlogMLPostType
     /// No post type specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// Indicates that the post represents an article.
@@ -24,5 +24,5 @@ public enum BlogMLPostType
     /// Indicates that the post represents web log entry.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Normal", AlternateValue = "normal")]
-    Normal  = 2
+    Normal = 2
 }

@@ -36,8 +36,8 @@ public class PheedSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="thumbnail"/> is a null reference.</exception>
     public PheedSyndicationExtensionContext(Uri source, Uri thumbnail)
     {
-        this.Source     = source;
-        this.Thumbnail  = thumbnail;
+        this.Source = source;
+        this.Thumbnail = thumbnail;
     }
 
     /// <summary>
@@ -91,21 +91,21 @@ public class PheedSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(manager, "manager");
 
         if (source.HasChildren)
         {
-            XPathNavigator thumbnailNavigator   = source.SelectSingleNode("photo:thumbnail", manager);
+            XPathNavigator thumbnailNavigator = source.SelectSingleNode("photo:thumbnail", manager);
             XPathNavigator imageSourceNavigator = source.SelectSingleNode("photo:imgsrc", manager);
 
             if (thumbnailNavigator != null)
             {
                 if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out Uri thumbnail))
                 {
-                    this.Thumbnail  = thumbnail;
-                    wasLoaded       = true;
+                    this.Thumbnail = thumbnail;
+                    wasLoaded = true;
                 }
             }
 
@@ -114,7 +114,7 @@ public class PheedSyndicationExtensionContext
                 if (Uri.TryCreate(imageSourceNavigator.Value, UriKind.RelativeOrAbsolute, out Uri original))
                 {
                     this.Source = original;
-                    wasLoaded   = true;
+                    wasLoaded = true;
                 }
             }
         }

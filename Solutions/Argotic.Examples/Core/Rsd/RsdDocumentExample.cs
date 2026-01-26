@@ -22,7 +22,7 @@ public static class RsdDocumentExample
     /// </summary>
     public static void ClassExample()
     {
-        RsdDocument document    = new RsdDocument
+        RsdDocument document = new RsdDocument
         {
             EngineName = "Blog Munging CMS",
             EngineLink = new Uri("http://www.blogmunging.com/"),
@@ -34,11 +34,11 @@ public static class RsdDocumentExample
         document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
         document.AddInterface(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
 
-        RsdApplicationInterface conversantApi   = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty)
-            {
-                Documentation = new Uri("http://www.conversant.com/docs/api/"),
-                Notes = "Additional explanation here."
-            };
+        RsdApplicationInterface conversantApi = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty)
+        {
+            Documentation = new Uri("http://www.conversant.com/docs/api/"),
+            Notes = "Additional explanation here."
+        };
         conversantApi.Settings.Add("service-specific-setting", "a value");
         conversantApi.Settings.Add("another-setting", "another value");
         document.AddInterface(conversantApi);
@@ -48,9 +48,9 @@ public static class RsdDocumentExample
     /// </summary>
     public static void CreateExample()
     {
-        RsdDocument document    = RsdDocument.Create(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"));
-            
-        foreach(RsdApplicationInterface api in document.Interfaces)
+        RsdDocument document = RsdDocument.Create(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"));
+
+        foreach (RsdApplicationInterface api in document.Interfaces)
         {
             if (api.IsPreferred)
             {
@@ -64,7 +64,7 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadAsyncExample()
     {
-        RsdDocument document   = new RsdDocument();
+        RsdDocument document = new RsdDocument();
 
         document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
@@ -78,7 +78,7 @@ public static class RsdDocumentExample
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
     private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
     {
-        if(e.State != null)
+        if (e.State != null)
         {
         }
     }
@@ -87,9 +87,9 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source    = new XPathDocument("http://blog.oppositionallydefiant.com/rsd.axd");
+        XPathDocument source = new XPathDocument("http://blog.oppositionallydefiant.com/rsd.axd");
 
-        RsdDocument document   = new RsdDocument();
+        RsdDocument document = new RsdDocument();
         document.Load(source);
 
         foreach (RsdApplicationInterface api in document.Interfaces)
@@ -107,7 +107,7 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadStreamExample()
     {
-        RsdDocument document   = new RsdDocument();
+        RsdDocument document = new RsdDocument();
 
         using Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read);
         document.Load(stream);
@@ -127,10 +127,10 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadXmlReaderExample()
     {
-        RsdDocument document   = new RsdDocument();
+        RsdDocument document = new RsdDocument();
 
         using Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read);
-        XmlReaderSettings settings  = new XmlReaderSettings
+        XmlReaderSettings settings = new XmlReaderSettings
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -154,8 +154,8 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadUriExample()
     {
-        RsdDocument document   = new RsdDocument();
-        Uri source              = new Uri("http://blog.oppositionallydefiant.com/rsd.axd");
+        RsdDocument document = new RsdDocument();
+        Uri source = new Uri("http://blog.oppositionallydefiant.com/rsd.axd");
 
         document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -174,7 +174,7 @@ public static class RsdDocumentExample
     /// </summary>
     public static void SaveStreamExample()
     {
-        RsdDocument document   = new RsdDocument();
+        RsdDocument document = new RsdDocument();
 
         //  Modify document state using public properties and methods
 
@@ -187,12 +187,12 @@ public static class RsdDocumentExample
     /// </summary>
     public static void SaveXmlWriterExample()
     {
-        RsdDocument document   = new RsdDocument();
+        RsdDocument document = new RsdDocument();
 
         //  Modify document state using public properties and methods
 
         using Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write);
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             Indent = true
         };

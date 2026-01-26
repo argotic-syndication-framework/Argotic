@@ -29,7 +29,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private AtomPublishingEditedSyndicationExtensionContext extensionContext    = new AtomPublishingEditedSyndicationExtensionContext();
+    private AtomPublishingEditedSyndicationExtensionContext extensionContext = new AtomPublishingEditedSyndicationExtensionContext();
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtension"/> class.
     /// </summary>
@@ -87,11 +87,11 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -106,7 +106,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -131,14 +131,14 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -163,18 +163,18 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
         {
             return 1;
         }
-        AtomPublishingEditedSyndicationExtension value  = obj as AtomPublishingEditedSyndicationExtension;
+        AtomPublishingEditedSyndicationExtension value = obj as AtomPublishingEditedSyndicationExtension;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Version.CompareTo(value.Version);
-            result      = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result      = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Version.CompareTo(value.Version);
+            result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
-            result      = result | this.Context.EditedOn.CompareTo(value.Context.EditedOn);
+            result = result | this.Context.EditedOn.CompareTo(value.Context.EditedOn);
 
             return result;
         }
@@ -205,7 +205,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

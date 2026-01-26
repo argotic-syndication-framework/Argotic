@@ -35,11 +35,11 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat documentFormat  = SyndicationContentFormat.AtomCategoryDocument;
+    private static SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomCategoryDocument;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version documentVersion                  = new Version(1, 0);
+    private static Version documentVersion = new Version(1, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -97,7 +97,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         Guard.ArgumentNotNull(categories, "categories");
 
-        foreach(AtomCategory category in categories)
+        foreach (AtomCategory category in categories)
         {
             this.AddCategory(category);
         }
@@ -109,7 +109,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <param name="href">A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the location of the document.</param>
     public AtomCategoryDocument(Uri href)
     {
-        this.Uri    = href;
+        this.Uri = href;
     }
 
     /// <summary>
@@ -119,8 +119,8 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <param name="scheme">A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the categorization scheme used by the document.</param>
     public AtomCategoryDocument(bool isFixed, Uri scheme)
     {
-        this.IsFixed    = isFixed;
-        this.Scheme     = scheme;
+        this.IsFixed = isFixed;
+        this.Scheme = scheme;
     }
 
     /// <summary>
@@ -258,12 +258,12 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
 
         Guard.ArgumentNotNull(extension, "extension");
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -307,7 +307,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -504,7 +504,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<AtomCategoryDocument> source, Collection<AtomCategoryDocument> target)
     {
-        int result  = 0;
+        int result = 0;
 
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
@@ -513,7 +513,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -736,7 +736,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
 
         if (this.LoadOperationInProgress)
@@ -744,14 +744,14 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
             throw new InvalidOperationException();
         }
 
-        this.LoadOperationInProgress    = true;
+        this.LoadOperationInProgress = true;
 
-        this.AsyncLoadHasBeenCancelled  = false;
+        this.AsyncLoadHasBeenCancelled = false;
 
-        asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
+        asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
+        object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
 
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
@@ -769,7 +769,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
         {
-            this.AsyncLoadHasBeenCancelled  = true;
+            this.AsyncLoadHasBeenCancelled = true;
 
             asyncHttpWebRequest.Abort();
         }
@@ -781,23 +781,23 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <param name="result">The result of the asynchronous operation.</param>
     private static void AsyncLoadCallback(IAsyncResult result)
     {
-        System.Text.Encoding encoding               = System.Text.Encoding.UTF8;
-        XPathNavigator navigator                    = null;
-        WebRequest httpWebRequest                   = null;
-        AtomCategoryDocument document               = null;
-        Uri source                                  = null;
-        WebRequestOptions options                   = null;
-        SyndicationResourceLoadSettings settings    = null;
+        System.Text.Encoding encoding = System.Text.Encoding.UTF8;
+        XPathNavigator navigator = null;
+        WebRequest httpWebRequest = null;
+        AtomCategoryDocument document = null;
+        Uri source = null;
+        WebRequestOptions options = null;
+        SyndicationResourceLoadSettings settings = null;
 
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest      = parameters[0] as WebRequest;
-            document            = parameters[1] as AtomCategoryDocument;
-            source              = parameters[2] as Uri;
-            settings            = parameters[3] as SyndicationResourceLoadSettings;
-            options             = parameters[4] as WebRequestOptions;
-            object userToken    = parameters[5];
+            httpWebRequest = parameters[0] as WebRequest;
+            document = parameters[1] as AtomCategoryDocument;
+            source = parameters[2] as Uri;
+            settings = parameters[3] as SyndicationResourceLoadSettings;
+            options = parameters[4] as WebRequestOptions;
+            object userToken = parameters[5];
 
             if (document != null)
             {
@@ -807,12 +807,12 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
                 {
                     if (settings != null)
                     {
-                        encoding    = settings.CharacterEncoding;
+                        encoding = settings.CharacterEncoding;
                     }
 
                     using (StreamReader streamReader = new StreamReader(stream, encoding))
                     {
-                        XmlReaderSettings readerSettings    = new XmlReaderSettings
+                        XmlReaderSettings readerSettings = new XmlReaderSettings
                         {
                             IgnoreComments = true,
                             IgnoreWhitespace = true,
@@ -823,14 +823,14 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
                         {
                             if (encoding == System.Text.Encoding.UTF8)
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                             }
                             else
                             {
-                                navigator   = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                             }
 
-                            SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+                            SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
                             adapter.Fill(document, SyndicationContentFormat.AtomCategoryDocument);
 
                             document.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
@@ -858,7 +858,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
             }
         }
 
-        this.LoadOperationInProgress    = false;
+        this.LoadOperationInProgress = false;
     }
 
     /// <summary>
@@ -869,12 +869,12 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference.</exception>
     public bool AddCategory(AtomCategory category)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
 
         Guard.ArgumentNotNull(category, "category");
 
         ((Collection<AtomCategory>)this.Categories).Add(category);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -918,7 +918,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         if (((Collection<AtomCategory>)this.Categories).Contains(category))
         {
             ((Collection<AtomCategory>)this.Categories).Remove(category);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -935,14 +935,14 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     public XPathNavigator CreateNavigator()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Document,
             Indent = true,
             OmitXmlDeclaration = false
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.Save(writer);
             writer.Flush();
@@ -950,7 +950,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        XPathDocument document  = new XPathDocument(stream);
+        XPathDocument document = new XPathDocument(stream);
         return document.CreateNavigator();
     }
 
@@ -986,10 +986,10 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
         if (settings == null)
         {
-            settings    = new SyndicationResourceLoadSettings();
+            settings = new SyndicationResourceLoadSettings();
         }
 
-        XPathNavigator navigator    = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator();
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
     }
 
@@ -1205,7 +1205,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator    = null;
+        XPathNavigator navigator = null;
 
         Guard.ArgumentNotNull(source, "source");
 
@@ -1216,11 +1216,11 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
         }
         else
         {
-            navigator    = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
         }
 
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
@@ -1250,10 +1250,10 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
         if (settings == null)
         {
-            settings    = new SyndicationResourceSaveSettings();
+            settings = new SyndicationResourceSaveSettings();
         }
 
-        XmlWriterSettings writerSettings    = new XmlWriterSettings
+        XmlWriterSettings writerSettings = new XmlWriterSettings
         {
             OmitXmlDeclaration = false,
             Indent = !settings.MinimizeOutputSize,
@@ -1350,7 +1350,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         Guard.ArgumentNotNull(settings, "settings");
         Guard.ArgumentNotNull(eventData, "eventData");
 
-        SyndicationResourceAdapter adapter  = new SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.AtomCategoryDocument);
 
         this.OnDocumentLoaded(eventData);
@@ -1366,14 +1366,14 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.Save(writer);
         }
@@ -1399,15 +1399,15 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
             return 1;
         }
 
-        AtomCategoryDocument value  = obj as AtomCategoryDocument;
+        AtomCategoryDocument value = obj as AtomCategoryDocument;
 
         if (value != null)
         {
-            int result  = this.IsFixed.CompareTo(value.IsFixed);
-            result      = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | AtomFeed.CompareSequence(((Collection<AtomCategory>)this.Categories), ((Collection<AtomCategory>)value.Categories));
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            int result = this.IsFixed.CompareTo(value.IsFixed);
+            result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | AtomFeed.CompareSequence(((Collection<AtomCategory>)this.Categories), ((Collection<AtomCategory>)value.Categories));
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -1438,7 +1438,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

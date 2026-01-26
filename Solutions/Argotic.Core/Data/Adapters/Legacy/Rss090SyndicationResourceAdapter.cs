@@ -45,31 +45,31 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         Guard.ArgumentNotNull(resource, "resource");
 
-        XmlNamespaceManager manager     = new XmlNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
         manager.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
         manager.AddNamespace("rss", "http://my.netscape.com/rdf/simple/0.9/");
 
-        XPathNavigator channelNavigator     = this.Navigator.SelectSingleNode("rdf:RDF/rss:channel", manager);
+        XPathNavigator channelNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:channel", manager);
         if (channelNavigator != null)
         {
             Rss090SyndicationResourceAdapter.FillChannel(resource.Channel, channelNavigator, manager, this.Settings);
         }
 
-        XPathNavigator imageNavigator       = this.Navigator.SelectSingleNode("rdf:RDF/rss:image", manager);
+        XPathNavigator imageNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:image", manager);
         if (imageNavigator != null)
         {
-            resource.Channel.Image          = new RssImage();
+            resource.Channel.Image = new RssImage();
             Rss090SyndicationResourceAdapter.FillImage(resource.Channel.Image, imageNavigator, manager, this.Settings);
         }
 
-        XPathNavigator textInputNavigator   = this.Navigator.SelectSingleNode("rdf:RDF/rss:textinput", manager);
+        XPathNavigator textInputNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:textinput", manager);
         if (textInputNavigator != null)
         {
-            resource.Channel.TextInput      = new RssTextInput();
+            resource.Channel.TextInput = new RssTextInput();
             Rss090SyndicationResourceAdapter.FillTextInput(resource.Channel.TextInput, textInputNavigator, manager, this.Settings);
         }
 
-        XPathNodeIterator itemIterator      = this.Navigator.Select("rdf:RDF/rss:item", manager);
+        XPathNodeIterator itemIterator = this.Navigator.Select("rdf:RDF/rss:item", manager);
         if (itemIterator is { Count: > 0 })
         {
             int counter = 0;
@@ -83,29 +83,29 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
                     break;
                 }
 
-                XPathNavigator titleNavigator   = itemIterator.Current.SelectSingleNode("rss:title", manager);
-                XPathNavigator linkNavigator    = itemIterator.Current.SelectSingleNode("rss:link", manager);
+                XPathNavigator titleNavigator = itemIterator.Current.SelectSingleNode("rss:title", manager);
+                XPathNavigator linkNavigator = itemIterator.Current.SelectSingleNode("rss:link", manager);
 
                 if (titleNavigator != null)
                 {
-                    item.Title      = titleNavigator.Value;
+                    item.Title = titleNavigator.Value;
                 }
                 if (linkNavigator != null)
                 {
                     if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
                     {
-                        item.Link   = link;
+                        item.Link = link;
                     }
                 }
 
-                SyndicationExtensionAdapter itemExtensionAdapter    = new SyndicationExtensionAdapter(itemIterator.Current, this.Settings);
+                SyndicationExtensionAdapter itemExtensionAdapter = new SyndicationExtensionAdapter(itemIterator.Current, this.Settings);
                 itemExtensionAdapter.Fill(item, manager);
 
                 ((Collection<RssItem>)resource.Channel.Items).Add(item);
             }
         }
 
-        SyndicationExtensionAdapter feedExtensionAdapter    = new SyndicationExtensionAdapter(this.Navigator.SelectSingleNode("rdf:RDF", manager), this.Settings);
+        SyndicationExtensionAdapter feedExtensionAdapter = new SyndicationExtensionAdapter(this.Navigator.SelectSingleNode("rdf:RDF", manager), this.Settings);
         feedExtensionAdapter.Fill(resource, manager);
     }
 
@@ -128,8 +128,8 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         Guard.ArgumentNotNull(settings, "settings");
 
         XPathNavigator descriptionNavigator = navigator.SelectSingleNode("rss:description", manager);
-        XPathNavigator linkNavigator        = navigator.SelectSingleNode("rss:link", manager);
-        XPathNavigator titleNavigator       = navigator.SelectSingleNode("rss:title", manager);
+        XPathNavigator linkNavigator = navigator.SelectSingleNode("rss:link", manager);
+        XPathNavigator titleNavigator = navigator.SelectSingleNode("rss:title", manager);
 
         if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
@@ -140,13 +140,13 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                channel.Link    = link;
+                channel.Link = link;
             }
         }
 
         if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
-            channel.Title       = titleNavigator.Value;
+            channel.Title = titleNavigator.Value;
         }
 
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
@@ -171,15 +171,15 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         Guard.ArgumentNotNull(manager, "manager");
         Guard.ArgumentNotNull(settings, "settings");
 
-        XPathNavigator linkNavigator    = navigator.SelectSingleNode("rss:link", manager);
-        XPathNavigator titleNavigator   = navigator.SelectSingleNode("rss:title", manager);
-        XPathNavigator urlNavigator     = navigator.SelectSingleNode("rss:url", manager);
+        XPathNavigator linkNavigator = navigator.SelectSingleNode("rss:link", manager);
+        XPathNavigator titleNavigator = navigator.SelectSingleNode("rss:title", manager);
+        XPathNavigator urlNavigator = navigator.SelectSingleNode("rss:url", manager);
 
         if (linkNavigator != null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                image.Link      = link;
+                image.Link = link;
             }
         }
 
@@ -187,7 +187,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
-                image.Title     = titleNavigator.Value;
+                image.Title = titleNavigator.Value;
             }
         }
 
@@ -195,7 +195,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
             {
-                image.Url       = url;
+                image.Url = url;
             }
         }
 
@@ -222,15 +222,15 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         Guard.ArgumentNotNull(settings, "settings");
 
         XPathNavigator descriptionNavigator = navigator.SelectSingleNode("rss:description", manager);
-        XPathNavigator linkNavigator        = navigator.SelectSingleNode("rss:link", manager);
-        XPathNavigator nameNavigator        = navigator.SelectSingleNode("rss:name", manager);
-        XPathNavigator titleNavigator       = navigator.SelectSingleNode("rss:title", manager);
+        XPathNavigator linkNavigator = navigator.SelectSingleNode("rss:link", manager);
+        XPathNavigator nameNavigator = navigator.SelectSingleNode("rss:name", manager);
+        XPathNavigator titleNavigator = navigator.SelectSingleNode("rss:title", manager);
 
         if (descriptionNavigator != null)
         {
             if (!string.IsNullOrEmpty(descriptionNavigator.Value))
             {
-                textInput.Description   = descriptionNavigator.Value;
+                textInput.Description = descriptionNavigator.Value;
             }
         }
 
@@ -238,7 +238,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
-                textInput.Link          = link;
+                textInput.Link = link;
             }
         }
 
@@ -246,7 +246,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if (!string.IsNullOrEmpty(nameNavigator.Value))
             {
-                textInput.Name          = nameNavigator.Value;
+                textInput.Name = nameNavigator.Value;
             }
         }
 
@@ -254,7 +254,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
-                textInput.Title         = titleNavigator.Value;
+                textInput.Title = titleNavigator.Value;
             }
         }
 

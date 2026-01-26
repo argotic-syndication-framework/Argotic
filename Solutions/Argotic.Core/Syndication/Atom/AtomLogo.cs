@@ -58,7 +58,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     public AtomLogo(Uri uri)
     {
-        this.Uri    = uri;
+        this.Uri = uri;
     }
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
@@ -170,10 +170,10 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded   = false;
+        bool wasAdded = false;
         Guard.ArgumentNotNull(extension, "extension");
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded    = true;
+        wasAdded = true;
 
         return wasAdded;
     }
@@ -214,7 +214,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
         {
             ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved  = true;
+            wasRemoved = true;
         }
 
         return wasRemoved;
@@ -230,18 +230,18 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded              = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         if (AtomUtility.FillCommonObjectAttributes(this, source))
         {
-            wasLoaded   = true;
+            wasLoaded = true;
         }
         if (!string.IsNullOrEmpty(source.Value))
         {
             if (Uri.TryCreate(source.Value, UriKind.RelativeOrAbsolute, out Uri uri))
             {
-                this.Uri    = uri;
-                wasLoaded   = true;
+                this.Uri = uri;
+                wasLoaded = true;
             }
         }
 
@@ -261,10 +261,10 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(settings, "settings");
-        wasLoaded   = this.Load(source);
+        wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 
@@ -297,14 +297,14 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -328,13 +328,13 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         {
             return 1;
         }
-        AtomLogo value  = obj as AtomLogo;
+        AtomLogo value = obj as AtomLogo;
 
         if (value != null)
         {
-            int result  = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            int result = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            result      = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }
@@ -365,7 +365,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

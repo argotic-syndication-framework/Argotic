@@ -29,7 +29,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private ITunesSyndicationExtensionContext extensionContext  = new ITunesSyndicationExtensionContext();
+    private ITunesSyndicationExtensionContext extensionContext = new ITunesSyndicationExtensionContext();
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
     /// </summary>
@@ -81,7 +81,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(Collection<ITunesCategory> source, Collection<ITunesCategory> target)
     {
-        int result  = 0;
+        int result = 0;
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
@@ -89,7 +89,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result  = result | source[i].CompareTo(target[i]);
+                result = result | source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -120,13 +120,13 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
 
                 if (explicitMaterial == material)
                 {
-                    object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                     if (customAttributes is { Length: > 0 })
                     {
                         EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                        name    = enumerationMetadata.AlternateValue;
+                        name = enumerationMetadata.AlternateValue;
                         break;
                     }
                 }
@@ -153,7 +153,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
             if (fieldInfo.FieldType == typeof(ITunesExplicitMaterial))
             {
                 ITunesExplicitMaterial material = (ITunesExplicitMaterial)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes   = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
                 if (customAttributes is { Length: > 0 })
                 {
@@ -161,7 +161,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
 
                     if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        explicitMaterial    = material;
+                        explicitMaterial = material;
                         break;
                     }
                 }
@@ -198,11 +198,11 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
         Guard.ArgumentNotNull(source, "source");
-        XPathNavigator navigator    = source.CreateNavigator();
-        wasLoaded                   = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args    = new SyndicationExtensionLoadedEventArgs(source, this);
+        XPathNavigator navigator = source.CreateNavigator();
+        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -217,7 +217,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         Guard.ArgumentNotNull(reader, "reader");
-        XPathDocument document  = new XPathDocument(reader);
+        XPathDocument document = new XPathDocument(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -242,14 +242,14 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -273,21 +273,21 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
         {
             return 1;
         }
-        ITunesSyndicationExtension value  = obj as ITunesSyndicationExtension;
+        ITunesSyndicationExtension value = obj as ITunesSyndicationExtension;
 
         if (value != null)
         {
-            int result  = string.Compare(this.Context.Author, value.Context.Author, StringComparison.OrdinalIgnoreCase);
-            result      = result | ITunesSyndicationExtension.CompareSequence(this.Context.Categories, value.Context.Categories);
-            result      = result | this.Context.Duration.CompareTo(value.Context.Duration);
-            result      = result | this.Context.ExplicitMaterial.CompareTo(value.Context.ExplicitMaterial);
-            result      = result | Uri.Compare(this.Context.Image, value.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Context.IsBlocked.CompareTo(value.Context.IsBlocked);
-            result      = result | ComparisonUtility.CompareSequence(this.Context.Keywords, value.Context.Keywords, StringComparison.OrdinalIgnoreCase);
-            result      = result | Uri.Compare(this.Context.NewFeedUrl, value.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-            result      = result | this.Context.Owner.CompareTo(value.Context.Owner);
-            result      = result | string.Compare(this.Context.Subtitle, value.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
-            result      = result | string.Compare(this.Context.Summary, value.Context.Summary, StringComparison.OrdinalIgnoreCase);
+            int result = string.Compare(this.Context.Author, value.Context.Author, StringComparison.OrdinalIgnoreCase);
+            result = result | ITunesSyndicationExtension.CompareSequence(this.Context.Categories, value.Context.Categories);
+            result = result | this.Context.Duration.CompareTo(value.Context.Duration);
+            result = result | this.Context.ExplicitMaterial.CompareTo(value.Context.ExplicitMaterial);
+            result = result | Uri.Compare(this.Context.Image, value.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Context.IsBlocked.CompareTo(value.Context.IsBlocked);
+            result = result | ComparisonUtility.CompareSequence(this.Context.Keywords, value.Context.Keywords, StringComparison.OrdinalIgnoreCase);
+            result = result | Uri.Compare(this.Context.NewFeedUrl, value.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+            result = result | this.Context.Owner.CompareTo(value.Context.Owner);
+            result = result | string.Compare(this.Context.Subtitle, value.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
+            result = result | string.Compare(this.Context.Summary, value.Context.Summary, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

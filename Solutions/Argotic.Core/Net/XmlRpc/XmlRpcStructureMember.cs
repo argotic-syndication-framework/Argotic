@@ -14,7 +14,7 @@ public class XmlRpcStructureMember : IComparable
     /// <summary>
     /// Private member to hold the name of the structure member.
     /// </summary>
-    private string memberName   = string.Empty;
+    private string memberName = string.Empty;
     /// <summary>
     /// Private member to hold the value of the structure member.
     /// </summary>
@@ -37,8 +37,8 @@ public class XmlRpcStructureMember : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public XmlRpcStructureMember(string name, IXmlRpcValue value)
     {
-        this.Name   = name;
-        this.Value  = value;
+        this.Name = name;
+        this.Value = value;
     }
 
     /// <summary>
@@ -91,27 +91,27 @@ public class XmlRpcStructureMember : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded  = false;
+        bool wasLoaded = false;
 
         Guard.ArgumentNotNull(source, "source");
 
         if (source.HasChildren)
         {
-            XPathNavigator nameNavigator    = source.SelectSingleNode("name");
-            XPathNavigator valueNavigator   = source.SelectSingleNode("value");
+            XPathNavigator nameNavigator = source.SelectSingleNode("name");
+            XPathNavigator valueNavigator = source.SelectSingleNode("value");
 
             if (nameNavigator != null && !string.IsNullOrEmpty(nameNavigator.Value))
             {
-                this.Name   = nameNavigator.Value;
-                wasLoaded   = true;
+                this.Name = nameNavigator.Value;
+                wasLoaded = true;
             }
 
             if (valueNavigator != null)
             {
                 if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue value))
                 {
-                    this.Value  = value;
-                    wasLoaded   = true;
+                    this.Value = value;
+                    wasLoaded = true;
                 }
             }
         }
@@ -154,14 +154,14 @@ public class XmlRpcStructureMember : IComparable
     public override string ToString()
     {
         using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings  = new XmlWriterSettings
+        XmlWriterSettings settings = new XmlWriterSettings
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
             OmitXmlDeclaration = true
         };
 
-        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {
             this.WriteTo(writer);
         }
@@ -187,11 +187,11 @@ public class XmlRpcStructureMember : IComparable
             return 1;
         }
 
-        XmlRpcStructureMember value  = obj as XmlRpcStructureMember;
+        XmlRpcStructureMember value = obj as XmlRpcStructureMember;
 
         if (value != null)
         {
-            int result  = string.Compare(this.ToString(), value.ToString(), StringComparison.Ordinal);
+            int result = string.Compare(this.ToString(), value.ToString(), StringComparison.Ordinal);
 
             return result;
         }
@@ -222,7 +222,7 @@ public class XmlRpcStructureMember : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray    = this.ToString().ToCharArray();
+        char[] charArray = this.ToString().ToCharArray();
 
         return charArray.GetHashCode();
     }

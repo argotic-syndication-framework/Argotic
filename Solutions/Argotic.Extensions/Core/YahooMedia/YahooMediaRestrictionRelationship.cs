@@ -13,17 +13,17 @@ public enum YahooMediaRestrictionRelationship
     /// No restriction relationship specified.
     /// </summary>
     [EnumerationMetadata(DisplayName = "", AlternateValue = "")]
-    None    = 0,
+    None = 0,
 
     /// <summary>
     /// Indicates that the type of relationship is permissive.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Allow", AlternateValue = "allow")]
-    Allow    = 1,
+    Allow = 1,
 
     /// <summary>
     /// Indicates that the type of relationship is restrictive.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Deny", AlternateValue = "deny")]
-    Deny    = 2
+    Deny = 2
 }

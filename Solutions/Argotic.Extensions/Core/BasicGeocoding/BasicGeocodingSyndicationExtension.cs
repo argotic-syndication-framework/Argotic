@@ -184,10 +184,9 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public override bool Load(IXPathNavigable source)
     {
-        bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
-        wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
+        bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
         SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
         this.OnExtensionLoaded(args);
 

@@ -37,9 +37,8 @@ internal static class AtomPublishingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
-        XmlNamespaceManager manager = null;
         ArgumentNullException.ThrowIfNull(nameTable);
-        manager = new XmlNamespaceManager(nameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(nameTable);
         manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : ATOM_NAMESPACE);
         manager.AddNamespace("app", ATOMPUB_NAMESPACE);
         manager.AddNamespace("xhtml", XHTML_NAMESPACE);

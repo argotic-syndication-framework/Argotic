@@ -107,14 +107,7 @@ public class XmlRpcClient
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Security", "CA2109:ReviewVisibleEventHandlers", MessageId = "0#")]
     protected virtual void OnMessageSent(XmlRpcMessageSentEventArgs e)
     {
-        EventHandler<XmlRpcMessageSentEventArgs> handler = null;
-
-        handler = this.SendCompleted;
-
-        if (handler != null)
-        {
-            handler(this, e);
-        }
+        this.SendCompleted?.Invoke(this, e);
     }
 
     /// <summary>

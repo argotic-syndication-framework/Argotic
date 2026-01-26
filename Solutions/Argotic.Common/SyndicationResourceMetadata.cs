@@ -300,11 +300,10 @@ public class SyndicationResourceMetadata : IComparable
     protected static bool TryParseAtomPublishingServiceResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
-        XmlNamespaceManager manager = null;
 
         ArgumentNullException.ThrowIfNull(resource);
 
-        manager = new XmlNamespaceManager(resource.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
         manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
         manager.AddNamespace("app", "http://www.w3.org/2007/app");
@@ -340,11 +339,10 @@ public class SyndicationResourceMetadata : IComparable
     protected static bool TryParseBlogMLResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
-        XmlNamespaceManager manager = null;
 
         ArgumentNullException.ThrowIfNull(resource);
 
-        manager = new XmlNamespaceManager(resource.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("blogML", "http://www.blogml.com/2006/09/BlogML");
 
         version = null;
@@ -378,11 +376,10 @@ public class SyndicationResourceMetadata : IComparable
     protected static bool TryParseMicroSummaryGeneratorResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
-        XmlNamespaceManager manager = null;
 
         ArgumentNullException.ThrowIfNull(resource);
 
-        manager = new XmlNamespaceManager(resource.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("micro", "http://www.mozilla.org/microsummaries/0.1");
 
         version = null;
@@ -446,11 +443,10 @@ public class SyndicationResourceMetadata : IComparable
     protected static bool TryParseOpenSearchDescriptionResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
-        XmlNamespaceManager manager = null;
 
         ArgumentNullException.ThrowIfNull(resource);
 
-        manager = new XmlNamespaceManager(resource.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("search", "http://a9.com/-/spec/opensearch/1.1/");
 
         version = null;
@@ -516,11 +512,10 @@ public class SyndicationResourceMetadata : IComparable
     protected static bool TryParseRsdResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
-        XmlNamespaceManager manager = null;
 
         ArgumentNullException.ThrowIfNull(resource);
 
-        manager = new XmlNamespaceManager(resource.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("rsd", "http://archipelago.phrasewise.com/rsd");
 
         version = null;
@@ -560,11 +555,10 @@ public class SyndicationResourceMetadata : IComparable
     protected static bool TryParseRssResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
-        XmlNamespaceManager manager = null;
 
         ArgumentNullException.ThrowIfNull(resource);
 
-        manager = new XmlNamespaceManager(resource.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
         manager.AddNamespace("rss09", "http://my.netscape.com/rdf/simple/0.9/");
         manager.AddNamespace("rss10", "http://purl.org/rss/1.0/");
@@ -573,7 +567,6 @@ public class SyndicationResourceMetadata : IComparable
         if ((navigator = resource.SelectSingleNode("rss", manager)) != null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
-            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
             resourceConformsToFormat = true;
             if (version == null)

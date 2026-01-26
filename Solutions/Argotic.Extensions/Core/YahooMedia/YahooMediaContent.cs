@@ -682,9 +682,8 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        wasLoaded = this.LoadPrimary(source);
+        bool wasLoaded = this.LoadPrimary(source);
 
         if (this.LoadSecondary(source))
         {

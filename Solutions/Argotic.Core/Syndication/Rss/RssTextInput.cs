@@ -317,10 +317,9 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
-        wasLoaded = this.Load(source);
+        bool wasLoaded = this.Load(source);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 

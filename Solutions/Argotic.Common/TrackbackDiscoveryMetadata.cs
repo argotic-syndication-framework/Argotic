@@ -151,11 +151,10 @@ public class TrackbackDiscoveryMetadata : IComparable
     public bool Load(XPathNavigator navigator)
     {
         bool wasLoaded = false;
-        XmlNamespaceManager manager = null;
 
         ArgumentNullException.ThrowIfNull(navigator);
 
-        manager = new XmlNamespaceManager(navigator.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(navigator.NameTable);
         manager.AddNamespace("rdf", RDF_NAMESPACE);
         manager.AddNamespace("dc", DUBLIN_CORE_NAMESPACE);
         manager.AddNamespace("trackback", TRACKBACK_NAMESPACE);

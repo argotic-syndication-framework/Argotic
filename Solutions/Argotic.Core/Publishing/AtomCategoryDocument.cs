@@ -158,14 +158,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
     protected virtual void OnDocumentLoaded(SyndicationResourceLoadedEventArgs e)
     {
-        EventHandler<SyndicationResourceLoadedEventArgs> handler = null;
-
-        handler = this.Loaded;
-
-        if (handler != null)
-        {
-            handler(this, e);
-        }
+        this.Loaded?.Invoke(this, e);
     }
 
     /// <summary>
@@ -782,21 +775,14 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     private static void AsyncLoadCallback(IAsyncResult result)
     {
         System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-        XPathNavigator navigator = null;
-        WebRequest httpWebRequest = null;
-        AtomCategoryDocument document = null;
-        Uri source = null;
-        WebRequestOptions options = null;
-        SyndicationResourceLoadSettings settings = null;
-
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest = parameters[0] as WebRequest;
-            document = parameters[1] as AtomCategoryDocument;
-            source = parameters[2] as Uri;
-            settings = parameters[3] as SyndicationResourceLoadSettings;
-            options = parameters[4] as WebRequestOptions;
+            var httpWebRequest = parameters[0] as WebRequest;
+            var document = parameters[1] as AtomCategoryDocument;
+            var source = parameters[2] as Uri;
+            var settings = parameters[3] as SyndicationResourceLoadSettings;
+            var options = parameters[4] as WebRequestOptions;
             object userToken = parameters[5];
 
             if (document != null)
@@ -821,6 +807,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
                         using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                         {
+                            XPathNavigator navigator;
                             if (encoding == System.Text.Encoding.UTF8)
                             {
                                 navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

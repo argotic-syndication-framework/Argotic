@@ -445,12 +445,11 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static bool FillCommonObjectEntities(IYahooMediaCommonObjectEntities target, XPathNavigator source)
     {
-        bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(target);
         ArgumentNullException.ThrowIfNull(source);
         YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
-        wasLoaded = YahooMediaUtility.FillCommonObjectEntityClasses(target, source, manager);
+        bool wasLoaded = YahooMediaUtility.FillCommonObjectEntityClasses(target, source, manager);
 
         if (YahooMediaUtility.FillCommonObjectEntityCollectionsPrimary(target, source, manager))
         {

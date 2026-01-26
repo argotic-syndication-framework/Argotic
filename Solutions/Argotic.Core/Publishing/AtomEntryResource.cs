@@ -237,21 +237,14 @@ public class AtomEntryResource : AtomEntry
     private static void AsyncLoadCallback(IAsyncResult result)
     {
         System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-        XPathNavigator navigator = null;
-        WebRequest httpWebRequest = null;
-        AtomEntryResource entry = null;
-        Uri source = null;
-        WebRequestOptions options = null;
-        SyndicationResourceLoadSettings settings = null;
-
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest = parameters[0] as WebRequest;
-            entry = parameters[1] as AtomEntryResource;
-            source = parameters[2] as Uri;
-            settings = parameters[3] as SyndicationResourceLoadSettings;
-            options = parameters[4] as WebRequestOptions;
+            var httpWebRequest = parameters[0] as WebRequest;
+            var entry = parameters[1] as AtomEntryResource;
+            var source = parameters[2] as Uri;
+            var settings = parameters[3] as SyndicationResourceLoadSettings;
+            var options = parameters[4] as WebRequestOptions;
             object userToken = parameters[5];
 
             if (entry != null)
@@ -276,6 +269,7 @@ public class AtomEntryResource : AtomEntry
 
                         using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                         {
+                            XPathNavigator navigator;
                             if (encoding == System.Text.Encoding.UTF8)
                             {
                                 navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

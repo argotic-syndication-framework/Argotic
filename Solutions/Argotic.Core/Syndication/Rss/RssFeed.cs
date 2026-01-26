@@ -109,13 +109,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
     protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e)
     {
-        EventHandler<SyndicationResourceLoadedEventArgs> handler = null;
-        handler = this.Loaded;
-
-        if (handler != null)
-        {
-            handler(this, e);
-        }
+        this.Loaded?.Invoke(this, e);
     }
     /// <summary>
     /// Gets or sets the <see cref="RssItem"/> at the specified index.
@@ -611,20 +605,14 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     private static void AsyncLoadCallback(IAsyncResult result)
     {
         System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-        XPathNavigator navigator = null;
-        WebRequest httpWebRequest = null;
-        RssFeed feed = null;
-        Uri source = null;
-        WebRequestOptions options = null;
-        SyndicationResourceLoadSettings settings = null;
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest = parameters[0] as WebRequest;
-            feed = parameters[1] as RssFeed;
-            source = parameters[2] as Uri;
-            settings = parameters[3] as SyndicationResourceLoadSettings;
-            options = parameters[4] as WebRequestOptions;
+            var httpWebRequest = parameters[0] as WebRequest;
+            var feed = parameters[1] as RssFeed;
+            var source = parameters[2] as Uri;
+            var settings = parameters[3] as SyndicationResourceLoadSettings;
+            var options = parameters[4] as WebRequestOptions;
             object userToken = parameters[5];
             if (feed != null)
             {
@@ -647,6 +635,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
 
                         using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
                         {
+                            XPathNavigator navigator;
                             if (encoding == System.Text.Encoding.UTF8)
                             {
                                 navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

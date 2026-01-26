@@ -199,7 +199,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
         bool wasLoaded = Load(source, manager);
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;

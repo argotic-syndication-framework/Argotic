@@ -45,7 +45,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <summary>
     /// Private member to hold a human-readable title for the workspace.
     /// </summary>
-    private AtomTextConstruct workspaceTitle = new AtomTextConstruct();
+    private AtomTextConstruct workspaceTitle = new();
     /// <summary>
     /// Private member to hold the collections associated to this workspace.
     /// </summary>
@@ -403,7 +403,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
 
             if (titleNavigator != null)
             {
-                this.Title = new AtomTextConstruct();
+                this.Title = new();
                 if (this.Title.Load(titleNavigator))
                 {
                     wasLoaded = true;
@@ -414,7 +414,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
             {
                 while (collectionIterator.MoveNext())
                 {
-                    AtomMemberResources collection = new AtomMemberResources();
+                    AtomMemberResources collection = new();
                     if (collection.Load(collectionIterator.Current))
                     {
                         this.AddCollection(collection);
@@ -445,7 +445,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
 
         bool wasLoaded = this.Load(source);
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -508,8 +508,8 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -523,7 +523,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

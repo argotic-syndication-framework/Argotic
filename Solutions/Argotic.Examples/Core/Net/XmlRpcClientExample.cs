@@ -19,13 +19,13 @@ public static class XmlRpcClientExample
     public static void ClassExample()
     {
         // Initialize the XML-RPC client
-        XmlRpcClient client = new XmlRpcClient
+        XmlRpcClient client = new()
         {
-            Host = new Uri("http://bob.example.net/xmlrpcserver")
+            Host = new("http://bob.example.net/xmlrpcserver")
         };
 
         // Construct a Pingback peer-to-peer notification XML-RPC message
-        XmlRpcMessage message = new XmlRpcMessage("pingback.ping")
+        XmlRpcMessage message = new("pingback.ping")
         {
             Encoding = Encoding.UTF8
         };

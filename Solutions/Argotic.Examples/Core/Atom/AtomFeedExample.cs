@@ -21,24 +21,24 @@ public static class AtomFeedExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed = new AtomFeed
+        AtomFeed feed = new()
         {
-            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
-            Title = new AtomTextConstruct("Example Feed"),
-            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+            Id = new(new("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new("Example Feed"),
+            UpdatedOn = new(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
-        feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
+        feed.Links.Add(new(new("http://example.org/")));
+        feed.Links.Add(new(new("/feed"), "self"));
 
-        feed.Authors.Add(new AtomPersonConstruct("John Doe"));
+        feed.Authors.Add(new("John Doe"));
 
-        AtomEntry entry = new AtomEntry
+        AtomEntry entry = new()
         {
-            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
-            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
-            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
-            Summary = new AtomTextConstruct("Some text.")
+            Id = new(new("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new(2003, 12, 13, 18, 30, 2),
+            Summary = new("Some text.")
         };
 
         feed.AddEntry(entry);
@@ -48,7 +48,7 @@ public static class AtomFeedExample
     /// </summary>
     public static void CreateExample()
     {
-        AtomFeed feed = AtomFeed.Create(new Uri("http://news.google.com/?output=atom"));
+        AtomFeed feed = AtomFeed.Create(new("http://news.google.com/?output=atom"));
 
         foreach (AtomEntry entry in feed.Entries)
         {
@@ -63,11 +63,11 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadAsyncExample()
     {
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
-        feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
+        feed.Loaded += new(FeedLoadedCallback);
 
-        feed.LoadAsync(new Uri("http://news.google.com/?output=atom"), null);
+        feed.LoadAsync(new("http://news.google.com/?output=atom"), null);
     }
 
     /// <summary>
@@ -86,9 +86,9 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new XPathDocument("http://news.google.com/?output=atom");
+        XPathDocument source = new("http://news.google.com/?output=atom");
 
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
         feed.Load(source);
 
         foreach (AtomEntry entry in feed.Entries)
@@ -105,7 +105,7 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadStreamExample()
     {
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         using Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read);
         feed.Load(stream);
@@ -124,10 +124,10 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadXmlReaderExample()
     {
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         using Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read);
-        XmlReaderSettings settings = new XmlReaderSettings
+        XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -150,8 +150,8 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadUriExample()
     {
-        AtomFeed feed = new AtomFeed();
-        Uri source = new Uri("http://news.google.com/?output=atom");
+        AtomFeed feed = new();
+        Uri source = new("http://news.google.com/?output=atom");
 
         feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -169,7 +169,7 @@ public static class AtomFeedExample
     /// </summary>
     public static void SaveStreamExample()
     {
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         //  Modify feed state using public properties and methods
 
@@ -182,12 +182,12 @@ public static class AtomFeedExample
     /// </summary>
     public static void SaveXmlWriterExample()
     {
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         //  Modify feed state using public properties and methods
 
         using Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write);
-        XmlWriterSettings settings = new XmlWriterSettings
+        XmlWriterSettings settings = new()
         {
             Indent = true
         };

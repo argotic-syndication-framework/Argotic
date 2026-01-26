@@ -18,7 +18,7 @@ public static class FeedRankSyndicationExtensionExample
     public static void ClassExample()
     {
         // Framework auto-discovers supported extensions based on XML namespace attributes (xmlns) defined on root of resource
-        RssFeed feed = RssFeed.Create(new Uri("http://www.example.com/feed.aspx?format=rss"));
+        RssFeed feed = RssFeed.Create(new("http://www.example.com/feed.aspx?format=rss"));
 
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
         if (feed.Channel.HasExtensions)
@@ -44,7 +44,7 @@ public static class FeedRankSyndicationExtensionExample
 
         // By default the framework will automatically determine what XML namespace attributes (xmlns) to write 
         // on the root of the resource based on the extensions applied to extensible parent and child entities
-        using FileStream stream = new FileStream("Feed.xml", FileMode.Create, FileAccess.Write);
+        using FileStream stream = new("Feed.xml", FileMode.Create, FileAccess.Write);
         feed.Save(stream);
     }
 }

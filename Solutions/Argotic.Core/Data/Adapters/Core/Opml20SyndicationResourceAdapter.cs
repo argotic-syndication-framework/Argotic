@@ -44,7 +44,7 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         ArgumentNullException.ThrowIfNull(resource);
 
-        XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = new(this.Navigator.NameTable);
 
         XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("opml", manager);
         if (documentNavigator != null)
@@ -61,7 +61,7 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
                 int counter = 0;
                 while (outlineIterator.MoveNext())
                 {
-                    OpmlOutline outline = new OpmlOutline();
+                    OpmlOutline outline = new();
                     counter++;
 
                     if (outline.Load(outlineIterator.Current, this.Settings))
@@ -76,7 +76,7 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(documentNavigator, this.Settings);
+            SyndicationExtensionAdapter adapter = new(documentNavigator, this.Settings);
             adapter.Fill(resource, manager);
         }
     }

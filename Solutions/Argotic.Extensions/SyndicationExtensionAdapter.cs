@@ -18,7 +18,7 @@ public class SyndicationExtensionAdapter
     /// <summary>
     /// Private member to hold the XPathNavigator used to configure the load of a syndication extension.
     /// </summary>
-    private readonly SyndicationResourceLoadSettings adapterSettings = new SyndicationResourceLoadSettings();
+    private readonly SyndicationResourceLoadSettings adapterSettings = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtensionAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -45,7 +45,7 @@ public class SyndicationExtensionAdapter
     {
         get
         {
-            Collection<Type> extensions = new Collection<Type>();
+            Collection<Type> extensions = new();
 #if true
             foreach (Type type in Assembly.GetExecutingAssembly()
                         .GetExportedTypes()
@@ -143,7 +143,7 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
     public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types)
     {
-        Collection<ISyndicationExtension> extensions = new Collection<ISyndicationExtension>();
+        Collection<ISyndicationExtension> extensions = new();
         ArgumentNullException.ThrowIfNull(types);
 
         foreach (Type type in types)
@@ -176,7 +176,7 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="namespaces"/> is a null reference.</exception>
     public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types, Dictionary<string, string> namespaces)
     {
-        Collection<ISyndicationExtension> supportedExtensions = new Collection<ISyndicationExtension>();
+        Collection<ISyndicationExtension> supportedExtensions = new();
         ArgumentNullException.ThrowIfNull(types);
         ArgumentNullException.ThrowIfNull(namespaces);
 
@@ -258,7 +258,7 @@ public class SyndicationExtensionAdapter
     public void Fill(IExtensibleSyndicationObject entity)
     {
         ArgumentNullException.ThrowIfNull(entity);
-        XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = new(this.Navigator.NameTable);
 
         this.Fill(entity, manager);
     }
@@ -272,7 +272,7 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public void Fill(IExtensibleSyndicationObject entity, XmlNamespaceManager manager)
     {
-        Collection<ISyndicationExtension> extensions = new Collection<ISyndicationExtension>();
+        Collection<ISyndicationExtension> extensions = new();
         ArgumentNullException.ThrowIfNull(entity);
         ArgumentNullException.ThrowIfNull(manager);
 

@@ -31,13 +31,13 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private YahooMediaSyndicationExtensionContext extensionContext = new YahooMediaSyndicationExtensionContext();
+    private YahooMediaSyndicationExtensionContext extensionContext = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaSyndicationExtension"/> class.
     /// </summary>
     public YahooMediaSyndicationExtension()
-        : base("media", "http://search.yahoo.com/mrss/", new Version("1.1.1"), new Uri("http://search.yahoo.com/mrss"), "Yahoo! Media", "Extends syndication feeds to provide a means of supplementing the enclosure capabilities of feeds.")
+        : base("media", "http://search.yahoo.com/mrss/", new("1.1.1"), new("http://search.yahoo.com/mrss"), "Yahoo! Media", "Extends syndication feeds to provide a means of supplementing the enclosure capabilities of feeds.")
     {
     }
 
@@ -230,7 +230,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -245,7 +245,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -270,8 +270,8 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -285,7 +285,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

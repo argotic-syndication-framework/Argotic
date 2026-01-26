@@ -96,7 +96,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                     {
                         while (categoryIterator.MoveNext())
                         {
-                            AtomCategory category = new AtomCategory();
+                            AtomCategory category = new();
                             if (category.Load(categoryIterator.Current, this.Settings))
                             {
                                 resource.AddCategory(category);
@@ -106,7 +106,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                 }
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(documentNavigator, this.Settings);
+            SyndicationExtensionAdapter adapter = new(documentNavigator, this.Settings);
             adapter.Fill(resource, manager);
         }
     }
@@ -135,7 +135,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                 {
                     while (workspaceIterator.MoveNext())
                     {
-                        AtomWorkspace workspace = new AtomWorkspace();
+                        AtomWorkspace workspace = new();
                         if (workspace.Load(workspaceIterator.Current, this.Settings))
                         {
                             resource.AddWorkspace(workspace);
@@ -144,7 +144,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                 }
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(documentNavigator, this.Settings);
+            SyndicationExtensionAdapter adapter = new(documentNavigator, this.Settings);
             adapter.Fill(resource, manager);
         }
     }

@@ -33,7 +33,7 @@ internal static class PrivilegedConfigurationManager
         {
             if (configurationManagerSyndicationResourceSyncObject == null)
             {
-                Interlocked.CompareExchange(ref configurationManagerSyndicationResourceSyncObject, new object(), null);
+                Interlocked.CompareExchange(ref configurationManagerSyndicationResourceSyncObject, new(), null);
             }
             return configurationManagerSyndicationResourceSyncObject;
         }
@@ -49,7 +49,7 @@ internal static class PrivilegedConfigurationManager
         {
             if (configurationManagerTrackbackSyncObject == null)
             {
-                Interlocked.CompareExchange(ref configurationManagerTrackbackSyncObject, new object(), null);
+                Interlocked.CompareExchange(ref configurationManagerTrackbackSyncObject, new(), null);
             }
             return configurationManagerTrackbackSyncObject;
         }
@@ -65,7 +65,7 @@ internal static class PrivilegedConfigurationManager
         {
             if (configurationManagerXmlRpcSyncObject == null)
             {
-                Interlocked.CompareExchange(ref configurationManagerXmlRpcSyncObject, new object(), null);
+                Interlocked.CompareExchange(ref configurationManagerXmlRpcSyncObject, new(), null);
             }
             return configurationManagerXmlRpcSyncObject;
         }

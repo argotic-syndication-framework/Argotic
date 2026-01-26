@@ -15,7 +15,7 @@ public class GenericSyndicationFeedTest
     {
         string xml = @"<rss xmlns:app=""http:/example.com"" version=""2.0""></rss>";
 
-        GenericSyndicationFeed feed = new GenericSyndicationFeed();
+        GenericSyndicationFeed feed = new();
 
         feed.Load(xml);
         feed.ShouldNotBeSameAs(new GenericSyndicationFeed());

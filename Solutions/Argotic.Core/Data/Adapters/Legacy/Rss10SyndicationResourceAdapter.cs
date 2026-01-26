@@ -44,7 +44,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         ArgumentNullException.ThrowIfNull(resource);
 
-        XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = new(this.Navigator.NameTable);
         manager.AddNamespace("rdf", "http://www.w3.org/1999/02/22-rdf-syntax-ns#");
         manager.AddNamespace("rss", "http://purl.org/rss/1.0/");
 
@@ -57,14 +57,14 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator imageNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:image", manager);
         if (imageNavigator != null)
         {
-            resource.Channel.Image = new RssImage();
+            resource.Channel.Image = new();
             Rss10SyndicationResourceAdapter.FillImage(resource.Channel.Image, imageNavigator, manager, this.Settings);
         }
 
         XPathNavigator textInputNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:textinput", manager);
         if (textInputNavigator != null)
         {
-            resource.Channel.TextInput = new RssTextInput();
+            resource.Channel.TextInput = new();
             Rss10SyndicationResourceAdapter.FillTextInput(resource.Channel.TextInput, textInputNavigator, manager, this.Settings);
         }
 
@@ -74,7 +74,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (itemIterator.MoveNext())
             {
-                RssItem item = new RssItem();
+                RssItem item = new();
                 counter++;
 
                 if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
@@ -104,14 +104,14 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
                     item.Description = itemDescriptionNavigator.Value;
                 }
 
-                SyndicationExtensionAdapter itemExtensionAdapter = new SyndicationExtensionAdapter(itemIterator.Current, this.Settings);
+                SyndicationExtensionAdapter itemExtensionAdapter = new(itemIterator.Current, this.Settings);
                 itemExtensionAdapter.Fill(item, manager);
 
                 ((Collection<RssItem>)resource.Channel.Items).Add(item);
             }
         }
 
-        SyndicationExtensionAdapter feedExtensionAdapter = new SyndicationExtensionAdapter(this.Navigator.SelectSingleNode("rdf:RDF", manager), this.Settings);
+        SyndicationExtensionAdapter feedExtensionAdapter = new(this.Navigator.SelectSingleNode("rdf:RDF", manager), this.Settings);
         feedExtensionAdapter.Fill(resource, manager);
     }
 
@@ -155,7 +155,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             channel.Title = titleNavigator.Value;
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(channel);
     }
 
@@ -205,7 +205,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(image);
     }
 
@@ -264,7 +264,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(textInput);
     }
 }

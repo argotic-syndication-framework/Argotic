@@ -21,21 +21,21 @@ public static class RsdDocumentExample
     /// </summary>
     public static void ClassExample()
     {
-        RsdDocument document = new RsdDocument
+        RsdDocument document = new()
         {
             EngineName = "Blog Munging CMS",
-            EngineLink = new Uri("http://www.blogmunging.com/"),
-            Homepage = new Uri("http://www.userdomain.com/")
+            EngineLink = new("http://www.blogmunging.com/"),
+            Homepage = new("http://www.userdomain.com/")
         };
 
-        document.AddInterface(new RsdApplicationInterface("MetaWeblog", new Uri("http://example.com/xml/rpc/url"), true, "123abc"));
-        document.AddInterface(new RsdApplicationInterface("Blogger", new Uri("http://example.com/xml/rpc/url"), false, "123abc"));
-        document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
-        document.AddInterface(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
+        document.AddInterface(new("MetaWeblog", new("http://example.com/xml/rpc/url"), true, "123abc"));
+        document.AddInterface(new("Blogger", new("http://example.com/xml/rpc/url"), false, "123abc"));
+        document.AddInterface(new("MetaWiki", new("http://example.com/some/other/url"), false, "123abc"));
+        document.AddInterface(new("Antville", new("http://example.com/yet/another/url"), false, "123abc"));
 
-        RsdApplicationInterface conversantApi = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty)
+        RsdApplicationInterface conversantApi = new("Conversant", new("http://example.com/xml/rpc/url"), false, string.Empty)
         {
-            Documentation = new Uri("http://www.conversant.com/docs/api/"),
+            Documentation = new("http://www.conversant.com/docs/api/"),
             Notes = "Additional explanation here."
         };
         conversantApi.Settings.Add("service-specific-setting", "a value");
@@ -47,7 +47,7 @@ public static class RsdDocumentExample
     /// </summary>
     public static void CreateExample()
     {
-        RsdDocument document = RsdDocument.Create(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"));
+        RsdDocument document = RsdDocument.Create(new("http://blog.oppositionallydefiant.com/rsd.axd"));
 
         foreach (RsdApplicationInterface api in document.Interfaces)
         {
@@ -63,11 +63,11 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadAsyncExample()
     {
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
-        document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
+        document.Loaded += new(ResourceLoadedCallback);
 
-        document.LoadAsync(new Uri("http://blog.oppositionallydefiant.com/rsd.axd"), null);
+        document.LoadAsync(new("http://blog.oppositionallydefiant.com/rsd.axd"), null);
     }
 
     /// <summary>
@@ -86,9 +86,9 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new XPathDocument("http://blog.oppositionallydefiant.com/rsd.axd");
+        XPathDocument source = new("http://blog.oppositionallydefiant.com/rsd.axd");
 
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
         document.Load(source);
 
         foreach (RsdApplicationInterface api in document.Interfaces)
@@ -106,7 +106,7 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadStreamExample()
     {
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         using Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read);
         document.Load(stream);
@@ -126,10 +126,10 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadXmlReaderExample()
     {
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         using Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read);
-        XmlReaderSettings settings = new XmlReaderSettings
+        XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -153,8 +153,8 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadUriExample()
     {
-        RsdDocument document = new RsdDocument();
-        Uri source = new Uri("http://blog.oppositionallydefiant.com/rsd.axd");
+        RsdDocument document = new();
+        Uri source = new("http://blog.oppositionallydefiant.com/rsd.axd");
 
         document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -173,7 +173,7 @@ public static class RsdDocumentExample
     /// </summary>
     public static void SaveStreamExample()
     {
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         //  Modify document state using public properties and methods
 
@@ -186,12 +186,12 @@ public static class RsdDocumentExample
     /// </summary>
     public static void SaveXmlWriterExample()
     {
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         //  Modify document state using public properties and methods
 
         using Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write);
-        XmlWriterSettings settings = new XmlWriterSettings
+        XmlWriterSettings settings = new()
         {
             Indent = true
         };

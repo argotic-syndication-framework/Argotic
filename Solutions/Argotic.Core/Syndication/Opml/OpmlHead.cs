@@ -82,7 +82,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <value>
     ///     A <see cref="Uri"/> that represents the http address of the documentation that this OPML document conforms to.
     /// </value>
-    public Uri Documentation { get; } = new Uri("http://www.opml.org/spec2");
+    public Uri Documentation { get; } = new("http://www.opml.org/spec2");
 
     /// <summary>
     /// Gets a collection of line numbers that are expanded within the outline.
@@ -253,7 +253,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        OpmlOwner owner = new OpmlOwner();
+        OpmlOwner owner = new();
         if (owner.Load(source))
         {
             this.Owner = owner;
@@ -292,7 +292,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             }
         }
 
-        OpmlWindow window = new OpmlWindow();
+        OpmlWindow window = new();
         if (window.Load(source))
         {
             this.Window = window;
@@ -317,7 +317,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
         bool wasLoaded = this.Load(source);
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -387,8 +387,8 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -402,7 +402,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

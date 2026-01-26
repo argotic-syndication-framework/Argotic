@@ -78,7 +78,7 @@ public class TrackbackResponse : IComparable
         }
 
         using Stream stream = response.GetResponseStream();
-        XmlReaderSettings settings = new XmlReaderSettings
+        XmlReaderSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Document,
             IgnoreComments = true,
@@ -88,7 +88,7 @@ public class TrackbackResponse : IComparable
         };
 
         using XmlReader reader = XmlReader.Create(stream, settings);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
         XPathNavigator source = document.CreateNavigator();
 
         XPathNavigator responseNavigator = source.SelectSingleNode("response");
@@ -199,8 +199,8 @@ public class TrackbackResponse : IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -214,7 +214,7 @@ public class TrackbackResponse : IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

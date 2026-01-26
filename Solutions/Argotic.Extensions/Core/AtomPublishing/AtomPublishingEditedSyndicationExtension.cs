@@ -29,12 +29,12 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private AtomPublishingEditedSyndicationExtensionContext extensionContext = new AtomPublishingEditedSyndicationExtensionContext();
+    private AtomPublishingEditedSyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtension"/> class.
     /// </summary>
     public AtomPublishingEditedSyndicationExtension()
-        : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Editing", "Extends syndication resource memebers to provide a means of specifying a date construct whose content indicates the last time a resource was edited.")
+        : base("app", "http://www.w3.org/2007/app", new("1.0"), new("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Editing", "Extends syndication resource memebers to provide a means of specifying a date construct whose content indicates the last time a resource was edited.")
     {
     }
     /// <summary>
@@ -90,7 +90,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -105,7 +105,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -129,8 +129,8 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -144,7 +144,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

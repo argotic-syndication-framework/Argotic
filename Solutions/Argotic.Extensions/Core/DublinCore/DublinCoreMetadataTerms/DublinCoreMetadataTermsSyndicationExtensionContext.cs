@@ -2248,7 +2248,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
             {
                 try
                 {
-                    CultureInfo language = new CultureInfo(languageNavigator.Value);
+                    CultureInfo language = new(languageNavigator.Value);
                     this.Language = language;
                     wasLoaded = true;
                 }

@@ -453,7 +453,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
+        XmlNamespaceManager manager = new(source.NameTable);
         XPathNavigator authorNavigator = source.SelectSingleNode("author", manager);
         XPathNavigator commentsNavigator = source.SelectSingleNode("comments", manager);
         XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
@@ -503,7 +503,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (guidNavigator != null)
         {
-            RssGuid guid = new RssGuid();
+            RssGuid guid = new();
             if (guid.Load(guidNavigator))
             {
                 this.Guid = guid;
@@ -522,7 +522,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (sourceNavigator != null)
         {
-            RssSource sourceFeed = new RssSource();
+            RssSource sourceFeed = new();
             if (sourceFeed.Load(sourceNavigator))
             {
                 this.Source = sourceFeed;
@@ -534,7 +534,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             while (categoryIterator.MoveNext())
             {
-                RssCategory category = new RssCategory();
+                RssCategory category = new();
                 if (category.Load(categoryIterator.Current))
                 {
                     this.Categories.Add(category);
@@ -546,7 +546,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             while (enclosureIterator.MoveNext())
             {
-                RssEnclosure enclosure = new RssEnclosure();
+                RssEnclosure enclosure = new();
                 if (enclosure.Load(enclosureIterator.Current))
                 {
                     this.Enclosures.Add(enclosure);
@@ -573,7 +573,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
-        XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
+        XmlNamespaceManager manager = new(source.NameTable);
         XPathNavigator authorNavigator = source.SelectSingleNode("author", manager);
         XPathNavigator commentsNavigator = source.SelectSingleNode("comments", manager);
         XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
@@ -622,7 +622,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (guidNavigator != null)
         {
-            RssGuid guid = new RssGuid();
+            RssGuid guid = new();
             if (guid.Load(guidNavigator, settings))
             {
                 this.Guid = guid;
@@ -641,7 +641,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (sourceNavigator != null)
         {
-            RssSource sourceFeed = new RssSource();
+            RssSource sourceFeed = new();
             if (sourceFeed.Load(sourceNavigator, settings))
             {
                 this.Source = sourceFeed;
@@ -652,7 +652,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             while (categoryIterator.MoveNext())
             {
-                RssCategory category = new RssCategory();
+                RssCategory category = new();
                 if (category.Load(categoryIterator.Current, settings))
                 {
                     this.Categories.Add(category);
@@ -664,14 +664,14 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             while (enclosureIterator.MoveNext())
             {
-                RssEnclosure enclosure = new RssEnclosure();
+                RssEnclosure enclosure = new();
                 if (enclosure.Load(enclosureIterator.Current, settings))
                 {
                     this.Enclosures.Add(enclosure);
                 }
             }
         }
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -743,8 +743,8 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -758,7 +758,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

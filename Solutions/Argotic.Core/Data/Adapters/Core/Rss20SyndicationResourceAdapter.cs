@@ -43,7 +43,7 @@ public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         ArgumentNullException.ThrowIfNull(resource);
 
-        XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = new(this.Navigator.NameTable);
 
         XPathNavigator feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
 
@@ -55,7 +55,7 @@ public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
                 resource.Channel.Load(channelNavigator, this.Settings);
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(feedNavigator, this.Settings);
+            SyndicationExtensionAdapter adapter = new(feedNavigator, this.Settings);
             adapter.Fill(resource, manager);
         }
     }

@@ -53,7 +53,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <summary>
     /// Private member to hold a human-readable title for the collection.
     /// </summary>
-    private AtomTextConstruct collectionTitle = new AtomTextConstruct();
+    private AtomTextConstruct collectionTitle = new();
     /// <summary>
     /// Private member to hold a list of categories that can be applied to members of the collection.
     /// </summary>
@@ -67,7 +67,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// Initializes a new instance of the <see cref="AtomMemberResources"/> class.
     /// </summary>
     public AtomMemberResources()
-        : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Collection", "Extends syndication resource memebers to provide a means of specifying a collection by which new entries may be added to a feed.")
+        : base("app", "http://www.w3.org/2007/app", new("1.0"), new("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Collection", "Extends syndication resource memebers to provide a means of specifying a collection by which new entries may be added to a feed.")
     {
     }
 
@@ -375,7 +375,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         ArgumentNullException.ThrowIfNull(href);
 
-        return new AtomLink(href, "edit");
+        return new(href, "edit");
     }
 
     /// <summary>
@@ -404,7 +404,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         ArgumentNullException.ThrowIfNull(href);
 
-        return new AtomLink(href, "edit-media");
+        return new(href, "edit-media");
     }
 
     /// <summary>
@@ -597,7 +597,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
             if (titleNavigator != null)
             {
-                this.Title = new AtomTextConstruct();
+                this.Title = new();
                 if (this.Title.Load(titleNavigator))
                 {
                     wasLoaded = true;
@@ -608,7 +608,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
             {
                 while (acceptIterator.MoveNext())
                 {
-                    AtomAcceptedMediaRange mediaRange = new AtomAcceptedMediaRange();
+                    AtomAcceptedMediaRange mediaRange = new();
                     if (mediaRange.Load(acceptIterator.Current))
                     {
                         this.Accepts.Add(mediaRange);
@@ -621,7 +621,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
             {
                 while (categoriesIterator.MoveNext())
                 {
-                    AtomCategoryDocument categories = new AtomCategoryDocument();
+                    AtomCategoryDocument categories = new();
                     categories.Load(categoriesIterator.Current);
                     wasLoaded = true;
                 }
@@ -649,7 +649,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
         bool wasLoaded = this.Load(source);
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -681,9 +681,9 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
         if (settings == null)
         {
-            settings = new SyndicationResourceLoadSettings();
+            settings = new();
         }
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator(), settings);
     }
@@ -731,8 +731,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -746,7 +746,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

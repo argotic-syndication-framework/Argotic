@@ -45,7 +45,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         ArgumentNullException.ThrowIfNull(resource);
 
-        XmlNamespaceManager manager = new XmlNamespaceManager(this.Navigator.NameTable);
+        XmlNamespaceManager manager = new(this.Navigator.NameTable);
 
         XPathNavigator feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
 
@@ -57,7 +57,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
                 Rss092SyndicationResourceAdapter.FillChannel(resource.Channel, channelNavigator, manager, this.Settings);
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(feedNavigator, this.Settings);
+            SyndicationExtensionAdapter adapter = new(feedNavigator, this.Settings);
             adapter.Fill(resource, manager);
         }
     }
@@ -94,7 +94,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             category.Value = navigator.Value;
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(category);
     }
 
@@ -157,7 +157,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(cloud);
     }
 
@@ -206,7 +206,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             try
             {
-                CultureInfo language = new CultureInfo(languageNavigator.Value);
+                CultureInfo language = new(languageNavigator.Value);
                 channel.Language = language;
             }
             catch (ArgumentException)
@@ -218,7 +218,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator imageNavigator = navigator.SelectSingleNode("image", manager);
         if (imageNavigator != null)
         {
-            channel.Image = new RssImage();
+            channel.Image = new();
             Rss092SyndicationResourceAdapter.FillImage(channel.Image, imageNavigator, manager, settings);
         }
 
@@ -226,7 +226,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
 
         Rss092SyndicationResourceAdapter.FillChannelCollections(channel, navigator, manager, settings);
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(channel);
     }
 
@@ -299,7 +299,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (itemIterator.MoveNext())
             {
-                RssItem item = new RssItem();
+                RssItem item = new();
                 counter++;
 
                 if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
@@ -379,13 +379,13 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (textInputNavigator != null)
         {
-            channel.TextInput = new RssTextInput();
+            channel.TextInput = new();
             Rss092SyndicationResourceAdapter.FillTextInput(channel.TextInput, textInputNavigator, manager, settings);
         }
 
         if (cloudNavigator != null)
         {
-            channel.Cloud = new RssCloud();
+            channel.Cloud = new();
             Rss092SyndicationResourceAdapter.FillCloud(channel.Cloud, cloudNavigator, manager, settings);
         }
     }
@@ -430,7 +430,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(enclosure);
     }
 
@@ -501,7 +501,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(image);
     }
 
@@ -550,7 +550,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (sourceNavigator != null)
         {
-            item.Source = new RssSource();
+            item.Source = new();
 
             if (sourceNavigator.HasAttributes)
             {
@@ -571,7 +571,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (enclosureIterator.MoveNext())
             {
-                RssEnclosure enclosure = new RssEnclosure();
+                RssEnclosure enclosure = new();
                 Rss092SyndicationResourceAdapter.FillEnclosure(enclosure, enclosureIterator.Current, manager, settings);
 
                 item.Enclosures.Add(enclosure);
@@ -582,14 +582,14 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (categoryIterator.MoveNext())
             {
-                RssCategory category = new RssCategory();
+                RssCategory category = new();
                 Rss092SyndicationResourceAdapter.FillCategory(category, categoryIterator.Current, manager, settings);
 
                 item.Categories.Add(category);
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(item);
     }
 
@@ -645,7 +645,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(navigator, settings);
+        SyndicationExtensionAdapter adapter = new(navigator, settings);
         adapter.Fill(textInput);
     }
 }

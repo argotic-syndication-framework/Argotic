@@ -19,7 +19,7 @@ public class FeedRankSyndicationExtensionTest
     [TestMethod]
     public void FeedRankSyndicationExtensionConstructorTest()
     {
-        FeedRankSyndicationExtension target = new FeedRankSyndicationExtension();
+        FeedRankSyndicationExtension target = new();
         target.ShouldNotBeNull();
         target.ShouldBeOfType<FeedRankSyndicationExtension>();
     }
@@ -59,7 +59,7 @@ public class FeedRankSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
     }
 
@@ -79,7 +79,7 @@ public class FeedRankSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
 
         feed.Channel.Items.Count().ShouldBe(1);
@@ -111,8 +111,8 @@ public class FeedRankSyndicationExtensionTest
     public void FeedRankWriteToTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
-        using StringWriter sw = new StringWriter();
-        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
@@ -176,13 +176,13 @@ public class FeedRankSyndicationExtensionTest
 
     private static FeedRankSyndicationExtension CreateExtension1()
     {
-        FeedRankSyndicationExtension re = new FeedRankSyndicationExtension
+        FeedRankSyndicationExtension re = new()
         {
             Context =
             {
-                Domain = new Uri("http://example.com"),
+                Domain = new("http://example.com"),
                 Label = "Title",
-                Scheme = new Uri("http://example.com/scheme.txt"),
+                Scheme = new("http://example.com/scheme.txt"),
                 Value = 1.0m
             }
         };
@@ -191,13 +191,13 @@ public class FeedRankSyndicationExtensionTest
 
     private static FeedRankSyndicationExtension CreateExtension2()
     {
-        FeedRankSyndicationExtension re = new FeedRankSyndicationExtension
+        FeedRankSyndicationExtension re = new()
         {
             Context =
             {
-                Domain = new Uri("http://example.net"),
+                Domain = new("http://example.net"),
                 Label = "label",
-                Scheme = new Uri("http://example.net/scheme.html"),
+                Scheme = new("http://example.net/scheme.html"),
                 Value = 2.0m
             }
         };
@@ -206,11 +206,11 @@ public class FeedRankSyndicationExtensionTest
 
     public static FeedRankSyndicationExtensionContext CreateContext1()
     {
-        FeedRankSyndicationExtensionContext re = new FeedRankSyndicationExtensionContext
+        FeedRankSyndicationExtensionContext re = new()
         {
-            Domain = new Uri(""),
+            Domain = new(""),
             Label = "",
-            Scheme = new Uri(""),
+            Scheme = new(""),
             Value = 1.0m
         };
         return re;

@@ -13,23 +13,23 @@ public sealed class TrackbackClientNetworkElement : ConfigurationElement
     /// <summary>
     /// Private member to hold the client host configuration property for the element.
     /// </summary>
-    private static readonly ConfigurationProperty configurationSectionHostProperty = new ConfigurationProperty("host", typeof(System.Uri), null, new UriTypeConverter(), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationSectionHostProperty = new("host", typeof(System.Uri), null, new UriTypeConverter(), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold the client default credentials configuration property for the element.
     /// </summary>
-    private static readonly ConfigurationProperty configurationElementDefaultCredentialsProperty = new ConfigurationProperty("defaultCredentials", typeof(bool), false, new BooleanConverter(), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationElementDefaultCredentialsProperty = new("defaultCredentials", typeof(bool), false, new BooleanConverter(), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold the client user name configuration property for the element.
     /// </summary>
-    private static readonly ConfigurationProperty configurationElementUserNameProperty = new ConfigurationProperty("userName", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationElementUserNameProperty = new("userName", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold the client password configuration property for the element.
     /// </summary>
-    private static readonly ConfigurationProperty configurationElementPasswordProperty = new ConfigurationProperty("password", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationElementPasswordProperty = new("password", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold the client domain configuration property for the element.
     /// </summary>
-    private static readonly ConfigurationProperty configurationElementDomainProperty = new ConfigurationProperty("domain", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationElementDomainProperty = new("domain", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold a collection of configuration element properties for the element.
     /// </summary>
@@ -156,11 +156,11 @@ public sealed class TrackbackClientNetworkElement : ConfigurationElement
             {
                 if (!string.IsNullOrEmpty(this.Domain))
                 {
-                    credential = new NetworkCredential(this.UserName, this.Password, this.Domain);
+                    credential = new(this.UserName, this.Password, this.Domain);
                 }
                 else
                 {
-                    credential = new NetworkCredential(this.UserName, this.Password);
+                    credential = new(this.UserName, this.Password);
                 }
             }
 

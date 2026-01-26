@@ -64,7 +64,7 @@ public class FeedSynchronizationSyndicationExtensionContext
 
             if (sharingNavigator != null)
             {
-                FeedSynchronizationSharingInformation sharing = new FeedSynchronizationSharingInformation();
+                FeedSynchronizationSharingInformation sharing = new();
                 if (sharing.Load(sharingNavigator))
                 {
                     this.Sharing = sharing;
@@ -74,7 +74,7 @@ public class FeedSynchronizationSyndicationExtensionContext
 
             if (syncNavigator != null)
             {
-                FeedSynchronizationItem synchronization = new FeedSynchronizationItem();
+                FeedSynchronizationItem synchronization = new();
                 if (synchronization.Load(syncNavigator))
                 {
                     this.Synchronization = synchronization;

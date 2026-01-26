@@ -274,15 +274,15 @@ public class TrackbackMessage : IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        using (StreamWriter writer = new StreamWriter(stream, this.Encoding))
+        using MemoryStream stream = new();
+        using (StreamWriter writer = new(stream, this.Encoding))
         {
             this.WriteTo(writer);
         }
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

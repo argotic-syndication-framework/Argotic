@@ -40,7 +40,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static readonly Version documentVersion = new Version(0, 6);
+    private static readonly Version documentVersion = new(0, 6);
     /// <summary>
     /// Private member to hold HTTP web request used by asynchronous load operations.
     /// </summary>
@@ -52,7 +52,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold header information for the document.
     /// </summary>
-    private ApmlHead documentHead = new ApmlHead();
+    private ApmlHead documentHead = new();
     /// <summary>
     /// Private member to hold the name of the default profile for the document.
     /// </summary>
@@ -284,7 +284,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     public static ApmlDocument Create(Uri source, SyndicationResourceLoadSettings settings)
     {
-        return ApmlDocument.Create(source, new WebRequestOptions(), settings);
+        return ApmlDocument.Create(source, new(), settings);
     }
 
     /// <summary>
@@ -340,7 +340,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     public static ApmlDocument Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
     {
-        return ApmlDocument.Create(source, new WebRequestOptions(credentials, proxy), settings);
+        return ApmlDocument.Create(source, new(credentials, proxy), settings);
     }
 
     /// <summary>
@@ -354,7 +354,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     public static ApmlDocument Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        ApmlDocument syndicationResource = new ApmlDocument();
+        ApmlDocument syndicationResource = new();
         ArgumentNullException.ThrowIfNull(source);
         syndicationResource.Load(source, options, settings);
 
@@ -417,7 +417,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="InvalidOperationException">This <see cref="ApmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
     {
-        this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
+        this.LoadAsync(source, settings, new(), userToken);
     }
 
     /// <summary>
@@ -447,7 +447,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="InvalidOperationException">This <see cref="ApmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
     {
-        this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
+        this.LoadAsync(source, settings, new(credentials, proxy), userToken);
     }
 
     /// <summary>
@@ -475,7 +475,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
-            settings = new SyndicationResourceLoadSettings();
+            settings = new();
         }
 
         if (this.LoadOperationInProgress)
@@ -492,8 +492,8 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
 
         object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
-        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
-        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
+        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new(AsyncLoadCallback), state);
+        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new(AsyncTimeoutCallback), state, settings.Timeout, true);
     }
 
     /// <summary>
@@ -537,8 +537,8 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
                         encoding = settings.CharacterEncoding;
                     }
 
-                    using StreamReader streamReader = new StreamReader(stream, encoding);
-                    XmlReaderSettings readerSettings = new XmlReaderSettings
+                    using StreamReader streamReader = new(stream, encoding);
+                    XmlReaderSettings readerSettings = new()
                     {
                         IgnoreComments = true,
                         IgnoreWhitespace = true,
@@ -555,9 +555,9 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
                     {
                         navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                     }
-                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+                    SyndicationResourceAdapter adapter = new(navigator, settings);
                     adapter.Fill(document, SyndicationContentFormat.Apml);
-                    document.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
+                    document.OnDocumentLoaded(new(navigator, source, options, userToken));
                 }
                 document.LoadOperationInProgress = false;
             }
@@ -681,8 +681,8 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </remarks>
     public XPathNavigator CreateNavigator()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Document,
             Indent = true,
@@ -697,7 +697,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        XPathDocument document = new XPathDocument(stream);
+        XPathDocument document = new(stream);
         return document.CreateNavigator();
     }
 
@@ -740,10 +740,10 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
-            settings = new SyndicationResourceLoadSettings();
+            settings = new();
         }
         XPathNavigator navigator = source.CreateNavigator();
-        this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
+        this.Load(navigator, settings, new(navigator));
     }
 
     /// <summary>
@@ -877,7 +877,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </example>
     public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
     {
-        this.Load(source, new WebRequestOptions(credentials, proxy));
+        this.Load(source, new(credentials, proxy));
     }
 
     /// <summary>
@@ -956,7 +956,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
     {
-        this.Load(source, new WebRequestOptions(credentials, proxy), settings);
+        this.Load(source, new(credentials, proxy), settings);
     }
 
     /// <summary>
@@ -991,7 +991,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
-            settings = new SyndicationResourceLoadSettings();
+            settings = new();
         }
         XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
@@ -1002,7 +1002,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
         }
-        this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
+        this.Load(navigator, settings, new(navigator, source, options));
     }
 
     /// <summary>
@@ -1037,9 +1037,9 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         if (settings == null)
         {
-            settings = new SyndicationResourceSaveSettings();
+            settings = new();
         }
-        XmlWriterSettings writerSettings = new XmlWriterSettings
+        XmlWriterSettings writerSettings = new()
         {
             OmitXmlDeclaration = false,
             Indent = !settings.MinimizeOutputSize,
@@ -1067,7 +1067,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Save(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        this.Save(writer, new SyndicationResourceSaveSettings());
+        this.Save(writer, new());
     }
 
     /// <summary>
@@ -1179,7 +1179,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(navigator);
         ArgumentNullException.ThrowIfNull(settings);
         ArgumentNullException.ThrowIfNull(eventData);
-        SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceAdapter adapter = new(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.Apml);
         this.OnDocumentLoaded(eventData);
     }

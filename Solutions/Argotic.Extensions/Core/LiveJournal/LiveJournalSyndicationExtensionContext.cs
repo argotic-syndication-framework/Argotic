@@ -112,7 +112,7 @@ public class LiveJournalSyndicationExtensionContext
 
             if (moodNavigator != null)
             {
-                LiveJournalMood mood = new LiveJournalMood();
+                LiveJournalMood mood = new();
                 if (mood.Load(moodNavigator))
                 {
                     this.Mood = mood;
@@ -122,7 +122,7 @@ public class LiveJournalSyndicationExtensionContext
 
             if (securityNavigator != null)
             {
-                LiveJournalSecurity security = new LiveJournalSecurity();
+                LiveJournalSecurity security = new();
                 if (security.Load(securityNavigator))
                 {
                     this.Security = security;
@@ -132,7 +132,7 @@ public class LiveJournalSyndicationExtensionContext
 
             if (userPictureNavigator != null)
             {
-                LiveJournalUserPicture userPicture = new LiveJournalUserPicture();
+                LiveJournalUserPicture userPicture = new();
                 if (userPicture.Load(userPictureNavigator))
                 {
                     this.UserPicture = userPicture;

@@ -49,7 +49,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     [TestMethod]
     public void DublinCoreElementSetSyndicationExtensionConstructorTest()
     {
-        DublinCoreElementSetSyndicationExtension target = new DublinCoreElementSetSyndicationExtension();
+        DublinCoreElementSetSyndicationExtension target = new();
         target.ShouldNotBeNull();
         target.ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
     }
@@ -105,7 +105,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
     }
 
@@ -125,7 +125,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
 
         feed.Channel.Items.Count().ShouldBe(1);
@@ -157,8 +157,8 @@ public class DublinCoreElementSetSyndicationExtensionTest
     public void DublinCoreElementSetWriteToTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-        using StringWriter sw = new StringWriter();
-        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
@@ -222,18 +222,18 @@ public class DublinCoreElementSetSyndicationExtensionTest
 
     private static DublinCoreElementSetSyndicationExtension CreateExtension1()
     {
-        DublinCoreElementSetSyndicationExtension dub = new DublinCoreElementSetSyndicationExtension
+        DublinCoreElementSetSyndicationExtension dub = new()
         {
             Context =
             {
                 Contributor = "Helper",
                 Coverage = "US",
                 Creator = "The Big Guy",
-                Date = new DateTime(2010, 8, 1),
+                Date = new(2010, 8, 1),
                 Description = "That kind of thing",
                 Format = "CDROM",
                 Identifier = "MYTESTCDROM-1",
-                Language = new CultureInfo("en-US"),
+                Language = new("en-US"),
                 Publisher = "MeMeMe",
                 Relation = "MYTESTCDROM-2",
                 Rights = "Copyright 2010",
@@ -249,18 +249,18 @@ public class DublinCoreElementSetSyndicationExtensionTest
 
     private static DublinCoreElementSetSyndicationExtension CreateExtension2()
     {
-        DublinCoreElementSetSyndicationExtension dub = new DublinCoreElementSetSyndicationExtension
+        DublinCoreElementSetSyndicationExtension dub = new()
         {
             Context =
             {
                 Contributor = "Helper-er",
                 Coverage = "US",
                 Creator = "The Not-So-Big Guy",
-                Date = new DateTime(2010, 8, 1),
+                Date = new(2010, 8, 1),
                 Description = "This kind of thing",
                 Format = "CDROM",
                 Identifier = "MYTESTCDROM-2",
-                Language = new CultureInfo("en-US"),
+                Language = new("en-US"),
                 Publisher = "MeMyselfI",
                 Relation = "MYTESTCDROM-1",
                 Rights = "Copyright 2010",
@@ -276,16 +276,16 @@ public class DublinCoreElementSetSyndicationExtensionTest
 
     public static DublinCoreElementSetSyndicationExtensionContext CreateContext1()
     {
-        DublinCoreElementSetSyndicationExtensionContext dub = new DublinCoreElementSetSyndicationExtensionContext
+        DublinCoreElementSetSyndicationExtensionContext dub = new()
         {
             Contributor = "",
             Coverage = "",
             Creator = "",
-            Date = new DateTime(2010, 8, 1),
+            Date = new(2010, 8, 1),
             Description = "",
             Format = "",
             Identifier = "",
-            Language = new CultureInfo("US-en"),
+            Language = new("US-en"),
             Publisher = "",
             Relation = "",
             Rights = "",

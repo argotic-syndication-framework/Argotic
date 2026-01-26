@@ -34,7 +34,7 @@ public class TrackbackClient
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
-    private readonly WebRequestOptions clientOptions = new WebRequestOptions();
+    private readonly WebRequestOptions clientOptions = new();
     /// <summary>
     /// Private member to hold a value that specifies the amount of time after which an asynchronous send operation times out.
     /// </summary>
@@ -269,9 +269,9 @@ public class TrackbackClient
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
 
-                TrackbackResponse response = new TrackbackResponse(httpWebResponse);
+                TrackbackResponse response = new(httpWebResponse);
 
-                client.OnMessageSent(new TrackbackMessageSentEventArgs(host, message, response, options, userToken));
+                client.OnMessageSent(new(host, message, response, options, userToken));
 
                 client.SendOperationInProgress = false;
             }
@@ -317,7 +317,7 @@ public class TrackbackClient
         WebRequest webRequest = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
         using WebResponse webResponse = (WebResponse)webRequest.GetResponse();
-        TrackbackResponse response = new TrackbackResponse(webResponse);
+        TrackbackResponse response = new(webResponse);
         return response;
     }
 
@@ -356,9 +356,9 @@ public class TrackbackClient
         asyncHttpWebRequest = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
         object[] state = [asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken];
-        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncSendCallback), state);
+        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new(AsyncSendCallback), state);
 
-        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);
+        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new(AsyncTimeoutCallback), state, this.Timeout, true);
     }
 
     /// <summary>
@@ -400,9 +400,9 @@ public class TrackbackClient
         ArgumentException.ThrowIfNullOrEmpty(userAgent);
         ArgumentNullException.ThrowIfNull(message);
 
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            using StreamWriter writer = new StreamWriter(stream, message.Encoding);
+            using StreamWriter writer = new(stream, message.Encoding);
             message.WriteTo(writer);
             writer.Flush();
 

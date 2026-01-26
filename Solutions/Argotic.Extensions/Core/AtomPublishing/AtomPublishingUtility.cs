@@ -38,7 +38,7 @@ internal static class AtomPublishingUtility
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
-        XmlNamespaceManager manager = new XmlNamespaceManager(nameTable);
+        XmlNamespaceManager manager = new(nameTable);
         manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : ATOM_NAMESPACE);
         manager.AddNamespace("app", ATOMPUB_NAMESPACE);
         manager.AddNamespace("xhtml", XHTML_NAMESPACE);
@@ -104,7 +104,7 @@ internal static class AtomPublishingUtility
         {
             try
             {
-                CultureInfo language = new CultureInfo(source.XmlLang);
+                CultureInfo language = new(source.XmlLang);
                 target.Language = language;
                 wasLoaded = true;
             }

@@ -11,15 +11,15 @@ public sealed class TrackbackClientSection : ConfigurationSection
     /// <summary>
     /// Private member to hold the client timeout configuration property for the section.
     /// </summary>
-    private static readonly ConfigurationProperty configurationSectionTimeoutProperty = new ConfigurationProperty("timeout", typeof(System.TimeSpan), TimeSpan.FromSeconds(15), new TimeSpanConverter(), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationSectionTimeoutProperty = new("timeout", typeof(System.TimeSpan), TimeSpan.FromSeconds(15), new TimeSpanConverter(), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold the client user agent configuration property for the section.
     /// </summary>
-    private static readonly ConfigurationProperty configurationSectionUserAgentProperty = new ConfigurationProperty("agent", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationSectionUserAgentProperty = new("agent", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold the client network configuration property for the section.
     /// </summary>
-    private static readonly ConfigurationProperty configurationSectionNetworkProperty = new ConfigurationProperty("network", typeof(TrackbackClientNetworkElement), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationSectionNetworkProperty = new("network", typeof(TrackbackClientNetworkElement), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold a collection of configuration properties for the section.
     /// </summary>

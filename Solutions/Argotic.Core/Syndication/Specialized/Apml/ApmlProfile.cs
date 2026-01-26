@@ -338,7 +338,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 {
                     while (conceptsIterator.MoveNext())
                     {
-                        ApmlConcept concept = new ApmlConcept();
+                        ApmlConcept concept = new();
                         if (concept.Load(conceptsIterator.Current))
                         {
                             this.ImplicitConcepts.Add(concept);
@@ -352,7 +352,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 {
                     while (sourcesIterator.MoveNext())
                     {
-                        ApmlSource attentionSource = new ApmlSource();
+                        ApmlSource attentionSource = new();
                         if (attentionSource.Load(sourcesIterator.Current))
                         {
                             this.ImplicitSources.Add(attentionSource);
@@ -369,7 +369,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 {
                     while (conceptsIterator.MoveNext())
                     {
-                        ApmlConcept concept = new ApmlConcept();
+                        ApmlConcept concept = new();
                         if (concept.Load(conceptsIterator.Current))
                         {
                             this.ExplicitConcepts.Add(concept);
@@ -383,7 +383,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 {
                     while (sourcesIterator.MoveNext())
                     {
-                        ApmlSource attentionSource = new ApmlSource();
+                        ApmlSource attentionSource = new();
                         if (attentionSource.Load(sourcesIterator.Current))
                         {
                             this.ExplicitSources.Add(attentionSource);
@@ -436,7 +436,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 {
                     while (conceptsIterator.MoveNext())
                     {
-                        ApmlConcept concept = new ApmlConcept();
+                        ApmlConcept concept = new();
                         if (concept.Load(conceptsIterator.Current, settings))
                         {
                             this.ImplicitConcepts.Add(concept);
@@ -450,7 +450,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 {
                     while (sourcesIterator.MoveNext())
                     {
-                        ApmlSource attentionSource = new ApmlSource();
+                        ApmlSource attentionSource = new();
                         if (attentionSource.Load(sourcesIterator.Current, settings))
                         {
                             this.ImplicitSources.Add(attentionSource);
@@ -467,7 +467,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 {
                     while (conceptsIterator.MoveNext())
                     {
-                        ApmlConcept concept = new ApmlConcept();
+                        ApmlConcept concept = new();
                         if (concept.Load(conceptsIterator.Current, settings))
                         {
                             this.ExplicitConcepts.Add(concept);
@@ -481,7 +481,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 {
                     while (sourcesIterator.MoveNext())
                     {
-                        ApmlSource attentionSource = new ApmlSource();
+                        ApmlSource attentionSource = new();
                         if (attentionSource.Load(sourcesIterator.Current, settings))
                         {
                             this.ExplicitSources.Add(attentionSource);
@@ -491,7 +491,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
                 }
             }
         }
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -575,8 +575,8 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -590,7 +590,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

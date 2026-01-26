@@ -29,12 +29,12 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private BlogChannelSyndicationExtensionContext extensionContext = new BlogChannelSyndicationExtensionContext();
+    private BlogChannelSyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogChannelSyndicationExtension"/> class.
     /// </summary>
     public BlogChannelSyndicationExtension()
-        : base("blogChannel", "http://backend.userland.com/blogChannelModule", new Version("1.0"), new Uri("http://backend.userland.com/blogChannelModule"), "Blog Channel", "Extends syndication feeds to provide meta-data common to weblogs.")
+        : base("blogChannel", "http://backend.userland.com/blogChannelModule", new("1.0"), new("http://backend.userland.com/blogChannelModule"), "Blog Channel", "Extends syndication feeds to provide meta-data common to weblogs.")
     {
     }
     /// <summary>
@@ -92,7 +92,7 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -107,7 +107,7 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -132,8 +132,8 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -147,7 +147,7 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

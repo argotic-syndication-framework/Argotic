@@ -18,7 +18,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// <summary>
     /// Private member to hold the title of the web log entity.
     /// </summary>
-    private BlogMLTextConstruct commonObjectBaseTitle = new BlogMLTextConstruct();
+    private BlogMLTextConstruct commonObjectBaseTitle = new();
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
@@ -30,7 +30,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// <summary>
     /// Private member to hold the textual content of the comment.
     /// </summary>
-    private BlogMLTextConstruct commentContent = new BlogMLTextConstruct();
+    private BlogMLTextConstruct commentContent = new();
     /// <summary>
     /// Private member to hold the author's name for the comment.
     /// </summary>
@@ -330,7 +330,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
             XPathNavigator contentNavigator = source.SelectSingleNode("blog:content", manager);
             if (contentNavigator != null)
             {
-                BlogMLTextConstruct content = new BlogMLTextConstruct();
+                BlogMLTextConstruct content = new();
                 if (content.Load(contentNavigator))
                 {
                     this.Content = content;
@@ -398,7 +398,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
             XPathNavigator contentNavigator = source.SelectSingleNode("blog:content", manager);
             if (contentNavigator != null)
             {
-                BlogMLTextConstruct content = new BlogMLTextConstruct();
+                BlogMLTextConstruct content = new();
                 if (content.Load(contentNavigator))
                 {
                     this.Content = content;
@@ -407,7 +407,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -451,8 +451,8 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -466,7 +466,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

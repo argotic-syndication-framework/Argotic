@@ -41,7 +41,7 @@ public class XmlRpcClient
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
-    private readonly WebRequestOptions clientOptions = new WebRequestOptions();
+    private readonly WebRequestOptions clientOptions = new();
     /// <summary>
     /// Private member to hold a value that specifies the amount of time after which an asynchronous send operation times out.
     /// </summary>
@@ -431,7 +431,7 @@ public class XmlRpcClient
                 }
                 else if (string.Compare(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    XmlRpcStructureValue structure = new XmlRpcStructureValue();
+                    XmlRpcStructureValue structure = new();
                     if (structure.Load(source))
                     {
                         value = structure;
@@ -440,7 +440,7 @@ public class XmlRpcClient
                 }
                 else if (string.Compare(navigator.Name, "array", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    XmlRpcArrayValue array = new XmlRpcArrayValue();
+                    XmlRpcArrayValue array = new();
                     if (array.Load(source))
                     {
                         value = array;
@@ -518,9 +518,9 @@ public class XmlRpcClient
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
 
-                XmlRpcResponse response = new XmlRpcResponse(httpWebResponse);
+                XmlRpcResponse response = new(httpWebResponse);
 
-                client.OnMessageSent(new XmlRpcMessageSentEventArgs(host, message, response, options, userToken));
+                client.OnMessageSent(new(host, message, response, options, userToken));
 
                 client.SendOperationInProgress = false;
             }
@@ -566,7 +566,7 @@ public class XmlRpcClient
         WebRequest webRequest = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
         using WebResponse webResponse = (WebResponse)webRequest.GetResponse();
-        XmlRpcResponse response = new XmlRpcResponse(webResponse);
+        XmlRpcResponse response = new(webResponse);
         return response;
     }
 
@@ -605,9 +605,9 @@ public class XmlRpcClient
         asyncHttpWebRequest = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
         object[] state = [asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken];
-        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncSendCallback), state);
+        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new(AsyncSendCallback), state);
 
-        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);
+        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new(AsyncTimeoutCallback), state, this.Timeout, true);
     }
 
     /// <summary>
@@ -649,9 +649,9 @@ public class XmlRpcClient
         ArgumentException.ThrowIfNullOrEmpty(userAgent);
         ArgumentNullException.ThrowIfNull(message);
 
-        using (MemoryStream stream = new MemoryStream())
+        using (MemoryStream stream = new())
         {
-            XmlWriterSettings settings = new XmlWriterSettings
+            XmlWriterSettings settings = new()
             {
                 ConformanceLevel = ConformanceLevel.Document,
                 Encoding = message.Encoding,

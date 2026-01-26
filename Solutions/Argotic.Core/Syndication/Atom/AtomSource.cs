@@ -373,7 +373,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (idNavigator != null)
         {
-            this.Id = new AtomId();
+            this.Id = new();
             if (this.Id.Load(idNavigator))
             {
                 wasLoaded = true;
@@ -382,7 +382,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (titleNavigator != null)
         {
-            this.Title = new AtomTextConstruct();
+            this.Title = new();
             if (this.Title.Load(titleNavigator))
             {
                 wasLoaded = true;
@@ -427,7 +427,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
         bool wasLoaded = this.Load(source);
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -495,8 +495,8 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -510,7 +510,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>
@@ -732,7 +732,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             while (authorIterator.MoveNext())
             {
-                AtomPersonConstruct author = new AtomPersonConstruct();
+                AtomPersonConstruct author = new();
                 if (author.Load(authorIterator.Current))
                 {
                     this.Authors.Add(author);
@@ -745,7 +745,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             while (categoryIterator.MoveNext())
             {
-                AtomCategory category = new AtomCategory();
+                AtomCategory category = new();
                 if (category.Load(categoryIterator.Current))
                 {
                     this.Categories.Add(category);
@@ -758,7 +758,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             while (contributorIterator.MoveNext())
             {
-                AtomPersonConstruct contributor = new AtomPersonConstruct();
+                AtomPersonConstruct contributor = new();
                 if (contributor.Load(contributorIterator.Current))
                 {
                     this.Contributors.Add(contributor);
@@ -771,7 +771,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             while (linkIterator.MoveNext())
             {
-                AtomLink link = new AtomLink();
+                AtomLink link = new();
                 if (link.Load(linkIterator.Current))
                 {
                     this.Links.Add(link);
@@ -807,7 +807,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (generatorNavigator != null)
         {
-            this.Generator = new AtomGenerator();
+            this.Generator = new();
             if (this.Generator.Load(generatorNavigator))
             {
                 wasLoaded = true;
@@ -816,7 +816,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (iconNavigator != null)
         {
-            this.Icon = new AtomIcon();
+            this.Icon = new();
             if (this.Icon.Load(iconNavigator))
             {
                 wasLoaded = true;
@@ -825,7 +825,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (logoNavigator != null)
         {
-            this.Logo = new AtomLogo();
+            this.Logo = new();
             if (this.Logo.Load(logoNavigator))
             {
                 wasLoaded = true;
@@ -834,7 +834,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (rightsNavigator != null)
         {
-            this.Rights = new AtomTextConstruct();
+            this.Rights = new();
             if (this.Rights.Load(rightsNavigator))
             {
                 wasLoaded = true;
@@ -843,7 +843,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (subtitleNavigator != null)
         {
-            this.Subtitle = new AtomTextConstruct();
+            this.Subtitle = new();
             if (this.Subtitle.Load(subtitleNavigator))
             {
                 wasLoaded = true;

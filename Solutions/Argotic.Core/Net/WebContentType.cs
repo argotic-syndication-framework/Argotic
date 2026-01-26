@@ -232,7 +232,7 @@ public class WebContentType : IComparable
     {
         get
         {
-            webContentMediaParameters ??= new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+            webContentMediaParameters ??= new(StringComparer.OrdinalIgnoreCase);
             return webContentMediaParameters;
         }
     }
@@ -300,7 +300,7 @@ public class WebContentType : IComparable
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
     public override string ToString()
     {
-        StringBuilder builder = new StringBuilder();
+        StringBuilder builder = new();
 
         builder.Append(string.Format(null, "{0}/{1}", this.MediaType.ToLowerInvariant(), this.MediaSubtype));
 

@@ -18,7 +18,7 @@ public class TrackbackMessageSentEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold instance of event with no event data.
     /// </summary>
-    private static readonly TrackbackMessageSentEventArgs emptyEventArguments = new TrackbackMessageSentEventArgs();
+    private static readonly TrackbackMessageSentEventArgs emptyEventArguments = new();
     /// <summary>
     /// Private member to hold the Trackback ping request payload that was sent.
     /// </summary>
@@ -34,7 +34,7 @@ public class TrackbackMessageSentEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
-    private readonly WebRequestOptions eventOptions = new WebRequestOptions();
+    private readonly WebRequestOptions eventOptions = new();
     /// <summary>
     /// Private member to hold an object containing state information that was passed to the asynchronous send operation.
     /// </summary>
@@ -68,7 +68,7 @@ public class TrackbackMessageSentEventArgs : EventArgs, IComparable
         eventHost = host;
         eventMessage = message;
         eventResponse = response;
-        eventOptions = new WebRequestOptions(credentials, proxy);
+        eventOptions = new(credentials, proxy);
         eventUserToken = state;
     }
 

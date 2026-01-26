@@ -25,7 +25,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <summary>
     /// Private member to hold the title of the web log entity.
     /// </summary>
-    private BlogMLTextConstruct commonObjectBaseTitle = new BlogMLTextConstruct();
+    private BlogMLTextConstruct commonObjectBaseTitle = new();
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
@@ -37,7 +37,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <summary>
     /// Private member to hold the textual content of the post.
     /// </summary>
-    private BlogMLTextConstruct postContent = new BlogMLTextConstruct();
+    private BlogMLTextConstruct postContent = new();
     /// <summary>
     /// Private member to hold references to authors of the post.
     /// </summary>
@@ -702,7 +702,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
             if (contentNavigator != null)
             {
-                BlogMLTextConstruct content = new BlogMLTextConstruct();
+                BlogMLTextConstruct content = new();
                 if (content.Load(contentNavigator))
                 {
                     this.Content = content;
@@ -712,7 +712,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
             if (postNameNavigator != null)
             {
-                BlogMLTextConstruct name = new BlogMLTextConstruct();
+                BlogMLTextConstruct name = new();
                 if (name.Load(postNameNavigator))
                 {
                     this.Name = name;
@@ -722,7 +722,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
             if (excerptNavigator != null)
             {
-                BlogMLTextConstruct excerpt = new BlogMLTextConstruct();
+                BlogMLTextConstruct excerpt = new();
                 if (excerpt.Load(excerptNavigator))
                 {
                     this.Excerpt = excerpt;
@@ -800,7 +800,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
             if (contentNavigator != null)
             {
-                BlogMLTextConstruct content = new BlogMLTextConstruct();
+                BlogMLTextConstruct content = new();
                 if (content.Load(contentNavigator, settings))
                 {
                     this.Content = content;
@@ -810,7 +810,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
             if (postNameNavigator != null)
             {
-                BlogMLTextConstruct name = new BlogMLTextConstruct();
+                BlogMLTextConstruct name = new();
                 if (name.Load(postNameNavigator, settings))
                 {
                     this.Name = name;
@@ -820,7 +820,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
             if (excerptNavigator != null)
             {
-                BlogMLTextConstruct excerpt = new BlogMLTextConstruct();
+                BlogMLTextConstruct excerpt = new();
                 if (excerpt.Load(excerptNavigator, settings))
                 {
                     this.Excerpt = excerpt;
@@ -833,7 +833,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
                 wasLoaded = true;
             }
         }
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -973,7 +973,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (commentsIterator.MoveNext())
             {
-                BlogMLComment comment = new BlogMLComment();
+                BlogMLComment comment = new();
                 if (comment.Load(commentsIterator.Current))
                 {
                     post.Comments.Add(comment);
@@ -986,7 +986,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (trackbacksIterator.MoveNext())
             {
-                BlogMLTrackback trackback = new BlogMLTrackback();
+                BlogMLTrackback trackback = new();
                 if (trackback.Load(trackbacksIterator.Current))
                 {
                     post.Trackbacks.Add(trackback);
@@ -999,7 +999,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (attachmentsIterator.MoveNext())
             {
-                BlogMLAttachment attachment = new BlogMLAttachment();
+                BlogMLAttachment attachment = new();
                 if (attachment.Load(attachmentsIterator.Current))
                 {
                     post.Attachments.Add(attachment);
@@ -1068,7 +1068,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (commentsIterator.MoveNext())
             {
-                BlogMLComment comment = new BlogMLComment();
+                BlogMLComment comment = new();
                 if (comment.Load(commentsIterator.Current, settings))
                 {
                     post.Comments.Add(comment);
@@ -1081,7 +1081,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (trackbacksIterator.MoveNext())
             {
-                BlogMLTrackback trackback = new BlogMLTrackback();
+                BlogMLTrackback trackback = new();
                 if (trackback.Load(trackbacksIterator.Current, settings))
                 {
                     post.Trackbacks.Add(trackback);
@@ -1094,7 +1094,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             while (attachmentsIterator.MoveNext())
             {
-                BlogMLAttachment attachment = new BlogMLAttachment();
+                BlogMLAttachment attachment = new();
                 if (attachment.Load(attachmentsIterator.Current, settings))
                 {
                     post.Attachments.Add(attachment);
@@ -1127,8 +1127,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -1142,7 +1142,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

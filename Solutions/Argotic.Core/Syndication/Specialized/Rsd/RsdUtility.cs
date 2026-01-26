@@ -36,7 +36,7 @@ internal static class RsdUtility
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
-        XmlNamespaceManager manager = new XmlNamespaceManager(nameTable);
+        XmlNamespaceManager manager = new(nameTable);
         manager.AddNamespace("rsd", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : RSD_NAMESPACE);
 
         return manager;

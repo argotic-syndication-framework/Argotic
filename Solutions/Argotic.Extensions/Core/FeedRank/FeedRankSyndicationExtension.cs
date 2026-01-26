@@ -30,12 +30,12 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private FeedRankSyndicationExtensionContext extensionContext = new FeedRankSyndicationExtensionContext();
+    private FeedRankSyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedRankSyndicationExtension"/> class.
     /// </summary>
     public FeedRankSyndicationExtension()
-        : base("re", "http://purl.org/atompub/rank/1.0", new Version("1.0"), new Uri("http://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt"), "Feed Ranking", "Extends syndication feeds to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, each of which can be used, independently or in conjunction with the others, to establish a sorting order.")
+        : base("re", "http://purl.org/atompub/rank/1.0", new("1.0"), new("http://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt"), "Feed Ranking", "Extends syndication feeds to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, each of which can be used, independently or in conjunction with the others, to establish a sorting order.")
     {
     }
     /// <summary>
@@ -91,7 +91,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -106,7 +106,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -130,8 +130,8 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -145,7 +145,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

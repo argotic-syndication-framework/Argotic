@@ -22,24 +22,24 @@ public static class RssFeedExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed = new RssFeed
+        RssFeed feed = new()
         {
             Channel =
             {
                 Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
+                Link = new("http://dallas.example.com"),
                 Description = "Current headlines from the Dallas Times-Herald newspaper"
             }
         };
 
-        feed.Channel.Categories.Add(new RssCategory("Media"));
-        feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
+        feed.Channel.Categories.Add(new("Media"));
+        feed.Channel.Categories.Add(new("News/Newspapers/Regional/United_States/Texas", "dmoz"));
 
-        feed.Channel.Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
+        feed.Channel.Cloud = new("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
         feed.Channel.Copyright = "Copyright 2007 Dallas Times-Herald";
         feed.Channel.Generator = "Microsoft Spaces v1.1";
 
-        RssImage image = new RssImage(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
+        RssImage image = new(new("http://dallas.example.com"), "Dallas Times-Herald", new("http://dallas.example.com/masthead.gif"))
         {
             Description = "Read the Dallas Times-Herald",
             Height = 32,
@@ -47,10 +47,10 @@ public static class RssFeedExample
         };
         feed.Channel.Image = image;
 
-        feed.Channel.Language = new CultureInfo("en-US");
-        feed.Channel.LastBuildDate = new DateTime(2007, 10, 14, 17, 17, 44);
+        feed.Channel.Language = new("en-US");
+        feed.Channel.LastBuildDate = new(2007, 10, 14, 17, 17, 44);
         feed.Channel.ManagingEditor = "jlehrer@dallas.example.com (Jim Lehrer)";
-        feed.Channel.PublicationDate = new DateTime(2007, 10, 14, 5, 0, 0);
+        feed.Channel.PublicationDate = new(2007, 10, 14, 5, 0, 0);
         feed.Channel.Rating = "(PICS-1.1 \"http://www.rsac.org/ratingsv01.html\" l by \"webmaster@example.com\" on \"2007.01.29T10:09-0800\" r (n 0 s 0 v 0 l 0))";
 
         feed.Channel.SkipDays.Add(DayOfWeek.Saturday);
@@ -62,26 +62,26 @@ public static class RssFeedExample
         feed.Channel.SkipHours.Add(22);
         feed.Channel.SkipHours.Add(23);
 
-        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
+        feed.Channel.TextInput = new("What software are you using?", new("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
         feed.Channel.TimeToLive = 60;
         feed.Channel.Webmaster = "helpdesk@dallas.example.com";
 
-        RssItem item = new RssItem
+        RssItem item = new()
         {
             Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
-            Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),
+            Link = new("http://dallas.example.com/1991/05/02/nolan.htm"),
             Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.",
             Author = "jbb@dallas.example.com (Joe Bob Briggs)"
         };
 
-        item.Categories.Add(new RssCategory("sports"));
-        item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
+        item.Categories.Add(new("sports"));
+        item.Categories.Add(new("1991/Texas Rangers", "rec.sports.baseball"));
 
-        item.Comments = new Uri("http://dallas.example.com/feedback/1983/06/joebob.htm");
-        item.Enclosures.Add(new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
-        item.Guid = new RssGuid("http://dallas.example.com/1983/05/06/joebob.htm");
-        item.PublicationDate = new DateTime(2007, 10, 5, 9, 0, 0);
-        item.Source = new RssSource(new Uri("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");
+        item.Comments = new("http://dallas.example.com/feedback/1983/06/joebob.htm");
+        item.Enclosures.Add(new(24986239L, "audio/mpeg", new("http://dallas.example.com/joebob_050689.mp3")));
+        item.Guid = new("http://dallas.example.com/1983/05/06/joebob.htm");
+        item.PublicationDate = new(2007, 10, 5, 9, 0, 0);
+        item.Source = new(new("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");
 
         feed.Channel.AddItem(item);
     }
@@ -91,7 +91,7 @@ public static class RssFeedExample
     /// </summary>
     public static void CreateExample()
     {
-        RssFeed feed = RssFeed.Create(new Uri("http://news.google.com/?output=rss"));
+        RssFeed feed = RssFeed.Create(new("http://news.google.com/?output=rss"));
 
         foreach (RssItem item in feed.Channel.Items)
         {
@@ -107,11 +107,11 @@ public static class RssFeedExample
     /// </summary>
     public static void LoadAsyncExample()
     {
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
-        feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
+        feed.Loaded += new(FeedLoadedCallback);
 
-        feed.LoadAsync(new Uri("http://news.google.com/?output=rss"), null);
+        feed.LoadAsync(new("http://news.google.com/?output=rss"), null);
     }
 
     /// <summary>
@@ -131,9 +131,9 @@ public static class RssFeedExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new XPathDocument("http://news.google.com/?output=rss");
+        XPathDocument source = new("http://news.google.com/?output=rss");
 
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(source);
 
         foreach (RssItem item in feed.Channel.Items)
@@ -150,7 +150,7 @@ public static class RssFeedExample
     /// </summary>
     public static void LoadStreamExample()
     {
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         using Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read);
         feed.Load(stream);
@@ -169,10 +169,10 @@ public static class RssFeedExample
     /// </summary>
     public static void LoadXmlReaderExample()
     {
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         using Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read);
-        XmlReaderSettings settings = new XmlReaderSettings
+        XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -195,8 +195,8 @@ public static class RssFeedExample
     /// </summary>
     public static void LoadUriExample()
     {
-        RssFeed feed = new RssFeed();
-        Uri source = new Uri("http://news.google.com/?output=rss");
+        RssFeed feed = new();
+        Uri source = new("http://news.google.com/?output=rss");
 
         feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 
@@ -214,7 +214,7 @@ public static class RssFeedExample
     /// </summary>
     public static void SaveStreamExample()
     {
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         //  Modify feed state using public properties and methods
 
@@ -227,12 +227,12 @@ public static class RssFeedExample
     /// </summary>
     public static void SaveXmlWriterExample()
     {
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         //  Modify feed state using public properties and methods
 
         using Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write);
-        XmlWriterSettings settings = new XmlWriterSettings
+        XmlWriterSettings settings = new()
         {
             Indent = true
         };

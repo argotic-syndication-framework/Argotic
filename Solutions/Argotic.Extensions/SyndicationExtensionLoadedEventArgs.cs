@@ -21,7 +21,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold instance of event with no event data.
     /// </summary>
-    private static readonly SyndicationExtensionLoadedEventArgs emptyEventArguments = new SyndicationExtensionLoadedEventArgs();
+    private static readonly SyndicationExtensionLoadedEventArgs emptyEventArguments = new();
     /// <summary>
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication extension.
     /// </summary>

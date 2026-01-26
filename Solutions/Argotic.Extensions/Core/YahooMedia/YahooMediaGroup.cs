@@ -326,7 +326,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
         {
@@ -336,7 +336,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
             {
                 while (contentIterator.MoveNext())
                 {
-                    YahooMediaContent content = new YahooMediaContent();
+                    YahooMediaContent content = new();
                     if (content.Load(contentIterator.Current))
                     {
                         this.Contents.Add(content);
@@ -362,7 +362,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new();
         writer.WriteStartElement("group", extension.XmlNamespace);
 
         foreach (YahooMediaContent content in this.Contents)
@@ -384,8 +384,8 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -399,7 +399,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

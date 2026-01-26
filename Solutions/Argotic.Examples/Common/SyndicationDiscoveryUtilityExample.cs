@@ -20,7 +20,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void SyndicationContentFormatGetExample()
     {
-        Uri url = new Uri("http://feeds.feedburner.com/HanselminutesCompleteMP3?format=xml");
+        Uri url = new("http://feeds.feedburner.com/HanselminutesCompleteMP3?format=xml");
 
         SyndicationContentFormat format = SyndicationDiscoveryUtility.SyndicationContentFormatGet(url);
 
@@ -37,8 +37,8 @@ public static class SyndicationDiscoveryUtilityExample
     {
         //  Certain syndication scenarios involve verifying that one web resource references or 'links' to another web resource.
 
-        Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
-        Uri target = new Uri("http://www.wikimindmap.org/");
+        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        Uri target = new("http://www.wikimindmap.org/");
 
         if (SyndicationDiscoveryUtility.SourceReferencesTarget(source, target))
         {
@@ -51,7 +51,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void UriExistsExample()
     {
-        Uri source = new Uri("http://blog.oppositionallydefiant.com/");
+        Uri source = new("http://blog.oppositionallydefiant.com/");
 
         if (SyndicationDiscoveryUtility.UriExists(source))
         {
@@ -64,7 +64,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void ConditionalGetExample()
     {
-        Uri source = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
+        Uri source = new("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
 
         HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
         httpRequest.AllowAutoRedirect = true;
@@ -93,7 +93,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void TryConditionalGetExample()
     {
-        Uri source = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
+        Uri source = new("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
         HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
         httpRequest.AllowAutoRedirect = true;
         httpRequest.KeepAlive = true;
@@ -121,7 +121,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void LocateDiscoverableSyndicationEndpointsExample()
     {
-        Uri source = new Uri("http://www.dotnetrocks.com/");
+        Uri source = new("http://www.dotnetrocks.com/");
 
         Collection<DiscoverableSyndicationEndpoint> endpoints = SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(source);
 
@@ -143,7 +143,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void IsPingbackEnabledExample()
     {
-        Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
 
         if (SyndicationDiscoveryUtility.IsPingbackEnabled(source))
         {
@@ -156,13 +156,13 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void LocatePingbackNotificationServerExample()
     {
-        Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
 
         Uri pingbackServer = SyndicationDiscoveryUtility.LocatePingbackNotificationServer(source);
         if (pingbackServer != null)
         {
-            Argotic.Net.XmlRpcClient client = new Argotic.Net.XmlRpcClient(pingbackServer);
-            Argotic.Net.XmlRpcMessage message = new Argotic.Net.XmlRpcMessage();
+            Argotic.Net.XmlRpcClient client = new(pingbackServer);
+            Argotic.Net.XmlRpcMessage message = new();
 
             // Build the Pingback XML-RPC message to be sent
 
@@ -175,7 +175,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void IsTrackbackEnabledExample()
     {
-        Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
 
         if (SyndicationDiscoveryUtility.IsTrackbackEnabled(source))
         {
@@ -188,13 +188,13 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void LocateTrackbackNotificationServersExample()
     {
-        Uri source = new Uri("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
 
         Collection<TrackbackDiscoveryMetadata> endpoints = SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(source);
         foreach (TrackbackDiscoveryMetadata endpoint in endpoints)
         {
-            Argotic.Net.TrackbackClient client = new Argotic.Net.TrackbackClient(endpoint.PingUrl);
-            Argotic.Net.TrackbackMessage message = new Argotic.Net.TrackbackMessage();
+            Argotic.Net.TrackbackClient client = new(endpoint.PingUrl);
+            Argotic.Net.TrackbackMessage message = new();
 
             //  Build Trackback url-encoded message to be sent
 

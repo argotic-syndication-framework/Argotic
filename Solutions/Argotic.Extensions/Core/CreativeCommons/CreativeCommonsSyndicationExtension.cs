@@ -29,12 +29,12 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private CreativeCommonsSyndicationExtensionContext extensionContext = new CreativeCommonsSyndicationExtensionContext();
+    private CreativeCommonsSyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="CreativeCommonsSyndicationExtension"/> class.
     /// </summary>
     public CreativeCommonsSyndicationExtension()
-        : base("creativeCommons", "http://backend.userland.com/creativeCommonsRssModule", new Version("1.0"), new Uri("http://backend.userland.com/creativeCommonsRssModule"), "Creative Commons Licensing", "Extends syndication feeds to provide a means of specifying which Creative Commons licenses are applicable.")
+        : base("creativeCommons", "http://backend.userland.com/creativeCommonsRssModule", new("1.0"), new("http://backend.userland.com/creativeCommonsRssModule"), "Creative Commons Licensing", "Extends syndication feeds to provide a means of specifying which Creative Commons licenses are applicable.")
     {
     }
     /// <summary>
@@ -90,7 +90,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -105,7 +105,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -129,8 +129,8 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -144,7 +144,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

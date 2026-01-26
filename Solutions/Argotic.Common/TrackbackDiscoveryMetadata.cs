@@ -153,7 +153,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
         ArgumentNullException.ThrowIfNull(navigator);
 
-        XmlNamespaceManager manager = new XmlNamespaceManager(navigator.NameTable);
+        XmlNamespaceManager manager = new(navigator.NameTable);
         manager.AddNamespace("rdf", RDF_NAMESPACE);
         manager.AddNamespace("dc", DUBLIN_CORE_NAMESPACE);
         manager.AddNamespace("trackback", TRACKBACK_NAMESPACE);
@@ -241,8 +241,8 @@ public class TrackbackDiscoveryMetadata : IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             Indent = true,
             OmitXmlDeclaration = true,
@@ -256,7 +256,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

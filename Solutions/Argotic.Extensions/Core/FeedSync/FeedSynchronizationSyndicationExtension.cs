@@ -31,12 +31,12 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private FeedSynchronizationSyndicationExtensionContext extensionContext = new FeedSynchronizationSyndicationExtensionContext();
+    private FeedSynchronizationSyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtension"/> class.
     /// </summary>
     public FeedSynchronizationSyndicationExtension()
-        : base("sx", "http://feedsync.org/2007/feedsync", new Version("1.0"), new Uri("http://dev.live.com/feedsync/spec/"), "FeedSync", "Extends syndication feeds to enable loosely-cooperating applications to use feeds as the basis for item sharing amongst two or more cross-subscribed feeds.")
+        : base("sx", "http://feedsync.org/2007/feedsync", new("1.0"), new("http://dev.live.com/feedsync/spec/"), "FeedSync", "Extends syndication feeds to enable loosely-cooperating applications to use feeds as the basis for item sharing amongst two or more cross-subscribed feeds.")
     {
     }
     /// <summary>
@@ -92,7 +92,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -107,7 +107,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -131,8 +131,8 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -146,7 +146,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

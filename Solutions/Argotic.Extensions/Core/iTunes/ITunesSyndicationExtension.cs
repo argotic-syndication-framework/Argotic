@@ -29,12 +29,12 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private ITunesSyndicationExtensionContext extensionContext = new ITunesSyndicationExtensionContext();
+    private ITunesSyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
     /// </summary>
     public ITunesSyndicationExtension()
-        : base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new Version("1.0"), new Uri("http://www.apple.com/itunes/store/podcaststechspecs.html#rss"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
+        : base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new("1.0"), new("http://www.apple.com/itunes/store/podcaststechspecs.html#rss"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
     {
     }
     /// <summary>
@@ -201,7 +201,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -216,7 +216,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -240,8 +240,8 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -255,7 +255,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

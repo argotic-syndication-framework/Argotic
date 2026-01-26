@@ -70,7 +70,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
                 int counter = 0;
                 while (profileIterator.MoveNext())
                 {
-                    ApmlProfile profile = new ApmlProfile();
+                    ApmlProfile profile = new();
                     counter++;
 
                     if (profile.Load(profileIterator.Current, this.Settings))
@@ -90,7 +90,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
             {
                 while (applicationIterator.MoveNext())
                 {
-                    ApmlApplication application = new ApmlApplication();
+                    ApmlApplication application = new();
                     if (application.Load(applicationIterator.Current, this.Settings))
                     {
                         resource.Applications.Add(application);
@@ -99,7 +99,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(this.Navigator.SelectSingleNode("apml:APML", manager), this.Settings);
+        SyndicationExtensionAdapter adapter = new(this.Navigator.SelectSingleNode("apml:APML", manager), this.Settings);
         adapter.Fill(resource, manager);
     }
 }

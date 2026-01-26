@@ -19,7 +19,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold instance of event with no event data.
     /// </summary>
-    private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments = new SyndicationResourceLoadedEventArgs();
+    private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments = new();
     /// <summary>
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication resource.
     /// </summary>
@@ -32,7 +32,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
-    private readonly WebRequestOptions eventOptions = new WebRequestOptions();
+    private readonly WebRequestOptions eventOptions = new();
     /// <summary>
     /// Private member to hold an object containing state information that was passed to the asynchronous load operation.
     /// </summary>
@@ -77,7 +77,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
         ArgumentNullException.ThrowIfNull(source);
 
         eventSource = source;
-        eventOptions = new WebRequestOptions(credentials, proxy);
+        eventOptions = new(credentials, proxy);
     }
 
     /// <summary>

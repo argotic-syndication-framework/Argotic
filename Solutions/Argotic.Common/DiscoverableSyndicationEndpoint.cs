@@ -181,7 +181,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
     {
         ArgumentNullException.ThrowIfNull(this.Source);
 
-        return SyndicationEncodingUtility.CreateSafeNavigator(this.Source, new WebRequestOptions());
+        return SyndicationEncodingUtility.CreateSafeNavigator(this.Source, new());
     }
 
     /// <summary>

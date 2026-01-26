@@ -99,7 +99,7 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials));
+        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new(credentials));
         return response != null ? SyndicationDiscoveryUtility.SyndicationContentFormatGet(response.GetResponseStream()) : SyndicationContentFormat.None;
     }
 
@@ -116,7 +116,7 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        XmlReaderSettings settings = new XmlReaderSettings
+        XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
             IgnoreWhitespace = true
@@ -141,7 +141,7 @@ public static class SyndicationDiscoveryUtility
 
         ArgumentNullException.ThrowIfNull(reader);
 
-        XmlDocument document = new XmlDocument();
+        XmlDocument document = new();
         document.Load(reader);
 
         string rootElementName = document.DocumentElement.LocalName;
@@ -225,7 +225,7 @@ public static class SyndicationDiscoveryUtility
     private static Hashtable ExtractHtmlAttributes(string content)
     {
         Hashtable hashtable = [];
-        Regex attributePattern = new Regex("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
+        Regex attributePattern = new("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 
@@ -269,9 +269,9 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<Uri> ExtractUrls(string content)
     {
-        Collection<Uri> results = new Collection<Uri>();
-        Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
-        Regex anchorPattern = new Regex("<a[^>]+", RegexOptions.IgnoreCase);
+        Collection<Uri> results = new();
+        Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
+        Regex anchorPattern = new("<a[^>]+", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 
@@ -374,11 +374,11 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(target);
 
-        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials));
+        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new(credentials));
         if (response != null)
         {
             using Stream stream = response.GetResponseStream();
-            using StreamReader reader = new StreamReader(stream);
+            using StreamReader reader = new(stream);
             Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(reader.ReadToEnd());
 
             if (links is { Count: > 0 })
@@ -441,7 +441,7 @@ public static class SyndicationDiscoveryUtility
 
         try
         {
-            using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+            using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
             if (response is { ContentLength: > 0 })
             {
                 uriExists = true;
@@ -708,8 +708,8 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
     {
-        Collection<DiscoverableSyndicationEndpoint> results = new Collection<DiscoverableSyndicationEndpoint>();
-        Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
+        Collection<DiscoverableSyndicationEndpoint> results = new();
+        Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 
@@ -729,7 +729,7 @@ public static class SyndicationDiscoveryUtility
                 {
                     if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri url))
                     {
-                        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint
+                        DiscoverableSyndicationEndpoint endpoint = new()
                         {
                             Source = url
                         };
@@ -772,7 +772,7 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(reader.ReadToEnd());
     }
 
@@ -822,7 +822,7 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(uri);
 
-        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
         if (webResponse == null)
         {
             return [];
@@ -860,7 +860,7 @@ public static class SyndicationDiscoveryUtility
     public static HtmlAnchor ExtractPingbackNotificationServer(string content)
     {
         HtmlAnchor pingbackAnchor = null;
-        Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
+        Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 
@@ -879,7 +879,7 @@ public static class SyndicationDiscoveryUtility
                 {
                     if (Uri.TryCreate(href, UriKind.Absolute, out Uri uri))
                     {
-                        pingbackAnchor = new HtmlAnchor
+                        pingbackAnchor = new()
                         {
                             HRef = href
                         };
@@ -1010,7 +1010,7 @@ public static class SyndicationDiscoveryUtility
 
         ArgumentNullException.ThrowIfNull(uri);
 
-        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
         if (webResponse == null)
         {
             return false;
@@ -1036,7 +1036,7 @@ public static class SyndicationDiscoveryUtility
 
         if (!isPingbackEnabled)
         {
-            using StreamReader reader = new StreamReader(webResponse.GetResponseStream());
+            using StreamReader reader = new(webResponse.GetResponseStream());
             HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
 
             if (link != null)
@@ -1156,7 +1156,7 @@ public static class SyndicationDiscoveryUtility
 
         ArgumentNullException.ThrowIfNull(uri);
 
-        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
         if (webResponse == null)
         {
             return null;
@@ -1182,7 +1182,7 @@ public static class SyndicationDiscoveryUtility
 
         if (pingbackXmlRpcServer == null)
         {
-            using StreamReader reader = new StreamReader(webResponse.GetResponseStream());
+            using StreamReader reader = new(webResponse.GetResponseStream());
             HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
 
             if (link != null)
@@ -1212,9 +1212,9 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
-        Collection<TrackbackDiscoveryMetadata> results = new Collection<TrackbackDiscoveryMetadata>();
-        Regex rdfPattern = new Regex("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
-        XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
+        Collection<TrackbackDiscoveryMetadata> results = new();
+        Regex rdfPattern = new("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        XmlNamespaceManager manager = new(new NameTable());
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 
@@ -1226,11 +1226,11 @@ public static class SyndicationDiscoveryUtility
 
         foreach (Match embeddedRdf in embeddedRdfs)
         {
-            using StringReader reader = new StringReader(embeddedRdf.Value);
-            XPathDocument document = new XPathDocument(reader);
+            using StringReader reader = new(embeddedRdf.Value);
+            XPathDocument document = new(reader);
             XPathNavigator navigator = document.CreateNavigator();
 
-            TrackbackDiscoveryMetadata trackbackMetadata = new TrackbackDiscoveryMetadata();
+            TrackbackDiscoveryMetadata trackbackMetadata = new();
             if (trackbackMetadata.Load(navigator))
             {
                 results.Add(trackbackMetadata);
@@ -1256,7 +1256,7 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(reader.ReadToEnd());
     }
 
@@ -1410,7 +1410,7 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(uri);
 
-        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
         if (webResponse == null)
         {
             return [];

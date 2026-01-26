@@ -447,7 +447,7 @@ internal static class YahooMediaUtility
     {
         ArgumentNullException.ThrowIfNull(target);
         ArgumentNullException.ThrowIfNull(source);
-        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         bool wasLoaded = YahooMediaUtility.FillCommonObjectEntityClasses(target, source, manager);
 
@@ -475,7 +475,7 @@ internal static class YahooMediaUtility
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new();
         source.Title?.WriteTo(writer, "title");
 
         source.Description?.WriteTo(writer, "description");
@@ -675,7 +675,7 @@ internal static class YahooMediaUtility
 
             if (titleNavigator != null)
             {
-                YahooMediaTextConstruct title = new YahooMediaTextConstruct();
+                YahooMediaTextConstruct title = new();
                 if (title.Load(titleNavigator))
                 {
                     target.Title = title;
@@ -685,7 +685,7 @@ internal static class YahooMediaUtility
 
             if (descriptionNavigator != null)
             {
-                YahooMediaTextConstruct description = new YahooMediaTextConstruct();
+                YahooMediaTextConstruct description = new();
                 if (description.Load(descriptionNavigator))
                 {
                     target.Description = description;
@@ -695,7 +695,7 @@ internal static class YahooMediaUtility
 
             if (copyrightNavigator != null)
             {
-                YahooMediaCopyright copyright = new YahooMediaCopyright();
+                YahooMediaCopyright copyright = new();
                 if (copyright.Load(copyrightNavigator))
                 {
                     target.Copyright = copyright;
@@ -705,7 +705,7 @@ internal static class YahooMediaUtility
 
             if (playerNavigator != null)
             {
-                YahooMediaPlayer player = new YahooMediaPlayer();
+                YahooMediaPlayer player = new();
                 if (player.Load(playerNavigator))
                 {
                     target.Player = player;
@@ -766,7 +766,7 @@ internal static class YahooMediaUtility
             {
                 while (categoryIterator.MoveNext())
                 {
-                    YahooMediaCategory category = new YahooMediaCategory();
+                    YahooMediaCategory category = new();
                     if (category.Load(categoryIterator.Current))
                     {
                         target.Categories.Add(category);
@@ -779,7 +779,7 @@ internal static class YahooMediaUtility
             {
                 while (creditIterator.MoveNext())
                 {
-                    YahooMediaCredit credit = new YahooMediaCredit();
+                    YahooMediaCredit credit = new();
                     if (credit.Load(creditIterator.Current))
                     {
                         target.Credits.Add(credit);
@@ -792,7 +792,7 @@ internal static class YahooMediaUtility
             {
                 while (ratingIterator.MoveNext())
                 {
-                    YahooMediaRating rating = new YahooMediaRating();
+                    YahooMediaRating rating = new();
                     if (rating.Load(ratingIterator.Current))
                     {
                         target.Ratings.Add(rating);
@@ -805,7 +805,7 @@ internal static class YahooMediaUtility
             {
                 while (thumbnailIterator.MoveNext())
                 {
-                    YahooMediaThumbnail thumbnail = new YahooMediaThumbnail();
+                    YahooMediaThumbnail thumbnail = new();
                     if (thumbnail.Load(thumbnailIterator.Current))
                     {
                         target.Thumbnails.Add(thumbnail);
@@ -845,7 +845,7 @@ internal static class YahooMediaUtility
             {
                 while (hashIterator.MoveNext())
                 {
-                    YahooMediaHash hash = new YahooMediaHash();
+                    YahooMediaHash hash = new();
                     if (hash.Load(hashIterator.Current))
                     {
                         target.Hashes.Add(hash);
@@ -858,7 +858,7 @@ internal static class YahooMediaUtility
             {
                 while (restrictionIterator.MoveNext())
                 {
-                    YahooMediaRestriction restriction = new YahooMediaRestriction();
+                    YahooMediaRestriction restriction = new();
                     if (restriction.Load(restrictionIterator.Current))
                     {
                         target.Restrictions.Add(restriction);
@@ -871,7 +871,7 @@ internal static class YahooMediaUtility
             {
                 while (textIterator.MoveNext())
                 {
-                    YahooMediaText text = new YahooMediaText();
+                    YahooMediaText text = new();
                     if (text.Load(textIterator.Current))
                     {
                         target.TextSeries.Add(text);

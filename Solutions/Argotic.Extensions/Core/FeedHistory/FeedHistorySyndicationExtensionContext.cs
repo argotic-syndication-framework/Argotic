@@ -93,7 +93,7 @@ public class FeedHistorySyndicationExtensionContext
 
                     if (!string.IsNullOrEmpty(relAttribute) && FeedHistorySyndicationExtension.LinkRelationTypeByName(relAttribute) != FeedHistoryLinkRelationType.None)
                     {
-                        FeedHistoryLinkRelation relation = new FeedHistoryLinkRelation();
+                        FeedHistoryLinkRelation relation = new();
                         if (relation.Load(linkIterator.Current))
                         {
                             this.Relations.Add(relation);

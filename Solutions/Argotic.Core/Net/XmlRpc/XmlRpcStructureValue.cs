@@ -39,7 +39,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
         {
             while (iterator.MoveNext())
             {
-                XmlRpcStructureMember member = new XmlRpcStructureMember();
+                XmlRpcStructureMember member = new();
                 if (member.Load(iterator.Current))
                 {
                     this.Members.Add(member);
@@ -185,7 +185,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
             {
                 while (memberIterator.MoveNext())
                 {
-                    XmlRpcStructureMember member = new XmlRpcStructureMember();
+                    XmlRpcStructureMember member = new();
                     if (member.Load(memberIterator.Current))
                     {
                         this.Members.Add(member);
@@ -228,8 +228,8 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -243,7 +243,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

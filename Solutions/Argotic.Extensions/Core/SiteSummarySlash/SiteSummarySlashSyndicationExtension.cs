@@ -29,13 +29,13 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private SiteSummarySlashSyndicationExtensionContext extensionContext = new SiteSummarySlashSyndicationExtensionContext();
+    private SiteSummarySlashSyndicationExtensionContext extensionContext = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummarySlashSyndicationExtension"/> class.
     /// </summary>
     public SiteSummarySlashSyndicationExtension()
-        : base("slash", "http://purl.org/rss/1.0/modules/slash/", new Version("1.0"), new Uri("http://web.resource.org/rss/1.0/modules/slash/"), "RDF Site Summary (Slash)", "Extends syndication feeds to provide a means of describing Slash-based site meta-data.")
+        : base("slash", "http://purl.org/rss/1.0/modules/slash/", new("1.0"), new("http://web.resource.org/rss/1.0/modules/slash/"), "RDF Site Summary (Slash)", "Extends syndication feeds to provide a means of describing Slash-based site meta-data.")
     {
     }
 
@@ -94,7 +94,7 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -109,7 +109,7 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -133,8 +133,8 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -148,7 +148,7 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

@@ -31,12 +31,12 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private FeedHistorySyndicationExtensionContext extensionContext = new FeedHistorySyndicationExtensionContext();
+    private FeedHistorySyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedHistorySyndicationExtension"/> class.
     /// </summary>
     public FeedHistorySyndicationExtension()
-        : base("fh", "http://purl.org/syndication/history/1.0", new Version("1.0"), new Uri("http://www.ietf.org/rfc/rfc5005.txt"), "Feed Paging and Archiving", "Extends syndication feeds to provide a means of publishing of entries across one or more feed documents.")
+        : base("fh", "http://purl.org/syndication/history/1.0", new("1.0"), new("http://www.ietf.org/rfc/rfc5005.txt"), "Feed Paging and Archiving", "Extends syndication feeds to provide a means of publishing of entries across one or more feed documents.")
     {
     }
     /// <summary>
@@ -205,7 +205,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -220,7 +220,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -245,8 +245,8 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -260,7 +260,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

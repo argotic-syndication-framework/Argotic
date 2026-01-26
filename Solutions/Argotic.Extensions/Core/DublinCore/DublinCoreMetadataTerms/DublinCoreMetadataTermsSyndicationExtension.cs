@@ -30,12 +30,12 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private DublinCoreMetadataTermsSyndicationExtensionContext extensionContext = new DublinCoreMetadataTermsSyndicationExtensionContext();
+    private DublinCoreMetadataTermsSyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="DublinCoreMetadataTermsSyndicationExtension"/> class.
     /// </summary>
     public DublinCoreMetadataTermsSyndicationExtension()
-        : base("dcterms", "http://purl.org/dc/terms/", new Version("1.0"), new Uri("http://dublincore.org/documents/dcmi-terms/"), "Dublin Core Metadata Terms", "Extends syndication feeds to provide a meta-data term resource description vocabulary.")
+        : base("dcterms", "http://purl.org/dc/terms/", new("1.0"), new("http://dublincore.org/documents/dcmi-terms/"), "Dublin Core Metadata Terms", "Extends syndication feeds to provide a meta-data term resource description vocabulary.")
     {
     }
     /// <summary>
@@ -158,7 +158,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -173,7 +173,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -197,8 +197,8 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -212,7 +212,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

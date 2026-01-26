@@ -28,13 +28,13 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private AtomPublishingControlSyndicationExtensionContext extensionContext = new AtomPublishingControlSyndicationExtensionContext();
+    private AtomPublishingControlSyndicationExtensionContext extensionContext = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingControlSyndicationExtension"/> class.
     /// </summary>
     public AtomPublishingControlSyndicationExtension()
-        : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Control", "Extends syndication resource memebers to provide a means of specifying publishing control of published resources.")
+        : base("app", "http://www.w3.org/2007/app", new("1.0"), new("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Control", "Extends syndication resource memebers to provide a means of specifying publishing control of published resources.")
     {
     }
 
@@ -119,7 +119,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
             wasLoaded = Context.Load(navigator, CreateNamespaceManager(navigator));
         }
 
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -134,7 +134,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -152,10 +152,10 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
 
         if (settings == null)
         {
-            settings = new SyndicationResourceLoadSettings();
+            settings = new();
         }
 
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator(), settings);
     }
@@ -180,8 +180,8 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -195,7 +195,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

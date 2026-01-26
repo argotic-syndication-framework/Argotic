@@ -357,7 +357,7 @@ public class ITunesSyndicationExtensionContext
 
             if (ownerNavigator != null)
             {
-                ITunesOwner owner = new ITunesOwner();
+                ITunesOwner owner = new();
                 if (owner.Load(ownerNavigator))
                 {
                     this.Owner = owner;
@@ -381,7 +381,7 @@ public class ITunesSyndicationExtensionContext
             {
                 while (categoryIterator.MoveNext())
                 {
-                    ITunesCategory category = new ITunesCategory();
+                    ITunesCategory category = new();
                     if (category.Load(categoryIterator.Current))
                     {
                         this.Categories.Add(category);
@@ -479,7 +479,7 @@ public class ITunesSyndicationExtensionContext
         {
             if (int.TryParse(value, out int totalSeconds))
             {
-                timeSpan = new TimeSpan(0, 0, totalSeconds);
+                timeSpan = new(0, 0, totalSeconds);
             }
             else
             {
@@ -497,7 +497,7 @@ public class ITunesSyndicationExtensionContext
             {
                 if (int.TryParse(durationParts[0], out int minutes) && int.TryParse(durationParts[1], out int seconds))
                 {
-                    timeSpan = new TimeSpan(0, minutes, seconds);
+                    timeSpan = new(0, minutes, seconds);
                 }
             }
             else if (durationParts.Length >= 3)
@@ -508,7 +508,7 @@ public class ITunesSyndicationExtensionContext
 
                 if (int.TryParse(hoursValue, out int hours) && int.TryParse(minutesValue, out int minutes) && int.TryParse(secondsValue, out int seconds))
                 {
-                    timeSpan = new TimeSpan(hours, minutes, seconds);
+                    timeSpan = new(hours, minutes, seconds);
                 }
                 else
                 {

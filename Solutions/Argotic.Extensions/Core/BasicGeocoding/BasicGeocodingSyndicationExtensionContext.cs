@@ -79,7 +79,7 @@ public class BasicGeocodingSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is an empty string.</exception>
     public void WriteTo(XmlWriter writer, string xmlNamespace)
     {
-        NumberFormatInfo formatProvider = new NumberFormatInfo();
+        NumberFormatInfo formatProvider = new();
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
 

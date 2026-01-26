@@ -17,7 +17,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
     /// <summary>
     /// Private member to hold the title of the web log entity.
     /// </summary>
-    private BlogMLTextConstruct commonObjectBaseTitle = new BlogMLTextConstruct();
+    private BlogMLTextConstruct commonObjectBaseTitle = new();
     /// <summary>
     /// Private member to hold a unique identifier for the web log entity.
     /// </summary>
@@ -328,7 +328,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
                 wasLoaded = true;
             }
         }
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -369,8 +369,8 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -384,7 +384,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

@@ -19,7 +19,7 @@ public static class GenericSyndicationFeedExample
     /// </summary>
     public static void ClassExample()
     {
-        GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
+        GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new("http://feeds.feedburner.com/OppositionallyDefiant"));
 
         foreach (GenericSyndicationCategory category in feed.Categories)
         {
@@ -60,7 +60,7 @@ public static class GenericSyndicationFeedExample
     /// </summary>
     public static void CreateExample()
     {
-        GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new Uri("http://feeds.feedburner.com/OppositionallyDefiant"));
+        GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new("http://feeds.feedburner.com/OppositionallyDefiant"));
 
         foreach (GenericSyndicationItem item in feed.Items)
         {
@@ -83,8 +83,8 @@ public static class GenericSyndicationFeedExample
     /// </summary>
     public static void LoadUriExample()
     {
-        GenericSyndicationFeed feed = new GenericSyndicationFeed();
-        Uri source = new Uri("http://feeds.feedburner.com/OppositionallyDefiant");
+        GenericSyndicationFeed feed = new();
+        Uri source = new("http://feeds.feedburner.com/OppositionallyDefiant");
 
         feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
 

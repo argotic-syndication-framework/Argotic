@@ -103,7 +103,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable
     {
         get
         {
-            supportedSyndicationExtensions ??= new Collection<Type>();
+            supportedSyndicationExtensions ??= new();
             return supportedSyndicationExtensions;
         }
     }

@@ -145,7 +145,7 @@ internal static class BlogMLUtility
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
         ArgumentNullException.ThrowIfNull(nameTable);
-        XmlNamespaceManager manager = new XmlNamespaceManager(nameTable);
+        XmlNamespaceManager manager = new(nameTable);
         manager.AddNamespace("blog", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
 
         return manager;
@@ -222,7 +222,7 @@ internal static class BlogMLUtility
             XPathNavigator titleNavigator = source.SelectSingleNode("blog:title", manager);
             if (titleNavigator != null)
             {
-                BlogMLTextConstruct title = new BlogMLTextConstruct();
+                BlogMLTextConstruct title = new();
                 if (title.Load(titleNavigator))
                 {
                     target.Title = title;
@@ -308,7 +308,7 @@ internal static class BlogMLUtility
             XPathNavigator titleNavigator = source.SelectSingleNode("blog:title", manager);
             if (titleNavigator != null)
             {
-                BlogMLTextConstruct title = new BlogMLTextConstruct();
+                BlogMLTextConstruct title = new();
                 if (title.Load(titleNavigator, settings))
                 {
                     target.Title = title;

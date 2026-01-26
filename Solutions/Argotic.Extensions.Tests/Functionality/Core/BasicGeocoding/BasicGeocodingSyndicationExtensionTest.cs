@@ -21,7 +21,7 @@ public class BasicGeocodingSyndicationExtensionTest
     [TestMethod]
     public void BasicGeocodingSyndicationExtensionConstructorTest()
     {
-        BasicGeocodingSyndicationExtension target = new BasicGeocodingSyndicationExtension();
+        BasicGeocodingSyndicationExtension target = new();
         target.ShouldNotBeNull();
         target.ShouldBeOfType<BasicGeocodingSyndicationExtension>();
     }
@@ -38,7 +38,7 @@ public class BasicGeocodingSyndicationExtensionTest
     [TestMethod]
     public void BasicGeocodingConvertDecimalToDegreesMinutesSecondsTest()
     {
-        decimal value = new decimal(12.582438888888888888888888888889);
+        decimal value = new(12.582438888888888888888888888889);
         string expected = "12°34'56.78\"";
         string actual = BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(value);
         actual.ShouldBe(expected);
@@ -48,7 +48,7 @@ public class BasicGeocodingSyndicationExtensionTest
     public void ConvertDegreesMinutesSecondsToDecimalTest()
     {
         string degreesMinutesSeconds = "12°34'56.78\"";
-        decimal expected = new decimal(12.582438888888888888888888888889);
+        decimal expected = new(12.582438888888888888888888888889);
         decimal actual = BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal(degreesMinutesSeconds);
         ((double)actual).ShouldBe((double)expected, 3e-6);
     }
@@ -79,14 +79,14 @@ public class BasicGeocodingSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
     }
 
     [TestMethod]
     public void BasicGeocodingCreateXmlTest()
     {
-        BasicGeocodingSyndicationExtension geo = new BasicGeocodingSyndicationExtension
+        BasicGeocodingSyndicationExtension geo = new()
         {
             Context =
             {
@@ -106,7 +106,7 @@ public class BasicGeocodingSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
 
         feed.Channel.Items.Count().ShouldBe(1);
@@ -139,8 +139,8 @@ public class BasicGeocodingSyndicationExtensionTest
     public void BasicGeocodingWriteToTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
-        using StringWriter sw = new StringWriter();
-        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
@@ -204,7 +204,7 @@ public class BasicGeocodingSyndicationExtensionTest
 
     private static BasicGeocodingSyndicationExtension CreateExtension1()
     {
-        BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension
+        BasicGeocodingSyndicationExtension nyc = new()
         {
             Context =
             {
@@ -217,7 +217,7 @@ public class BasicGeocodingSyndicationExtensionTest
 
     private static BasicGeocodingSyndicationExtension CreateExtension2()
     {
-        BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension
+        BasicGeocodingSyndicationExtension nyc = new()
         {
             Context =
             {
@@ -230,7 +230,7 @@ public class BasicGeocodingSyndicationExtensionTest
 
     public static BasicGeocodingSyndicationExtensionContext CreateContext1()
     {
-        BasicGeocodingSyndicationExtensionContext nyc = new BasicGeocodingSyndicationExtensionContext
+        BasicGeocodingSyndicationExtensionContext nyc = new()
         {
             Latitude = 40,
             Longitude = -74

@@ -22,7 +22,7 @@ public class CreativeCommonsSyndicationExtensionTest
     [TestMethod]
     public void CreativeCommonsSyndicationExtensionConstructorTest()
     {
-        CreativeCommonsSyndicationExtension target = new CreativeCommonsSyndicationExtension();
+        CreativeCommonsSyndicationExtension target = new();
         target.ShouldNotBeNull();
         target.ShouldBeOfType<CreativeCommonsSyndicationExtension>();
     }
@@ -62,7 +62,7 @@ public class CreativeCommonsSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
     }
 
@@ -82,7 +82,7 @@ public class CreativeCommonsSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
 
         feed.Channel.Items.Count().ShouldBe(1);
@@ -113,8 +113,8 @@ public class CreativeCommonsSyndicationExtensionTest
     [TestMethod]
     public void CreativeCommonsWriteToTest()
     {
-        using StringWriter sw = new StringWriter();
-        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         CreativeCommonsSyndicationExtension target = CreateExtension1();
         target.WriteTo(writer);
         writer.Flush();
@@ -179,24 +179,24 @@ public class CreativeCommonsSyndicationExtensionTest
 
     private static CreativeCommonsSyndicationExtension CreateExtension1()
     {
-        CreativeCommonsSyndicationExtension nyc = new CreativeCommonsSyndicationExtension();
+        CreativeCommonsSyndicationExtension nyc = new();
 
-        nyc.Context.Licenses.Add(new Uri("http://www.example.com/license1.html"));
-        nyc.Context.Licenses.Add(new Uri("http://www.example.com/license2.html"));
+        nyc.Context.Licenses.Add(new("http://www.example.com/license1.html"));
+        nyc.Context.Licenses.Add(new("http://www.example.com/license2.html"));
         return nyc;
     }
 
     private static CreativeCommonsSyndicationExtension CreateExtension2()
     {
-        CreativeCommonsSyndicationExtension nyc = new CreativeCommonsSyndicationExtension();
-        nyc.Context.Licenses.Add(new Uri("http://www.example.net/license1.html"));
-        nyc.Context.Licenses.Add(new Uri("http://www.example.net/license2.html"));
+        CreativeCommonsSyndicationExtension nyc = new();
+        nyc.Context.Licenses.Add(new("http://www.example.net/license1.html"));
+        nyc.Context.Licenses.Add(new("http://www.example.net/license2.html"));
         return nyc;
     }
 
     public static CreativeCommonsSyndicationExtensionContext CreateContext1()
     {
-        CreativeCommonsSyndicationExtensionContext nyc = new CreativeCommonsSyndicationExtensionContext();
+        CreativeCommonsSyndicationExtensionContext nyc = new();
         return nyc;
     }
 }

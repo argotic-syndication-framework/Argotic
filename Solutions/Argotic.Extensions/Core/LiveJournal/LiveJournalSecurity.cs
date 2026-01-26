@@ -202,7 +202,7 @@ public class LiveJournalSecurity : IComparable
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        LiveJournalSyndicationExtension extension = new LiveJournalSyndicationExtension();
+        LiveJournalSyndicationExtension extension = new();
         writer.WriteStartElement("security", extension.XmlNamespace);
 
         writer.WriteAttributeString("type", LiveJournalSecurity.AccessibilityAsString(this.Accessibility));
@@ -224,8 +224,8 @@ public class LiveJournalSecurity : IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -239,7 +239,7 @@ public class LiveJournalSecurity : IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

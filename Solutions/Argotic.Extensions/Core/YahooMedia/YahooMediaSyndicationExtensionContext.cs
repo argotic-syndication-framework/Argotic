@@ -318,7 +318,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
             {
                 while (contentIterator.MoveNext())
                 {
-                    YahooMediaContent content = new YahooMediaContent();
+                    YahooMediaContent content = new();
                     if (content.Load(contentIterator.Current))
                     {
                         this.AddContent(content);
@@ -331,7 +331,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
             {
                 while (groupIterator.MoveNext())
                 {
-                    YahooMediaGroup group = new YahooMediaGroup();
+                    YahooMediaGroup group = new();
                     if (group.Load(groupIterator.Current))
                     {
                         this.AddGroup(group);

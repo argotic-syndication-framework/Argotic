@@ -21,7 +21,7 @@ public class PheedSyndicationExtensionTest
     [TestMethod]
     public void PheedSyndicationExtensionConstructorTest()
     {
-        PheedSyndicationExtension target = new PheedSyndicationExtension();
+        PheedSyndicationExtension target = new();
         target.ShouldNotBeNull();
         target.ShouldBeOfType<PheedSyndicationExtension>();
     }
@@ -61,19 +61,19 @@ public class PheedSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
     }
 
     [TestMethod]
     public void PheedCreateXmlTest()
     {
-        PheedSyndicationExtension pheed = new PheedSyndicationExtension
+        PheedSyndicationExtension pheed = new()
         {
             Context =
             {
-                Source = new Uri("http://www.example.com"),
-                Thumbnail = new Uri("http://www.example.com/thumbnail.jpg")
+                Source = new("http://www.example.com"),
+                Thumbnail = new("http://www.example.com/thumbnail.jpg")
             }
         };
 
@@ -88,7 +88,7 @@ public class PheedSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
         feed.Channel.Items.Count().ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
@@ -119,8 +119,8 @@ public class PheedSyndicationExtensionTest
     public void PheedWriteToTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
-        using StringWriter sw = new StringWriter();
-        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
@@ -184,12 +184,12 @@ public class PheedSyndicationExtensionTest
 
     private static PheedSyndicationExtension CreateExtension1()
     {
-        PheedSyndicationExtension nyc = new PheedSyndicationExtension
+        PheedSyndicationExtension nyc = new()
         {
             Context =
             {
-                Source = new Uri("http://www.example.com"),
-                Thumbnail = new Uri("http://www.example.com/thumbnail.jpg")
+                Source = new("http://www.example.com"),
+                Thumbnail = new("http://www.example.com/thumbnail.jpg")
             }
         };
 
@@ -198,12 +198,12 @@ public class PheedSyndicationExtensionTest
 
     private static PheedSyndicationExtension CreateExtension2()
     {
-        PheedSyndicationExtension nyc = new PheedSyndicationExtension
+        PheedSyndicationExtension nyc = new()
         {
             Context =
             {
-                Source = new Uri("http://www.example.net"),
-                Thumbnail = new Uri("http://www.example.net/thumbnail.png")
+                Source = new("http://www.example.net"),
+                Thumbnail = new("http://www.example.net/thumbnail.png")
             }
         };
 
@@ -212,10 +212,10 @@ public class PheedSyndicationExtensionTest
 
     public static PheedSyndicationExtensionContext CreateContext1()
     {
-        PheedSyndicationExtensionContext nyc = new PheedSyndicationExtensionContext
+        PheedSyndicationExtensionContext nyc = new()
         {
-            Source = new Uri("http://www.example.com"),
-            Thumbnail = new Uri("http://www.example.com/thumbnail.jpg")
+            Source = new("http://www.example.com"),
+            Thumbnail = new("http://www.example.com/thumbnail.jpg")
         };
 
         return nyc;

@@ -682,7 +682,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
+        YahooMediaSyndicationExtension extension = new();
         writer.WriteStartElement("content", extension.XmlNamespace);
 
         if (this.Url != null)
@@ -769,8 +769,8 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -784,7 +784,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 
@@ -1079,7 +1079,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
             {
                 if (int.TryParse(durationAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int seconds))
                 {
-                    this.Duration = new TimeSpan(0, 0, seconds);
+                    this.Duration = new(0, 0, seconds);
                     wasLoaded = true;
                 }
                 else if (TimeSpan.TryParse(durationAttribute, out TimeSpan duration))
@@ -1111,7 +1111,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
             {
                 try
                 {
-                    CultureInfo language = new CultureInfo(languageAttribute);
+                    CultureInfo language = new(languageAttribute);
                     this.Language = language;
                     wasLoaded = true;
                 }

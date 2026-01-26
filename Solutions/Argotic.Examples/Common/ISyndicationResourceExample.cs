@@ -19,7 +19,7 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static readonly Version feedVersion = new Version(3, 0);
+    private static readonly Version feedVersion = new(3, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -117,8 +117,8 @@ public class MyCustomRssFeed : ISyndicationResource
     /// </remarks>
     public XPathNavigator CreateNavigator()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Document,
             Indent = true,
@@ -133,7 +133,7 @@ public class MyCustomRssFeed : ISyndicationResource
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        XPathDocument document = new XPathDocument(stream);
+        XPathDocument document = new(stream);
         return document.CreateNavigator();
     }
 
@@ -168,10 +168,10 @@ public class MyCustomRssFeed : ISyndicationResource
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
-            settings = new SyndicationResourceLoadSettings();
+            settings = new();
         }
         XPathNavigator navigator = source.CreateNavigator();
-        this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
+        this.Load(navigator, settings, new(navigator));
     }
 
     /// <summary>
@@ -281,7 +281,7 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
     {
-        this.Load(source, new WebRequestOptions(credentials, proxy));
+        this.Load(source, new(credentials, proxy));
     }
 
     /// <summary>
@@ -352,7 +352,7 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
     {
-        this.Load(source, new WebRequestOptions(credentials, proxy), settings);
+        this.Load(source, new(credentials, proxy), settings);
     }
 
     /// <summary>
@@ -387,7 +387,7 @@ public class MyCustomRssFeed : ISyndicationResource
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
-            settings = new SyndicationResourceLoadSettings();
+            settings = new();
         }
         XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
@@ -398,7 +398,7 @@ public class MyCustomRssFeed : ISyndicationResource
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
         }
-        this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source, options));
+        this.Load(navigator, settings, new(navigator, source, options));
     }
 
     /// <summary>
@@ -425,9 +425,9 @@ public class MyCustomRssFeed : ISyndicationResource
 
         if (settings == null)
         {
-            settings = new SyndicationResourceSaveSettings();
+            settings = new();
         }
-        XmlWriterSettings writerSettings = new XmlWriterSettings
+        XmlWriterSettings writerSettings = new()
         {
             OmitXmlDeclaration = false,
             Indent = !settings.MinimizeOutputSize,
@@ -447,7 +447,7 @@ public class MyCustomRssFeed : ISyndicationResource
     public void Save(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        this.Save(writer, new SyndicationResourceSaveSettings());
+        this.Save(writer, new());
     }
 
     /// <summary>
@@ -514,7 +514,7 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <exception cref="InvalidOperationException">This <see cref="MyCustomRssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
     {
-        this.LoadAsync(source, settings, new WebRequestOptions(), userToken);
+        this.LoadAsync(source, settings, new(), userToken);
     }
 
     /// <summary>
@@ -544,7 +544,7 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <exception cref="InvalidOperationException">This <see cref="MyCustomRssFeed"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
     {
-        this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
+        this.LoadAsync(source, settings, new(credentials, proxy), userToken);
     }
 
     /// <summary>
@@ -572,7 +572,7 @@ public class MyCustomRssFeed : ISyndicationResource
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
-            settings = new SyndicationResourceLoadSettings();
+            settings = new();
         }
         if (this.LoadOperationInProgress)
         {
@@ -587,8 +587,8 @@ public class MyCustomRssFeed : ISyndicationResource
 
 
         object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
-        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
-        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
+        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new(AsyncLoadCallback), state);
+        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new(AsyncTimeoutCallback), state, settings.Timeout, true);
     }
 
     /// <summary>
@@ -633,8 +633,8 @@ public class MyCustomRssFeed : ISyndicationResource
                         encoding = settings.CharacterEncoding;
                     }
 
-                    using StreamReader streamReader = new StreamReader(stream, encoding);
-                    XmlReaderSettings readerSettings = new XmlReaderSettings
+                    using StreamReader streamReader = new(stream, encoding);
+                    XmlReaderSettings readerSettings = new()
                     {
                         IgnoreComments = true,
                         IgnoreWhitespace = true,
@@ -655,7 +655,7 @@ public class MyCustomRssFeed : ISyndicationResource
                     //  Code to load the syndication resource using the XPathNavigator would go here.
                     //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed; 
                     //  Otherwise, you would utilize the feed's Load method.
-                    feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
+                    feed.OnFeedLoaded(new(navigator, source, options, userToken));
                 }
                 feed.LoadOperationInProgress = false;
             }

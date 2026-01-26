@@ -30,12 +30,12 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private BasicGeocodingSyndicationExtensionContext extensionContext = new BasicGeocodingSyndicationExtensionContext();
+    private BasicGeocodingSyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtension"/> class.
     /// </summary>
     public BasicGeocodingSyndicationExtension()
-        : base("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#", new Version("1.0"), new Uri("http://www.w3.org/2003/01/geo/"), "Basic Geocoding Vocabulary", "Extends syndication feeds to provide a means of representing latitude, longitude and other information about spatially-located things.")
+        : base("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#", new("1.0"), new("http://www.w3.org/2003/01/geo/"), "Basic Geocoding Vocabulary", "Extends syndication feeds to provide a means of representing latitude, longitude and other information about spatially-located things.")
     {
     }
     /// <summary>
@@ -186,7 +186,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -201,7 +201,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
         //			return this.Load(document);
@@ -227,8 +227,8 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -242,7 +242,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

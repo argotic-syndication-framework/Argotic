@@ -16,26 +16,26 @@ public static class AtomIdExample
     /// </summary>
     public static void ClassExample()
     {
-        AtomFeed feed = new AtomFeed
+        AtomFeed feed = new()
         {
             //  Identifies the feed using a universally unique and permanent URI
-            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
-            Title = new AtomTextConstruct("Example Feed"),
-            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
+            Id = new(new("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new("Example Feed"),
+            UpdatedOn = new(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
-        feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
+        feed.Links.Add(new(new("http://example.org/")));
+        feed.Links.Add(new(new("/feed"), "self"));
 
-        feed.Authors.Add(new AtomPersonConstruct("John Doe"));
+        feed.Authors.Add(new("John Doe"));
 
-        AtomEntry entry = new AtomEntry
+        AtomEntry entry = new()
         {
             //  Identifies the entry using a universally unique and permanent URI
-            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
-            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
-            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
-            Summary = new AtomTextConstruct("Some text.")
+            Id = new(new("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new(2003, 12, 13, 18, 30, 2),
+            Summary = new("Some text.")
         };
 
         feed.AddEntry(entry);

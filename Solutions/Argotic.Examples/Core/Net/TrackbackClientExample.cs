@@ -19,13 +19,13 @@ public static class TrackbackClientExample
     public static void ClassExample()
     {
         // Initialize the Trackback peer-to-peer notification protocol client
-        TrackbackClient client = new TrackbackClient
+        TrackbackClient client = new()
         {
-            Host = new Uri("http://www.example.com/trackback/5")
+            Host = new("http://www.example.com/trackback/5")
         };
 
         // Construct the trackback message to be sent
-        TrackbackMessage message = new TrackbackMessage(new Uri("http://www.bar.com/"))
+        TrackbackMessage message = new(new("http://www.bar.com/"))
         {
             Encoding = Encoding.UTF8,
             WeblogName = "Foo",

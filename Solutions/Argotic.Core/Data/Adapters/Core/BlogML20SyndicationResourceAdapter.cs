@@ -78,7 +78,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
                 if (titleNavigator != null)
                 {
-                    BlogMLTextConstruct title = new BlogMLTextConstruct();
+                    BlogMLTextConstruct title = new();
                     if (title.Load(titleNavigator))
                     {
                         resource.Title = title;
@@ -87,7 +87,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
                 if (subtitleNavigator != null)
                 {
-                    BlogMLTextConstruct subtitle = new BlogMLTextConstruct();
+                    BlogMLTextConstruct subtitle = new();
                     if (subtitle.Load(subtitleNavigator))
                     {
                         resource.Subtitle = subtitle;
@@ -97,7 +97,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
                 BlogML20SyndicationResourceAdapter.FillDocumentCollections(resource, blogNavigator, manager, this.Settings);
             }
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(blogNavigator, this.Settings);
+            SyndicationExtensionAdapter adapter = new(blogNavigator, this.Settings);
             adapter.Fill(resource, manager);
         }
     }
@@ -132,7 +132,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (authorsIterator.MoveNext())
             {
-                BlogMLAuthor author = new BlogMLAuthor();
+                BlogMLAuthor author = new();
                 if (author.Load(authorsIterator.Current, settings))
                 {
                     document.Authors.Add(author);
@@ -161,7 +161,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (categoriesIterator.MoveNext())
             {
-                BlogMLCategory category = new BlogMLCategory();
+                BlogMLCategory category = new();
                 if (category.Load(categoriesIterator.Current, settings))
                 {
                     document.Categories.Add(category);
@@ -174,7 +174,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (postsIterator.MoveNext())
             {
-                BlogMLPost post = new BlogMLPost();
+                BlogMLPost post = new();
                 counter++;
 
                 if (post.Load(postsIterator.Current, settings))

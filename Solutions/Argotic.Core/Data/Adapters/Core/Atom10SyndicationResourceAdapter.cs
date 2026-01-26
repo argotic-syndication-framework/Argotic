@@ -79,13 +79,13 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (idNavigator != null)
             {
-                resource.Id = new AtomId();
+                resource.Id = new();
                 resource.Id.Load(idNavigator, this.Settings);
             }
 
             if (titleNavigator != null)
             {
-                resource.Title = new AtomTextConstruct();
+                resource.Title = new();
                 resource.Title.Load(titleNavigator, this.Settings);
             }
 
@@ -100,7 +100,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
             Atom10SyndicationResourceAdapter.FillFeedOptionals(resource, feedNavigator, manager, this.Settings);
             Atom10SyndicationResourceAdapter.FillFeedCollections(resource, feedNavigator, manager, this.Settings);
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(feedNavigator, this.Settings);
+            SyndicationExtensionAdapter adapter = new(feedNavigator, this.Settings);
             adapter.Fill(resource, manager);
         }
     }
@@ -133,13 +133,13 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (idNavigator != null)
         {
-            entry.Id = new AtomId();
+            entry.Id = new();
             entry.Id.Load(idNavigator, settings);
         }
 
         if (titleNavigator != null)
         {
-            entry.Title = new AtomTextConstruct();
+            entry.Title = new();
             entry.Title.Load(titleNavigator, settings);
         }
 
@@ -154,7 +154,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         Atom10SyndicationResourceAdapter.FillEntryOptionals(entry, source, manager, settings);
         Atom10SyndicationResourceAdapter.FillEntryCollections(entry, source, manager, settings);
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(entry, manager);
     }
 
@@ -188,7 +188,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (authorIterator.MoveNext())
             {
-                AtomPersonConstruct author = new AtomPersonConstruct();
+                AtomPersonConstruct author = new();
                 if (author.Load(authorIterator.Current, settings))
                 {
                     entry.Authors.Add(author);
@@ -200,7 +200,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (categoryIterator.MoveNext())
             {
-                AtomCategory category = new AtomCategory();
+                AtomCategory category = new();
                 if (category.Load(categoryIterator.Current, settings))
                 {
                     entry.Categories.Add(category);
@@ -212,7 +212,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (contributorIterator.MoveNext())
             {
-                AtomPersonConstruct contributor = new AtomPersonConstruct();
+                AtomPersonConstruct contributor = new();
                 if (contributor.Load(contributorIterator.Current, settings))
                 {
                     entry.Contributors.Add(contributor);
@@ -224,7 +224,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (linkIterator.MoveNext())
             {
-                AtomLink link = new AtomLink();
+                AtomLink link = new();
                 if (link.Load(linkIterator.Current, settings))
                 {
                     entry.Links.Add(link);
@@ -262,7 +262,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (contentNavigator != null)
         {
-            entry.Content = new AtomContent();
+            entry.Content = new();
             entry.Content.Load(contentNavigator, settings);
         }
 
@@ -276,19 +276,19 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (rightsNavigator != null)
         {
-            entry.Rights = new AtomTextConstruct();
+            entry.Rights = new();
             entry.Rights.Load(rightsNavigator, settings);
         }
 
         if (sourceNavigator != null)
         {
-            entry.Source = new AtomSource();
+            entry.Source = new();
             entry.Source.Load(sourceNavigator, settings);
         }
 
         if (summaryNavigator != null)
         {
-            entry.Summary = new AtomTextConstruct();
+            entry.Summary = new();
             entry.Summary.Load(summaryNavigator, settings);
         }
     }
@@ -324,7 +324,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (authorIterator.MoveNext())
             {
-                AtomPersonConstruct author = new AtomPersonConstruct();
+                AtomPersonConstruct author = new();
                 if (author.Load(authorIterator.Current, settings))
                 {
                     feed.Authors.Add(author);
@@ -336,7 +336,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (categoryIterator.MoveNext())
             {
-                AtomCategory category = new AtomCategory();
+                AtomCategory category = new();
                 if (category.Load(categoryIterator.Current, settings))
                 {
                     feed.Categories.Add(category);
@@ -348,7 +348,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (contributorIterator.MoveNext())
             {
-                AtomPersonConstruct contributor = new AtomPersonConstruct();
+                AtomPersonConstruct contributor = new();
                 if (contributor.Load(contributorIterator.Current, settings))
                 {
                     feed.Contributors.Add(contributor);
@@ -361,7 +361,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (entryIterator.MoveNext())
             {
-                AtomEntry entry = new AtomEntry();
+                AtomEntry entry = new();
                 counter++;
 
                 Atom10SyndicationResourceAdapter.FillEntry(entry, entryIterator.Current, manager, settings);
@@ -379,7 +379,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (linkIterator.MoveNext())
             {
-                AtomLink link = new AtomLink();
+                AtomLink link = new();
                 if (link.Load(linkIterator.Current, settings))
                 {
                     feed.Links.Add(link);
@@ -417,31 +417,31 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (generatorNavigator != null)
         {
-            feed.Generator = new AtomGenerator();
+            feed.Generator = new();
             feed.Generator.Load(generatorNavigator, settings);
         }
 
         if (iconNavigator != null)
         {
-            feed.Icon = new AtomIcon();
+            feed.Icon = new();
             feed.Icon.Load(iconNavigator, settings);
         }
 
         if (logoNavigator != null)
         {
-            feed.Logo = new AtomLogo();
+            feed.Logo = new();
             feed.Logo.Load(logoNavigator, settings);
         }
 
         if (rightsNavigator != null)
         {
-            feed.Rights = new AtomTextConstruct();
+            feed.Rights = new();
             feed.Rights.Load(rightsNavigator, settings);
         }
 
         if (subtitleNavigator != null)
         {
-            feed.Subtitle = new AtomTextConstruct();
+            feed.Subtitle = new();
             feed.Subtitle.Load(subtitleNavigator, settings);
         }
     }

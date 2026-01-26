@@ -30,13 +30,13 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <summary>
     /// Private member to hold specific information about the extension.
     /// </summary>
-    private SiteSummaryUpdateSyndicationExtensionContext extensionContext = new SiteSummaryUpdateSyndicationExtensionContext();
+    private SiteSummaryUpdateSyndicationExtensionContext extensionContext = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtension"/> class.
     /// </summary>
     public SiteSummaryUpdateSyndicationExtension()
-        : base("sy", "http://purl.org/rss/1.0/modules/syndication/", new Version("1.0"), new Uri("http://web.resource.org/rss/1.0/modules/syndication/"), "RDF Site Summary (Syndication)", "Extends syndication feeds to provide syndication hints to aggregators and other entities regarding how often a feed is updated.")
+        : base("sy", "http://purl.org/rss/1.0/modules/syndication/", new("1.0"), new("http://web.resource.org/rss/1.0/modules/syndication/"), "RDF Site Summary (Syndication)", "Extends syndication feeds to provide syndication hints to aggregators and other entities regarding how often a feed is updated.")
     {
     }
 
@@ -161,7 +161,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator();
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -176,7 +176,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     public override bool Load(XmlReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -201,8 +201,8 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -216,7 +216,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

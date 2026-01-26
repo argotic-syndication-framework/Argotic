@@ -300,7 +300,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
         bool wasLoaded = this.Load(source);
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -331,8 +331,8 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -346,7 +346,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

@@ -162,7 +162,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
     public new void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
     {
-        this.LoadAsync(source, settings, new WebRequestOptions(credentials, proxy), userToken);
+        this.LoadAsync(source, settings, new(credentials, proxy), userToken);
     }
 
     /// <summary>
@@ -191,7 +191,7 @@ public class AtomEntryResource : AtomEntry
 
         if (settings == null)
         {
-            settings = new SyndicationResourceLoadSettings();
+            settings = new();
         }
 
         if (this.LoadOperationInProgress)
@@ -207,9 +207,9 @@ public class AtomEntryResource : AtomEntry
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
         object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
-        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
+        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new(AsyncLoadCallback), state);
 
-        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
+        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new(AsyncTimeoutCallback), state, settings.Timeout, true);
     }
 
     /// <summary>
@@ -257,8 +257,8 @@ public class AtomEntryResource : AtomEntry
                         encoding = settings.CharacterEncoding;
                     }
 
-                    using StreamReader streamReader = new StreamReader(stream, encoding);
-                    XmlReaderSettings readerSettings = new XmlReaderSettings
+                    using StreamReader streamReader = new(stream, encoding);
+                    XmlReaderSettings readerSettings = new()
                     {
                         IgnoreComments = true,
                         IgnoreWhitespace = true,
@@ -276,7 +276,7 @@ public class AtomEntryResource : AtomEntry
                         navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
                     }
 
-                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+                    SyndicationResourceAdapter adapter = new(navigator, settings);
                     adapter.Fill(entry, SyndicationContentFormat.Atom);
 
                     AtomPublishingEditedSyndicationExtension editedExtension = entry.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
@@ -291,7 +291,7 @@ public class AtomEntryResource : AtomEntry
                         entry.IsDraft = controlExtension.Context.IsDraft;
                     }
 
-                    entry.OnEntryLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
+                    entry.OnEntryLoaded(new(navigator, source, options, userToken));
                 }
 
                 entry.LoadOperationInProgress = false;
@@ -386,7 +386,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
     public new void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
     {
-        this.Load(source, new WebRequestOptions(credentials, proxy), settings);
+        this.Load(source, new(credentials, proxy), settings);
     }
 
     /// <summary>
@@ -452,7 +452,7 @@ public class AtomEntryResource : AtomEntry
         {
             if (!list.Exists(AtomPublishingEditedSyndicationExtension.MatchByType))
             {
-                AtomPublishingEditedSyndicationExtension editedExtension = new AtomPublishingEditedSyndicationExtension
+                AtomPublishingEditedSyndicationExtension editedExtension = new()
                 {
                     Context =
                         {
@@ -467,7 +467,7 @@ public class AtomEntryResource : AtomEntry
         {
             if (!list.Exists(AtomPublishingControlSyndicationExtension.MatchByType))
             {
-                AtomPublishingControlSyndicationExtension controlExtension = new AtomPublishingControlSyndicationExtension
+                AtomPublishingControlSyndicationExtension controlExtension = new()
                 {
                     Context =
                         {

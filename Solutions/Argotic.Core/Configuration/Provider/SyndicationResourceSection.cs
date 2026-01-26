@@ -11,11 +11,11 @@ public sealed class SyndicationResourceSection : ConfigurationSection
     /// <summary>
     /// Private member to hold the default provider configuration property for the section.
     /// </summary>
-    private static readonly ConfigurationProperty configurationSectionDefaultProviderProperty = new ConfigurationProperty("defaultProvider", typeof(string), "XmlSyndicationResourceProvider", new StringConverter(), new StringValidator(1), ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationSectionDefaultProviderProperty = new("defaultProvider", typeof(string), "XmlSyndicationResourceProvider", new StringConverter(), new StringValidator(1), ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold the providers configuration property for the section.
     /// </summary>
-    private static readonly ConfigurationProperty configurationSectionProvidersProperty = new ConfigurationProperty("providers", typeof(ProviderSettingsCollection), null, ConfigurationPropertyOptions.None);
+    private static readonly ConfigurationProperty configurationSectionProvidersProperty = new("providers", typeof(ProviderSettingsCollection), null, ConfigurationPropertyOptions.None);
     /// <summary>
     /// Private member to hold a collection of configuration properties for the section.
     /// </summary>

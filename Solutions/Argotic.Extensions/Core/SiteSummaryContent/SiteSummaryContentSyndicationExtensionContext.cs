@@ -107,7 +107,7 @@ public class SiteSummaryContentSyndicationExtensionContext
                 {
                     while (itemIterator.MoveNext())
                     {
-                        SiteSummaryContentItem item = new SiteSummaryContentItem();
+                        SiteSummaryContentItem item = new();
                         if (item.Load(itemIterator.Current))
                         {
                             this.Items.Add(item);

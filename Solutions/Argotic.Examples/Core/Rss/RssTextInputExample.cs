@@ -16,14 +16,14 @@ public static class RssTextInputExample
     /// </summary>
     public static void ClassExample()
     {
-        RssFeed feed = new RssFeed
+        RssFeed feed = new()
         {
             Channel =
             {
                 Title = "Dallas Times-Herald",
-                Link = new Uri("http://dallas.example.com"),
+                Link = new("http://dallas.example.com"),
                 Description = "Current headlines from the Dallas Times-Herald newspaper",
-                TextInput = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry")
+                TextInput = new("What software are you using?", new("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry")
             }
         };
     }

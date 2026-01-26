@@ -83,7 +83,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                 int counter = 0;
                 while (apiIterator.MoveNext())
                 {
-                    RsdApplicationInterface api = new RsdApplicationInterface();
+                    RsdApplicationInterface api = new();
                     counter++;
 
                     string rpcLinkAttribute = apiIterator.Current.GetAttribute("rpcLink", string.Empty);
@@ -105,7 +105,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd", manager), this.Settings);
+        SyndicationExtensionAdapter adapter = new(RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd", manager), this.Settings);
         adapter.Fill(resource, manager);
     }
 }

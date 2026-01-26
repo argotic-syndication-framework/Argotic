@@ -42,7 +42,7 @@ public class SiteSummaryContentItem : IComparable
     {
         get
         {
-            return new Uri("http://www.w3.org/TR/REC-xml#dt-wellformed");
+            return new("http://www.w3.org/TR/REC-xml#dt-wellformed");
         }
     }
 
@@ -122,7 +122,7 @@ public class SiteSummaryContentItem : IComparable
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        SiteSummaryContentSyndicationExtension extension = new SiteSummaryContentSyndicationExtension();
+        SiteSummaryContentSyndicationExtension extension = new();
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
         {
@@ -165,7 +165,7 @@ public class SiteSummaryContentItem : IComparable
     public void WriteTo(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        SiteSummaryContentSyndicationExtension extension = new SiteSummaryContentSyndicationExtension();
+        SiteSummaryContentSyndicationExtension extension = new();
         writer.WriteStartElement("item", extension.XmlNamespace);
 
         writer.WriteElementString("format", extension.XmlNamespace, this.Format != null ? this.Format.ToString() : string.Empty);
@@ -189,8 +189,8 @@ public class SiteSummaryContentItem : IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -204,7 +204,7 @@ public class SiteSummaryContentItem : IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
 

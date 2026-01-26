@@ -47,7 +47,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     {
         ArgumentNullException.ThrowIfNull(nameTable);
 
-        XmlNamespaceManager manager = new XmlNamespaceManager(nameTable);
+        XmlNamespaceManager manager = new(nameTable);
         manager.AddNamespace("atom", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : "http://purl.org/atom/ns#");
         manager.AddNamespace("xhtml", AtomUtility.XhtmlNamespace);
 
@@ -96,7 +96,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (idNavigator != null)
             {
-                resource.Id = new AtomId();
+                resource.Id = new();
                 resource.Id.Load(idNavigator, this.Settings);
             }
 
@@ -116,7 +116,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             Atom03SyndicationResourceAdapter.FillFeedOptionals(resource, feedNavigator, manager, this.Settings);
             Atom03SyndicationResourceAdapter.FillFeedCollections(resource, feedNavigator, manager, this.Settings);
 
-            SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(feedNavigator, this.Settings);
+            SyndicationExtensionAdapter adapter = new(feedNavigator, this.Settings);
             adapter.Fill(resource, manager);
         }
     }
@@ -136,7 +136,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static AtomContent CreateContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        AtomContent content = new AtomContent();
+        AtomContent content = new();
         string modeAttribute = string.Empty;
 
         ArgumentNullException.ThrowIfNull(source);
@@ -173,7 +173,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             content.Content = source.Value;
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(content, manager);
 
         return content;
@@ -194,7 +194,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static AtomGenerator CreateGenerator(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        AtomGenerator generator = new AtomGenerator();
+        AtomGenerator generator = new();
 
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
@@ -226,7 +226,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             generator.Content = source.Value;
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(generator, manager);
 
         return generator;
@@ -247,7 +247,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static AtomPersonConstruct CreatePerson(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        AtomPersonConstruct person = new AtomPersonConstruct();
+        AtomPersonConstruct person = new();
 
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
@@ -277,7 +277,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             person.EmailAddress = emailNavigator.Value;
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(person, manager);
 
         return person;
@@ -298,7 +298,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     private static AtomTextConstruct CreateTextContent(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        AtomTextConstruct content = new AtomTextConstruct();
+        AtomTextConstruct content = new();
 
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
@@ -347,7 +347,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             content.Content = source.Value;
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(content, manager);
 
         return content;
@@ -382,7 +382,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (idNavigator != null)
         {
-            entry.Id = new AtomId();
+            entry.Id = new();
             entry.Id.Load(idNavigator, settings);
         }
 
@@ -402,7 +402,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         Atom03SyndicationResourceAdapter.FillEntryOptionals(entry, source, manager, settings);
         Atom03SyndicationResourceAdapter.FillEntryCollections(entry, source, manager, settings);
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(entry, manager);
     }
 
@@ -453,7 +453,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (linkIterator.MoveNext())
             {
-                AtomLink link = new AtomLink();
+                AtomLink link = new();
                 if (link.Load(linkIterator.Current, settings))
                 {
                     entry.Links.Add(link);
@@ -555,7 +555,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (entryIterator.MoveNext())
             {
-                AtomEntry entry = new AtomEntry();
+                AtomEntry entry = new();
                 counter++;
 
                 Atom03SyndicationResourceAdapter.FillEntry(entry, entryIterator.Current, manager, settings);
@@ -573,7 +573,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (linkIterator.MoveNext())
             {
-                AtomLink link = new AtomLink();
+                AtomLink link = new();
                 if (link.Load(linkIterator.Current, settings))
                 {
                     feed.Links.Add(link);

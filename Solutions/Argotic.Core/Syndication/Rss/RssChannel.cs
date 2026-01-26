@@ -55,7 +55,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
     /// </summary>
-    private static readonly Uri channelDocumentation = new Uri("http://www.rssboard.org/rss-specification");
+    private static readonly Uri channelDocumentation = new("http://www.rssboard.org/rss-specification");
     /// <summary>
     /// Private member to hold a value that credits the software that created the feed.
     /// </summary>
@@ -761,7 +761,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        return this.Load(source, new SyndicationResourceLoadSettings());
+        return this.Load(source, new());
     }
 
     /// <summary>
@@ -780,7 +780,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
-        XmlNamespaceManager manager = new XmlNamespaceManager(source.NameTable);
+        XmlNamespaceManager manager = new(source.NameTable);
         manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
         XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
         XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
@@ -822,7 +822,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             wasLoaded = true;
         }
 
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -1007,7 +1007,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             while (categoryIterator.MoveNext())
             {
-                RssCategory category = new RssCategory();
+                RssCategory category = new();
                 if (category.Load(categoryIterator.Current, settings))
                 {
                     this.Categories.Add(category);
@@ -1063,7 +1063,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             int counter = 0;
             while (itemIterator.MoveNext())
             {
-                RssItem item = new RssItem();
+                RssItem item = new();
                 counter++;
 
                 if (item.Load(itemIterator.Current, settings))
@@ -1115,7 +1115,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         if (cloudNavigator != null)
         {
-            RssCloud cloud = new RssCloud();
+            RssCloud cloud = new();
             if (cloud.Load(cloudNavigator, settings))
             {
                 this.Cloud = cloud;
@@ -1137,7 +1137,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         if (imageNavigator != null)
         {
-            RssImage image = new RssImage();
+            RssImage image = new();
             if (image.Load(imageNavigator, settings))
             {
                 this.Image = image;
@@ -1149,7 +1149,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             try
             {
-                CultureInfo language = new CultureInfo(languageNavigator.Value);
+                CultureInfo language = new(languageNavigator.Value);
                 this.Language = language;
                 wasLoaded = true;
             }
@@ -1191,7 +1191,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         if (textInputNavigator != null)
         {
-            RssTextInput textInput = new RssTextInput();
+            RssTextInput textInput = new();
             if (textInput.Load(textInputNavigator, settings))
             {
                 this.TextInput = textInput;
@@ -1272,8 +1272,8 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -1287,7 +1287,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

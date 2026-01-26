@@ -20,7 +20,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
     /// </summary>
     public MyCustomSyndicationExtension()
-        : base("myPrefix", "http://www.example.com/2008/03/custom", new Version("1.0"), new Uri("http://www.example.com/spec"), "My Extension", "Example of a custom syndication extension.")
+        : base("myPrefix", "http://www.example.com/2008/03/custom", new("1.0"), new("http://www.example.com/spec"), "My Extension", "Example of a custom syndication extension.")
     {
         // Class state initialized by abstract SyndicationExtension base class
     }
@@ -88,7 +88,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
             }
         }
 
-        SyndicationExtensionLoadedEventArgs args = new SyndicationExtensionLoadedEventArgs(source, this);
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);
 
         return wasLoaded;
@@ -104,7 +104,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     {
         ArgumentNullException.ThrowIfNull(reader);
 
-        XPathDocument document = new XPathDocument(reader);
+        XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator());
     }
@@ -136,8 +136,8 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -151,7 +151,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

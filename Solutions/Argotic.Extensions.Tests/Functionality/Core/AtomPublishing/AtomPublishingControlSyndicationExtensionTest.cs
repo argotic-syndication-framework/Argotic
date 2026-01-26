@@ -19,7 +19,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     [TestMethod]
     public void AtomPublishingControlSyndicationExtensionConstructorTest()
     {
-        AtomPublishingControlSyndicationExtension target = new AtomPublishingControlSyndicationExtension();
+        AtomPublishingControlSyndicationExtension target = new();
         target.ShouldNotBeNull();
         target.ShouldBeOfType<AtomPublishingControlSyndicationExtension>();
     }
@@ -58,7 +58,7 @@ public class AtomPublishingControlSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
     }
 
@@ -78,7 +78,7 @@ public class AtomPublishingControlSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
         feed.Channel.Items.Count().ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
@@ -108,8 +108,8 @@ public class AtomPublishingControlSyndicationExtensionTest
     [TestMethod]
     public void AtomPublishingControlWriteToTest()
     {
-        using StringWriter sw = new StringWriter();
-        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         target.WriteTo(writer);
         writer.Flush();
@@ -174,13 +174,13 @@ public class AtomPublishingControlSyndicationExtensionTest
 
     private static AtomPublishingControlSyndicationExtension CreateExtension1()
     {
-        AtomPublishingControlSyndicationExtension nyc = new AtomPublishingControlSyndicationExtension
+        AtomPublishingControlSyndicationExtension nyc = new()
         {
             Context =
             {
-                BaseUri = new Uri("http://www.example.com/control.html"),
+                BaseUri = new("http://www.example.com/control.html"),
                 IsDraft = true,
-                Language = new CultureInfo("en-US")
+                Language = new("en-US")
             }
         };
 
@@ -189,13 +189,13 @@ public class AtomPublishingControlSyndicationExtensionTest
 
     private static AtomPublishingControlSyndicationExtension CreateExtension2()
     {
-        AtomPublishingControlSyndicationExtension nyc = new AtomPublishingControlSyndicationExtension
+        AtomPublishingControlSyndicationExtension nyc = new()
         {
             Context =
             {
-                BaseUri = new Uri("http://www.example.net/control.html"),
+                BaseUri = new("http://www.example.net/control.html"),
                 IsDraft = false,
-                Language = new CultureInfo("fr-CA")
+                Language = new("fr-CA")
             }
         };
 
@@ -204,6 +204,6 @@ public class AtomPublishingControlSyndicationExtensionTest
 
     public static AtomPublishingControlSyndicationExtensionContext CreateContext1()
     {
-        return new AtomPublishingControlSyndicationExtensionContext();
+        return new();
     }
 }

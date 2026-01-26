@@ -16,22 +16,22 @@ public static class RsdApplicationInterfaceExample
     /// </summary>
     public static void ClassExample()
     {
-        RsdDocument document = new RsdDocument
+        RsdDocument document = new()
         {
             EngineName = "Blog Munging CMS",
-            EngineLink = new Uri("http://www.blogmunging.com/"),
-            Homepage = new Uri("http://www.userdomain.com/")
+            EngineLink = new("http://www.blogmunging.com/"),
+            Homepage = new("http://www.userdomain.com/")
         };
 
         //  Identify supported services using well known names
-        document.AddInterface(new RsdApplicationInterface("MetaWeblog", new Uri("http://example.com/xml/rpc/url"), true, "123abc"));
-        document.AddInterface(new RsdApplicationInterface("Blogger", new Uri("http://example.com/xml/rpc/url"), false, "123abc"));
-        document.AddInterface(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
-        document.AddInterface(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
+        document.AddInterface(new("MetaWeblog", new("http://example.com/xml/rpc/url"), true, "123abc"));
+        document.AddInterface(new("Blogger", new("http://example.com/xml/rpc/url"), false, "123abc"));
+        document.AddInterface(new("MetaWiki", new("http://example.com/some/other/url"), false, "123abc"));
+        document.AddInterface(new("Antville", new("http://example.com/yet/another/url"), false, "123abc"));
 
-        RsdApplicationInterface conversantApi = new RsdApplicationInterface("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty)
+        RsdApplicationInterface conversantApi = new("Conversant", new("http://example.com/xml/rpc/url"), false, string.Empty)
         {
-            Documentation = new Uri("http://www.conversant.com/docs/api/"),
+            Documentation = new("http://www.conversant.com/docs/api/"),
             Notes = "Additional explanation here."
         };
         conversantApi.Settings.Add("service-specific-setting", "a value");

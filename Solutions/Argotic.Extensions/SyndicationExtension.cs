@@ -220,7 +220,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     public XmlNamespaceManager CreateNamespaceManager(XPathNavigator navigator)
     {
         ArgumentNullException.ThrowIfNull(navigator);
-        XmlNamespaceManager manager = new XmlNamespaceManager(navigator.NameTable);
+        XmlNamespaceManager manager = new(navigator.NameTable);
 
         Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
         string existingXmlNamespace = string.Empty;

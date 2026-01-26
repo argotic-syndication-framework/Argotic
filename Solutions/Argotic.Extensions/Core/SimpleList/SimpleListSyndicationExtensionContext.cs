@@ -103,7 +103,7 @@ public class SimpleListSyndicationExtensionContext
                 {
                     while (sortIterator.MoveNext())
                     {
-                        SimpleListSort sort = new SimpleListSort();
+                        SimpleListSort sort = new();
                         if (sort.Load(sortIterator.Current))
                         {
                             this.Sorting.Add(sort);
@@ -116,7 +116,7 @@ public class SimpleListSyndicationExtensionContext
                 {
                     while (groupIterator.MoveNext())
                     {
-                        SimpleListGroup group = new SimpleListGroup();
+                        SimpleListGroup group = new();
                         if (group.Load(groupIterator.Current))
                         {
                             this.Grouping.Add(group);

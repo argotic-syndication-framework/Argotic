@@ -30,8 +30,8 @@ public static class SyndicationEncodingUtility
 
         string safeXml = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(xml);
 
-        using StringReader reader = new StringReader(safeXml);
-        XPathDocument document = new XPathDocument(reader);
+        using StringReader reader = new(safeXml);
+        XPathDocument document = new(reader);
         XPathNavigator navigator = document.CreateNavigator();
 
         return navigator;
@@ -60,7 +60,7 @@ public static class SyndicationEncodingUtility
         Encoding encoding = Encoding.UTF8;
         encoding = SyndicationEncodingUtility.GetXmlEncoding(buffer);
 
-        using MemoryStream memoryStream = new MemoryStream(buffer);
+        using MemoryStream memoryStream = new(buffer);
         return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
     }
 
@@ -81,7 +81,7 @@ public static class SyndicationEncodingUtility
         ArgumentNullException.ThrowIfNull(stream);
         ArgumentNullException.ThrowIfNull(encoding);
 
-        using StreamReader reader = new StreamReader(stream, encoding);
+        using StreamReader reader = new(stream, encoding);
         return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
     }
 
@@ -122,7 +122,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy)
     {
-        return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy));
+        return SyndicationEncodingUtility.CreateSafeNavigator(source, new(credentials, proxy));
     }
 
     /// <summary>
@@ -166,7 +166,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy, Encoding encoding)
     {
-        return SyndicationEncodingUtility.CreateSafeNavigator(source, new WebRequestOptions(credentials, proxy), encoding);
+        return SyndicationEncodingUtility.CreateSafeNavigator(source, new(credentials, proxy), encoding);
     }
 
     /// <summary>
@@ -250,7 +250,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static WebRequest CreateWebRequest(Uri source, ICredentials credentials, IWebProxy proxy)
     {
-        return SyndicationEncodingUtility.CreateWebRequest(source, new WebRequestOptions(credentials, proxy));
+        return SyndicationEncodingUtility.CreateWebRequest(source, new(credentials, proxy));
     }
 
     /// <summary>
@@ -304,7 +304,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static WebResponse CreateWebResponse(Uri source, ICredentials credentials, IWebProxy proxy)
     {
-        return SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials, proxy));
+        return SyndicationEncodingUtility.CreateWebResponse(source, new(credentials, proxy));
     }
 
     /// <summary>
@@ -344,7 +344,7 @@ public static class SyndicationEncodingUtility
         ArgumentException.ThrowIfNullOrEmpty(encodedValue);
 
         byte[] data = Convert.FromBase64String(encodedValue);
-        MemoryStream stream = new MemoryStream(data);
+        MemoryStream stream = new(data);
 
         if (stream.CanSeek)
         {
@@ -387,7 +387,7 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static string EncodeInvalidXmlHexadecimalCharacters(string content)
     {
-        Regex invalidXmlUnicodeCharacters = new Regex(@"[\x01-\x08\x0B-\x0C\x0E-\x1F\xD800-\xDFFF\xFFFE-\xFFFF]");
+        Regex invalidXmlUnicodeCharacters = new(@"[\x01-\x08\x0B-\x0C\x0E-\x1F\xD800-\xDFFF\xFFFE-\xFFFF]");
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 
@@ -469,7 +469,7 @@ public static class SyndicationEncodingUtility
     {
         ArgumentNullException.ThrowIfNull(data);
 
-        using MemoryStream stream = new MemoryStream(data);
+        using MemoryStream stream = new(data);
         return SyndicationEncodingUtility.GetXmlEncoding(stream);
     }
 
@@ -486,7 +486,7 @@ public static class SyndicationEncodingUtility
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return SyndicationEncodingUtility.GetXmlEncoding(reader.ReadToEnd());
     }
 
@@ -546,7 +546,7 @@ public static class SyndicationEncodingUtility
         ArgumentException.ThrowIfNullOrEmpty(content);
 
         // Adapted from https://stackoverflow.com/a/17735649
-        StringBuilder result = new StringBuilder(content.Length);
+        StringBuilder result = new(content.Length);
         for (int i = 0; i < content.Length; i++)
         {
             if (XmlConvert.IsXmlChar(content[i]))

@@ -38,7 +38,7 @@ public class ITunesSyndicationExtensionTest
     [TestMethod]
     public void ITunesSyndicationExtensionConstructorTest()
     {
-        ITunesSyndicationExtension target = new ITunesSyndicationExtension();
+        ITunesSyndicationExtension target = new();
         target.ShouldNotBeNull();
         target.ShouldBeOfType<ITunesSyndicationExtension>();
     }
@@ -95,7 +95,7 @@ public class ITunesSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
     }
 
@@ -115,7 +115,7 @@ public class ITunesSyndicationExtensionTest
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         feed.Load(reader);
 
         feed.Channel.Items.Count().ShouldBe(1);
@@ -146,8 +146,8 @@ public class ITunesSyndicationExtensionTest
     [TestMethod]
     public void ITunesWriteToTest()
     {
-        using StringWriter sw = new StringWriter();
-        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using StringWriter sw = new();
+        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         ITunesSyndicationExtension target = CreateExtension1();
         target.WriteTo(writer);
         writer.Flush();
@@ -212,7 +212,7 @@ public class ITunesSyndicationExtensionTest
 
     private static ITunesSyndicationExtension CreateExtension1()
     {
-        ITunesSyndicationExtension nyc = new ITunesSyndicationExtension
+        ITunesSyndicationExtension nyc = new()
         {
             Context =
             {
@@ -220,15 +220,15 @@ public class ITunesSyndicationExtensionTest
             }
         };
 
-        nyc.Context.Categories.Add(new ITunesCategory("Rock"));
-        nyc.Context.Categories.Add(new ITunesCategory("Folk"));
-        nyc.Context.Duration = new TimeSpan(0, 3, 21);
+        nyc.Context.Categories.Add(new("Rock"));
+        nyc.Context.Categories.Add(new("Folk"));
+        nyc.Context.Duration = new(0, 3, 21);
         nyc.Context.ExplicitMaterial = ITunesExplicitMaterial.Clean;
-        nyc.Context.Image = new Uri("http://www.eexample.com/image.jpg");
+        nyc.Context.Image = new("http://www.eexample.com/image.jpg");
         nyc.Context.IsBlocked = false;
         nyc.Context.Keywords.Add("loud");
         nyc.Context.Keywords.Add("good for parties");
-        nyc.Context.Owner = new ITunesOwner("owner@bigstar.com", "BigStar's Guy");
+        nyc.Context.Owner = new("owner@bigstar.com", "BigStar's Guy");
         nyc.Context.Subtitle = "That song you like.";
         nyc.Context.Summary = "Duh... That song you like";
 
@@ -237,22 +237,22 @@ public class ITunesSyndicationExtensionTest
 
     private static ITunesSyndicationExtension CreateExtension2()
     {
-        ITunesSyndicationExtension nyc = new ITunesSyndicationExtension
+        ITunesSyndicationExtension nyc = new()
         {
             Context =
             {
                 Author = "NewStar"
             }
         };
-        nyc.Context.Categories.Add(new ITunesCategory("Dance"));
-        nyc.Context.Categories.Add(new ITunesCategory("Funk"));
-        nyc.Context.Duration = new TimeSpan(0, 4, 32);
+        nyc.Context.Categories.Add(new("Dance"));
+        nyc.Context.Categories.Add(new("Funk"));
+        nyc.Context.Duration = new(0, 4, 32);
         nyc.Context.ExplicitMaterial = ITunesExplicitMaterial.Yes;
-        nyc.Context.Image = new Uri("http://www.example.com/newimage.png");
+        nyc.Context.Image = new("http://www.example.com/newimage.png");
         nyc.Context.IsBlocked = true;
         nyc.Context.Keywords.Add("loud");
         nyc.Context.Keywords.Add("offend your parents");
-        nyc.Context.Owner = new ITunesOwner("owner@newstar.com", "NewStar's Friend's Uncle");
+        nyc.Context.Owner = new("owner@newstar.com", "NewStar's Friend's Uncle");
         nyc.Context.Subtitle = "That song you will like.";
         nyc.Context.Summary = "Better than that other song.";
         return nyc;
@@ -260,7 +260,7 @@ public class ITunesSyndicationExtensionTest
 
     public static ITunesSyndicationExtensionContext CreateContext1()
     {
-        ITunesSyndicationExtensionContext nyc = new ITunesSyndicationExtensionContext();
+        ITunesSyndicationExtensionContext nyc = new();
         return nyc;
     }
 }

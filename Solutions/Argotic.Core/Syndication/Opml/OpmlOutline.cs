@@ -346,7 +346,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
             {
                 while (outlinesIterator.MoveNext())
                 {
-                    OpmlOutline outline = new OpmlOutline();
+                    OpmlOutline outline = new();
                     if (outline.Load(outlinesIterator.Current))
                     {
                         this.Outlines.Add(outline);
@@ -400,7 +400,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
             {
                 while (outlinesIterator.MoveNext())
                 {
-                    OpmlOutline outline = new OpmlOutline();
+                    OpmlOutline outline = new();
                     if (outline.Load(outlinesIterator.Current, settings))
                     {
                         this.Outlines.Add(outline);
@@ -409,7 +409,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
                 }
             }
         }
-        SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
+        SyndicationExtensionAdapter adapter = new(source, settings);
         adapter.Fill(this);
 
         return wasLoaded;
@@ -539,7 +539,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="url"/> is a null reference.</exception>
     public static OpmlOutline CreateInclusionOutline(string text, Uri url)
     {
-        OpmlOutline outline = new OpmlOutline();
+        OpmlOutline outline = new();
         ArgumentException.ThrowIfNullOrEmpty(text);
         ArgumentNullException.ThrowIfNull(url);
 
@@ -617,7 +617,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference.</exception>
     public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl, Uri htmlUrl, string version, string title, string description, CultureInfo language)
     {
-        OpmlOutline outline = new OpmlOutline();
+        OpmlOutline outline = new();
         ArgumentException.ThrowIfNullOrEmpty(text);
         ArgumentException.ThrowIfNullOrEmpty(type);
         ArgumentNullException.ThrowIfNull(xmlUrl);
@@ -662,8 +662,8 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = true,
@@ -677,7 +677,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
     /// <summary>

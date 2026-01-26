@@ -1,17 +1,12 @@
-﻿namespace Argotic.Extensions.Tests;
+namespace Argotic.Extensions.Tests;
 
-using System;
-using System.IO;
+using System.Globalization;
 using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using System.Globalization;
-using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shouldly;
 
-/// <summary>
-///This is a test class for DublinCoreElementSetSyndicationExtensionTest and is intended
-///to contain all DublinCoreElementSetSyndicationExtensionTest Unit Tests
-///</summary>
 [TestClass]
 public class DublinCoreElementSetSyndicationExtensionTest
 {
@@ -49,89 +44,67 @@ public class DublinCoreElementSetSyndicationExtensionTest
                                      + "<dc:title>Stupid test data</dc:title>"
                                      + "<dc:type>PhysicalObject</dc:type>";
 
-    public TestContext TestContext { get; set; }
+    public TestContext? TestContext { get; set; }
 
-    /// <summary>
-    ///A test for DublinCoreElementSetSyndicationExtension Constructor
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetSyndicationExtensionConstructorTest()
     {
         DublinCoreElementSetSyndicationExtension target = new DublinCoreElementSetSyndicationExtension();
-        Assert.IsNotNull(target);
-        Assert.IsInstanceOfType(target, typeof(DublinCoreElementSetSyndicationExtension));
+        target.ShouldNotBeNull();
+        target.ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
     }
 
-    /// <summary>
-    ///A test for CompareTo
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetCompareToTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        int expected = 0;
         int actual = target.CompareTo(obj);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(0);
     }
 
+    [TestMethod]
     public void DublinCoreTypeVocabularyAsString()
     {
         DublinCoreTypeVocabularies value = DublinCoreTypeVocabularies.MovingImage;
         string expected = "MovingImage";
         string actual = DublinCoreElementSetSyndicationExtension.TypeVocabularyAsString(value);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
 
-    /// <summary>
-    ///A test for ConvertDegreesMinutesSecondsToDecimal
-    ///</summary>
     [TestMethod]
     public void DublinCoreTypeVocabularyByName()
     {
         DublinCoreTypeVocabularies expected = DublinCoreTypeVocabularies.MovingImage;
         DublinCoreTypeVocabularies actual = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName("MovingImage");
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
 
-    /// <summary>
-    ///A test for Equals
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetEqualsTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        bool expected = true;
         bool actual = target.Equals(obj);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for GetHashCode
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void DublinCoreElementSetGetHashCodeTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         int expected = 1398804031;
         int actual = target.GetHashCode();
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
 
-    /// <summary>
-    ///A test for Load
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetLoadTest()
     {
-        DublinCoreElementSetSyndicationExtension target = new DublinCoreElementSetSyndicationExtension(); // TODO: Initialize to an appropriate value
-        NameTable nt = new NameTable();
-        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
-        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new RssFeed();
         feed.Load(reader);
     }
@@ -143,141 +116,108 @@ public class DublinCoreElementSetSyndicationExtensionTest
 
         string actual = ExtensionTestUtil.AddExtensionToXml(dub);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
-
 
     [TestMethod]
     public void DublinCoreElementSetFullTest()
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new RssFeed();
         feed.Load(reader);
 
-        Assert.AreEqual(1, feed.Channel.Items.Count());
+        feed.Channel.Items.Count().ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
-        Assert.IsTrue(item.HasExtensions);
+        item.HasExtensions.ShouldBeTrue();
         DublinCoreElementSetSyndicationExtension itemExtension = item.FindExtension<DublinCoreElementSetSyndicationExtension>();
-        Assert.IsNotNull(itemExtension);
-        Assert.IsInstanceOfType(
-            item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
-            typeof(DublinCoreElementSetSyndicationExtension));
+        itemExtension.ShouldNotBeNull();
+        (item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension)
+            .ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
     }
 
-    /// <summary>
-    ///A test for MatchByType
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetMatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
-        bool expected = true;
         bool actual = DublinCoreElementSetSyndicationExtension.MatchByType(extension);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for ToString
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetToStringTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-        string expected = nycText;
         string actual = target.ToString();
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(nycText);
     }
 
-    /// <summary>
-    ///A test for WriteTo
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetWriteToTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         using StringWriter sw = new StringWriter();
-        using XmlWriter writer = new XmlTextWriter(sw);
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
+        writer.Flush();
         string output = sw.ToString();
-        Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
+        output.Replace(Environment.NewLine, "").ShouldBe(nycText.Replace(Environment.NewLine, ""));
     }
 
-    /// <summary>
-    ///A test for op_Equality
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetOpEqualityTestFailure()
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool expected = false;
         bool actual = (first == second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeFalse();
     }
 
+    [TestMethod]
     public void DublinCoreElementSetOpEqualityTestSuccess()
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension1();
-        bool expected = true;
         bool actual = (first == second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for op_GreaterThan
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetOpGreaterThanTest()
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool expected = false;
-        bool actual = false;
-        actual = (first > second);
-        Assert.AreEqual(expected, actual);
+        bool actual = (first > second);
+        actual.ShouldBeFalse();
     }
 
-    /// <summary>
-    ///A test for op_Inequality
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetOpInequalityTest()
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool expected = true;
         bool actual = (first != second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for op_LessThan
-    ///</summary>
     [TestMethod]
     public void DublinCoreElementSetOpLessThanTest()
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool expected = true;
         bool actual = (first < second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for Context
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("Context equality comparison not implemented")]
     public void DublinCoreElementSetContextTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         DublinCoreElementSetSyndicationExtensionContext expected = CreateContext1();
         DublinCoreElementSetSyndicationExtensionContext actual = target.Context;
-
-        Assert.AreEqual(expected, actual);
-        Assert.Inconclusive("Verify the correctness of this test method.");
+        actual.ShouldBe(expected);
     }
 
     private DublinCoreElementSetSyndicationExtension CreateExtension1()

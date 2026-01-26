@@ -1,4 +1,4 @@
-﻿using Argotic.Syndication;
+using Argotic.Syndication;
 using System.Globalization;
 using System.Xml;
 
@@ -28,14 +28,16 @@ internal static class ExtensionTestUtil
         };
 
         feed.Channel.AddItem(item);
-
-        //			var firstItem = feed.Channel.Items.First();
-        //			firstItem.AddExtension(geo);
         item.AddExtension(ext);
 
         using StringWriter sw = new StringWriter();
-        using XmlTextWriter tw = new XmlTextWriter(sw);
+        using XmlWriter tw = XmlWriter.Create(sw, new XmlWriterSettings
+        {
+            OmitXmlDeclaration = true,
+            ConformanceLevel = ConformanceLevel.Fragment
+        });
         feed.Save(tw);
+        tw.Flush();
         return sw.ToString();
     }
 
@@ -43,6 +45,6 @@ internal static class ExtensionTestUtil
 
     internal static string GetWrappedXml(string namespc, string strExt)
     {
-        return string.Format(strFullXml1, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version.ToString(), strExt);
+        return string.Format(strFullXml1, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version?.ToString() ?? "0.0.0.0", strExt);
     }
 }

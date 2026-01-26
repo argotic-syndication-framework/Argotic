@@ -1,16 +1,11 @@
-﻿namespace Argotic.Extensions.Tests;
+namespace Argotic.Extensions.Tests;
 
-using System;
-using System.IO;
 using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using System.Linq;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shouldly;
 
-/// <summary>
-///This is a test class for PheedSyndicationExtensionTest and is intended
-///to contain all PheedSyndicationExtensionTest Unit Tests
-///</summary>
 [TestClass]
 public class PheedSyndicationExtensionTest
 {
@@ -21,70 +16,51 @@ public class PheedSyndicationExtensionTest
 
     private const string strExtXml = "<photo:thumbnail>http://www.example.com/thumbnail.jpg</photo:thumbnail><photo:imgsrc>http://www.example.com/</photo:imgsrc>";
 
-    public TestContext TestContext { get; set; }
+    public TestContext? TestContext { get; set; }
 
-    /// <summary>
-    ///A test for PheedSyndicationExtension Constructor
-    ///</summary>
     [TestMethod]
     public void PheedSyndicationExtensionConstructorTest()
     {
         PheedSyndicationExtension target = new PheedSyndicationExtension();
-        Assert.IsNotNull(target);
-        Assert.IsInstanceOfType(target, typeof(PheedSyndicationExtension));
+        target.ShouldNotBeNull();
+        target.ShouldBeOfType<PheedSyndicationExtension>();
     }
 
-    /// <summary>
-    ///A test for CompareTo
-    ///</summary>
     [TestMethod]
     public void PheedCompareToTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        int expected = 0;
         int actual = target.CompareTo(obj);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(0);
     }
 
-    /// <summary>
-    ///A test for Equals
-    ///</summary>
     [TestMethod]
     public void PheedEqualsTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        bool expected = true;
         bool actual = target.Equals(obj);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for GetHashCode
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void PheedGetHashCodeTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         int expected = -1671096665;
         int actual = target.GetHashCode();
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
 
-    /// <summary>
-    ///A test for Load
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("Test requires manual verification of Load behavior")]
     public void PheedLoadTest()
     {
-        PheedSyndicationExtension target = new PheedSyndicationExtension(); // TODO: Initialize to an appropriate value
-        NameTable nt = new NameTable();
-        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
-        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new RssFeed();
         feed.Load(reader);
     }
@@ -103,7 +79,7 @@ public class PheedSyndicationExtensionTest
 
         string actual = ExtensionTestUtil.AddExtensionToXml(pheed);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
 
     [TestMethod]
@@ -111,133 +87,99 @@ public class PheedSyndicationExtensionTest
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new RssFeed();
         feed.Load(reader);
-        Assert.AreEqual(1, feed.Channel.Items.Count());
+        feed.Channel.Items.Count().ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
-        Assert.IsTrue(item.HasExtensions);
+        item.HasExtensions.ShouldBeTrue();
         PheedSyndicationExtension itemExtension = item.FindExtension<PheedSyndicationExtension>();
-        Assert.IsNotNull(itemExtension);
-        Assert.IsInstanceOfType(
-            item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension,
-            typeof(PheedSyndicationExtension));
+        itemExtension.ShouldNotBeNull();
+        (item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension)
+            .ShouldBeOfType<PheedSyndicationExtension>();
     }
 
-    /// <summary>
-    ///A test for MatchByType
-    ///</summary>
     [TestMethod]
     public void PheedMatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
-        bool expected = true;
         bool actual = PheedSyndicationExtension.MatchByType(extension);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for ToString
-    ///</summary>
     [TestMethod]
     public void PheedToStringTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
-        string expected = nycText;
         string actual = target.ToString();
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(nycText);
     }
 
-    /// <summary>
-    ///A test for WriteTo
-    ///</summary>
     [TestMethod]
     public void PheedWriteToTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         using StringWriter sw = new StringWriter();
-        using XmlWriter writer = new XmlTextWriter(sw);
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
+        writer.Flush();
         string output = sw.ToString();
-        Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
+        output.Replace(Environment.NewLine, "").ShouldBe(nycText.Replace(Environment.NewLine, ""));
     }
 
-    /// <summary>
-    ///A test for op_Equality
-    ///</summary>
     [TestMethod]
     public void PheedOpEqualityTestFailure()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
-        bool expected = false;
         bool actual = (first == second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeFalse();
     }
 
+    [TestMethod]
     public void PheedOpEqualityTestSuccess()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension1();
-        bool expected = true;
         bool actual = (first == second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for op_GreaterThan
-    ///</summary>
     [TestMethod]
     public void PheedOpGreaterThanTest()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
-        bool expected = false;
-        bool actual = false;
-        actual = (first > second);
-        Assert.AreEqual(expected, actual);
+        bool actual = (first > second);
+        actual.ShouldBeFalse();
     }
 
-    /// <summary>
-    ///A test for op_Inequality
-    ///</summary>
     [TestMethod]
     public void PheedOpInequalityTest()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
-        bool expected = true;
         bool actual = (first != second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for op_LessThan
-    ///</summary>
     [TestMethod]
     public void PheedOpLessThanTest()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
-        bool expected = true;
         bool actual = (first < second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for Context
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("Context equality comparison not implemented")]
     public void PheedContextTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         PheedSyndicationExtensionContext expected = CreateContext1();
-        PheedSyndicationExtensionContext actual =
-            //			target.Context = expected;
-            target.Context;
-        bool b = actual.Equals(expected);
-        Assert.AreEqual(expected, actual);
-        Assert.Inconclusive("Verify the correctness of this test method.");
+        PheedSyndicationExtensionContext actual = target.Context;
+        actual.ShouldBe(expected);
     }
 
     private PheedSyndicationExtension CreateExtension1()

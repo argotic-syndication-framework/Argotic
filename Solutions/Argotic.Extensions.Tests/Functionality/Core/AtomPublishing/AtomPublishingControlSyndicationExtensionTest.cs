@@ -1,17 +1,12 @@
-﻿namespace Argotic.Extensions.Tests;
+namespace Argotic.Extensions.Tests;
 
+using System.Globalization;
+using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using System;
-using System.IO;
-using System.Linq;
-using System.Xml;
-using System.Globalization;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shouldly;
 
-/// <summary>
-///This is a test class for AtomPublishingControlSyndicationExtensionTest and is intended
-///to contain all AtomPublishingControlSyndicationExtensionTest Unit Tests
-///</summary>
 [TestClass]
 public class AtomPublishingControlSyndicationExtensionTest
 {
@@ -19,71 +14,50 @@ public class AtomPublishingControlSyndicationExtensionTest
     private readonly string nycText = $@"<control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US"" xmlns=""http://www.w3.org/2007/app"">{Environment.NewLine}  <draft>yes</draft>{Environment.NewLine}</control>";
     private readonly string strExtXml = @"<app:control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US""><app:draft>yes</app:draft></app:control>";
 
-    public TestContext TestContext { get; set; }
+    public TestContext? TestContext { get; set; }
 
-    /// <summary>
-    ///A test for AtomPublishingControlSyndicationExtension Constructor
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlSyndicationExtensionConstructorTest()
     {
         AtomPublishingControlSyndicationExtension target = new AtomPublishingControlSyndicationExtension();
-        Assert.IsNotNull(target);
-        Assert.IsInstanceOfType(target, typeof(AtomPublishingControlSyndicationExtension));
+        target.ShouldNotBeNull();
+        target.ShouldBeOfType<AtomPublishingControlSyndicationExtension>();
     }
 
-    /// <summary>
-    ///A test for CompareTo
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlCompareToTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        int expected = 0;
         int actual = target.CompareTo(obj);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(0);
     }
 
-
-    /// <summary>
-    ///A test for Equals
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlEqualsTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        bool expected = true;
         bool actual = target.Equals(obj);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for GetHashCode
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void AtomPublishingControlGetHashCodeTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         int expected = -1862124151;
         int actual = target.GetHashCode();
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
 
-    /// <summary>
-    ///A test for Load
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlLoadTest()
     {
-        AtomPublishingControlSyndicationExtension target = new AtomPublishingControlSyndicationExtension(); // TODO: Initialize to an appropriate value
-        NameTable nt = new NameTable();
-        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
-        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Preserve);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new RssFeed();
         feed.Load(reader);
     }
@@ -94,137 +68,108 @@ public class AtomPublishingControlSyndicationExtensionTest
         AtomPublishingControlSyndicationExtension itunes = CreateExtension1();
         string actual = ExtensionTestUtil.AddExtensionToXml(itunes).Trim();
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml).Trim();
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
 
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("Extension not being parsed from RSS feed correctly")]
     public void AtomPublishingControlFullTest()
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new RssFeed();
         feed.Load(reader);
-        Assert.AreEqual(1, feed.Channel.Items.Count());
+        feed.Channel.Items.Count().ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
-        bool ext = item.HasExtensions;
-        Assert.IsTrue(item.HasExtensions);
+        item.HasExtensions.ShouldBeTrue();
         AtomPublishingControlSyndicationExtension itemExtension = item.FindExtension<AtomPublishingControlSyndicationExtension>();
-        Assert.IsNotNull(itemExtension);
-        Assert.IsInstanceOfType(item.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension,
-            typeof(AtomPublishingControlSyndicationExtension));
+        itemExtension.ShouldNotBeNull();
+        (item.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension)
+            .ShouldBeOfType<AtomPublishingControlSyndicationExtension>();
     }
 
-    /// <summary>
-    ///A test for MatchByType
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlMatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
-        bool expected = true;
         bool actual = AtomPublishingControlSyndicationExtension.MatchByType(extension);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for ToString
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlToStringTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
-        string expected = nycText;
         string actual = target.ToString();
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(nycText);
     }
 
-    /// <summary>
-    ///A test for WriteTo
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlWriteToTest()
     {
         using StringWriter sw = new StringWriter();
-        using XmlWriter writer = new XmlTextWriter(sw);
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         target.WriteTo(writer);
+        writer.Flush();
         string output = sw.ToString();
-        Assert.AreEqual(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
+        output.Replace(Environment.NewLine, "").ShouldBe(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""));
     }
 
-    /// <summary>
-    ///A test for op_Equality
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlOpEqualityTestFailure()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
-        bool expected = false;
         bool actual = first == second;
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeFalse();
     }
 
+    [TestMethod]
     public void AtomPublishingControlOpEqualityTestSuccess()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension1();
-        bool expected = true;
         bool actual = first == second;
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for op_GreaterThan
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlOpGreaterThanTest()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
-        bool expected = false;
         bool actual = first > second;
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeFalse();
     }
 
-    /// <summary>
-    ///A test for op_Inequality
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlOpInequalityTest()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
-        bool expected = true;
         bool actual = first != second;
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for op_LessThan
-    ///</summary>
     [TestMethod]
     public void AtomPublishingControlOpLessThanTest()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
-        bool expected = true;
         bool actual = first < second;
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for Context
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("Context equality comparison not implemented")]
     public void AtomPublishingControlContextTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         AtomPublishingControlSyndicationExtensionContext expected = CreateContext1();
         AtomPublishingControlSyndicationExtensionContext actual = target.Context;
-        Assert.AreEqual(expected, actual);
-        Assert.Inconclusive("Verify the correctness of this test method.");
+        actual.ShouldBe(expected);
     }
 
     private AtomPublishingControlSyndicationExtension CreateExtension1()

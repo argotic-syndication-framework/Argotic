@@ -1,20 +1,14 @@
-﻿namespace Argotic.Extensions.Tests;
+namespace Argotic.Extensions.Tests;
 
+using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using System;
-using System.IO;
-using System.Linq;
-using System.Xml;
+using Microsoft.VisualStudio.TestTools.UnitTesting;
+using Shouldly;
 
-/// <summary>
-///This is a test class for CreativeCommonsSyndicationExtensionTest and is intended
-///to contain all CreativeCommonsSyndicationExtensionTest Unit Tests
-///</summary>
 [TestClass]
 public class CreativeCommonsSyndicationExtensionTest
 {
-
     const string namespc = @"xmlns:creativeCommons=""http://backend.userland.com/creativeCommonsRssModule""";
 
     private const string nycText = "<license xmlns=\"http://backend.userland.com/creativeCommonsRssModule\">http://www.example.com/license1.html</license>" +
@@ -23,90 +17,53 @@ public class CreativeCommonsSyndicationExtensionTest
     private const string strExtXml = "<creativeCommons:license>http://www.example.com/license1.html</creativeCommons:license>"
                                      + "<creativeCommons:license>http://www.example.com/license2.html</creativeCommons:license>";
 
-    public TestContext TestContext { get; set; }
+    public TestContext? TestContext { get; set; }
 
-    /// <summary>
-    ///A test for CreativeCommonsSyndicationExtension Constructor
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsSyndicationExtensionConstructorTest()
     {
         CreativeCommonsSyndicationExtension target = new CreativeCommonsSyndicationExtension();
-        Assert.IsNotNull(target);
-        Assert.IsInstanceOfType(target, typeof(CreativeCommonsSyndicationExtension));
+        target.ShouldNotBeNull();
+        target.ShouldBeOfType<CreativeCommonsSyndicationExtension>();
     }
 
-    /// <summary>
-    ///A test for CompareTo
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsCompareToTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        int expected = 0;
         int actual = target.CompareTo(obj);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(0);
     }
 
-
-    /// <summary>
-    ///A test for Equals
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsEqualsTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
-        bool expected = true;
         bool actual = target.Equals(obj);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for GetHashCode
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void CreativeCommonsGetHashCodeTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
         int expected = -2111858259;
         int actual = target.GetHashCode();
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
 
-    /// <summary>
-    ///A test for Load
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("Test requires manual verification of Load behavior")]
     public void CreativeCommonsLoadTest()
     {
-        CreativeCommonsSyndicationExtension target = new CreativeCommonsSyndicationExtension(); // TODO: Initialize to an appropriate value
-        NameTable nt = new NameTable();
-        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
-        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
-#if false
-				//var document  = new XPathDocument(reader);
-				//var nav = document.CreateNavigator();
-				//nav.Select("//item");
-				do
-				{
-					if (!reader.Read())
-						break;
-				} while (reader.NodeType != XmlNodeType.EndElement || reader.Name != "webMaster");
-
-				
-				bool expected = true;
-				bool actual;
-				actual = target.Load(reader);
-				Assert.AreEqual(expected, actual);
-#else
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new RssFeed();
         feed.Load(reader);
-#endif
     }
 
     [TestMethod]
@@ -116,146 +73,108 @@ public class CreativeCommonsSyndicationExtensionTest
 
         string actual = ExtensionTestUtil.AddExtensionToXml(itunes);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBe(expected);
     }
-
 
     [TestMethod]
     public void CreativeCommonsFullTest()
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
         RssFeed feed = new RssFeed();
         feed.Load(reader);
 
-        //				 Assert.IsTrue(feed.Channel.HasExtensions);
-        //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension,
-        //						 typeof(CreativeCommonsSyndicationExtension));
-
-        Assert.AreEqual(1, feed.Channel.Items.Count());
+        feed.Channel.Items.Count().ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
-        Assert.IsTrue(item.HasExtensions);
+        item.HasExtensions.ShouldBeTrue();
         CreativeCommonsSyndicationExtension itemExtension = item.FindExtension<CreativeCommonsSyndicationExtension>();
-        Assert.IsNotNull(itemExtension);
-        Assert.IsInstanceOfType(item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension,
-            typeof(CreativeCommonsSyndicationExtension));
+        itemExtension.ShouldNotBeNull();
+        (item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension)
+            .ShouldBeOfType<CreativeCommonsSyndicationExtension>();
     }
 
-    /// <summary>
-    ///A test for MatchByType
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsMatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
-        bool expected = true;
         bool actual = CreativeCommonsSyndicationExtension.MatchByType(extension);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for ToString
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsToStringTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
-        string expected = nycText;
         string actual = target.ToString();
-        Assert.AreEqual(expected, actual.Replace(Environment.NewLine, ""));
+        actual.Replace(Environment.NewLine, "").ShouldBe(nycText);
     }
 
-    /// <summary>
-    ///A test for WriteTo
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsWriteToTest()
     {
         using StringWriter sw = new StringWriter();
-        using XmlWriter writer = new XmlTextWriter(sw);
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         CreativeCommonsSyndicationExtension target = CreateExtension1();
         target.WriteTo(writer);
+        writer.Flush();
         string output = sw.ToString();
-        Assert.AreEqual(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
+        output.Replace(Environment.NewLine, "").ShouldBe(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""));
     }
 
-    /// <summary>
-    ///A test for op_Equality
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsOpEqualityTestFailure()
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool expected = false;
         bool actual = (first == second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeFalse();
     }
 
+    [TestMethod]
     public void CreativeCommonsOpEqualityTestSuccess()
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension1();
-        bool expected = true;
         bool actual = (first == second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for op_GreaterThan
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsOpGreaterThanTest()
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool expected = false;
-        bool actual = false;
-        actual = (first > second);
-        Assert.AreEqual(expected, actual);
+        bool actual = (first > second);
+        actual.ShouldBeFalse();
     }
 
-    /// <summary>
-    ///A test for op_Inequality
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsOpInequalityTest()
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool expected = true;
         bool actual = (first != second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for op_LessThan
-    ///</summary>
     [TestMethod]
     public void CreativeCommonsOpLessThanTest()
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool expected = true;
         bool actual = (first < second);
-        Assert.AreEqual(expected, actual);
+        actual.ShouldBeTrue();
     }
 
-    /// <summary>
-    ///A test for Context
-    ///</summary>
-    [TestMethod, Ignore]
+    [TestMethod]
+    [Ignore("Context equality comparison not implemented")]
     public void CreativeCommonsContextTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
         CreativeCommonsSyndicationExtensionContext expected = CreateContext1();
-        CreativeCommonsSyndicationExtensionContext actual =
-            //			target.Context = expected;
-            target.Context;
-        bool b = actual.Equals(expected);
-        Assert.AreEqual(expected, actual);
-        Assert.Inconclusive("Verify the correctness of this test method.");
+        CreativeCommonsSyndicationExtensionContext actual = target.Context;
+        actual.ShouldBe(expected);
     }
 
     private CreativeCommonsSyndicationExtension CreateExtension1()
@@ -266,6 +185,7 @@ public class CreativeCommonsSyndicationExtensionTest
         nyc.Context.Licenses.Add(new Uri("http://www.example.com/license2.html"));
         return nyc;
     }
+
     private CreativeCommonsSyndicationExtension CreateExtension2()
     {
         CreativeCommonsSyndicationExtension nyc = new CreativeCommonsSyndicationExtension();
@@ -277,8 +197,6 @@ public class CreativeCommonsSyndicationExtensionTest
     public static CreativeCommonsSyndicationExtensionContext CreateContext1()
     {
         CreativeCommonsSyndicationExtensionContext nyc = new CreativeCommonsSyndicationExtensionContext();
-        //nyc.Latitude = 40;
-        //nyc.Longitude = -74;
         return nyc;
     }
 }

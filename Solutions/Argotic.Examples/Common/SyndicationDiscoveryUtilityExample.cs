@@ -66,8 +66,6 @@ public static class SyndicationDiscoveryUtilityExample
     public static void ConditionalGetExample()
     {
         Uri source = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
-        DateTime lastModified;
-        string entityTag;
 
         HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
         httpRequest.AllowAutoRedirect = true;
@@ -76,15 +74,14 @@ public static class SyndicationDiscoveryUtilityExample
 
         HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
 
-        lastModified = httpResponse.LastModified;
-        entityTag = httpResponse.Headers[HttpResponseHeader.ETag];
+        DateTime lastModified = httpResponse.LastModified;
+        string? entityTag = httpResponse.Headers[HttpResponseHeader.ETag];
 
         /*
             Typically the consumer would store the modification date and entity tag information for the resource,
             and some amount of time passes. Consumer can now use a conditional GET operation to determine if
             the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
         */
-
         WebResponse conditionalResponse = SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag);
         if (conditionalResponse != null)
         {
@@ -98,8 +95,6 @@ public static class SyndicationDiscoveryUtilityExample
     public static void TryConditionalGetExample()
     {
         Uri source = new Uri("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
-        DateTime lastModified;
-        string entityTag;
         HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
         httpRequest.AllowAutoRedirect = true;
         httpRequest.KeepAlive = true;
@@ -107,16 +102,15 @@ public static class SyndicationDiscoveryUtilityExample
 
         HttpWebResponse httpResponse = (HttpWebResponse)httpRequest.GetResponse();
 
-        lastModified = httpResponse.LastModified;
-        entityTag = httpResponse.Headers[HttpResponseHeader.ETag];
+        DateTime lastModified = httpResponse.LastModified;
+        string? entityTag = httpResponse.Headers[HttpResponseHeader.ETag];
+
 
         /*
             Typically the consumer would store the modification date and entity tag information for the resource,
             and some amount of time passes. Consumer can now use a conditional GET operation to determine if
             the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
         */
-
-
         HttpWebResponse conditionalResponse = null;
         if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, out conditionalResponse))
         {
@@ -130,9 +124,8 @@ public static class SyndicationDiscoveryUtilityExample
     public static void LocateDiscoverableSyndicationEndpointsExample()
     {
         Uri source = new Uri("http://www.dotnetrocks.com/");
-        Collection<DiscoverableSyndicationEndpoint> endpoints;
 
-        endpoints = SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(source);
+        Collection<DiscoverableSyndicationEndpoint> endpoints = SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(source);
 
         foreach (DiscoverableSyndicationEndpoint endpoint in endpoints)
         {

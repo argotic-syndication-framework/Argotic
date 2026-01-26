@@ -51,15 +51,8 @@ public sealed class SyndicationResourceLoadSettings : IComparable
     /// </remarks>
     public bool AutoDetectExtensions
     {
-        get
-        {
-            return syndicationExtensionAutodetectionEnabled;
-        }
-
-        set
-        {
-            syndicationExtensionAutodetectionEnabled = value;
-        }
+        get => syndicationExtensionAutodetectionEnabled;
+        set => syndicationExtensionAutodetectionEnabled = value;
     }
 
     /// <summary>

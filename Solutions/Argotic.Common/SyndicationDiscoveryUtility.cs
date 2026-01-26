@@ -21,13 +21,7 @@ public static class SyndicationDiscoveryUtility
     /// Gets the raw user agent string used by the framework when sending web requests.
     /// </summary>
     /// <value>A string that represents information such as the client application name, version, host operating system, and language.</value>
-    public static string FrameworkUserAgent
-    {
-        get
-        {
-            return frameworkUserAgent;
-        }
-    }
+    public static string FrameworkUserAgent => frameworkUserAgent;
 
     /// <summary>
     /// Returns the <see cref="SyndicationContentFormat"/> enumeration value that corresponds to the specified format name.

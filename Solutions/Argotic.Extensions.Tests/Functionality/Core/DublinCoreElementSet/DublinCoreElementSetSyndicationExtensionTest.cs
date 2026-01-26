@@ -71,8 +71,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
         int expected = 0;
-        int actual;
-        actual = target.CompareTo(obj);
+        int actual = target.CompareTo(obj);
         Assert.AreEqual(expected, actual);
     }
 
@@ -104,8 +103,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = target.Equals(obj);
+        bool actual = target.Equals(obj);
         Assert.AreEqual(expected, actual);
     }
 
@@ -117,8 +115,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         int expected = 1398804031;
-        int actual;
-        actual = target.GetHashCode();
+        int actual = target.GetHashCode();
         Assert.AreEqual(expected, actual);
     }
 
@@ -177,8 +174,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         ISyndicationExtension extension = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = DublinCoreElementSetSyndicationExtension.MatchByType(extension);
+        bool actual = DublinCoreElementSetSyndicationExtension.MatchByType(extension);
         Assert.AreEqual(expected, actual);
     }
 
@@ -190,8 +186,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         string expected = nycText;
-        string actual;
-        actual = target.ToString();
+        string actual = target.ToString();
         Assert.AreEqual(expected, actual);
     }
 
@@ -218,8 +213,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
         bool expected = false;
-        bool actual;
-        actual = (first == second);
+        bool actual = (first == second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -228,8 +222,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = (first == second);
+        bool actual = (first == second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -269,8 +262,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
         bool expected = true;
-        bool actual;
-        actual = (first < second);
+        bool actual = (first < second);
         Assert.AreEqual(expected, actual);
     }
 

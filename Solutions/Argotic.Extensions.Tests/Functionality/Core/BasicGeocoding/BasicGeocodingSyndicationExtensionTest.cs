@@ -44,8 +44,7 @@ public class BasicGeocodingSyndicationExtensionTest
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
         int expected = 0;
-        int actual;
-        actual = target.CompareTo(obj);
+        int actual = target.CompareTo(obj);
         Assert.AreEqual(expected, actual);
     }
 
@@ -57,8 +56,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         decimal value = new decimal(12.582438888888888888888888888889);
         string expected = "12°34'56.78\"";
-        string actual;
-        actual = BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(value);
+        string actual = BasicGeocodingSyndicationExtension.ConvertDecimalToDegreesMinutesSeconds(value);
         Assert.AreEqual(expected, actual);
     }
 
@@ -70,8 +68,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         string degreesMinutesSeconds = "12°34'56.78\"";
         decimal expected = new decimal(12.582438888888888888888888888889);
-        decimal actual;
-        actual = BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal(degreesMinutesSeconds);
+        decimal actual = BasicGeocodingSyndicationExtension.ConvertDegreesMinutesSecondsToDecimal(degreesMinutesSeconds);
         Assert.AreEqual((double)expected, (double)actual, 3e-6);
     }
 
@@ -84,8 +81,7 @@ public class BasicGeocodingSyndicationExtensionTest
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = target.Equals(obj);
+        bool actual = target.Equals(obj);
         Assert.AreEqual(expected, actual);
     }
 
@@ -97,8 +93,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         int expected = -1112179344;
-        int actual;
-        actual = target.GetHashCode();
+        int actual = target.GetHashCode();
         Assert.AreEqual(expected, actual);
     }
 
@@ -184,8 +179,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         ISyndicationExtension extension = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = BasicGeocodingSyndicationExtension.MatchByType(extension);
+        bool actual = BasicGeocodingSyndicationExtension.MatchByType(extension);
         Assert.AreEqual(expected, actual);
     }
 
@@ -197,8 +191,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         string expected = nycText;
-        string actual;
-        actual = target.ToString();
+        string actual = target.ToString();
         Assert.AreEqual(expected, actual);
     }
 
@@ -225,8 +218,7 @@ public class BasicGeocodingSyndicationExtensionTest
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
         bool expected = false;
-        bool actual;
-        actual = (first == second);
+        bool actual = (first == second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -235,8 +227,7 @@ public class BasicGeocodingSyndicationExtensionTest
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = (first == second);
+        bool actual = (first == second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -276,8 +267,7 @@ public class BasicGeocodingSyndicationExtensionTest
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
         bool expected = true;
-        bool actual;
-        actual = (first < second);
+        bool actual = (first < second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -289,9 +279,9 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         BasicGeocodingSyndicationExtensionContext expected = CreateContext1();
-        BasicGeocodingSyndicationExtensionContext actual;
-        //			target.Context = expected;
-        actual = target.Context;
+        BasicGeocodingSyndicationExtensionContext actual =
+            //			target.Context = expected;
+            target.Context;
         bool b = actual.Equals(expected);
         Assert.AreEqual(expected, actual);
         Assert.Inconclusive("Verify the correctness of this test method.");

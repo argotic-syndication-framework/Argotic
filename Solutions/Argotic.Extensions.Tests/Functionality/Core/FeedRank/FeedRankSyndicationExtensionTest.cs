@@ -41,8 +41,7 @@ public class FeedRankSyndicationExtensionTest
         FeedRankSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
         int expected = 0;
-        int actual;
-        actual = target.CompareTo(obj);
+        int actual = target.CompareTo(obj);
         Assert.AreEqual(expected, actual);
     }
 
@@ -55,8 +54,7 @@ public class FeedRankSyndicationExtensionTest
         FeedRankSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = target.Equals(obj);
+        bool actual = target.Equals(obj);
         Assert.AreEqual(expected, actual);
     }
 
@@ -68,8 +66,7 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         int expected = 1719638022;
-        int actual;
-        actual = target.GetHashCode();
+        int actual = target.GetHashCode();
         Assert.AreEqual(expected, actual);
     }
 
@@ -149,8 +146,7 @@ public class FeedRankSyndicationExtensionTest
     {
         ISyndicationExtension extension = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = FeedRankSyndicationExtension.MatchByType(extension);
+        bool actual = FeedRankSyndicationExtension.MatchByType(extension);
         Assert.AreEqual(expected, actual);
     }
 
@@ -162,8 +158,7 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         string expected = nycText;
-        string actual;
-        actual = target.ToString();
+        string actual = target.ToString();
         Assert.AreEqual(expected, actual);
     }
 
@@ -190,8 +185,7 @@ public class FeedRankSyndicationExtensionTest
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
         bool expected = false;
-        bool actual;
-        actual = (first == second);
+        bool actual = (first == second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -200,8 +194,7 @@ public class FeedRankSyndicationExtensionTest
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = (first == second);
+        bool actual = (first == second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -241,8 +234,7 @@ public class FeedRankSyndicationExtensionTest
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
         bool expected = true;
-        bool actual;
-        actual = (first < second);
+        bool actual = (first < second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -254,9 +246,9 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         FeedRankSyndicationExtensionContext expected = CreateContext1();
-        FeedRankSyndicationExtensionContext actual;
-        //			target.Context = expected;
-        actual = target.Context;
+        FeedRankSyndicationExtensionContext actual =
+            //			target.Context = expected;
+            target.Context;
         bool b = actual.Equals(expected);
         Assert.AreEqual(expected, actual);
         Assert.Inconclusive("Verify the correctness of this test method.");

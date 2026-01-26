@@ -59,8 +59,7 @@ public class ITunesSyndicationExtensionTest
         ITunesSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
         int expected = 0;
-        int actual;
-        actual = target.CompareTo(obj);
+        int actual = target.CompareTo(obj);
         Assert.AreEqual(expected, actual);
     }
 
@@ -96,8 +95,7 @@ public class ITunesSyndicationExtensionTest
         ITunesSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = target.Equals(obj);
+        bool actual = target.Equals(obj);
         Assert.AreEqual(expected, actual);
     }
 
@@ -109,8 +107,7 @@ public class ITunesSyndicationExtensionTest
     {
         ITunesSyndicationExtension target = CreateExtension1();
         int expected = -765758449;
-        int actual;
-        actual = target.GetHashCode();
+        int actual = target.GetHashCode();
         Assert.AreEqual(expected, actual);
     }
 
@@ -173,8 +170,7 @@ public class ITunesSyndicationExtensionTest
     {
         ISyndicationExtension extension = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = ITunesSyndicationExtension.MatchByType(extension);
+        bool actual = ITunesSyndicationExtension.MatchByType(extension);
         Assert.AreEqual(expected, actual);
     }
 
@@ -186,8 +182,7 @@ public class ITunesSyndicationExtensionTest
     {
         ITunesSyndicationExtension target = CreateExtension1();
         string expected = nycText;
-        string actual;
-        actual = target.ToString();
+        string actual = target.ToString();
         Assert.AreEqual(expected, actual);
     }
 
@@ -214,8 +209,7 @@ public class ITunesSyndicationExtensionTest
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
         bool expected = false;
-        bool actual;
-        actual = (first == second);
+        bool actual = (first == second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -224,8 +218,7 @@ public class ITunesSyndicationExtensionTest
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension1();
         bool expected = true;
-        bool actual;
-        actual = (first == second);
+        bool actual = (first == second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -265,8 +258,7 @@ public class ITunesSyndicationExtensionTest
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
         bool expected = true;
-        bool actual;
-        actual = (first < second);
+        bool actual = (first < second);
         Assert.AreEqual(expected, actual);
     }
 
@@ -278,9 +270,9 @@ public class ITunesSyndicationExtensionTest
     {
         ITunesSyndicationExtension target = CreateExtension1();
         ITunesSyndicationExtensionContext expected = CreateContext1();
-        ITunesSyndicationExtensionContext actual;
-        //			target.Context = expected;
-        actual = target.Context;
+        ITunesSyndicationExtensionContext actual =
+            //			target.Context = expected;
+            target.Context;
         bool b = actual.Equals(expected);
         Assert.AreEqual(expected, actual);
         Assert.Inconclusive("Verify the correctness of this test method.");

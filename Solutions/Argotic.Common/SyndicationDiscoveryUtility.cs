@@ -1031,8 +1031,7 @@ public static class SyndicationDiscoveryUtility
 
                 if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    Uri pingbackXmlRpcServer;
-                    if (Uri.TryCreate(value, UriKind.Absolute, out pingbackXmlRpcServer))
+                    if (Uri.TryCreate(value, UriKind.Absolute, out Uri? pingbackXmlRpcServer))
                     {
                         isPingbackEnabled = true;
                     }

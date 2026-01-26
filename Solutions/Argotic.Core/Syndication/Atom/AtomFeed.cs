@@ -1103,13 +1103,12 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             object[] parameters = (object[])result.AsyncState;
             var httpWebRequest = parameters[0] as WebRequest;
-            var feed = parameters[1] as AtomFeed;
             var source = parameters[2] as Uri;
             var settings = parameters[3] as SyndicationResourceLoadSettings;
             var options = parameters[4] as WebRequestOptions;
             object userToken = parameters[5];
 
-            if (feed != null)
+            if (parameters[1] is AtomFeed feed)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
 

@@ -821,13 +821,12 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         {
             object[] parameters = (object[])result.AsyncState;
             var httpWebRequest = parameters[0] as WebRequest;
-            var entry = parameters[1] as AtomEntry;
             var source = parameters[2] as Uri;
             var settings = parameters[3] as SyndicationResourceLoadSettings;
             var options = parameters[4] as WebRequestOptions;
             object userToken = parameters[5];
 
-            if (entry != null)
+            if (parameters[1] is AtomEntry entry)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
 

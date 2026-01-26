@@ -599,12 +599,11 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             object[] parameters = (object[])result.AsyncState;
             var httpWebRequest = parameters[0] as WebRequest;
-            var document = parameters[1] as BlogMLDocument;
             var source = parameters[2] as Uri;
             var settings = parameters[3] as SyndicationResourceLoadSettings;
             var options = parameters[4] as WebRequestOptions;
             object userToken = parameters[5];
-            if (document != null)
+            if (parameters[1] is BlogMLDocument document)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
                 using (Stream stream = httpWebResponse.GetResponseStream())

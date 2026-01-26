@@ -270,7 +270,7 @@ public class FeedSynchronizationItem : IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -598,11 +598,11 @@ public class FeedSynchronizationItem : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Id, value.Id, StringComparison.OrdinalIgnoreCase);
-            result = result | this.ConflictPreservation.CompareTo(value.ConflictPreservation);
-            result = result | this.TombstoneStatus.CompareTo(value.TombstoneStatus);
-            result = result | this.Updates.CompareTo(value.Updates);
-            result = result | FeedSynchronizationItem.CompareSequence(this.Histories, value.Histories);
-            result = result | ComparisonUtility.CompareSequence(this.Conflicts, value.Conflicts);
+            result |= this.ConflictPreservation.CompareTo(value.ConflictPreservation);
+            result |= this.TombstoneStatus.CompareTo(value.TombstoneStatus);
+            result |= this.Updates.CompareTo(value.Updates);
+            result |= FeedSynchronizationItem.CompareSequence(this.Histories, value.Histories);
+            result |= ComparisonUtility.CompareSequence(this.Conflicts, value.Conflicts);
 
             return result;
         }

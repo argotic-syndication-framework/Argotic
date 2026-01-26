@@ -560,10 +560,10 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
         if (value != null)
         {
             int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

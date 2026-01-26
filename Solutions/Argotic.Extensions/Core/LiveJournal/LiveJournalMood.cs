@@ -168,7 +168,7 @@ public class LiveJournalMood : IComparable
         if (value != null)
         {
             int result = this.Id.CompareTo(value.Id);
-            result = result | string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

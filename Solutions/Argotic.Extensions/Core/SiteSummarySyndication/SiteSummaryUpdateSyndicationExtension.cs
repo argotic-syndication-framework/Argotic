@@ -239,8 +239,8 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
         if (value != null)
         {
             int result = this.Context.Base.CompareTo(value.Context.Base);
-            result = result | this.Context.Frequency.CompareTo(value.Context.Frequency);
-            result = result | this.Context.Period.CompareTo(value.Context.Period);
+            result |= this.Context.Frequency.CompareTo(value.Context.Frequency);
+            result |= this.Context.Period.CompareTo(value.Context.Period);
 
             return result;
         }

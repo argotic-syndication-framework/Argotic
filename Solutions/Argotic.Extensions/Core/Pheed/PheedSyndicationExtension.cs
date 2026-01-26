@@ -172,7 +172,7 @@ public class PheedSyndicationExtension : SyndicationExtension, IComparable
         if (value != null)
         {
             int result = Uri.Compare(this.Context.Source, value.Context.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Context.Thumbnail, value.Context.Thumbnail, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Context.Thumbnail, value.Context.Thumbnail, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

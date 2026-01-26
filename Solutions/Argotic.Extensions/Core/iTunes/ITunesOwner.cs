@@ -191,7 +191,7 @@ public class ITunesOwner : IComparable
         if (value != null)
         {
             int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

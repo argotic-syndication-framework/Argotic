@@ -363,7 +363,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
         {
             int result = Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            result = result | BlogMLUtility.CompareCommonObjects(this, value);
+            result |= BlogMLUtility.CompareCommonObjects(this, value);
 
             return result;
         }

@@ -410,9 +410,9 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
         if (value != null)
         {
             int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.ParentId, value.ParentId, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.ParentId, value.ParentId, StringComparison.OrdinalIgnoreCase);
 
-            result = result | BlogMLUtility.CompareCommonObjects(this, value);
+            result |= BlogMLUtility.CompareCommonObjects(this, value);
 
             return result;
         }

@@ -182,7 +182,7 @@ public class FeedHistoryLinkRelation : IComparable
         if (value != null)
         {
             int result = this.RelationType.CompareTo(value.RelationType);
-            result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

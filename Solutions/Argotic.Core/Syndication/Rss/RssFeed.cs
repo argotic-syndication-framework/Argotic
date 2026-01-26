@@ -330,7 +330,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)

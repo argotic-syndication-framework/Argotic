@@ -224,7 +224,7 @@ public class YahooMediaRating : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            result |= Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }

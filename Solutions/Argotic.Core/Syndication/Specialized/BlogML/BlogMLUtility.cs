@@ -117,21 +117,21 @@ internal static class BlogMLUtility
             return -1;
         }
         result = source.ApprovalStatus.CompareTo(target.ApprovalStatus);
-        result = result | source.CreatedOn.CompareTo(target.CreatedOn);
-        result = result | string.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
-        result = result | source.LastModifiedOn.CompareTo(target.LastModifiedOn);
+        result |= source.CreatedOn.CompareTo(target.CreatedOn);
+        result |= string.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
+        result |= source.LastModifiedOn.CompareTo(target.LastModifiedOn);
 
         if (source.Title != null && target.Title != null)
         {
-            result = result | source.Title.CompareTo(target.Title);
+            result |= source.Title.CompareTo(target.Title);
         }
         else if (source.Title != null && target.Title == null)
         {
-            result = result | 1;
+            result |= 1;
         }
         else if (source.Title == null && target.Title != null)
         {
-            result = result | -1;
+            result |= -1;
         }
 
         return result;

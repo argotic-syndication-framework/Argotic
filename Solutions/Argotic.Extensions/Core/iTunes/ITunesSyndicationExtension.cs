@@ -89,7 +89,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -278,16 +278,16 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
         if (value != null)
         {
             int result = string.Compare(this.Context.Author, value.Context.Author, StringComparison.OrdinalIgnoreCase);
-            result = result | ITunesSyndicationExtension.CompareSequence(this.Context.Categories, value.Context.Categories);
-            result = result | this.Context.Duration.CompareTo(value.Context.Duration);
-            result = result | this.Context.ExplicitMaterial.CompareTo(value.Context.ExplicitMaterial);
-            result = result | Uri.Compare(this.Context.Image, value.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Context.IsBlocked.CompareTo(value.Context.IsBlocked);
-            result = result | ComparisonUtility.CompareSequence(this.Context.Keywords, value.Context.Keywords, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Context.NewFeedUrl, value.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Context.Owner.CompareTo(value.Context.Owner);
-            result = result | string.Compare(this.Context.Subtitle, value.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Summary, value.Context.Summary, StringComparison.OrdinalIgnoreCase);
+            result |= ITunesSyndicationExtension.CompareSequence(this.Context.Categories, value.Context.Categories);
+            result |= this.Context.Duration.CompareTo(value.Context.Duration);
+            result |= this.Context.ExplicitMaterial.CompareTo(value.Context.ExplicitMaterial);
+            result |= Uri.Compare(this.Context.Image, value.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.Context.IsBlocked.CompareTo(value.Context.IsBlocked);
+            result |= ComparisonUtility.CompareSequence(this.Context.Keywords, value.Context.Keywords, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Context.NewFeedUrl, value.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.Context.Owner.CompareTo(value.Context.Owner);
+            result |= string.Compare(this.Context.Subtitle, value.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Summary, value.Context.Summary, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

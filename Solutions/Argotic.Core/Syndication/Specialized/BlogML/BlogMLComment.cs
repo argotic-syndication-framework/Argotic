@@ -492,11 +492,11 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
         if (value != null)
         {
             int result = this.Content.CompareTo(value.Content);
-            result = result | string.Compare(this.UserEmailAddress, value.UserEmailAddress, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.UserName, value.UserName, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.UserUrl, value.UserUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.UserEmailAddress, value.UserEmailAddress, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.UserName, value.UserName, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.UserUrl, value.UserUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            result = result | BlogMLUtility.CompareCommonObjects(this, value);
+            result |= BlogMLUtility.CompareCommonObjects(this, value);
 
             return result;
         }

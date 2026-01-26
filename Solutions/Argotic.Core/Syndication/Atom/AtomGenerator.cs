@@ -387,10 +387,10 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
         if (value != null)
         {
             int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Version, value.Version, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Version, value.Version, StringComparison.OrdinalIgnoreCase);
 
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

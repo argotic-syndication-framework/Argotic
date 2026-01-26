@@ -233,9 +233,9 @@ public class TrackbackMessageSentEventArgs : EventArgs, IComparable
         if (value != null)
         {
             int result = 0;
-            result = result | this.Message.CompareTo(value.Message);
-            result = result | this.Response.CompareTo(value.Response);
-            result = result | Uri.Compare(this.Host, value.Host, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.Message.CompareTo(value.Message);
+            result |= this.Response.CompareTo(value.Response);
+            result |= Uri.Compare(this.Host, value.Host, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

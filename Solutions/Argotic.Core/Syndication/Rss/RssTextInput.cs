@@ -391,9 +391,9 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

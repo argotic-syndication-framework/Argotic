@@ -199,7 +199,7 @@ public class ITunesCategory : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
-            result = result | ITunesSyndicationExtension.CompareSequence(this.Categories, value.Categories);
+            result |= ITunesSyndicationExtension.CompareSequence(this.Categories, value.Categories);
 
             return result;
         }

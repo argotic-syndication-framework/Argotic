@@ -177,50 +177,50 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
             {
                 if (value.Context.Mood != null)
                 {
-                    result = result | this.Context.Mood.CompareTo(value.Context.Mood);
+                    result |= this.Context.Mood.CompareTo(value.Context.Mood);
                 }
                 else
                 {
-                    result = result | 1;
+                    result |= 1;
                 }
             }
             else if (this.Context.Mood == null && value.Context.Mood != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
-            result = result | string.Compare(this.Context.Music, value.Context.Music, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Music, value.Context.Music, StringComparison.OrdinalIgnoreCase);
 
             if (this.Context.Security != null)
             {
                 if (value.Context.Security != null)
                 {
-                    result = result | this.Context.Security.CompareTo(value.Context.Security);
+                    result |= this.Context.Security.CompareTo(value.Context.Security);
                 }
                 else
                 {
-                    result = result | 1;
+                    result |= 1;
                 }
             }
             else if (this.Context.Security == null && value.Context.Security != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Context.UserPicture != null)
             {
                 if (value.Context.UserPicture != null)
                 {
-                    result = result | this.Context.UserPicture.CompareTo(value.Context.UserPicture);
+                    result |= this.Context.UserPicture.CompareTo(value.Context.UserPicture);
                 }
                 else
                 {
-                    result = result | 1;
+                    result |= 1;
                 }
             }
             else if (this.Context.UserPicture == null && value.Context.UserPicture != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             return result;

@@ -600,17 +600,17 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         if (value != null)
         {
             int result = this.Length.CompareTo(value.Length);
-            result = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Relation, value.Relation, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Relation, value.Relation, StringComparison.OrdinalIgnoreCase);
 
             string sourceLanguageName = this.ContentLanguage != null ? this.ContentLanguage.Name : string.Empty;
             string targetLanguageName = value.ContentLanguage != null ? value.ContentLanguage.Name : string.Empty;
-            result = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
-            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

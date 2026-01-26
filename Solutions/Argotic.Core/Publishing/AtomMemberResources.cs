@@ -355,7 +355,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -784,9 +784,9 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
         if (value != null)
         {
             int result = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Title.CompareTo(value.Title);
-            result = result | AtomMemberResources.CompareSequence(this.Accepts, value.Accepts);
-            result = result | AtomCategoryDocument.CompareSequence(this.Categories, value.Categories);
+            result |= this.Title.CompareTo(value.Title);
+            result |= AtomMemberResources.CompareSequence(this.Accepts, value.Accepts);
+            result |= AtomCategoryDocument.CompareSequence(this.Categories, value.Categories);
 
             return result;
         }

@@ -173,8 +173,8 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable
         if (value != null)
         {
             int result = Uri.Compare(this.Context.Server, value.Context.Server, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Context.Target, value.Context.Target, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | ComparisonUtility.CompareSequence(this.Context.Abouts, value.Context.Abouts, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Context.Target, value.Context.Target, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= ComparisonUtility.CompareSequence(this.Context.Abouts, value.Context.Abouts, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

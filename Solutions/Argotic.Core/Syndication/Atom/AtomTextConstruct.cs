@@ -442,9 +442,9 @@ public class AtomTextConstruct : IComparable, IAtomCommonObjectAttributes, IExte
         if (value != null)
         {
             int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result = result | this.TextType.CompareTo(value.TextType);
+            result |= this.TextType.CompareTo(value.TextType);
 
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

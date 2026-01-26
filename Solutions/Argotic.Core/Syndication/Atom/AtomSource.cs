@@ -549,77 +549,77 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         if (value != null)
         {
             int result = AtomFeed.CompareSequence(this.Authors, value.Authors);
-            result = result | AtomFeed.CompareSequence(this.Categories, value.Categories);
-            result = result | AtomFeed.CompareSequence(this.Contributors, value.Contributors);
+            result |= AtomFeed.CompareSequence(this.Categories, value.Categories);
+            result |= AtomFeed.CompareSequence(this.Contributors, value.Contributors);
 
             if (this.Generator != null)
             {
-                result = result | this.Generator.CompareTo(value.Generator);
+                result |= this.Generator.CompareTo(value.Generator);
             }
             else if (value.Generator != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Icon != null)
             {
-                result = result | this.Icon.CompareTo(value.Icon);
+                result |= this.Icon.CompareTo(value.Icon);
             }
             else if (value.Icon != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Id != null)
             {
-                result = result | this.Id.CompareTo(value.Id);
+                result |= this.Id.CompareTo(value.Id);
             }
             else if (value.Id != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
-            result = result | AtomFeed.CompareSequence(this.Links, value.Links);
+            result |= AtomFeed.CompareSequence(this.Links, value.Links);
 
             if (this.Logo != null)
             {
-                result = result | this.Logo.CompareTo(value.Logo);
+                result |= this.Logo.CompareTo(value.Logo);
             }
             else if (value.Logo != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Rights != null)
             {
-                result = result | this.Rights.CompareTo(value.Rights);
+                result |= this.Rights.CompareTo(value.Rights);
             }
             else if (value.Rights != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Subtitle != null)
             {
-                result = result | this.Subtitle.CompareTo(value.Subtitle);
+                result |= this.Subtitle.CompareTo(value.Subtitle);
             }
             else if (value.Subtitle != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Title != null)
             {
-                result = result | this.Title.CompareTo(value.Title);
+                result |= this.Title.CompareTo(value.Title);
             }
             else if (value.Title != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
-            result = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
+            result |= this.UpdatedOn.CompareTo(value.UpdatedOn);
 
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

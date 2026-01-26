@@ -450,7 +450,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
         {
             int result = YahooMediaUtility.CompareSequence(this.Contents, value.Contents);
 
-            result = result | YahooMediaUtility.CompareCommonObjectEntities(this, value);
+            result |= YahooMediaUtility.CompareCommonObjectEntities(this, value);
 
             return result;
         }

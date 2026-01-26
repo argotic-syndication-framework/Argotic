@@ -316,7 +316,7 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Data, value.Data, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

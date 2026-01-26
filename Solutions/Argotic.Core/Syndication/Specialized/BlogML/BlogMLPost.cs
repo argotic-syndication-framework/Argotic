@@ -378,7 +378,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -422,7 +422,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -466,7 +466,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -510,7 +510,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -1184,35 +1184,35 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         if (value != null)
         {
             int result = BlogMLPost.CompareSequence(this.Attachments, value.Attachments);
-            result = result | ComparisonUtility.CompareSequence(this.Authors, value.Authors, StringComparison.OrdinalIgnoreCase);
-            result = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
-            result = result | BlogMLPost.CompareSequence(this.Comments, value.Comments);
-            result = result | this.Content.CompareTo(value.Content);
+            result |= ComparisonUtility.CompareSequence(this.Authors, value.Authors, StringComparison.OrdinalIgnoreCase);
+            result |= ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
+            result |= BlogMLPost.CompareSequence(this.Comments, value.Comments);
+            result |= this.Content.CompareTo(value.Content);
 
             if (this.Excerpt != null)
             {
-                result = result | this.Excerpt.CompareTo(value.Excerpt);
+                result |= this.Excerpt.CompareTo(value.Excerpt);
             }
             else if (value.Excerpt != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Name != null)
             {
-                result = result | this.Name.CompareTo(value.Name);
+                result |= this.Name.CompareTo(value.Name);
             }
             else if (value.Name != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
-            result = result | this.PostType.CompareTo(value.PostType);
-            result = result | BlogMLPost.CompareSequence(this.Trackbacks, value.Trackbacks);
-            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
+            result |= this.PostType.CompareTo(value.PostType);
+            result |= BlogMLPost.CompareSequence(this.Trackbacks, value.Trackbacks);
+            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
 
-            result = result | BlogMLUtility.CompareCommonObjects(this, value);
+            result |= BlogMLUtility.CompareCommonObjects(this, value);
 
             return result;
         }

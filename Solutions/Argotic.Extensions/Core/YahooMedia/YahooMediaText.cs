@@ -401,14 +401,14 @@ public class YahooMediaText : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result = result | this.End.CompareTo(value.End);
+            result |= this.End.CompareTo(value.End);
 
             string sourceLanguageName = this.Language != null ? this.Language.Name : string.Empty;
             string targetLanguageName = value.Language != null ? value.Language.Name : string.Empty;
-            result = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
-            result = result | this.Start.CompareTo(value.Start);
-            result = result | this.TextType.CompareTo(value.TextType);
+            result |= this.Start.CompareTo(value.Start);
+            result |= this.TextType.CompareTo(value.TextType);
 
             return result;
         }

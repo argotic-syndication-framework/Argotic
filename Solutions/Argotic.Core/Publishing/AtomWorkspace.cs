@@ -332,7 +332,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -561,8 +561,8 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         if (value != null)
         {
             int result = this.Title.CompareTo(value.Title);
-            result = result | AtomWorkspace.CompareSequence(((Collection<AtomMemberResources>)this.Collections), ((Collection<AtomMemberResources>)value.Collections));
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomWorkspace.CompareSequence(((Collection<AtomMemberResources>)this.Collections), ((Collection<AtomMemberResources>)value.Collections));
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

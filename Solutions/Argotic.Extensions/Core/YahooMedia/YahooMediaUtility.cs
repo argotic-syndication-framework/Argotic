@@ -33,8 +33,8 @@ internal static class YahooMediaUtility
         {
             return -1;
         }
-        result = result | YahooMediaUtility.CompareCommonObjectEntityClasses(source, target);
-        result = result | YahooMediaUtility.CompareCommonObjectEntityCollections(source, target);
+        result |= YahooMediaUtility.CompareCommonObjectEntityClasses(source, target);
+        result |= YahooMediaUtility.CompareCommonObjectEntityCollections(source, target);
 
         return result;
     }
@@ -68,7 +68,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -112,7 +112,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -156,7 +156,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -200,7 +200,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -244,7 +244,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -288,7 +288,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -332,7 +332,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -376,7 +376,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -420,7 +420,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -554,64 +554,64 @@ internal static class YahooMediaUtility
         {
             if (target.Copyright != null)
             {
-                result = result | source.Copyright.CompareTo(target.Copyright);
+                result |= source.Copyright.CompareTo(target.Copyright);
             }
             else
             {
-                result = result | 1;
+                result |= 1;
             }
         }
         else if (target.Copyright != null)
         {
-            result = result | -1;
+            result |= -1;
         }
 
         if (source.Description != null)
         {
             if (target.Description != null)
             {
-                result = result | source.Description.CompareTo(target.Description);
+                result |= source.Description.CompareTo(target.Description);
             }
             else
             {
-                result = result | 1;
+                result |= 1;
             }
         }
         else if (target.Description != null)
         {
-            result = result | -1;
+            result |= -1;
         }
 
         if (source.Player != null)
         {
             if (target.Player != null)
             {
-                result = result | source.Player.CompareTo(target.Player);
+                result |= source.Player.CompareTo(target.Player);
             }
             else
             {
-                result = result | 1;
+                result |= 1;
             }
         }
         else if (target.Player != null)
         {
-            result = result | -1;
+            result |= -1;
         }
 
         if (source.Title != null)
         {
             if (target.Title != null)
             {
-                result = result | source.Title.CompareTo(target.Title);
+                result |= source.Title.CompareTo(target.Title);
             }
             else
             {
-                result = result | 1;
+                result |= 1;
             }
         }
         else if (target.Title != null)
         {
-            result = result | -1;
+            result |= -1;
         }
 
         return result;
@@ -638,14 +638,14 @@ internal static class YahooMediaUtility
         {
             return -1;
         }
-        result = result | YahooMediaUtility.CompareSequence(source.Categories, target.Categories);
-        result = result | YahooMediaUtility.CompareSequence(source.Credits, target.Credits);
-        result = result | YahooMediaUtility.CompareSequence(source.Hashes, target.Hashes);
-        result = result | ComparisonUtility.CompareSequence(source.Keywords, target.Keywords, StringComparison.OrdinalIgnoreCase);
-        result = result | YahooMediaUtility.CompareSequence(source.Ratings, target.Ratings);
-        result = result | YahooMediaUtility.CompareSequence(source.Restrictions, target.Restrictions);
-        result = result | YahooMediaUtility.CompareSequence(source.TextSeries, target.TextSeries);
-        result = result | YahooMediaUtility.CompareSequence(source.Thumbnails, target.Thumbnails);
+        result |= YahooMediaUtility.CompareSequence(source.Categories, target.Categories);
+        result |= YahooMediaUtility.CompareSequence(source.Credits, target.Credits);
+        result |= YahooMediaUtility.CompareSequence(source.Hashes, target.Hashes);
+        result |= ComparisonUtility.CompareSequence(source.Keywords, target.Keywords, StringComparison.OrdinalIgnoreCase);
+        result |= YahooMediaUtility.CompareSequence(source.Ratings, target.Ratings);
+        result |= YahooMediaUtility.CompareSequence(source.Restrictions, target.Restrictions);
+        result |= YahooMediaUtility.CompareSequence(source.TextSeries, target.TextSeries);
+        result |= YahooMediaUtility.CompareSequence(source.Thumbnails, target.Thumbnails);
 
         return result;
     }

@@ -261,7 +261,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -305,7 +305,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -629,10 +629,10 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = ApmlProfile.CompareSequence(this.ExplicitConcepts, value.ExplicitConcepts);
-            result = result | ApmlProfile.CompareSequence(this.ExplicitSources, value.ExplicitSources);
-            result = result | ApmlProfile.CompareSequence(this.ImplicitConcepts, value.ImplicitConcepts);
-            result = result | ApmlProfile.CompareSequence(this.ImplicitSources, value.ImplicitSources);
-            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result |= ApmlProfile.CompareSequence(this.ExplicitSources, value.ExplicitSources);
+            result |= ApmlProfile.CompareSequence(this.ImplicitConcepts, value.ImplicitConcepts);
+            result |= ApmlProfile.CompareSequence(this.ImplicitSources, value.ImplicitSources);
+            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

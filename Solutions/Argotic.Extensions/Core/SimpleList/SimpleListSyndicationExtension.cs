@@ -93,7 +93,7 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -137,7 +137,7 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -262,8 +262,8 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable
         if (value != null)
         {
             int result = this.Context.TreatAsList.CompareTo(value.Context.TreatAsList);
-            result = result | SimpleListSyndicationExtension.CompareSequence(this.Context.Grouping, value.Context.Grouping);
-            result = result | SimpleListSyndicationExtension.CompareSequence(this.Context.Sorting, value.Context.Sorting);
+            result |= SimpleListSyndicationExtension.CompareSequence(this.Context.Grouping, value.Context.Grouping);
+            result |= SimpleListSyndicationExtension.CompareSequence(this.Context.Sorting, value.Context.Sorting);
 
             return result;
         }

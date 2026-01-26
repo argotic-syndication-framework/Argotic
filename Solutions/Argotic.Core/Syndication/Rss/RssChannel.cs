@@ -753,7 +753,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -1327,64 +1327,64 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Copyright, value.Copyright, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
-            result = result | this.LastBuildDate.CompareTo(value.LastBuildDate);
-            result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.ManagingEditor, value.ManagingEditor, StringComparison.OrdinalIgnoreCase);
-            result = result | this.PublicationDate.CompareTo(value.PublicationDate);
-            result = result | string.Compare(this.Rating, value.Rating, StringComparison.OrdinalIgnoreCase);
-            result = result | this.TimeToLive.CompareTo(value.TimeToLive);
-            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Webmaster, value.Webmaster, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
+            result |= this.LastBuildDate.CompareTo(value.LastBuildDate);
+            result |= Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.ManagingEditor, value.ManagingEditor, StringComparison.OrdinalIgnoreCase);
+            result |= this.PublicationDate.CompareTo(value.PublicationDate);
+            result |= string.Compare(this.Rating, value.Rating, StringComparison.OrdinalIgnoreCase);
+            result |= this.TimeToLive.CompareTo(value.TimeToLive);
+            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Webmaster, value.Webmaster, StringComparison.OrdinalIgnoreCase);
 
             if (this.Cloud != null)
             {
-                result = result | this.Cloud.CompareTo(value.Cloud);
+                result |= this.Cloud.CompareTo(value.Cloud);
             }
             else if (this.Cloud == null && value.Cloud != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Image != null)
             {
-                result = result | this.Image.CompareTo(value.Image);
+                result |= this.Image.CompareTo(value.Image);
             }
             else if (this.Image == null && value.Image != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Language != null)
             {
                 if (value.Language != null)
                 {
-                    result = result | string.Compare(this.Language.Name, value.Language.Name, StringComparison.OrdinalIgnoreCase);
+                    result |= string.Compare(this.Language.Name, value.Language.Name, StringComparison.OrdinalIgnoreCase);
                 }
                 else
                 {
-                    result = result | 1;
+                    result |= 1;
                 }
             }
             else if (this.Language == null && value.Language != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.TextInput != null)
             {
-                result = result | this.TextInput.CompareTo(value.TextInput);
+                result |= this.TextInput.CompareTo(value.TextInput);
             }
             else if (this.TextInput == null && value.TextInput != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
-            result = result | RssFeed.CompareSequence(this.Categories, value.Categories);
-            result = result | RssChannel.CompareSequence((Collection<RssItem>)this.Items, (Collection<RssItem>)value.Items);
-            result = result | ComparisonUtility.CompareSequence(this.SkipDays, value.SkipDays);
-            result = result | ComparisonUtility.CompareSequence(this.SkipHours, value.SkipHours);
+            result |= RssFeed.CompareSequence(this.Categories, value.Categories);
+            result |= RssChannel.CompareSequence((Collection<RssItem>)this.Items, (Collection<RssItem>)value.Items);
+            result |= ComparisonUtility.CompareSequence(this.SkipDays, value.SkipDays);
+            result |= ComparisonUtility.CompareSequence(this.SkipHours, value.SkipHours);
 
             return result;
         }

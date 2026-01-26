@@ -300,8 +300,8 @@ public class XmlRpcMessage : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
-            result = result | XmlRpcMessage.CompareSequence(this.Parameters, value.Parameters);
+            result |= string.Compare(this.MethodName, value.MethodName, StringComparison.OrdinalIgnoreCase);
+            result |= XmlRpcMessage.CompareSequence(this.Parameters, value.Parameters);
 
             return result;
         }

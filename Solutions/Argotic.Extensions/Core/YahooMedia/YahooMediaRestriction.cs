@@ -380,8 +380,8 @@ public class YahooMediaRestriction : IComparable
         if (value != null)
         {
             int result = ComparisonUtility.CompareSequence(this.Entities, value.Entities, StringComparison.Ordinal);
-            result = result | this.EntityType.CompareTo(value.EntityType);
-            result = result | this.Relationship.CompareTo(value.Relationship);
+            result |= this.EntityType.CompareTo(value.EntityType);
+            result |= this.Relationship.CompareTo(value.Relationship);
 
             return result;
         }

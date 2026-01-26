@@ -518,12 +518,12 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.IsPreferred.CompareTo(value.IsPreferred);
-            result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
-            result = result | ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
-            result = result | string.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
+            result |= this.IsPreferred.CompareTo(value.IsPreferred);
+            result |= Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
+            result |= ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
+            result |= string.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

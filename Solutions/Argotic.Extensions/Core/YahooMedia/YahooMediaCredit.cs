@@ -252,8 +252,8 @@ public class YahooMediaCredit : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Entity, value.Entity, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Role, value.Role, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            result |= string.Compare(this.Role, value.Role, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }

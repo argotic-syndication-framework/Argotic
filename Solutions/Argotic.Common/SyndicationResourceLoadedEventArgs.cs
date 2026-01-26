@@ -262,8 +262,8 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
         if (value != null)
         {
             int result = 0;
-            result = result | string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

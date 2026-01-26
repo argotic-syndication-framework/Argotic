@@ -115,9 +115,9 @@ public sealed class SyndicationResourceSaveSettings : IComparable
         if (value != null)
         {
             int result = string.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result = result | this.MinimizeOutputSize.CompareTo(value.MinimizeOutputSize);
-            result = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
-            result = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
+            result |= this.MinimizeOutputSize.CompareTo(value.MinimizeOutputSize);
+            result |= ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
+            result |= this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
 
             return result;
         }

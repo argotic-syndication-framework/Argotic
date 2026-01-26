@@ -295,7 +295,7 @@ public class YahooMediaHash : IComparable
         if (value != null)
         {
             int result = this.Algorithm.CompareTo(value.Algorithm);
-            result = result | string.Compare(this.Value, value.Value, StringComparison.Ordinal);
+            result |= string.Compare(this.Value, value.Value, StringComparison.Ordinal);
 
             return result;
         }

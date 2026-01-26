@@ -392,10 +392,10 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
         if (value != null)
         {
             int result = string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
 
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

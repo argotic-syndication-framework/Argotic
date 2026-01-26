@@ -68,11 +68,11 @@ internal static class AtomPublishingUtility
         {
             return -1;
         }
-        result = result | Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         string sourceLanguageName = source.Language != null ? source.Language.Name : string.Empty;
         string targetLanguageName = target.Language != null ? target.Language.Name : string.Empty;
-        result = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }

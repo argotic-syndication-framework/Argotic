@@ -146,32 +146,32 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
             {
                 if (value.Data != null)
                 {
-                    result = result | string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.Ordinal);
+                    result |= string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.Ordinal);
                 }
                 else
                 {
-                    result = result | 1;
+                    result |= 1;
                 }
             }
             else if (value.Data != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Extension != null)
             {
                 if (value.Extension != null)
                 {
-                    result = result | string.Compare(this.Extension.ToString(), value.Extension.ToString(), StringComparison.Ordinal);
+                    result |= string.Compare(this.Extension.ToString(), value.Extension.ToString(), StringComparison.Ordinal);
                 }
                 else
                 {
-                    result = result | 1;
+                    result |= 1;
                 }
             }
             else if (value.Extension != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             return result;

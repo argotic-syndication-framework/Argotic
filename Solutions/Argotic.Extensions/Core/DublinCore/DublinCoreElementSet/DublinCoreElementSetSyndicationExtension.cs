@@ -239,43 +239,43 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
         if (value != null)
         {
             int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Version.CompareTo(value.Version);
-            result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            result |= Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result |= this.Version.CompareTo(value.Version);
+            result |= string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result |= string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
-            result = result | string.Compare(this.Context.Contributor, value.Context.Contributor, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Coverage, value.Context.Coverage, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Creator, value.Context.Creator, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Context.Date.CompareTo(value.Context.Date);
-            result = result | string.Compare(this.Context.Description, value.Context.Description, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Format, value.Context.Format, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Identifier, value.Context.Identifier, StringComparison.Ordinal);
+            result |= string.Compare(this.Context.Contributor, value.Context.Contributor, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Coverage, value.Context.Coverage, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Creator, value.Context.Creator, StringComparison.OrdinalIgnoreCase);
+            result |= this.Context.Date.CompareTo(value.Context.Date);
+            result |= string.Compare(this.Context.Description, value.Context.Description, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Format, value.Context.Format, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Identifier, value.Context.Identifier, StringComparison.Ordinal);
 
             if (this.Context.Language != null)
             {
                 if (value.Context.Language != null)
                 {
-                    result = result | string.Compare(this.Context.Language.Name, value.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
+                    result |= string.Compare(this.Context.Language.Name, value.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
                 }
                 else
                 {
-                    result = result | 1;
+                    result |= 1;
                 }
             }
             else if (this.Context.Language == null && value.Context.Language != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
-            result = result | string.Compare(this.Context.Publisher, value.Context.Publisher, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Relation, value.Context.Relation, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Rights, value.Context.Rights, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Source, value.Context.Source, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Subject, value.Context.Subject, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Title, value.Context.Title, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Context.TypeVocabulary.CompareTo(value.Context.TypeVocabulary);
+            result |= string.Compare(this.Context.Publisher, value.Context.Publisher, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Relation, value.Context.Relation, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Rights, value.Context.Rights, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Source, value.Context.Source, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Subject, value.Context.Subject, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Title, value.Context.Title, StringComparison.OrdinalIgnoreCase);
+            result |= this.Context.TypeVocabulary.CompareTo(value.Context.TypeVocabulary);
 
             return result;
         }

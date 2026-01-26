@@ -437,7 +437,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -792,32 +792,32 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Author, value.Author, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Comments, value.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.PublicationDate.CompareTo(value.PublicationDate);
-            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Comments, value.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.PublicationDate.CompareTo(value.PublicationDate);
+            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             if (this.Guid != null)
             {
-                result = result | this.Guid.CompareTo(value.Guid);
+                result |= this.Guid.CompareTo(value.Guid);
             }
             else if (this.Guid == null && value.Guid != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Source != null)
             {
-                result = result | this.Source.CompareTo(value.Source);
+                result |= this.Source.CompareTo(value.Source);
             }
             else if (this.Source == null && value.Source != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
-            result = result | RssFeed.CompareSequence(this.Categories, value.Categories);
-            result = result | RssItem.CompareSequence(this.Enclosures, value.Enclosures);
+            result |= RssFeed.CompareSequence(this.Categories, value.Categories);
+            result |= RssItem.CompareSequence(this.Enclosures, value.Enclosures);
 
             return result;
         }

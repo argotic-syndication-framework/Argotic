@@ -327,8 +327,8 @@ public class FeedSynchronizationRelatedInformation : IComparable
         if (value != null)
         {
             int result = Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result = result | this.RelationType.CompareTo(value.RelationType);
+            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result |= this.RelationType.CompareTo(value.RelationType);
 
             return result;
         }

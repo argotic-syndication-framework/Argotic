@@ -139,8 +139,8 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
         if (value != null)
         {
             int result = string.Compare(this.Documentation, value.Documentation, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.SubName, value.SubName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

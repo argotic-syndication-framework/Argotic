@@ -376,8 +376,8 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Length.CompareTo(value.Length);
-            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.Length.CompareTo(value.Length);
+            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

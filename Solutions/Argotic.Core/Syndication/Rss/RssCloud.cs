@@ -514,10 +514,10 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Path, value.Path, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Port.CompareTo(value.Port);
-            result = result | this.Protocol.CompareTo(value.Protocol);
-            result = result | string.Compare(this.RegisterProcedure, value.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Path, value.Path, StringComparison.OrdinalIgnoreCase);
+            result |= this.Port.CompareTo(value.Port);
+            result |= this.Protocol.CompareTo(value.Protocol);
+            result |= string.Compare(this.RegisterProcedure, value.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

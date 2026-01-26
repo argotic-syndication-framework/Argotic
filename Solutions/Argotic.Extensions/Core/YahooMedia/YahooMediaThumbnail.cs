@@ -279,9 +279,9 @@ public class YahooMediaThumbnail : IComparable
         if (value != null)
         {
             int result = this.Height.CompareTo(value.Height);
-            result = result | this.Time.CompareTo(value.Time);
-            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Width.CompareTo(value.Width);
+            result |= this.Time.CompareTo(value.Time);
+            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.Width.CompareTo(value.Width);
 
             return result;
         }

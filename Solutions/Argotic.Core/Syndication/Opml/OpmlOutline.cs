@@ -514,7 +514,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -713,14 +713,14 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result = result | this.CreatedOn.CompareTo(value.CreatedOn);
-            result = result | this.HasBreakpoint.CompareTo(value.HasBreakpoint);
-            result = result | this.IsCommented.CompareTo(value.IsCommented);
-            result = result | string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
+            result |= this.CreatedOn.CompareTo(value.CreatedOn);
+            result |= this.HasBreakpoint.CompareTo(value.HasBreakpoint);
+            result |= this.IsCommented.CompareTo(value.IsCommented);
+            result |= string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
 
-            result = result | ComparisonUtility.CompareSequence(this.Attributes, value.Attributes, StringComparison.OrdinalIgnoreCase);
-            result = result | ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
-            result = result | OpmlOutline.CompareSequence(this.Outlines, value.Outlines);
+            result |= ComparisonUtility.CompareSequence(this.Attributes, value.Attributes, StringComparison.OrdinalIgnoreCase);
+            result |= ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
+            result |= OpmlOutline.CompareSequence(this.Outlines, value.Outlines);
 
             return result;
         }

@@ -41,7 +41,7 @@ public static class ComparisonUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -86,7 +86,7 @@ public static class ComparisonUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -131,7 +131,7 @@ public static class ComparisonUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -177,7 +177,7 @@ public static class ComparisonUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | string.Compare(source[i], target[i], comparisonType);
+                result |= string.Compare(source[i], target[i], comparisonType);
             }
         }
         else if (source.Count > target.Count)
@@ -222,7 +222,7 @@ public static class ComparisonUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | string.Compare(source[i].FullName, target[i].FullName, StringComparison.Ordinal);
+                result |= string.Compare(source[i].FullName, target[i].FullName, StringComparison.Ordinal);
             }
         }
         else if (source.Count > target.Count)
@@ -268,7 +268,7 @@ public static class ComparisonUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | Uri.Compare(source[i], target[i], UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, comparisonType);
+                result |= Uri.Compare(source[i], target[i], UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, comparisonType);
             }
         }
         else if (source.Count > target.Count)
@@ -313,7 +313,7 @@ public static class ComparisonUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | string.Compare(source[i].OuterXml, target[i].OuterXml, StringComparison.Ordinal);
+                result |= string.Compare(source[i].OuterXml, target[i].OuterXml, StringComparison.Ordinal);
             }
         }
         else if (source.Count > target.Count)
@@ -361,7 +361,7 @@ public static class ComparisonUtility
             {
                 if (target.ContainsKey(key))
                 {
-                    result = result | string.Compare(source[key], target[key], comparisonType);
+                    result |= string.Compare(source[key], target[key], comparisonType);
                 }
                 else
                 {

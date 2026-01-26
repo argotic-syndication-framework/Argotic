@@ -2,8 +2,6 @@
 using System.Text;
 using System.Web;
 
-using Argotic.Common;
-
 namespace Argotic.Net;
 
 /// <summary>
@@ -311,10 +309,10 @@ public class TrackbackMessage : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Encoding.WebName, value.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Permalink, value.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Excerpt, value.Excerpt, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Permalink, value.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.WeblogName, value.WeblogName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

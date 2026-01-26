@@ -544,11 +544,11 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Height.CompareTo(value.Height);
-            result = result | Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Width.CompareTo(value.Width);
+            result |= this.Height.CompareTo(value.Height);
+            result |= Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.Width.CompareTo(value.Width);
 
             return result;
         }

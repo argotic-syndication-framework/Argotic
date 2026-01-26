@@ -218,14 +218,14 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
         if (value != null)
         {
             int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Version.CompareTo(value.Version);
-            result = result | string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result = result | string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            result |= Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result |= this.Version.CompareTo(value.Version);
+            result |= string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            result |= string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
-            result = result | AtomPublishingUtility.CompareCommonObjectAttributes(this.Context, value.Context);
-            result = result | this.Context.IsDraft.CompareTo(value.Context.IsDraft);
+            result |= AtomPublishingUtility.CompareCommonObjectAttributes(this.Context, value.Context);
+            result |= this.Context.IsDraft.CompareTo(value.Context.IsDraft);
 
             return result;
         }

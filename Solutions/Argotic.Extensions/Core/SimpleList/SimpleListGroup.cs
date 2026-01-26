@@ -242,8 +242,8 @@ public class SimpleListGroup : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Element, value.Element, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Namespace, value.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            result |= string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Namespace, value.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }

@@ -272,11 +272,11 @@ public class WebContentType : IComparable
             {
                 if (target.ContainsKey(key))
                 {
-                    result = result | string.Compare(source[key], target[key], StringComparison.Ordinal);
+                    result |= string.Compare(source[key], target[key], StringComparison.Ordinal);
                 }
                 else
                 {
-                    result = result | -1;
+                    result |= -1;
                     break;
                 }
             }
@@ -346,8 +346,8 @@ public class WebContentType : IComparable
         if (value != null)
         {
             int result = string.Compare(this.MediaType, value.MediaType, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.MediaSubtype, value.MediaSubtype, StringComparison.Ordinal);
-            result = result | WebContentType.CompareSequence(this.Parameters, value.Parameters);
+            result |= string.Compare(this.MediaSubtype, value.MediaSubtype, StringComparison.Ordinal);
+            result |= WebContentType.CompareSequence(this.Parameters, value.Parameters);
 
             return result;
         }

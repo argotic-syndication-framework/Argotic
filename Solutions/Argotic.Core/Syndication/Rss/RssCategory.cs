@@ -356,7 +356,7 @@ public class RssCategory : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

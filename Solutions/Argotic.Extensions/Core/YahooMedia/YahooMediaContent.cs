@@ -833,25 +833,25 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         if (value != null)
         {
             int result = this.Bitrate.CompareTo(value.Bitrate);
-            result = result | this.Channels.CompareTo(value.Channels);
-            result = result | string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Duration.CompareTo(value.Duration);
-            result = result | this.Expression.CompareTo(value.Expression);
-            result = result | this.FileSize.CompareTo(value.FileSize);
-            result = result | this.FrameRate.CompareTo(value.FrameRate);
-            result = result | this.Height.CompareTo(value.Height);
-            result = result | this.IsDefault.CompareTo(value.IsDefault);
+            result |= this.Channels.CompareTo(value.Channels);
+            result |= string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
+            result |= this.Duration.CompareTo(value.Duration);
+            result |= this.Expression.CompareTo(value.Expression);
+            result |= this.FileSize.CompareTo(value.FileSize);
+            result |= this.FrameRate.CompareTo(value.FrameRate);
+            result |= this.Height.CompareTo(value.Height);
+            result |= this.IsDefault.CompareTo(value.IsDefault);
 
             string sourceLanguageName = this.Language != null ? this.Language.Name : string.Empty;
             string targetLanguageName = value.Language != null ? value.Language.Name : string.Empty;
-            result = result | string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
-            result = result | this.Medium.CompareTo(value.Medium);
-            result = result | this.SamplingRate.CompareTo(value.SamplingRate);
-            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Width.CompareTo(value.Width);
+            result |= this.Medium.CompareTo(value.Medium);
+            result |= this.SamplingRate.CompareTo(value.SamplingRate);
+            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.Width.CompareTo(value.Width);
 
-            result = result | YahooMediaUtility.CompareCommonObjectEntities(this, value);
+            result |= YahooMediaUtility.CompareCommonObjectEntities(this, value);
 
             return result;
         }

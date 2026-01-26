@@ -172,9 +172,9 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
         if (value != null)
         {
             int result = this.Context.Comments.CompareTo(value.Context.Comments);
-            result = result | string.Compare(this.Context.Department, value.Context.Department, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Context.Section, value.Context.Section, StringComparison.OrdinalIgnoreCase);
-            result = result | ComparisonUtility.CompareSequence(this.Context.HitParade, value.Context.HitParade);
+            result |= string.Compare(this.Context.Department, value.Context.Department, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Context.Section, value.Context.Section, StringComparison.OrdinalIgnoreCase);
+            result |= ComparisonUtility.CompareSequence(this.Context.HitParade, value.Context.HitParade);
 
             return result;
         }

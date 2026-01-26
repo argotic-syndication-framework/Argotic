@@ -374,9 +374,9 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = this.CreatedOn.CompareTo(value.CreatedOn);
-            result = result | string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Generator, value.Generator, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

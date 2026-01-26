@@ -239,7 +239,7 @@ public class TrackbackResponse : IComparable
         if (value != null)
         {
             int result = string.Compare(this.ErrorMessage, value.ErrorMessage, StringComparison.OrdinalIgnoreCase);
-            result = result | this.HasError.CompareTo(value.HasError);
+            result |= this.HasError.CompareTo(value.HasError);
 
             return result;
         }

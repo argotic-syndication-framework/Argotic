@@ -188,7 +188,7 @@ public class YahooMediaCopyright : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

@@ -149,8 +149,8 @@ public class GenericSyndicationItem : IComparable
         if (value != null)
         {
             int result = GenericSyndicationFeed.CompareSequence(this.Categories, value.Categories);
-            result = result | string.Compare(this.Summary, value.Summary, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Summary, value.Summary, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

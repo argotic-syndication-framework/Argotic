@@ -682,7 +682,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -727,7 +727,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -772,7 +772,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -817,7 +817,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)

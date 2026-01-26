@@ -411,9 +411,9 @@ public class ApmlConcept : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
-            result = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
-            result = result | this.Value.CompareTo(value.Value);
+            result |= string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
+            result |= this.UpdatedOn.CompareTo(value.UpdatedOn);
+            result |= this.Value.CompareTo(value.Value);
 
             return result;
         }

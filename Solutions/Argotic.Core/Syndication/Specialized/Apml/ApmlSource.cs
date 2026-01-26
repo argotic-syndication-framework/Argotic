@@ -373,7 +373,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -651,12 +651,12 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = ApmlSource.CompareSequence(this.Authors, value.Authors);
-            result = result | string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result = result | this.UpdatedOn.CompareTo(value.UpdatedOn);
-            result = result | this.Value.CompareTo(value.Value);
+            result |= string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            result |= this.UpdatedOn.CompareTo(value.UpdatedOn);
+            result |= this.Value.CompareTo(value.Value);
 
             return result;
         }

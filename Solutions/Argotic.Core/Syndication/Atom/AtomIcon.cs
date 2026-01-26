@@ -306,7 +306,7 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         {
             int result = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

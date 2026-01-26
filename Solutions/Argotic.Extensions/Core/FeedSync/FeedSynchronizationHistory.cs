@@ -261,8 +261,8 @@ public class FeedSynchronizationHistory : IComparable
         if (value != null)
         {
             int result = string.Compare(this.By, value.By, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Sequence.CompareTo(value.Sequence);
-            result = result | this.When.CompareTo(value.When);
+            result |= this.Sequence.CompareTo(value.Sequence);
+            result |= this.When.CompareTo(value.When);
 
             return result;
         }

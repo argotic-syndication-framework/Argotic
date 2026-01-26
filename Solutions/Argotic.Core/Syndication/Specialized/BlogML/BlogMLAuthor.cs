@@ -367,7 +367,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
         {
             int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
 
-            result = result | BlogMLUtility.CompareCommonObjects(this, value);
+            result |= BlogMLUtility.CompareCommonObjects(this, value);
 
             return result;
         }

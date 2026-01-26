@@ -214,7 +214,7 @@ public class FeedSynchronizationSharingInformation : IComparable
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -373,9 +373,9 @@ public class FeedSynchronizationSharingInformation : IComparable
         if (value != null)
         {
             int result = this.ExpiresOn.CompareTo(value.ExpiresOn);
-            result = result | FeedSynchronizationSharingInformation.CompareSequence(this.Relations, value.Relations);
-            result = result | string.Compare(this.Since, value.Since, StringComparison.OrdinalIgnoreCase);
-            result = result | string.Compare(this.Until, value.Until, StringComparison.OrdinalIgnoreCase);
+            result |= FeedSynchronizationSharingInformation.CompareSequence(this.Relations, value.Relations);
+            result |= string.Compare(this.Since, value.Since, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Until, value.Until, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

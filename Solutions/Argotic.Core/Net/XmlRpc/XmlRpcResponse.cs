@@ -286,32 +286,32 @@ public class XmlRpcResponse : IComparable
             {
                 if (value.Fault != null)
                 {
-                    result = result | this.Fault.CompareTo(value.Fault);
+                    result |= this.Fault.CompareTo(value.Fault);
                 }
                 else
                 {
-                    result = result | 1;
+                    result |= 1;
                 }
             }
             else if (value.Fault != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Parameter != null)
             {
                 if (value.Parameter != null)
                 {
-                    result = result | string.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
+                    result |= string.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
                 }
                 else
                 {
-                    result = result | 1;
+                    result |= 1;
                 }
             }
             else if (value.Parameter != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             return result;

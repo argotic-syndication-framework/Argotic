@@ -327,7 +327,7 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = this.IsPermanentLink.CompareTo(value.IsPermanentLink);
-            result = result | string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

@@ -171,10 +171,10 @@ public sealed class SyndicationResourceLoadSettings : IComparable
         if (value != null)
         {
             int result = string.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result = result | this.RetrievalLimit.CompareTo(value.RetrievalLimit);
-            result = result | this.Timeout.CompareTo(value.Timeout);
-            result = result | this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
-            result = result | ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
+            result |= this.RetrievalLimit.CompareTo(value.RetrievalLimit);
+            result |= this.Timeout.CompareTo(value.Timeout);
+            result |= this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
+            result |= ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
 
             return result;
         }

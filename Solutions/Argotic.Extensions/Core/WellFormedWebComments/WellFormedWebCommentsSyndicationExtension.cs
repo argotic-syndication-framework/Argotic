@@ -174,7 +174,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
         if (value != null)
         {
             int result = Uri.Compare(this.Context.Comments, value.Context.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Context.CommentsFeed, value.Context.CommentsFeed, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Context.CommentsFeed, value.Context.CommentsFeed, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

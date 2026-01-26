@@ -92,7 +92,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -217,7 +217,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
         if (value != null)
         {
             int result = string.Compare(this.Context.Encoded, value.Context.Encoded, StringComparison.Ordinal);
-            result = result | SiteSummaryContentSyndicationExtension.CompareSequence(this.Context.Items, value.Context.Items);
+            result |= SiteSummaryContentSyndicationExtension.CompareSequence(this.Context.Items, value.Context.Items);
 
             return result;
         }

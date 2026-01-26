@@ -397,10 +397,10 @@ public class SimpleListSort : IComparable
         if (value != null)
         {
             int result = this.DataType.CompareTo(value.DataType);
-            result = result | string.Compare(this.Element, value.Element, StringComparison.OrdinalIgnoreCase);
-            result = result | this.IsDefault.CompareTo(value.IsDefault);
-            result = result | string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Namespace, value.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+            result |= string.Compare(this.Element, value.Element, StringComparison.OrdinalIgnoreCase);
+            result |= this.IsDefault.CompareTo(value.IsDefault);
+            result |= string.Compare(this.Label, value.Label, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Namespace, value.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
             return result;
         }

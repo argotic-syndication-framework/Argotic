@@ -281,7 +281,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             {
                 if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
-                    hour = hour - 1; // Convert to zero-based range
+                    hour -= 1; // Convert to zero-based range
 
                     if (!channel.SkipHours.Contains(hour) && hour is >= 0 and <= 23)
                     {

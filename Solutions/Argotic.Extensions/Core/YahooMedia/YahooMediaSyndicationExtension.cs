@@ -309,9 +309,9 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
         if (value != null)
         {
             int result = YahooMediaUtility.CompareSequence((Collection<YahooMediaContent>)this.Context.Contents, (Collection<YahooMediaContent>)value.Context.Contents);
-            result = result | YahooMediaUtility.CompareSequence((Collection<YahooMediaGroup>)this.Context.Groups, (Collection<YahooMediaGroup>)value.Context.Groups);
+            result |= YahooMediaUtility.CompareSequence((Collection<YahooMediaGroup>)this.Context.Groups, (Collection<YahooMediaGroup>)value.Context.Groups);
 
-            result = result | YahooMediaUtility.CompareCommonObjectEntities(this.Context, value.Context);
+            result |= YahooMediaUtility.CompareCommonObjectEntities(this.Context, value.Context);
 
             return result;
         }

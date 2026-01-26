@@ -188,9 +188,9 @@ public class OpmlWindow : IComparable
         if (value != null)
         {
             int result = this.Bottom.CompareTo(value.Bottom);
-            result = result | this.Left.CompareTo(value.Left);
-            result = result | this.Right.CompareTo(value.Right);
-            result = result | this.Top.CompareTo(value.Top);
+            result |= this.Left.CompareTo(value.Left);
+            result |= this.Right.CompareTo(value.Right);
+            result |= this.Top.CompareTo(value.Top);
 
             return result;
         }

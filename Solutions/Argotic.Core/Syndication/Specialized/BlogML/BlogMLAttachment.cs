@@ -382,11 +382,11 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.ExternalUri, value.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.IsEmbedded.CompareTo(value.IsEmbedded);
-            result = result | string.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Size.CompareTo(value.Size);
-            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.ExternalUri, value.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.IsEmbedded.CompareTo(value.IsEmbedded);
+            result |= string.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
+            result |= this.Size.CompareTo(value.Size);
+            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

@@ -422,7 +422,7 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result = result | this.ContentType.CompareTo(value.ContentType);
+            result |= this.ContentType.CompareTo(value.ContentType);
 
             return result;
         }

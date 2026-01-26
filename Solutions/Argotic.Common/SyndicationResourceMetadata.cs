@@ -730,37 +730,37 @@ public class SyndicationResourceMetadata : IComparable
 
             if (this.Version != null)
             {
-                result = result | this.Version.CompareTo(value.Version);
+                result |= this.Version.CompareTo(value.Version);
             }
             else if (value.Version != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Namespaces != null && value.Namespaces != null)
             {
-                result = result | ComparisonUtility.CompareSequence(this.Namespaces, value.Namespaces, StringComparison.Ordinal);
+                result |= ComparisonUtility.CompareSequence(this.Namespaces, value.Namespaces, StringComparison.Ordinal);
             }
             else if (this.Namespaces != null && value.Namespaces == null)
             {
-                result = result | 1;
+                result |= 1;
             }
             else if (this.Namespaces == null && value.Namespaces != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             if (this.Resource != null && value.Resource != null)
             {
-                result = result | string.Compare(this.Resource.OuterXml, value.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
+                result |= string.Compare(this.Resource.OuterXml, value.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
             }
             else if (this.Resource != null && value.Resource == null)
             {
-                result = result | 1;
+                result |= 1;
             }
             else if (this.Resource == null && value.Resource != null)
             {
-                result = result | -1;
+                result |= -1;
             }
 
             return result;

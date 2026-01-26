@@ -136,7 +136,7 @@ public class GenericSyndicationCategory : IComparable
         if (value != null)
         {
             int result = string.Compare(this.Scheme, value.Scheme, StringComparison.Ordinal);
-            result = result | string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.Term, value.Term, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

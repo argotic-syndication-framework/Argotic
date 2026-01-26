@@ -392,7 +392,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
         if (value != null)
         {
             int result = string.Compare(this.MediaRange, value.MediaRange, StringComparison.OrdinalIgnoreCase);
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

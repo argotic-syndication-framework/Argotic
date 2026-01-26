@@ -274,9 +274,9 @@ public class LiveJournalUserPicture : IComparable
         if (value != null)
         {
             int result = this.Height.CompareTo(value.Height);
-            result = result | string.Compare(this.Keyword, value.Keyword, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | this.Width.CompareTo(value.Width);
+            result |= string.Compare(this.Keyword, value.Keyword, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= this.Width.CompareTo(value.Width);
 
             return result;
         }

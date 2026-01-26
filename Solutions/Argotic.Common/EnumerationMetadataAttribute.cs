@@ -101,7 +101,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable
         if (value != null)
         {
             int result = string.Compare(this.AlternateValue, value.AlternateValue, StringComparison.Ordinal);
-            result = result | string.Compare(this.DisplayName, value.DisplayName, StringComparison.OrdinalIgnoreCase);
+            result |= string.Compare(this.DisplayName, value.DisplayName, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

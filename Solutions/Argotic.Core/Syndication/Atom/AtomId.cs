@@ -374,7 +374,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
         {
             int result = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.Ordinal);
 
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

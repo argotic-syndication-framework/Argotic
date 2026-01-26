@@ -513,7 +513,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result = result | source[i].CompareTo(target[i]);
+                result |= source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -1401,10 +1401,10 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         if (value != null)
         {
             int result = this.IsFixed.CompareTo(value.IsFixed);
-            result = result | Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result = result | AtomFeed.CompareSequence(((Collection<AtomCategory>)this.Categories), ((Collection<AtomCategory>)value.Categories));
-            result = result | AtomUtility.CompareCommonObjectAttributes(this, value);
+            result |= Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= AtomFeed.CompareSequence(((Collection<AtomCategory>)this.Categories), ((Collection<AtomCategory>)value.Categories));
+            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;
         }

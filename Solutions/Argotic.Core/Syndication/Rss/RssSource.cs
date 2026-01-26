@@ -317,7 +317,7 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
         if (value != null)
         {
             int result = string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result = result | Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

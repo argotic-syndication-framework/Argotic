@@ -174,7 +174,7 @@ public class FeedRankSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
-    private FeedRankSyndicationExtension CreateExtension1()
+    private static FeedRankSyndicationExtension CreateExtension1()
     {
         FeedRankSyndicationExtension re = new FeedRankSyndicationExtension
         {
@@ -189,7 +189,7 @@ public class FeedRankSyndicationExtensionTest
         return re;
     }
 
-    private FeedRankSyndicationExtension CreateExtension2()
+    private static FeedRankSyndicationExtension CreateExtension2()
     {
         FeedRankSyndicationExtension re = new FeedRankSyndicationExtension
         {

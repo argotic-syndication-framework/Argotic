@@ -210,7 +210,7 @@ public class ITunesSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
-    private ITunesSyndicationExtension CreateExtension1()
+    private static ITunesSyndicationExtension CreateExtension1()
     {
         ITunesSyndicationExtension nyc = new ITunesSyndicationExtension
         {
@@ -235,7 +235,7 @@ public class ITunesSyndicationExtensionTest
         return nyc;
     }
 
-    private ITunesSyndicationExtension CreateExtension2()
+    private static ITunesSyndicationExtension CreateExtension2()
     {
         ITunesSyndicationExtension nyc = new ITunesSyndicationExtension
         {

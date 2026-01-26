@@ -220,7 +220,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
-    private DublinCoreElementSetSyndicationExtension CreateExtension1()
+    private static DublinCoreElementSetSyndicationExtension CreateExtension1()
     {
         DublinCoreElementSetSyndicationExtension dub = new DublinCoreElementSetSyndicationExtension
         {
@@ -247,7 +247,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         return dub;
     }
 
-    private DublinCoreElementSetSyndicationExtension CreateExtension2()
+    private static DublinCoreElementSetSyndicationExtension CreateExtension2()
     {
         DublinCoreElementSetSyndicationExtension dub = new DublinCoreElementSetSyndicationExtension
         {

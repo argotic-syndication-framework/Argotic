@@ -177,7 +177,7 @@ public class CreativeCommonsSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
-    private CreativeCommonsSyndicationExtension CreateExtension1()
+    private static CreativeCommonsSyndicationExtension CreateExtension1()
     {
         CreativeCommonsSyndicationExtension nyc = new CreativeCommonsSyndicationExtension();
 
@@ -186,7 +186,7 @@ public class CreativeCommonsSyndicationExtensionTest
         return nyc;
     }
 
-    private CreativeCommonsSyndicationExtension CreateExtension2()
+    private static CreativeCommonsSyndicationExtension CreateExtension2()
     {
         CreativeCommonsSyndicationExtension nyc = new CreativeCommonsSyndicationExtension();
         nyc.Context.Licenses.Add(new Uri("http://www.example.net/license1.html"));

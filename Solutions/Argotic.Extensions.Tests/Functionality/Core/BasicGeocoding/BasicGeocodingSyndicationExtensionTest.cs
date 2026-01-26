@@ -202,7 +202,7 @@ public class BasicGeocodingSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
-    private BasicGeocodingSyndicationExtension CreateExtension1()
+    private static BasicGeocodingSyndicationExtension CreateExtension1()
     {
         BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension
         {
@@ -215,7 +215,7 @@ public class BasicGeocodingSyndicationExtensionTest
         return nyc;
     }
 
-    private BasicGeocodingSyndicationExtension CreateExtension2()
+    private static BasicGeocodingSyndicationExtension CreateExtension2()
     {
         BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension
         {

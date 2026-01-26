@@ -182,7 +182,7 @@ public class PheedSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
-    private PheedSyndicationExtension CreateExtension1()
+    private static PheedSyndicationExtension CreateExtension1()
     {
         PheedSyndicationExtension nyc = new PheedSyndicationExtension
         {
@@ -196,7 +196,7 @@ public class PheedSyndicationExtensionTest
         return nyc;
     }
 
-    private PheedSyndicationExtension CreateExtension2()
+    private static PheedSyndicationExtension CreateExtension2()
     {
         PheedSyndicationExtension nyc = new PheedSyndicationExtension
         {

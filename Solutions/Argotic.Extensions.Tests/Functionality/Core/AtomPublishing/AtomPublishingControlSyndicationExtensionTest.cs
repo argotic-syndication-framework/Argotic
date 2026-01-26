@@ -172,7 +172,7 @@ public class AtomPublishingControlSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
-    private AtomPublishingControlSyndicationExtension CreateExtension1()
+    private static AtomPublishingControlSyndicationExtension CreateExtension1()
     {
         AtomPublishingControlSyndicationExtension nyc = new AtomPublishingControlSyndicationExtension
         {
@@ -187,7 +187,7 @@ public class AtomPublishingControlSyndicationExtensionTest
         return nyc;
     }
 
-    private AtomPublishingControlSyndicationExtension CreateExtension2()
+    private static AtomPublishingControlSyndicationExtension CreateExtension2()
     {
         AtomPublishingControlSyndicationExtension nyc = new AtomPublishingControlSyndicationExtension
         {

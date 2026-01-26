@@ -17,8 +17,8 @@ public class BasicGeocodingSyndicationExtensionTest
 
     const string namespc = @"xmlns:geo=""http://www.w3.org/2003/01/geo/wgs84_pos#""";
 
-    private string nycText = "<lat xmlns=\"http://www.w3.org/2003/01/geo/wgs84_pos#\">40.0000000</lat>" + Environment.NewLine +
-                             "<long xmlns=\"http://www.w3.org/2003/01/geo/wgs84_pos#\">-74.0000000</long>";
+    private readonly string nycText = "<lat xmlns=\"http://www.w3.org/2003/01/geo/wgs84_pos#\">40.0000000</lat>" + Environment.NewLine +
+                                      "<long xmlns=\"http://www.w3.org/2003/01/geo/wgs84_pos#\">-74.0000000</long>";
 
     private const string strExtXml = "<geo:lat>41.0000000</geo:lat><geo:long>-74.1200000</geo:long>";
 

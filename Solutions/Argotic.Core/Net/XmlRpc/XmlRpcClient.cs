@@ -41,7 +41,7 @@ public class XmlRpcClient
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
-    private WebRequestOptions clientOptions = new WebRequestOptions();
+    private readonly WebRequestOptions clientOptions = new WebRequestOptions();
     /// <summary>
     /// Private member to hold a value that specifies the amount of time after which an asynchronous send operation times out.
     /// </summary>

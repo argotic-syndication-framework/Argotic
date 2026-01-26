@@ -16,11 +16,11 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat feedFormat  = SyndicationContentFormat.Rss;
+    private static readonly SyndicationContentFormat feedFormat  = SyndicationContentFormat.Rss;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version feedVersion                  = new Version(3, 0);
+    private static readonly Version feedVersion                  = new Version(3, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>

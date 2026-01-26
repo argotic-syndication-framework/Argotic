@@ -20,7 +20,7 @@ public sealed class SyndicationResourceSection : ConfigurationSection
     /// <summary>
     /// Private member to hold a collection of configuration properties for the section.
     /// </summary>
-    private static ConfigurationPropertyCollection configurationSectionProperties               = new ConfigurationPropertyCollection();
+    private static readonly ConfigurationPropertyCollection configurationSectionProperties               = new ConfigurationPropertyCollection();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceSection"/> class.

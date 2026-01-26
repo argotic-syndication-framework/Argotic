@@ -14,11 +14,11 @@ public class SyndicationExtensionAdapter
     /// <summary>
     /// Private member to hold the XPathNavigator used to load a syndication extension.
     /// </summary>
-    private XPathNavigator adapterNavigator;
+    private readonly XPathNavigator adapterNavigator;
     /// <summary>
     /// Private member to hold the XPathNavigator used to configure the load of a syndication extension.
     /// </summary>
-    private SyndicationResourceLoadSettings adapterSettings  = new SyndicationResourceLoadSettings();
+    private readonly SyndicationResourceLoadSettings adapterSettings  = new SyndicationResourceLoadSettings();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtensionAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.

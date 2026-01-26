@@ -15,7 +15,7 @@ public static class SyndicationDiscoveryUtility
     /// <summary>
     /// Private member to hold the default user agent sent by the framework when making HTTP web requests.
     /// </summary>
-    private static string frameworkUserAgent    = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
+    private static readonly string frameworkUserAgent    = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
 
     /// <summary>
     /// Gets the raw user agent string used by the framework when sending web requests.

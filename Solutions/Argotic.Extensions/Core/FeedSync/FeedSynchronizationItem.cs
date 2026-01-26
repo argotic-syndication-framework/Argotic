@@ -98,10 +98,7 @@ public class FeedSynchronizationItem : IComparable
     {
         get
         {
-            if (synchronizationConflicts == null)
-            {
-                synchronizationConflicts = [];
-            }
+            synchronizationConflicts ??= [];
             return synchronizationConflicts;
         }
     }

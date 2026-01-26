@@ -53,12 +53,11 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     public static XPathNavigator CreateSafeNavigator(Stream stream)
     {
-        Encoding encoding = Encoding.UTF8;
-
         ArgumentNullException.ThrowIfNull(stream);
 
         byte[] buffer = SyndicationEncodingUtility.GetStreamBytes(stream);
 
+        Encoding encoding = Encoding.UTF8;
         encoding = SyndicationEncodingUtility.GetXmlEncoding(buffer);
 
         using MemoryStream memoryStream = new MemoryStream(buffer);

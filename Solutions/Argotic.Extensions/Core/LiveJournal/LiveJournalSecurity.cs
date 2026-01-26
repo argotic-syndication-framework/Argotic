@@ -259,8 +259,7 @@ public class LiveJournalSecurity : IComparable
 
         if (value != null)
         {
-            int result = this.Accessibility.CompareTo(value.Accessibility);
-            result = this.Mask.CompareTo(value.Mask);
+            int result = this.Mask.CompareTo(value.Mask);
 
             return result;
         }

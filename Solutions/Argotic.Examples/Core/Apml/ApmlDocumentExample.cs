@@ -178,17 +178,15 @@ public static class ApmlDocumentExample
     {
         ApmlDocument document   = new ApmlDocument();
 
-        using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read))
-        {
-            document.Load(stream);
+        using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read);
+        document.Load(stream);
 
-            foreach (ApmlProfile profile in document.Profiles)
+        foreach (ApmlProfile profile in document.Profiles)
+        {
+            if (profile.Name == document.DefaultProfileName)
             {
-                if (profile.Name == document.DefaultProfileName)
-                {
-                    //  Perform some processing on the attention profile
-                    break;
-                }
+                //  Perform some processing on the attention profile
+                break;
             }
         }
     }
@@ -200,26 +198,22 @@ public static class ApmlDocumentExample
     {
         ApmlDocument document   = new ApmlDocument();
 
-        using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read))
+        using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read);
+        XmlReaderSettings settings  = new XmlReaderSettings
         {
-            XmlReaderSettings settings  = new XmlReaderSettings
-            {
-                IgnoreComments = true,
-                IgnoreWhitespace = true
-            };
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
-            using(XmlReader reader = XmlReader.Create(stream, settings))
-            {
-                document.Load(reader);
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        document.Load(reader);
 
-                foreach (ApmlProfile profile in document.Profiles)
-                {
-                    if (profile.Name == document.DefaultProfileName)
-                    {
-                        //  Perform some processing on the attention profile
-                        break;
-                    }
-                }
+        foreach (ApmlProfile profile in document.Profiles)
+        {
+            if (profile.Name == document.DefaultProfileName)
+            {
+                //  Perform some processing on the attention profile
+                break;
             }
         }
     }
@@ -253,10 +247,8 @@ public static class ApmlDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using(Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write))
-        {
-            document.Save(stream);
-        }
+        using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write);
+        document.Save(stream);
     }
 
     /// <summary>
@@ -268,17 +260,13 @@ public static class ApmlDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using (Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write))
+        using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write);
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                Indent = true
-            };
+            Indent = true
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                document.Save(writer);
-            }
-        }
+        using XmlWriter writer = XmlWriter.Create(stream, settings);
+        document.Save(writer);
     }
 }

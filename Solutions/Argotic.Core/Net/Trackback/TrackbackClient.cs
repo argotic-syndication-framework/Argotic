@@ -384,10 +384,8 @@ public class TrackbackClient
 
         WebRequest webRequest   = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
-        using (WebResponse webResponse = (WebResponse)webRequest.GetResponse())
-        {
-            response    = new TrackbackResponse(webResponse);
-        }
+        using WebResponse webResponse = (WebResponse)webRequest.GetResponse();
+        response    = new TrackbackResponse(webResponse);
 
         return response;
     }

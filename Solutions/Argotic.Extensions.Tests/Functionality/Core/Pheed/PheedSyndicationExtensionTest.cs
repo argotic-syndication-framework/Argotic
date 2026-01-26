@@ -104,11 +104,9 @@ public class PheedSyndicationExtensionTest
         XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc))
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
-        }
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
     }
 
     [TestMethod]
@@ -133,20 +131,17 @@ public class PheedSyndicationExtensionTest
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
-            Assert.AreEqual(1, feed.Channel.Items.Count());
-            RssItem item = feed.Channel.Items.Single();
-            Assert.IsTrue(item.HasExtensions);
-            PheedSyndicationExtension itemExtension = item.FindExtension<PheedSyndicationExtension>();
-            Assert.IsNotNull(itemExtension);
-            Assert.IsInstanceOfType(
-                item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension,
-                typeof(PheedSyndicationExtension));
-
-        }
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
+        Assert.AreEqual(1, feed.Channel.Items.Count());
+        RssItem item = feed.Channel.Items.Single();
+        Assert.IsTrue(item.HasExtensions);
+        PheedSyndicationExtension itemExtension = item.FindExtension<PheedSyndicationExtension>();
+        Assert.IsNotNull(itemExtension);
+        Assert.IsInstanceOfType(
+            item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension,
+            typeof(PheedSyndicationExtension));
     }
 
     /// <summary>
@@ -182,14 +177,11 @@ public class PheedSyndicationExtensionTest
     public void Pheed_WriteToTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
-        using (StringWriter sw = new StringWriter())
-        using (XmlWriter writer = new XmlTextWriter(sw))
-        {
-
-            target.WriteTo(writer);
-            string output = sw.ToString();
-            Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-        }
+        using StringWriter sw = new StringWriter();
+        using XmlWriter writer = new XmlTextWriter(sw);
+        target.WriteTo(writer);
+        string output = sw.ToString();
+        Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
     }
 
     /// <summary>

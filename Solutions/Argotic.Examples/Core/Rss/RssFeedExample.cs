@@ -153,16 +153,14 @@ public static class RssFeedExample
     {
         RssFeed feed    = new RssFeed();
 
-        using (Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read))
-        {
-            feed.Load(stream);
+        using Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read);
+        feed.Load(stream);
 
-            foreach (RssItem item in feed.Channel.Items)
+        foreach (RssItem item in feed.Channel.Items)
+        {
+            if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
             {
-                if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
-                {
-                    //  Process channel items published in the last week
-                }
+                //  Process channel items published in the last week
             }
         }
     }
@@ -174,25 +172,21 @@ public static class RssFeedExample
     {
         RssFeed feed    = new RssFeed();
 
-        using (Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read))
+        using Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read);
+        XmlReaderSettings settings  = new XmlReaderSettings
         {
-            XmlReaderSettings settings  = new XmlReaderSettings
-            {
-                IgnoreComments = true,
-                IgnoreWhitespace = true
-            };
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
-            using(XmlReader reader = XmlReader.Create(stream, settings))
-            {
-                feed.Load(reader);
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        feed.Load(reader);
 
-                foreach (RssItem item in feed.Channel.Items)
-                {
-                    if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
-                    {
-                        //  Process channel items published in the last week
-                    }
-                }
+        foreach (RssItem item in feed.Channel.Items)
+        {
+            if (item.PublicationDate >= DateTime.Today.Subtract(new TimeSpan(7, 0, 0, 0)))
+            {
+                //  Process channel items published in the last week
             }
         }
     }
@@ -225,10 +219,8 @@ public static class RssFeedExample
 
         //  Modify feed state using public properties and methods
 
-        using(Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write))
-        {
-            feed.Save(stream);
-        }
+        using Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write);
+        feed.Save(stream);
     }
 
     /// <summary>
@@ -240,17 +232,13 @@ public static class RssFeedExample
 
         //  Modify feed state using public properties and methods
 
-        using (Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write))
+        using Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write);
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                Indent = true
-            };
+            Indent = true
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                feed.Save(writer);
-            }
-        }
+        using XmlWriter writer = XmlWriter.Create(stream, settings);
+        feed.Save(writer);
     }
 }

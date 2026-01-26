@@ -105,16 +105,14 @@ public static class SyndicationDiscoveryUtility
     {
         Guard.ArgumentNotNull(source, "source");
 
-        using (WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials)))
+        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials));
+        if (response != null)
         {
-            if (response != null)
-            {
-                return SyndicationDiscoveryUtility.SyndicationContentFormatGet(response.GetResponseStream());
-            }
-            else
-            {
-                return SyndicationContentFormat.None;
-            }
+            return SyndicationDiscoveryUtility.SyndicationContentFormatGet(response.GetResponseStream());
+        }
+        else
+        {
+            return SyndicationContentFormat.None;
         }
     }
 
@@ -137,10 +135,8 @@ public static class SyndicationDiscoveryUtility
             IgnoreWhitespace = true
         };
 
-        using(XmlReader reader = XmlReader.Create(stream, settings))
-        {
-            return SyndicationDiscoveryUtility.SyndicationContentFormatGet(reader);
-        }
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        return SyndicationDiscoveryUtility.SyndicationContentFormatGet(reader);
     }
 
     /// <summary>
@@ -394,27 +390,21 @@ public static class SyndicationDiscoveryUtility
         Guard.ArgumentNotNull(source, "source");
         Guard.ArgumentNotNull(target, "target");
 
-        using (WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials)))
+        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials));
+        if (response != null)
         {
-            if (response != null)
-            {
-                using(Stream stream = response.GetResponseStream())
-                {
-                    using (StreamReader reader = new StreamReader(stream))
-                    {
-                        Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(reader.ReadToEnd());
+            using Stream stream = response.GetResponseStream();
+            using StreamReader reader = new StreamReader(stream);
+            Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(reader.ReadToEnd());
 
-                        if (links is { Count: > 0 })
-                        {
-                            foreach (Uri link in links)
-                            {
-                                if (Uri.Compare(link, target, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase) == 0)
-                                {
-                                    sourceContainsLinkToTarget = true;
-                                    break;
-                                }
-                            }
-                        }
+            if (links is { Count: > 0 })
+            {
+                foreach (Uri link in links)
+                {
+                    if (Uri.Compare(link, target, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase) == 0)
+                    {
+                        sourceContainsLinkToTarget = true;
+                        break;
                     }
                 }
             }
@@ -467,12 +457,10 @@ public static class SyndicationDiscoveryUtility
 
         try
         {
-            using (WebResponse response = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials)))
+            using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+            if (response is { ContentLength: > 0 })
             {
-                if (response is { ContentLength: > 0 })
-                {
-                    uriExists   = true;
-                }
+                uriExists   = true;
             }
         }
         catch (WebException)
@@ -800,10 +788,8 @@ public static class SyndicationDiscoveryUtility
     {
         Guard.ArgumentNotNull(stream, "stream");
 
-        using (StreamReader reader = new StreamReader(stream))
-        {
-            return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(reader.ReadToEnd());
-        }
+        using StreamReader reader = new StreamReader(stream);
+        return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(reader.ReadToEnd());
     }
 
     /// <summary>
@@ -852,18 +838,14 @@ public static class SyndicationDiscoveryUtility
     {
         Guard.ArgumentNotNull(uri, "uri");
 
-        using (WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials)))
+        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+        if (webResponse == null)
         {
-            if (webResponse == null)
-            {
-                return new Collection<DiscoverableSyndicationEndpoint>();
-            }
-
-            using (Stream stream = webResponse.GetResponseStream())
-            {
-                return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(stream);
-            }
+            return new Collection<DiscoverableSyndicationEndpoint>();
         }
+
+        using Stream stream = webResponse.GetResponseStream();
+        return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(stream);
     }
 
     /// <summary>
@@ -1048,43 +1030,39 @@ public static class SyndicationDiscoveryUtility
 
         Guard.ArgumentNotNull(uri, "uri");
 
-        using (WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials)))
+        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+        if (webResponse == null)
         {
-            if (webResponse == null)
-            {
-                return false;
-            }
+            return false;
+        }
 
-            if (webResponse.Headers is { Count: > 0 })
+        if (webResponse.Headers is { Count: > 0 })
+        {
+            for (int i = 0; i < webResponse.Headers.Count; i++)
             {
-                for (int i = 0; i < webResponse.Headers.Count; i++)
+                string name     = webResponse.Headers.Keys[i];
+                string value    = webResponse.Headers[i];
+
+                if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    string name     = webResponse.Headers.Keys[i];
-                    string value    = webResponse.Headers[i];
-
-                    if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        Uri pingbackXmlRpcServer;
-                        if(Uri.TryCreate(value, UriKind.Absolute, out pingbackXmlRpcServer))
-                        {
-                            isPingbackEnabled   = true;
-                        }
-                        break;
-                    }
-                }
-            }
-
-            if (!isPingbackEnabled)
-            {
-                using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
-                {
-                    HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
-
-                    if (link != null)
+                    Uri pingbackXmlRpcServer;
+                    if(Uri.TryCreate(value, UriKind.Absolute, out pingbackXmlRpcServer))
                     {
                         isPingbackEnabled   = true;
                     }
+                    break;
                 }
+            }
+        }
+
+        if (!isPingbackEnabled)
+        {
+            using StreamReader reader = new StreamReader(webResponse.GetResponseStream());
+            HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
+
+            if (link != null)
+            {
+                isPingbackEnabled   = true;
             }
         }
 
@@ -1201,44 +1179,40 @@ public static class SyndicationDiscoveryUtility
 
         Guard.ArgumentNotNull(uri, "uri");
 
-        using (WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials)))
+        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+        if (webResponse == null)
         {
-            if (webResponse == null)
-            {
-                return null;
-            }
+            return null;
+        }
 
-            if (webResponse.Headers is { Count: > 0 })
+        if (webResponse.Headers is { Count: > 0 })
+        {
+            for (int i = 0; i < webResponse.Headers.Count; i++)
             {
-                for (int i = 0; i < webResponse.Headers.Count; i++)
+                string name     = webResponse.Headers.Keys[i];
+                string value    = webResponse.Headers[i];
+
+                if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    string name     = webResponse.Headers.Keys[i];
-                    string value    = webResponse.Headers[i];
-
-                    if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                    if(Uri.TryCreate(value, UriKind.Absolute, out Uri url))
                     {
-                        if(Uri.TryCreate(value, UriKind.Absolute, out Uri url))
-                        {
-                            pingbackXmlRpcServer    = url;
-                        }
-                        break;
+                        pingbackXmlRpcServer    = url;
                     }
+                    break;
                 }
             }
+        }
 
-            if (pingbackXmlRpcServer == null)
+        if (pingbackXmlRpcServer == null)
+        {
+            using StreamReader reader = new StreamReader(webResponse.GetResponseStream());
+            HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
+
+            if (link != null)
             {
-                using (StreamReader reader = new StreamReader(webResponse.GetResponseStream()))
+                if (Uri.TryCreate(link.HRef, UriKind.Absolute, out Uri href))
                 {
-                    HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
-
-                    if (link != null)
-                    {
-                        if (Uri.TryCreate(link.HRef, UriKind.Absolute, out Uri href))
-                        {
-                            pingbackXmlRpcServer    = href;
-                        }
-                    }
+                    pingbackXmlRpcServer    = href;
                 }
             }
         }
@@ -1276,16 +1250,14 @@ public static class SyndicationDiscoveryUtility
 
         foreach (Match embeddedRdf in embeddedRdfs)
         {
-            using (StringReader reader = new StringReader(embeddedRdf.Value))
-            {
-                XPathDocument document      = new XPathDocument(reader);
-                XPathNavigator navigator    = document.CreateNavigator();
+            using StringReader reader = new StringReader(embeddedRdf.Value);
+            XPathDocument document      = new XPathDocument(reader);
+            XPathNavigator navigator    = document.CreateNavigator();
 
-                TrackbackDiscoveryMetadata trackbackMetadata    = new TrackbackDiscoveryMetadata();
-                if (trackbackMetadata.Load(navigator))
-                {
-                    results.Add(trackbackMetadata);
-                }
+            TrackbackDiscoveryMetadata trackbackMetadata    = new TrackbackDiscoveryMetadata();
+            if (trackbackMetadata.Load(navigator))
+            {
+                results.Add(trackbackMetadata);
             }
         }
 
@@ -1309,10 +1281,8 @@ public static class SyndicationDiscoveryUtility
     {
         Guard.ArgumentNotNull(stream, "stream");
 
-        using(StreamReader reader = new StreamReader(stream))
-        {
-            return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(reader.ReadToEnd());
-        }
+        using StreamReader reader = new StreamReader(stream);
+        return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(reader.ReadToEnd());
     }
 
     /// <summary>
@@ -1469,17 +1439,13 @@ public static class SyndicationDiscoveryUtility
     {
         Guard.ArgumentNotNull(uri, "uri");
 
-        using (WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials)))
+        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
+        if (webResponse == null)
         {
-            if (webResponse == null)
-            {
-                return new Collection<TrackbackDiscoveryMetadata>();
-            }
-
-            using (Stream stream = webResponse.GetResponseStream())
-            {
-                return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(stream);
-            }
+            return new Collection<TrackbackDiscoveryMetadata>();
         }
+
+        using Stream stream = webResponse.GetResponseStream();
+        return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(stream);
     }
 }

@@ -109,17 +109,15 @@ public static class RsdDocumentExample
     {
         RsdDocument document   = new RsdDocument();
 
-        using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read))
-        {
-            document.Load(stream);
+        using Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read);
+        document.Load(stream);
 
-            foreach (RsdApplicationInterface api in document.Interfaces)
+        foreach (RsdApplicationInterface api in document.Interfaces)
+        {
+            if (api.IsPreferred)
             {
-                if (api.IsPreferred)
-                {
-                    //  Perform some processing on the application programming interface
-                    break;
-                }
+                //  Perform some processing on the application programming interface
+                break;
             }
         }
     }
@@ -131,26 +129,22 @@ public static class RsdDocumentExample
     {
         RsdDocument document   = new RsdDocument();
 
-        using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read))
+        using Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read);
+        XmlReaderSettings settings  = new XmlReaderSettings
         {
-            XmlReaderSettings settings  = new XmlReaderSettings
-            {
-                IgnoreComments = true,
-                IgnoreWhitespace = true
-            };
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
-            using(XmlReader reader = XmlReader.Create(stream, settings))
-            {
-                document.Load(reader);
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        document.Load(reader);
 
-                foreach (RsdApplicationInterface api in document.Interfaces)
-                {
-                    if (api.IsPreferred)
-                    {
-                        //  Perform some processing on the application programming interface
-                        break;
-                    }
-                }
+        foreach (RsdApplicationInterface api in document.Interfaces)
+        {
+            if (api.IsPreferred)
+            {
+                //  Perform some processing on the application programming interface
+                break;
             }
         }
     }
@@ -184,10 +178,8 @@ public static class RsdDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using(Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write))
-        {
-            document.Save(stream);
-        }
+        using Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write);
+        document.Save(stream);
     }
 
     /// <summary>
@@ -199,17 +191,13 @@ public static class RsdDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using (Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write))
+        using Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write);
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                Indent = true
-            };
+            Indent = true
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                document.Save(writer);
-            }
-        }
+        using XmlWriter writer = XmlWriter.Create(stream, settings);
+        document.Save(writer);
     }
 }

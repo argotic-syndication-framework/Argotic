@@ -101,8 +101,7 @@ public class FeedRankSyndicationExtensionTest
         XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc))
-        {
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
 #if false
 //var document  = new XPathDocument(reader);
 //var nav = document.CreateNavigator();
@@ -119,10 +118,9 @@ public class FeedRankSyndicationExtensionTest
 				actual = target.Load(reader);
 				Assert.AreEqual(expected, actual);
 #else
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
 #endif
-        }
     }
 
     [TestMethod]
@@ -141,24 +139,22 @@ public class FeedRankSyndicationExtensionTest
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
 
-            //				 Assert.IsTrue(feed.Channel.HasExtensions);
-            //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension,
-            //						 typeof(FeedRankSyndicationExtension));
+        //				 Assert.IsTrue(feed.Channel.HasExtensions);
+        //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension,
+        //						 typeof(FeedRankSyndicationExtension));
 
-            Assert.AreEqual(1, feed.Channel.Items.Count());
-            RssItem item = feed.Channel.Items.Single();
-            Assert.IsTrue(item.HasExtensions);
-            FeedRankSyndicationExtension itemExtension = item.FindExtension<FeedRankSyndicationExtension>();
-            Assert.IsNotNull(itemExtension);
-            Assert.IsInstanceOfType(
-                item.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension,
-                typeof(FeedRankSyndicationExtension));
-        }
+        Assert.AreEqual(1, feed.Channel.Items.Count());
+        RssItem item = feed.Channel.Items.Single();
+        Assert.IsTrue(item.HasExtensions);
+        FeedRankSyndicationExtension itemExtension = item.FindExtension<FeedRankSyndicationExtension>();
+        Assert.IsNotNull(itemExtension);
+        Assert.IsInstanceOfType(
+            item.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension,
+            typeof(FeedRankSyndicationExtension));
     }
 
     /// <summary>
@@ -194,13 +190,11 @@ public class FeedRankSyndicationExtensionTest
     public void FeedRank_WriteToTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
-        using (StringWriter sw = new StringWriter())
-        using (XmlWriter writer = new XmlTextWriter(sw))
-        {
-            target.WriteTo(writer);
-            string output = sw.ToString();
-            Assert.AreEqual(writeToText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-        }
+        using StringWriter sw = new StringWriter();
+        using XmlWriter writer = new XmlTextWriter(sw);
+        target.WriteTo(writer);
+        string output = sw.ToString();
+        Assert.AreEqual(writeToText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
     }
 
     /// <summary>

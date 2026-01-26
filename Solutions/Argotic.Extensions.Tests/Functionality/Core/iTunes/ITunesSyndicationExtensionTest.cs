@@ -142,11 +142,9 @@ public class ITunesSyndicationExtensionTest
         XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc))
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
-        }
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
     }
 
     [TestMethod]
@@ -165,25 +163,22 @@ public class ITunesSyndicationExtensionTest
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
 
-            //				 Assert.IsTrue(feed.Channel.HasExtensions);
-            //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension,
-            //						 typeof(ITunesSyndicationExtension));
+        //				 Assert.IsTrue(feed.Channel.HasExtensions);
+        //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension,
+        //						 typeof(ITunesSyndicationExtension));
 
-            Assert.AreEqual(1, feed.Channel.Items.Count());
-            RssItem item = feed.Channel.Items.Single();
-            Assert.IsTrue(item.HasExtensions);
-            ITunesSyndicationExtension itemExtension = item.FindExtension<ITunesSyndicationExtension>();
-            Assert.IsNotNull(itemExtension);
-            Assert.IsInstanceOfType(
-                item.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension,
-                typeof(ITunesSyndicationExtension));
-
-        }
+        Assert.AreEqual(1, feed.Channel.Items.Count());
+        RssItem item = feed.Channel.Items.Single();
+        Assert.IsTrue(item.HasExtensions);
+        ITunesSyndicationExtension itemExtension = item.FindExtension<ITunesSyndicationExtension>();
+        Assert.IsNotNull(itemExtension);
+        Assert.IsInstanceOfType(
+            item.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension,
+            typeof(ITunesSyndicationExtension));
     }
 
     /// <summary>
@@ -218,15 +213,12 @@ public class ITunesSyndicationExtensionTest
     [TestMethod]
     public void ITunes_WriteToTest()
     {
-        using (StringWriter sw = new StringWriter())
-        using (XmlWriter writer = new XmlTextWriter(sw))
-        {
-
-            ITunesSyndicationExtension target = CreateExtension1();
-            target.WriteTo(writer);
-            string output = sw.ToString();
-            Assert.AreEqual(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-        }
+        using StringWriter sw = new StringWriter();
+        using XmlWriter writer = new XmlTextWriter(sw);
+        ITunesSyndicationExtension target = CreateExtension1();
+        target.WriteTo(writer);
+        string output = sw.ToString();
+        Assert.AreEqual(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
     }
 
     /// <summary>

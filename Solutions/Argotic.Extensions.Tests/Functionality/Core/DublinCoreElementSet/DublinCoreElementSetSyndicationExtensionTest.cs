@@ -150,11 +150,9 @@ public class DublinCoreElementSetSyndicationExtensionTest
         XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
-        }
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
     }
 
     [TestMethod]
@@ -173,20 +171,18 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
 
-            Assert.AreEqual(1, feed.Channel.Items.Count());
-            RssItem item = feed.Channel.Items.Single();
-            Assert.IsTrue(item.HasExtensions);
-            DublinCoreElementSetSyndicationExtension itemExtension = item.FindExtension<DublinCoreElementSetSyndicationExtension>();
-            Assert.IsNotNull(itemExtension);
-            Assert.IsInstanceOfType(
-                item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
-                typeof(DublinCoreElementSetSyndicationExtension));
-        }
+        Assert.AreEqual(1, feed.Channel.Items.Count());
+        RssItem item = feed.Channel.Items.Single();
+        Assert.IsTrue(item.HasExtensions);
+        DublinCoreElementSetSyndicationExtension itemExtension = item.FindExtension<DublinCoreElementSetSyndicationExtension>();
+        Assert.IsNotNull(itemExtension);
+        Assert.IsInstanceOfType(
+            item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension,
+            typeof(DublinCoreElementSetSyndicationExtension));
     }
 
     /// <summary>
@@ -222,14 +218,11 @@ public class DublinCoreElementSetSyndicationExtensionTest
     public void DublinCoreElementSet_WriteToTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-        using(StringWriter sw = new StringWriter())
-        using (XmlWriter writer = new XmlTextWriter(sw))
-        {
-
-            target.WriteTo(writer);
-            string output = sw.ToString();
-            Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-        }
+        using StringWriter sw = new StringWriter();
+        using XmlWriter writer = new XmlTextWriter(sw);
+        target.WriteTo(writer);
+        string output = sw.ToString();
+        Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
     }
 
     /// <summary>

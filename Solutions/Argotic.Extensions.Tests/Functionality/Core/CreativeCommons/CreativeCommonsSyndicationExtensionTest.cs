@@ -106,8 +106,7 @@ public class CreativeCommonsSyndicationExtensionTest
         XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
-        {
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
 #if false
 				//var document  = new XPathDocument(reader);
 				//var nav = document.CreateNavigator();
@@ -124,10 +123,9 @@ public class CreativeCommonsSyndicationExtensionTest
 				actual = target.Load(reader);
 				Assert.AreEqual(expected, actual);
 #else
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
 #endif
-        }
     }
 
     [TestMethod]
@@ -146,24 +144,21 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
 
-            //				 Assert.IsTrue(feed.Channel.HasExtensions);
-            //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension,
-            //						 typeof(CreativeCommonsSyndicationExtension));
+        //				 Assert.IsTrue(feed.Channel.HasExtensions);
+        //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension,
+        //						 typeof(CreativeCommonsSyndicationExtension));
 
-            Assert.AreEqual(1, feed.Channel.Items.Count());
-            RssItem item = feed.Channel.Items.Single();
-            Assert.IsTrue(item.HasExtensions);
-            CreativeCommonsSyndicationExtension itemExtension = item.FindExtension<CreativeCommonsSyndicationExtension>();
-            Assert.IsNotNull(itemExtension);
-            Assert.IsInstanceOfType(item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension,
-                typeof(CreativeCommonsSyndicationExtension));
-
-        }
+        Assert.AreEqual(1, feed.Channel.Items.Count());
+        RssItem item = feed.Channel.Items.Single();
+        Assert.IsTrue(item.HasExtensions);
+        CreativeCommonsSyndicationExtension itemExtension = item.FindExtension<CreativeCommonsSyndicationExtension>();
+        Assert.IsNotNull(itemExtension);
+        Assert.IsInstanceOfType(item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension,
+            typeof(CreativeCommonsSyndicationExtension));
     }
 
     /// <summary>
@@ -198,15 +193,12 @@ public class CreativeCommonsSyndicationExtensionTest
     [TestMethod]
     public void CreativeCommons_WriteToTest()
     {
-        using(StringWriter sw = new StringWriter())
-        using (XmlWriter writer = new XmlTextWriter(sw))
-        {
-
-            CreativeCommonsSyndicationExtension target = CreateExtension1();
-            target.WriteTo(writer);
-            string output = sw.ToString();
-            Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-        }
+        using StringWriter sw = new StringWriter();
+        using XmlWriter writer = new XmlTextWriter(sw);
+        CreativeCommonsSyndicationExtension target = CreateExtension1();
+        target.WriteTo(writer);
+        string output = sw.ToString();
+        Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
     }
 
     /// <summary>

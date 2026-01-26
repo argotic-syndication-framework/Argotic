@@ -32,11 +32,9 @@ public static class SyndicationEncodingUtility
 
         string safeXml  = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(xml);
 
-        using(StringReader reader = new StringReader(safeXml))
-        {
-            XPathDocument document  = new XPathDocument(reader);
-            navigator               = document.CreateNavigator();
-        }
+        using StringReader reader = new StringReader(safeXml);
+        XPathDocument document  = new XPathDocument(reader);
+        navigator               = document.CreateNavigator();
 
         return navigator;
     }
@@ -66,10 +64,8 @@ public static class SyndicationEncodingUtility
 
         encoding    = SyndicationEncodingUtility.GetXmlEncoding(buffer);
 
-        using(MemoryStream memoryStream = new MemoryStream(buffer))
-        {
-            return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
-        }
+        using MemoryStream memoryStream = new MemoryStream(buffer);
+        return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
     }
 
     /// <summary>
@@ -89,10 +85,8 @@ public static class SyndicationEncodingUtility
         Guard.ArgumentNotNull(stream, "stream");
         Guard.ArgumentNotNull(encoding, "encoding");
 
-        using (StreamReader reader = new StreamReader(stream, encoding))
-        {
-            return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
-        }
+        using StreamReader reader = new StreamReader(stream, encoding);
+        return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
     }
 
     /// <summary>
@@ -199,48 +193,46 @@ public static class SyndicationEncodingUtility
     {
         Guard.ArgumentNotNull(source, "source");
 
-        using (WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, options))
+        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, options);
+        Stream stream = null;
+        HttpWebResponse httpResponse = response as HttpWebResponse;
+
+        if (httpResponse != null)
         {
-            Stream stream = null;
-            HttpWebResponse httpResponse = response as HttpWebResponse;
+            string contentEncoding = httpResponse.ContentEncoding?.ToUpperInvariant();
 
-            if (httpResponse != null)
-            {
-                string contentEncoding = httpResponse.ContentEncoding?.ToUpperInvariant();
-
-                if(string.IsNullOrEmpty(contentEncoding))
-                {
-                    stream = response.GetResponseStream();
-                }
-                else
-                {
-                    if (contentEncoding.Contains("GZIP"))
-                    {
-                        stream = new GZipStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
-                    }
-                    else if (contentEncoding.Contains("DEFLATE"))
-                    {
-                        stream = new DeflateStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
-                    }
-                    else
-                    {
-                        stream = httpResponse.GetResponseStream();
-                    }
-                }
-            }
-            else
+            if(string.IsNullOrEmpty(contentEncoding))
             {
                 stream = response.GetResponseStream();
             }
-
-            if (encoding != null)
-            {
-                return SyndicationEncodingUtility.CreateSafeNavigator(stream, encoding);
-            }
             else
             {
-                return SyndicationEncodingUtility.CreateSafeNavigator(stream);
+                if (contentEncoding.Contains("GZIP"))
+                {
+                    stream = new GZipStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
+                }
+                else if (contentEncoding.Contains("DEFLATE"))
+                {
+                    stream = new DeflateStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
+                }
+                else
+                {
+                    stream = httpResponse.GetResponseStream();
+                }
             }
+        }
+        else
+        {
+            stream = response.GetResponseStream();
+        }
+
+        if (encoding != null)
+        {
+            return SyndicationEncodingUtility.CreateSafeNavigator(stream, encoding);
+        }
+        else
+        {
+            return SyndicationEncodingUtility.CreateSafeNavigator(stream);
         }
     }
 
@@ -488,10 +480,8 @@ public static class SyndicationEncodingUtility
     {
         Guard.ArgumentNotNull(data, "data");
 
-        using (MemoryStream stream = new MemoryStream(data))
-        {
-            return SyndicationEncodingUtility.GetXmlEncoding(stream);
-        }
+        using MemoryStream stream = new MemoryStream(data);
+        return SyndicationEncodingUtility.GetXmlEncoding(stream);
     }
 
     /// <summary>
@@ -507,10 +497,8 @@ public static class SyndicationEncodingUtility
     {
         Guard.ArgumentNotNull(stream, "stream");
 
-        using (StreamReader reader = new StreamReader(stream))
-        {
-            return SyndicationEncodingUtility.GetXmlEncoding(reader.ReadToEnd());
-        }
+        using StreamReader reader = new StreamReader(stream);
+        return SyndicationEncodingUtility.GetXmlEncoding(reader.ReadToEnd());
     }
 
     /// <summary>

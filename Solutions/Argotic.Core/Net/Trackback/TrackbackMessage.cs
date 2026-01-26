@@ -279,19 +279,17 @@ public class TrackbackMessage : IComparable
     /// </remarks>
     public override string ToString()
     {
-        using(MemoryStream stream = new MemoryStream())
+        using MemoryStream stream = new MemoryStream();
+        using (StreamWriter writer = new StreamWriter(stream, this.Encoding))
         {
-            using (StreamWriter writer = new StreamWriter(stream, this.Encoding))
-            {
-                this.WriteTo(writer);
-            }
+            this.WriteTo(writer);
+        }
 
-            stream.Seek(0, SeekOrigin.Begin);
+        stream.Seek(0, SeekOrigin.Begin);
 
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
+        using (StreamReader reader = new StreamReader(stream))
+        {
+            return reader.ReadToEnd();
         }
     }
 

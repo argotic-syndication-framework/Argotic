@@ -98,28 +98,24 @@ public class XmlRpcResponse : IComparable
             throw new ArgumentException(string.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), nameof(response));
         }
 
-        using (Stream stream = response.GetResponseStream())
+        using Stream stream = response.GetResponseStream();
+        XmlReaderSettings settings              = new XmlReaderSettings
         {
-            XmlReaderSettings settings              = new XmlReaderSettings
-            {
-                ConformanceLevel = ConformanceLevel.Document,
-                IgnoreComments = true,
-                IgnoreProcessingInstructions = true,
-                IgnoreWhitespace = true,
-                DtdProcessing = DtdProcessing.Ignore
-            };
+            ConformanceLevel = ConformanceLevel.Document,
+            IgnoreComments = true,
+            IgnoreProcessingInstructions = true,
+            IgnoreWhitespace = true,
+            DtdProcessing = DtdProcessing.Ignore
+        };
 
-            using (XmlReader reader = XmlReader.Create(stream, settings))
-            {
-                XPathDocument document  = new XPathDocument(reader);
-                XPathNavigator source   = document.CreateNavigator();
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        XPathDocument document  = new XPathDocument(reader);
+        XPathNavigator source   = document.CreateNavigator();
 
-                XPathNavigator methodResponseNavigator  = source.SelectSingleNode("methodResponse");
-                if (methodResponseNavigator != null)
-                {
-                    this.Load(methodResponseNavigator);
-                }
-            }
+        XPathNavigator methodResponseNavigator  = source.SelectSingleNode("methodResponse");
+        if (methodResponseNavigator != null)
+        {
+            this.Load(methodResponseNavigator);
         }
     }
 
@@ -246,26 +242,24 @@ public class XmlRpcResponse : IComparable
     /// </remarks>
     public override string ToString()
     {
-        using(MemoryStream stream = new MemoryStream())
+        using MemoryStream stream = new MemoryStream();
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                ConformanceLevel = ConformanceLevel.Fragment,
-                Indent = true,
-                OmitXmlDeclaration = true
-            };
+            ConformanceLevel = ConformanceLevel.Fragment,
+            Indent = true,
+            OmitXmlDeclaration = true
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                this.WriteTo(writer);
-            }
+        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        {
+            this.WriteTo(writer);
+        }
 
-            stream.Seek(0, SeekOrigin.Begin);
+        stream.Seek(0, SeekOrigin.Begin);
 
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
+        using (StreamReader reader = new StreamReader(stream))
+        {
+            return reader.ReadToEnd();
         }
     }
 

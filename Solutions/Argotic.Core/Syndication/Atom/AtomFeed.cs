@@ -1330,26 +1330,24 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// </remarks>
     public XPathNavigator CreateNavigator()
     {
-        using(MemoryStream stream = new MemoryStream())
+        using MemoryStream stream = new MemoryStream();
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                ConformanceLevel = ConformanceLevel.Document,
-                Indent = true,
-                OmitXmlDeclaration = false
-            };
+            ConformanceLevel = ConformanceLevel.Document,
+            Indent = true,
+            OmitXmlDeclaration = false
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                this.Save(writer);
-                writer.Flush();
-            }
-
-            stream.Seek(0, SeekOrigin.Begin);
-
-            XPathDocument document  = new XPathDocument(stream);
-            return document.CreateNavigator();
+        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        {
+            this.Save(writer);
+            writer.Flush();
         }
+
+        stream.Seek(0, SeekOrigin.Begin);
+
+        XPathDocument document  = new XPathDocument(stream);
+        return document.CreateNavigator();
     }
 
     /// <summary>
@@ -1706,10 +1704,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
             Encoding = settings.CharacterEncoding
         };
 
-        using (XmlWriter writer = XmlWriter.Create(stream, writerSettings))
-        {
-            this.Save(writer, settings);
-        }
+        using XmlWriter writer = XmlWriter.Create(stream, writerSettings);
+        this.Save(writer, settings);
     }
 
     /// <summary>

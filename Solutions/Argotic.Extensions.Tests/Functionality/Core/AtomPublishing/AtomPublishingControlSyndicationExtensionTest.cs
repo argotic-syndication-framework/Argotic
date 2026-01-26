@@ -99,11 +99,9 @@ public class AtomPublishingControlSyndicationExtensionTest
         XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Preserve);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
-        }
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
     }
 
     [TestMethod]
@@ -120,19 +118,17 @@ public class AtomPublishingControlSyndicationExtensionTest
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
-            Assert.AreEqual(1, feed.Channel.Items.Count());
-            RssItem item = feed.Channel.Items.Single();
-            bool ext = item.HasExtensions;
-            Assert.IsTrue(item.HasExtensions);
-            AtomPublishingControlSyndicationExtension itemExtension = item.FindExtension<AtomPublishingControlSyndicationExtension>();
-            Assert.IsNotNull(itemExtension);
-            Assert.IsInstanceOfType(item.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension,
-                typeof(AtomPublishingControlSyndicationExtension));
-        }
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
+        Assert.AreEqual(1, feed.Channel.Items.Count());
+        RssItem item = feed.Channel.Items.Single();
+        bool ext = item.HasExtensions;
+        Assert.IsTrue(item.HasExtensions);
+        AtomPublishingControlSyndicationExtension itemExtension = item.FindExtension<AtomPublishingControlSyndicationExtension>();
+        Assert.IsNotNull(itemExtension);
+        Assert.IsInstanceOfType(item.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension,
+            typeof(AtomPublishingControlSyndicationExtension));
     }
 
     /// <summary>
@@ -165,14 +161,12 @@ public class AtomPublishingControlSyndicationExtensionTest
     [TestMethod]
     public void AtomPublishingControl_WriteToTest()
     {
-        using(StringWriter sw = new StringWriter())
-        using (XmlWriter writer = new XmlTextWriter(sw))
-        {
-            AtomPublishingControlSyndicationExtension target = CreateExtension1();
-            target.WriteTo(writer);
-            string output = sw.ToString();
-            Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-        }
+        using StringWriter sw = new StringWriter();
+        using XmlWriter writer = new XmlTextWriter(sw);
+        AtomPublishingControlSyndicationExtension target = CreateExtension1();
+        target.WriteTo(writer);
+        string output = sw.ToString();
+        Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
     }
 
     /// <summary>

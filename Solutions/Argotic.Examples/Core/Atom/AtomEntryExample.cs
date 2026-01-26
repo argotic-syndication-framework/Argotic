@@ -91,14 +91,12 @@ public static class AtomEntryExample
     {
         AtomEntry entry = new AtomEntry();
 
-        using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read))
-        {
-            entry.Load(stream);
+        using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read);
+        entry.Load(stream);
 
-            if (entry.UpdatedOn >= DateTime.Today)
-            {
-                //  Perform some processing on the entry
-            }
+        if (entry.UpdatedOn >= DateTime.Today)
+        {
+            //  Perform some processing on the entry
         }
     }
 
@@ -109,23 +107,19 @@ public static class AtomEntryExample
     {
         AtomEntry entry = new AtomEntry();
 
-        using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read))
+        using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read);
+        XmlReaderSettings settings  = new XmlReaderSettings
         {
-            XmlReaderSettings settings  = new XmlReaderSettings
-            {
-                IgnoreComments = true,
-                IgnoreWhitespace = true
-            };
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
-            using(XmlReader reader = XmlReader.Create(stream, settings))
-            {
-                entry.Load(reader);
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        entry.Load(reader);
 
-                if (entry.UpdatedOn >= DateTime.Today)
-                {
-                    //  Perform some processing on the entry
-                }
-            }
+        if (entry.UpdatedOn >= DateTime.Today)
+        {
+            //  Perform some processing on the entry
         }
     }
 
@@ -154,10 +148,8 @@ public static class AtomEntryExample
 
         //  Modify entry state using public properties and methods
 
-        using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write))
-        {
-            entry.Save(stream);
-        }
+        using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write);
+        entry.Save(stream);
     }
 
     /// <summary>
@@ -169,17 +161,13 @@ public static class AtomEntryExample
 
         //  Modify entry state using public properties and methods
 
-        using (Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write))
+        using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write);
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                Indent = true
-            };
+            Indent = true
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                entry.Save(writer);
-            }
-        }
+        using XmlWriter writer = XmlWriter.Create(stream, settings);
+        entry.Save(writer);
     }
 }

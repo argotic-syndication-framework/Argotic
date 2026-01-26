@@ -239,26 +239,24 @@ public class YahooMediaTextConstruct : IComparable
     /// </remarks>
     public override string ToString()
     {
-        using(MemoryStream stream = new MemoryStream())
+        using MemoryStream stream = new MemoryStream();
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                ConformanceLevel = ConformanceLevel.Fragment,
-                Indent = true,
-                OmitXmlDeclaration = true
-            };
+            ConformanceLevel = ConformanceLevel.Fragment,
+            Indent = true,
+            OmitXmlDeclaration = true
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                this.WriteTo(writer, "generic");
-            }
+        using(XmlWriter writer = XmlWriter.Create(stream, settings))
+        {
+            this.WriteTo(writer, "generic");
+        }
 
-            stream.Seek(0, SeekOrigin.Begin);
+        stream.Seek(0, SeekOrigin.Begin);
 
-            using (StreamReader reader = new StreamReader(stream))
-            {
-                return reader.ReadToEnd();
-            }
+        using (StreamReader reader = new StreamReader(stream))
+        {
+            return reader.ReadToEnd();
         }
     }
 

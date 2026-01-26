@@ -107,16 +107,14 @@ public static class AtomFeedExample
     {
         AtomFeed feed   = new AtomFeed();
 
-        using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read))
-        {
-            feed.Load(stream);
+        using Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read);
+        feed.Load(stream);
 
-            foreach (AtomEntry entry in feed.Entries)
+        foreach (AtomEntry entry in feed.Entries)
+        {
+            if (entry.PublishedOn >= DateTime.Today)
             {
-                if (entry.PublishedOn >= DateTime.Today)
-                {
-                    //  Perform some processing on the feed entry
-                }
+                //  Perform some processing on the feed entry
             }
         }
     }
@@ -128,25 +126,21 @@ public static class AtomFeedExample
     {
         AtomFeed feed   = new AtomFeed();
 
-        using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read))
+        using Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read);
+        XmlReaderSettings settings  = new XmlReaderSettings
         {
-            XmlReaderSettings settings  = new XmlReaderSettings
-            {
-                IgnoreComments = true,
-                IgnoreWhitespace = true
-            };
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
-            using(XmlReader reader = XmlReader.Create(stream, settings))
-            {
-                feed.Load(reader);
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        feed.Load(reader);
 
-                foreach (AtomEntry entry in feed.Entries)
-                {
-                    if (entry.PublishedOn >= DateTime.Today)
-                    {
-                        //  Perform some processing on the feed entry
-                    }
-                }
+        foreach (AtomEntry entry in feed.Entries)
+        {
+            if (entry.PublishedOn >= DateTime.Today)
+            {
+                //  Perform some processing on the feed entry
             }
         }
     }
@@ -179,10 +173,8 @@ public static class AtomFeedExample
 
         //  Modify feed state using public properties and methods
 
-        using(Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write))
-        {
-            feed.Save(stream);
-        }
+        using Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write);
+        feed.Save(stream);
     }
 
     /// <summary>
@@ -194,17 +186,13 @@ public static class AtomFeedExample
 
         //  Modify feed state using public properties and methods
 
-        using (Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write))
+        using Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write);
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                Indent = true
-            };
+            Indent = true
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                feed.Save(writer);
-            }
-        }
+        using XmlWriter writer = XmlWriter.Create(stream, settings);
+        feed.Save(writer);
     }
 }

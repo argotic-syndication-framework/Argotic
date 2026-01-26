@@ -44,9 +44,7 @@ public static class DublinCoreElementSetSyndicationExtensionExample
 
         // By default the framework will automatically determine what XML namespace attributes (xmlns) to write 
         // on the root of the resource based on the extensions applied to extensible parent and child entities
-        using(FileStream stream = new FileStream("Feed.xml", FileMode.Create, FileAccess.Write))
-        {
-            feed.Save(stream);
-        }
+        using FileStream stream = new FileStream("Feed.xml", FileMode.Create, FileAccess.Write);
+        feed.Save(stream);
     }
 }

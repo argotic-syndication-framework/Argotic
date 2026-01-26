@@ -173,16 +173,14 @@ public static class BlogMLDocumentExample
     {
         BlogMLDocument document = new BlogMLDocument();
 
-        using (Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Open, FileAccess.Read))
-        {
-            document.Load(stream);
+        using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Open, FileAccess.Read);
+        document.Load(stream);
 
-            foreach (BlogMLPost post in document.Posts)
+        foreach (BlogMLPost post in document.Posts)
+        {
+            if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
             {
-                if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
-                {
-                    //  Perform some processing on the blog post
-                }
+                //  Perform some processing on the blog post
             }
         }
     }
@@ -194,25 +192,21 @@ public static class BlogMLDocumentExample
     {
         BlogMLDocument document = new BlogMLDocument();
 
-        using (Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Open, FileAccess.Read))
+        using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Open, FileAccess.Read);
+        XmlReaderSettings settings  = new XmlReaderSettings
         {
-            XmlReaderSettings settings  = new XmlReaderSettings
-            {
-                IgnoreComments = true,
-                IgnoreWhitespace = true
-            };
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
-            using(XmlReader reader = XmlReader.Create(stream, settings))
-            {
-                document.Load(reader);
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        document.Load(reader);
 
-                foreach (BlogMLPost post in document.Posts)
-                {
-                    if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
-                    {
-                        //  Perform some processing on the blog post
-                    }
-                }
+        foreach (BlogMLPost post in document.Posts)
+        {
+            if (post.ApprovalStatus == BlogMLApprovalStatus.Approved)
+            {
+                //  Perform some processing on the blog post
             }
         }
     }
@@ -245,10 +239,8 @@ public static class BlogMLDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using(Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Create, FileAccess.Write))
-        {
-            document.Save(stream);
-        }
+        using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Create, FileAccess.Write);
+        document.Save(stream);
     }
 
     /// <summary>
@@ -260,17 +252,13 @@ public static class BlogMLDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using (Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Create, FileAccess.Write))
+        using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Create, FileAccess.Write);
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                Indent = true
-            };
+            Indent = true
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                document.Save(writer);
-            }
-        }
+        using XmlWriter writer = XmlWriter.Create(stream, settings);
+        document.Save(writer);
     }
 }

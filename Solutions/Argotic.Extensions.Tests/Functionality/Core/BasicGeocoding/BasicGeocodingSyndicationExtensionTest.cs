@@ -130,8 +130,7 @@ public class BasicGeocodingSyndicationExtensionTest
         XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
-        {
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
 #if false
 				//var document  = new XPathDocument(reader);
 				//var nav = document.CreateNavigator();
@@ -148,10 +147,9 @@ public class BasicGeocodingSyndicationExtensionTest
 				actual = target.Load(reader);
 				Assert.AreEqual(expected, actual);
 #else
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
 #endif
-        }
     }
 
     [TestMethod]
@@ -177,23 +175,21 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
-        using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
-        {
-            RssFeed feed = new RssFeed();
-            feed.Load(reader);
+        using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null);
+        RssFeed feed = new RssFeed();
+        feed.Load(reader);
 
-            //				 Assert.IsTrue(feed.Channel.HasExtensions);
-            //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension,
-            //						 typeof(BasicGeocodingSyndicationExtension));
+        //				 Assert.IsTrue(feed.Channel.HasExtensions);
+        //				 Assert.IsInstanceOfType(feed.Channel.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension,
+        //						 typeof(BasicGeocodingSyndicationExtension));
 
-            Assert.AreEqual(1, feed.Channel.Items.Count());
-            RssItem item = feed.Channel.Items.Single();
-            Assert.IsTrue(item.HasExtensions);
-            BasicGeocodingSyndicationExtension itemExtension = item.FindExtension<BasicGeocodingSyndicationExtension>();
-            Assert.IsNotNull(itemExtension);
-            Assert.IsInstanceOfType(item.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension,
-                typeof(BasicGeocodingSyndicationExtension));
-        }
+        Assert.AreEqual(1, feed.Channel.Items.Count());
+        RssItem item = feed.Channel.Items.Single();
+        Assert.IsTrue(item.HasExtensions);
+        BasicGeocodingSyndicationExtension itemExtension = item.FindExtension<BasicGeocodingSyndicationExtension>();
+        Assert.IsNotNull(itemExtension);
+        Assert.IsInstanceOfType(item.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension,
+            typeof(BasicGeocodingSyndicationExtension));
     }
 
     /// <summary>
@@ -229,14 +225,11 @@ public class BasicGeocodingSyndicationExtensionTest
     public void BasicGeocoding_WriteToTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
-        using(StringWriter sw = new StringWriter())
-        using (XmlWriter writer = new XmlTextWriter(sw))
-        {
-
-            target.WriteTo(writer);
-            string output = sw.ToString();
-            Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
-        }
+        using StringWriter sw = new StringWriter();
+        using XmlWriter writer = new XmlTextWriter(sw);
+        target.WriteTo(writer);
+        string output = sw.ToString();
+        Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
     }
 
     /// <summary>

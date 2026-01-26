@@ -105,16 +105,14 @@ public static class OpmlDocumentExample
     {
         OpmlDocument document   = new OpmlDocument();
 
-        using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read))
-        {
-            document.Load(stream);
+        using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read);
+        document.Load(stream);
 
-            foreach (OpmlOutline outline in document.Outlines)
+        foreach (OpmlOutline outline in document.Outlines)
+        {
+            if (outline.IsSubscriptionListOutline)
             {
-                if (outline.IsSubscriptionListOutline)
-                {
-                    //  Process outline information
-                }
+                //  Process outline information
             }
         }
     }
@@ -126,25 +124,21 @@ public static class OpmlDocumentExample
     {
         OpmlDocument document   = new OpmlDocument();
 
-        using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read))
+        using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read);
+        XmlReaderSettings settings  = new XmlReaderSettings
         {
-            XmlReaderSettings settings  = new XmlReaderSettings
-            {
-                IgnoreComments = true,
-                IgnoreWhitespace = true
-            };
+            IgnoreComments = true,
+            IgnoreWhitespace = true
+        };
 
-            using(XmlReader reader = XmlReader.Create(stream, settings))
-            {
-                document.Load(reader);
+        using XmlReader reader = XmlReader.Create(stream, settings);
+        document.Load(reader);
 
-                foreach (OpmlOutline outline in document.Outlines)
-                {
-                    if (outline.IsSubscriptionListOutline)
-                    {
-                        //  Process outline information
-                    }
-                }
+        foreach (OpmlOutline outline in document.Outlines)
+        {
+            if (outline.IsSubscriptionListOutline)
+            {
+                //  Process outline information
             }
         }
     }
@@ -177,10 +171,8 @@ public static class OpmlDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using(Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write))
-        {
-            document.Save(stream);
-        }
+        using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write);
+        document.Save(stream);
     }
 
     /// <summary>
@@ -192,17 +184,13 @@ public static class OpmlDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using (Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write))
+        using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write);
+        XmlWriterSettings settings  = new XmlWriterSettings
         {
-            XmlWriterSettings settings  = new XmlWriterSettings
-            {
-                Indent = true
-            };
+            Indent = true
+        };
 
-            using(XmlWriter writer = XmlWriter.Create(stream, settings))
-            {
-                document.Save(writer);
-            }
-        }
+        using XmlWriter writer = XmlWriter.Create(stream, settings);
+        document.Save(writer);
     }
 }

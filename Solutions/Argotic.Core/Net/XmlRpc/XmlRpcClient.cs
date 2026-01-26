@@ -632,10 +632,8 @@ public class XmlRpcClient
 
         WebRequest webRequest   = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
-        using (WebResponse webResponse = (WebResponse)webRequest.GetResponse())
-        {
-            response    = new XmlRpcResponse(webResponse);
-        }
+        using WebResponse webResponse = (WebResponse)webRequest.GetResponse();
+        response    = new XmlRpcResponse(webResponse);
 
         return response;
     }

@@ -73,7 +73,7 @@ public class SiteSummaryContentSyndicationExtensionContext
         {
             if (extensionItems == null)
             {
-                extensionItems = new Collection<SiteSummaryContentItem>();
+                extensionItems = [];
             }
             return extensionItems;
         }

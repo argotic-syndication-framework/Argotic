@@ -122,7 +122,7 @@ public class XmlRpcMessage : IComparable
         {
             if (messageParameters == null)
             {
-                messageParameters = new Collection<IXmlRpcValue>();
+                messageParameters = [];
             }
             return messageParameters;
         }

@@ -252,7 +252,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             if (postAttachments == null)
             {
-                postAttachments = new Collection<BlogMLAttachment>();
+                postAttachments = [];
             }
             return postAttachments;
         }
@@ -271,7 +271,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             if (postAuthors == null)
             {
-                postAuthors = new Collection<string>();
+                postAuthors = [];
             }
             return postAuthors;
         }
@@ -290,7 +290,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             if (postCategories == null)
             {
-                postCategories = new Collection<string>();
+                postCategories = [];
             }
             return postCategories;
         }
@@ -306,7 +306,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             if (postComments == null)
             {
-                postComments = new Collection<BlogMLComment>();
+                postComments = [];
             }
             return postComments;
         }
@@ -408,7 +408,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             if (postTrackbacks == null)
             {
-                postTrackbacks = new Collection<BlogMLTrackback>();
+                postTrackbacks = [];
             }
             return postTrackbacks;
         }

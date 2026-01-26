@@ -152,7 +152,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (mediaObjectCategories == null)
             {
-                mediaObjectCategories = new Collection<YahooMediaCategory>();
+                mediaObjectCategories = [];
             }
             return mediaObjectCategories;
         }
@@ -195,7 +195,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (mediaObjectCredits == null)
             {
-                mediaObjectCredits = new Collection<YahooMediaCredit>();
+                mediaObjectCredits = [];
             }
             return mediaObjectCredits;
         }
@@ -237,7 +237,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (mediaObjectHashes == null)
             {
-                mediaObjectHashes = new Collection<YahooMediaHash>();
+                mediaObjectHashes = [];
             }
             return mediaObjectHashes;
         }
@@ -259,7 +259,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (mediaObjectKeywords == null)
             {
-                mediaObjectKeywords = new Collection<string>();
+                mediaObjectKeywords = [];
             }
             return mediaObjectKeywords;
         }
@@ -298,7 +298,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (mediaObjectRatings == null)
             {
-                mediaObjectRatings = new Collection<YahooMediaRating>();
+                mediaObjectRatings = [];
             }
             return mediaObjectRatings;
         }
@@ -317,7 +317,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (mediaObjectRestrictions == null)
             {
-                mediaObjectRestrictions = new Collection<YahooMediaRestriction>();
+                mediaObjectRestrictions = [];
             }
             return mediaObjectRestrictions;
         }
@@ -341,7 +341,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (mediaObjectTextSeries == null)
             {
-                mediaObjectTextSeries = new Collection<YahooMediaText>();
+                mediaObjectTextSeries = [];
             }
             return mediaObjectTextSeries;
         }
@@ -363,7 +363,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (mediaObjectThumbnails == null)
             {
-                mediaObjectThumbnails = new Collection<YahooMediaThumbnail>();
+                mediaObjectThumbnails = [];
             }
             return mediaObjectThumbnails;
         }

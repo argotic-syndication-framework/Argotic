@@ -121,7 +121,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable
         {
             if (supportedSyndicationExtensions == null)
             {
-                supportedSyndicationExtensions = new Collection<Type>();
+                supportedSyndicationExtensions = [];
             }
             return supportedSyndicationExtensions;
         }

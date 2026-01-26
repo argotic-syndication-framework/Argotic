@@ -672,7 +672,7 @@ public class XmlRpcClient
 
         asyncHttpWebRequest = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
-        object[] state      = new object[6] { asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken };
+        object[] state      = [asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncSendCallback), state);
 
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, this.Timeout, true);

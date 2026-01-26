@@ -60,7 +60,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
         {
             if (arrayValues == null)
             {
-                arrayValues = new Collection<IXmlRpcValue>();
+                arrayValues = [];
             }
             return arrayValues;
         }

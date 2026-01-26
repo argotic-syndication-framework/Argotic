@@ -53,7 +53,7 @@ public class ITunesCategory : IComparable
         {
             if (categorySubcategories == null)
             {
-                categorySubcategories = new Collection<ITunesCategory>();
+                categorySubcategories = [];
             }
             return categorySubcategories;
         }

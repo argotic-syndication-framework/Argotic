@@ -188,7 +188,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             if (documentAuthors == null)
             {
-                documentAuthors = new Collection<BlogMLAuthor>();
+                documentAuthors = [];
             }
             return documentAuthors;
         }
@@ -207,7 +207,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             if (documentCategories == null)
             {
-                documentCategories = new Collection<BlogMLCategory>();
+                documentCategories = [];
             }
             return documentCategories;
         }
@@ -633,7 +633,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
             
-        object[] state      = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
+        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
     }

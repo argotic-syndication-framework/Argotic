@@ -52,7 +52,7 @@ public class GenericSyndicationFeed
     /// <summary>
     /// Private member to hold the collection of categories associated with the feed.
     /// </summary>
-    private Collection<GenericSyndicationCategory> feedCategories   = new Collection<GenericSyndicationCategory>();
+    private Collection<GenericSyndicationCategory> feedCategories   = [];
     /// <summary>
     /// Private member to hold the collection of items that comprise the distinct content published in the feed.
     /// </summary>
@@ -109,7 +109,7 @@ public class GenericSyndicationFeed
         {
             if (feedCategories == null)
             {
-                feedCategories = new Collection<GenericSyndicationCategory>();
+                feedCategories = [];
             }
             return feedCategories;
         }
@@ -869,7 +869,7 @@ public class GenericSyndicationFeed
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
             
-        object[] state      = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
+        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);
     }

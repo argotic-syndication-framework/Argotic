@@ -252,7 +252,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
         {
             if (collectionAcceptedMediaRanges == null)
             {
-                collectionAcceptedMediaRanges = new Collection<AtomAcceptedMediaRange>();
+                collectionAcceptedMediaRanges = [];
             }
             return collectionAcceptedMediaRanges;
         }
@@ -274,7 +274,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
         {
             if (collectionCategories == null)
             {
-                collectionCategories = new Collection<AtomCategoryDocument>();
+                collectionCategories = [];
             }
             return collectionCategories;
         }

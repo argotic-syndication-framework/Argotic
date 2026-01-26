@@ -27,7 +27,7 @@ public class GenericSyndicationItem : IComparable
     /// <summary>
     /// Private member to hold the collection of categories associated with the item.
     /// </summary>
-    private Collection<GenericSyndicationCategory> itemCategories   = new Collection<GenericSyndicationCategory>();
+    private Collection<GenericSyndicationCategory> itemCategories   = [];
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
     /// </summary>
@@ -61,7 +61,7 @@ public class GenericSyndicationItem : IComparable
         {
             if (itemCategories == null)
             {
-                itemCategories  = new Collection<GenericSyndicationCategory>();
+                itemCategories  = [];
             }
             return itemCategories;
         }

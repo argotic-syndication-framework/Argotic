@@ -437,7 +437,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         {
             if (mediaObjectCategories == null)
             {
-                mediaObjectCategories = new Collection<YahooMediaCategory>();
+                mediaObjectCategories = [];
             }
             return mediaObjectCategories;
         }
@@ -480,7 +480,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         {
             if (mediaObjectCredits == null)
             {
-                mediaObjectCredits = new Collection<YahooMediaCredit>();
+                mediaObjectCredits = [];
             }
             return mediaObjectCredits;
         }
@@ -522,7 +522,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         {
             if (mediaObjectHashes == null)
             {
-                mediaObjectHashes = new Collection<YahooMediaHash>();
+                mediaObjectHashes = [];
             }
             return mediaObjectHashes;
         }
@@ -544,7 +544,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         {
             if (mediaObjectKeywords == null)
             {
-                mediaObjectKeywords = new Collection<string>();
+                mediaObjectKeywords = [];
             }
             return mediaObjectKeywords;
         }
@@ -583,7 +583,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         {
             if (mediaObjectRatings == null)
             {
-                mediaObjectRatings = new Collection<YahooMediaRating>();
+                mediaObjectRatings = [];
             }
             return mediaObjectRatings;
         }
@@ -602,7 +602,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         {
             if (mediaObjectRestrictions == null)
             {
-                mediaObjectRestrictions = new Collection<YahooMediaRestriction>();
+                mediaObjectRestrictions = [];
             }
             return mediaObjectRestrictions;
         }
@@ -626,7 +626,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         {
             if (mediaObjectTextSeries == null)
             {
-                mediaObjectTextSeries = new Collection<YahooMediaText>();
+                mediaObjectTextSeries = [];
             }
             return mediaObjectTextSeries;
         }
@@ -648,7 +648,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
         {
             if (mediaObjectThumbnails == null)
             {
-                mediaObjectThumbnails = new Collection<YahooMediaThumbnail>();
+                mediaObjectThumbnails = [];
             }
             return mediaObjectThumbnails;
         }

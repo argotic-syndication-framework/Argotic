@@ -371,7 +371,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             if (feedAuthors == null)
             {
-                feedAuthors = new Collection<AtomPersonConstruct>();
+                feedAuthors = [];
             }
             return feedAuthors;
         }
@@ -387,7 +387,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             if (feedCategories == null)
             {
-                feedCategories = new Collection<AtomCategory>();
+                feedCategories = [];
             }
             return feedCategories;
         }
@@ -403,7 +403,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             if (feedContributors == null)
             {
-                feedContributors = new Collection<AtomPersonConstruct>();
+                feedContributors = [];
             }
             return feedContributors;
         }
@@ -531,7 +531,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             if (feedLinks == null)
             {
-                feedLinks = new Collection<AtomLink>();
+                feedLinks = [];
             }
             return feedLinks;
         }
@@ -1105,7 +1105,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-        object[] state      = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
+        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
 
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);

@@ -37,7 +37,7 @@ public class CreativeCommonsSyndicationExtensionContext
         {
             if (extensionLicenses == null)
             {
-                extensionLicenses = new Collection<Uri>();
+                extensionLicenses = [];
             }
             return extensionLicenses;
         }

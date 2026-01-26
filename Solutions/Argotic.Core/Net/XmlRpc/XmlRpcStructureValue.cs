@@ -110,7 +110,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
         {
             if (structureMembers == null)
             {
-                structureMembers = new Collection<XmlRpcStructureMember>();
+                structureMembers = [];
             }
             return structureMembers;
         }

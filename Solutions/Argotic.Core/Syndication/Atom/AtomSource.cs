@@ -209,7 +209,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             if (sourceAuthors == null)
             {
-                sourceAuthors = new Collection<AtomPersonConstruct>();
+                sourceAuthors = [];
             }
             return sourceAuthors;
         }
@@ -225,7 +225,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             if (sourceCategories == null)
             {
-                sourceCategories = new Collection<AtomCategory>();
+                sourceCategories = [];
             }
             return sourceCategories;
         }
@@ -241,7 +241,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             if (sourceContributors == null)
             {
-                sourceContributors = new Collection<AtomPersonConstruct>();
+                sourceContributors = [];
             }
             return sourceContributors;
         }
@@ -311,7 +311,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             if (sourceLinks == null)
             {
-                sourceLinks = new Collection<AtomLink>();
+                sourceLinks = [];
             }
             return sourceLinks;
         }

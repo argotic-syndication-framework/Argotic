@@ -48,7 +48,7 @@ public class PingbackSyndicationExtensionContext
         {
             if (extensionAbouts == null)
             {
-                extensionAbouts = new Collection<Uri>();
+                extensionAbouts = [];
             }
             return extensionAbouts;
         }

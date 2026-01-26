@@ -209,7 +209,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             if (channelCategories == null)
             {
-                channelCategories = new Collection<RssCategory>();
+                channelCategories = [];
             }
             return channelCategories;
         }
@@ -550,7 +550,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             if (channelSkipDays == null)
             {
-                channelSkipDays = new Collection<DayOfWeek>();
+                channelSkipDays = [];
             }
             return channelSkipDays;
         }
@@ -569,7 +569,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             if (channelSkipHours == null)
             {
-                channelSkipHours = new Collection<int>();
+                channelSkipHours = [];
             }
             return channelSkipHours;
         }

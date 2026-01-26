@@ -45,7 +45,7 @@ public class SimpleListSyndicationExtensionContext
         {
             if (extensionGroups == null)
             {
-                extensionGroups = new Collection<SimpleListGroup>();
+                extensionGroups = [];
             }
             return extensionGroups;
         }
@@ -64,7 +64,7 @@ public class SimpleListSyndicationExtensionContext
         {
             if (extensionSorts == null)
             {
-                extensionSorts = new Collection<SimpleListSort>();
+                extensionSorts = [];
             }
             return extensionSorts;
         }

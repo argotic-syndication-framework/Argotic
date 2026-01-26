@@ -101,7 +101,7 @@ public class ITunesSyndicationExtensionContext
         {
             if (extensionCategories == null)
             {
-                extensionCategories = new Collection<ITunesCategory>();
+                extensionCategories = [];
             }
             return extensionCategories;
         }
@@ -193,7 +193,7 @@ public class ITunesSyndicationExtensionContext
         {
             if (extensionKeywords == null)
             {
-                extensionKeywords = new Collection<string>();
+                extensionKeywords = [];
             }
             return extensionKeywords;
         }

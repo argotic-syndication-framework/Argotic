@@ -45,7 +45,7 @@ public class SyndicationExtensionAdapter
     {
         get
         {
-            Collection<Type> extensions = new Collection<Type>();
+            Collection<Type> extensions = [];
 #if true
             foreach(Type type in  Assembly.GetExecutingAssembly()
                         .GetExportedTypes()
@@ -143,7 +143,7 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
     public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types)
     {
-        Collection<ISyndicationExtension> extensions    = new Collection<ISyndicationExtension>();
+        Collection<ISyndicationExtension> extensions    = [];
         Guard.ArgumentNotNull(types, "types");
 
         foreach(Type type in types)
@@ -177,7 +177,7 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="namespaces"/> is a null reference.</exception>
     public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types, Dictionary<string, string> namespaces)
     {
-        Collection<ISyndicationExtension> supportedExtensions   = new Collection<ISyndicationExtension>();
+        Collection<ISyndicationExtension> supportedExtensions   = [];
         Guard.ArgumentNotNull(types, "types");
         Guard.ArgumentNotNull(namespaces, "namespaces");
 
@@ -274,7 +274,7 @@ public class SyndicationExtensionAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public void Fill(IExtensibleSyndicationObject entity, XmlNamespaceManager manager)
     {
-        Collection<ISyndicationExtension> extensions    = new Collection<ISyndicationExtension>();
+        Collection<ISyndicationExtension> extensions    = [];
         Guard.ArgumentNotNull(entity, "entity");
         Guard.ArgumentNotNull(manager, "manager");
 

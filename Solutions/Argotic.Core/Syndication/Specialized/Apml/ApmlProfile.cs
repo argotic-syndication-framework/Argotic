@@ -101,7 +101,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         {
             if (profileExplicitConcepts == null)
             {
-                profileExplicitConcepts = new Collection<ApmlConcept>();
+                profileExplicitConcepts = [];
             }
             return profileExplicitConcepts;
         }
@@ -117,7 +117,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         {
             if (profileExplicitSources == null)
             {
-                profileExplicitSources = new Collection<ApmlSource>();
+                profileExplicitSources = [];
             }
             return profileExplicitSources;
         }
@@ -133,7 +133,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         {
             if (profileImplicitConcepts == null)
             {
-                profileImplicitConcepts = new Collection<ApmlConcept>();
+                profileImplicitConcepts = [];
             }
             return profileImplicitConcepts;
         }
@@ -149,7 +149,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
         {
             if (profileImplicitSources == null)
             {
-                profileImplicitSources = new Collection<ApmlSource>();
+                profileImplicitSources = [];
             }
             return profileImplicitSources;
         }

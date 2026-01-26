@@ -143,7 +143,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
         {
             if (headExpansionState == null)
             {
-                headExpansionState = new Collection<int>();
+                headExpansionState = [];
             }
             return headExpansionState;
         }

@@ -92,7 +92,7 @@ public class SiteSummarySlashSyndicationExtensionContext
         {
             if (extensionHitParade == null)
             {
-                extensionHitParade = new Collection<int>();
+                extensionHitParade = [];
             }
             return extensionHitParade;
         }

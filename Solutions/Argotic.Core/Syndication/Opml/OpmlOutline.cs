@@ -152,7 +152,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         {
             if (outlineCategories == null)
             {
-                outlineCategories = new Collection<string>();
+                outlineCategories = [];
             }
             return outlineCategories;
         }
@@ -281,7 +281,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         {
             if (outlineSubordinateOutlines == null)
             {
-                outlineSubordinateOutlines = new Collection<OpmlOutline>();
+                outlineSubordinateOutlines = [];
             }
             return outlineSubordinateOutlines;
         }

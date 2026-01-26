@@ -100,7 +100,7 @@ public class FeedSynchronizationItem : IComparable
         {
             if (synchronizationConflicts == null)
             {
-                synchronizationConflicts = new Collection<XPathNavigator>();
+                synchronizationConflicts = [];
             }
             return synchronizationConflicts;
         }
@@ -119,7 +119,7 @@ public class FeedSynchronizationItem : IComparable
         {
             if (synchronizationHistories == null)
             {
-                synchronizationHistories = new Collection<FeedSynchronizationHistory>();
+                synchronizationHistories = [];
             }
             return synchronizationHistories;
         }

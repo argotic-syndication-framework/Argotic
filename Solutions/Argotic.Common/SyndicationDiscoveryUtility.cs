@@ -285,7 +285,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<Uri> ExtractUrls(string content)
     {
-        Collection<Uri> results = new Collection<Uri>();
+        Collection<Uri> results = [];
         Regex linkPattern       = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
         Regex anchorPattern     = new Regex("<a[^>]+", RegexOptions.IgnoreCase);
 
@@ -724,7 +724,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
     {
-        Collection<DiscoverableSyndicationEndpoint> results = new Collection<DiscoverableSyndicationEndpoint>();
+        Collection<DiscoverableSyndicationEndpoint> results = [];
         Regex linkPattern                                   = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
 
         Guard.ArgumentNotNullOrEmptyString(content, "content");
@@ -841,7 +841,7 @@ public static class SyndicationDiscoveryUtility
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
         if (webResponse == null)
         {
-            return new Collection<DiscoverableSyndicationEndpoint>();
+            return [];
         }
 
         using Stream stream = webResponse.GetResponseStream();
@@ -1236,7 +1236,7 @@ public static class SyndicationDiscoveryUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
-        Collection<TrackbackDiscoveryMetadata> results  = new Collection<TrackbackDiscoveryMetadata>();
+        Collection<TrackbackDiscoveryMetadata> results  = [];
         Regex rdfPattern                                = new Regex("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         XmlNamespaceManager manager                     = new XmlNamespaceManager(new NameTable());
 
@@ -1442,7 +1442,7 @@ public static class SyndicationDiscoveryUtility
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new WebRequestOptions(credentials));
         if (webResponse == null)
         {
-            return new Collection<TrackbackDiscoveryMetadata>();
+            return [];
         }
 
         using Stream stream = webResponse.GetResponseStream();

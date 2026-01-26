@@ -76,7 +76,7 @@ public class FeedHistorySyndicationExtensionContext
         {
             if (extensionLinkRelations == null)
             {
-                extensionLinkRelations = new Collection<FeedHistoryLinkRelation>();
+                extensionLinkRelations = [];
             }
 
             return extensionLinkRelations;

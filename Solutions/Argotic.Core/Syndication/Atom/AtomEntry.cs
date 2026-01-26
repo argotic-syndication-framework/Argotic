@@ -270,7 +270,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         {
             if (entryAuthors == null)
             {
-                entryAuthors = new Collection<AtomPersonConstruct>();
+                entryAuthors = [];
             }
             return entryAuthors;
         }
@@ -286,7 +286,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         {
             if (entryCategories == null)
             {
-                entryCategories = new Collection<AtomCategory>();
+                entryCategories = [];
             }
             return entryCategories;
         }
@@ -319,7 +319,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         {
             if (entryContributors == null)
             {
-                entryContributors = new Collection<AtomPersonConstruct>();
+                entryContributors = [];
             }
             return entryContributors;
         }
@@ -379,7 +379,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         {
             if (entryLinks == null)
             {
-                entryLinks = new Collection<AtomLink>();
+                entryLinks = [];
             }
             return entryLinks;
         }
@@ -823,7 +823,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         asyncHttpWebRequest         = SyndicationEncodingUtility.CreateWebRequest(source, options);
         asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
 
-        object[] state      = new object[6] { asyncHttpWebRequest, this, source, settings, options, userToken };
+        object[] state      = [asyncHttpWebRequest, this, source, settings, options, userToken];
         IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new AsyncCallback(AsyncLoadCallback), state);
 
         ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new WaitOrTimerCallback(AsyncTimeoutCallback), state, settings.Timeout, true);

@@ -169,7 +169,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
         {
             if (sourceAuthors == null)
             {
-                sourceAuthors = new Collection<ApmlAuthor>();
+                sourceAuthors = [];
             }
             return sourceAuthors;
         }

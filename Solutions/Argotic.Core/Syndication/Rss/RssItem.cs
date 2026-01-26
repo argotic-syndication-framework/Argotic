@@ -160,7 +160,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             if (itemCategories == null)
             {
-                itemCategories = new Collection<RssCategory>();
+                itemCategories = [];
             }
             return itemCategories;
         }
@@ -238,7 +238,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             if (itemEnclosures == null)
             {
-                itemEnclosures = new Collection<RssEnclosure>();
+                itemEnclosures = [];
             }
             return itemEnclosures;
         }

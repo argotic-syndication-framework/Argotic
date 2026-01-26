@@ -116,20 +116,20 @@ public class BasicGeocodingSyndicationExtensionTest
 
         using XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc);
 #if false
-				//var document  = new XPathDocument(reader);
-				//var nav = document.CreateNavigator();
-				//nav.Select("//item");
-				do
-				{
-					if (!reader.Read())
-						break;
-				} while (reader.NodeType != XmlNodeType.EndElement || reader.Name != "webMaster");
+                //var document  = new XPathDocument(reader);
+                //var nav = document.CreateNavigator();
+                //nav.Select("//item");
+                do
+                {
+                    if (!reader.Read())
+                        break;
+                } while (reader.NodeType != XmlNodeType.EndElement || reader.Name != "webMaster");
 
-				
-				bool expected = true;
-				bool actual;
-				actual = target.Load(reader);
-				Assert.AreEqual(expected, actual);
+                
+                bool expected = true;
+                bool actual;
+                actual = target.Load(reader);
+                Assert.AreEqual(expected, actual);
 #else
         RssFeed feed = new RssFeed();
         feed.Load(reader);

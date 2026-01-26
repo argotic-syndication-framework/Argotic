@@ -133,8 +133,7 @@ public class YahooMediaPlayer : IComparable
 
             if (!String.IsNullOrEmpty(urlAttribute))
             {
-                Uri url;
-                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.Url    = url;
                     wasLoaded   = true;
@@ -143,8 +142,7 @@ public class YahooMediaPlayer : IComparable
 
             if (!String.IsNullOrEmpty(heightAttribute))
             {
-                int height;
-                if (Int32.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out height))
+                if (Int32.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
                 {
                     this.Height = height;
                     wasLoaded   = true;
@@ -153,8 +151,7 @@ public class YahooMediaPlayer : IComparable
 
             if (!String.IsNullOrEmpty(widthAttribute))
             {
-                int width;
-                if (Int32.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out width))
+                if (Int32.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
                 {
                     this.Width  = width;
                     wasLoaded   = true;

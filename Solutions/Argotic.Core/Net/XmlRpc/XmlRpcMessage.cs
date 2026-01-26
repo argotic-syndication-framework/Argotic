@@ -211,8 +211,7 @@ public class XmlRpcMessage : IComparable
                 {
                     while (valueIterator.MoveNext())
                     {
-                        IXmlRpcValue value;
-                        if (XmlRpcClient.TryParseValue(valueIterator.Current, out value))
+                        if (XmlRpcClient.TryParseValue(valueIterator.Current, out IXmlRpcValue value))
                         {
                             this.Parameters.Add(value);
                             wasLoaded   = true;

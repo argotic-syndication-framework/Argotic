@@ -490,8 +490,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 this.Link       = link;
                 wasLoaded       = true;
@@ -506,8 +505,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (commentsNavigator != null)
         {
-            Uri comments;
-            if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out comments))
+            if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri comments))
             {
                 this.Comments   = comments;
                 wasLoaded       = true;
@@ -526,8 +524,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (publicationNavigator != null)
         {
-            DateTime publicationDate;
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out publicationDate))
+            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out DateTime publicationDate))
             {
                 this.PublicationDate    = publicationDate;
                 wasLoaded               = true;
@@ -613,8 +610,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 this.Link       = link;
                 wasLoaded       = true;
@@ -628,8 +624,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (commentsNavigator != null)
         {
-            Uri comments;
-            if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out comments))
+            if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri comments))
             {
                 this.Comments   = comments;
                 wasLoaded       = true;
@@ -648,8 +643,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         if (publicationNavigator != null)
         {
-            DateTime publicationDate;
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out publicationDate))
+            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out DateTime publicationDate))
             {
                 this.PublicationDate    = publicationDate;
                 wasLoaded               = true;

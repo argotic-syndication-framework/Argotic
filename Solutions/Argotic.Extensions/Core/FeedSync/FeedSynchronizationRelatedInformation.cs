@@ -232,8 +232,7 @@ public class FeedSynchronizationRelatedInformation : IComparable
 
             if (!String.IsNullOrEmpty(linkAttribute))
             {
-                Uri link;
-                if (Uri.TryCreate(linkAttribute, UriKind.Absolute, out link))
+                if (Uri.TryCreate(linkAttribute, UriKind.Absolute, out Uri link))
                 {
                     this.Link   = link;
                     wasLoaded   = true;

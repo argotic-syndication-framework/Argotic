@@ -93,8 +93,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 channel.Link    = link;
             }
@@ -181,8 +180,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (skipHoursIterator.MoveNext())
             {
-                int hour;
-                if (Int32.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hour))
+                if (Int32.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
                     hour    = hour - 1; // Convert to zero-based range
 
@@ -227,8 +225,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
                 if (linkNavigator != null)
                 {
-                    Uri link;
-                    if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+                    if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
                     {
                         item.Link       = link;
                     }
@@ -290,8 +287,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (publicationNavigator != null)
         {
-            DateTime publicationDate;
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out publicationDate))
+            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out DateTime publicationDate))
             {
                 channel.PublicationDate = publicationDate;
             }
@@ -299,8 +295,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (lastBuildDateNavigator != null)
         {
-            DateTime lastBuildDate;
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(lastBuildDateNavigator.Value, out lastBuildDate))
+            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(lastBuildDateNavigator.Value, out DateTime lastBuildDate))
             {
                 channel.LastBuildDate   = lastBuildDate;
             }
@@ -341,8 +336,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 image.Link      = link;
             }
@@ -356,8 +350,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         }
         if (urlNavigator != null)
         {
-            Uri url;
-            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out url))
+            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
             {
                 image.Url       = url;
             }
@@ -369,16 +362,14 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         }
         if (heightNavigator != null)
         {
-            int height;
-            if (Int32.TryParse(heightNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out height))
+            if (Int32.TryParse(heightNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
             {
                 image.Height    = height < RssImage.HeightMaximum ? height : RssImage.HeightMaximum;
             }
         }
         if (widthNavigator != null)
         {
-            int width;
-            if (Int32.TryParse(widthNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out width))
+            if (Int32.TryParse(widthNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
             {
                 image.Width     = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
             }
@@ -420,8 +411,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         }
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 textInput.Link          = link;
             }

@@ -301,8 +301,7 @@ public static class SyndicationDiscoveryUtility
 
             if (linkAttributes.ContainsKey("HREF"))
             {
-                Uri uri;
-                if (Uri.TryCreate((string)linkAttributes["HREF"], UriKind.RelativeOrAbsolute, out uri))
+                if (Uri.TryCreate((string)linkAttributes["HREF"], UriKind.RelativeOrAbsolute, out Uri uri))
                 {
                     results.Add(uri);
                 }
@@ -317,8 +316,7 @@ public static class SyndicationDiscoveryUtility
 
             if (anchorAttributes.ContainsKey("HREF"))
             {
-                Uri uri;
-                if (Uri.TryCreate((string)anchorAttributes["HREF"], UriKind.RelativeOrAbsolute, out uri))
+                if (Uri.TryCreate((string)anchorAttributes["HREF"], UriKind.RelativeOrAbsolute, out Uri uri))
                 {
                     results.Add(uri);
                 }
@@ -518,9 +516,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials)
     {
-        HttpWebResponse response    = null;
-
-        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, credentials, out response))
+        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, credentials, out HttpWebResponse response))
         {
             return response;
         }
@@ -561,9 +557,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options)
     {
-        HttpWebResponse response    = null;
-
-        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, options, out response))
+        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, options, out HttpWebResponse response))
         {
             return response;
         }
@@ -759,8 +753,7 @@ public static class SyndicationDiscoveryUtility
 
                 if (String.Compare(rel, "alternate", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    Uri url;
-                    if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out url))
+                    if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri url))
                     {
                         DiscoverableSyndicationEndpoint endpoint    = new DiscoverableSyndicationEndpoint();
                         endpoint.Source                             = url;
@@ -1218,8 +1211,7 @@ public static class SyndicationDiscoveryUtility
 
                     if (String.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
                     {
-                        Uri url;
-                        if(Uri.TryCreate(value, UriKind.Absolute, out url))
+                        if(Uri.TryCreate(value, UriKind.Absolute, out Uri url))
                         {
                             pingbackXmlRpcServer    = url;
                         }
@@ -1236,8 +1228,7 @@ public static class SyndicationDiscoveryUtility
 
                     if (link != null)
                     {
-                        Uri href;
-                        if (Uri.TryCreate(link.HRef, UriKind.Absolute, out href))
+                        if (Uri.TryCreate(link.HRef, UriKind.Absolute, out Uri href))
                         {
                             pingbackXmlRpcServer    = href;
                         }

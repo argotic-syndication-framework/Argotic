@@ -257,8 +257,7 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(lengthAttribute))
             {
-                long length;
-                if (Int64.TryParse(lengthAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out length))
+                if (Int64.TryParse(lengthAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out long length))
                 {
                     if (length >= 0)
                     {
@@ -280,8 +279,7 @@ public class RssEnclosure : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(urlAttribute))
             {
-                Uri url;
-                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.Url        = url;
                     wasLoaded       = true;

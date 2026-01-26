@@ -417,8 +417,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
                 break;
 
             case XmlRpcScalarValueType.Boolean:
-                bool boolean;
-                if (XmlRpcClient.TryParseBoolean(scalar, out boolean))
+                if (XmlRpcClient.TryParseBoolean(scalar, out bool boolean))
                 {
                     result  = boolean;
                 }

@@ -211,8 +211,7 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(urlAttribute))
             {
-                Uri url;
-                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.Url        = url;
                     wasLoaded       = true;

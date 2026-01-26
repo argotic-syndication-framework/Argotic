@@ -83,8 +83,7 @@ public class WellFormedWebCommentsSyndicationExtensionContext
 
             if (commentNavigator != null)
             {
-                Uri comments;
-                if (Uri.TryCreate(commentNavigator.Value, UriKind.RelativeOrAbsolute, out comments))
+                if (Uri.TryCreate(commentNavigator.Value, UriKind.RelativeOrAbsolute, out Uri comments))
                 {
                     this.Comments   = comments;
                     wasLoaded       = true;
@@ -99,8 +98,7 @@ public class WellFormedWebCommentsSyndicationExtensionContext
 
             if (commentRssNavigator != null)
             {
-                Uri commentsFeed;
-                if (Uri.TryCreate(commentRssNavigator.Value, UriKind.RelativeOrAbsolute, out commentsFeed))
+                if (Uri.TryCreate(commentRssNavigator.Value, UriKind.RelativeOrAbsolute, out Uri commentsFeed))
                 {
                     this.CommentsFeed   = commentsFeed;
                     wasLoaded           = true;

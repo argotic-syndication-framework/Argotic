@@ -422,8 +422,7 @@ public class XmlRpcClient
             {
                 if (String.Compare(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    int scalar;
-                    if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out scalar))
+                    if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
                     {
                         value   = new XmlRpcScalarValue(scalar);
                         return true;
@@ -431,8 +430,7 @@ public class XmlRpcClient
                 }
                 else if (String.Compare(navigator.Name, "int", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    int scalar;
-                    if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out scalar))
+                    if (Int32.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
                     {
                         value   = new XmlRpcScalarValue(scalar);
                         return true;
@@ -440,8 +438,7 @@ public class XmlRpcClient
                 }
                 else if (String.Compare(navigator.Name, "boolean", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    bool scalar;
-                    if (XmlRpcClient.TryParseBoolean(navigator.Value, out scalar))
+                    if (XmlRpcClient.TryParseBoolean(navigator.Value, out bool scalar))
                     {
                         value   = new XmlRpcScalarValue(scalar);
                         return true;
@@ -454,8 +451,7 @@ public class XmlRpcClient
                 }
                 else if (String.Compare(navigator.Name, "double", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    double scalar;
-                    if (Double.TryParse(navigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out scalar))
+                    if (Double.TryParse(navigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out double scalar))
                     {
                         value   = new XmlRpcScalarValue(scalar);
                         return true;
@@ -463,8 +459,7 @@ public class XmlRpcClient
                 }
                 else if (String.Compare(navigator.Name, "dateTime.iso8601", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    DateTime scalar;
-                    if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(navigator.Value, out scalar))
+                    if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(navigator.Value, out DateTime scalar))
                     {
                         value   = new XmlRpcScalarValue(scalar);
                         return true;

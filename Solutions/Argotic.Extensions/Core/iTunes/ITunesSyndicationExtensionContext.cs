@@ -447,8 +447,7 @@ public class ITunesSyndicationExtensionContext
 
             if (newFeedUrlNavigator != null)
             {
-                Uri newFeedUrl;
-                if (Uri.TryCreate(newFeedUrlNavigator.Value, UriKind.RelativeOrAbsolute, out newFeedUrl))
+                if (Uri.TryCreate(newFeedUrlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri newFeedUrl))
                 {
                     this.NewFeedUrl = newFeedUrl;
                     wasLoaded       = true;
@@ -533,9 +532,7 @@ public class ITunesSyndicationExtensionContext
                 string hrefAttribute    = imageNavigator.GetAttribute("href", String.Empty);
                 if (!String.IsNullOrEmpty(hrefAttribute))
                 {
-                    Uri image;
-
-                    if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out image))
+                    if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri image))
                     {
                         this.Image  = image;
                         wasLoaded   = true;
@@ -579,15 +576,13 @@ public class ITunesSyndicationExtensionContext
 
         if (!value.Contains(":"))
         {
-            int totalSeconds;
-            if (Int32.TryParse(value, out totalSeconds))
+            if (Int32.TryParse(value, out int totalSeconds))
             {
                 timeSpan    = new TimeSpan(0, 0, totalSeconds);
             }
             else
             {
-                TimeSpan duration;
-                if (TimeSpan.TryParse(value, out duration))
+                if (TimeSpan.TryParse(value, out TimeSpan duration))
                 {
                     timeSpan    = duration;
                 }
@@ -599,32 +594,24 @@ public class ITunesSyndicationExtensionContext
 
             if (durationParts.Length == 2)
             {
-                int minutes;
-                int seconds;
-
-                if (Int32.TryParse(durationParts[0], out minutes) && Int32.TryParse(durationParts[1], out seconds))
+                if (Int32.TryParse(durationParts[0], out int minutes) && Int32.TryParse(durationParts[1], out int seconds))
                 {
                     timeSpan    = new TimeSpan(0, minutes, seconds);
                 }
             }
             else if (durationParts.Length >= 3)
             {
-                int hours;
-                int minutes;
-                int seconds;
-
                 string hoursValue   = durationParts[0];
                 string minutesValue = durationParts[1];
                 string secondsValue = durationParts[2];
 
-                if (Int32.TryParse(hoursValue, out hours) && Int32.TryParse(minutesValue, out minutes) && Int32.TryParse(secondsValue, out seconds))
+                if (Int32.TryParse(hoursValue, out int hours) && Int32.TryParse(minutesValue, out int minutes) && Int32.TryParse(secondsValue, out int seconds))
                 {
                     timeSpan    = new TimeSpan(hours, minutes, seconds);
                 }
                 else
                 {
-                    TimeSpan duration;
-                    if (TimeSpan.TryParse(value, out duration))
+                    if (TimeSpan.TryParse(value, out TimeSpan duration))
                     {
                         timeSpan    = duration;
                     }

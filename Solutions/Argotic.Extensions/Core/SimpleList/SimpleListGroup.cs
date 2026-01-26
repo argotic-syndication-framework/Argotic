@@ -143,8 +143,7 @@ public class SimpleListGroup : IComparable
 
             if (!String.IsNullOrEmpty(namespaceAttribute))
             {
-                Uri elementNamespace;
-                if (Uri.TryCreate(namespaceAttribute, UriKind.RelativeOrAbsolute, out elementNamespace))
+                if (Uri.TryCreate(namespaceAttribute, UriKind.RelativeOrAbsolute, out Uri elementNamespace))
                 {
                     this.Namespace  = elementNamespace;
                     wasLoaded       = true;

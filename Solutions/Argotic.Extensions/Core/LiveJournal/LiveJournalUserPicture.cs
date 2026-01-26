@@ -165,8 +165,7 @@ public class LiveJournalUserPicture : IComparable
 
             if (urlNavigator != null)
             {
-                Uri url;
-                if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.Url    = url;
                     wasLoaded   = true;
@@ -181,8 +180,7 @@ public class LiveJournalUserPicture : IComparable
 
             if (widthNavigator != null)
             {
-                int width;
-                if (Int32.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out width))
+                if (Int32.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int width))
                 {
                     if (width > 100)
                     {
@@ -195,8 +193,7 @@ public class LiveJournalUserPicture : IComparable
 
             if (heightNavigator != null)
             {
-                int height;
-                if (Int32.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out height))
+                if (Int32.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int height))
                 {
                     if (height > 100)
                     {

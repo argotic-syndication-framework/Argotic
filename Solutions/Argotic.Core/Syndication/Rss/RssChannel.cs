@@ -811,8 +811,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 this.Link       = link;
                 wasLoaded       = true;
@@ -1071,8 +1070,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             while (skipHoursIterator.MoveNext())
             {
-                int hour;
-                if (Int32.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hour))
+                if (Int32.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
                     if (!this.SkipHours.Contains(hour) && (hour >= 0 && hour <= 23))
                     {
@@ -1190,8 +1188,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         if (lastBuildDateNavigator != null)
         {
-            DateTime lastBuildDate;
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(lastBuildDateNavigator.Value, out lastBuildDate))
+            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(lastBuildDateNavigator.Value, out DateTime lastBuildDate))
             {
                 this.LastBuildDate  = lastBuildDate;
                 wasLoaded           = true;
@@ -1206,8 +1203,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         if (publicationNavigator != null)
         {
-            DateTime publicationDate;
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out publicationDate))
+            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out DateTime publicationDate))
             {
                 this.PublicationDate    = publicationDate;
                 wasLoaded               = true;
@@ -1232,8 +1228,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
 
         if (timeToLiveNavigator != null)
         {
-            int timeToLive;
-            if (Int32.TryParse(timeToLiveNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out timeToLive))
+            if (Int32.TryParse(timeToLiveNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int timeToLive))
             {
                 this.TimeToLive     = timeToLive;
                 wasLoaded           = true;
@@ -1281,8 +1276,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
                         string hrefAttribute    = atomLinkIterator.Current.GetAttribute("href", String.Empty);
                         if (!String.IsNullOrEmpty(hrefAttribute))
                         {
-                            Uri atomLink;
-                            if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out atomLink))
+                            if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri atomLink))
                             {
                                 this.SelfLink   = atomLink;
                                 wasLoaded       = true;

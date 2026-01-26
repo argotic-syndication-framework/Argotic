@@ -179,8 +179,7 @@ public class XmlRpcResponse : IComparable
                 XPathNavigator valueNavigator   = parametersNavigator.SelectSingleNode("param/value");
                 if (valueNavigator != null)
                 {
-                    IXmlRpcValue value;
-                    if (XmlRpcClient.TryParseValue(valueNavigator, out value))
+                    if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue value))
                     {
                         responseParameter   = value;
                         wasLoaded           = true;

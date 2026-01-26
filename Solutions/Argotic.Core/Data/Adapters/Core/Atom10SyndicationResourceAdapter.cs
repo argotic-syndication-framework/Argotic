@@ -91,8 +91,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (updatedNavigator != null)
             {
-                DateTime updatedOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out updatedOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out DateTime updatedOn))
                 {
                     resource.UpdatedOn  = updatedOn;
                 }
@@ -146,8 +145,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (updatedNavigator != null)
         {
-            DateTime updatedOn;
-            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out updatedOn))
+            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out DateTime updatedOn))
             {
                 entry.UpdatedOn = updatedOn;
             }
@@ -270,8 +268,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (publishedNavigator != null)
         {
-            DateTime publishedOn;
-            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(publishedNavigator.Value, out publishedOn))
+            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(publishedNavigator.Value, out DateTime publishedOn))
             {
                 entry.PublishedOn   = publishedOn;
             }

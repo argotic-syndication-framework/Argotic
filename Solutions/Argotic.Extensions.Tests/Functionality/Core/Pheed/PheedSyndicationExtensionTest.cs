@@ -99,10 +99,10 @@ public class PheedSyndicationExtensionTest
     public void Pheed_LoadTest()
     {
         PheedSyndicationExtension target = new PheedSyndicationExtension(); // TODO: Initialize to an appropriate value
-        var nt = new NameTable();
-        var ns = new XmlNamespaceManager(nt);
-        var xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        NameTable nt = new NameTable();
+        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
+        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc))
         {
@@ -114,12 +114,12 @@ public class PheedSyndicationExtensionTest
     [TestMethod]
     public void Pheed_CreateXmlTest()
     {
-        var pheed = new PheedSyndicationExtension();
+        PheedSyndicationExtension pheed = new PheedSyndicationExtension();
 
         pheed.Context.Source = new Uri("http://www.example.com");
         pheed.Context.Thumbnail = new Uri("http://www.example.com/thumbnail.jpg");
 
-        var actual = ExtensionTestUtil.AddExtensionToXml(pheed);
+        string actual = ExtensionTestUtil.AddExtensionToXml(pheed);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
         Assert.AreEqual(expected, actual);
     }
@@ -127,16 +127,16 @@ public class PheedSyndicationExtensionTest
     [TestMethod]
     public void Pheed_FullTest()
     {
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
         {
             RssFeed feed = new RssFeed();
             feed.Load(reader);
             Assert.AreEqual(1, feed.Channel.Items.Count());
-            var item = feed.Channel.Items.Single();
+            RssItem item = feed.Channel.Items.Single();
             Assert.IsTrue(item.HasExtensions);
-            var itemExtension = item.FindExtension<PheedSyndicationExtension>();
+            PheedSyndicationExtension itemExtension = item.FindExtension<PheedSyndicationExtension>();
             Assert.IsNotNull(itemExtension);
             Assert.IsInstanceOfType(
                 item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension,
@@ -178,12 +178,12 @@ public class PheedSyndicationExtensionTest
     public void Pheed_WriteToTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
-        using (var sw = new StringWriter())
+        using (StringWriter sw = new StringWriter())
         using (XmlWriter writer = new XmlTextWriter(sw))
         {
 
             target.WriteTo(writer);
-            var output = sw.ToString();
+            string output = sw.ToString();
             Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
         }
     }
@@ -264,14 +264,14 @@ public class PheedSyndicationExtensionTest
         PheedSyndicationExtensionContext actual;
         //			target.Context = expected;
         actual = target.Context;
-        var b = actual.Equals(expected);
+        bool b = actual.Equals(expected);
         Assert.AreEqual(expected, actual);
         Assert.Inconclusive("Verify the correctness of this test method.");
     }
 
     private PheedSyndicationExtension CreateExtension1()
     {
-        var nyc = new PheedSyndicationExtension();
+        PheedSyndicationExtension nyc = new PheedSyndicationExtension();
         nyc.Context.Source = new Uri("http://www.example.com");
         nyc.Context.Thumbnail = new Uri("http://www.example.com/thumbnail.jpg");
 
@@ -280,7 +280,7 @@ public class PheedSyndicationExtensionTest
 
     private PheedSyndicationExtension CreateExtension2()
     {
-        var nyc = new PheedSyndicationExtension();
+        PheedSyndicationExtension nyc = new PheedSyndicationExtension();
         nyc.Context.Source = new Uri("http://www.example.net");
         nyc.Context.Thumbnail = new Uri("http://www.example.net/thumbnail.png");
 
@@ -289,7 +289,7 @@ public class PheedSyndicationExtensionTest
 
     public static PheedSyndicationExtensionContext CreateContext1()
     {
-        var nyc = new PheedSyndicationExtensionContext();
+        PheedSyndicationExtensionContext nyc = new PheedSyndicationExtensionContext();
         nyc.Source = new Uri("http://www.example.com");
         nyc.Thumbnail = new Uri("http://www.example.com/thumbnail.jpg");
 

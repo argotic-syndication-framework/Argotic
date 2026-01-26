@@ -983,8 +983,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!String.IsNullOrEmpty(urlAttribute))
             {
-                Uri url;
-                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.Url    = url;
                     wasLoaded   = true;
@@ -993,8 +992,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!String.IsNullOrEmpty(fileSizeAttribute))
             {
-                long fileSize;
-                if (Int64.TryParse(fileSizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out fileSize))
+                if (Int64.TryParse(fileSizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long fileSize))
                 {
                     this.FileSize   = fileSize;
                     wasLoaded       = true;
@@ -1043,8 +1041,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!String.IsNullOrEmpty(bitrateAttribute))
             {
-                int bitrate;
-                if (Int32.TryParse(bitrateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out bitrate))
+                if (Int32.TryParse(bitrateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int bitrate))
                 {
                     this.Bitrate    = bitrate;
                     wasLoaded       = true;
@@ -1080,8 +1077,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!String.IsNullOrEmpty(frameRateAttribute))
             {
-                int frameRate;
-                if (Int32.TryParse(frameRateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out frameRate))
+                if (Int32.TryParse(frameRateAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frameRate))
                 {
                     this.FrameRate  = frameRate;
                     wasLoaded       = true;
@@ -1090,8 +1086,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!String.IsNullOrEmpty(samplingRateAttribute))
             {
-                decimal samplingRate;
-                if (Decimal.TryParse(samplingRateAttribute, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out samplingRate))
+                if (Decimal.TryParse(samplingRateAttribute, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal samplingRate))
                 {
                     this.SamplingRate   = samplingRate;
                     wasLoaded           = true;
@@ -1100,8 +1095,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!String.IsNullOrEmpty(channelsAttribute))
             {
-                int channels;
-                if (Int32.TryParse(channelsAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out channels))
+                if (Int32.TryParse(channelsAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int channels))
                 {
                     this.Channels   = channels;
                     wasLoaded       = true;
@@ -1110,14 +1104,12 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!String.IsNullOrEmpty(durationAttribute))
             {
-                int seconds;
-                TimeSpan duration;
-                if (Int32.TryParse(durationAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out seconds))
+                if (Int32.TryParse(durationAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int seconds))
                 {
                     this.Duration   = new TimeSpan(0, 0, seconds);
                     wasLoaded       = true;
                 }
-                else if (TimeSpan.TryParse(durationAttribute, out duration))
+                else if (TimeSpan.TryParse(durationAttribute, out TimeSpan duration))
                 {
                     this.Duration   = duration;
                     wasLoaded       = true;
@@ -1126,8 +1118,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!String.IsNullOrEmpty(heightAttribute))
             {
-                int height;
-                if (Int32.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out height))
+                if (Int32.TryParse(heightAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int height))
                 {
                     this.Height = height;
                     wasLoaded   = true;
@@ -1136,8 +1127,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!String.IsNullOrEmpty(widthAttribute))
             {
-                int width;
-                if (Int32.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out width))
+                if (Int32.TryParse(widthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int width))
                 {
                     this.Width  = width;
                     wasLoaded   = true;

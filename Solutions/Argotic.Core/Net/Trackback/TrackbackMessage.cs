@@ -207,8 +207,7 @@ public class TrackbackMessage : IComparable
             {
                 if (String.Compare(parameterName, "url", StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    Uri url;
-                    if (Uri.TryCreate(source[parameterName], UriKind.RelativeOrAbsolute, out url))
+                    if (Uri.TryCreate(source[parameterName], UriKind.RelativeOrAbsolute, out Uri url))
                     {
                         this.Permalink  = url;
                         wasLoaded       = true;

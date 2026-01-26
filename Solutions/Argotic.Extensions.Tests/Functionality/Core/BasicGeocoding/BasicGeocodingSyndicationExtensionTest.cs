@@ -125,10 +125,10 @@ public class BasicGeocodingSyndicationExtensionTest
     public void BasicGeocoding_LoadTest()
     {
         BasicGeocodingSyndicationExtension target = new BasicGeocodingSyndicationExtension(); // TODO: Initialize to an appropriate value
-        var nt = new NameTable();
-        var ns = new XmlNamespaceManager(nt);
-        var xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        NameTable nt = new NameTable();
+        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
+        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
         {
@@ -157,11 +157,11 @@ public class BasicGeocodingSyndicationExtensionTest
     [TestMethod]
     public void BasicGeocoding_CreateXmlTest()
     {
-        var geo = new BasicGeocodingSyndicationExtension();
+        BasicGeocodingSyndicationExtension geo = new BasicGeocodingSyndicationExtension();
         geo.Context.Latitude = 41.0m;
         geo.Context.Longitude = -74.12m;
 
-        var actual = ExtensionTestUtil.AddExtensionToXml(geo);
+        string actual = ExtensionTestUtil.AddExtensionToXml(geo);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
         Assert.AreEqual(expected, actual);
     }
@@ -170,7 +170,7 @@ public class BasicGeocodingSyndicationExtensionTest
     [TestMethod]
     public void BasicGeocoding_FullTest()
     {
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
         {
@@ -182,9 +182,9 @@ public class BasicGeocodingSyndicationExtensionTest
             //						 typeof(BasicGeocodingSyndicationExtension));
 
             Assert.AreEqual(1, feed.Channel.Items.Count());
-            var item = feed.Channel.Items.Single();
+            RssItem item = feed.Channel.Items.Single();
             Assert.IsTrue(item.HasExtensions);
-            var itemExtension = item.FindExtension<BasicGeocodingSyndicationExtension>();
+            BasicGeocodingSyndicationExtension itemExtension = item.FindExtension<BasicGeocodingSyndicationExtension>();
             Assert.IsNotNull(itemExtension);
             Assert.IsInstanceOfType(item.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension,
                 typeof(BasicGeocodingSyndicationExtension));
@@ -224,12 +224,12 @@ public class BasicGeocodingSyndicationExtensionTest
     public void BasicGeocoding_WriteToTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
-        using(var sw = new StringWriter())
+        using(StringWriter sw = new StringWriter())
         using (XmlWriter writer = new XmlTextWriter(sw))
         {
 
             target.WriteTo(writer);
-            var output = sw.ToString();
+            string output = sw.ToString();
             Assert.AreEqual(nycText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
         }
     }
@@ -310,21 +310,21 @@ public class BasicGeocodingSyndicationExtensionTest
         BasicGeocodingSyndicationExtensionContext actual;
 //			target.Context = expected;
         actual = target.Context;
-        var b = actual.Equals(expected);
+        bool b = actual.Equals(expected);
         Assert.AreEqual(expected, actual);
         Assert.Inconclusive("Verify the correctness of this test method.");
     }
 
     private BasicGeocodingSyndicationExtension CreateExtension1()
     {
-        var nyc = new BasicGeocodingSyndicationExtension();
+        BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension();
         nyc.Context.Latitude = 40;
         nyc.Context.Longitude = -74;
         return nyc;
     }
     private BasicGeocodingSyndicationExtension CreateExtension2()
     {
-        var nyc = new BasicGeocodingSyndicationExtension();
+        BasicGeocodingSyndicationExtension nyc = new BasicGeocodingSyndicationExtension();
         nyc.Context.Latitude = 43;
         nyc.Context.Longitude = -80;
         return nyc;
@@ -332,7 +332,7 @@ public class BasicGeocodingSyndicationExtensionTest
 
     public static BasicGeocodingSyndicationExtensionContext CreateContext1()
     {
-        var nyc = new BasicGeocodingSyndicationExtensionContext();
+        BasicGeocodingSyndicationExtensionContext nyc = new BasicGeocodingSyndicationExtensionContext();
         nyc.Latitude = 40;
         nyc.Longitude = -74;
         return nyc;

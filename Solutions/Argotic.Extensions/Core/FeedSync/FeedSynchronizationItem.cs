@@ -449,8 +449,7 @@ public class FeedSynchronizationItem : IComparable
 
             if (!String.IsNullOrEmpty(updatesAttribute))
             {
-                int updates;
-                if (Int32.TryParse(updatesAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out updates))
+                if (Int32.TryParse(updatesAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int updates))
                 {
                     this.Updates    = updates;
                     wasLoaded       = true;

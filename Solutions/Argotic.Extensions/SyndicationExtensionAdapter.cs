@@ -47,7 +47,7 @@ public class SyndicationExtensionAdapter
         {
             Collection<Type> extensions = new Collection<Type>();
 #if true
-            foreach(var type in  Assembly.GetExecutingAssembly()
+            foreach(Type type in  Assembly.GetExecutingAssembly()
                         .GetExportedTypes()
                         .Where(t => typeof(SyndicationExtension).IsAssignableFrom(t) && t != typeof(SyndicationExtension)))
                 extensions.Add(type);

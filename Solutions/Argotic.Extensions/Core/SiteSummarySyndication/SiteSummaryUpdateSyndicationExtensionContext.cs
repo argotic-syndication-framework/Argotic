@@ -126,8 +126,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
 
             if (updateFrequencyNavigator != null)
             {
-                int frequency;
-                if (Int32.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out frequency))
+                if (Int32.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frequency))
                 {
                     this.Frequency  = frequency;
                     wasLoaded       = true;
@@ -136,8 +135,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
 
             if (updateBaseNavigator != null)
             {
-                DateTime updateBase;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updateBaseNavigator.Value, out updateBase))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updateBaseNavigator.Value, out DateTime updateBase))
                 {
                     this.Base   = updateBase;
                     wasLoaded   = true;

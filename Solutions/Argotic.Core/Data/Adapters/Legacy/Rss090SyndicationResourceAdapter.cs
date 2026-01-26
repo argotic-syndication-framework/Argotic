@@ -92,8 +92,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
                 if (linkNavigator != null)
                 {
-                    Uri link;
-                    if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+                    if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
                     {
                         item.Link   = link;
                     }
@@ -139,8 +138,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 channel.Link    = link;
             }
@@ -179,8 +177,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 image.Link      = link;
             }
@@ -196,8 +193,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (urlNavigator != null)
         {
-            Uri url;
-            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out url))
+            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
             {
                 image.Url       = url;
             }
@@ -240,8 +236,7 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 textInput.Link          = link;
             }

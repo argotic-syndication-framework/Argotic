@@ -96,10 +96,10 @@ public class FeedRankSyndicationExtensionTest
     public void FeedRank_LoadTest()
     {
         FeedRankSyndicationExtension target = new FeedRankSyndicationExtension(); // TODO: Initialize to an appropriate value
-        var nt = new NameTable();
-        var ns = new XmlNamespaceManager(nt);
-        var xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        NameTable nt = new NameTable();
+        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
+        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc))
         {
@@ -128,9 +128,9 @@ public class FeedRankSyndicationExtensionTest
     [TestMethod]
     public void FeedRank_CreateXmlTest()
     {
-        var re = CreateExtension1();
+        FeedRankSyndicationExtension re = CreateExtension1();
 
-        var actual = ExtensionTestUtil.AddExtensionToXml(re);
+        string actual = ExtensionTestUtil.AddExtensionToXml(re);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
         Assert.AreEqual(expected, actual);
     }
@@ -139,7 +139,7 @@ public class FeedRankSyndicationExtensionTest
     [TestMethod]
     public void FeedRank_FullTest()
     {
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
         {
@@ -151,9 +151,9 @@ public class FeedRankSyndicationExtensionTest
             //						 typeof(FeedRankSyndicationExtension));
 
             Assert.AreEqual(1, feed.Channel.Items.Count());
-            var item = feed.Channel.Items.Single();
+            RssItem item = feed.Channel.Items.Single();
             Assert.IsTrue(item.HasExtensions);
-            var itemExtension = item.FindExtension<FeedRankSyndicationExtension>();
+            FeedRankSyndicationExtension itemExtension = item.FindExtension<FeedRankSyndicationExtension>();
             Assert.IsNotNull(itemExtension);
             Assert.IsInstanceOfType(
                 item.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension,
@@ -194,11 +194,11 @@ public class FeedRankSyndicationExtensionTest
     public void FeedRank_WriteToTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
-        using (var sw = new StringWriter())
+        using (StringWriter sw = new StringWriter())
         using (XmlWriter writer = new XmlTextWriter(sw))
         {
             target.WriteTo(writer);
-            var output = sw.ToString();
+            string output = sw.ToString();
             Assert.AreEqual(writeToText.Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
         }
     }
@@ -279,14 +279,14 @@ public class FeedRankSyndicationExtensionTest
         FeedRankSyndicationExtensionContext actual;
         //			target.Context = expected;
         actual = target.Context;
-        var b = actual.Equals(expected);
+        bool b = actual.Equals(expected);
         Assert.AreEqual(expected, actual);
         Assert.Inconclusive("Verify the correctness of this test method.");
     }
 
     private FeedRankSyndicationExtension CreateExtension1()
     {
-        var re = new FeedRankSyndicationExtension();
+        FeedRankSyndicationExtension re = new FeedRankSyndicationExtension();
         re.Context.Domain = new Uri("http://example.com");
         re.Context.Label = "Title";
         re.Context.Scheme = new Uri("http://example.com/scheme.txt");
@@ -296,7 +296,7 @@ public class FeedRankSyndicationExtensionTest
 
     private FeedRankSyndicationExtension CreateExtension2()
     {
-        var re = new FeedRankSyndicationExtension();
+        FeedRankSyndicationExtension re = new FeedRankSyndicationExtension();
         re.Context.Domain = new Uri("http://example.net");
         re.Context.Label = "label";
         re.Context.Scheme = new Uri("http://example.net/scheme.html");
@@ -306,7 +306,7 @@ public class FeedRankSyndicationExtensionTest
 
     public static FeedRankSyndicationExtensionContext CreateContext1()
     {
-        var re = new FeedRankSyndicationExtensionContext();
+        FeedRankSyndicationExtensionContext re = new FeedRankSyndicationExtensionContext();
         re.Domain = new Uri("");
         re.Label = "";
         re.Scheme = new Uri("");

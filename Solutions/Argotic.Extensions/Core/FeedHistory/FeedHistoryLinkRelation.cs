@@ -98,8 +98,7 @@ public class FeedHistoryLinkRelation : IComparable
 
             if (!String.IsNullOrEmpty(hrefAttribute))
             {
-                Uri href;
-                if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out href))
+                if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                 {
                     this.Uri        = href;
                     wasLoaded       = true;

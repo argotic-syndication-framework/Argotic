@@ -23,11 +23,9 @@ public static class SyndicationDateTimeUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
     public static DateTime ParseRfc3339DateTime(string value)
     {
-        DateTime result = DateTime.MinValue;
-
         Guard.ArgumentNotNullOrEmptyString(value, "value");
 
-        if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(value, out result))
+        if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(value, out DateTime result))
         {
             return result;
         }
@@ -207,11 +205,9 @@ public static class SyndicationDateTimeUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
     public static DateTime ParseRfc822DateTime(string value)
     {
-        DateTime result = DateTime.MinValue;
-
         Guard.ArgumentNotNullOrEmptyString(value, "value");
 
-        if (SyndicationDateTimeUtility.TryParseRfc822DateTime(value, out result))
+        if (SyndicationDateTimeUtility.TryParseRfc822DateTime(value, out DateTime result))
         {
             return result;
         }

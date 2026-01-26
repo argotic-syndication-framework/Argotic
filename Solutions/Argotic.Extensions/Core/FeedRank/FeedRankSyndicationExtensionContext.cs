@@ -149,8 +149,7 @@ public class FeedRankSyndicationExtensionContext
 
                     if (!String.IsNullOrEmpty(schemeAttribute))
                     {
-                        Uri scheme;
-                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
+                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                         {
                             this.Scheme = scheme;
                             wasLoaded   = true;
@@ -159,8 +158,7 @@ public class FeedRankSyndicationExtensionContext
 
                     if (!String.IsNullOrEmpty(domainAttribute))
                     {
-                        Uri domain;
-                        if (Uri.TryCreate(domainAttribute, UriKind.RelativeOrAbsolute, out domain))
+                        if (Uri.TryCreate(domainAttribute, UriKind.RelativeOrAbsolute, out Uri domain))
                         {
                             this.Domain = domain;
                             wasLoaded   = true;
@@ -176,8 +174,7 @@ public class FeedRankSyndicationExtensionContext
 
                 if (!String.IsNullOrEmpty(rankNavigator.Value))
                 {
-                    decimal value;
-                    if (Decimal.TryParse(rankNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out value))
+                    if (Decimal.TryParse(rankNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal value))
                     {
                         this.Value  = value;
                         wasLoaded   = true;

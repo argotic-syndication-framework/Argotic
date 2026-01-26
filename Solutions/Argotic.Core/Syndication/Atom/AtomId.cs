@@ -308,8 +308,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
         }
         if (!String.IsNullOrEmpty(source.Value))
         {
-            Uri uri;
-            if (Uri.TryCreate(source.Value, UriKind.Absolute, out uri))
+            if (Uri.TryCreate(source.Value, UriKind.Absolute, out Uri uri))
             {
                 this.Uri    = uri;
                 wasLoaded   = true;

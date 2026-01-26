@@ -40,9 +40,9 @@ public class GenericSyndicationFeedTest
     public void TestCustomXmlNamespace()
     {
         //   xmlns:content=""http://purl.org/rss/1.0/modules/content/""
-        var xml = @"<rss xmlns:app=""http:/example.com"" version=""2.0""></rss>";
+        string xml = @"<rss xmlns:app=""http:/example.com"" version=""2.0""></rss>";
 
-        var feed = new GenericSyndicationFeed();
+        GenericSyndicationFeed feed = new GenericSyndicationFeed();
 
         feed.Load(xml);
         Assert.AreNotSame(new GenericSyndicationFeed(), feed);

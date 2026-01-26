@@ -130,8 +130,7 @@ public class BlogChannelSyndicationExtensionContext
 
             if (blogRollNavigator != null)
             {
-                Uri blogRoll;
-                if (Uri.TryCreate(blogRollNavigator.Value, UriKind.RelativeOrAbsolute, out blogRoll))
+                if (Uri.TryCreate(blogRollNavigator.Value, UriKind.RelativeOrAbsolute, out Uri blogRoll))
                 {
                     this.BlogRoll   = blogRoll;
                     wasLoaded       = true;
@@ -140,8 +139,7 @@ public class BlogChannelSyndicationExtensionContext
 
             if (mySubscriptionsNavigator != null)
             {
-                Uri mySubscriptions;
-                if (Uri.TryCreate(mySubscriptionsNavigator.Value, UriKind.RelativeOrAbsolute, out mySubscriptions))
+                if (Uri.TryCreate(mySubscriptionsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri mySubscriptions))
                 {
                     this.MySubscriptions    = mySubscriptions;
                     wasLoaded               = true;
@@ -150,8 +148,7 @@ public class BlogChannelSyndicationExtensionContext
 
             if (blinkNavigator != null)
             {
-                Uri blink;
-                if (Uri.TryCreate(blinkNavigator.Value, UriKind.RelativeOrAbsolute, out blink))
+                if (Uri.TryCreate(blinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri blink))
                 {
                     this.Blink  = blink;
                     wasLoaded   = true;
@@ -160,8 +157,7 @@ public class BlogChannelSyndicationExtensionContext
 
             if (changesNavigator != null)
             {
-                Uri changes;
-                if (Uri.TryCreate(changesNavigator.Value, UriKind.RelativeOrAbsolute, out changes))
+                if (Uri.TryCreate(changesNavigator.Value, UriKind.RelativeOrAbsolute, out Uri changes))
                 {
                     this.Changes    = changes;
                     wasLoaded       = true;

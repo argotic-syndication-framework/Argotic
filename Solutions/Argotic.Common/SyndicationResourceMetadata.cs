@@ -608,9 +608,6 @@ public class SyndicationResourceMetadata : IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
     private void Load(XPathNavigator resource)
     {
-        XPathNavigator navigator    = null;
-        Version version             = null;
-
         Guard.ArgumentNotNull(resource, "resource");
 
         Dictionary<string, string> namespaces   = (Dictionary<string, string>)resource.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -621,7 +618,7 @@ public class SyndicationResourceMetadata : IComparable
 
         resourceVersion     = SyndicationResourceMetadata.GetVersionFromAttribute(resource, "version");
 
-        if (SyndicationResourceMetadata.TryParseApmlResource(resource, out navigator, out version))
+        if (SyndicationResourceMetadata.TryParseApmlResource(resource, out XPathNavigator navigator, out Version version))
         {
             resourceFormat      = SyndicationContentFormat.Apml;
             resourceRootNode    = navigator;

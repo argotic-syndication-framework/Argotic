@@ -62,8 +62,7 @@ public class CreativeCommonsSyndicationExtensionContext
             {
                 while (licenseIterator.MoveNext())
                 {
-                    Uri license;
-                    if (Uri.TryCreate(licenseIterator.Current.Value, UriKind.RelativeOrAbsolute, out license))
+                    if (Uri.TryCreate(licenseIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri license))
                     {
                         this.Licenses.Add(license);
                         wasLoaded   = true;

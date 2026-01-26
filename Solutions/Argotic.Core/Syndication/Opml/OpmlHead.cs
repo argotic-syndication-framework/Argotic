@@ -344,8 +344,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
 
         if (dateCreatedNavigator != null)
         {
-            DateTime createdOn;
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(dateCreatedNavigator.Value, out createdOn))
+            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(dateCreatedNavigator.Value, out DateTime createdOn))
             {
                 this.CreatedOn  = createdOn;
                 wasLoaded       = true;
@@ -354,8 +353,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
 
         if (dateModifiedNavigator != null)
         {
-            DateTime modifiedOn;
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(dateModifiedNavigator.Value, out modifiedOn))
+            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(dateModifiedNavigator.Value, out DateTime modifiedOn))
             {
                 this.ModifiedOn = modifiedOn;
                 wasLoaded       = true;
@@ -375,8 +373,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
                 string[] expansionStates    = expansionStateNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 foreach (string expansionState in expansionStates)
                 {
-                    int state;
-                    if (Int32.TryParse(expansionState.Trim(), System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out state))
+                    if (Int32.TryParse(expansionState.Trim(), System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int state))
                     {
                         this.ExpansionState.Add(state);
                         wasLoaded   = true;
@@ -385,8 +382,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             }
             else
             {
-                int expansionState;
-                if (Int32.TryParse(expansionStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out expansionState))
+                if (Int32.TryParse(expansionStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int expansionState))
                 {
                     this.ExpansionState.Add(expansionState);
                     wasLoaded                   = true;
@@ -396,8 +392,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
 
         if (verticalScrollStateNavigator != null)
         {
-            int verticalScrollState;
-            if (Int32.TryParse(verticalScrollStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out verticalScrollState))
+            if (Int32.TryParse(verticalScrollStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int verticalScrollState))
             {
                 this.VerticalScrollState    = verticalScrollState;
                 wasLoaded                   = true;

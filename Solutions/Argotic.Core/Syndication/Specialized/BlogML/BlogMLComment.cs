@@ -381,8 +381,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
 
             if (!String.IsNullOrEmpty(userUrlAttribute))
             {
-                Uri url;
-                if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.UserUrl    = url;
                     wasLoaded       = true;
@@ -450,8 +449,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
 
             if (!String.IsNullOrEmpty(userUrlAttribute))
             {
-                Uri url;
-                if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(userUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.UserUrl    = url;
                     wasLoaded       = true;

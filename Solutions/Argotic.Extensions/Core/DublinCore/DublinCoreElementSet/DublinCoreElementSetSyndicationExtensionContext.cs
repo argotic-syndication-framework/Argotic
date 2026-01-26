@@ -634,8 +634,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
 
         if (dateNavigator != null)
         {
-            DateTime date;
-            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateNavigator.Value, out date))
+            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateNavigator.Value, out DateTime date))
             {
                 this.Date   = date;
                 wasLoaded   = true;

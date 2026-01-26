@@ -69,8 +69,7 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (engineLinkNavigator != null)
             {
-                Uri link;
-                if (Uri.TryCreate(engineLinkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+                if (Uri.TryCreate(engineLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
                 {
                     resource.EngineLink = link;
                 }
@@ -78,8 +77,7 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (homePageLinkNavigator != null)
             {
-                Uri homepage;
-                if (Uri.TryCreate(homePageLinkNavigator.Value, UriKind.RelativeOrAbsolute, out homepage))
+                if (Uri.TryCreate(homePageLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri homepage))
                 {
                     resource.Homepage   = homepage;
                 }

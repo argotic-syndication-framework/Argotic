@@ -302,8 +302,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
 
         if (uriNavigator != null)
         {
-            Uri uri;
-            if (Uri.TryCreate(uriNavigator.Value, UriKind.RelativeOrAbsolute, out uri))
+            if (Uri.TryCreate(uriNavigator.Value, UriKind.RelativeOrAbsolute, out Uri uri))
             {
                 this.Uri        = uri;
                 wasLoaded       = true;

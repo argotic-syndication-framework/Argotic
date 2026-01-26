@@ -83,8 +83,7 @@ public class LiveJournalMood : IComparable
             string idAttribute  = source.GetAttribute("id", String.Empty);
             if (!String.IsNullOrEmpty(idAttribute))
             {
-                int id;
-                if (Int32.TryParse(idAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out id))
+                if (Int32.TryParse(idAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int id))
                 {
                     this.Id     = id;
                     wasLoaded   = true;

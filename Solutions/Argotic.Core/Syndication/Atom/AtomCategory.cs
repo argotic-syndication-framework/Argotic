@@ -317,8 +317,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable, IExtensibl
 
             if (!String.IsNullOrEmpty(schemeAttribute))
             {
-                Uri scheme;
-                if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
+                if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                 {
                     this.Scheme = scheme;
                     wasLoaded   = true;

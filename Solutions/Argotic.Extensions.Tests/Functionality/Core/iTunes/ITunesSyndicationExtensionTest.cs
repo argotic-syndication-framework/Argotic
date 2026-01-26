@@ -86,7 +86,7 @@ public class ITunesSyndicationExtensionTest
     [TestMethod()]
     public void ITunes_ExplicitMaterialAsStringTest()
     {
-        var value = ITunesExplicitMaterial.Clean;
+        ITunesExplicitMaterial value = ITunesExplicitMaterial.Clean;
         string expected = "clean";
         string actual = ITunesSyndicationExtension.ExplicitMaterialAsString(value);
         Assert.AreEqual(expected, actual);
@@ -98,8 +98,8 @@ public class ITunesSyndicationExtensionTest
     [TestMethod()]
     public void ITunes_ExplicitMaterialByNameTest()
     {
-        var expected = ITunesExplicitMaterial.Clean;
-        var actual = ITunesSyndicationExtension.ExplicitMaterialByName("clean");
+        ITunesExplicitMaterial expected = ITunesExplicitMaterial.Clean;
+        ITunesExplicitMaterial actual = ITunesSyndicationExtension.ExplicitMaterialByName("clean");
         Assert.AreEqual((double)expected, (double)actual, 3e-6);
     }
 
@@ -137,10 +137,10 @@ public class ITunesSyndicationExtensionTest
     public void ITunes_LoadTest()
     {
         ITunesSyndicationExtension target = new ITunesSyndicationExtension(); // TODO: Initialize to an appropriate value
-        var nt = new NameTable();
-        var ns = new XmlNamespaceManager(nt);
-        var xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        NameTable nt = new NameTable();
+        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
+        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Default);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc))
         {
@@ -152,9 +152,9 @@ public class ITunesSyndicationExtensionTest
     [TestMethod]
     public void ITunes_CreateXmlTest()
     {
-        var itunes = CreateExtension1();
+        ITunesSyndicationExtension itunes = CreateExtension1();
 
-        var actual = ExtensionTestUtil.AddExtensionToXml(itunes);
+        string actual = ExtensionTestUtil.AddExtensionToXml(itunes);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
         Assert.AreEqual(expected, actual);
     }
@@ -163,7 +163,7 @@ public class ITunesSyndicationExtensionTest
     [TestMethod]
     public void ITunes_FullTest()
     {
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
         {
@@ -175,9 +175,9 @@ public class ITunesSyndicationExtensionTest
             //						 typeof(ITunesSyndicationExtension));
 
             Assert.AreEqual(1, feed.Channel.Items.Count());
-            var item = feed.Channel.Items.Single();
+            RssItem item = feed.Channel.Items.Single();
             Assert.IsTrue(item.HasExtensions);
-            var itemExtension = item.FindExtension<ITunesSyndicationExtension>();
+            ITunesSyndicationExtension itemExtension = item.FindExtension<ITunesSyndicationExtension>();
             Assert.IsNotNull(itemExtension);
             Assert.IsInstanceOfType(
                 item.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension,
@@ -218,13 +218,13 @@ public class ITunesSyndicationExtensionTest
     [TestMethod()]
     public void ITunes_WriteToTest()
     {
-        using (var sw = new StringWriter())
+        using (StringWriter sw = new StringWriter())
         using (XmlWriter writer = new XmlTextWriter(sw))
         {
 
-            var target = CreateExtension1();
+            ITunesSyndicationExtension target = CreateExtension1();
             target.WriteTo(writer);
-            var output = sw.ToString();
+            string output = sw.ToString();
             Assert.AreEqual(nycText.Replace(Environment.NewLine + "  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
         }
     }
@@ -305,14 +305,14 @@ public class ITunesSyndicationExtensionTest
         ITunesSyndicationExtensionContext actual;
         //			target.Context = expected;
         actual = target.Context;
-        var b = actual.Equals(expected);
+        bool b = actual.Equals(expected);
         Assert.AreEqual(expected, actual);
         Assert.Inconclusive("Verify the correctness of this test method.");
     }
 
     private ITunesSyndicationExtension CreateExtension1()
     {
-        var nyc = new ITunesSyndicationExtension();
+        ITunesSyndicationExtension nyc = new ITunesSyndicationExtension();
 
         nyc.Context.Author = "BigStar";
         nyc.Context.Categories.Add(new ITunesCategory("Rock"));
@@ -333,7 +333,7 @@ public class ITunesSyndicationExtensionTest
 
     private ITunesSyndicationExtension CreateExtension2()
     {
-        var nyc = new ITunesSyndicationExtension();
+        ITunesSyndicationExtension nyc = new ITunesSyndicationExtension();
         nyc.Context.Author = "NewStar";
         nyc.Context.Categories.Add(new ITunesCategory("Dance"));
         nyc.Context.Categories.Add(new ITunesCategory("Funk"));
@@ -352,7 +352,7 @@ public class ITunesSyndicationExtensionTest
 
     public static ITunesSyndicationExtensionContext CreateContext1()
     {
-        var nyc = new ITunesSyndicationExtensionContext();
+        ITunesSyndicationExtensionContext nyc = new ITunesSyndicationExtensionContext();
         //nyc.Latitude = 40;
         //nyc.Longitude = -74;
         return nyc;

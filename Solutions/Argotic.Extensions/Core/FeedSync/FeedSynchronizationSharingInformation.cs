@@ -263,8 +263,7 @@ public class FeedSynchronizationSharingInformation : IComparable
 
             if (!String.IsNullOrEmpty(expiresAttribute))
             {
-                DateTime expiresOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(expiresAttribute, out expiresOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(expiresAttribute, out DateTime expiresOn))
                 {
                     this.ExpiresOn  = expiresOn;
                     wasLoaded       = true;

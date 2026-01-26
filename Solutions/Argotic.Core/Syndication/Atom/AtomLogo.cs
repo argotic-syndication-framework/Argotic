@@ -238,8 +238,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         }
         if (!String.IsNullOrEmpty(source.Value))
         {
-            Uri uri;
-            if (Uri.TryCreate(source.Value, UriKind.RelativeOrAbsolute, out uri))
+            if (Uri.TryCreate(source.Value, UriKind.RelativeOrAbsolute, out Uri uri))
             {
                 this.Uri    = uri;
                 wasLoaded   = true;

@@ -2037,8 +2037,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
 
             if (createdNavigator != null)
             {
-                DateTime createdOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(createdNavigator.Value, out createdOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(createdNavigator.Value, out DateTime createdOn))
                 {
                     this.DateCreated    = createdOn;
                     wasLoaded           = true;
@@ -2053,8 +2052,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
 
             if (dateNavigator != null)
             {
-                DateTime date;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateNavigator.Value, out date))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateNavigator.Value, out DateTime date))
                 {
                     this.Date   = date;
                     wasLoaded   = true;
@@ -2063,8 +2061,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
 
             if (dateAcceptedNavigator != null)
             {
-                DateTime dateAccepted;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateAcceptedNavigator.Value, out dateAccepted))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateAcceptedNavigator.Value, out DateTime dateAccepted))
                 {
                     this.DateAccepted   = dateAccepted;
                     wasLoaded           = true;
@@ -2073,8 +2070,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
 
             if (dateCopyrightedNavigator != null)
             {
-                DateTime dateCopyrighted;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCopyrightedNavigator.Value, out dateCopyrighted))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCopyrightedNavigator.Value, out DateTime dateCopyrighted))
                 {
                     this.DateCopyrighted    = dateCopyrighted;
                     wasLoaded               = true;
@@ -2083,8 +2079,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
 
             if (dateSubmittedNavigator != null)
             {
-                DateTime dateSubmitted;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateSubmittedNavigator.Value, out dateSubmitted))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateSubmittedNavigator.Value, out DateTime dateSubmitted))
                 {
                     this.DateSubmitted  = dateSubmitted;
                     wasLoaded           = true;
@@ -2237,8 +2232,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
 
             if (issuedNavigator != null)
             {
-                DateTime issuedOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(issuedNavigator.Value, out issuedOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(issuedNavigator.Value, out DateTime issuedOn))
                 {
                     this.DateIssued = issuedOn;
                     wasLoaded       = true;
@@ -2285,8 +2279,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
 
             if (modifiedNavigator != null)
             {
-                DateTime modifiedOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(modifiedNavigator.Value, out modifiedOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(modifiedNavigator.Value, out DateTime modifiedOn))
                 {
                     this.DateModified   = modifiedOn;
                     wasLoaded           = true;

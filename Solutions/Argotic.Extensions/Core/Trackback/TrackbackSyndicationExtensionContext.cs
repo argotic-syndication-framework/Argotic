@@ -90,8 +90,7 @@ public class TrackbackSyndicationExtensionContext
 
             if (pingNavigator != null)
             {
-                Uri ping;
-                if (Uri.TryCreate(pingNavigator.Value, UriKind.RelativeOrAbsolute, out ping))
+                if (Uri.TryCreate(pingNavigator.Value, UriKind.RelativeOrAbsolute, out Uri ping))
                 {
                     this.Ping   = ping;
                     wasLoaded   = true;
@@ -102,8 +101,7 @@ public class TrackbackSyndicationExtensionContext
             {
                 while (aboutIterator.MoveNext())
                 {
-                    Uri about;
-                    if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out about))
+                    if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri about))
                     {
                         this.Abouts.Add(about);
                         wasLoaded   = true;

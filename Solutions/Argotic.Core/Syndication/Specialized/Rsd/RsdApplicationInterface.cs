@@ -366,8 +366,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(preferredAttribute))
             {
-                bool isPreferred;
-                if (Boolean.TryParse(preferredAttribute, out isPreferred))
+                if (Boolean.TryParse(preferredAttribute, out bool isPreferred))
                 {
                     this.IsPreferred    = isPreferred;
                     wasLoaded           = true;
@@ -376,8 +375,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(apiLinkAttribute))
             {
-                Uri link;
-                if (Uri.TryCreate(apiLinkAttribute, UriKind.RelativeOrAbsolute, out link))
+                if (Uri.TryCreate(apiLinkAttribute, UriKind.RelativeOrAbsolute, out Uri link))
                 {
                     this.Link   = link;
                     wasLoaded   = true;
@@ -403,8 +401,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
 
                 if (docsNavigator != null)
                 {
-                    Uri documentation;
-                    if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out documentation))
+                    if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri documentation))
                     {
                         this.Documentation  = documentation;
                         wasLoaded           = true;

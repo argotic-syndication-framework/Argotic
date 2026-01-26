@@ -166,8 +166,7 @@ public class OpmlOwner : IComparable
 
         if (ownerIdNavigator != null)
         {
-            Uri id;
-            if (Uri.TryCreate(ownerIdNavigator.Value, UriKind.RelativeOrAbsolute, out id))
+            if (Uri.TryCreate(ownerIdNavigator.Value, UriKind.RelativeOrAbsolute, out Uri id))
             {
                 this.Id     = id;
                 wasLoaded   = true;

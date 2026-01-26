@@ -74,7 +74,6 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         string minutesPart  = String.Empty;
         string secondsPart  = String.Empty;
         decimal multiplier  = (decimal)60;
-        decimal fractionalValue;
 
         string degreesAsString  = value.ToString(NumberFormatInfo.InvariantInfo);
 			
@@ -85,7 +84,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
             {
                 degreesPart = degreesParts[0];
 
-                if (Decimal.TryParse("." + degreesParts[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out fractionalValue))
+                if (Decimal.TryParse("." + degreesParts[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal fractionalValue))
                 {
                     decimal minutes = Decimal.Multiply(fractionalValue, multiplier);
 
@@ -121,9 +120,6 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <seealso cref="ConvertDecimalToDegreesMinutesSeconds(decimal)"/>
     public static decimal ConvertDegreesMinutesSecondsToDecimal(string degreesMinutesSeconds)
     {
-        decimal degrees;
-        decimal minutes;
-        decimal seconds;
         Guard.ArgumentNotNullOrEmptyString(degreesMinutesSeconds, "degreesMinutesSeconds");
         if (!degreesMinutesSeconds.Contains("°"))
         {
@@ -146,15 +142,15 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         secondsValue        = secondsValue.Replace("N", String.Empty).Replace("S", String.Empty).Replace("E", String.Empty).Replace("W", String.Empty);
         secondsValue        = secondsValue.Trim();
 
-        if (!Decimal.TryParse(degreesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out degrees))
+        if (!Decimal.TryParse(degreesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal degrees))
         {
             throw new FormatException(String.Format(null, "The supplied degrees of {0} does not represent an integer.", degreesValue));
         }
-        if (!Decimal.TryParse(minutesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out minutes))
+        if (!Decimal.TryParse(minutesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal minutes))
         {
             throw new FormatException(String.Format(null, "The supplied minutes of {0} does not represent an integer.", minutesValue));
         }
-        if (!Decimal.TryParse(secondsValue, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out seconds))
+        if (!Decimal.TryParse(secondsValue, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal seconds))
         {
             throw new FormatException(String.Format(null, "The supplied seconds of {0} does not represent a floating point number.", secondsValue));
         }

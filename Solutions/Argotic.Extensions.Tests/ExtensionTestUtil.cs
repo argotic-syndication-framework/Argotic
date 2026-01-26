@@ -26,8 +26,8 @@ internal static class ExtensionTestUtil
         //			firstItem.AddExtension(geo);
         item.AddExtension(ext);
 
-        using (var sw = new StringWriter())
-        using (var tw = new XmlTextWriter(sw))
+        using (StringWriter sw = new StringWriter())
+        using (XmlTextWriter tw = new XmlTextWriter(sw))
         {
             feed.Save(tw);
             return sw.ToString();

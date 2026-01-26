@@ -512,8 +512,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (updatedNavigator != null)
         {
-            DateTime updatedOn;
-            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out updatedOn))
+            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out DateTime updatedOn))
             {
                 this.UpdatedOn  = updatedOn;
                 wasLoaded       = true;

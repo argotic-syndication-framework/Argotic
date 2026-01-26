@@ -156,8 +156,7 @@ public class SiteSummarySlashSyndicationExtensionContext
 
             if (commentsNavigator != null)
             {
-                int comments;
-                if (Int32.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out comments))
+                if (Int32.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int comments))
                 {
                     this.Comments   = comments;
                     wasLoaded       = true;
@@ -173,8 +172,7 @@ public class SiteSummarySlashSyndicationExtensionContext
                     {
                         foreach(string identifier in identifiers)
                         {
-                            int paradeId;
-                            if (Int32.TryParse(identifier, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out paradeId))
+                            if (Int32.TryParse(identifier, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int paradeId))
                             {
                                 this.HitParade.Add(paradeId);
                                 wasLoaded   = true;
@@ -184,8 +182,7 @@ public class SiteSummarySlashSyndicationExtensionContext
                 }
                 else
                 {
-                    int hitParade;
-                    if (Int32.TryParse(hitParadeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out hitParade))
+                    if (Int32.TryParse(hitParadeNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hitParade))
                     {
                         this.HitParade.Add(hitParade);
                         wasLoaded   = true;

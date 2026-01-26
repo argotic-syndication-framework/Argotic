@@ -18,7 +18,7 @@ public class SyndicationEncodingUtilityTest
     [DataRow("a\uFFFEb", "ab")] // FFFE should be stripped
     public void RemoveInvalidXmlHexadecimalCharactersTest(string input, string expected)
     {
-        var stripped = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(input);
+        string stripped = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(input);
         Assert.AreEqual(expected, stripped);
     }
 }

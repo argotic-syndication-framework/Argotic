@@ -901,8 +901,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         }
         else if (String.Compare(attribute.Name, "isComment", StringComparison.OrdinalIgnoreCase) == 0)
         {
-            bool isComment;
-            if (Boolean.TryParse(attribute.Value, out isComment))
+            if (Boolean.TryParse(attribute.Value, out bool isComment))
             {
                 this.IsCommented    = isComment;
                 wasLoaded           = true;
@@ -910,8 +909,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         }
         else if (String.Compare(attribute.Name, "isBreakpoint", StringComparison.OrdinalIgnoreCase) == 0)
         {
-            bool isBreakpoint;
-            if (Boolean.TryParse(attribute.Value, out isBreakpoint))
+            if (Boolean.TryParse(attribute.Value, out bool isBreakpoint))
             {
                 this.HasBreakpoint  = isBreakpoint;
                 wasLoaded           = true;
@@ -919,8 +917,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         }
         else if (String.Compare(attribute.Name, "created", StringComparison.OrdinalIgnoreCase) == 0)
         {
-            DateTime created;
-            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(attribute.Value, out created))
+            if (SyndicationDateTimeUtility.TryParseRfc822DateTime(attribute.Value, out DateTime created))
             {
                 this.CreatedOn  = created;
                 wasLoaded       = true;

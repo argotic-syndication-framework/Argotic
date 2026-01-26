@@ -81,8 +81,7 @@ public class BasicGeocodingSyndicationExtensionContext
 
         if (latitudeNavigator != null)
         {
-            decimal latitude;
-            if (Decimal.TryParse(latitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out latitude))
+            if (Decimal.TryParse(latitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal latitude))
             {
                 this.Latitude   = latitude;
                 wasLoaded       = true;
@@ -91,8 +90,7 @@ public class BasicGeocodingSyndicationExtensionContext
 
         if (longitudeNavigator != null)
         {
-            decimal longitude;
-            if (Decimal.TryParse(longitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out longitude))
+            if (Decimal.TryParse(longitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal longitude))
             {
                 this.Longitude  = longitude;
                 wasLoaded       = true;

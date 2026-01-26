@@ -136,8 +136,7 @@ public class YahooMediaRating : IComparable
             string schemeAttribute  = source.GetAttribute("scheme", String.Empty);
             if (!String.IsNullOrEmpty(schemeAttribute))
             {
-                Uri scheme;
-                if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
+                if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                 {
                     this.Scheme = scheme;
                     wasLoaded   = true;

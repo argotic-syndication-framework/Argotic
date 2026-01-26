@@ -306,8 +306,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
 
             if (!String.IsNullOrEmpty(uriAttribute))
             {
-                Uri uri;
-                if (Uri.TryCreate(uriAttribute, UriKind.RelativeOrAbsolute, out uri))
+                if (Uri.TryCreate(uriAttribute, UriKind.RelativeOrAbsolute, out Uri uri))
                 {
                     this.Uri    = uri;
                     wasLoaded   = true;

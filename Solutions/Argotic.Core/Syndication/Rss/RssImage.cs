@@ -397,8 +397,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
 
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 this.Link   = link;
                 wasLoaded   = true;
@@ -414,8 +413,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         }
         if (urlNavigator != null)
         {
-            Uri url;
-            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out url))
+            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
             {
                 this.Url    = url;
                 wasLoaded   = true;
@@ -429,8 +427,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         }
         if (heightNavigator != null)
         {
-            int height;
-            if (Int32.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out height))
+            if (Int32.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int height))
             {
                 this.Height = height < RssImage.HeightMaximum ? height : RssImage.HeightMaximum;
                 wasLoaded   = true;
@@ -438,8 +435,7 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
         }
         if (widthNavigator != null)
         {
-            int width;
-            if (Int32.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out width))
+            if (Int32.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int width))
             {
                 this.Width  = width < RssImage.WidthMaximum ? width : RssImage.WidthMaximum;
                 wasLoaded   = true;

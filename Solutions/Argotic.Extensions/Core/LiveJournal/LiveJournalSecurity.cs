@@ -183,8 +183,7 @@ public class LiveJournalSecurity : IComparable
 
             if (!String.IsNullOrEmpty(maskAttribute))
             {
-                int mask;
-                if (Int32.TryParse(maskAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out mask))
+                if (Int32.TryParse(maskAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int mask))
                 {
                     this.Mask   = mask;
                     wasLoaded   = true;

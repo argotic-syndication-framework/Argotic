@@ -460,8 +460,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
             }
             if (!String.IsNullOrEmpty(sourceAttribute))
             {
-                Uri src;
-                if (Uri.TryCreate(sourceAttribute, UriKind.RelativeOrAbsolute, out src))
+                if (Uri.TryCreate(sourceAttribute, UriKind.RelativeOrAbsolute, out Uri src))
                 {
                     this.Source = src;
                     wasLoaded   = true;

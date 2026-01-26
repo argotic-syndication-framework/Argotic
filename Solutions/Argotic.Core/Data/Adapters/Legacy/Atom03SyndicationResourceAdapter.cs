@@ -109,8 +109,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (modifiedNavigator != null)
             {
-                DateTime updatedOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(modifiedNavigator.Value, out updatedOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(modifiedNavigator.Value, out DateTime updatedOn))
                 {
                     resource.UpdatedOn  = updatedOn;
                 }
@@ -212,8 +211,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (!String.IsNullOrEmpty(urlAttribute))
             {
-                Uri uri;
-                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out uri))
+                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri uri))
                 {
                     generator.Uri   = uri;
                 }
@@ -270,8 +268,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (urlNavigator != null)
         {
-            Uri uri;
-            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out uri))
+            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri uri))
             {
                 person.Uri      = uri;
             }
@@ -398,8 +395,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (modifiedNavigator != null)
         {
-            DateTime updatedOn;
-            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(modifiedNavigator.Value, out updatedOn))
+            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(modifiedNavigator.Value, out DateTime updatedOn))
             {
                 entry.UpdatedOn = updatedOn;
             }
@@ -500,8 +496,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (createdNavigator != null)
         {
-            DateTime publishedOn;
-            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(createdNavigator.Value, out publishedOn))
+            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(createdNavigator.Value, out DateTime publishedOn))
             {
                 entry.PublishedOn   = publishedOn;
             }

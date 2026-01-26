@@ -176,8 +176,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
             if (!String.IsNullOrEmpty(aboutAttribute))
             {
-                Uri about;
-                if (Uri.TryCreate(aboutAttribute, UriKind.RelativeOrAbsolute, out about))
+                if (Uri.TryCreate(aboutAttribute, UriKind.RelativeOrAbsolute, out Uri about))
                 {
                     this.About  = about;
                     wasLoaded   = true;
@@ -186,8 +185,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
             if (!String.IsNullOrEmpty(identifierAttribute))
             {
-                Uri identifier;
-                if (Uri.TryCreate(identifierAttribute, UriKind.RelativeOrAbsolute, out identifier))
+                if (Uri.TryCreate(identifierAttribute, UriKind.RelativeOrAbsolute, out Uri identifier))
                 {
                     this.Identifier = identifier;
                     wasLoaded       = true;
@@ -202,8 +200,7 @@ public class TrackbackDiscoveryMetadata : IComparable
 
             if (!String.IsNullOrEmpty(pingAttribute))
             {
-                Uri ping;
-                if (Uri.TryCreate(pingAttribute, UriKind.RelativeOrAbsolute, out ping))
+                if (Uri.TryCreate(pingAttribute, UriKind.RelativeOrAbsolute, out Uri ping))
                 {
                     this.PingUrl    = ping;
                     wasLoaded       = true;

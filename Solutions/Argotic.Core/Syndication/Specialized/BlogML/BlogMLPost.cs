@@ -795,8 +795,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
             if (!String.IsNullOrEmpty(postUrlAttribute))
             {
-                Uri url;
-                if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.Url    = url;
                     wasLoaded   = true;
@@ -894,8 +893,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
             if (!String.IsNullOrEmpty(postUrlAttribute))
             {
-                Uri url;
-                if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.Url    = url;
                     wasLoaded   = true;

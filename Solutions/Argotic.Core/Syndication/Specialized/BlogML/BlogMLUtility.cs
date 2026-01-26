@@ -182,8 +182,7 @@ internal static class BlogMLUtility
 
             if (!String.IsNullOrEmpty(dateCreatedAttribute))
             {
-                DateTime createdOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out createdOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out DateTime createdOn))
                 {
                     target.CreatedOn        = createdOn;
                     wasLoaded               = true;
@@ -197,8 +196,7 @@ internal static class BlogMLUtility
 
             if (!String.IsNullOrEmpty(dateModifiedAttribute))
             {
-                DateTime modifiedOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateModifiedAttribute, out modifiedOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateModifiedAttribute, out DateTime modifiedOn))
                 {
                     target.LastModifiedOn   = modifiedOn;
                     wasLoaded               = true;
@@ -270,8 +268,7 @@ internal static class BlogMLUtility
 
             if (!String.IsNullOrEmpty(dateCreatedAttribute))
             {
-                DateTime createdOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out createdOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out DateTime createdOn))
                 {
                     target.CreatedOn        = createdOn;
                     wasLoaded               = true;
@@ -285,8 +282,7 @@ internal static class BlogMLUtility
 
             if (!String.IsNullOrEmpty(dateModifiedAttribute))
             {
-                DateTime modifiedOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateModifiedAttribute, out modifiedOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateModifiedAttribute, out DateTime modifiedOn))
                 {
                     target.LastModifiedOn   = modifiedOn;
                     wasLoaded               = true;

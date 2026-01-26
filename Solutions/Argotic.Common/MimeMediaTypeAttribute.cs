@@ -49,8 +49,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable
             }
             else
             {
-                Uri url;
-                if (Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     mimeMediaDocumentation = url;
                 }

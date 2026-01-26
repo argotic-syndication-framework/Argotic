@@ -138,8 +138,7 @@ public class OpmlWindow : IComparable
 
         if (windowTopNavigator != null)
         {
-            int top;
-            if (Int32.TryParse(windowTopNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out top))
+            if (Int32.TryParse(windowTopNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int top))
             {
                 this.Top    = top;
                 wasLoaded   = true;
@@ -148,8 +147,7 @@ public class OpmlWindow : IComparable
 
         if (windowLeftNavigator != null)
         {
-            int left;
-            if (Int32.TryParse(windowLeftNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out left))
+            if (Int32.TryParse(windowLeftNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int left))
             {
                 this.Left   = left;
                 wasLoaded   = true;
@@ -158,8 +156,7 @@ public class OpmlWindow : IComparable
 
         if (windowBottomNavigator != null)
         {
-            int bottom;
-            if (Int32.TryParse(windowBottomNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out bottom))
+            if (Int32.TryParse(windowBottomNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int bottom))
             {
                 this.Bottom = bottom;
                 wasLoaded   = true;
@@ -168,8 +165,7 @@ public class OpmlWindow : IComparable
 
         if (windowRightNavigator != null)
         {
-            int right;
-            if (Int32.TryParse(windowRightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out right))
+            if (Int32.TryParse(windowRightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int right))
             {
                 this.Right  = right;
                 wasLoaded   = true;

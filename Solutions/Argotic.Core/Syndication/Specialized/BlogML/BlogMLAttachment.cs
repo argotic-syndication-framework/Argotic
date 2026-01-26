@@ -287,8 +287,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(embeddedAttribute))
             {
-                bool isEmbedded;
-                if (Boolean.TryParse(embeddedAttribute, out isEmbedded))
+                if (Boolean.TryParse(embeddedAttribute, out bool isEmbedded))
                 {
                     this.IsEmbedded = isEmbedded;
                     wasLoaded       = true;
@@ -303,8 +302,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(sizeAttribute))
             {
-                long size;
-                if (Int64.TryParse(sizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out size))
+                if (Int64.TryParse(sizeAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long size))
                 {
                     this.Size   = size;
                     wasLoaded   = true;
@@ -313,8 +311,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(externalUriAttribute))
             {
-                Uri externalUri;
-                if (Uri.TryCreate(externalUriAttribute, UriKind.RelativeOrAbsolute, out externalUri))
+                if (Uri.TryCreate(externalUriAttribute, UriKind.RelativeOrAbsolute, out Uri externalUri))
                 {
                     this.ExternalUri    = externalUri;
                     wasLoaded           = true;
@@ -323,8 +320,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(urlAttribute))
             {
-                Uri url;
-                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out url))
+                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
                 {
                     this.Url    = url;
                     wasLoaded   = true;

@@ -94,10 +94,10 @@ public class AtomPublishingControlSyndicationExtensionTest
     public void AtomPublishingControl_LoadTest()
     {
         AtomPublishingControlSyndicationExtension target = new AtomPublishingControlSyndicationExtension(); // TODO: Initialize to an appropriate value
-        var nt = new NameTable();
-        var ns = new XmlNamespaceManager(nt);
-        var xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Preserve);
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        NameTable nt = new NameTable();
+        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
+        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en", XmlSpace.Preserve);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
         {
@@ -109,8 +109,8 @@ public class AtomPublishingControlSyndicationExtensionTest
     [TestMethod]
     public void AtomPublishingControl_CreateXmlTest()
     {
-        var itunes = CreateExtension1();
-        var actual = ExtensionTestUtil.AddExtensionToXml(itunes).Trim();
+        AtomPublishingControlSyndicationExtension itunes = CreateExtension1();
+        string actual = ExtensionTestUtil.AddExtensionToXml(itunes).Trim();
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml).Trim();
         Assert.AreEqual(expected, actual);
     }
@@ -118,17 +118,17 @@ public class AtomPublishingControlSyndicationExtensionTest
     [TestMethod, Ignore]
     public void AtomPublishingControl_FullTest()
     {
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
         {
             RssFeed feed = new RssFeed();
             feed.Load(reader);
             Assert.AreEqual(1, feed.Channel.Items.Count());
-            var item = feed.Channel.Items.Single();
-            var ext = item.HasExtensions;
+            RssItem item = feed.Channel.Items.Single();
+            bool ext = item.HasExtensions;
             Assert.IsTrue(item.HasExtensions);
-            var itemExtension = item.FindExtension<AtomPublishingControlSyndicationExtension>();
+            AtomPublishingControlSyndicationExtension itemExtension = item.FindExtension<AtomPublishingControlSyndicationExtension>();
             Assert.IsNotNull(itemExtension);
             Assert.IsInstanceOfType(item.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension,
                 typeof(AtomPublishingControlSyndicationExtension));
@@ -165,12 +165,12 @@ public class AtomPublishingControlSyndicationExtensionTest
     [TestMethod()]
     public void AtomPublishingControl_WriteToTest()
     {
-        using(var sw = new StringWriter())
+        using(StringWriter sw = new StringWriter())
         using (XmlWriter writer = new XmlTextWriter(sw))
         {
-            var target = CreateExtension1();
+            AtomPublishingControlSyndicationExtension target = CreateExtension1();
             target.WriteTo(writer);
-            var output = sw.ToString();
+            string output = sw.ToString();
             Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
         }
     }
@@ -251,7 +251,7 @@ public class AtomPublishingControlSyndicationExtensionTest
 
     private AtomPublishingControlSyndicationExtension CreateExtension1()
     {
-        var nyc = new AtomPublishingControlSyndicationExtension
+        AtomPublishingControlSyndicationExtension nyc = new AtomPublishingControlSyndicationExtension
         {
             Context =
             {
@@ -266,7 +266,7 @@ public class AtomPublishingControlSyndicationExtensionTest
 
     private AtomPublishingControlSyndicationExtension CreateExtension2()
     {
-        var nyc = new AtomPublishingControlSyndicationExtension();
+        AtomPublishingControlSyndicationExtension nyc = new AtomPublishingControlSyndicationExtension();
         nyc.Context.BaseUri = new Uri("http://www.example.net/control.html");
         nyc.Context.IsDraft = false;
         nyc.Context.Language = new CultureInfo("fr-CA");

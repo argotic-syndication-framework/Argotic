@@ -56,8 +56,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
                 if (!String.IsNullOrEmpty(dateCreatedAttribute))
                 {
-                    DateTime createdOn;
-                    if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out createdOn))
+                    if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedAttribute, out DateTime createdOn))
                     {
                         resource.GeneratedOn    = createdOn;
                     }
@@ -65,8 +64,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
                 if (!String.IsNullOrEmpty(rootUrlAttribute))
                 {
-                    Uri rootUrl;
-                    if (Uri.TryCreate(rootUrlAttribute, UriKind.RelativeOrAbsolute, out rootUrl))
+                    if (Uri.TryCreate(rootUrlAttribute, UriKind.RelativeOrAbsolute, out Uri rootUrl))
                     {
                         resource.RootUrl    = rootUrl;
                     }

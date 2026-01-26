@@ -101,10 +101,10 @@ public class CreativeCommonsSyndicationExtensionTest
     public void CreativeCommons_LoadTest()
     {
         CreativeCommonsSyndicationExtension target = new CreativeCommonsSyndicationExtension(); // TODO: Initialize to an appropriate value
-        var nt = new NameTable();
-        var ns = new XmlNamespaceManager(nt);
-        var xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        NameTable nt = new NameTable();
+        XmlNamespaceManager ns = new XmlNamespaceManager(nt);
+        XmlParserContext xpc = new XmlParserContext(nt, ns, "US-en",XmlSpace.Default);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, xpc)	)
         {
@@ -133,9 +133,9 @@ public class CreativeCommonsSyndicationExtensionTest
     [TestMethod]
     public void CreativeCommons_CreateXmlTest()
     {
-        var itunes = CreateExtension1();
+        CreativeCommonsSyndicationExtension itunes = CreateExtension1();
 
-        var actual = ExtensionTestUtil.AddExtensionToXml(itunes);
+        string actual = ExtensionTestUtil.AddExtensionToXml(itunes);
         string expected = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
         Assert.AreEqual(expected, actual);
     }
@@ -144,7 +144,7 @@ public class CreativeCommonsSyndicationExtensionTest
     [TestMethod]
     public void CreativeCommons_FullTest()
     {
-        var strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
+        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
         using (XmlReader reader = new XmlTextReader(strXml, XmlNodeType.Document, null))
         {
@@ -156,9 +156,9 @@ public class CreativeCommonsSyndicationExtensionTest
             //						 typeof(CreativeCommonsSyndicationExtension));
 
             Assert.AreEqual(1, feed.Channel.Items.Count());
-            var item = feed.Channel.Items.Single();
+            RssItem item = feed.Channel.Items.Single();
             Assert.IsTrue(item.HasExtensions);
-            var itemExtension = item.FindExtension<CreativeCommonsSyndicationExtension>();
+            CreativeCommonsSyndicationExtension itemExtension = item.FindExtension<CreativeCommonsSyndicationExtension>();
             Assert.IsNotNull(itemExtension);
             Assert.IsInstanceOfType(item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension,
                 typeof(CreativeCommonsSyndicationExtension));
@@ -198,13 +198,13 @@ public class CreativeCommonsSyndicationExtensionTest
     [TestMethod()]
     public void CreativeCommons_WriteToTest()
     {
-        using(var sw = new StringWriter())
+        using(StringWriter sw = new StringWriter())
         using (XmlWriter writer = new XmlTextWriter(sw))
         {
 
-            var target = CreateExtension1();
+            CreativeCommonsSyndicationExtension target = CreateExtension1();
             target.WriteTo(writer);
-            var output = sw.ToString();
+            string output = sw.ToString();
             Assert.AreEqual(nycText.Replace(Environment.NewLine+"  ", "").Replace(Environment.NewLine, ""), output.Replace(Environment.NewLine, ""));
         }
     }
@@ -285,14 +285,14 @@ public class CreativeCommonsSyndicationExtensionTest
         CreativeCommonsSyndicationExtensionContext actual;
 //			target.Context = expected;
         actual = target.Context;
-        var b = actual.Equals(expected);
+        bool b = actual.Equals(expected);
         Assert.AreEqual(expected, actual);
         Assert.Inconclusive("Verify the correctness of this test method.");
     }
 
     private CreativeCommonsSyndicationExtension CreateExtension1()
     {
-        var nyc = new CreativeCommonsSyndicationExtension();
+        CreativeCommonsSyndicationExtension nyc = new CreativeCommonsSyndicationExtension();
 
         nyc.Context.Licenses.Add(new Uri("http://www.example.com/license1.html"));
         nyc.Context.Licenses.Add(new Uri("http://www.example.com/license2.html"));
@@ -300,7 +300,7 @@ public class CreativeCommonsSyndicationExtensionTest
     }
     private CreativeCommonsSyndicationExtension CreateExtension2()
     {
-        var nyc = new CreativeCommonsSyndicationExtension();
+        CreativeCommonsSyndicationExtension nyc = new CreativeCommonsSyndicationExtension();
         nyc.Context.Licenses.Add(new Uri("http://www.example.net/license1.html"));
         nyc.Context.Licenses.Add(new Uri("http://www.example.net/license2.html"));
         return nyc;
@@ -308,7 +308,7 @@ public class CreativeCommonsSyndicationExtensionTest
 
     public static CreativeCommonsSyndicationExtensionContext CreateContext1()
     {
-        var nyc = new CreativeCommonsSyndicationExtensionContext();
+        CreativeCommonsSyndicationExtensionContext nyc = new CreativeCommonsSyndicationExtensionContext();
         //nyc.Latitude = 40;
         //nyc.Longitude = -74;
         return nyc;

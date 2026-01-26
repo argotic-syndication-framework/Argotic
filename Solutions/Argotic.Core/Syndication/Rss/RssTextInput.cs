@@ -278,8 +278,7 @@ public class RssTextInput : IComparable, IExtensibleSyndicationObject
         }
         if (linkNavigator != null)
         {
-            Uri link;
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
             {
                 this.Link           = link;
                 wasLoaded           = true;

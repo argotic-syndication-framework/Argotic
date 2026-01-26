@@ -63,8 +63,7 @@ public class AtomPublishingEditedSyndicationExtensionContext
             XPathNavigator editedNavigator  = source.SelectSingleNode("app:edited", manager);
             if (editedNavigator != null && !String.IsNullOrEmpty(editedNavigator.Value))
             {
-                DateTime editedOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(editedNavigator.Value, out editedOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(editedNavigator.Value, out DateTime editedOn))
                 {
                     this.EditedOn   = editedOn;
                     wasLoaded       = true;

@@ -102,8 +102,7 @@ public class PheedSyndicationExtensionContext
 
             if (thumbnailNavigator != null)
             {
-                Uri thumbnail;
-                if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out thumbnail))
+                if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out Uri thumbnail))
                 {
                     this.Thumbnail  = thumbnail;
                     wasLoaded       = true;
@@ -112,8 +111,7 @@ public class PheedSyndicationExtensionContext
 
             if (imageSourceNavigator != null)
             {
-                Uri original;
-                if (Uri.TryCreate(imageSourceNavigator.Value, UriKind.RelativeOrAbsolute, out original))
+                if (Uri.TryCreate(imageSourceNavigator.Value, UriKind.RelativeOrAbsolute, out Uri original))
                 {
                     this.Source = original;
                     wasLoaded   = true;

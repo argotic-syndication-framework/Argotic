@@ -483,8 +483,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
 
             if (!String.IsNullOrEmpty(hrefAttribute))
             {
-                Uri href;
-                if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out href))
+                if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                 {
                     this.Uri        = href;
                     wasLoaded       = true;
@@ -525,8 +524,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
 
             if (!String.IsNullOrEmpty(lengthAttribute))
             {
-                long length;
-                if (Int64.TryParse(lengthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out length))
+                if (Int64.TryParse(lengthAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out long length))
                 {
                     this.Length     = length;
                     wasLoaded       = true;

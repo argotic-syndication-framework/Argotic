@@ -439,8 +439,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(valueAttribute))
             {
-                decimal value;
-                if (Decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out value))
+                if (Decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
                 {
                     if (value >= Decimal.MinusOne && value <= Decimal.One)
                     {
@@ -464,8 +463,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(updatedAttribute))
             {
-                DateTime updatedOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedAttribute, out updatedOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedAttribute, out DateTime updatedOn))
                 {
                     this.UpdatedOn  = updatedOn;
                     wasLoaded       = true;
@@ -534,8 +532,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(valueAttribute))
             {
-                decimal value;
-                if (Decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out value))
+                if (Decimal.TryParse(valueAttribute, System.Globalization.NumberStyles.Float, System.Globalization.NumberFormatInfo.InvariantInfo, out decimal value))
                 {
                     if (value >= Decimal.MinusOne && value <= Decimal.One)
                     {
@@ -559,8 +556,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(updatedAttribute))
             {
-                DateTime updatedOn;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedAttribute, out updatedOn))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedAttribute, out DateTime updatedOn))
                 {
                     this.UpdatedOn  = updatedOn;
                     wasLoaded       = true;

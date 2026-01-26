@@ -131,8 +131,7 @@ public class SiteSummaryContentItem : IComparable
 
             if (formatNavigator != null)
             {
-                Uri format;
-                if (Uri.TryCreate(formatNavigator.Value, UriKind.RelativeOrAbsolute, out format))
+                if (Uri.TryCreate(formatNavigator.Value, UriKind.RelativeOrAbsolute, out Uri format))
                 {
                     this.Format = format;
                     wasLoaded   = true;
@@ -141,8 +140,7 @@ public class SiteSummaryContentItem : IComparable
 
             if (encodingNavigator != null)
             {
-                Uri encoding;
-                if (Uri.TryCreate(encodingNavigator.Value, UriKind.RelativeOrAbsolute, out encoding))
+                if (Uri.TryCreate(encodingNavigator.Value, UriKind.RelativeOrAbsolute, out Uri encoding))
                 {
                     this.Encoding   = encoding;
                     wasLoaded       = true;

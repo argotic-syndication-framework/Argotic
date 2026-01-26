@@ -396,8 +396,7 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(port))
             {
-                int tcpPort;
-                if (Int32.TryParse(port, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out tcpPort))
+                if (Int32.TryParse(port, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int tcpPort))
                 {
                     if (tcpPort > 0)
                     {

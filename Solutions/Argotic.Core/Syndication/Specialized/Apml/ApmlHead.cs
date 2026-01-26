@@ -277,8 +277,7 @@ public class ApmlHead : IComparable, IExtensibleSyndicationObject
 
         if (dateCreatedNavigator != null)
         {
-            DateTime createdOn;
-            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedNavigator.Value, out createdOn))
+            if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedNavigator.Value, out DateTime createdOn))
             {
                 this.CreatedOn  = createdOn;
                 wasLoaded       = true;

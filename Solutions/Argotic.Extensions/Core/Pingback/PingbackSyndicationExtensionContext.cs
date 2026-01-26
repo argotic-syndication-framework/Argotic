@@ -114,8 +114,7 @@ public class PingbackSyndicationExtensionContext
 
             if (serverNavigator != null)
             {
-                Uri server;
-                if (Uri.TryCreate(serverNavigator.Value, UriKind.RelativeOrAbsolute, out server))
+                if (Uri.TryCreate(serverNavigator.Value, UriKind.RelativeOrAbsolute, out Uri server))
                 {
                     this.Server = server;
                     wasLoaded   = true;
@@ -124,8 +123,7 @@ public class PingbackSyndicationExtensionContext
 
             if (targetNavigator != null)
             {
-                Uri target;
-                if (Uri.TryCreate(targetNavigator.Value, UriKind.RelativeOrAbsolute, out target))
+                if (Uri.TryCreate(targetNavigator.Value, UriKind.RelativeOrAbsolute, out Uri target))
                 {
                     this.Target = target;
                     wasLoaded   = true;
@@ -136,8 +134,7 @@ public class PingbackSyndicationExtensionContext
             {
                 while (aboutIterator.MoveNext())
                 {
-                    Uri about;
-                    if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out about))
+                    if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri about))
                     {
                         this.Abouts.Add(about);
                         wasLoaded   = true;

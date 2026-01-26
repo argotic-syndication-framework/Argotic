@@ -73,8 +73,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
                     if (!String.IsNullOrEmpty(schemeAttribute))
                     {
-                        Uri scheme;
-                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out scheme))
+                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
                         {
                             resource.Scheme     = scheme;
                         }
@@ -82,8 +81,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
                     if (!String.IsNullOrEmpty(hrefAttribute))
                     {
-                        Uri href;
-                        if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out href))
+                        if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
                         {
                             resource.Uri        = href;
                         }

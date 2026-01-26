@@ -240,8 +240,7 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
 
             if (!String.IsNullOrEmpty(permalinkAttribute))
             {
-                bool isPermaLink;
-                if (Boolean.TryParse(permalinkAttribute, out isPermaLink))
+                if (Boolean.TryParse(permalinkAttribute, out bool isPermaLink))
                 {
                     this.IsPermanentLink    = isPermaLink;
                     wasLoaded               = true;

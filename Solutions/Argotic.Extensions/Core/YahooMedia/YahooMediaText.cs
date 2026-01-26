@@ -289,8 +289,7 @@ public class YahooMediaText : IComparable
 
             if (!String.IsNullOrEmpty(startAttribute))
             {
-                TimeSpan start;
-                if (TimeSpan.TryParse(startAttribute, out start))
+                if (TimeSpan.TryParse(startAttribute, out TimeSpan start))
                 {
                     this.Start  = start;
                     wasLoaded   = true;
@@ -299,8 +298,7 @@ public class YahooMediaText : IComparable
 
             if (!String.IsNullOrEmpty(endAttribute))
             {
-                TimeSpan end;
-                if (TimeSpan.TryParse(endAttribute, out end))
+                if (TimeSpan.TryParse(endAttribute, out TimeSpan end))
                 {
                     this.End    = end;
                     wasLoaded   = true;

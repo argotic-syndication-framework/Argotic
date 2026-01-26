@@ -163,8 +163,7 @@ public class FeedSynchronizationHistory : IComparable
 
             if (!String.IsNullOrEmpty(sequenceAttribute))
             {
-                int sequence;
-                if (Int32.TryParse(sequenceAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out sequence))
+                if (Int32.TryParse(sequenceAttribute, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int sequence))
                 {
                     this.Sequence   = sequence;
                     wasLoaded       = true;
@@ -173,8 +172,7 @@ public class FeedSynchronizationHistory : IComparable
 
             if (!String.IsNullOrEmpty(whenAttribute))
             {
-                DateTime when;
-                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(whenAttribute, out when))
+                if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(whenAttribute, out DateTime when))
                 {
                     this.When   = when;
                     wasLoaded   = true;

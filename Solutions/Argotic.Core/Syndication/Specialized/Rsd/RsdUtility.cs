@@ -47,7 +47,7 @@ internal static class RsdUtility
     /// Selects a node set using the specified XPath expression with the <see cref="IXmlNamespaceResolver"/> object specified to resolve namespace prefixes.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to execute the XPath query against.</param>
-    /// <param name="xpath">A <see cref="String"/> representing an XPath expression. May be <i>/</i> delimited query. Query shound <b>not</b> contain any prefixing.</param>
+    /// <param name="xpath">A <see cref="String"/> representing an XPath expression. May be <i>/</i> delimited query. Query should <b>not</b> contain any prefixing.</param>
     /// <param name="resolver">The <see cref="IXmlNamespaceResolver"/> object used to resolve namespace prefixes in the XPath query.</param>
     /// <returns>
     ///     An <see cref="XPathNodeIterator"/> that points to the selected node set.
@@ -69,7 +69,7 @@ internal static class RsdUtility
 
         iterator    = source.Select(xpath, resolver);
 
-        if (iterator == null || iterator.Count <= 0)
+        if (iterator is not { Count: > 0 })
         {
             string safeXpath    = xpath.Replace("rsd:", string.Empty);
             iterator            = source.Select(safeXpath, resolver);

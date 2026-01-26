@@ -26,7 +26,7 @@ namespace Argotic.Syndication;
 public class GenericSyndicationFeed
 {
     /// <summary>
-    /// Private member to hold the underlying syndication resource that is being absratracted by this generic feed.
+    /// Private member to hold the underlying syndication resource that is being abstracted by this generic feed.
     /// </summary>
     private ISyndicationResource feedResource;
     /// <summary>
@@ -195,7 +195,7 @@ public class GenericSyndicationFeed
     }
 
     /// <summary>
-    /// Gets the syndication resource that is being absratracted by this generic feed.
+    /// Gets the syndication resource that is being abstracted by this generic feed.
     /// </summary>
     /// <value>
     ///     An object that implements the <see cref="ISyndicationResource"/> interface that represents the actual syndication feed that is being abstracted by this generic feed. 
@@ -729,14 +729,14 @@ public class GenericSyndicationFeed
 
     /// <summary>
     /// Initializes the generic syndication feed using the supplied <see cref="OpmlDocument"/>.
-    /// Since OmplDocument hasn't direct mappings to feeds in this method we simply initialize 
-    /// feedFormat to Opml and feedResource to omplDocument
+    /// Since OpmlDocument hasn't direct mappings to feeds in this method we simply initialize 
+    /// feedFormat to Opml and feedResource to opmlDocument
     /// </summary>
-    /// <param name="feed">The <see cref="RssFeed"/> to build an abstraction against.</param>
+    /// <param name="opmlDocument">The <see cref="OpmlDocument"/> to build an abstraction against.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference.</exception>
     public void Parse(OpmlDocument opmlDocument)
     {
-        Guard.ArgumentNotNull(opmlDocument, "omplDocument");
+        Guard.ArgumentNotNull(opmlDocument, "opmlDocument");
         feedResource = opmlDocument;
         feedFormat = SyndicationContentFormat.Opml;
     }

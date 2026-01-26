@@ -5,8 +5,7 @@
 	using System.Xml;
 	using Argotic.Extensions.Core;
 	using Argotic.Syndication;
-	using Microsoft.VisualStudio.TestTools.UnitTesting;
-	using System.Linq;
+    using System.Linq;
 
 	/// <summary>
 	///This is a test class for BasicGeocodingSyndicationExtensionTest and is intended

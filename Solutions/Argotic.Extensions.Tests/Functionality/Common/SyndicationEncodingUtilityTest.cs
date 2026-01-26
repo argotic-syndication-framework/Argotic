@@ -1,7 +1,6 @@
 ﻿namespace Argotic.Extensions.Tests
 {
     using Argotic.Common;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
 
     /// <summary>
     /// This is a test class for SyndicationEncodingUtilityTest and is intended

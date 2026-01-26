@@ -1,6 +1,4 @@
-﻿using System;
-
-using Argotic.Common;
+﻿using Argotic.Common;
 
 namespace Argotic.Net
 {

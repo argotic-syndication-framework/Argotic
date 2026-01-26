@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
     /// <summary>
     /// Associates enumeration field description information with a target element. This class cannot be inherited.

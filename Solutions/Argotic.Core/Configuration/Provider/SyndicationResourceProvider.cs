@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.ObjectModel;
-using System.Configuration.Provider;
-using System.Security.Permissions;
-using System.Web;
-using System.Xml.XPath;
-
+﻿using System.Collections.ObjectModel;
 using Argotic.Common;
 
 namespace Argotic.Configuration.Provider

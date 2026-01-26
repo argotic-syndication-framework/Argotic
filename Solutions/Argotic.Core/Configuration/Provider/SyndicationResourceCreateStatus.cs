@@ -1,7 +1,4 @@
-﻿using System;
-using System.Xml.XPath;
-
-using Argotic.Common;
+﻿using Argotic.Common;
 
 namespace Argotic.Configuration.Provider
 {

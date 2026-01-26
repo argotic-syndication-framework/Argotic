@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
     /// <summary>
     /// Provides common validation methods shared across the framework entities. This class cannot be inherited.

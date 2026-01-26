@@ -1,10 +1,7 @@
-﻿using System;
-using System.Collections;
+﻿using System.Collections;
 using System.Collections.ObjectModel;
-using System.IO;
 using System.Net;
 using System.Text.RegularExpressions;
-using System.Web;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -886,7 +883,7 @@ namespace Argotic.Common
         ///         &lt;link rel="pingback" href="{Absolute URI of the pingback XML-RPC server}" /&gt; element.
         ///     </para>
         ///     <para>
-        ///         The <see cref="HtmlAnchor"/> that is returned will have an <i>Href</i> property that points to the
+        ///         The <see cref="HtmlAnchor"/> that is returned will have a <i>Href</i> property that points to the
         ///         absolute URI of the pingback XML-RPC server, and a <i>rel</i> attribute of pingback.
         ///         The <i>Title</i> property and <i>type</i> attribute will also be extracted if available.
         ///     </para>
@@ -1129,7 +1126,7 @@ namespace Argotic.Common
         ///     </para>
         ///     <para>
         ///         This method is optimized to locate the pingback XML-RPC server endpoint within the HTTP headers
-        ///         before attempting to parse the response data for an pingback XML-RPC server link.
+        ///         before attempting to parse the response data for a pingback XML-RPC server link.
         ///     </para>
         ///     <para>
         ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>

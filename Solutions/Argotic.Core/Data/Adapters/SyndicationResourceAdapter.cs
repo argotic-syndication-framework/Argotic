@@ -1,6 +1,4 @@
-﻿using System;
-using System.Xml;
-using System.Xml.XPath;
+﻿using System.Xml.XPath;
 
 using Argotic.Common;
 using Argotic.Publishing;

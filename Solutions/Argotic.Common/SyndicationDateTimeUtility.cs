@@ -1,6 +1,4 @@
-﻿using System;
-using System.Globalization;
-using System.Text.RegularExpressions;
+﻿using System.Globalization;
 
 namespace Argotic.Common
 {
@@ -15,9 +13,9 @@ namespace Argotic.Common
     public static class SyndicationDateTimeUtility
     {
         /// <summary>
-        /// Converts the specified string representation of a RFC-3339 formatted date to its <see cref="DateTime"/> equivalent.
+        /// Converts the specified string representation of an RFC-3339 formatted date to its <see cref="DateTime"/> equivalent.
         /// </summary>
-        /// <param name="value">A string containing a RFC-3339 formatted date to convert.</param>
+        /// <param name="value">A string containing an RFC-3339 formatted date to convert.</param>
         /// <returns>A <see cref="DateTime"/> equivalent to the RFC-3339 formatted date contained in <paramref name="value"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
@@ -65,7 +63,7 @@ namespace Argotic.Common
         /// <param name="value">A string containing a RFC-3339 formatted date to convert.</param>
         /// <param name="result">
         ///     When this method returns, contains the <see cref="DateTime"/> value equivalent to the date and time contained in <paramref name="value"/>, if the conversion succeeded, or <see cref="DateTime.MinValue">MinValue</see> if the conversion failed.
-        ///     The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string, or does not contain a valid string representation of a RFC-3339 formatted date.
+        ///     The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string, or does not contain a valid string representation of an RFC-3339 formatted date.
         ///     This parameter is passed uninitialized.
         /// </param>
         /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>
@@ -103,8 +101,8 @@ namespace Argotic.Common
         /// <summary>
         /// Replaces the RFC-822 time-zone component with its offset equivalent.
         /// </summary>
-        /// <param name="value">A string containing a RFC-822 formatted date to convert.</param>
-        /// <returns>A string containing a RFC-822 formatted date, with the <i>zone</i> component converted to its offset equivalent.</returns>
+        /// <param name="value">A string containing an RFC-822 formatted date to convert.</param>
+        /// <returns>A string containing an RFC-822 formatted date, with the <i>zone</i> component converted to its offset equivalent.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
         /// <seealso cref="TryParseRfc822DateTime(string, out DateTime)"/>
@@ -199,13 +197,13 @@ namespace Argotic.Common
         }
 
         /// <summary>
-        /// Converts the specified string representation of a RFC-822 formatted date to its <see cref="DateTime"/> equivalent.
+        /// Converts the specified string representation of an RFC-822 formatted date to its <see cref="DateTime"/> equivalent.
         /// </summary>
-        /// <param name="value">A string containing a RFC-822 formatted date to convert.</param>
+        /// <param name="value">A string containing an RFC-822 formatted date to convert.</param>
         /// <returns>A <see cref="DateTime"/> equivalent to the RFC-822 formatted date contained in <paramref name="value"/>.</returns>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
-        /// <exception cref="FormatException">The <paramref name="value"/> is not a recognized as a RFC-822 formatted date.</exception>
+        /// <exception cref="FormatException">The <paramref name="value"/> is not a recognized as an RFC-822 formatted date.</exception>
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Rfc")]
         public static DateTime ParseRfc822DateTime(string value)
         {
@@ -237,12 +235,12 @@ namespace Argotic.Common
         }
 
         /// <summary>
-        /// Converts the specified string representation of a RFC-822 formatted date to its <see cref="DateTime"/> equivalent.
+        /// Converts the specified string representation of an RFC-822 formatted date to its <see cref="DateTime"/> equivalent.
         /// </summary>
-        /// <param name="value">A string containing a RFC-822 formatted date to convert.</param>
+        /// <param name="value">A string containing an RFC-822 formatted date to convert.</param>
         /// <param name="result">
         ///     When this method returns, contains the <see cref="DateTime"/> value equivalent to the date and time contained in <paramref name="value"/>, if the conversion succeeded, or <see cref="DateTime.MinValue">MinValue</see> if the conversion failed.
-        ///     The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string, or does not contain a valid string representation of a RFC-822 formatted date.
+        ///     The conversion fails if the <paramref name="value"/> parameter is a <b>null</b> or empty string, or does not contain a valid string representation of an RFC-822 formatted date.
         ///     This parameter is passed uninitialized.
         /// </param>
         /// <returns><b>true</b> if the <paramref name="value"/> parameter was converted successfully; otherwise, <b>false</b>.</returns>

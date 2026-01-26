@@ -1,12 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-using System.Linq;
-
 using Argotic.Common;
-using Argotic.Extensions.Core;
 using System.Reflection;
 
 namespace Argotic.Extensions

@@ -1,8 +1,4 @@
-﻿using System;
-using System.Configuration;
-using System.Security.Permissions;
-using System.Threading;
-
+﻿using System.Security.Permissions;
 using Argotic.Common;
 using Argotic.Configuration.Provider;
 

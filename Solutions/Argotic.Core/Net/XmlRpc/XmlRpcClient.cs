@@ -1,9 +1,5 @@
-﻿using System;
-using System.Globalization;
-using System.IO;
+﻿using System.Globalization;
 using System.Net;
-using System.Security.Permissions;
-using System.Threading;
 using System.Xml;
 using System.Xml.XPath;
 

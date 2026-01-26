@@ -5,7 +5,6 @@
     using System.Xml;
     using Argotic.Extensions.Core;
     using Argotic.Syndication;
-    using Microsoft.VisualStudio.TestTools.UnitTesting;
     using System.Linq;
 
     /// <summary>

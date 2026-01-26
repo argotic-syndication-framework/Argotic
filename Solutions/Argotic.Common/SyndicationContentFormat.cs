@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
     /// <summary>
     /// Specifies the web content syndication format that the syndicated content conforms to.

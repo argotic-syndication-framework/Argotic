@@ -1,7 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Net;
+﻿using System.Net;
 using System.Text;
 
 using Argotic.Common;
@@ -12,7 +9,7 @@ namespace Argotic.Net
     /// Represents the media type for the content of a <see cref="WebRequest"/> or <see cref="WebResponse"/>.
     /// </summary>
     /// <remarks>
-    ///     <para>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.</para>
+    ///     <para>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.</para>
     /// </remarks>
     [Serializable()]
     public class WebContentType : IComparable
@@ -30,7 +27,7 @@ namespace Argotic.Net
         /// </summary>
         private string webContentMediaType          = String.Empty;
         /// <summary>
-        /// Private member to hold the sub-type of the media content.
+        /// Private member to hold the subtype of the media content.
         /// </summary>
         private string webContentMediaSubType       = String.Empty;
         /// <summary>
@@ -46,7 +43,7 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type and sub-type.
+        /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type and subtype.
         /// </summary>
         /// <param name="mediaType">The top-level media type used to declare the general type of data the media content represents.</param>
         /// <param name="mediaSubtype">The specific format for the general type of data the media content represents</param>
@@ -61,7 +58,7 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type, sub-type and type discriminator.
+        /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type, subtype and type discriminator.
         /// </summary>
         /// <param name="mediaType">The top-level media type used to declare the general type of data the media content represents.</param>
         /// <param name="mediaSubtype">The specific format for the general type of data the media content represents</param>
@@ -76,7 +73,7 @@ namespace Argotic.Net
         }
 
         /// <summary>
-        /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type, sub-type, type discriminator and character encoding.
+        /// Initializes a new instance of the <see cref="WebContentType"/> class using the specified media type, subtype, type discriminator and character encoding.
         /// </summary>
         /// <param name="mediaType">The top-level media type used to declare the general type of data the media content represents.</param>
         /// <param name="mediaSubtype">The specific format for the general type of data the media content represents</param>

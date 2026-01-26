@@ -1,15 +1,8 @@
 ﻿namespace Argotic.Extensions.Tests
 {
-	using Argotic.Extensions.Core;
-	using Argotic.Syndication;
-	using Microsoft.VisualStudio.TestTools.UnitTesting;
-	using System;
-	using System.IO;
-	using System.Linq;
-	using System.Xml;
-	using System.Globalization;
+    using Argotic.Syndication;
 
-	/// <summary>
+    /// <summary>
 	///This is a test class for GenericSyndicationFeedTest and is intended
 	///to contain all GenericSyndicationFeedTest Unit Tests
 	///</summary>

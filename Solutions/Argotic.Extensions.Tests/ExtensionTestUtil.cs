@@ -1,12 +1,6 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using Argotic.Syndication;
+﻿using Argotic.Syndication;
 using System.Globalization;
-using System.IO;
 using System.Xml;
-using System.Reflection;
 
 namespace Argotic.Extensions.Tests
 {

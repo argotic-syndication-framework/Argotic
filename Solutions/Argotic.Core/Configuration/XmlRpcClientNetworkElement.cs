@@ -1,6 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Configuration;
+﻿using System.ComponentModel;
 using System.Net;
 
 namespace Argotic.Configuration

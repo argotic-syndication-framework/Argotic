@@ -1,12 +1,10 @@
-﻿using System;
-
-namespace Argotic.Common
+﻿namespace Argotic.Common
 {
     /// <summary>
     /// Associates IANA MIME media type information with a target element. This class cannot be inherited.
     /// </summary>
     /// <remarks>
-    ///     See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.
+    ///     See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.
     /// </remarks>
     [AttributeUsage(AttributeTargets.Field | AttributeTargets.Class, Inherited = false, AllowMultiple = false)]
     [Serializable()]
@@ -17,7 +15,7 @@ namespace Argotic.Common
         /// </summary>
         private string mimeMediaTypeName    = String.Empty;
         /// <summary>
-        /// Private member to hold the MIME media sub-type name.
+        /// Private member to hold the MIME media subtype name.
         /// </summary>
         private string mimeMediaSubTypeName = String.Empty;
         /// <summary>
@@ -89,9 +87,9 @@ namespace Argotic.Common
         }
 
         /// <summary>
-        /// Gets or sets the MIME media sub-type name for the attributed field.
+        /// Gets or sets the MIME media subtype name for the attributed field.
         /// </summary>
-        /// <value>The MIME media sub-type name for the attributed field.</value>
+        /// <value>The MIME media subtype name for the attributed field.</value>
         public string SubName
         {
             get

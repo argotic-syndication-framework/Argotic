@@ -1,8 +1,4 @@
-﻿using System;
-using System.ComponentModel;
-using System.Configuration;
-using System.Security.Permissions;
-using System.Web;
+﻿using System.ComponentModel;
 
 namespace Argotic.Configuration.Provider
 {

@@ -1,7 +1,4 @@
-﻿using System;
-using System.Globalization;
-
-using Argotic.Common;
+﻿using System.Globalization;
 using Argotic.Syndication;
 
 namespace Argotic.Examples

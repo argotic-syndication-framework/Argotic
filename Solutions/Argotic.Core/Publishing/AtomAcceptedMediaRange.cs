@@ -1,8 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
+﻿using System.Collections.ObjectModel;
 using System.Globalization;
-using System.IO;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -29,7 +26,7 @@ namespace Argotic.Publishing
     ///         Media type parameters are allowed within <see cref="AtomAcceptedMediaRange"/>, but <see cref="AtomAcceptedMediaRange"/> has no notion of preference e.g. <i>accept-params</i> or <i>q</i> arguments,
     ///         as specified in section 14.1 of <a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a> are not significant.
     ///     </para>
-    ///     <para>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.</para>
+    ///     <para>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.</para>
     /// </remarks>
     /// <seealso cref="AtomMemberResources.Accepts"/>
     /// <seealso cref="AtomMemberResources"/>
@@ -244,7 +241,7 @@ namespace Argotic.Publishing
         /// <value>The value of this accepted media range.</value>
         /// <remarks>
         ///     <para>
-        ///         See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and sub-types.
+        ///         See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.
         ///     </para>
         ///     <para>
         ///         The <see cref="AtomAcceptedMediaRange"/> is similar to the HTTP Accept request-header [<a href="http://tools.ietf.org/html/rfc2616">RFC 2616</a>].

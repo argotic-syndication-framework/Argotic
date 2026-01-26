@@ -1,6 +1,4 @@
-﻿using System;
-using System.IO;
-using System.Net;
+﻿using System.Net;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -457,14 +455,14 @@ namespace Argotic.Common
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
+        /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         void Save(Stream stream);
 
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="Stream"/>.
         /// </summary>
         /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
         /// <remarks>
         ///     <para>
         ///         Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="Stream"/>.
@@ -475,7 +473,7 @@ namespace Argotic.Common
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
+        /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         void Save(Stream stream, SyndicationResourceSaveSettings settings);
 
         /// <summary>
@@ -492,20 +490,20 @@ namespace Argotic.Common
         ///     </para>
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
+        /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         void Save(XmlWriter writer);
 
         /// <summary>
         /// Saves the syndication resource to the specified <see cref="XmlWriter"/>.
         /// </summary>
         /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
-        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistance of the <see cref="ISyndicationResource"/> instance.</param>
+        /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="ISyndicationResource"/> instance.</param>
         /// <remarks>
         ///     Place your custom code in the <b>Save</b> virtual method to save the syndication resource to the specified <see cref="XmlWriter"/> using the <see cref="SyndicationResourceSaveSettings"/>.
         /// </remarks>
         /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference (Nothing in Visual Basic).</exception>
         /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference (Nothing in Visual Basic).</exception>
-        /// <exception cref="XmlException">The operation would not result in well formed XML for the syndication resource.</exception>
+        /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
         void Save(XmlWriter writer, SyndicationResourceSaveSettings settings);
     }
 }

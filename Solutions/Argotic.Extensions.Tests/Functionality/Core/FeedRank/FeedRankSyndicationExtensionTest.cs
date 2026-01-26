@@ -36,7 +36,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for CompareTo
     ///</summary>
     [TestMethod]
-    public void FeedRank_CompareToTest()
+    public void FeedRankCompareToTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -49,7 +49,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for Equals
     ///</summary>
     [TestMethod]
-    public void FeedRank_EqualsTest()
+    public void FeedRankEqualsTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -62,7 +62,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for GetHashCode
     ///</summary>
     [TestMethod, Ignore]
-    public void FeedRank_GetHashCodeTest()
+    public void FeedRankGetHashCodeTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         int expected = 1719638022;
@@ -74,7 +74,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for Load
     ///</summary>
     [TestMethod, Ignore]
-    public void FeedRank_LoadTest()
+    public void FeedRankLoadTest()
     {
         FeedRankSyndicationExtension target = new FeedRankSyndicationExtension(); // TODO: Initialize to an appropriate value
         NameTable nt = new NameTable();
@@ -105,7 +105,7 @@ public class FeedRankSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedRank_CreateXmlTest()
+    public void FeedRankCreateXmlTest()
     {
         FeedRankSyndicationExtension re = CreateExtension1();
 
@@ -116,7 +116,7 @@ public class FeedRankSyndicationExtensionTest
 
 
     [TestMethod]
-    public void FeedRank_FullTest()
+    public void FeedRankFullTest()
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
@@ -142,7 +142,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for MatchByType
     ///</summary>
     [TestMethod]
-    public void FeedRank_MatchByTypeTest()
+    public void FeedRankMatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
         bool expected = true;
@@ -154,7 +154,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for ToString
     ///</summary>
     [TestMethod]
-    public void FeedRank_ToStringTest()
+    public void FeedRankToStringTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         string expected = nycText;
@@ -166,7 +166,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for WriteTo
     ///</summary>
     [TestMethod]
-    public void FeedRank_WriteToTest()
+    public void FeedRankWriteToTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         using StringWriter sw = new StringWriter();
@@ -180,7 +180,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for op_Equality
     ///</summary>
     [TestMethod]
-    public void FeedRank_op_EqualityTest_Failure()
+    public void FeedRankOpEqualityTestFailure()
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
@@ -189,7 +189,7 @@ public class FeedRankSyndicationExtensionTest
         Assert.AreEqual(expected, actual);
     }
 
-    public void FeedRank_op_EqualityTest_Success()
+    public void FeedRankOpEqualityTestSuccess()
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension1();
@@ -202,7 +202,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for op_GreaterThan
     ///</summary>
     [TestMethod]
-    public void FeedRank_op_GreaterThanTest()
+    public void FeedRankOpGreaterThanTest()
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
@@ -216,7 +216,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for op_Inequality
     ///</summary>
     [TestMethod]
-    public void FeedRank_op_InequalityTest()
+    public void FeedRankOpInequalityTest()
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
@@ -229,7 +229,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for op_LessThan
     ///</summary>
     [TestMethod]
-    public void FeedRank_op_LessThanTest()
+    public void FeedRankOpLessThanTest()
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
@@ -242,7 +242,7 @@ public class FeedRankSyndicationExtensionTest
     ///A test for Context
     ///</summary>
     [TestMethod, Ignore]
-    public void FeedRank_ContextTest()
+    public void FeedRankContextTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         FeedRankSyndicationExtensionContext expected = CreateContext1();

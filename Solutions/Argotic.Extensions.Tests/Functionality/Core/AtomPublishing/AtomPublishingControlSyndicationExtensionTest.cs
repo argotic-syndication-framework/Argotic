@@ -36,7 +36,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for CompareTo
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_CompareToTest()
+    public void AtomPublishingControlCompareToTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -50,7 +50,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for Equals
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_EqualsTest()
+    public void AtomPublishingControlEqualsTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -63,7 +63,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for GetHashCode
     ///</summary>
     [TestMethod, Ignore]
-    public void AtomPublishingControl_GetHashCodeTest()
+    public void AtomPublishingControlGetHashCodeTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         int expected = -1862124151;
@@ -75,7 +75,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for Load
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_LoadTest()
+    public void AtomPublishingControlLoadTest()
     {
         AtomPublishingControlSyndicationExtension target = new AtomPublishingControlSyndicationExtension(); // TODO: Initialize to an appropriate value
         NameTable nt = new NameTable();
@@ -89,7 +89,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void AtomPublishingControl_CreateXmlTest()
+    public void AtomPublishingControlCreateXmlTest()
     {
         AtomPublishingControlSyndicationExtension itunes = CreateExtension1();
         string actual = ExtensionTestUtil.AddExtensionToXml(itunes).Trim();
@@ -98,7 +98,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     }
 
     [TestMethod, Ignore]
-    public void AtomPublishingControl_FullTest()
+    public void AtomPublishingControlFullTest()
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
@@ -119,7 +119,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for MatchByType
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_MatchByTypeTest()
+    public void AtomPublishingControlMatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
         bool expected = true;
@@ -131,7 +131,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for ToString
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_ToStringTest()
+    public void AtomPublishingControlToStringTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         string expected = nycText;
@@ -143,7 +143,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for WriteTo
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_WriteToTest()
+    public void AtomPublishingControlWriteToTest()
     {
         using StringWriter sw = new StringWriter();
         using XmlWriter writer = new XmlTextWriter(sw);
@@ -157,7 +157,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for op_Equality
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_op_EqualityTest_Failure()
+    public void AtomPublishingControlOpEqualityTestFailure()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
@@ -166,7 +166,7 @@ public class AtomPublishingControlSyndicationExtensionTest
         Assert.AreEqual(expected, actual);
     }
 
-    public void AtomPublishingControl_op_EqualityTest_Success()
+    public void AtomPublishingControlOpEqualityTestSuccess()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension1();
@@ -179,7 +179,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for op_GreaterThan
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_op_GreaterThanTest()
+    public void AtomPublishingControlOpGreaterThanTest()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
@@ -192,7 +192,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for op_Inequality
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_op_InequalityTest()
+    public void AtomPublishingControlOpInequalityTest()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
@@ -205,7 +205,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for op_LessThan
     ///</summary>
     [TestMethod]
-    public void AtomPublishingControl_op_LessThanTest()
+    public void AtomPublishingControlOpLessThanTest()
     {
         AtomPublishingControlSyndicationExtension first = CreateExtension1();
         AtomPublishingControlSyndicationExtension second = CreateExtension2();
@@ -218,7 +218,7 @@ public class AtomPublishingControlSyndicationExtensionTest
     ///A test for Context
     ///</summary>
     [TestMethod, Ignore]
-    public void AtomPublishingControl_ContextTest()
+    public void AtomPublishingControlContextTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
         AtomPublishingControlSyndicationExtensionContext expected = CreateContext1();

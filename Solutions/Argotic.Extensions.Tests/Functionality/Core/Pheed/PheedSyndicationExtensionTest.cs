@@ -38,7 +38,7 @@ public class PheedSyndicationExtensionTest
     ///A test for CompareTo
     ///</summary>
     [TestMethod]
-    public void Pheed_CompareToTest()
+    public void PheedCompareToTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -51,7 +51,7 @@ public class PheedSyndicationExtensionTest
     ///A test for Equals
     ///</summary>
     [TestMethod]
-    public void Pheed_EqualsTest()
+    public void PheedEqualsTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -64,7 +64,7 @@ public class PheedSyndicationExtensionTest
     ///A test for GetHashCode
     ///</summary>
     [TestMethod, Ignore]
-    public void Pheed_GetHashCodeTest()
+    public void PheedGetHashCodeTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         int expected = -1671096665;
@@ -76,7 +76,7 @@ public class PheedSyndicationExtensionTest
     ///A test for Load
     ///</summary>
     [TestMethod, Ignore]
-    public void Pheed_LoadTest()
+    public void PheedLoadTest()
     {
         PheedSyndicationExtension target = new PheedSyndicationExtension(); // TODO: Initialize to an appropriate value
         NameTable nt = new NameTable();
@@ -90,7 +90,7 @@ public class PheedSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void Pheed_CreateXmlTest()
+    public void PheedCreateXmlTest()
     {
         PheedSyndicationExtension pheed = new PheedSyndicationExtension
         {
@@ -107,7 +107,7 @@ public class PheedSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void Pheed_FullTest()
+    public void PheedFullTest()
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
@@ -128,7 +128,7 @@ public class PheedSyndicationExtensionTest
     ///A test for MatchByType
     ///</summary>
     [TestMethod]
-    public void Pheed_MatchByTypeTest()
+    public void PheedMatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
         bool expected = true;
@@ -140,7 +140,7 @@ public class PheedSyndicationExtensionTest
     ///A test for ToString
     ///</summary>
     [TestMethod]
-    public void Pheed_ToStringTest()
+    public void PheedToStringTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         string expected = nycText;
@@ -152,7 +152,7 @@ public class PheedSyndicationExtensionTest
     ///A test for WriteTo
     ///</summary>
     [TestMethod]
-    public void Pheed_WriteToTest()
+    public void PheedWriteToTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         using StringWriter sw = new StringWriter();
@@ -166,7 +166,7 @@ public class PheedSyndicationExtensionTest
     ///A test for op_Equality
     ///</summary>
     [TestMethod]
-    public void Pheed_op_EqualityTest_Failure()
+    public void PheedOpEqualityTestFailure()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
@@ -175,7 +175,7 @@ public class PheedSyndicationExtensionTest
         Assert.AreEqual(expected, actual);
     }
 
-    public void Pheed_op_EqualityTest_Success()
+    public void PheedOpEqualityTestSuccess()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension1();
@@ -188,7 +188,7 @@ public class PheedSyndicationExtensionTest
     ///A test for op_GreaterThan
     ///</summary>
     [TestMethod]
-    public void Pheed_op_GreaterThanTest()
+    public void PheedOpGreaterThanTest()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
@@ -202,7 +202,7 @@ public class PheedSyndicationExtensionTest
     ///A test for op_Inequality
     ///</summary>
     [TestMethod]
-    public void Pheed_op_InequalityTest()
+    public void PheedOpInequalityTest()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
@@ -215,7 +215,7 @@ public class PheedSyndicationExtensionTest
     ///A test for op_LessThan
     ///</summary>
     [TestMethod]
-    public void Pheed_op_LessThanTest()
+    public void PheedOpLessThanTest()
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
@@ -228,7 +228,7 @@ public class PheedSyndicationExtensionTest
     ///A test for Context
     ///</summary>
     [TestMethod, Ignore]
-    public void Pheed_ContextTest()
+    public void PheedContextTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
         PheedSyndicationExtensionContext expected = CreateContext1();

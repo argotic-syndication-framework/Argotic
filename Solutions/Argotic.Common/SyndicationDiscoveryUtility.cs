@@ -100,14 +100,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(source);
 
         using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new WebRequestOptions(credentials));
-        if (response != null)
-        {
-            return SyndicationDiscoveryUtility.SyndicationContentFormatGet(response.GetResponseStream());
-        }
-        else
-        {
-            return SyndicationContentFormat.None;
-        }
+        return response != null ? SyndicationDiscoveryUtility.SyndicationContentFormatGet(response.GetResponseStream()) : SyndicationContentFormat.None;
     }
 
     /// <summary>

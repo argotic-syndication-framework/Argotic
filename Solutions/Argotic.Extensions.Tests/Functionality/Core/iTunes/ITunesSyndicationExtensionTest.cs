@@ -15,7 +15,9 @@ using System.Xml;
 public class ITunesSyndicationExtensionTest
 {
 
-    const string namespc = @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd""";
+    const string namespc = """
+                           xmlns:itunes="http://www.itunes.com/dtds/podcast-1.0.dtd"
+                           """;
 
     private readonly string nycText = "<subtitle xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">That song you like.</subtitle>" + Environment.NewLine
                                                                                                                                       + "<author xmlns=\"http://www.itunes.com/dtds/podcast-1.0.dtd\">BigStar</author>" + Environment.NewLine
@@ -47,14 +49,14 @@ public class ITunesSyndicationExtensionTest
     {
         ITunesSyndicationExtension target = new ITunesSyndicationExtension();
         Assert.IsNotNull(target);
-        Assert.IsInstanceOfType(target, typeof(ITunesSyndicationExtension));
+        Assert.IsInstanceOfType<ITunesSyndicationExtension>(target);
     }
 
     /// <summary>
     ///A test for CompareTo
     ///</summary>
     [TestMethod]
-    public void ITunes_CompareToTest()
+    public void ITunesCompareToTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -67,7 +69,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for ConvertDecimalToDegreesMinutesSeconds
     ///</summary>
     [TestMethod]
-    public void ITunes_ExplicitMaterialAsStringTest()
+    public void ITunesExplicitMaterialAsStringTest()
     {
         ITunesExplicitMaterial value = ITunesExplicitMaterial.Clean;
         string expected = "clean";
@@ -79,7 +81,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for ConvertDegreesMinutesSecondsToDecimal
     ///</summary>
     [TestMethod]
-    public void ITunes_ExplicitMaterialByNameTest()
+    public void ITunesExplicitMaterialByNameTest()
     {
         ITunesExplicitMaterial expected = ITunesExplicitMaterial.Clean;
         ITunesExplicitMaterial actual = ITunesSyndicationExtension.ExplicitMaterialByName("clean");
@@ -90,7 +92,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for Equals
     ///</summary>
     [TestMethod]
-    public void ITunes_EqualsTest()
+    public void ITunesEqualsTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -103,7 +105,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for GetHashCode
     ///</summary>
     [TestMethod, Ignore]
-    public void ITunes_GetHashCodeTest()
+    public void ITunesGetHashCodeTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
         int expected = -765758449;
@@ -115,7 +117,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for Load
     ///</summary>
     [TestMethod, Ignore]
-    public void ITunes_LoadTest()
+    public void ITunesLoadTest()
     {
         ITunesSyndicationExtension target = new ITunesSyndicationExtension(); // TODO: Initialize to an appropriate value
         NameTable nt = new NameTable();
@@ -129,7 +131,7 @@ public class ITunesSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void ITunes_CreateXmlTest()
+    public void ITunesCreateXmlTest()
     {
         ITunesSyndicationExtension itunes = CreateExtension1();
 
@@ -140,7 +142,7 @@ public class ITunesSyndicationExtensionTest
 
 
     [TestMethod]
-    public void ITunes_FullTest()
+    public void ITunesFullTest()
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
@@ -166,7 +168,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for MatchByType
     ///</summary>
     [TestMethod]
-    public void ITunes_MatchByTypeTest()
+    public void ITunesMatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
         bool expected = true;
@@ -178,7 +180,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for ToString
     ///</summary>
     [TestMethod]
-    public void ITunes_ToStringTest()
+    public void ITunesToStringTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
         string expected = nycText;
@@ -190,7 +192,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for WriteTo
     ///</summary>
     [TestMethod]
-    public void ITunes_WriteToTest()
+    public void ITunesWriteToTest()
     {
         using StringWriter sw = new StringWriter();
         using XmlWriter writer = new XmlTextWriter(sw);
@@ -204,7 +206,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for op_Equality
     ///</summary>
     [TestMethod]
-    public void ITunes_op_EqualityTest_Failure()
+    public void ITunesOpEqualityTestFailure()
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
@@ -213,7 +215,7 @@ public class ITunesSyndicationExtensionTest
         Assert.AreEqual(expected, actual);
     }
 
-    public void ITunes_op_EqualityTest_Success()
+    public void ITunesOpEqualityTestSuccess()
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension1();
@@ -226,7 +228,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for op_GreaterThan
     ///</summary>
     [TestMethod]
-    public void ITunes_op_GreaterThanTest()
+    public void ITunesOpGreaterThanTest()
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
@@ -240,7 +242,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for op_Inequality
     ///</summary>
     [TestMethod]
-    public void ITunes_op_InequalityTest()
+    public void ITunesOpInequalityTest()
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
@@ -253,7 +255,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for op_LessThan
     ///</summary>
     [TestMethod]
-    public void ITunes_op_LessThanTest()
+    public void ITunesOpLessThanTest()
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
@@ -266,7 +268,7 @@ public class ITunesSyndicationExtensionTest
     ///A test for Context
     ///</summary>
     [TestMethod, Ignore]
-    public void ITunes_ContextTest()
+    public void ITunesContextTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
         ITunesSyndicationExtensionContext expected = CreateContext1();

@@ -1316,7 +1316,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <param name="obj">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
     /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object obj)
+    public int CompareTo(object? obj)
     {
         if (obj == null)
         {
@@ -1399,7 +1399,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object obj)
+    public override bool Equals(object? obj)
     {
         if (obj is not RssChannel)
         {

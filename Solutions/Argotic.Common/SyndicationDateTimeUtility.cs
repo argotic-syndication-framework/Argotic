@@ -121,10 +121,10 @@ public static class SyndicationDateTimeUtility
         {
             zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" GMT", StringComparison.Ordinal) + 1)], "+00:00");
         }
-        else if (value.Contains(" GMT"))
+        else if (value.Contains(" GMT", StringComparison.OrdinalIgnoreCase))
         {
             int GMT_index = value.LastIndexOf(" GMT", StringComparison.Ordinal);
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(GMT_index + 1)], value.Substring(GMT_index + 4, value.Length - GMT_index - 4));
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(GMT_index + 1)], value[(GMT_index + 4)..]);
         }
         else if (value.EndsWith(" EST", StringComparison.OrdinalIgnoreCase))
         {

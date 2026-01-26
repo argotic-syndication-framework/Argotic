@@ -39,7 +39,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for CompareTo
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_CompareToTest()
+    public void BasicGeocodingCompareToTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -52,7 +52,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for ConvertDecimalToDegreesMinutesSeconds
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_ConvertDecimalToDegreesMinutesSecondsTest()
+    public void BasicGeocodingConvertDecimalToDegreesMinutesSecondsTest()
     {
         decimal value = new decimal(12.582438888888888888888888888889);
         string expected = "12°34'56.78\"";
@@ -76,7 +76,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for Equals
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_EqualsTest()
+    public void BasicGeocodingEqualsTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         object obj = CreateExtension1();
@@ -89,7 +89,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for GetHashCode
     ///</summary>
     [TestMethod, Ignore]
-    public void BasicGeocoding_GetHashCodeTest()
+    public void BasicGeocodingGetHashCodeTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         int expected = -1112179344;
@@ -101,7 +101,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for Load
     ///</summary>
     [TestMethod, Ignore]
-    public void BasicGeocoding_LoadTest()
+    public void BasicGeocodingLoadTest()
     {
         BasicGeocodingSyndicationExtension target = new BasicGeocodingSyndicationExtension(); // TODO: Initialize to an appropriate value
         NameTable nt = new NameTable();
@@ -132,7 +132,7 @@ public class BasicGeocodingSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void BasicGeocoding_CreateXmlTest()
+    public void BasicGeocodingCreateXmlTest()
     {
         BasicGeocodingSyndicationExtension geo = new BasicGeocodingSyndicationExtension
         {
@@ -150,7 +150,7 @@ public class BasicGeocodingSyndicationExtensionTest
 
 
     [TestMethod]
-    public void BasicGeocoding_FullTest()
+    public void BasicGeocodingFullTest()
     {
         string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
 
@@ -175,7 +175,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for MatchByType
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_MatchByTypeTest()
+    public void BasicGeocodingMatchByTypeTest()
     {
         ISyndicationExtension extension = CreateExtension1();
         bool expected = true;
@@ -187,7 +187,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for ToString
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_ToStringTest()
+    public void BasicGeocodingToStringTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         string expected = nycText;
@@ -199,7 +199,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for WriteTo
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_WriteToTest()
+    public void BasicGeocodingWriteToTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         using StringWriter sw = new StringWriter();
@@ -213,7 +213,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for op_Equality
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_op_EqualityTest_Failure()
+    public void BasicGeocodingOpEqualityTestFailure()
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
@@ -222,7 +222,7 @@ public class BasicGeocodingSyndicationExtensionTest
         Assert.AreEqual(expected, actual);
     }
 
-    public void BasicGeocoding_op_EqualityTest_Success()
+    public void BasicGeocodingOpEqualityTestSuccess()
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension1();
@@ -235,7 +235,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for op_GreaterThan
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_op_GreaterThanTest()
+    public void BasicGeocodingOpGreaterThanTest()
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
@@ -249,7 +249,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for op_Inequality
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_op_InequalityTest()
+    public void BasicGeocodingOpInequalityTest()
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
@@ -262,7 +262,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for op_LessThan
     ///</summary>
     [TestMethod]
-    public void BasicGeocoding_op_LessThanTest()
+    public void BasicGeocodingOpLessThanTest()
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
@@ -275,7 +275,7 @@ public class BasicGeocodingSyndicationExtensionTest
     ///A test for Context
     ///</summary>
     [TestMethod, Ignore]
-    public void BasicGeocoding_ContextTest()
+    public void BasicGeocodingContextTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         BasicGeocodingSyndicationExtensionContext expected = CreateContext1();

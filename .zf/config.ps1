@@ -5,15 +5,9 @@ to provide the features needed when building a .NET solutions.
 
 $zerofailedExtensions = @(
     @{
-        # References the extension from its GitHub repository. If not already installed, the latest version from 'main' will be downloaded.
+        # References the extension from its GitHub repository. If not already installed, use latest version from 'main' will be downloaded.
         Name = "ZeroFailed.Build.DotNet"
         GitRepository = "https://github.com/zerofailed/ZeroFailed.Build.DotNet"
-        GitRef = "main"
-    }
-    @{
-        # References the extension from its GitHub repository. If not already installed, the latest version from 'main' will be downloaded.
-        Name = "ZeroFailed.Build.GitHub"
-        GitRepository = "https://github.com/zerofailed/ZeroFailed.Build.GitHub"
         GitRef = "main"
     }
 )
@@ -38,13 +32,10 @@ $SkipPackage = $false
 $SkipPublish = $false
 
 $SolutionToBuild = (Resolve-Path (Join-Path $here "./Solutions/Argotic.slnx")).Path
-$ProjectsToPublish = ""
+$ProjectsToPublish = @()
 $NugetPublishSource = property ZF_NUGET_PUBLISH_SOURCE "$here/_local-nuget-feed"
 $IncludeAssembliesInCodeCoverage = "Argotic.*"
-$ExcludeAssembliesInCodeCoverage = "Argotic.Extensions.Tests"
-
-$CreateGitHubRelease = $true
-$PublishNuGetPackagesAsGitHubReleaseArtefacts = $true
+$ExcludeAssembliesInCodeCoverage = "Argotic.*.Tests*"
 
 task . FullBuild
 

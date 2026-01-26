@@ -42,11 +42,11 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat documentFormat = SyndicationContentFormat.Opml;
+    private static readonly SyndicationContentFormat documentFormat = SyndicationContentFormat.Opml;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version documentVersion = new Version(2, 0);
+    private static readonly Version documentVersion = new Version(2, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -134,7 +134,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -202,7 +202,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             if (documentOutlines == null)
             {
-                documentOutlines = new Collection<OpmlOutline>();
+                documentOutlines = [];
             }
             return documentOutlines;
         }
@@ -593,10 +593,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
         this.LoadOperationInProgress = false;
     }
@@ -632,7 +629,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -1132,10 +1129,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         }
         SyndicationExtensionAdapter.WriteXmlNamespaceDeclarations(settings.SupportedExtensions, writer);
 
-        if (this.Head != null)
-        {
-            this.Head.WriteTo(writer);
-        }
+        this.Head?.WriteTo(writer);
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         writer.WriteStartElement("body");

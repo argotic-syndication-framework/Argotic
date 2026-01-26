@@ -35,11 +35,11 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomCategoryDocument;
+    private static readonly SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomCategoryDocument;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version documentVersion = new Version(1, 0);
+    private static readonly Version documentVersion = new Version(1, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -226,7 +226,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -285,7 +285,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -347,7 +347,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         {
             if (documentCategories == null)
             {
-                documentCategories = new Collection<AtomCategory>();
+                documentCategories = [];
             }
             return documentCategories;
         }
@@ -852,10 +852,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
 
         this.LoadOperationInProgress = false;
@@ -896,7 +893,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<AtomCategory> list = new List<AtomCategory>(this.Categories);
+        List<AtomCategory> list = [.. this.Categories];
         return list.Find(match);
     }
 

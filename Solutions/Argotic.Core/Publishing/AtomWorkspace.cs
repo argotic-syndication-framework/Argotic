@@ -166,7 +166,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -225,7 +225,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -268,7 +268,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         {
             if (workspaceCollections == null)
             {
-                workspaceCollections = new Collection<AtomMemberResources>();
+                workspaceCollections = [];
             }
             return workspaceCollections;
         }
@@ -382,7 +382,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<AtomMemberResources> list = new List<AtomMemberResources>(this.Collections);
+        List<AtomMemberResources> list = [.. this.Collections];
         return list.Find(match);
     }
 
@@ -501,10 +501,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         writer.WriteStartElement("workspace", AtomUtility.AtomPublishingNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (this.Title != null)
-        {
-            this.Title.WriteTo(writer, "title");
-        }
+        this.Title?.WriteTo(writer, "title");
 
         foreach (AtomMemberResources collection in this.Collections)
         {

@@ -23,23 +23,23 @@ public class TrackbackMessageSentEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold the Trackback ping request payload that was sent.
     /// </summary>
-    private TrackbackMessage eventMessage;
+    private readonly TrackbackMessage eventMessage;
     /// <summary>
     /// Private member to hold the response to the Trackback ping request.
     /// </summary>
-    private TrackbackResponse eventResponse;
+    private readonly TrackbackResponse eventResponse;
     /// <summary>
     /// Private member to hold the location of the host computer that the Trackback ping request was sent to.
     /// </summary>
-    private Uri eventHost;
+    private readonly Uri eventHost;
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
-    private WebRequestOptions eventOptions = new WebRequestOptions();
+    private readonly WebRequestOptions eventOptions = new WebRequestOptions();
     /// <summary>
     /// Private member to hold an object containing state information that was passed to the asynchronous send operation.
     /// </summary>
-    private object eventUserToken;
+    private readonly object eventUserToken;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackMessageSentEventArgs"/> class.

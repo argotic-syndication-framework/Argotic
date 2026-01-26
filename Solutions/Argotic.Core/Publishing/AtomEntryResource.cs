@@ -319,10 +319,7 @@ public class AtomEntryResource : AtomEntry
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
 
         this.LoadOperationInProgress = false;
@@ -460,7 +457,7 @@ public class AtomEntryResource : AtomEntry
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(settings);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
 
         if (this.EditedOn != DateTime.MinValue)
         {

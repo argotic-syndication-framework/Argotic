@@ -91,7 +91,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -378,7 +378,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -723,20 +723,14 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("comments", this.Comments.ToString());
         }
 
-        if (this.Guid != null)
-        {
-            this.Guid.WriteTo(writer);
-        }
+        this.Guid?.WriteTo(writer);
 
         if (this.PublicationDate != DateTime.MinValue)
         {
             writer.WriteElementString("pubDate", SyndicationDateTimeUtility.ToRfc822DateTime(this.PublicationDate));
         }
 
-        if (this.Source != null)
-        {
-            this.Source.WriteTo(writer);
-        }
+        this.Source?.WriteTo(writer);
 
         foreach (RssCategory category in this.Categories)
         {

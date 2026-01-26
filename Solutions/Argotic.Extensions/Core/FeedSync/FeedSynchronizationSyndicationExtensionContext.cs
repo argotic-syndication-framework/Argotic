@@ -98,14 +98,8 @@ public class FeedSynchronizationSyndicationExtensionContext
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
-        if (this.Sharing != null)
-        {
-            this.Sharing.WriteTo(writer);
-        }
+        this.Sharing?.WriteTo(writer);
 
-        if (this.Synchronization != null)
-        {
-            this.Synchronization.WriteTo(writer);
-        }
+        this.Synchronization?.WriteTo(writer);
     }
 }

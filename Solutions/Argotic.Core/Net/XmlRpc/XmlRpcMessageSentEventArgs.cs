@@ -22,23 +22,23 @@ public class XmlRpcMessageSentEventArgs : EventArgs, IComparable
     /// <summary>
     /// Private member to hold the remote procedure call payload that was sent.
     /// </summary>
-    private XmlRpcMessage eventMessage;
+    private readonly XmlRpcMessage eventMessage;
     /// <summary>
     /// Private member to hold the response to the remote procedure call.
     /// </summary>
-    private XmlRpcResponse eventResponse;
+    private readonly XmlRpcResponse eventResponse;
     /// <summary>
     /// Private member to hold the location of the host computer that the remote procedure call was sent to.
     /// </summary>
-    private Uri eventHost;
+    private readonly Uri eventHost;
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
-    private WebRequestOptions eventOptions = new WebRequestOptions();
+    private readonly WebRequestOptions eventOptions = new WebRequestOptions();
     /// <summary>
     /// Private member to hold an object containing state information that was passed to the asynchronous send operation.
     /// </summary>
-    private object eventUserToken;
+    private readonly object eventUserToken;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcMessageSentEventArgs"/> class.

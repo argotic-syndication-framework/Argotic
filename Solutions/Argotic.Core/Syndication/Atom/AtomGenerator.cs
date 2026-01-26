@@ -90,7 +90,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -206,7 +206,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 

@@ -682,10 +682,7 @@ public class MyCustomRssFeed : ISyndicationResource
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
         this.LoadOperationInProgress = false;
     }

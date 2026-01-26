@@ -24,19 +24,19 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication resource.
     /// </summary>
     [NonSerialized]
-    private XPathNavigator eventNavigator;
+    private readonly XPathNavigator eventNavigator;
     /// <summary>
     /// Private member to hold the URI that the syndication resource information was retrieved from.
     /// </summary>
-    private Uri eventSource;
+    private readonly Uri eventSource;
     /// <summary>
     /// Private member to hold the web request options.
     /// </summary>
-    private WebRequestOptions eventOptions = new WebRequestOptions();
+    private readonly WebRequestOptions eventOptions = new WebRequestOptions();
     /// <summary>
     /// Private member to hold an object containing state information that was passed to the asynchronous load operation.
     /// </summary>
-    private object eventUserToken;
+    private readonly object eventUserToken;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.

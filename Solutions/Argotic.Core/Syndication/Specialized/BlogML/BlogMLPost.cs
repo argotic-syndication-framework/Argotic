@@ -158,7 +158,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -639,7 +639,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -891,15 +891,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         this.Content.WriteTo(writer, "content");
 
-        if (this.Name != null)
-        {
-            this.Name.WriteTo(writer, "post-name");
-        }
+        this.Name?.WriteTo(writer, "post-name");
 
-        if (this.Excerpt != null)
-        {
-            this.Excerpt.WriteTo(writer, "excerpt");
-        }
+        this.Excerpt?.WriteTo(writer, "excerpt");
 
         if (this.Categories.Count > 0)
         {

@@ -9,7 +9,7 @@ using Argotic.Syndication;
 [TestClass]
 public class GenericSyndicationFeedTest
 {
-    private string namespc = @"xmlns:app=""http://www.wdr.de/rss/1.0/modules/app/1.0/""";
+    private readonly string namespc = @"xmlns:app=""http://www.wdr.de/rss/1.0/modules/app/1.0/""";
 
     private const string strExtXml = "<app:sportverlagID>ma9242941</app:sportverlagID>"
                                      + "<app:tags>Fußball, Bundesliga, Netcast, 11. Spieltag, Saison 2021/2022, Zusammenfassung, VFL, TSG</app:tags>"

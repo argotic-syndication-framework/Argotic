@@ -42,11 +42,11 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat feedFormat = SyndicationContentFormat.Atom;
+    private static readonly SyndicationContentFormat feedFormat = SyndicationContentFormat.Atom;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version feedVersion = new Version(1, 0);
+    private static readonly Version feedVersion = new Version(1, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -301,7 +301,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -393,7 +393,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             if (feedEntries == null)
             {
-                feedEntries = new Collection<AtomEntry>();
+                feedEntries = [];
             }
             return feedEntries;
         }
@@ -1176,10 +1176,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
 
         this.LoadOperationInProgress = false;
@@ -1220,7 +1217,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -1773,14 +1770,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
 
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (this.Id != null)
-        {
-            this.Id.WriteTo(writer);
-        }
-        if (this.Title != null)
-        {
-            this.Title.WriteTo(writer, "title");
-        }
+        this.Id?.WriteTo(writer);
+        this.Title?.WriteTo(writer, "title");
         if (this.UpdatedOn != DateTime.MinValue)
         {
             writer.WriteElementString("updated", AtomUtility.AtomNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
@@ -1868,29 +1859,14 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         ArgumentNullException.ThrowIfNull(writer);
 
-        if (this.Generator != null)
-        {
-            this.Generator.WriteTo(writer);
-        }
+        this.Generator?.WriteTo(writer);
 
-        if (this.Icon != null)
-        {
-            this.Icon.WriteTo(writer);
-        }
+        this.Icon?.WriteTo(writer);
 
-        if (this.Logo != null)
-        {
-            this.Logo.WriteTo(writer);
-        }
+        this.Logo?.WriteTo(writer);
 
-        if (this.Rights != null)
-        {
-            this.Rights.WriteTo(writer, "rights");
-        }
+        this.Rights?.WriteTo(writer, "rights");
 
-        if (this.Subtitle != null)
-        {
-            this.Subtitle.WriteTo(writer, "subtitle");
-        }
+        this.Subtitle?.WriteTo(writer, "subtitle");
     }
 }

@@ -46,11 +46,11 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat feedFormat = SyndicationContentFormat.Atom;
+    private static readonly SyndicationContentFormat feedFormat = SyndicationContentFormat.Atom;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version feedVersion = new Version(1, 0);
+    private static readonly Version feedVersion = new Version(1, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -200,7 +200,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -894,10 +894,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
 
         this.LoadOperationInProgress = false;
@@ -938,7 +935,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -1440,14 +1437,8 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
 
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (this.Id != null)
-        {
-            this.Id.WriteTo(writer);
-        }
-        if (this.Title != null)
-        {
-            this.Title.WriteTo(writer, "title");
-        }
+        this.Id?.WriteTo(writer);
+        this.Title?.WriteTo(writer, "title");
         if (this.UpdatedOn != DateTime.MinValue)
         {
             writer.WriteElementString("updated", AtomUtility.AtomNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
@@ -1525,29 +1516,17 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         ArgumentNullException.ThrowIfNull(writer);
 
-        if (this.Content != null)
-        {
-            this.Content.WriteTo(writer);
-        }
+        this.Content?.WriteTo(writer);
 
         if (this.PublishedOn != DateTime.MinValue)
         {
             writer.WriteElementString("published", AtomUtility.AtomNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.PublishedOn));
         }
 
-        if (this.Rights != null)
-        {
-            this.Rights.WriteTo(writer, "rights");
-        }
+        this.Rights?.WriteTo(writer, "rights");
 
-        if (this.Source != null)
-        {
-            this.Source.WriteTo(writer);
-        }
+        this.Source?.WriteTo(writer);
 
-        if (this.Summary != null)
-        {
-            this.Summary.WriteTo(writer, "summary");
-        }
+        this.Summary?.WriteTo(writer, "summary");
     }
 }

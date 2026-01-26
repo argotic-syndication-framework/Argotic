@@ -16,7 +16,7 @@ public class SyndicationResourceMetadata : IComparable
     /// <summary>
     /// Private member to hold the XML namespaces declared in the syndication resource's root element.
     /// </summary>
-    private Dictionary<string, string> resourceNamespaces = [];
+    private readonly Dictionary<string, string> resourceNamespaces = [];
     /// <summary>
     /// Private member to hold the version of the syndication specification that the resource conforms to.
     /// </summary>

@@ -124,7 +124,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -183,7 +183,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 

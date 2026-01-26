@@ -36,11 +36,11 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat documentFormat = SyndicationContentFormat.BlogML;
+    private static readonly SyndicationContentFormat documentFormat = SyndicationContentFormat.BlogML;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version documentVersion = new Version(2, 0);
+    private static readonly Version documentVersion = new Version(2, 0);
     /// <summary>
     /// Private member to hold HTTP web request used by asynchronous load operations.
     /// </summary>
@@ -136,7 +136,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -251,7 +251,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             if (documentPosts == null)
             {
-                documentPosts = new Collection<BlogMLPost>();
+                documentPosts = [];
             }
             return documentPosts;
         }
@@ -665,10 +665,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
         this.LoadOperationInProgress = false;
     }
@@ -704,7 +701,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -1198,15 +1195,9 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
             writer.WriteAttributeString("root-url", this.RootUrl.ToString());
         }
 
-        if (this.Title != null)
-        {
-            this.Title.WriteTo(writer, "title");
-        }
+        this.Title?.WriteTo(writer, "title");
 
-        if (this.Subtitle != null)
-        {
-            this.Subtitle.WriteTo(writer, "sub-title");
-        }
+        this.Subtitle?.WriteTo(writer, "sub-title");
 
         if (this.Authors.Count > 0)
         {

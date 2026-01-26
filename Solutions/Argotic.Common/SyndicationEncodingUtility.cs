@@ -281,10 +281,7 @@ public static class SyndicationEncodingUtility
             }
         }
 
-        if (options != null)
-        {
-            options.ApplyOptions(request);
-        }
+        options?.ApplyOptions(request);
 
         return request;
     }

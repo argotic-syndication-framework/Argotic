@@ -37,11 +37,11 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomServiceDocument;
+    private static readonly SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomServiceDocument;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version documentVersion = new Version(1, 0);
+    private static readonly Version documentVersion = new Version(1, 0);
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -200,7 +200,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -259,7 +259,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -341,7 +341,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
         {
             if (documentWorkspaces == null)
             {
-                documentWorkspaces = new Collection<AtomWorkspace>();
+                documentWorkspaces = [];
             }
             return documentWorkspaces;
         }
@@ -756,10 +756,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
 
         this.LoadOperationInProgress = false;
@@ -800,7 +797,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<AtomWorkspace> list = new List<AtomWorkspace>(this.Workspaces);
+        List<AtomWorkspace> list = [.. this.Workspaces];
         return list.Find(match);
     }
 

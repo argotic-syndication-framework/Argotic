@@ -477,25 +477,13 @@ internal static class YahooMediaUtility
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(writer);
         YahooMediaSyndicationExtension extension = new YahooMediaSyndicationExtension();
-        if (source.Title != null)
-        {
-            source.Title.WriteTo(writer, "title");
-        }
+        source.Title?.WriteTo(writer, "title");
 
-        if (source.Description != null)
-        {
-            source.Description.WriteTo(writer, "description");
-        }
+        source.Description?.WriteTo(writer, "description");
 
-        if (source.Copyright != null)
-        {
-            source.Copyright.WriteTo(writer);
-        }
+        source.Copyright?.WriteTo(writer);
 
-        if (source.Player != null)
-        {
-            source.Player.WriteTo(writer);
-        }
+        source.Player?.WriteTo(writer);
 
         if (source.Keywords.Count > 0)
         {

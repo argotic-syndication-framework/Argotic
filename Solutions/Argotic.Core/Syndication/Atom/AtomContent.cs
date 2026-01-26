@@ -173,7 +173,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -353,7 +353,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 

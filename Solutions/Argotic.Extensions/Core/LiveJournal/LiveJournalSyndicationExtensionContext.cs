@@ -169,15 +169,9 @@ public class LiveJournalSyndicationExtensionContext
             writer.WriteEndElement();
         }
 
-        if (this.Mood != null)
-        {
-            this.Mood.WriteTo(writer);
-        }
+        this.Mood?.WriteTo(writer);
 
-        if (this.Security != null)
-        {
-            this.Security.WriteTo(writer);
-        }
+        this.Security?.WriteTo(writer);
 
         if (this.IsPreformatted)
         {

@@ -553,10 +553,7 @@ public class XmlRpcClient
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
 
         this.SendOperationInProgress = false;
@@ -698,7 +695,7 @@ public class XmlRpcClient
         httpRequest.ContentLength = payloadData.Length;
         httpRequest.ContentType = string.Format(null, "text/xml; charset={0}", message.Encoding.WebName);
         httpRequest.UserAgent = userAgent;
-        if (options != null) options.ApplyOptions(httpRequest);
+        options?.ApplyOptions(httpRequest);
 
         if (useDefaultCredentials)
         {

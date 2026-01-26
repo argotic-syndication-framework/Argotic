@@ -56,7 +56,7 @@ public class GenericSyndicationFeed
     /// <summary>
     /// Private member to hold the collection of items that comprise the distinct content published in the feed.
     /// </summary>
-    private IEnumerable<GenericSyndicationItem> feedItems = new Collection<GenericSyndicationItem>();
+    private IEnumerable<GenericSyndicationItem> feedItems = [];
     /// <summary>
     /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
@@ -158,7 +158,7 @@ public class GenericSyndicationFeed
         {
             if (feedItems == null)
             {
-                feedItems = new Collection<GenericSyndicationItem>();
+                feedItems = [];
             }
             return feedItems;
         }
@@ -977,10 +977,7 @@ public class GenericSyndicationFeed
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
         this.LoadOperationInProgress = false;
     }

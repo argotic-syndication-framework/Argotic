@@ -37,11 +37,11 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static SyndicationContentFormat documentFormat = SyndicationContentFormat.Opml;
+    private static readonly SyndicationContentFormat documentFormat = SyndicationContentFormat.Opml;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
-    private static Version documentVersion = new Version(1, 0);
+    private static readonly Version documentVersion = new Version(1, 0);
     /// <summary>
     /// Private member to hold HTTP web request used by asynchronous load operations.
     /// </summary>
@@ -122,7 +122,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -208,7 +208,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             if (documentInterfaces == null)
             {
-                documentInterfaces = new Collection<RsdApplicationInterface>();
+                documentInterfaces = [];
             }
             return documentInterfaces;
         }
@@ -576,10 +576,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
         this.LoadOperationInProgress = false;
     }
@@ -616,7 +613,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 

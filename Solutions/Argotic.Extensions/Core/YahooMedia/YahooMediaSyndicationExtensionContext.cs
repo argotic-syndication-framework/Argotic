@@ -79,7 +79,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (extensionContents == null)
             {
-                extensionContents = new Collection<YahooMediaContent>();
+                extensionContents = [];
             }
             return extensionContents;
         }
@@ -111,7 +111,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         {
             if (extensionGroups == null)
             {
-                extensionGroups = new Collection<YahooMediaGroup>();
+                extensionGroups = [];
             }
             return extensionGroups;
         }

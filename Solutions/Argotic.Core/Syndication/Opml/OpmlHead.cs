@@ -48,7 +48,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -193,7 +193,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -357,10 +357,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("dateModified", SyndicationDateTimeUtility.ToRfc822DateTime(this.ModifiedOn));
         }
 
-        if (this.Owner != null)
-        {
-            this.Owner.WriteTo(writer);
-        }
+        this.Owner?.WriteTo(writer);
 
         if (this.Documentation != null)
         {
@@ -385,10 +382,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("vertScrollState", this.VerticalScrollState.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.Window != null)
-        {
-            this.Window.WriteTo(writer);
-        }
+        this.Window?.WriteTo(writer);
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         writer.WriteEndElement();

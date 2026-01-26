@@ -56,7 +56,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
     /// </summary>
-    private static Uri channelDocumentation = new Uri("http://www.rssboard.org/rss-specification");
+    private static readonly Uri channelDocumentation = new Uri("http://www.rssboard.org/rss-specification");
     /// <summary>
     /// Private member to hold a value that credits the software that created the feed.
     /// </summary>
@@ -174,7 +174,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -355,7 +355,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             if (channelItems == null)
             {
-                channelItems = new Collection<RssItem>();
+                channelItems = [];
             }
             return channelItems;
         }
@@ -699,7 +699,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -858,10 +858,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
         writer.WriteElementString("description", this.Description);
 
-        if (this.Cloud != null)
-        {
-            this.Cloud.WriteTo(writer);
-        }
+        this.Cloud?.WriteTo(writer);
 
         if (!string.IsNullOrEmpty(this.Copyright))
         {
@@ -875,10 +872,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("generator", this.Generator);
         }
 
-        if (this.Image != null)
-        {
-            this.Image.WriteTo(writer);
-        }
+        this.Image?.WriteTo(writer);
 
         if (this.Language != null)
         {
@@ -905,10 +899,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
             writer.WriteElementString("rating", this.Rating);
         }
 
-        if (this.TextInput != null)
-        {
-            this.TextInput.WriteTo(writer);
-        }
+        this.TextInput?.WriteTo(writer);
 
         if (this.TimeToLive != int.MinValue)
         {

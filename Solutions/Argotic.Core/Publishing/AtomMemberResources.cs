@@ -142,7 +142,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -201,7 +201,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         ArgumentNullException.ThrowIfNull(match);
 
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -719,10 +719,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
             writer.WriteAttributeString("href", this.Uri.ToString());
         }
 
-        if (this.Title != null)
-        {
-            this.Title.WriteTo(writer, "title");
-        }
+        this.Title?.WriteTo(writer, "title");
 
         foreach (AtomAcceptedMediaRange mediaRange in this.Accepts)
         {

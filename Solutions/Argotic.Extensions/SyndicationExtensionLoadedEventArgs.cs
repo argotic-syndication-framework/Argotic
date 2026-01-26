@@ -26,11 +26,11 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication extension.
     /// </summary>
     [NonSerialized]
-    private XPathNavigator eventNavigator;
+    private readonly XPathNavigator eventNavigator;
     /// <summary>
     /// Private member to hold the syndication extension that resulted from the load operation.
     /// </summary>
-    private ISyndicationExtension eventExtension;
+    private readonly ISyndicationExtension eventExtension;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class.

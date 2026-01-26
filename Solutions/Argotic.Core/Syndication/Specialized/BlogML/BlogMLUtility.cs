@@ -366,9 +366,6 @@ internal static class BlogMLUtility
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(writer);
-        if (source.Title != null)
-        {
-            source.Title.WriteTo(writer, "title");
-        }
+        source.Title?.WriteTo(writer, "title");
     }
 }

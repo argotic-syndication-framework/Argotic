@@ -305,10 +305,7 @@ public class TrackbackClient
     {
         if (timedOut)
         {
-            if (asyncHttpWebRequest != null)
-            {
-                asyncHttpWebRequest.Abort();
-            }
+            asyncHttpWebRequest?.Abort();
         }
 
         this.SendOperationInProgress = false;
@@ -442,7 +439,7 @@ public class TrackbackClient
         httpRequest.ContentLength = payloadData.Length;
         httpRequest.ContentType = string.Format(null, "application/x-www-form-urlencoded; charset={0}", message.Encoding.WebName);
         httpRequest.UserAgent = userAgent;
-        if (options != null) options.ApplyOptions(httpRequest);
+        options?.ApplyOptions(httpRequest);
 
         if (useDefaultCredentials)
         {

@@ -126,7 +126,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
+                objectSyndicationExtensions = [];
             }
             return objectSyndicationExtensions;
         }
@@ -340,7 +340,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = new List<ISyndicationExtension>(this.Extensions);
+        List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
@@ -461,45 +461,24 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         writer.WriteStartElement("source", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (this.Id != null)
-        {
-            this.Id.WriteTo(writer);
-        }
+        this.Id?.WriteTo(writer);
 
-        if (this.Title != null)
-        {
-            this.Title.WriteTo(writer, "title");
-        }
+        this.Title?.WriteTo(writer, "title");
 
         if (this.UpdatedOn != DateTime.MinValue)
         {
             writer.WriteElementString("updated", AtomUtility.AtomNamespace, SyndicationDateTimeUtility.ToRfc3339DateTime(this.UpdatedOn));
         }
 
-        if (this.Generator != null)
-        {
-            this.Generator.WriteTo(writer);
-        }
+        this.Generator?.WriteTo(writer);
 
-        if (this.Icon != null)
-        {
-            this.Icon.WriteTo(writer);
-        }
+        this.Icon?.WriteTo(writer);
 
-        if (this.Logo != null)
-        {
-            this.Logo.WriteTo(writer);
-        }
+        this.Logo?.WriteTo(writer);
 
-        if (this.Rights != null)
-        {
-            this.Rights.WriteTo(writer, "rights");
-        }
+        this.Rights?.WriteTo(writer, "rights");
 
-        if (this.Subtitle != null)
-        {
-            this.Subtitle.WriteTo(writer, "subtitle");
-        }
+        this.Subtitle?.WriteTo(writer, "subtitle");
 
         foreach (AtomPersonConstruct author in this.Authors)
         {

@@ -676,7 +676,7 @@ public static class SyndicationDiscoveryUtility
         httpRequest.UserAgent = frameworkUserAgent;
         httpRequest.IfModifiedSince = lastModified;
         httpRequest.Headers.Add(HttpRequestHeader.IfNoneMatch, entityTag);
-        if (options != null) options.ApplyOptions(httpRequest);
+        options?.ApplyOptions(httpRequest);
 
         try
         {

@@ -14,11 +14,11 @@ public class GenericSyndicationCategory : IComparable
     /// <summary>
     /// Private member to hold a string that identifies a hierarchical position in the taxonomy.
     /// </summary>
-    private string categoryTerm = string.Empty;
+    private readonly string categoryTerm = string.Empty;
     /// <summary>
     /// Private member to hold a string that identifies the categorization scheme.
     /// </summary>
-    private string categoryScheme = string.Empty;
+    private readonly string categoryScheme = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
     /// </summary>

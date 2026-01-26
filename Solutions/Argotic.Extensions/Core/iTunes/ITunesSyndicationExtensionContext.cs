@@ -258,10 +258,7 @@ public class ITunesSyndicationExtensionContext
             writer.WriteElementString("summary", xmlNamespace, this.Summary);
         }
 
-        if (this.Owner != null)
-        {
-            this.Owner.WriteTo(writer);
-        }
+        this.Owner?.WriteTo(writer);
 
         if (this.Image != null)
         {

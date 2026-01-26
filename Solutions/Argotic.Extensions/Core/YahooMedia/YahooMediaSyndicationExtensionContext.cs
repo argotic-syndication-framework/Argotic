@@ -106,10 +106,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (extensionGroups == null)
-            {
-                extensionGroups = [];
-            }
+            extensionGroups ??= [];
             return extensionGroups;
         }
 
@@ -131,10 +128,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (mediaObjectCategories == null)
-            {
-                mediaObjectCategories = [];
-            }
+            mediaObjectCategories ??= [];
             return mediaObjectCategories;
         }
     }
@@ -163,10 +157,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (mediaObjectCredits == null)
-            {
-                mediaObjectCredits = [];
-            }
+            mediaObjectCredits ??= [];
             return mediaObjectCredits;
         }
     }
@@ -194,10 +185,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (mediaObjectHashes == null)
-            {
-                mediaObjectHashes = [];
-            }
+            mediaObjectHashes ??= [];
             return mediaObjectHashes;
         }
     }
@@ -216,10 +204,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (mediaObjectKeywords == null)
-            {
-                mediaObjectKeywords = [];
-            }
+            mediaObjectKeywords ??= [];
             return mediaObjectKeywords;
         }
     }
@@ -244,10 +229,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (mediaObjectRatings == null)
-            {
-                mediaObjectRatings = [];
-            }
+            mediaObjectRatings ??= [];
             return mediaObjectRatings;
         }
     }
@@ -263,10 +245,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (mediaObjectRestrictions == null)
-            {
-                mediaObjectRestrictions = [];
-            }
+            mediaObjectRestrictions ??= [];
             return mediaObjectRestrictions;
         }
     }
@@ -287,10 +266,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (mediaObjectTextSeries == null)
-            {
-                mediaObjectTextSeries = [];
-            }
+            mediaObjectTextSeries ??= [];
             return mediaObjectTextSeries;
         }
     }
@@ -309,10 +285,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     {
         get
         {
-            if (mediaObjectThumbnails == null)
-            {
-                mediaObjectThumbnails = [];
-            }
+            mediaObjectThumbnails ??= [];
             return mediaObjectThumbnails;
         }
     }
@@ -409,11 +382,10 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     public bool AddContent(YahooMediaContent content)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(content);
 
         ((Collection<YahooMediaContent>)this.Contents).Add(content);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -426,11 +398,10 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference.</exception>
     public bool AddGroup(YahooMediaGroup group)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(group);
 
         ((Collection<YahooMediaGroup>)this.Groups).Add(group);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }

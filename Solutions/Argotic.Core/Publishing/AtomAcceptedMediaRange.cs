@@ -153,13 +153,10 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
-
         ArgumentNullException.ThrowIfNull(extension);
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
-
+        bool wasAdded = true;
         return wasAdded;
     }
 
@@ -278,18 +275,14 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(XPathNavigator source)
     {
-        bool wasLoaded = false;
-
         ArgumentNullException.ThrowIfNull(source);
 
         if (AtomUtility.FillCommonObjectAttributes(this, source))
         {
-            wasLoaded = true;
         }
 
         this.MediaRange = !string.IsNullOrEmpty(source.Value) ? source.Value.Trim() : string.Empty;
-        wasLoaded = true;
-
+        bool wasLoaded = true;
         return wasLoaded;
     }
 

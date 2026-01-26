@@ -181,11 +181,9 @@ public static class SyndicationDiscoveryUtility
     public static SyndicationContentFormat SyndicationContentFormatGet(XPathNavigator navigator)
     {
         SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
-        XPathNavigator source = null;
-
         ArgumentNullException.ThrowIfNull(navigator);
 
-        source = navigator.CreateNavigator();
+        XPathNavigator source = navigator.CreateNavigator();
         if (string.IsNullOrEmpty(source.LocalName))
         {
             source.MoveToRoot();
@@ -238,8 +236,7 @@ public static class SyndicationDiscoveryUtility
             if (attribute.Groups is { Count: > 0 })
             {
                 string name = attribute.Groups[1].Value;
-                string value = string.Empty;
-
+                string value;
                 if (!string.IsNullOrEmpty(name))
                 {
                     value = attribute.Groups[2].Value;

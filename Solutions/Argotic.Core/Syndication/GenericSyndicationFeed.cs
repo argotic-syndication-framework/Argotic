@@ -101,10 +101,7 @@ public class GenericSyndicationFeed
     {
         get
         {
-            if (feedCategories == null)
-            {
-                feedCategories = [];
-            }
+            feedCategories ??= [];
             return feedCategories;
         }
     }
@@ -446,7 +443,7 @@ public class GenericSyndicationFeed
     public void Load(Stream stream, SyndicationResourceLoadSettings settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
-        XPathNavigator navigator = null;
+        XPathNavigator navigator;
         if (settings != null)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding);
@@ -455,7 +452,7 @@ public class GenericSyndicationFeed
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);
         }
-        this.Load(navigator, settings == null ? new SyndicationResourceLoadSettings() : settings, new SyndicationResourceLoadedEventArgs(navigator));
+        this.Load(navigator, settings ?? new SyndicationResourceLoadSettings(), new SyndicationResourceLoadedEventArgs(navigator));
     }
 
     /// <summary>
@@ -613,12 +610,12 @@ public class GenericSyndicationFeed
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator = null;
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
         }
+        XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

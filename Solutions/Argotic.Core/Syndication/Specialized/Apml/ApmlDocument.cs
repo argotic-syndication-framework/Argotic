@@ -119,10 +119,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 
@@ -220,10 +217,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (documentProfiles == null)
-            {
-                documentProfiles = [];
-            }
+            documentProfiles ??= [];
             return documentProfiles;
         }
 
@@ -591,10 +585,9 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -648,11 +641,10 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="profile"/> is a null reference.</exception>
     public bool AddProfile(ApmlProfile profile)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(profile);
 
         ((Collection<ApmlProfile>)this.Profiles).Add(profile);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -996,12 +988,12 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator = null;
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
         }
+        XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

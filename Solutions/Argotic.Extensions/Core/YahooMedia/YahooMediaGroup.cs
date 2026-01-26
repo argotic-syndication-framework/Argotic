@@ -141,10 +141,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectCredits == null)
-            {
-                mediaObjectCredits = [];
-            }
+            mediaObjectCredits ??= [];
             return mediaObjectCredits;
         }
     }
@@ -183,10 +180,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectHashes == null)
-            {
-                mediaObjectHashes = [];
-            }
+            mediaObjectHashes ??= [];
             return mediaObjectHashes;
         }
     }
@@ -205,10 +199,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectKeywords == null)
-            {
-                mediaObjectKeywords = [];
-            }
+            mediaObjectKeywords ??= [];
             return mediaObjectKeywords;
         }
     }
@@ -244,10 +235,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectRatings == null)
-            {
-                mediaObjectRatings = [];
-            }
+            mediaObjectRatings ??= [];
             return mediaObjectRatings;
         }
     }
@@ -263,10 +251,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectRestrictions == null)
-            {
-                mediaObjectRestrictions = [];
-            }
+            mediaObjectRestrictions ??= [];
             return mediaObjectRestrictions;
         }
     }
@@ -287,10 +272,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectTextSeries == null)
-            {
-                mediaObjectTextSeries = [];
-            }
+            mediaObjectTextSeries ??= [];
             return mediaObjectTextSeries;
         }
     }
@@ -309,10 +291,7 @@ public class YahooMediaGroup : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectThumbnails == null)
-            {
-                mediaObjectThumbnails = [];
-            }
+            mediaObjectThumbnails ??= [];
             return mediaObjectThumbnails;
         }
     }

@@ -82,10 +82,7 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 
@@ -253,10 +250,9 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }

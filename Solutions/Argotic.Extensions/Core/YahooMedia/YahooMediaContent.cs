@@ -514,10 +514,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectHashes == null)
-            {
-                mediaObjectHashes = [];
-            }
+            mediaObjectHashes ??= [];
             return mediaObjectHashes;
         }
     }
@@ -536,10 +533,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectKeywords == null)
-            {
-                mediaObjectKeywords = [];
-            }
+            mediaObjectKeywords ??= [];
             return mediaObjectKeywords;
         }
     }
@@ -575,10 +569,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectRatings == null)
-            {
-                mediaObjectRatings = [];
-            }
+            mediaObjectRatings ??= [];
             return mediaObjectRatings;
         }
     }
@@ -594,10 +585,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectRestrictions == null)
-            {
-                mediaObjectRestrictions = [];
-            }
+            mediaObjectRestrictions ??= [];
             return mediaObjectRestrictions;
         }
     }
@@ -618,10 +606,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectTextSeries == null)
-            {
-                mediaObjectTextSeries = [];
-            }
+            mediaObjectTextSeries ??= [];
             return mediaObjectTextSeries;
         }
     }
@@ -640,10 +625,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     {
         get
         {
-            if (mediaObjectThumbnails == null)
-            {
-                mediaObjectThumbnails = [];
-            }
+            mediaObjectThumbnails ??= [];
             return mediaObjectThumbnails;
         }
     }

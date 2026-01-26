@@ -667,10 +667,9 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -1033,12 +1032,12 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator = null;
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
         }
+        XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

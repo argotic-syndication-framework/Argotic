@@ -452,10 +452,9 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        wasLoaded = this.LoadCommon(source, manager);
+        bool wasLoaded = LoadCommon(source, manager);
 
         if (this.LoadOptionals(source, manager))
         {

@@ -171,10 +171,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 
@@ -349,10 +346,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (channelItems == null)
-            {
-                channelItems = new Collection<RssItem>();
-            }
+            channelItems ??= new Collection<RssItem>();
             return channelItems;
         }
 
@@ -544,10 +538,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (channelSkipDays == null)
-            {
-                channelSkipDays = [];
-            }
+            channelSkipDays ??= [];
             return channelSkipDays;
         }
     }
@@ -563,10 +554,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (channelSkipHours == null)
-            {
-                channelSkipHours = [];
-            }
+            channelSkipHours ??= [];
             return channelSkipHours;
         }
     }
@@ -671,10 +659,9 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -958,10 +945,9 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="item"/> is a null reference.</exception>
     public bool AddItem(RssItem item)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(item);
         ((Collection<RssItem>)this.Items).Add(item);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }

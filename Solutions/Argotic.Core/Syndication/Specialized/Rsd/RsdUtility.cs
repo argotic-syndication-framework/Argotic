@@ -35,9 +35,8 @@ internal static class RsdUtility
     /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
-        XmlNamespaceManager manager = null;
         ArgumentNullException.ThrowIfNull(nameTable);
-        manager = new XmlNamespaceManager(nameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(nameTable);
         manager.AddNamespace("rsd", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : RSD_NAMESPACE);
 
         return manager;
@@ -62,12 +61,11 @@ internal static class RsdUtility
     /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference.</exception>
     public static XPathNodeIterator SelectSafe(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
     {
-        XPathNodeIterator iterator = null;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentException.ThrowIfNullOrEmpty(xpath);
         ArgumentNullException.ThrowIfNull(resolver);
 
-        iterator = source.Select(xpath, resolver);
+        XPathNodeIterator iterator = source.Select(xpath, resolver);
 
         if (iterator is not { Count: > 0 })
         {
@@ -97,12 +95,11 @@ internal static class RsdUtility
     /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference.</exception>
     public static XPathNavigator SelectSafeSingleNode(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
     {
-        XPathNavigator navigator = null;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentException.ThrowIfNullOrEmpty(xpath);
         ArgumentNullException.ThrowIfNull(resolver);
 
-        navigator = source.SelectSingleNode(xpath, resolver);
+        XPathNavigator navigator = source.SelectSingleNode(xpath, resolver);
 
         if (navigator == null)
         {

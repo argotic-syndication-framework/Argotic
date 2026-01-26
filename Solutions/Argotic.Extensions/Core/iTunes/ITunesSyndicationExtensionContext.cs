@@ -120,10 +120,7 @@ public class ITunesSyndicationExtensionContext
     {
         get
         {
-            if (extensionKeywords == null)
-            {
-                extensionKeywords = [];
-            }
+            extensionKeywords ??= [];
             return extensionKeywords;
         }
     }

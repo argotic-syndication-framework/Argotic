@@ -198,8 +198,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <param name="e">A <see cref="SyndicationExtensionLoadedEventArgs"/> that contains the event data.</param>
     protected virtual void OnExtensionLoaded(SyndicationExtensionLoadedEventArgs e)
     {
-        EventHandler<SyndicationExtensionLoadedEventArgs> handler = null;
-        handler = this.Loaded;
+        EventHandler<SyndicationExtensionLoadedEventArgs> handler = Loaded;
 
         if (handler != null)
         {
@@ -220,9 +219,8 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     public XmlNamespaceManager CreateNamespaceManager(XPathNavigator navigator)
     {
-        XmlNamespaceManager manager = null;
         ArgumentNullException.ThrowIfNull(navigator);
-        manager = new XmlNamespaceManager(navigator.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(navigator.NameTable);
 
         Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
         string existingXmlNamespace = string.Empty;

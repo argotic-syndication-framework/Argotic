@@ -172,10 +172,9 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }

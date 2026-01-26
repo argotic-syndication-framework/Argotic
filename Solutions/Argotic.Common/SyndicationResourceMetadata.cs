@@ -151,11 +151,9 @@ public class SyndicationResourceMetadata : IComparable
     protected static bool TryParseApmlResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
-        XmlNamespaceManager manager = null;
-
         ArgumentNullException.ThrowIfNull(resource);
 
-        manager = new XmlNamespaceManager(resource.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("apml", "http://www.apml.org/apml-0.6");
 
         version = null;
@@ -188,11 +186,9 @@ public class SyndicationResourceMetadata : IComparable
     protected static bool TryParseAtomResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
-        XmlNamespaceManager manager = null;
-
         ArgumentNullException.ThrowIfNull(resource);
 
-        manager = new XmlNamespaceManager(resource.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
         manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
 
@@ -256,11 +252,9 @@ public class SyndicationResourceMetadata : IComparable
     protected static bool TryParseAtomPublishingCategoriesResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
     {
         bool resourceConformsToFormat = false;
-        XmlNamespaceManager manager = null;
-
         ArgumentNullException.ThrowIfNull(resource);
 
-        manager = new XmlNamespaceManager(resource.NameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(resource.NameTable);
         manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
         manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
         manager.AddNamespace("app", "http://www.w3.org/2007/app");

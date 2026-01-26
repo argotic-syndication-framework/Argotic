@@ -93,10 +93,9 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -196,11 +195,10 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
     {
-        bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
-        wasLoaded = this.Load(source, manager);
+        bool wasLoaded = Load(source, manager);
         SyndicationExtensionAdapter adapter = new SyndicationExtensionAdapter(source, settings);
         adapter.Fill(this);
 

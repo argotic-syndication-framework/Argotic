@@ -100,8 +100,7 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
     protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e)
     {
-        EventHandler<SyndicationResourceLoadedEventArgs> handler = null;
-        handler = this.Loaded;
+        EventHandler<SyndicationResourceLoadedEventArgs> handler = Loaded;
 
         if (handler != null)
         {
@@ -385,12 +384,12 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator = null;
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
         }
+        XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
@@ -615,20 +614,14 @@ public class MyCustomRssFeed : ISyndicationResource
     private static void AsyncLoadCallback(IAsyncResult result)
     {
         System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-        XPathNavigator navigator = null;
-        WebRequest httpWebRequest = null;
-        MyCustomRssFeed feed = null;
-        Uri source = null;
-        WebRequestOptions options = null;
-        SyndicationResourceLoadSettings settings = null;
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest = parameters[0] as WebRequest;
-            feed = parameters[1] as MyCustomRssFeed;
-            source = parameters[2] as Uri;
-            settings = parameters[3] as SyndicationResourceLoadSettings;
-            options = parameters[4] as WebRequestOptions;
+            WebRequest httpWebRequest = parameters[0] as WebRequest;
+            MyCustomRssFeed feed = parameters[1] as MyCustomRssFeed;
+            Uri source = parameters[2] as Uri;
+            SyndicationResourceLoadSettings settings = parameters[3] as SyndicationResourceLoadSettings;
+            WebRequestOptions options = parameters[4] as WebRequestOptions;
             object userToken = parameters[5];
             if (feed != null)
             {
@@ -649,6 +642,7 @@ public class MyCustomRssFeed : ISyndicationResource
                     };
 
                     using XmlReader reader = XmlReader.Create(streamReader, readerSettings);
+                    XPathNavigator navigator;
                     if (encoding == System.Text.Encoding.UTF8)
                     {
                         navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

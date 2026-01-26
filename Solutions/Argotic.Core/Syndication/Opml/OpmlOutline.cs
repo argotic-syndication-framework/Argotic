@@ -114,10 +114,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (outlineAttributes == null)
-            {
-                outlineAttributes = [];
-            }
+            outlineAttributes ??= [];
             return outlineAttributes;
         }
     }
@@ -134,10 +131,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (outlineCategories == null)
-            {
-                outlineCategories = [];
-            }
+            outlineCategories ??= [];
             return outlineCategories;
         }
     }
@@ -230,10 +224,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (outlineSubordinateOutlines == null)
-            {
-                outlineSubordinateOutlines = [];
-            }
+            outlineSubordinateOutlines ??= [];
             return outlineSubordinateOutlines;
         }
     }
@@ -268,10 +259,9 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }

@@ -222,13 +222,10 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
-
         ArgumentNullException.ThrowIfNull(extension);
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
-
+        bool wasAdded = true;
         return wasAdded;
     }
 
@@ -329,10 +326,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     {
         get
         {
-            if (documentWorkspaces == null)
-            {
-                documentWorkspaces = [];
-            }
+            documentWorkspaces ??= [];
             return documentWorkspaces;
         }
 
@@ -749,13 +743,10 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <exception cref="ArgumentNullException">The <paramref name="workspace"/> is a null reference.</exception>
     public bool AddWorkspace(AtomWorkspace workspace)
     {
-        bool wasAdded = false;
-
         ArgumentNullException.ThrowIfNull(workspace);
 
         ((Collection<AtomWorkspace>)this.Workspaces).Add(workspace);
-        wasAdded = true;
-
+        bool wasAdded = true;
         return wasAdded;
     }
 
@@ -1085,8 +1076,6 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator = null;
-
         ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
@@ -1094,6 +1083,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
             settings = new SyndicationResourceLoadSettings();
         }
 
+        XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

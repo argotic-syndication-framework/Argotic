@@ -103,13 +103,12 @@ public static class SyndicationDateTimeUtility
     /// <seealso cref="TryParseRfc822DateTime(string, out DateTime)"/>
     private static string ReplaceRfc822TimeZoneWithOffset(string value)
     {
-        string zoneRepresentedAsLocalDifferential = string.Empty;
-
         if (string.IsNullOrEmpty(value))
         {
             throw new ArgumentNullException("s");
         }
 
+        string zoneRepresentedAsLocalDifferential;
         if (value.EndsWith(" UT", StringComparison.OrdinalIgnoreCase))
         {
             zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" UT", StringComparison.Ordinal) + 1)], "+00:00");
@@ -185,10 +184,9 @@ public static class SyndicationDateTimeUtility
         }
         else
         {
-            zoneRepresentedAsLocalDifferential = value;
         }
 
-        return zoneRepresentedAsLocalDifferential;
+        return string.Empty;
     }
 
     /// <summary>

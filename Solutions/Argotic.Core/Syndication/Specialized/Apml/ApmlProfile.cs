@@ -65,10 +65,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 
@@ -98,10 +95,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (profileExplicitConcepts == null)
-            {
-                profileExplicitConcepts = [];
-            }
+            profileExplicitConcepts ??= [];
             return profileExplicitConcepts;
         }
     }
@@ -114,10 +108,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (profileExplicitSources == null)
-            {
-                profileExplicitSources = [];
-            }
+            profileExplicitSources ??= [];
             return profileExplicitSources;
         }
     }
@@ -130,10 +121,7 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            if (profileImplicitConcepts == null)
-            {
-                profileImplicitConcepts = [];
-            }
+            profileImplicitConcepts ??= [];
             return profileImplicitConcepts;
         }
     }
@@ -178,10 +166,9 @@ public class ApmlProfile : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }

@@ -195,13 +195,10 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
-
         ArgumentNullException.ThrowIfNull(extension);
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
-
+        bool wasAdded = true;
         return wasAdded;
     }
 
@@ -263,10 +260,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         get
         {
-            if (workspaceCollections == null)
-            {
-                workspaceCollections = [];
-            }
+            workspaceCollections ??= [];
             return workspaceCollections;
         }
 
@@ -352,13 +346,10 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference.</exception>
     public bool AddCollection(AtomMemberResources collection)
     {
-        bool wasAdded = false;
-
         ArgumentNullException.ThrowIfNull(collection);
 
         ((Collection<AtomMemberResources>)this.Collections).Add(collection);
-        wasAdded = true;
-
+        bool wasAdded = true;
         return wasAdded;
     }
 

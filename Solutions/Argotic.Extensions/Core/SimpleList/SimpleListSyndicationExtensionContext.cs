@@ -55,10 +55,7 @@ public class SimpleListSyndicationExtensionContext
     {
         get
         {
-            if (extensionSorts == null)
-            {
-                extensionSorts = [];
-            }
+            extensionSorts ??= [];
             return extensionSorts;
         }
     }

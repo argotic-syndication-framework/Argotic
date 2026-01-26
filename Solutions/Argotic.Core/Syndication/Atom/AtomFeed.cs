@@ -222,7 +222,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
 
                 if (entry.Id != null)
                 {
-                    Uri idUri = null;
+                    Uri idUri;
                     if (entry.Id.BaseUri != null)
                     {
                         idUri = new Uri(entry.Id.BaseUri, entry.Id.Uri);
@@ -329,10 +329,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         get
         {
-            if (feedAuthors == null)
-            {
-                feedAuthors = [];
-            }
+            feedAuthors ??= [];
             return feedAuthors;
         }
     }
@@ -345,10 +342,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         get
         {
-            if (feedCategories == null)
-            {
-                feedCategories = [];
-            }
+            feedCategories ??= [];
             return feedCategories;
         }
     }
@@ -361,10 +355,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         get
         {
-            if (feedContributors == null)
-            {
-                feedContributors = [];
-            }
+            feedContributors ??= [];
             return feedContributors;
         }
     }
@@ -381,10 +372,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         get
         {
-            if (feedEntries == null)
-            {
-                feedEntries = [];
-            }
+            feedEntries ??= [];
             return feedEntries;
         }
 
@@ -489,10 +477,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         get
         {
-            if (feedLinks == null)
-            {
-                feedLinks = [];
-            }
+            feedLinks ??= [];
             return feedLinks;
         }
     }
@@ -1169,13 +1154,10 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
-
         ArgumentNullException.ThrowIfNull(extension);
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
-
+        bool wasAdded = true;
         return wasAdded;
     }
 
@@ -1232,13 +1214,10 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="entry"/> is a null reference.</exception>
     public bool AddEntry(AtomEntry entry)
     {
-        bool wasAdded = false;
-
         ArgumentNullException.ThrowIfNull(entry);
 
         ((Collection<AtomEntry>)this.Entries).Add(entry);
-        wasAdded = true;
-
+        bool wasAdded = true;
         return wasAdded;
     }
 
@@ -1587,8 +1566,6 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator = null;
-
         ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
@@ -1596,6 +1573,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
             settings = new SyndicationResourceLoadSettings();
         }
 
+        XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

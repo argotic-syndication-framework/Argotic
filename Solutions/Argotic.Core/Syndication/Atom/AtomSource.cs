@@ -154,10 +154,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     {
         get
         {
-            if (sourceAuthors == null)
-            {
-                sourceAuthors = [];
-            }
+            sourceAuthors ??= [];
             return sourceAuthors;
         }
     }
@@ -170,10 +167,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     {
         get
         {
-            if (sourceCategories == null)
-            {
-                sourceCategories = [];
-            }
+            sourceCategories ??= [];
             return sourceCategories;
         }
     }
@@ -186,10 +180,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     {
         get
         {
-            if (sourceContributors == null)
-            {
-                sourceContributors = [];
-            }
+            sourceContributors ??= [];
             return sourceContributors;
         }
     }
@@ -234,10 +225,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     {
         get
         {
-            if (sourceLinks == null)
-            {
-                sourceLinks = [];
-            }
+            sourceLinks ??= [];
             return sourceLinks;
         }
     }
@@ -313,10 +301,9 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }

@@ -156,10 +156,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     {
         get
         {
-            if (objectSyndicationExtensions == null)
-            {
-                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
-            }
+            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
             return objectSyndicationExtensions;
         }
 
@@ -189,10 +186,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     {
         get
         {
-            if (postAttachments == null)
-            {
-                postAttachments = [];
-            }
+            postAttachments ??= [];
             return postAttachments;
         }
     }
@@ -208,10 +202,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     {
         get
         {
-            if (postAuthors == null)
-            {
-                postAuthors = [];
-            }
+            postAuthors ??= [];
             return postAuthors;
         }
     }
@@ -227,10 +218,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     {
         get
         {
-            if (postCategories == null)
-            {
-                postCategories = [];
-            }
+            postCategories ??= [];
             return postCategories;
         }
     }
@@ -308,10 +296,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     {
         get
         {
-            if (postTrackbacks == null)
-            {
-                postTrackbacks = [];
-            }
+            postTrackbacks ??= [];
             return postTrackbacks;
         }
     }
@@ -611,10 +596,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }

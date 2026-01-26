@@ -20,10 +20,9 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static void SyndicationContentFormatGetExample()
     {
-        SyndicationContentFormat format = SyndicationContentFormat.None;
         Uri url = new Uri("http://feeds.feedburner.com/HanselminutesCompleteMP3?format=xml");
 
-        format = SyndicationDiscoveryUtility.SyndicationContentFormatGet(url);
+        SyndicationContentFormat format = SyndicationDiscoveryUtility.SyndicationContentFormatGet(url);
 
         if (format != SyndicationContentFormat.None)
         {

@@ -1861,10 +1861,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     public bool Load(XPathNavigator source, XmlNamespaceManager manager)
     {
-        bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        wasLoaded = this.LoadGroup1(source, manager);
+        bool wasLoaded = LoadGroup1(source, manager);
         if (this.LoadGroup2(source, manager))
         {
             wasLoaded = true;

@@ -228,10 +228,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         get
         {
-            if (entryAuthors == null)
-            {
-                entryAuthors = [];
-            }
+            entryAuthors ??= [];
             return entryAuthors;
         }
     }
@@ -244,10 +241,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         get
         {
-            if (entryCategories == null)
-            {
-                entryCategories = [];
-            }
+            entryCategories ??= [];
             return entryCategories;
         }
     }
@@ -277,10 +271,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         get
         {
-            if (entryContributors == null)
-            {
-                entryContributors = [];
-            }
+            entryContributors ??= [];
             return entryContributors;
         }
     }
@@ -337,10 +328,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         get
         {
-            if (entryLinks == null)
-            {
-                entryLinks = [];
-            }
+            entryLinks ??= [];
             return entryLinks;
         }
     }
@@ -887,13 +875,10 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
-
         ArgumentNullException.ThrowIfNull(extension);
 
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
-
+        bool wasAdded = true;
         return wasAdded;
     }
 
@@ -1263,8 +1248,6 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator = null;
-
         ArgumentNullException.ThrowIfNull(source);
 
         if (settings == null)
@@ -1272,6 +1255,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
             settings = new SyndicationResourceLoadSettings();
         }
 
+        XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

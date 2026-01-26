@@ -256,29 +256,20 @@ public class TrackbackClient
     /// <param name="result">The result of the asynchronous operation.</param>
     private static void AsyncSendCallback(IAsyncResult result)
     {
-        TrackbackResponse response = null;
-        WebRequest httpWebRequest = null;
-        TrackbackClient client = null;
-        Uri host = null;
-        TrackbackMessage message = null;
-        WebRequestOptions options = null;
-        object userToken = null;
-
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest = parameters[0] as WebRequest;
-            client = parameters[1] as TrackbackClient;
-            host = parameters[2] as Uri;
-            message = parameters[3] as TrackbackMessage;
-            options = parameters[4] as WebRequestOptions;
-            userToken = parameters[5];
-
+            WebRequest httpWebRequest = parameters[0] as WebRequest;
+            TrackbackClient client = parameters[1] as TrackbackClient;
+            Uri host = parameters[2] as Uri;
+            TrackbackMessage message = parameters[3] as TrackbackMessage;
+            WebRequestOptions options = parameters[4] as WebRequestOptions;
+            object userToken = parameters[5];
             if (client != null)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
 
-                response = new TrackbackResponse(httpWebResponse);
+                TrackbackResponse response = new TrackbackResponse(httpWebResponse);
 
                 client.OnMessageSent(new TrackbackMessageSentEventArgs(host, message, response, options, userToken));
 
@@ -312,8 +303,6 @@ public class TrackbackClient
     /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, Object)"/> call in progress.</exception>
     public TrackbackResponse Send(TrackbackMessage message)
     {
-        TrackbackResponse response = null;
-
         ArgumentNullException.ThrowIfNull(message);
 
         if (this.Host == null)
@@ -328,8 +317,7 @@ public class TrackbackClient
         WebRequest webRequest = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
         using WebResponse webResponse = (WebResponse)webRequest.GetResponse();
-        response = new TrackbackResponse(webResponse);
-
+        TrackbackResponse response = new TrackbackResponse(webResponse);
         return response;
     }
 
@@ -406,7 +394,6 @@ public class TrackbackClient
     /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
     private static WebRequest CreateWebRequest(Uri host, string userAgent, TrackbackMessage message, bool useDefaultCredentials, WebRequestOptions options)
     {
-        HttpWebRequest httpRequest = null;
         byte[] payloadData;
 
         ArgumentNullException.ThrowIfNull(host);
@@ -423,7 +410,7 @@ public class TrackbackClient
             payloadData = message.Encoding.GetBytes((new StreamReader(stream)).ReadToEnd());
         }
 
-        httpRequest = (HttpWebRequest)HttpWebRequest.Create(host);
+        HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(host);
         httpRequest.Method = "POST";
         httpRequest.ContentLength = payloadData.Length;
         httpRequest.ContentType = string.Format(null, "application/x-www-form-urlencoded; charset={0}", message.Encoding.WebName);

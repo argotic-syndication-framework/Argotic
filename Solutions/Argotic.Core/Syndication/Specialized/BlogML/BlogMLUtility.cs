@@ -103,7 +103,6 @@ internal static class BlogMLUtility
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
     public static int CompareCommonObjects(IBlogMLCommonObject source, IBlogMLCommonObject target)
     {
-        int result = 0;
         if (source == null && target == null)
         {
             return 0;
@@ -116,7 +115,7 @@ internal static class BlogMLUtility
         {
             return -1;
         }
-        result = source.ApprovalStatus.CompareTo(target.ApprovalStatus);
+        int result = source.ApprovalStatus.CompareTo(target.ApprovalStatus);
         result |= source.CreatedOn.CompareTo(target.CreatedOn);
         result |= string.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
         result |= source.LastModifiedOn.CompareTo(target.LastModifiedOn);
@@ -145,9 +144,8 @@ internal static class BlogMLUtility
     /// <exception cref="ArgumentNullException">The <paramref name="nameTable"/> is a null reference.</exception>
     public static XmlNamespaceManager CreateNamespaceManager(XmlNameTable nameTable)
     {
-        XmlNamespaceManager manager = null;
         ArgumentNullException.ThrowIfNull(nameTable);
-        manager = new XmlNamespaceManager(nameTable);
+        XmlNamespaceManager manager = new XmlNamespaceManager(nameTable);
         manager.AddNamespace("blog", !string.IsNullOrEmpty(manager.DefaultNamespace) ? manager.DefaultNamespace : BLOGML_NAMESPACE);
 
         return manager;

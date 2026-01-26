@@ -505,29 +505,20 @@ public class XmlRpcClient
     /// <param name="result">The result of the asynchronous operation.</param>
     private static void AsyncSendCallback(IAsyncResult result)
     {
-        XmlRpcResponse response = null;
-        WebRequest httpWebRequest = null;
-        XmlRpcClient client = null;
-        Uri host = null;
-        XmlRpcMessage message = null;
-        WebRequestOptions options = null;
-        object userToken = null;
-
         if (result.IsCompleted)
         {
             object[] parameters = (object[])result.AsyncState;
-            httpWebRequest = parameters[0] as WebRequest;
-            client = parameters[1] as XmlRpcClient;
-            host = parameters[2] as Uri;
-            message = parameters[3] as XmlRpcMessage;
-            options = parameters[4] as WebRequestOptions;
-            userToken = parameters[5];
-
+            WebRequest httpWebRequest = parameters[0] as WebRequest;
+            XmlRpcClient client = parameters[1] as XmlRpcClient;
+            Uri host = parameters[2] as Uri;
+            XmlRpcMessage message = parameters[3] as XmlRpcMessage;
+            WebRequestOptions options = parameters[4] as WebRequestOptions;
+            object userToken = parameters[5];
             if (client != null)
             {
                 WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
 
-                response = new XmlRpcResponse(httpWebResponse);
+                XmlRpcResponse response = new XmlRpcResponse(httpWebResponse);
 
                 client.OnMessageSent(new XmlRpcMessageSentEventArgs(host, message, response, options, userToken));
 
@@ -561,8 +552,6 @@ public class XmlRpcClient
     /// <exception cref="InvalidOperationException">This <see cref="XmlRpcClient"/> has a <see cref="SendAsync(XmlRpcMessage, Object)"/> call in progress.</exception>
     public XmlRpcResponse Send(XmlRpcMessage message)
     {
-        XmlRpcResponse response = null;
-
         ArgumentNullException.ThrowIfNull(message);
 
         if (this.Host == null)
@@ -577,8 +566,7 @@ public class XmlRpcClient
         WebRequest webRequest = XmlRpcClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
 
         using WebResponse webResponse = (WebResponse)webRequest.GetResponse();
-        response = new XmlRpcResponse(webResponse);
-
+        XmlRpcResponse response = new XmlRpcResponse(webResponse);
         return response;
     }
 
@@ -655,7 +643,6 @@ public class XmlRpcClient
     /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
     private static WebRequest CreateWebRequest(Uri host, string userAgent, XmlRpcMessage message, bool useDefaultCredentials, WebRequestOptions options)
     {
-        HttpWebRequest httpRequest = null;
         byte[] payloadData;
 
         ArgumentNullException.ThrowIfNull(host);
@@ -682,7 +669,7 @@ public class XmlRpcClient
             payloadData = message.Encoding.GetBytes((new StreamReader(stream)).ReadToEnd());
         }
 
-        httpRequest = (HttpWebRequest)HttpWebRequest.Create(host);
+        HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(host);
         httpRequest.Method = "POST";
         httpRequest.ContentLength = payloadData.Length;
         httpRequest.ContentType = string.Format(null, "text/xml; charset={0}", message.Encoding.WebName);

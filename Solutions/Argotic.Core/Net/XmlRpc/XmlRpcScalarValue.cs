@@ -168,7 +168,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
         {
             if (source.MoveToFirstChild())
             {
-                XmlRpcScalarValueType type = XmlRpcScalarValueType.None;
+                XmlRpcScalarValueType type;
                 if (string.Compare(source.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
                 {
                     // Framework prefers the <int> designator for integers, so this handles when the <i4> designator is utilized.

@@ -161,10 +161,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (documentAuthors == null)
-            {
-                documentAuthors = [];
-            }
+            documentAuthors ??= [];
             return documentAuthors;
         }
     }
@@ -180,10 +177,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (documentCategories == null)
-            {
-                documentCategories = [];
-            }
+            documentCategories ??= [];
             return documentCategories;
         }
     }
@@ -196,10 +190,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (documentExtendedProperties == null)
-            {
-                documentExtendedProperties = [];
-            }
+            documentExtendedProperties ??= [];
             return documentExtendedProperties;
         }
     }
@@ -240,10 +231,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (documentPosts == null)
-            {
-                documentPosts = [];
-            }
+            documentPosts ??= [];
             return documentPosts;
         }
 
@@ -658,10 +646,9 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -715,11 +702,10 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="post"/> is a null reference.</exception>
     public bool AddPost(BlogMLPost post)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(post);
 
         ((Collection<BlogMLPost>)this.Posts).Add(post);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -1063,12 +1049,12 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator = null;
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
         }
+        XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

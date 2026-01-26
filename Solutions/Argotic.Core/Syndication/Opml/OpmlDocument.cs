@@ -190,10 +190,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            if (documentOutlines == null)
-            {
-                documentOutlines = [];
-            }
+            documentOutlines ??= [];
             return documentOutlines;
         }
 
@@ -585,10 +582,9 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool AddExtension(ISyndicationExtension extension)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(extension);
         ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -642,10 +638,9 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="outline"/> is a null reference.</exception>
     public bool AddOutline(OpmlOutline outline)
     {
-        bool wasAdded = false;
         ArgumentNullException.ThrowIfNull(outline);
         ((Collection<OpmlOutline>)this.Outlines).Add(outline);
-        wasAdded = true;
+        bool wasAdded = true;
 
         return wasAdded;
     }
@@ -989,13 +984,13 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
     public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
     {
-        XPathNavigator navigator = null;
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
             settings = new SyndicationResourceLoadSettings();
         }
 
+        XPathNavigator navigator;
         if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);

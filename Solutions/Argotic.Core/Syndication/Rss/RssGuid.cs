@@ -42,10 +42,6 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     /// </summary>
     private string guidIdentifier = string.Empty;
     /// <summary>
-    /// Private member to hold a value indicating if the guid represents a permanent URL.
-    /// </summary>
-    private bool guidIsPermalink = true;
-    /// <summary>
     /// Initializes a new instance of the <see cref="RssGuid"/> class.
     /// </summary>
     public RssGuid()
@@ -117,21 +113,10 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     /// </summary>
     /// <value><b>true</b> if the guid <see cref="RssGuid.Value">value</see> represents a permanent URL of a web page; Otherwise, <b>false</b>.</value>
     /// <remarks>
-    ///     If set to <b>false</b>, the guid may employ any syntax the feed's publisher has devised for ensuring the uniqueness of the string, 
+    ///     If set to <b>false</b>, the guid may employ any syntax the feed's publisher has devised for ensuring the uniqueness of the string,
     ///     such as the <a href="http://www.faqs.org/rfcs/rfc4151.html">Tag URI scheme</a> described in RFC 4151.
     /// </remarks>
-    public bool IsPermanentLink
-    {
-        get
-        {
-            return guidIsPermalink;
-        }
-
-        set
-        {
-            guidIsPermalink = value;
-        }
-    }
+    public bool IsPermanentLink { get; set; } = true;
 
     /// <summary>
     /// Gets or sets a string value that uniquely identifies this item.

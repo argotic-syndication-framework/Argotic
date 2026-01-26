@@ -13,10 +13,6 @@ public class YahooMediaCategory : IComparable
 {
 
     /// <summary>
-    /// Private member to hold a URI that identifies the taxonomy scheme.
-    /// </summary>
-    private Uri categoryScheme;
-    /// <summary>
     /// Private member to hold the human readable label for the category that can be displayed in end user applications.
     /// </summary>
     private string categoryLabel = string.Empty;
@@ -107,18 +103,7 @@ public class YahooMediaCategory : IComparable
     ///     If no categorization scheme is provided, the default scheme can be assumed to be <b>http://search.yahoo.com/mrss/category_schema</b>.
     /// </remarks>
     /// <seealso cref="DefaultScheme"/>
-    public Uri Scheme
-    {
-        get
-        {
-            return categoryScheme;
-        }
-
-        set
-        {
-            categoryScheme = value;
-        }
-    }
+    public Uri Scheme { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaCategory"/> using the supplied <see cref="XPathNavigator"/>.

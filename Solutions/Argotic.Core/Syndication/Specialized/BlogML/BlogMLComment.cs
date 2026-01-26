@@ -24,18 +24,6 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// </summary>
     private string commonObjectBaseId = string.Empty;
     /// <summary>
-    /// Private member to hold a date-time indicating when the web log entity information was created.
-    /// </summary>
-    private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold a date-time indicating when the web log entity information was last modified.
-    /// </summary>
-    private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold a value indicating the web log entity approval status.
-    /// </summary>
-    private BlogMLApprovalStatus commonObjectBaseApprovalStatus = BlogMLApprovalStatus.None;
-    /// <summary>
     /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
     /// </summary>
     private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
@@ -51,10 +39,6 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// Private member to hold the author's email address for the comment.
     /// </summary>
     private string commentUserEmailAddress = string.Empty;
-    /// <summary>
-    /// Private member to hold the author's homepage or web log address for the comment.
-    /// </summary>
-    private Uri commentUserUrl;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLComment"/> class.
@@ -66,44 +50,22 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// Gets or sets the approval status of this web log entity.
     /// </summary>
     /// <value>
-    ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available. 
+    ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available.
     ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified.
     /// </value>
-    public BlogMLApprovalStatus ApprovalStatus
-    {
-        get
-        {
-            return commonObjectBaseApprovalStatus;
-        }
-
-        set
-        {
-            commonObjectBaseApprovalStatus = value;
-        }
-    }
+    public BlogMLApprovalStatus ApprovalStatus { get; set; } = BlogMLApprovalStatus.None;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this web log entity was created.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity. 
+    ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime CreatedOn
-    {
-        get
-        {
-            return commonObjectBaseCreatedOn;
-        }
-
-        set
-        {
-            commonObjectBaseCreatedOn = value;
-        }
-    }
+    public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the unique identifier of this web log entity.
@@ -133,24 +95,13 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// Gets or sets a date-time indicating when this web log entity was last modified.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant. 
+    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date-time was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime LastModifiedOn
-    {
-        get
-        {
-            return commonObjectBaseLastModifiedOn;
-        }
-
-        set
-        {
-            commonObjectBaseLastModifiedOn = value;
-        }
-    }
+    public DateTime LastModifiedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the title of this web log entity.
@@ -274,18 +225,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
     /// Gets or sets the author's homepage or web log for this comment.
     /// </summary>
     /// <value>The author's homepage or web log address for this comment.</value>
-    public Uri UserUrl
-    {
-        get
-        {
-            return commentUserUrl;
-        }
-
-        set
-        {
-            commentUserUrl = value;
-        }
-    }
+    public Uri UserUrl { get; set; }
     /// <summary>
     /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
     /// </summary>

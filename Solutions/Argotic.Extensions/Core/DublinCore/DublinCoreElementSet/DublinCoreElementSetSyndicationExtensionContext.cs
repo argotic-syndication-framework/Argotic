@@ -26,10 +26,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </summary>
     private string extensionCreator = string.Empty;
     /// <summary>
-    /// Private member to hold a point or period of time associated with an event in the lifecycle of the resource.
-    /// </summary>
-    private DateTime extensionDate = DateTime.MinValue;
-    /// <summary>
     /// Private member to hold an account of the resource.
     /// </summary>
     private string extensionDescription = string.Empty;
@@ -41,10 +37,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// Private member to hold an unambiguous reference to the resource within a given context.
     /// </summary>
     private string extensionIdentifier = string.Empty;
-    /// <summary>
-    /// Private member to hold the language of the resource.
-    /// </summary>
-    private CultureInfo extensionLanguage;
     /// <summary>
     /// Private member to hold the entity responsible for making the resource available.
     /// </summary>
@@ -69,10 +61,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// Private member to hold the name given to the resource.
     /// </summary>
     private string extensionTitle = string.Empty;
-    /// <summary>
-    /// Private member to hold the nature or genre of the resource.
-    /// </summary>
-    private DublinCoreTypeVocabularies extensionType = DublinCoreTypeVocabularies.None;
     /// <summary>
     /// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> class.
     /// </summary>
@@ -173,24 +161,13 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// Gets or sets a point or period of time associated with an event in the lifecycle of the resource.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates a point or period of time associated with an event in the lifecycle of the resource. 
+    ///     A <see cref="DateTime"/> that indicates a point or period of time associated with an event in the lifecycle of the resource.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no date was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime Date
-    {
-        get
-        {
-            return extensionDate;
-        }
-
-        set
-        {
-            extensionDate = value;
-        }
-    }
+    public DateTime Date { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets an account of the resource.
@@ -279,21 +256,10 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </summary>
     /// <value>A <see cref="CultureInfo"/> object that represents the language of the resource. The default value is a <b>null</b> reference, which indicates that no language was specified.</value>
     /// <remarks>
-    ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>. 
+    ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>.
     ///     This framework conforms to this best practice by utilizing the <see cref="CultureInfo"/> class to represent the language of a resource.
     /// </remarks>
-    public CultureInfo Language
-    {
-        get
-        {
-            return extensionLanguage;
-        }
-
-        set
-        {
-            extensionLanguage = value;
-        }
-    }
+    public CultureInfo Language { get; set; }
 
     /// <summary>
     /// Gets or sets the entity responsible for making the resource available.
@@ -464,28 +430,17 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// Gets or sets the nature or genre of the resource.
     /// </summary>
     /// <value>
-    ///     An <see cref="DublinCoreTypeVocabularies"/> enumeration value that represents the nature or genre of the resource. 
+    ///     An <see cref="DublinCoreTypeVocabularies"/> enumeration value that represents the nature or genre of the resource.
     ///     The default value is <see cref="DublinCoreTypeVocabularies.None"/>, which indicates that no nature or genre was specified.
     /// </value>
     /// <remarks>
     ///     <para>
-    ///         Recommended best practice is to use a controlled vocabulary such as the <a href="http://dublincore.org/documents/dcmi-type-vocabulary/">DCMI Type Vocabulary</a>. 
+    ///         Recommended best practice is to use a controlled vocabulary such as the <a href="http://dublincore.org/documents/dcmi-type-vocabulary/">DCMI Type Vocabulary</a>.
     ///         This framework conforms to this best practice by providing the <see cref="DublinCoreTypeVocabularies"/> enumeration for specifiying the nature or genre of a resource.
     ///     </para>
     ///     <para>To describe the file format, physical medium, or dimensions of the resource, use <see cref="Format"/>.</para>
     /// </remarks>
-    public DublinCoreTypeVocabularies TypeVocabulary
-    {
-        get
-        {
-            return extensionType;
-        }
-
-        set
-        {
-            extensionType = value;
-        }
-    }
+    public DublinCoreTypeVocabularies TypeVocabulary { get; set; } = DublinCoreTypeVocabularies.None;
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

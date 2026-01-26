@@ -15,14 +15,6 @@ public class BasicGeocodingSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the latitude spatial coordinate.
-    /// </summary>
-    private decimal extensionLatitude = decimal.MinValue;
-    /// <summary>
-    /// Private member to hold the longitude spatial coordinate.
-    /// </summary>
-    private decimal extensionLongitude = decimal.MinValue;
-    /// <summary>
     /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtensionContext"/> class.
     /// </summary>
     public BasicGeocodingSyndicationExtensionContext()
@@ -33,35 +25,13 @@ public class BasicGeocodingSyndicationExtensionContext
     /// Gets or sets the geocoding latitude coordinate.
     /// </summary>
     /// <value>The geocoding latitude coordinate. The default value is <see cref="Decimal.MinValue"/>, which indicates that no latitude was provided.</value>
-    public decimal Latitude
-    {
-        get
-        {
-            return extensionLatitude;
-        }
-
-        set
-        {
-            extensionLatitude = value;
-        }
-    }
+    public decimal Latitude { get; set; } = decimal.MinValue;
 
     /// <summary>
     /// Gets or sets the geocoding longitude coordinate.
     /// </summary>
     /// <value>The geocoding longitude coordinate. The default value is <see cref="Decimal.MinValue"/>, which indicates that no longitude was provided.</value>
-    public decimal Longitude
-    {
-        get
-        {
-            return extensionLongitude;
-        }
-
-        set
-        {
-            extensionLongitude = value;
-        }
-    }
+    public decimal Longitude { get; set; } = decimal.MinValue;
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

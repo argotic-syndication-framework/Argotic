@@ -43,14 +43,6 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     private static Version documentVersion = new Version(0, 6);
     /// <summary>
-    /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-    /// </summary>
-    private bool resourceAsyncLoadCancelled;
-    /// <summary>
-    /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-    /// </summary>
-    private bool resourceIsLoading;
-    /// <summary>
     /// Private member to hold HTTP web request used by asynchronous load operations.
     /// </summary>
     private static WebRequest asyncHttpWebRequest;
@@ -268,35 +260,13 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
     /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, Otherwise, <b>false</b>.</value>
-    internal bool AsyncLoadHasBeenCancelled
-    {
-        get
-        {
-            return resourceAsyncLoadCancelled;
-        }
-
-        set
-        {
-            resourceAsyncLoadCancelled = value;
-        }
-    }
+    internal bool AsyncLoadHasBeenCancelled { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if the syndication resource is in the process of loading.
     /// </summary>
     /// <value><b>true</b> if syndication resource is in the process of loading, Otherwise, <b>false</b>.</value>
-    internal bool LoadOperationInProgress
-    {
-        get
-        {
-            return resourceIsLoading;
-        }
-
-        set
-        {
-            resourceIsLoading = value;
-        }
-    }
+    internal bool LoadOperationInProgress { get; set; }
     /// <summary>
     /// Creates a new <see cref="ApmlDocument"/> instance using the specified <see cref="Uri"/>.
     /// </summary>

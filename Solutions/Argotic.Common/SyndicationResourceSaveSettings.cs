@@ -14,17 +14,9 @@ public sealed class SyndicationResourceSaveSettings : IComparable
     /// </summary>
     private Encoding characterEncoding = Encoding.UTF8;
     /// <summary>
-    /// Private member to hold a value indicating if write/save operations should attempt to minimize the size of the resulting output.
-    /// </summary>
-    private bool minimizeOutputSize;
-    /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the save operation.
     /// </summary>
     private Collection<Type> supportedSyndicationExtensions;
-    /// <summary>
-    /// Private member to hold a value indicating if auto-detection of supported syndication extensions is enabled.
-    /// </summary>
-    private bool syndicationExtensionAutodetectionEnabled = true;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceSaveSettings"/> class.
@@ -44,18 +36,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable
     ///     Automatic detection of supported syndication extensions will <b>not</b> remove any syndication extensions already added
     ///     to the <see cref="SupportedExtensions"/> collection prior to the save operation execution.
     /// </remarks>
-    public bool AutoDetectExtensions
-    {
-        get
-        {
-            return syndicationExtensionAutodetectionEnabled;
-        }
-
-        set
-        {
-            syndicationExtensionAutodetectionEnabled = value;
-        }
-    }
+    public bool AutoDetectExtensions { get; set; } = true;
 
     /// <summary>
     /// Gets or sets the character encoding to use when persisting a syndication resource.
@@ -80,18 +61,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable
     /// Gets or sets a value indicating if syndication resource persist operations should attempt to minimize the physical size of the resulting output.
     /// </summary>
     /// <value><b>true</b> if output size should be as small as possible; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
-    public bool MinimizeOutputSize
-    {
-        get
-        {
-            return minimizeOutputSize;
-        }
-
-        set
-        {
-            minimizeOutputSize = value;
-        }
-    }
+    public bool MinimizeOutputSize { get; set; }
 
     /// <summary>
     /// Gets the syndication extensions that extend the syndication resource.

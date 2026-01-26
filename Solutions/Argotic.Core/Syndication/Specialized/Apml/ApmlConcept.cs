@@ -42,10 +42,6 @@ public class ApmlConcept : IComparable, IExtensibleSyndicationObject
     /// </summary>
     private string conceptFrom = string.Empty;
     /// <summary>
-    /// Private member to hold a date indicating the last time the concept was updated.
-    /// </summary>
-    private DateTime conceptUpdatedOn = DateTime.MinValue;
-    /// <summary>
     /// Initializes a new instance of the <see cref="ApmlConcept"/> class.
     /// </summary>
     public ApmlConcept()
@@ -184,18 +180,7 @@ public class ApmlConcept : IComparable, IExtensibleSyndicationObject
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime UpdatedOn
-    {
-        get
-        {
-            return conceptUpdatedOn;
-        }
-
-        set
-        {
-            conceptUpdatedOn = value;
-        }
-    }
+    public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the decimal score of this concept.

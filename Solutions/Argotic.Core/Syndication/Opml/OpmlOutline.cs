@@ -37,18 +37,6 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// </summary>
     private string outlineType = string.Empty;
     /// <summary>
-    /// Private member to hold a value indicating whether the outline is commented or not.
-    /// </summary>
-    private bool outlineIsCommented;
-    /// <summary>
-    /// Private member to hold a value indicating whether a breakpoint is set on the outline.
-    /// </summary>
-    private bool outlineHasBreakpointSet;
-    /// <summary>
-    /// Private member to hold a date-time that indicates when the outline was created.
-    /// </summary>
-    private DateTime outlineCreatedOn = DateTime.MinValue;
-    /// <summary>
     /// Private member to hold a collection that describes the categorization taxonomy applied to the outline.
     /// </summary>
     private Collection<string> outlineCategories;
@@ -186,24 +174,13 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// Gets or sets a date-time indicating when this outline was created.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates when this outline was created. 
+    ///     A <see cref="DateTime"/> that indicates when this outline was created.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime CreatedOn
-    {
-        get
-        {
-            return outlineCreatedOn;
-        }
-
-        set
-        {
-            outlineCreatedOn = value;
-        }
-    }
+    public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets a value indicating if a breakpoint is set on this outline.
@@ -212,18 +189,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <remarks>
     ///     This property is mainly necessary for outlines used to edit scripts. If it's not present, the value is <b>false</b>.
     /// </remarks>
-    public bool HasBreakpoint
-    {
-        get
-        {
-            return outlineHasBreakpointSet;
-        }
-
-        set
-        {
-            outlineHasBreakpointSet = value;
-        }
-    }
+    public bool HasBreakpoint { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether this outline is commented.
@@ -232,18 +198,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <remarks>
     ///     By convention if an outline is commented, all subordinate outlines are considered to also be commented. If it's not present, the value is <b>false</b>.
     /// </remarks>
-    public bool IsCommented
-    {
-        get
-        {
-            return outlineIsCommented;
-        }
-
-        set
-        {
-            outlineIsCommented = value;
-        }
-    }
+    public bool IsCommented { get; set; }
 
     /// <summary>
     /// Gets a value indicating if this outline represents an inclusion.

@@ -25,18 +25,6 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
     /// </summary>
     private string commonObjectBaseId = string.Empty;
     /// <summary>
-    /// Private member to hold a date-time indicating when the web log entity information was created.
-    /// </summary>
-    private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold a date-time indicating when the web log entity information was last modified.
-    /// </summary>
-    private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold a value indicating the web log entity approval status.
-    /// </summary>
-    private BlogMLApprovalStatus commonObjectBaseApprovalStatus = BlogMLApprovalStatus.None;
-    /// <summary>
     /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
     /// </summary>
     private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
@@ -54,44 +42,22 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
     /// Gets or sets the approval status of this web log entity.
     /// </summary>
     /// <value>
-    ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available. 
+    ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available.
     ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified.
     /// </value>
-    public BlogMLApprovalStatus ApprovalStatus
-    {
-        get
-        {
-            return commonObjectBaseApprovalStatus;
-        }
-
-        set
-        {
-            commonObjectBaseApprovalStatus = value;
-        }
-    }
+    public BlogMLApprovalStatus ApprovalStatus { get; set; } = BlogMLApprovalStatus.None;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this web log entity was created.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity. 
+    ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime CreatedOn
-    {
-        get
-        {
-            return commonObjectBaseCreatedOn;
-        }
-
-        set
-        {
-            commonObjectBaseCreatedOn = value;
-        }
-    }
+    public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the unique identifier of this web log entity.
@@ -121,24 +87,13 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
     /// Gets or sets a date-time indicating when this web log entity was last modified.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant. 
+    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date-time was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime LastModifiedOn
-    {
-        get
-        {
-            return commonObjectBaseLastModifiedOn;
-        }
-
-        set
-        {
-            commonObjectBaseLastModifiedOn = value;
-        }
-    }
+    public DateTime LastModifiedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the title of this web log entity.

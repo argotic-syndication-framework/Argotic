@@ -41,18 +41,6 @@ public class TrackbackClient
     /// </summary>
     private TimeSpan clientTimeout = TimeSpan.FromSeconds(15);
     /// <summary>
-    /// Private member to hold a value that indicates if the client sends default credentials when making a Trackback ping request.
-    /// </summary>
-    private bool clientUsesDefaultCredentials;
-    /// <summary>
-    /// Private member to hold a value indicating if the client is in the process of sending a Trackback ping request.
-    /// </summary>
-    private bool clientIsSending;
-    /// <summary>
-    /// Private member to hold a value indicating if the client asynchronous send operation was cancelled.
-    /// </summary>
-    private bool clientAsyncSendCancelled;
-    /// <summary>
     /// Private member to hold Trackback web request used by asynchronous send operations.
     /// </summary>
     private static WebRequest asyncHttpWebRequest;
@@ -237,18 +225,7 @@ public class TrackbackClient
     ///         and the <see cref="Credentials"/> property has not been set, then Trackback pings are sent to the server anonymously.
     ///     </para>
     /// </remarks>
-    public bool UseDefaultCredentials
-    {
-        get
-        {
-            return clientUsesDefaultCredentials;
-        }
-
-        set
-        {
-            clientUsesDefaultCredentials = value;
-        }
-    }
+    public bool UseDefaultCredentials { get; set; }
 
     /// <summary>
     /// Gets or sets information such as the client application name, version, host operating system, and language.
@@ -274,35 +251,13 @@ public class TrackbackClient
     /// Gets or sets a value indicating if the client asynchronous send operation was cancelled.
     /// </summary>
     /// <value><b>true</b> if client asynchronous send operation has been cancelled, Otherwise, <b>false</b>.</value>
-    internal bool AsyncSendHasBeenCancelled
-    {
-        get
-        {
-            return clientAsyncSendCancelled;
-        }
-
-        set
-        {
-            clientAsyncSendCancelled = value;
-        }
-    }
+    internal bool AsyncSendHasBeenCancelled { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if the client is in the process of sending a Trackback ping request.
     /// </summary>
     /// <value><b>true</b> if client is in the process of sending a Trackback ping request, Otherwise, <b>false</b>.</value>
-    internal bool SendOperationInProgress
-    {
-        get
-        {
-            return clientIsSending;
-        }
-
-        set
-        {
-            clientIsSending = value;
-        }
-    }
+    internal bool SendOperationInProgress { get; set; }
 
     /// <summary>
     /// Called when a corresponding asynchronous send operation completes.

@@ -32,10 +32,6 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// </summary>
     private string interfaceName = string.Empty;
     /// <summary>
-    /// Private member to hold a value indicating if the application interface is preferred.
-    /// </summary>
-    private bool interfaceIsPreferred;
-    /// <summary>
     /// Private member to hold the communication endpoint of the application interface.
     /// </summary>
     private Uri interfaceLink;
@@ -43,10 +39,6 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// Private member to hold custom data that is passed to the application interface.
     /// </summary>
     private string interfaceWeblogId = string.Empty;
-    /// <summary>
-    /// Private member to hold the location of the documentation for the application interface.
-    /// </summary>
-    private Uri interfaceDocumentation;
     /// <summary>
     /// Private member to hold human readable text that explains the features and settings for the application interface.
     /// </summary>
@@ -120,35 +112,13 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// Gets or sets the location of the documentation for this application interface.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the location of the documentation for this application interface.</value>
-    public Uri Documentation
-    {
-        get
-        {
-            return interfaceDocumentation;
-        }
-
-        set
-        {
-            interfaceDocumentation = value;
-        }
-    }
+    public Uri Documentation { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if this application interface is preferred.
     /// </summary>
     /// <value><b>true</b> if this application interface is the preferred service; Otherwise, <b>false</b>.</value>
-    public bool IsPreferred
-    {
-        get
-        {
-            return interfaceIsPreferred;
-        }
-
-        set
-        {
-            interfaceIsPreferred = value;
-        }
-    }
+    public bool IsPreferred { get; set; }
 
     /// <summary>
     /// Gets or sets the communication endpoint of this application interface.

@@ -13,14 +13,6 @@ public class FeedSynchronizationSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the sharing information exposed by a syndication feed.
-    /// </summary>
-    private FeedSynchronizationSharingInformation extensionSharingInformation;
-    /// <summary>
-    /// Private member to hold information required for synchronization of syndication feeds.
-    /// </summary>
-    private FeedSynchronizationItem synchronizationItem;
-    /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtensionContext"/> class.
     /// </summary>
     public FeedSynchronizationSyndicationExtensionContext()
@@ -31,49 +23,27 @@ public class FeedSynchronizationSyndicationExtensionContext
     /// Gets or sets information from a specific feed publisher to the specific feed consumer that requested the feed.
     /// </summary>
     /// <value>
-    ///     A <see cref="FeedSynchronizationSharingInformation"/> object that represents information from a specific feed publisher to the specific feed consumer that requested the feed. 
+    ///     A <see cref="FeedSynchronizationSharingInformation"/> object that represents information from a specific feed publisher to the specific feed consumer that requested the feed.
     ///     The default value is <b>null</b>.
     /// </value>
-    public FeedSynchronizationSharingInformation Sharing
-    {
-        get
-        {
-            return extensionSharingInformation;
-        }
-
-        set
-        {
-            extensionSharingInformation = value;
-        }
-    }
+    public FeedSynchronizationSharingInformation Sharing { get; set; }
 
     /// <summary>
     /// Gets or sets the information required for synchronization.
     /// </summary>
-    /// <value>A <see cref="synchronizationItem"/> object that represents the information required for synchronization.</value>
+    /// <value>A <see cref="FeedSynchronizationItem"/> object that represents the information required for synchronization.</value>
     /// <remarks>
     ///     <para>
-    ///         This is <b>required</b> of all items in all feeds wishing to participate in FeedSync-based synchronization. 
-    ///         Since <see cref="FeedSynchronizationSharingInformation"/> is not required, feed consumers <b>must</b> consider the presence of <see cref="FeedSynchronizationItem"/> in items or entries 
+    ///         This is <b>required</b> of all items in all feeds wishing to participate in FeedSync-based synchronization.
+    ///         Since <see cref="FeedSynchronizationSharingInformation"/> is not required, feed consumers <b>must</b> consider the presence of <see cref="FeedSynchronizationItem"/> in items or entries
     ///         as an indication that the feed contains sync data.
     ///     </para>
     ///     <para>
-    ///         It acceptable for a feed to have some items or entries with <see cref="FeedSynchronizationItem"/> elements, and some without a <see cref="FeedSynchronizationItem"/>. 
+    ///         It acceptable for a feed to have some items or entries with <see cref="FeedSynchronizationItem"/> elements, and some without a <see cref="FeedSynchronizationItem"/>.
     ///         Only the items and entries that include the <see cref="FeedSynchronizationItem"/> element participate in FeedSync synchronization.
     ///     </para>
     /// </remarks>
-    public FeedSynchronizationItem Synchronization
-    {
-        get
-        {
-            return synchronizationItem;
-        }
-
-        set
-        {
-            synchronizationItem = value;
-        }
-    }
+    public FeedSynchronizationItem Synchronization { get; set; }
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

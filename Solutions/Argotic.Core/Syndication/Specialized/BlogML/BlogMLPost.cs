@@ -31,18 +31,6 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// </summary>
     private string commonObjectBaseId = string.Empty;
     /// <summary>
-    /// Private member to hold a date-time indicating when the web log entity information was created.
-    /// </summary>
-    private DateTime commonObjectBaseCreatedOn = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold a date-time indicating when the web log entity information was last modified.
-    /// </summary>
-    private DateTime commonObjectBaseLastModifiedOn = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold a value indicating the web log entity approval status.
-    /// </summary>
-    private BlogMLApprovalStatus commonObjectBaseApprovalStatus = BlogMLApprovalStatus.None;
-    /// <summary>
     /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
     /// </summary>
     private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
@@ -50,14 +38,6 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// Private member to hold the textual content of the post.
     /// </summary>
     private BlogMLTextConstruct postContent = new BlogMLTextConstruct();
-    /// <summary>
-    /// Private member to hold the name of the post.
-    /// </summary>
-    private BlogMLTextConstruct postName;
-    /// <summary>
-    /// Private member to hold the excerpt of the post.
-    /// </summary>
-    private BlogMLTextConstruct postExcerpt;
     /// <summary>
     /// Private member to hold references to authors of the post.
     /// </summary>
@@ -79,14 +59,6 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// </summary>
     private Collection<BlogMLAttachment> postAttachments;
     /// <summary>
-    /// Private member to hold the URL of the post.
-    /// </summary>
-    private Uri postUrl;
-    /// <summary>
-    /// Private member to hold the type of web log entry the post represents.
-    /// </summary>
-    private BlogMLPostType postType = BlogMLPostType.None;
-    /// <summary>
     /// Private member to hold views of the post.
     /// </summary>
     private string postViews = string.Empty;
@@ -101,44 +73,22 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// Gets or sets the approval status of this web log entity.
     /// </summary>
     /// <value>
-    ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available. 
+    ///     An <see cref="BlogMLApprovalStatus"/> enumeration value that represents whether this web log entity was approved to be publicly available.
     ///     The default value is <see cref="BlogMLApprovalStatus.None"/>, which indicates that no approval status information was specified.
     /// </value>
-    public BlogMLApprovalStatus ApprovalStatus
-    {
-        get
-        {
-            return commonObjectBaseApprovalStatus;
-        }
-
-        set
-        {
-            commonObjectBaseApprovalStatus = value;
-        }
-    }
+    public BlogMLApprovalStatus ApprovalStatus { get; set; } = BlogMLApprovalStatus.None;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this web log entity was created.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity. 
+    ///     A <see cref="DateTime"/> that indicates an instant in time associated with an event early in the life cycle of this web log entity.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime CreatedOn
-    {
-        get
-        {
-            return commonObjectBaseCreatedOn;
-        }
-
-        set
-        {
-            commonObjectBaseCreatedOn = value;
-        }
-    }
+    public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the unique identifier of this web log entity.
@@ -168,24 +118,13 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// Gets or sets a date-time indicating when this web log entity was last modified.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant. 
+    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this web log entity was modified in a way the publisher considers significant.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no modification date-time was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime LastModifiedOn
-    {
-        get
-        {
-            return commonObjectBaseLastModifiedOn;
-        }
-
-        set
-        {
-            commonObjectBaseLastModifiedOn = value;
-        }
-    }
+    public DateTime LastModifiedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the title of this web log entity.
@@ -335,18 +274,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// Gets or sets the excerpt of this post.
     /// </summary>
     /// <value>A <see cref="BlogMLTextConstruct"/> that represents an excerpt of this post.</value>
-    public BlogMLTextConstruct Excerpt
-    {
-        get
-        {
-            return postExcerpt;
-        }
-
-        set
-        {
-            postExcerpt = value;
-        }
-    }
+    public BlogMLTextConstruct Excerpt { get; set; }
 
     /// <summary>
     /// Gets a value indicating if this post has an excerpt.
@@ -364,38 +292,16 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// Gets or sets the name of this post.
     /// </summary>
     /// <value>A <see cref="BlogMLTextConstruct"/> that represents the name of this post.</value>
-    public BlogMLTextConstruct Name
-    {
-        get
-        {
-            return postName;
-        }
-
-        set
-        {
-            postName = value;
-        }
-    }
+    public BlogMLTextConstruct Name { get; set; }
 
     /// <summary>
     /// Gets or sets the type of web log entry this post represents.
     /// </summary>
     /// <value>
-    ///     An <see cref="BlogMLPostType"/> enumeration value that represents the type of web log entry this post represents. 
+    ///     An <see cref="BlogMLPostType"/> enumeration value that represents the type of web log entry this post represents.
     ///     The default value is <see cref="BlogMLPostType.None"/>.
     /// </value>
-    public BlogMLPostType PostType
-    {
-        get
-        {
-            return postType;
-        }
-
-        set
-        {
-            postType = value;
-        }
-    }
+    public BlogMLPostType PostType { get; set; } = BlogMLPostType.None;
 
     /// <summary>
     /// Gets the trackbacks for this post.
@@ -418,18 +324,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// Gets or sets the URL of this post.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of this post.</value>
-    public Uri Url
-    {
-        get
-        {
-            return postUrl;
-        }
-
-        set
-        {
-            postUrl = value;
-        }
-    }
+    public Uri Url { get; set; }
 
     /// <summary>
     /// Gets or sets the views of this post.

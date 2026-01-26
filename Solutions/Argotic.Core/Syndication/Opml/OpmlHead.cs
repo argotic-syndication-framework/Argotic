@@ -24,33 +24,9 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// </summary>
     private string headTitle = string.Empty;
     /// <summary>
-    /// Private member to hold a date-time indicating when the document was created.
-    /// </summary>
-    private DateTime headCreatedOn = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold a date-time indicating when the document was last modified.
-    /// </summary>
-    private DateTime headModifiedOn = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold the http address of the documentation the OPML document conforms to.
-    /// </summary>
-    private Uri headDocumentation = new Uri("http://www.opml.org/spec2");
-    /// <summary>
     /// Private member to hold a collection of line numbers that are expanded.
     /// </summary>
     private Collection<int> headExpansionState;
-    /// <summary>
-    /// Private member to hold a number indicating which line of the outline is displayed on the top line of the window.
-    /// </summary>
-    private int headVerticalScrollState = int.MinValue;
-    /// <summary>
-    /// Private member to hold information that describes the owner of the document.
-    /// </summary>
-    private OpmlOwner headOwner;
-    /// <summary>
-    /// Private member to hold information that describes the pixel locations of the outline window.
-    /// </summary>
-    private OpmlWindow headWindow;
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlHead"/> class.
     /// </summary>
@@ -102,18 +78,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime CreatedOn
-    {
-        get
-        {
-            return headCreatedOn;
-        }
-
-        set
-        {
-            headCreatedOn = value;
-        }
-    }
+    public DateTime CreatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets the http address of the documentation that this OPML document conforms to.
@@ -121,13 +86,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <value>
     ///     A <see cref="Uri"/> that represents the http address of the documentation that this OPML document conforms to.
     /// </value>
-    public Uri Documentation
-    {
-        get
-        {
-            return headDocumentation;
-        }
-    }
+    public Uri Documentation { get; } = new Uri("http://www.opml.org/spec2");
 
     /// <summary>
     /// Gets a collection of line numbers that are expanded within the outline.
@@ -156,42 +115,13 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime ModifiedOn
-    {
-        get
-        {
-            return headModifiedOn;
-        }
-
-        set
-        {
-            headModifiedOn = value;
-        }
-    }
+    public DateTime ModifiedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets information that describes the owner of this document.
     /// </summary>
     /// <value>A <see cref="OpmlOwner"/> object that provides information that describes the owner of this document.</value>
-    public OpmlOwner Owner
-    {
-        get
-        {
-            return headOwner;
-        }
-
-        set
-        {
-            if (value == null)
-            {
-                headOwner = null;
-            }
-            else
-            {
-                headOwner = value;
-            }
-        }
-    }
+    public OpmlOwner Owner { get; set; }
 
     /// <summary>
     /// Gets or sets the title of this document.
@@ -221,45 +151,16 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// Gets or sets a number indicating which line of this outline is displayed on the top line of the window.
     /// </summary>
     /// <value>
-    ///     An integer that indicates which line of this outline is displayed on the top line of the window. 
+    ///     An integer that indicates which line of this outline is displayed on the top line of the window.
     ///     The default value is <see cref="Int32.MinValue"/>, which indicates that no vertical scroll state was provided.
     /// </value>
-    public int VerticalScrollState
-    {
-        get
-        {
-            return headVerticalScrollState;
-        }
-
-        set
-        {
-            headVerticalScrollState = value;
-        }
-    }
+    public int VerticalScrollState { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets information that describes the pixel location of the edges of the outline window for this document.
     /// </summary>
     /// <value>A <see cref="OpmlWindow"/> object that provides information that describes the pixel location of the edges of the outline window for this document.</value>
-    public OpmlWindow Window
-    {
-        get
-        {
-            return headWindow;
-        }
-
-        set
-        {
-            if (value == null)
-            {
-                headWindow = null;
-            }
-            else
-            {
-                headWindow = value;
-            }
-        }
-    }
+    public OpmlWindow Window { get; set; }
     /// <summary>
     /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
     /// </summary>

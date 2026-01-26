@@ -23,14 +23,6 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// </summary>
     private string textConstructContent = string.Empty;
     /// <summary>
-    /// Private member to hold entity encoding utilized by the text.
-    /// </summary>
-    private BlogMLContentType textConstructType = BlogMLContentType.None;
-    /// <summary>
-    /// Private member to hold a value indicating if the text construct escapes content using a CDATA block.
-    /// </summary>
-    private bool textConstructEscapesContent = true;
-    /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLTextConstruct"/> class.
     /// </summary>
     public BlogMLTextConstruct()
@@ -132,44 +124,22 @@ public class BlogMLTextConstruct : IComparable, IExtensibleSyndicationObject
     /// Gets or sets the entity encoding utilized by this text.
     /// </summary>
     /// <value>
-    ///     An <see cref="BlogMLContentType"/> enumeration value that represents the entity encoding utilized by this text. 
+    ///     An <see cref="BlogMLContentType"/> enumeration value that represents the entity encoding utilized by this text.
     ///     The default value is <see cref="BlogMLContentType.None"/>.
     /// </value>
-    public BlogMLContentType ContentType
-    {
-        get
-        {
-            return textConstructType;
-        }
-
-        set
-        {
-            textConstructType = value;
-        }
-    }
+    public BlogMLContentType ContentType { get; set; } = BlogMLContentType.None;
 
     /// <summary>
     /// Gets or sets a value indicating if the content of this text is escaped using a CDATA block.
     /// </summary>
     /// <value><b>true</b> if the content of this text will be escaped using a CDATA block section; Otherwise, <b>false</b>. The default value is <b>true</b>.</value>
     /// <remarks>
-    ///     <i>CDATA</i> sections are used to escape blocks of text containing characters which would Otherwise, be recognized as markup. 
-    ///     All tags and entity references are ignored by an XML processor that treats them just like any character data. 
-    ///     <i>CDATA</i> blocks should be used when you want to include large blocks of special characters as character data, 
+    ///     <i>CDATA</i> sections are used to escape blocks of text containing characters which would Otherwise, be recognized as markup.
+    ///     All tags and entity references are ignored by an XML processor that treats them just like any character data.
+    ///     <i>CDATA</i> blocks should be used when you want to include large blocks of special characters as character data,
     ///     but you do not want to have to use entity references all the time.
     /// </remarks>
-    public bool EscapeContent
-    {
-        get
-        {
-            return textConstructEscapesContent;
-        }
-
-        set
-        {
-            textConstructEscapesContent = value;
-        }
-    }
+    public bool EscapeContent { get; set; } = true;
     /// <summary>
     /// Returns the text construct identifier for the supplied <see cref="BlogMLContentType"/>.
     /// </summary>

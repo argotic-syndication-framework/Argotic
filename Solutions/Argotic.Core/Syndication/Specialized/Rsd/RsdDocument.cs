@@ -43,14 +43,6 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     private static Version documentVersion = new Version(1, 0);
     /// <summary>
-    /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-    /// </summary>
-    private bool resourceAsyncLoadCancelled;
-    /// <summary>
-    /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-    /// </summary>
-    private bool resourceIsLoading;
-    /// <summary>
     /// Private member to hold HTTP web request used by asynchronous load operations.
     /// </summary>
     private static WebRequest asyncHttpWebRequest;
@@ -62,14 +54,6 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Private member to hold the name of the engine that is providing the services being described.
     /// </summary>
     private string documentServiceEngineName = string.Empty;
-    /// <summary>
-    /// Private member to hold the URL to the home of the engine.
-    /// </summary>
-    private Uri documentServiceEngineLink;
-    /// <summary>
-    /// Private member to hold the URL of the users homepage.
-    /// </summary>
-    private Uri documentServiceHomepageLink;
     /// <summary>
     /// Private member to hold the collection of application interfaces that comprise the discoverable services for the document.
     /// </summary>
@@ -166,18 +150,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets the homepage of the engine that is providing these discovery services.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the homepage of the engine that is providing these discovery services.</value>
-    public Uri EngineLink
-    {
-        get
-        {
-            return documentServiceEngineLink;
-        }
-
-        set
-        {
-            documentServiceEngineLink = value;
-        }
-    }
+    public Uri EngineLink { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the engine that is providing these discovery services.
@@ -219,18 +192,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets the homepage of the website that is hosting these discovery services.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents homepage of the website that is hosting these discovery services.</value>
-    public Uri Homepage
-    {
-        get
-        {
-            return documentServiceHomepageLink;
-        }
-
-        set
-        {
-            documentServiceHomepageLink = value;
-        }
-    }
+    public Uri Homepage { get; set; }
 
     /// <summary>
     /// Gets or sets the application interfaces that comprise the discoverable services for this document.
@@ -274,35 +236,13 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
     /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, Otherwise, <b>false</b>.</value>
-    internal bool AsyncLoadHasBeenCancelled
-    {
-        get
-        {
-            return resourceAsyncLoadCancelled;
-        }
-
-        set
-        {
-            resourceAsyncLoadCancelled = value;
-        }
-    }
+    internal bool AsyncLoadHasBeenCancelled { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if the syndication resource is in the process of loading.
     /// </summary>
     /// <value><b>true</b> if syndication resource is in the process of loading, Otherwise, <b>false</b>.</value>
-    internal bool LoadOperationInProgress
-    {
-        get
-        {
-            return resourceIsLoading;
-        }
-
-        set
-        {
-            resourceIsLoading = value;
-        }
-    }
+    internal bool LoadOperationInProgress { get; set; }
 
     /// <summary>
     /// Creates a new <see cref="RsdDocument"/> instance using the specified <see cref="Uri"/>.

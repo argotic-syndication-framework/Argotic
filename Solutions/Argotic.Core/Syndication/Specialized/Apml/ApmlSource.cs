@@ -50,10 +50,6 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
     /// </summary>
     private string sourceFrom = string.Empty;
     /// <summary>
-    /// Private member to hold a date indicating the last time the source was updated.
-    /// </summary>
-    private DateTime sourceUpdatedOn = DateTime.MinValue;
-    /// <summary>
     /// Private member to hold the collection of authors of the source.
     /// </summary>
     private Collection<ApmlAuthor> sourceAuthors;
@@ -269,18 +265,7 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime UpdatedOn
-    {
-        get
-        {
-            return sourceUpdatedOn;
-        }
-
-        set
-        {
-            sourceUpdatedOn = value;
-        }
-    }
+    public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the decimal score of this source.

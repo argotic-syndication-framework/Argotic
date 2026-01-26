@@ -41,10 +41,6 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// </summary>
     private string authorFrom = string.Empty;
     /// <summary>
-    /// Private member to hold a date indicating the last time the author was updated.
-    /// </summary>
-    private DateTime authorUpdatedOn = DateTime.MinValue;
-    /// <summary>
     /// Initializes a new instance of the <see cref="ApmlAuthor"/> class.
     /// </summary>
     public ApmlAuthor()
@@ -184,18 +180,7 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime UpdatedOn
-    {
-        get
-        {
-            return authorUpdatedOn;
-        }
-
-        set
-        {
-            authorUpdatedOn = value;
-        }
-    }
+    public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the decimal score of this author.

@@ -42,14 +42,6 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     private static Version documentVersion = new Version(2, 0);
     /// <summary>
-    /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-    /// </summary>
-    private bool resourceAsyncLoadCancelled;
-    /// <summary>
-    /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-    /// </summary>
-    private bool resourceIsLoading;
-    /// <summary>
     /// Private member to hold HTTP web request used by asynchronous load operations.
     /// </summary>
     private static WebRequest asyncHttpWebRequest;
@@ -81,14 +73,6 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Private member to hold the collection of posts for the web log.
     /// </summary>
     private IEnumerable<BlogMLPost> documentPosts;
-    /// <summary>
-    /// Private member to hold the creation date of this web log storage media.
-    /// </summary>
-    private DateTime documentCreationDate = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold the base URL of the web log. 
-    /// </summary>
-    private Uri documentRootUrl;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLDocument"/> class.
@@ -245,24 +229,13 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets a date-time indicating when this BlogML document was created.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the creation date of this web log storage media. 
+    ///     A <see cref="DateTime"/> that indicates the creation date of this web log storage media.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no creation date-time was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime GeneratedOn
-    {
-        get
-        {
-            return documentCreationDate;
-        }
-
-        set
-        {
-            documentCreationDate = value;
-        }
-    }
+    public DateTime GeneratedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the posts for this web log.
@@ -295,18 +268,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets the root URL of this web log.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the base URL of this web log.</value>
-    public Uri RootUrl
-    {
-        get
-        {
-            return documentRootUrl;
-        }
-
-        set
-        {
-            documentRootUrl = value;
-        }
-    }
+    public Uri RootUrl { get; set; }
 
     /// <summary>
     /// Gets or sets the sub-title of this web log.
@@ -366,35 +328,13 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
     /// </summary>
     /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, Otherwise, <b>false</b>.</value>
-    internal bool AsyncLoadHasBeenCancelled
-    {
-        get
-        {
-            return resourceAsyncLoadCancelled;
-        }
-
-        set
-        {
-            resourceAsyncLoadCancelled = value;
-        }
-    }
+    internal bool AsyncLoadHasBeenCancelled { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if the syndication resource is in the process of loading.
     /// </summary>
     /// <value><b>true</b> if syndication resource is in the process of loading, Otherwise, <b>false</b>.</value>
-    internal bool LoadOperationInProgress
-    {
-        get
-        {
-            return resourceIsLoading;
-        }
-
-        set
-        {
-            resourceIsLoading = value;
-        }
-    }
+    internal bool LoadOperationInProgress { get; set; }
     /// <summary>
     /// Creates a new <see cref="BlogMLDocument"/> instance using the specified <see cref="Uri"/>.
     /// </summary>

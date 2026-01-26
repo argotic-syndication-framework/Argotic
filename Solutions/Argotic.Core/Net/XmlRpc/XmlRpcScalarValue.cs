@@ -18,10 +18,6 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// Private member to hold the value of the parameter.
     /// </summary>
     private object scalarParameterValue;
-    /// <summary>
-    /// Private member to hold the type of scalar value the parameter represents.
-    /// </summary>
-    private XmlRpcScalarValueType scalarParameterType = XmlRpcScalarValueType.None;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class.
@@ -151,18 +147,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
     /// </remarks>
     /// <seealso cref="XmlRpcClient.ScalarTypeAsString(XmlRpcScalarValueType)"/>
     /// <seealso cref="XmlRpcClient.ScalarTypeByName(string)"/>
-    public XmlRpcScalarValueType ValueType
-    {
-        get
-        {
-            return scalarParameterType;
-        }
-
-        set
-        {
-            scalarParameterType = value;
-        }
-    }
+    public XmlRpcScalarValueType ValueType { get; set; } = XmlRpcScalarValueType.None;
 
     /// <summary>
     /// Loads this <see cref="XmlRpcScalarValue"/> using the supplied <see cref="XPathNavigator"/>.

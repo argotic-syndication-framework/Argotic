@@ -12,23 +12,6 @@ namespace Argotic.Syndication;
 [Serializable]
 public class OpmlWindow : IComparable
 {
-
-    /// <summary>
-    /// Private member to hold pixel location of the top edge of the window.
-    /// </summary>
-    private int windowTop = int.MinValue;
-    /// <summary>
-    /// Private member to hold pixel location of the left edge of the window.
-    /// </summary>
-    private int windowLeft = int.MinValue;
-    /// <summary>
-    /// Private member to hold pixel location of the bottom edge of the window.
-    /// </summary>
-    private int windowBottom = int.MinValue;
-    /// <summary>
-    /// Private member to hold pixel location of the right edge of the window.
-    /// </summary>
-    private int windowRight = int.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlWindow"/> class.
     /// </summary>
@@ -55,69 +38,25 @@ public class OpmlWindow : IComparable
     /// Gets or sets the pixel location of the bottom edge of this window.
     /// </summary>
     /// <value>The pixel location of the bottom edge of this window. The default value is <see cref="Int32.MinValue"/>, which indicates no pixel location was specified.</value>
-    public int Bottom
-    {
-        get
-        {
-            return windowBottom;
-        }
-
-        set
-        {
-            windowBottom = value;
-        }
-    }
+    public int Bottom { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the pixel location of the left edge of this window.
     /// </summary>
     /// <value>The pixel location of the left edge of this window. The default value is <see cref="Int32.MinValue"/>, which indicates no pixel location was specified.</value>
-    public int Left
-    {
-        get
-        {
-            return windowLeft;
-        }
-
-        set
-        {
-            windowLeft = value;
-        }
-    }
+    public int Left { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the pixel location of the right edge of this window.
     /// </summary>
     /// <value>The pixel location of the right edge of this window. The default value is <see cref="Int32.MinValue"/>, which indicates no pixel location was specified.</value>
-    public int Right
-    {
-        get
-        {
-            return windowRight;
-        }
-
-        set
-        {
-            windowRight = value;
-        }
-    }
+    public int Right { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the pixel location of the top edge of this window.
     /// </summary>
     /// <value>The pixel location of the top edge of this window. The default value is <see cref="Int32.MinValue"/>, which indicates no pixel location was specified.</value>
-    public int Top
-    {
-        get
-        {
-            return windowTop;
-        }
-
-        set
-        {
-            windowTop = value;
-        }
-    }
+    public int Top { get; set; } = int.MinValue;
     /// <summary>
     /// Loads this <see cref="OpmlWindow"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

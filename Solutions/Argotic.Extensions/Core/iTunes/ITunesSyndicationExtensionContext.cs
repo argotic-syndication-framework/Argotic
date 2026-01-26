@@ -19,37 +19,13 @@ public class ITunesSyndicationExtensionContext
     /// </summary>
     private string extensionAuthor = string.Empty;
     /// <summary>
-    /// Private member to hold a value indicating if the podcast is blocked from appearing in the iTunes Podcast directory.
-    /// </summary>
-    private bool extensionIsBlocked;
-    /// <summary>
     /// Private member to hold the categorization taxonomy applied to the podcast.
     /// </summary>
     private Collection<ITunesCategory> extensionCategories;
     /// <summary>
-    /// Private member to hold the total duration of the podcast.
-    /// </summary>
-    private TimeSpan extensionDuration = TimeSpan.MinValue;
-    /// <summary>
-    /// Private member to hold a value indicating if the podcast contains explicit material.
-    /// </summary>
-    private ITunesExplicitMaterial extensionExplicitMaterialDesignation = ITunesExplicitMaterial.None;
-    /// <summary>
-    /// Private member to hold a URL that points to the album artwork for the podcast.
-    /// </summary>
-    private Uri extensionImage;
-    /// <summary>
     ///  Private member to hold keywords that describe the podcast.
     /// </summary>
     private Collection<string> extensionKeywords;
-    /// <summary>
-    /// Private member to hold the URL where the podcast feed is has been relocated to.
-    /// </summary>
-    private Uri extensionNewFeedUrl;
-    /// <summary>
-    /// Private member to hold information that can be used to contact the owner of the podcast.
-    /// </summary>
-    private ITunesOwner extensionOwner;
     /// <summary>
     /// Private member to hold a brief synopsis of the podcast.
     /// </summary>
@@ -111,77 +87,33 @@ public class ITunesSyndicationExtensionContext
     /// Gets or sets the total duration of this podcast.
     /// </summary>
     /// <value>A <see cref="TimeSpan"/> that represents total duration of this podcast. The default value is <see cref="TimeSpan.MinValue"/>, which indicates that no duration was specified.</value>
-    public TimeSpan Duration
-    {
-        get
-        {
-            return extensionDuration;
-        }
-
-        set
-        {
-            extensionDuration = value;
-        }
-    }
+    public TimeSpan Duration { get; set; } = TimeSpan.MinValue;
 
     /// <summary>
     /// Gets or sets the explicit language or adult content advisory information for this podcast.
     /// </summary>
     /// <value>
-    ///     An <see cref="ITunesExplicitMaterial"/> enumeration value that indicates whether the podcast contains explicit material. 
+    ///     An <see cref="ITunesExplicitMaterial"/> enumeration value that indicates whether the podcast contains explicit material.
     ///     The default value is <see cref="ITunesExplicitMaterial.None"/>.
     /// </value>
-    public ITunesExplicitMaterial ExplicitMaterial
-    {
-        get
-        {
-            return extensionExplicitMaterialDesignation;
-        }
-
-        set
-        {
-            extensionExplicitMaterialDesignation = value;
-        }
-    }
+    public ITunesExplicitMaterial ExplicitMaterial { get; set; } = ITunesExplicitMaterial.None;
 
     /// <summary>
     /// Gets or sets a URL that points to the album artwork for this podcast.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents a URL that points to the album artwork for this podcast.</value>
     /// <remarks>
-    ///     iTunes recommends the use of square images that are at least 600 by 600 pixels. 
-    ///     iTunes supports images in <i>JPEG</i> and <i>PNG</i> formats. 
+    ///     iTunes recommends the use of square images that are at least 600 by 600 pixels.
+    ///     iTunes supports images in <i>JPEG</i> and <i>PNG</i> formats.
     ///     The URL <b>must</b> end in ".jpg" or ".png".
     /// </remarks>
-    public Uri Image
-    {
-        get
-        {
-            return extensionImage;
-        }
-
-        set
-        {
-            extensionImage = value;
-        }
-    }
+    public Uri Image { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if this podcast is blocked from appearing in the iTunes Podcast directory.
     /// </summary>
     /// <value><b>true</b> if this podcast is blocked from appearing in the iTunes Podcast directory; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
-    public bool IsBlocked
-    {
-        get
-        {
-            return extensionIsBlocked;
-        }
-
-        set
-        {
-            extensionIsBlocked = value;
-        }
-    }
+    public bool IsBlocked { get; set; }
 
     /// <summary>
     /// Gets the search keywords for this podcast.
@@ -206,38 +138,16 @@ public class ITunesSyndicationExtensionContext
     /// <remarks>
     ///     It is recommended that you should maintain the old feed for 48 hours before retiring it. At that point, iTunes will have updated the directory with the new feed URL.
     /// </remarks>
-    public Uri NewFeedUrl
-    {
-        get
-        {
-            return extensionNewFeedUrl;
-        }
-
-        set
-        {
-            extensionNewFeedUrl = value;
-        }
-    }
+    public Uri NewFeedUrl { get; set; }
 
     /// <summary>
     /// Gets or sets information that can be used to contact the owner of this podcast.
     /// </summary>
     /// <value>
-    ///     A <see cref="ITunesOwner"/> object that represents information that can be used to contact the owner of this podcast. 
+    ///     A <see cref="ITunesOwner"/> object that represents information that can be used to contact the owner of this podcast.
     ///     The default value is a <b>null</b> reference.
     /// </value>
-    public ITunesOwner Owner
-    {
-        get
-        {
-            return extensionOwner;
-        }
-
-        set
-        {
-            extensionOwner = value;
-        }
-    }
+    public ITunesOwner Owner { get; set; }
 
     /// <summary>
     /// Gets or sets a brief synopsis of this podcast.

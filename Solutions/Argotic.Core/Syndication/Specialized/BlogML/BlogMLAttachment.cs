@@ -25,25 +25,9 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// </summary>
     private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
     /// <summary>
-    /// Private member to hold a value indicating if the attachment is embedded via base64 encoding.
-    /// </summary>
-    private bool attachmentIsEmbedded;
-    /// <summary>
     /// Private member to hold the MIME type of the attachment.
     /// </summary>
     private string attachmentMimeType = string.Empty;
-    /// <summary>
-    /// Private member to hold the size of the attachment.
-    /// </summary>
-    private long attachmentSize = long.MinValue;
-    /// <summary>
-    /// Private member to hold a relative or fully qualified URL to the attachment.
-    /// </summary>
-    private Uri attachmentExternalUri;
-    /// <summary>
-    /// Private member to hold the original URL of the attachment.
-    /// </summary>
-    private Uri attachmentUrl;
     /// <summary>
     /// Private member to hold the attachment resource content.
     /// </summary>
@@ -124,35 +108,13 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// Gets or sets a relative or fully qualified URL to this attachment.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents a relative or fully qualified URL to this attachment resource.</value>
-    public Uri ExternalUri
-    {
-        get
-        {
-            return attachmentExternalUri;
-        }
-
-        set
-        {
-            attachmentExternalUri = value;
-        }
-    }
+    public Uri ExternalUri { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if this attachment is embedded.
     /// </summary>
     /// <value><b>true</b> if this attachment is embedded via <i>base64</i> encoding; Otherwise, <b>false</b>.</value>
-    public bool IsEmbedded
-    {
-        get
-        {
-            return attachmentIsEmbedded;
-        }
-
-        set
-        {
-            attachmentIsEmbedded = value;
-        }
-    }
+    public bool IsEmbedded { get; set; }
 
     /// <summary>
     /// Gets or sets MIME content type of this attachment.
@@ -178,35 +140,13 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// Gets or sets the size of this attachment.
     /// </summary>
     /// <value>The length of the attachment resource, in bytes. Default value is <see cref="Int64.MinValue"/>, which indicates that no size was specified.</value>
-    public long Size
-    {
-        get
-        {
-            return attachmentSize;
-        }
-
-        set
-        {
-            attachmentSize = value;
-        }
-    }
+    public long Size { get; set; } = long.MinValue;
 
     /// <summary>
     /// Gets or sets the original URL of this attachment.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the original URL of this attachment.</value>
-    public Uri Url
-    {
-        get
-        {
-            return attachmentUrl;
-        }
-
-        set
-        {
-            attachmentUrl = value;
-        }
-    }
+    public Uri Url { get; set; }
     /// <summary>
     /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
     /// </summary>

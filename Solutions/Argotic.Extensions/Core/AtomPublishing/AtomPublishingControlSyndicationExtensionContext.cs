@@ -15,21 +15,9 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
 {
 
     /// <summary>
-    /// Private member to hold the base URI other than the base URI of the document or external entity.
-    /// </summary>
-    private Uri commonObjectBaseUri;
-    /// <summary>
-    /// Private member to hold the natural or formal language in which the content is written.
-    /// </summary>
-    private CultureInfo commonObjectLanguage;
-    /// <summary>
     /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
     /// </summary>
     private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-    /// <summary>
-    /// Private member to hold a value indicating if the client is requesting to control the visibility of a resource.
-    /// </summary>
-    private bool extensionIsDraft;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingControlSyndicationExtensionContext"/> class.
     /// </summary>
@@ -43,21 +31,10 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>, 
+    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
     ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
     /// </remarks>
-    public Uri BaseUri
-    {
-        get
-        {
-            return commonObjectBaseUri;
-        }
-
-        set
-        {
-            commonObjectBaseUri = value;
-        }
-    }
+    public Uri BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
@@ -68,18 +45,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo Language
-    {
-        get
-        {
-            return commonObjectLanguage;
-        }
-
-        set
-        {
-            commonObjectLanguage = value;
-        }
-    }
+    public CultureInfo Language { get; set; }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -121,18 +87,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// Gets or sets a value indicating if client has requested to control the visibility of the resource.
     /// </summary>
     /// <value><b>true</b> if the client is requesting to control the visibility of the resource; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
-    public bool IsDraft
-    {
-        get
-        {
-            return extensionIsDraft;
-        }
-
-        set
-        {
-            extensionIsDraft = value;
-        }
-    }
+    public bool IsDraft { get; set; }
     /// <summary>
     /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
     /// </summary>

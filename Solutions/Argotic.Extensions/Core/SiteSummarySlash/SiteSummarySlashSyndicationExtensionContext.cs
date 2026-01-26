@@ -23,10 +23,6 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// </summary>
     private string extensionDepartment = string.Empty;
     /// <summary>
-    /// Private member to hold the number of comments.
-    /// </summary>
-    private int extensionComments = int.MinValue;
-    /// <summary>
     /// Private member to hold the hit parade identifiers.
     /// </summary>
     private Collection<int> extensionHitParade;
@@ -42,18 +38,7 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// Gets or sets the number of comments.
     /// </summary>
     /// <value>The number of comments. The default value is <see cref="Int32.MinValue"/>, which indicates that no comment count was specified.</value>
-    public int Comments
-    {
-        get
-        {
-            return extensionComments;
-        }
-
-        set
-        {
-            extensionComments = value;
-        }
-    }
+    public int Comments { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the name of the department.

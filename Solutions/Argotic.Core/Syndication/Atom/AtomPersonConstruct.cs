@@ -24,14 +24,6 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
 {
 
     /// <summary>
-    /// Private member to hold the base URI other than the base URI of the document or external entity.
-    /// </summary>
-    private Uri commonObjectBaseUri;
-    /// <summary>
-    /// Private member to hold the natural or formal language in which the content is written.
-    /// </summary>
-    private CultureInfo commonObjectLanguage;
-    /// <summary>
     /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
     /// </summary>
     private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
@@ -39,10 +31,6 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// Private member to hold a human-readable name for the person.
     /// </summary>
     private string personConstructName = string.Empty;
-    /// <summary>
-    /// Private member to hold an IRI associated with the person.
-    /// </summary>
-    private Uri personConstructUri;
     /// <summary>
     /// Private member to hold an e-mail address associated with the person.
     /// </summary>
@@ -71,21 +59,10 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// <value>A <see cref="Uri"/> that represents a base URI other than the base URI of the document or external entity. The default value is a <b>null</b> reference.</value>
     /// <remarks>
     ///     <para>
-    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>, 
+    ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
     ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
     /// </remarks>
-    public Uri BaseUri
-    {
-        get
-        {
-            return commonObjectBaseUri;
-        }
-
-        set
-        {
-            commonObjectBaseUri = value;
-        }
-    }
+    public Uri BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
@@ -96,18 +73,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo Language
-    {
-        get
-        {
-            return commonObjectLanguage;
-        }
-
-        set
-        {
-            commonObjectLanguage = value;
-        }
-    }
+    public CultureInfo Language { get; set; }
     /// <summary>
     /// Gets or sets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -203,18 +169,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
     ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
-    public Uri Uri
-    {
-        get
-        {
-            return personConstructUri;
-        }
-
-        set
-        {
-            personConstructUri = value;
-        }
-    }
+    public Uri Uri { get; set; }
     /// <summary>
     /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
     /// </summary>

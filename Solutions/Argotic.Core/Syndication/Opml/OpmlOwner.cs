@@ -22,10 +22,6 @@ public class OpmlOwner : IComparable
     /// </summary>
     private string ownerEmail = string.Empty;
     /// <summary>
-    /// Private member to hold the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
-    /// </summary>
-    private Uri ownerId;
-    /// <summary>
     /// Initializes a new instance of the <see cref="OpmlOwner"/> class.
     /// </summary>
     public OpmlOwner()
@@ -93,24 +89,13 @@ public class OpmlOwner : IComparable
     /// Gets or sets the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
     /// </summary>
     /// <value>
-    ///     A <see cref="Uri"/> that represents the http address of a web page that contains information 
+    ///     A <see cref="Uri"/> that represents the http address of a web page that contains information
     ///     that allows a human reader to communicate with the author of the document via email or other means.
     /// </value>
     /// <remarks>
     ///     The owner identifier may also may be used to identify the author. No two authors should have the same identifier.
     /// </remarks>
-    public Uri Id
-    {
-        get
-        {
-            return ownerId;
-        }
-
-        set
-        {
-            ownerId = value;
-        }
-    }
+    public Uri Id { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the owner of this document.

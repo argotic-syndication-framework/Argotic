@@ -13,10 +13,6 @@ public class AtomPublishingEditedSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the last time a resource was edited. If the resource has not been edited yet, indicates the time the resource was created.
-    /// </summary>
-    private DateTime extensionEditedOn = DateTime.MinValue;
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtensionContext"/> class.
     /// </summary>
     public AtomPublishingEditedSyndicationExtensionContext()
@@ -27,24 +23,13 @@ public class AtomPublishingEditedSyndicationExtensionContext
     /// Gets or sets a date-time indicating the most recent instant in time when this resource was edited.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this resource was edited. 
+    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this resource was edited.
     ///     If the resource has not been edited yet, indicates the time the resource was created. The default value is <see cref="DateTime.MinValue"/>, which indicates that no edit time was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime EditedOn
-    {
-        get
-        {
-            return extensionEditedOn;
-        }
-
-        set
-        {
-            extensionEditedOn = value;
-        }
-    }
+    public DateTime EditedOn { get; set; } = DateTime.MinValue;
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

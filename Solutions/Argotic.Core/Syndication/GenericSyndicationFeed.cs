@@ -909,47 +909,43 @@ public class GenericSyndicationFeed
                         encoding = settings.CharacterEncoding;
                     }
 
-                    using (StreamReader streamReader = new StreamReader(stream, encoding))
+                    using StreamReader streamReader = new StreamReader(stream, encoding);
+                    XmlReaderSettings readerSettings = new XmlReaderSettings
                     {
-                        XmlReaderSettings readerSettings = new XmlReaderSettings
-                        {
-                            IgnoreComments = true,
-                            IgnoreWhitespace = true,
-                            DtdProcessing = DtdProcessing.Ignore
-                        };
+                        IgnoreComments = true,
+                        IgnoreWhitespace = true,
+                        DtdProcessing = DtdProcessing.Ignore
+                    };
 
-                        using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
-                        {
-                            XPathNavigator navigator;
-                            if (encoding == System.Text.Encoding.UTF8)
-                            {
-                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-                            }
-                            else
-                            {
-                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
-                            }
-                            SyndicationResourceMetadata metadata = new SyndicationResourceMetadata(navigator);
-
-                            if (metadata.Format == SyndicationContentFormat.Atom)
-                            {
-                                AtomFeed atomFeed = new AtomFeed();
-                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
-                                adapter.Fill(atomFeed, SyndicationContentFormat.Atom);
-
-                                feed.Parse(atomFeed);
-                            }
-                            else if (metadata.Format == SyndicationContentFormat.Rss)
-                            {
-                                RssFeed rssFeed = new RssFeed();
-                                SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
-                                adapter.Fill(rssFeed, SyndicationContentFormat.Rss);
-
-                                feed.Parse(rssFeed);
-                            }
-                            feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
-                        }
+                    using XmlReader reader = XmlReader.Create(streamReader, readerSettings);
+                    XPathNavigator navigator;
+                    if (encoding == System.Text.Encoding.UTF8)
+                    {
+                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                     }
+                    else
+                    {
+                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                    }
+                    SyndicationResourceMetadata metadata = new SyndicationResourceMetadata(navigator);
+
+                    if (metadata.Format == SyndicationContentFormat.Atom)
+                    {
+                        AtomFeed atomFeed = new AtomFeed();
+                        SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+                        adapter.Fill(atomFeed, SyndicationContentFormat.Atom);
+
+                        feed.Parse(atomFeed);
+                    }
+                    else if (metadata.Format == SyndicationContentFormat.Rss)
+                    {
+                        RssFeed rssFeed = new RssFeed();
+                        SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+                        adapter.Fill(rssFeed, SyndicationContentFormat.Rss);
+
+                        feed.Parse(rssFeed);
+                    }
+                    feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                 }
                 feed.LoadOperationInProgress = false;
             }

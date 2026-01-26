@@ -641,32 +641,28 @@ public class MyCustomRssFeed : ISyndicationResource
                         encoding = settings.CharacterEncoding;
                     }
 
-                    using (StreamReader streamReader = new StreamReader(stream, encoding))
+                    using StreamReader streamReader = new StreamReader(stream, encoding);
+                    XmlReaderSettings readerSettings = new XmlReaderSettings
                     {
-                        XmlReaderSettings readerSettings = new XmlReaderSettings
-                        {
-                            IgnoreComments = true,
-                            IgnoreWhitespace = true,
-                            DtdProcessing = DtdProcessing.Ignore
-                        };
+                        IgnoreComments = true,
+                        IgnoreWhitespace = true,
+                        DtdProcessing = DtdProcessing.Ignore
+                    };
 
-                        using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
-                        {
-                            if (encoding == System.Text.Encoding.UTF8)
-                            {
-                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-                            }
-                            else
-                            {
-                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
-                            }
-
-                            //  Code to load the syndication resource using the XPathNavigator would go here.
-                            //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed; 
-                            //  Otherwise, you would utilize the feed's Load method.
-                            feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
-                        }
+                    using XmlReader reader = XmlReader.Create(streamReader, readerSettings);
+                    if (encoding == System.Text.Encoding.UTF8)
+                    {
+                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                     }
+                    else
+                    {
+                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                    }
+
+                    //  Code to load the syndication resource using the XPathNavigator would go here.
+                    //  If you support legacy formats, you would use a SyndicationResourceAdapter to fill the feed; 
+                    //  Otherwise, you would utilize the feed's Load method.
+                    feed.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                 }
                 feed.LoadOperationInProgress = false;
             }

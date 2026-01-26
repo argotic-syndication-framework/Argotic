@@ -417,14 +417,12 @@ public class TrackbackClient
 
         using (MemoryStream stream = new MemoryStream())
         {
-            using (StreamWriter writer = new StreamWriter(stream, message.Encoding))
-            {
-                message.WriteTo(writer);
-                writer.Flush();
+            using StreamWriter writer = new StreamWriter(stream, message.Encoding);
+            message.WriteTo(writer);
+            writer.Flush();
 
-                stream.Seek(0, SeekOrigin.Begin);
-                payloadData = message.Encoding.GetBytes((new StreamReader(stream)).ReadToEnd());
-            }
+            stream.Seek(0, SeekOrigin.Begin);
+            payloadData = message.Encoding.GetBytes((new StreamReader(stream)).ReadToEnd());
         }
 
         httpRequest = (HttpWebRequest)HttpWebRequest.Create(host);

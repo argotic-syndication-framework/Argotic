@@ -1162,10 +1162,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using (StreamReader reader = new StreamReader(stream))
-        {
-            return reader.ReadToEnd();
-        }
+        using StreamReader reader = new StreamReader(stream);
+        return reader.ReadToEnd();
     }
     /// <summary>
     /// Compares the current instance with another object of the same type.

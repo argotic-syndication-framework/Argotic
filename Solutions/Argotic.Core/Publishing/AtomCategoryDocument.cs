@@ -796,33 +796,29 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
                         encoding = settings.CharacterEncoding;
                     }
 
-                    using (StreamReader streamReader = new StreamReader(stream, encoding))
+                    using StreamReader streamReader = new StreamReader(stream, encoding);
+                    XmlReaderSettings readerSettings = new XmlReaderSettings
                     {
-                        XmlReaderSettings readerSettings = new XmlReaderSettings
-                        {
-                            IgnoreComments = true,
-                            IgnoreWhitespace = true,
-                            DtdProcessing = DtdProcessing.Ignore
-                        };
+                        IgnoreComments = true,
+                        IgnoreWhitespace = true,
+                        DtdProcessing = DtdProcessing.Ignore
+                    };
 
-                        using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
-                        {
-                            XPathNavigator navigator;
-                            if (encoding == System.Text.Encoding.UTF8)
-                            {
-                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-                            }
-                            else
-                            {
-                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
-                            }
-
-                            SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
-                            adapter.Fill(document, SyndicationContentFormat.AtomCategoryDocument);
-
-                            document.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
-                        }
+                    using XmlReader reader = XmlReader.Create(streamReader, readerSettings);
+                    XPathNavigator navigator;
+                    if (encoding == System.Text.Encoding.UTF8)
+                    {
+                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                     }
+                    else
+                    {
+                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                    }
+
+                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+                    adapter.Fill(document, SyndicationContentFormat.AtomCategoryDocument);
+
+                    document.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                 }
 
                 document.LoadOperationInProgress = false;
@@ -1364,10 +1360,8 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        using (StreamReader reader = new StreamReader(stream))
-        {
-            return reader.ReadToEnd();
-        }
+        using StreamReader reader = new StreamReader(stream);
+        return reader.ReadToEnd();
     }
 
     /// <summary>

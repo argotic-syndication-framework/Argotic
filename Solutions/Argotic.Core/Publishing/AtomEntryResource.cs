@@ -257,45 +257,41 @@ public class AtomEntryResource : AtomEntry
                         encoding = settings.CharacterEncoding;
                     }
 
-                    using (StreamReader streamReader = new StreamReader(stream, encoding))
+                    using StreamReader streamReader = new StreamReader(stream, encoding);
+                    XmlReaderSettings readerSettings = new XmlReaderSettings
                     {
-                        XmlReaderSettings readerSettings = new XmlReaderSettings
-                        {
-                            IgnoreComments = true,
-                            IgnoreWhitespace = true,
-                            DtdProcessing = DtdProcessing.Ignore
-                        };
+                        IgnoreComments = true,
+                        IgnoreWhitespace = true,
+                        DtdProcessing = DtdProcessing.Ignore
+                    };
 
-                        using (XmlReader reader = XmlReader.Create(streamReader, readerSettings))
-                        {
-                            XPathNavigator navigator;
-                            if (encoding == System.Text.Encoding.UTF8)
-                            {
-                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-                            }
-                            else
-                            {
-                                navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
-                            }
-
-                            SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
-                            adapter.Fill(entry, SyndicationContentFormat.Atom);
-
-                            AtomPublishingEditedSyndicationExtension editedExtension = entry.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
-                            if (editedExtension != null)
-                            {
-                                entry.EditedOn = editedExtension.Context.EditedOn;
-                            }
-
-                            AtomPublishingControlSyndicationExtension controlExtension = entry.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
-                            if (controlExtension != null)
-                            {
-                                entry.IsDraft = controlExtension.Context.IsDraft;
-                            }
-
-                            entry.OnEntryLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
-                        }
+                    using XmlReader reader = XmlReader.Create(streamReader, readerSettings);
+                    XPathNavigator navigator;
+                    if (encoding == System.Text.Encoding.UTF8)
+                    {
+                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
                     }
+                    else
+                    {
+                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
+                    }
+
+                    SyndicationResourceAdapter adapter = new SyndicationResourceAdapter(navigator, settings);
+                    adapter.Fill(entry, SyndicationContentFormat.Atom);
+
+                    AtomPublishingEditedSyndicationExtension editedExtension = entry.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+                    if (editedExtension != null)
+                    {
+                        entry.EditedOn = editedExtension.Context.EditedOn;
+                    }
+
+                    AtomPublishingControlSyndicationExtension controlExtension = entry.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+                    if (controlExtension != null)
+                    {
+                        entry.IsDraft = controlExtension.Context.IsDraft;
+                    }
+
+                    entry.OnEntryLoaded(new SyndicationResourceLoadedEventArgs(navigator, source, options, userToken));
                 }
 
                 entry.LoadOperationInProgress = false;

@@ -272,7 +272,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<Uri> ExtractUrls(string content)
     {
-        Collection<Uri> results = [];
+        Collection<Uri> results = new Collection<Uri>();
         Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
         Regex anchorPattern = new Regex("<a[^>]+", RegexOptions.IgnoreCase);
 
@@ -711,7 +711,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
     {
-        Collection<DiscoverableSyndicationEndpoint> results = [];
+        Collection<DiscoverableSyndicationEndpoint> results = new Collection<DiscoverableSyndicationEndpoint>();
         Regex linkPattern = new Regex("<link[^>]+", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -1222,7 +1222,7 @@ public static class SyndicationDiscoveryUtility
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Naming", "CA1704:IdentifiersShouldBeSpelledCorrectly", MessageId = "Trackback")]
     public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
-        Collection<TrackbackDiscoveryMetadata> results = [];
+        Collection<TrackbackDiscoveryMetadata> results = new Collection<TrackbackDiscoveryMetadata>();
         Regex rdfPattern = new Regex("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         XmlNamespaceManager manager = new XmlNamespaceManager(new NameTable());
 

@@ -158,7 +158,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

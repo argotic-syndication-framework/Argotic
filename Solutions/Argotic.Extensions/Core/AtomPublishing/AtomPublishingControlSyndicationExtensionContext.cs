@@ -60,7 +60,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

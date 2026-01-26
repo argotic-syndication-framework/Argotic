@@ -142,7 +142,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

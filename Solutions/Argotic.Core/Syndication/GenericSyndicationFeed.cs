@@ -52,7 +52,7 @@ public class GenericSyndicationFeed
     /// <summary>
     /// Private member to hold the collection of categories associated with the feed.
     /// </summary>
-    private Collection<GenericSyndicationCategory> feedCategories = [];
+    private Collection<GenericSyndicationCategory> feedCategories = new Collection<GenericSyndicationCategory>();
     /// <summary>
     /// Private member to hold the collection of items that comprise the distinct content published in the feed.
     /// </summary>

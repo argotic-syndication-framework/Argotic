@@ -200,7 +200,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

@@ -135,7 +135,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable, IExtensibleSyndic
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

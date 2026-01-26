@@ -200,7 +200,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

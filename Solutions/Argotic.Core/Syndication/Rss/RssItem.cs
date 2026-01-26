@@ -91,7 +91,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

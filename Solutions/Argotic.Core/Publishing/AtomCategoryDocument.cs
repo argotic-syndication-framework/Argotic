@@ -226,7 +226,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

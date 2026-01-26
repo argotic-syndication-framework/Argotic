@@ -126,7 +126,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IExtensibleSyndica
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

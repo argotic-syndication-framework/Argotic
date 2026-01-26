@@ -126,7 +126,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

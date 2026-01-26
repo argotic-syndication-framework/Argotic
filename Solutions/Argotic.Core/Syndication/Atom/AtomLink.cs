@@ -149,7 +149,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

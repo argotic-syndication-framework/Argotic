@@ -130,7 +130,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

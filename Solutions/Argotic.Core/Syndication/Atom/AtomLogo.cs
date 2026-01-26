@@ -87,7 +87,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

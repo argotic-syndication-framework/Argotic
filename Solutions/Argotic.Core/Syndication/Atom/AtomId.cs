@@ -156,7 +156,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

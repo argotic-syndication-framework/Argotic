@@ -173,7 +173,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }

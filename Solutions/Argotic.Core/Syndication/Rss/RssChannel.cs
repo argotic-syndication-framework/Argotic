@@ -174,7 +174,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             if (objectSyndicationExtensions == null)
             {
-                objectSyndicationExtensions = [];
+                objectSyndicationExtensions = new Collection<ISyndicationExtension>();
             }
             return objectSyndicationExtensions;
         }
@@ -355,7 +355,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
         {
             if (channelItems == null)
             {
-                channelItems = [];
+                channelItems = new Collection<RssItem>();
             }
             return channelItems;
         }

@@ -205,7 +205,7 @@ public class YahooMediaCopyright : IComparable
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is YahooMediaCopyright))
+        if (obj is not YahooMediaCopyright)
         {
             return false;
         }

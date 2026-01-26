@@ -425,7 +425,7 @@ public class YahooMediaText : IComparable
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is YahooMediaText))
+        if (obj is not YahooMediaText)
         {
             return false;
         }

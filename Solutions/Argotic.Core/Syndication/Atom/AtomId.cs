@@ -391,7 +391,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is AtomId))
+        if (obj is not AtomId)
         {
             return false;
         }

@@ -407,7 +407,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IExtensib
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is AtomGenerator))
+        if (obj is not AtomGenerator)
         {
             return false;
         }

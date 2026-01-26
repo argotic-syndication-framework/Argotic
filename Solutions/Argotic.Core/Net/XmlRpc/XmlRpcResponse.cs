@@ -329,7 +329,7 @@ public class XmlRpcResponse : IComparable
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is XmlRpcResponse))
+        if (obj is not XmlRpcResponse)
         {
             return false;
         }

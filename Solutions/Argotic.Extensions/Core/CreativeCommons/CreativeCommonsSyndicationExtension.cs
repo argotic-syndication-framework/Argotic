@@ -190,7 +190,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is CreativeCommonsSyndicationExtension))
+        if (obj is not CreativeCommonsSyndicationExtension)
         {
             return false;
         }

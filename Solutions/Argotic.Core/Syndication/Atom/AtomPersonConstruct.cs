@@ -392,7 +392,7 @@ public class AtomPersonConstruct : IComparable, IAtomCommonObjectAttributes, IEx
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is AtomPersonConstruct))
+        if (obj is not AtomPersonConstruct)
         {
             return false;
         }

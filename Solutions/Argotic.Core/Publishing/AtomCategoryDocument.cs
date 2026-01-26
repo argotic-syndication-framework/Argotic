@@ -1424,7 +1424,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is AtomCategoryDocument))
+        if (obj is not AtomCategoryDocument)
         {
             return false;
         }

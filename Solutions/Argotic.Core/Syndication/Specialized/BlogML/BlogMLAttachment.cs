@@ -403,7 +403,7 @@ public class BlogMLAttachment : IComparable, IExtensibleSyndicationObject
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is BlogMLAttachment))
+        if (obj is not BlogMLAttachment)
         {
             return false;
         }

@@ -256,7 +256,7 @@ public class TrackbackResponse : IComparable
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is TrackbackResponse))
+        if (obj is not TrackbackResponse)
         {
             return false;
         }

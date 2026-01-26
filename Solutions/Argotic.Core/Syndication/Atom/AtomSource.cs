@@ -657,7 +657,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is AtomSource))
+        if (obj is not AtomSource)
         {
             return false;
         }

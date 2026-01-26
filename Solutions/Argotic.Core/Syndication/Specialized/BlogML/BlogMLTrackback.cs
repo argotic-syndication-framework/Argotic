@@ -380,7 +380,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable, IExtensibleSynd
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is BlogMLTrackback))
+        if (obj is not BlogMLTrackback)
         {
             return false;
         }

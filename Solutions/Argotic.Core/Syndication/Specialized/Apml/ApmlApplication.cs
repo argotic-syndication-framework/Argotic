@@ -333,7 +333,7 @@ public class ApmlApplication : IComparable, IExtensibleSyndicationObject
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object obj)
     {
-        if (!(obj is ApmlApplication))
+        if (obj is not ApmlApplication)
         {
             return false;
         }

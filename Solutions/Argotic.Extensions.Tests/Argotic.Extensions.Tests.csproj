@@ -1,27 +1,27 @@
 <Project Sdk="MSTest.Sdk">
 
-  <PropertyGroup>
-    <TargetFramework>net10.0</TargetFramework>
-    <Nullable>enable</Nullable>
-    <ImplicitUsings>enable</ImplicitUsings>
-    <LangVersion>14.0</LangVersion>
-    <Product>Argotic Syndication Framework</Product>
-    <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
-    <Authors>Brian William Kuhn, endjin</Authors>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TargetFramework>net10.0</TargetFramework>
+        <Nullable>enable</Nullable>
+        <ImplicitUsings>enable</ImplicitUsings>
+        <LangVersion>14.0</LangVersion>
+        <Product>Argotic Syndication Framework</Product>
+        <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
+        <Authors>Brian William Kuhn, endjin</Authors>
+    </PropertyGroup>
 
-  <PropertyGroup>
-    <TestingExtensionsProfile>Default</TestingExtensionsProfile>
-  </PropertyGroup>
+    <PropertyGroup>
+        <TestingExtensionsProfile>Default</TestingExtensionsProfile>
+    </PropertyGroup>
 
-  <ItemGroup>
-    <PackageReference Include="Shouldly" Version="4.3.0" />
-  </ItemGroup>
+    <ItemGroup>
+        <PackageReference Include="Shouldly" Version="4.3.0" />
+    </ItemGroup>
 
-  <ItemGroup>
-    <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
-    <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
-    <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
-  </ItemGroup>
+    <ItemGroup>
+        <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
+        <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
+        <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+    </ItemGroup>
 
 </Project>

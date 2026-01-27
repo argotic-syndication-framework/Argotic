@@ -107,13 +107,17 @@ public class YahooMediaHash : IComparable
 
         if (algorithm == YahooMediaHashAlgorithm.MD5)
         {
+#pragma warning disable CA5351 // Yahoo Media RSS specification requires MD5 for hash verification
             using MD5 md5 = MD5.Create();
+#pragma warning restore CA5351
             byte[] hash = md5.ComputeHash(stream);
             base64EncodedHash = Convert.ToBase64String(hash);
         }
         else if (algorithm == YahooMediaHashAlgorithm.Sha1)
         {
+#pragma warning disable CA5350 // Yahoo Media RSS specification requires SHA1 for hash verification
             using SHA1 sha1 = SHA1.Create();
+#pragma warning restore CA5350
             byte[] hash = sha1.ComputeHash(stream);
             base64EncodedHash = Convert.ToBase64String(hash);
         }

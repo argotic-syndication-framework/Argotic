@@ -163,12 +163,12 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
             XPathNavigator draftNavigator = source.SelectSingleNode("app:draft", manager);
             if (draftNavigator != null && !string.IsNullOrEmpty(draftNavigator.Value))
             {
-                if (string.Compare(draftNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(draftNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase))
                 {
                     this.IsDraft = true;
                     wasLoaded = true;
                 }
-                else if (string.Compare(draftNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(draftNavigator.Value, "no", StringComparison.OrdinalIgnoreCase))
                 {
                     this.IsDraft = false;
                     wasLoaded = true;

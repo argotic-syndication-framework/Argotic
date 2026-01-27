@@ -316,7 +316,7 @@ public class WebContentType : IComparable
         foreach (string parameterName in this.Parameters.Keys)
         {
             string parameterValue = !string.IsNullOrEmpty(this.Parameters[parameterName]) ? this.Parameters[parameterName].Trim() : string.Empty;
-            if (string.Compare(parameterName, TYPE_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0 && string.Compare(parameterName, CHARSET_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) != 0)
+            if (!string.Equals(parameterName, TYPE_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) && !string.Equals(parameterName, CHARSET_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase))
             {
                 builder.Append(string.Format(null, ";{0}={1}", parameterName, parameterValue));
             }

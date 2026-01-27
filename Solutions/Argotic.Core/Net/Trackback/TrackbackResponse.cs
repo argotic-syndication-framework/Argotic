@@ -68,7 +68,7 @@ public class TrackbackResponse : IComparable
     {
         ArgumentNullException.ThrowIfNull(response);
 
-        if (string.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
+        if (!string.Equals(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase))
         {
             throw new ArgumentException(string.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), nameof(response));
         }
@@ -135,12 +135,12 @@ public class TrackbackResponse : IComparable
 
             if (errorNavigator != null)
             {
-                if (string.Compare(errorNavigator.Value, "0", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(errorNavigator.Value, "0", StringComparison.OrdinalIgnoreCase))
                 {
                     responseHasError = false;
                     wasLoaded = true;
                 }
-                else if (string.Compare(errorNavigator.Value, "1", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(errorNavigator.Value, "1", StringComparison.OrdinalIgnoreCase))
                 {
                     responseHasError = true;
                     wasLoaded = true;

@@ -513,7 +513,7 @@ public class SyndicationResourceMetadata : IComparable
                     version = new(1, 0);
                 }
             }
-            else if (string.Compare(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) == 0 && version != null)
+            else if (string.Equals(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) && version != null)
             {
                 //  Most web log software actually fails to provide the default XML namespace per RSD spec, so this is a hack/compromise
                 resourceConformsToFormat = true;

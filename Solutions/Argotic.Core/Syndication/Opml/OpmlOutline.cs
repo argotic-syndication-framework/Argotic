@@ -199,7 +199,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            return (string.Compare(this.ContentType, "include", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(this.ContentType, "link", StringComparison.OrdinalIgnoreCase) == 0);
+            return (string.Equals(this.ContentType, "include", StringComparison.OrdinalIgnoreCase) || string.Equals(this.ContentType, "link", StringComparison.OrdinalIgnoreCase));
         }
     }
 
@@ -212,7 +212,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     {
         get
         {
-            return (string.Compare(this.ContentType, "rss", StringComparison.OrdinalIgnoreCase) == 0 || string.Compare(this.ContentType, "feed", StringComparison.OrdinalIgnoreCase) == 0);
+            return (string.Equals(this.ContentType, "rss", StringComparison.OrdinalIgnoreCase) || string.Equals(this.ContentType, "feed", StringComparison.OrdinalIgnoreCase));
         }
     }
 
@@ -829,17 +829,17 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
             return false;
         }
 
-        if (string.Compare(attribute.Name, "text", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Equals(attribute.Name, "text", StringComparison.OrdinalIgnoreCase))
         {
             this.Text = attribute.Value;
             wasLoaded = true;
         }
-        else if (string.Compare(attribute.Name, "type", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Equals(attribute.Name, "type", StringComparison.OrdinalIgnoreCase))
         {
             this.ContentType = attribute.Value;
             wasLoaded = true;
         }
-        else if (string.Compare(attribute.Name, "isComment", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Equals(attribute.Name, "isComment", StringComparison.OrdinalIgnoreCase))
         {
             if (bool.TryParse(attribute.Value, out bool isComment))
             {
@@ -847,7 +847,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
                 wasLoaded = true;
             }
         }
-        else if (string.Compare(attribute.Name, "isBreakpoint", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Equals(attribute.Name, "isBreakpoint", StringComparison.OrdinalIgnoreCase))
         {
             if (bool.TryParse(attribute.Value, out bool isBreakpoint))
             {
@@ -855,7 +855,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
                 wasLoaded = true;
             }
         }
-        else if (string.Compare(attribute.Name, "created", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Equals(attribute.Name, "created", StringComparison.OrdinalIgnoreCase))
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(attribute.Value, out DateTime created))
             {
@@ -863,7 +863,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
                 wasLoaded = true;
             }
         }
-        else if (string.Compare(attribute.Name, "category", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Equals(attribute.Name, "category", StringComparison.OrdinalIgnoreCase))
         {
             if (attribute.Value.Contains(","))
             {

@@ -83,7 +83,7 @@ internal static class BlogMLUtility
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (string.Compare(value, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Equals(value, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
                     {
                         approvalStatus = status;
                         break;

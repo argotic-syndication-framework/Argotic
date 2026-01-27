@@ -61,11 +61,11 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
                     if (!string.IsNullOrEmpty(fixedAttribute))
                     {
-                        if (string.Compare(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase) == 0)
+                        if (string.Equals(fixedAttribute, "yes", StringComparison.OrdinalIgnoreCase))
                         {
                             resource.IsFixed = true;
                         }
-                        else if (string.Compare(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase) == 0)
+                        else if (string.Equals(fixedAttribute, "no", StringComparison.OrdinalIgnoreCase))
                         {
                             resource.IsFixed = false;
                         }

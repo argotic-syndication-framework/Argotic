@@ -290,8 +290,8 @@ public static class SyndicationEncodingUtility
 
         if (source.IsAbsoluteUri)
         {
-            if (string.Compare(source.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) == 0 ||
-                string.Compare(source.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase) == 0)
+            if (string.Equals(source.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) ||
+                string.Equals(source.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
             {
                 HttpWebRequest httpRequest = (HttpWebRequest)request;
                 httpRequest.UserAgent = SyndicationDiscoveryUtility.FrameworkUserAgent;

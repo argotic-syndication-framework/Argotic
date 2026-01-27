@@ -137,7 +137,7 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
                     {
                         typeVocabulary = vocabulary;
                         break;

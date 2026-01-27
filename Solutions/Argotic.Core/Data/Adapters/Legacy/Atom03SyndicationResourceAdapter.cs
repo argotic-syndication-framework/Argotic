@@ -156,7 +156,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (string.Compare(modeAttribute, "xml", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Equals(modeAttribute, "xml", StringComparison.OrdinalIgnoreCase))
         {
             XPathNavigator xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
             if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
@@ -311,15 +311,15 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             string modeAttribute = source.GetAttribute("mode", string.Empty);
             if (!string.IsNullOrEmpty(modeAttribute))
             {
-                if (string.Compare(modeAttribute, "base64", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(modeAttribute, "base64", StringComparison.OrdinalIgnoreCase))
                 {
                     content.TextType = AtomTextConstructType.Text;
                 }
-                else if (string.Compare(modeAttribute, "escaped", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(modeAttribute, "escaped", StringComparison.OrdinalIgnoreCase))
                 {
                     content.TextType = AtomTextConstructType.Html;
                 }
-                else if (string.Compare(modeAttribute, "xml", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(modeAttribute, "xml", StringComparison.OrdinalIgnoreCase))
                 {
                     content.TextType = AtomTextConstructType.Xhtml;
                 }

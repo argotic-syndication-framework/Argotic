@@ -90,7 +90,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
                             MimeMediaTypeAttribute mediaType = customAttributes[0] as MimeMediaTypeAttribute;
                             string contentType = string.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
 
-                            if (string.Compare(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase) == 0)
+                            if (string.Equals(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase))
                             {
                                 syndicationFormat = format;
                                 break;

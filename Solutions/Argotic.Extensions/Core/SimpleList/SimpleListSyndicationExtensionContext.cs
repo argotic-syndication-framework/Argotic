@@ -88,7 +88,7 @@ public class SimpleListSyndicationExtensionContext
             XPathNavigator treatAsNavigator = source.SelectSingleNode("cf:treatAs", manager);
             XPathNavigator listInformationNavigator = source.SelectSingleNode("cf:listinfo", manager);
 
-            if (treatAsNavigator != null && string.Compare(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase) == 0)
+            if (treatAsNavigator != null && string.Equals(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase))
             {
                 this.TreatAsList = true;
                 wasLoaded = true;

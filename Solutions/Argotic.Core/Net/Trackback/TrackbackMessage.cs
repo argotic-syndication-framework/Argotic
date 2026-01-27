@@ -200,7 +200,7 @@ public class TrackbackMessage : IComparable
         {
             foreach (string parameterName in source.AllKeys)
             {
-                if (string.Compare(parameterName, "url", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(parameterName, "url", StringComparison.OrdinalIgnoreCase))
                 {
                     if (Uri.TryCreate(source[parameterName], UriKind.RelativeOrAbsolute, out Uri url))
                     {
@@ -208,7 +208,7 @@ public class TrackbackMessage : IComparable
                         wasLoaded = true;
                     }
                 }
-                else if (string.Compare(parameterName, "title", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(parameterName, "title", StringComparison.OrdinalIgnoreCase))
                 {
                     if (!string.IsNullOrEmpty(source[parameterName]))
                     {
@@ -216,7 +216,7 @@ public class TrackbackMessage : IComparable
                         wasLoaded = true;
                     }
                 }
-                else if (string.Compare(parameterName, "excerpt", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(parameterName, "excerpt", StringComparison.OrdinalIgnoreCase))
                 {
                     if (!string.IsNullOrEmpty(source[parameterName]))
                     {
@@ -224,7 +224,7 @@ public class TrackbackMessage : IComparable
                         wasLoaded = true;
                     }
                 }
-                else if (string.Compare(parameterName, "blog_name", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(parameterName, "blog_name", StringComparison.OrdinalIgnoreCase))
                 {
                     if (!string.IsNullOrEmpty(source[parameterName]))
                     {

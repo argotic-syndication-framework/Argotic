@@ -416,12 +416,12 @@ public class ITunesSyndicationExtensionContext
 
             if (blockNavigator != null && !string.IsNullOrEmpty(blockNavigator.Value))
             {
-                if (string.Compare(blockNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(blockNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase))
                 {
                     this.IsBlocked = true;
                     wasLoaded = true;
                 }
-                else if (string.Compare(blockNavigator.Value, "no", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(blockNavigator.Value, "no", StringComparison.OrdinalIgnoreCase))
                 {
                     this.IsBlocked = false;
                     wasLoaded = true;

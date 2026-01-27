@@ -990,12 +990,12 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
 
             if (!string.IsNullOrEmpty(isDefaultAttribute))
             {
-                if (string.Compare(isDefaultAttribute, "true", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(isDefaultAttribute, "true", StringComparison.OrdinalIgnoreCase))
                 {
                     this.IsDefault = true;
                     wasLoaded = true;
                 }
-                else if (string.Compare(isDefaultAttribute, "false", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(isDefaultAttribute, "false", StringComparison.OrdinalIgnoreCase))
                 {
                     this.IsDefault = false;
                     wasLoaded = true;

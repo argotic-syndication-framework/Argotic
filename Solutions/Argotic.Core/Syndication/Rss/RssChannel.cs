@@ -1244,7 +1244,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
                 if (atomLinkIterator.Current.HasAttributes)
                 {
                     string relAttribute = atomLinkIterator.Current.GetAttribute("rel", string.Empty);
-                    if (string.Compare(relAttribute, "self", StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Equals(relAttribute, "self", StringComparison.OrdinalIgnoreCase))
                     {
                         string hrefAttribute = atomLinkIterator.Current.GetAttribute("href", string.Empty);
                         if (!string.IsNullOrEmpty(hrefAttribute))

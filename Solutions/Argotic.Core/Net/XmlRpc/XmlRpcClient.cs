@@ -325,7 +325,7 @@ public class XmlRpcClient
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
                     {
                         valueType = type;
                         break;
@@ -356,7 +356,7 @@ public class XmlRpcClient
     /// </remarks>
     public static bool TryParseValue(XPathNavigator source, out IXmlRpcValue value)
     {
-        if (source == null || string.Compare(source.Name, "value", StringComparison.OrdinalIgnoreCase) != 0)
+        if (source == null || !string.Equals(source.Name, "value", StringComparison.OrdinalIgnoreCase))
         {
             value = null;
             return false;
@@ -367,7 +367,7 @@ public class XmlRpcClient
             XPathNavigator navigator = source.CreateNavigator();
             if (navigator.MoveToFirstChild())
             {
-                if (string.Compare(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(navigator.Name, "i4", StringComparison.OrdinalIgnoreCase))
                 {
                     if (int.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
                     {
@@ -375,7 +375,7 @@ public class XmlRpcClient
                         return true;
                     }
                 }
-                else if (string.Compare(navigator.Name, "int", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(navigator.Name, "int", StringComparison.OrdinalIgnoreCase))
                 {
                     if (int.TryParse(navigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int scalar))
                     {
@@ -383,7 +383,7 @@ public class XmlRpcClient
                         return true;
                     }
                 }
-                else if (string.Compare(navigator.Name, "boolean", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(navigator.Name, "boolean", StringComparison.OrdinalIgnoreCase))
                 {
                     if (XmlRpcClient.TryParseBoolean(navigator.Value, out bool scalar))
                     {
@@ -391,12 +391,12 @@ public class XmlRpcClient
                         return true;
                     }
                 }
-                else if (string.Compare(navigator.Name, "string", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(navigator.Name, "string", StringComparison.OrdinalIgnoreCase))
                 {
                     value = new XmlRpcScalarValue(navigator.Value);
                     return true;
                 }
-                else if (string.Compare(navigator.Name, "double", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(navigator.Name, "double", StringComparison.OrdinalIgnoreCase))
                 {
                     if (double.TryParse(navigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out double scalar))
                     {
@@ -404,7 +404,7 @@ public class XmlRpcClient
                         return true;
                     }
                 }
-                else if (string.Compare(navigator.Name, "dateTime.iso8601", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(navigator.Name, "dateTime.iso8601", StringComparison.OrdinalIgnoreCase))
                 {
                     if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(navigator.Value, out DateTime scalar))
                     {
@@ -412,7 +412,7 @@ public class XmlRpcClient
                         return true;
                     }
                 }
-                else if (string.Compare(navigator.Name, "base64", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(navigator.Name, "base64", StringComparison.OrdinalIgnoreCase))
                 {
                     if (!string.IsNullOrEmpty(navigator.Value))
                     {
@@ -429,7 +429,7 @@ public class XmlRpcClient
                         }
                     }
                 }
-                else if (string.Compare(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(navigator.Name, "struct", StringComparison.OrdinalIgnoreCase))
                 {
                     XmlRpcStructureValue structure = new();
                     if (structure.Load(source))
@@ -438,7 +438,7 @@ public class XmlRpcClient
                         return true;
                     }
                 }
-                else if (string.Compare(navigator.Name, "array", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(navigator.Name, "array", StringComparison.OrdinalIgnoreCase))
                 {
                     XmlRpcArrayValue array = new();
                     if (array.Load(source))
@@ -472,22 +472,22 @@ public class XmlRpcClient
     /// <returns><b>true</b> if <paramref name="value"/> was converted successfully; otherwise, <b>false</b>.</returns>
     internal static bool TryParseBoolean(string value, out bool result)
     {
-        if (string.Compare(value, "1", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Equals(value, "1", StringComparison.OrdinalIgnoreCase))
         {
             result = true;
             return true;
         }
-        else if (string.Compare(value, "0", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Equals(value, "0", StringComparison.OrdinalIgnoreCase))
         {
             result = false;
             return true;
         }
-        else if (string.Compare(value, "true", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Equals(value, "true", StringComparison.OrdinalIgnoreCase))
         {
             result = true;
             return true;
         }
-        else if (string.Compare(value, "false", StringComparison.OrdinalIgnoreCase) == 0)
+        else if (string.Equals(value, "false", StringComparison.OrdinalIgnoreCase))
         {
             result = false;
             return true;

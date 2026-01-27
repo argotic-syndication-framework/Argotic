@@ -34,7 +34,7 @@ public static class RssCloudExample
     {
         string protocol = RssCloud.CloudProtocolAsString(RssCloudProtocol.XmlRpc);    // xml-rpc
 
-        if (string.Compare(protocol, "xml-rpc", StringComparison.OrdinalIgnoreCase) == 0)
+        if (string.Equals(protocol, "xml-rpc", StringComparison.OrdinalIgnoreCase))
         {
         }
     }

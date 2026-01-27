@@ -169,7 +169,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable
             if (source.MoveToFirstChild())
             {
                 XmlRpcScalarValueType type;
-                if (string.Compare(source.Name, "i4", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(source.Name, "i4", StringComparison.OrdinalIgnoreCase))
                 {
                     // Framework prefers the <int> designator for integers, so this handles when the <i4> designator is utilized.
                     type = XmlRpcScalarValueType.Integer;

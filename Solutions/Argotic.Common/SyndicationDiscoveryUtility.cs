@@ -48,7 +48,7 @@ public static class SyndicationDiscoveryUtility
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
                     {
                         syndicationFormat = format;
                         break;
@@ -157,7 +157,7 @@ public static class SyndicationDiscoveryUtility
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (string.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Equals(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
                     {
                         syndicationFormat = format;
                         break;
@@ -203,7 +203,7 @@ public static class SyndicationDiscoveryUtility
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (string.Compare(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Equals(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
                     {
                         syndicationFormat = format;
                         break;
@@ -725,7 +725,7 @@ public static class SyndicationDiscoveryUtility
                 string rel = (string)linkAttributes["REL"];
                 string type = (string)linkAttributes["TYPE"];
 
-                if (string.Compare(rel, "alternate", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(rel, "alternate", StringComparison.OrdinalIgnoreCase))
                 {
                     if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri url))
                     {
@@ -875,7 +875,7 @@ public static class SyndicationDiscoveryUtility
                 string href = (string)linkAttributes["HREF"];
                 string rel = (string)linkAttributes["REL"];
 
-                if (string.Compare(rel, "pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(rel, "pingback", StringComparison.OrdinalIgnoreCase))
                 {
                     if (Uri.TryCreate(href, UriKind.Absolute, out Uri uri))
                     {
@@ -1023,7 +1023,7 @@ public static class SyndicationDiscoveryUtility
                 string name = webResponse.Headers.Keys[i];
                 string value = webResponse.Headers[i];
 
-                if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(name, "X-Pingback", StringComparison.OrdinalIgnoreCase))
                 {
                     if (Uri.TryCreate(value, UriKind.Absolute, out Uri? pingbackXmlRpcServer))
                     {
@@ -1169,7 +1169,7 @@ public static class SyndicationDiscoveryUtility
                 string name = webResponse.Headers.Keys[i];
                 string value = webResponse.Headers[i];
 
-                if (string.Compare(name, "X-Pingback", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(name, "X-Pingback", StringComparison.OrdinalIgnoreCase))
                 {
                     if (Uri.TryCreate(value, UriKind.Absolute, out Uri url))
                     {

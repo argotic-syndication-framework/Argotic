@@ -153,7 +153,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
 
             foreach (RssItem item in this.Channel.Items)
             {
-                if (item.Guid != null && string.Compare(item.Guid.Value, guid, StringComparison.Ordinal) == 0)
+                if (item.Guid != null && string.Equals(item.Guid.Value, guid, StringComparison.Ordinal))
                 {
                     result = item;
                     break;
@@ -173,7 +173,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
             for (int i = 0; i < items.Count; i++)
             {
                 RssItem item = items[i];
-                if (item.Guid != null && string.Compare(item.Guid.Value, guid, StringComparison.Ordinal) == 0)
+                if (item.Guid != null && string.Equals(item.Guid.Value, guid, StringComparison.Ordinal))
                 {
                     ((Collection<RssItem>)this.Channel.Items)[i] = value;
                     break;

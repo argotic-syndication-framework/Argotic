@@ -70,7 +70,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
 
             foreach (XmlRpcStructureMember member in this.Members)
             {
-                if (string.Compare(member.Name, name, StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(member.Name, name, StringComparison.OrdinalIgnoreCase))
                 {
                     result = member;
                     break;
@@ -88,7 +88,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
             for (int i = 0; i < this.Members.Count; i++)
             {
                 XmlRpcStructureMember member = this.Members[i];
-                if (string.Compare(member.Name, name, StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(member.Name, name, StringComparison.OrdinalIgnoreCase))
                 {
                     this.Members[i] = value;
                     break;

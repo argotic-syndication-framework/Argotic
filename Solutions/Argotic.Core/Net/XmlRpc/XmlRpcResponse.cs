@@ -89,7 +89,7 @@ public class XmlRpcResponse : IComparable
     {
         ArgumentNullException.ThrowIfNull(response);
 
-        if (string.Compare(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase) != 0)
+        if (!string.Equals(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase))
         {
             throw new ArgumentException(string.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), nameof(response));
         }

@@ -229,7 +229,7 @@ public class SimpleListSort : IComparable
                 {
                     EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
 
-                    if (string.Compare(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase) == 0)
+                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
                     {
                         dataType = type;
                         break;
@@ -295,12 +295,12 @@ public class SimpleListSort : IComparable
 
             if (!string.IsNullOrEmpty(defaultAttribute))
             {
-                if (string.Compare(defaultAttribute, "true", StringComparison.OrdinalIgnoreCase) == 0)
+                if (string.Equals(defaultAttribute, "true", StringComparison.OrdinalIgnoreCase))
                 {
                     this.IsDefault = true;
                     wasLoaded = true;
                 }
-                else if (string.Compare(defaultAttribute, "false", StringComparison.OrdinalIgnoreCase) == 0)
+                else if (string.Equals(defaultAttribute, "false", StringComparison.OrdinalIgnoreCase))
                 {
                     this.IsDefault = false;
                     wasLoaded = true;

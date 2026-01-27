@@ -1,4 +1,4 @@
-﻿using System.Collections.ObjectModel;
+using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -422,15 +422,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
     public static bool operator ==(AtomAcceptedMediaRange first, AtomAcceptedMediaRange second)
     {
-        if (object.Equals(first, null) && object.Equals(second, null))
-        {
-            return true;
-        }
-        else if (object.Equals(first, null) && !object.Equals(second, null))
-        {
-            return false;
-        }
-
+        if (first is null) return second is null;
         return first.Equals(second);
     }
 
@@ -453,16 +445,8 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
     public static bool operator <(AtomAcceptedMediaRange first, AtomAcceptedMediaRange second)
     {
-        if (object.Equals(first, null) && object.Equals(second, null))
-        {
-            return false;
-        }
-        else if (object.Equals(first, null) && !object.Equals(second, null))
-        {
-            return true;
-        }
-
-        return (first.CompareTo(second) < 0);
+        if (first is null) return second is not null;
+        return first.CompareTo(second) < 0;
     }
 
     /// <summary>
@@ -473,16 +457,8 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
     public static bool operator >(AtomAcceptedMediaRange first, AtomAcceptedMediaRange second)
     {
-        if (object.Equals(first, null) && object.Equals(second, null))
-        {
-            return false;
-        }
-        else if (object.Equals(first, null) && !object.Equals(second, null))
-        {
-            return false;
-        }
-
-        return (first.CompareTo(second) > 0);
+        if (first is null) return false;
+        return first.CompareTo(second) > 0;
     }
 
     /// <summary>
@@ -493,16 +469,8 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
     public static bool operator <=(AtomAcceptedMediaRange first, AtomAcceptedMediaRange second)
     {
-        if (object.Equals(first, null) && object.Equals(second, null))
-        {
-            return true;
-        }
-        else if (object.Equals(first, null) && !object.Equals(second, null))
-        {
-            return true;
-        }
-
-        return (first.CompareTo(second) <= 0);
+        if (first is null) return true;
+        return first.CompareTo(second) <= 0;
     }
 
     /// <summary>
@@ -513,15 +481,7 @@ public class AtomAcceptedMediaRange : IComparable, IExtensibleSyndicationObject,
     /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
     public static bool operator >=(AtomAcceptedMediaRange first, AtomAcceptedMediaRange second)
     {
-        if (object.Equals(first, null) && object.Equals(second, null))
-        {
-            return true;
-        }
-        else if (object.Equals(first, null) && !object.Equals(second, null))
-        {
-            return false;
-        }
-
-        return (first.CompareTo(second) >= 0);
+        if (first is null) return second is null;
+        return first.CompareTo(second) >= 0;
     }
 }

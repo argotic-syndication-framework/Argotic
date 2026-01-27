@@ -14,6 +14,24 @@ namespace Argotic.Common;
 public static class SyndicationEncodingUtility
 {
     /// <summary>
+    /// Creates <see cref="XmlReaderSettings"/> configured for secure XML parsing.
+    /// </summary>
+    /// <returns>
+    ///     An <see cref="XmlReaderSettings"/> instance with DTD processing disabled to prevent XXE attacks.
+    /// </returns>
+    public static XmlReaderSettings CreateSafeXmlReaderSettings()
+    {
+        return new XmlReaderSettings
+        {
+            ConformanceLevel = ConformanceLevel.Document,
+            IgnoreComments = true,
+            IgnoreProcessingInstructions = true,
+            IgnoreWhitespace = true,
+            DtdProcessing = DtdProcessing.Ignore
+        };
+    }
+
+    /// <summary>
     /// Creates a <see cref="XPathNavigator"/> against the supplied XML data.
     /// </summary>
     /// <param name="xml">The XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
@@ -30,8 +48,9 @@ public static class SyndicationEncodingUtility
 
         string safeXml = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(xml);
 
-        using StringReader reader = new(safeXml);
-        XPathDocument document = new(reader);
+        using StringReader stringReader = new(safeXml);
+        using XmlReader xmlReader = XmlReader.Create(stringReader, CreateSafeXmlReaderSettings());
+        XPathDocument document = new(xmlReader);
         XPathNavigator navigator = document.CreateNavigator();
 
         return navigator;

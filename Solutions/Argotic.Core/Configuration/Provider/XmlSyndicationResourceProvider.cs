@@ -4,6 +4,7 @@ using System.Collections.Specialized;
 using System.Configuration.Provider;
 using System.IO;
 using System.Web;
+using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -172,8 +173,9 @@ namespace Argotic.Configuration.Provider
             }
             else if (format == SyndicationContentFormat.Atom)
             {
-                XPathDocument document      = new XPathDocument(stream);
-                XPathNavigator navigator    = document.CreateNavigator();
+                using XmlReader xmlReader = XmlReader.Create(stream, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+                XPathDocument document = new XPathDocument(xmlReader);
+                XPathNavigator navigator = document.CreateNavigator();
                 navigator.MoveToRoot();
                 navigator.MoveToChild(XPathNodeType.Element);
 

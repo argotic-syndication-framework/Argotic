@@ -73,7 +73,8 @@ public static class AtomEntryExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new("http://example.org/blog/1234");
+        using XmlReader xmlReader = XmlReader.Create("http://example.org/blog/1234", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument source = new(xmlReader);
 
         AtomEntry entry = new();
         entry.Load(source);

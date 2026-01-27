@@ -1226,8 +1226,9 @@ public static class SyndicationDiscoveryUtility
 
         foreach (Match embeddedRdf in embeddedRdfs)
         {
-            using StringReader reader = new(embeddedRdf.Value);
-            XPathDocument document = new(reader);
+            using StringReader stringReader = new(embeddedRdf.Value);
+            using XmlReader xmlReader = XmlReader.Create(stringReader, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+            XPathDocument document = new(xmlReader);
             XPathNavigator navigator = document.CreateNavigator();
 
             TrackbackDiscoveryMetadata trackbackMetadata = new();

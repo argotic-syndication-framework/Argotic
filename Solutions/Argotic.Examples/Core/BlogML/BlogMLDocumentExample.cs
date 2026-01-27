@@ -152,7 +152,8 @@ public static class BlogMLDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new("http://www.example.org/blog/blogML.axd");
+        using XmlReader xmlReader = XmlReader.Create("http://www.example.org/blog/blogML.axd", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument source = new(xmlReader);
 
         BlogMLDocument document = new();
         document.Load(source);

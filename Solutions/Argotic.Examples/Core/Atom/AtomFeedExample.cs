@@ -86,7 +86,8 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new("http://news.google.com/?output=atom");
+        using XmlReader xmlReader = XmlReader.Create("http://news.google.com/?output=atom", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument source = new(xmlReader);
 
         AtomFeed feed = new();
         feed.Load(source);

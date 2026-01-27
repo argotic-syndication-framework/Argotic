@@ -86,7 +86,8 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new("http://blog.oppositionallydefiant.com/rsd.axd");
+        using XmlReader xmlReader = XmlReader.Create("http://blog.oppositionallydefiant.com/rsd.axd", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument source = new(xmlReader);
 
         RsdDocument document = new();
         document.Load(source);

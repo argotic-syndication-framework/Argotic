@@ -83,7 +83,8 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new("http://blog.oppositionallydefiant.com/opml.axd");
+        using XmlReader xmlReader = XmlReader.Create("http://blog.oppositionallydefiant.com/opml.axd", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument source = new(xmlReader);
 
         OpmlDocument document = new();
         document.Load(source);

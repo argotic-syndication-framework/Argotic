@@ -155,7 +155,8 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
+        using XmlReader xmlReader = XmlReader.Create("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument source = new(xmlReader);
 
         ApmlDocument document = new();
         document.Load(source);

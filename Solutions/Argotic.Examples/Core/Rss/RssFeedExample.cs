@@ -131,7 +131,8 @@ public static class RssFeedExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        XPathDocument source = new("http://news.google.com/?output=rss");
+        using XmlReader xmlReader = XmlReader.Create("http://news.google.com/?output=rss", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument source = new(xmlReader);
 
         RssFeed feed = new();
         feed.Load(source);

@@ -693,7 +693,8 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         stream.Seek(0, SeekOrigin.Begin);
 
-        XPathDocument document = new(stream);
+        using XmlReader xmlReader = XmlReader.Create(stream, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        XPathDocument document = new(xmlReader);
         return document.CreateNavigator();
     }
 
@@ -826,7 +827,9 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
     {
         ArgumentNullException.ThrowIfNull(reader);
-        this.Load(new XPathDocument(reader), settings);
+
+        using XmlReader safeReader = XmlReader.Create(reader, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        this.Load(new XPathDocument(safeReader), settings);
     }
 
     /// <summary>

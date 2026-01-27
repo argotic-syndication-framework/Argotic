@@ -99,16 +99,7 @@ public class XmlRpcResponse : IComparable
         }
 
         using Stream stream = response.GetResponseStream();
-        XmlReaderSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Document,
-            IgnoreComments = true,
-            IgnoreProcessingInstructions = true,
-            IgnoreWhitespace = true,
-            DtdProcessing = DtdProcessing.Ignore
-        };
-
-        using XmlReader reader = XmlReader.Create(stream, settings);
+        using XmlReader reader = XmlReader.Create(stream, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument document = new(reader);
         XPathNavigator source = document.CreateNavigator();
 

@@ -1,8 +1,5 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -35,7 +32,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// Initializes a new instance of the <see cref="SiteSummaryContentSyndicationExtension"/> class.
     /// </summary>
     public SiteSummaryContentSyndicationExtension()
-        : base("content", "http://purl.org/rss/1.0/modules/content/", new("1.0"), new("http://web.resource.org/rss/1.0/modules/content/"), "RDF Site Summary (Content)", "Extends syndication feeds to provide a means of describing content, including its format and encoding.")
+        : base("content", "http://purl.org/rss/1.0/modules/content/", new Version("1.0"), new Uri("http://web.resource.org/rss/1.0/modules/content/"), "RDF Site Summary (Content)", "Extends syndication feeds to provide a means of describing content, including its format and encoding.")
     {
     }
 
@@ -82,7 +79,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<SiteSummaryContentItem> source, Collection<SiteSummaryContentItem> target)
+    public static int CompareSequence(IList<SiteSummaryContentItem> source, IList<SiteSummaryContentItem> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);

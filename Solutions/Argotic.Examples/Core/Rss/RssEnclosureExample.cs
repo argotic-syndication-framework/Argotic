@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Rss;
 
 /// <summary>
 /// Contains the code examples for the <see cref="RssEnclosure"/> class.
@@ -21,7 +21,7 @@ public static class RssEnclosureExample
             Channel =
             {
                 Title = "Dallas Times-Herald",
-                Link = new("http://dallas.example.com"),
+                Link = new Uri("http://dallas.example.com"),
                 Description = "Current headlines from the Dallas Times-Herald newspaper"
             }
         };
@@ -29,12 +29,12 @@ public static class RssEnclosureExample
         RssItem item = new()
         {
             Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
-            Link = new("http://dallas.example.com/1991/05/02/nolan.htm"),
+            Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),
             Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0."
         };
 
-        item.Enclosures.Add(new(24986239L, "audio/mpeg", new("http://dallas.example.com/joebob_050689.mp3")));
+        item.Enclosures.Add(new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
 
-        feed.Channel.AddItem(item);
+        feed.Channel.Items.Add(item);
     }
 }

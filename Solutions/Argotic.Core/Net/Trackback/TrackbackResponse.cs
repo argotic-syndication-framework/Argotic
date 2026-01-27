@@ -1,4 +1,3 @@
-using System.Net;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -57,36 +56,44 @@ public class TrackbackResponse : IComparable
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TrackbackResponse"/> class using the supplied <see cref="WebResponse"/>.
+    /// Creates a new instance of the <see cref="TrackbackResponse"/> class asynchronously using the supplied <see cref="HttpResponseMessage"/>.
     /// </summary>
-    /// <param name="response">A <see cref="WebResponse"/> object that represents the Trackback server's response to the remote procedure call.</param>
+    /// <param name="response">An <see cref="HttpResponseMessage"/> object that represents the Trackback server's response to the ping request.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="TrackbackResponse"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
     /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content type.</exception>
     /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content length.</exception>
     /// <exception cref="XmlException">The <paramref name="response"/> body does not represent a valid XML document, or an error was encountered in the XML data.</exception>
-    public TrackbackResponse(WebResponse response)
+    public static async Task<TrackbackResponse> CreateAsync(HttpResponseMessage response, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(response);
 
-        if (!string.Equals(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase))
+        string? contentType = response.Content.Headers.ContentType?.MediaType;
+        if (!string.Equals(contentType, "text/xml", StringComparison.OrdinalIgnoreCase))
         {
-            throw new ArgumentException(string.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), nameof(response));
-        }
-        else if (response.ContentLength <= 0)
-        {
-            throw new ArgumentException(string.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), nameof(response));
+            throw new ArgumentException(string.Format(null, "The HttpResponseMessage content type is invalid. Content type of the response was {0}", contentType), nameof(response));
         }
 
-        using Stream stream = response.GetResponseStream();
+        long contentLength = response.Content.Headers.ContentLength ?? -1;
+        if (contentLength <= 0)
+        {
+            throw new ArgumentException(string.Format(null, "The HttpResponseMessage content length is invalid. Content length was {0}. ", contentLength), nameof(response));
+        }
+
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         using XmlReader reader = XmlReader.Create(stream, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument document = new(reader);
         XPathNavigator source = document.CreateNavigator();
 
+        TrackbackResponse result = new();
         XPathNavigator responseNavigator = source.SelectSingleNode("response");
         if (responseNavigator != null)
         {
-            this.Load(responseNavigator);
+            result.Load(responseNavigator);
         }
+
+        return result;
     }
 
     /// <summary>

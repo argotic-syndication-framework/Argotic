@@ -1,10 +1,8 @@
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 using Argotic.Extensions;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Extensions;
 
 /// <summary>
 /// Provides a simple example of a custom syndication extension.
@@ -20,7 +18,7 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
     /// </summary>
     public MyCustomSyndicationExtension()
-        : base("myPrefix", "http://www.example.com/2008/03/custom", new("1.0"), new("http://www.example.com/spec"), "My Extension", "Example of a custom syndication extension.")
+        : base("myPrefix", "http://www.example.com/2008/03/custom", new Version("1.0"), new Uri("http://www.example.com/spec"), "My Extension", "Example of a custom syndication extension.")
     {
         // Class state initialized by abstract SyndicationExtension base class
     }

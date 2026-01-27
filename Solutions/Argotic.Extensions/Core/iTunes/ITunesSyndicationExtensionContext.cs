@@ -1,9 +1,6 @@
-﻿using System.Collections.ObjectModel;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -13,19 +10,10 @@ namespace Argotic.Extensions.Core;
 [Serializable]
 public class ITunesSyndicationExtensionContext
 {
-
     /// <summary>
     /// Private member to hold the name of the artist of the podcast.
     /// </summary>
     private string extensionAuthor = string.Empty;
-    /// <summary>
-    /// Private member to hold the categorization taxonomy applied to the podcast.
-    /// </summary>
-    private Collection<ITunesCategory> extensionCategories;
-    /// <summary>
-    ///  Private member to hold keywords that describe the podcast.
-    /// </summary>
-    private Collection<string> extensionKeywords;
     /// <summary>
     /// Private member to hold a brief synopsis of the podcast.
     /// </summary>
@@ -34,6 +22,7 @@ public class ITunesSyndicationExtensionContext
     /// Private member to hold the full description of the podcast.
     /// </summary>
     private string extensionSummary = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtensionContext"/> class.
     /// </summary>
@@ -69,16 +58,9 @@ public class ITunesSyndicationExtensionContext
     /// Gets the categories to which this podcast belongs.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="ITunesCategory"/> objects that represent the categories to which this podcast belongs. The default value is an <i>empty</i> collection.
+    ///     A <see cref="IList{T}"/> collection of <see cref="ITunesCategory"/> objects that represent the categories to which this podcast belongs. The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<ITunesCategory> Categories
-    {
-        get
-        {
-            extensionCategories ??= [];
-            return extensionCategories;
-        }
-    }
+    public IList<ITunesCategory> Categories { get; } = [];
 
     /// <summary>
     /// Gets or sets the total duration of this podcast.
@@ -115,15 +97,8 @@ public class ITunesSyndicationExtensionContext
     /// <summary>
     /// Gets the search keywords for this podcast.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of strings that allows users to search on a maximum of 12 text keywords.</value>
-    public Collection<string> Keywords
-    {
-        get
-        {
-            extensionKeywords ??= [];
-            return extensionKeywords;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of strings that allows users to search on a maximum of 12 text keywords.</value>
+    public IList<string> Keywords { get; } = [];
 
     /// <summary>
     /// Gets or sets the URL where this podcast feed has been relocated to.
@@ -479,7 +454,7 @@ public class ITunesSyndicationExtensionContext
         {
             if (int.TryParse(value, out int totalSeconds))
             {
-                timeSpan = new(0, 0, totalSeconds);
+                timeSpan = new TimeSpan(0, 0, totalSeconds);
             }
             else
             {
@@ -497,7 +472,7 @@ public class ITunesSyndicationExtensionContext
             {
                 if (int.TryParse(durationParts[0], out int minutes) && int.TryParse(durationParts[1], out int seconds))
                 {
-                    timeSpan = new(0, minutes, seconds);
+                    timeSpan = new TimeSpan(0, minutes, seconds);
                 }
             }
             else if (durationParts.Length >= 3)
@@ -508,7 +483,7 @@ public class ITunesSyndicationExtensionContext
 
                 if (int.TryParse(hoursValue, out int hours) && int.TryParse(minutesValue, out int minutes) && int.TryParse(secondsValue, out int seconds))
                 {
-                    timeSpan = new(hours, minutes, seconds);
+                    timeSpan = new TimeSpan(hours, minutes, seconds);
                 }
                 else
                 {

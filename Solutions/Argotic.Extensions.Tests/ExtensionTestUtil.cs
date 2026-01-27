@@ -8,7 +8,7 @@ internal static class ExtensionTestUtil
 {
     internal static string AddExtensionToXml(SyndicationExtension ext)
     {
-        RssFeed feed = new(new("http://www.example.com"), "Argotic - Extension Test")
+        RssFeed feed = new(new Uri("http://www.example.com"), "Argotic - Extension Test")
         {
             Channel =
             {
@@ -22,16 +22,16 @@ internal static class ExtensionTestUtil
         RssItem item = new()
         {
             Title = "Item #1",
-            Link = new("http://www.example.com/item1.htm"),
+            Link = new Uri("http://www.example.com/item1.htm"),
             Description = "text for First Item",
-            PublicationDate = new(2010, 8, 1, 0, 0, 1)
+            PublicationDate = new DateTime(2010, 8, 1, 0, 0, 1)
         };
 
-        feed.Channel.AddItem(item);
-        item.AddExtension(ext);
+        feed.Channel.Items.Add(item);
+        item.Extensions.Add(ext);
 
         using StringWriter sw = new();
-        using XmlWriter tw = XmlWriter.Create(sw, new()
+        using XmlWriter tw = XmlWriter.Create(sw, new XmlWriterSettings
         {
             OmitXmlDeclaration = true,
             ConformanceLevel = ConformanceLevel.Fragment

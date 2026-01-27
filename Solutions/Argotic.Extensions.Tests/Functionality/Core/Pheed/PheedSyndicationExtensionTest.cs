@@ -1,10 +1,9 @@
-namespace Argotic.Extensions.Tests;
-
 using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
+
+namespace Argotic.Extensions.Tests.Functionality.Core.Pheed;
 
 [TestClass]
 public class PheedSyndicationExtensionTest
@@ -45,24 +44,16 @@ public class PheedSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void PheedGetHashCodeTest()
     {
+        // Consistency: same object returns same hash
         PheedSyndicationExtension target = CreateExtension1();
-        int expected = -1671096665;
-        int actual = target.GetHashCode();
-        actual.ShouldBe(expected);
-    }
+        target.GetHashCode().ShouldBe(target.GetHashCode());
 
-    [TestMethod]
-    [Ignore("Test requires manual verification of Load behavior")]
-    public void PheedLoadTest()
-    {
-        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-
-        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new();
-        feed.Load(reader);
+        // Equality contract: equal objects have equal hashes
+        PheedSyndicationExtension other = CreateExtension1();
+        target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
     [TestMethod]
@@ -72,8 +63,8 @@ public class PheedSyndicationExtensionTest
         {
             Context =
             {
-                Source = new("http://www.example.com"),
-                Thumbnail = new("http://www.example.com/thumbnail.jpg")
+                Source = new Uri("http://www.example.com"),
+                Thumbnail = new Uri("http://www.example.com/thumbnail.jpg")
             }
         };
 
@@ -120,7 +111,7 @@ public class PheedSyndicationExtensionTest
     {
         PheedSyndicationExtension target = CreateExtension1();
         using StringWriter sw = new();
-        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
@@ -173,13 +164,14 @@ public class PheedSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("Context equality comparison not implemented")]
     public void PheedContextTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
-        PheedSyndicationExtensionContext expected = CreateContext1();
-        PheedSyndicationExtensionContext actual = target.Context;
-        actual.ShouldBe(expected);
+        PheedSyndicationExtensionContext context = target.Context;
+
+        context.ShouldNotBeNull();
+        context.Source.ShouldBe(new Uri("http://www.example.com"));
+        context.Thumbnail.ShouldBe(new Uri("http://www.example.com/thumbnail.jpg"));
     }
 
     private static PheedSyndicationExtension CreateExtension1()
@@ -188,8 +180,8 @@ public class PheedSyndicationExtensionTest
         {
             Context =
             {
-                Source = new("http://www.example.com"),
-                Thumbnail = new("http://www.example.com/thumbnail.jpg")
+                Source = new Uri("http://www.example.com"),
+                Thumbnail = new Uri("http://www.example.com/thumbnail.jpg")
             }
         };
 
@@ -202,8 +194,8 @@ public class PheedSyndicationExtensionTest
         {
             Context =
             {
-                Source = new("http://www.example.net"),
-                Thumbnail = new("http://www.example.net/thumbnail.png")
+                Source = new Uri("http://www.example.net"),
+                Thumbnail = new Uri("http://www.example.net/thumbnail.png")
             }
         };
 
@@ -214,8 +206,8 @@ public class PheedSyndicationExtensionTest
     {
         PheedSyndicationExtensionContext nyc = new()
         {
-            Source = new("http://www.example.com"),
-            Thumbnail = new("http://www.example.com/thumbnail.jpg")
+            Source = new Uri("http://www.example.com"),
+            Thumbnail = new Uri("http://www.example.com/thumbnail.jpg")
         };
 
         return nyc;

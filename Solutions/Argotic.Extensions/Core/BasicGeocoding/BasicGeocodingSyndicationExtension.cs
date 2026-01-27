@@ -2,8 +2,6 @@ using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -35,7 +33,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtension"/> class.
     /// </summary>
     public BasicGeocodingSyndicationExtension()
-        : base("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#", new("1.0"), new("http://www.w3.org/2003/01/geo/"), "Basic Geocoding Vocabulary", "Extends syndication feeds to provide a means of representing latitude, longitude and other information about spatially-located things.")
+        : base("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#", new Version("1.0"), new Uri("http://www.w3.org/2003/01/geo/"), "Basic Geocoding Vocabulary", "Extends syndication feeds to provide a means of representing latitude, longitude and other information about spatially-located things.")
     {
     }
     /// <summary>

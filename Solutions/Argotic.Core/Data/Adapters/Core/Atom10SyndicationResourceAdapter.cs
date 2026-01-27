@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -79,13 +78,13 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (idNavigator != null)
             {
-                resource.Id = new();
+                resource.Id = new AtomId();
                 resource.Id.Load(idNavigator, this.Settings);
             }
 
             if (titleNavigator != null)
             {
-                resource.Title = new();
+                resource.Title = new AtomTextConstruct();
                 resource.Title.Load(titleNavigator, this.Settings);
             }
 
@@ -133,13 +132,13 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (idNavigator != null)
         {
-            entry.Id = new();
+            entry.Id = new AtomId();
             entry.Id.Load(idNavigator, settings);
         }
 
         if (titleNavigator != null)
         {
-            entry.Title = new();
+            entry.Title = new AtomTextConstruct();
             entry.Title.Load(titleNavigator, settings);
         }
 
@@ -262,7 +261,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (contentNavigator != null)
         {
-            entry.Content = new();
+            entry.Content = new AtomContent();
             entry.Content.Load(contentNavigator, settings);
         }
 
@@ -276,19 +275,19 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (rightsNavigator != null)
         {
-            entry.Rights = new();
+            entry.Rights = new AtomTextConstruct();
             entry.Rights.Load(rightsNavigator, settings);
         }
 
         if (sourceNavigator != null)
         {
-            entry.Source = new();
+            entry.Source = new AtomSource();
             entry.Source.Load(sourceNavigator, settings);
         }
 
         if (summaryNavigator != null)
         {
-            entry.Summary = new();
+            entry.Summary = new AtomTextConstruct();
             entry.Summary.Load(summaryNavigator, settings);
         }
     }
@@ -371,7 +370,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
                     break;
                 }
 
-                ((Collection<AtomEntry>)feed.Entries).Add(entry);
+                feed.Entries.Add(entry);
             }
         }
 
@@ -417,31 +416,31 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (generatorNavigator != null)
         {
-            feed.Generator = new();
+            feed.Generator = new AtomGenerator();
             feed.Generator.Load(generatorNavigator, settings);
         }
 
         if (iconNavigator != null)
         {
-            feed.Icon = new();
+            feed.Icon = new AtomIcon();
             feed.Icon.Load(iconNavigator, settings);
         }
 
         if (logoNavigator != null)
         {
-            feed.Logo = new();
+            feed.Logo = new AtomLogo();
             feed.Logo.Load(logoNavigator, settings);
         }
 
         if (rightsNavigator != null)
         {
-            feed.Rights = new();
+            feed.Rights = new AtomTextConstruct();
             feed.Rights.Load(rightsNavigator, settings);
         }
 
         if (subtitleNavigator != null)
         {
-            feed.Subtitle = new();
+            feed.Subtitle = new AtomTextConstruct();
             feed.Subtitle.Load(subtitleNavigator, settings);
         }
     }

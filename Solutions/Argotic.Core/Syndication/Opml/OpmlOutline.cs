@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -24,10 +23,6 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
 {
 
     /// <summary>
-    /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-    /// </summary>
-    private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-    /// <summary>
     /// Private member to hold the textual content of the outline.
     /// </summary>
     private string outlineText = string.Empty;
@@ -35,20 +30,6 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// Private member to hold a value indicating how the outline's attributes are interpreted.
     /// </summary>
     private string outlineType = string.Empty;
-    /// <summary>
-    /// Private member to hold a collection that describes the categorization taxonomy applied to the outline.
-    /// </summary>
-    private Collection<string> outlineCategories;
-    /// <summary>
-    /// Private member to hold a collection of key/value pairs that represent custom attributes applied to the outline.
-    /// </summary>
-    private Dictionary<string, string> outlineAttributes;
-    /// <summary>
-    /// Private member to hold a collection of outlines that are children of the outline.
-    /// </summary>
-#pragma warning disable CA5362 // OPML specification requires outlines to contain sub-outlines
-    private Collection<OpmlOutline> outlineSubordinateOutlines;
-#pragma warning restore CA5362
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlOutline"/> class.
     /// </summary>
@@ -71,72 +52,35 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         this.Text = text;
     }
     /// <summary>
-    /// Gets or sets the syndication extensions applied to this syndication entity.
+    /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<ISyndicationExtension> Extensions
-    {
-        get
-        {
-            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
-            return objectSyndicationExtensions;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            objectSyndicationExtensions = value;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-        }
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
     /// <summary>
     /// Gets a collection of key/value string pairs that represent custom attributes applied to this outline.
     /// </summary>
     /// <value>A <see cref="Dictionary{T, T}"/> of strings that represent custom attributes applied to this outline.</value>
     /// <remarks>
-    ///     The attributes <b>text</b>, <b>type</b>, <b>isComment</b>, <b>isBreakpoint</b>, <b>created</b>, and <b>category</b> are treated as special 
+    ///     The attributes <b>text</b>, <b>type</b>, <b>isComment</b>, <b>isBreakpoint</b>, <b>created</b>, and <b>category</b> are treated as special
     ///     within the OPML specification. Use the class properties that represent these attributes instead of adding them to this collection.
     /// </remarks>
-    public Dictionary<string, string> Attributes
-    {
-        get
-        {
-            outlineAttributes ??= [];
-            return outlineAttributes;
-        }
-    }
+    public Dictionary<string, string> Attributes { get; } = [];
 
     /// <summary>
     /// Gets a collection that describes the categorization taxonomy applied to this outline.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> of strings that represent the categorization taxonomy applied to this outline.</value>
+    /// <value>A <see cref="IList{T}"/> of strings that represent the categorization taxonomy applied to this outline.</value>
     /// <remarks>
-    ///     Categories are represented as slash-delimited strings, in the format defined by the <a href="http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt">RSS 2.0 category element</a>. 
+    ///     Categories are represented as slash-delimited strings, in the format defined by the <a href="http://cyber.law.harvard.edu/rss/rss.html#ltcategorygtSubelementOfLtitemgt">RSS 2.0 category element</a>.
     ///     To represent a <i>tag</i>, the category string should contain <u>no</u> slashes.
     /// </remarks>
-    public Collection<string> Categories
-    {
-        get
-        {
-            outlineCategories ??= [];
-            return outlineCategories;
-        }
-    }
+    public IList<string> Categories { get; } = [];
 
     /// <summary>
     /// Gets or sets a value indicating how this outline's attributes should be interpreted.
@@ -221,15 +165,10 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Gets a collection of outlines that are children of this outline.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> of <see cref="OpmlOutline"/> objects that represent the children of this outline.</value>
-    public Collection<OpmlOutline> Outlines
-    {
-        get
-        {
-            outlineSubordinateOutlines ??= [];
-            return outlineSubordinateOutlines;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> of <see cref="OpmlOutline"/> objects that represent the children of this outline.</value>
+#pragma warning disable CA5362 // OPML specification requires outlines to contain sub-outlines
+    public IList<OpmlOutline> Outlines { get; } = [];
+#pragma warning restore CA5362
 
     /// <summary>
     /// Gets or sets the textual content of this outline.
@@ -254,21 +193,6 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         }
     }
     /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool AddExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        bool wasAdded = true;
-
-        return wasAdded;
-    }
-
-    /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
     /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
@@ -276,32 +200,18 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
-    /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool RemoveExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-    }
     /// <summary>
     /// Loads this <see cref="OpmlOutline"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -467,7 +377,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Compares two specified <see cref="Collection{OpmlOutline}"/> collections.
+    /// Compares two specified <see cref="IList{OpmlOutline}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -485,7 +395,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<OpmlOutline> source, Collection<OpmlOutline> target)
+    public static int CompareSequence(IList<OpmlOutline> source, IList<OpmlOutline> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);

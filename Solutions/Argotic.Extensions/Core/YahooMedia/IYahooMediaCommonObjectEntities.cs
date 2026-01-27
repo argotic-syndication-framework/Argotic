@@ -1,5 +1,3 @@
-﻿using System.Collections.ObjectModel;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -10,8 +8,8 @@ namespace Argotic.Extensions.Core;
 ///          The following properties are optional and may appear as sub-elements of syndication entities, <see cref="YahooMediaContent"/> and/or <see cref="YahooMediaGroup"/>.
 ///     </para>
 ///     <para>
-///         When a property appears at a shallow level, such as syndication entities, it means that the property should be applied to every media object within its scope. 
-///         Duplicated properties appearing at deeper levels of the document tree have higher priority over other levels. For example, <see cref="YahooMediaContent"/> level 
+///         When a property appears at a shallow level, such as syndication entities, it means that the property should be applied to every media object within its scope.
+///         Duplicated properties appearing at deeper levels of the document tree have higher priority over other levels. For example, <see cref="YahooMediaContent"/> level
 ///         properties are favored over syndication entity level properties.
 ///     </para>
 ///     <para>
@@ -27,13 +25,10 @@ interface IYahooMediaCommonObjectEntities
     /// Gets a taxonomy that gives an indication of the type of content for the media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for the media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for the media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    Collection<YahooMediaCategory> Categories
-    {
-        get;
-    }
+    IList<YahooMediaCategory> Categories { get; }
 
     /// <summary>
     /// Gets or sets the copyright information for the media object.
@@ -42,27 +37,20 @@ interface IYahooMediaCommonObjectEntities
     /// <remarks>
     ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
     /// </remarks>
-    YahooMediaCopyright Copyright
-    {
-        get;
-        set;
-    }
+    YahooMediaCopyright Copyright { get; set; }
 
     /// <summary>
     /// Gets the entities that contributed to the creation of the media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of the media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of the media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles, 
+    ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
     ///     and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
     /// </remarks>
-    Collection<YahooMediaCredit> Credits
-    {
-        get;
-    }
+    IList<YahooMediaCredit> Credits { get; }
 
     /// <summary>
     /// Gets or sets the description of the media object.
@@ -71,118 +59,88 @@ interface IYahooMediaCommonObjectEntities
     /// <remarks>
     ///     Media object descriptions are typically a sentence in length.
     /// </remarks>
-    YahooMediaTextConstruct Description
-    {
-        get;
-        set;
-    }
+    YahooMediaTextConstruct Description { get; set; }
 
     /// <summary>
     /// Gets the hash digests for the media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for the media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for the media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     When assigning multiple hashes, each <see cref="YahooMediaHash"/> <b>must</b> have a different <see cref="YahooMediaHash.Algorithm"/>.
     /// </remarks>
-    Collection<YahooMediaHash> Hashes
-    {
-        get;
-    }
+    IList<YahooMediaHash> Hashes { get; }
 
     /// <summary>
     /// Gets the relevant keywords that describe the media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe the media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe the media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     Media objects are typically assigned maximum of ten keywords or phrases.
     /// </remarks>
-    Collection<string> Keywords
-    {
-        get;
-    }
+    IList<string> Keywords { get; }
 
     /// <summary>
     /// Gets or sets a web browser media player console the media object can be accessed through.
     /// </summary>
     /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console the media object can be accessed through.</value>
-    YahooMediaPlayer Player
-    {
-        get;
-        set;
-    }
+    YahooMediaPlayer Player { get; set; }
 
     /// <summary>
     /// Gets the permissible audiences for the media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for the media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for the media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     If there are no ratings specified, it can be assumed that no restrictions are necessary.
     /// </remarks>
-    Collection<YahooMediaRating> Ratings
-    {
-        get;
-    }
+    IList<YahooMediaRating> Ratings { get; }
 
     /// <summary>
     /// Gets the restrictions to be placed on aggregators that are rendering the media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering the media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering the media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    Collection<YahooMediaRestriction> Restrictions
-    {
-        get;
-    }
+    IList<YahooMediaRestriction> Restrictions { get; }
 
     /// <summary>
     /// Gets the text transcript, closed captioning, or lyrics for the media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for the media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for the media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text. 
-    ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time. 
+    ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text.
+    ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time.
     ///     <see cref="YahooMediaText"/> objects can have overlapping start and end times.
     /// </remarks>
-    Collection<YahooMediaText> TextSeries
-    {
-        get;
-    }
+    IList<YahooMediaText> TextSeries { get; }
 
     /// <summary>
     /// Gets the representative images for the media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of the media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of the media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     If multiple thumbnails are included, and time coding is not at play, it is assumed that the images are in order of importance.
     /// </remarks>
-    Collection<YahooMediaThumbnail> Thumbnails
-    {
-        get;
-    }
+    IList<YahooMediaThumbnail> Thumbnails { get; }
 
     /// <summary>
     /// Gets or sets the title of the media object.
     /// </summary>
     /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of the media object.</value>
-    YahooMediaTextConstruct Title
-    {
-        get;
-        set;
-    }
+    YahooMediaTextConstruct Title { get; set; }
 }

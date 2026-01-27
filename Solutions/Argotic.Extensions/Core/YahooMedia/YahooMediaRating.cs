@@ -1,8 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -71,7 +69,7 @@ public class YahooMediaRating : IComparable
     {
         get
         {
-            return new("urn:simple");
+            return new Uri("urn:simple");
         }
     }
 

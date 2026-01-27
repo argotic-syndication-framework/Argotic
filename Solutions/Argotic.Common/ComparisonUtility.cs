@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml.XPath;
+﻿using System.Xml.XPath;
 
 namespace Argotic.Common;
 
@@ -30,7 +29,7 @@ public static class ComparisonUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<DayOfWeek> source, Collection<DayOfWeek> target)
+    public static int CompareSequence(IList<DayOfWeek> source, IList<DayOfWeek> target)
     {
         int result = 0;
 
@@ -75,7 +74,7 @@ public static class ComparisonUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<int> source, Collection<int> target)
+    public static int CompareSequence(IList<int> source, IList<int> target)
     {
         int result = 0;
 
@@ -120,7 +119,7 @@ public static class ComparisonUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<long> source, Collection<long> target)
+    public static int CompareSequence(IList<long> source, IList<long> target)
     {
         int result = 0;
 
@@ -166,7 +165,7 @@ public static class ComparisonUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<string> source, Collection<string> target, StringComparison comparisonType)
+    public static int CompareSequence(IList<string> source, IList<string> target, StringComparison comparisonType)
     {
         int result = 0;
 
@@ -211,7 +210,7 @@ public static class ComparisonUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<Type> source, Collection<Type> target)
+    public static int CompareSequence(IList<Type> source, IList<Type> target)
     {
         int result = 0;
 
@@ -257,7 +256,7 @@ public static class ComparisonUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<Uri> source, Collection<Uri> target, StringComparison comparisonType)
+    public static int CompareSequence(IList<Uri> source, IList<Uri> target, StringComparison comparisonType)
     {
         int result = 0;
 
@@ -302,7 +301,7 @@ public static class ComparisonUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<XPathNavigator> source, Collection<XPathNavigator> target)
+    public static int CompareSequence(IList<XPathNavigator> source, IList<XPathNavigator> target)
     {
         int result = 0;
 

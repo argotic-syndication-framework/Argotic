@@ -1,7 +1,5 @@
 using System.Collections.ObjectModel;
 
-using Argotic.Common;
-
 namespace Argotic.Syndication;
 
 /// <summary>

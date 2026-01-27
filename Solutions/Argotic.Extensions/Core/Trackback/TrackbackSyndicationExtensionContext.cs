@@ -1,8 +1,5 @@
-﻿using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -19,11 +16,6 @@ public class TrackbackSyndicationExtensionContext
     private Uri extensionPing;
 
     /// <summary>
-    /// Private member to hold the TRackbackURLs that were pinged in reference.
-    /// </summary>
-    private Collection<Uri> extensionAbouts;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackSyndicationExtensionContext"/> class.
     /// </summary>
     public TrackbackSyndicationExtensionContext()
@@ -34,17 +26,10 @@ public class TrackbackSyndicationExtensionContext
     /// Gets the trackbacks that were pinged in reference.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="Uri"/> objects that represent trackbacks that were pinged in reference. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="Uri"/> objects that represent trackbacks that were pinged in reference.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<Uri> Abouts
-    {
-        get
-        {
-            extensionAbouts ??= [];
-            return extensionAbouts;
-        }
-    }
+    public IList<Uri> Abouts { get; } = [];
 
     /// <summary>
     /// Gets or sets the TrackBack URL.

@@ -1,8 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -36,7 +34,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtension"/> class.
     /// </summary>
     public FeedSynchronizationSyndicationExtension()
-        : base("sx", "http://feedsync.org/2007/feedsync", new("1.0"), new("http://dev.live.com/feedsync/spec/"), "FeedSync", "Extends syndication feeds to enable loosely-cooperating applications to use feeds as the basis for item sharing amongst two or more cross-subscribed feeds.")
+        : base("sx", "http://feedsync.org/2007/feedsync", new Version("1.0"), new Uri("http://dev.live.com/feedsync/spec/"), "FeedSync", "Extends syndication feeds to enable loosely-cooperating applications to use feeds as the basis for item sharing amongst two or more cross-subscribed feeds.")
     {
     }
     /// <summary>

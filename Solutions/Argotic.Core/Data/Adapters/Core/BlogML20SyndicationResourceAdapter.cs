@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -184,7 +183,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
                         break;
                     }
 
-                    ((Collection<BlogMLPost>)document.Posts).Add(post);
+                    document.Posts.Add(post);
                 }
             }
         }

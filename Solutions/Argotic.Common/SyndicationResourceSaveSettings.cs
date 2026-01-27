@@ -77,7 +77,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable
     {
         get
         {
-            supportedSyndicationExtensions ??= new();
+            supportedSyndicationExtensions ??= new Collection<Type>();
             return supportedSyndicationExtensions;
         }
     }

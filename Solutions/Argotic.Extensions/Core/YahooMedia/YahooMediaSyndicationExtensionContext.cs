@@ -1,8 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -13,47 +10,6 @@ namespace Argotic.Extensions.Core;
 public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEntities
 {
     /// <summary>
-    /// Private member to hold the collection of items that comprise the distinct content published in the feed.
-    /// </summary>
-    private IEnumerable<YahooMediaContent> extensionContents;
-    /// <summary>
-    /// Private member to hold the collection of media objects that are effectively the same content, yet different representations.
-    /// </summary>
-    private IEnumerable<YahooMediaGroup> extensionGroups;
-    /// <summary>
-    /// Private member to hold the permissible audiences for the syndication entity.
-    /// </summary>
-    private Collection<YahooMediaRating> mediaObjectRatings;
-    /// <summary>
-    /// Private member to hold the relevant keywords that describe the syndication entity.
-    /// </summary>
-    private Collection<string> mediaObjectKeywords;
-    /// <summary>
-    /// Private member to hold the representative images for the syndication entity.
-    /// </summary>
-    private Collection<YahooMediaThumbnail> mediaObjectThumbnails;
-    /// <summary>
-    /// Private member to hold a taxonomy that gives an indication of the type of content for the syndication entity.
-    /// </summary>
-    private Collection<YahooMediaCategory> mediaObjectCategories;
-    /// <summary>
-    /// Private member to hold the hash digests for the syndication entity.
-    /// </summary>
-    private Collection<YahooMediaHash> mediaObjectHashes;
-    /// <summary>
-    /// Private member to hold the entities that contributed to the creation of the syndication entity.
-    /// </summary>
-    private Collection<YahooMediaCredit> mediaObjectCredits;
-    /// <summary>
-    /// Private member to hold the text transcript, closed captioning, or lyrics for the syndication entity.
-    /// </summary>
-    private Collection<YahooMediaText> mediaObjectTextSeries;
-    /// <summary>
-    /// Private member to hold the restrictions to be placed on aggregators that are rendering the syndication entity.
-    /// </summary>
-    private Collection<YahooMediaRestriction> mediaObjectRestrictions;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaSyndicationExtensionContext"/> class.
     /// </summary>
     public YahooMediaSyndicationExtensionContext()
@@ -61,77 +17,32 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     }
 
     /// <summary>
-    /// Gets or sets the publishable media objects.
+    /// Gets the publishable media objects.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="YahooMediaContent"/> objects that represent publishable media objects.</value>
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="YahooMediaContent"/> objects that represent publishable media objects.</value>
     /// <remarks>
-    ///     <para>
-    ///         The sequence of <see cref="YahooMediaContent"/> objects within a syndication entity implies the order of presentation.
-    ///     </para>
-    ///     <para>
-    ///         This <see cref="IEnumerable{T}"/> collection of <see cref="YahooMediaContent"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    ///     </para>
+    ///     The sequence of <see cref="YahooMediaContent"/> objects within a syndication entity implies the order of presentation.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<YahooMediaContent> Contents
-    {
-        get
-        {
-            extensionContents ??= [];
-            return extensionContents;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            extensionContents = value;
-        }
-    }
+    public IList<YahooMediaContent> Contents { get; } = [];
 
     /// <summary>
-    /// Gets or sets the media objects that are effectively the same content, yet different representations.
+    /// Gets the media objects that are effectively the same content, yet different representations.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="YahooMediaGroup"/> objects that represent effectively the same content, yet different representations.</value>
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="YahooMediaGroup"/> objects that represent effectively the same content, yet different representations.</value>
     /// <remarks>
-    ///     <para>
-    ///         Media objects that are not the same content should not be included in the same <see cref="YahooMediaGroup"/>. 
-    ///         The sequence of <see cref="YahooMediaContent"/> objects within a <see cref="YahooMediaGroup"/> implies the order of presentation.
-    ///     </para>
-    ///     <para>
-    ///         This <see cref="IEnumerable{T}"/> collection of <see cref="YahooMediaGroup"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    ///     </para>
+    ///     Media objects that are not the same content should not be included in the same <see cref="YahooMediaGroup"/>.
+    ///     The sequence of <see cref="YahooMediaContent"/> objects within a <see cref="YahooMediaGroup"/> implies the order of presentation.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<YahooMediaGroup> Groups
-    {
-        get
-        {
-            extensionGroups ??= [];
-            return extensionGroups;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            extensionGroups = value;
-        }
-    }
+    public IList<YahooMediaGroup> Groups { get; } = [];
 
     /// <summary>
     /// Gets a taxonomy that gives an indication of the type of content for this syndication entity.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this syndication entity. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this syndication entity.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<YahooMediaCategory> Categories
-    {
-        get
-        {
-            mediaObjectCategories ??= [];
-            return mediaObjectCategories;
-        }
-    }
+    public IList<YahooMediaCategory> Categories { get; } = [];
 
     /// <summary>
     /// Gets or sets the copyright information for this syndication entity.
@@ -146,21 +57,14 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// Gets the entities that contributed to the creation of this syndication entity.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this syndication entity. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this syndication entity.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles, 
+    ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
     ///     and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
     /// </remarks>
-    public Collection<YahooMediaCredit> Credits
-    {
-        get
-        {
-            mediaObjectCredits ??= [];
-            return mediaObjectCredits;
-        }
-    }
+    public IList<YahooMediaCredit> Credits { get; } = [];
 
     /// <summary>
     /// Gets or sets the description of this syndication entity.
@@ -175,39 +79,25 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// Gets the hash digests for this syndication entity.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this syndication entity. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this syndication entity.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     When assigning multiple hashes, each <see cref="YahooMediaHash"/> <b>must</b> have a different <see cref="YahooMediaHash.Algorithm"/>.
     /// </remarks>
-    public Collection<YahooMediaHash> Hashes
-    {
-        get
-        {
-            mediaObjectHashes ??= [];
-            return mediaObjectHashes;
-        }
-    }
+    public IList<YahooMediaHash> Hashes { get; } = [];
 
     /// <summary>
     /// Gets the relevant keywords that describe this syndication entity.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this syndication entity. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this syndication entity.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     Media objects are typically assigned maximum of ten keywords or phrases.
     /// </remarks>
-    public Collection<string> Keywords
-    {
-        get
-        {
-            mediaObjectKeywords ??= [];
-            return mediaObjectKeywords;
-        }
-    }
+    public IList<string> Keywords { get; } = [];
 
     /// <summary>
     /// Gets or sets a web browser media player console this syndication entity can be accessed through.
@@ -219,76 +109,48 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// Gets the permissible audiences for this syndication entity.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this syndication entity. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this syndication entity.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     If there are no ratings specified, it can be assumed that no restrictions are necessary.
     /// </remarks>
-    public Collection<YahooMediaRating> Ratings
-    {
-        get
-        {
-            mediaObjectRatings ??= [];
-            return mediaObjectRatings;
-        }
-    }
+    public IList<YahooMediaRating> Ratings { get; } = [];
 
     /// <summary>
     /// Gets the restrictions to be placed on aggregators that are rendering this syndication entity.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this syndication entity. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this syndication entity.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<YahooMediaRestriction> Restrictions
-    {
-        get
-        {
-            mediaObjectRestrictions ??= [];
-            return mediaObjectRestrictions;
-        }
-    }
+    public IList<YahooMediaRestriction> Restrictions { get; } = [];
 
     /// <summary>
     /// Gets the text transcript, closed captioning, or lyrics for this syndication entity.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this syndication entity. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this syndication entity.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text. 
-    ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time. 
+    ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text.
+    ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time.
     ///     <see cref="YahooMediaText"/> objects can have overlapping start and end times.
     /// </remarks>
-    public Collection<YahooMediaText> TextSeries
-    {
-        get
-        {
-            mediaObjectTextSeries ??= [];
-            return mediaObjectTextSeries;
-        }
-    }
+    public IList<YahooMediaText> TextSeries { get; } = [];
 
     /// <summary>
     /// Gets the representative images for this syndication entity.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this syndication entity. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this syndication entity.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     If multiple thumbnails are included, and time coding is not at play, it is assumed that the images are in order of importance.
     /// </remarks>
-    public Collection<YahooMediaThumbnail> Thumbnails
-    {
-        get
-        {
-            mediaObjectThumbnails ??= [];
-            return mediaObjectThumbnails;
-        }
-    }
+    public IList<YahooMediaThumbnail> Thumbnails { get; } = [];
 
     /// <summary>
     /// Gets or sets the title of this syndication entity.
@@ -321,7 +183,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
                     YahooMediaContent content = new();
                     if (content.Load(contentIterator.Current))
                     {
-                        this.AddContent(content);
+                        this.Contents.Add(content);
                         wasLoaded = true;
                     }
                 }
@@ -334,7 +196,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
                     YahooMediaGroup group = new();
                     if (group.Load(groupIterator.Current))
                     {
-                        this.AddGroup(group);
+                        this.Groups.Add(group);
                         wasLoaded = true;
                     }
                 }
@@ -372,67 +234,5 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
         }
 
         YahooMediaUtility.WriteCommonObjectEntities(this, writer);
-    }
-
-    /// <summary>
-    /// Adds the supplied <see cref="YahooMediaContent"/> to the current instance's <see cref="Contents"/> collection.
-    /// </summary>
-    /// <param name="content">The <see cref="YahooMediaContent"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was added to the <see cref="Contents"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    public bool AddContent(YahooMediaContent content)
-    {
-        ArgumentNullException.ThrowIfNull(content);
-
-        ((Collection<YahooMediaContent>)this.Contents).Add(content);
-        bool wasAdded = true;
-
-        return wasAdded;
-    }
-
-    /// <summary>
-    /// Adds the supplied <see cref="YahooMediaGroup"/> to the current instance's <see cref="Groups"/> collection.
-    /// </summary>
-    /// <param name="group">The <see cref="YahooMediaGroup"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaGroup"/> was added to the <see cref="Groups"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference.</exception>
-    public bool AddGroup(YahooMediaGroup group)
-    {
-        ArgumentNullException.ThrowIfNull(group);
-
-        ((Collection<YahooMediaGroup>)this.Groups).Add(group);
-        bool wasAdded = true;
-
-        return wasAdded;
-    }
-
-    /// <summary>
-    /// Removes the supplied <see cref="YahooMediaContent"/> from the current instance's <see cref="Contents"/> collection.
-    /// </summary>
-    /// <param name="content">The <see cref="YahooMediaContent"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaContent"/> was removed from the <see cref="Contents"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Contents"/> collection of the current instance does not contain the specified <see cref="YahooMediaContent"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    public bool RemoveContent(YahooMediaContent content)
-    {
-        ArgumentNullException.ThrowIfNull(content);
-        return ((Collection<YahooMediaContent>)this.Contents).Remove(content);
-    }
-
-    /// <summary>
-    /// Removes the supplied <see cref="YahooMediaGroup"/> from the current instance's <see cref="Groups"/> collection.
-    /// </summary>
-    /// <param name="group">The <see cref="YahooMediaGroup"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="YahooMediaGroup"/> was removed from the <see cref="Groups"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Groups"/> collection of the current instance does not contain the specified <see cref="YahooMediaGroup"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference.</exception>
-    public bool RemoveGroup(YahooMediaGroup group)
-    {
-        ArgumentNullException.ThrowIfNull(group);
-        return ((Collection<YahooMediaGroup>)this.Groups).Remove(group);
     }
 }

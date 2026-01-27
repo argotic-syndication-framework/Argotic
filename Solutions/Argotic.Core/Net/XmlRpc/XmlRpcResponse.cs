@@ -1,4 +1,3 @@
-using System.Net;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -78,36 +77,44 @@ public class XmlRpcResponse : IComparable
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class using the supplied <see cref="WebResponse"/>.
+    /// Creates a new instance of the <see cref="XmlRpcResponse"/> class asynchronously using the supplied <see cref="HttpResponseMessage"/>.
     /// </summary>
-    /// <param name="response">A <see cref="WebResponse"/> object that represents the XML-RPC server's response to the remote procedure call.</param>
+    /// <param name="response">An <see cref="HttpResponseMessage"/> object that represents the XML-RPC server's response to the remote procedure call.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="XmlRpcResponse"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
     /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content type.</exception>
     /// <exception cref="ArgumentException">The <paramref name="response"/> has an invalid content length.</exception>
     /// <exception cref="XmlException">The <paramref name="response"/> body does not represent a valid XML document, or an error was encountered in the XML data.</exception>
-    public XmlRpcResponse(WebResponse response)
+    public static async Task<XmlRpcResponse> CreateAsync(HttpResponseMessage response, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(response);
 
-        if (!string.Equals(response.ContentType, "text/xml", StringComparison.OrdinalIgnoreCase))
+        string? contentType = response.Content.Headers.ContentType?.MediaType;
+        if (!string.Equals(contentType, "text/xml", StringComparison.OrdinalIgnoreCase))
         {
-            throw new ArgumentException(string.Format(null, "The WebResponse content type is invalid. Content type of the response was {0}", response.ContentType), nameof(response));
-        }
-        else if (response.ContentLength <= 0)
-        {
-            throw new ArgumentException(string.Format(null, "The WebResponse content length is invalid. Content length was {0}. ", response.ContentLength), nameof(response));
+            throw new ArgumentException(string.Format(null, "The HttpResponseMessage content type is invalid. Content type of the response was {0}", contentType), nameof(response));
         }
 
-        using Stream stream = response.GetResponseStream();
+        long contentLength = response.Content.Headers.ContentLength ?? -1;
+        if (contentLength <= 0)
+        {
+            throw new ArgumentException(string.Format(null, "The HttpResponseMessage content length is invalid. Content length was {0}. ", contentLength), nameof(response));
+        }
+
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         using XmlReader reader = XmlReader.Create(stream, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument document = new(reader);
         XPathNavigator source = document.CreateNavigator();
 
-        XPathNavigator methodResponseNavigator = source.SelectSingleNode("methodResponse");
+        XmlRpcResponse result = new();
+        XPathNavigator? methodResponseNavigator = source.SelectSingleNode("methodResponse");
         if (methodResponseNavigator != null)
         {
-            this.Load(methodResponseNavigator);
+            result.Load(methodResponseNavigator);
         }
+
+        return result;
     }
 
     /// <summary>
@@ -132,7 +139,7 @@ public class XmlRpcResponse : IComparable
     /// </summary>
     /// <value>
     ///     A <see cref="IXmlRpcValue"/> that represents the response value that was returned for the remote procedure call.
-    ///     If the remote procedure call raised an execption, will return <b>null</b> and the <see cref="Fault"/> <i>should</i> be populated.
+    ///     If the remote procedure call raised an exception, will return <b>null</b> and the <see cref="Fault"/> <i>should</i> be populated.
     /// </value>
     /// <seealso cref="XmlRpcResponse(IXmlRpcValue)"/>
     public IXmlRpcValue Parameter

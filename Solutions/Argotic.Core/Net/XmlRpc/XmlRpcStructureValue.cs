@@ -1,8 +1,5 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Net;
 
@@ -14,11 +11,6 @@ namespace Argotic.Net;
 [Serializable]
 public class XmlRpcStructureValue : IXmlRpcValue, IComparable
 {
-    /// <summary>
-    /// Private member to hold the structure members.
-    /// </summary>
-    private Collection<XmlRpcStructureMember> structureMembers;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcStructureValue"/> class.
     /// </summary>
@@ -101,20 +93,13 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     /// Gets this structure's members.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="XmlRpcStructureMember"/> objects that represent this structure's members.
+    ///     A <see cref="IList{T}"/> collection of <see cref="XmlRpcStructureMember"/> objects that represent this structure's members.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<XmlRpcStructureMember> Members
-    {
-        get
-        {
-            structureMembers ??= [];
-            return structureMembers;
-        }
-    }
+    public IList<XmlRpcStructureMember> Members { get; } = [];
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{XmlRpcStructureMember}"/> collections.
+    /// Compares two specified <see cref="IList{XmlRpcStructureMember}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -132,7 +117,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<XmlRpcStructureMember> source, Collection<XmlRpcStructureMember> target)
+    public static int CompareSequence(IList<XmlRpcStructureMember> source, IList<XmlRpcStructureMember> target)
     {
         int result = 0;
 

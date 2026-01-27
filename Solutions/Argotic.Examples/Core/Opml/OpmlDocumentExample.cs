@@ -1,17 +1,15 @@
-﻿using System.Net;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Opml;
 
 /// <summary>
 /// Contains the code examples for the <see cref="OpmlDocument"/> class.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="OpmlDocument"/> class. 
+///     This class contains all the code examples that are referenced by the <see cref="OpmlDocument"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
 public static class OpmlDocumentExample
@@ -26,25 +24,25 @@ public static class OpmlDocumentExample
             Head =
             {
                 Title = "Example OPML List",
-                CreatedOn = new(2005, 6, 18, 12, 11, 52),
-                ModifiedOn = new(2005, 7, 2, 21, 42, 48),
-                Owner = new("John Doe", "john.doe@example.com"),
+                CreatedOn = new DateTime(2005, 6, 18, 12, 11, 52),
+                ModifiedOn = new DateTime(2005, 7, 2, 21, 42, 48),
+                Owner = new OpmlOwner("John Doe", "john.doe@example.com"),
                 VerticalScrollState = 1,
-                Window = new(61, 304, 562, 842)
+                Window = new OpmlWindow(61, 304, 562, 842)
             }
         };
 
         OpmlOutline containerOutline = new("Feeds");
-        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
-        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new("http://news.google.com/?output=atom")));
-        document.AddOutline(containerOutline);
+        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
+        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
+        document.Outlines.Add(containerOutline);
     }
     /// <summary>
-    /// Provides example code for the OpmlDocument.Create(Uri) method
+    /// Provides example code for the OpmlDocument.CreateAsync(Uri) method
     /// </summary>
-    public static void CreateExample()
+    public static async Task CreateExampleAsync()
     {
-        OpmlDocument document = OpmlDocument.Create(new("http://blog.oppositionallydefiant.com/opml.axd"));
+        OpmlDocument document = await OpmlDocument.CreateAsync(new Uri("http://blog.oppositionallydefiant.com/opml.axd")).ConfigureAwait(false);
 
         foreach (OpmlOutline outline in document.Outlines)
         {
@@ -56,15 +54,15 @@ public static class OpmlDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the LoadAsync(Uri, Object) method
+    /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
-    public static void LoadAsyncExample()
+    public static async Task LoadAsyncExampleAsync()
     {
         OpmlDocument document = new();
 
-        document.Loaded += new(ResourceLoadedCallback);
+        document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
-        document.LoadAsync(new("http://blog.oppositionallydefiant.com/opml.axd"), null);
+        await document.LoadAsync(new Uri("http://blog.oppositionallydefiant.com/opml.axd")).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -72,10 +70,12 @@ public static class OpmlDocumentExample
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-    private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
+    private static void ResourceLoadedCallback(object? sender, SyndicationResourceLoadedEventArgs e)
     {
-        if (e.State != null)
+        // Process the loaded document using e.Data or e.Source
+        if (e.Source != null)
         {
+            // Process the source URI
         }
     }
     /// <summary>
@@ -144,14 +144,20 @@ public static class OpmlDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
+    /// Provides example code for the LoadAsync(Uri, HttpClient) method
     /// </summary>
-    public static void LoadUriExample()
+    public static async Task LoadUriExampleAsync()
     {
         OpmlDocument document = new();
         Uri source = new("http://blog.oppositionallydefiant.com/opml.axd");
 
-        document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+        // For simple case (no credentials):
+        await document.LoadAsync(source).ConfigureAwait(false);
+
+        // Or for credentials:
+        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
+        // using var httpClient = new HttpClient(handler);
+        // await document.LoadAsync(source, httpClient);
 
         foreach (OpmlOutline outline in document.Outlines)
         {

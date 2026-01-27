@@ -117,7 +117,7 @@ public class SyndicationResourceMetadata : IComparable
         {
             try
             {
-                version = new(value);
+                version = new Version(value);
             }
             catch (ArgumentOutOfRangeException)
             {
@@ -167,7 +167,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(0, 6);
+                    version = new Version(0, 6);
                 }
             }
         }
@@ -203,7 +203,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(1, 0);
+                    version = new Version(1, 0);
                 }
             }
             else if (namespaces.ContainsValue("http://purl.org/atom/ns#"))
@@ -211,7 +211,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(0, 3);
+                    version = new Version(0, 3);
                 }
             }
         }
@@ -225,7 +225,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(1, 0);
+                    version = new Version(1, 0);
                 }
             }
             else if (namespaces.ContainsValue("http://purl.org/atom/ns#"))
@@ -233,7 +233,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(0, 3);
+                    version = new Version(0, 3);
                 }
             }
         }
@@ -270,7 +270,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(1, 0);
+                    version = new Version(1, 0);
                 }
             }
         }
@@ -308,7 +308,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(1, 0);
+                    version = new Version(1, 0);
                 }
             }
         }
@@ -344,7 +344,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(2, 0);
+                    version = new Version(2, 0);
                 }
             }
         }
@@ -380,7 +380,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(0, 1);
+                    version = new Version(0, 1);
                 }
             }
         }
@@ -410,7 +410,7 @@ public class SyndicationResourceMetadata : IComparable
             resourceConformsToFormat = true;
             if (version == null)
             {
-                version = new(2, 0);
+                version = new Version(2, 0);
             }
         }
 
@@ -445,7 +445,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(1, 1);
+                    version = new Version(1, 1);
                 }
             }
         }
@@ -475,7 +475,7 @@ public class SyndicationResourceMetadata : IComparable
             resourceConformsToFormat = true;
             if (version == null)
             {
-                version = new(2, 0);
+                version = new Version(2, 0);
             }
         }
 
@@ -510,7 +510,7 @@ public class SyndicationResourceMetadata : IComparable
                 resourceConformsToFormat = true;
                 if (version == null)
                 {
-                    version = new(1, 0);
+                    version = new Version(1, 0);
                 }
             }
             else if (string.Equals(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) && version != null)
@@ -550,7 +550,7 @@ public class SyndicationResourceMetadata : IComparable
             resourceConformsToFormat = true;
             if (version == null)
             {
-                version = new(2, 0);
+                version = new Version(2, 0);
             }
         }
         else if ((navigator = resource.SelectSingleNode("rdf:RDF", manager)) != null)
@@ -561,12 +561,12 @@ public class SyndicationResourceMetadata : IComparable
             if (namespaces.ContainsValue("http://purl.org/rss/1.0/"))
             {
                 resourceConformsToFormat = true;
-                version = new(1, 0);
+                version = new Version(1, 0);
             }
             else if (namespaces.ContainsValue("http://my.netscape.com/rdf/simple/0.9/"))
             {
                 resourceConformsToFormat = true;
-                version = new(0, 9);
+                version = new Version(0, 9);
             }
         }
 

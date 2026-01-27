@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Rss;
 
 /// <summary>
 /// Contains the code examples for the <see cref="RssCloud"/> class.
@@ -21,9 +21,9 @@ public static class RssCloudExample
             Channel =
             {
                 Title = "Dallas Times-Herald",
-                Link = new("http://dallas.example.com"),
+                Link = new Uri("http://dallas.example.com"),
                 Description = "Current headlines from the Dallas Times-Herald newspaper",
-                Cloud = new("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify")
+                Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify")
             }
         };
     }

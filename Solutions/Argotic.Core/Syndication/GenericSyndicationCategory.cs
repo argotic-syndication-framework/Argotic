@@ -1,5 +1,3 @@
-using Argotic.Common;
-
 namespace Argotic.Syndication;
 
 /// <summary>

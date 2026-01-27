@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication.Specialized;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.BlogML;
 
 /// <summary>
 /// Contains the code examples for the <see cref="BlogMLTextConstruct"/> class.

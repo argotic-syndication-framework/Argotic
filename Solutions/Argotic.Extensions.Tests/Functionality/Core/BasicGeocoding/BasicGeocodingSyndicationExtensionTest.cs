@@ -1,10 +1,9 @@
-namespace Argotic.Extensions.Tests;
-
 using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
+
+namespace Argotic.Extensions.Tests.Functionality.Core.BasicGeocoding;
 
 [TestClass]
 public class BasicGeocodingSyndicationExtensionTest
@@ -63,24 +62,16 @@ public class BasicGeocodingSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void BasicGeocodingGetHashCodeTest()
     {
+        // Consistency: same object returns same hash
         BasicGeocodingSyndicationExtension target = CreateExtension1();
-        int expected = -1112179344;
-        int actual = target.GetHashCode();
-        actual.ShouldBe(expected);
-    }
+        target.GetHashCode().ShouldBe(target.GetHashCode());
 
-    [TestMethod]
-    [Ignore("Test requires manual verification of Load behavior")]
-    public void BasicGeocodingLoadTest()
-    {
-        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-
-        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new();
-        feed.Load(reader);
+        // Equality contract: equal objects have equal hashes
+        BasicGeocodingSyndicationExtension other = CreateExtension1();
+        target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
     [TestMethod]
@@ -140,7 +131,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
         using StringWriter sw = new();
-        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
@@ -193,13 +184,14 @@ public class BasicGeocodingSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("Context equality comparison not implemented")]
     public void BasicGeocodingContextTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
-        BasicGeocodingSyndicationExtensionContext expected = CreateContext1();
-        BasicGeocodingSyndicationExtensionContext actual = target.Context;
-        actual.ShouldBe(expected);
+        BasicGeocodingSyndicationExtensionContext context = target.Context;
+
+        context.ShouldNotBeNull();
+        context.Latitude.ShouldBe(40m);
+        context.Longitude.ShouldBe(-74m);
     }
 
     private static BasicGeocodingSyndicationExtension CreateExtension1()

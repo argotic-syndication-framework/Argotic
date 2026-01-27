@@ -1,8 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -42,7 +40,7 @@ public class SiteSummaryContentItem : IComparable
     {
         get
         {
-            return new("http://www.w3.org/TR/REC-xml#dt-wellformed");
+            return new Uri("http://www.w3.org/TR/REC-xml#dt-wellformed");
         }
     }
 

@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -36,7 +35,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="FeedHistorySyndicationExtension"/> class.
     /// </summary>
     public FeedHistorySyndicationExtension()
-        : base("fh", "http://purl.org/syndication/history/1.0", new("1.0"), new("http://www.ietf.org/rfc/rfc5005.txt"), "Feed Paging and Archiving", "Extends syndication feeds to provide a means of publishing of entries across one or more feed documents.")
+        : base("fh", "http://purl.org/syndication/history/1.0", new Version("1.0"), new Uri("http://www.ietf.org/rfc/rfc5005.txt"), "Feed Paging and Archiving", "Extends syndication feeds to provide a means of publishing of entries across one or more feed documents.")
     {
     }
     /// <summary>
@@ -82,7 +81,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<FeedHistoryLinkRelation> source, Collection<FeedHistoryLinkRelation> target)
+    public static int CompareSequence(IList<FeedHistoryLinkRelation> source, IList<FeedHistoryLinkRelation> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);

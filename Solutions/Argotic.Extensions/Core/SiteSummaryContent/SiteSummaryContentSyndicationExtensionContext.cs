@@ -1,8 +1,5 @@
-﻿using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -17,10 +14,6 @@ public class SiteSummaryContentSyndicationExtensionContext
     /// Private member to hold the entity-encoded or CDATA-escaped version of the content of the item.
     /// </summary>
     private string extensionEncoded = string.Empty;
-    /// <summary>
-    /// Private member to hold the alternative versions of the item's content.
-    /// </summary>
-    private Collection<SiteSummaryContentItem> extensionItems;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryContentSyndicationExtensionContext"/> class.
@@ -34,7 +27,7 @@ public class SiteSummaryContentSyndicationExtensionContext
     /// </summary>
     /// <value>The alternative version of the content of this item.</value>
     /// <remarks>
-    ///     The value of this property <i>may</i> be entity-encoded, but will <b>always</b> be CDATA-escaped. 
+    ///     The value of this property <i>may</i> be entity-encoded, but will <b>always</b> be CDATA-escaped.
     /// </remarks>
     public string Encoded
     {
@@ -60,21 +53,14 @@ public class SiteSummaryContentSyndicationExtensionContext
     /// Gets the alternative versions of this item's content.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="SiteSummaryContentItem"/> objects that represent multiple versions of this item's content. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="SiteSummaryContentItem"/> objects that represent multiple versions of this item's content.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     The <see cref="Encoded"/> property represents the <b>updated</b> syntax for the <see cref="SiteSummaryContentSyndicationExtension"/>. 
+    ///     The <see cref="Encoded"/> property represents the <b>updated</b> syntax for the <see cref="SiteSummaryContentSyndicationExtension"/>.
     ///     It is <i>recommended</i> that <see cref="Encoded"/> is utilized when defining an alternative encoding for the content of an item.
     /// </remarks>
-    public Collection<SiteSummaryContentItem> Items
-    {
-        get
-        {
-            extensionItems ??= [];
-            return extensionItems;
-        }
-    }
+    public IList<SiteSummaryContentItem> Items { get; } = [];
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

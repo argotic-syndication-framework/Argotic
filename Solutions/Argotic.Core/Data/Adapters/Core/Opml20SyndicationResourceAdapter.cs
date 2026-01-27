@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -71,7 +70,7 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
                             break;
                         }
 
-                        ((Collection<OpmlOutline>)resource.Outlines).Add(outline);
+                        resource.Outlines.Add(outline);
                     }
                 }
             }

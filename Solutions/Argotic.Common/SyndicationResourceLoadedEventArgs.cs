@@ -1,4 +1,3 @@
-using System.Net;
 using System.Xml.XPath;
 
 namespace Argotic.Common;
@@ -29,14 +28,6 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// Private member to hold the URI that the syndication resource information was retrieved from.
     /// </summary>
     private readonly Uri eventSource;
-    /// <summary>
-    /// Private member to hold the web request options.
-    /// </summary>
-    private readonly WebRequestOptions eventOptions = new();
-    /// <summary>
-    /// Private member to hold an object containing state information that was passed to the asynchronous load operation.
-    /// </summary>
-    private readonly object eventUserToken;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.
@@ -58,81 +49,19 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>, <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
+    /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/> and source <see cref="Uri"/>.
     /// </summary>
     /// <param name="data">A <see cref="IXPathNavigable"/> object that represents the XML data that was used to load the syndication resource.</param>
     /// <param name="source">
-    ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
-    /// </param>
-    /// <param name="credentials">
-    ///    The <see cref="ICredentials"/> that were used to authenticate the request to an Internet resource. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
-    /// </param>
-    /// <param name="proxy">
-    ///     The <see cref="IWebProxy"/> used to access the Internet resource. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
+    ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
     /// </param>
     /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy) : this(data)
+    public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source) : this(data)
     {
         ArgumentNullException.ThrowIfNull(source);
 
         eventSource = source;
-        eventOptions = new(credentials, proxy);
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>, <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    /// </summary>
-    /// <param name="data">A <see cref="IXPathNavigable"/> object that represents the XML data that was used to load the syndication resource.</param>
-    /// <param name="source">
-    ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
-    /// </param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options) : this(data)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-
-        eventSource = source;
-        eventOptions = options ?? new WebRequestOptions();
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>, <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and user token.
-    /// </summary>
-    /// <param name="data">A <see cref="IXPathNavigable"/> object that represents the XML data that was used to load the syndication resource.</param>
-    /// <param name="source">
-    ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
-    /// </param>
-    /// <param name="credentials">
-    ///    The <see cref="ICredentials"/> that were used to authenticate the request to an Internet resource. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
-    /// </param>
-    /// <param name="proxy">
-    ///     The <see cref="IWebProxy"/> used to access the Internet resource. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
-    /// </param>
-    /// <param name="state">The user-defined object that was passed to the asynchronous operation.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, ICredentials credentials, IWebProxy proxy, object state) : this(data, source, credentials, proxy)
-    {
-        eventUserToken = state;
-    }
-
-    /// <summary>
-    /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class using the supplied <see cref="IXPathNavigable"/>, <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and user token.
-    /// </summary>
-    /// <param name="data">A <see cref="IXPathNavigable"/> object that represents the XML data that was used to load the syndication resource.</param>
-    /// <param name="source">
-    ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from. Can be <b>null</b> if syndication resource was not loaded using an Internet resource.
-    /// </param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="state">The user-defined object that was passed to the asynchronous operation.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="data"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public SyndicationResourceLoadedEventArgs(IXPathNavigable data, Uri source, WebRequestOptions options, object state) : this(data, source, options)
-    {
-        eventUserToken = state;
     }
 
     /// <summary>
@@ -145,22 +74,6 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
         get
         {
             return emptyEventArguments;
-        }
-    }
-
-    /// <summary>
-    /// Gets the network credentials used for authenticating the request to the Internet resource that the syndication resource was loaded from.
-    /// </summary>
-    /// <value>
-    ///     The <see cref="ICredentials"/> that were used to authenticate the request to an Internet resource.
-    ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource or no credentials were provided, returns <b>null</b>.
-    /// </value>
-    /// <seealso cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy)"/>
-    public ICredentials Credentials
-    {
-        get
-        {
-            return eventOptions.Credentials;
         }
     }
 
@@ -179,50 +92,17 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     }
 
     /// <summary>
-    /// Gets the network proxy used to access the Internet resource that the syndication resource was loaded from.
-    /// </summary>
-    /// <value>
-    ///     The <see cref="IWebProxy"/> used to access the Internet resource.
-    ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource or no proxy was specified, returns <b>null</b>.
-    /// </value>
-    /// <seealso cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy)"/>
-    public IWebProxy Proxy
-    {
-        get
-        {
-            return eventOptions.Proxy;
-        }
-    }
-
-    /// <summary>
     /// Gets the <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
     /// </summary>
     /// <value>
     ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
     ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource, returns <b>null</b>.
     /// </value>
-    /// <seealso cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy)"/>
     public Uri Source
     {
         get
         {
             return eventSource;
-        }
-    }
-
-    /// <summary>
-    /// Gets an <see cref="object"/> containing state information that was passed to the asynchronous load operation.
-    /// </summary>
-    /// <value>
-    ///     A <see cref="object"/> containing state information that was passed to the asynchronous load operation.
-    ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource or no user token provided, returns <b>null</b>.
-    /// </value>
-    /// <seealso cref="ISyndicationResource.LoadAsync(Uri, Object)"/>
-    public object State
-    {
-        get
-        {
-            return eventUserToken;
         }
     }
 
@@ -237,11 +117,8 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     {
         string source = this.Source != null ? this.Source.ToString() : string.Empty;
         string data = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string credentials = this.Credentials != null ? this.Credentials.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string proxy = this.Proxy != null ? this.Proxy.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string state = this.State != null ? this.State.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
-        return string.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\", Credentials = \"{2}\", Proxy = \"{3}\", State = \"{4}\")]", source, data, credentials, proxy, state);
+        return string.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\")]", source, data);
     }
 
     /// <summary>

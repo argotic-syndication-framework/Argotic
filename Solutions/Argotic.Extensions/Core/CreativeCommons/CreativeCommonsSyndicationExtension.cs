@@ -34,7 +34,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// Initializes a new instance of the <see cref="CreativeCommonsSyndicationExtension"/> class.
     /// </summary>
     public CreativeCommonsSyndicationExtension()
-        : base("creativeCommons", "http://backend.userland.com/creativeCommonsRssModule", new("1.0"), new("http://backend.userland.com/creativeCommonsRssModule"), "Creative Commons Licensing", "Extends syndication feeds to provide a means of specifying which Creative Commons licenses are applicable.")
+        : base("creativeCommons", "http://backend.userland.com/creativeCommonsRssModule", new Version("1.0"), new Uri("http://backend.userland.com/creativeCommonsRssModule"), "Creative Commons Licensing", "Extends syndication feeds to provide a means of specifying which Creative Commons licenses are applicable.")
     {
     }
     /// <summary>

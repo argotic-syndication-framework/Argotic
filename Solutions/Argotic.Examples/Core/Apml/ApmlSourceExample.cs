@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication.Specialized;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Apml;
 
 /// <summary>
 /// Contains the code examples for the <see cref="ApmlSource"/> class.
@@ -24,7 +24,7 @@ public static class ApmlSourceExample
                 Title = "Example APML file for apml.org",
                 Generator = "Written by Hand",
                 EmailAddress = "sample@apml.org",
-                CreatedOn = new(2007, 3, 11, 13, 55, 0)
+                CreatedOn = new DateTime(2007, 3, 11, 13, 55, 0)
             }
         };
 
@@ -33,20 +33,20 @@ public static class ApmlSourceExample
             Name = "Home"
         };
 
-        homeProfile.ImplicitConcepts.Add(new("attention", 0.99m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("content distribution", 0.97m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("information", 0.95m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("business", 0.93m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("alerting", 0.91m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("intelligent agents", 0.89m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("development", 0.87m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("service", 0.85m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("user interface", 0.83m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("experience design", 0.81m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("site design", 0.79m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("television", 0.77m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("management", 0.75m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("media", 0.73m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("content distribution", 0.97m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("information", 0.95m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("business", 0.93m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("alerting", 0.91m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("intelligent agents", 0.89m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("development", 0.87m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("service", 0.85m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("user interface", 0.83m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("experience design", 0.81m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("site design", 0.79m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("television", 0.77m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
         //  Define the implicit source associated to this profile
         ApmlSource apmlSpecSource = new()
@@ -56,13 +56,13 @@ public static class ApmlSourceExample
             Value = 1.00m,
             MimeType = "application/rss+xml",
             From = "GatheringTool.com",
-            UpdatedOn = new(2007, 3, 11, 13, 55, 0)
+            UpdatedOn = new DateTime(2007, 3, 11, 13, 55, 0)
         };
-        apmlSpecSource.Authors.Add(new("Sample", 0.5m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
+        apmlSpecSource.Authors.Add(new ApmlAuthor("Sample", 0.5m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
         homeProfile.ImplicitSources.Add(apmlSpecSource);
 
-        homeProfile.ExplicitConcepts.Add(new("direct attention", 0.99m));
+        homeProfile.ExplicitConcepts.Add(new ApmlConcept("direct attention", 0.99m));
 
         //  Define the explicit source associated to this profile
         ApmlSource techCrunchSource = new()
@@ -72,18 +72,18 @@ public static class ApmlSourceExample
             Value = 0.4m,
             MimeType = "application/rss+xml"
         };
-        techCrunchSource.Authors.Add(new("ExplicitSample", 0.5m));
+        techCrunchSource.Authors.Add(new ApmlAuthor("ExplicitSample", 0.5m));
 
         homeProfile.ExplicitSources.Add(techCrunchSource);
 
-        document.AddProfile(homeProfile);
+        document.Profiles.Add(homeProfile);
 
         ApmlProfile workProfile = new()
         {
             Name = "Work"
         };
 
-        homeProfile.ExplicitConcepts.Add(new("Golf", 0.2m));
+        homeProfile.ExplicitConcepts.Add(new ApmlConcept("Golf", 0.2m));
 
         //  Define the explicit source associated to this profile
         ApmlSource workTechCrunchSource = new()
@@ -93,11 +93,11 @@ public static class ApmlSourceExample
             Value = 0.4m,
             MimeType = "application/atom+xml"
         };
-        workTechCrunchSource.Authors.Add(new("ProfessionalBlogger", 0.5m));
+        workTechCrunchSource.Authors.Add(new ApmlAuthor("ProfessionalBlogger", 0.5m));
 
         homeProfile.ExplicitSources.Add(workTechCrunchSource);
 
-        document.AddProfile(workProfile);
+        document.Profiles.Add(workProfile);
 
         ApmlApplication sampleApplication = new("sample.com")
         {

@@ -1,8 +1,5 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -18,12 +15,6 @@ public class ITunesCategory : IComparable
     /// Private member to hold the name of the category.
     /// </summary>
     private string categoryText = string.Empty;
-    /// <summary>
-    /// Private member to hold a collection of sub-categories of the category.
-    /// </summary>
-#pragma warning disable CA5362 // iTunes specification requires categories to contain subcategories
-    private Collection<ITunesCategory> categorySubcategories;
-#pragma warning restore CA5362
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesCategory"/> class.
     /// </summary>
@@ -47,16 +38,11 @@ public class ITunesCategory : IComparable
     /// Gets the sub-categories of this category.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="ITunesCategory"/> objects that represent the sub-categories of this category. The default value is an <i>empty</i> collection.
+    ///     A <see cref="IList{T}"/> collection of <see cref="ITunesCategory"/> objects that represent the sub-categories of this category. The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<ITunesCategory> Categories
-    {
-        get
-        {
-            categorySubcategories ??= [];
-            return categorySubcategories;
-        }
-    }
+#pragma warning disable CA5362 // iTunes specification requires categories to contain subcategories
+    public IList<ITunesCategory> Categories { get; } = [];
+#pragma warning restore CA5362
 
     /// <summary>
     /// Gets or sets the name of this category.

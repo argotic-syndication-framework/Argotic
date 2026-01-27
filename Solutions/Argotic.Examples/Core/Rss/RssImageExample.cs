@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Rss;
 
 /// <summary>
 /// Contains the code examples for the <see cref="RssImage"/> class.
@@ -21,12 +21,12 @@ public static class RssImageExample
             Channel =
             {
                 Title = "Dallas Times-Herald",
-                Link = new("http://dallas.example.com"),
+                Link = new Uri("http://dallas.example.com"),
                 Description = "Current headlines from the Dallas Times-Herald newspaper"
             }
         };
 
-        RssImage image = new(new("http://dallas.example.com"), "Dallas Times-Herald", new("http://dallas.example.com/masthead.gif"))
+        RssImage image = new(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
         {
             Description = "Read the Dallas Times-Herald",
             Height = 32,

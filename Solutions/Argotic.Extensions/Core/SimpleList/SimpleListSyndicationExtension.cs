@@ -1,8 +1,5 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -36,7 +33,7 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="SimpleListSyndicationExtension"/> class.
     /// </summary>
     public SimpleListSyndicationExtension()
-        : base("cf", "http://www.microsoft.com/schemas/rss/core/2005", new("1.0"), new("http://msdn2.microsoft.com/en-us/xml/bb190612.aspx"), "Simple List", "Extends syndication feeds to provide a means of exposing ordered lists of items easier and more accessible to users.")
+        : base("cf", "http://www.microsoft.com/schemas/rss/core/2005", new Version("1.0"), new Uri("http://msdn2.microsoft.com/en-us/xml/bb190612.aspx"), "Simple List", "Extends syndication feeds to provide a means of exposing ordered lists of items easier and more accessible to users.")
     {
     }
 
@@ -83,7 +80,7 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<SimpleListGroup> source, Collection<SimpleListGroup> target)
+    public static int CompareSequence(IList<SimpleListGroup> source, IList<SimpleListGroup> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -127,7 +124,7 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<SimpleListSort> source, Collection<SimpleListSort> target)
+    public static int CompareSequence(IList<SimpleListSort> source, IList<SimpleListSort> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);

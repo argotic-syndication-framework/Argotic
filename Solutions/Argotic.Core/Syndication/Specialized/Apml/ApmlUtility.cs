@@ -1,7 +1,5 @@
 ﻿using System.Xml;
 
-using Argotic.Common;
-
 namespace Argotic.Syndication.Specialized;
 
 /// <summary>

@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -43,10 +42,6 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// </summary>
     private CultureInfo commonObjectLanguage;
     /// <summary>
-    /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-    /// </summary>
-    private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-    /// <summary>
     /// Private member to hold an IRI that identifies the location of the collection.
     /// </summary>
     private Uri collectionResourceLocation;
@@ -54,20 +49,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// Private member to hold a human-readable title for the collection.
     /// </summary>
     private AtomTextConstruct collectionTitle = new();
-    /// <summary>
-    /// Private member to hold a list of categories that can be applied to members of the collection.
-    /// </summary>
-    private Collection<AtomCategoryDocument> collectionCategories;
-    /// <summary>
-    /// Private member to hold
-    /// </summary>
-    private Collection<AtomAcceptedMediaRange> collectionAcceptedMediaRanges;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomMemberResources"/> class.
     /// </summary>
     public AtomMemberResources()
-        : base("app", "http://www.w3.org/2007/app", new("1.0"), new("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Collection", "Extends syndication resource memebers to provide a means of specifying a collection by which new entries may be added to a feed.")
+        : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Collection", "Extends syndication resource memebers to provide a means of specifying a collection by which new entries may be added to a feed.")
     {
     }
 
@@ -129,54 +116,16 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     }
 
     /// <summary>
-    /// Gets or sets the syndication extensions applied to this syndication entity.
+    /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<ISyndicationExtension> Extensions
-    {
-        get
-        {
-            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
-            return objectSyndicationExtensions;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            objectSyndicationExtensions = value;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-        }
-    }
-
-    /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool AddExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-
-        ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        bool wasAdded = true;
-        return wasAdded;
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
@@ -191,7 +140,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
 
@@ -200,24 +149,9 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     }
 
     /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool RemoveExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-    }
-
-    /// <summary>
     /// Gets a list of media ranges that are accepted by this collection.
     /// </summary>
-    /// <value>A <see cref="Collection{AtomAcceptedMediaRange}"/> of <see cref="AtomAcceptedMediaRange"/> objects that represent a list of media ranges that this collection will accept from clients.</value>
+    /// <value>A <see cref="IList{AtomAcceptedMediaRange}"/> of <see cref="AtomAcceptedMediaRange"/> objects that represent a list of media ranges that this collection will accept from clients.</value>
     /// <remarks>
     ///     <para>
     ///         A value of <b>application/atom+xml;type=entry</b> <i>may</i> appear in any <see cref="AtomAcceptedMediaRange">accept</see> list of media ranges
@@ -231,33 +165,19 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     ///         that the <see cref="AtomMemberResources"/> <b>does not</b> support the creation of new <see cref="AtomFeed.Entries"/>.
     ///     </para>
     /// </remarks>
-    public Collection<AtomAcceptedMediaRange> Accepts
-    {
-        get
-        {
-            collectionAcceptedMediaRanges ??= [];
-            return collectionAcceptedMediaRanges;
-        }
-    }
+    public IList<AtomAcceptedMediaRange> Accepts { get; } = [];
 
     /// <summary>
     /// Gets a list of categories that can be applied to members of this collection.
     /// </summary>
-    /// <value>A <see cref="Collection{AtomCategoryDocument}"/> of <see cref="AtomCategoryDocument"/> objects that represent a list of categories that can be applied to members of this collection.</value>
+    /// <value>A <see cref="IList{AtomCategoryDocument}"/> of <see cref="AtomCategoryDocument"/> objects that represent a list of categories that can be applied to members of this collection.</value>
     /// <remarks>
     ///     The server <i>may</i> reject attempts to create or store members whose categories are not present in its categories list.
     ///     A <see cref="AtomMemberResources"/> that indicates the category set is open <b>should not</b> reject Otherwise, acceptable members whose categories are not in its categories list.
     ///     The absence of <see cref="Categories"/> means that the category handling of the <see cref="AtomMemberResources"/> is unspecified.
     ///     A <see cref="AtomCategoryDocument.IsFixed">fixed</see> category list that contains zero categories indicates the <see cref="AtomMemberResources"/> does not accept category data.
     /// </remarks>
-    public Collection<AtomCategoryDocument> Categories
-    {
-        get
-        {
-            collectionCategories ??= [];
-            return collectionCategories;
-        }
-    }
+    public IList<AtomCategoryDocument> Categories { get; } = [];
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable title for this collection.
@@ -305,7 +225,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{AtomAcceptedMediaRange}"/> collections.
+    /// Compares two specified <see cref="IList{AtomAcceptedMediaRange}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -323,7 +243,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<AtomAcceptedMediaRange> source, Collection<AtomAcceptedMediaRange> target)
+    public static int CompareSequence(IList<AtomAcceptedMediaRange> source, IList<AtomAcceptedMediaRange> target)
     {
         int result = 0;
 
@@ -366,7 +286,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         ArgumentNullException.ThrowIfNull(href);
 
-        return new(href, "edit");
+        return new AtomLink(href, "edit");
     }
 
     /// <summary>
@@ -395,7 +315,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         ArgumentNullException.ThrowIfNull(href);
 
-        return new(href, "edit-media");
+        return new AtomLink(href, "edit-media");
     }
 
     /// <summary>
@@ -588,7 +508,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
             if (titleNavigator != null)
             {
-                this.Title = new();
+                this.Title = new AtomTextConstruct();
                 if (this.Title.Load(titleNavigator))
                 {
                     wasLoaded = true;
@@ -672,7 +592,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
 
         if (settings == null)
         {
-            settings = new();
+            settings = new SyndicationResourceLoadSettings();
         }
         XPathDocument document = new(reader);
 

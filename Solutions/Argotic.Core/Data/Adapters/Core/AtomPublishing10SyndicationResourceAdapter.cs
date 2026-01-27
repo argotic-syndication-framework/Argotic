@@ -99,7 +99,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                             AtomCategory category = new();
                             if (category.Load(categoryIterator.Current, this.Settings))
                             {
-                                resource.AddCategory(category);
+                                resource.Categories.Add(category);
                             }
                         }
                     }
@@ -138,7 +138,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                         AtomWorkspace workspace = new();
                         if (workspace.Load(workspaceIterator.Current, this.Settings))
                         {
-                            resource.AddWorkspace(workspace);
+                            resource.Workspaces.Add(workspace);
                         }
                     }
                 }

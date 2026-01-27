@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 using Argotic.Common;
@@ -24,19 +23,10 @@ namespace Argotic.Syndication;
 [Serializable]
 public class RssItem : IComparable, IExtensibleSyndicationObject
 {
-
-    /// <summary>
-    /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-    /// </summary>
-    private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
     /// <summary>
     /// Private member to hold the e-mail address of the person who wrote the item.
     /// </summary>
     private string itemAuthor = string.Empty;
-    /// <summary>
-    /// Private member to hold categories or tags to which the item belongs.
-    /// </summary>
-    private Collection<RssCategory> itemCategories;
     /// <summary>
     /// Private member to hold the URL of a web page that contains comments received in response to the item.
     /// </summary>
@@ -45,10 +35,6 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// Private member to hold character data that contains the item's full content or a summary of its contents.
     /// </summary>
     private string itemDescription = string.Empty;
-    /// <summary>
-    /// Private member to hold media objects such as an audio, video, or executable file that are associated with the item.
-    /// </summary>
-    private Collection<RssEnclosure> itemEnclosures;
     /// <summary>
     /// Private member to hold the unique identifier for the item.
     /// </summary>
@@ -77,39 +63,16 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
     }
     /// <summary>
-    /// Gets or sets the syndication extensions applied to this syndication entity.
+    /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<ISyndicationExtension> Extensions
-    {
-        get
-        {
-            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
-            return objectSyndicationExtensions;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            objectSyndicationExtensions = value;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-        }
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
     /// <summary>
     /// Gets or sets the e-mail address of the person who wrote this item.
     /// </summary>
@@ -148,16 +111,9 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// Gets the categories or tags to which this item belongs.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> of <see cref="RssCategory"/> objects that represent the categories to which this item belongs. The default value is an <i>empty</i> collection.
+    ///     A <see cref="IList{T}"/> of <see cref="RssCategory"/> objects that represent the categories to which this item belongs. The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<RssCategory> Categories
-    {
-        get
-        {
-            itemCategories ??= [];
-            return itemCategories;
-        }
-    }
+    public IList<RssCategory> Categories { get; } = [];
 
     /// <summary>
     /// Gets or sets the URL of a web page that contains comments received in response to this item.
@@ -215,24 +171,17 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// Gets the media objects associated with this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> of <see cref="RssEnclosure"/> objects that represent the media objects such as an audio, video, or executable file that are associated with this item. 
+    ///     A <see cref="IList{T}"/> of <see cref="RssEnclosure"/> objects that represent the media objects such as an audio, video, or executable file that are associated with this item.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     <para>
-    ///         Support for the enclosure element in RSS software varies significantly because of disagreement over whether the specification permits more than one enclosure per item. 
-    ///         Although the original author intended to permit no more than one enclosure in each item, this limit is not explicit in the specification. 
+    ///         Support for the enclosure element in RSS software varies significantly because of disagreement over whether the specification permits more than one enclosure per item.
+    ///         Although the original author intended to permit no more than one enclosure in each item, this limit is not explicit in the specification.
     ///         For best support in the widest number of aggregators, an item <i>should not</i> contain more than one enclosure.
     ///     </para>
     /// </remarks>
-    public Collection<RssEnclosure> Enclosures
-    {
-        get
-        {
-            itemEnclosures ??= [];
-            return itemEnclosures;
-        }
-    }
+    public IList<RssEnclosure> Enclosures { get; } = [];
 
     /// <summary>
     /// Gets or sets the unique identifier for this item.
@@ -339,21 +288,6 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
         }
     }
     /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool AddExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        bool wasAdded = true;
-
-        return wasAdded;
-    }
-
-    /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
     /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
@@ -361,39 +295,25 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
 
-    public TExtension FindExtension<TExtension>() where TExtension : ISyndicationExtension
+    public TExtension? FindExtension<TExtension>() where TExtension : ISyndicationExtension
     {
         return this.Extensions.OfType<TExtension>().FirstOrDefault();
     }
 
     /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool RemoveExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-    }
-    /// <summary>
-    /// Compares two specified <see cref="Collection{RssEnclosure}"/> collections.
+    /// Compares two specified <see cref="IList{RssEnclosure}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -411,7 +331,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<RssEnclosure> source, Collection<RssEnclosure> target)
+    public static int CompareSequence(IList<RssEnclosure> source, IList<RssEnclosure> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);

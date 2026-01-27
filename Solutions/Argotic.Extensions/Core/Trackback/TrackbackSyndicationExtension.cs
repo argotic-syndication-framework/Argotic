@@ -36,7 +36,7 @@ public class TrackbackSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="TrackbackSyndicationExtension"/> class.
     /// </summary>
     public TrackbackSyndicationExtension()
-        : base("trackback", "http://madskills.com/public/xml/rss/module/trackback/", new("1.0"), new("http://madskills.com/public/xml/rss/module/trackback/"), "Trackback Notification", "Extends syndication feeds to provide a means of communicating where to send Trackback peer-to-peer notification pings.")
+        : base("trackback", "http://madskills.com/public/xml/rss/module/trackback/", new Version("1.0"), new Uri("http://madskills.com/public/xml/rss/module/trackback/"), "Trackback Notification", "Extends syndication feeds to provide a means of communicating where to send Trackback peer-to-peer notification pings.")
     {
     }
 

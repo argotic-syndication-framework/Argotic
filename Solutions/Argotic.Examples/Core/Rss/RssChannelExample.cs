@@ -1,7 +1,7 @@
 ﻿using System.Globalization;
 using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Rss;
 
 /// <summary>
 /// Contains the code examples for the <see cref="RssChannel"/> class.
@@ -22,19 +22,19 @@ public static class RssChannelExample
             Channel =
             {
                 Title = "Dallas Times-Herald",
-                Link = new("http://dallas.example.com"),
+                Link = new Uri("http://dallas.example.com"),
                 Description = "Current headlines from the Dallas Times-Herald newspaper"
             }
         };
 
-        feed.Channel.Categories.Add(new("Media"));
-        feed.Channel.Categories.Add(new("News/Newspapers/Regional/United_States/Texas", "dmoz"));
+        feed.Channel.Categories.Add(new RssCategory("Media"));
+        feed.Channel.Categories.Add(new RssCategory("News/Newspapers/Regional/United_States/Texas", "dmoz"));
 
-        feed.Channel.Cloud = new("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
+        feed.Channel.Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
         feed.Channel.Copyright = "Copyright 2007 Dallas Times-Herald";
         feed.Channel.Generator = "Microsoft Spaces v1.1";
 
-        RssImage image = new(new("http://dallas.example.com"), "Dallas Times-Herald", new("http://dallas.example.com/masthead.gif"))
+        RssImage image = new(new Uri("http://dallas.example.com"), "Dallas Times-Herald", new Uri("http://dallas.example.com/masthead.gif"))
         {
             Description = "Read the Dallas Times-Herald",
             Height = 32,
@@ -42,10 +42,10 @@ public static class RssChannelExample
         };
         feed.Channel.Image = image;
 
-        feed.Channel.Language = new("en-US");
-        feed.Channel.LastBuildDate = new(2007, 10, 14, 17, 17, 44);
+        feed.Channel.Language = new CultureInfo("en-US");
+        feed.Channel.LastBuildDate = new DateTime(2007, 10, 14, 17, 17, 44);
         feed.Channel.ManagingEditor = "jlehrer@dallas.example.com (Jim Lehrer)";
-        feed.Channel.PublicationDate = new(2007, 10, 14, 5, 0, 0);
+        feed.Channel.PublicationDate = new DateTime(2007, 10, 14, 5, 0, 0);
         feed.Channel.Rating = "(PICS-1.1 \"http://www.rsac.org/ratingsv01.html\" l by \"webmaster@example.com\" on \"2007.01.29T10:09-0800\" r (n 0 s 0 v 0 l 0))";
 
         feed.Channel.SkipDays.Add(DayOfWeek.Saturday);
@@ -57,7 +57,7 @@ public static class RssChannelExample
         feed.Channel.SkipHours.Add(22);
         feed.Channel.SkipHours.Add(23);
 
-        feed.Channel.TextInput = new("What software are you using?", new("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
+        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
         feed.Channel.TimeToLive = 60;
         feed.Channel.Webmaster = "helpdesk@dallas.example.com";
     }

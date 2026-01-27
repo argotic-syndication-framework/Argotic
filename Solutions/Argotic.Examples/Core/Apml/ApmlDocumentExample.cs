@@ -1,17 +1,15 @@
-﻿using System.Net;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 using Argotic.Syndication.Specialized;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Apml;
 
 /// <summary>
 /// Contains the code examples for the <see cref="ApmlDocument"/> class.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="ApmlDocument"/> class. 
+///     This class contains all the code examples that are referenced by the <see cref="ApmlDocument"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
 public static class ApmlDocumentExample
@@ -29,7 +27,7 @@ public static class ApmlDocumentExample
                 Title = "Example APML file for apml.org",
                 Generator = "Written by Hand",
                 EmailAddress = "sample@apml.org",
-                CreatedOn = new(2007, 3, 11, 13, 55, 0)
+                CreatedOn = new DateTime(2007, 3, 11, 13, 55, 0)
             }
         };
 
@@ -39,20 +37,20 @@ public static class ApmlDocumentExample
         };
 
         //  Provide the implicit data associated with this profile
-        homeProfile.ImplicitConcepts.Add(new("attention", 0.99m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("content distribution", 0.97m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("information", 0.95m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("business", 0.93m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("alerting", 0.91m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("intelligent agents", 0.89m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("development", 0.87m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("service", 0.85m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("user interface", 0.83m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("experience design", 0.81m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("site design", 0.79m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("television", 0.77m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("management", 0.75m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
-        homeProfile.ImplicitConcepts.Add(new("media", 0.73m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("attention", 0.99m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("content distribution", 0.97m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("information", 0.95m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("business", 0.93m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("alerting", 0.91m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("intelligent agents", 0.89m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("development", 0.87m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("service", 0.85m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("user interface", 0.83m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("experience design", 0.81m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("site design", 0.79m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("television", 0.77m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("management", 0.75m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
+        homeProfile.ImplicitConcepts.Add(new ApmlConcept("media", 0.73m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
         ApmlSource apmlSpecSource = new()
         {
@@ -61,14 +59,14 @@ public static class ApmlDocumentExample
             Value = 1.00m,
             MimeType = "application/rss+xml",
             From = "GatheringTool.com",
-            UpdatedOn = new(2007, 3, 11, 13, 55, 0)
+            UpdatedOn = new DateTime(2007, 3, 11, 13, 55, 0)
         };
-        apmlSpecSource.Authors.Add(new("Sample", 0.5m, "GatheringTool.com", new(2007, 3, 11, 13, 55, 0)));
+        apmlSpecSource.Authors.Add(new ApmlAuthor("Sample", 0.5m, "GatheringTool.com", new DateTime(2007, 3, 11, 13, 55, 0)));
 
         homeProfile.ImplicitSources.Add(apmlSpecSource);
 
         //  Provide the explicit data associated with this profile
-        homeProfile.ExplicitConcepts.Add(new("direct attention", 0.99m));
+        homeProfile.ExplicitConcepts.Add(new ApmlConcept("direct attention", 0.99m));
 
         ApmlSource techCrunchSource = new()
         {
@@ -77,11 +75,11 @@ public static class ApmlDocumentExample
             Value = 0.4m,
             MimeType = "application/rss+xml"
         };
-        techCrunchSource.Authors.Add(new("ExplicitSample", 0.5m));
+        techCrunchSource.Authors.Add(new ApmlAuthor("ExplicitSample", 0.5m));
 
         homeProfile.ExplicitSources.Add(techCrunchSource);
 
-        document.AddProfile(homeProfile);
+        document.Profiles.Add(homeProfile);
 
         ApmlProfile workProfile = new()
         {
@@ -89,7 +87,7 @@ public static class ApmlDocumentExample
         };
 
         //  Provide the explicit data associated with this profile
-        homeProfile.ExplicitConcepts.Add(new("Golf", 0.2m));
+        homeProfile.ExplicitConcepts.Add(new ApmlConcept("Golf", 0.2m));
 
         ApmlSource workTechCrunchSource = new()
         {
@@ -98,11 +96,11 @@ public static class ApmlDocumentExample
             Value = 0.4m,
             MimeType = "application/atom+xml"
         };
-        workTechCrunchSource.Authors.Add(new("ProfessionalBlogger", 0.5m));
+        workTechCrunchSource.Authors.Add(new ApmlAuthor("ProfessionalBlogger", 0.5m));
 
         homeProfile.ExplicitSources.Add(workTechCrunchSource);
 
-        document.AddProfile(workProfile);
+        document.Profiles.Add(workProfile);
 
         ApmlApplication sampleApplication = new("sample.com")
         {
@@ -112,11 +110,11 @@ public static class ApmlDocumentExample
         document.Applications.Add(sampleApplication);
     }
     /// <summary>
-    /// Provides example code for the ApmlDocument.Create(Uri) method
+    /// Provides example code for the ApmlDocument.CreateAsync(Uri) method
     /// </summary>
-    public static void CreateExample()
+    public static async Task CreateExampleAsync()
     {
-        ApmlDocument document = ApmlDocument.Create(new("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"));
+        ApmlDocument document = await ApmlDocument.CreateAsync(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional")).ConfigureAwait(false);
 
         foreach (ApmlProfile profile in document.Profiles)
         {
@@ -128,15 +126,15 @@ public static class ApmlDocumentExample
         }
     }
     /// <summary>
-    /// Provides example code for the LoadAsync(Uri, Object) method
+    /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
-    public static void LoadAsyncExample()
+    public static async Task LoadAsyncExampleAsync()
     {
         ApmlDocument document = new();
 
-        document.Loaded += new(ResourceLoadedCallback);
+        document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
-        document.LoadAsync(new("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional"), null);
+        await document.LoadAsync(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional")).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -144,10 +142,12 @@ public static class ApmlDocumentExample
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-    private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
+    private static void ResourceLoadedCallback(object? sender, SyndicationResourceLoadedEventArgs e)
     {
-        if (e.State != null)
+        // Process the loaded document using e.Data or e.Source
+        if (e.Source != null)
         {
+            // Process the source URI
         }
     }
     /// <summary>
@@ -219,14 +219,20 @@ public static class ApmlDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
+    /// Provides example code for the LoadAsync(Uri, HttpClient) method
     /// </summary>
-    public static void LoadUriExample()
+    public static async Task LoadUriExampleAsync()
     {
         ApmlDocument document = new();
         Uri source = new("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
 
-        document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+        // For simple case (no credentials):
+        await document.LoadAsync(source).ConfigureAwait(false);
+
+        // Or for credentials:
+        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
+        // using var httpClient = new HttpClient(handler);
+        // await document.LoadAsync(source, httpClient);
 
         foreach (ApmlProfile profile in document.Profiles)
         {

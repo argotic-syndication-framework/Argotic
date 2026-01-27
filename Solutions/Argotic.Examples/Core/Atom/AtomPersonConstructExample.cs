@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Atom;
 
 /// <summary>
 /// Contains the code examples for the <see cref="AtomPersonConstruct"/> class.
@@ -18,39 +18,39 @@ public static class AtomPersonConstructExample
     {
         AtomFeed feed = new()
         {
-            Id = new(new("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
-            Title = new("Example Feed"),
-            UpdatedOn = new(2003, 12, 13, 18, 30, 2)
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new(new("http://example.org/")));
-        feed.Links.Add(new(new("/feed"), "self"));
+        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
         //  Identify the author of the feed
-        feed.Authors.Add(new("John Doe"));
+        feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
         //  Identify the contributors to the feed
-        feed.Contributors.Add(new("Jane Doe"));
+        feed.Contributors.Add(new AtomPersonConstruct("Jane Doe"));
 
         AtomPersonConstruct contributor = new()
         {
             EmailAddress = "some.person@example.org",
             Name = "Some Person",
-            Uri = new("http://example.org/somePerson")
+            Uri = new Uri("http://example.org/somePerson")
         };
         feed.Contributors.Add(contributor);
 
         AtomEntry entry = new()
         {
-            Id = new(new("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
-            Title = new("Atom-Powered Robots Run Amok"),
-            UpdatedOn = new(2003, 12, 13, 18, 30, 2),
-            Summary = new("Some text.")
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
+            Summary = new AtomTextConstruct("Some text.")
         };
 
         //  Identify the author of the entry
-        entry.Authors.Add(new("Jane Doe"));
+        entry.Authors.Add(new AtomPersonConstruct("Jane Doe"));
 
-        feed.AddEntry(entry);
+        feed.Entries.Add(entry);
     }
 }

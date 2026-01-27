@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Rss;
 
 /// <summary>
 /// Contains the code examples for the <see cref="RssGuid"/> class.
@@ -21,7 +21,7 @@ public static class RssGuidExample
             Channel =
             {
                 Title = "Dallas Times-Herald",
-                Link = new("http://dallas.example.com"),
+                Link = new Uri("http://dallas.example.com"),
                 Description = "Current headlines from the Dallas Times-Herald newspaper"
             }
         };
@@ -29,11 +29,11 @@ public static class RssGuidExample
         RssItem item = new()
         {
             Title = "Seventh Heaven! Ryan Hurls Another No Hitter",
-            Link = new("http://dallas.example.com/1991/05/02/nolan.htm"),
+            Link = new Uri("http://dallas.example.com/1991/05/02/nolan.htm"),
             Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0.",
-            Guid = new("http://dallas.example.com/1983/05/06/joebob.htm")
+            Guid = new RssGuid("http://dallas.example.com/1983/05/06/joebob.htm")
         };
 
-        feed.Channel.AddItem(item);
+        feed.Channel.Items.Add(item);
     }
 }

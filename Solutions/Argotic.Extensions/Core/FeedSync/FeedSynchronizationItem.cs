@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -13,12 +12,12 @@ namespace Argotic.Extensions.Core;
 /// <remarks>
 ///     <para>The <see cref="FeedSynchronizationItem"/> class represents a <b>sx:sync</b> element in the <i>FeedSync</i> specification.</para>
 ///     <para>
-///         This is <b>required</b> of all items in all feeds wishing to participate in FeedSync-based synchronization. 
-///         Since <see cref="FeedSynchronizationSharingInformation"/> is not required, feed consumers <b>must</b> consider the presence of <see cref="FeedSynchronizationItem"/> in items or entries 
+///         This is <b>required</b> of all items in all feeds wishing to participate in FeedSync-based synchronization.
+///         Since <see cref="FeedSynchronizationSharingInformation"/> is not required, feed consumers <b>must</b> consider the presence of <see cref="FeedSynchronizationItem"/> in items or entries
 ///         as an indication that the feed contains sync data.
 ///     </para>
 ///     <para>
-///         It acceptable for a feed to have some items or entries with <see cref="FeedSynchronizationItem"/> elements, and some without a <see cref="FeedSynchronizationItem"/>. 
+///         It acceptable for a feed to have some items or entries with <see cref="FeedSynchronizationItem"/> elements, and some without a <see cref="FeedSynchronizationItem"/>.
 ///         Only the items and entries that include the <see cref="FeedSynchronizationItem"/> element participate in FeedSync synchronization.
 ///     </para>
 /// </remarks>
@@ -26,7 +25,6 @@ namespace Argotic.Extensions.Core;
 [Serializable]
 public class FeedSynchronizationItem : IComparable
 {
-
     /// <summary>
     /// Private member to hold the globally unique identifier for the item.
     /// </summary>
@@ -43,14 +41,7 @@ public class FeedSynchronizationItem : IComparable
     /// Private member to hold a value indicating how conflict preservation is processed.
     /// </summary>
     private FeedSynchronizationConflictPreservationDirective synchronizationConflictPreservation;
-    /// <summary>
-    /// Private member to hold information about updates to the item.
-    /// </summary>
-    private Collection<FeedSynchronizationHistory> synchronizationHistories;
-    /// <summary>
-    /// Private member to hold information about conflicting updates to the item.
-    /// </summary>
-    private Collection<XPathNavigator> synchronizationConflicts;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class.
     /// </summary>
@@ -91,33 +82,19 @@ public class FeedSynchronizationItem : IComparable
     /// Gets the conflicting updates for this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="XPathNavigator"/> objects that represent conflicting updates for this item. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="XPathNavigator"/> objects that represent conflicting updates for this item.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<XPathNavigator> Conflicts
-    {
-        get
-        {
-            synchronizationConflicts ??= [];
-            return synchronizationConflicts;
-        }
-    }
+    public IList<XPathNavigator> Conflicts { get; } = [];
 
     /// <summary>
     /// Gets the information about updates to this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="FeedSynchronizationHistory"/> objects that represent information about updates to this item. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="FeedSynchronizationHistory"/> objects that represent information about updates to this item.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<FeedSynchronizationHistory> Histories
-    {
-        get
-        {
-            synchronizationHistories ??= [];
-            return synchronizationHistories;
-        }
-    }
+    public IList<FeedSynchronizationHistory> Histories { get; } = [];
 
     /// <summary>
     /// Gets or sets the globally unique identifier for this item.
@@ -236,7 +213,7 @@ public class FeedSynchronizationItem : IComparable
         }
     }
     /// <summary>
-    /// Compares two specified <see cref="Collection{FeedSynchronizationHistory}"/> collections.
+    /// Compares two specified <see cref="IList{FeedSynchronizationHistory}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -254,7 +231,7 @@ public class FeedSynchronizationItem : IComparable
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<FeedSynchronizationHistory> source, Collection<FeedSynchronizationHistory> target)
+    public static int CompareSequence(IList<FeedSynchronizationHistory> source, IList<FeedSynchronizationHistory> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);

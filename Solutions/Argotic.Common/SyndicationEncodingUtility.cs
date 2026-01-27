@@ -1,5 +1,4 @@
-﻿using System.Globalization;
-using System.IO.Compression;
+using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -13,6 +12,39 @@ namespace Argotic.Common;
 /// </summary>
 public static class SyndicationEncodingUtility
 {
+    /// <summary>
+    /// Private member to hold the lazily-initialized shared HttpClient instance.
+    /// </summary>
+    private static readonly Lazy<HttpClient> sharedHttpClient = new(CreateSharedHttpClient);
+
+    /// <summary>
+    /// Creates a shared <see cref="HttpClient"/> instance configured for optimal connection pooling.
+    /// </summary>
+    /// <returns>A configured <see cref="HttpClient"/> instance.</returns>
+    private static HttpClient CreateSharedHttpClient()
+    {
+#pragma warning disable CA2000 // HttpClient takes ownership of the handler; this is an intentional singleton
+        SocketsHttpHandler handler = new SocketsHttpHandler
+#pragma warning restore CA2000
+        {
+            PooledConnectionLifetime = TimeSpan.FromMinutes(15),
+            PooledConnectionIdleTimeout = TimeSpan.FromMinutes(2),
+            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
+        };
+        return new HttpClient(handler) { Timeout = Timeout.InfiniteTimeSpan };
+    }
+
+    /// <summary>
+    /// Gets the shared <see cref="HttpClient"/> instance for making HTTP requests.
+    /// </summary>
+    /// <value>A shared <see cref="HttpClient"/> instance configured for optimal connection pooling.</value>
+    /// <remarks>
+    /// This shared client is intended for use when no custom credentials or proxy settings are needed.
+    /// For requests requiring authentication or custom proxy configuration, create an <see cref="HttpClient"/>
+    /// with a configured <see cref="HttpClientHandler"/> or use <c>IHttpClientFactory</c>.
+    /// </remarks>
+    public static HttpClient SharedHttpClient => sharedHttpClient.Value;
+
     /// <summary>
     /// Creates <see cref="XmlReaderSettings"/> configured for secure XML parsing.
     /// </summary>
@@ -122,232 +154,138 @@ public static class SyndicationEncodingUtility
     }
 
     /// <summary>
-    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
+    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> asynchronously using the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required.
-    ///     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
-    /// </param>
-    /// <returns>
-    ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="source"/>.
-    ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
-    ///     a navigator from being created.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy)
-    {
-        return SyndicationEncodingUtility.CreateSafeNavigator(source, new(credentials, proxy));
-    }
-
-    /// <summary>
-    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <returns>
-    ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="source"/>.
-    ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
-    ///     a navigator from being created.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options)
-    {
-        return SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-    }
-
-    /// <summary>
-    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required.
-    ///     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
-    /// </param>
     /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>
-    ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="source"/>.
-    ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
-    ///     a navigator from being created.
+    ///     A task that represents the asynchronous operation. The task result contains an <see cref="XPathNavigator"/>
+    ///     that provides a cursor model for navigating the supplied <paramref name="source"/>.
     /// </returns>
     /// <remarks>
-    ///     If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
-    ///     Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
+    ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
+    ///     <para>
+    ///         If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
+    ///         Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static XPathNavigator CreateSafeNavigator(Uri source, ICredentials credentials, IWebProxy proxy, Encoding encoding)
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static Task<XPathNavigator> CreateSafeNavigatorAsync(
+        Uri source,
+        Encoding? encoding,
+        CancellationToken cancellationToken = default)
     {
-        return SyndicationEncodingUtility.CreateSafeNavigator(source, new(credentials, proxy), encoding);
+        return CreateSafeNavigatorAsync(source, SharedHttpClient, encoding, null, cancellationToken);
     }
 
     /// <summary>
-    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
+    /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> asynchronously using the specified <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="encoding">A <see cref="Encoding"/> object that indicates the expected character encoding of the supplied <paramref name="source"/>. This value can be <b>null</b>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
     /// <returns>
-    ///     An <see cref="XPathNavigator"/> that provides a cursor model for navigating the supplied <paramref name="source"/>.
-    ///     The supplied <paramref name="source"/> XML data is parsed to remove invalid XML characters that would normally prevent
-    ///     a navigator from being created.
+    ///     A task that represents the asynchronous operation. The task result contains an <see cref="XPathNavigator"/>
+    ///     that provides a cursor model for navigating the supplied <paramref name="source"/>.
     /// </returns>
     /// <remarks>
-    ///     If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
-    ///     Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    ///     <para>
+    ///         If the <paramref name="encoding"/> is <b>null</b>, the character encoding of the supplied <paramref name="source"/> is determined automatically.
+    ///         Otherwise, the specified <paramref name="encoding"/> is used when reading the XML data represented by the supplied <paramref name="source"/>.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static XPathNavigator CreateSafeNavigator(Uri source, WebRequestOptions options, Encoding encoding)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<XPathNavigator> CreateSafeNavigatorAsync(
+        Uri source,
+        HttpClient httpClient,
+        Encoding? encoding,
+        SyndicationRequestOptions? requestOptions = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        using HttpResponseMessage response = await SendHttpRequestAsync(source, httpClient, requestOptions, cancellationToken).ConfigureAwait(false);
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+
+        return encoding != null
+            ? CreateSafeNavigator(stream, encoding)
+            : CreateSafeNavigator(stream);
+    }
+
+    /// <summary>
+    /// Creates an <see cref="HttpRequestMessage"/> for a resource located at the supplied <see cref="Uri"/>.
+    /// </summary>
+    /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <b>null</b>.</param>
+    /// <param name="method">The HTTP method to use. Defaults to <see cref="HttpMethod.Get"/>.</param>
+    /// <returns>An <see cref="HttpRequestMessage"/> configured for the request.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    public static HttpRequestMessage CreateHttpRequestMessage(Uri source, SyndicationRequestOptions? requestOptions = null, HttpMethod? method = null)
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, options);
-        Stream stream = null;
-
-        try
-        {
-            if (response is HttpWebResponse httpResponse)
-            {
-                string contentEncoding = httpResponse.ContentEncoding?.ToUpperInvariant();
-
-                if (string.IsNullOrEmpty(contentEncoding))
-                {
-                    stream = response.GetResponseStream();
-                }
-                else
-                {
-                    if (contentEncoding.Contains("GZIP", StringComparison.Ordinal))
-                    {
-                        stream = new GZipStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
-                    }
-                    else if (contentEncoding.Contains("DEFLATE", StringComparison.Ordinal))
-                    {
-                        stream = new DeflateStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
-                    }
-                    else
-                    {
-                        stream = httpResponse.GetResponseStream();
-                    }
-                }
-            }
-            else
-            {
-                stream = response.GetResponseStream();
-            }
-
-            // CreateSafeNavigator takes ownership of the stream and disposes it
-            XPathNavigator result = encoding != null
-                ? SyndicationEncodingUtility.CreateSafeNavigator(stream, encoding)
-                : SyndicationEncodingUtility.CreateSafeNavigator(stream);
-
-            stream = null; // Ownership transferred, prevent double dispose
-            return result;
-        }
-        finally
-        {
-            stream?.Dispose();
-        }
-    }
-
-    /// <summary>
-    /// Returns a <see cref="WebRequest"/> that makes a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials if supported by the underlying protocol.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required.
-    ///     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings if supported by the underlying protocol.
-    /// </param>
-    /// <returns>
-    ///     An <see cref="WebRequest"/> that makes a request to the <paramref name="source"/>. If unable to create a <see cref="WebRequest"/> for
-    ///     the specified <paramref name="source"/>, returns a <b>null</b> reference.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static WebRequest CreateWebRequest(Uri source, ICredentials credentials, IWebProxy proxy)
-    {
-        return SyndicationEncodingUtility.CreateWebRequest(source, new(credentials, proxy));
-    }
-
-    /// <summary>
-    /// Returns a <see cref="WebRequest"/> that makes a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <returns>
-    ///     An <see cref="WebRequest"/> that makes a request to the <paramref name="source"/>. If unable to create a <see cref="WebRequest"/> for
-    ///     the specified <paramref name="source"/>, returns a <b>null</b> reference.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static WebRequest CreateWebRequest(Uri source, WebRequestOptions options)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-
-        WebRequest request = WebRequest.Create(source);
-
-        if (source.IsAbsoluteUri)
-        {
-            if (string.Equals(source.Scheme, Uri.UriSchemeHttp, StringComparison.OrdinalIgnoreCase) ||
-                string.Equals(source.Scheme, Uri.UriSchemeHttps, StringComparison.OrdinalIgnoreCase))
-            {
-                HttpWebRequest httpRequest = (HttpWebRequest)request;
-                httpRequest.UserAgent = SyndicationDiscoveryUtility.FrameworkUserAgent;
-                request = httpRequest;
-            }
-        }
-
-        options?.ApplyOptions(request);
+        HttpRequestMessage request = new(method ?? HttpMethod.Get, source);
+        request.Headers.UserAgent.ParseAdd(SyndicationDiscoveryUtility.FrameworkUserAgent);
+        requestOptions?.ApplyTo(request);
 
         return request;
     }
 
     /// <summary>
-    /// Returns the <see cref="WebResponse"/> to a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
+    /// Sends an HTTP request using the shared <see cref="HttpClient"/> and returns the response asynchronously.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials if supported by the underlying protocol.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required.
-    ///     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings if supported by the underlying protocol.
-    /// </param>
-    /// <returns>
-    ///     An <see cref="WebResponse"/> that contains the response from the requested resource. If unable to create a <see cref="WebResponse"/> for
-    ///     the requested <paramref name="source"/>, returns a <b>null</b> reference.
-    /// </returns>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
+    /// <remarks>
+    ///     This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.
+    ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static WebResponse CreateWebResponse(Uri source, ICredentials credentials, IWebProxy proxy)
+    public static Task<HttpResponseMessage> SendHttpRequestAsync(Uri source, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
-        return SyndicationEncodingUtility.CreateWebResponse(source, new(credentials, proxy));
+        return SendHttpRequestAsync(source, SharedHttpClient, requestOptions, cancellationToken);
     }
 
     /// <summary>
-    /// Returns the <see cref="WebResponse"/> to a request for a resource located at the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
+    /// Sends an HTTP request using the specified <see cref="HttpClient"/> and returns the response asynchronously.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the resource to be retrieved.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <returns>
-    ///     An <see cref="WebResponse"/> that contains the response from the requested resource. If unable to create a <see cref="WebResponse"/> for
-    ///     the requested <paramref name="source"/>, returns a <b>null</b> reference.
-    /// </returns>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). Can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    ///     <para>
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
+    ///     </para>
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static WebResponse CreateWebResponse(Uri source, WebRequestOptions options)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    public static async Task<HttpResponseMessage> SendHttpRequestAsync(Uri source, HttpClient httpClient, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
 
-        WebRequest webRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
-        return webRequest.GetResponse();
+        using HttpRequestMessage request = CreateHttpRequestMessage(source, requestOptions);
+        return await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -419,60 +357,6 @@ public static class SyndicationEncodingUtility
 
         return encodedContent;
     }
-
-    /// <summary>
-    /// Extracts the character encoding for the content type of the supplied <see cref="HttpRequest"/>.
-    /// </summary>
-    /// <param name="request">The HTTP values sent by a client during a Web request.</param>
-    /// <returns>
-    ///     A <see cref="Encoding"/> that represents character encoding of the Content-Type <i>charset</i> attribute.
-    ///     If the <i>charset</i> attribute is unavailable or invalid, returns <b>null</b>.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference.</exception>
-    /*public static Encoding GetCharacterEncoding(HttpRequest request)
-    {
-        Encoding contentEncoding    = null;
-
-        ArgumentNullException.ThrowIfNull(request);
-
-        if (!String.IsNullOrEmpty(request.ContentType))
-        {
-            if (request.ContentType.Contains(";"))
-            {
-                string[] contentTypeParts   = request.ContentType.Split(";".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                if (contentTypeParts != null && contentTypeParts.Length > 0)
-                {
-                    for (int i = 0; i < contentTypeParts.Length; i++)
-                    {
-                        string typePart = contentTypeParts[i].Trim();
-                        if (typePart.Contains("="))
-                        {
-                            string[] nameValuePair  = typePart.Split("=".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
-                            if (nameValuePair != null && nameValuePair.Length == 2)
-                            {
-                                string name     = nameValuePair[0].Trim();
-                                string value    = nameValuePair[1].Trim();
-
-                                if (String.Compare(name, "charset", StringComparison.OrdinalIgnoreCase) == 0)
-                                {
-                                    try
-                                    {
-                                        contentEncoding = Encoding.GetEncoding(value);
-                                    }
-                                    catch (ArgumentException)
-                                    {
-                                        return null;
-                                    }
-                                }
-                            }
-                        }
-                    }
-                }
-            }
-        }
-
-        return contentEncoding;
-    }*/
 
     /// <summary>
     /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied array of bytes.

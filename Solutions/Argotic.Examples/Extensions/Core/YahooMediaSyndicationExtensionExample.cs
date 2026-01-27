@@ -1,7 +1,7 @@
 ﻿using Argotic.Extensions.Core;
 using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Extensions.Core;
 
 /// <summary>
 /// Contains the code examples for the <see cref="YahooMediaSyndicationExtension"/> class.
@@ -15,10 +15,10 @@ public static class YahooMediaSyndicationExtensionExample
     /// <summary>
     /// Provides example code for the YahooMediaSyndicationExtension class.
     /// </summary>
-    public static void ClassExample()
+    public static async Task ClassExampleAsync()
     {
         // Framework auto-discovers supported extensions based on XML namespace attributes (xmlns) defined on root of resource
-        RssFeed feed = RssFeed.Create(new("http://www.example.com/feed.aspx?format=rss"));
+        RssFeed feed = await RssFeed.CreateAsync(new Uri("http://www.example.com/feed.aspx?format=rss")).ConfigureAwait(false);
 
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
         if (feed.Channel.HasExtensions)

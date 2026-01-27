@@ -1,4 +1,4 @@
-﻿using System.Collections;
+using System.Collections;
 using System.Collections.ObjectModel;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -15,7 +15,17 @@ public static class SyndicationDiscoveryUtility
     /// <summary>
     /// Private member to hold the default user agent sent by the framework when making HTTP web requests.
     /// </summary>
-    private static readonly string frameworkUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility)).GetName().Version.ToString(4));
+    private static readonly string frameworkUserAgent = CreateFrameworkUserAgent();
+
+    /// <summary>
+    /// Creates the framework user agent string with defensive null handling.
+    /// </summary>
+    private static string CreateFrameworkUserAgent()
+    {
+        var assembly = System.Reflection.Assembly.GetAssembly(typeof(SyndicationDiscoveryUtility));
+        var version = assembly?.GetName().Version?.ToString(4) ?? "unknown";
+        return $"Argotic-Syndication-Framework/{version}";
+    }
 
     /// <summary>
     /// Gets the raw user agent string used by the framework when sending web requests.
@@ -61,46 +71,56 @@ public static class SyndicationDiscoveryUtility
     }
 
     /// <summary>
-    /// Returns the <see cref="SyndicationContentFormat"/> of the syndicated resource located at the specified <see cref="Uri"/>.
+    /// Asynchronously returns the <see cref="SyndicationContentFormat"/> of the syndicated resource located at the specified <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">The <see cref="Uri"/> of the syndication resource to determine syndication content format for.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
-    ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
+    ///     A task that represents the asynchronous operation. The task result contains a <see cref="SyndicationContentFormat"/>
+    ///     enumeration value indicating the format of the syndicated resource. If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
     /// </returns>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the SyndicationContentFormatGet method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="SyndicationContentFormatGet(Uri source)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static SyndicationContentFormat SyndicationContentFormatGet(Uri source)
-    {
-        return SyndicationDiscoveryUtility.SyndicationContentFormatGet(source, null);
-    }
-
-    /// <summary>
-    /// Returns the <see cref="SyndicationContentFormat"/> of the syndicated resource located at the specified <see cref="Uri"/> using the supplied <see cref="ICredentials">credentials</see>.
-    /// </summary>
-    /// <param name="source">The <see cref="Uri"/> of the syndication resource to determine syndication content format for.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <returns>
-    ///     A <see cref="SyndicationContentFormat"/> enumeration value indicating the format of the syndicated resource.
-    ///     If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static SyndicationContentFormat SyndicationContentFormatGet(Uri source, ICredentials credentials)
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<SyndicationContentFormat> SyndicationContentFormatGetAsync(
+        Uri source,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new(credentials));
-        return SyndicationDiscoveryUtility.SyndicationContentFormatGet(response.GetResponseStream());
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(source, null, cancellationToken).ConfigureAwait(false);
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        return SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
+    }
+
+    /// <summary>
+    /// Asynchronously returns the <see cref="SyndicationContentFormat"/> of the syndicated resource located at the specified <see cref="Uri"/> using the specified <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="Uri"/> of the syndication resource to determine syndication content format for.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result contains a <see cref="SyndicationContentFormat"/>
+    ///     enumeration value indicating the format of the syndicated resource. If unable to determine format, returns <see cref="SyndicationContentFormat.None"/>.
+    /// </returns>
+    /// <remarks>
+    ///     This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///     and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///     This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<SyndicationContentFormat> SyndicationContentFormatGetAsync(
+        Uri source,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(source, httpClient, null, cancellationToken).ConfigureAwait(false);
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        return SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
     }
 
     /// <summary>
@@ -335,49 +355,61 @@ public static class SyndicationDiscoveryUtility
     }*/
 
     /// <summary>
-    /// Returns a value indicating if the source <see cref="Uri"/> references the target <see cref="Uri"/>.
+    /// Asynchronously returns a value indicating if the source <see cref="Uri"/> references the target <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the source web resource that will be searched.</param>
     /// <param name="target">A <see cref="Uri"/> that represents the target web resource being searched for.</param>
-    /// <returns><b>true</b> if the <paramref name="source"/> contains at least one link to the <paramref name="target"/>, Otherwise, <b>false</b>.</returns>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="source"/>
+    ///     contains at least one link to the <paramref name="target"/>, otherwise <b>false</b>.
+    /// </returns>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the SourceReferencesTarget method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="SourceReferencesTarget(Uri source, Uri target)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static bool SourceReferencesTarget(Uri source, Uri target)
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static Task<bool> SourceReferencesTargetAsync(
+        Uri source,
+        Uri target,
+        CancellationToken cancellationToken = default)
     {
-        return SyndicationDiscoveryUtility.SourceReferencesTarget(source, target, null);
+        return SourceReferencesTargetAsync(source, target, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
     }
 
     /// <summary>
-    /// Returns a value indicating if the source <see cref="Uri"/> references the target <see cref="Uri"/>, using the specified <see cref="ICredentials">credentials</see>.
+    /// Asynchronously returns a value indicating if the source <see cref="Uri"/> references the target <see cref="Uri"/> using the specified <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the source web resource that will be searched.</param>
     /// <param name="target">A <see cref="Uri"/> that represents the target web resource being searched for.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <returns><b>true</b> if the <paramref name="source"/> contains at least one link to the <paramref name="target"/>, Otherwise, <b>false</b>.</returns>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="source"/>
+    ///     contains at least one link to the <paramref name="target"/>, otherwise <b>false</b>.
+    /// </returns>
+    /// <remarks>
+    ///     This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///     and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///     This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static bool SourceReferencesTarget(Uri source, Uri target, ICredentials credentials)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<bool> SourceReferencesTargetAsync(
+        Uri source,
+        Uri target,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
     {
-        bool sourceContainsLinkToTarget = false;
-
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(target);
+        ArgumentNullException.ThrowIfNull(httpClient);
 
-        using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new(credentials));
-        using Stream stream = response.GetResponseStream();
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(source, httpClient, null, cancellationToken).ConfigureAwait(false);
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         using StreamReader reader = new(stream);
-        Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(reader.ReadToEnd());
+        string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
+        Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(content);
 
         if (links is { Count: > 0 })
         {
@@ -385,51 +417,58 @@ public static class SyndicationDiscoveryUtility
             {
                 if (Uri.Compare(link, target, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    sourceContainsLinkToTarget = true;
-                    break;
+                    return true;
                 }
             }
         }
 
-        return sourceContainsLinkToTarget;
+        return false;
     }
 
     /// <summary>
-    /// Returns a value indicating if the supplied <see cref="Uri"/> exists.
+    /// Asynchronously returns a value indicating if the supplied <see cref="Uri"/> exists.
     /// </summary>
     /// <param name="uri">The <see cref="Uri"/> to validate.</param>
-    /// <returns><b>true</b> if the <paramref name="uri"/> exists, Otherwise, <b>false</b>.</returns>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/> exists, otherwise <b>false</b>.
+    /// </returns>
     /// <remarks>
-    ///     This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is Otherwise, inaccessible.
+    ///     This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is otherwise inaccessible.
     /// </remarks>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the UriExists method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="UriExists(Uri uri)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static bool UriExists(Uri uri)
+    public static Task<bool> UriExistsAsync(
+        Uri uri,
+        CancellationToken cancellationToken = default)
     {
-        return SyndicationDiscoveryUtility.UriExists(uri, null);
+        return UriExistsAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
     }
 
     /// <summary>
-    /// Returns a value indicating if the supplied <see cref="Uri"/> exists using the specified <see cref="ICredentials">credentials</see>.
+    /// Asynchronously returns a value indicating if the supplied <see cref="Uri"/> exists using the specified <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="uri">The <see cref="Uri"/> to validate.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <returns><b>true</b> if the <paramref name="uri"/> exists, Otherwise, <b>false</b>.</returns>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/> exists, otherwise <b>false</b>.
+    /// </returns>
     /// <remarks>
-    ///     This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is Otherwise, inaccessible.
+    ///     <para>
+    ///         This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is otherwise inaccessible.
+    ///     </para>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///         and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
     /// </remarks>
-    public static bool UriExists(Uri uri, ICredentials credentials)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    public static async Task<bool> UriExistsAsync(
+        Uri uri,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
     {
-        bool uriExists = false;
+        ArgumentNullException.ThrowIfNull(httpClient);
 
         if (uri == null)
         {
@@ -438,256 +477,94 @@ public static class SyndicationDiscoveryUtility
 
         try
         {
-            using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
-            if (response is { ContentLength: > 0 })
-            {
-                uriExists = true;
-            }
+            using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+            var contentLength = response.Content.Headers.ContentLength ?? -1;
+            return response.IsSuccessStatusCode && contentLength > 0;
         }
-        catch (WebException)
+        catch (HttpRequestException)
         {
-            uriExists = false;
-        }
-
-        return uriExists;
-    }
-
-    /// <summary>
-    /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/> and entity tag.
-    /// </summary>
-    /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
-    /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
-    /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
-    /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, Otherwise, <b>null</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the ConditionalGet method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="ConditionalGet(Uri source, DateTime lastModified, string entityTag)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag)
-    {
-        return SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag, new WebRequestOptions());
-    }
-
-    /// <summary>
-    /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
-    /// </summary>
-    /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
-    /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
-    /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, Otherwise, <b>null</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials)
-    {
-        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, credentials, out HttpWebResponse response))
-        {
-            return response;
-        }
-        else
-        {
-            return null;
+            return false;
         }
     }
 
     /// <summary>
-    /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
+    /// Asynchronously performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/> and entity tag.
     /// </summary>
     /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
     /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
     /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, Otherwise, <b>null</b>.</returns>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="ConditionalGetResult"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy)
+    public static Task<ConditionalGetResult> ConditionalGetAsync(
+        Uri source,
+        DateTime lastModified,
+        string entityTag,
+        CancellationToken cancellationToken = default)
     {
-        return SyndicationDiscoveryUtility.ConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy));
+        return ConditionalGetAsync(source, lastModified, entityTag, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
     }
 
     /// <summary>
-    /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
+    /// Asynchronously performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag, and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
     /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
     /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <returns>A <see cref="HttpWebResponse"/> for the <paramref name="source"/> if it has been modfied, Otherwise, <b>null</b>.</returns>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="ConditionalGetResult"/>.</returns>
+    /// <remarks>
+    ///     This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///     and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///     This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static HttpWebResponse ConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    public static async Task<ConditionalGetResult> ConditionalGetAsync(
+        Uri source,
+        DateTime lastModified,
+        string entityTag,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
     {
-        if (SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, options, out HttpWebResponse response))
-        {
-            return response;
-        }
-        else
-        {
-            return null;
-        }
-    }
-
-    /// <summary>
-    /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/> and entity tag.
-    /// </summary>
-    /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
-    /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
-    /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
-    /// <param name="response">
-    ///     When this method returns, contains the <see cref="HttpWebResponse"/> for the supplied <paramref name="source"/>, if the web resource has been modified, or <b>null</b> if the web resource has <u>not</u> been modified.
-    ///     This parameter is passed uninitialized.
-    /// </param>
-    /// <returns><b>true</b> if the <paramref name="source"/> has been modified, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the TryConditionalGet method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="TryConditionalGet(Uri source, DateTime lastModified, string entityTag, out WebResponse response)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, out HttpWebResponse response)
-    {
-        return SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, new WebRequestOptions(), out response);
-    }
-
-    /// <summary>
-    /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
-    /// </summary>
-    /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
-    /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
-    /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <param name="response">
-    ///     When this method returns, contains the <see cref="HttpWebResponse"/> for the supplied <paramref name="source"/>, if the web resource has been modified, or <b>null</b> if the web resource has <u>not</u> been modified.
-    ///     This parameter is passed uninitialized.
-    /// </param>
-    /// <returns><b>true</b> if the <paramref name="source"/> has been modified, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, out HttpWebResponse response)
-    {
-        bool sourceHasBeenModified = false;
-
         ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
 
-        HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
-        httpRequest.UserAgent = frameworkUserAgent;
-        httpRequest.IfModifiedSince = lastModified;
-        httpRequest.Headers.Add(HttpRequestHeader.IfNoneMatch, entityTag);
-        new WebRequestOptions(credentials).ApplyOptions(httpRequest);
-
-        try
+        using var request = new HttpRequestMessage(HttpMethod.Get, source);
+        request.Headers.UserAgent.ParseAdd(FrameworkUserAgent);
+        request.Headers.IfModifiedSince = new DateTimeOffset(lastModified);
+        if (!string.IsNullOrEmpty(entityTag))
         {
-            response = (HttpWebResponse)httpRequest.GetResponse();
-
-            if (DateTime.Compare(response.LastModified, lastModified) != 0)
-            {
-                sourceHasBeenModified = true;
-            }
-        }
-        catch (WebException webException)
-        {
-            if (webException.Response != null && ((HttpWebResponse)webException.Response).StatusCode == HttpStatusCode.NotModified)
-            {
-                sourceHasBeenModified = false;
-                response = null;
-            }
-            else
-            {
-                throw;
-            }
+            request.Headers.IfNoneMatch.TryParseAdd(entityTag);
         }
 
-        return sourceHasBeenModified;
-    }
+        var response = await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
-    /// <summary>
-    /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
-    /// </summary>
-    /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
-    /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
-    /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="response">
-    ///     When this method returns, contains the <see cref="HttpWebResponse"/> for the supplied <paramref name="source"/>, if the web resource has been modified, or <b>null</b> if the web resource has <u>not</u> been modified.
-    ///     This parameter is passed uninitialized.
-    /// </param>
-    /// <returns><b>true</b> if the <paramref name="source"/> has been modified, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, ICredentials credentials, IWebProxy proxy, out HttpWebResponse response)
-    {
-        return SyndicationDiscoveryUtility.TryConditionalGet(source, lastModified, entityTag, new WebRequestOptions(credentials, proxy), out response);
-    }
-
-    /// <summary>
-    /// Performs a conditional get operation against the supplied <see cref="Uri"/> using the specified <see cref="DateTime"/>, entity tag and <see cref="ICredentials">credentials</see>.
-    /// </summary>
-    /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
-    /// <param name="lastModified">A <see cref="DateTime"/> object that represents the date and time at which the <paramref name="source"/> was last known to be modified.</param>
-    /// <param name="entityTag">The entity tag provided by the <paramref name="source"/> that is used to determine change in content.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="response">
-    ///     When this method returns, contains the <see cref="HttpWebResponse"/> for the supplied <paramref name="source"/>, if the web resource has been modified, or <b>null</b> if the web resource has <u>not</u> been modified.
-    ///     This parameter is passed uninitialized.
-    /// </param>
-    /// <returns><b>true</b> if the <paramref name="source"/> has been modified, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static bool TryConditionalGet(Uri source, DateTime lastModified, string entityTag, WebRequestOptions options, out HttpWebResponse response)
-    {
-        bool sourceHasBeenModified = false;
-
-        ArgumentNullException.ThrowIfNull(source);
-
-        HttpWebRequest httpRequest = (HttpWebRequest)HttpWebRequest.Create(source);
-        httpRequest.UserAgent = frameworkUserAgent;
-        httpRequest.IfModifiedSince = lastModified;
-        httpRequest.Headers.Add(HttpRequestHeader.IfNoneMatch, entityTag);
-        options?.ApplyOptions(httpRequest);
-
-        try
+        if (response.StatusCode == HttpStatusCode.NotModified)
         {
-            response = (HttpWebResponse)httpRequest.GetResponse();
-
-            if (DateTime.Compare(response.LastModified, lastModified) != 0)
-            {
-                sourceHasBeenModified = true;
-            }
-        }
-        catch (WebException webException)
-        {
-            if (webException.Response != null && ((HttpWebResponse)webException.Response).StatusCode == HttpStatusCode.NotModified)
-            {
-                sourceHasBeenModified = false;
-                response = null;
-            }
-            else
-            {
-                throw;
-            }
+            response.Dispose();
+            return new ConditionalGetResult(null, wasModified: false);
         }
 
-        return sourceHasBeenModified;
+        // Check if actually modified by comparing Last-Modified header
+        var responseLastModified = response.Content.Headers.LastModified?.DateTime ?? DateTime.MinValue;
+        bool isModified = responseLastModified > lastModified;
+
+        if (!isModified && response.StatusCode == HttpStatusCode.OK)
+        {
+            // Server may not support conditional GET properly, consider it modified if we got content
+            isModified = response.Content.Headers.ContentLength > 0 ||
+                         response.Content.Headers.ContentType != null;
+        }
+
+        if (!isModified)
+        {
+            response.Dispose();
+            return new ConditionalGetResult(null, wasModified: false);
+        }
+
+        return new ConditionalGetResult(response, wasModified: true);
     }
 
     /// <summary>
@@ -774,53 +651,61 @@ public static class SyndicationDiscoveryUtility
     }
 
     /// <summary>
-    /// Returns a collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the supplied <see cref="Uri"/>.
+    /// Asynchronously returns a collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the supplied <see cref="Uri"/>.
     /// </summary>
     /// <param name="uri">A <see cref="Uri"/> that represents the URL of the web resource to parse.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <paramref name="uri"/>.
+    ///     A task that represents the asynchronous operation. The task result contains a collection of <see cref="DiscoverableSyndicationEndpoint"/>
+    ///     objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <paramref name="uri"/>.
     /// </returns>
     /// <remarks>
     ///     See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
     ///     further information about the auto-discovery of syndicated content.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the LocateDiscoverableSyndicationEndpoints method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="LocateDiscoverableSyndicationEndpoints(Uri uri)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static Collection<DiscoverableSyndicationEndpoint> LocateDiscoverableSyndicationEndpoints(Uri uri)
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static Task<Collection<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
+        Uri uri,
+        CancellationToken cancellationToken = default)
     {
-        return SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpoints(uri, null);
+        return LocateDiscoverableSyndicationEndpointsAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
     }
 
     /// <summary>
-    /// Returns a collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the supplied <see cref="Uri"/>
-    /// using the specified <see cref="ICredentials">credentials</see>.
+    /// Asynchronously returns a collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the supplied <see cref="Uri"/> using the specified <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="uri">A <see cref="Uri"/> that represents the URL of the web resource to parse.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A collection of <see cref="DiscoverableSyndicationEndpoint"/> objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <paramref name="uri"/>.
+    ///     A task that represents the asynchronous operation. The task result contains a collection of <see cref="DiscoverableSyndicationEndpoint"/>
+    ///     objects that represent auto-discoverable syndicated content endpoints for the web resource located at the <paramref name="uri"/>.
     /// </returns>
     /// <remarks>
-    ///     See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
-    ///     further information about the auto-discovery of syndicated content.
+    ///     <para>
+    ///         See <a href="http://www.rssboard.org/rss-autodiscovery">http://www.rssboard.org/rss-autodiscovery</a> for
+    ///         further information about the auto-discovery of syndicated content.
+    ///     </para>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///         and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    public static Collection<DiscoverableSyndicationEndpoint> LocateDiscoverableSyndicationEndpoints(Uri uri, ICredentials credentials)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<Collection<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
+        Uri uri,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(uri);
+        ArgumentNullException.ThrowIfNull(httpClient);
 
-        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
-        using Stream stream = webResponse.GetResponseStream();
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(stream);
     }
 
@@ -871,7 +756,7 @@ public static class SyndicationDiscoveryUtility
                 {
                     if (Uri.TryCreate(href, UriKind.Absolute, out Uri uri))
                     {
-                        pingbackAnchor = new()
+                        pingbackAnchor = new HtmlAnchor
                         {
                             HRef = href
                         };
@@ -902,146 +787,13 @@ public static class SyndicationDiscoveryUtility
     }
 
     /// <summary>
-    /// Returns a value indicating if the supplied <see cref="Uri"/> is a pingback enabled web resource.
+    /// Asynchronously returns a value indicating if the supplied <see cref="Uri"/> is a pingback enabled web resource.
     /// </summary>
     /// <param name="uri">The <see cref="Uri"/> to validate.</param>
-    /// <returns><b>true</b> if the <paramref name="uri"/> is pingback enabled, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         There are two mechanisms used when determining if a web resource is pingback enabled;
-    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <i>rel</i> attribute value of <b>pingback</b>
-    ///         <u>or</u> an HTTP header named <b>X-Pingback</b>. A web resource is considered pingback enabled if it utilizes
-    ///         either or both of these mechanisms.
-    ///     </para>
-    ///     <para>
-    ///         To conform to the Pingback 1.0 specification, the following information should apply to a pingback enabled resource:
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     Pingback enabled resources that utilize the link mechanism will contain a
-    ///                     &lt;link rel="pingback" href="{Absolute URI of the pingback XML-RPC server}" /&gt; element.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     Pingback enabled resources that utilize the HTTP header mechanism will contain an
-    ///                     HTTP header named <i>X-Pingback</i> whose value is the absolute URI of the pingback XML-RPC server.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    ///     <para>
-    ///         This method is optimized to determine pingback enablement by examining the HTTP headers
-    ///         before attempting to parse the response data for an pingback XML-RPC server link.
-    ///     </para>
-    ///     <para>
-    ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
-    ///         for more information about the pingback notification mechanism.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the IsPingbackEnabled method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="IsPingbackEnabled(Uri uri)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static bool IsPingbackEnabled(Uri uri)
-    {
-        return SyndicationDiscoveryUtility.IsPingbackEnabled(uri, null);
-    }
-
-    /// <summary>
-    /// Returns a value indicating if the supplied <see cref="Uri"/> is a pingback enabled web resource using the specified <see cref="ICredentials">credentials</see>.
-    /// </summary>
-    /// <param name="uri">The <see cref="Uri"/> to validate.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <returns><b>true</b> if the <paramref name="uri"/> is pingback enabled, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         There are two mechanisms used when determining if a web resource is pingback enabled;
-    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <i>rel</i> attribute value of <b>pingback</b>
-    ///         <u>or</u> an HTTP header named <b>X-Pingback</b>. A web resource is considered pingback enabled if it utilizes
-    ///         either or both of these mechanisms.
-    ///     </para>
-    ///     <para>
-    ///         To conform to the Pingback 1.0 specification, the following information should apply to a pingback enabled resource:
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     Pingback enabled resources that utilize the link mechanism will contain a
-    ///                     &lt;link rel="pingback" href="{Absolute URI of the pingback XML-RPC server}" /&gt; element.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     Pingback enabled resources that utilize the HTTP header mechanism will contain an
-    ///                     HTTP header named <i>X-Pingback</i> whose value is the absolute URI of the pingback XML-RPC server.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    ///     <para>
-    ///         This method is optimized to determine pingback enablement by examining the HTTP headers
-    ///         before attempting to parse the response data for an pingback XML-RPC server link.
-    ///     </para>
-    ///     <para>
-    ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
-    ///         for more information about the pingback notification mechanism.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    public static bool IsPingbackEnabled(Uri uri, ICredentials credentials)
-    {
-        bool isPingbackEnabled = false;
-
-        ArgumentNullException.ThrowIfNull(uri);
-
-        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
-        if (webResponse.Headers is { Count: > 0 })
-        {
-            for (int i = 0; i < webResponse.Headers.Count; i++)
-            {
-                string name = webResponse.Headers.Keys[i];
-                string value = webResponse.Headers[i];
-
-                if (string.Equals(name, "X-Pingback", StringComparison.OrdinalIgnoreCase))
-                {
-                    if (Uri.TryCreate(value, UriKind.Absolute, out Uri? pingbackXmlRpcServer))
-                    {
-                        isPingbackEnabled = true;
-                    }
-                    break;
-                }
-            }
-        }
-
-        if (!isPingbackEnabled)
-        {
-            using StreamReader reader = new(webResponse.GetResponseStream());
-            HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
-
-            if (link != null)
-            {
-                isPingbackEnabled = true;
-            }
-        }
-
-        return isPingbackEnabled;
-    }
-
-    /// <summary>
-    /// Returns a <see cref="Uri"/> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <see cref="Uri"/>.
-    /// </summary>
-    /// <param name="uri">The <see cref="Uri"/> of a web resource to perform pingback auto-discovery against.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A <see cref="Uri"/> that represents the absolute URI of the pingback XML-RPC server.
-    ///     If pingback server auto-discovery fails to locate a pingback XML-RPC server endpoint, returns <b>null</b>.
+    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/>
+    ///     is pingback enabled, otherwise <b>false</b>.
     /// </returns>
     /// <remarks>
     ///     <para>
@@ -1051,57 +803,28 @@ public static class SyndicationDiscoveryUtility
     ///         either or both of these mechanisms.
     ///     </para>
     ///     <para>
-    ///         To conform to the Pingback 1.0 specification, the following information should apply to a pingback enabled resource:
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     Pingback enabled resources that utilize the link mechanism will contain a
-    ///                     &lt;link rel="pingback" href="{Absolute URI of the pingback XML-RPC server}" /&gt; element.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     Pingback enabled resources that utilize the HTTP header mechanism will contain an
-    ///                     HTTP header named <i>X-Pingback</i> whose value is the absolute URI of the pingback XML-RPC server.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    ///     <para>
-    ///         This method is optimized to locate the pingback XML-RPC server endpoint within the HTTP headers
-    ///         before attempting to parse the response data for a pingback XML-RPC server link.
-    ///     </para>
-    ///     <para>
     ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
     ///         for more information about the pingback notification mechanism.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the LocatePingbackNotificationServer method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="LocatePingbackNotificationServer(Uri uri)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static Uri LocatePingbackNotificationServer(Uri uri)
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static Task<bool> IsPingbackEnabledAsync(
+        Uri uri,
+        CancellationToken cancellationToken = default)
     {
-        return SyndicationDiscoveryUtility.LocatePingbackNotificationServer(uri, null);
+        return IsPingbackEnabledAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
     }
 
     /// <summary>
-    /// Returns a <see cref="Uri"/> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <see cref="Uri"/>
-    /// using the specified <see cref="ICredentials">credentials</see>.
+    /// Asynchronously returns a value indicating if the supplied <see cref="Uri"/> is a pingback enabled web resource using the specified <see cref="HttpClient"/>.
     /// </summary>
-    /// <param name="uri">The <see cref="Uri"/> of a web resource to perform pingback auto-discovery against.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
+    /// <param name="uri">The <see cref="Uri"/> to validate.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>
-    ///     A <see cref="Uri"/> that represents the absolute URI of the pingback XML-RPC server.
-    ///     If pingback server auto-discovery fails to locate a pingback XML-RPC server endpoint, returns <b>null</b>.
+    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/>
+    ///     is pingback enabled, otherwise <b>false</b>.
     /// </returns>
     /// <remarks>
     ///     <para>
@@ -1111,25 +834,61 @@ public static class SyndicationDiscoveryUtility
     ///         either or both of these mechanisms.
     ///     </para>
     ///     <para>
-    ///         To conform to the Pingback 1.0 specification, the following information should apply to a pingback enabled resource:
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     Pingback enabled resources that utilize the link mechanism will contain a
-    ///                     &lt;link rel="pingback" href="{Absolute URI of the pingback XML-RPC server}" /&gt; element.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     Pingback enabled resources that utilize the HTTP header mechanism will contain an
-    ///                     HTTP header named <i>X-Pingback</i> whose value is the absolute URI of the pingback XML-RPC server.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
+    ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
+    ///         for more information about the pingback notification mechanism.
     ///     </para>
     ///     <para>
-    ///         This method is optimized to locate the pingback XML-RPC server endpoint within the HTTP headers
-    ///         before attempting to parse the response data for an pingback XML-RPC server link.
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///         and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<bool> IsPingbackEnabledAsync(
+        Uri uri,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(uri);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+
+        if (response.Headers.TryGetValues("X-Pingback", out var values))
+        {
+            foreach (var value in values)
+            {
+                if (Uri.TryCreate(value, UriKind.Absolute, out Uri? pingbackXmlRpcServer))
+                {
+                    return true;
+                }
+            }
+        }
+
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        using StreamReader reader = new(stream);
+        string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
+        HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
+
+        return link != null;
+    }
+
+    /// <summary>
+    /// Asynchronously returns a <see cref="Uri"/> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <see cref="Uri"/>.
+    /// </summary>
+    /// <param name="uri">The <see cref="Uri"/> of a web resource to perform pingback auto-discovery against.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result contains a <see cref="Uri"/> that represents
+    ///     the absolute URI of the pingback XML-RPC server. If pingback server auto-discovery fails, returns <b>null</b>.
+    /// </returns>
+    /// <remarks>
+    ///     <para>
+    ///         There are two mechanisms used when determining if a web resource is pingback enabled;
+    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <i>rel</i> attribute value of <b>pingback</b>
+    ///         <u>or</u> an HTTP header named <b>X-Pingback</b>.
     ///     </para>
     ///     <para>
     ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
@@ -1137,46 +896,75 @@ public static class SyndicationDiscoveryUtility
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    public static Uri LocatePingbackNotificationServer(Uri uri, ICredentials credentials)
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static Task<Uri?> LocatePingbackNotificationServerAsync(
+        Uri uri,
+        CancellationToken cancellationToken = default)
     {
-        Uri pingbackXmlRpcServer = null;
+        return LocatePingbackNotificationServerAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+    }
 
+    /// <summary>
+    /// Asynchronously returns a <see cref="Uri"/> that represents a pingback XML-RPC server endpoint using the Pingback server auto-discovery mechanisms for the supplied <see cref="Uri"/> using the specified <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="uri">The <see cref="Uri"/> of a web resource to perform pingback auto-discovery against.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result contains a <see cref="Uri"/> that represents
+    ///     the absolute URI of the pingback XML-RPC server. If pingback server auto-discovery fails, returns <b>null</b>.
+    /// </returns>
+    /// <remarks>
+    ///     <para>
+    ///         There are two mechanisms used when determining if a web resource is pingback enabled;
+    ///         the presence of an HTML/XHTML &lt;link&gt; element with a <i>rel</i> attribute value of <b>pingback</b>
+    ///         <u>or</u> an HTTP header named <b>X-Pingback</b>.
+    ///     </para>
+    ///     <para>
+    ///         See <a href="http://www.hixie.ch/specs/pingback/pingback">http://www.hixie.ch/specs/pingback/pingback</a>
+    ///         for more information about the pingback notification mechanism.
+    ///     </para>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///         and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<Uri?> LocatePingbackNotificationServerAsync(
+        Uri uri,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
+    {
         ArgumentNullException.ThrowIfNull(uri);
+        ArgumentNullException.ThrowIfNull(httpClient);
 
-        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
-        if (webResponse.Headers is { Count: > 0 })
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+
+        if (response.Headers.TryGetValues("X-Pingback", out var values))
         {
-            for (int i = 0; i < webResponse.Headers.Count; i++)
+            foreach (var value in values)
             {
-                string name = webResponse.Headers.Keys[i];
-                string value = webResponse.Headers[i];
-
-                if (string.Equals(name, "X-Pingback", StringComparison.OrdinalIgnoreCase))
+                if (Uri.TryCreate(value, UriKind.Absolute, out Uri? url))
                 {
-                    if (Uri.TryCreate(value, UriKind.Absolute, out Uri url))
-                    {
-                        pingbackXmlRpcServer = url;
-                    }
-                    break;
+                    return url;
                 }
             }
         }
 
-        if (pingbackXmlRpcServer == null)
-        {
-            using StreamReader reader = new(webResponse.GetResponseStream());
-            HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(reader.ReadToEnd());
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        using StreamReader reader = new(stream);
+        string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
+        HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
 
-            if (link != null)
-            {
-                if (Uri.TryCreate(link.HRef, UriKind.Absolute, out Uri href))
-                {
-                    pingbackXmlRpcServer = href;
-                }
-            }
+        if (link != null && Uri.TryCreate(link.HRef, UriKind.Absolute, out Uri? href))
+        {
+            return href;
         }
 
-        return pingbackXmlRpcServer;
+        return null;
     }
 
     /// <summary>
@@ -1244,38 +1032,17 @@ public static class SyndicationDiscoveryUtility
     }
 
     /// <summary>
-    /// Returns a value indicating if the supplied <see cref="Uri"/> is a trackback enabled web resource.
+    /// Asynchronously returns a value indicating if the supplied <see cref="Uri"/> is a trackback enabled web resource.
     /// </summary>
     /// <param name="uri">The <see cref="Uri"/> to validate.</param>
-    /// <returns><b>true</b> if the <paramref name="uri"/> is trackback enabled, Otherwise, <b>false</b>.</returns>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/>
+    ///     is trackback enabled, otherwise <b>false</b>.
+    /// </returns>
     /// <remarks>
     ///     <para>
     ///         The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.
-    ///     </para>
-    ///     <para>
-    ///         To conform to the Trackback 1.2 specification, the following information should apply to a trackback enabled resource:
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     Trackback enabled resources will contain one or more embedded RDF elements that describe where to send pings for web log entries.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     A sample embedded RDF element looks like this:
-    ///                     <para>
-    ///                         &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"&gt;
-    ///                             &lt;rdf:Description
-    ///                                 rdf:about="http://www.foo.com/archive.html#foo"
-    ///                                 dc:identifier="http://www.foo.com/archive.html#foo"
-    ///                                 dc:title="Foo Bar"
-    ///                                 trackback:ping="http://www.foo.com/tb.cgi/5"
-    ///                             /&gt;
-    ///                         &lt;/rdf:RDF&gt;
-    ///                     </para>
-    ///                 </description>
-    ///             </item>
-    ///         </list>
     ///     </para>
     ///     <para>
     ///         See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
@@ -1283,118 +1050,112 @@ public static class SyndicationDiscoveryUtility
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the IsTrackbackEnabled method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="IsTrackbackEnabled(Uri uri)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static bool IsTrackbackEnabled(Uri uri)
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<bool> IsTrackbackEnabledAsync(
+        Uri uri,
+        CancellationToken cancellationToken = default)
     {
-        return SyndicationDiscoveryUtility.IsTrackbackEnabled(uri, null);
+        ArgumentNullException.ThrowIfNull(uri);
+
+        Collection<TrackbackDiscoveryMetadata> endpoints = await LocateTrackbackNotificationServersAsync(uri, cancellationToken).ConfigureAwait(false);
+        return endpoints.Count > 0;
     }
 
     /// <summary>
-    /// Returns a value indicating if the supplied <see cref="Uri"/> is a trackback enabled web resource using the specified <see cref="ICredentials">credentials</see>.
+    /// Asynchronously returns a value indicating if the supplied <see cref="Uri"/> is a trackback enabled web resource using the specified <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="uri">The <see cref="Uri"/> to validate.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <returns><b>true</b> if the <paramref name="uri"/> is trackback enabled, Otherwise, <b>false</b>.</returns>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result is <b>true</b> if the <paramref name="uri"/>
+    ///     is trackback enabled, otherwise <b>false</b>.
+    /// </returns>
     /// <remarks>
     ///     <para>
     ///         The auto-discovery mechanism for trackback utilizes embedded RDF meta-data elements within the web resource.
     ///     </para>
     ///     <para>
-    ///         To conform to the Trackback 1.2 specification, the following information should apply to a trackback enabled resource:
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     Trackback enabled resources will contain one or more embedded RDF elements that describe where to send pings for web log entries.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     A sample embedded RDF element looks like this:
-    ///                     <para>
-    ///                         &lt;rdf:RDF xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#" xmlns:dc="http://purl.org/dc/elements/1.1/" xmlns:trackback="http://madskills.com/public/xml/rss/module/trackback/"&gt;
-    ///                             &lt;rdf:Description
-    ///                                 rdf:about="http://www.foo.com/archive.html#foo"
-    ///                                 dc:identifier="http://www.foo.com/archive.html#foo"
-    ///                                 dc:title="Foo Bar"
-    ///                                 trackback:ping="http://www.foo.com/tb.cgi/5"
-    ///                             /&gt;
-    ///                         &lt;/rdf:RDF&gt;
-    ///                     </para>
-    ///                 </description>
-    ///             </item>
-    ///         </list>
+    ///         See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
+    ///         further information about the auto-discovery of Trackback ping URLs.
     ///     </para>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///         and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<bool> IsTrackbackEnabledAsync(
+        Uri uri,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(uri);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        Collection<TrackbackDiscoveryMetadata> endpoints = await LocateTrackbackNotificationServersAsync(uri, httpClient, cancellationToken).ConfigureAwait(false);
+        return endpoints.Count > 0;
+    }
+
+    /// <summary>
+    /// Asynchronously returns a collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent trackback ping URL endpoints for the supplied <see cref="Uri"/>.
+    /// </summary>
+    /// <param name="uri">A <see cref="Uri"/> that represents the URL of the web resource to parse.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result contains a collection of <see cref="TrackbackDiscoveryMetadata"/>
+    ///     objects that represent embedded Trackback ping URLs for the web resource located at the <paramref name="uri"/>.
+    /// </returns>
+    /// <remarks>
+    ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
+    ///     further information about the auto-discovery of Trackback ping URLs.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static Task<Collection<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
+        Uri uri,
+        CancellationToken cancellationToken = default)
+    {
+        return LocateTrackbackNotificationServersAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+    }
+
+    /// <summary>
+    /// Asynchronously returns a collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent trackback ping URL endpoints for the supplied <see cref="Uri"/> using the specified <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="uri">A <see cref="Uri"/> that represents the URL of the web resource to parse.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>
+    ///     A task that represents the asynchronous operation. The task result contains a collection of <see cref="TrackbackDiscoveryMetadata"/>
+    ///     objects that represent embedded Trackback ping URLs for the web resource located at the <paramref name="uri"/>.
+    /// </returns>
+    /// <remarks>
     ///     <para>
     ///         See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
     ///         further information about the auto-discovery of Trackback ping URLs.
     ///     </para>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///         and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    public static bool IsTrackbackEnabled(Uri uri, ICredentials credentials)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<Collection<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
+        Uri uri,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(uri);
+        ArgumentNullException.ThrowIfNull(httpClient);
 
-        return (SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, credentials).Count > 0);
-    }
-
-    /// <summary>
-    /// Returns a collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent trackback ping URL endpoints for the supplied <see cref="Uri"/>.
-    /// </summary>
-    /// <param name="uri">A <see cref="Uri"/> that represents the URL of the web resource to parse.</param>
-    /// <returns>
-    ///     A collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent embedded Trackback ping URLs for the web resource located at the <paramref name="uri"/>.
-    /// </returns>
-    /// <remarks>
-    ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
-    ///     further information about the auto-discovery of Trackback ping URLs.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the LocateTrackbackNotificationServers method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\\Common\SyndicationDiscoveryUtilityExample.cs"
-    ///             region="LocateTrackbackNotificationServers(Uri uri)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri)
-    {
-        return SyndicationDiscoveryUtility.LocateTrackbackNotificationServers(uri, null);
-    }
-
-    /// <summary>
-    /// Returns a collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent trackback ping URL endpoints for the supplied <see cref="Uri"/>
-    /// using the specified <see cref="ICredentials">credentials</see>.
-    /// </summary>
-    /// <param name="uri">A <see cref="Uri"/> that represents the URL of the web resource to parse.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the web resource when required.
-    ///     If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    /// </param>
-    /// <returns>
-    ///     A collection of <see cref="TrackbackDiscoveryMetadata"/> objects that represent embedded Trackback ping URLs for the web resource located at the <paramref name="uri"/>.
-    /// </returns>
-    /// <remarks>
-    ///     See <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a> for
-    ///     further information about the auto-discovery of Trackback ping URLs.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
-    public static Collection<TrackbackDiscoveryMetadata> LocateTrackbackNotificationServers(Uri uri, ICredentials credentials)
-    {
-        ArgumentNullException.ThrowIfNull(uri);
-
-        using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
-        using Stream stream = webResponse.GetResponseStream();
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(stream);
     }
 }

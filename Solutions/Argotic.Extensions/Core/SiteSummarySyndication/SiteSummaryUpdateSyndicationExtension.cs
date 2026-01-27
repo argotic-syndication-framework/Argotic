@@ -36,7 +36,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtension"/> class.
     /// </summary>
     public SiteSummaryUpdateSyndicationExtension()
-        : base("sy", "http://purl.org/rss/1.0/modules/syndication/", new("1.0"), new("http://web.resource.org/rss/1.0/modules/syndication/"), "RDF Site Summary (Syndication)", "Extends syndication feeds to provide syndication hints to aggregators and other entities regarding how often a feed is updated.")
+        : base("sy", "http://purl.org/rss/1.0/modules/syndication/", new Version("1.0"), new Uri("http://web.resource.org/rss/1.0/modules/syndication/"), "RDF Site Summary (Syndication)", "Extends syndication feeds to provide syndication hints to aggregators and other entities regarding how often a feed is updated.")
     {
     }
 

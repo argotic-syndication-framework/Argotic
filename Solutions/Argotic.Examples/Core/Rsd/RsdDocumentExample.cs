@@ -1,17 +1,15 @@
-﻿using System.Net;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 using Argotic.Syndication.Specialized;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Rsd;
 
 /// <summary>
 /// Contains the code examples for the <see cref="RsdDocument"/> class.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="RsdDocument"/> class. 
+///     This class contains all the code examples that are referenced by the <see cref="RsdDocument"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
 public static class RsdDocumentExample
@@ -24,30 +22,30 @@ public static class RsdDocumentExample
         RsdDocument document = new()
         {
             EngineName = "Blog Munging CMS",
-            EngineLink = new("http://www.blogmunging.com/"),
-            Homepage = new("http://www.userdomain.com/")
+            EngineLink = new Uri("http://www.blogmunging.com/"),
+            Homepage = new Uri("http://www.userdomain.com/")
         };
 
-        document.AddInterface(new("MetaWeblog", new("http://example.com/xml/rpc/url"), true, "123abc"));
-        document.AddInterface(new("Blogger", new("http://example.com/xml/rpc/url"), false, "123abc"));
-        document.AddInterface(new("MetaWiki", new("http://example.com/some/other/url"), false, "123abc"));
-        document.AddInterface(new("Antville", new("http://example.com/yet/another/url"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("MetaWeblog", new Uri("http://example.com/xml/rpc/url"), true, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("Blogger", new Uri("http://example.com/xml/rpc/url"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("MetaWiki", new Uri("http://example.com/some/other/url"), false, "123abc"));
+        document.Interfaces.Add(new RsdApplicationInterface("Antville", new Uri("http://example.com/yet/another/url"), false, "123abc"));
 
-        RsdApplicationInterface conversantApi = new("Conversant", new("http://example.com/xml/rpc/url"), false, string.Empty)
+        RsdApplicationInterface conversantApi = new("Conversant", new Uri("http://example.com/xml/rpc/url"), false, string.Empty)
         {
-            Documentation = new("http://www.conversant.com/docs/api/"),
+            Documentation = new Uri("http://www.conversant.com/docs/api/"),
             Notes = "Additional explanation here."
         };
         conversantApi.Settings.Add("service-specific-setting", "a value");
         conversantApi.Settings.Add("another-setting", "another value");
-        document.AddInterface(conversantApi);
+        document.Interfaces.Add(conversantApi);
     }
     /// <summary>
-    /// Provides example code for the RsdDocument.Create(Uri) method
+    /// Provides example code for the RsdDocument.CreateAsync(Uri) method
     /// </summary>
-    public static void CreateExample()
+    public static async Task CreateExampleAsync()
     {
-        RsdDocument document = RsdDocument.Create(new("http://blog.oppositionallydefiant.com/rsd.axd"));
+        RsdDocument document = await RsdDocument.CreateAsync(new Uri("http://blog.oppositionallydefiant.com/rsd.axd")).ConfigureAwait(false);
 
         foreach (RsdApplicationInterface api in document.Interfaces)
         {
@@ -59,15 +57,15 @@ public static class RsdDocumentExample
         }
     }
     /// <summary>
-    /// Provides example code for the LoadAsync(Uri, Object) method
+    /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
-    public static void LoadAsyncExample()
+    public static async Task LoadAsyncExampleAsync()
     {
         RsdDocument document = new();
 
-        document.Loaded += new(ResourceLoadedCallback);
+        document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
-        document.LoadAsync(new("http://blog.oppositionallydefiant.com/rsd.axd"), null);
+        await document.LoadAsync(new Uri("http://blog.oppositionallydefiant.com/rsd.axd")).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -75,10 +73,12 @@ public static class RsdDocumentExample
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-    private static void ResourceLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
+    private static void ResourceLoadedCallback(object? sender, SyndicationResourceLoadedEventArgs e)
     {
-        if (e.State != null)
+        // Process the loaded document using e.Data or e.Source
+        if (e.Source != null)
         {
+            // Process the source URI
         }
     }
     /// <summary>
@@ -150,14 +150,20 @@ public static class RsdDocumentExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
+    /// Provides example code for the LoadAsync(Uri, HttpClient) method
     /// </summary>
-    public static void LoadUriExample()
+    public static async Task LoadUriExampleAsync()
     {
         RsdDocument document = new();
         Uri source = new("http://blog.oppositionallydefiant.com/rsd.axd");
 
-        document.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+        // For simple case (no credentials):
+        await document.LoadAsync(source).ConfigureAwait(false);
+
+        // Or for credentials:
+        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
+        // using var httpClient = new HttpClient(handler);
+        // await document.LoadAsync(source, httpClient);
 
         foreach (RsdApplicationInterface api in document.Interfaces)
         {

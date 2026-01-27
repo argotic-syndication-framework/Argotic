@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -80,7 +79,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
                             break;
                         }
 
-                        ((Collection<ApmlProfile>)resource.Profiles).Add(profile);
+                        resource.Profiles.Add(profile);
                     }
                 }
             }

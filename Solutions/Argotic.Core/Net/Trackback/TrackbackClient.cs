@@ -1,4 +1,4 @@
-﻿using System.Net;
+using System.Net.Http.Headers;
 using Argotic.Common;
 using Argotic.Configuration;
 
@@ -11,6 +11,10 @@ namespace Argotic.Net;
 ///     <para>
 ///         This implementation of Trackback is based on the Trackback 1.2 specification which can be found
 ///         at <a href="http://www.sixapart.com/pronet/docs/trackback_spec">http://www.sixapart.com/pronet/docs/trackback_spec</a>.
+///     </para>
+///     <para>
+///         For scenarios requiring authentication or proxy configuration, provide a pre-configured <see cref="HttpClient"/>
+///         via the constructor. This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
 ///     </para>
 /// </remarks>
 /// <example>
@@ -30,25 +34,26 @@ public class TrackbackClient
     /// <summary>
     /// Private member to hold information such as the application name, version, host operating system, and language.
     /// </summary>
-    private string clientUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(TrackbackClient)).GetName().Version.ToString(4));
+    private string clientUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(TrackbackClient))!.GetName().Version!.ToString(4));
     /// <summary>
-    /// Private member to hold the web request options.
+    /// Private member to hold the HttpClient used for sending requests.
     /// </summary>
-    private readonly WebRequestOptions clientOptions = new();
+    private readonly HttpClient httpClient;
     /// <summary>
     /// Private member to hold a value that specifies the amount of time after which an asynchronous send operation times out.
     /// </summary>
     private TimeSpan clientTimeout = TimeSpan.FromSeconds(15);
-    /// <summary>
-    /// Private member to hold Trackback web request used by asynchronous send operations.
-    /// </summary>
-    private static WebRequest asyncHttpWebRequest;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TrackbackClient"/> class.
+    /// Initializes a new instance of the <see cref="TrackbackClient"/> class using the shared <see cref="HttpClient"/>.
     /// </summary>
+    /// <remarks>
+    ///     This constructor uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.
+    ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
+    /// </remarks>
     public TrackbackClient()
     {
+        this.httpClient = SyndicationEncodingUtility.SharedHttpClient;
         this.Initialize();
     }
 
@@ -56,69 +61,58 @@ public class TrackbackClient
     /// Initializes a new instance of the <see cref="TrackbackClient"/> class that sends Trackback pings using the specified Trackback server.
     /// </summary>
     /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</param>
+    /// <remarks>
+    ///     This constructor uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.
+    ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
-    public TrackbackClient(Uri host)
+    public TrackbackClient(Uri host) : this()
     {
-        this.Initialize();
         this.Host = host;
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="TrackbackClient"/> class that sends Trackback pings using the specified Trackback server and user agent.
+    /// Initializes a new instance of the <see cref="TrackbackClient"/> class that sends Trackback pings using the specified <see cref="HttpClient"/>.
     /// </summary>
-    /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</param>
-    /// <param name="userAgent">Information such as the application name, version, host operating system, and language.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
-    public TrackbackClient(Uri host, string userAgent) : this(host)
-    {
-        this.UserAgent = userAgent;
-    }
-
-    /// <summary>
-    /// Occurs when an asynchronous Trackback ping request send operation completes.
-    /// </summary>
-    /// <seealso cref="SendAsync(TrackbackMessage, Object)"/>
-    public event EventHandler<TrackbackMessageSentEventArgs> SendCompleted;
-
-    /// <summary>
-    /// Raises the <see cref="SendCompleted"/> event.
-    /// </summary>
-    /// <param name="e">A <see cref="TrackbackMessageSentEventArgs"/> that contains the event data.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for sending requests. The caller is responsible for managing the client's lifecycle.</param>
     /// <remarks>
     ///     <para>
-    ///         Classes that inherit from the <see cref="TrackbackClient"/> class can override the <see cref="OnMessageSent(TrackbackMessageSentEventArgs)"/> method
-    ///         to perform additional tasks when the <see cref="SendCompleted"/> event occurs.
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     ///     <para>
-    ///         <see cref="OnMessageSent(TrackbackMessageSentEventArgs)"/> also allows derived classes to handle <see cref="SendCompleted"/> without attaching a delegate.
-    ///         This is the preferred technique for handling <see cref="SendCompleted"/> in a derived class.
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
-    protected virtual void OnMessageSent(TrackbackMessageSentEventArgs e)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    public TrackbackClient(HttpClient httpClient)
     {
-        this.SendCompleted?.Invoke(this, e);
+        ArgumentNullException.ThrowIfNull(httpClient);
+        this.httpClient = httpClient;
+        this.Initialize();
     }
 
     /// <summary>
-    /// Gets or sets the authentication credentials utilized by this client when making Trackback pings.
+    /// Initializes a new instance of the <see cref="TrackbackClient"/> class that sends Trackback pings using the specified <see cref="HttpClient"/> and Trackback server.
     /// </summary>
-    /// <value>
-    ///     A <see cref="ICredentials"/> object that represents the authentication credentials provided by this client when making Trackback pings.
-    ///     The default is a null reference, which indicates no authentication information will be supplied to identify the maker of the request.
-    /// </value>
-    public ICredentials Credentials
+    /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for sending requests. The caller is responsible for managing the client's lifecycle.</param>
+    /// <remarks>
+    ///     <para>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    ///     <para>
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    public TrackbackClient(Uri host, HttpClient httpClient) : this(httpClient)
     {
-        get
-        {
-            return clientOptions.Credentials;
-        }
-
-        set
-        {
-            clientOptions.Credentials = value;
-        }
+        this.Host = host;
     }
 
     /// <summary>
@@ -140,26 +134,6 @@ public class TrackbackClient
         {
             ArgumentNullException.ThrowIfNull(value);
             clientHost = value;
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the web proxy utilized by this client to proxy Trackback pings.
-    /// </summary>
-    /// <value>
-    ///     A <see cref="IWebProxy"/> object that represents the web proxy utilized by this client to proxy Trackback pings.
-    ///     The default is a null reference, which indicates no proxy will be used to proxy the request.
-    /// </value>
-    public IWebProxy Proxy
-    {
-        get
-        {
-            return clientOptions.Proxy;
-        }
-
-        set
-        {
-            clientOptions.Proxy = value;
         }
     }
 
@@ -197,28 +171,6 @@ public class TrackbackClient
     }
 
     /// <summary>
-    /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making Trackback pings.
-    /// </summary>
-    /// <value><b>true</b> if the default credentials are used; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
-    /// <remarks>
-    ///     <para>
-    ///         Some Trackback servers require that the client be authenticated before the server executes Trackback pings on its behalf.
-    ///         Set this property to <b>true</b> when this <see cref="TrackbackClient"/> object should, if requested by the server, authenticate using the
-    ///         default credentials of the currently logged on user. For client applications, this is the desired behavior in most scenarios.
-    ///     </para>
-    ///     <para>
-    ///         Credentials information can also be specified using the application and machine configuration files.
-    ///         For more information, see <see cref="Argotic.Configuration.XmlRpcClientNetworkElement"/> Element (Network Settings).
-    ///     </para>
-    ///     <para>
-    ///         If the UseDefaultCredentials property is set to <b>false</b>, then the value set in the <see cref="Credentials"/> property
-    ///         will be used for the credentials when connecting to the server. If the UseDefaultCredentials property is set to <b>false</b>
-    ///         and the <see cref="Credentials"/> property has not been set, then Trackback pings are sent to the server anonymously.
-    ///     </para>
-    /// </remarks>
-    public bool UseDefaultCredentials { get; set; }
-
-    /// <summary>
     /// Gets or sets information such as the client application name, version, host operating system, and language.
     /// </summary>
     /// <value>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</value>
@@ -239,69 +191,14 @@ public class TrackbackClient
     }
 
     /// <summary>
-    /// Gets or sets a value indicating if the client asynchronous send operation was cancelled.
-    /// </summary>
-    /// <value><b>true</b> if client asynchronous send operation has been cancelled, Otherwise, <b>false</b>.</value>
-    internal bool AsyncSendHasBeenCancelled { get; set; }
-
-    /// <summary>
-    /// Gets or sets a value indicating if the client is in the process of sending a Trackback ping request.
-    /// </summary>
-    /// <value><b>true</b> if client is in the process of sending a Trackback ping request, Otherwise, <b>false</b>.</value>
-    internal bool SendOperationInProgress { get; set; }
-
-    /// <summary>
-    /// Called when a corresponding asynchronous send operation completes.
-    /// </summary>
-    /// <param name="result">The result of the asynchronous operation.</param>
-    private static void AsyncSendCallback(IAsyncResult result)
-    {
-        if (result.IsCompleted)
-        {
-            object[] parameters = (object[])result.AsyncState;
-            WebRequest httpWebRequest = parameters[0] as WebRequest;
-            TrackbackClient client = parameters[1] as TrackbackClient;
-            Uri host = parameters[2] as Uri;
-            TrackbackMessage message = parameters[3] as TrackbackMessage;
-            WebRequestOptions options = parameters[4] as WebRequestOptions;
-            object userToken = parameters[5];
-            if (client != null)
-            {
-                WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
-
-                TrackbackResponse response = new(httpWebResponse);
-
-                client.OnMessageSent(new(host, message, response, options, userToken));
-
-                client.SendOperationInProgress = false;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
-    /// </summary>
-    /// <param name="state">An object containing information to be used by the callback method each time it executes.</param>
-    /// <param name="timedOut"><b>true</b> if the <see cref="WaitHandle"/> timed out; <b>false</b> if it was signaled.</param>
-    private void AsyncTimeoutCallback(object state, bool timedOut)
-    {
-        if (timedOut)
-        {
-            asyncHttpWebRequest?.Abort();
-        }
-
-        this.SendOperationInProgress = false;
-    }
-
-    /// <summary>
-    /// Sends the specified message to a Trackback server to execute a Trackback ping request.
+    /// Sends the specified message to a Trackback server to execute a Trackback ping request asynchronously.
     /// </summary>
     /// <param name="message">A <see cref="TrackbackMessage"/> that represents the information needed to execute the Trackback ping request.</param>
-    /// <returns>A <see cref="TrackbackResponse"/> that represents the server's response to the Trackback ping request.</returns>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="TrackbackResponse"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
     /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, Object)"/> call in progress.</exception>
-    public TrackbackResponse Send(TrackbackMessage message)
+    public async Task<TrackbackResponse> SendAsync(TrackbackMessage message, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(message);
 
@@ -309,126 +206,60 @@ public class TrackbackClient
         {
             throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
         }
-        else if (this.SendOperationInProgress)
-        {
-            throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
-        }
 
-        WebRequest webRequest = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
+        using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(this.Timeout);
 
-        using WebResponse webResponse = (WebResponse)webRequest.GetResponse();
-        TrackbackResponse response = new(webResponse);
-        return response;
+        using HttpResponseMessage httpResponse = await SendRequestAsync(
+            this.Host, this.UserAgent, message, this.httpClient, timeoutCts.Token).ConfigureAwait(false);
+
+        return await TrackbackResponse.CreateAsync(httpResponse, timeoutCts.Token).ConfigureAwait(false);
     }
 
     /// <summary>
-    /// Sends the specified message to a Trackback server to execute a Trackback ping request.
-    /// This method does not block the calling thread and allows the caller to pass an object to the method that is invoked when the operation completes.
-    /// </summary>
-    /// <param name="message">A <see cref="TrackbackMessage"/> that represents the information needed to execute the Trackback ping request.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
-    /// <remarks>
-    ///     <para>
-    ///         To receive notification when the Trackback ping request has been sent or the operation has been cancelled, add an event handler to the <see cref="SendCompleted"/> event.
-    ///         You can cancel a <see cref="SendAsync(TrackbackMessage, Object)"/> operation by calling the <see cref="SendAsyncCancel()"/> method.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
-    /// <exception cref="InvalidOperationException">The <see cref="Host"/> is a <b>null</b> reference.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="TrackbackClient"/> has a <see cref="SendAsync(TrackbackMessage, Object)"/> call in progress.</exception>
-    //[HostProtectionAttribute(SecurityAction.LinkDemand, ExternalThreading = true)]
-    public void SendAsync(TrackbackMessage message, object userToken)
-    {
-        ArgumentNullException.ThrowIfNull(message);
-
-        if (this.Host == null)
-        {
-            throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {0}", message));
-        }
-        else if (this.SendOperationInProgress)
-        {
-            throw new InvalidOperationException(string.Format(null, "Unable to send Trackback message. The TrackbackClient has a SendAsync call in progress. \n\r Message payload: {0}", message));
-        }
-
-        this.SendOperationInProgress = true;
-        this.AsyncSendHasBeenCancelled = false;
-
-        asyncHttpWebRequest = TrackbackClient.CreateWebRequest(this.Host, this.UserAgent, message, this.UseDefaultCredentials, this.clientOptions);
-
-        object[] state = [asyncHttpWebRequest, this, this.Host, message, this.clientOptions, userToken];
-        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new(AsyncSendCallback), state);
-
-        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new(AsyncTimeoutCallback), state, this.Timeout, true);
-    }
-
-    /// <summary>
-    /// Cancels an asynchronous operation to send a Trackback ping request.
-    /// </summary>
-    /// <remarks>
-    ///     Use the <see cref="SendAsyncCancel()"/> method to cancel a pending <see cref="SendAsync(TrackbackMessage, Object)"/> operation.
-    ///     If there is a Trackback ping request waiting to be sent, this method releases resources used to execute the send operation and cancels the pending operation.
-    ///     If there is no send operation pending, this method does nothing.
-    /// </remarks>
-    public void SendAsyncCancel()
-    {
-        if (this.SendOperationInProgress && !this.AsyncSendHasBeenCancelled)
-        {
-            this.AsyncSendHasBeenCancelled = true;
-            asyncHttpWebRequest.Abort();
-        }
-    }
-
-    /// <summary>
-    /// Initializes a new <see cref="WebRequest"/> suitable for sending a Trackback ping request using the supplied host, user agent, message, credentials, and proxy.
+    /// Sends a Trackback ping request asynchronously using the supplied host, user agent, message, and HttpClient.
     /// </summary>
     /// <param name="host">A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</param>
     /// <param name="userAgent">Information such as the application name, version, host operating system, and language.</param>
     /// <param name="message">A <see cref="TrackbackMessage"/> that represents the information needed to execute the Trackback ping request.</param>
-    /// <param name="useDefaultCredentials">
-    ///     Controls whether the <see cref="CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent when making Trackback pings.
-    /// </param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains the <see cref="HttpResponseMessage"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="host"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
-    private static HttpWebRequest CreateWebRequest(Uri host, string userAgent, TrackbackMessage message, bool useDefaultCredentials, WebRequestOptions options)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    private static async Task<HttpResponseMessage> SendRequestAsync(
+        Uri host,
+        string userAgent,
+        TrackbackMessage message,
+        HttpClient httpClient,
+        CancellationToken cancellationToken = default)
     {
-        byte[] payloadData;
-
         ArgumentNullException.ThrowIfNull(host);
         ArgumentException.ThrowIfNullOrEmpty(userAgent);
         ArgumentNullException.ThrowIfNull(message);
+        ArgumentNullException.ThrowIfNull(httpClient);
 
+        byte[] payloadData;
         using (MemoryStream stream = new())
         {
-            using StreamWriter writer = new(stream, message.Encoding);
+            using StreamWriter writer = new(stream, message.Encoding, leaveOpen: true);
             message.WriteTo(writer);
             writer.Flush();
-
-            stream.Seek(0, SeekOrigin.Begin);
-            using StreamReader reader = new(stream);
-            payloadData = message.Encoding.GetBytes(reader.ReadToEnd());
+            payloadData = stream.ToArray();
         }
 
-        HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(host);
-        httpRequest.Method = "POST";
-        httpRequest.ContentLength = payloadData.Length;
-        httpRequest.ContentType = string.Format(null, "application/x-www-form-urlencoded; charset={0}", message.Encoding.WebName);
-        httpRequest.UserAgent = userAgent;
-        options?.ApplyOptions(httpRequest);
-
-        if (useDefaultCredentials)
+        using HttpRequestMessage request = new(HttpMethod.Post, host);
+        request.Headers.UserAgent.ParseAdd(userAgent);
+        request.Content = new ByteArrayContent(payloadData);
+        request.Content.Headers.ContentType = new MediaTypeHeaderValue("application/x-www-form-urlencoded")
         {
-            httpRequest.Credentials = CredentialCache.DefaultCredentials;
-        }
+            CharSet = message.Encoding.WebName
+        };
 
-        using (Stream stream = httpRequest.GetRequestStream())
-        {
-            stream.Write(payloadData, 0, payloadData.Length);
-        }
-
-        return httpRequest;
+        return await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -451,19 +282,9 @@ public class TrackbackClient
                 this.UserAgent = clientConfiguration.UserAgent;
             }
 
-            if (clientConfiguration.Network != null)
+            if (clientConfiguration.Network?.Host != null)
             {
-                this.UseDefaultCredentials = clientConfiguration.Network.DefaultCredentials;
-
-                if (clientConfiguration.Network.Credential != null)
-                {
-                    this.Credentials = clientConfiguration.Network.Credential;
-                }
-
-                if (clientConfiguration.Network.Host != null)
-                {
-                    this.Host = clientConfiguration.Network.Host;
-                }
+                this.Host = clientConfiguration.Network.Host;
             }
         }
     }

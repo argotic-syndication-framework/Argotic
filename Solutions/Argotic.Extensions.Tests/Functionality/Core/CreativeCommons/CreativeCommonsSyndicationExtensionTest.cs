@@ -1,10 +1,9 @@
-namespace Argotic.Extensions.Tests;
-
 using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
+
+namespace Argotic.Extensions.Tests.Functionality.Core.CreativeCommons;
 
 [TestClass]
 public class CreativeCommonsSyndicationExtensionTest
@@ -46,24 +45,16 @@ public class CreativeCommonsSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void CreativeCommonsGetHashCodeTest()
     {
+        // Consistency: same object returns same hash
         CreativeCommonsSyndicationExtension target = CreateExtension1();
-        int expected = -2111858259;
-        int actual = target.GetHashCode();
-        actual.ShouldBe(expected);
-    }
+        target.GetHashCode().ShouldBe(target.GetHashCode());
 
-    [TestMethod]
-    [Ignore("Test requires manual verification of Load behavior")]
-    public void CreativeCommonsLoadTest()
-    {
-        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-
-        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new();
-        feed.Load(reader);
+        // Equality contract: equal objects have equal hashes
+        CreativeCommonsSyndicationExtension other = CreateExtension1();
+        target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
     [TestMethod]
@@ -114,7 +105,7 @@ public class CreativeCommonsSyndicationExtensionTest
     public void CreativeCommonsWriteToTest()
     {
         using StringWriter sw = new();
-        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         CreativeCommonsSyndicationExtension target = CreateExtension1();
         target.WriteTo(writer);
         writer.Flush();
@@ -168,29 +159,31 @@ public class CreativeCommonsSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("Context equality comparison not implemented")]
     public void CreativeCommonsContextTest()
     {
         CreativeCommonsSyndicationExtension target = CreateExtension1();
-        CreativeCommonsSyndicationExtensionContext expected = CreateContext1();
-        CreativeCommonsSyndicationExtensionContext actual = target.Context;
-        actual.ShouldBe(expected);
+        CreativeCommonsSyndicationExtensionContext context = target.Context;
+
+        context.ShouldNotBeNull();
+        context.Licenses.Count.ShouldBe(2);
+        context.Licenses[0].ShouldBe(new Uri("http://www.example.com/license1.html"));
+        context.Licenses[1].ShouldBe(new Uri("http://www.example.com/license2.html"));
     }
 
     private static CreativeCommonsSyndicationExtension CreateExtension1()
     {
         CreativeCommonsSyndicationExtension nyc = new();
 
-        nyc.Context.Licenses.Add(new("http://www.example.com/license1.html"));
-        nyc.Context.Licenses.Add(new("http://www.example.com/license2.html"));
+        nyc.Context.Licenses.Add(new Uri("http://www.example.com/license1.html"));
+        nyc.Context.Licenses.Add(new Uri("http://www.example.com/license2.html"));
         return nyc;
     }
 
     private static CreativeCommonsSyndicationExtension CreateExtension2()
     {
         CreativeCommonsSyndicationExtension nyc = new();
-        nyc.Context.Licenses.Add(new("http://www.example.net/license1.html"));
-        nyc.Context.Licenses.Add(new("http://www.example.net/license2.html"));
+        nyc.Context.Licenses.Add(new Uri("http://www.example.net/license1.html"));
+        nyc.Context.Licenses.Add(new Uri("http://www.example.net/license2.html"));
         return nyc;
     }
 

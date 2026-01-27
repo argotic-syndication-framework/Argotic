@@ -1,10 +1,9 @@
-namespace Argotic.Extensions.Tests;
-
 using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
+
+namespace Argotic.Extensions.Tests.Functionality.Core.iTunes;
 
 [TestClass]
 public class ITunesSyndicationExtensionTest
@@ -79,24 +78,16 @@ public class ITunesSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void ITunesGetHashCodeTest()
     {
+        // Consistency: same object returns same hash
         ITunesSyndicationExtension target = CreateExtension1();
-        int expected = -765758449;
-        int actual = target.GetHashCode();
-        actual.ShouldBe(expected);
-    }
+        target.GetHashCode().ShouldBe(target.GetHashCode());
 
-    [TestMethod]
-    [Ignore("Test requires manual verification of Load behavior")]
-    public void ITunesLoadTest()
-    {
-        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-
-        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new();
-        feed.Load(reader);
+        // Equality contract: equal objects have equal hashes
+        ITunesSyndicationExtension other = CreateExtension1();
+        target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
     [TestMethod]
@@ -147,7 +138,7 @@ public class ITunesSyndicationExtensionTest
     public void ITunesWriteToTest()
     {
         using StringWriter sw = new();
-        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         ITunesSyndicationExtension target = CreateExtension1();
         target.WriteTo(writer);
         writer.Flush();
@@ -201,13 +192,23 @@ public class ITunesSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("Context equality comparison not implemented")]
     public void ITunesContextTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
-        ITunesSyndicationExtensionContext expected = CreateContext1();
-        ITunesSyndicationExtensionContext actual = target.Context;
-        actual.ShouldBe(expected);
+        ITunesSyndicationExtensionContext context = target.Context;
+
+        context.ShouldNotBeNull();
+        context.Author.ShouldBe("BigStar");
+        context.Categories.Count.ShouldBe(2);
+        context.Duration.ShouldBe(new TimeSpan(0, 3, 21));
+        context.ExplicitMaterial.ShouldBe(ITunesExplicitMaterial.Clean);
+        context.Image.ShouldBe(new Uri("http://www.eexample.com/image.jpg"));
+        context.IsBlocked.ShouldBeFalse();
+        context.Keywords.Count.ShouldBe(2);
+        context.Owner.EmailAddress.ShouldBe("owner@bigstar.com");
+        context.Owner.Name.ShouldBe("BigStar's Guy");
+        context.Subtitle.ShouldBe("That song you like.");
+        context.Summary.ShouldBe("Duh... That song you like");
     }
 
     private static ITunesSyndicationExtension CreateExtension1()
@@ -220,15 +221,15 @@ public class ITunesSyndicationExtensionTest
             }
         };
 
-        nyc.Context.Categories.Add(new("Rock"));
-        nyc.Context.Categories.Add(new("Folk"));
-        nyc.Context.Duration = new(0, 3, 21);
+        nyc.Context.Categories.Add(new ITunesCategory("Rock"));
+        nyc.Context.Categories.Add(new ITunesCategory("Folk"));
+        nyc.Context.Duration = new TimeSpan(0, 3, 21);
         nyc.Context.ExplicitMaterial = ITunesExplicitMaterial.Clean;
-        nyc.Context.Image = new("http://www.eexample.com/image.jpg");
+        nyc.Context.Image = new Uri("http://www.eexample.com/image.jpg");
         nyc.Context.IsBlocked = false;
         nyc.Context.Keywords.Add("loud");
         nyc.Context.Keywords.Add("good for parties");
-        nyc.Context.Owner = new("owner@bigstar.com", "BigStar's Guy");
+        nyc.Context.Owner = new ITunesOwner("owner@bigstar.com", "BigStar's Guy");
         nyc.Context.Subtitle = "That song you like.";
         nyc.Context.Summary = "Duh... That song you like";
 
@@ -244,15 +245,15 @@ public class ITunesSyndicationExtensionTest
                 Author = "NewStar"
             }
         };
-        nyc.Context.Categories.Add(new("Dance"));
-        nyc.Context.Categories.Add(new("Funk"));
-        nyc.Context.Duration = new(0, 4, 32);
+        nyc.Context.Categories.Add(new ITunesCategory("Dance"));
+        nyc.Context.Categories.Add(new ITunesCategory("Funk"));
+        nyc.Context.Duration = new TimeSpan(0, 4, 32);
         nyc.Context.ExplicitMaterial = ITunesExplicitMaterial.Yes;
-        nyc.Context.Image = new("http://www.example.com/newimage.png");
+        nyc.Context.Image = new Uri("http://www.example.com/newimage.png");
         nyc.Context.IsBlocked = true;
         nyc.Context.Keywords.Add("loud");
         nyc.Context.Keywords.Add("offend your parents");
-        nyc.Context.Owner = new("owner@newstar.com", "NewStar's Friend's Uncle");
+        nyc.Context.Owner = new ITunesOwner("owner@newstar.com", "NewStar's Friend's Uncle");
         nyc.Context.Subtitle = "That song you will like.";
         nyc.Context.Summary = "Better than that other song.";
         return nyc;

@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -37,7 +36,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="YahooMediaSyndicationExtension"/> class.
     /// </summary>
     public YahooMediaSyndicationExtension()
-        : base("media", "http://search.yahoo.com/mrss/", new("1.1.1"), new("http://search.yahoo.com/mrss"), "Yahoo! Media", "Extends syndication feeds to provide a means of supplementing the enclosure capabilities of feeds.")
+        : base("media", "http://search.yahoo.com/mrss/", new Version("1.1.1"), new Uri("http://search.yahoo.com/mrss"), "Yahoo! Media", "Extends syndication feeds to provide a means of supplementing the enclosure capabilities of feeds.")
     {
     }
 
@@ -305,8 +304,8 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable
 
         if (value != null)
         {
-            int result = YahooMediaUtility.CompareSequence((Collection<YahooMediaContent>)this.Context.Contents, (Collection<YahooMediaContent>)value.Context.Contents);
-            result |= YahooMediaUtility.CompareSequence((Collection<YahooMediaGroup>)this.Context.Groups, (Collection<YahooMediaGroup>)value.Context.Groups);
+            int result = YahooMediaUtility.CompareSequence(this.Context.Contents, value.Context.Contents);
+            result |= YahooMediaUtility.CompareSequence(this.Context.Groups, value.Context.Groups);
 
             result |= YahooMediaUtility.CompareCommonObjectEntities(this.Context, value.Context);
 

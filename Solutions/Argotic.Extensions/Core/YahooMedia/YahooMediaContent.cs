@@ -1,9 +1,6 @@
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -12,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         Media objects that are not the same content should not be included in the same <see cref="YahooMediaGroup"/>. 
+///         Media objects that are not the same content should not be included in the same <see cref="YahooMediaGroup"/>.
 ///         The sequence of <see cref="YahooMediaContent"/> objects within a <see cref="YahooMediaGroup"/> implies the order of presentation.
 ///     </para>
 /// </remarks>
@@ -80,7 +77,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <summary>
     /// Private member to hold the permissible audiences for the media object.
     /// </summary>
-    private Collection<YahooMediaRating> mediaObjectRatings;
+    private List<YahooMediaRating> mediaObjectRatings;
     /// <summary>
     /// Private member to hold the title of the media object.
     /// </summary>
@@ -92,19 +89,19 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <summary>
     /// Private member to hold the relevant keywords that describe the media object.
     /// </summary>
-    private Collection<string> mediaObjectKeywords;
+    private List<string> mediaObjectKeywords;
     /// <summary>
     /// Private member to hold the representative images for the media object.
     /// </summary>
-    private Collection<YahooMediaThumbnail> mediaObjectThumbnails;
+    private List<YahooMediaThumbnail> mediaObjectThumbnails;
     /// <summary>
     /// Private member to hold a taxonomy that gives an indication of the type of content for the media object.
     /// </summary>
-    private Collection<YahooMediaCategory> mediaObjectCategories;
+    private List<YahooMediaCategory> mediaObjectCategories;
     /// <summary>
     /// Private member to hold the hash digests for the media object.
     /// </summary>
-    private Collection<YahooMediaHash> mediaObjectHashes;
+    private List<YahooMediaHash> mediaObjectHashes;
     /// <summary>
     /// Private member to hold a web browser media player console the media object can be accessed through.
     /// </summary>
@@ -112,7 +109,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <summary>
     /// Private member to hold the entities that contributed to the creation of the media object.
     /// </summary>
-    private Collection<YahooMediaCredit> mediaObjectCredits;
+    private List<YahooMediaCredit> mediaObjectCredits;
     /// <summary>
     /// Private member to hold the copyright information for the media object.
     /// </summary>
@@ -120,11 +117,11 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <summary>
     /// Private member to hold the text transcript, closed captioning, or lyrics for the media object.
     /// </summary>
-    private Collection<YahooMediaText> mediaObjectTextSeries;
+    private List<YahooMediaText> mediaObjectTextSeries;
     /// <summary>
     /// Private member to hold the restrictions to be placed on aggregators that are rendering the media object.
     /// </summary>
-    private Collection<YahooMediaRestriction> mediaObjectRestrictions;
+    private List<YahooMediaRestriction> mediaObjectRestrictions;
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaContent"/> class.
     /// </summary>
@@ -428,10 +425,10 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// Gets a taxonomy that gives an indication of the type of content for this media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<YahooMediaCategory> Categories
+    public IList<YahooMediaCategory> Categories
     {
         get
         {
@@ -464,14 +461,14 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// Gets the entities that contributed to the creation of this media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles, 
+    ///     Current entities can include people, companies, locations, etc. Specific entities can have multiple roles,
     ///     and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
     /// </remarks>
-    public Collection<YahooMediaCredit> Credits
+    public IList<YahooMediaCredit> Credits
     {
         get
         {
@@ -504,13 +501,13 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// Gets the hash digests for this media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     When assigning multiple hashes, each <see cref="YahooMediaHash"/> <b>must</b> have a different <see cref="YahooMediaHash.Algorithm"/>.
     /// </remarks>
-    public Collection<YahooMediaHash> Hashes
+    public IList<YahooMediaHash> Hashes
     {
         get
         {
@@ -523,13 +520,13 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// Gets the relevant keywords that describe this media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     Media objects are typically assigned maximum of ten keywords or phrases.
     /// </remarks>
-    public Collection<string> Keywords
+    public IList<string> Keywords
     {
         get
         {
@@ -559,13 +556,13 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// Gets the permissible audiences for this media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     If there are no ratings specified, it can be assumed that no restrictions are necessary.
     /// </remarks>
-    public Collection<YahooMediaRating> Ratings
+    public IList<YahooMediaRating> Ratings
     {
         get
         {
@@ -578,10 +575,10 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// Gets the restrictions to be placed on aggregators that are rendering this media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<YahooMediaRestriction> Restrictions
+    public IList<YahooMediaRestriction> Restrictions
     {
         get
         {
@@ -594,15 +591,15 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// Gets the text transcript, closed captioning, or lyrics for this media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
-    ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text. 
-    ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time. 
+    ///     Many of these <see cref="YahooMediaText"/> objects are permitted to provide a time series of text.
+    ///     In such cases, it is encouraged, but not required, that the <see cref="YahooMediaText"/> objects be grouped by language and appear in time sequence order based on the start time.
     ///     <see cref="YahooMediaText"/> objects can have overlapping start and end times.
     /// </remarks>
-    public Collection<YahooMediaText> TextSeries
+    public IList<YahooMediaText> TextSeries
     {
         get
         {
@@ -615,13 +612,13 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// Gets the representative images for this media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this media object. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     If multiple thumbnails are included, and time coding is not at play, it is assumed that the images are in order of importance.
     /// </remarks>
-    public Collection<YahooMediaThumbnail> Thumbnails
+    public IList<YahooMediaThumbnail> Thumbnails
     {
         get
         {
@@ -1079,7 +1076,7 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
             {
                 if (int.TryParse(durationAttribute, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int seconds))
                 {
-                    this.Duration = new(0, 0, seconds);
+                    this.Duration = new TimeSpan(0, 0, seconds);
                     wasLoaded = true;
                 }
                 else if (TimeSpan.TryParse(durationAttribute, out TimeSpan duration))

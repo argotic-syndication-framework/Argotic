@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -93,7 +92,7 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
                             break;
                         }
 
-                        ((Collection<RsdApplicationInterface>)resource.Interfaces).Add(api);
+                        resource.Interfaces.Add(api);
                     }
                 }
             }

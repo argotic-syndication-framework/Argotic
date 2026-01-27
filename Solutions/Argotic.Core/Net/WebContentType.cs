@@ -1,8 +1,6 @@
 using System.Net;
 using System.Text;
 
-using Argotic.Common;
-
 namespace Argotic.Net;
 
 /// <summary>
@@ -232,7 +230,7 @@ public class WebContentType : IComparable
     {
         get
         {
-            webContentMediaParameters ??= new(StringComparer.OrdinalIgnoreCase);
+            webContentMediaParameters ??= new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
             return webContentMediaParameters;
         }
     }

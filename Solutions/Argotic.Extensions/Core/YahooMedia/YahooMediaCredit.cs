@@ -1,8 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -59,7 +57,7 @@ public class YahooMediaCredit : IComparable
     {
         get
         {
-            return new("urn:ebu");
+            return new Uri("urn:ebu");
         }
     }
 

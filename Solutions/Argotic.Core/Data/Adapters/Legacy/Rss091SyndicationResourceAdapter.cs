@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Globalization;
+﻿using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -119,7 +118,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator imageNavigator = navigator.SelectSingleNode("image", manager);
         if (imageNavigator != null)
         {
-            channel.Image = new();
+            channel.Image = new RssImage();
             Rss091SyndicationResourceAdapter.FillImage(channel.Image, imageNavigator, manager, settings);
         }
 
@@ -233,7 +232,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
                 SyndicationExtensionAdapter adapter = new(itemIterator.Current, settings);
                 adapter.Fill(item);
 
-                ((Collection<RssItem>)channel.Items).Add(item);
+                channel.Items.Add(item);
             }
         }
     }
@@ -302,7 +301,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (textInputNavigator != null)
         {
-            channel.TextInput = new();
+            channel.TextInput = new RssTextInput();
             Rss091SyndicationResourceAdapter.FillTextInput(channel.TextInput, textInputNavigator, manager, settings);
         }
     }

@@ -1,6 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Globalization;
-using System.Net;
+﻿using System.Globalization;
+using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -52,45 +51,13 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// </summary>
     private static readonly Version feedVersion = new(1, 0);
     /// <summary>
-    /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-    /// </summary>
-    private bool resourceAsyncLoadCancelled;
-    /// <summary>
-    /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-    /// </summary>
-    private bool resourceIsLoading;
-    /// <summary>
-    /// Private member to hold HTTP web request used by asynchronous load operations.
-    /// </summary>
-    private static WebRequest asyncHttpWebRequest;
-    /// <summary>
-    /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-    /// </summary>
-    private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-    /// <summary>
-    /// Private member to hold the collection of authors of the entry.
-    /// </summary>
-    private Collection<AtomPersonConstruct> entryAuthors;
-    /// <summary>
-    /// Private member to hold the collection of categories associated with the entry.
-    /// </summary>
-    private Collection<AtomCategory> entryCategories;
-    /// <summary>
     /// Private member to hold information that contains or links to the content of the entry.
     /// </summary>
     private AtomContent entryContent;
     /// <summary>
-    /// Private member to hold the collection of contributors of the entry.
-    /// </summary>
-    private Collection<AtomPersonConstruct> entryContributors;
-    /// <summary>
     /// Private member to hold a permanent, universally unique identifier for the entry.
     /// </summary>
     private AtomId entryId;
-    /// <summary>
-    /// Private member to hold references from the entry to one or more Web resources.
-    /// </summary>
-    private Collection<AtomLink> entryLinks;
     /// <summary>
     /// Private member to hold a value indicating an instant in time associated with an event early in the life cycle of the entry.
     /// </summary>
@@ -180,71 +147,34 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     public CultureInfo Language { get; set; }
 
     /// <summary>
-    /// Gets or sets the syndication extensions applied to this syndication entity.
+    /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<ISyndicationExtension> Extensions
-    {
-        get
-        {
-            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
-            return objectSyndicationExtensions;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            objectSyndicationExtensions = value;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-        }
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
-    /// Gets or sets the authors of this entry.
+    /// Gets the authors of this entry.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the authors of this entry.</value>
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the authors of this entry.</value>
     /// <remarks>
     ///     <para>
     ///        An entry <b>must</b> contain one or more authors, unless the entry contains an <see cref="AtomEntry.Source"/> object that contains an author or,
     ///        in an Atom Feed Document, the <see cref="AtomFeed"/> contains an author itself.
     ///     </para>
     /// </remarks>
-    public Collection<AtomPersonConstruct> Authors
-    {
-        get
-        {
-            entryAuthors ??= [];
-            return entryAuthors;
-        }
-    }
+    public IList<AtomPersonConstruct> Authors { get; } = [];
 
     /// <summary>
-    /// Gets or sets the categories associated with this entry.
+    /// Gets the categories associated with this entry.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="AtomCategory"/> objects that represent the categories associated with this entry.</value>
-    public Collection<AtomCategory> Categories
-    {
-        get
-        {
-            entryCategories ??= [];
-            return entryCategories;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomCategory"/> objects that represent the categories associated with this entry.</value>
+    public IList<AtomCategory> Categories { get; } = [];
 
     /// <summary>
     /// Gets or sets information that contains or links to the content of this entry.
@@ -264,17 +194,10 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     }
 
     /// <summary>
-    /// Gets or sets the entities who contributed to this entry.
+    /// Gets the entities who contributed to this entry.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the entities who contributed to this entry.</value>
-    public Collection<AtomPersonConstruct> Contributors
-    {
-        get
-        {
-            entryContributors ??= [];
-            return entryContributors;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the entities who contributed to this entry.</value>
+    public IList<AtomPersonConstruct> Contributors { get; } = [];
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
@@ -315,23 +238,16 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     }
 
     /// <summary>
-    /// Gets or sets references from this entry to one or more Web resources.
+    /// Gets references from this entry to one or more Web resources.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="AtomLink"/> objects that represent references from this entry to one or more Web resources.</value>
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomLink"/> objects that represent references from this entry to one or more Web resources.</value>
     /// <remarks>
     ///     <para>
     ///         An entry <b>must not</b> contain more than one <see cref="AtomLink"/> with a <see cref="AtomLink.Relation"/> property of <i>alternate</i>
     ///         that has the same combination of <see cref="AtomLink.ContentType"/> and <see cref="AtomLink.ContentLanguage"/> property values.
     ///     </para>
     /// </remarks>
-    public Collection<AtomLink> Links
-    {
-        get
-        {
-            entryLinks ??= [];
-            return entryLinks;
-        }
-    }
+    public IList<AtomLink> Links { get; } = [];
 
     /// <summary>
     /// Gets or sets a date-time indicating an instant in time associated with an event early in the life cycle of this entry.
@@ -495,391 +411,55 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     }
 
     /// <summary>
-    /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
-    /// </summary>
-    /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, Otherwise, <b>false</b>.</value>
-    internal bool AsyncLoadHasBeenCancelled
-    {
-        get
-        {
-            return resourceAsyncLoadCancelled;
-        }
-
-        set
-        {
-            resourceAsyncLoadCancelled = value;
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating if the syndication resource is in the process of loading.
-    /// </summary>
-    /// <value><b>true</b> if syndication resource is in the process of loading, Otherwise, <b>false</b>.</value>
-    internal bool LoadOperationInProgress
-    {
-        get
-        {
-            return resourceIsLoading;
-        }
-
-        set
-        {
-            resourceIsLoading = value;
-        }
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/>.
+    /// Asynchronously creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <returns>An <see cref="AtomEntry"/> object loaded using the <paramref name="source"/> data.</returns>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
+    /// <returns>A <see cref="Task{AtomEntry}"/> that represents the asynchronous operation. The task result contains the loaded <see cref="AtomEntry"/>.</returns>
     /// <remarks>
-    ///     The <see cref="AtomEntry"/> is created using the default <see cref="SyndicationResourceLoadSettings"/>.
+    ///     This method uses the shared <see cref="HttpClient"/> from <see cref="SyndicationEncodingUtility.SharedHttpClient"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Create method.">
+    ///     <code lang="cs" title="The following code example demonstrates the usage of the CreateAsync method.">
     ///         <code
-    ///             source=".\..\Argotic.Examples\Core\Atom\AtomFeedExample.cs"
-    ///             region="Create(Uri source)"
+    ///             source=".\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs"
+    ///             region="CreateAsync(Uri source)"
     ///         />
     ///     </code>
     /// </example>
-    public static AtomEntry Create(Uri source)
-    {
-        return AtomEntry.Create(source, new WebRequestOptions());
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/> object.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-    /// <returns>An <see cref="AtomEntry"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-    public static AtomEntry Create(Uri source, SyndicationResourceLoadSettings settings)
-    {
-        return AtomEntry.Create(source, new(), settings);
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <returns>An <see cref="AtomEntry"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <remarks>
-    ///     The <see cref="AtomEntry"/> is created using the default <see cref="SyndicationResourceLoadSettings"/>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-    public static AtomEntry Create(Uri source, ICredentials credentials, IWebProxy proxy)
-    {
-        return AtomEntry.Create(source, new WebRequestOptions(credentials, proxy));
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <returns>An <see cref="AtomEntry"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <remarks>
-    ///     The <see cref="AtomEntry"/> is created using the default <see cref="SyndicationResourceLoadSettings"/>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-    public static AtomEntry Create(Uri source, WebRequestOptions options)
-    {
-        return AtomEntry.Create(source, options, null);
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-    /// <returns>An <see cref="AtomEntry"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-    public static AtomEntry Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
-    {
-        return AtomEntry.Create(source, new(credentials, proxy), settings);
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-    /// <returns>An <see cref="AtomEntry"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-    public static AtomEntry Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
+    public static async Task<AtomEntry> CreateAsync(Uri source, SyndicationResourceLoadSettings? settings = null, CancellationToken cancellationToken = default)
     {
         AtomEntry syndicationResource = new();
-
-        ArgumentNullException.ThrowIfNull(source);
-
-        syndicationResource.Load(source, options, settings);
-
+        await syndicationResource.LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, settings, null, cancellationToken).ConfigureAwait(false);
         return syndicationResource;
     }
 
     /// <summary>
-    /// Loads this <see cref="AtomEntry"/> instance asynchronously using the specified <see cref="Uri"/>.
+    /// Asynchronously creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
-    /// <remarks>
-    ///     <para>The <see cref="AtomEntry"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
-    ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
-    ///     </para>
-    ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
-    ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the LoadAsync method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs"
-    ///             region="LoadAsync(Uri source, Object userToken)"
-    ///         />
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs"
-    ///             region="EntryLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public void LoadAsync(Uri source, object userToken)
-    {
-        this.LoadAsync(source, null, userToken);
-    }
-
-    /// <summary>
-    /// Loads this <see cref="AtomEntry"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
+    /// <returns>A <see cref="Task{AtomEntry}"/> that represents the asynchronous operation. The task result contains the loaded <see cref="AtomEntry"/>.</returns>
     /// <remarks>
     ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
-    ///     </para>
-    ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
-    ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, Object)"/> method.
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
+    public static async Task<AtomEntry> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
-        this.LoadAsync(source, settings, new(), userToken);
-    }
-
-    /// <summary>
-    /// Loads this <see cref="AtomEntry"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
-    /// <remarks>
-    ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
-    ///     </para>
-    ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-    ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
-    {
-        this.LoadAsync(source, settings, new(credentials, proxy), userToken);
-    }
-
-    /// <summary>
-    /// Loads this <see cref="AtomEntry"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
-    /// <remarks>
-    ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
-    ///     </para>
-    ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-    ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="AtomEntry"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-
-        if (settings == null)
-        {
-            settings = new();
-        }
-
-        if (this.LoadOperationInProgress)
-        {
-            throw new InvalidOperationException();
-        }
-
-        this.LoadOperationInProgress = true;
-
-        this.AsyncLoadHasBeenCancelled = false;
-
-        asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
-        asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
-
-        object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
-        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new(AsyncLoadCallback), state);
-
-        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new(AsyncTimeoutCallback), state, settings.Timeout, true);
-    }
-
-    /// <summary>
-    /// Cancels an asynchronous operation to load this syndication resource.
-    /// </summary>
-    /// <remarks>
-    ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, Object)"/> operation.
-    ///     If there is a load operation in progress, this method releases resources used to execute the load operation.
-    ///     If there is no load operation pending, this method does nothing.
-    /// </remarks>
-    public void LoadAsyncCancel()
-    {
-        if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
-        {
-            this.AsyncLoadHasBeenCancelled = true;
-
-            asyncHttpWebRequest.Abort();
-        }
-    }
-
-    /// <summary>
-    /// Called when a corresponding asynchronous load operation completes.
-    /// </summary>
-    /// <param name="result">The result of the asynchronous operation.</param>
-    private static void AsyncLoadCallback(IAsyncResult result)
-    {
-        System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-        if (result.IsCompleted)
-        {
-            object[] parameters = (object[])result.AsyncState;
-            var httpWebRequest = parameters[0] as WebRequest;
-            var source = parameters[2] as Uri;
-            var settings = parameters[3] as SyndicationResourceLoadSettings;
-            var options = parameters[4] as WebRequestOptions;
-            object userToken = parameters[5];
-
-            if (parameters[1] is AtomEntry entry)
-            {
-                WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
-
-                using (Stream stream = httpWebResponse.GetResponseStream())
-                {
-                    if (settings != null)
-                    {
-                        encoding = settings.CharacterEncoding;
-                    }
-
-                    using StreamReader streamReader = new(stream, encoding);
-                    XmlReaderSettings readerSettings = new()
-                    {
-                        IgnoreComments = true,
-                        IgnoreWhitespace = true,
-                        DtdProcessing = DtdProcessing.Ignore
-                    };
-
-                    using XmlReader reader = XmlReader.Create(streamReader, readerSettings);
-                    XPathNavigator navigator;
-                    if (encoding == System.Text.Encoding.UTF8)
-                    {
-                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-                    }
-                    else
-                    {
-                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
-                    }
-
-                    SyndicationResourceAdapter adapter = new(navigator, settings);
-                    adapter.Fill(entry, SyndicationContentFormat.Atom);
-
-                    entry.OnEntryLoaded(new(navigator, source, options, userToken));
-                }
-
-                entry.LoadOperationInProgress = false;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
-    /// </summary>
-    /// <param name="state">An object containing information to be used by the callback method each time it executes.</param>
-    /// <param name="timedOut"><b>true</b> if the <see cref="WaitHandle"/> timed out; <b>false</b> if it was signaled.</param>
-    private void AsyncTimeoutCallback(object state, bool timedOut)
-    {
-        if (timedOut)
-        {
-            asyncHttpWebRequest?.Abort();
-        }
-
-        this.LoadOperationInProgress = false;
-    }
-
-    /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool AddExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-
-        ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        bool wasAdded = true;
-        return wasAdded;
+        AtomEntry syndicationResource = new();
+        await syndicationResource.LoadAsync(source, httpClient, settings, requestOptions, cancellationToken).ConfigureAwait(false);
+        return syndicationResource;
     }
 
     /// <summary>
@@ -895,27 +475,12 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
 
         List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
-    }
-
-    /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool RemoveExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
 
     /// <summary>
@@ -989,11 +554,11 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
 
         if (settings == null)
         {
-            settings = new();
+            settings = new SyndicationResourceLoadSettings();
         }
 
         XPathNavigator navigator = source.CreateNavigator();
-        this.Load(navigator, settings, new(navigator));
+        this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
     }
 
     /// <summary>
@@ -1087,178 +652,61 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     }
 
     /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
+    /// Asynchronously loads the <see cref="AtomEntry"/> from the specified <see cref="Uri"/> using the shared <see cref="HttpClient"/>.
     /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
+    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
+    /// <returns>A <see cref="Task"/> that represents the asynchronous load operation.</returns>
     /// <remarks>
-    ///     <para>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                      If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
+    ///     This method uses the shared <see cref="HttpClient"/> from <see cref="SyndicationEncodingUtility.SharedHttpClient"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs"
-    ///             region="Load(Uri source, ICredentials credentials, IWebProxy proxy)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
+    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default)
     {
-        this.Load(source, new(credentials, proxy));
+        return LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
     }
 
     /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
+    /// Asynchronously loads the <see cref="AtomEntry"/> from the specified <see cref="Uri"/> using the specified <see cref="HttpClient"/>.
     /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <remarks>
-    ///     <para>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code
-    ///             source="..\..\Argotic.Examples\Core\Atom\AtomEntryExample.cs"
-    ///             region="Load(Uri source, WebRequestOptions options)"
-    ///         />
-    ///     </code>
-    /// </example>
-    public void Load(Uri source, WebRequestOptions options)
-    {
-        this.Load(source, options, null);
-    }
-
-    /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
+    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A <see cref="CancellationToken"/> that can be used to cancel the operation.</param>
+    /// <returns>A <see cref="Task"/> that represents the asynchronous load operation.</returns>
     /// <remarks>
     ///     <para>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                      If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
-    ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used.
-    ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    ///     </para>
+    ///     <para>
+    ///         If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
+    ///         the character encoding of the <paramref name="source"/> will be attempted to be determined automatically. Otherwise, the specified character encoding will be used.
+    ///         If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
+    ///     </para>
+    ///     <para>
+    ///         After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
-    {
-        this.Load(source, new(credentials, proxy), settings);
-    }
-
-    /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
-    /// <remarks>
-    ///     <para>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
-    ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used.
-    ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    public async Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
+        settings ??= new SyndicationResourceLoadSettings();
 
-        if (settings == null)
-        {
-            settings = new();
-        }
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(settings.Timeout);
 
-        XPathNavigator navigator;
-        if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
-        {
-            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-        }
-        else
-        {
-            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
-        }
+        Encoding? encoding = settings.CharacterEncoding == System.Text.Encoding.UTF8 ? null : settings.CharacterEncoding;
+        XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(source, httpClient, encoding, requestOptions, timeoutCts.Token).ConfigureAwait(false);
 
-        this.Load(navigator, settings, new(navigator, source, options));
+        SyndicationResourceAdapter adapter = new(navigator, settings);
+        adapter.Fill(this, SyndicationContentFormat.Atom);
+
+        this.OnEntryLoaded(new SyndicationResourceLoadedEventArgs(navigator, source));
     }
 
     /// <summary>
@@ -1293,7 +741,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
 
         if (settings == null)
         {
-            settings = new();
+            settings = new SyndicationResourceSaveSettings();
         }
 
         XmlWriterSettings writerSettings = new()
@@ -1325,7 +773,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         ArgumentNullException.ThrowIfNull(writer);
 
-        this.Save(writer, new());
+        this.Save(writer, new SyndicationResourceSaveSettings());
     }
 
     /// <summary>

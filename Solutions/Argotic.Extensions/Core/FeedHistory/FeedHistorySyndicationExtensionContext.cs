@@ -1,8 +1,5 @@
-﻿using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -13,10 +10,6 @@ namespace Argotic.Extensions.Core;
 public class FeedHistorySyndicationExtensionContext
 {
 
-    /// <summary>
-    /// Private member to hold a collection of relations for linked feed documents that together contain the entries of a logical feed.
-    /// </summary>
-    private Collection<FeedHistoryLinkRelation> extensionLinkRelations;
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedHistorySyndicationExtensionContext"/> class.
     /// </summary>
@@ -40,15 +33,7 @@ public class FeedHistorySyndicationExtensionContext
     /// Gets a collection of <see cref="FeedHistoryLinkRelation"/> objects that represent the relationships between feed documents.
     /// </summary>
     /// <value>A collection of <see cref="FeedHistoryLinkRelation"/> objects that represent the relationships between feed documents.</value>
-    public Collection<FeedHistoryLinkRelation> Relations
-    {
-        get
-        {
-            extensionLinkRelations ??= [];
-
-            return extensionLinkRelations;
-        }
-    }
+    public IList<FeedHistoryLinkRelation> Relations { get; } = [];
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

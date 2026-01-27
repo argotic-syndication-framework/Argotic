@@ -1,8 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -47,7 +45,7 @@ public class YahooMediaCategory : IComparable
     {
         get
         {
-            return new("http://search.yahoo.com/mrss/category_schema");
+            return new Uri("http://search.yahoo.com/mrss/category_schema");
         }
     }
 

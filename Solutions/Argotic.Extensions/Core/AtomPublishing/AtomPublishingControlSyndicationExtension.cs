@@ -34,7 +34,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// Initializes a new instance of the <see cref="AtomPublishingControlSyndicationExtension"/> class.
     /// </summary>
     public AtomPublishingControlSyndicationExtension()
-        : base("app", "http://www.w3.org/2007/app", new("1.0"), new("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Control", "Extends syndication resource memebers to provide a means of specifying publishing control of published resources.")
+        : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Control", "Extends syndication resource memebers to provide a means of specifying publishing control of published resources.")
     {
     }
 
@@ -152,7 +152,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
 
         if (settings == null)
         {
-            settings = new();
+            settings = new SyndicationResourceLoadSettings();
         }
 
         XPathDocument document = new(reader);

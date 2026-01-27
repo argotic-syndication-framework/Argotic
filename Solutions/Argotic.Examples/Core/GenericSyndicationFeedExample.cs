@@ -1,15 +1,13 @@
-﻿using System.Net;
-
 using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core;
 
 /// <summary>
 /// Contains the code examples for the <see cref="GenericSyndicationFeed"/> class.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="GenericSyndicationFeed"/> class. 
+///     This class contains all the code examples that are referenced by the <see cref="GenericSyndicationFeed"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
 public static class GenericSyndicationFeedExample
@@ -17,9 +15,9 @@ public static class GenericSyndicationFeedExample
     /// <summary>
     /// Provides example code for the GenericSyndicationFeed class.
     /// </summary>
-    public static void ClassExample()
+    public static async Task ClassExampleAsync()
     {
-        GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new("http://feeds.feedburner.com/OppositionallyDefiant"));
+        GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("http://feeds.feedburner.com/OppositionallyDefiant")).ConfigureAwait(false);
 
         foreach (GenericSyndicationCategory category in feed.Categories)
         {
@@ -56,11 +54,11 @@ public static class GenericSyndicationFeedExample
     }
 
     /// <summary>
-    /// Provides example code for the GenericSyndicationFeed.Create(Uri) method
+    /// Provides example code for the GenericSyndicationFeed.CreateAsync(Uri) method
     /// </summary>
-    public static void CreateExample()
+    public static async Task CreateExampleAsync()
     {
-        GenericSyndicationFeed feed = GenericSyndicationFeed.Create(new("http://feeds.feedburner.com/OppositionallyDefiant"));
+        GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("http://feeds.feedburner.com/OppositionallyDefiant")).ConfigureAwait(false);
 
         foreach (GenericSyndicationItem item in feed.Items)
         {
@@ -79,14 +77,20 @@ public static class GenericSyndicationFeedExample
         }
     }
     /// <summary>
-    /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
+    /// Provides example code for the LoadAsync(Uri, HttpClient) method
     /// </summary>
-    public static void LoadUriExample()
+    public static async Task LoadUriExampleAsync()
     {
         GenericSyndicationFeed feed = new();
         Uri source = new("http://feeds.feedburner.com/OppositionallyDefiant");
 
-        feed.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+        // For simple case (no credentials):
+        await feed.LoadAsync(source).ConfigureAwait(false);
+
+        // Or for credentials:
+        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
+        // using var httpClient = new HttpClient(handler);
+        // await feed.LoadAsync(source, httpClient);
 
         foreach (GenericSyndicationItem item in feed.Items)
         {

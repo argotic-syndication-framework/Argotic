@@ -1,8 +1,5 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Net;
 
@@ -14,11 +11,6 @@ namespace Argotic.Net;
 [Serializable]
 public class XmlRpcArrayValue : IXmlRpcValue, IComparable
 {
-    /// <summary>
-    /// Private member to hold data elements for the array.
-    /// </summary>
-    private Collection<IXmlRpcValue> arrayValues;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcArrayValue"/> class.
     /// </summary>
@@ -51,17 +43,10 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable
     /// Gets data elements for this array.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the data elements for this array.
+    ///     A <see cref="IList{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the data elements for this array.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<IXmlRpcValue> Values
-    {
-        get
-        {
-            arrayValues ??= [];
-            return arrayValues;
-        }
-    }
+    public IList<IXmlRpcValue> Values { get; } = [];
 
     /// <summary>
     /// Loads this <see cref="XmlRpcArrayValue"/> using the supplied <see cref="XPathNavigator"/>.

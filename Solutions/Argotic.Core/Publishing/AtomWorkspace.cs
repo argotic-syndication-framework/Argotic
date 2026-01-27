@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -39,17 +38,9 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// </summary>
     private CultureInfo commonObjectLanguage;
     /// <summary>
-    /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-    /// </summary>
-    private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-    /// <summary>
     /// Private member to hold a human-readable title for the workspace.
     /// </summary>
     private AtomTextConstruct workspaceTitle = new();
-    /// <summary>
-    /// Private member to hold the collections associated to this workspace.
-    /// </summary>
-    private IEnumerable<AtomMemberResources> workspaceCollections;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomWorkspace"/> class.
@@ -69,20 +60,20 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="AtomWorkspace"/> class using the supplied <see cref="AtomTextConstruct"/> and <see cref="Collection{AtomMemberResources}"/>.
+    /// Initializes a new instance of the <see cref="AtomWorkspace"/> class using the supplied <see cref="AtomTextConstruct"/> and <see cref="IEnumerable{AtomMemberResources}"/>.
     /// </summary>
     /// <param name="title">A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for the workspace.</param>
-    /// <param name="collections"></param>
+    /// <param name="collections">A collection of <see cref="AtomMemberResources"/> objects to associate with the workspace.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="title"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="collections"/> is a null reference.</exception>
-    public AtomWorkspace(AtomTextConstruct title, Collection<AtomMemberResources> collections)
+    public AtomWorkspace(AtomTextConstruct title, IEnumerable<AtomMemberResources> collections)
     {
         this.Title = title;
 
         ArgumentNullException.ThrowIfNull(collections);
         foreach (AtomMemberResources collection in collections)
         {
-            this.AddCollection(collection);
+            this.Collections.Add(collection);
         }
     }
 
@@ -98,13 +89,13 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     {
         get
         {
-            return ((Collection<AtomMemberResources>)this.Collections)[index];
+            return this.Collections[index];
         }
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            ((Collection<AtomMemberResources>)this.Collections)[index] = value;
+            this.Collections[index] = value;
         }
     }
 
@@ -153,54 +144,16 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     }
 
     /// <summary>
-    /// Gets or sets the syndication extensions applied to this syndication entity.
+    /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<ISyndicationExtension> Extensions
-    {
-        get
-        {
-            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
-            return objectSyndicationExtensions;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            objectSyndicationExtensions = value;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-        }
-    }
-
-    /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool AddExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-
-        ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        bool wasAdded = true;
-        return wasAdded;
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
 
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
@@ -215,7 +168,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
 
@@ -224,43 +177,13 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     }
 
     /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
+    /// Gets the collections of resources available for editing that are associated with this workspace.
     /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomMemberResources"/> objects that represent the collections of resources available for editing that are associated with this workspace.</value>
     /// <remarks>
-    ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool RemoveExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-    }
-
-    /// <summary>
-    /// Gets or sets the collections of resources available for editing that are associated with this workspace.
-    /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="AtomMemberResources"/> objects that represent the collections of resources available for editing that are associated with this workspace.</value>
-    /// <remarks>
-    ///     <para>This <see cref="IEnumerable{T}"/> collection of <see cref="AtomMemberResources"/> objects is internally represented as a <see cref="Collection{T}"/> collection.</para>
     ///     <para>The <see cref="Collections"/> for the <see cref="AtomWorkspace"/> can contain zero or more <see cref="AtomMemberResources"/> objects.</para>
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<AtomMemberResources> Collections
-    {
-        get
-        {
-            workspaceCollections ??= [];
-            return workspaceCollections;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            workspaceCollections = value;
-        }
-    }
+    public IList<AtomMemberResources> Collections { get; } = [];
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable title for this workspace.
@@ -285,7 +208,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{AtomMemberResources}"/> collections.
+    /// Compares two specified <see cref="IList{AtomMemberResources}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -303,7 +226,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<AtomMemberResources> source, Collection<AtomMemberResources> target)
+    public static int CompareSequence(IList<AtomMemberResources> source, IList<AtomMemberResources> target)
     {
         int result = 0;
 
@@ -327,42 +250,6 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         }
 
         return result;
-    }
-
-    /// <summary>
-    /// Adds the supplied <see cref="AtomMemberResources"/> to the <see cref="Collections"/> of the workspace.
-    /// </summary>
-    /// <param name="collection">The <see cref="AtomMemberResources"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was added to the <see cref="Collections"/> of the workspace, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference.</exception>
-    public bool AddCollection(AtomMemberResources collection)
-    {
-        ArgumentNullException.ThrowIfNull(collection);
-
-        ((Collection<AtomMemberResources>)this.Collections).Add(collection);
-        bool wasAdded = true;
-        return wasAdded;
-    }
-
-    /// <summary>
-    /// Searches for a collection that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Collections"/> of the workspace.
-    /// </summary>
-    /// <param name="match">The <see cref="Predicate{AtomMemberResources}"/> delegate that defines the conditions of the <see cref="AtomMemberResources"/> to search for.</param>
-    /// <returns>
-    ///     The first collection that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="AtomMemberResources"/>.
-    /// </returns>
-    /// <remarks>
-    ///     The <see cref="Predicate{AtomMemberResources}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-    ///     The elements of the current <see cref="Collections"/> are individually passed to the <see cref="Predicate{AtomMemberResources}"/> delegate, moving forward in
-    ///     the <see cref="Collections"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public AtomMemberResources FindCollection(Predicate<AtomMemberResources> match)
-    {
-        ArgumentNullException.ThrowIfNull(match);
-
-        List<AtomMemberResources> list = [.. this.Collections];
-        return list.Find(match);
     }
 
     /// <summary>
@@ -394,7 +281,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
 
             if (titleNavigator != null)
             {
-                this.Title = new();
+                this.Title = new AtomTextConstruct();
                 if (this.Title.Load(titleNavigator))
                 {
                     wasLoaded = true;
@@ -408,7 +295,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
                     AtomMemberResources collection = new();
                     if (collection.Load(collectionIterator.Current))
                     {
-                        this.AddCollection(collection);
+                        this.Collections.Add(collection);
                         wasLoaded = true;
                     }
                 }
@@ -440,21 +327,6 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         adapter.Fill(this);
 
         return wasLoaded;
-    }
-
-    /// <summary>
-    /// Removes the supplied <see cref="AtomMemberResources"/> from the <see cref="Collections"/> of the workspace.
-    /// </summary>
-    /// <param name="collection">The <see cref="AtomMemberResources"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was removed from the <see cref="Collections"/> of the workspace, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Collections"/> of the workspace does not contain the specified <see cref="AtomMemberResources"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference.</exception>
-    public bool RemoveCollection(AtomMemberResources collection)
-    {
-        ArgumentNullException.ThrowIfNull(collection);
-        return ((Collection<AtomMemberResources>)this.Collections).Remove(collection);
     }
 
     /// <summary>
@@ -527,7 +399,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
         if (value != null)
         {
             int result = this.Title.CompareTo(value.Title);
-            result |= AtomWorkspace.CompareSequence(((Collection<AtomMemberResources>)this.Collections), ((Collection<AtomMemberResources>)value.Collections));
+            result |= AtomWorkspace.CompareSequence(this.Collections, value.Collections);
             result |= AtomUtility.CompareCommonObjectAttributes(this, value);
 
             return result;

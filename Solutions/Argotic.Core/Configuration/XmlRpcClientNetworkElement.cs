@@ -1,6 +1,5 @@
-﻿using System.ComponentModel;
+using System.ComponentModel;
 using System.Configuration;
-using System.Net;
 
 namespace Argotic.Configuration;
 
@@ -15,22 +14,6 @@ public sealed class XmlRpcClientNetworkElement : ConfigurationElement
     /// </summary>
     private static readonly ConfigurationProperty configurationSectionHostProperty = new("host", typeof(System.Uri), null, new UriTypeConverter(), null, ConfigurationPropertyOptions.None);
     /// <summary>
-    /// Private member to hold the client default credentials configuration property for the element.
-    /// </summary>
-    private static readonly ConfigurationProperty configurationElementDefaultCredentialsProperty = new("defaultCredentials", typeof(bool), false, new BooleanConverter(), null, ConfigurationPropertyOptions.None);
-    /// <summary>
-    /// Private member to hold the client user name configuration property for the element.
-    /// </summary>
-    private static readonly ConfigurationProperty configurationElementUserNameProperty = new("userName", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
-    /// <summary>
-    /// Private member to hold the client password configuration property for the element.
-    /// </summary>
-    private static readonly ConfigurationProperty configurationElementPasswordProperty = new("password", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
-    /// <summary>
-    /// Private member to hold the client domain configuration property for the element.
-    /// </summary>
-    private static readonly ConfigurationProperty configurationElementDomainProperty = new("domain", typeof(string), string.Empty, new StringConverter(), null, ConfigurationPropertyOptions.None);
-    /// <summary>
     /// Private member to hold a collection of configuration element properties for the element.
     /// </summary>
     private static readonly ConfigurationPropertyCollection configurationElementProperties = [];
@@ -41,46 +24,6 @@ public sealed class XmlRpcClientNetworkElement : ConfigurationElement
     public XmlRpcClientNetworkElement()
     {
         configurationElementProperties.Add(configurationSectionHostProperty);
-        configurationElementProperties.Add(configurationElementDefaultCredentialsProperty);
-        configurationElementProperties.Add(configurationElementUserNameProperty);
-        configurationElementProperties.Add(configurationElementPasswordProperty);
-        configurationElementProperties.Add(configurationElementDomainProperty);
-    }
-
-    /// <summary>
-    /// Gets or sets a <see cref="Boolean"/> value that controls whether the <see cref="System.Net.CredentialCache.DefaultCredentials">DefaultCredentials</see> are sent with requests.
-    /// </summary>
-    /// <value><b>true</b> indicates that default user credentials will be used to access the XML-RPC server; otherwise, <b>false</b>.</value>
-    [ConfigurationProperty("defaultCredentials", DefaultValue = false, Options = ConfigurationPropertyOptions.None)]
-    [TypeConverter(typeof(bool))]
-    public bool DefaultCredentials
-    {
-        get
-        {
-            return (bool)base[configurationElementDefaultCredentialsProperty];
-        }
-        set
-        {
-            base[configurationElementDefaultCredentialsProperty] = value;
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the domain or computer name that verifies the network credentials.
-    /// </summary>
-    /// <value>A string that represents the domain or computer name that verifies the network credentials.</value>
-    /// <seealso cref="NetworkCredential.Domain"/>
-    [ConfigurationProperty("domain", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
-    public string Domain
-    {
-        get
-        {
-            return (string)base[configurationElementDomainProperty];
-        }
-        set
-        {
-            base[configurationElementDomainProperty] = value;
-        }
     }
 
     /// <summary>
@@ -98,73 +41,6 @@ public sealed class XmlRpcClientNetworkElement : ConfigurationElement
         set
         {
             base[configurationSectionHostProperty] = value;
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the user password to use to connect to an XML-RPC server.
-    /// </summary>
-    /// <value>A string that represents the password to use to connect to an XML-RPC server.</value>
-    /// <seealso cref="NetworkCredential.Password"/>
-    [ConfigurationProperty("password", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
-    public string Password
-    {
-        get
-        {
-            return (string)base[configurationElementPasswordProperty];
-        }
-        set
-        {
-            base[configurationElementPasswordProperty] = value;
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets the user name to connect to an XML-RPC server.
-    /// </summary>
-    /// <value>A string that represents the user name to connect to an XML-RPC server.</value>
-    /// <seealso cref="NetworkCredential.UserName"/>
-    [ConfigurationProperty("userName", DefaultValue = "", Options = ConfigurationPropertyOptions.None)]
-    public string UserName
-    {
-        get
-        {
-            return (string)base[configurationElementUserNameProperty];
-        }
-        set
-        {
-            base[configurationElementUserNameProperty] = value;
-        }
-    }
-
-    /// <summary>
-    /// Returns a <see cref="NetworkCredential"/> for the configured user name, password, and domain.
-    /// </summary>
-    /// <returns>
-    ///     A <see cref="NetworkCredential"/> object initialized using the curent <see cref="UserName"/>, <see cref="Password"/>, and <see cref="Domain"/>.
-    /// </returns>
-    /// <remarks>
-    ///     If <see cref="UserName"/> is a null or empty string, returns a <b>null</b> reference.
-    /// </remarks>
-    public NetworkCredential Credential
-    {
-        get
-        {
-            NetworkCredential credential = null;
-
-            if (!string.IsNullOrEmpty(this.UserName))
-            {
-                if (!string.IsNullOrEmpty(this.Domain))
-                {
-                    credential = new(this.UserName, this.Password, this.Domain);
-                }
-                else
-                {
-                    credential = new(this.UserName, this.Password);
-                }
-            }
-
-            return credential;
         }
     }
 

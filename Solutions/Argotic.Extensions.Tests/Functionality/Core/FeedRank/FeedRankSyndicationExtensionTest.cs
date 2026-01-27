@@ -1,10 +1,9 @@
-namespace Argotic.Extensions.Tests;
-
 using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
+
+namespace Argotic.Extensions.Tests.Functionality.Core.FeedRank;
 
 [TestClass]
 public class FeedRankSyndicationExtensionTest
@@ -43,24 +42,16 @@ public class FeedRankSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void FeedRankGetHashCodeTest()
     {
+        // Consistency: same object returns same hash
         FeedRankSyndicationExtension target = CreateExtension1();
-        int expected = 1719638022;
-        int actual = target.GetHashCode();
-        actual.ShouldBe(expected);
-    }
+        target.GetHashCode().ShouldBe(target.GetHashCode());
 
-    [TestMethod]
-    [Ignore("Test requires manual verification of Load behavior")]
-    public void FeedRankLoadTest()
-    {
-        string strXml = ExtensionTestUtil.GetWrappedXml(namespc, strExtXml);
-
-        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
-        RssFeed feed = new();
-        feed.Load(reader);
+        // Equality contract: equal objects have equal hashes
+        FeedRankSyndicationExtension other = CreateExtension1();
+        target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
     [TestMethod]
@@ -112,7 +103,7 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtension target = CreateExtension1();
         using StringWriter sw = new();
-        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
@@ -165,13 +156,16 @@ public class FeedRankSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("Context equality comparison not implemented")]
     public void FeedRankContextTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
-        FeedRankSyndicationExtensionContext expected = CreateContext1();
-        FeedRankSyndicationExtensionContext actual = target.Context;
-        actual.ShouldBe(expected);
+        FeedRankSyndicationExtensionContext context = target.Context;
+
+        context.ShouldNotBeNull();
+        context.Domain.ShouldBe(new Uri("http://example.com"));
+        context.Label.ShouldBe("Title");
+        context.Scheme.ShouldBe(new Uri("http://example.com/scheme.txt"));
+        context.Value.ShouldBe(1.0m);
     }
 
     private static FeedRankSyndicationExtension CreateExtension1()
@@ -180,9 +174,9 @@ public class FeedRankSyndicationExtensionTest
         {
             Context =
             {
-                Domain = new("http://example.com"),
+                Domain = new Uri("http://example.com"),
                 Label = "Title",
-                Scheme = new("http://example.com/scheme.txt"),
+                Scheme = new Uri("http://example.com/scheme.txt"),
                 Value = 1.0m
             }
         };
@@ -195,9 +189,9 @@ public class FeedRankSyndicationExtensionTest
         {
             Context =
             {
-                Domain = new("http://example.net"),
+                Domain = new Uri("http://example.net"),
                 Label = "label",
-                Scheme = new("http://example.net/scheme.html"),
+                Scheme = new Uri("http://example.net/scheme.html"),
                 Value = 2.0m
             }
         };
@@ -208,9 +202,9 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtensionContext re = new()
         {
-            Domain = new(""),
+            Domain = new Uri(""),
             Label = "",
-            Scheme = new(""),
+            Scheme = new Uri(""),
             Value = 1.0m
         };
         return re;

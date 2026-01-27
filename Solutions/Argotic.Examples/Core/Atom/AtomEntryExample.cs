@@ -1,17 +1,15 @@
-﻿using System.Net;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Atom;
 
 /// <summary>
 /// Contains the code examples for the <see cref="AtomEntry"/> class.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="AtomEntry"/> class. 
+///     This class contains all the code examples that are referenced by the <see cref="AtomEntry"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
 public static class AtomEntryExample
@@ -23,21 +21,21 @@ public static class AtomEntryExample
     {
         AtomEntry entry = new()
         {
-            Id = new(new("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
-            Title = new("Atom Entry Document"),
-            UpdatedOn = new(2003, 12, 13, 18, 30, 2)
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom Entry Document"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        entry.Authors.Add(new("John Doe"));
-        entry.Links.Add(new(new("/blog/1234"), "alternate"));
-        entry.Summary = new("A stand-alone Atom Entry Document.");
+        entry.Authors.Add(new AtomPersonConstruct("John Doe"));
+        entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
+        entry.Summary = new AtomTextConstruct("A stand-alone Atom Entry Document.");
     }
     /// <summary>
-    /// Provides example code for the AtomEntry.Create(Uri) method
+    /// Provides example code for the AtomEntry.CreateAsync(Uri) method
     /// </summary>
-    public static void CreateExample()
+    public static async Task CreateExampleAsync()
     {
-        AtomEntry entry = AtomEntry.Create(new("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707"));
+        AtomEntry entry = await AtomEntry.CreateAsync(new Uri("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707")).ConfigureAwait(false);
 
         if (entry.PublishedOn >= DateTime.Today)
         {
@@ -46,15 +44,15 @@ public static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the LoadAsync(Uri, Object) method
+    /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
-    public static void LoadAsyncExample()
+    public static async Task LoadAsyncExampleAsync()
     {
         AtomEntry entry = new();
 
-        entry.Loaded += new(EntryLoadedCallback);
+        entry.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(EntryLoadedCallback);
 
-        entry.LoadAsync(new("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707"), null);
+        await entry.LoadAsync(new Uri("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707")).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -62,10 +60,12 @@ public static class AtomEntryExample
     /// </summary>
     /// <param name="sender">The source of the event.</param>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains event data.</param>
-    private static void EntryLoadedCallback(object sender, SyndicationResourceLoadedEventArgs e)
+    private static void EntryLoadedCallback(object? sender, SyndicationResourceLoadedEventArgs e)
     {
-        if (e.State != null)
+        // Process the loaded entry using e.Data or e.Source
+        if (e.Source != null)
         {
+            // Process the source URI
         }
     }
     /// <summary>
@@ -125,14 +125,20 @@ public static class AtomEntryExample
     }
 
     /// <summary>
-    /// Provides example code for the Load(Uri, ICredentials, IWebProxy) method
+    /// Provides example code for the LoadAsync(Uri, HttpClient) method
     /// </summary>
-    public static void LoadUriExample()
+    public static async Task LoadUriExampleAsync()
     {
         AtomEntry entry = new();
         Uri source = new("http://example.org/blog/1234");
 
-        entry.Load(source, CredentialCache.DefaultNetworkCredentials, null);
+        // For simple case (no credentials):
+        await entry.LoadAsync(source).ConfigureAwait(false);
+
+        // Or for credentials:
+        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
+        // using var httpClient = new HttpClient(handler);
+        // await entry.LoadAsync(source, httpClient);
 
         if (entry.UpdatedOn >= DateTime.Today)
         {

@@ -1,9 +1,6 @@
-﻿using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -22,11 +19,6 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// Private member to hold the department name.
     /// </summary>
     private string extensionDepartment = string.Empty;
-    /// <summary>
-    /// Private member to hold the hit parade identifiers.
-    /// </summary>
-    private Collection<int> extensionHitParade;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummarySlashSyndicationExtensionContext"/> class.
     /// </summary>
@@ -68,17 +60,10 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// Gets the hit parade identifiers.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="Int32"/> objects that represent the hit parade identifiers. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="Int32"/> objects that represent the hit parade identifiers.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<int> HitParade
-    {
-        get
-        {
-            extensionHitParade ??= [];
-            return extensionHitParade;
-        }
-    }
+    public IList<int> HitParade { get; } = [];
 
     /// <summary>
     /// Gets or sets the name of the section.

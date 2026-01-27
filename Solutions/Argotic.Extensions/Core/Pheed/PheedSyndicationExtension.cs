@@ -1,8 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -34,7 +32,7 @@ public class PheedSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="PheedSyndicationExtension"/> class.
     /// </summary>
     public PheedSyndicationExtension()
-        : base("photo", "http://www.pheed.com/pheed/", new("1.0"), new("http://www.pheed.com/pheed/"), "Pheed Photography", "Extends syndication feeds to provide a means of describing a collection of photographs as both thumbnail and full size images.")
+        : base("photo", "http://www.pheed.com/pheed/", new Version("1.0"), new Uri("http://www.pheed.com/pheed/"), "Pheed Photography", "Extends syndication feeds to provide a means of describing a collection of photographs as both thumbnail and full size images.")
     {
     }
 

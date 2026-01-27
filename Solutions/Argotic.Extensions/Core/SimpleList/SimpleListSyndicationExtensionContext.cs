@@ -1,8 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -12,53 +9,30 @@ namespace Argotic.Extensions.Core;
 [Serializable]
 public class SimpleListSyndicationExtensionContext
 {
-
-    /// <summary>
-    /// Private member to hold information that allows the client to group or filter on the values of feed properties.
-    /// </summary>
-    private Collection<SimpleListGroup> extensionGroups;
-    /// <summary>
-    /// Private member to hold information that allows the client to sort on the values of feed properties.
-    /// </summary>
-    private Collection<SimpleListSort> extensionSorts;
     /// <summary>
     /// Initializes a new instance of the <see cref="SimpleListSyndicationExtensionContext"/> class.
     /// </summary>
     public SimpleListSyndicationExtensionContext()
     {
-
     }
+
     /// <summary>
     /// Gets information that allows the client to group or filter on the values of feed properties.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="SimpleListGroup"/> objects that represent information that allows the client to group or filter on the values of feed properties. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="SimpleListGroup"/> objects that represent information that allows the client to group or filter on the values of feed properties.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<SimpleListGroup> Grouping
-    {
-        get
-        {
-            extensionGroups ??= [];
-            return extensionGroups;
-        }
-    }
+    public IList<SimpleListGroup> Grouping { get; } = [];
 
     /// <summary>
     /// Gets information that allows the client to sort on the values of feed properties.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="SimpleListSort"/> objects that represent information that allows the client to sort on the values of feed properties. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="SimpleListSort"/> objects that represent information that allows the client to sort on the values of feed properties.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<SimpleListSort> Sorting
-    {
-        get
-        {
-            extensionSorts ??= [];
-            return extensionSorts;
-        }
-    }
+    public IList<SimpleListSort> Sorting { get; } = [];
 
     /// <summary>
     /// Gets or sets a value indicating if this feed is intended to be consumed as a list.

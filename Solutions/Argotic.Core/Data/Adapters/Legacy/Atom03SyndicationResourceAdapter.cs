@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -96,7 +95,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (idNavigator != null)
             {
-                resource.Id = new();
+                resource.Id = new AtomId();
                 resource.Id.Load(idNavigator, this.Settings);
             }
 
@@ -382,7 +381,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         if (idNavigator != null)
         {
-            entry.Id = new();
+            entry.Id = new AtomId();
             entry.Id.Load(idNavigator, settings);
         }
 
@@ -565,7 +564,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
                     break;
                 }
 
-                ((Collection<AtomEntry>)feed.Entries).Add(entry);
+                feed.Entries.Add(entry);
             }
         }
 

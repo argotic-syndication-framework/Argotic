@@ -1,11 +1,10 @@
-namespace Argotic.Extensions.Tests;
-
 using System.Globalization;
 using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
+
+namespace Argotic.Extensions.Tests.Functionality.Core.DublinCoreElementSet;
 
 [TestClass]
 public class DublinCoreElementSetSyndicationExtensionTest
@@ -90,13 +89,16 @@ public class DublinCoreElementSetSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("GetHashCode implementation is not deterministic across runs")]
     public void DublinCoreElementSetGetHashCodeTest()
     {
+        // Consistency: same object returns same hash
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-        int expected = 1398804031;
-        int actual = target.GetHashCode();
-        actual.ShouldBe(expected);
+        target.GetHashCode().ShouldBe(target.GetHashCode());
+
+        // Equality contract: equal objects have equal hashes
+        DublinCoreElementSetSyndicationExtension other = CreateExtension1();
+        target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
     [TestMethod]
@@ -158,7 +160,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
         using StringWriter sw = new();
-        using XmlWriter writer = XmlWriter.Create(sw, new() { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
+        using XmlWriter writer = XmlWriter.Create(sw, new XmlWriterSettings { OmitXmlDeclaration = true, ConformanceLevel = ConformanceLevel.Fragment });
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
@@ -211,13 +213,27 @@ public class DublinCoreElementSetSyndicationExtensionTest
     }
 
     [TestMethod]
-    [Ignore("Context equality comparison not implemented")]
     public void DublinCoreElementSetContextTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-        DublinCoreElementSetSyndicationExtensionContext expected = CreateContext1();
-        DublinCoreElementSetSyndicationExtensionContext actual = target.Context;
-        actual.ShouldBe(expected);
+        DublinCoreElementSetSyndicationExtensionContext context = target.Context;
+
+        context.ShouldNotBeNull();
+        context.Contributor.ShouldBe("Helper");
+        context.Coverage.ShouldBe("US");
+        context.Creator.ShouldBe("The Big Guy");
+        context.Date.ShouldBe(new DateTime(2010, 8, 1));
+        context.Description.ShouldBe("That kind of thing");
+        context.Format.ShouldBe("CDROM");
+        context.Identifier.ShouldBe("MYTESTCDROM-1");
+        context.Language.Name.ShouldBe("en-US");
+        context.Publisher.ShouldBe("MeMeMe");
+        context.Relation.ShouldBe("MYTESTCDROM-2");
+        context.Rights.ShouldBe("Copyright 2010");
+        context.Source.ShouldBe("Out of Me Head");
+        context.Subject.ShouldBe("Test data (Stupid variety)");
+        context.Title.ShouldBe("Stupid test data");
+        context.TypeVocabulary.ShouldBe(DublinCoreTypeVocabularies.PhysicalObject);
     }
 
     private static DublinCoreElementSetSyndicationExtension CreateExtension1()
@@ -229,11 +245,11 @@ public class DublinCoreElementSetSyndicationExtensionTest
                 Contributor = "Helper",
                 Coverage = "US",
                 Creator = "The Big Guy",
-                Date = new(2010, 8, 1),
+                Date = new DateTime(2010, 8, 1),
                 Description = "That kind of thing",
                 Format = "CDROM",
                 Identifier = "MYTESTCDROM-1",
-                Language = new("en-US"),
+                Language = new CultureInfo("en-US"),
                 Publisher = "MeMeMe",
                 Relation = "MYTESTCDROM-2",
                 Rights = "Copyright 2010",
@@ -256,11 +272,11 @@ public class DublinCoreElementSetSyndicationExtensionTest
                 Contributor = "Helper-er",
                 Coverage = "US",
                 Creator = "The Not-So-Big Guy",
-                Date = new(2010, 8, 1),
+                Date = new DateTime(2010, 8, 1),
                 Description = "This kind of thing",
                 Format = "CDROM",
                 Identifier = "MYTESTCDROM-2",
-                Language = new("en-US"),
+                Language = new CultureInfo("en-US"),
                 Publisher = "MeMyselfI",
                 Relation = "MYTESTCDROM-1",
                 Rights = "Copyright 2010",
@@ -281,11 +297,11 @@ public class DublinCoreElementSetSyndicationExtensionTest
             Contributor = "",
             Coverage = "",
             Creator = "",
-            Date = new(2010, 8, 1),
+            Date = new DateTime(2010, 8, 1),
             Description = "",
             Format = "",
             Identifier = "",
-            Language = new("US-en"),
+            Language = new CultureInfo("US-en"),
             Publisher = "",
             Relation = "",
             Rights = "",

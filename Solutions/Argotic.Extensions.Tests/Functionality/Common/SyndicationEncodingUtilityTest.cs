@@ -1,8 +1,7 @@
-namespace Argotic.Extensions.Tests;
-
 using Argotic.Common;
-using Microsoft.VisualStudio.TestTools.UnitTesting;
 using Shouldly;
+
+namespace Argotic.Extensions.Tests.Functionality.Common;
 
 [TestClass]
 public class SyndicationEncodingUtilityTest

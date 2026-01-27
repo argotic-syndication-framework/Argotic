@@ -293,7 +293,7 @@ public class SyndicationExtensionAdapter
 
                 if (instance.Load(this.Navigator))
                 {
-                    ((Collection<ISyndicationExtension>)entity.Extensions).Add(instance);
+                    entity.Extensions.Add(instance);
                 }
             }
         }

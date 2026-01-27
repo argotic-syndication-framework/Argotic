@@ -1,39 +1,23 @@
 ﻿namespace Argotic.Extensions;
 
 /// <summary>
-/// Defines generalized extension properties, methods, indexers and events that a value type or class 
+/// Defines generalized extension properties, methods, indexers and events that a value type or class
 /// implements to create a type-specific implementation of extension properties, methods, indexers and events.
 /// </summary>
 public interface IExtensibleSyndicationObject
 {
     /// <summary>
-    /// Gets or sets the syndication extensions applied to the syndication entity.
+    /// Gets the syndication extensions applied to the syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to the syndication entity.</value>
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to the syndication entity.</value>
     /// <seealso cref="SyndicationExtension"/>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    IEnumerable<ISyndicationExtension> Extensions
-    {
-        get;
-        set;
-    }
+    IList<ISyndicationExtension> Extensions { get; }
 
     /// <summary>
     /// Gets a value indicating if the syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    bool HasExtensions
-    {
-        get;
-    }
-
-    /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    bool AddExtension(ISyndicationExtension extension);
+    bool HasExtensions { get; }
 
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
@@ -43,18 +27,10 @@ public interface IExtensibleSyndicationObject
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match);
-
-    /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    bool RemoveExtension(ISyndicationExtension extension);
+    ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match);
 }

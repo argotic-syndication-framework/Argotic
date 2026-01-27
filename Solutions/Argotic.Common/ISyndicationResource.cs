@@ -1,4 +1,3 @@
-﻿using System.Net;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -209,237 +208,46 @@ public interface ISyndicationResource
     void Load(XmlReader reader, SyndicationResourceLoadSettings settings);
 
     /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <remarks>
-    ///     <para>
-    ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/>
-    ///         using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    ///     </para>
-    ///     <para>
-    ///         <b>Notes to Implementers:</b>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     When implementing this method, the <paramref name="source"/>, <paramref name="credentials"/>, and <paramref name="proxy"/> parameters should be passed
-    ///                     to the <see cref="ISyndicationResource.Load(Uri, ICredentials, IWebProxy, SyndicationResourceLoadSettings)"/> method with the <item>settings</item> parameter as <b>null</b>.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                      If <paramref name="credentials"/> is <b>null</b>, request should be made using the default application credentials.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="proxy"/> is <b>null</b>, request should be made using the <see cref="WebRequest"/> default proxy settings.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <b>must</b> be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
-    void Load(Uri source, ICredentials credentials, IWebProxy proxy);
-
-    /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <remarks>
-    ///     <para>
-    ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/>
-    ///         using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
-    void Load(Uri source, WebRequestOptions options);
-
-    /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
-    /// <remarks>
-    ///     <para>
-    ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/>
-    ///         using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    ///     </para>
-    ///     <para>
-    ///         <b>Notes to Implementers:</b>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                      If <paramref name="credentials"/> is <b>null</b>, request should be made using the default application credentials.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="proxy"/> is <b>null</b>, request should be made using the <see cref="WebRequest"/> default proxy settings.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     Implementers should consider using the <see cref="SyndicationEncodingUtility.CreateSafeNavigator(Uri, ICredentials, IWebProxy, System.Text.Encoding)"/> utility method
-    ///                     to retrieve the syndication resource information in a safe manner.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="ISyndicationResource.Loaded"/> event <b>must</b> be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
-    void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings);
-
-    /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
-    /// <remarks>
-    ///     <para>
-    ///         Place your custom code in the <b>Load</b> abstract method to load the syndication resource from the supplied <see cref="Uri"/>
-    ///         using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
-    void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings);
-
-    /// <summary>
-    /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/>.
+    /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
-    ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/>.</para>
-    ///     <para>The <see cref="ISyndicationResource"/> should be loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
-    ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
-    ///     </para>
-    ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
-    ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
-    ///     </para>
+    ///     <para>The <see cref="ISyndicationResource"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/> and the shared <see cref="HttpClient"/>.</para>
+    ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
+    ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    void LoadAsync(Uri source, object userToken);
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    Task LoadAsync(Uri source, CancellationToken cancellationToken = default);
 
     /// <summary>
-    /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.
+    /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
-    ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.</para>
     ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before
-    ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, Object)"/> method.
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
+    ///     <para>After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken);
-
-    /// <summary>
-    /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
-    /// <remarks>
-    ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/> and <see cref="IWebProxy"/>.</para>
-    ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
-    ///     </para>
-    ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-    ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken);
-
-    /// <summary>
-    /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="ISyndicationResource"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
-    /// <remarks>
-    ///     <para>Place your custom code in the <b>LoadAsync</b> abstract method to load the syndication resource asynchronously from the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/> and <see cref="IWebProxy"/>.</para>
-    ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event.
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
-    ///     </para>
-    ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>,
-    ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="ISyndicationResource"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken);
-
-    /// <summary>
-    /// Cancels an asynchronous operation to load the syndication resource.
-    /// </summary>
-    /// <remarks>
-    ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, Object)"/> operation.
-    ///     If there is a load operation in progress, this method releases resources used to execute the load operation.
-    ///     If there is no load operation pending, this method does nothing.
-    /// </remarks>
-    void LoadAsyncCancel();
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.

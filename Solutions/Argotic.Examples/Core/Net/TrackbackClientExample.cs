@@ -1,14 +1,13 @@
-﻿using System.Text;
-
+using System.Text;
 using Argotic.Net;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Net;
 
 /// <summary>
 /// Contains the code examples for the <see cref="TrackbackClient"/> class.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="TrackbackClient"/> class. 
+///     This class contains all the code examples that are referenced by the <see cref="TrackbackClient"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
 public static class TrackbackClientExample
@@ -16,16 +15,16 @@ public static class TrackbackClientExample
     /// <summary>
     /// Provides example code for the TrackbackClient class.
     /// </summary>
-    public static void ClassExample()
+    public static async Task ClassExampleAsync()
     {
         // Initialize the Trackback peer-to-peer notification protocol client
         TrackbackClient client = new()
         {
-            Host = new("http://www.example.com/trackback/5")
+            Host = new Uri("http://www.example.com/trackback/5")
         };
 
         // Construct the trackback message to be sent
-        TrackbackMessage message = new(new("http://www.bar.com/"))
+        TrackbackMessage message = new(new Uri("http://www.bar.com/"))
         {
             Encoding = Encoding.UTF8,
             WeblogName = "Foo",
@@ -33,8 +32,8 @@ public static class TrackbackClientExample
             Excerpt = "My Excerpt"
         };
 
-        // Send a synchronous trackback ping
-        TrackbackResponse response = client.Send(message);
+        // Send an asynchronous trackback ping
+        TrackbackResponse response = await client.SendAsync(message).ConfigureAwait(false);
 
         // Verify response to the trackback ping
         if (response != null)

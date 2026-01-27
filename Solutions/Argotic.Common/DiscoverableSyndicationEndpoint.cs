@@ -173,15 +173,37 @@ public class DiscoverableSyndicationEndpoint : IComparable
     }
 
     /// <summary>
-    /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="Source">endpoint location</see>.
+    /// Asynchronously initializes a read-only <see cref="XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="Source">endpoint location</see>.
     /// </summary>
-    /// <returns>A read-only <see cref="XPathNavigator"/> object for navigating the auto-discoverable syndicated content.</returns>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a read-only <see cref="XPathNavigator"/> object for navigating the auto-discoverable syndicated content.</returns>
     /// <exception cref="ArgumentNullException">The <see cref="Source"/> is a null reference.</exception>
-    public XPathNavigator CreateNavigator()
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public Task<XPathNavigator> CreateNavigatorAsync(CancellationToken cancellationToken = default)
+    {
+        return CreateNavigatorAsync(SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+    }
+
+    /// <summary>
+    /// Asynchronously initializes a read-only <see cref="XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="Source">endpoint location</see> using the specified <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a read-only <see cref="XPathNavigator"/> object for navigating the auto-discoverable syndicated content.</returns>
+    /// <remarks>
+    ///     This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle
+    ///     and configure handler-level settings (credentials, proxy, cookies) on the client.
+    ///     This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <see cref="Source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public Task<XPathNavigator> CreateNavigatorAsync(HttpClient httpClient, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(this.Source);
+        ArgumentNullException.ThrowIfNull(httpClient);
 
-        return SyndicationEncodingUtility.CreateSafeNavigator(this.Source, new());
+        return SyndicationEncodingUtility.CreateSafeNavigatorAsync(this.Source, httpClient, null, null, cancellationToken);
     }
 
     /// <summary>

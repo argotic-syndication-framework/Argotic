@@ -1,6 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Net;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -47,29 +45,9 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     private static readonly Version documentVersion = new(2, 0);
     /// <summary>
-    /// Private member to hold a value indicating if the syndication resource asynchronous load operation was cancelled.
-    /// </summary>
-    private bool resourceAsyncLoadCancelled;
-    /// <summary>
-    /// Private member to hold a value indicating if the syndication resource is in the process of loading.
-    /// </summary>
-    private bool resourceIsLoading;
-    /// <summary>
-    /// Private member to hold HTTP web request used by asynchronous load operations.
-    /// </summary>
-    private static WebRequest asyncHttpWebRequest;
-    /// <summary>
-    /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-    /// </summary>
-    private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-    /// <summary>
     /// Private member to hold header information for the document.
     /// </summary>
     private OpmlHead documentHead = new();
-    /// <summary>
-    /// Private member to hold the collection of outlines that comprise the published content of the document.
-    /// </summary>
-    private IEnumerable<OpmlOutline> documentOutlines;
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlDocument"/> class.
     /// </summary>
@@ -90,13 +68,13 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         get
         {
-            return ((Collection<OpmlOutline>)this.Outlines)[index];
+            return this.Outlines[index];
         }
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            ((Collection<OpmlOutline>)this.Outlines)[index] = value;
+            this.Outlines[index] = value;
         }
     }
     /// <summary>
@@ -114,39 +92,16 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         this.Loaded?.Invoke(this, e);
     }
     /// <summary>
-    /// Gets or sets the syndication extensions applied to this syndication entity.
+    /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<ISyndicationExtension> Extensions
-    {
-        get
-        {
-            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
-            return objectSyndicationExtensions;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            objectSyndicationExtensions = value;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-        }
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
@@ -179,28 +134,10 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     }
 
     /// <summary>
-    /// Gets or sets the discrete entities for this document.
+    /// Gets the discrete entities for this document.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="OpmlOutline"/> objects that represents the discrete entities for this document.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="OpmlOutline"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<OpmlOutline> Outlines
-    {
-        get
-        {
-            documentOutlines ??= [];
-            return documentOutlines;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            documentOutlines = value;
-        }
-
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="OpmlOutline"/> objects that represents the discrete entities for this document.</value>
+    public IList<OpmlOutline> Outlines { get; } = [];
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
@@ -215,378 +152,120 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     }
 
     /// <summary>
-    /// Gets or sets a value indicating if the syndication resource asynchronous load operation was cancelled.
-    /// </summary>
-    /// <value><b>true</b> if syndication resource asynchronous load operation has been cancelled, Otherwise, <b>false</b>.</value>
-    internal bool AsyncLoadHasBeenCancelled
-    {
-        get
-        {
-            return resourceAsyncLoadCancelled;
-        }
-
-        set
-        {
-            resourceAsyncLoadCancelled = value;
-        }
-    }
-
-    /// <summary>
-    /// Gets or sets a value indicating if the syndication resource is in the process of loading.
-    /// </summary>
-    /// <value><b>true</b> if syndication resource is in the process of loading, Otherwise, <b>false</b>.</value>
-    internal bool LoadOperationInProgress
-    {
-        get
-        {
-            return resourceIsLoading;
-        }
-
-        set
-        {
-            resourceIsLoading = value;
-        }
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="OpmlDocument"/> instance using the specified <see cref="Uri"/>.
+    /// Creates a new <see cref="OpmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <returns>An <see cref="OpmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="OpmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
-    ///     The <see cref="OpmlDocument"/> is created using the default <see cref="SyndicationResourceLoadSettings"/>.
+    ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
+    ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Create method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" 
-    ///             region="Create(Uri source)" 
-    ///         />
+    ///     <code lang="cs" title="The following code example demonstrates the usage of the CreateAsync method.">
+    ///         var document = await OpmlDocument.CreateAsync(new Uri("https://example.com/feed.opml"));
     ///     </code>
     /// </example>
-    public static OpmlDocument Create(Uri source)
-    {
-        return OpmlDocument.Create(source, new WebRequestOptions());
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="OpmlDocument"/> instance using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/> object.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <returns>An <see cref="OpmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    public static OpmlDocument Create(Uri source, SyndicationResourceLoadSettings settings)
-    {
-        return OpmlDocument.Create(source, new(), settings);
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="OpmlDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <returns>An <see cref="OpmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <remarks>
-    ///     The <see cref="OpmlDocument"/> is created using the default <see cref="SyndicationResourceLoadSettings"/>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    public static OpmlDocument Create(Uri source, ICredentials credentials, IWebProxy proxy)
-    {
-        return OpmlDocument.Create(source, new WebRequestOptions(credentials, proxy));
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="OpmlDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <returns>An <see cref="OpmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <remarks>
-    ///     The <see cref="OpmlDocument"/> is created using the default <see cref="SyndicationResourceLoadSettings"/>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    public static OpmlDocument Create(Uri source, WebRequestOptions options)
-    {
-        return OpmlDocument.Create(source, options, null);
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="OpmlDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <returns>An <see cref="OpmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    public static OpmlDocument Create(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
-    {
-        return OpmlDocument.Create(source, new(credentials, proxy), settings);
-    }
-
-    /// <summary>
-    /// Creates a new <see cref="OpmlDocument"/> instance using the specified <see cref="Uri"/>, <see cref="ICredentials"/>, <see cref="IWebProxy"/>, and <see cref="SyndicationResourceLoadSettings"/> object.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <returns>An <see cref="OpmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    public static OpmlDocument Create(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
+    public static async Task<OpmlDocument> CreateAsync(Uri source, SyndicationResourceLoadSettings? settings = null, CancellationToken cancellationToken = default)
     {
         OpmlDocument syndicationResource = new();
-        ArgumentNullException.ThrowIfNull(source);
-        syndicationResource.Load(source, options, settings);
-
+        await syndicationResource.LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, settings, null, cancellationToken).ConfigureAwait(false);
         return syndicationResource;
     }
 
     /// <summary>
-    /// Loads this <see cref="OpmlDocument"/> instance asynchronously using the specified <see cref="Uri"/>.
+    /// Creates a new <see cref="OpmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains an <see cref="OpmlDocument"/> object loaded using the <paramref name="source"/> data.</returns>
     /// <remarks>
-    ///     <para>The <see cref="OpmlDocument"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/>.</para>
     ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before 
-    ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the LoadAsync method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" 
-    ///             region="LoadAsync(Uri source, Object userToken)" 
-    ///         />
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" 
-    ///             region="ResourceLoadedCallback(Object sender, SyndicationResourceLoadedEventArgs e)" 
-    ///         />
-    ///     </code>
-    /// </example>
-    public void LoadAsync(Uri source, object userToken)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public static async Task<OpmlDocument> CreateAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
-        this.LoadAsync(source, null, userToken);
+        OpmlDocument syndicationResource = new();
+        await syndicationResource.LoadAsync(source, httpClient, settings, requestOptions, cancellationToken).ConfigureAwait(false);
+        return syndicationResource;
     }
 
     /// <summary>
-    /// Loads this <see cref="OpmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="SyndicationResourceLoadSettings"/>.
+    /// Loads this <see cref="OpmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
-    ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
-    ///     </para>
-    ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, you must wait for the load operation to complete before 
-    ///         attempting to load the syndication resource using the <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, Object)"/> method.
-    ///     </para>
+    ///     <para>The <see cref="OpmlDocument"/> is loaded using the default <see cref="SyndicationResourceLoadSettings"/> and the shared <see cref="HttpClient"/>.</para>
+    ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
+    ///     <para>After the load operation has successfully completed, the <see cref="OpmlDocument.Loaded"/> event will be raised.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, object userToken)
+    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default)
     {
-        this.LoadAsync(source, settings, new(), userToken);
+        return LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
     }
 
     /// <summary>
-    /// Loads this <see cref="OpmlDocument"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
+    /// Loads this <see cref="OpmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
+    /// <param name="requestOptions">A <see cref="SyndicationRequestOptions"/> that holds request-level options (headers). This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token that can be used to cancel the operation.</param>
+    /// <returns>A task that represents the asynchronous load operation.</returns>
     /// <remarks>
     ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
+    ///         This overload accepts an <see cref="HttpClient"/> parameter, allowing the caller to manage the client's lifecycle.
+    ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, 
-    ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
+    ///         Configure handler-level settings (credentials, proxy, cookies) on the <see cref="HttpClient"/> itself,
+    ///         either when creating it manually or via <c>IHttpClientFactory.ConfigurePrimaryHttpMessageHandler</c>.
     ///     </para>
+    ///     <para>After the load operation has successfully completed, the <see cref="OpmlDocument.Loaded"/> event will be raised.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, ICredentials credentials, IWebProxy proxy, object userToken)
-    {
-        this.LoadAsync(source, settings, new(credentials, proxy), userToken);
-    }
-
-    /// <summary>
-    /// Loads this <see cref="OpmlDocument"/> instance asynchronously using the specified <see cref="Uri"/>, <see cref="SyndicationResourceLoadSettings"/>, <see cref="ICredentials"/>, and <see cref="IWebProxy"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that represents the URL of the syndication resource XML data.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="userToken">A user-defined object that is passed to the method invoked when the asynchronous operation completes.</param>
-    /// <remarks>
-    ///     <para>
-    ///         To receive notification when the operation has completed or the operation has been canceled, add an event handler to the <see cref="Loaded"/> event. 
-    ///         You can cancel a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> operation by calling the <see cref="LoadAsyncCancel()"/> method.
-    ///     </para>
-    ///     <para>
-    ///         After calling <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/>, 
-    ///         you must wait for the load operation to complete before attempting to load the syndication resource using the <see cref="LoadAsync(Uri, Object)"/> method.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
-    /// <exception cref="InvalidOperationException">This <see cref="OpmlDocument"/> has a <see cref="LoadAsync(Uri, SyndicationResourceLoadSettings, ICredentials, IWebProxy, Object)"/> call in progress.</exception>
-    public void LoadAsync(Uri source, SyndicationResourceLoadSettings settings, WebRequestOptions options, object userToken)
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
+    /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
+    public async Task LoadAsync(Uri source, HttpClient httpClient, SyndicationResourceLoadSettings? settings = null, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
         ArgumentNullException.ThrowIfNull(source);
-        if (settings == null)
-        {
-            settings = new();
-        }
+        ArgumentNullException.ThrowIfNull(httpClient);
+        settings ??= new SyndicationResourceLoadSettings();
 
-        if (this.LoadOperationInProgress)
-        {
-            throw new InvalidOperationException();
-        }
+        using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(settings.Timeout);
 
-        this.LoadOperationInProgress = true;
-        this.AsyncLoadHasBeenCancelled = false;
+        var encoding = settings.CharacterEncoding == System.Text.Encoding.UTF8 ? null : settings.CharacterEncoding;
+        var navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(source, httpClient, encoding, requestOptions, timeoutCts.Token).ConfigureAwait(false);
 
+        SyndicationResourceAdapter adapter = new(navigator, settings);
+        adapter.Fill(this, SyndicationContentFormat.Opml);
 
-        asyncHttpWebRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
-        asyncHttpWebRequest.Timeout = Convert.ToInt32(settings.Timeout.TotalMilliseconds, System.Globalization.NumberFormatInfo.InvariantInfo);
-
-        object[] state = [asyncHttpWebRequest, this, source, settings, options, userToken];
-        IAsyncResult result = asyncHttpWebRequest.BeginGetResponse(new(AsyncLoadCallback), state);
-        ThreadPool.RegisterWaitForSingleObject(result.AsyncWaitHandle, new(AsyncTimeoutCallback), state, settings.Timeout, true);
-    }
-
-    /// <summary>
-    /// Cancels an asynchronous operation to load this syndication resource.
-    /// </summary>
-    /// <remarks>
-    ///     Use the LoadAsyncCancel method to cancel a pending <see cref="LoadAsync(Uri, Object)"/> operation. 
-    ///     If there is a load operation in progress, this method releases resources used to execute the load operation. 
-    ///     If there is no load operation pending, this method does nothing.
-    /// </remarks>
-    public void LoadAsyncCancel()
-    {
-        if (this.LoadOperationInProgress && !this.AsyncLoadHasBeenCancelled)
-        {
-            this.AsyncLoadHasBeenCancelled = true;
-            asyncHttpWebRequest.Abort();
-        }
-    }
-    /// <summary>
-    /// Called when a corresponding asynchronous load operation completes.
-    /// </summary>
-    /// <param name="result">The result of the asynchronous operation.</param>
-    private static void AsyncLoadCallback(IAsyncResult result)
-    {
-        System.Text.Encoding encoding = System.Text.Encoding.UTF8;
-        if (result.IsCompleted)
-        {
-            object[] parameters = (object[])result.AsyncState;
-            var httpWebRequest = parameters[0] as WebRequest;
-            var source = parameters[2] as Uri;
-            var settings = parameters[3] as SyndicationResourceLoadSettings;
-            var options = parameters[4] as WebRequestOptions;
-            object userToken = parameters[5];
-            if (parameters[1] is OpmlDocument document)
-            {
-                WebResponse httpWebResponse = (WebResponse)httpWebRequest.EndGetResponse(result);
-                using (Stream stream = httpWebResponse.GetResponseStream())
-                {
-                    if (settings != null)
-                    {
-                        encoding = settings.CharacterEncoding;
-                    }
-
-                    using StreamReader streamReader = new(stream, encoding);
-                    XmlReaderSettings readerSettings = new()
-                    {
-                        IgnoreComments = true,
-                        IgnoreWhitespace = true,
-                        DtdProcessing = DtdProcessing.Ignore
-                    };
-
-                    using XmlReader reader = XmlReader.Create(streamReader, readerSettings);
-                    XPathNavigator navigator;
-                    if (encoding == System.Text.Encoding.UTF8)
-                    {
-                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-                    }
-                    else
-                    {
-                        navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
-                    }
-                    SyndicationResourceAdapter adapter = new(navigator, settings);
-                    adapter.Fill(document, SyndicationContentFormat.Opml);
-                    document.OnDocumentLoaded(new(navigator, source, options, userToken));
-                }
-                document.LoadOperationInProgress = false;
-            }
-        }
-    }
-
-    /// <summary>
-    /// Represents a method to be called when a <see cref="WaitHandle"/> is signaled or times out.
-    /// </summary>
-    /// <param name="state">An object containing information to be used by the callback method each time it executes.</param>
-    /// <param name="timedOut"><b>true</b> if the <see cref="WaitHandle"/> timed out; <b>false</b> if it was signaled.</param>
-    private void AsyncTimeoutCallback(object state, bool timedOut)
-    {
-        if (timedOut)
-        {
-            asyncHttpWebRequest?.Abort();
-        }
-        this.LoadOperationInProgress = false;
-    }
-    /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool AddExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        bool wasAdded = true;
-
-        return wasAdded;
+        this.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source));
     }
 
     /// <summary>
@@ -597,60 +276,16 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
-    }
-
-    /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool RemoveExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-    }
-    /// <summary>
-    /// Adds the supplied <see cref="OpmlOutline"/> to the current instance's <see cref="Outlines"/> collection.
-    /// </summary>
-    /// <param name="outline">The <see cref="OpmlOutline"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="OpmlOutline"/> was added to the <see cref="Outlines"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="outline"/> is a null reference.</exception>
-    public bool AddOutline(OpmlOutline outline)
-    {
-        ArgumentNullException.ThrowIfNull(outline);
-        ((Collection<OpmlOutline>)this.Outlines).Add(outline);
-        bool wasAdded = true;
-
-        return wasAdded;
-    }
-
-    /// <summary>
-    /// Removes the supplied <see cref="OpmlOutline"/> from the current instance's <see cref="Outlines"/> collection.
-    /// </summary>
-    /// <param name="outline">The <see cref="OpmlOutline"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="OpmlOutline"/> was removed from the <see cref="Outlines"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Outlines"/> collection of the current instance does not contain the specified <see cref="OpmlOutline"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="outline"/> is a null reference.</exception>
-    public bool RemoveOutline(OpmlOutline outline)
-    {
-        ArgumentNullException.ThrowIfNull(outline);
-        return ((Collection<OpmlOutline>)this.Outlines).Remove(outline);
     }
 
     /// <summary>
@@ -723,10 +358,10 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
         {
-            settings = new();
+            settings = new SyndicationResourceLoadSettings();
         }
         XPathNavigator navigator = source.CreateNavigator();
-        this.Load(navigator, settings, new(navigator));
+        this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
     }
 
     /// <summary>
@@ -819,179 +454,6 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     }
 
     /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <remarks>
-    ///     <para>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                      If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="OpmlDocument.Loaded"/> event will be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" 
-    ///             region="Load(Uri source, ICredentials credentials, IWebProxy proxy)" 
-    ///         />
-    ///     </code>
-    /// </example>
-    public void Load(Uri source, ICredentials credentials, IWebProxy proxy)
-    {
-        this.Load(source, new(credentials, proxy));
-    }
-
-    /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see> and <see cref="IWebProxy">proxy</see>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <remarks>
-    ///     <para>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="OpmlDocument.Loaded"/> event will be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    /// <example>
-    ///     <code lang="cs" title="The following code example demonstrates the usage of the Load method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\Opml\OpmlDocumentExample.cs" 
-    ///             region="Load(Uri source, WebRequestOptions options)" 
-    ///         />
-    ///     </code>
-    /// </example>
-    public void Load(Uri source, WebRequestOptions options)
-    {
-        this.Load(source, options, null);
-    }
-
-    /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="credentials">
-    ///     A <see cref="ICredentials"/> that provides the proper set of credentials to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="proxy">
-    ///     A <see cref="IWebProxy"/> that provides proxy access to the <paramref name="source"/> resource when required. This value can be <b>null</b>.
-    /// </param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <remarks>
-    ///     <para>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                      If <paramref name="credentials"/> is <b>null</b>, request is made using the default application credentials.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="proxy"/> is <b>null</b>, request is made using the <see cref="WebRequest"/> default proxy settings.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/> 
-    ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used. 
-    ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="OpmlDocument.Loaded"/> event will be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    public void Load(Uri source, ICredentials credentials, IWebProxy proxy, SyndicationResourceLoadSettings settings)
-    {
-        this.Load(source, new(credentials, proxy));
-    }
-
-    /// <summary>
-    /// Loads the syndication resource from the supplied <see cref="Uri"/> using the specified <see cref="ICredentials">credentials</see>, <see cref="IWebProxy">proxy</see> and <see cref="SyndicationResourceLoadSettings"/>.
-    /// </summary>
-    /// <param name="source">A <see cref="Uri"/> that points to the location of the web resource used to load the syndication resource.</param>
-    /// <param name="options">A <see cref="WebRequestOptions"/> that holds options that should be applied to web requests.</param>
-    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="OpmlDocument"/> instance. This value can be <b>null</b>.</param>
-    /// <remarks>
-    ///     <para>
-    ///         <list type="bullet">
-    ///             <item>
-    ///                 <description>
-    ///                     If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/> 
-    ///                     the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used. 
-    ///                     If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
-    ///                 </description>
-    ///             </item>
-    ///             <item>
-    ///                 <description>
-    ///                     After the load operation has successfully completed, the <see cref="OpmlDocument.Loaded"/> event will be raised.
-    ///                 </description>
-    ///             </item>
-    ///         </list>
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    public void Load(Uri source, WebRequestOptions options, SyndicationResourceLoadSettings settings)
-    {
-        ArgumentNullException.ThrowIfNull(source);
-        if (settings == null)
-        {
-            settings = new();
-        }
-
-        XPathNavigator navigator;
-        if (settings.CharacterEncoding == System.Text.Encoding.UTF8)
-        {
-            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, null);
-        }
-        else
-        {
-            navigator = SyndicationEncodingUtility.CreateSafeNavigator(source, options, settings.CharacterEncoding);
-        }
-        this.Load(navigator, settings, new(navigator, source, options));
-    }
-
-    /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
     /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
@@ -1023,7 +485,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         if (settings == null)
         {
-            settings = new();
+            settings = new SyndicationResourceSaveSettings();
         }
 
         XmlWriterSettings writerSettings = new()
@@ -1054,7 +516,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Save(XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(writer);
-        this.Save(writer, new());
+        this.Save(writer, new SyndicationResourceSaveSettings());
     }
 
     /// <summary>

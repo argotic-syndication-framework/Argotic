@@ -34,7 +34,7 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
     /// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtension"/> class.
     /// </summary>
     public DublinCoreElementSetSyndicationExtension()
-        : base("dc", "http://purl.org/dc/elements/1.1/", new("1.1"), new("http://dublincore.org/documents/dces/"), "Dublin Core Metadata Element Set", "Extends syndication feeds to provide a meta-data element resource description vocabulary.")
+        : base("dc", "http://purl.org/dc/elements/1.1/", new Version("1.1"), new Uri("http://dublincore.org/documents/dces/"), "Dublin Core Metadata Element Set", "Extends syndication feeds to provide a meta-data element resource description vocabulary.")
     {
     }
 

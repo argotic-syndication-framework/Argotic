@@ -1,9 +1,6 @@
-using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Net;
 
@@ -25,10 +22,6 @@ public class XmlRpcMessage : IComparable
     /// Private member to hold the name of the method to be called.
     /// </summary>
     private string messageMethodName = string.Empty;
-    /// <summary>
-    /// Private member to hold the method parameters.
-    /// </summary>
-    private Collection<IXmlRpcValue> messageParameters;
     /// <summary>
     /// Private member to hold the character encoding of the message.
     /// </summary>
@@ -56,11 +49,11 @@ public class XmlRpcMessage : IComparable
     /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class using the specified method name and parameters.
     /// </summary>
     /// <param name="methodName">The name of the method to be called.</param>
-    /// <param name="parameters">A <see cref="Collection{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the method parameters.</param>
+    /// <param name="parameters">An <see cref="IEnumerable{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the method parameters.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="methodName"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="parameters"/> is a null reference.</exception>
-    public XmlRpcMessage(string methodName, Collection<IXmlRpcValue> parameters) : this(methodName)
+    public XmlRpcMessage(string methodName, IEnumerable<IXmlRpcValue> parameters) : this(methodName)
     {
         ArgumentNullException.ThrowIfNull(parameters);
 
@@ -113,20 +106,13 @@ public class XmlRpcMessage : IComparable
     /// Gets the method parameters.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the method parameters.
+    ///     A <see cref="IList{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the method parameters.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<IXmlRpcValue> Parameters
-    {
-        get
-        {
-            messageParameters ??= [];
-            return messageParameters;
-        }
-    }
+    public IList<IXmlRpcValue> Parameters { get; } = [];
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{IXmlRpcValue}"/> collections.
+    /// Compares two specified <see cref="IList{IXmlRpcValue}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -144,7 +130,7 @@ public class XmlRpcMessage : IComparable
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<IXmlRpcValue> source, Collection<IXmlRpcValue> target)
+    public static int CompareSequence(IList<IXmlRpcValue> source, IList<IXmlRpcValue> target)
     {
         int result = 0;
 

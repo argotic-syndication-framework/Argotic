@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -29,10 +28,6 @@ public class YahooMediaRestriction : IComparable
     /// </summary>
     private YahooMediaRestrictionType restrictionType = YahooMediaRestrictionType.None;
     /// <summary>
-    /// Private member to hold the entities the restriction applies to.
-    /// </summary>
-    private Collection<string> restrictionEntities;
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaRestriction"/> class.
     /// </summary>
     public YahooMediaRestriction()
@@ -43,7 +38,7 @@ public class YahooMediaRestriction : IComparable
     /// Gets the entities this restriction applies to.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="String"/> objects that represent the entities this restriction applies to. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="String"/> objects that represent the entities this restriction applies to.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
@@ -54,18 +49,11 @@ public class YahooMediaRestriction : IComparable
     ///         When the restriction <see cref="EntityType"/> is <see cref="YahooMediaRestrictionType.Uri"/> the elements in this collection should represent distributor <see cref="Uri">Uri's</see>.
     ///     </para>
     ///     <para>
-    ///         When the restriction <see cref="EntityType"/> is <see cref="YahooMediaRestrictionType.Country"/> the elements in this collection should represent country codes. 
+    ///         When the restriction <see cref="EntityType"/> is <see cref="YahooMediaRestrictionType.Country"/> the elements in this collection should represent country codes.
     ///         See <a href="http://www.iso.org/iso/country_codes/iso_3166_code_lists/english_country_names_and_code_elements.htm">ISO 3166</a> for a listing of the permissible country codes.
     ///     </para>
     /// </remarks>
-    public Collection<string> Entities
-    {
-        get
-        {
-            restrictionEntities ??= [];
-            return restrictionEntities;
-        }
-    }
+    public IList<string> Entities { get; } = [];
 
     /// <summary>
     /// Gets or sets the type of media that this restriction applies to.

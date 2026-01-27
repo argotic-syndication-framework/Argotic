@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -15,14 +14,14 @@ namespace Argotic.Syndication;
 /// <seealso cref="AtomFeed.Id"/>
 /// <remarks>
 ///     <para>
-///         When an <i>Atom Document</i> is relocated, migrated, syndicated, republished, exported, or imported, the content of its universally unique identifier <b>must not</b> change. 
-///         Put another way, an <see cref="AtomId"/> pertains to all instantiations of a particular <see cref="AtomEntry"/> or <see cref="AtomFeed"/>; revisions retain the same 
+///         When an <i>Atom Document</i> is relocated, migrated, syndicated, republished, exported, or imported, the content of its universally unique identifier <b>must not</b> change.
+///         Put another way, an <see cref="AtomId"/> pertains to all instantiations of a particular <see cref="AtomEntry"/> or <see cref="AtomFeed"/>; revisions retain the same
 ///         content in their <see cref="AtomId"/> properties. It is suggested that the<see cref="AtomId"/> be stored along with the associated resource.
 ///     </para>
 ///     <para>
-///         The content of an <see cref="AtomId"/> <b>must</b> be created in a way that assures uniqueness. 
-///         Because of the risk of confusion between IRIs that would be equivalent if they were mapped to URIs and dereferenced, 
-///         the following normalization strategy <i>should</i> be applied when generating unique identifiers: 
+///         The content of an <see cref="AtomId"/> <b>must</b> be created in a way that assures uniqueness.
+///         Because of the risk of confusion between IRIs that would be equivalent if they were mapped to URIs and dereferenced,
+///         the following normalization strategy <i>should</i> be applied when generating unique identifiers:
 ///         <list type="bullet">
 ///             <item>
 ///                 <description>
@@ -77,27 +76,22 @@ namespace Argotic.Syndication;
 ///         </list>
 ///     </para>
 ///     <para>
-///         Instances of <see cref="AtomId"/> objects can be compared to determine whether an entry or feed is the same as one seen before. 
-///         Processors <b>must</b> compare <see cref="AtomId"/> objects on a character-by-character basis (in a case-sensitive fashion). 
+///         Instances of <see cref="AtomId"/> objects can be compared to determine whether an entry or feed is the same as one seen before.
+///         Processors <b>must</b> compare <see cref="AtomId"/> objects on a character-by-character basis (in a case-sensitive fashion).
 ///         Comparison operations <b>must</b> be based solely on the IRI character strings and <b>must not</b> rely on dereferencing the IRIs or URIs mapped from them.
 ///     </para>
 /// </remarks>
 /// <example>
 ///     <code lang="cs" title="The following code example demonstrates the usage of the AtomId class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\Atom\AtomIdExample.cs" 
-///             region="AtomId" 
+///         <code
+///             source="..\..\Argotic.Examples\Core\Atom\AtomIdExample.cs"
+///             region="AtomId"
 ///         />
 ///     </code>
 /// </example>
 [Serializable]
 public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
 {
-
-    /// <summary>
-    /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-    /// </summary>
-    private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
     /// <summary>
     /// Private member to hold an IRI that represents a permanent, universally unique identifier for the entity.
     /// </summary>
@@ -143,39 +137,16 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
     /// </remarks>
     public CultureInfo Language { get; set; }
     /// <summary>
-    /// Gets or sets the syndication extensions applied to this syndication entity.
+    /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<ISyndicationExtension> Extensions
-    {
-        get
-        {
-            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
-            return objectSyndicationExtensions;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            objectSyndicationExtensions = value;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-        }
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
     /// <summary>
     /// Gets or sets an IRI that represents a permanent, universally unique identifier for this entity.
     /// </summary>
@@ -200,21 +171,6 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
         }
     }
     /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool AddExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        bool wasAdded = true;
-
-        return wasAdded;
-    }
-
-    /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
     /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
@@ -222,31 +178,16 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
-    }
-
-    /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool RemoveExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
     /// <summary>
     /// Loads this <see cref="AtomId"/> using the supplied <see cref="XPathNavigator"/>.

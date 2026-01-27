@@ -1,8 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -34,7 +32,7 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="BlogChannelSyndicationExtension"/> class.
     /// </summary>
     public BlogChannelSyndicationExtension()
-        : base("blogChannel", "http://backend.userland.com/blogChannelModule", new("1.0"), new("http://backend.userland.com/blogChannelModule"), "Blog Channel", "Extends syndication feeds to provide meta-data common to weblogs.")
+        : base("blogChannel", "http://backend.userland.com/blogChannelModule", new Version("1.0"), new Uri("http://backend.userland.com/blogChannelModule"), "Blog Channel", "Extends syndication feeds to provide meta-data common to weblogs.")
     {
     }
     /// <summary>

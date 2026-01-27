@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Atom;
 
 /// <summary>
 /// Contains the code examples for the <see cref="AtomContent"/> class.
@@ -18,26 +18,26 @@ public static class AtomContentExample
     {
         AtomFeed feed = new()
         {
-            Id = new(new("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
-            Title = new("Example Feed"),
-            UpdatedOn = new(2003, 12, 13, 18, 30, 2)
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new(new("http://example.org/")));
-        feed.Links.Add(new(new("/feed"), "self"));
+        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
-        feed.Authors.Add(new("John Doe"));
+        feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
         AtomEntry entry = new()
         {
-            Id = new(new("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
-            Title = new("Atom-Powered Robots Run Amok"),
-            UpdatedOn = new(2003, 12, 13, 18, 30, 2),
-            Summary = new("Some text."),
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
+            Summary = new AtomTextConstruct("Some text."),
             //  Define the complete content of the entry
-            Content = new("Powered by <b>Argotic</b>!", "xhtml")
+            Content = new AtomContent("Powered by <b>Argotic</b>!", "xhtml")
         };
 
-        feed.AddEntry(entry);
+        feed.Entries.Add(entry);
     }
 }

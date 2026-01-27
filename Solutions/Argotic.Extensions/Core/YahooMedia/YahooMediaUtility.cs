@@ -1,4 +1,3 @@
-﻿using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -40,7 +39,7 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{YahooMediaCategory}"/> collections.
+    /// Compares two specified <see cref="IList{YahooMediaCategory}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -58,7 +57,7 @@ internal static class YahooMediaUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<YahooMediaCategory> source, Collection<YahooMediaCategory> target)
+    public static int CompareSequence(IList<YahooMediaCategory> source, IList<YahooMediaCategory> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -84,7 +83,7 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{YahooMediaContent}"/> collections.
+    /// Compares two specified <see cref="IList{YahooMediaContent}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -102,7 +101,7 @@ internal static class YahooMediaUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<YahooMediaContent> source, Collection<YahooMediaContent> target)
+    public static int CompareSequence(IList<YahooMediaContent> source, IList<YahooMediaContent> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -128,7 +127,7 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{YahooMediaCredit}"/> collections.
+    /// Compares two specified <see cref="IList{YahooMediaCredit}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -146,7 +145,7 @@ internal static class YahooMediaUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<YahooMediaCredit> source, Collection<YahooMediaCredit> target)
+    public static int CompareSequence(IList<YahooMediaCredit> source, IList<YahooMediaCredit> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -172,7 +171,7 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{YahooMediaGroup}"/> collections.
+    /// Compares two specified <see cref="IList{YahooMediaGroup}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -190,7 +189,7 @@ internal static class YahooMediaUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<YahooMediaGroup> source, Collection<YahooMediaGroup> target)
+    public static int CompareSequence(IList<YahooMediaGroup> source, IList<YahooMediaGroup> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -216,7 +215,7 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{YahooMediaHash}"/> collections.
+    /// Compares two specified <see cref="IList{YahooMediaHash}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -234,7 +233,7 @@ internal static class YahooMediaUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<YahooMediaHash> source, Collection<YahooMediaHash> target)
+    public static int CompareSequence(IList<YahooMediaHash> source, IList<YahooMediaHash> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -260,7 +259,7 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{YahooMediaRating}"/> collections.
+    /// Compares two specified <see cref="IList{YahooMediaRating}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -278,7 +277,7 @@ internal static class YahooMediaUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<YahooMediaRating> source, Collection<YahooMediaRating> target)
+    public static int CompareSequence(IList<YahooMediaRating> source, IList<YahooMediaRating> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -304,7 +303,7 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{YahooMediaRestriction}"/> collections.
+    /// Compares two specified <see cref="IList{YahooMediaRestriction}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -322,7 +321,7 @@ internal static class YahooMediaUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<YahooMediaRestriction> source, Collection<YahooMediaRestriction> target)
+    public static int CompareSequence(IList<YahooMediaRestriction> source, IList<YahooMediaRestriction> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -348,7 +347,7 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{YahooMediaText}"/> collections.
+    /// Compares two specified <see cref="IList{YahooMediaText}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -366,7 +365,7 @@ internal static class YahooMediaUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<YahooMediaText> source, Collection<YahooMediaText> target)
+    public static int CompareSequence(IList<YahooMediaText> source, IList<YahooMediaText> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -392,7 +391,7 @@ internal static class YahooMediaUtility
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{YahooMediaThumbnail}"/> collections.
+    /// Compares two specified <see cref="IList{YahooMediaThumbnail}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -410,7 +409,7 @@ internal static class YahooMediaUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<YahooMediaThumbnail> source, Collection<YahooMediaThumbnail> target)
+    public static int CompareSequence(IList<YahooMediaThumbnail> source, IList<YahooMediaThumbnail> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);

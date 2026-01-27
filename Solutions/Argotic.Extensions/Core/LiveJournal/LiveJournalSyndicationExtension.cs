@@ -1,8 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -35,7 +33,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="LiveJournalSyndicationExtension"/> class.
     /// </summary>
     public LiveJournalSyndicationExtension()
-        : base("lj", "http://livejournal.org/rss/lj/2.0/", new("2.0"), new("http://neugierig.org/drop/lj/rss/"), "LiveJournal", "Extends syndication feeds to provide LiveJournal specific meta-data.")
+        : base("lj", "http://livejournal.org/rss/lj/2.0/", new Version("2.0"), new Uri("http://neugierig.org/drop/lj/rss/"), "LiveJournal", "Extends syndication feeds to provide LiveJournal specific meta-data.")
     {
     }
 

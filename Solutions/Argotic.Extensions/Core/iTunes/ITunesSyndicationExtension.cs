@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -34,7 +33,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
     /// </summary>
     public ITunesSyndicationExtension()
-        : base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new("1.0"), new("http://www.apple.com/itunes/store/podcaststechspecs.html#rss"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
+        : base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new Version("1.0"), new Uri("http://www.apple.com/itunes/store/podcaststechspecs.html#rss"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
     {
     }
     /// <summary>
@@ -79,7 +78,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<ITunesCategory> source, Collection<ITunesCategory> target)
+    public static int CompareSequence(IList<ITunesCategory> source, IList<ITunesCategory> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);

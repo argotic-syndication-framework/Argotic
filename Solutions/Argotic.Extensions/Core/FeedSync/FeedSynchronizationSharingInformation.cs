@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -29,10 +28,6 @@ public class FeedSynchronizationSharingInformation : IComparable
     /// Private member to hold the publisher suggested date-time before which subscribers should read the feed in order to avoid missing item updates.
     /// </summary>
     private DateTime sharingInformationExpires = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold 
-    /// </summary>
-    private Collection<FeedSynchronizationRelatedInformation> sharingInformationRelations;
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationSharingInformation"/> class.
     /// </summary>
@@ -90,17 +85,10 @@ public class FeedSynchronizationSharingInformation : IComparable
     /// Gets the related feeds or locations.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="FeedSynchronizationRelatedInformation"/> objects that represent the related feeds or locations. 
+    ///     A <see cref="IList{T}"/> collection of <see cref="FeedSynchronizationRelatedInformation"/> objects that represent the related feeds or locations.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public Collection<FeedSynchronizationRelatedInformation> Relations
-    {
-        get
-        {
-            sharingInformationRelations ??= [];
-            return sharingInformationRelations;
-        }
-    }
+    public IList<FeedSynchronizationRelatedInformation> Relations { get; } = [];
 
     /// <summary>
     /// Gets or sets a lower bound of items contained within the feed.
@@ -201,7 +189,7 @@ public class FeedSynchronizationSharingInformation : IComparable
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<FeedSynchronizationRelatedInformation> source, Collection<FeedSynchronizationRelatedInformation> target)
+    public static int CompareSequence(IList<FeedSynchronizationRelatedInformation> source, IList<FeedSynchronizationRelatedInformation> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);

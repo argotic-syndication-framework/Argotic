@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -31,33 +30,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// </summary>
     private string commonObjectBaseId = string.Empty;
     /// <summary>
-    /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-    /// </summary>
-    private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-    /// <summary>
     /// Private member to hold the textual content of the post.
     /// </summary>
     private BlogMLTextConstruct postContent = new();
-    /// <summary>
-    /// Private member to hold references to authors of the post.
-    /// </summary>
-    private Collection<string> postAuthors;
-    /// <summary>
-    /// Private member to hold references to categories for the post.
-    /// </summary>
-    private Collection<string> postCategories;
-    /// <summary>
-    /// Private member to hold comments for the post.
-    /// </summary>
-    private Collection<BlogMLComment> postComments;
-    /// <summary>
-    /// Private member to hold trackbacks for the post.
-    /// </summary>
-    private Collection<BlogMLTrackback> postTrackbacks;
-    /// <summary>
-    /// Private member to hold attachments for the post.
-    /// </summary>
-    private Collection<BlogMLAttachment> postAttachments;
     /// <summary>
     /// Private member to hold views of the post.
     /// </summary>
@@ -145,96 +120,45 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         }
     }
     /// <summary>
-    /// Gets or sets the syndication extensions applied to this syndication entity.
+    /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<ISyndicationExtension> Extensions
-    {
-        get
-        {
-            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
-            return objectSyndicationExtensions;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            objectSyndicationExtensions = value;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-        }
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
     /// <summary>
     /// Gets the attachments for this post.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="BlogMLAttachment"/> objects that represent the attachments for this post.</value>
-    public Collection<BlogMLAttachment> Attachments
-    {
-        get
-        {
-            postAttachments ??= [];
-            return postAttachments;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="BlogMLAttachment"/> objects that represent the attachments for this post.</value>
+    public IList<BlogMLAttachment> Attachments { get; } = [];
 
     /// <summary>
     /// Gets the authors of this post.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of strings that represent references to the authors of this post.</value>
+    /// <value>A <see cref="IList{T}"/> collection of strings that represent references to the authors of this post.</value>
     /// <remarks>
     ///     The authors referenced by this collection <i>should</i> be located in the post's parent document <see cref="BlogMLDocument.Authors"/> collection.
     /// </remarks>
-    public Collection<string> Authors
-    {
-        get
-        {
-            postAuthors ??= [];
-            return postAuthors;
-        }
-    }
+    public IList<string> Authors { get; } = [];
 
     /// <summary>
     /// Gets the categories for this post.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of strings that represent references to the categories for this post.</value>
+    /// <value>A <see cref="IList{T}"/> collection of strings that represent references to the categories for this post.</value>
     /// <remarks>
     ///     The categories referenced by this collection <i>should</i> be located in the post's parent document <see cref="BlogMLDocument.Categories"/> collection.
     /// </remarks>
-    public Collection<string> Categories
-    {
-        get
-        {
-            postCategories ??= [];
-            return postCategories;
-        }
-    }
+    public IList<string> Categories { get; } = [];
 
     /// <summary>
     /// Gets the comments for this post.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="BlogMLComment"/> objects that represent the comments for this post.</value>
-    public Collection<BlogMLComment> Comments
-    {
-        get
-        {
-            postComments ??= [];
-            return postComments;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="BlogMLComment"/> objects that represent the comments for this post.</value>
+    public IList<BlogMLComment> Comments { get; } = [];
 
     /// <summary>
     /// Gets or sets the content of this post.
@@ -291,15 +215,8 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// <summary>
     /// Gets the trackbacks for this post.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="BlogMLTrackback"/> objects that represent the trackbacks for this post.</value>
-    public Collection<BlogMLTrackback> Trackbacks
-    {
-        get
-        {
-            postTrackbacks ??= [];
-            return postTrackbacks;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="BlogMLTrackback"/> objects that represent the trackbacks for this post.</value>
+    public IList<BlogMLTrackback> Trackbacks { get; } = [];
 
     /// <summary>
     /// Gets or sets the URL of this post.
@@ -331,7 +248,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         }
     }
     /// <summary>
-    /// Compares two specified <see cref="Collection{BlogMLAttachment}"/> collections.
+    /// Compares two specified <see cref="IList{BlogMLAttachment}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -349,7 +266,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<BlogMLAttachment> source, Collection<BlogMLAttachment> target)
+    public static int CompareSequence(IList<BlogMLAttachment> source, IList<BlogMLAttachment> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -375,7 +292,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{BlogMLAuthor}"/> collections.
+    /// Compares two specified <see cref="IList{BlogMLAuthor}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -393,7 +310,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<BlogMLAuthor> source, Collection<BlogMLAuthor> target)
+    public static int CompareSequence(IList<BlogMLAuthor> source, IList<BlogMLAuthor> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -419,7 +336,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{BlogMLComment}"/> collections.
+    /// Compares two specified <see cref="IList{BlogMLComment}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -437,7 +354,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<BlogMLComment> source, Collection<BlogMLComment> target)
+    public static int CompareSequence(IList<BlogMLComment> source, IList<BlogMLComment> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -463,7 +380,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     }
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{BlogMLTrackback}"/> collections.
+    /// Compares two specified <see cref="IList{BlogMLTrackback}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>
@@ -481,7 +398,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(Collection<BlogMLTrackback> source, Collection<BlogMLTrackback> target)
+    public static int CompareSequence(IList<BlogMLTrackback> source, IList<BlogMLTrackback> target)
     {
         int result = 0;
         ArgumentNullException.ThrowIfNull(source);
@@ -589,21 +506,6 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
         return postType;
     }
     /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool AddExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        bool wasAdded = true;
-
-        return wasAdded;
-    }
-
-    /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
     /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
@@ -611,31 +513,16 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IExtensibleSyndicati
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
-    }
-
-    /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool RemoveExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
     /// <summary>
     /// Loads this <see cref="BlogMLPost"/> using the supplied <see cref="XPathNavigator"/>.

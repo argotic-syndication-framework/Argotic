@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Atom;
 
 /// <summary>
 /// Contains the code examples for the <see cref="AtomSource"/> class.
@@ -18,34 +18,34 @@ public static class AtomSourceExample
     {
         AtomFeed feed = new()
         {
-            Id = new(new("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
-            Title = new("Example Feed"),
-            UpdatedOn = new(2003, 12, 13, 18, 30, 2)
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new(new("http://example.org/")));
-        feed.Links.Add(new(new("/feed"), "self"));
+        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
-        feed.Authors.Add(new("John Doe"));
+        feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
         AtomEntry entry = new()
         {
-            Id = new(new("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
-            Title = new("Atom-Powered Robots Run Amok"),
-            UpdatedOn = new(2003, 12, 13, 18, 30, 2),
-            Summary = new("Some text.")
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
+            Summary = new AtomTextConstruct("Some text.")
         };
 
         //  Entry was copied from another feed, so preserve source meta-data
         AtomSource source = new()
         {
-            Id = new(new("http://example2.org/")),
-            Title = new("Fourty-Two"),
-            UpdatedOn = new(2003, 11, 13, 18, 30, 2),
-            Rights = new("© 2003 Example, Inc.")
+            Id = new AtomId(new Uri("http://example2.org/")),
+            Title = new AtomTextConstruct("Fourty-Two"),
+            UpdatedOn = new DateTime(2003, 11, 13, 18, 30, 2),
+            Rights = new AtomTextConstruct("© 2003 Example, Inc.")
         };
         entry.Source = source;
 
-        feed.AddEntry(entry);
+        feed.Entries.Add(entry);
     }
 }

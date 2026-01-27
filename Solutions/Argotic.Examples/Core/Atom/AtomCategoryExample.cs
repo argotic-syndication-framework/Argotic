@@ -1,6 +1,6 @@
 ﻿using Argotic.Syndication;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Atom;
 
 /// <summary>
 /// Contains the code examples for the <see cref="AtomCategory"/> class.
@@ -18,37 +18,37 @@ public static class AtomCategoryExample
     {
         AtomFeed feed = new()
         {
-            Id = new(new("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
-            Title = new("Example Feed"),
-            UpdatedOn = new(2003, 12, 13, 18, 30, 2)
+            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Title = new AtomTextConstruct("Example Feed"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
 
-        feed.Links.Add(new(new("http://example.org/")));
-        feed.Links.Add(new(new("/feed"), "self"));
+        feed.Links.Add(new AtomLink(new Uri("http://example.org/")));
+        feed.Links.Add(new AtomLink(new Uri("/feed"), "self"));
 
-        feed.Authors.Add(new("John Doe"));
+        feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
         // Categorize the feed
-        feed.Categories.Add(new("sports"));
+        feed.Categories.Add(new AtomCategory("sports"));
 
         AtomEntry entry = new()
         {
-            Id = new(new("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
-            Title = new("Atom-Powered Robots Run Amok"),
-            UpdatedOn = new(2003, 12, 13, 18, 30, 2),
-            Summary = new("Some text.")
+            Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
+            Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
+            UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
+            Summary = new AtomTextConstruct("Some text.")
         };
 
         //  Categorize the feed entry
         AtomCategory entryCategory = new()
         {
             Label = "Baseball",
-            Scheme = new("http://example.org/scheme/category"),
+            Scheme = new Uri("http://example.org/scheme/category"),
             Term = "baseball"
         };
 
         entry.Categories.Add(entryCategory);
 
-        feed.AddEntry(entry);
+        feed.Entries.Add(entry);
     }
 }

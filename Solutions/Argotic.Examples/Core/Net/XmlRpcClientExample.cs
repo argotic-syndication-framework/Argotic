@@ -1,14 +1,13 @@
-﻿using System.Text;
-
+using System.Text;
 using Argotic.Net;
 
-namespace Argotic.Examples;
+namespace Argotic.Examples.Core.Net;
 
 /// <summary>
 /// Contains the code examples for the <see cref="XmlRpcClient"/> class.
 /// </summary>
 /// <remarks>
-///     This class contains all the code examples that are referenced by the <see cref="XmlRpcClient"/> class. 
+///     This class contains all the code examples that are referenced by the <see cref="XmlRpcClient"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
 public static class XmlRpcClientExample
@@ -16,12 +15,12 @@ public static class XmlRpcClientExample
     /// <summary>
     /// Provides example code for the XmlRpcClient class.
     /// </summary>
-    public static void ClassExample()
+    public static async Task ClassExampleAsync()
     {
         // Initialize the XML-RPC client
         XmlRpcClient client = new()
         {
-            Host = new("http://bob.example.net/xmlrpcserver")
+            Host = new Uri("http://bob.example.net/xmlrpcserver")
         };
 
         // Construct a Pingback peer-to-peer notification XML-RPC message
@@ -32,8 +31,8 @@ public static class XmlRpcClientExample
         message.Parameters.Add(new XmlRpcScalarValue("http://alice.example.org/#p123"));    // sourceURI
         message.Parameters.Add(new XmlRpcScalarValue("http://bob.example.net/#foo"));       // targetURI
 
-        // Send a synchronous pingback ping
-        XmlRpcResponse response = client.Send(message);
+        // Send an asynchronous pingback ping
+        XmlRpcResponse response = await client.SendAsync(message).ConfigureAwait(false);
 
         // Verify response to the trackback ping
         if (response != null)

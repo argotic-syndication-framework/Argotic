@@ -1,5 +1,4 @@
 ﻿using System.Configuration;
-using Argotic.Common;
 using Argotic.Configuration.Provider;
 
 namespace Argotic.Configuration;
@@ -33,7 +32,7 @@ internal static class PrivilegedConfigurationManager
         {
             if (configurationManagerSyndicationResourceSyncObject == null)
             {
-                Interlocked.CompareExchange(ref configurationManagerSyndicationResourceSyncObject, new(), null);
+                Interlocked.CompareExchange(ref configurationManagerSyndicationResourceSyncObject, new object(), null);
             }
             return configurationManagerSyndicationResourceSyncObject;
         }
@@ -49,7 +48,7 @@ internal static class PrivilegedConfigurationManager
         {
             if (configurationManagerTrackbackSyncObject == null)
             {
-                Interlocked.CompareExchange(ref configurationManagerTrackbackSyncObject, new(), null);
+                Interlocked.CompareExchange(ref configurationManagerTrackbackSyncObject, new object(), null);
             }
             return configurationManagerTrackbackSyncObject;
         }
@@ -65,7 +64,7 @@ internal static class PrivilegedConfigurationManager
         {
             if (configurationManagerXmlRpcSyncObject == null)
             {
-                Interlocked.CompareExchange(ref configurationManagerXmlRpcSyncObject, new(), null);
+                Interlocked.CompareExchange(ref configurationManagerXmlRpcSyncObject, new object(), null);
             }
             return configurationManagerXmlRpcSyncObject;
         }

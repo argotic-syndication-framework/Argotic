@@ -1,8 +1,5 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
-
-using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -12,33 +9,21 @@ namespace Argotic.Extensions.Core;
 [Serializable]
 public class CreativeCommonsSyndicationExtensionContext
 {
-
-    /// <summary>
-    /// Private member to hold a collection of URI's that represent creative commons licenses that apply to published content.
-    /// </summary>
-    private Collection<Uri> extensionLicenses;
     /// <summary>
     /// Initializes a new instance of the <see cref="CreativeCommonsSyndicationExtensionContext"/> class.
     /// </summary>
     public CreativeCommonsSyndicationExtensionContext()
     {
-
     }
+
     /// <summary>
-    /// Gets or sets the creative commons licenses that apply to the published content.
+    /// Gets the creative commons licenses that apply to the published content.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="Uri"/> objects that represent the creative commons licenses that apply to the published content.</value>
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="Uri"/> objects that represent the creative commons licenses that apply to the published content.</value>
     /// <remarks>
     ///     See <a href="http://creativecommons.org/licenses/">http://creativecommons.org/licenses/</a> for a listing of the current Creative Commons licenses.
     /// </remarks>
-    public Collection<Uri> Licenses
-    {
-        get
-        {
-            extensionLicenses ??= [];
-            return extensionLicenses;
-        }
-    }
+    public IList<Uri> Licenses { get; } = [];
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

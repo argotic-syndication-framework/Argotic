@@ -1,5 +1,4 @@
-﻿using System.Collections.ObjectModel;
-using System.Xml;
+﻿using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -57,14 +56,14 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator imageNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:image", manager);
         if (imageNavigator != null)
         {
-            resource.Channel.Image = new();
+            resource.Channel.Image = new RssImage();
             Rss10SyndicationResourceAdapter.FillImage(resource.Channel.Image, imageNavigator, manager, this.Settings);
         }
 
         XPathNavigator textInputNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:textinput", manager);
         if (textInputNavigator != null)
         {
-            resource.Channel.TextInput = new();
+            resource.Channel.TextInput = new RssTextInput();
             Rss10SyndicationResourceAdapter.FillTextInput(resource.Channel.TextInput, textInputNavigator, manager, this.Settings);
         }
 
@@ -107,7 +106,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
                 SyndicationExtensionAdapter itemExtensionAdapter = new(itemIterator.Current, this.Settings);
                 itemExtensionAdapter.Fill(item, manager);
 
-                ((Collection<RssItem>)resource.Channel.Items).Add(item);
+                resource.Channel.Items.Add(item);
             }
         }
 

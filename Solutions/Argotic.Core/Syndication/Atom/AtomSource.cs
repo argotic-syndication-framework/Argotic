@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -13,53 +12,32 @@ namespace Argotic.Syndication;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         If an <see cref="AtomEntry"/> is copied from one feed into another feed, then the source feed's metadata (all child elements of feed other than the entry elements) <i>may</i> be preserved 
-///         within the copied entry by specifying an <see cref="AtomSource"/>, if it is not already present in the entry, and including some or all the source feed's meta-data elements as the 
-///         source's children. Such metadata <i>should</i> be preserved if the source <see cref="AtomFeed">feed</see> contains any of the child elements author, contributor, rights, or category 
+///         If an <see cref="AtomEntry"/> is copied from one feed into another feed, then the source feed's metadata (all child elements of feed other than the entry elements) <i>may</i> be preserved
+///         within the copied entry by specifying an <see cref="AtomSource"/>, if it is not already present in the entry, and including some or all the source feed's meta-data elements as the
+///         source's children. Such metadata <i>should</i> be preserved if the source <see cref="AtomFeed">feed</see> contains any of the child elements author, contributor, rights, or category
 ///         and those child elements are not present in the source <see cref="AtomEntry">entry</see>.
 ///     </para>
 ///     <para>
-///         The <see cref="AtomSource"/> is designed to allow the aggregation of entries from different feeds while retaining information about an entry's source feed. 
-///         For this reason, Atom Processors that are performing such aggregation <i>should</i> include at least the required feed-level meta-data elements 
+///         The <see cref="AtomSource"/> is designed to allow the aggregation of entries from different feeds while retaining information about an entry's source feed.
+///         For this reason, Atom Processors that are performing such aggregation <i>should</i> include at least the required feed-level meta-data elements
 ///         (<see cref="AtomFeed.Id">id</see>, <see cref="AtomFeed.Title">title</see>, and <see cref="AtomFeed.UpdatedOn">updated</see>) in the <see cref="AtomSource"/>.
 ///     </para>
 /// </remarks>
 /// <example>
 ///     <code lang="cs" title="The following code example demonstrates the usage of the AtomSource class.">
-///         <code 
-///             source="..\..\Argotic.Examples\Core\Atom\AtomSourceExample.cs" 
-///             region="AtomSource" 
+///         <code
+///             source="..\..\Argotic.Examples\Core\Atom\AtomSourceExample.cs"
+///             region="AtomSource"
 ///         />
 ///     </code>
 /// </example>
 [Serializable]
 public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
 {
-
-    /// <summary>
-    /// Private member to hold the collection of syndication extensions that have been applied to this syndication entity.
-    /// </summary>
-    private IEnumerable<ISyndicationExtension> objectSyndicationExtensions;
-    /// <summary>
-    /// Private member to hold the collection of authors of the source.
-    /// </summary>
-    private Collection<AtomPersonConstruct> sourceAuthors;
-    /// <summary>
-    /// Private member to hold the collection of categories associated with the source.
-    /// </summary>
-    private Collection<AtomCategory> sourceCategories;
-    /// <summary>
-    /// Private member to hold the collection of contributors of the source.
-    /// </summary>
-    private Collection<AtomPersonConstruct> sourceContributors;
     /// <summary>
     /// Private member to hold a permanent, universally unique identifier for the source.
     /// </summary>
     private AtomId sourceId;
-    /// <summary>
-    /// Private member to hold references from the source to one or more Web resources.
-    /// </summary>
-    private Collection<AtomLink> sourceLinks;
     /// <summary>
     /// Private member to hold information that conveys a human-readable title for the source.
     /// </summary>
@@ -113,77 +91,33 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// </remarks>
     public CultureInfo Language { get; set; }
     /// <summary>
-    /// Gets or sets the syndication extensions applied to this syndication entity.
+    /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
-    /// <value>A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
-    /// <remarks>
-    ///     This <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects is internally represented as a <see cref="Collection{T}"/> collection.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IEnumerable<ISyndicationExtension> Extensions
-    {
-        get
-        {
-            objectSyndicationExtensions ??= new Collection<ISyndicationExtension>();
-            return objectSyndicationExtensions;
-        }
-
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            objectSyndicationExtensions = value;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent syndication extensions applied to this syndication entity.</value>
+    public IList<ISyndicationExtension> Extensions { get; } = [];
 
     /// <summary>
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return ((Collection<ISyndicationExtension>)this.Extensions).Count > 0;
-        }
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
     /// <summary>
-    /// Gets or sets the authors of this source.
+    /// Gets the authors of this source.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the authors of this source.</value>
-    public Collection<AtomPersonConstruct> Authors
-    {
-        get
-        {
-            sourceAuthors ??= [];
-            return sourceAuthors;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the authors of this source.</value>
+    public IList<AtomPersonConstruct> Authors { get; } = [];
 
     /// <summary>
-    /// Gets or sets the categories associated with this source.
+    /// Gets the categories associated with this source.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="AtomCategory"/> objects that represent the categories associated with this source.</value>
-    public Collection<AtomCategory> Categories
-    {
-        get
-        {
-            sourceCategories ??= [];
-            return sourceCategories;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomCategory"/> objects that represent the categories associated with this source.</value>
+    public IList<AtomCategory> Categories { get; } = [];
 
     /// <summary>
-    /// Gets or sets the entities who contributed to this source.
+    /// Gets the entities who contributed to this source.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the entities who contributed to this source.</value>
-    public Collection<AtomPersonConstruct> Contributors
-    {
-        get
-        {
-            sourceContributors ??= [];
-            return sourceContributors;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomPersonConstruct"/> objects that represent the entities who contributed to this source.</value>
+    public IList<AtomPersonConstruct> Contributors { get; } = [];
 
     /// <summary>
     /// Gets or sets the agent used to generate this source.
@@ -218,17 +152,10 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     }
 
     /// <summary>
-    /// Gets or sets references from this source to one or more Web resources.
+    /// Gets references from this source to one or more Web resources.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> collection of <see cref="AtomLink"/> objects that represent references from this source to one or more Web resources.</value>
-    public Collection<AtomLink> Links
-    {
-        get
-        {
-            sourceLinks ??= [];
-            return sourceLinks;
-        }
-    }
+    /// <value>A <see cref="IList{T}"/> collection of <see cref="AtomLink"/> objects that represent references from this source to one or more Web resources.</value>
+    public IList<AtomLink> Links { get; } = [];
 
     /// <summary>
     /// Gets or sets an image that provides visual identification for this source.
@@ -294,21 +221,6 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
         }
     }
     /// <summary>
-    /// Adds the supplied <see cref="ISyndicationExtension"/> to the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be added.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was added to the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool AddExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        ((Collection<ISyndicationExtension>)this.Extensions).Add(extension);
-        bool wasAdded = true;
-
-        return wasAdded;
-    }
-
-    /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
     /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
@@ -316,31 +228,16 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
     /// </returns>
     /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate. 
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in 
+    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
+    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
         List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
-    }
-
-    /// <summary>
-    /// Removes the supplied <see cref="ISyndicationExtension"/> from the current instance's <see cref="IExtensibleSyndicationObject.Extensions"/> collection.
-    /// </summary>
-    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be removed.</param>
-    /// <returns><b>true</b> if the <see cref="ISyndicationExtension"/> was removed from the <see cref="IExtensibleSyndicationObject.Extensions"/> collection, Otherwise, <b>false</b>.</returns>
-    /// <remarks>
-    ///     If the <see cref="Extensions"/> collection of the current instance does not contain the specified <see cref="ISyndicationExtension"/>, will return <b>false</b>.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
-    public bool RemoveExtension(ISyndicationExtension extension)
-    {
-        ArgumentNullException.ThrowIfNull(extension);
-        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
     /// <summary>
     /// Loads this <see cref="AtomSource"/> using the supplied <see cref="XPathNavigator"/>.
@@ -366,7 +263,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (idNavigator != null)
         {
-            this.Id = new();
+            this.Id = new AtomId();
             if (this.Id.Load(idNavigator))
             {
                 wasLoaded = true;
@@ -375,7 +272,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (titleNavigator != null)
         {
-            this.Title = new();
+            this.Title = new AtomTextConstruct();
             if (this.Title.Load(titleNavigator))
             {
                 wasLoaded = true;
@@ -800,7 +697,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (generatorNavigator != null)
         {
-            this.Generator = new();
+            this.Generator = new AtomGenerator();
             if (this.Generator.Load(generatorNavigator))
             {
                 wasLoaded = true;
@@ -809,7 +706,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (iconNavigator != null)
         {
-            this.Icon = new();
+            this.Icon = new AtomIcon();
             if (this.Icon.Load(iconNavigator))
             {
                 wasLoaded = true;
@@ -818,7 +715,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (logoNavigator != null)
         {
-            this.Logo = new();
+            this.Logo = new AtomLogo();
             if (this.Logo.Load(logoNavigator))
             {
                 wasLoaded = true;
@@ -827,7 +724,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (rightsNavigator != null)
         {
-            this.Rights = new();
+            this.Rights = new AtomTextConstruct();
             if (this.Rights.Load(rightsNavigator))
             {
                 wasLoaded = true;
@@ -836,7 +733,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
 
         if (subtitleNavigator != null)
         {
-            this.Subtitle = new();
+            this.Subtitle = new AtomTextConstruct();
             if (this.Subtitle.Load(subtitleNavigator))
             {
                 wasLoaded = true;

@@ -143,7 +143,9 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="guid"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="guid"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+#pragma warning disable CA1720
     public RssItem this[string guid]
+#pragma warning restore CA1720
     {
         get
         {

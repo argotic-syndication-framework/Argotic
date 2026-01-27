@@ -243,7 +243,9 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <remarks>
     ///     A publisher <i>should</i> provide a guid for each item.
     /// </remarks>
+#pragma warning disable CA1720
     public RssGuid Guid
+#pragma warning restore CA1720
     {
         get
         {

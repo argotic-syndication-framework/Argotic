@@ -1,4 +1,6 @@
-﻿using Argotic.Common;
+﻿#pragma warning disable CA1720
+
+using Argotic.Common;
 
 namespace Argotic.Net;
 

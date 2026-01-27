@@ -45,7 +45,6 @@ public class RssGuid : IComparable, IExtensibleSyndicationObject
     /// </summary>
     public RssGuid()
     {
-
     }
 
     /// <summary>

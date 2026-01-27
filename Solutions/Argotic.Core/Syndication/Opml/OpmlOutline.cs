@@ -46,7 +46,9 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold a collection of outlines that are children of the outline.
     /// </summary>
+#pragma warning disable CA5362 // OPML specification requires outlines to contain sub-outlines
     private Collection<OpmlOutline> outlineSubordinateOutlines;
+#pragma warning restore CA5362
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlOutline"/> class.
     /// </summary>

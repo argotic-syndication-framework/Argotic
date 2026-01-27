@@ -21,7 +21,9 @@ public class ITunesCategory : IComparable
     /// <summary>
     /// Private member to hold a collection of sub-categories of the category.
     /// </summary>
+#pragma warning disable CA5362 // iTunes specification requires categories to contain subcategories
     private Collection<ITunesCategory> categorySubcategories;
+#pragma warning restore CA5362
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesCategory"/> class.
     /// </summary>

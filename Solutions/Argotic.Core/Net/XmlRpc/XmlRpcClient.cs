@@ -6,6 +6,8 @@ using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Configuration;
 
+using Microsoft.Extensions.Options;
+
 namespace Argotic.Net;
 
 /// <summary>
@@ -61,7 +63,39 @@ public class XmlRpcClient
     public XmlRpcClient()
     {
         this.httpClient = SyndicationEncodingUtility.SharedHttpClient;
-        this.Initialize();
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XmlRpcClient"/> class with the specified options.
+    /// </summary>
+    /// <param name="options">The options to configure this client.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is a null reference.</exception>
+    /// <remarks>
+    ///     This constructor is intended for use with dependency injection and the <see cref="IOptions{TOptions}"/> pattern.
+    /// </remarks>
+    public XmlRpcClient(IOptions<XmlRpcClientOptions> options)
+    {
+        ArgumentNullException.ThrowIfNull(options);
+        this.httpClient = SyndicationEncodingUtility.SharedHttpClient;
+        ApplyOptions(options.Value);
+    }
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="XmlRpcClient"/> class with the specified options and <see cref="HttpClient"/>.
+    /// </summary>
+    /// <param name="options">The options to configure this client.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for sending requests. The caller is responsible for managing the client's lifecycle.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="options"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <remarks>
+    ///     This constructor is intended for use with dependency injection and the <see cref="IOptions{TOptions}"/> pattern.
+    /// </remarks>
+    public XmlRpcClient(IOptions<XmlRpcClientOptions> options, HttpClient httpClient)
+    {
+        ArgumentNullException.ThrowIfNull(options);
+        ArgumentNullException.ThrowIfNull(httpClient);
+        this.httpClient = httpClient;
+        ApplyOptions(options.Value);
     }
 
     /// <summary>
@@ -97,7 +131,6 @@ public class XmlRpcClient
     {
         ArgumentNullException.ThrowIfNull(httpClient);
         this.httpClient = httpClient;
-        this.Initialize();
     }
 
     /// <summary>
@@ -126,9 +159,6 @@ public class XmlRpcClient
     /// Gets or sets the location of the host computer that client remote procedure calls will be sent to.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the host computer used for XML-RPC transactions.</value>
-    /// <remarks>
-    ///     If <see cref="Host"/> is a null reference, <see cref="Host"/> is initialized using the settings in the application or machine configuration files.
-    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Host
     {
@@ -520,29 +550,24 @@ public class XmlRpcClient
     }
 
     /// <summary>
-    /// Initializes the current instance using the application configuration settings.
+    /// Applies the specified options to this client instance.
     /// </summary>
-    /// <seealso cref="XmlRpcClientSection"/>
-    private void Initialize()
+    /// <param name="options">The options to apply.</param>
+    private void ApplyOptions(XmlRpcClientOptions options)
     {
-        XmlRpcClientSection clientConfiguration = PrivilegedConfigurationManager.GetXmlRpcClientSection();
-
-        if (clientConfiguration != null)
+        if (options.Timeout > TimeSpan.Zero && options.Timeout < TimeSpan.FromDays(365))
         {
-            if (clientConfiguration.Timeout.TotalMilliseconds > 0 && clientConfiguration.Timeout < TimeSpan.FromDays(365))
-            {
-                this.Timeout = clientConfiguration.Timeout;
-            }
+            this.Timeout = options.Timeout;
+        }
 
-            if (!string.IsNullOrEmpty(clientConfiguration.UserAgent))
-            {
-                this.UserAgent = clientConfiguration.UserAgent;
-            }
+        if (!string.IsNullOrEmpty(options.UserAgent))
+        {
+            this.UserAgent = options.UserAgent;
+        }
 
-            if (clientConfiguration.Network?.Host != null)
-            {
-                this.Host = clientConfiguration.Network.Host;
-            }
+        if (options.Host is not null)
+        {
+            this.Host = options.Host;
         }
     }
 }

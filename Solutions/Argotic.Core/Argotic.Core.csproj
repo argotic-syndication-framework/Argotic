@@ -21,11 +21,15 @@
 
     <ItemGroup>
         <Compile Remove="Configuration\Provider\XmlSyndicationResourceProvider.cs" />
+        <Compile Remove="Configuration\Provider\SyndicationResourceProvider.cs" />
+        <Compile Remove="Configuration\Provider\SyndicationResourceProviderCollection.cs" />
         <Compile Remove="Syndication\SyndicationManager.cs" />
     </ItemGroup>
 
     <ItemGroup>
-        <PackageReference Include="System.Configuration.ConfigurationManager" Version="10.0.2" />
+        <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.0" />
+        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.0" />
+        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.0" />
     </ItemGroup>
 
     <ItemGroup>

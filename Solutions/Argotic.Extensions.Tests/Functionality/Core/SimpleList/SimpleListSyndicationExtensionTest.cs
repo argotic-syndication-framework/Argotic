@@ -1070,4 +1070,374 @@ public class SimpleListSyndicationExtensionTest
     }
 
     #endregion
+
+    #region SimpleListSort Tests
+
+    [TestMethod]
+    public void SimpleListSort_DefaultConstructor_CreatesEmptyInstance()
+    {
+        // Act
+        var sort = new SimpleListSort();
+
+        // Assert
+        sort.Element.ShouldBe(string.Empty);
+        sort.Label.ShouldBe(string.Empty);
+        sort.DataType.ShouldBe(SimpleListDataType.None);
+        sort.IsDefault.ShouldBeFalse();
+        sort.Namespace.ShouldBeNull();
+    }
+
+    [TestMethod]
+    public void SimpleListSort_Element_CanBeSet()
+    {
+        // Arrange
+        var sort = new SimpleListSort();
+
+        // Act
+        sort.Element = "price";
+
+        // Assert
+        sort.Element.ShouldBe("price");
+    }
+
+    [TestMethod]
+    public void SimpleListSort_Element_TrimsWhitespace()
+    {
+        // Arrange
+        var sort = new SimpleListSort();
+
+        // Act
+        sort.Element = "  price  ";
+
+        // Assert
+        sort.Element.ShouldBe("price");
+    }
+
+    [TestMethod]
+    public void SimpleListSort_Label_CanBeSet()
+    {
+        // Arrange
+        var sort = new SimpleListSort();
+
+        // Act
+        sort.Label = "Price";
+
+        // Assert
+        sort.Label.ShouldBe("Price");
+    }
+
+    [TestMethod]
+    public void SimpleListSort_DataType_CanBeSetToNumber()
+    {
+        // Arrange
+        var sort = new SimpleListSort();
+
+        // Act
+        sort.DataType = SimpleListDataType.Number;
+
+        // Assert
+        sort.DataType.ShouldBe(SimpleListDataType.Number);
+    }
+
+    [TestMethod]
+    public void SimpleListSort_DataType_CanBeSetToDate()
+    {
+        // Arrange
+        var sort = new SimpleListSort();
+
+        // Act
+        sort.DataType = SimpleListDataType.Date;
+
+        // Assert
+        sort.DataType.ShouldBe(SimpleListDataType.Date);
+    }
+
+    [TestMethod]
+    public void SimpleListSort_IsDefault_CanBeSet()
+    {
+        // Arrange
+        var sort = new SimpleListSort();
+
+        // Act
+        sort.IsDefault = true;
+
+        // Assert
+        sort.IsDefault.ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void SimpleListSort_Namespace_CanBeSet()
+    {
+        // Arrange
+        var sort = new SimpleListSort();
+        var ns = new Uri("http://www.example.com/ns");
+
+        // Act
+        sort.Namespace = ns;
+
+        // Assert
+        sort.Namespace.ShouldBe(ns);
+    }
+
+    [TestMethod]
+    public void SimpleListSort_DataTypeAsString_ReturnsCorrectValue_ForNumber()
+    {
+        // Act
+        string result = SimpleListSort.DataTypeAsString(SimpleListDataType.Number);
+
+        // Assert
+        result.ShouldBe("number");
+    }
+
+    [TestMethod]
+    public void SimpleListSort_DataTypeAsString_ReturnsCorrectValue_ForText()
+    {
+        // Act
+        string result = SimpleListSort.DataTypeAsString(SimpleListDataType.Text);
+
+        // Assert
+        result.ShouldBe("text");
+    }
+
+    [TestMethod]
+    public void SimpleListSort_DataTypeAsString_ReturnsCorrectValue_ForDate()
+    {
+        // Act
+        string result = SimpleListSort.DataTypeAsString(SimpleListDataType.Date);
+
+        // Assert
+        result.ShouldBe("date");
+    }
+
+    [TestMethod]
+    public void SimpleListSort_DataTypeByName_ReturnsCorrectEnum_ForNumber()
+    {
+        // Act
+        var result = SimpleListSort.DataTypeByName("number");
+
+        // Assert
+        result.ShouldBe(SimpleListDataType.Number);
+    }
+
+    [TestMethod]
+    public void SimpleListSort_DataTypeByName_ReturnsCorrectEnum_ForText()
+    {
+        // Act
+        var result = SimpleListSort.DataTypeByName("text");
+
+        // Assert
+        result.ShouldBe(SimpleListDataType.Text);
+    }
+
+    [TestMethod]
+    public void SimpleListSort_DataTypeByName_IsCaseInsensitive()
+    {
+        // Act
+        var result = SimpleListSort.DataTypeByName("NUMBER");
+
+        // Assert
+        result.ShouldBe(SimpleListDataType.Number);
+    }
+
+    [TestMethod]
+    public void SimpleListSort_CompareTo_WithNull_ReturnsPositive()
+    {
+        // Arrange
+        var sort = new SimpleListSort { Element = "price" };
+
+        // Act
+        int result = sort.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void SimpleListSort_CompareTo_WithEqual_ReturnsZero()
+    {
+        // Arrange
+        var sort1 = new SimpleListSort
+        {
+            Element = "price",
+            Label = "Price",
+            DataType = SimpleListDataType.Number
+        };
+        var sort2 = new SimpleListSort
+        {
+            Element = "price",
+            Label = "Price",
+            DataType = SimpleListDataType.Number
+        };
+
+        // Act
+        int result = sort1.CompareTo(sort2);
+
+        // Assert
+        result.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void SimpleListSort_Equals_WithEqual_ReturnsTrue()
+    {
+        // Arrange
+        var sort1 = new SimpleListSort
+        {
+            Element = "price",
+            Label = "Price",
+            DataType = SimpleListDataType.Number
+        };
+        var sort2 = new SimpleListSort
+        {
+            Element = "price",
+            Label = "Price",
+            DataType = SimpleListDataType.Number
+        };
+
+        // Act & Assert
+        sort1.Equals(sort2).ShouldBeTrue();
+    }
+
+    #endregion
+
+    #region SimpleListGroup Tests
+
+    [TestMethod]
+    public void SimpleListGroup_DefaultConstructor_CreatesEmptyInstance()
+    {
+        // Act
+        var group = new SimpleListGroup();
+
+        // Assert
+        group.Element.ShouldBe(string.Empty);
+        group.Label.ShouldBe(string.Empty);
+        group.Namespace.ShouldBeNull();
+    }
+
+    [TestMethod]
+    public void SimpleListGroup_Element_CanBeSet()
+    {
+        // Arrange
+        var group = new SimpleListGroup();
+
+        // Act
+        group.Element = "category";
+
+        // Assert
+        group.Element.ShouldBe("category");
+    }
+
+    [TestMethod]
+    public void SimpleListGroup_Element_TrimsWhitespace()
+    {
+        // Arrange
+        var group = new SimpleListGroup();
+
+        // Act
+        group.Element = "  category  ";
+
+        // Assert
+        group.Element.ShouldBe("category");
+    }
+
+    [TestMethod]
+    public void SimpleListGroup_Label_CanBeSet()
+    {
+        // Arrange
+        var group = new SimpleListGroup();
+
+        // Act
+        group.Label = "Category";
+
+        // Assert
+        group.Label.ShouldBe("Category");
+    }
+
+    [TestMethod]
+    public void SimpleListGroup_Namespace_CanBeSet()
+    {
+        // Arrange
+        var group = new SimpleListGroup();
+        var ns = new Uri("http://www.example.com/ns");
+
+        // Act
+        group.Namespace = ns;
+
+        // Assert
+        group.Namespace.ShouldBe(ns);
+    }
+
+    [TestMethod]
+    public void SimpleListGroup_CompareTo_WithNull_ReturnsPositive()
+    {
+        // Arrange
+        var group = new SimpleListGroup { Element = "category" };
+
+        // Act
+        int result = group.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void SimpleListGroup_CompareTo_WithEqual_ReturnsZero()
+    {
+        // Arrange
+        var group1 = new SimpleListGroup
+        {
+            Element = "category",
+            Label = "Category"
+        };
+        var group2 = new SimpleListGroup
+        {
+            Element = "category",
+            Label = "Category"
+        };
+
+        // Act
+        int result = group1.CompareTo(group2);
+
+        // Assert
+        result.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void SimpleListGroup_Equals_WithEqual_ReturnsTrue()
+    {
+        // Arrange
+        var group1 = new SimpleListGroup
+        {
+            Element = "category",
+            Label = "Category"
+        };
+        var group2 = new SimpleListGroup
+        {
+            Element = "category",
+            Label = "Category"
+        };
+
+        // Act & Assert
+        group1.Equals(group2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void SimpleListGroup_EqualityOperator_WithEqual_ReturnsTrue()
+    {
+        // Arrange
+        var group1 = new SimpleListGroup
+        {
+            Element = "category",
+            Label = "Category"
+        };
+        var group2 = new SimpleListGroup
+        {
+            Element = "category",
+            Label = "Category"
+        };
+
+        // Act & Assert
+        (group1 == group2).ShouldBeTrue();
+    }
+
+    #endregion
 }

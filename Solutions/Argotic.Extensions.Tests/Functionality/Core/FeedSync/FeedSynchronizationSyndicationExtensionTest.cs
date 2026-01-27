@@ -1180,6 +1180,482 @@ public class FeedSynchronizationSyndicationExtensionTest
 
     #endregion
 
+    #region FeedSynchronizationRelatedInformation Tests
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_DefaultConstructor_SetsDefaults()
+    {
+        // Arrange & Act
+        FeedSynchronizationRelatedInformation info = new();
+
+        // Assert
+        info.Link.ShouldBeNull();
+        info.Title.ShouldBe(string.Empty);
+        info.RelationType.ShouldBe(FeedSynchronizationRelatedInformationType.None);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_ParameterizedConstructor_SetsLinkAndType()
+    {
+        // Arrange
+        Uri link = new("http://example.com/feed");
+
+        // Act
+        FeedSynchronizationRelatedInformation info = new(link, FeedSynchronizationRelatedInformationType.Complete);
+
+        // Assert
+        info.Link.ShouldBe(link);
+        info.RelationType.ShouldBe(FeedSynchronizationRelatedInformationType.Complete);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_FullConstructor_SetsAllValues()
+    {
+        // Arrange
+        Uri link = new("http://example.com/feed");
+
+        // Act
+        FeedSynchronizationRelatedInformation info = new(link, FeedSynchronizationRelatedInformationType.Aggregated, "Related Feed");
+
+        // Assert
+        info.Link.ShouldBe(link);
+        info.RelationType.ShouldBe(FeedSynchronizationRelatedInformationType.Aggregated);
+        info.Title.ShouldBe("Related Feed");
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_LinkNull_ThrowsArgumentNullException()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new();
+
+        // Act & Assert
+        Should.Throw<ArgumentNullException>(() => info.Link = null!);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeNone_ThrowsArgumentException()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new();
+
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => info.RelationType = FeedSynchronizationRelatedInformationType.None);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_TitleNull_SetsEmpty()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new();
+
+        // Act
+        info.Title = null!;
+
+        // Assert
+        info.Title.ShouldBe(string.Empty);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_TitleWhitespace_TrimsValue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new();
+
+        // Act
+        info.Title = "  My Feed Title  ";
+
+        // Assert
+        info.Title.ShouldBe("My Feed Title");
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeAsString_Complete_ReturnsCorrect()
+    {
+        // Act
+        string result = FeedSynchronizationRelatedInformation.RelationTypeAsString(FeedSynchronizationRelatedInformationType.Complete);
+
+        // Assert
+        result.ShouldBe("complete");
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeAsString_Aggregated_ReturnsCorrect()
+    {
+        // Act
+        string result = FeedSynchronizationRelatedInformation.RelationTypeAsString(FeedSynchronizationRelatedInformationType.Aggregated);
+
+        // Assert
+        result.ShouldBe("aggregated");
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeAsString_None_ReturnsEmpty()
+    {
+        // Act
+        string result = FeedSynchronizationRelatedInformation.RelationTypeAsString(FeedSynchronizationRelatedInformationType.None);
+
+        // Assert
+        result.ShouldBe(string.Empty);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Complete_ReturnsCorrect()
+    {
+        // Act
+        FeedSynchronizationRelatedInformationType result = FeedSynchronizationRelatedInformation.RelationTypeByName("complete");
+
+        // Assert
+        result.ShouldBe(FeedSynchronizationRelatedInformationType.Complete);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Aggregated_ReturnsCorrect()
+    {
+        // Act
+        FeedSynchronizationRelatedInformationType result = FeedSynchronizationRelatedInformation.RelationTypeByName("aggregated");
+
+        // Assert
+        result.ShouldBe(FeedSynchronizationRelatedInformationType.Aggregated);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_CaseInsensitive()
+    {
+        // Act & Assert
+        FeedSynchronizationRelatedInformation.RelationTypeByName("COMPLETE").ShouldBe(FeedSynchronizationRelatedInformationType.Complete);
+        FeedSynchronizationRelatedInformation.RelationTypeByName("Aggregated").ShouldBe(FeedSynchronizationRelatedInformationType.Aggregated);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Unknown_ReturnsNone()
+    {
+        // Act
+        FeedSynchronizationRelatedInformationType result = FeedSynchronizationRelatedInformation.RelationTypeByName("unknown");
+
+        // Assert
+        result.ShouldBe(FeedSynchronizationRelatedInformationType.None);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Null_ThrowsArgumentException()
+    {
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => FeedSynchronizationRelatedInformation.RelationTypeByName(null!));
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Empty_ThrowsArgumentException()
+    {
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => FeedSynchronizationRelatedInformation.RelationTypeByName(string.Empty));
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_ToString_ReturnsXml()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete,
+            "Complete Feed");
+
+        // Act
+        string result = info.ToString();
+
+        // Assert
+        result.ShouldNotBeNullOrEmpty();
+        result.ShouldContain("related");
+        result.ShouldContain("http://example.com/feed");
+        result.ShouldContain("complete");
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_CompareTo_Null_ReturnsPositive()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act
+        int result = info.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_CompareTo_EqualObjects_ReturnsZero()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info1 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete,
+            "Feed Title");
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete,
+            "Feed Title");
+
+        // Act
+        int result = info1.CompareTo(info2);
+
+        // Assert
+        result.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_CompareTo_WrongType_ThrowsArgumentException()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => info.CompareTo("wrong type"));
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_Equals_EqualObjects_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info1 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        info1.Equals(info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_Equals_DifferentObjects_ReturnsFalse()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info1 = new(
+            new Uri("http://example.com/feed1"),
+            FeedSynchronizationRelatedInformationType.Complete);
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed2"),
+            FeedSynchronizationRelatedInformationType.Aggregated);
+
+        // Act & Assert
+        info1.Equals(info2).ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_Equals_Null_ReturnsFalse()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        info.Equals(null).ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_Equals_WrongType_ReturnsFalse()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        info.Equals("wrong type").ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_GetHashCode_DoesNotThrow()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert - GetHashCode should not throw
+        Should.NotThrow(() => info.GetHashCode());
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorEquals_EqualObjects_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info1 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        (info1 == info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorEquals_BothNull_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation? info1 = null;
+        FeedSynchronizationRelatedInformation? info2 = null;
+
+        // Act & Assert
+        (info1 == info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorEquals_FirstNull_ReturnsFalse()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation? info1 = null;
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        (info1 == info2).ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorNotEquals_DifferentObjects_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info1 = new(
+            new Uri("http://example.com/feed1"),
+            FeedSynchronizationRelatedInformationType.Complete);
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed2"),
+            FeedSynchronizationRelatedInformationType.Aggregated);
+
+        // Act & Assert
+        (info1 != info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorLessThan_FirstNull_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation? info1 = null;
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        (info1 < info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorLessThan_BothNull_ReturnsFalse()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation? info1 = null;
+        FeedSynchronizationRelatedInformation? info2 = null;
+
+        // Act & Assert
+        (info1 < info2).ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorGreaterThan_FirstNull_ReturnsFalse()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation? info1 = null;
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        (info1 > info2).ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorGreaterThan_SecondNull_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info1 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+        FeedSynchronizationRelatedInformation? info2 = null;
+
+        // Act & Assert
+        (info1 > info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorLessThanOrEqual_EqualObjects_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info1 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        (info1 <= info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorLessThanOrEqual_FirstNull_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation? info1 = null;
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        (info1 <= info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorGreaterThanOrEqual_EqualObjects_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation info1 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        (info1 >= info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorGreaterThanOrEqual_BothNull_ReturnsTrue()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation? info1 = null;
+        FeedSynchronizationRelatedInformation? info2 = null;
+
+        // Act & Assert
+        (info1 >= info2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void FeedSynchronizationRelatedInformation_OperatorGreaterThanOrEqual_FirstNullSecondNotNull_ReturnsFalse()
+    {
+        // Arrange
+        FeedSynchronizationRelatedInformation? info1 = null;
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/feed"),
+            FeedSynchronizationRelatedInformationType.Complete);
+
+        // Act & Assert
+        (info1 >= info2).ShouldBeFalse();
+    }
+
+    #endregion
+
     #region Helper Methods
 
     private static FeedSynchronizationSyndicationExtension CreateExtension1()

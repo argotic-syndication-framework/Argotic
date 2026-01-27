@@ -1408,4 +1408,567 @@ public class YahooMediaSyndicationExtensionTest
     }
 
     #endregion
+
+    #region YahooMediaRestriction Tests
+
+    [TestMethod]
+    public void YahooMediaRestriction_DefaultConstructor_CreatesEmptyInstance()
+    {
+        // Act
+        var restriction = new YahooMediaRestriction();
+
+        // Assert
+        restriction.Relationship.ShouldBe(YahooMediaRestrictionRelationship.None);
+        restriction.EntityType.ShouldBe(YahooMediaRestrictionType.None);
+        restriction.Entities.ShouldNotBeNull();
+        restriction.Entities.Count.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_Relationship_CanBeSet()
+    {
+        // Arrange
+        var restriction = new YahooMediaRestriction();
+
+        // Act
+        restriction.Relationship = YahooMediaRestrictionRelationship.Allow;
+
+        // Assert
+        restriction.Relationship.ShouldBe(YahooMediaRestrictionRelationship.Allow);
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_EntityType_CanBeSet()
+    {
+        // Arrange
+        var restriction = new YahooMediaRestriction();
+
+        // Act
+        restriction.EntityType = YahooMediaRestrictionType.Country;
+
+        // Assert
+        restriction.EntityType.ShouldBe(YahooMediaRestrictionType.Country);
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_Entities_CanAddCountries()
+    {
+        // Arrange
+        var restriction = new YahooMediaRestriction
+        {
+            Relationship = YahooMediaRestrictionRelationship.Allow,
+            EntityType = YahooMediaRestrictionType.Country
+        };
+
+        // Act
+        restriction.Entities.Add("US");
+        restriction.Entities.Add("UK");
+        restriction.Entities.Add("CA");
+
+        // Assert
+        restriction.Entities.Count.ShouldBe(3);
+        restriction.Entities.ShouldContain("US");
+        restriction.Entities.ShouldContain("UK");
+        restriction.Entities.ShouldContain("CA");
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_RelationshipAsString_ReturnsCorrectValue_ForAllow()
+    {
+        // Act
+        string result = YahooMediaRestriction.RelationshipAsString(YahooMediaRestrictionRelationship.Allow);
+
+        // Assert
+        result.ShouldBe("allow");
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_RelationshipAsString_ReturnsCorrectValue_ForDeny()
+    {
+        // Act
+        string result = YahooMediaRestriction.RelationshipAsString(YahooMediaRestrictionRelationship.Deny);
+
+        // Assert
+        result.ShouldBe("deny");
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_RelationshipByName_ReturnsCorrectEnum_ForAllow()
+    {
+        // Act
+        var result = YahooMediaRestriction.RelationshipByName("allow");
+
+        // Assert
+        result.ShouldBe(YahooMediaRestrictionRelationship.Allow);
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_RelationshipByName_ReturnsCorrectEnum_ForDeny()
+    {
+        // Act
+        var result = YahooMediaRestriction.RelationshipByName("deny");
+
+        // Assert
+        result.ShouldBe(YahooMediaRestrictionRelationship.Deny);
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_RelationshipByName_IsCaseInsensitive()
+    {
+        // Act
+        var result = YahooMediaRestriction.RelationshipByName("ALLOW");
+
+        // Assert
+        result.ShouldBe(YahooMediaRestrictionRelationship.Allow);
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_RestrictionTypeAsString_ReturnsCorrectValue_ForCountry()
+    {
+        // Act
+        string result = YahooMediaRestriction.RestrictionTypeAsString(YahooMediaRestrictionType.Country);
+
+        // Assert
+        result.ShouldBe("country");
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_RestrictionTypeAsString_ReturnsCorrectValue_ForUri()
+    {
+        // Act
+        string result = YahooMediaRestriction.RestrictionTypeAsString(YahooMediaRestrictionType.Uri);
+
+        // Assert
+        result.ShouldBe("uri");
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_RestrictionTypeByName_ReturnsCorrectEnum_ForCountry()
+    {
+        // Act
+        var result = YahooMediaRestriction.RestrictionTypeByName("country");
+
+        // Assert
+        result.ShouldBe(YahooMediaRestrictionType.Country);
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_CompareTo_WithNull_ReturnsPositive()
+    {
+        // Arrange
+        var restriction = new YahooMediaRestriction
+        {
+            Relationship = YahooMediaRestrictionRelationship.Allow,
+            EntityType = YahooMediaRestrictionType.Country
+        };
+
+        // Act
+        int result = restriction.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_CompareTo_WithEqual_ReturnsZero()
+    {
+        // Arrange
+        var restriction1 = new YahooMediaRestriction
+        {
+            Relationship = YahooMediaRestrictionRelationship.Allow,
+            EntityType = YahooMediaRestrictionType.Country
+        };
+        var restriction2 = new YahooMediaRestriction
+        {
+            Relationship = YahooMediaRestrictionRelationship.Allow,
+            EntityType = YahooMediaRestrictionType.Country
+        };
+
+        // Act
+        int result = restriction1.CompareTo(restriction2);
+
+        // Assert
+        result.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void YahooMediaRestriction_Equals_WithEqual_ReturnsTrue()
+    {
+        // Arrange
+        var restriction1 = new YahooMediaRestriction
+        {
+            Relationship = YahooMediaRestrictionRelationship.Allow,
+            EntityType = YahooMediaRestrictionType.Country
+        };
+        var restriction2 = new YahooMediaRestriction
+        {
+            Relationship = YahooMediaRestrictionRelationship.Allow,
+            EntityType = YahooMediaRestrictionType.Country
+        };
+
+        // Act & Assert
+        restriction1.Equals(restriction2).ShouldBeTrue();
+    }
+
+    #endregion
+
+    #region YahooMediaHash Tests
+
+    [TestMethod]
+    public void YahooMediaHash_DefaultConstructor_CreatesEmptyInstance()
+    {
+        // Act
+        var hash = new YahooMediaHash();
+
+        // Assert
+        hash.Algorithm.ShouldBe(YahooMediaHashAlgorithm.None);
+        hash.Value.ShouldBe(string.Empty);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_Constructor_WithValue_SetsValue()
+    {
+        // Arrange
+        string hashValue = "abc123def456";
+
+        // Act
+        var hash = new YahooMediaHash(hashValue);
+
+        // Assert
+        hash.Value.ShouldBe(hashValue);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_Algorithm_CanBeSet()
+    {
+        // Arrange
+        var hash = new YahooMediaHash("abc123");
+
+        // Act
+        hash.Algorithm = YahooMediaHashAlgorithm.MD5;
+
+        // Assert
+        hash.Algorithm.ShouldBe(YahooMediaHashAlgorithm.MD5);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_Value_ThrowsOnNull()
+    {
+        // Arrange
+        var hash = new YahooMediaHash();
+
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => hash.Value = null!);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_Value_ThrowsOnEmpty()
+    {
+        // Arrange
+        var hash = new YahooMediaHash();
+
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => hash.Value = string.Empty);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_HashAlgorithmAsString_ReturnsCorrectValue_ForMD5()
+    {
+        // Act
+        string result = YahooMediaHash.HashAlgorithmAsString(YahooMediaHashAlgorithm.MD5);
+
+        // Assert
+        result.ShouldBe("md5");
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_HashAlgorithmAsString_ReturnsCorrectValue_ForSha1()
+    {
+        // Act
+        string result = YahooMediaHash.HashAlgorithmAsString(YahooMediaHashAlgorithm.Sha1);
+
+        // Assert
+        result.ShouldBe("sha-1");
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_HashAlgorithmByName_ReturnsCorrectEnum_ForMD5()
+    {
+        // Act
+        var result = YahooMediaHash.HashAlgorithmByName("md5");
+
+        // Assert
+        result.ShouldBe(YahooMediaHashAlgorithm.MD5);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_HashAlgorithmByName_ReturnsCorrectEnum_ForSha1()
+    {
+        // Act
+        var result = YahooMediaHash.HashAlgorithmByName("sha-1");
+
+        // Assert
+        result.ShouldBe(YahooMediaHashAlgorithm.Sha1);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_HashAlgorithmByName_IsCaseInsensitive()
+    {
+        // Act
+        var result = YahooMediaHash.HashAlgorithmByName("MD5");
+
+        // Assert
+        result.ShouldBe(YahooMediaHashAlgorithm.MD5);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_GenerateHash_ComputesMD5Hash()
+    {
+        // Arrange
+        using var stream = new MemoryStream("test content"u8.ToArray());
+
+        // Act
+        string result = YahooMediaHash.GenerateHash(stream, YahooMediaHashAlgorithm.MD5);
+
+        // Assert
+        result.ShouldNotBeNullOrEmpty();
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_GenerateHash_ComputesSha1Hash()
+    {
+        // Arrange
+        using var stream = new MemoryStream("test content"u8.ToArray());
+
+        // Act
+        string result = YahooMediaHash.GenerateHash(stream, YahooMediaHashAlgorithm.Sha1);
+
+        // Assert
+        result.ShouldNotBeNullOrEmpty();
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_GenerateHash_ThrowsOnNoneAlgorithm()
+    {
+        // Arrange
+        using var stream = new MemoryStream("test"u8.ToArray());
+
+        // Act & Assert
+        Should.Throw<ArgumentException>(() =>
+            YahooMediaHash.GenerateHash(stream, YahooMediaHashAlgorithm.None));
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_CompareTo_WithNull_ReturnsPositive()
+    {
+        // Arrange
+        var hash = new YahooMediaHash("abc123") { Algorithm = YahooMediaHashAlgorithm.MD5 };
+
+        // Act
+        int result = hash.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_CompareTo_WithEqual_ReturnsZero()
+    {
+        // Arrange
+        var hash1 = new YahooMediaHash("abc123") { Algorithm = YahooMediaHashAlgorithm.MD5 };
+        var hash2 = new YahooMediaHash("abc123") { Algorithm = YahooMediaHashAlgorithm.MD5 };
+
+        // Act
+        int result = hash1.CompareTo(hash2);
+
+        // Assert
+        result.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void YahooMediaHash_Equals_WithEqual_ReturnsTrue()
+    {
+        // Arrange
+        var hash1 = new YahooMediaHash("abc123") { Algorithm = YahooMediaHashAlgorithm.MD5 };
+        var hash2 = new YahooMediaHash("abc123") { Algorithm = YahooMediaHashAlgorithm.MD5 };
+
+        // Act & Assert
+        hash1.Equals(hash2).ShouldBeTrue();
+    }
+
+    #endregion
+
+    #region YahooMediaText Tests
+
+    [TestMethod]
+    public void YahooMediaText_DefaultConstructor_CreatesEmptyInstance()
+    {
+        // Act
+        var text = new YahooMediaText();
+
+        // Assert
+        text.TextType.ShouldBe(YahooMediaTextConstructType.None);
+        text.Content.ShouldBe(string.Empty);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_Constructor_WithContent_SetsContent()
+    {
+        // Arrange
+        string content = "Sample caption text";
+
+        // Act
+        var text = new YahooMediaText(content);
+
+        // Assert
+        text.Content.ShouldBe(content);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_TextType_CanBeSetToPlain()
+    {
+        // Arrange
+        var text = new YahooMediaText("content");
+
+        // Act
+        text.TextType = YahooMediaTextConstructType.Plain;
+
+        // Assert
+        text.TextType.ShouldBe(YahooMediaTextConstructType.Plain);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_TextType_CanBeSetToHtml()
+    {
+        // Arrange
+        var text = new YahooMediaText("<p>HTML content</p>");
+
+        // Act
+        text.TextType = YahooMediaTextConstructType.Html;
+
+        // Assert
+        text.TextType.ShouldBe(YahooMediaTextConstructType.Html);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_Start_CanBeSet()
+    {
+        // Arrange
+        var text = new YahooMediaText("Caption");
+        var startTime = TimeSpan.FromSeconds(10);
+
+        // Act
+        text.Start = startTime;
+
+        // Assert
+        text.Start.ShouldBe(startTime);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_End_CanBeSet()
+    {
+        // Arrange
+        var text = new YahooMediaText("Caption");
+        var endTime = TimeSpan.FromSeconds(20);
+
+        // Act
+        text.End = endTime;
+
+        // Assert
+        text.End.ShouldBe(endTime);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_Language_CanBeSet()
+    {
+        // Arrange
+        var text = new YahooMediaText("Caption");
+        var language = CultureInfo.GetCultureInfo("en-US");
+
+        // Act
+        text.Language = language;
+
+        // Assert
+        text.Language.ShouldBe(language);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_CompareTo_WithNull_ReturnsPositive()
+    {
+        // Arrange
+        var text = new YahooMediaText("content");
+
+        // Act
+        int result = text.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_CompareTo_WithEqual_ReturnsZero()
+    {
+        // Arrange
+        var text1 = new YahooMediaText("content") { TextType = YahooMediaTextConstructType.Plain };
+        var text2 = new YahooMediaText("content") { TextType = YahooMediaTextConstructType.Plain };
+
+        // Act
+        int result = text1.CompareTo(text2);
+
+        // Assert
+        result.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_Equals_WithEqual_ReturnsTrue()
+    {
+        // Arrange
+        var text1 = new YahooMediaText("content") { TextType = YahooMediaTextConstructType.Plain };
+        var text2 = new YahooMediaText("content") { TextType = YahooMediaTextConstructType.Plain };
+
+        // Act & Assert
+        text1.Equals(text2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void YahooMediaText_TextTypeAsString_ReturnsCorrectValue_ForPlain()
+    {
+        // Act
+        string result = YahooMediaText.TextTypeAsString(YahooMediaTextConstructType.Plain);
+
+        // Assert
+        result.ShouldBe("plain");
+    }
+
+    [TestMethod]
+    public void YahooMediaText_TextTypeAsString_ReturnsCorrectValue_ForHtml()
+    {
+        // Act
+        string result = YahooMediaText.TextTypeAsString(YahooMediaTextConstructType.Html);
+
+        // Assert
+        result.ShouldBe("html");
+    }
+
+    [TestMethod]
+    public void YahooMediaText_TextTypeByName_ReturnsCorrectEnum_ForPlain()
+    {
+        // Act
+        var result = YahooMediaText.TextTypeByName("plain");
+
+        // Assert
+        result.ShouldBe(YahooMediaTextConstructType.Plain);
+    }
+
+    [TestMethod]
+    public void YahooMediaText_TextTypeByName_ReturnsCorrectEnum_ForHtml()
+    {
+        // Act
+        var result = YahooMediaText.TextTypeByName("html");
+
+        // Assert
+        result.ShouldBe(YahooMediaTextConstructType.Html);
+    }
+
+    #endregion
 }

@@ -10,9 +10,15 @@ public class LiveJournalSyndicationExtensionTest
 {
     private const string Namespc = @"xmlns:lj=""http://livejournal.org/rss/lj/2.0/""";
 
-    private readonly string toStringText = "<music xmlns=\"http://livejournal.org/rss/lj/2.0/\"><![CDATA[Test Music Track]]></music>";
+    private readonly string toStringText = "<music xmlns=\"http://livejournal.org/rss/lj/2.0/\"><![CDATA[Test Music Track]]></music>" + Environment.NewLine +
+                                           "<mood id=\"1\" xmlns=\"http://livejournal.org/rss/lj/2.0/\"><![CDATA[Happy]]></mood>" + Environment.NewLine +
+                                           "<security type=\"public\" xmlns=\"http://livejournal.org/rss/lj/2.0/\" />" + Environment.NewLine +
+                                           "<preformatted xmlns=\"http://livejournal.org/rss/lj/2.0/\" />";
 
-    private const string StrExtXml = "<lj:music>Test Music Track</lj:music>";
+    private const string StrExtXml = "<lj:music>Test Music Track</lj:music>"
+                                     + "<lj:mood id=\"1\">Happy</lj:mood>"
+                                     + "<lj:security type=\"public\" />"
+                                     + "<lj:preformatted />";
 
     public TestContext? TestContext { get; set; }
 
@@ -171,6 +177,240 @@ public class LiveJournalSyndicationExtensionTest
 
         context.ShouldNotBeNull();
         context.Music.ShouldBe("Test Music Track");
+        context.IsPreformatted.ShouldBeTrue();
+        context.Mood.ShouldNotBeNull();
+        context.Mood.Content.ShouldBe("Happy");
+        context.Mood.Id.ShouldBe(1);
+        context.Security.ShouldNotBeNull();
+        context.Security.Accessibility.ShouldBe(LiveJournalSecurityType.Public);
+    }
+
+    [TestMethod]
+    public void LiveJournalContextSetterThrowsOnNull()
+    {
+        // Arrange
+        LiveJournalSyndicationExtension target = new();
+
+        // Act & Assert
+        Should.Throw<ArgumentNullException>(() => target.Context = null!);
+    }
+
+    [TestMethod]
+    public void LiveJournalRoundTripTest()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(Namespc, StrExtXml);
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        RssItem item = feed.Channel.Items.Single();
+        LiveJournalSyndicationExtension itemExtension = item.FindExtension<LiveJournalSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Music.ShouldBe("Test Music Track");
+        itemExtension.Context.IsPreformatted.ShouldBeTrue();
+        itemExtension.Context.Mood.ShouldNotBeNull();
+        itemExtension.Context.Mood.Content.ShouldBe("Happy");
+        itemExtension.Context.Security.ShouldNotBeNull();
+        itemExtension.Context.Security.Accessibility.ShouldBe(LiveJournalSecurityType.Public);
+    }
+
+    [TestMethod]
+    public void LiveJournalOpLessThanOrEqualTest()
+    {
+        // Arrange
+        LiveJournalSyndicationExtension first = CreateExtension1();
+        LiveJournalSyndicationExtension second = CreateExtension1();
+
+        // Act & Assert
+        (first <= second).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void LiveJournalOpGreaterThanOrEqualTest()
+    {
+        // Arrange
+        LiveJournalSyndicationExtension first = CreateExtension1();
+        LiveJournalSyndicationExtension second = CreateExtension1();
+
+        // Act & Assert
+        (first >= second).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void LiveJournalMatchByTypeReturnsFalseForDifferentType()
+    {
+        // Arrange
+        ISyndicationExtension extension = new SiteSummarySlashSyndicationExtension();
+
+        // Act
+        bool actual = LiveJournalSyndicationExtension.MatchByType(extension);
+
+        // Assert
+        actual.ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void LiveJournalEqualsReturnsFalseForDifferentType()
+    {
+        // Arrange
+        LiveJournalSyndicationExtension target = CreateExtension1();
+
+        // Act & Assert
+        target.Equals("not an extension").ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void LiveJournalCompareToNullReturnsPositive()
+    {
+        // Arrange
+        LiveJournalSyndicationExtension target = CreateExtension1();
+
+        // Act
+        int result = target.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void LiveJournalCompareToWrongTypeThrows()
+    {
+        // Arrange
+        LiveJournalSyndicationExtension target = CreateExtension1();
+
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => target.CompareTo("wrong type"));
+    }
+
+    [TestMethod]
+    public void LiveJournalMoodPropertyTest()
+    {
+        // Arrange
+        LiveJournalMood mood = new()
+        {
+            Content = "Excited",
+            Id = 42
+        };
+
+        // Act & Assert
+        mood.Content.ShouldBe("Excited");
+        mood.Id.ShouldBe(42);
+    }
+
+    [TestMethod]
+    public void LiveJournalSecurityPropertyTest()
+    {
+        // Arrange & Act
+        LiveJournalSecurity security = new(LiveJournalSecurityType.Friends, 123);
+
+        // Assert
+        security.Accessibility.ShouldBe(LiveJournalSecurityType.Friends);
+        security.Mask.ShouldBe(123);
+    }
+
+    [TestMethod]
+    public void LiveJournalSecurityAccessibilityAsStringTest()
+    {
+        // Arrange & Act & Assert
+        LiveJournalSecurity.AccessibilityAsString(LiveJournalSecurityType.Public).ShouldBe("public");
+        LiveJournalSecurity.AccessibilityAsString(LiveJournalSecurityType.Friends).ShouldBe("friends");
+        LiveJournalSecurity.AccessibilityAsString(LiveJournalSecurityType.Private).ShouldBe("private");
+        LiveJournalSecurity.AccessibilityAsString(LiveJournalSecurityType.None).ShouldBe(string.Empty);
+    }
+
+    [TestMethod]
+    public void LiveJournalSecurityAccessibilityByNameTest()
+    {
+        // Arrange & Act & Assert
+        LiveJournalSecurity.AccessibilityByName("public").ShouldBe(LiveJournalSecurityType.Public);
+        LiveJournalSecurity.AccessibilityByName("friends").ShouldBe(LiveJournalSecurityType.Friends);
+        LiveJournalSecurity.AccessibilityByName("private").ShouldBe(LiveJournalSecurityType.Private);
+    }
+
+    [TestMethod]
+    public void LiveJournalUserPicturePropertyTest()
+    {
+        // Arrange & Act
+        LiveJournalUserPicture userPic = new(
+            new Uri("http://example.com/pic.jpg"),
+            "avatar",
+            100,
+            100
+        );
+
+        // Assert
+        userPic.Url.ShouldBe(new Uri("http://example.com/pic.jpg"));
+        userPic.Keyword.ShouldBe("avatar");
+        userPic.Width.ShouldBe(100);
+        userPic.Height.ShouldBe(100);
+    }
+
+    [TestMethod]
+    public void LiveJournalUserPictureMaxDimensionTest()
+    {
+        // Arrange
+        LiveJournalUserPicture userPic = new();
+
+        // Act & Assert - Width > 100 should throw
+        Should.Throw<ArgumentOutOfRangeException>(() => userPic.Width = 101);
+        Should.Throw<ArgumentOutOfRangeException>(() => userPic.Height = 101);
+    }
+
+    [TestMethod]
+    public void LiveJournalMoodCompareToTest()
+    {
+        // Arrange
+        LiveJournalMood mood1 = new() { Content = "Happy", Id = 1 };
+        LiveJournalMood mood2 = new() { Content = "Happy", Id = 1 };
+
+        // Act
+        int result = mood1.CompareTo(mood2);
+
+        // Assert
+        result.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void LiveJournalMoodEqualsTest()
+    {
+        // Arrange
+        LiveJournalMood mood1 = new() { Content = "Happy", Id = 1 };
+        LiveJournalMood mood2 = new() { Content = "Happy", Id = 1 };
+
+        // Act & Assert
+        mood1.Equals(mood2).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void LiveJournalSecurityCompareToTest()
+    {
+        // Arrange
+        LiveJournalSecurity sec1 = new(LiveJournalSecurityType.Public, 0);
+        LiveJournalSecurity sec2 = new(LiveJournalSecurityType.Public, 0);
+
+        // Act
+        int result = sec1.CompareTo(sec2);
+
+        // Assert
+        result.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void LiveJournalUserPictureCompareToTest()
+    {
+        // Arrange
+        LiveJournalUserPicture pic1 = new(new Uri("http://example.com/pic.jpg"), "avatar", 50, 50);
+        LiveJournalUserPicture pic2 = new(new Uri("http://example.com/pic.jpg"), "avatar", 50, 50);
+
+        // Act
+        int result = pic1.CompareTo(pic2);
+
+        // Assert
+        result.ShouldBe(0);
     }
 
     private static LiveJournalSyndicationExtension CreateExtension1()
@@ -179,7 +419,10 @@ public class LiveJournalSyndicationExtensionTest
         {
             Context =
             {
-                Music = "Test Music Track"
+                Music = "Test Music Track",
+                IsPreformatted = true,
+                Mood = new LiveJournalMood { Content = "Happy", Id = 1 },
+                Security = new LiveJournalSecurity(LiveJournalSecurityType.Public)
             }
         };
 
@@ -192,7 +435,10 @@ public class LiveJournalSyndicationExtensionTest
         {
             Context =
             {
-                Music = "Other Music Track"
+                Music = "Other Music Track",
+                IsPreformatted = false,
+                Mood = new LiveJournalMood { Content = "Sad", Id = 2 },
+                Security = new LiveJournalSecurity(LiveJournalSecurityType.Private)
             }
         };
 

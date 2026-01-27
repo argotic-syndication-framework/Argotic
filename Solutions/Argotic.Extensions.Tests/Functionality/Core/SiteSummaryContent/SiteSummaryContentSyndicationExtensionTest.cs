@@ -173,6 +173,173 @@ public class SiteSummaryContentSyndicationExtensionTest
         context.Encoded.ShouldBe("<p>Test encoded content</p>");
     }
 
+    [TestMethod]
+    public void SiteSummaryContentContextSetterThrowsOnNull()
+    {
+        // Arrange
+        SiteSummaryContentSyndicationExtension target = new();
+
+        // Act & Assert
+        Should.Throw<ArgumentNullException>(() => target.Context = null!);
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentRoundTripTest()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(Namespc, StrExtXml);
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        RssItem item = feed.Channel.Items.Single();
+        SiteSummaryContentSyndicationExtension itemExtension = item.FindExtension<SiteSummaryContentSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Encoded.ShouldBe("<p>Test encoded content</p>");
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentOpLessThanOrEqualTest()
+    {
+        // Arrange
+        SiteSummaryContentSyndicationExtension first = CreateExtension1();
+        SiteSummaryContentSyndicationExtension second = CreateExtension1();
+
+        // Act & Assert
+        (first <= second).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentOpGreaterThanOrEqualTest()
+    {
+        // Arrange
+        SiteSummaryContentSyndicationExtension first = CreateExtension1();
+        SiteSummaryContentSyndicationExtension second = CreateExtension1();
+
+        // Act & Assert
+        (first >= second).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentMatchByTypeReturnsFalseForDifferentType()
+    {
+        // Arrange
+        ISyndicationExtension extension = new SiteSummarySlashSyndicationExtension();
+
+        // Act
+        bool actual = SiteSummaryContentSyndicationExtension.MatchByType(extension);
+
+        // Assert
+        actual.ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentEqualsReturnsFalseForDifferentType()
+    {
+        // Arrange
+        SiteSummaryContentSyndicationExtension target = CreateExtension1();
+
+        // Act & Assert
+        target.Equals("not an extension").ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentCompareToNullReturnsPositive()
+    {
+        // Arrange
+        SiteSummaryContentSyndicationExtension target = CreateExtension1();
+
+        // Act
+        int result = target.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentCompareToWrongTypeThrows()
+    {
+        // Arrange
+        SiteSummaryContentSyndicationExtension target = CreateExtension1();
+
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => target.CompareTo("wrong type"));
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentItemsPropertyTest()
+    {
+        // Arrange
+        SiteSummaryContentSyndicationExtension ext = new();
+        SiteSummaryContentItem item = new()
+        {
+            Content = "Item content",
+            Format = new Uri("http://www.w3.org/1999/xhtml")
+        };
+
+        // Act
+        ext.Context.Items.Add(item);
+
+        // Assert
+        ext.Context.Items.Count.ShouldBe(1);
+        ext.Context.Items[0].Content.ShouldBe("Item content");
+        ext.Context.Items[0].Format.ShouldBe(new Uri("http://www.w3.org/1999/xhtml"));
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentCompareSequenceTest()
+    {
+        // Arrange
+        IList<SiteSummaryContentItem> source = new List<SiteSummaryContentItem>
+        {
+            new() { Content = "Content 1", Format = new Uri("http://example.com/1") }
+        };
+        IList<SiteSummaryContentItem> target = new List<SiteSummaryContentItem>
+        {
+            new() { Content = "Content 1", Format = new Uri("http://example.com/1") }
+        };
+
+        // Act
+        int result = SiteSummaryContentSyndicationExtension.CompareSequence(source, target);
+
+        // Assert
+        result.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentCompareSequenceDifferentCountsTest()
+    {
+        // Arrange
+        IList<SiteSummaryContentItem> source = new List<SiteSummaryContentItem>
+        {
+            new() { Content = "Content 1", Format = new Uri("http://example.com/1") },
+            new() { Content = "Content 2", Format = new Uri("http://example.com/2") }
+        };
+        IList<SiteSummaryContentItem> target = new List<SiteSummaryContentItem>
+        {
+            new() { Content = "Content 1", Format = new Uri("http://example.com/1") }
+        };
+
+        // Act
+        int result = SiteSummaryContentSyndicationExtension.CompareSequence(source, target);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void SiteSummaryContentItemWellFormedXmlEncodingTest()
+    {
+        // Act
+        Uri encoding = SiteSummaryContentItem.WellFormedXmlEncoding;
+
+        // Assert
+        encoding.ShouldBe(new Uri("http://www.w3.org/TR/REC-xml#dt-wellformed"));
+    }
+
     private static SiteSummaryContentSyndicationExtension CreateExtension1()
     {
         SiteSummaryContentSyndicationExtension ext = new()

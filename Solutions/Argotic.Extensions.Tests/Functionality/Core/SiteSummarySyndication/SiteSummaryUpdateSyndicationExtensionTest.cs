@@ -195,6 +195,149 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         actual.ShouldBe(expected);
     }
 
+    [TestMethod]
+    public void SiteSummaryUpdateContextSetterThrowsOnNull()
+    {
+        // Arrange
+        SiteSummaryUpdateSyndicationExtension target = new();
+
+        // Act & Assert
+        Should.Throw<ArgumentNullException>(() => target.Context = null!);
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdateRoundTripTest()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(Namespc, StrExtXml);
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        RssItem item = feed.Channel.Items.Single();
+        SiteSummaryUpdateSyndicationExtension itemExtension = item.FindExtension<SiteSummaryUpdateSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Period.ShouldBe(SiteSummaryUpdatePeriod.Hourly);
+        itemExtension.Context.Frequency.ShouldBe(2);
+        itemExtension.Context.Base.Year.ShouldBe(2010);
+        itemExtension.Context.Base.Month.ShouldBe(8);
+        itemExtension.Context.Base.Day.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdateOpLessThanOrEqualTest()
+    {
+        // Arrange
+        SiteSummaryUpdateSyndicationExtension first = CreateExtension1();
+        SiteSummaryUpdateSyndicationExtension second = CreateExtension1();
+
+        // Act & Assert
+        (first <= second).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdateOpGreaterThanOrEqualTest()
+    {
+        // Arrange
+        SiteSummaryUpdateSyndicationExtension first = CreateExtension1();
+        SiteSummaryUpdateSyndicationExtension second = CreateExtension1();
+
+        // Act & Assert
+        (first >= second).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdateMatchByTypeReturnsFalseForDifferentType()
+    {
+        // Arrange
+        ISyndicationExtension extension = new SiteSummarySlashSyndicationExtension();
+
+        // Act
+        bool actual = SiteSummaryUpdateSyndicationExtension.MatchByType(extension);
+
+        // Assert
+        actual.ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdateEqualsReturnsFalseForDifferentType()
+    {
+        // Arrange
+        SiteSummaryUpdateSyndicationExtension target = CreateExtension1();
+
+        // Act & Assert
+        target.Equals("not an extension").ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdateCompareToNullReturnsPositive()
+    {
+        // Arrange
+        SiteSummaryUpdateSyndicationExtension target = CreateExtension1();
+
+        // Act
+        int result = target.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdateCompareToWrongTypeThrows()
+    {
+        // Arrange
+        SiteSummaryUpdateSyndicationExtension target = CreateExtension1();
+
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => target.CompareTo("wrong type"));
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdatePeriodAsStringForAllPeriods()
+    {
+        // Arrange & Act & Assert
+        SiteSummaryUpdateSyndicationExtension.PeriodAsString(SiteSummaryUpdatePeriod.Daily).ShouldBe("daily");
+        SiteSummaryUpdateSyndicationExtension.PeriodAsString(SiteSummaryUpdatePeriod.Hourly).ShouldBe("hourly");
+        SiteSummaryUpdateSyndicationExtension.PeriodAsString(SiteSummaryUpdatePeriod.Monthly).ShouldBe("monthly");
+        SiteSummaryUpdateSyndicationExtension.PeriodAsString(SiteSummaryUpdatePeriod.Weekly).ShouldBe("weekly");
+        SiteSummaryUpdateSyndicationExtension.PeriodAsString(SiteSummaryUpdatePeriod.Yearly).ShouldBe("yearly");
+        SiteSummaryUpdateSyndicationExtension.PeriodAsString(SiteSummaryUpdatePeriod.None).ShouldBe(string.Empty);
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdatePeriodByNameForAllPeriods()
+    {
+        // Arrange & Act & Assert
+        SiteSummaryUpdateSyndicationExtension.PeriodByName("daily").ShouldBe(SiteSummaryUpdatePeriod.Daily);
+        SiteSummaryUpdateSyndicationExtension.PeriodByName("hourly").ShouldBe(SiteSummaryUpdatePeriod.Hourly);
+        SiteSummaryUpdateSyndicationExtension.PeriodByName("monthly").ShouldBe(SiteSummaryUpdatePeriod.Monthly);
+        SiteSummaryUpdateSyndicationExtension.PeriodByName("weekly").ShouldBe(SiteSummaryUpdatePeriod.Weekly);
+        SiteSummaryUpdateSyndicationExtension.PeriodByName("yearly").ShouldBe(SiteSummaryUpdatePeriod.Yearly);
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdatePeriodByNameReturnsNoneForUnknown()
+    {
+        // Arrange & Act
+        SiteSummaryUpdatePeriod actual = SiteSummaryUpdateSyndicationExtension.PeriodByName("unknown");
+
+        // Assert
+        actual.ShouldBe(SiteSummaryUpdatePeriod.None);
+    }
+
+    [TestMethod]
+    public void SiteSummaryUpdateFrequencyThrowsOnInvalidValue()
+    {
+        // Arrange
+        SiteSummaryUpdateSyndicationExtension ext = new();
+
+        // Act & Assert
+        Should.Throw<ArgumentOutOfRangeException>(() => ext.Context.Frequency = 0);
+    }
+
     private static SiteSummaryUpdateSyndicationExtension CreateExtension1()
     {
         SiteSummaryUpdateSyndicationExtension ext = new()

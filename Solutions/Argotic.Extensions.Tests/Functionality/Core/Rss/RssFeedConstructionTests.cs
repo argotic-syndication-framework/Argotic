@@ -43,8 +43,13 @@ public class RssFeedConstructionTests
     [TestMethod]
     public void Construction_WithCloud_SetsCorrectly()
     {
-        RssFeed feed = new();
-        feed.Channel.Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify");
+        RssFeed feed = new()
+        {
+            Channel =
+            {
+                Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify")
+            }
+        };
 
         feed.Channel.Cloud.ShouldNotBeNull();
         feed.Channel.Cloud.Domain.ShouldBe("server.example.com");

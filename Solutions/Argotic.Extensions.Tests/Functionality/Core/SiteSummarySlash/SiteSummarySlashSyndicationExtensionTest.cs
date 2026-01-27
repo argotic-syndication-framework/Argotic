@@ -11,12 +11,14 @@ public class SiteSummarySlashSyndicationExtensionTest
     private const string Namespc = @"xmlns:slash=""http://purl.org/rss/1.0/modules/slash/""";
 
     private readonly string toStringText = "<comments xmlns=\"http://purl.org/rss/1.0/modules/slash/\">42</comments>" + Environment.NewLine +
-                                           "<section xmlns=\"http://purl.org/rss/1.0/modules/slash/\">Technology</section>" + Environment.NewLine +
-                                           "<department xmlns=\"http://purl.org/rss/1.0/modules/slash/\">Software</department>";
+                                           "<section xmlns=\"http://purl.org/rss/1.0/modules/slash/\"><![CDATA[Technology]]></section>" + Environment.NewLine +
+                                           "<department xmlns=\"http://purl.org/rss/1.0/modules/slash/\"><![CDATA[Software]]></department>" + Environment.NewLine +
+                                           "<hit_parade xmlns=\"http://purl.org/rss/1.0/modules/slash/\">100,200,300</hit_parade>";
 
     private const string StrExtXml = "<slash:comments>42</slash:comments>"
-                                     + "<slash:section>Technology</slash:section>"
-                                     + "<slash:department>Software</slash:department>";
+                                     + "<slash:section><![CDATA[Technology]]></slash:section>"
+                                     + "<slash:department><![CDATA[Software]]></slash:department>"
+                                     + "<slash:hit_parade>100,200,300</slash:hit_parade>";
 
     public TestContext? TestContext { get; set; }
 
@@ -177,6 +179,112 @@ public class SiteSummarySlashSyndicationExtensionTest
         context.Comments.ShouldBe(42);
         context.Section.ShouldBe("Technology");
         context.Department.ShouldBe("Software");
+        context.HitParade.Count.ShouldBe(3);
+        context.HitParade[0].ShouldBe(100);
+        context.HitParade[1].ShouldBe(200);
+        context.HitParade[2].ShouldBe(300);
+    }
+
+    [TestMethod]
+    public void SiteSummarySlashContextSetterThrowsOnNull()
+    {
+        // Arrange
+        SiteSummarySlashSyndicationExtension target = new();
+
+        // Act & Assert
+        Should.Throw<ArgumentNullException>(() => target.Context = null!);
+    }
+
+    [TestMethod]
+    public void SiteSummarySlashRoundTripTest()
+    {
+        // Arrange
+        string strXml = ExtensionTestUtil.GetWrappedXml(Namespc, StrExtXml);
+
+        // Act
+        using XmlReader reader = XmlReader.Create(new StringReader(strXml));
+        RssFeed feed = new();
+        feed.Load(reader);
+
+        // Assert
+        RssItem item = feed.Channel.Items.Single();
+        SiteSummarySlashSyndicationExtension itemExtension = item.FindExtension<SiteSummarySlashSyndicationExtension>();
+        itemExtension.ShouldNotBeNull();
+        itemExtension.Context.Comments.ShouldBe(42);
+        itemExtension.Context.Section.ShouldBe("Technology");
+        itemExtension.Context.Department.ShouldBe("Software");
+        itemExtension.Context.HitParade.Count.ShouldBe(3);
+        itemExtension.Context.HitParade.ShouldContain(100);
+        itemExtension.Context.HitParade.ShouldContain(200);
+        itemExtension.Context.HitParade.ShouldContain(300);
+    }
+
+    [TestMethod]
+    public void SiteSummarySlashOpLessThanOrEqualTest()
+    {
+        // Arrange
+        SiteSummarySlashSyndicationExtension first = CreateExtension1();
+        SiteSummarySlashSyndicationExtension second = CreateExtension1();
+
+        // Act & Assert
+        (first <= second).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void SiteSummarySlashOpGreaterThanOrEqualTest()
+    {
+        // Arrange
+        SiteSummarySlashSyndicationExtension first = CreateExtension1();
+        SiteSummarySlashSyndicationExtension second = CreateExtension1();
+
+        // Act & Assert
+        (first >= second).ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public void SiteSummarySlashMatchByTypeReturnsFalseForDifferentType()
+    {
+        // Arrange
+        ISyndicationExtension extension = new SiteSummaryContentSyndicationExtension();
+
+        // Act
+        bool actual = SiteSummarySlashSyndicationExtension.MatchByType(extension);
+
+        // Assert
+        actual.ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void SiteSummarySlashEqualsReturnsFalseForDifferentType()
+    {
+        // Arrange
+        SiteSummarySlashSyndicationExtension target = CreateExtension1();
+
+        // Act & Assert
+        target.Equals("not an extension").ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void SiteSummarySlashCompareToNullReturnsPositive()
+    {
+        // Arrange
+        SiteSummarySlashSyndicationExtension target = CreateExtension1();
+
+        // Act
+        int result = target.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void SiteSummarySlashCompareToWrongTypeThrows()
+    {
+        // Arrange
+        SiteSummarySlashSyndicationExtension target = CreateExtension1();
+
+        // Act & Assert
+        Should.Throw<ArgumentException>(() => target.CompareTo("wrong type"));
     }
 
     private static SiteSummarySlashSyndicationExtension CreateExtension1()
@@ -190,6 +298,9 @@ public class SiteSummarySlashSyndicationExtensionTest
                 Department = "Software"
             }
         };
+        ext.Context.HitParade.Add(100);
+        ext.Context.HitParade.Add(200);
+        ext.Context.HitParade.Add(300);
 
         return ext;
     }
@@ -205,6 +316,7 @@ public class SiteSummarySlashSyndicationExtensionTest
                 Department = "Research"
             }
         };
+        ext.Context.HitParade.Add(50);
 
         return ext;
     }

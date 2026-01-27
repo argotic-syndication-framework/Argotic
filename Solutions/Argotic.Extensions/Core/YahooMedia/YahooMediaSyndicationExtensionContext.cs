@@ -417,16 +417,8 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     public bool RemoveContent(YahooMediaContent content)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(content);
-
-        if (((Collection<YahooMediaContent>)this.Contents).Contains(content))
-        {
-            ((Collection<YahooMediaContent>)this.Contents).Remove(content);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<YahooMediaContent>)this.Contents).Remove(content);
     }
 
     /// <summary>
@@ -440,15 +432,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// <exception cref="ArgumentNullException">The <paramref name="group"/> is a null reference.</exception>
     public bool RemoveGroup(YahooMediaGroup group)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(group);
-
-        if (((Collection<YahooMediaGroup>)this.Groups).Contains(group))
-        {
-            ((Collection<YahooMediaGroup>)this.Groups).Remove(group);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<YahooMediaGroup>)this.Groups).Remove(group);
     }
 }

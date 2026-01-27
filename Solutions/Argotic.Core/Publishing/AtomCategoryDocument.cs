@@ -287,17 +287,8 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool RemoveExtension(ISyndicationExtension extension)
     {
-        bool wasRemoved = false;
-
         ArgumentNullException.ThrowIfNull(extension);
-
-        if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-        {
-            ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
 
     /// <summary>
@@ -879,17 +870,8 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="category"/> is a null reference.</exception>
     public bool RemoveCategory(AtomCategory category)
     {
-        bool wasRemoved = false;
-
         ArgumentNullException.ThrowIfNull(category);
-
-        if (((Collection<AtomCategory>)this.Categories).Contains(category))
-        {
-            ((Collection<AtomCategory>)this.Categories).Remove(category);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<AtomCategory>)this.Categories).Remove(category);
     }
 
     /// <summary>

@@ -705,15 +705,8 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool RemoveExtension(ISyndicationExtension extension)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(extension);
-        if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-        {
-            ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
     /// <summary>
     /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="RssFeed"/>.

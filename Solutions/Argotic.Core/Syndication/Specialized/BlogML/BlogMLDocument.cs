@@ -684,15 +684,8 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool RemoveExtension(ISyndicationExtension extension)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(extension);
-        if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-        {
-            ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
     /// <summary>
     /// Adds the supplied <see cref="BlogMLPost"/> to the current instance's <see cref="Posts"/> collection.
@@ -721,16 +714,8 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="post"/> is a null reference.</exception>
     public bool RemovePost(BlogMLPost post)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(post);
-
-        if (((Collection<BlogMLPost>)this.Posts).Contains(post))
-        {
-            ((Collection<BlogMLPost>)this.Posts).Remove(post);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<BlogMLPost>)this.Posts).Remove(post);
     }
     /// <summary>
     /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="BlogMLDocument"/>.

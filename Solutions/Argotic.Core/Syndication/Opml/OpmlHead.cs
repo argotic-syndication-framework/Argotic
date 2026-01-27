@@ -200,15 +200,8 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool RemoveExtension(ISyndicationExtension extension)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(extension);
-        if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-        {
-            ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
     /// <summary>
     /// Loads this <see cref="OpmlHead"/> using the supplied <see cref="XPathNavigator"/>.
@@ -261,7 +254,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
 
         if (expansionStateNavigator != null && !string.IsNullOrEmpty(expansionStateNavigator.Value))
         {
-            if (expansionStateNavigator.Value.Contains(","))
+            if (expansionStateNavigator.Value.Contains(',', StringComparison.Ordinal))
             {
                 string[] expansionStates = expansionStateNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 foreach (string expansionState in expansionStates)

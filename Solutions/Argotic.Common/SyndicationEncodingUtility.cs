@@ -209,44 +209,50 @@ public static class SyndicationEncodingUtility
         ArgumentNullException.ThrowIfNull(source);
 
         using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, options);
-        Stream stream;
+        Stream stream = null;
 
-        if (response is HttpWebResponse httpResponse)
+        try
         {
-            string contentEncoding = httpResponse.ContentEncoding?.ToUpperInvariant();
+            if (response is HttpWebResponse httpResponse)
+            {
+                string contentEncoding = httpResponse.ContentEncoding?.ToUpperInvariant();
 
-            if (string.IsNullOrEmpty(contentEncoding))
-            {
-                stream = response.GetResponseStream();
-            }
-            else
-            {
-                if (contentEncoding.Contains("GZIP"))
+                if (string.IsNullOrEmpty(contentEncoding))
                 {
-                    stream = new GZipStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
-                }
-                else if (contentEncoding.Contains("DEFLATE"))
-                {
-                    stream = new DeflateStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
+                    stream = response.GetResponseStream();
                 }
                 else
                 {
-                    stream = httpResponse.GetResponseStream();
+                    if (contentEncoding.Contains("GZIP", StringComparison.Ordinal))
+                    {
+                        stream = new GZipStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
+                    }
+                    else if (contentEncoding.Contains("DEFLATE", StringComparison.Ordinal))
+                    {
+                        stream = new DeflateStream(httpResponse.GetResponseStream(), CompressionMode.Decompress);
+                    }
+                    else
+                    {
+                        stream = httpResponse.GetResponseStream();
+                    }
                 }
             }
-        }
-        else
-        {
-            stream = response.GetResponseStream();
-        }
+            else
+            {
+                stream = response.GetResponseStream();
+            }
 
-        if (encoding != null)
-        {
-            return SyndicationEncodingUtility.CreateSafeNavigator(stream, encoding);
+            // CreateSafeNavigator takes ownership of the stream and disposes it
+            XPathNavigator result = encoding != null
+                ? SyndicationEncodingUtility.CreateSafeNavigator(stream, encoding)
+                : SyndicationEncodingUtility.CreateSafeNavigator(stream);
+
+            stream = null; // Ownership transferred, prevent double dispose
+            return result;
         }
-        else
+        finally
         {
-            return SyndicationEncodingUtility.CreateSafeNavigator(stream);
+            stream?.Dispose();
         }
     }
 
@@ -415,7 +421,7 @@ public static class SyndicationEncodingUtility
         MatchCollection matches = invalidXmlUnicodeCharacters.Matches(encodedContent);
         foreach (Match match in matches)
         {
-            encodedContent = encodedContent.Replace(match.Value, Convert.ToUInt32(match.Value, 16).ToString(NumberFormatInfo.InvariantInfo));
+            encodedContent = encodedContent.Replace(match.Value, Convert.ToUInt32(match.Value, 16).ToString(NumberFormatInfo.InvariantInfo), StringComparison.Ordinal);
         }
 
         return encodedContent;
@@ -594,14 +600,14 @@ public static class SyndicationEncodingUtility
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
 
-        string directoryName = name.Replace("\\", string.Empty);
-        directoryName = directoryName.Replace("/", string.Empty);
-        directoryName = directoryName.Replace(":", string.Empty);
-        directoryName = directoryName.Replace("*", string.Empty);
-        directoryName = directoryName.Replace("?", string.Empty);
-        directoryName = directoryName.Replace("<", string.Empty);
-        directoryName = directoryName.Replace(">", string.Empty);
-        directoryName = directoryName.Replace("|", string.Empty);
+        string directoryName = name.Replace("\\", string.Empty, StringComparison.Ordinal);
+        directoryName = directoryName.Replace("/", string.Empty, StringComparison.Ordinal);
+        directoryName = directoryName.Replace(":", string.Empty, StringComparison.Ordinal);
+        directoryName = directoryName.Replace("*", string.Empty, StringComparison.Ordinal);
+        directoryName = directoryName.Replace("?", string.Empty, StringComparison.Ordinal);
+        directoryName = directoryName.Replace("<", string.Empty, StringComparison.Ordinal);
+        directoryName = directoryName.Replace(">", string.Empty, StringComparison.Ordinal);
+        directoryName = directoryName.Replace("|", string.Empty, StringComparison.Ordinal);
 
         return directoryName;
     }

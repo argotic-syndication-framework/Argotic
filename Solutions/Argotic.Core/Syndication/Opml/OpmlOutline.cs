@@ -297,15 +297,8 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool RemoveExtension(ISyndicationExtension extension)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(extension);
-        if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-        {
-            ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
     /// <summary>
     /// Loads this <see cref="OpmlOutline"/> using the supplied <see cref="XPathNavigator"/>.
@@ -865,7 +858,7 @@ public class OpmlOutline : IComparable, IExtensibleSyndicationObject
         }
         else if (string.Equals(attribute.Name, "category", StringComparison.OrdinalIgnoreCase))
         {
-            if (attribute.Value.Contains(","))
+            if (attribute.Value.Contains(',', StringComparison.Ordinal))
             {
                 string[] categories = attribute.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 foreach (string category in categories)

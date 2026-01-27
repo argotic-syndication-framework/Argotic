@@ -407,7 +407,8 @@ public class TrackbackClient
             writer.Flush();
 
             stream.Seek(0, SeekOrigin.Begin);
-            payloadData = message.Encoding.GetBytes((new StreamReader(stream)).ReadToEnd());
+            using StreamReader reader = new(stream);
+            payloadData = message.Encoding.GetBytes(reader.ReadToEnd());
         }
 
         HttpWebRequest httpRequest = (HttpWebRequest)WebRequest.Create(host);

@@ -69,7 +69,7 @@ internal static class RsdUtility
 
         if (iterator is not { Count: > 0 })
         {
-            string safeXpath = xpath.Replace("rsd:", string.Empty);
+            string safeXpath = xpath.Replace("rsd:", string.Empty, StringComparison.Ordinal);
             iterator = source.Select(safeXpath, resolver);
         }
 
@@ -103,7 +103,7 @@ internal static class RsdUtility
 
         if (navigator == null)
         {
-            string safeXpath = xpath.Replace("rsd:", string.Empty);
+            string safeXpath = xpath.Replace("rsd:", string.Empty, StringComparison.Ordinal);
             navigator = source.SelectSingleNode(safeXpath, resolver);
         }
 

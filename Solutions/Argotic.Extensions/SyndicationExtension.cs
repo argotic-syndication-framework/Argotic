@@ -222,9 +222,9 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
 
         Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
         string existingXmlNamespace = string.Empty;
-        if (namespaces.ContainsKey(this.XmlPrefix))
+        if (namespaces.TryGetValue(this.XmlPrefix, out string namespaceValue))
         {
-            existingXmlNamespace = namespaces[this.XmlPrefix];
+            existingXmlNamespace = namespaceValue;
         }
 
         manager.AddNamespace(this.XmlPrefix, !string.IsNullOrEmpty(existingXmlNamespace) ? existingXmlNamespace : this.XmlNamespace);

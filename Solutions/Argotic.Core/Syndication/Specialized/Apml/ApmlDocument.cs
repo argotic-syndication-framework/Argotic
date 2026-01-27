@@ -623,15 +623,8 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool RemoveExtension(ISyndicationExtension extension)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(extension);
-        if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-        {
-            ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
     /// <summary>
     /// Adds the supplied <see cref="ApmlProfile"/> to the current instance's <see cref="Profiles"/> collection.
@@ -660,16 +653,8 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="profile"/> is a null reference.</exception>
     public bool RemoveProfile(ApmlProfile profile)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(profile);
-
-        if (((Collection<ApmlProfile>)this.Profiles).Contains(profile))
-        {
-            ((Collection<ApmlProfile>)this.Profiles).Remove(profile);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ApmlProfile>)this.Profiles).Remove(profile);
     }
     /// <summary>
     /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="ApmlDocument"/>.

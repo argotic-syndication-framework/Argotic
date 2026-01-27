@@ -330,7 +330,7 @@ public class ITunesSyndicationExtensionContext
 
             if (keywordsNavigator != null && !string.IsNullOrEmpty(keywordsNavigator.Value))
             {
-                if (keywordsNavigator.Value.Contains(","))
+                if (keywordsNavigator.Value.Contains(',', StringComparison.Ordinal))
                 {
                     string[] keywords = keywordsNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     foreach (string keyword in keywords)
@@ -475,7 +475,7 @@ public class ITunesSyndicationExtensionContext
     {
         TimeSpan timeSpan = TimeSpan.MinValue;
 
-        if (!value.Contains(":"))
+        if (!value.Contains(':', StringComparison.Ordinal))
         {
             if (int.TryParse(value, out int totalSeconds))
             {

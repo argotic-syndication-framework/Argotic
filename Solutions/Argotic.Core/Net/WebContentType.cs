@@ -106,7 +106,7 @@ public class WebContentType : IComparable
     {
         get
         {
-            return this.Parameters.ContainsKey(CHARSET_PARAMETER_NAME) ? this.Parameters[CHARSET_PARAMETER_NAME] : string.Empty;
+            return this.Parameters.TryGetValue(CHARSET_PARAMETER_NAME, out string charsetValue) ? charsetValue : string.Empty;
         }
 
         set
@@ -138,7 +138,7 @@ public class WebContentType : IComparable
     {
         get
         {
-            return this.Parameters.ContainsKey(TYPE_PARAMETER_NAME) ? this.Parameters[TYPE_PARAMETER_NAME] : string.Empty;
+            return this.Parameters.TryGetValue(TYPE_PARAMETER_NAME, out string typeValue) ? typeValue : string.Empty;
         }
 
         set
@@ -267,9 +267,9 @@ public class WebContentType : IComparable
         {
             foreach (string key in source.Keys)
             {
-                if (target.ContainsKey(key))
+                if (target.TryGetValue(key, out string targetValue))
                 {
-                    result |= string.Compare(source[key], target[key], StringComparison.Ordinal);
+                    result |= string.Compare(source[key], targetValue, StringComparison.Ordinal);
                 }
                 else
                 {

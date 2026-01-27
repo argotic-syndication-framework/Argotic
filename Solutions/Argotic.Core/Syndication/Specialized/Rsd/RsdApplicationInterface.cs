@@ -288,15 +288,8 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool RemoveExtension(ISyndicationExtension extension)
     {
-        bool wasRemoved = false;
         ArgumentNullException.ThrowIfNull(extension);
-        if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-        {
-            ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
 
     /// <summary>
@@ -383,9 +376,8 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
                         string settingName = settingIterator.Current.GetAttribute("name", string.Empty);
                         string settingValue = settingIterator.Current.Value;
 
-                        if (!this.Settings.ContainsKey(settingName))
+                        if (this.Settings.TryAdd(settingName, settingValue))
                         {
-                            this.Settings.Add(settingName, settingValue);
                             wasLoaded = true;
                         }
                     }

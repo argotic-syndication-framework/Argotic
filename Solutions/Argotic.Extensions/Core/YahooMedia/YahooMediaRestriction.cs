@@ -276,7 +276,7 @@ public class YahooMediaRestriction : IComparable
 
         if (!string.IsNullOrEmpty(source.Value))
         {
-            if (source.Value.Contains(" "))
+            if (source.Value.Contains(' ', StringComparison.Ordinal))
             {
                 string[] entities = source.Value.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                 if (entities.Length > 0)

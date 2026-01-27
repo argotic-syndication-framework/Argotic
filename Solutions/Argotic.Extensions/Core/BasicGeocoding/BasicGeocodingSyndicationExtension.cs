@@ -76,7 +76,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
 
         string degreesAsString = value.ToString(NumberFormatInfo.InvariantInfo);
 
-        if (degreesAsString.Contains("."))
+        if (degreesAsString.Contains('.', StringComparison.Ordinal))
         {
             string[] degreesParts = degreesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
             if (degreesParts.Length == 2)
@@ -88,7 +88,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
                     decimal minutes = decimal.Multiply(fractionalValue, multiplier);
 
                     string minutesAsString = minutes.ToString(NumberFormatInfo.InvariantInfo);
-                    if (minutesAsString.Contains("."))
+                    if (minutesAsString.Contains('.', StringComparison.Ordinal))
                     {
                         string[] minutesParts = minutesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                         if (minutesParts.Length == 2)
@@ -120,25 +120,25 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     public static decimal ConvertDegreesMinutesSecondsToDecimal(string degreesMinutesSeconds)
     {
         ArgumentException.ThrowIfNullOrEmpty(degreesMinutesSeconds);
-        if (!degreesMinutesSeconds.Contains("°"))
+        if (!degreesMinutesSeconds.Contains('°', StringComparison.Ordinal))
         {
             throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ° degrees delimiter.", degreesMinutesSeconds));
         }
-        else if (!degreesMinutesSeconds.Contains("'"))
+        else if (!degreesMinutesSeconds.Contains('\'', StringComparison.Ordinal))
         {
             throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ' minutes delimiter.", degreesMinutesSeconds));
         }
-        else if (!degreesMinutesSeconds.Contains("\""))
+        else if (!degreesMinutesSeconds.Contains('"', StringComparison.Ordinal))
         {
             throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a \" seconds delimiter.", degreesMinutesSeconds));
         }
-        string degreesValue = degreesMinutesSeconds[..degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase)];
-        string minutesValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) + 1, degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) - degreesMinutesSeconds.IndexOf("°", StringComparison.OrdinalIgnoreCase) - 1);
-        string secondsValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) + 1, degreesMinutesSeconds.IndexOf("\"", StringComparison.OrdinalIgnoreCase) - degreesMinutesSeconds.IndexOf("'", StringComparison.OrdinalIgnoreCase) - 1);
+        string degreesValue = degreesMinutesSeconds[..degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal)];
+        string minutesValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal) + 1, degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal) - degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal) - 1);
+        string secondsValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal) + 1, degreesMinutesSeconds.IndexOf('"', StringComparison.Ordinal) - degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal) - 1);
 
         degreesValue = degreesValue.Trim();
         minutesValue = minutesValue.Trim();
-        secondsValue = secondsValue.Replace("N", string.Empty).Replace("S", string.Empty).Replace("E", string.Empty).Replace("W", string.Empty);
+        secondsValue = secondsValue.Replace("N", string.Empty, StringComparison.Ordinal).Replace("S", string.Empty, StringComparison.Ordinal).Replace("E", string.Empty, StringComparison.Ordinal).Replace("W", string.Empty, StringComparison.Ordinal);
         secondsValue = secondsValue.Trim();
 
         if (!decimal.TryParse(degreesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal degrees))
@@ -302,7 +302,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return this.ToString().GetHashCode();
+        return StringComparer.Ordinal.GetHashCode(this.ToString());
     }
 
     /// <summary>

@@ -715,7 +715,7 @@ internal static class YahooMediaUtility
 
             if (keywordNavigator != null && !string.IsNullOrEmpty(keywordNavigator.Value))
             {
-                if (keywordNavigator.Value.Contains(","))
+                if (keywordNavigator.Value.Contains(',', StringComparison.Ordinal))
                 {
                     string[] keywords = keywordNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
                     if (keywords.Length > 0)

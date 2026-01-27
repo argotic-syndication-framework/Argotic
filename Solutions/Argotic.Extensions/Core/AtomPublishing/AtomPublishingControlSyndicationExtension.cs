@@ -254,7 +254,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return this.ToString().GetHashCode();
+        return StringComparer.Ordinal.GetHashCode(this.ToString());
     }
 
     /// <summary>

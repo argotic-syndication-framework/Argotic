@@ -210,17 +210,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool RemoveExtension(ISyndicationExtension extension)
     {
-        bool wasRemoved = false;
-
         ArgumentNullException.ThrowIfNull(extension);
-
-        if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-        {
-            ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
 
     /// <summary>
@@ -519,7 +510,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable, IExtensibl
     {
         ArgumentException.ThrowIfNullOrEmpty(characterSequence);
 
-        return System.Web.HttpUtility.UrlEncode(characterSequence, System.Text.Encoding.UTF8).Replace("+", " ");
+        return System.Web.HttpUtility.UrlEncode(characterSequence, System.Text.Encoding.UTF8).Replace("+", " ", StringComparison.Ordinal);
     }
 
     /// <summary>

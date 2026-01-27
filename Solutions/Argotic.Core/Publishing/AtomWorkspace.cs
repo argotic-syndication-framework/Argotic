@@ -234,17 +234,8 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
     public bool RemoveExtension(ISyndicationExtension extension)
     {
-        bool wasRemoved = false;
-
         ArgumentNullException.ThrowIfNull(extension);
-
-        if (((Collection<ISyndicationExtension>)this.Extensions).Contains(extension))
-        {
-            ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<ISyndicationExtension>)this.Extensions).Remove(extension);
     }
 
     /// <summary>
@@ -462,17 +453,8 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <exception cref="ArgumentNullException">The <paramref name="collection"/> is a null reference.</exception>
     public bool RemoveCollection(AtomMemberResources collection)
     {
-        bool wasRemoved = false;
-
         ArgumentNullException.ThrowIfNull(collection);
-
-        if (((Collection<AtomMemberResources>)this.Collections).Contains(collection))
-        {
-            ((Collection<AtomMemberResources>)this.Collections).Remove(collection);
-            wasRemoved = true;
-        }
-
-        return wasRemoved;
+        return ((Collection<AtomMemberResources>)this.Collections).Remove(collection);
     }
 
     /// <summary>

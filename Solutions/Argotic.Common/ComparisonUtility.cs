@@ -359,9 +359,9 @@ public static class ComparisonUtility
         {
             foreach (string key in source.Keys)
             {
-                if (target.ContainsKey(key))
+                if (target.TryGetValue(key, out string targetValue))
                 {
-                    result |= string.Compare(source[key], target[key], comparisonType);
+                    result |= string.Compare(source[key], targetValue, comparisonType);
                 }
                 else
                 {

@@ -99,8 +99,6 @@ public class YahooMediaHash : IComparable
     public static string GenerateHash(Stream stream, YahooMediaHashAlgorithm algorithm)
     {
         string base64EncodedHash = string.Empty;
-        MD5 md5 = MD5.Create();
-        SHA1 sha1 = SHA1.Create();
         ArgumentNullException.ThrowIfNull(stream);
         if (algorithm == YahooMediaHashAlgorithm.None)
         {
@@ -109,11 +107,13 @@ public class YahooMediaHash : IComparable
 
         if (algorithm == YahooMediaHashAlgorithm.MD5)
         {
+            using MD5 md5 = MD5.Create();
             byte[] hash = md5.ComputeHash(stream);
             base64EncodedHash = Convert.ToBase64String(hash);
         }
         else if (algorithm == YahooMediaHashAlgorithm.Sha1)
         {
+            using SHA1 sha1 = SHA1.Create();
             byte[] hash = sha1.ComputeHash(stream);
             base64EncodedHash = Convert.ToBase64String(hash);
         }

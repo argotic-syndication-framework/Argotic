@@ -25,35 +25,35 @@ public enum FeedHistoryLinkRelationType
     /// Refers to the furthest preceding document in a series of documents.
     /// </summary>
     [EnumerationMetadata(DisplayName = "First", AlternateValue = "first")]
-    First = 1,
+    First = 2,
 
     /// <summary>
     /// Refers to the furthest following document in a series of documents.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Last", AlternateValue = "last")]
-    Last = 2,
+    Last = 3,
 
     /// <summary>
     /// Refers to the immediately following document in a series of documents.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Next", AlternateValue = "next")]
-    Next = 3,
+    Next = 4,
 
     /// <summary>
     /// Refers to the immediately following archive document.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Next Archive", AlternateValue = "next-archive")]
-    NextArchive = 3,
+    NextArchive = 5,
 
     /// <summary>
     /// Refers to the immediately preceding document in a series of documents.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Previous", AlternateValue = "previous")]
-    Previous = 4,
+    Previous = 6,
 
     /// <summary>
     /// Refers to the immediately preceding archive document.
     /// </summary>
     [EnumerationMetadata(DisplayName = "Previous Archive", AlternateValue = "prev-archive")]
-    PreviousArchive = 5
+    PreviousArchive = 7
 }

@@ -1009,7 +1009,7 @@ public class RssChannel : IComparable, IExtensibleSyndicationObject
                 {
                     try
                     {
-                        DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), skipDaysIterator.Current.Value, true);
+                        DayOfWeek day = Enum.Parse<DayOfWeek>(skipDaysIterator.Current.Value, true);
                         if (!this.SkipDays.Contains(day))
                         {
                             this.SkipDays.Add(day);

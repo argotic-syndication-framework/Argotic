@@ -260,7 +260,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
                 {
                     try
                     {
-                        DayOfWeek day = (DayOfWeek)Enum.Parse(typeof(DayOfWeek), skipDaysIterator.Current.Value, true);
+                        DayOfWeek day = Enum.Parse<DayOfWeek>(skipDaysIterator.Current.Value, true);
                         if (!channel.SkipDays.Contains(day))
                         {
                             channel.SkipDays.Add(day);

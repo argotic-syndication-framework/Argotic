@@ -105,7 +105,7 @@ public static class SyndicationDateTimeUtility
     {
         if (string.IsNullOrEmpty(value))
         {
-            throw new ArgumentNullException("s");
+            throw new ArgumentNullException(nameof(value));
         }
 
         string zoneRepresentedAsLocalDifferential;

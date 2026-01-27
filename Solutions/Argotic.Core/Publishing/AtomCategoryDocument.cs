@@ -35,7 +35,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static readonly SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomCategoryDocument;
+    private const SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomCategoryDocument;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>

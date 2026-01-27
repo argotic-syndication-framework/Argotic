@@ -72,8 +72,8 @@ public class WebRequestOptions
         set { _credentials = value; }
     }
 
-    /// <summary>Gets or sets the collection of header name/value pairs associated with the request.</summary>
-    public WebHeaderCollection Headers { get; set; }
+    /// <summary>Gets the collection of header name/value pairs associated with the request.</summary>
+    public WebHeaderCollection Headers { get; } = [];
 
     /// <summary>Gets or sets the impersonation level for the current request.</summary>
     public TokenImpersonationLevel? ImpersonationLevel { get; set; }
@@ -175,8 +175,8 @@ public class WebRequestOptions
 
     private bool? _keepAlive;
 
-    /// <summary>Gets or sets the collection of security certificates that are associated with this request.</summary>
-    public X509CertificateCollection ClientCertificates { get; set; }
+    /// <summary>Gets the collection of security certificates that are associated with this request.</summary>
+    public X509CertificateCollection ClientCertificates { get; } = [];
 
     /// <summary>Gets or sets a value that indicates whether to make a persistent connection to the Internet resource.</summary>
     public bool? KeepAlive
@@ -194,11 +194,13 @@ public class WebRequestOptions
     /// <param name="request">A <see cref="WebRequest"/> that should be configured.</param>
     public void ApplyOptions(WebRequest request)
     {
+        ArgumentNullException.ThrowIfNull(request);
+
         if (AuthenticationLevel != null) request.AuthenticationLevel = AuthenticationLevel.Value;
         if (CachePolicy != null) request.CachePolicy = CachePolicy;
         if (ConnectionGroupName != null) request.ConnectionGroupName = ConnectionGroupName;
         if (Credentials != null) request.Credentials = Credentials;
-        if (Headers != null) request.Headers = Headers;
+        if (Headers.Count > 0) request.Headers = Headers;
         if (ImpersonationLevel != null) request.ImpersonationLevel = ImpersonationLevel.Value;
         if (PreAuthenticate != null) request.PreAuthenticate = PreAuthenticate.Value;
         if (Proxy != null) request.Proxy = Proxy;
@@ -224,7 +226,7 @@ public class WebRequestOptions
         if (UseBinary != null) ftpRequest.UseBinary = UseBinary.Value;
         if (UsePassive != null) ftpRequest.UsePassive = UsePassive.Value;
 
-        if (ClientCertificates != null) ftpRequest.ClientCertificates = ClientCertificates;
+        if (ClientCertificates.Count > 0) ftpRequest.ClientCertificates = ClientCertificates;
         if (KeepAlive != null) ftpRequest.KeepAlive = KeepAlive.Value;
         if (ReadWriteTimeout != null) ftpRequest.ReadWriteTimeout = ReadWriteTimeout.Value;
     }
@@ -250,7 +252,7 @@ public class WebRequestOptions
         if (UnsafeAuthenticatedConnectionSharing != null) httpRequest.UnsafeAuthenticatedConnectionSharing = UnsafeAuthenticatedConnectionSharing.Value;
         if (UserAgent != null) httpRequest.UserAgent = UserAgent;
 
-        if (ClientCertificates != null) httpRequest.ClientCertificates = ClientCertificates;
+        if (ClientCertificates.Count > 0) httpRequest.ClientCertificates = ClientCertificates;
         if (KeepAlive != null) httpRequest.KeepAlive = KeepAlive.Value;
         if (ReadWriteTimeout != null) httpRequest.ReadWriteTimeout = ReadWriteTimeout.Value;
     }

@@ -344,17 +344,10 @@ public static class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public static WebResponse CreateWebResponse(Uri source, WebRequestOptions options)
     {
-        WebResponse response = null;
-
         ArgumentNullException.ThrowIfNull(source);
 
         WebRequest webRequest = SyndicationEncodingUtility.CreateWebRequest(source, options);
-        if (webRequest != null)
-        {
-            response = webRequest.GetResponse();
-        }
-
-        return response;
+        return webRequest.GetResponse();
     }
 
     /// <summary>

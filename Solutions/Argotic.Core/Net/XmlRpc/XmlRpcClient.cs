@@ -641,7 +641,7 @@ public class XmlRpcClient
     /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="userAgent"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="message"/> is a null reference.</exception>
-    private static WebRequest CreateWebRequest(Uri host, string userAgent, XmlRpcMessage message, bool useDefaultCredentials, WebRequestOptions options)
+    private static HttpWebRequest CreateWebRequest(Uri host, string userAgent, XmlRpcMessage message, bool useDefaultCredentials, WebRequestOptions options)
     {
         byte[] payloadData;
 

@@ -15,7 +15,7 @@ public class MyCustomRssFeed : ISyndicationResource
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
-    private static readonly SyndicationContentFormat feedFormat = SyndicationContentFormat.Rss;
+    private const SyndicationContentFormat feedFormat = SyndicationContentFormat.Rss;
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>

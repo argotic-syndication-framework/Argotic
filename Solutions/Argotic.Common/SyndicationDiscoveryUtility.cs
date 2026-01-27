@@ -100,7 +100,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(source);
 
         using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new(credentials));
-        return response != null ? SyndicationDiscoveryUtility.SyndicationContentFormatGet(response.GetResponseStream()) : SyndicationContentFormat.None;
+        return SyndicationDiscoveryUtility.SyndicationContentFormatGet(response.GetResponseStream());
     }
 
     /// <summary>
@@ -375,21 +375,18 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(target);
 
         using WebResponse response = SyndicationEncodingUtility.CreateWebResponse(source, new(credentials));
-        if (response != null)
-        {
-            using Stream stream = response.GetResponseStream();
-            using StreamReader reader = new(stream);
-            Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(reader.ReadToEnd());
+        using Stream stream = response.GetResponseStream();
+        using StreamReader reader = new(stream);
+        Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(reader.ReadToEnd());
 
-            if (links is { Count: > 0 })
+        if (links is { Count: > 0 })
+        {
+            foreach (Uri link in links)
             {
-                foreach (Uri link in links)
+                if (Uri.Compare(link, target, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase) == 0)
                 {
-                    if (Uri.Compare(link, target, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase) == 0)
-                    {
-                        sourceContainsLinkToTarget = true;
-                        break;
-                    }
+                    sourceContainsLinkToTarget = true;
+                    break;
                 }
             }
         }
@@ -823,11 +820,6 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(uri);
 
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
-        if (webResponse == null)
-        {
-            return [];
-        }
-
         using Stream stream = webResponse.GetResponseStream();
         return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(stream);
     }
@@ -1011,11 +1003,6 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(uri);
 
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
-        if (webResponse == null)
-        {
-            return false;
-        }
-
         if (webResponse.Headers is { Count: > 0 })
         {
             for (int i = 0; i < webResponse.Headers.Count; i++)
@@ -1157,11 +1144,6 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(uri);
 
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
-        if (webResponse == null)
-        {
-            return null;
-        }
-
         if (webResponse.Headers is { Count: > 0 })
         {
             for (int i = 0; i < webResponse.Headers.Count; i++)
@@ -1412,11 +1394,6 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(uri);
 
         using WebResponse webResponse = SyndicationEncodingUtility.CreateWebResponse(uri, new(credentials));
-        if (webResponse == null)
-        {
-            return [];
-        }
-
         using Stream stream = webResponse.GetResponseStream();
         return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(stream);
     }

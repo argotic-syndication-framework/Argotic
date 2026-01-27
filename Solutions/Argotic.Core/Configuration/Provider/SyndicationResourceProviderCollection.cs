@@ -36,6 +36,8 @@ public class SyndicationResourceProviderCollection : ProviderCollection, ICollec
     /// <returns><b>true</b> if item is found in the <see cref="SyndicationResourceProviderCollection"/>; otherwise, <b>false</b>.</returns>
     public bool Contains(SyndicationResourceProvider item)
     {
+        ArgumentNullException.ThrowIfNull(item);
+
         if (base.Count > 0)
         {
             bool itemExists = false;
@@ -90,6 +92,8 @@ public class SyndicationResourceProviderCollection : ProviderCollection, ICollec
     /// </returns>
     public bool Remove(SyndicationResourceProvider item)
     {
+        ArgumentNullException.ThrowIfNull(item);
+
         if (this.Contains(item))
         {
             base.Remove(item.Name);

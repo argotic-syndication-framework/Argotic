@@ -333,7 +333,7 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            itemTitle = value.Trim();
+            itemTitle = value?.Trim() ?? string.Empty;
         }
     }
     /// <summary>

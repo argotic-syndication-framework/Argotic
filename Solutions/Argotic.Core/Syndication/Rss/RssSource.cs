@@ -109,7 +109,7 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
 
         set
         {
-            sourceTitle = value.Trim();
+            sourceTitle = value?.Trim() ?? string.Empty;
         }
     }
 

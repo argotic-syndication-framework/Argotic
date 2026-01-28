@@ -8,7 +8,7 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <seealso cref="SiteSummaryContentSyndicationExtensionContext.Items"/>
 [Serializable]
-public class SiteSummaryContentItem : IComparable
+public class SiteSummaryContentItem : IComparable, IEquatable<SiteSummaryContentItem>
 {
 
     /// <summary>
@@ -235,18 +235,28 @@ public class SiteSummaryContentItem : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SiteSummaryContentItem"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SiteSummaryContentItem"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SiteSummaryContentItem"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SiteSummaryContentItem? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SiteSummaryContentItem)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is SiteSummaryContentItem other && this.Equals(other);
     }
 
     /// <summary>
@@ -255,9 +265,7 @@ public class SiteSummaryContentItem : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Content, this.Encoding, this.Format);
     }
 
     /// <summary>

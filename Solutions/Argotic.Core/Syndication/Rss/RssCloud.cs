@@ -22,7 +22,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssCloud : IComparable, IExtensibleSyndicationObject
+public class RssCloud : IComparable, IEquatable<RssCloud>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -468,18 +468,28 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="RssCloud"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="RssCloud"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="RssCloud"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(RssCloud? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not RssCloud)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is RssCloud other && this.Equals(other);
     }
 
     /// <summary>
@@ -488,9 +498,12 @@ public class RssCloud : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.Domain ?? string.Empty),
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.Path ?? string.Empty),
+            this.Port,
+            this.Protocol,
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.RegisterProcedure ?? string.Empty));
     }
 
     /// <summary>

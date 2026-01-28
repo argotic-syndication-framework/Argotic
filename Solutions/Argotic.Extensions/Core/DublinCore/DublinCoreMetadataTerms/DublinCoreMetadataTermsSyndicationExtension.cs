@@ -24,7 +24,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension, IComparable
+public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension, IComparable, IEquatable<DublinCoreMetadataTermsSyndicationExtension>
 {
 
     /// <summary>
@@ -320,18 +320,28 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="DublinCoreMetadataTermsSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="DublinCoreMetadataTermsSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="DublinCoreMetadataTermsSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(DublinCoreMetadataTermsSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not DublinCoreMetadataTermsSyndicationExtension)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is DublinCoreMetadataTermsSyndicationExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -340,9 +350,11 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(
+            HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, this.XmlNamespace, this.XmlPrefix),
+            HashCode.Combine(this.Context.Abstract, this.Context.Contributor, this.Context.Creator, this.Context.Date, this.Context.Description, this.Context.Identifier),
+            HashCode.Combine(this.Context.Language, this.Context.Publisher, this.Context.Relation, this.Context.Rights, this.Context.Source),
+            HashCode.Combine(this.Context.Subject, this.Context.Title, this.Context.TypeVocabulary));
     }
 
     /// <summary>

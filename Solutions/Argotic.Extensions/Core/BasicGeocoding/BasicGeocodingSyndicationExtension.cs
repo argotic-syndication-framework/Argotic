@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class BasicGeocodingSyndicationExtension : SyndicationExtension, IComparable
+public class BasicGeocodingSyndicationExtension : SyndicationExtension, IComparable, IEquatable<BasicGeocodingSyndicationExtension>
 {
     /// <summary>
     /// Private member to hold specific information about the extension.
@@ -280,18 +280,28 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="BasicGeocodingSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="BasicGeocodingSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="BasicGeocodingSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(BasicGeocodingSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not BasicGeocodingSyndicationExtension)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is BasicGeocodingSyndicationExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -300,7 +310,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return StringComparer.Ordinal.GetHashCode(this.ToString());
+        return HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, this.XmlNamespace, this.XmlPrefix, this.Context.Latitude, this.Context.Longitude);
     }
 
     /// <summary>

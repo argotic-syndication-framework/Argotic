@@ -29,7 +29,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
 [Serializable]
-public class SitemapVideo : IComparable
+public class SitemapVideo : IComparable, IEquatable<SitemapVideo>
 {
     /// <summary>
     /// Maximum length for video title per Google Video Sitemap 1.1 specification.
@@ -864,18 +864,28 @@ public class SitemapVideo : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SitemapVideo"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SitemapVideo"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SitemapVideo"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SitemapVideo? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SitemapVideo)
-        {
-            return false;
-        }
-
-        return this.CompareTo(obj) == 0;
+        return obj is SitemapVideo other && this.Equals(other);
     }
 
     /// <summary>

@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso cref="FeedSynchronizationSyndicationExtensionContext"/>
 [Serializable]
-public class FeedSynchronizationItem : IComparable
+public class FeedSynchronizationItem : IComparable, IEquatable<FeedSynchronizationItem>
 {
     /// <summary>
     /// Private member to hold the globally unique identifier for the item.
@@ -582,18 +582,28 @@ public class FeedSynchronizationItem : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="FeedSynchronizationItem"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="FeedSynchronizationItem"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="FeedSynchronizationItem"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(FeedSynchronizationItem? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not FeedSynchronizationItem)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is FeedSynchronizationItem other && this.Equals(other);
     }
 
     /// <summary>
@@ -602,9 +612,7 @@ public class FeedSynchronizationItem : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Id, this.ConflictPreservation, this.TombstoneStatus, this.Updates);
     }
 
     /// <summary>

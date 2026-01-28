@@ -8,7 +8,7 @@ namespace Argotic.Common;
 /// Specifies a set of features to support on a <see cref="ISyndicationResource"/> object loaded by the <see cref="ISyndicationResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)"/> method.
 /// </summary>
 [Serializable]
-public sealed class SyndicationResourceLoadSettings : IComparable
+public sealed class SyndicationResourceLoadSettings : IComparable, IEquatable<SyndicationResourceLoadSettings>
 {
     /// <summary>
     /// Private member to hold the character encoding to use when reading the syndication resource.
@@ -182,18 +182,28 @@ public sealed class SyndicationResourceLoadSettings : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SyndicationResourceLoadSettings"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SyndicationResourceLoadSettings"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SyndicationResourceLoadSettings"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SyndicationResourceLoadSettings? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SyndicationResourceLoadSettings)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is SyndicationResourceLoadSettings other && this.Equals(other);
     }
 
     /// <summary>
@@ -202,9 +212,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.CharacterEncoding?.WebName, this.RetrievalLimit, this.Timeout, this.AutoDetectExtensions);
     }
 
     /// <summary>

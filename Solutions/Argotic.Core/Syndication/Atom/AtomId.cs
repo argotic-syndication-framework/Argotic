@@ -90,7 +90,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
+public class AtomId : IAtomCommonObjectAttributes, IComparable, IEquatable<AtomId>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold an IRI that represents a permanent, universally unique identifier for the entity.
@@ -312,18 +312,28 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="AtomId"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="AtomId"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="AtomId"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(AtomId? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not AtomId)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is AtomId other && this.Equals(other);
     }
 
     /// <summary>
@@ -332,9 +342,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndi
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Uri);
     }
 
     /// <summary>

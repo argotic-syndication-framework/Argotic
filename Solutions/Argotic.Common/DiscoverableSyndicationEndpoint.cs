@@ -6,7 +6,7 @@ namespace Argotic.Common;
 /// Represents a discoverable syndication endpoint that is being broadcast by a web resource.
 /// </summary>
 [Serializable]
-public class DiscoverableSyndicationEndpoint : IComparable
+public class DiscoverableSyndicationEndpoint : IComparable, IEquatable<DiscoverableSyndicationEndpoint>
 {
     /// <summary>
     /// Private member to hold the content MIME type of the syndication endpoint.
@@ -248,18 +248,28 @@ public class DiscoverableSyndicationEndpoint : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="DiscoverableSyndicationEndpoint"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="DiscoverableSyndicationEndpoint"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="DiscoverableSyndicationEndpoint"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(DiscoverableSyndicationEndpoint? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not DiscoverableSyndicationEndpoint)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is DiscoverableSyndicationEndpoint other && this.Equals(other);
     }
 
     /// <summary>
@@ -268,9 +278,7 @@ public class DiscoverableSyndicationEndpoint : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.ContentType, this.Source, this.Title);
     }
 
     /// <summary>

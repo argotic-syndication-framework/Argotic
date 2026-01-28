@@ -21,7 +21,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
+public class AtomLink : IAtomCommonObjectAttributes, IComparable, IEquatable<AtomLink>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold an IRI that identifies the location of the Web resource.
@@ -548,18 +548,28 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="AtomLink"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="AtomLink"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="AtomLink"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(AtomLink? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not AtomLink)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is AtomLink other && this.Equals(other);
     }
 
     /// <summary>
@@ -568,9 +578,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable, IExtensibleSyn
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Length, this.ContentType, this.Relation, this.ContentLanguage?.Name, this.Title, this.Uri);
     }
 
     /// <summary>

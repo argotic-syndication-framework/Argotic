@@ -10,7 +10,7 @@ namespace Argotic.Syndication.Specialized;
 /// Represents an categorization taxonomy for published content.
 /// </summary>
 [Serializable]
-public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndicationObject
+public class BlogMLCategory : IBlogMLCommonObject, IComparable, IEquatable<BlogMLCategory>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -353,18 +353,28 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="BlogMLCategory"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="BlogMLCategory"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="BlogMLCategory"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(BlogMLCategory? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not BlogMLCategory)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is BlogMLCategory other && this.Equals(other);
     }
 
     /// <summary>
@@ -373,9 +383,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IExtensibleSyndi
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Description, this.ParentId, this.ApprovalStatus, this.CreatedOn, this.Id, this.LastModifiedOn, this.Title);
     }
 
     /// <summary>

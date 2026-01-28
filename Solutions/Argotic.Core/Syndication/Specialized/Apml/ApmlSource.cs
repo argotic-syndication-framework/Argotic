@@ -20,7 +20,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [Serializable]
-public class ApmlSource : IComparable, IExtensibleSyndicationObject
+public class ApmlSource : IComparable, IEquatable<ApmlSource>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -581,18 +581,28 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="ApmlSource"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="ApmlSource"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="ApmlSource"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(ApmlSource? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not ApmlSource)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is ApmlSource other && this.Equals(other);
     }
 
     /// <summary>
@@ -601,9 +611,14 @@ public class ApmlSource : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(
+            this.Authors.Count,
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.From ?? string.Empty),
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.Key ?? string.Empty),
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.MimeType ?? string.Empty),
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.Name ?? string.Empty),
+            this.UpdatedOn,
+            this.Value);
     }
 
     /// <summary>

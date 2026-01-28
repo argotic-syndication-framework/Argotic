@@ -11,7 +11,7 @@ namespace Argotic.Syndication;
 /// Represents the header information for an <see cref="OpmlDocument"/>.
 /// </summary>
 [Serializable]
-public class OpmlHead : IComparable, IExtensibleSyndicationObject
+public class OpmlHead : IComparable, IEquatable<OpmlHead>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -370,18 +370,28 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="OpmlHead"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="OpmlHead"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="OpmlHead"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(OpmlHead? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not OpmlHead)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is OpmlHead other && this.Equals(other);
     }
 
     /// <summary>
@@ -390,9 +400,7 @@ public class OpmlHead : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Title, this.CreatedOn, this.ModifiedOn, this.VerticalScrollState, this.Owner, this.Window);
     }
 
     /// <summary>

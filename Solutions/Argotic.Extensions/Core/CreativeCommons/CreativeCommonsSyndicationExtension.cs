@@ -24,7 +24,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class CreativeCommonsSyndicationExtension : SyndicationExtension, IComparable
+public class CreativeCommonsSyndicationExtension : SyndicationExtension, IComparable, IEquatable<CreativeCommonsSyndicationExtension>
 {
     /// <summary>
     /// Private member to hold specific information about the extension.
@@ -181,18 +181,28 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="CreativeCommonsSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="CreativeCommonsSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="CreativeCommonsSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(CreativeCommonsSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not CreativeCommonsSyndicationExtension)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is CreativeCommonsSyndicationExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -201,7 +211,18 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return StringComparer.Ordinal.GetHashCode(this.ToString());
+        HashCode hash = new();
+        hash.Add(this.Description, StringComparer.OrdinalIgnoreCase);
+        hash.Add(this.Documentation);
+        hash.Add(this.Name, StringComparer.OrdinalIgnoreCase);
+        hash.Add(this.Version);
+        hash.Add(this.XmlNamespace, StringComparer.Ordinal);
+        hash.Add(this.XmlPrefix, StringComparer.Ordinal);
+        foreach (Uri license in this.Context.Licenses)
+        {
+            hash.Add(license);
+        }
+        return hash.ToHashCode();
     }
 
     /// <summary>

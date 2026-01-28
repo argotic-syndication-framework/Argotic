@@ -6,7 +6,7 @@ namespace Argotic.Syndication;
 /// <seealso cref="GenericSyndicationFeed.Categories"/>
 /// <seealso cref="GenericSyndicationItem.Categories"/>
 [Serializable]
-public class GenericSyndicationCategory : IComparable
+public class GenericSyndicationCategory : IComparable, IEquatable<GenericSyndicationCategory>
 {
 
     /// <summary>
@@ -145,18 +145,28 @@ public class GenericSyndicationCategory : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="GenericSyndicationCategory"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="GenericSyndicationCategory"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="GenericSyndicationCategory"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(GenericSyndicationCategory? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not GenericSyndicationCategory)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is GenericSyndicationCategory other && this.Equals(other);
     }
 
     /// <summary>
@@ -165,9 +175,7 @@ public class GenericSyndicationCategory : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Scheme, this.Term);
     }
 
     /// <summary>

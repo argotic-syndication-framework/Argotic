@@ -29,7 +29,7 @@ namespace Argotic.Publishing;
 /// <seealso cref="AtomMemberResources.Categories"/>
 [Serializable]
 [MimeMediaType(Name = "application", SubName = "atomcat+xml", Documentation = "http://bitworking.org/projects/atom/rfc5023.html#iana-atomcat")]
-public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparable
+public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparable, IEquatable<AtomCategoryDocument>
 {
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
@@ -819,18 +819,28 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="AtomCategoryDocument"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="AtomCategoryDocument"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="AtomCategoryDocument"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(AtomCategoryDocument? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not AtomCategoryDocument)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is AtomCategoryDocument other && this.Equals(other);
     }
 
     /// <summary>
@@ -839,9 +849,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.IsFixed, this.Scheme, this.Uri, this.BaseUri, this.Language);
     }
 
     /// <summary>

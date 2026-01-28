@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class ITunesSyndicationExtension : SyndicationExtension, IComparable
+public class ITunesSyndicationExtension : SyndicationExtension, IComparable, IEquatable<ITunesSyndicationExtension>
 {
     /// <summary>
     /// Private member to hold specific information about the extension.
@@ -294,18 +294,28 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="ITunesSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="ITunesSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="ITunesSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(ITunesSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not ITunesSyndicationExtension)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is ITunesSyndicationExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -314,7 +324,19 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return StringComparer.Ordinal.GetHashCode(this.ToString());
+        HashCode hash = new();
+        hash.Add(this.Context.Author);
+        hash.Add(this.Context.Categories.Count);
+        hash.Add(this.Context.Duration);
+        hash.Add(this.Context.ExplicitMaterial);
+        hash.Add(this.Context.Image);
+        hash.Add(this.Context.IsBlocked);
+        hash.Add(this.Context.Keywords.Count);
+        hash.Add(this.Context.NewFeedUrl);
+        hash.Add(this.Context.Owner);
+        hash.Add(this.Context.Subtitle);
+        hash.Add(this.Context.Summary);
+        return hash.ToHashCode();
     }
 
     /// <summary>

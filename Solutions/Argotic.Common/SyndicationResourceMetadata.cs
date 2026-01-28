@@ -7,7 +7,7 @@ namespace Argotic.Common;
 /// Represents metadata associated with a <see cref="ISyndicationResource">syndication resource</see>.
 /// </summary>
 [Serializable]
-public class SyndicationResourceMetadata : IComparable
+public class SyndicationResourceMetadata : IComparable, IEquatable<SyndicationResourceMetadata>
 {
     /// <summary>
     /// Private member to hold the syndication content format that the syndication resource conforms to.
@@ -820,18 +820,28 @@ public class SyndicationResourceMetadata : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SyndicationResourceMetadata"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SyndicationResourceMetadata"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SyndicationResourceMetadata"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SyndicationResourceMetadata? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SyndicationResourceMetadata)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is SyndicationResourceMetadata other && this.Equals(other);
     }
 
     /// <summary>
@@ -840,9 +850,7 @@ public class SyndicationResourceMetadata : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Format, this.Version, this.Resource?.OuterXml);
     }
 
     /// <summary>

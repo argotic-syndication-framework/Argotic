@@ -24,7 +24,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IComparable
+public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IComparable, IEquatable<DublinCoreElementSetSyndicationExtension>
 {
     /// <summary>
     /// Private member to hold specific information about the extension.
@@ -283,18 +283,28 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="DublinCoreElementSetSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="DublinCoreElementSetSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="DublinCoreElementSetSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(DublinCoreElementSetSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not DublinCoreElementSetSyndicationExtension)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is DublinCoreElementSetSyndicationExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -303,7 +313,11 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return StringComparer.Ordinal.GetHashCode(this.ToString());
+        return HashCode.Combine(
+            HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, this.XmlNamespace, this.XmlPrefix),
+            HashCode.Combine(this.Context.Contributor, this.Context.Coverage, this.Context.Creator, this.Context.Date, this.Context.Description, this.Context.Format),
+            HashCode.Combine(this.Context.Identifier, this.Context.Language, this.Context.Publisher, this.Context.Relation, this.Context.Rights),
+            HashCode.Combine(this.Context.Source, this.Context.Subject, this.Context.Title, this.Context.TypeVocabulary));
     }
 
     /// <summary>

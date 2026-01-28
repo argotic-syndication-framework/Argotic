@@ -19,7 +19,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [Serializable]
-public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
+public class ApmlAuthor : IComparable, IEquatable<ApmlAuthor>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -351,18 +351,28 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="ApmlAuthor"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="ApmlAuthor"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="ApmlAuthor"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(ApmlAuthor? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not ApmlAuthor)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is ApmlAuthor other && this.Equals(other);
     }
 
     /// <summary>
@@ -371,9 +381,11 @@ public class ApmlAuthor : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.From ?? string.Empty),
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.Key ?? string.Empty),
+            this.UpdatedOn,
+            this.Value);
     }
 
     /// <summary>

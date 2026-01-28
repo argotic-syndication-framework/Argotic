@@ -13,7 +13,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso cref="FeedSynchronizationSyndicationExtensionContext"/>
 [Serializable]
-public class FeedSynchronizationSharingInformation : IComparable
+public class FeedSynchronizationSharingInformation : IComparable, IEquatable<FeedSynchronizationSharingInformation>
 {
 
     /// <summary>
@@ -369,18 +369,28 @@ public class FeedSynchronizationSharingInformation : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="FeedSynchronizationSharingInformation"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="FeedSynchronizationSharingInformation"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="FeedSynchronizationSharingInformation"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(FeedSynchronizationSharingInformation? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not FeedSynchronizationSharingInformation)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is FeedSynchronizationSharingInformation other && this.Equals(other);
     }
 
     /// <summary>
@@ -389,9 +399,7 @@ public class FeedSynchronizationSharingInformation : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.ExpiresOn, this.Since, this.Until);
     }
 
     /// <summary>

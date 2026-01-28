@@ -16,7 +16,7 @@ namespace Argotic.Net;
 ///     </code>
 /// </example>
 [Serializable]
-public class XmlRpcMessage : IComparable
+public class XmlRpcMessage : IComparable, IEquatable<XmlRpcMessage>
 {
     /// <summary>
     /// Private member to hold the name of the method to be called.
@@ -293,18 +293,28 @@ public class XmlRpcMessage : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="XmlRpcMessage"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="XmlRpcMessage"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="XmlRpcMessage"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(XmlRpcMessage? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not XmlRpcMessage)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is XmlRpcMessage other && this.Equals(other);
     }
 
     /// <summary>
@@ -313,9 +323,7 @@ public class XmlRpcMessage : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Encoding?.WebName, this.MethodName, this.Parameters.Count);
     }
 
     /// <summary>

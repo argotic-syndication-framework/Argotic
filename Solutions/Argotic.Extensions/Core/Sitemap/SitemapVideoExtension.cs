@@ -29,7 +29,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
 [Serializable]
-public class SitemapVideoExtension : SyndicationExtension, IComparable
+public class SitemapVideoExtension : SyndicationExtension, IComparable, IEquatable<SitemapVideoExtension>
 {
     /// <summary>
     /// Private member to hold the collection of videos.
@@ -229,18 +229,28 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SitemapVideoExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SitemapVideoExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SitemapVideoExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SitemapVideoExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SitemapVideoExtension)
-        {
-            return false;
-        }
-
-        return this.CompareTo(obj) == 0;
+        return obj is SitemapVideoExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -249,7 +259,13 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return StringComparer.Ordinal.GetHashCode(this.ToString());
+        HashCode hash = new();
+        foreach (SitemapVideo video in this.Videos)
+        {
+            hash.Add(video);
+        }
+
+        return hash.ToHashCode();
     }
 
     /// <summary>

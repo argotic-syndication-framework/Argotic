@@ -14,7 +14,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 [Serializable]
-public class SitemapHreflangLink : IComparable
+public class SitemapHreflangLink : IComparable, IEquatable<SitemapHreflangLink>
 {
     /// <summary>
     /// Private member to hold the language/region code.
@@ -188,18 +188,28 @@ public class SitemapHreflangLink : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SitemapHreflangLink"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SitemapHreflangLink"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SitemapHreflangLink"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SitemapHreflangLink? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SitemapHreflangLink)
-        {
-            return false;
-        }
-
-        return this.CompareTo(obj) == 0;
+        return obj is SitemapHreflangLink other && this.Equals(other);
     }
 
     /// <summary>

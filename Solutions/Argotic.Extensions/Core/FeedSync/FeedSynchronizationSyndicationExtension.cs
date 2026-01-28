@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class FeedSynchronizationSyndicationExtension : SyndicationExtension, IComparable
+public class FeedSynchronizationSyndicationExtension : SyndicationExtension, IComparable, IEquatable<FeedSynchronizationSyndicationExtension>
 {
 
     /// <summary>
@@ -211,18 +211,28 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="FeedSynchronizationSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="FeedSynchronizationSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="FeedSynchronizationSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(FeedSynchronizationSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not FeedSynchronizationSyndicationExtension)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is FeedSynchronizationSyndicationExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -231,9 +241,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, this.XmlNamespace, this.XmlPrefix);
     }
 
     /// <summary>

@@ -22,7 +22,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, IComparable
+public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, IComparable, IEquatable<WellFormedWebCommentsSyndicationExtension>
 {
 
     /// <summary>
@@ -180,18 +180,28 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="WellFormedWebCommentsSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="WellFormedWebCommentsSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="WellFormedWebCommentsSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(WellFormedWebCommentsSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not WellFormedWebCommentsSyndicationExtension)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is WellFormedWebCommentsSyndicationExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -200,9 +210,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Context.Comments, this.Context.CommentsFeed);
     }
 
     /// <summary>

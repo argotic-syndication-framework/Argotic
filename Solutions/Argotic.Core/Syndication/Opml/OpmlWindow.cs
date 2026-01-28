@@ -7,7 +7,7 @@ namespace Argotic.Syndication;
 /// Represents the pixel location of the edges of the outline window for a <see cref="OpmlDocument"/>.
 /// </summary>
 [Serializable]
-public class OpmlWindow : IComparable
+public class OpmlWindow : IComparable, IEquatable<OpmlWindow>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlWindow"/> class.
@@ -196,18 +196,28 @@ public class OpmlWindow : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="OpmlWindow"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="OpmlWindow"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="OpmlWindow"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(OpmlWindow? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not OpmlWindow)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is OpmlWindow other && this.Equals(other);
     }
 
     /// <summary>
@@ -216,9 +226,7 @@ public class OpmlWindow : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Bottom, this.Left, this.Right, this.Top);
     }
 
     /// <summary>

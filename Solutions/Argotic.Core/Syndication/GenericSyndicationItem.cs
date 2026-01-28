@@ -7,7 +7,7 @@ namespace Argotic.Syndication;
 /// </summary>
 /// <seealso cref="GenericSyndicationFeed.Items"/>
 [Serializable]
-public class GenericSyndicationItem : IComparable
+public class GenericSyndicationItem : IComparable, IEquatable<GenericSyndicationItem>
 {
 
     /// <summary>
@@ -156,18 +156,28 @@ public class GenericSyndicationItem : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="GenericSyndicationItem"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="GenericSyndicationItem"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="GenericSyndicationItem"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(GenericSyndicationItem? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not GenericSyndicationItem)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is GenericSyndicationItem other && this.Equals(other);
     }
 
     /// <summary>
@@ -176,9 +186,7 @@ public class GenericSyndicationItem : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Categories.Count, this.Summary, this.Title);
     }
 
     /// <summary>

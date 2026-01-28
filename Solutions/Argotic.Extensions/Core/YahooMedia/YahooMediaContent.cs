@@ -15,7 +15,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso cref="IYahooMediaCommonObjectEntities"/>
 [Serializable]
-public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
+public class YahooMediaContent : IComparable, IEquatable<YahooMediaContent>, IYahooMediaCommonObjectEntities
 {
 
     /// <summary>
@@ -832,18 +832,28 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="YahooMediaContent"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="YahooMediaContent"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="YahooMediaContent"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(YahooMediaContent? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not YahooMediaContent)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is YahooMediaContent other && this.Equals(other);
     }
 
     /// <summary>
@@ -852,9 +862,22 @@ public class YahooMediaContent : IComparable, IYahooMediaCommonObjectEntities
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        HashCode hash = new();
+        hash.Add(this.Bitrate);
+        hash.Add(this.Channels);
+        hash.Add(this.ContentType);
+        hash.Add(this.Duration);
+        hash.Add(this.Expression);
+        hash.Add(this.FileSize);
+        hash.Add(this.FrameRate);
+        hash.Add(this.Height);
+        hash.Add(this.IsDefault);
+        hash.Add(this.Language?.Name);
+        hash.Add(this.Medium);
+        hash.Add(this.SamplingRate);
+        hash.Add(this.Url);
+        hash.Add(this.Width);
+        return hash.ToHashCode();
     }
 
     /// <summary>

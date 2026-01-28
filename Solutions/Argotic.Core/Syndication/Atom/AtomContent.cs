@@ -69,7 +69,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
+public class AtomContent : IAtomCommonObjectAttributes, IComparable, IEquatable<AtomContent>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold the local content of the entry.
@@ -497,18 +497,28 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="AtomContent"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="AtomContent"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="AtomContent"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(AtomContent? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not AtomContent)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is AtomContent other && this.Equals(other);
     }
 
     /// <summary>
@@ -517,9 +527,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable, IExtensible
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Content, this.ContentType, this.Source);
     }
 
     /// <summary>

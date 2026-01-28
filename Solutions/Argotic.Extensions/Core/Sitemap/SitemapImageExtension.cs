@@ -16,7 +16,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">Image Sitemap 1.1 Schema</seealso>
 [Serializable]
-public class SitemapImageExtension : SyndicationExtension, IComparable
+public class SitemapImageExtension : SyndicationExtension, IComparable, IEquatable<SitemapImageExtension>
 {
     /// <summary>
     /// Private member to hold the collection of images.
@@ -216,18 +216,28 @@ public class SitemapImageExtension : SyndicationExtension, IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SitemapImageExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SitemapImageExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SitemapImageExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SitemapImageExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SitemapImageExtension)
-        {
-            return false;
-        }
-
-        return this.CompareTo(obj) == 0;
+        return obj is SitemapImageExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -236,7 +246,13 @@ public class SitemapImageExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return StringComparer.Ordinal.GetHashCode(this.ToString());
+        HashCode hash = new();
+        foreach (SitemapImage image in this.Images)
+        {
+            hash.Add(image);
+        }
+
+        return hash.ToHashCode();
     }
 
     /// <summary>

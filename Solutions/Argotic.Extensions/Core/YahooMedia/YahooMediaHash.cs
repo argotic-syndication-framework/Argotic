@@ -15,7 +15,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 [Serializable]
-public class YahooMediaHash : IComparable
+public class YahooMediaHash : IComparable, IEquatable<YahooMediaHash>
 {
 
     /// <summary>
@@ -308,18 +308,28 @@ public class YahooMediaHash : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="YahooMediaHash"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="YahooMediaHash"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="YahooMediaHash"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(YahooMediaHash? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not YahooMediaHash)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is YahooMediaHash other && this.Equals(other);
     }
 
     /// <summary>
@@ -328,9 +338,7 @@ public class YahooMediaHash : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Algorithm, this.Value);
     }
 
     /// <summary>

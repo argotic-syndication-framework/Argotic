@@ -19,7 +19,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssSource : IComparable, IExtensibleSyndicationObject
+public class RssSource : IComparable, IEquatable<RssSource>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -268,18 +268,28 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="RssSource"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="RssSource"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="RssSource"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(RssSource? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not RssSource)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is RssSource other && this.Equals(other);
     }
 
     /// <summary>
@@ -288,9 +298,9 @@ public class RssSource : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.Title ?? string.Empty),
+            this.Url);
     }
 
     /// <summary>

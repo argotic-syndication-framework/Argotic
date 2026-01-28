@@ -19,7 +19,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [Serializable]
-public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
+public class RsdApplicationInterface : IComparable, IEquatable<RsdApplicationInterface>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold the name of the application interface.
@@ -446,18 +446,28 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="RsdApplicationInterface"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="RsdApplicationInterface"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="RsdApplicationInterface"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(RsdApplicationInterface? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not RsdApplicationInterface)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is RsdApplicationInterface other && this.Equals(other);
     }
 
     /// <summary>
@@ -466,9 +476,14 @@ public class RsdApplicationInterface : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(
+            this.Documentation,
+            this.IsPreferred,
+            this.Link,
+            this.Name,
+            this.Notes,
+            this.Settings.Count,
+            this.WeblogId);
     }
 
     /// <summary>

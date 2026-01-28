@@ -19,7 +19,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssImage : IComparable, IExtensibleSyndicationObject
+public class RssImage : IComparable, IEquatable<RssImage>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -499,18 +499,28 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="RssImage"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="RssImage"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="RssImage"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(RssImage? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not RssImage)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is RssImage other && this.Equals(other);
     }
 
     /// <summary>
@@ -519,9 +529,13 @@ public class RssImage : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.Description ?? string.Empty),
+            this.Height,
+            this.Link,
+            StringComparer.OrdinalIgnoreCase.GetHashCode(this.Title ?? string.Empty),
+            this.Url,
+            this.Width);
     }
 
     /// <summary>

@@ -32,7 +32,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleSyndicationObject
+public class AtomSource : IAtomCommonObjectAttributes, IComparable, IEquatable<AtomSource>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold a permanent, universally unique identifier for the source.
@@ -501,18 +501,28 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="AtomSource"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="AtomSource"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="AtomSource"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(AtomSource? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not AtomSource)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is AtomSource other && this.Equals(other);
     }
 
     /// <summary>
@@ -521,9 +531,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IExtensibleS
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Id, this.Title, this.UpdatedOn, this.Generator, this.Icon, this.Logo, this.Rights);
     }
 
     /// <summary>

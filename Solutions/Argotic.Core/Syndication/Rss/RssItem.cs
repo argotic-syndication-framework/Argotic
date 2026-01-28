@@ -21,7 +21,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssItem : IComparable, IExtensibleSyndicationObject
+public class RssItem : IComparable, IEquatable<RssItem>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold the e-mail address of the person who wrote the item.
@@ -730,18 +730,28 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="RssItem"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="RssItem"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="RssItem"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(RssItem? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not RssItem)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is RssItem other && this.Equals(other);
     }
 
     /// <summary>
@@ -750,9 +760,14 @@ public class RssItem : IComparable, IExtensibleSyndicationObject
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        HashCode hash = new();
+        hash.Add(this.Author, StringComparer.OrdinalIgnoreCase);
+        hash.Add(this.Comments);
+        hash.Add(this.Description, StringComparer.OrdinalIgnoreCase);
+        hash.Add(this.Link);
+        hash.Add(this.PublicationDate);
+        hash.Add(this.Title, StringComparer.OrdinalIgnoreCase);
+        return hash.ToHashCode();
     }
 
     /// <summary>

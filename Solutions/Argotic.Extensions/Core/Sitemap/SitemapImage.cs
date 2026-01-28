@@ -14,7 +14,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">Image Sitemap 1.1 Schema</seealso>
 [Serializable]
-public class SitemapImage : IComparable
+public class SitemapImage : IComparable, IEquatable<SitemapImage>
 {
     /// <summary>
     /// Private member to hold the URL of the image.
@@ -141,18 +141,28 @@ public class SitemapImage : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SitemapImage"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SitemapImage"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SitemapImage"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SitemapImage? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SitemapImage)
-        {
-            return false;
-        }
-
-        return this.CompareTo(obj) == 0;
+        return obj is SitemapImage other && this.Equals(other);
     }
 
     /// <summary>

@@ -17,7 +17,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-news/0.9/sitemap-news.xsd">News Sitemap 0.9 Schema</seealso>
 [Serializable]
-public class SitemapNewsExtension : SyndicationExtension, IComparable
+public class SitemapNewsExtension : SyndicationExtension, IComparable, IEquatable<SitemapNewsExtension>
 {
     /// <summary>
     /// Private member to hold the publication information.
@@ -292,18 +292,28 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SitemapNewsExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SitemapNewsExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SitemapNewsExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SitemapNewsExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SitemapNewsExtension)
-        {
-            return false;
-        }
-
-        return this.CompareTo(obj) == 0;
+        return obj is SitemapNewsExtension other && this.Equals(other);
     }
 
     /// <summary>

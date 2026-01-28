@@ -10,7 +10,7 @@ namespace Argotic.Net;
 ///     <para>See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.</para>
 /// </remarks>
 [Serializable]
-public class WebContentType : IComparable
+public class WebContentType : IComparable, IEquatable<WebContentType>
 {
     /// <summary>
     /// Private member to hold the well known name for the character encoding parameter.
@@ -353,18 +353,28 @@ public class WebContentType : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="WebContentType"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="WebContentType"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="WebContentType"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(WebContentType? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not WebContentType)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is WebContentType other && this.Equals(other);
     }
 
     /// <summary>
@@ -373,9 +383,7 @@ public class WebContentType : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.MediaType, this.MediaSubtype, this.Parameters.Count);
     }
 
     /// <summary>

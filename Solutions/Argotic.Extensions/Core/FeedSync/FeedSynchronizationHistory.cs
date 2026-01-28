@@ -11,7 +11,7 @@ namespace Argotic.Extensions.Core;
 /// <seealso cref="FeedSynchronizationItem.Histories"/>
 /// <seealso cref="FeedSynchronizationItem"/>
 [Serializable]
-public class FeedSynchronizationHistory : IComparable
+public class FeedSynchronizationHistory : IComparable, IEquatable<FeedSynchronizationHistory>
 {
 
     /// <summary>
@@ -271,18 +271,28 @@ public class FeedSynchronizationHistory : IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="FeedSynchronizationHistory"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="FeedSynchronizationHistory"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="FeedSynchronizationHistory"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(FeedSynchronizationHistory? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not FeedSynchronizationHistory)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is FeedSynchronizationHistory other && this.Equals(other);
     }
 
     /// <summary>
@@ -291,9 +301,7 @@ public class FeedSynchronizationHistory : IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.By, this.Sequence, this.When);
     }
 
     /// <summary>

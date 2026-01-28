@@ -21,7 +21,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
+public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable, IEquatable<BlogChannelSyndicationExtension>
 {
 
     /// <summary>
@@ -186,18 +186,28 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="BlogChannelSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="BlogChannelSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="BlogChannelSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(BlogChannelSyndicationExtension? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not BlogChannelSyndicationExtension)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is BlogChannelSyndicationExtension other && this.Equals(other);
     }
 
     /// <summary>
@@ -206,9 +216,7 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, HashCode.Combine(this.XmlNamespace, this.XmlPrefix, this.Context.Blink, this.Context.BlogRoll, this.Context.Changes, this.Context.MySubscriptions));
     }
 
     /// <summary>

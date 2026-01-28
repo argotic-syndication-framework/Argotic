@@ -27,7 +27,7 @@ namespace Argotic.Publishing;
 ///     </para>
 /// </remarks>
 [Serializable]
-public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
+public class AtomWorkspace : IComparable, IEquatable<AtomWorkspace>, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
 {
     /// <summary>
     /// Private member to hold the base URI other than the base URI of the document or external entity.
@@ -411,18 +411,28 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="AtomWorkspace"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="AtomWorkspace"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="AtomWorkspace"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(AtomWorkspace? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not AtomWorkspace)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is AtomWorkspace other && this.Equals(other);
     }
 
     /// <summary>
@@ -431,9 +441,7 @@ public class AtomWorkspace : IComparable, IExtensibleSyndicationObject, IAtomCom
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Title, this.BaseUri, this.Language);
     }
 
     /// <summary>

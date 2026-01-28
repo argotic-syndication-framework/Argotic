@@ -13,7 +13,7 @@ namespace Argotic.Common;
 /// <seealso cref="ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"/>
 /// <seealso cref="ISyndicationResource.Load(System.Xml.XmlReader)"/>
 [Serializable]
-public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
+public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable, IEquatable<SyndicationResourceLoadedEventArgs>
 {
     /// <summary>
     /// Private member to hold instance of event with no event data.
@@ -151,18 +151,28 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     }
 
     /// <summary>
+    /// Determines whether the specified <see cref="SyndicationResourceLoadedEventArgs"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="SyndicationResourceLoadedEventArgs"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="SyndicationResourceLoadedEventArgs"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(SyndicationResourceLoadedEventArgs? other)
+    {
+        if (other is null)
+        {
+            return false;
+        }
+
+        return this.CompareTo(other) == 0;
+    }
+
+    /// <summary>
     /// Determines whether the specified <see cref="object"/> is equal to the current instance.
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SyndicationResourceLoadedEventArgs)
-        {
-            return false;
-        }
-
-        return (this.CompareTo(obj) == 0);
+        return obj is SyndicationResourceLoadedEventArgs other && this.Equals(other);
     }
 
     /// <summary>
@@ -171,9 +181,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
+        return HashCode.Combine(this.Data?.OuterXml, this.Source);
     }
 
     /// <summary>

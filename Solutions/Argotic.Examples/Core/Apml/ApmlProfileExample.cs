@@ -104,5 +104,7 @@ public static class ApmlProfileExample
         };
 
         document.Applications.Add(sampleApplication);
+
+        ExampleOutput.ShowApmlProfile(homeProfile);
     }
 }

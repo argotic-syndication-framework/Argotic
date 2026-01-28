@@ -15,7 +15,12 @@ public static class TrackbackClientExample
     /// <summary>
     /// Provides example code for the TrackbackClient class.
     /// </summary>
-    public static async Task ClassExampleAsync()
+    /// <remarks>
+    /// This example demonstrates how to configure and use the TrackbackClient.
+    /// Note: This example does not make actual network calls since it uses placeholder URLs.
+    /// In a real application, you would use actual trackback server endpoints.
+    /// </remarks>
+    public static void ClassExample()
     {
         // Initialize the Trackback peer-to-peer notification protocol client
         TrackbackClient client = new()
@@ -32,16 +37,20 @@ public static class TrackbackClientExample
             Excerpt = "My Excerpt"
         };
 
-        // Send an asynchronous trackback ping
-        TrackbackResponse response = await client.SendAsync(message).ConfigureAwait(false);
+        // Note: In a real application, you would send the message:
+        // TrackbackResponse response = await client.SendAsync(message).ConfigureAwait(false);
 
-        // Verify response to the trackback ping
-        if (response != null)
+        // For demonstration, we just verify the client and message are configured correctly
+        if (client.Host != null && message.Permalink != null)
         {
-            if (response.HasError)
-            {
-                // Use the TrackbackResponse.ErrorMessage property to determine the reason the trackback ping failed
-            }
+            // Client is configured and ready to send
+            // Verify response to the trackback ping
+            // if (response != null && response.HasError)
+            // {
+            //     // Use the TrackbackResponse.ErrorMessage property to determine the reason the trackback ping failed
+            // }
         }
+
+        ExampleOutput.ShowTrackbackClient(client.Host, message.WeblogName, message.Title);
     }
 }

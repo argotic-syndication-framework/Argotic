@@ -44,5 +44,7 @@ public static class RssItemExample
         item.Source = new RssSource(new Uri("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");
 
         feed.Channel.Items.Add(item);
+
+        ExampleOutput.ShowRssItem(item);
     }
 }

@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="utf-8"?>
+<APML xmlns="http://www.apml.org/apml-0.6" version="0.6">
+  <Head>
+    <Title>Sample APML Document</Title>
+    <Generator>Argotic Framework 3.0</Generator>
+    <UserEmail>user@example.com</UserEmail>
+    <DateCreated>2024-01-01T08:00:00Z</DateCreated>
+  </Head>
+  <Body defaultprofile="work">
+    <Profile name="work">
+      <ImplicitData>
+        <Concepts>
+          <Concept key="technology" value="0.95" from="https://news.ycombinator.com" updated="2024-01-01T12:00:00Z"/>
+          <Concept key="software" value="0.90" from="https://devblogs.microsoft.com" updated="2024-01-01T11:00:00Z"/>
+          <Concept key="cloud computing" value="0.85" from="https://azure.microsoft.com" updated="2024-01-01T10:00:00Z"/>
+          <Concept key="dotnet" value="0.88" from="https://devblogs.microsoft.com/dotnet" updated="2024-01-01T09:00:00Z"/>
+          <Concept key="open source" value="0.75" from="https://github.blog" updated="2024-01-01T08:00:00Z"/>
+          <Concept key="devops" value="0.70" from="https://devblogs.microsoft.com/devops" updated="2023-12-31T12:00:00Z"/>
+        </Concepts>
+        <Sources>
+          <Source key="https://devblogs.microsoft.com/dotnet/" value="0.98" name=".NET Blog" type="application/rss+xml" from="https://example.com" updated="2024-01-01T12:00:00Z"/>
+          <Source key="https://azure.microsoft.com/blog/feed/" value="0.92" name="Azure Blog" type="application/rss+xml" from="https://example.com" updated="2024-01-01T11:00:00Z"/>
+          <Source key="https://github.blog/feed/" value="0.85" name="GitHub Blog" type="application/rss+xml" from="https://example.com" updated="2024-01-01T10:00:00Z"/>
+          <Source key="https://news.ycombinator.com/rss" value="0.80" name="Hacker News" type="application/rss+xml" from="https://example.com" updated="2024-01-01T09:00:00Z"/>
+        </Sources>
+      </ImplicitData>
+      <ExplicitData>
+        <Concepts>
+          <Concept key="programming" value="1.0"/>
+          <Concept key="C#" value="1.0"/>
+          <Concept key=".NET" value="1.0"/>
+          <Concept key="software architecture" value="0.9"/>
+          <Concept key="microservices" value="0.8"/>
+        </Concepts>
+        <Sources>
+          <Source key="https://martinfowler.com/feed.atom" value="1.0" name="Martin Fowler" type="application/atom+xml"/>
+          <Source key="https://blog.codinghorror.com/rss/" value="0.95" name="Coding Horror" type="application/rss+xml"/>
+        </Sources>
+      </ExplicitData>
+    </Profile>
+
+    <Profile name="personal">
+      <ImplicitData>
+        <Concepts>
+          <Concept key="photography" value="0.85" from="https://petapixel.com" updated="2024-01-01T12:00:00Z"/>
+          <Concept key="travel" value="0.80" from="https://lonelyplanet.com" updated="2024-01-01T11:00:00Z"/>
+          <Concept key="cooking" value="0.75" from="https://seriouseats.com" updated="2024-01-01T10:00:00Z"/>
+          <Concept key="music" value="0.70" from="https://pitchfork.com" updated="2024-01-01T09:00:00Z"/>
+          <Concept key="books" value="0.65" from="https://lithub.com" updated="2024-01-01T08:00:00Z"/>
+        </Concepts>
+        <Sources>
+          <Source key="https://petapixel.com/feed/" value="0.90" name="PetaPixel" type="application/rss+xml" from="https://example.com" updated="2024-01-01T12:00:00Z"/>
+          <Source key="https://www.seriouseats.com/feeds/all" value="0.85" name="Serious Eats" type="application/rss+xml" from="https://example.com" updated="2024-01-01T11:00:00Z"/>
+        </Sources>
+      </ImplicitData>
+      <ExplicitData>
+        <Concepts>
+          <Concept key="landscape photography" value="1.0"/>
+          <Concept key="hiking" value="0.95"/>
+          <Concept key="national parks" value="0.90"/>
+        </Concepts>
+        <Sources>
+          <Source key="https://www.nationalgeographic.com/feed" value="1.0" name="National Geographic" type="application/rss+xml"/>
+        </Sources>
+      </ExplicitData>
+    </Profile>
+
+    <Profile name="research">
+      <ImplicitData>
+        <Concepts>
+          <Concept key="machine learning" value="0.92" from="https://arxiv.org" updated="2024-01-01T12:00:00Z"/>
+          <Concept key="artificial intelligence" value="0.90" from="https://openai.com" updated="2024-01-01T11:00:00Z"/>
+          <Concept key="natural language processing" value="0.85" from="https://huggingface.co" updated="2024-01-01T10:00:00Z"/>
+          <Concept key="computer vision" value="0.80" from="https://pytorch.org" updated="2024-01-01T09:00:00Z"/>
+        </Concepts>
+        <Sources>
+          <Source key="https://arxiv.org/rss/cs.AI" value="0.95" name="arXiv AI" type="application/rss+xml" from="https://example.com" updated="2024-01-01T12:00:00Z"/>
+          <Source key="https://openai.com/blog/rss.xml" value="0.90" name="OpenAI Blog" type="application/rss+xml" from="https://example.com" updated="2024-01-01T11:00:00Z"/>
+        </Sources>
+      </ImplicitData>
+      <ExplicitData>
+        <Concepts>
+          <Concept key="transformer models" value="1.0"/>
+          <Concept key="deep learning" value="1.0"/>
+          <Concept key="neural networks" value="0.95"/>
+        </Concepts>
+        <Sources>
+          <Source key="https://distill.pub/rss.xml" value="1.0" name="Distill" type="application/rss+xml"/>
+        </Sources>
+      </ExplicitData>
+    </Profile>
+  </Body>
+</APML>

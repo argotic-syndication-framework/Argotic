@@ -36,5 +36,7 @@ public static class RssEnclosureExample
         item.Enclosures.Add(new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
 
         feed.Channel.Items.Add(item);
+
+        ExampleOutput.ShowRssEnclosure(item.Enclosures[0]);
     }
 }

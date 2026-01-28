@@ -35,5 +35,7 @@ public static class RssSourceExample
         };
 
         feed.Channel.Items.Add(item);
+
+        ExampleOutput.ShowRssSource(item.Source);
     }
 }

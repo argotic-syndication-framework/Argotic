@@ -1,0 +1,212 @@
+<?xml version="1.0" encoding="utf-8"?>
+<feed xmlns="http://www.w3.org/2005/Atom"
+      xmlns:app="http://www.w3.org/2007/app"
+      xmlns:dc="http://purl.org/dc/elements/1.1/"
+      xmlns:dcterms="http://purl.org/dc/terms/"
+      xmlns:geo="http://www.w3.org/2003/01/geo/wgs84_pos#"
+      xmlns:media="http://search.yahoo.com/mrss/"
+      xmlns:fh="http://purl.org/syndication/history/1.0"
+      xmlns:thr="http://purl.org/syndication/thread/1.0"
+      xmlns:opensearch="http://a9.com/-/spec/opensearch/1.1/"
+      xmlns:creativeCommons="http://backend.userland.com/creativeCommonsRssModule">
+
+  <title type="text">Sample Atom Feed with Extensions</title>
+  <subtitle type="html">Demonstrating &lt;strong&gt;Atom Publishing Protocol&lt;/strong&gt; and other Atom-compatible extensions</subtitle>
+  <link href="https://example.com/" rel="alternate" type="text/html"/>
+  <link href="https://example.com/feed.atom" rel="self" type="application/atom+xml"/>
+  <link href="https://example.com/feed.atom?page=2" rel="next" type="application/atom+xml"/>
+  <link href="https://example.com/feed.atom?page=0" rel="first" type="application/atom+xml"/>
+  <link href="https://example.com/search" rel="search" type="application/opensearchdescription+xml" title="Search"/>
+  <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>
+  <updated>2024-01-01T12:00:00Z</updated>
+  <rights type="text">Copyright 2024 Example Corporation</rights>
+  <generator uri="https://github.com/argotic-syndication-framework/Argotic" version="3.0">Argotic Framework</generator>
+  <icon>https://example.com/favicon.ico</icon>
+  <logo>https://example.com/images/logo.png</logo>
+
+  <!-- Dublin Core at feed level -->
+  <dc:creator>Feed Author</dc:creator>
+  <dc:publisher>Example Publishing</dc:publisher>
+  <dc:rights>Copyright 2024 Example</dc:rights>
+  <dc:language>en</dc:language>
+
+  <!-- Dublin Core Metadata Terms -->
+  <dcterms:created>2024-01-01T08:00:00Z</dcterms:created>
+  <dcterms:modified>2024-01-01T12:00:00Z</dcterms:modified>
+
+  <!-- Creative Commons -->
+  <creativeCommons:license>http://creativecommons.org/licenses/by/4.0/</creativeCommons:license>
+
+  <!-- Feed History -->
+  <fh:complete/>
+  <link href="https://example.com/archive/2023.atom" rel="prev-archive" type="application/atom+xml"/>
+  <link href="https://example.com/feed.atom" rel="current" type="application/atom+xml"/>
+
+  <!-- OpenSearch elements -->
+  <opensearch:totalResults>150</opensearch:totalResults>
+  <opensearch:startIndex>1</opensearch:startIndex>
+  <opensearch:itemsPerPage>25</opensearch:itemsPerPage>
+
+  <author>
+    <name>Primary Author</name>
+    <email>primary@example.com</email>
+    <uri>https://example.com/authors/primary</uri>
+  </author>
+
+  <category term="technology" scheme="https://example.com/categories" label="Technology"/>
+  <category term="extensions" label="Extensions"/>
+
+  <contributor>
+    <name>Technical Editor</name>
+    <email>editor@example.com</email>
+  </contributor>
+
+  <entry>
+    <title type="text">First Entry - Atom Publishing Protocol Demo</title>
+    <link href="https://example.com/entry1" rel="alternate" type="text/html"/>
+    <link href="https://example.com/entry1.atom" rel="self" type="application/atom+xml"/>
+    <link href="https://example.com/entry1/edit" rel="edit" type="application/atom+xml"/>
+    <link href="https://example.com/entry1/media" rel="edit-media" type="image/jpeg"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a</id>
+    <published>2024-01-01T09:00:00Z</published>
+    <updated>2024-01-01T10:00:00Z</updated>
+    <summary type="text">This entry demonstrates Atom Publishing Protocol extensions.</summary>
+
+    <!-- Atom Publishing Protocol -->
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+    <app:edited>2024-01-01T10:30:00Z</app:edited>
+
+    <content type="html">&lt;p&gt;This entry demonstrates the &lt;strong&gt;Atom Publishing Protocol&lt;/strong&gt; extensions including app:control and app:edited elements.&lt;/p&gt;&lt;p&gt;These extensions are used for managing entry publication state and tracking edit times.&lt;/p&gt;</content>
+
+    <!-- Dublin Core -->
+    <dc:creator>Entry Author</dc:creator>
+    <dc:subject>Atom Publishing Protocol</dc:subject>
+    <dc:date>2024-01-01T10:00:00Z</dc:date>
+
+    <!-- Dublin Core Metadata Terms -->
+    <dcterms:abstract>An entry demonstrating APP extensions</dcterms:abstract>
+
+    <category term="app" label="Atom Publishing Protocol"/>
+    <category term="demo"/>
+
+    <author>
+      <name>Entry Author</name>
+      <email>author@example.com</email>
+    </author>
+  </entry>
+
+  <entry>
+    <title type="html">&lt;em&gt;Draft Entry&lt;/em&gt; - Unpublished Content</title>
+    <link href="https://example.com/entry2" rel="alternate"/>
+    <link href="https://example.com/entry2/edit" rel="edit" type="application/atom+xml"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6b</id>
+    <published>2024-01-01T10:00:00Z</published>
+    <updated>2024-01-01T11:00:00Z</updated>
+    <summary>A draft entry that is not yet published.</summary>
+
+    <!-- Atom Publishing Protocol - Draft status -->
+    <app:control>
+      <app:draft>yes</app:draft>
+    </app:control>
+    <app:edited>2024-01-01T11:00:00Z</app:edited>
+
+    <content type="text">This is a draft entry. The app:draft element is set to "yes" indicating this entry should not be publicly visible yet.</content>
+
+    <category term="draft"/>
+  </entry>
+
+  <entry>
+    <title>Third Entry - Threading Extension Demo</title>
+    <link href="https://example.com/entry3" rel="alternate"/>
+    <link href="https://example.com/entry3/replies.atom" rel="replies" type="application/atom+xml" thr:count="15" thr:updated="2024-01-01T14:00:00Z"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6c</id>
+    <published>2024-01-01T11:00:00Z</published>
+    <updated>2024-01-01T12:00:00Z</updated>
+    <summary>This entry demonstrates the Threading extension for comments.</summary>
+
+    <!-- Threading extension -->
+    <thr:total>15</thr:total>
+
+    <content type="xhtml">
+      <div xmlns="http://www.w3.org/1999/xhtml">
+        <p>This entry demonstrates the <strong>Atom Threading Extension</strong> (RFC 4685).</p>
+        <p>The threading extension provides:</p>
+        <ul>
+          <li>thr:in-reply-to for reply relationships</li>
+          <li>thr:total for comment counts</li>
+          <li>thr:count and thr:updated on reply links</li>
+        </ul>
+      </div>
+    </content>
+
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+
+    <category term="threading"/>
+    <category term="comments"/>
+  </entry>
+
+  <entry>
+    <title>Reply Entry - In Reply To Demo</title>
+    <link href="https://example.com/entry4" rel="alternate"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6d</id>
+    <published>2024-01-01T13:00:00Z</published>
+    <updated>2024-01-01T13:00:00Z</updated>
+    <summary>This entry is a reply to Entry 3.</summary>
+
+    <!-- Threading extension - in-reply-to -->
+    <thr:in-reply-to ref="urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6c"
+                     type="application/atom+xml"
+                     href="https://example.com/entry3.atom"/>
+
+    <content type="text">This is a reply to Entry 3, demonstrating the thr:in-reply-to element from the Threading extension.</content>
+
+    <author>
+      <name>Reply Author</name>
+      <email>reply@example.com</email>
+    </author>
+
+    <category term="reply"/>
+  </entry>
+
+  <entry>
+    <title>Fifth Entry - Media and Geocoding</title>
+    <link href="https://example.com/entry5" rel="alternate"/>
+    <link href="https://example.com/entry5/media/photo.jpg" rel="enclosure" type="image/jpeg" length="2048576"/>
+    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6e</id>
+    <published>2024-01-01T14:00:00Z</published>
+    <updated>2024-01-01T14:30:00Z</updated>
+    <summary>An entry with media and geocoding extensions.</summary>
+
+    <content type="html">&lt;p&gt;This entry demonstrates Yahoo Media RSS and Basic Geocoding extensions in an Atom feed.&lt;/p&gt;</content>
+
+    <!-- Basic Geocoding -->
+    <geo:lat>48.8566</geo:lat>
+    <geo:long>2.3522</geo:long>
+
+    <!-- Yahoo Media RSS -->
+    <media:content url="https://example.com/entry5/media/photo.jpg" type="image/jpeg" medium="image" width="1920" height="1080">
+      <media:title type="plain">Paris Photo</media:title>
+      <media:description type="plain">A beautiful photo taken in Paris</media:description>
+      <media:credit role="photographer">Photo Author</media:credit>
+    </media:content>
+    <media:thumbnail url="https://example.com/entry5/media/photo_thumb.jpg" width="320" height="180"/>
+
+    <app:control>
+      <app:draft>no</app:draft>
+    </app:control>
+    <app:edited>2024-01-01T14:30:00Z</app:edited>
+
+    <category term="photo"/>
+    <category term="travel"/>
+    <category term="paris"/>
+
+    <!-- Dublin Core for this entry -->
+    <dc:creator>Travel Photographer</dc:creator>
+    <dc:coverage>Paris, France</dc:coverage>
+    <dcterms:spatial>Paris, France</dcterms:spatial>
+  </entry>
+</feed>

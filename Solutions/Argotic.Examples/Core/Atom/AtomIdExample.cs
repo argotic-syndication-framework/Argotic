@@ -16,10 +16,12 @@ public static class AtomIdExample
     /// </summary>
     public static void ClassExample()
     {
+        //  Identifies the feed using a universally unique and permanent URI
+        AtomId feedId = new(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
+
         AtomFeed feed = new()
         {
-            //  Identifies the feed using a universally unique and permanent URI
-            Id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6")),
+            Id = feedId,
             Title = new AtomTextConstruct("Example Feed"),
             UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2)
         };
@@ -39,5 +41,7 @@ public static class AtomIdExample
         };
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomId(feedId);
     }
 }

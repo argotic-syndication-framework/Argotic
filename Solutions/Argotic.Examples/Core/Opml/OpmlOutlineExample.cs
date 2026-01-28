@@ -31,8 +31,10 @@ public static class OpmlOutlineExample
 
         // Create outline that contains child outlines
         OpmlOutline containerOutline = new("Feeds");
-        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
-        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
+        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("https://endjin.com/atom.xml")));
+        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline(".NET Blog", "feed", new Uri("https://endjin.com/rss.xml")));
         document.Outlines.Add(containerOutline);
+
+        ExampleOutput.ShowOpmlOutline(containerOutline);
     }
 }

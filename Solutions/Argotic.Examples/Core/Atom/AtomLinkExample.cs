@@ -39,8 +39,11 @@ public static class AtomLinkExample
         };
 
         //  Identify a related web resource for the entry
-        entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
+        AtomLink entryLink = new(new Uri("/blog/1234"), "alternate");
+        entry.Links.Add(entryLink);
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomLink(entryLink);
     }
 }

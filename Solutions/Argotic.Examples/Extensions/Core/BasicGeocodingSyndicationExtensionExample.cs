@@ -15,18 +15,24 @@ public static class BasicGeocodingSyndicationExtensionExample
     /// <summary>
     /// Provides example code for the BasicGeocodingSyndicationExtension class.
     /// </summary>
-    public static async Task ClassExampleAsync()
+    public static void ClassExample()
     {
         // Framework auto-discovers supported extensions based on XML namespace attributes (xmlns) defined on root of resource
-        RssFeed feed = await RssFeed.CreateAsync(new Uri("http://www.example.com/feed.aspx?format=rss")).ConfigureAwait(false);
+        RssFeed feed = new();
+        using (Stream inputStream = SampleDataPath.OpenRead(SampleDataPath.RssFeedWithExtensions))
+        {
+            feed.Load(inputStream);
+        }
 
-        // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based seaching against available extensions
+        ExampleOutput.ShowLoaded("RssFeed", feed.Channel.Title);
+
+        // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
             BasicGeocodingSyndicationExtension channelExtension = feed.Channel.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension;
             if (channelExtension != null)
             {
-                // Process channel extension
+                ExampleOutput.ShowBasicGeocodingExtension(channelExtension);
             }
         }
 
@@ -42,9 +48,14 @@ public static class BasicGeocodingSyndicationExtensionExample
             }
         }
 
-        // By default the framework will automatically determine what XML namespace attributes (xmlns) to write 
+        int count = feed.Channel.Items.Count(i => i.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) != null);
+        ExampleOutput.ShowItemsWithExtension(count, feed.Channel.Items.Count, "BasicGeocoding");
+
+        // By default the framework will automatically determine what XML namespace attributes (xmlns) to write
         // on the root of the resource based on the extensions applied to extensible parent and child entities
-        using FileStream stream = new("Feed.xml", FileMode.Create, FileAccess.Write);
+        using MemoryStream stream = new();
         feed.Save(stream);
+
+        ExampleOutput.ShowSaved("RssFeed");
     }
 }

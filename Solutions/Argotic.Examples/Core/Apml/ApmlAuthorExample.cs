@@ -108,5 +108,7 @@ public static class ApmlAuthorExample
         };
 
         document.Applications.Add(sampleApplication);
+
+        ExampleOutput.ShowApmlAuthor(apmlSpecSource.Authors[0]);
     }
 }

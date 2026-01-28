@@ -52,5 +52,7 @@ public static class AtomPersonConstructExample
         entry.Authors.Add(new AtomPersonConstruct("Jane Doe"));
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomPersonConstruct(contributor);
     }
 }

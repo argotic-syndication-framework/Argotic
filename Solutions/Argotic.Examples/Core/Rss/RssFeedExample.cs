@@ -60,7 +60,7 @@ public static class RssFeedExample
         feed.Channel.SkipHours.Add(22);
         feed.Channel.SkipHours.Add(23);
 
-        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
+        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("https://example.com/search"), "query", "TextInput Inquiry");
         feed.Channel.TimeToLive = 60;
         feed.Channel.Webmaster = "helpdesk@dallas.example.com";
 
@@ -82,6 +82,8 @@ public static class RssFeedExample
         item.Source = new RssSource(new Uri("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");
 
         feed.Channel.Items.Add(item);
+
+        ExampleOutput.ShowRssFeed(feed);
     }
 
     /// <summary>
@@ -89,7 +91,7 @@ public static class RssFeedExample
     /// </summary>
     public static async Task CreateExampleAsync()
     {
-        RssFeed feed = await RssFeed.CreateAsync(new Uri("http://news.google.com/?output=rss")).ConfigureAwait(false);
+        RssFeed feed = await RssFeed.CreateAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
 
         foreach (RssItem item in feed.Channel.Items)
         {
@@ -109,7 +111,7 @@ public static class RssFeedExample
 
         feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
 
-        await feed.LoadAsync(new Uri("http://news.google.com/?output=rss")).ConfigureAwait(false);
+        await feed.LoadAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -131,7 +133,7 @@ public static class RssFeedExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        using XmlReader xmlReader = XmlReader.Create("http://news.google.com/?output=rss", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        using XmlReader xmlReader = XmlReader.Create("https://endjin.com/rss.xml", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument source = new(xmlReader);
 
         RssFeed feed = new();
@@ -153,7 +155,7 @@ public static class RssFeedExample
     {
         RssFeed feed = new();
 
-        using Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RssFeed);
         feed.Load(stream);
 
         foreach (RssItem item in feed.Channel.Items)
@@ -163,6 +165,8 @@ public static class RssFeedExample
                 //  Process channel items published in the last week
             }
         }
+
+        ExampleOutput.ShowRssFeed(feed);
     }
 
     /// <summary>
@@ -172,7 +176,7 @@ public static class RssFeedExample
     {
         RssFeed feed = new();
 
-        using Stream stream = new FileStream("RssFeed.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RssFeed);
         XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
@@ -197,7 +201,7 @@ public static class RssFeedExample
     public static async Task LoadUriExampleAsync()
     {
         RssFeed feed = new();
-        Uri source = new("http://news.google.com/?output=rss");
+        Uri source = new("https://endjin.com/rss.xml");
 
         // For simple case (no credentials):
         await feed.LoadAsync(source).ConfigureAwait(false);
@@ -225,8 +229,10 @@ public static class RssFeedExample
 
         //  Modify feed state using public properties and methods
 
-        using Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         feed.Save(stream);
+
+        ExampleOutput.ShowSaved("RssFeed");
     }
 
     /// <summary>
@@ -238,7 +244,7 @@ public static class RssFeedExample
 
         //  Modify feed state using public properties and methods
 
-        using Stream stream = new FileStream("RssFeed.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         XmlWriterSettings settings = new()
         {
             Indent = true
@@ -246,5 +252,7 @@ public static class RssFeedExample
 
         using XmlWriter writer = XmlWriter.Create(stream, settings);
         feed.Save(writer);
+
+        ExampleOutput.ShowSaved("RssFeed");
     }
 }

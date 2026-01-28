@@ -33,5 +33,7 @@ public static class RssImageExample
             Width = 96
         };
         feed.Channel.Image = image;
+
+        ExampleOutput.ShowRssImage(image);
     }
 }

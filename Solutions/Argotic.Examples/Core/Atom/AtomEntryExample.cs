@@ -29,18 +29,22 @@ public static class AtomEntryExample
         entry.Authors.Add(new AtomPersonConstruct("John Doe"));
         entry.Links.Add(new AtomLink(new Uri("/blog/1234"), "alternate"));
         entry.Summary = new AtomTextConstruct("A stand-alone Atom Entry Document.");
+
+        ExampleOutput.ShowAtomEntry(entry);
     }
     /// <summary>
     /// Provides example code for the AtomEntry.CreateAsync(Uri) method
     /// </summary>
     public static async Task CreateExampleAsync()
     {
-        AtomEntry entry = await AtomEntry.CreateAsync(new Uri("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707")).ConfigureAwait(false);
+        AtomEntry entry = await AtomEntry.CreateAsync(new Uri("https://endjin.com/atom.xml")).ConfigureAwait(false);
 
         if (entry.PublishedOn >= DateTime.Today)
         {
             //  Perform some processing on the entry
         }
+
+        ExampleOutput.ShowAtomEntry(entry);
     }
 
     /// <summary>
@@ -52,7 +56,9 @@ public static class AtomEntryExample
 
         entry.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(EntryLoadedCallback);
 
-        await entry.LoadAsync(new Uri("http://www.codeplex.com/Project/Download/FileDownload.aspx?ProjectName=Argotic&DownloadId=28707")).ConfigureAwait(false);
+        await entry.LoadAsync(new Uri("https://endjin.com/atom.xml")).ConfigureAwait(false);
+
+        ExampleOutput.ShowAtomEntry(entry);
     }
 
     /// <summary>
@@ -73,7 +79,7 @@ public static class AtomEntryExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        using XmlReader xmlReader = XmlReader.Create("http://example.org/blog/1234", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        using XmlReader xmlReader = XmlReader.Create(SampleDataPath.AtomEntryDocument.FullPath, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument source = new(xmlReader);
 
         AtomEntry entry = new();
@@ -83,6 +89,8 @@ public static class AtomEntryExample
         {
             //  Perform some processing on the entry
         }
+
+        ExampleOutput.ShowAtomEntry(entry);
     }
 
     /// <summary>
@@ -92,13 +100,15 @@ public static class AtomEntryExample
     {
         AtomEntry entry = new();
 
-        using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.AtomEntryDocument);
         entry.Load(stream);
 
         if (entry.UpdatedOn >= DateTime.Today)
         {
             //  Perform some processing on the entry
         }
+
+        ExampleOutput.ShowAtomEntry(entry);
     }
 
     /// <summary>
@@ -108,7 +118,7 @@ public static class AtomEntryExample
     {
         AtomEntry entry = new();
 
-        using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.AtomEntryDocument);
         XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
@@ -122,6 +132,8 @@ public static class AtomEntryExample
         {
             //  Perform some processing on the entry
         }
+
+        ExampleOutput.ShowAtomEntry(entry);
     }
 
     /// <summary>
@@ -130,7 +142,7 @@ public static class AtomEntryExample
     public static async Task LoadUriExampleAsync()
     {
         AtomEntry entry = new();
-        Uri source = new("http://example.org/blog/1234");
+        Uri source = new("https://endjin.com/atom.xml");
 
         // For simple case (no credentials):
         await entry.LoadAsync(source).ConfigureAwait(false);
@@ -144,6 +156,8 @@ public static class AtomEntryExample
         {
             //  Perform some processing on the entry
         }
+
+        ExampleOutput.ShowAtomEntry(entry);
     }
 
     /// <summary>
@@ -155,8 +169,10 @@ public static class AtomEntryExample
 
         //  Modify entry state using public properties and methods
 
-        using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         entry.Save(stream);
+
+        ExampleOutput.ShowSaved("AtomEntry");
     }
 
     /// <summary>
@@ -168,7 +184,7 @@ public static class AtomEntryExample
 
         //  Modify entry state using public properties and methods
 
-        using Stream stream = new FileStream("AtomEntryDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         XmlWriterSettings settings = new()
         {
             Indent = true
@@ -176,5 +192,7 @@ public static class AtomEntryExample
 
         using XmlWriter writer = XmlWriter.Create(stream, settings);
         entry.Save(writer);
+
+        ExampleOutput.ShowSaved("AtomEntry");
     }
 }

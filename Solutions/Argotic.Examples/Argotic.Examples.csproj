@@ -1,10 +1,12 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
     <PropertyGroup>
+        <OutputType>Exe</OutputType>
         <TargetFramework>net10.0</TargetFramework>
         <Nullable>enable</Nullable>
         <ImplicitUsings>enable</ImplicitUsings>
         <LangVersion>14.0</LangVersion>
+        <RootNamespace>Argotic.Examples</RootNamespace>
         <Authors>Brian William Kuhn, endjin</Authors>
     </PropertyGroup>
 
@@ -18,6 +20,12 @@
     </PropertyGroup>
 
     <ItemGroup>
+        <PackageReference Include="Spectre.Console" Version="0.54.0" />
+        <PackageReference Include="Spectre.Console.Cli" Version="0.53.1" />
+        <PackageReference Include="Spectre.IO" Version="0.21.0" />
+    </ItemGroup>
+
+    <ItemGroup>
         <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
         <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
         <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
@@ -28,5 +36,9 @@
         <AnalysisMode>AllEnabledByDefault</AnalysisMode>
         <AnalysisLevel>latest</AnalysisLevel>
     </PropertyGroup>
+
+    <ItemGroup>
+        <None Include="SampleData\**\*" CopyToOutputDirectory="PreserveNewest" />
+    </ItemGroup>
 
 </Project>

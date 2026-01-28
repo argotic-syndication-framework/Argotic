@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<entry xmlns="http://www.w3.org/2005/Atom">
+  <title type="html">Sample Atom Entry with &lt;em&gt;Comprehensive&lt;/em&gt; Elements</title>
+  <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6c</id>
+  <published>2024-01-01T10:00:00Z</published>
+  <updated>2024-01-01T12:00:00Z</updated>
+  <rights type="text">Copyright 2024 Sample Authors. Licensed under CC BY 4.0.</rights>
+
+  <link href="https://example.com/entry" rel="alternate" type="text/html"/>
+  <link href="https://example.com/entry.atom" rel="self" type="application/atom+xml"/>
+  <link href="https://example.com/entry/edit" rel="edit" type="application/atom+xml"/>
+  <link href="https://example.com/entry/comments" rel="replies" type="text/html" title="Comments"/>
+  <link href="https://example.com/entry/comments.atom" rel="replies" type="application/atom+xml"/>
+  <link href="https://original.example.com/post" rel="via" title="Original Source"/>
+  <link href="https://example.com/related-entry" rel="related"/>
+  <link href="https://example.com/entry/attachment.pdf" rel="enclosure" type="application/pdf" length="2048576" title="PDF Attachment"/>
+
+  <author>
+    <name>Primary Author</name>
+    <email>primary@example.com</email>
+    <uri>https://example.com/authors/primary</uri>
+  </author>
+  <author>
+    <name>Co-Author</name>
+    <email>coauthor@example.com</email>
+    <uri>https://example.com/authors/coauthor</uri>
+  </author>
+
+  <contributor>
+    <name>Technical Reviewer</name>
+    <email>reviewer@example.com</email>
+    <uri>https://example.com/contributors/reviewer</uri>
+  </contributor>
+  <contributor>
+    <name>Content Editor</name>
+    <email>editor@example.com</email>
+  </contributor>
+  <contributor>
+    <name>Proofreader</name>
+  </contributor>
+
+  <category term="technology" scheme="https://example.com/categories" label="Technology"/>
+  <category term="software-development" scheme="https://example.com/categories" label="Software Development"/>
+  <category term="tutorial" label="Tutorial"/>
+  <category term="atom-format"/>
+
+  <summary type="html">&lt;p&gt;This is a standalone Atom entry document demonstrating &lt;strong&gt;comprehensive&lt;/strong&gt; optional elements including multiple authors, contributors, categories, and link types.&lt;/p&gt;</summary>
+
+  <content type="xhtml">
+    <div xmlns="http://www.w3.org/1999/xhtml">
+      <h2>Introduction</h2>
+      <p>This is the <strong>XHTML content</strong> of the Atom entry document. It demonstrates proper namespace handling and structured content.</p>
+
+      <h2>Features Demonstrated</h2>
+      <ul>
+        <li>Multiple authors with full contact information</li>
+        <li>Multiple contributors with varying detail levels</li>
+        <li>Categories with term, scheme, and label attributes</li>
+        <li>Various link rel types (alternate, self, edit, replies, via, related, enclosure)</li>
+        <li>Published and updated timestamps</li>
+        <li>Rights declaration</li>
+        <li>XHTML content type</li>
+      </ul>
+
+      <h2>Conclusion</h2>
+      <p>This entry provides comprehensive coverage of Atom entry elements for testing purposes.</p>
+    </div>
+  </content>
+</entry>

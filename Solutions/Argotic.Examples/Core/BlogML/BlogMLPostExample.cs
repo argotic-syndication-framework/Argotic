@@ -103,6 +103,8 @@ public static class BlogMLPostExample
             Content = new BlogMLTextConstruct("This is a test comment.")
         };
         post.Comments.Add(comment);
+
+        ExampleOutput.ShowBlogMLPost(post);
     }
     /// <summary>
     /// Provides example code for the BlogMLPost.PostTypeAsString(BlogMLPostType) method

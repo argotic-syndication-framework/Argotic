@@ -105,5 +105,7 @@ public static class ApmlSourceExample
         };
 
         document.Applications.Add(sampleApplication);
+
+        ExampleOutput.ShowApmlSource(apmlSpecSource);
     }
 }

@@ -1,0 +1,88 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Sample RSS Feed</title>
+    <link>https://example.com/</link>
+    <description>A sample RSS feed for testing Argotic examples with comprehensive optional elements</description>
+    <language>en-us</language>
+    <copyright>Copyright 2024 Example Corporation</copyright>
+    <managingEditor>editor@example.com (Jane Editor)</managingEditor>
+    <webMaster>webmaster@example.com (John Admin)</webMaster>
+    <pubDate>Mon, 01 Jan 2024 08:00:00 GMT</pubDate>
+    <lastBuildDate>Mon, 01 Jan 2024 12:00:00 GMT</lastBuildDate>
+    <category domain="https://example.com/categories">Technology</category>
+    <category>Software Development</category>
+    <generator>Argotic Framework 3.0</generator>
+    <docs>https://www.rssboard.org/rss-specification</docs>
+    <ttl>60</ttl>
+
+    <image>
+      <url>https://example.com/images/logo.png</url>
+      <title>Sample RSS Feed</title>
+      <link>https://example.com/</link>
+      <width>144</width>
+      <height>144</height>
+      <description>The logo for our sample RSS feed</description>
+    </image>
+
+    <cloud domain="rpc.example.com" port="80" path="/RPC2" registerProcedure="pingMe" protocol="soap"/>
+
+    <textInput>
+      <title>Search</title>
+      <description>Search this feed</description>
+      <name>query</name>
+      <link>https://example.com/search</link>
+    </textInput>
+
+    <skipHours>
+      <hour>0</hour>
+      <hour>1</hour>
+      <hour>2</hour>
+      <hour>3</hour>
+    </skipHours>
+
+    <skipDays>
+      <day>Saturday</day>
+      <day>Sunday</day>
+    </skipDays>
+
+    <item>
+      <title>First Article - Podcast Episode</title>
+      <link>https://example.com/article1</link>
+      <description>This article includes an enclosure for podcast/media testing.</description>
+      <author>author1@example.com (Alice Writer)</author>
+      <category>Podcasts</category>
+      <category domain="https://example.com/tags">Audio</category>
+      <comments>https://example.com/article1#comments</comments>
+      <enclosure url="https://example.com/media/episode1.mp3" length="12345678" type="audio/mpeg"/>
+      <guid isPermaLink="true">https://example.com/article1</guid>
+      <pubDate>Mon, 01 Jan 2024 10:00:00 GMT</pubDate>
+      <source url="https://original-source.com/feed.rss">Original Source Feed</source>
+    </item>
+
+    <item>
+      <title>Second Article - Video Content</title>
+      <link>https://example.com/article2</link>
+      <description>This article features video content with an enclosure.</description>
+      <author>author2@example.com (Bob Creator)</author>
+      <category>Video</category>
+      <category>Tutorial</category>
+      <category domain="https://example.com/topics">Learning</category>
+      <enclosure url="https://example.com/media/tutorial.mp4" length="98765432" type="video/mp4"/>
+      <guid isPermaLink="false">urn:uuid:article-2-unique-id</guid>
+      <pubDate>Mon, 01 Jan 2024 11:00:00 GMT</pubDate>
+    </item>
+
+    <item>
+      <title>Third Article - Standard Blog Post</title>
+      <link>https://example.com/article3</link>
+      <description>A standard blog post without media attachments, demonstrating basic item elements.</description>
+      <author>author3@example.com (Carol Blogger)</author>
+      <category>Blog</category>
+      <comments>https://example.com/article3#comments</comments>
+      <guid>https://example.com/article3</guid>
+      <pubDate>Mon, 01 Jan 2024 12:00:00 GMT</pubDate>
+      <source url="https://partner-site.com/rss">Partner Site</source>
+    </item>
+  </channel>
+</rss>

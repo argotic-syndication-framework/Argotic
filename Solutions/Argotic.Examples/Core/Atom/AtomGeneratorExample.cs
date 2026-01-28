@@ -45,5 +45,7 @@ public static class AtomGeneratorExample
         };
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomGenerator(generator);
     }
 }

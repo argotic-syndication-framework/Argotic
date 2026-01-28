@@ -108,13 +108,19 @@ public static class ApmlDocumentExample
         };
 
         document.Applications.Add(sampleApplication);
+
+        ExampleOutput.ShowApmlDocument(document);
     }
     /// <summary>
     /// Provides example code for the ApmlDocument.CreateAsync(Uri) method
     /// </summary>
     public static async Task CreateExampleAsync()
     {
-        ApmlDocument document = await ApmlDocument.CreateAsync(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional")).ConfigureAwait(false);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.ApmlDocument);
+        ApmlDocument document = new();
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
 
         foreach (ApmlProfile profile in document.Profiles)
         {
@@ -124,6 +130,8 @@ public static class ApmlDocumentExample
                 break;
             }
         }
+
+        ExampleOutput.ShowApmlDocument(document);
     }
     /// <summary>
     /// Provides example code for the LoadAsync(Uri) method with event notification
@@ -134,7 +142,12 @@ public static class ApmlDocumentExample
 
         document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
-        await document.LoadAsync(new Uri("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional")).ConfigureAwait(false);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.ApmlDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
+
+        ExampleOutput.ShowApmlDocument(document);
     }
 
     /// <summary>
@@ -155,7 +168,7 @@ public static class ApmlDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        using XmlReader xmlReader = XmlReader.Create("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        using XmlReader xmlReader = XmlReader.Create(SampleDataPath.ApmlDocument.FullPath, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument source = new(xmlReader);
 
         ApmlDocument document = new();
@@ -169,6 +182,8 @@ public static class ApmlDocumentExample
                 break;
             }
         }
+
+        ExampleOutput.ShowApmlDocument(document);
     }
 
     /// <summary>
@@ -178,7 +193,7 @@ public static class ApmlDocumentExample
     {
         ApmlDocument document = new();
 
-        using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.ApmlDocument);
         document.Load(stream);
 
         foreach (ApmlProfile profile in document.Profiles)
@@ -189,6 +204,8 @@ public static class ApmlDocumentExample
                 break;
             }
         }
+
+        ExampleOutput.ShowApmlDocument(document);
     }
 
     /// <summary>
@@ -198,7 +215,7 @@ public static class ApmlDocumentExample
     {
         ApmlDocument document = new();
 
-        using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.ApmlDocument);
         XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
@@ -216,6 +233,8 @@ public static class ApmlDocumentExample
                 break;
             }
         }
+
+        ExampleOutput.ShowApmlDocument(document);
     }
 
     /// <summary>
@@ -224,15 +243,11 @@ public static class ApmlDocumentExample
     public static async Task LoadUriExampleAsync()
     {
         ApmlDocument document = new();
-        Uri source = new("http://aura.darkstar.sunlabs.com/AttentionProfile/apml/web/Oppositional");
 
-        // For simple case (no credentials):
-        await document.LoadAsync(source).ConfigureAwait(false);
-
-        // Or for credentials:
-        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
-        // using var httpClient = new HttpClient(handler);
-        // await document.LoadAsync(source, httpClient);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.ApmlDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
 
         foreach (ApmlProfile profile in document.Profiles)
         {
@@ -242,6 +257,8 @@ public static class ApmlDocumentExample
                 break;
             }
         }
+
+        ExampleOutput.ShowApmlDocument(document);
     }
 
     /// <summary>
@@ -253,8 +270,10 @@ public static class ApmlDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         document.Save(stream);
+
+        ExampleOutput.ShowSaved("ApmlDocument");
     }
 
     /// <summary>
@@ -266,7 +285,7 @@ public static class ApmlDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using Stream stream = new FileStream("ApmlDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         XmlWriterSettings settings = new()
         {
             Indent = true
@@ -274,5 +293,7 @@ public static class ApmlDocumentExample
 
         using XmlWriter writer = XmlWriter.Create(stream, settings);
         document.Save(writer);
+
+        ExampleOutput.ShowSaved("ApmlDocument");
     }
 }

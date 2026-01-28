@@ -35,5 +35,7 @@ public static class RssGuidExample
         };
 
         feed.Channel.Items.Add(item);
+
+        ExampleOutput.ShowRssGuid(item.Guid);
     }
 }

@@ -28,16 +28,20 @@ public static class AtomContentExample
 
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
+        //  Define the complete content of the entry
+        AtomContent content = new("Powered by <b>Argotic</b>!", "xhtml");
+
         AtomEntry entry = new()
         {
             Id = new AtomId(new Uri("urn:uuid:1225c695-cfb8-4ebb-aaaa-80da344efa6a")),
             Title = new AtomTextConstruct("Atom-Powered Robots Run Amok"),
             UpdatedOn = new DateTime(2003, 12, 13, 18, 30, 2),
             Summary = new AtomTextConstruct("Some text."),
-            //  Define the complete content of the entry
-            Content = new AtomContent("Powered by <b>Argotic</b>!", "xhtml")
+            Content = content
         };
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomContent(content);
     }
 }

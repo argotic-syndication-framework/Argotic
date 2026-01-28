@@ -105,13 +105,20 @@ public static class BlogMLDocumentExample
             Content = new BlogMLTextConstruct("This is a test comment.")
         };
         post.Comments.Add(comment);
+
+        ExampleOutput.ShowBlogMLDocument(document);
     }
+
     /// <summary>
     /// Provides example code for the BlogMLDocument.CreateAsync(Uri) method
     /// </summary>
     public static async Task CreateExampleAsync()
     {
-        BlogMLDocument document = await BlogMLDocument.CreateAsync(new Uri("http://www.example.org/blog/blogML.axd")).ConfigureAwait(false);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.BlogMLDocument);
+        BlogMLDocument document = new();
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
 
         foreach (BlogMLPost post in document.Posts)
         {
@@ -120,7 +127,10 @@ public static class BlogMLDocumentExample
                 //  Perform some processing on the blog post
             }
         }
+
+        ExampleOutput.ShowBlogMLDocument(document);
     }
+
     /// <summary>
     /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
@@ -130,7 +140,12 @@ public static class BlogMLDocumentExample
 
         document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
-        await document.LoadAsync(new Uri("http://www.example.org/blog/blogML.axd")).ConfigureAwait(false);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.BlogMLDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
+
+        ExampleOutput.ShowBlogMLDocument(document);
     }
 
     /// <summary>
@@ -152,7 +167,7 @@ public static class BlogMLDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        using XmlReader xmlReader = XmlReader.Create("http://www.example.org/blog/blogML.axd", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        using XmlReader xmlReader = XmlReader.Create(SampleDataPath.BlogMLDocument.FullPath, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument source = new(xmlReader);
 
         BlogMLDocument document = new();
@@ -165,6 +180,8 @@ public static class BlogMLDocumentExample
                 //  Perform some processing on the blog post
             }
         }
+
+        ExampleOutput.ShowBlogMLDocument(document);
     }
 
     /// <summary>
@@ -174,7 +191,7 @@ public static class BlogMLDocumentExample
     {
         BlogMLDocument document = new();
 
-        using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.BlogMLDocument);
         document.Load(stream);
 
         foreach (BlogMLPost post in document.Posts)
@@ -184,6 +201,8 @@ public static class BlogMLDocumentExample
                 //  Perform some processing on the blog post
             }
         }
+
+        ExampleOutput.ShowBlogMLDocument(document);
     }
 
     /// <summary>
@@ -193,7 +212,7 @@ public static class BlogMLDocumentExample
     {
         BlogMLDocument document = new();
 
-        using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.BlogMLDocument);
         XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
@@ -210,6 +229,8 @@ public static class BlogMLDocumentExample
                 //  Perform some processing on the blog post
             }
         }
+
+        ExampleOutput.ShowBlogMLDocument(document);
     }
 
     /// <summary>
@@ -218,15 +239,11 @@ public static class BlogMLDocumentExample
     public static async Task LoadUriExampleAsync()
     {
         BlogMLDocument document = new();
-        Uri source = new("http://www.example.org/blog/blogML.axd");
 
-        // For simple case (no credentials):
-        await document.LoadAsync(source).ConfigureAwait(false);
-
-        // Or for credentials:
-        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
-        // using var httpClient = new HttpClient(handler);
-        // await document.LoadAsync(source, httpClient);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.BlogMLDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
 
         foreach (BlogMLPost post in document.Posts)
         {
@@ -235,6 +252,8 @@ public static class BlogMLDocumentExample
                 //  Perform some processing on the blog post
             }
         }
+
+        ExampleOutput.ShowBlogMLDocument(document);
     }
 
     /// <summary>
@@ -246,8 +265,10 @@ public static class BlogMLDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         document.Save(stream);
+
+        ExampleOutput.ShowSaved("BlogMLDocument");
     }
 
     /// <summary>
@@ -259,7 +280,7 @@ public static class BlogMLDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using Stream stream = new FileStream("BlogMLDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         XmlWriterSettings settings = new()
         {
             Indent = true
@@ -267,5 +288,7 @@ public static class BlogMLDocumentExample
 
         using XmlWriter writer = XmlWriter.Create(stream, settings);
         document.Save(writer);
+
+        ExampleOutput.ShowSaved("BlogMLDocument");
     }
 }

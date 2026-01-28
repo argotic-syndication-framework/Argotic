@@ -1,6 +1,7 @@
 using System.Collections.ObjectModel;
 using Argotic.Common;
 using Argotic.Syndication;
+using Spectre.Console;
 
 namespace Argotic.Examples.Common;
 
@@ -18,7 +19,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static async Task SyndicationContentFormatGetExampleAsync()
     {
-        Uri url = new("http://feeds.feedburner.com/HanselminutesCompleteMP3?format=xml");
+        Uri url = new("https://endjin.com/rss.xml");
 
         SyndicationContentFormat format = await SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(url).ConfigureAwait(false);
 
@@ -26,6 +27,9 @@ public static class SyndicationDiscoveryUtilityExample
         {
             // Do something based on the determined content format
         }
+
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {url}");
+        AnsiConsole.MarkupLine($"  [dim]Format:[/] {format}");
     }
 
     /// <summary>
@@ -35,13 +39,18 @@ public static class SyndicationDiscoveryUtilityExample
     {
         //  Certain syndication scenarios involve verifying that one web resource references or 'links' to another web resource.
 
-        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
-        Uri target = new("http://www.wikimindmap.org/");
+        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
+        Uri target = new("https://github.com");
 
-        if (await SyndicationDiscoveryUtility.SourceReferencesTargetAsync(source, target).ConfigureAwait(false))
+        bool references = await SyndicationDiscoveryUtility.SourceReferencesTargetAsync(source, target).ConfigureAwait(false);
+        if (references)
         {
             // Perform some action based on source referencing the target.
         }
+
+        AnsiConsole.MarkupLine($"  [dim]Source:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Target:[/] {target}");
+        AnsiConsole.MarkupLine($"  [dim]References:[/] {references}");
     }
 
     /// <summary>
@@ -49,12 +58,16 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static async Task UriExistsExampleAsync()
     {
-        Uri source = new("http://blog.oppositionallydefiant.com/");
+        Uri source = new("https://devblogs.microsoft.com/dotnet/");
 
-        if (await SyndicationDiscoveryUtility.UriExistsAsync(source).ConfigureAwait(false))
+        bool exists = await SyndicationDiscoveryUtility.UriExistsAsync(source).ConfigureAwait(false);
+        if (exists)
         {
             // Perform some action based on source existing.
         }
+
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Exists:[/] {exists}");
     }
 
     /// <summary>
@@ -62,9 +75,9 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static async Task ConditionalGetExampleAsync()
     {
-        Uri source = new("http://www.pwop.com/feed.aspx?show=dotnetrocks&filetype=master");
+        Uri source = new("https://endjin.com/rss.xml");
 
-        using HttpClient client = new HttpClient();
+        using HttpClient client = new();
         using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, source);
         request.Headers.UserAgent.ParseAdd("Some User Agent 1.0.0.0");
 
@@ -85,6 +98,9 @@ public static class SyndicationDiscoveryUtilityExample
             using Stream stream = await conditionalResponse.GetResponseStreamAsync().ConfigureAwait(false);
             // Process the stream...
         }
+
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Was Modified:[/] {conditionalResponse.WasModified}");
     }
 
 
@@ -93,7 +109,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static async Task LocateDiscoverableSyndicationEndpointsExampleAsync()
     {
-        Uri source = new("http://www.dotnetrocks.com/");
+        Uri source = new("https://www.dotnetrocks.com/");
 
         Collection<DiscoverableSyndicationEndpoint> endpoints = await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(source).ConfigureAwait(false);
 
@@ -109,6 +125,9 @@ public static class SyndicationDiscoveryUtilityExample
                 }
             }
         }
+
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Endpoints found:[/] {endpoints.Count}");
     }
 
     /// <summary>
@@ -116,12 +135,16 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static async Task IsPingbackEnabledExampleAsync()
     {
-        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
 
-        if (await SyndicationDiscoveryUtility.IsPingbackEnabledAsync(source).ConfigureAwait(false))
+        bool isPingbackEnabled = await SyndicationDiscoveryUtility.IsPingbackEnabledAsync(source).ConfigureAwait(false);
+        if (isPingbackEnabled)
         {
             //  Parse source for Pingback information
         }
+
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Pingback Enabled:[/] {isPingbackEnabled}");
     }
 
     /// <summary>
@@ -129,7 +152,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static async Task LocatePingbackNotificationServerExampleAsync()
     {
-        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
 
         Uri? pingbackServer = await SyndicationDiscoveryUtility.LocatePingbackNotificationServerAsync(source).ConfigureAwait(false);
         if (pingbackServer != null)
@@ -141,6 +164,9 @@ public static class SyndicationDiscoveryUtilityExample
 
             await client.SendAsync(message).ConfigureAwait(false);
         }
+
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Pingback Server:[/] {pingbackServer?.ToString() ?? "Not found"}");
     }
 
     /// <summary>
@@ -148,12 +174,16 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static async Task IsTrackbackEnabledExampleAsync()
     {
-        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
 
-        if (await SyndicationDiscoveryUtility.IsTrackbackEnabledAsync(source).ConfigureAwait(false))
+        bool isTrackbackEnabled = await SyndicationDiscoveryUtility.IsTrackbackEnabledAsync(source).ConfigureAwait(false);
+        if (isTrackbackEnabled)
         {
             // Parse source for Trackback information
         }
+
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Trackback Enabled:[/] {isTrackbackEnabled}");
     }
 
     /// <summary>
@@ -161,7 +191,7 @@ public static class SyndicationDiscoveryUtilityExample
     /// </summary>
     public static async Task LocateTrackbackNotificationServersExampleAsync()
     {
-        Uri source = new("http://blog.oppositionallydefiant.com/post/SystemIOIntuition-Leveraging-human-pattern-recognition.aspx");
+        Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
 
         Collection<TrackbackDiscoveryMetadata> endpoints = await SyndicationDiscoveryUtility.LocateTrackbackNotificationServersAsync(source).ConfigureAwait(false);
         foreach (TrackbackDiscoveryMetadata endpoint in endpoints)
@@ -173,5 +203,8 @@ public static class SyndicationDiscoveryUtilityExample
 
             await client.SendAsync(message).ConfigureAwait(false);
         }
+
+        AnsiConsole.MarkupLine($"  [dim]URL:[/] {source}");
+        AnsiConsole.MarkupLine($"  [dim]Trackback Servers:[/] {endpoints.Count}");
     }
 }

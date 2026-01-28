@@ -75,8 +75,11 @@ public class TrackbackResponse : IComparable
             throw new ArgumentException(string.Format(null, "The HttpResponseMessage content type is invalid. Content type of the response was {0}", contentType), nameof(response));
         }
 
+        // Note: The Trackback spec does not require Content-Length. HTTP/1.1 (RFC 7230)
+        // allows Transfer-Encoding: chunked as an alternative, which doesn't include
+        // Content-Length (-1 here). We only reject explicitly empty responses (0).
         long contentLength = response.Content.Headers.ContentLength ?? -1;
-        if (contentLength <= 0)
+        if (contentLength == 0)
         {
             throw new ArgumentException(string.Format(null, "The HttpResponseMessage content length is invalid. Content length was {0}. ", contentLength), nameof(response));
         }

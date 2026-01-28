@@ -12,6 +12,16 @@ namespace Argotic.Examples.Core.BlogML;
 public static class BlogMLTextConstructExample
 {
     /// <summary>
+    /// Provides example code for the BlogMLTextConstruct class.
+    /// </summary>
+    public static void ClassExample()
+    {
+        BlogMLTextConstruct textConstruct = new("<p>This is <b>HTML encoded</b> content.</p>", BlogMLContentType.Html);
+
+        ExampleOutput.ShowBlogMLTextConstruct(textConstruct);
+    }
+
+    /// <summary>
     /// Provides example code for the BlogMLTextConstruct.ConstructTypeAsString(BlogMLContentType) method
     /// </summary>
     public static void ConstructTypeAsStringExample()

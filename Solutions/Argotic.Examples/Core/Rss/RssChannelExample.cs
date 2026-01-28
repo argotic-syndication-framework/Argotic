@@ -57,8 +57,10 @@ public static class RssChannelExample
         feed.Channel.SkipHours.Add(22);
         feed.Channel.SkipHours.Add(23);
 
-        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("http://www.cadenhead.org/textinput.php"), "query", "TextInput Inquiry");
+        feed.Channel.TextInput = new RssTextInput("What software are you using?", new Uri("https://example.com/search"), "query", "TextInput Inquiry");
         feed.Channel.TimeToLive = 60;
         feed.Channel.Webmaster = "helpdesk@dallas.example.com";
+
+        ExampleOutput.ShowRssChannel(feed.Channel);
     }
 }

@@ -37,5 +37,7 @@ public static class RsdApplicationInterfaceExample
         conversantApi.Settings.Add("service-specific-setting", "a value");
         conversantApi.Settings.Add("another-setting", "another value");
         document.Interfaces.Add(conversantApi);
+
+        ExampleOutput.ShowRsdApplicationInterface(conversantApi);
     }
 }

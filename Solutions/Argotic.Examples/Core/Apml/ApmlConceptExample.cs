@@ -105,5 +105,7 @@ public static class ApmlConceptExample
         };
 
         document.Applications.Add(sampleApplication);
+
+        ExampleOutput.ShowApmlConcept(homeProfile.ImplicitConcepts[0]);
     }
 }

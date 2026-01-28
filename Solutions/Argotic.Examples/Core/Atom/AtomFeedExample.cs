@@ -40,13 +40,15 @@ public static class AtomFeedExample
         };
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomFeed(feed);
     }
     /// <summary>
     /// Provides example code for the AtomFeed.CreateAsync(Uri) method
     /// </summary>
     public static async Task CreateExampleAsync()
     {
-        AtomFeed feed = await AtomFeed.CreateAsync(new Uri("http://news.google.com/?output=atom")).ConfigureAwait(false);
+        AtomFeed feed = await AtomFeed.CreateAsync(new Uri("https://endjin.com/atom.xml")).ConfigureAwait(false);
 
         foreach (AtomEntry entry in feed.Entries)
         {
@@ -55,6 +57,8 @@ public static class AtomFeedExample
                 //  Perform some processing on the feed entry
             }
         }
+
+        ExampleOutput.ShowAtomFeed(feed);
     }
     /// <summary>
     /// Provides example code for the LoadAsync(Uri) method with event notification
@@ -65,7 +69,9 @@ public static class AtomFeedExample
 
         feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
 
-        await feed.LoadAsync(new Uri("http://news.google.com/?output=atom")).ConfigureAwait(false);
+        await feed.LoadAsync(new Uri("https://endjin.com/atom.xml")).ConfigureAwait(false);
+
+        ExampleOutput.ShowAtomFeed(feed);
     }
 
     /// <summary>
@@ -86,7 +92,7 @@ public static class AtomFeedExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        using XmlReader xmlReader = XmlReader.Create("http://news.google.com/?output=atom", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        using XmlReader xmlReader = XmlReader.Create(SampleDataPath.AtomFeed.FullPath, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument source = new(xmlReader);
 
         AtomFeed feed = new();
@@ -99,6 +105,8 @@ public static class AtomFeedExample
                 //  Perform some processing on the feed entry
             }
         }
+
+        ExampleOutput.ShowAtomFeed(feed);
     }
 
     /// <summary>
@@ -108,7 +116,7 @@ public static class AtomFeedExample
     {
         AtomFeed feed = new();
 
-        using Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.AtomFeed);
         feed.Load(stream);
 
         foreach (AtomEntry entry in feed.Entries)
@@ -118,6 +126,8 @@ public static class AtomFeedExample
                 //  Perform some processing on the feed entry
             }
         }
+
+        ExampleOutput.ShowAtomFeed(feed);
     }
 
     /// <summary>
@@ -127,7 +137,7 @@ public static class AtomFeedExample
     {
         AtomFeed feed = new();
 
-        using Stream stream = new FileStream("AtomFeed.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.AtomFeed);
         XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
@@ -144,6 +154,8 @@ public static class AtomFeedExample
                 //  Perform some processing on the feed entry
             }
         }
+
+        ExampleOutput.ShowAtomFeed(feed);
     }
 
     /// <summary>
@@ -152,7 +164,7 @@ public static class AtomFeedExample
     public static async Task LoadUriExampleAsync()
     {
         AtomFeed feed = new();
-        Uri source = new("http://news.google.com/?output=atom");
+        Uri source = new("https://endjin.com/atom.xml");
 
         // For simple case (no credentials):
         await feed.LoadAsync(source).ConfigureAwait(false);
@@ -169,6 +181,8 @@ public static class AtomFeedExample
                 //  Perform some processing on the feed entry
             }
         }
+
+        ExampleOutput.ShowAtomFeed(feed);
     }
 
     /// <summary>
@@ -180,8 +194,10 @@ public static class AtomFeedExample
 
         //  Modify feed state using public properties and methods
 
-        using Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         feed.Save(stream);
+
+        ExampleOutput.ShowSaved("AtomFeed");
     }
 
     /// <summary>
@@ -193,7 +209,7 @@ public static class AtomFeedExample
 
         //  Modify feed state using public properties and methods
 
-        using Stream stream = new FileStream("AtomFeed.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         XmlWriterSettings settings = new()
         {
             Indent = true
@@ -201,5 +217,7 @@ public static class AtomFeedExample
 
         using XmlWriter writer = XmlWriter.Create(stream, settings);
         feed.Save(writer);
+
+        ExampleOutput.ShowSaved("AtomFeed");
     }
 }

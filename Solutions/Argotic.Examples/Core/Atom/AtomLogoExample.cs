@@ -29,7 +29,8 @@ public static class AtomLogoExample
         feed.Authors.Add(new AtomPersonConstruct("John Doe"));
 
         //  Provide visual identification for the feed
-        feed.Logo = new AtomLogo(new Uri("/logo.jpg"));
+        AtomLogo logo = new(new Uri("/logo.jpg"));
+        feed.Logo = logo;
 
         AtomEntry entry = new()
         {
@@ -40,5 +41,7 @@ public static class AtomLogoExample
         };
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomLogo(logo);
     }
 }

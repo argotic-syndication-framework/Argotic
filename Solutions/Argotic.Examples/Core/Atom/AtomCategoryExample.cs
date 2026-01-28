@@ -50,5 +50,7 @@ public static class AtomCategoryExample
         entry.Categories.Add(entryCategory);
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomCategory(entryCategory);
     }
 }

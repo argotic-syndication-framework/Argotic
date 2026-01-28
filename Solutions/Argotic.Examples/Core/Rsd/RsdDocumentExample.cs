@@ -39,13 +39,18 @@ public static class RsdDocumentExample
         conversantApi.Settings.Add("service-specific-setting", "a value");
         conversantApi.Settings.Add("another-setting", "another value");
         document.Interfaces.Add(conversantApi);
+        ExampleOutput.ShowRsdDocument(document);
     }
     /// <summary>
     /// Provides example code for the RsdDocument.CreateAsync(Uri) method
     /// </summary>
     public static async Task CreateExampleAsync()
     {
-        RsdDocument document = await RsdDocument.CreateAsync(new Uri("http://blog.oppositionallydefiant.com/rsd.axd")).ConfigureAwait(false);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
+        RsdDocument document = new();
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
 
         foreach (RsdApplicationInterface api in document.Interfaces)
         {
@@ -55,6 +60,7 @@ public static class RsdDocumentExample
                 break;
             }
         }
+        ExampleOutput.ShowRsdDocument(document);
     }
     /// <summary>
     /// Provides example code for the LoadAsync(Uri) method with event notification
@@ -65,7 +71,11 @@ public static class RsdDocumentExample
 
         document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
-        await document.LoadAsync(new Uri("http://blog.oppositionallydefiant.com/rsd.axd")).ConfigureAwait(false);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
+        ExampleOutput.ShowRsdDocument(document);
     }
 
     /// <summary>
@@ -86,7 +96,7 @@ public static class RsdDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        using XmlReader xmlReader = XmlReader.Create("http://blog.oppositionallydefiant.com/rsd.axd", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        using XmlReader xmlReader = XmlReader.Create(SampleDataPath.RsdDocument.FullPath, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument source = new(xmlReader);
 
         RsdDocument document = new();
@@ -100,6 +110,7 @@ public static class RsdDocumentExample
                 break;
             }
         }
+        ExampleOutput.ShowRsdDocument(document);
     }
 
     /// <summary>
@@ -109,7 +120,7 @@ public static class RsdDocumentExample
     {
         RsdDocument document = new();
 
-        using Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
         document.Load(stream);
 
         foreach (RsdApplicationInterface api in document.Interfaces)
@@ -120,6 +131,7 @@ public static class RsdDocumentExample
                 break;
             }
         }
+        ExampleOutput.ShowRsdDocument(document);
     }
 
     /// <summary>
@@ -129,7 +141,7 @@ public static class RsdDocumentExample
     {
         RsdDocument document = new();
 
-        using Stream stream = new FileStream("RsdDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
         XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
@@ -147,6 +159,7 @@ public static class RsdDocumentExample
                 break;
             }
         }
+        ExampleOutput.ShowRsdDocument(document);
     }
 
     /// <summary>
@@ -155,15 +168,11 @@ public static class RsdDocumentExample
     public static async Task LoadUriExampleAsync()
     {
         RsdDocument document = new();
-        Uri source = new("http://blog.oppositionallydefiant.com/rsd.axd");
 
-        // For simple case (no credentials):
-        await document.LoadAsync(source).ConfigureAwait(false);
-
-        // Or for credentials:
-        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
-        // using var httpClient = new HttpClient(handler);
-        // await document.LoadAsync(source, httpClient);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.RsdDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
 
         foreach (RsdApplicationInterface api in document.Interfaces)
         {
@@ -173,6 +182,7 @@ public static class RsdDocumentExample
                 break;
             }
         }
+        ExampleOutput.ShowRsdDocument(document);
     }
 
     /// <summary>
@@ -184,8 +194,9 @@ public static class RsdDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         document.Save(stream);
+        ExampleOutput.ShowSaved("RsdDocument");
     }
 
     /// <summary>
@@ -197,7 +208,7 @@ public static class RsdDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using Stream stream = new FileStream("RsdDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         XmlWriterSettings settings = new()
         {
             Indent = true
@@ -205,5 +216,6 @@ public static class RsdDocumentExample
 
         using XmlWriter writer = XmlWriter.Create(stream, settings);
         document.Save(writer);
+        ExampleOutput.ShowSaved("RsdDocument");
     }
 }

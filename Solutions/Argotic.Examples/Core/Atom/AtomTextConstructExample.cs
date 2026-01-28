@@ -44,5 +44,7 @@ public static class AtomTextConstructExample
         entry.Summary = summary;
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomTextConstruct(summary);
     }
 }

@@ -41,5 +41,7 @@ public static class RssCategoryExample
         item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
 
         feed.Channel.Items.Add(item);
+
+        ExampleOutput.ShowRssCategory(feed.Channel.Categories[0]);
     }
 }

@@ -96,8 +96,12 @@ public class XmlRpcResponse : IComparable
             throw new ArgumentException(string.Format(null, "The HttpResponseMessage content type is invalid. Content type of the response was {0}", contentType), nameof(response));
         }
 
+        // Note: The original XML-RPC spec (xmlrpc.com/spec.md) requires Content-Length,
+        // but this predates HTTP/1.1 chunked transfer encoding (RFC 7230). Modern servers
+        // commonly use Transfer-Encoding: chunked without Content-Length (-1 here).
+        // We only reject explicitly empty responses (0) which would be invalid XML.
         long contentLength = response.Content.Headers.ContentLength ?? -1;
-        if (contentLength <= 0)
+        if (contentLength == 0)
         {
             throw new ArgumentException(string.Format(null, "The HttpResponseMessage content length is invalid. Content length was {0}. ", contentLength), nameof(response));
         }

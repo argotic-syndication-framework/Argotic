@@ -17,7 +17,7 @@ public static class GenericSyndicationFeedExample
     /// </summary>
     public static async Task ClassExampleAsync()
     {
-        GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("http://feeds.feedburner.com/OppositionallyDefiant")).ConfigureAwait(false);
+        GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
 
         foreach (GenericSyndicationCategory category in feed.Categories)
         {
@@ -51,6 +51,8 @@ public static class GenericSyndicationFeedExample
                 //  Process RSS format specific information
             }
         }
+
+        ExampleOutput.ShowGenericFeed(feed);
     }
 
     /// <summary>
@@ -58,7 +60,7 @@ public static class GenericSyndicationFeedExample
     /// </summary>
     public static async Task CreateExampleAsync()
     {
-        GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("http://feeds.feedburner.com/OppositionallyDefiant")).ConfigureAwait(false);
+        GenericSyndicationFeed feed = await GenericSyndicationFeed.CreateAsync(new Uri("https://endjin.com/rss.xml")).ConfigureAwait(false);
 
         foreach (GenericSyndicationItem item in feed.Items)
         {
@@ -75,14 +77,17 @@ public static class GenericSyndicationFeedExample
                 }
             }
         }
+
+        ExampleOutput.ShowGenericFeed(feed);
     }
+
     /// <summary>
     /// Provides example code for the LoadAsync(Uri, HttpClient) method
     /// </summary>
     public static async Task LoadUriExampleAsync()
     {
         GenericSyndicationFeed feed = new();
-        Uri source = new("http://feeds.feedburner.com/OppositionallyDefiant");
+        Uri source = new("https://endjin.com/rss.xml");
 
         // For simple case (no credentials):
         await feed.LoadAsync(source).ConfigureAwait(false);
@@ -107,5 +112,7 @@ public static class GenericSyndicationFeedExample
                 }
             }
         }
+
+        ExampleOutput.ShowGenericFeed(feed);
     }
 }

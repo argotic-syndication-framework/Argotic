@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="utf-8"?>
+<blog root-url="http://example.com/blog" date-created="2024-01-01T08:00:00Z" xmlns="http://www.blogml.com/2006/09/BlogML">
+  <title type="text">Sample Blog</title>
+  <sub-title type="html">&lt;em&gt;A comprehensive sample blog&lt;/em&gt; for testing BlogML features</sub-title>
+
+  <authors>
+    <author id="author-1" date-created="2024-01-01T08:00:00Z" date-modified="2024-01-01T12:00:00Z" approved="true" email="alice@example.com">
+      <title type="text">Alice Writer</title>
+    </author>
+    <author id="author-2" date-created="2024-01-01T08:00:00Z" date-modified="2024-01-01T10:00:00Z" approved="true" email="bob@example.com">
+      <title type="text">Bob Blogger</title>
+    </author>
+    <author id="author-3" date-created="2024-01-01T08:00:00Z" date-modified="2024-01-01T09:00:00Z" approved="false" email="carol@example.com">
+      <title type="text">Carol Contributor</title>
+    </author>
+  </authors>
+
+  <extended-properties>
+    <property name="CommentModeration" value="true"/>
+    <property name="TrackbacksEnabled" value="true"/>
+    <property name="BlogEngine" value="Argotic Examples"/>
+    <property name="Version" value="3.0"/>
+  </extended-properties>
+
+  <categories>
+    <category id="cat-1" date-created="2024-01-01T08:00:00Z" date-modified="2024-01-01T12:00:00Z" approved="true" parentref="0">
+      <title type="text">Technology</title>
+      <description type="text">Posts about technology and software</description>
+    </category>
+    <category id="cat-2" date-created="2024-01-01T08:00:00Z" date-modified="2024-01-01T11:00:00Z" approved="true" parentref="cat-1">
+      <title type="text">Programming</title>
+      <description type="text">Programming tutorials and tips</description>
+    </category>
+    <category id="cat-3" date-created="2024-01-01T08:00:00Z" date-modified="2024-01-01T10:00:00Z" approved="true" parentref="cat-1">
+      <title type="text">Cloud Computing</title>
+    </category>
+    <category id="cat-4" date-created="2024-01-01T08:00:00Z" date-modified="2024-01-01T09:00:00Z" approved="true" parentref="0">
+      <title type="text">Tutorials</title>
+    </category>
+    <category id="cat-5" date-created="2024-01-01T08:00:00Z" date-modified="2024-01-01T08:30:00Z" approved="true" parentref="0">
+      <title type="text">News</title>
+    </category>
+  </categories>
+
+  <posts>
+    <post id="post-1" date-created="2024-01-01T10:00:00Z" date-modified="2024-01-01T12:00:00Z" approved="true" post-url="http://example.com/blog/post1" type="normal" hasexcerpt="true" views="1500">
+      <title type="text">Getting Started with .NET 10</title>
+      <excerpt type="html">&lt;p&gt;Learn about the new features in .NET 10 and how to get started with your first project.&lt;/p&gt;</excerpt>
+      <content type="html">&lt;p&gt;.NET 10 brings exciting new features for developers. In this comprehensive guide, we'll explore the key improvements and walk through creating your first .NET 10 application.&lt;/p&gt;&lt;h2&gt;Key Features&lt;/h2&gt;&lt;ul&gt;&lt;li&gt;Performance improvements&lt;/li&gt;&lt;li&gt;New language features&lt;/li&gt;&lt;li&gt;Enhanced tooling&lt;/li&gt;&lt;/ul&gt;&lt;p&gt;Let's dive in and explore these exciting additions!&lt;/p&gt;</content>
+      <post-name type="text">getting-started-dotnet-10</post-name>
+      <authors>
+        <author ref="author-1"/>
+      </authors>
+      <categories>
+        <category ref="cat-1"/>
+        <category ref="cat-2"/>
+        <category ref="cat-4"/>
+      </categories>
+      <comments>
+        <comment id="comment-1" date-created="2024-01-01T11:00:00Z" date-modified="2024-01-01T11:00:00Z" approved="true" user-name="Developer Dave" user-email="dave@example.com" user-url="https://dave.example.com">
+          <title type="text">Great article!</title>
+          <content type="text">Thanks for this comprehensive overview. Really helpful for getting started.</content>
+        </comment>
+        <comment id="comment-2" date-created="2024-01-01T11:30:00Z" date-modified="2024-01-01T11:30:00Z" approved="true" user-name="Coder Claire" user-email="claire@example.com">
+          <content type="text">I've been waiting for .NET 10. Excited to try the new features!</content>
+        </comment>
+        <comment id="comment-3" date-created="2024-01-01T12:00:00Z" date-modified="2024-01-01T12:00:00Z" approved="false" user-name="Spam Bot">
+          <content type="text">This is a spam comment that should not be approved.</content>
+        </comment>
+      </comments>
+      <trackbacks>
+        <trackback id="trackback-1" date-created="2024-01-01T11:15:00Z" date-modified="2024-01-01T11:15:00Z" approved="true" url="https://otherblog.example.com/trackback/123">
+          <title type="text">Referenced in: .NET 10 Roundup</title>
+        </trackback>
+      </trackbacks>
+      <attachments>
+        <attachment id="attach-1" date-created="2024-01-01T10:00:00Z" date-modified="2024-01-01T10:00:00Z" approved="true" url="http://example.com/blog/files/dotnet10-diagram.png" mime-type="image/png" size="245760" embedded="false" path="files/dotnet10-diagram.png">
+          <title type="text">.NET 10 Architecture Diagram</title>
+        </attachment>
+      </attachments>
+    </post>
+
+    <post id="post-2" date-created="2024-01-01T14:00:00Z" date-modified="2024-01-01T15:00:00Z" approved="true" post-url="http://example.com/blog/post2" type="normal" hasexcerpt="false" views="850">
+      <title type="text">Cloud Computing Best Practices</title>
+      <content type="html">&lt;p&gt;In this post, we discuss best practices for cloud computing deployments.&lt;/p&gt;&lt;h2&gt;Cost Optimization&lt;/h2&gt;&lt;p&gt;Managing cloud costs effectively is crucial for any organization.&lt;/p&gt;&lt;h2&gt;Security Considerations&lt;/h2&gt;&lt;p&gt;Security should be a top priority when deploying to the cloud.&lt;/p&gt;</content>
+      <authors>
+        <author ref="author-1"/>
+        <author ref="author-2"/>
+      </authors>
+      <categories>
+        <category ref="cat-1"/>
+        <category ref="cat-3"/>
+      </categories>
+      <comments>
+        <comment id="comment-4" date-created="2024-01-01T15:30:00Z" date-modified="2024-01-01T15:30:00Z" approved="true" user-name="Cloud Expert" user-email="expert@example.com">
+          <content type="text">Good overview of cloud best practices. Would love to see more on multi-cloud strategies.</content>
+        </comment>
+      </comments>
+    </post>
+
+    <post id="post-3" date-created="2024-01-01T16:00:00Z" date-modified="2024-01-01T16:00:00Z" approved="true" post-url="http://example.com/blog/post3" type="article" hasexcerpt="true" views="320">
+      <title type="html">&lt;strong&gt;Breaking News:&lt;/strong&gt; Major Framework Update</title>
+      <excerpt type="text">A major update to the syndication framework has been released.</excerpt>
+      <content type="html">&lt;p&gt;&lt;strong&gt;BREAKING:&lt;/strong&gt; The Argotic Syndication Framework has received a major update with support for .NET 10 and numerous new features.&lt;/p&gt;</content>
+      <authors>
+        <author ref="author-2"/>
+      </authors>
+      <categories>
+        <category ref="cat-5"/>
+      </categories>
+      <extended-properties>
+        <property name="IsBreaking" value="true"/>
+        <property name="Priority" value="high"/>
+      </extended-properties>
+    </post>
+
+    <post id="post-4" date-created="2023-12-15T10:00:00Z" date-modified="2023-12-15T10:00:00Z" approved="true" post-url="http://example.com/blog/post4" type="normal" hasexcerpt="false" views="2100">
+      <title type="text">End of Year Review</title>
+      <content type="text">A plain text post reviewing the year's accomplishments and looking ahead to the new year.</content>
+      <authors>
+        <author ref="author-1"/>
+        <author ref="author-2"/>
+        <author ref="author-3"/>
+      </authors>
+      <categories>
+        <category ref="cat-5"/>
+      </categories>
+      <trackbacks>
+        <trackback id="trackback-2" date-created="2023-12-16T09:00:00Z" date-modified="2023-12-16T09:00:00Z" approved="true" url="https://anotherblog.example.com/trackback/456">
+          <title type="text">Also looking back: Year in Review</title>
+        </trackback>
+        <trackback id="trackback-3" date-created="2023-12-17T14:00:00Z" date-modified="2023-12-17T14:00:00Z" approved="false" url="https://spam.example.com/trackback/789">
+          <title type="text">Spam trackback</title>
+        </trackback>
+      </trackbacks>
+      <attachments>
+        <attachment id="attach-2" date-created="2023-12-15T10:00:00Z" date-modified="2023-12-15T10:00:00Z" approved="true" url="http://example.com/blog/files/year-review.pdf" mime-type="application/pdf" size="1048576" embedded="false">
+          <title type="text">Full Year Review Report (PDF)</title>
+        </attachment>
+        <attachment id="attach-3" date-created="2023-12-15T10:00:00Z" date-modified="2023-12-15T10:00:00Z" approved="true" url="http://example.com/blog/files/stats.xlsx" mime-type="application/vnd.openxmlformats-officedocument.spreadsheetml.sheet" size="524288" embedded="false">
+          <title type="text">Statistics Spreadsheet</title>
+        </attachment>
+      </attachments>
+    </post>
+  </posts>
+</blog>

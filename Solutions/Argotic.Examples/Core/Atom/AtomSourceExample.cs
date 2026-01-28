@@ -47,5 +47,7 @@ public static class AtomSourceExample
         entry.Source = source;
 
         feed.Entries.Add(entry);
+
+        ExampleOutput.ShowAtomSource(source);
     }
 }

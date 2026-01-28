@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<rss version="2.0">
+  <channel>
+    <title>Generic Sample Feed</title>
+    <link>https://example.com/</link>
+    <description>A sample feed for testing GenericSyndicationFeed</description>
+    <language>en-us</language>
+    <item>
+      <title>Generic Item One</title>
+      <link>https://example.com/item1</link>
+      <description>First item description</description>
+      <pubDate>Mon, 01 Jan 2024 10:00:00 GMT</pubDate>
+    </item>
+    <item>
+      <title>Generic Item Two</title>
+      <link>https://example.com/item2</link>
+      <description>Second item description</description>
+      <pubDate>Mon, 01 Jan 2024 11:00:00 GMT</pubDate>
+    </item>
+  </channel>
+</rss>

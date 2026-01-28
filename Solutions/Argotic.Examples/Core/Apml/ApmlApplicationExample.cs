@@ -103,5 +103,7 @@ public static class ApmlApplicationExample
         };
 
         document.Applications.Add(sampleApplication);
+
+        ExampleOutput.ShowApmlApplication(sampleApplication);
     }
 }

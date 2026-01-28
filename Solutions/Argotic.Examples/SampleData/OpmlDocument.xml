@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="utf-8"?>
+<opml version="2.0">
+  <head>
+    <title>Sample OPML Document</title>
+    <dateCreated>Mon, 01 Jan 2024 08:00:00 GMT</dateCreated>
+    <dateModified>Mon, 01 Jan 2024 12:00:00 GMT</dateModified>
+    <ownerName>Sample Owner</ownerName>
+    <ownerEmail>owner@example.com</ownerEmail>
+    <ownerId>https://example.com/users/owner</ownerId>
+    <docs>http://opml.org/spec2.opml</docs>
+    <expansionState>1,2,5</expansionState>
+    <vertScrollState>1</vertScrollState>
+    <windowTop>100</windowTop>
+    <windowLeft>200</windowLeft>
+    <windowBottom>700</windowBottom>
+    <windowRight>1000</windowRight>
+  </head>
+  <body>
+    <outline text="Technology" title="Technology" description="Technology-related feeds and resources">
+      <outline text="Microsoft" title="Microsoft" description="Microsoft developer blogs and news">
+        <outline text=".NET Blog" title=".NET Blog" type="rss"
+                 xmlUrl="https://devblogs.microsoft.com/dotnet/feed/"
+                 htmlUrl="https://devblogs.microsoft.com/dotnet/"
+                 description="Official .NET Blog"
+                 language="en-us"
+                 version="RSS2"/>
+        <outline text="Azure Blog" title="Azure Blog" type="rss"
+                 xmlUrl="https://azure.microsoft.com/en-us/blog/feed/"
+                 htmlUrl="https://azure.microsoft.com/en-us/blog/"
+                 description="Microsoft Azure updates and announcements"/>
+        <outline text="Visual Studio" title="Visual Studio Blog" type="rss"
+                 xmlUrl="https://devblogs.microsoft.com/visualstudio/feed/"
+                 htmlUrl="https://devblogs.microsoft.com/visualstudio/"/>
+      </outline>
+      <outline text="Open Source" title="Open Source Projects">
+        <outline text="GitHub Blog" title="GitHub Blog" type="rss"
+                 xmlUrl="https://github.blog/feed/"
+                 htmlUrl="https://github.blog/"
+                 description="GitHub company blog"/>
+        <outline text="Linux Foundation" title="Linux Foundation" type="rss"
+                 xmlUrl="https://www.linuxfoundation.org/feed/"
+                 htmlUrl="https://www.linuxfoundation.org/"/>
+      </outline>
+    </outline>
+
+    <outline text="News" title="News" description="General news sources">
+      <outline text="World News" title="World News">
+        <outline text="BBC" title="BBC News" type="rss"
+                 xmlUrl="https://feeds.bbci.co.uk/news/rss.xml"
+                 htmlUrl="https://www.bbc.co.uk/news"
+                 description="BBC World News"/>
+        <outline text="Reuters" title="Reuters" type="rss"
+                 xmlUrl="https://www.reutersagency.com/feed/"
+                 htmlUrl="https://www.reuters.com/"/>
+      </outline>
+      <outline text="Tech News" title="Technology News">
+        <outline text="Ars Technica" title="Ars Technica" type="rss"
+                 xmlUrl="https://feeds.arstechnica.com/arstechnica/index"
+                 htmlUrl="https://arstechnica.com/"
+                 description="Technology news and analysis"/>
+        <outline text="The Verge" title="The Verge" type="rss"
+                 xmlUrl="https://www.theverge.com/rss/index.xml"
+                 htmlUrl="https://www.theverge.com/"/>
+      </outline>
+    </outline>
+
+    <outline text="Reference Links" title="Reference Links" description="Useful reference links (non-RSS)">
+      <outline text="W3C" title="W3C" type="link"
+               url="https://www.w3.org/"
+               description="World Wide Web Consortium"/>
+      <outline text="MDN Web Docs" title="MDN Web Docs" type="link"
+               url="https://developer.mozilla.org/"
+               description="Mozilla Developer Network documentation"/>
+      <outline text="Stack Overflow" title="Stack Overflow" type="link"
+               url="https://stackoverflow.com/"
+               description="Programming Q&amp;A community"/>
+    </outline>
+
+    <outline text="Included Lists" title="Included Lists" description="OPML files included from other sources">
+      <outline text="Tech Subscriptions" title="Tech Subscriptions" type="include"
+               url="https://example.com/opml/tech-subscriptions.opml"
+               description="Additional technology feed subscriptions"/>
+      <outline text="News Subscriptions" title="News Subscriptions" type="include"
+               url="https://example.com/opml/news-subscriptions.opml"
+               description="Additional news feed subscriptions"/>
+    </outline>
+
+    <outline text="Podcasts" title="Podcasts" description="Podcast feeds">
+      <outline text="Tech Podcasts" title="Technology Podcasts">
+        <outline text="Software Engineering" title="Software Engineering Podcasts">
+          <outline text="Hanselminutes" title="Hanselminutes" type="rss"
+                   xmlUrl="https://feeds.simplecast.com/gvtxUiIf"
+                   htmlUrl="https://www.hanselminutes.com/"
+                   description="Fresh talk and tech for developers"
+                   category="Technology/Software"/>
+          <outline text=".NET Rocks" title=".NET Rocks!" type="rss"
+                   xmlUrl="https://www.dotnetrocks.com/feed/"
+                   htmlUrl="https://www.dotnetrocks.com/"
+                   description=".NET developer talk show"/>
+        </outline>
+      </outline>
+    </outline>
+
+    <outline text="Custom Attributes" title="Custom Attributes Demo"
+             description="Demonstrates custom attributes on outlines"
+             created="2024-01-01T12:00:00Z"
+             category="demo,example,testing">
+      <outline text="Custom Item" title="Custom Outline Item" type="rss"
+               xmlUrl="https://example.com/custom/feed.rss"
+               htmlUrl="https://example.com/custom/"
+               isComment="false"
+               isBreakpoint="false"/>
+    </outline>
+  </body>
+</opml>

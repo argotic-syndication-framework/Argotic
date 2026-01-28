@@ -33,16 +33,22 @@ public static class OpmlDocumentExample
         };
 
         OpmlOutline containerOutline = new("Feeds");
-        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("http://www.codeplex.com/Argotic/Project/ProjectRss.aspx")));
-        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Google News", "feed", new Uri("http://news.google.com/?output=atom")));
+        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline("Argotic", "rss", new Uri("https://endjin.com/atom.xml")));
+        containerOutline.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline(".NET Blog", "feed", new Uri("https://endjin.com/rss.xml")));
         document.Outlines.Add(containerOutline);
+        ExampleOutput.ShowOpmlDocument(document);
     }
     /// <summary>
     /// Provides example code for the OpmlDocument.CreateAsync(Uri) method
     /// </summary>
     public static async Task CreateExampleAsync()
     {
-        OpmlDocument document = await OpmlDocument.CreateAsync(new Uri("http://blog.oppositionallydefiant.com/opml.axd")).ConfigureAwait(false);
+        // Note: This example would normally load from a URL
+        // For demonstration, we load from a local sample file
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.OpmlDocument);
+        OpmlDocument document = new();
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
 
         foreach (OpmlOutline outline in document.Outlines)
         {
@@ -51,6 +57,7 @@ public static class OpmlDocumentExample
                 //  Process outline information
             }
         }
+        ExampleOutput.ShowOpmlDocument(document);
     }
 
     /// <summary>
@@ -62,7 +69,11 @@ public static class OpmlDocumentExample
 
         document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
 
-        await document.LoadAsync(new Uri("http://blog.oppositionallydefiant.com/opml.axd")).ConfigureAwait(false);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.OpmlDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
+        ExampleOutput.ShowOpmlDocument(document);
     }
 
     /// <summary>
@@ -83,7 +94,7 @@ public static class OpmlDocumentExample
     /// </summary>
     public static void LoadIXPathNavigableExample()
     {
-        using XmlReader xmlReader = XmlReader.Create("http://blog.oppositionallydefiant.com/opml.axd", SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
+        using XmlReader xmlReader = XmlReader.Create(SampleDataPath.OpmlDocument.FullPath, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument source = new(xmlReader);
 
         OpmlDocument document = new();
@@ -96,6 +107,7 @@ public static class OpmlDocumentExample
                 //  Process outline information
             }
         }
+        ExampleOutput.ShowOpmlDocument(document);
     }
 
     /// <summary>
@@ -105,7 +117,7 @@ public static class OpmlDocumentExample
     {
         OpmlDocument document = new();
 
-        using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.OpmlDocument);
         document.Load(stream);
 
         foreach (OpmlOutline outline in document.Outlines)
@@ -115,6 +127,7 @@ public static class OpmlDocumentExample
                 //  Process outline information
             }
         }
+        ExampleOutput.ShowOpmlDocument(document);
     }
 
     /// <summary>
@@ -124,7 +137,7 @@ public static class OpmlDocumentExample
     {
         OpmlDocument document = new();
 
-        using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Open, FileAccess.Read);
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.OpmlDocument);
         XmlReaderSettings settings = new()
         {
             IgnoreComments = true,
@@ -141,6 +154,7 @@ public static class OpmlDocumentExample
                 //  Process outline information
             }
         }
+        ExampleOutput.ShowOpmlDocument(document);
     }
 
     /// <summary>
@@ -149,15 +163,11 @@ public static class OpmlDocumentExample
     public static async Task LoadUriExampleAsync()
     {
         OpmlDocument document = new();
-        Uri source = new("http://blog.oppositionallydefiant.com/opml.axd");
 
-        // For simple case (no credentials):
-        await document.LoadAsync(source).ConfigureAwait(false);
-
-        // Or for credentials:
-        // var handler = new SocketsHttpHandler { Credentials = CredentialCache.DefaultNetworkCredentials };
-        // using var httpClient = new HttpClient(handler);
-        // await document.LoadAsync(source, httpClient);
+        // Note: Loading from local sample file for demonstration
+        using Stream stream = SampleDataPath.OpenRead(SampleDataPath.OpmlDocument);
+        document.Load(stream);
+        await Task.CompletedTask.ConfigureAwait(false);
 
         foreach (OpmlOutline outline in document.Outlines)
         {
@@ -166,6 +176,7 @@ public static class OpmlDocumentExample
                 //  Process outline information
             }
         }
+        ExampleOutput.ShowOpmlDocument(document);
     }
 
     /// <summary>
@@ -177,8 +188,9 @@ public static class OpmlDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         document.Save(stream);
+        ExampleOutput.ShowSaved("OpmlDocument");
     }
 
     /// <summary>
@@ -190,7 +202,7 @@ public static class OpmlDocumentExample
 
         //  Modify document state using public properties and methods
 
-        using Stream stream = new FileStream("OpmlDocument.xml", FileMode.Create, FileAccess.Write);
+        using Stream stream = new MemoryStream();
         XmlWriterSettings settings = new()
         {
             Indent = true
@@ -198,5 +210,6 @@ public static class OpmlDocumentExample
 
         using XmlWriter writer = XmlWriter.Create(stream, settings);
         document.Save(writer);
+        ExampleOutput.ShowSaved("OpmlDocument");
     }
 }

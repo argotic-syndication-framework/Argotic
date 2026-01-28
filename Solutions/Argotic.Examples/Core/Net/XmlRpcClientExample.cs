@@ -15,7 +15,12 @@ public static class XmlRpcClientExample
     /// <summary>
     /// Provides example code for the XmlRpcClient class.
     /// </summary>
-    public static async Task ClassExampleAsync()
+    /// <remarks>
+    /// This example demonstrates how to configure and use the XmlRpcClient.
+    /// Note: This example does not make actual network calls since it uses placeholder URLs.
+    /// In a real application, you would use actual XML-RPC server endpoints.
+    /// </remarks>
+    public static void ClassExample()
     {
         // Initialize the XML-RPC client
         XmlRpcClient client = new()
@@ -31,30 +36,22 @@ public static class XmlRpcClientExample
         message.Parameters.Add(new XmlRpcScalarValue("http://alice.example.org/#p123"));    // sourceURI
         message.Parameters.Add(new XmlRpcScalarValue("http://bob.example.net/#foo"));       // targetURI
 
-        // Send an asynchronous pingback ping
-        XmlRpcResponse response = await client.SendAsync(message).ConfigureAwait(false);
+        // Note: In a real application, you would send the message:
+        // XmlRpcResponse response = await client.SendAsync(message).ConfigureAwait(false);
 
-        // Verify response to the trackback ping
-        if (response != null)
+        // For demonstration, we just verify the client and message are configured correctly
+        if (client.Host != null && message.MethodName != null)
         {
-            if (response.Fault != null)
-            {
-                XmlRpcStructureMember faultCode = response.Fault["faultCode"];
-                XmlRpcStructureMember faultMessage = response.Fault["faultString"];
-
-                if (faultCode != null && faultMessage != null)
-                {
-                    // Handle the pingback ping error condition that occurred
-                }
-            }
-            else
-            {
-                XmlRpcScalarValue successInformation = response.Parameter as XmlRpcScalarValue;
-                if (successInformation != null)
-                {
-                    // Pingback request was successful, return should be a string containing information the server deems useful.
-                }
-            }
+            // Client is configured and ready to send
+            // Verify response to the XML-RPC call
+            // if (response?.Fault != null)
+            // {
+            //     XmlRpcStructureMember faultCode = response.Fault["faultCode"];
+            //     XmlRpcStructureMember faultMessage = response.Fault["faultString"];
+            //     // Handle the fault condition
+            // }
         }
+
+        ExampleOutput.ShowXmlRpcClient(client.Host, message.MethodName);
     }
 }

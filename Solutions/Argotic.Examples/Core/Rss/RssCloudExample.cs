@@ -26,7 +26,10 @@ public static class RssCloudExample
                 Cloud = new RssCloud("server.example.com", "/rpc", 80, RssCloudProtocol.XmlRpc, "cloud.notify")
             }
         };
+
+        ExampleOutput.ShowRssCloud(feed.Channel.Cloud);
     }
+
     /// <summary>
     /// Provides example code for the RssCloud.CloudProtocolAsString(RssCloudProtocol) method
     /// </summary>

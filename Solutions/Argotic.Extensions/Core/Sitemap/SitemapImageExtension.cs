@@ -94,7 +94,7 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        return extension.GetType() == typeof(SitemapImageExtension);
+        return extension is SitemapImageExtension;
     }
 
     /// <summary>

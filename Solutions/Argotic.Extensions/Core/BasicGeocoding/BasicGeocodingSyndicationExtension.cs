@@ -26,39 +26,32 @@ namespace Argotic.Extensions.Core;
 public class BasicGeocodingSyndicationExtension : SyndicationExtension, IComparable<BasicGeocodingSyndicationExtension>, IEquatable<BasicGeocodingSyndicationExtension>
 {
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private BasicGeocodingSyndicationExtensionContext extensionContext = new();
-    /// <summary>
     /// Initializes a new instance of the <see cref="BasicGeocodingSyndicationExtension"/> class.
     /// </summary>
     public BasicGeocodingSyndicationExtension()
         : base("geo", "http://www.w3.org/2003/01/geo/wgs84_pos#", new Version("1.0"), new Uri("http://www.w3.org/2003/01/geo/"), "Basic Geocoding Vocabulary", "Extends syndication feeds to provide a means of representing latitude, longitude and other information about spatially-located things.")
     {
     }
+
     /// <summary>
     /// Gets or sets the <see cref="BasicGeocodingSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
     /// <value>A <see cref="BasicGeocodingSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
-    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
+    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
+    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that
     ///     are defined for the custom syndication extension.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BasicGeocodingSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
-
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
     /// <summary>
     /// Converts the supplied decimal value to an equivalent degrees, minutes, seconds string representation.
     /// </summary>
@@ -76,7 +69,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
 
         if (degreesAsString.Contains('.', StringComparison.Ordinal))
         {
-            string[] degreesParts = degreesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] degreesParts = degreesAsString.Split('.', StringSplitOptions.RemoveEmptyEntries);
             if (degreesParts.Length == 2)
             {
                 degreesPart = degreesParts[0];
@@ -88,7 +81,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
                     string minutesAsString = minutes.ToString(NumberFormatInfo.InvariantInfo);
                     if (minutesAsString.Contains('.', StringComparison.Ordinal))
                     {
-                        string[] minutesParts = minutesAsString.Split(".".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                        string[] minutesParts = minutesAsString.Split('.', StringSplitOptions.RemoveEmptyEntries);
                         if (minutesParts.Length == 2)
                         {
                             minutesPart = minutesParts[0];
@@ -104,7 +97,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
             }
         }
 
-        return string.Format(null, "{0}°{1}'{2}\"", degreesPart, minutesPart, secondsPart);
+        return $"{degreesPart}°{minutesPart}'{secondsPart}\"";
     }
 
     /// <summary>
@@ -120,15 +113,15 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         ArgumentException.ThrowIfNullOrEmpty(degreesMinutesSeconds);
         if (!degreesMinutesSeconds.Contains('°', StringComparison.Ordinal))
         {
-            throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ° degrees delimiter.", degreesMinutesSeconds));
+            throw new FormatException($"The supplied degrees, minutes, seconds of {degreesMinutesSeconds} does not contain a ° degrees delimiter.");
         }
         else if (!degreesMinutesSeconds.Contains('\'', StringComparison.Ordinal))
         {
-            throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a ' minutes delimiter.", degreesMinutesSeconds));
+            throw new FormatException($"The supplied degrees, minutes, seconds of {degreesMinutesSeconds} does not contain a ' minutes delimiter.");
         }
         else if (!degreesMinutesSeconds.Contains('"', StringComparison.Ordinal))
         {
-            throw new FormatException(string.Format(null, "The supplied degrees, minutes, seconds of {0} does not contain a \" seconds delimiter.", degreesMinutesSeconds));
+            throw new FormatException($"The supplied degrees, minutes, seconds of {degreesMinutesSeconds} does not contain a \\\" seconds delimiter.");
         }
         string degreesValue = degreesMinutesSeconds[..degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal)];
         string minutesValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal) + 1, degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal) - degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal) - 1);
@@ -141,15 +134,15 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
 
         if (!decimal.TryParse(degreesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal degrees))
         {
-            throw new FormatException(string.Format(null, "The supplied degrees of {0} does not represent an integer.", degreesValue));
+            throw new FormatException($"The supplied degrees of {degreesValue} does not represent an integer.");
         }
         if (!decimal.TryParse(minutesValue, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out decimal minutes))
         {
-            throw new FormatException(string.Format(null, "The supplied minutes of {0} does not represent an integer.", minutesValue));
+            throw new FormatException($"The supplied minutes of {minutesValue} does not represent an integer.");
         }
         if (!decimal.TryParse(secondsValue, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal seconds))
         {
-            throw new FormatException(string.Format(null, "The supplied seconds of {0} does not represent a floating point number.", secondsValue));
+            throw new FormatException($"The supplied seconds of {secondsValue} does not represent a floating point number.");
         }
         return (degrees + (minutes / 60) + (seconds / 3600));
     }
@@ -164,14 +157,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(BasicGeocodingSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is BasicGeocodingSyndicationExtension;
     }
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.

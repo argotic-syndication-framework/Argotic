@@ -147,7 +147,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// </remarks>
     public override string ToString()
     {
-        return string.Format(null, "[SyndicationResourceLoadSettings(CharacterEncoding = \"{0}\", RetrievalLimit = \"{1}\", Timeout = \"{2}\", Autodetect = \"{3}\", SupportedExtensions = \"{4}\")]", this.CharacterEncoding.WebName, this.RetrievalLimit, this.Timeout.TotalMilliseconds, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        return $"[SyndicationResourceLoadSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", RetrievalLimit = \"{this.RetrievalLimit}\", Timeout = \"{this.Timeout.TotalMilliseconds}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
     }
 
     /// <summary>

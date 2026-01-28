@@ -27,10 +27,6 @@ namespace Argotic.Extensions.Core;
 public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IComparable<DublinCoreElementSetSyndicationExtension>, IEquatable<DublinCoreElementSetSyndicationExtension>
 {
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private DublinCoreElementSetSyndicationExtensionContext extensionContext = new();
-    /// <summary>
     /// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtension"/> class.
     /// </summary>
     public DublinCoreElementSetSyndicationExtension()
@@ -43,24 +39,20 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
     /// </summary>
     /// <value>A <see cref="DublinCoreElementSetSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
-    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
+    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
+    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that
     ///     are defined for the custom syndication extension.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public DublinCoreElementSetSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
-
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
@@ -72,14 +64,7 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(DublinCoreElementSetSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is DublinCoreElementSetSyndicationExtension;
     }
 
     /// <summary>

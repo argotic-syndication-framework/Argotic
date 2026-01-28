@@ -107,7 +107,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        return extension.GetType() == typeof(SitemapVideoExtension);
+        return extension is SitemapVideoExtension;
     }
 
     /// <summary>

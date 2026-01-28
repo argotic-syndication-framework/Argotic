@@ -74,14 +74,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(SiteSummaryUpdateSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is SiteSummaryUpdateSyndicationExtension;
     }
 
     /// <summary>

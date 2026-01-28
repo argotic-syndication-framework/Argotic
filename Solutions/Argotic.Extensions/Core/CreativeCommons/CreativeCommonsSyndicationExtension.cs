@@ -27,39 +27,32 @@ namespace Argotic.Extensions.Core;
 public class CreativeCommonsSyndicationExtension : SyndicationExtension, IComparable<CreativeCommonsSyndicationExtension>, IEquatable<CreativeCommonsSyndicationExtension>
 {
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private CreativeCommonsSyndicationExtensionContext extensionContext = new();
-    /// <summary>
     /// Initializes a new instance of the <see cref="CreativeCommonsSyndicationExtension"/> class.
     /// </summary>
     public CreativeCommonsSyndicationExtension()
         : base("creativeCommons", "http://backend.userland.com/creativeCommonsRssModule", new Version("1.0"), new Uri("http://backend.userland.com/creativeCommonsRssModule"), "Creative Commons Licensing", "Extends syndication feeds to provide a means of specifying which Creative Commons licenses are applicable.")
     {
     }
+
     /// <summary>
     /// Gets or sets the <see cref="CreativeCommonsSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
     /// <value>A <see cref="CreativeCommonsSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
-    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
+    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
+    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that
     ///     are defined for the custom syndication extension.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public CreativeCommonsSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
-
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
@@ -70,14 +63,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(CreativeCommonsSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is CreativeCommonsSyndicationExtension;
     }
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.

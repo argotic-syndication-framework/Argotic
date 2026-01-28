@@ -68,14 +68,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(AtomPublishingEditedSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is AtomPublishingEditedSyndicationExtension;
     }
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.

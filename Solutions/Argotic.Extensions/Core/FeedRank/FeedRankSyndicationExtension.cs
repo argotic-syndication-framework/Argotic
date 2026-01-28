@@ -69,14 +69,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(FeedRankSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is FeedRankSyndicationExtension;
     }
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.

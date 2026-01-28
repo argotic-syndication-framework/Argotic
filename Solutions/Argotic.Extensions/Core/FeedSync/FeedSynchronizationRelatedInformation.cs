@@ -114,7 +114,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
         {
             if (value == FeedSynchronizationRelatedInformationType.None)
             {
-                throw new ArgumentException(string.Format(null, "The specified relation type of {0} is invalid.", value), nameof(value));
+                throw new ArgumentException($"The specified relation type of {value} is invalid.", nameof(value));
             }
             relatedInformationType = value;
         }

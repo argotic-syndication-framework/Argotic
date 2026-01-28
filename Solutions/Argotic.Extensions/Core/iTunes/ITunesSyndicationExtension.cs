@@ -26,39 +26,32 @@ namespace Argotic.Extensions.Core;
 public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITunesSyndicationExtension>, IEquatable<ITunesSyndicationExtension>
 {
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private ITunesSyndicationExtensionContext extensionContext = new();
-    /// <summary>
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
     /// </summary>
     public ITunesSyndicationExtension()
         : base("itunes", "http://www.itunes.com/dtds/podcast-1.0.dtd", new Version("1.0"), new Uri("http://www.apple.com/itunes/store/podcaststechspecs.html#rss"), "Apple iTunes Podcasting Extension", "Extends syndication feeds to provide Apple iTunes podcasting media information.")
     {
     }
+
     /// <summary>
     /// Gets or sets the <see cref="ITunesSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
     /// <value>A <see cref="ITunesSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
-    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
+    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
+    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that
     ///     are defined for the custom syndication extension.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public ITunesSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
-
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
     /// <summary>
     /// Compares two specified <see cref="Collection{ITunesCategory}"/> collections.
     /// </summary>
@@ -108,32 +101,8 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
     /// </summary>
     /// <param name="material">The <see cref="ITunesExplicitMaterial"/> to get the explicit material identifier for.</param>
     /// <returns>The explicit material identifier for the supplied <paramref name="material"/>, Otherwise, returns an empty string.</returns>
-    public static string ExplicitMaterialAsString(ITunesExplicitMaterial material)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(ITunesExplicitMaterial).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(ITunesExplicitMaterial))
-            {
-                ITunesExplicitMaterial explicitMaterial = (ITunesExplicitMaterial)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (explicitMaterial == material)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string ExplicitMaterialAsString(ITunesExplicitMaterial material) =>
+        EnumerationMetadataAttribute.GetAlternateValue(material);
 
     /// <summary>
     /// Returns the <see cref="ITunesExplicitMaterial"/> enumeration value that corresponds to the specified explicit material name.
@@ -143,32 +112,8 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
     /// <remarks>This method disregards case of specified explicit material name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static ITunesExplicitMaterial ExplicitMaterialByName(string name)
-    {
-        ITunesExplicitMaterial explicitMaterial = ITunesExplicitMaterial.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(ITunesExplicitMaterial).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(ITunesExplicitMaterial))
-            {
-                ITunesExplicitMaterial material = (ITunesExplicitMaterial)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        explicitMaterial = material;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return explicitMaterial;
-    }
+    public static ITunesExplicitMaterial ExplicitMaterialByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, ITunesExplicitMaterial.None);
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
@@ -180,14 +125,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(ITunesSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is ITunesSyndicationExtension;
     }
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.

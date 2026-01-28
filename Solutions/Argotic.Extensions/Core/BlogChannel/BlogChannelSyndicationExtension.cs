@@ -23,11 +23,6 @@ namespace Argotic.Extensions.Core;
 [Serializable]
 public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable<BlogChannelSyndicationExtension>, IEquatable<BlogChannelSyndicationExtension>
 {
-
-    /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private BlogChannelSyndicationExtensionContext extensionContext = new();
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogChannelSyndicationExtension"/> class.
     /// </summary>
@@ -35,29 +30,26 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
         : base("blogChannel", "http://backend.userland.com/blogChannelModule", new Version("1.0"), new Uri("http://backend.userland.com/blogChannelModule"), "Blog Channel", "Extends syndication feeds to provide meta-data common to weblogs.")
     {
     }
+
     /// <summary>
     /// Gets or sets the <see cref="BlogChannelSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
     /// <value>A <see cref="BlogChannelSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
-    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
+    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
+    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that
     ///     are defined for the custom syndication extension.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BlogChannelSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
-
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
@@ -69,14 +61,7 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(BlogChannelSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is BlogChannelSyndicationExtension;
     }
 
     /// <summary>

@@ -754,7 +754,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         string namespaces = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
         string resource = this.Resource != null ? this.Resource.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
-        return string.Format(null, "[SyndicationResourceMetadata(Format = \"{0}\", Version = \"{1}\", Namespaces = \"{2}\", Resource = \"{3}\")]", format, version, namespaces, resource);
+        return $"[SyndicationResourceMetadata(Format = \"{format}\", Version = \"{version}\", Namespaces = \"{namespaces}\", Resource = \"{resource}\")]";
     }
 
     /// <summary>

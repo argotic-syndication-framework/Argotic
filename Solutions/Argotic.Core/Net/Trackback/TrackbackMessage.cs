@@ -249,21 +249,21 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     {
         ArgumentNullException.ThrowIfNull(writer);
 
-        writer.Write(string.Format(null, "url={0}", this.Permalink != null ? this.Permalink.ToString() : string.Empty));
+        writer.Write($"url={this.Permalink?.ToString() ?? string.Empty}");
 
         if (!string.IsNullOrEmpty(this.Title))
         {
-            writer.Write(string.Format(null, "&title={0}", HttpUtility.UrlEncode(this.Title)));
+            writer.Write($"&title={HttpUtility.UrlEncode(this.Title)}");
         }
 
         if (!string.IsNullOrEmpty(this.WeblogName))
         {
-            writer.Write(string.Format(null, "&blog_name={0}", HttpUtility.UrlEncode(this.WeblogName)));
+            writer.Write($"&blog_name={HttpUtility.UrlEncode(this.WeblogName)}");
         }
 
         if (!string.IsNullOrEmpty(this.Excerpt))
         {
-            writer.Write(string.Format(null, "&excerpt={0}", HttpUtility.UrlEncode(this.Excerpt)));
+            writer.Write($"&excerpt={HttpUtility.UrlEncode(this.Excerpt)}");
         }
     }
 

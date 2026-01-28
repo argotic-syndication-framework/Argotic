@@ -723,7 +723,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
         {
             if (attribute.Value.Contains(',', StringComparison.Ordinal))
             {
-                string[] categories = attribute.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                string[] categories = attribute.Value.Split(',', StringSplitOptions.RemoveEmptyEntries);
                 foreach (string category in categories)
                 {
                     this.Categories.Add(category);

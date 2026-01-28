@@ -127,7 +127,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// </remarks>
     public override string ToString()
     {
-        return string.Format(null, "GenericSyndicationItem(Title = {0}, Summary = {1}, PublishedOn = {2})", this.Title, this.Summary, this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty);
+        return $"GenericSyndicationItem(Title = {this.Title}, Summary = {this.Summary}, PublishedOn = {(this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty)})";
     }
     /// <summary>
     /// Compares the current instance with another object of the same type.

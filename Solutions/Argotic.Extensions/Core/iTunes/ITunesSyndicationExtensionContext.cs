@@ -241,7 +241,7 @@ public class ITunesSyndicationExtensionContext
             string hours = this.Duration.Hours < 10 ? string.Concat("0", this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Hours.ToString(NumberFormatInfo.InvariantInfo);
             string minutes = this.Duration.Minutes < 10 ? string.Concat("0", this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Minutes.ToString(NumberFormatInfo.InvariantInfo);
             string seconds = this.Duration.Seconds < 10 ? string.Concat("0", this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo)) : this.Duration.Seconds.ToString(NumberFormatInfo.InvariantInfo);
-            string duration = string.Format(null, "{0}:{1}:{2}", hours, minutes, seconds);
+            string duration = $"{hours}:{minutes}:{seconds}";
 
             writer.WriteElementString("duration", xmlNamespace, duration);
         }
@@ -307,7 +307,7 @@ public class ITunesSyndicationExtensionContext
             {
                 if (keywordsNavigator.Value.Contains(',', StringComparison.Ordinal))
                 {
-                    string[] keywords = keywordsNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    string[] keywords = keywordsNavigator.Value.Split(',', StringSplitOptions.RemoveEmptyEntries);
                     foreach (string keyword in keywords)
                     {
                         this.Keywords.Add(keyword);
@@ -466,7 +466,7 @@ public class ITunesSyndicationExtensionContext
         }
         else
         {
-            string[] durationParts = value.Split(":".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+            string[] durationParts = value.Split(':', StringSplitOptions.RemoveEmptyEntries);
 
             if (durationParts.Length == 2)
             {

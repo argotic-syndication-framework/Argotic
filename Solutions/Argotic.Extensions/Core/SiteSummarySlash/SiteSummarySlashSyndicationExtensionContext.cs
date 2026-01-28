@@ -134,7 +134,7 @@ public class SiteSummarySlashSyndicationExtensionContext
             {
                 if (hitParadeNavigator.Value.Contains(',', StringComparison.Ordinal))
                 {
-                    string[] identifiers = hitParadeNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    string[] identifiers = hitParadeNavigator.Value.Split(',', StringSplitOptions.RemoveEmptyEntries);
                     if (identifiers is { Length: > 0 })
                     {
                         foreach (string identifier in identifiers)

@@ -159,14 +159,7 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(SimpleListSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is SimpleListSyndicationExtension;
     }
 
     /// <summary>

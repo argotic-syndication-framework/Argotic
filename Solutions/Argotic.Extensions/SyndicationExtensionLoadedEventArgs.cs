@@ -118,7 +118,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
         string extension = this.Extension != null ? this.Extension.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
         string data = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
-        return string.Format(null, "[SyndicationExtensionLoadedEventArgs(Name = \"{0}\", Prefix = \"{1}\", Namespace = \"{2}\", Extension = \"{3}\", Data = \"{4}\")]", name, prefix, xmlNamespace, extension, data);
+        return $"[SyndicationExtensionLoadedEventArgs(Name = \"{name}\", Prefix = \"{prefix}\", Namespace = \"{xmlNamespace}\", Extension = \"{extension}\", Data = \"{data}\")]";
     }
 
     /// <summary>

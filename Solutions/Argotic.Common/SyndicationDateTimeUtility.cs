@@ -30,7 +30,7 @@ public static class SyndicationDateTimeUtility
         }
         else
         {
-            throw new FormatException(string.Format(null, "'{0}' is not a valid RFC-3339 formatted date-time value.", value));
+            throw new FormatException($"'{value}' is not a valid RFC-3339 formatted date-time value.");
         }
     }
 
@@ -66,23 +66,24 @@ public static class SyndicationDateTimeUtility
     public static bool TryParseRfc3339DateTime(string value, out DateTime result)
     {
         DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
-        string[] formats = new string[15];
-
-        formats[0] = dateTimeFormat.SortableDateTimePattern;
-        formats[1] = dateTimeFormat.UniversalSortableDateTimePattern;
-        formats[2] = "yyyy'-'MM'-'dd'T'HH:mm:ss'Z'";
-        formats[3] = "yyyy'-'MM'-'dd'T'HH:mm:ss.f'Z'";
-        formats[4] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ff'Z'";
-        formats[5] = "yyyy'-'MM'-'dd'T'HH:mm:ss.fff'Z'";
-        formats[6] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffff'Z'";
-        formats[7] = "yyyy'-'MM'-'dd'T'HH:mm:ss.fffff'Z'";
-        formats[8] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffff'Z'";
-        formats[9] = "yyyy'-'MM'-'dd'T'HH:mm:sszzz";
-        formats[10] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffzzz";
-        formats[11] = "yyyy'-'MM'-'dd'T'HH:mm:ss.fffzzz";
-        formats[12] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffzzz";
-        formats[13] = "yyyy'-'MM'-'dd'T'HH:mm:ss.fffffzzz";
-        formats[14] = "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffffzzz";
+        string[] formats =
+        [
+            dateTimeFormat.SortableDateTimePattern,
+            dateTimeFormat.UniversalSortableDateTimePattern,
+            "yyyy'-'MM'-'dd'T'HH:mm:ss'Z'",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.f'Z'",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.ff'Z'",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.fff'Z'",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffff'Z'",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.fffff'Z'",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffff'Z'",
+            "yyyy'-'MM'-'dd'T'HH:mm:sszzz",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffzzz",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.fffzzz",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffzzz",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.fffffzzz",
+            "yyyy'-'MM'-'dd'T'HH:mm:ss.ffffffzzz",
+        ];
 
         if (string.IsNullOrEmpty(value))
         {
@@ -176,11 +177,11 @@ public static class SyndicationDateTimeUtility
         }
         else if (value.EndsWith("CET", StringComparison.OrdinalIgnoreCase))
         {
-            return string.Format(null, "{0}+1:00", value.TrimEnd("CET".ToCharArray()));
+            return $"{value.TrimEnd("CET".ToCharArray())}+1:00";
         }
         else if (value.EndsWith("CEST", StringComparison.OrdinalIgnoreCase))
         {
-            return string.Format(null, "{0}+2:00", value.TrimEnd("CEST".ToCharArray()));
+            return $"{value.TrimEnd("CEST".ToCharArray())}+2:00";
         }
         else
         {
@@ -209,7 +210,7 @@ public static class SyndicationDateTimeUtility
         }
         else
         {
-            throw new FormatException(string.Format(null, "'{0}' is not a valid RFC-822 formatted date-time value.", value));
+            throw new FormatException($"'{value}' is not a valid RFC-822 formatted date-time value.");
         }
     }
 
@@ -239,53 +240,50 @@ public static class SyndicationDateTimeUtility
     {
         // patterns from http://stackoverflow.com/questions/284775/how-do-i-parse-and-convert-datetimes-to-the-rfc-822-date-time-format
         DateTimeFormatInfo dateTimeFormat = CultureInfo.InvariantCulture.DateTimeFormat;
-        string[] formats = new string[36];
-
-        // two-digit day, four-digit year patterns
-        formats[0] = "ddd',' dd MMM yyyy HH':'mm':'ss'.'fffffff zzzz";
-        formats[1] = "ddd',' dd MMM yyyy HH':'mm':'ss'.'ffffff zzzz";
-        formats[2] = "ddd',' dd MMM yyyy HH':'mm':'ss'.'fffff zzzz";
-        formats[3] = "ddd',' dd MMM yyyy HH':'mm':'ss'.'ffff zzzz";
-        formats[4] = "ddd',' dd MMM yyyy HH':'mm':'ss'.'fff zzzz";
-        formats[5] = "ddd',' dd MMM yyyy HH':'mm':'ss'.'ff zzzz";
-        formats[6] = "ddd',' dd MMM yyyy HH':'mm':'ss'.'f zzzz";
-        formats[7] = "ddd',' dd MMM yyyy HH':'mm':'ss zzzz";
-
-        // two-digit day, two-digit year patterns
-        formats[8] = "ddd',' dd MMM yy HH':'mm':'ss'.'fffffff zzzz";
-        formats[9] = "ddd',' dd MMM yy HH':'mm':'ss'.'ffffff zzzz";
-        formats[10] = "ddd',' dd MMM yy HH':'mm':'ss'.'fffff zzzz";
-        formats[11] = "ddd',' dd MMM yy HH':'mm':'ss'.'ffff zzzz";
-        formats[12] = "ddd',' dd MMM yy HH':'mm':'ss'.'fff zzzz";
-        formats[13] = "ddd',' dd MMM yy HH':'mm':'ss'.'ff zzzz";
-        formats[14] = "ddd',' dd MMM yy HH':'mm':'ss'.'f zzzz";
-        formats[15] = "ddd',' dd MMM yy HH':'mm':'ss zzzz";
-
-        // one-digit day, four-digit year patterns
-        formats[16] = "ddd',' d MMM yyyy HH':'mm':'ss'.'fffffff zzzz";
-        formats[17] = "ddd',' d MMM yyyy HH':'mm':'ss'.'ffffff zzzz";
-        formats[18] = "ddd',' d MMM yyyy HH':'mm':'ss'.'fffff zzzz";
-        formats[19] = "ddd',' d MMM yyyy HH':'mm':'ss'.'ffff zzzz";
-        formats[20] = "ddd',' d MMM yyyy HH':'mm':'ss'.'fff zzzz";
-        formats[21] = "ddd',' d MMM yyyy HH':'mm':'ss'.'ff zzzz";
-        formats[22] = "ddd',' d MMM yyyy HH':'mm':'ss'.'f zzzz";
-        formats[23] = "ddd',' d MMM yyyy HH':'mm':'ss zzzz";
-
-        // two-digit day, two-digit year patterns
-        formats[24] = "ddd',' d MMM yy HH':'mm':'ss'.'fffffff zzzz";
-        formats[25] = "ddd',' d MMM yy HH':'mm':'ss'.'ffffff zzzz";
-        formats[26] = "ddd',' d MMM yy HH':'mm':'ss'.'fffff zzzz";
-        formats[27] = "ddd',' d MMM yy HH':'mm':'ss'.'ffff zzzz";
-        formats[28] = "ddd',' d MMM yy HH':'mm':'ss'.'fff zzzz";
-        formats[29] = "ddd',' d MMM yy HH':'mm':'ss'.'ff zzzz";
-        formats[30] = "ddd',' d MMM yy HH':'mm':'ss'.'f zzzz";
-        formats[31] = "ddd',' d MMM yy HH':'mm':'ss zzzz";
-
-        // Fall back patterns
-        formats[32] = "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK"; // RoundtripDateTimePattern
-        formats[33] = DateTimeFormatInfo.InvariantInfo.UniversalSortableDateTimePattern;
-        formats[34] = DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern;
-        formats[35] = dateTimeFormat.RFC1123Pattern;
+        string[] formats =
+        [
+            // two-digit day, four-digit year patterns
+            "ddd',' dd MMM yyyy HH':'mm':'ss'.'fffffff zzzz",
+            "ddd',' dd MMM yyyy HH':'mm':'ss'.'ffffff zzzz",
+            "ddd',' dd MMM yyyy HH':'mm':'ss'.'fffff zzzz",
+            "ddd',' dd MMM yyyy HH':'mm':'ss'.'ffff zzzz",
+            "ddd',' dd MMM yyyy HH':'mm':'ss'.'fff zzzz",
+            "ddd',' dd MMM yyyy HH':'mm':'ss'.'ff zzzz",
+            "ddd',' dd MMM yyyy HH':'mm':'ss'.'f zzzz",
+            "ddd',' dd MMM yyyy HH':'mm':'ss zzzz",
+            // two-digit day, two-digit year patterns
+            "ddd',' dd MMM yy HH':'mm':'ss'.'fffffff zzzz",
+            "ddd',' dd MMM yy HH':'mm':'ss'.'ffffff zzzz",
+            "ddd',' dd MMM yy HH':'mm':'ss'.'fffff zzzz",
+            "ddd',' dd MMM yy HH':'mm':'ss'.'ffff zzzz",
+            "ddd',' dd MMM yy HH':'mm':'ss'.'fff zzzz",
+            "ddd',' dd MMM yy HH':'mm':'ss'.'ff zzzz",
+            "ddd',' dd MMM yy HH':'mm':'ss'.'f zzzz",
+            "ddd',' dd MMM yy HH':'mm':'ss zzzz",
+            // one-digit day, four-digit year patterns
+            "ddd',' d MMM yyyy HH':'mm':'ss'.'fffffff zzzz",
+            "ddd',' d MMM yyyy HH':'mm':'ss'.'ffffff zzzz",
+            "ddd',' d MMM yyyy HH':'mm':'ss'.'fffff zzzz",
+            "ddd',' d MMM yyyy HH':'mm':'ss'.'ffff zzzz",
+            "ddd',' d MMM yyyy HH':'mm':'ss'.'fff zzzz",
+            "ddd',' d MMM yyyy HH':'mm':'ss'.'ff zzzz",
+            "ddd',' d MMM yyyy HH':'mm':'ss'.'f zzzz",
+            "ddd',' d MMM yyyy HH':'mm':'ss zzzz",
+            // one-digit day, two-digit year patterns
+            "ddd',' d MMM yy HH':'mm':'ss'.'fffffff zzzz",
+            "ddd',' d MMM yy HH':'mm':'ss'.'ffffff zzzz",
+            "ddd',' d MMM yy HH':'mm':'ss'.'fffff zzzz",
+            "ddd',' d MMM yy HH':'mm':'ss'.'ffff zzzz",
+            "ddd',' d MMM yy HH':'mm':'ss'.'fff zzzz",
+            "ddd',' d MMM yy HH':'mm':'ss'.'ff zzzz",
+            "ddd',' d MMM yy HH':'mm':'ss'.'f zzzz",
+            "ddd',' d MMM yy HH':'mm':'ss zzzz",
+            // Fall back patterns
+            "yyyy'-'MM'-'dd'T'HH':'mm':'ss'.'fffffffK", // RoundtripDateTimePattern
+            DateTimeFormatInfo.InvariantInfo.UniversalSortableDateTimePattern,
+            DateTimeFormatInfo.InvariantInfo.SortableDateTimePattern,
+            dateTimeFormat.RFC1123Pattern,
+        ];
 
         if (string.IsNullOrEmpty(value))
         {

@@ -74,14 +74,7 @@ public class TrackbackSyndicationExtension : SyndicationExtension, IComparable<T
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(TrackbackSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is TrackbackSyndicationExtension;
     }
 
     /// <summary>

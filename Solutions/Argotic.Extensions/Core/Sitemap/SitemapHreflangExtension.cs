@@ -95,7 +95,7 @@ public class SitemapHreflangExtension : SyndicationExtension, IComparable<Sitema
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        return extension.GetType() == typeof(SitemapHreflangExtension);
+        return extension is SitemapHreflangExtension;
     }
 
     /// <summary>

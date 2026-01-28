@@ -71,14 +71,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(DublinCoreMetadataTermsSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is DublinCoreMetadataTermsSyndicationExtension;
     }
 
     /// <summary>

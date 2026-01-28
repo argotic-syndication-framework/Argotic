@@ -266,7 +266,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
         {
             if (source.Value.Contains(' ', StringComparison.Ordinal))
             {
-                string[] entities = source.Value.Split(" ".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                string[] entities = source.Value.Split(' ', StringSplitOptions.RemoveEmptyEntries);
                 if (entities.Length > 0)
                 {
                     foreach (string entity in entities)

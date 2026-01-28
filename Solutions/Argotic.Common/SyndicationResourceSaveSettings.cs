@@ -91,7 +91,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// </remarks>
     public override string ToString()
     {
-        return string.Format(null, "[SyndicationResourceSaveSettings(CharacterEncoding = \"{0}\", MinimizeOutputSize = \"{1}\", Autodetect = \"{2}\", SupportedExtensions = \"{3}\")]", this.CharacterEncoding.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions, this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
+        return $"[SyndicationResourceSaveSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", MinimizeOutputSize = \"{this.MinimizeOutputSize}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
     }
 
     /// <summary>

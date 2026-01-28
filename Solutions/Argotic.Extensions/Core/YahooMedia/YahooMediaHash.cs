@@ -102,7 +102,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
         ArgumentNullException.ThrowIfNull(stream);
         if (algorithm == YahooMediaHashAlgorithm.None)
         {
-            throw new ArgumentException(string.Format(null, "Unable to generate a hash value for the {0} algorithm.", algorithm), nameof(algorithm));
+            throw new ArgumentException($"Unable to generate a hash value for the {algorithm} algorithm.", nameof(algorithm));
         }
 
         if (algorithm == YahooMediaHashAlgorithm.MD5)

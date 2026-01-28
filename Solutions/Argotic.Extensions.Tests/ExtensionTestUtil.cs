@@ -41,7 +41,7 @@ internal static class ExtensionTestUtil
         return sw.ToString();
     }
 
-    private const string strFullXml1 = @"<rss version=""2.0"" {0}><channel><title>Argotic - Extension Test</title><link>http://www.example.com/</link><description>Test of an extension</description><docs>http://www.rssboard.org/rss-specification</docs><generator>Argotic Syndication Framework {1}, http://www.codeplex.com/Argotic</generator><language>en-US</language><managingEditor>editor@example.com</managingEditor><webMaster>webmaster@example.com</webMaster><item><title>Item #1</title><description>text for First Item</description><link>http://www.example.com/item1.htm</link><pubDate>Sun, 01 Aug 2010 00:00:01 GMT</pubDate>{2}</item></channel></rss>";
+    private const string strFullXml1 = @"<rss version=""2.0"" {0}><channel><title>Argotic - Extension Test</title><link>http://www.example.com/</link><description>Test of an extension</description><docs>http://www.rssboard.org/rss-specification</docs><generator>Argotic Syndication Framework {1}, https://github.com/argotic-syndication-framework/argotic/</generator><language>en-US</language><managingEditor>editor@example.com</managingEditor><webMaster>webmaster@example.com</webMaster><item><title>Item #1</title><description>text for First Item</description><link>http://www.example.com/item1.htm</link><pubDate>Sun, 01 Aug 2010 00:00:01 GMT</pubDate>{2}</item></channel></rss>";
 
     internal static string GetWrappedXml(string namespc, string strExt)
     {

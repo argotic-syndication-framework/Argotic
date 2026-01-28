@@ -302,15 +302,15 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     {
         StringBuilder builder = new();
 
-        builder.Append(string.Format(null, "{0}/{1}", this.MediaType.ToLowerInvariant(), this.MediaSubtype));
+        builder.Append($"{this.MediaType.ToLowerInvariant()}/{this.MediaSubtype}");
 
         if (!string.IsNullOrEmpty(this.Discriminator))
         {
-            builder.Append(string.Format(null, ";{0}={1}", TYPE_PARAMETER_NAME, this.Discriminator));
+            builder.Append($";{TYPE_PARAMETER_NAME}={this.Discriminator}");
         }
         if (!string.IsNullOrEmpty(this.CharacterSet))
         {
-            builder.Append(string.Format(null, ";{0}={1}", CHARSET_PARAMETER_NAME, this.CharacterSet));
+            builder.Append($";{CHARSET_PARAMETER_NAME}={this.CharacterSet}");
         }
 
         foreach (string parameterName in this.Parameters.Keys)
@@ -318,7 +318,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
             string parameterValue = !string.IsNullOrEmpty(this.Parameters[parameterName]) ? this.Parameters[parameterName].Trim() : string.Empty;
             if (!string.Equals(parameterName, TYPE_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) && !string.Equals(parameterName, CHARSET_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase))
             {
-                builder.Append(string.Format(null, ";{0}={1}", parameterName, parameterValue));
+                builder.Append($";{parameterName}={parameterValue}");
             }
         }
 

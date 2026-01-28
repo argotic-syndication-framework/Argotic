@@ -390,15 +390,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-
-        if (extension.GetType() == typeof(AtomMemberResources))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is AtomMemberResources;
     }
 
     /// <summary>

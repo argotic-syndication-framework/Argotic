@@ -118,7 +118,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// </remarks>
     public override string ToString()
     {
-        return string.Format(null, "[MimeMediaType(Name = \"{0}\", SubName = \"{1}\", Documentation = \"{2}\")]", this.Name, this.SubName, this.Documentation != null ? this.Documentation.ToString() : string.Empty);
+        return $"[MimeMediaType(Name = \"{this.Name}\", SubName = \"{this.SubName}\", Documentation = \"{(this.Documentation != null ? this.Documentation.ToString() : string.Empty)}\")]";
     }
 
     /// <summary>

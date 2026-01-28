@@ -200,7 +200,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
         {
             if (expansionStateNavigator.Value.Contains(',', StringComparison.Ordinal))
             {
-                string[] expansionStates = expansionStateNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                string[] expansionStates = expansionStateNavigator.Value.Split(',', StringSplitOptions.RemoveEmptyEntries);
                 foreach (string expansionState in expansionStates)
                 {
                     if (int.TryParse(expansionState.Trim(), System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int state))

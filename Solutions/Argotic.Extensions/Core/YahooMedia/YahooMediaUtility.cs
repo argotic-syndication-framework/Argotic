@@ -716,7 +716,7 @@ internal static class YahooMediaUtility
             {
                 if (keywordNavigator.Value.Contains(',', StringComparison.Ordinal))
                 {
-                    string[] keywords = keywordNavigator.Value.Split(",".ToCharArray(), StringSplitOptions.RemoveEmptyEntries);
+                    string[] keywords = keywordNavigator.Value.Split(',', StringSplitOptions.RemoveEmptyEntries);
                     if (keywords.Length > 0)
                     {
                         foreach (string keyword in keywords)

@@ -70,14 +70,7 @@ public class PheedSyndicationExtension : SyndicationExtension, IComparable<Pheed
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(PheedSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is PheedSyndicationExtension;
     }
 
     /// <summary>

@@ -88,7 +88,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
                         if (customAttributes is { Length: > 0 })
                         {
                             MimeMediaTypeAttribute mediaType = customAttributes[0] as MimeMediaTypeAttribute;
-                            string contentType = string.Format(null, "{0}/{1}", mediaType.Name, mediaType.SubName);
+                            string contentType = $"{mediaType.Name}/{mediaType.SubName}";
 
                             if (string.Equals(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase))
                             {
@@ -215,7 +215,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// </remarks>
     public override string ToString()
     {
-        return string.Format(null, "<link rel=\"alternate\" type=\"{0}\" title=\"{1}\" href=\"{2}\" />", this.ContentType, this.Title, this.Source != null ? this.Source.ToString() : string.Empty);
+        return $"<link rel=\"alternate\" type=\"{this.ContentType}\" title=\"{this.Title}\" href=\"{(this.Source != null ? this.Source.ToString() : string.Empty)}\" />";
     }
 
     /// <summary>

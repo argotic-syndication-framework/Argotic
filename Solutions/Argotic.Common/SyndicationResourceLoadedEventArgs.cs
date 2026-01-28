@@ -118,7 +118,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
         string source = this.Source != null ? this.Source.ToString() : string.Empty;
         string data = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
 
-        return string.Format(null, "[SyndicationResourceLoadedEventArgs(Source = \"{0}\", Data = \"{1}\")]", source, data);
+        return $"[SyndicationResourceLoadedEventArgs(Source = \"{source}\", Data = \"{data}\")]";
     }
 
     /// <summary>

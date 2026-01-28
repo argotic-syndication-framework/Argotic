@@ -171,7 +171,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
         {
             if (value == RssCloudProtocol.None)
             {
-                throw new ArgumentException(string.Format(null, "The specified cloud protocol of {0} is invalid.", value), nameof(value));
+                throw new ArgumentException($"The specified cloud protocol of {value} is invalid.", nameof(value));
             }
             cloudProtocol = value;
         }

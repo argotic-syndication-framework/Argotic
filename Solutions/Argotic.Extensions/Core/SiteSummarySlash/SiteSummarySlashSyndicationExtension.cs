@@ -73,14 +73,7 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(SiteSummarySlashSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is SiteSummarySlashSyndicationExtension;
     }
 
     /// <summary>

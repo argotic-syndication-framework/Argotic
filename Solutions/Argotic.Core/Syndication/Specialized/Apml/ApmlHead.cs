@@ -21,7 +21,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// <summary>
     /// Private member to hold a value that credits the software that created the document.
     /// </summary>
-    private string headGenerator = string.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(ApmlHead)).GetName().Version.ToString(4));
+    private string headGenerator = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(ApmlHead)).GetName().Version.ToString(4)}, https://github.com/argotic-syndication-framework/argotic/";
     /// <summary>
     /// Private member to hold email address of the owner of the document.
     /// </summary>

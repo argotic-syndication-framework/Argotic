@@ -43,7 +43,7 @@ public class XmlRpcClient
     /// <summary>
     /// Private member to hold information such as the application name, version, host operating system, and language.
     /// </summary>
-    private string clientUserAgent = string.Format(null, "Argotic-Syndication-Framework/{0}", System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient))!.GetName().Version!.ToString(4));
+    private string clientUserAgent = $"Argotic-Syndication-Framework/{System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient))!.GetName().Version!.ToString(4)}";
     /// <summary>
     /// Private member to hold the HttpClient used for sending requests.
     /// </summary>
@@ -482,7 +482,7 @@ public class XmlRpcClient
 
         if (this.Host == null)
         {
-            throw new InvalidOperationException(string.Format(null, "Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {0}", message));
+            throw new InvalidOperationException($"Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {message}");
         }
 
         using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);

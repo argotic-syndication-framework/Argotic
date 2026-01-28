@@ -28,11 +28,6 @@ namespace Argotic.Extensions.Core;
 public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<YahooMediaSyndicationExtension>, IEquatable<YahooMediaSyndicationExtension>
 {
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private YahooMediaSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaSyndicationExtension"/> class.
     /// </summary>
     public YahooMediaSyndicationExtension()
@@ -45,55 +40,27 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     /// </summary>
     /// <value>A <see cref="YahooMediaSyndicationExtensionContext"/> object that contains information associated with the current syndication extension.</value>
     /// <remarks>
-    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity. 
-    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that 
+    ///     The <b>Context</b> encapsulates all the syndication extension information that can be retrieved or written to an extended syndication entity.
+    ///     Its purpose is to prevent property naming collisions between the base <see cref="SyndicationExtension"/> class and any custom properties that
     ///     are defined for the custom syndication extension.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public YahooMediaSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
-
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
     /// <summary>
     /// Returns the content expression identifier for the supplied <see cref="YahooMediaExpression"/>.
     /// </summary>
     /// <param name="expression">The <see cref="YahooMediaExpression"/> to get the content expression identifier for.</param>
     /// <returns>The content expression identifier for the supplied <paramref name="expression"/>, Otherwise, returns an empty string.</returns>
-    public static string ExpressionAsString(YahooMediaExpression expression)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaExpression).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaExpression))
-            {
-                YahooMediaExpression mediaExpression = (YahooMediaExpression)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (mediaExpression == expression)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string ExpressionAsString(YahooMediaExpression expression) =>
+        EnumerationMetadataAttribute.GetAlternateValue(expression);
 
     /// <summary>
     /// Returns the <see cref="YahooMediaExpression"/> enumeration value that corresponds to the specified content expression name.
@@ -103,33 +70,8 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     /// <remarks>This method disregards case of specified content expression name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static YahooMediaExpression ExpressionByName(string name)
-    {
-        YahooMediaExpression mediaExpression = YahooMediaExpression.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaExpression).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaExpression))
-            {
-                YahooMediaExpression expression = (YahooMediaExpression)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        mediaExpression = expression;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return mediaExpression;
-    }
+    public static YahooMediaExpression ExpressionByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaExpression.None);
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
@@ -141,14 +83,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(YahooMediaSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is YahooMediaSyndicationExtension;
     }
 
     /// <summary>
@@ -156,32 +91,8 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     /// </summary>
     /// <param name="medium">The <see cref="YahooMediaMedium"/> to get the content medium identifier for.</param>
     /// <returns>The content medium identifier for the supplied <paramref name="medium"/>, Otherwise, returns an empty string.</returns>
-    public static string MediumAsString(YahooMediaMedium medium)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaMedium).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaMedium))
-            {
-                YahooMediaMedium mediaMedium = (YahooMediaMedium)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (mediaMedium == medium)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string MediumAsString(YahooMediaMedium medium) =>
+        EnumerationMetadataAttribute.GetAlternateValue(medium);
 
     /// <summary>
     /// Returns the <see cref="YahooMediaMedium"/> enumeration value that corresponds to the specified content medium name.
@@ -191,33 +102,8 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     /// <remarks>This method disregards case of specified content medium name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static YahooMediaMedium MediumByName(string name)
-    {
-        YahooMediaMedium mediaMedium = YahooMediaMedium.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaMedium).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaMedium))
-            {
-                YahooMediaMedium medium = (YahooMediaMedium)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        mediaMedium = medium;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return mediaMedium;
-    }
+    public static YahooMediaMedium MediumByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaMedium.None);
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>

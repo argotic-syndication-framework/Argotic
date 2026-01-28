@@ -93,7 +93,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
         string? contentType = response.Content.Headers.ContentType?.MediaType;
         if (!string.Equals(contentType, "text/xml", StringComparison.OrdinalIgnoreCase))
         {
-            throw new ArgumentException(string.Format(null, "The HttpResponseMessage content type is invalid. Content type of the response was {0}", contentType), nameof(response));
+            throw new ArgumentException($"The HttpResponseMessage content type is invalid. Content type of the response was {contentType}", nameof(response));
         }
 
         // Note: The original XML-RPC spec (xmlrpc.com/spec.md) requires Content-Length,
@@ -103,7 +103,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
         long contentLength = response.Content.Headers.ContentLength ?? -1;
         if (contentLength == 0)
         {
-            throw new ArgumentException(string.Format(null, "The HttpResponseMessage content length is invalid. Content length was {0}. ", contentLength), nameof(response));
+            throw new ArgumentException($"The HttpResponseMessage content length is invalid. Content length was {contentLength}. ", nameof(response));
         }
 
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);

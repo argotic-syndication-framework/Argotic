@@ -71,14 +71,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(LiveJournalSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is LiveJournalSyndicationExtension;
     }
 
     /// <summary>

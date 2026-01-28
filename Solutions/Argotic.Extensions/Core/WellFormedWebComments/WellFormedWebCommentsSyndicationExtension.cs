@@ -72,14 +72,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(WellFormedWebCommentsSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is WellFormedWebCommentsSyndicationExtension;
     }
 
     /// <summary>

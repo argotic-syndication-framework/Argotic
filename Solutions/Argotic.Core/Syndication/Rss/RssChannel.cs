@@ -49,7 +49,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Private member to hold a value that credits the software that created the feed.
     /// </summary>
-    private string channelGenerator = string.Format(null, "Argotic Syndication Framework {0}, http://www.codeplex.com/Argotic", System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4));
+    private string channelGenerator = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4)}, https://github.com/argotic-syndication-framework/argotic/";
     /// <summary>
     /// Private member to hold the graphical logo for the feed.
     /// </summary>

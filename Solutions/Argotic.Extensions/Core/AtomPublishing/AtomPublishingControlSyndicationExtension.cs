@@ -72,15 +72,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-
-        if (extension.GetType() == typeof(AtomPublishingControlSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is AtomPublishingControlSyndicationExtension;
     }
 
     /// <summary>

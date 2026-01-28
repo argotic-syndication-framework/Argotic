@@ -74,14 +74,14 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         if (format == SyndicationContentFormat.None)
         {
-            throw new ArgumentException(string.Format(null, "The specified syndication content format of {0} is invalid.", format), nameof(format));
+            throw new ArgumentException($"The specified syndication content format of {format} is invalid.", nameof(format));
         }
 
         SyndicationResourceMetadata resourceMetadata = new(this.Navigator);
 
         if (format != resourceMetadata.Format)
         {
-            throw new FormatException(string.Format(null, "The supplied syndication resource has a content format of {0}, which does not match the expected content format of {1}.", resourceMetadata.Format, format));
+            throw new FormatException($"The supplied syndication resource has a content format of {resourceMetadata.Format}, which does not match the expected content format of {format}.");
         }
 
         switch (format)

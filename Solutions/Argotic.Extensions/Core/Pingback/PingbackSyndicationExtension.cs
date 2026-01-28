@@ -73,14 +73,7 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        if (extension.GetType() == typeof(PingbackSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is PingbackSyndicationExtension;
     }
 
     /// <summary>

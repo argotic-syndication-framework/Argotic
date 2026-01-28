@@ -123,7 +123,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     public static bool MatchByType(ISyndicationExtension extension)
     {
         ArgumentNullException.ThrowIfNull(extension);
-        return extension.GetType() == typeof(SitemapNewsExtension);
+        return extension is SitemapNewsExtension;
     }
 
     /// <summary>

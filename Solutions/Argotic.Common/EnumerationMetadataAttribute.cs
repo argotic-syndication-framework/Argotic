@@ -1,3 +1,5 @@
+using System.Reflection;
+
 namespace Argotic.Common;
 
 /// <summary>
@@ -80,7 +82,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// </remarks>
     public override string ToString()
     {
-        return string.Format(null, "[EnumerationMetadata(DisplayName = \"{0}\", AlternateValue=\"{1}\")]", this.DisplayName, this.AlternateValue);
+        return $"[EnumerationMetadata(DisplayName = \"{this.DisplayName}\", AlternateValue=\"{this.AlternateValue}\")]";
     }
 
     /// <summary>
@@ -204,5 +206,66 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     {
         if (first is null) return second is null;
         return first.CompareTo(second) >= 0;
+    }
+
+    /// <summary>
+    /// Gets the alternate value for the specified enum value using its <see cref="EnumerationMetadataAttribute"/>.
+    /// </summary>
+    /// <typeparam name="TEnum">The enum type.</typeparam>
+    /// <param name="value">The enum value to get the alternate value for.</param>
+    /// <returns>The alternate value if found, otherwise an empty string.</returns>
+    public static string GetAlternateValue<TEnum>(TEnum value) where TEnum : struct, Enum
+    {
+        foreach (FieldInfo fieldInfo in typeof(TEnum).GetFields())
+        {
+            if (fieldInfo.FieldType == typeof(TEnum))
+            {
+                TEnum enumValue = (TEnum)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+
+                if (EqualityComparer<TEnum>.Default.Equals(enumValue, value))
+                {
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+
+                    if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
+                    {
+                        return enumerationMetadata.AlternateValue;
+                    }
+                }
+            }
+        }
+
+        return string.Empty;
+    }
+
+    /// <summary>
+    /// Gets the enum value that corresponds to the specified alternate value name.
+    /// </summary>
+    /// <typeparam name="TEnum">The enum type.</typeparam>
+    /// <param name="name">The alternate value name to search for.</param>
+    /// <param name="defaultValue">The default value to return if not found.</param>
+    /// <returns>The enum value if found, otherwise the default value.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
+    public static TEnum GetEnumByAlternateValue<TEnum>(string name, TEnum defaultValue) where TEnum : struct, Enum
+    {
+        ArgumentException.ThrowIfNullOrEmpty(name);
+
+        foreach (FieldInfo fieldInfo in typeof(TEnum).GetFields())
+        {
+            if (fieldInfo.FieldType == typeof(TEnum))
+            {
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+
+                if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
+                {
+                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
+                    {
+                        return (TEnum)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    }
+                }
+            }
+        }
+
+        return defaultValue;
     }
 }

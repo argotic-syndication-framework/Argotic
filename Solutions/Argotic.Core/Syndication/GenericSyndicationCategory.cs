@@ -117,7 +117,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// </remarks>
     public override string ToString()
     {
-        return string.Format(null, "GenericSyndicationCategory(Term = {0}, Scheme = {1})", this.Term, this.Scheme);
+        return $"GenericSyndicationCategory(Term = {this.Term}, Scheme = {this.Scheme})";
     }
     /// <summary>
     /// Compares the current instance with another object of the same type.

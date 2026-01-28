@@ -7,7 +7,7 @@ namespace Argotic.Common;
 /// Represents metadata about a web log entry that allows clients to auto-discover the TrackBack ping URL for that entry.
 /// </summary>
 [Serializable]
-public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata>, IEquatable<TrackbackDiscoveryMetadata>
+public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata>, IEquatable<TrackbackDiscoveryMetadata>, IComparisonOperators
 {
     /// <summary>
     /// Private member to hold the XML namespace for Resource Description Framework (RDF) entities.
@@ -335,53 +335,5 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     public static bool operator !=(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
     {
         return !(first == second);
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
     }
 }

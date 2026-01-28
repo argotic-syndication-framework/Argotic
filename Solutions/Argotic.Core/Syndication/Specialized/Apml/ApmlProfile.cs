@@ -19,7 +19,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [Serializable]
-public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IExtensibleSyndicationObject
+public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IExtensibleSyndicationObject, IComparisonOperators
 {
 
     /// <summary>
@@ -564,53 +564,5 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     public static bool operator !=(ApmlProfile first, ApmlProfile second)
     {
         return !(first == second);
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(ApmlProfile first, ApmlProfile second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(ApmlProfile first, ApmlProfile second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(ApmlProfile first, ApmlProfile second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(ApmlProfile first, ApmlProfile second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
     }
 }

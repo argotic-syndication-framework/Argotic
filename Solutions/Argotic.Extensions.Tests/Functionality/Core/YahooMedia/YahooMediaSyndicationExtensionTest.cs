@@ -483,20 +483,6 @@ public class YahooMediaSyndicationExtensionTest
         (group1 == group2).ShouldBeTrue();
     }
 
-    [TestMethod]
-    public void YahooMediaGroup_ComparisonOperators_WorkCorrectly()
-    {
-        // Arrange
-        YahooMediaGroup group1 = CreateBasicGroup();
-        YahooMediaGroup group2 = CreateBasicGroup();
-
-        // Act & Assert
-        (group1 <= group2).ShouldBeTrue();
-        (group1 >= group2).ShouldBeTrue();
-        (group1 < group2).ShouldBeFalse();
-        (group1 > group2).ShouldBeFalse();
-    }
-
     #endregion
 
     #region YahooMediaThumbnail Tests

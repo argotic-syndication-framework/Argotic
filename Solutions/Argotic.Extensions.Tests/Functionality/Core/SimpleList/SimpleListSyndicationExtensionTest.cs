@@ -981,34 +981,6 @@ public class SimpleListSyndicationExtensionTest
         (group1 != group2).ShouldBeFalse();
     }
 
-    [TestMethod]
-    public void SimpleListGroup_OperatorLessThan_Works()
-    {
-        // Arrange
-        SimpleListGroup group1 = new SimpleListGroup { Element = "a" };
-        SimpleListGroup group2 = new SimpleListGroup { Element = "b" };
-
-        // Act
-        bool result = group1 < group2;
-
-        // Assert
-        result.ShouldBeOneOf(true, false);
-    }
-
-    [TestMethod]
-    public void SimpleListGroup_OperatorGreaterThan_Works()
-    {
-        // Arrange
-        SimpleListGroup group1 = new SimpleListGroup { Element = "b" };
-        SimpleListGroup group2 = new SimpleListGroup { Element = "a" };
-
-        // Act
-        bool result = group1 > group2;
-
-        // Assert
-        result.ShouldBeOneOf(true, false);
-    }
-
     #endregion
 
     #region Helper Methods

@@ -1,26 +1,28 @@
 using System.Xml;
 using System.Xml.XPath;
 
+using Argotic.Common;
+
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents information that informs the client that the property to which it refers is one that is <i>groupable</i>, 
+/// Represents information that informs the client that the property to which it refers is one that is <i>groupable</i>,
 /// meaning that the client should provide a user interface that allows the user to group or filter on the values of that property.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         This informational entity makes reference to XML elements that are child-elements within the items of the same feed, using the supported extension mechanism of the feed format. 
+///         This informational entity makes reference to XML elements that are child-elements within the items of the same feed, using the supported extension mechanism of the feed format.
 ///         Groupable properties <i>should</i> contain a small set of discrete values.
 ///     </para>
 ///     <para>
-///         The value which is to be grouped <b>must be</b> the text content of the element itself (i.e. the character data contained in the element). 
-///         Values of attributes or nested elements <b>cannot</b> be used for grouping. The property referred to must have no child-elements. 
+///         The value which is to be grouped <b>must be</b> the text content of the element itself (i.e. the character data contained in the element).
+///         Values of attributes or nested elements <b>cannot</b> be used for grouping. The property referred to must have no child-elements.
 ///         In general, only one instance of a property should appear in each item. Clients are free to ignore repeated instances of properties.
 ///     </para>
 /// </remarks>
 /// <seealso cref="SimpleListSyndicationExtensionContext.Grouping"/>
 [Serializable]
-public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleListGroup>
+public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleListGroup>, IComparisonOperators
 {
 
     /// <summary>
@@ -297,51 +299,4 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
         return !(first == second);
     }
 
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(SimpleListGroup first, SimpleListGroup second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(SimpleListGroup first, SimpleListGroup second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(SimpleListGroup first, SimpleListGroup second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(SimpleListGroup first, SimpleListGroup second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
-    }
 }

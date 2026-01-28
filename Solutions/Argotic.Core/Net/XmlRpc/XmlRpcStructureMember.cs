@@ -1,13 +1,15 @@
 using System.Xml;
 using System.Xml.XPath;
 
+using Argotic.Common;
+
 namespace Argotic.Net;
 
 /// <summary>
 /// Represents a structured list member.
 /// </summary>
 [Serializable]
-public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquatable<XmlRpcStructureMember>
+public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquatable<XmlRpcStructureMember>, IComparisonOperators
 {
     /// <summary>
     /// Private member to hold the name of the structure member.
@@ -242,53 +244,5 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     public static bool operator !=(XmlRpcStructureMember first, XmlRpcStructureMember second)
     {
         return !(first == second);
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(XmlRpcStructureMember first, XmlRpcStructureMember second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(XmlRpcStructureMember first, XmlRpcStructureMember second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(XmlRpcStructureMember first, XmlRpcStructureMember second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(XmlRpcStructureMember first, XmlRpcStructureMember second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
     }
 }

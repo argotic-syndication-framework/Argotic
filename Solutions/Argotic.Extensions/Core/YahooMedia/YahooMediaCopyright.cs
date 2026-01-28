@@ -1,6 +1,8 @@
 using System.Xml;
 using System.Xml.XPath;
 
+using Argotic.Common;
+
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -12,7 +14,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 [Serializable]
-public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<YahooMediaCopyright>
+public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<YahooMediaCopyright>, IComparisonOperators
 {
 
     /// <summary>
@@ -240,53 +242,5 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     public static bool operator !=(YahooMediaCopyright first, YahooMediaCopyright second)
     {
         return !(first == second);
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(YahooMediaCopyright first, YahooMediaCopyright second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(YahooMediaCopyright first, YahooMediaCopyright second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(YahooMediaCopyright first, YahooMediaCopyright second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(YahooMediaCopyright first, YahooMediaCopyright second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
     }
 }

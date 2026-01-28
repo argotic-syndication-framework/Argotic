@@ -7,7 +7,7 @@ namespace Argotic.Common;
 /// Represents metadata associated with a <see cref="ISyndicationResource">syndication resource</see>.
 /// </summary>
 [Serializable]
-public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetadata>, IEquatable<SyndicationResourceMetadata>
+public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetadata>, IEquatable<SyndicationResourceMetadata>, IComparisonOperators
 {
     /// <summary>
     /// Private member to hold the syndication content format that the syndication resource conforms to.
@@ -864,53 +864,5 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     public static bool operator !=(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
     {
         return !(first == second);
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(SyndicationResourceMetadata first, SyndicationResourceMetadata second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
     }
 }

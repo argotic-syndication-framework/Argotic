@@ -2,6 +2,8 @@ using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 
+using Argotic.Common;
+
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -16,7 +18,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
 [Serializable]
-public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<SitemapVideoSegment>
+public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<SitemapVideoSegment>, IComparisonOperators
 {
     /// <summary>
     /// The maximum allowed duration in seconds for a video segment (8 hours).
@@ -229,53 +231,5 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     public static bool operator !=(SitemapVideoSegment first, SitemapVideoSegment second)
     {
         return !(first == second);
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(SitemapVideoSegment first, SitemapVideoSegment second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(SitemapVideoSegment first, SitemapVideoSegment second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(SitemapVideoSegment first, SitemapVideoSegment second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(SitemapVideoSegment first, SitemapVideoSegment second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
     }
 }

@@ -271,7 +271,7 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= this.TextType.CompareTo(other.TextType);
+        if (result == 0) result = this.TextType.CompareTo(other.TextType);
 
         return result;
     }

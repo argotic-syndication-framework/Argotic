@@ -195,7 +195,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
     /// </remarks>
     public override string ToString()
     {
-        using MemoryStream stream = new();
+        using StringWriter stringWriter = new();
         XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
@@ -203,15 +203,13 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
             OmitXmlDeclaration = true
         };
 
-        using (XmlWriter writer = XmlWriter.Create(stream, settings))
+        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
         {
             this.WriteTo(writer);
         }
 
-        stream.Seek(0, SeekOrigin.Begin);
 
-        using StreamReader reader = new(stream);
-        return reader.ReadToEnd();
+        return stringWriter.ToString();
     }
     /// <summary>
     /// Compares the current instance with another object of the same type.

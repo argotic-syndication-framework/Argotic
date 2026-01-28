@@ -19,22 +19,19 @@ internal static class YahooMediaUtility
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
     public static int CompareCommonObjectEntities(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
     {
-        int result = 0;
-        if (source == null && target == null)
+        return (source, target) switch
         {
-            return 0;
-        }
-        else if (source != null && target == null)
-        {
-            return 1;
-        }
-        else if (source == null && target != null)
-        {
-            return -1;
-        }
-        result |= YahooMediaUtility.CompareCommonObjectEntityClasses(source, target);
-        result |= YahooMediaUtility.CompareCommonObjectEntityCollections(source, target);
+            (null, null) => 0,
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => CompareCommonObjectEntitiesCore(source, target)
+        };
+    }
 
+    private static int CompareCommonObjectEntitiesCore(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
+    {
+        int result = YahooMediaUtility.CompareCommonObjectEntityClasses(source, target);
+        if (result == 0) result = YahooMediaUtility.CompareCommonObjectEntityCollections(source, target);
         return result;
     }
 
@@ -67,7 +64,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -111,7 +108,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -155,7 +152,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -199,7 +196,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -243,7 +240,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -287,7 +284,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -331,7 +328,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -375,7 +372,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -419,7 +416,7 @@ internal static class YahooMediaUtility
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -535,81 +532,76 @@ internal static class YahooMediaUtility
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
     private static int CompareCommonObjectEntityClasses(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
     {
+        switch (source, target)
+        {
+            case (null, null): return 0;
+            case (not null, null): return 1;
+            case (null, not null): return -1;
+        }
+
         int result = 0;
-        if (source == null && target == null)
-        {
-            return 0;
-        }
-        else if (source != null && target == null)
-        {
-            return 1;
-        }
-        else if (source == null && target != null)
-        {
-            return -1;
-        }
         if (source.Copyright != null)
         {
             if (target.Copyright != null)
             {
-                result |= source.Copyright.CompareTo(target.Copyright);
+                if (result == 0) result = source.Copyright.CompareTo(target.Copyright);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (target.Copyright != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (source.Description != null)
         {
             if (target.Description != null)
             {
-                result |= source.Description.CompareTo(target.Description);
+                if (result == 0) result = source.Description.CompareTo(target.Description);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (target.Description != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (source.Player != null)
         {
             if (target.Player != null)
             {
-                result |= source.Player.CompareTo(target.Player);
+                if (result == 0) result = source.Player.CompareTo(target.Player);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (target.Player != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (source.Title != null)
         {
             if (target.Title != null)
             {
-                result |= source.Title.CompareTo(target.Title);
+                if (result == 0) result = source.Title.CompareTo(target.Title);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (target.Title != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         return result;
@@ -623,27 +615,21 @@ internal static class YahooMediaUtility
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
     private static int CompareCommonObjectEntityCollections(IYahooMediaCommonObjectEntities source, IYahooMediaCommonObjectEntities target)
     {
-        int result = 0;
-        if (source == null && target == null)
+        switch (source, target)
         {
-            return 0;
+            case (null, null): return 0;
+            case (not null, null): return 1;
+            case (null, not null): return -1;
         }
-        else if (source != null && target == null)
-        {
-            return 1;
-        }
-        else if (source == null && target != null)
-        {
-            return -1;
-        }
-        result |= YahooMediaUtility.CompareSequence(source.Categories, target.Categories);
-        result |= YahooMediaUtility.CompareSequence(source.Credits, target.Credits);
-        result |= YahooMediaUtility.CompareSequence(source.Hashes, target.Hashes);
-        result |= ComparisonUtility.CompareSequence(source.Keywords, target.Keywords, StringComparison.OrdinalIgnoreCase);
-        result |= YahooMediaUtility.CompareSequence(source.Ratings, target.Ratings);
-        result |= YahooMediaUtility.CompareSequence(source.Restrictions, target.Restrictions);
-        result |= YahooMediaUtility.CompareSequence(source.TextSeries, target.TextSeries);
-        result |= YahooMediaUtility.CompareSequence(source.Thumbnails, target.Thumbnails);
+
+        int result = YahooMediaUtility.CompareSequence(source.Categories, target.Categories);
+        if (result == 0) result = YahooMediaUtility.CompareSequence(source.Credits, target.Credits);
+        if (result == 0) result = YahooMediaUtility.CompareSequence(source.Hashes, target.Hashes);
+        if (result == 0) result = ComparisonUtility.CompareSequence(source.Keywords, target.Keywords, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = YahooMediaUtility.CompareSequence(source.Ratings, target.Ratings);
+        if (result == 0) result = YahooMediaUtility.CompareSequence(source.Restrictions, target.Restrictions);
+        if (result == 0) result = YahooMediaUtility.CompareSequence(source.TextSeries, target.TextSeries);
+        if (result == 0) result = YahooMediaUtility.CompareSequence(source.Thumbnails, target.Thumbnails);
 
         return result;
     }

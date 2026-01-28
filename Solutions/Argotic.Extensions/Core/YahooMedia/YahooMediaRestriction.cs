@@ -359,8 +359,8 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
         }
 
         int result = ComparisonUtility.CompareSequence(this.Entities, other.Entities, StringComparison.Ordinal);
-        result |= this.EntityType.CompareTo(other.EntityType);
-        result |= this.Relationship.CompareTo(other.Relationship);
+        if (result == 0) result = this.EntityType.CompareTo(other.EntityType);
+        if (result == 0) result = this.Relationship.CompareTo(other.Relationship);
 
         return result;
     }

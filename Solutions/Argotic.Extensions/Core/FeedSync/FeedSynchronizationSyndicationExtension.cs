@@ -153,42 +153,48 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
         }
 
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= this.Version.CompareTo(other.Version);
-        result |= string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
-        result |= string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
+        if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Version.CompareTo(other.Version);
+        if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-        if (this.Context.Sharing != null)
+        if (result == 0)
         {
-            if (other.Context.Sharing != null)
+            if (this.Context.Sharing != null)
             {
-                result |= this.Context.Sharing.CompareTo(other.Context.Sharing);
+                if (other.Context.Sharing != null)
+                {
+                    result = this.Context.Sharing.CompareTo(other.Context.Sharing);
+                }
+                else
+                {
+                    result = 1;
+                }
             }
-            else
+            else if (this.Context.Sharing == null && other.Context.Sharing != null)
             {
-                result |= 1;
+                result = -1;
             }
-        }
-        else if (this.Context.Sharing == null && other.Context.Sharing != null)
-        {
-            result |= -1;
         }
 
-        if (this.Context.Synchronization != null)
+        if (result == 0)
         {
-            if (other.Context.Synchronization != null)
+            if (this.Context.Synchronization != null)
             {
-                result |= this.Context.Synchronization.CompareTo(other.Context.Synchronization);
+                if (other.Context.Synchronization != null)
+                {
+                    result = this.Context.Synchronization.CompareTo(other.Context.Synchronization);
+                }
+                else
+                {
+                    result = 1;
+                }
             }
-            else
+            else if (this.Context.Synchronization == null && other.Context.Synchronization != null)
             {
-                result |= 1;
+                result = -1;
             }
-        }
-        else if (this.Context.Synchronization == null && other.Context.Synchronization != null)
-        {
-            result |= -1;
         }
 
         return result;

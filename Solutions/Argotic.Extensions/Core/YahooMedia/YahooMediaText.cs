@@ -395,14 +395,14 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= this.End.CompareTo(other.End);
+        if (result == 0) result = this.End.CompareTo(other.End);
 
         string sourceLanguageName = this.Language != null ? this.Language.Name : string.Empty;
         string targetLanguageName = other.Language != null ? other.Language.Name : string.Empty;
-        result |= string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
-        result |= this.Start.CompareTo(other.Start);
-        result |= this.TextType.CompareTo(other.TextType);
+        if (result == 0) result = this.Start.CompareTo(other.Start);
+        if (result == 0) result = this.TextType.CompareTo(other.TextType);
 
         return result;
     }

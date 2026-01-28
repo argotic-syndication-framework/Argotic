@@ -209,7 +209,7 @@ public class FeedSynchronizationHistory : IComparable
 
         if (!string.IsNullOrEmpty(this.By))
         {
-            writer.WriteAttributeString("when", this.By);
+            writer.WriteAttributeString("by", this.By);
         }
 
         writer.WriteEndElement();

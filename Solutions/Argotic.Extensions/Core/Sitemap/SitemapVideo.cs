@@ -11,12 +11,32 @@ namespace Argotic.Extensions.Core;
 ///     <para>
 ///         The <see cref="SitemapVideo"/> class represents video information that can be included in a sitemap
 ///         to help search engines discover and understand video content on your site. This conforms to the
-///         Google Video Sitemap extension specification.
+///         Google Video Sitemap extension specification version 1.1.
+///     </para>
+///     <para>
+///         <b>Deprecated Elements (May 2022):</b><br/>
+///         The following elements were deprecated by Google and are intentionally not implemented:
+///         <list type="bullet">
+///             <item><c>video:price</c> - Video purchase/rental pricing</item>
+///             <item><c>video:category</c> - Video category (max 256 chars)</item>
+///             <item><c>video:gallery_loc</c> - Gallery URL with title attribute</item>
+///             <item><c>video:tvshow</c> - TV show metadata</item>
+///             <item><c>player_loc/@allow_embed</c> - Embed permission attribute</item>
+///             <item><c>player_loc/@autoplay</c> - Autoplay parameter attribute</item>
+///         </list>
+///         See <see href="https://developers.google.com/search/blog/2022/05/spring-cleaning-sitemap-extensions">Google's announcement</see>.
 ///     </para>
 /// </remarks>
+/// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
 [Serializable]
 public class SitemapVideo : IComparable
 {
+    /// <summary>
+    /// Maximum length for video title per Google Video Sitemap 1.1 specification.
+    /// </summary>
+    /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd"/>
+    public const int MaxTitleLength = 100;
+
     /// <summary>
     /// The maximum length allowed for the description field.
     /// </summary>
@@ -78,6 +98,16 @@ public class SitemapVideo : IComparable
     private readonly List<string> videoTags = [];
 
     /// <summary>
+    /// Private member to hold the identifiers for the video.
+    /// </summary>
+    private readonly List<SitemapVideoId> videoIdentifiers = [];
+
+    /// <summary>
+    /// Private member to hold the content segments for the video.
+    /// </summary>
+    private readonly List<SitemapVideoSegment> videoContentSegments = [];
+
+    /// <summary>
     /// Initializes a new instance of the <see cref="SitemapVideo"/> class.
     /// </summary>
     public SitemapVideo()
@@ -100,7 +130,7 @@ public class SitemapVideo : IComparable
         ArgumentException.ThrowIfNullOrEmpty(description);
 
         this.videoThumbnailLocation = thumbnailLocation;
-        this.videoTitle = title.Trim();
+        this.Title = title;
         this.Description = description;
     }
 
@@ -126,7 +156,11 @@ public class SitemapVideo : IComparable
     /// <summary>
     /// Gets or sets the title of the video.
     /// </summary>
-    /// <value>The title of the video. This is a required property.</value>
+    /// <value>The title of the video, limited to 100 characters. This is a required property.</value>
+    /// <remarks>
+    ///     The title must be limited to 100 characters per the Google Video Sitemap 1.1 specification.
+    ///     If a longer value is provided, it will be truncated to the maximum allowed length.
+    /// </remarks>
     /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
     public string Title
     {
@@ -138,7 +172,15 @@ public class SitemapVideo : IComparable
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            videoTitle = value.Trim();
+            string trimmedValue = value.Trim();
+            if (trimmedValue.Length > MaxTitleLength)
+            {
+                videoTitle = trimmedValue[..MaxTitleLength];
+            }
+            else
+            {
+                videoTitle = trimmedValue;
+            }
         }
     }
 
@@ -311,6 +353,18 @@ public class SitemapVideo : IComparable
     public IList<string> Tags => videoTags;
 
     /// <summary>
+    /// Gets the identifiers associated with the video.
+    /// </summary>
+    /// <value>A list of video identifiers. Optional.</value>
+    public IList<SitemapVideoId> Identifiers => videoIdentifiers;
+
+    /// <summary>
+    /// Gets the content segment locations for the video.
+    /// </summary>
+    /// <value>A list of content segment locations. Optional.</value>
+    public IList<SitemapVideoSegment> ContentSegments => videoContentSegments;
+
+    /// <summary>
     /// Initializes the video using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SitemapVideo"/>.</param>
@@ -352,7 +406,8 @@ public class SitemapVideo : IComparable
 
         if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
-            this.videoTitle = titleNavigator.Value.Trim();
+            string trimmedTitle = titleNavigator.Value.Trim();
+            this.videoTitle = trimmedTitle.Length > MaxTitleLength ? trimmedTitle[..MaxTitleLength] : trimmedTitle;
             wasLoaded = true;
         }
 
@@ -475,6 +530,34 @@ public class SitemapVideo : IComparable
                 if (!string.IsNullOrEmpty(tagIterator.Current.Value))
                 {
                     this.videoTags.Add(tagIterator.Current.Value.Trim());
+                    wasLoaded = true;
+                }
+            }
+        }
+
+        XPathNodeIterator idIterator = source.Select("video:id", manager);
+        if (idIterator is { Count: > 0 })
+        {
+            while (idIterator.MoveNext())
+            {
+                SitemapVideoId videoId = new SitemapVideoId();
+                if (videoId.Load(idIterator.Current))
+                {
+                    this.videoIdentifiers.Add(videoId);
+                    wasLoaded = true;
+                }
+            }
+        }
+
+        XPathNodeIterator segmentIterator = source.Select("video:content_segment_loc", manager);
+        if (segmentIterator is { Count: > 0 })
+        {
+            while (segmentIterator.MoveNext())
+            {
+                SitemapVideoSegment segment = new SitemapVideoSegment();
+                if (segment.Load(segmentIterator.Current))
+                {
+                    this.videoContentSegments.Add(segment);
                     wasLoaded = true;
                 }
             }
@@ -640,6 +723,8 @@ public class SitemapVideo : IComparable
         WritePlatformElement(writer, xmlNamespace);
         WriteRestrictionElement(writer, xmlNamespace);
         WriteTagElements(writer, xmlNamespace);
+        WriteIdentifierElements(writer, xmlNamespace);
+        WriteContentSegmentElements(writer, xmlNamespace);
     }
 
     /// <summary>
@@ -725,6 +810,28 @@ public class SitemapVideo : IComparable
                 writer.WriteElementString("tag", xmlNamespace, tag);
                 count++;
             }
+        }
+    }
+
+    /// <summary>
+    /// Writes the identifier elements.
+    /// </summary>
+    private void WriteIdentifierElements(XmlWriter writer, string xmlNamespace)
+    {
+        foreach (SitemapVideoId identifier in this.Identifiers)
+        {
+            identifier.WriteTo(writer, xmlNamespace);
+        }
+    }
+
+    /// <summary>
+    /// Writes the content segment elements.
+    /// </summary>
+    private void WriteContentSegmentElements(XmlWriter writer, string xmlNamespace)
+    {
+        foreach (SitemapVideoSegment segment in this.ContentSegments)
+        {
+            segment.WriteTo(writer, xmlNamespace);
         }
     }
 

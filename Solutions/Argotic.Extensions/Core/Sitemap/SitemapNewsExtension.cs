@@ -15,6 +15,7 @@ namespace Argotic.Extensions.Core;
 ///         <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap">https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap</a>.
 ///     </para>
 /// </remarks>
+/// <seealso href="https://www.google.com/schemas/sitemap-news/0.9/sitemap-news.xsd">News Sitemap 0.9 Schema</seealso>
 [Serializable]
 public class SitemapNewsExtension : SyndicationExtension, IComparable
 {

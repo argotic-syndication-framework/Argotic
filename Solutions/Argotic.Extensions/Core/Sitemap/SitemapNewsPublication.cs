@@ -12,6 +12,7 @@ namespace Argotic.Extensions.Core;
 ///         that originally published the news article, including the publication name and language.
 ///     </para>
 /// </remarks>
+/// <seealso href="https://www.google.com/schemas/sitemap-news/0.9/sitemap-news.xsd">News Sitemap 0.9 Schema</seealso>
 [Serializable]
 public class SitemapNewsPublication : IComparable
 {

@@ -14,6 +14,7 @@ namespace Argotic.Extensions.Core;
 ///         <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps">https://developers.google.com/search/docs/crawling-indexing/sitemaps/image-sitemaps</a>.
 ///     </para>
 /// </remarks>
+/// <seealso href="https://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">Image Sitemap 1.1 Schema</seealso>
 [Serializable]
 public class SitemapImageExtension : SyndicationExtension, IComparable
 {

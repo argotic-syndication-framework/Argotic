@@ -1,102 +1,132 @@
+using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 
 namespace Argotic.Extensions.Core;
 
 /// <summary>
-/// Represents an image in a sitemap image extension.
+/// Represents a content segment location element in a Google Video Sitemap.
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="SitemapImage"/> class represents image information that can be included in a sitemap
-///         to help search engines discover images on your site. This conforms to the Google Image Sitemap extension.
+///         The <see cref="SitemapVideoSegment"/> class represents a video segment that can be included
+///         in a video sitemap to describe a portion of a video. Each segment has a URL pointing to the
+///         segment content and an optional duration attribute.
 ///     </para>
 /// </remarks>
-/// <seealso href="https://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">Image Sitemap 1.1 Schema</seealso>
+/// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
 [Serializable]
-public class SitemapImage : IComparable
+public class SitemapVideoSegment : IComparable
 {
     /// <summary>
-    /// Private member to hold the URL of the image.
+    /// The maximum allowed duration in seconds for a video segment (8 hours).
     /// </summary>
-    private Uri imageLocation;
+    /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd"/>
+    public const int MaxDuration = 28800;
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="SitemapImage"/> class.
+    /// Private member to hold the URL of the video segment.
     /// </summary>
-    public SitemapImage()
+    private Uri segmentLocation;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SitemapVideoSegment"/> class.
+    /// </summary>
+    public SitemapVideoSegment()
     {
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="SitemapImage"/> class with the specified location.
+    /// Initializes a new instance of the <see cref="SitemapVideoSegment"/> class with the specified location.
     /// </summary>
-    /// <param name="location">The URL of the image.</param>
+    /// <param name="location">The URL of the video segment.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="location"/> is a null reference.</exception>
-    public SitemapImage(Uri location)
+    public SitemapVideoSegment(Uri location)
     {
         ArgumentNullException.ThrowIfNull(location);
-        this.imageLocation = location;
+        this.segmentLocation = location;
     }
 
     /// <summary>
-    /// Gets or sets the URL of the image.
+    /// Initializes a new instance of the <see cref="SitemapVideoSegment"/> class with the specified location and duration.
     /// </summary>
-    /// <value>A <see cref="Uri"/> that represents the URL of the image. This is a required property.</value>
+    /// <param name="location">The URL of the video segment.</param>
+    /// <param name="duration">The duration of the video segment in seconds.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="location"/> is a null reference.</exception>
+    public SitemapVideoSegment(Uri location, int? duration)
+    {
+        ArgumentNullException.ThrowIfNull(location);
+        this.segmentLocation = location;
+        this.Duration = duration;
+    }
+
+    /// <summary>
+    /// Gets or sets the URL of the video segment.
+    /// </summary>
+    /// <value>A <see cref="Uri"/> that represents the URL of the video segment. This is a required property.</value>
     /// <remarks>
-    ///     The URL must be from the same domain as the page containing the sitemap, or from an allowed CDN domain.
+    ///     The URL must point to the actual video segment content file.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Location
     {
         get
         {
-            return imageLocation;
+            return segmentLocation;
         }
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            imageLocation = value;
+            segmentLocation = value;
         }
     }
 
     /// <summary>
-    /// Initializes the image using the supplied <see cref="XPathNavigator"/>.
+    /// Gets or sets the duration of the video segment in seconds.
     /// </summary>
-    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SitemapImage"/>.</param>
-    /// <param name="manager">The <see cref="XmlNamespaceManager"/> object used to resolve prefixed XML namespaces.</param>
-    /// <returns><b>true</b> if the <see cref="SitemapImage"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+    /// <value>The duration of the video segment in seconds. Optional.</value>
+    /// <remarks>
+    ///     The duration should be between 1 and 28800 seconds (8 hours).
+    /// </remarks>
+    public int? Duration { get; set; }
+
+    /// <summary>
+    /// Initializes the video segment using the supplied <see cref="XPathNavigator"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="XPathNavigator"/> used to load this <see cref="SitemapVideoSegment"/>.</param>
+    /// <returns><b>true</b> if the <see cref="SitemapVideoSegment"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, XmlNamespaceManager manager)
+    public bool Load(XPathNavigator source)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(manager);
 
-        // Try to find loc element - handle both cases:
-        // 1. Navigator positioned at the <image> element (look for child)
-        // 2. Navigator positioned at document root (look for descendant)
-        XPathNavigator locNavigator = source.SelectSingleNode("image:loc", manager);
-        locNavigator ??= source.SelectSingleNode("descendant::image:loc", manager);
-
-        if (locNavigator != null && !string.IsNullOrEmpty(locNavigator.Value))
+        // Load the URL from the element value
+        if (!string.IsNullOrEmpty(source.Value))
         {
-            if (Uri.TryCreate(locNavigator.Value, UriKind.RelativeOrAbsolute, out Uri location))
+            if (Uri.TryCreate(source.Value, UriKind.RelativeOrAbsolute, out Uri location))
             {
-                this.imageLocation = location;
+                this.segmentLocation = location;
                 wasLoaded = true;
             }
+        }
+
+        // Load the optional duration attribute
+        string durationAttr = source.GetAttribute("duration", string.Empty);
+        if (!string.IsNullOrEmpty(durationAttr) && int.TryParse(durationAttr, NumberStyles.Integer, CultureInfo.InvariantCulture, out int duration))
+        {
+            this.Duration = duration;
+            wasLoaded = true;
         }
 
         return wasLoaded;
     }
 
     /// <summary>
-    /// Writes the image to the specified <see cref="XmlWriter"/>.
+    /// Writes the video segment to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="writer">The <see cref="XmlWriter"/> to which the image will be written.</param>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which the video segment will be written.</param>
     /// <param name="xmlNamespace">The XML namespace used to qualify prefixed elements.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="xmlNamespace"/> is a null reference or empty string.</exception>
@@ -105,11 +135,16 @@ public class SitemapImage : IComparable
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
 
-        writer.WriteStartElement("image", xmlNamespace);
+        writer.WriteStartElement("content_segment_loc", xmlNamespace);
+
+        if (this.Duration.HasValue)
+        {
+            writer.WriteAttributeString("duration", this.Duration.Value.ToString(CultureInfo.InvariantCulture));
+        }
 
         if (this.Location != null)
         {
-            writer.WriteElementString("loc", xmlNamespace, this.Location.ToString());
+            writer.WriteString(this.Location.ToString());
         }
 
         writer.WriteEndElement();
@@ -128,7 +163,7 @@ public class SitemapImage : IComparable
             return 1;
         }
 
-        SitemapImage other = obj as SitemapImage;
+        SitemapVideoSegment other = obj as SitemapVideoSegment;
 
         if (other != null)
         {
@@ -147,7 +182,7 @@ public class SitemapImage : IComparable
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
     public override bool Equals(object? obj)
     {
-        if (obj is not SitemapImage)
+        if (obj is not SitemapVideoSegment)
         {
             return false;
         }
@@ -165,9 +200,9 @@ public class SitemapImage : IComparable
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="SitemapImage"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="SitemapVideoSegment"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapImage"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapVideoSegment"/>.</returns>
     public override string ToString()
     {
         return this.Location?.ToString() ?? string.Empty;
@@ -179,7 +214,7 @@ public class SitemapImage : IComparable
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(SitemapImage first, SitemapImage second)
+    public static bool operator ==(SitemapVideoSegment first, SitemapVideoSegment second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -191,7 +226,7 @@ public class SitemapImage : IComparable
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapImage first, SitemapImage second)
+    public static bool operator !=(SitemapVideoSegment first, SitemapVideoSegment second)
     {
         return !(first == second);
     }
@@ -202,7 +237,7 @@ public class SitemapImage : IComparable
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(SitemapImage first, SitemapImage second)
+    public static bool operator <(SitemapVideoSegment first, SitemapVideoSegment second)
     {
         if (first is null) return second is not null;
         return first.CompareTo(second) < 0;
@@ -214,7 +249,7 @@ public class SitemapImage : IComparable
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(SitemapImage first, SitemapImage second)
+    public static bool operator >(SitemapVideoSegment first, SitemapVideoSegment second)
     {
         if (first is null) return false;
         return first.CompareTo(second) > 0;
@@ -226,7 +261,7 @@ public class SitemapImage : IComparable
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(SitemapImage first, SitemapImage second)
+    public static bool operator <=(SitemapVideoSegment first, SitemapVideoSegment second)
     {
         if (first is null) return true;
         return first.CompareTo(second) <= 0;
@@ -238,7 +273,7 @@ public class SitemapImage : IComparable
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(SitemapImage first, SitemapImage second)
+    public static bool operator >=(SitemapVideoSegment first, SitemapVideoSegment second)
     {
         if (first is null) return second is null;
         return first.CompareTo(second) >= 0;

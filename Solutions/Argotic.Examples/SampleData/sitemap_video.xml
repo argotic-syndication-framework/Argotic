@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+  <url>
+    <loc>https://www.example.com/videos/cooking-tutorial</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.example.com/thumbnails/cooking-tutorial.jpg</video:thumbnail_loc>
+      <video:title>How to Make Perfect Pasta</video:title>
+      <video:description>Learn the secrets to cooking perfect pasta every time. This comprehensive tutorial covers everything from selecting the right pasta shape to achieving the ideal al dente texture.</video:description>
+      <video:content_loc>https://www.example.com/videos/cooking-tutorial.mp4</video:content_loc>
+      <video:duration>600</video:duration>
+      <video:publication_date>2024-06-15</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:tag>cooking</video:tag>
+      <video:tag>pasta</video:tag>
+      <video:tag>italian cuisine</video:tag>
+      <video:uploader info="https://www.example.com/users/chef-maria">Chef Maria</video:uploader>
+      <video:platform relationship="allow">web mobile</video:platform>
+    </video:video>
+  </url>
+  <url>
+    <loc>https://www.example.com/videos/yoga-beginners</loc>
+    <video:video>
+      <video:thumbnail_loc>https://www.example.com/thumbnails/yoga-beginners.jpg</video:thumbnail_loc>
+      <video:title>Yoga for Beginners - 30 Minute Morning Routine</video:title>
+      <video:description>Start your day with this gentle 30-minute yoga routine designed specifically for beginners. No experience necessary - just bring a yoga mat and an open mind.</video:description>
+      <video:player_loc>https://www.example.com/player?video=yoga-beginners</video:player_loc>
+      <video:duration>1800</video:duration>
+      <video:publication_date>2024-07-20</video:publication_date>
+      <video:family_friendly>yes</video:family_friendly>
+      <video:tag>yoga</video:tag>
+      <video:tag>fitness</video:tag>
+      <video:tag>wellness</video:tag>
+      <video:uploader info="https://www.example.com/users/yoga-with-sarah">Sarah Johnson</video:uploader>
+      <video:platform relationship="allow">web mobile tv</video:platform>
+    </video:video>
+  </url>
+</urlset>

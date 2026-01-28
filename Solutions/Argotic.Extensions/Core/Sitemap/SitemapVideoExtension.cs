@@ -13,7 +13,21 @@ namespace Argotic.Extensions.Core;
 ///         conforms to the Google Video Sitemap extension specification, which can be found at
 ///         <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps">https://developers.google.com/search/docs/crawling-indexing/sitemaps/video-sitemaps</a>.
 ///     </para>
+///     <para>
+///         <b>Deprecated Elements (May 2022):</b><br/>
+///         The following elements were deprecated by Google and are intentionally not implemented:
+///         <list type="bullet">
+///             <item><c>video:price</c> - Video purchase/rental pricing</item>
+///             <item><c>video:category</c> - Video category (max 256 chars)</item>
+///             <item><c>video:gallery_loc</c> - Gallery URL with title attribute</item>
+///             <item><c>video:tvshow</c> - TV show metadata</item>
+///             <item><c>player_loc/@allow_embed</c> - Embed permission attribute</item>
+///             <item><c>player_loc/@autoplay</c> - Autoplay parameter attribute</item>
+///         </list>
+///         See <see href="https://developers.google.com/search/blog/2022/05/spring-cleaning-sitemap-extensions">Google's announcement</see>.
+///     </para>
 /// </remarks>
+/// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
 [Serializable]
 public class SitemapVideoExtension : SyndicationExtension, IComparable
 {

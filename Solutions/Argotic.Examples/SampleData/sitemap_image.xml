@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+        xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+  <url>
+    <loc>https://www.example.com/products/ergonomic-office-chair</loc>
+    <image:image>
+      <image:loc>https://www.example.com/images/products/ergonomic-chair-front.jpg</image:loc>
+      <image:title>Ergonomic Office Chair - Front View</image:title>
+      <image:caption>Premium ergonomic office chair with adjustable lumbar support and breathable mesh back, shown from the front.</image:caption>
+    </image:image>
+    <image:image>
+      <image:loc>https://www.example.com/images/products/ergonomic-chair-side.jpg</image:loc>
+      <image:title>Ergonomic Office Chair - Side View</image:title>
+      <image:caption>Side profile of the ergonomic office chair highlighting the adjustable armrests and seat height mechanism.</image:caption>
+    </image:image>
+  </url>
+  <url>
+    <loc>https://www.example.com/blog/summer-garden-tips</loc>
+    <image:image>
+      <image:loc>https://www.example.com/images/blog/summer-garden-flowers.jpg</image:loc>
+      <image:title>Beautiful Summer Garden</image:title>
+      <image:caption>A vibrant summer garden showcasing colorful flowers including roses, lavender, and sunflowers in full bloom.</image:caption>
+    </image:image>
+  </url>
+</urlset>

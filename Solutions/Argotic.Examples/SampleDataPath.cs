@@ -49,6 +49,15 @@ public static class SampleDataPath
     /// <summary>Gets the path to the sample Sitemap Index file.</summary>
     public static FilePath SitemapIndex => BasePath.CombineWithFilePath("sitemap_index.xml");
 
+    /// <summary>Gets the path to the sample Video sitemap file.</summary>
+    public static FilePath SitemapVideo => BasePath.CombineWithFilePath("sitemap_video.xml");
+
+    /// <summary>Gets the path to the sample Image sitemap file.</summary>
+    public static FilePath SitemapImage => BasePath.CombineWithFilePath("sitemap_image.xml");
+
+    /// <summary>Gets the path to the sample News sitemap file.</summary>
+    public static FilePath SitemapNews => BasePath.CombineWithFilePath("sitemap_news.xml");
+
     /// <summary>
     /// Opens a file for reading.
     /// </summary>

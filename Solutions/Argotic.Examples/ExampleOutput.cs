@@ -932,4 +932,64 @@ public static class ExampleOutput
             AnsiConsole.MarkupLine($"    [dim]... and {index.Sitemaps.Count - 5} more[/]");
         }
     }
+
+    /// <summary>
+    /// Displays information about a SitemapVideoExtension.
+    /// </summary>
+    public static void ShowSitemapVideoExtension(SitemapVideoExtension extension)
+    {
+        AnsiConsole.MarkupLine($"  [dim]Video Extension:[/] [blue]{extension.Videos.Count} video(s)[/]");
+        foreach (SitemapVideo video in extension.Videos.Take(3))
+        {
+            AnsiConsole.MarkupLine($"    - [blue]{Markup.Escape(video.Title)}[/]");
+            if (video.Duration.HasValue)
+            {
+                AnsiConsole.MarkupLine($"      [dim]Duration:[/] {video.Duration.Value}s");
+            }
+            if (!string.IsNullOrEmpty(video.Uploader))
+            {
+                AnsiConsole.MarkupLine($"      [dim]Uploader:[/] {Markup.Escape(video.Uploader)}");
+            }
+        }
+        if (extension.Videos.Count > 3)
+        {
+            AnsiConsole.MarkupLine($"    [dim]... and {extension.Videos.Count - 3} more[/]");
+        }
+    }
+
+    /// <summary>
+    /// Displays information about a SitemapImageExtension.
+    /// </summary>
+    public static void ShowSitemapImageExtension(SitemapImageExtension extension)
+    {
+        AnsiConsole.MarkupLine($"  [dim]Image Extension:[/] [blue]{extension.Images.Count} image(s)[/]");
+        foreach (SitemapImage image in extension.Images.Take(3))
+        {
+            AnsiConsole.MarkupLine($"    - {Markup.Escape(image.Location?.ToString() ?? "")}");
+        }
+        if (extension.Images.Count > 3)
+        {
+            AnsiConsole.MarkupLine($"    [dim]... and {extension.Images.Count - 3} more[/]");
+        }
+    }
+
+    /// <summary>
+    /// Displays information about a SitemapNewsExtension.
+    /// </summary>
+    public static void ShowSitemapNewsExtension(SitemapNewsExtension extension)
+    {
+        AnsiConsole.MarkupLine("  [dim]News Extension:[/]");
+        if (!string.IsNullOrEmpty(extension.Title))
+        {
+            AnsiConsole.MarkupLine($"    [dim]Title:[/] [blue]{Markup.Escape(extension.Title)}[/]");
+        }
+        if (extension.Publication != null)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Publication:[/] {Markup.Escape(extension.Publication.Name)} ({Markup.Escape(extension.Publication.Language)})");
+        }
+        if (extension.PublicationDate != DateTime.MinValue)
+        {
+            AnsiConsole.MarkupLine($"    [dim]Date:[/] {extension.PublicationDate:yyyy-MM-dd HH:mm:ss}");
+        }
+    }
 }

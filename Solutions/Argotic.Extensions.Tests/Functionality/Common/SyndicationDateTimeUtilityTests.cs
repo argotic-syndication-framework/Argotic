@@ -898,4 +898,182 @@ public class SyndicationDateTimeUtilityTests
     }
 
     #endregion
+
+    #region TryParseRfc822DateTime Numeric Timezone Offset Tests
+
+    /// <summary>
+    /// Regression test for bug where ReplaceRfc822TimeZoneWithOffset returned empty string
+    /// for dates with numeric timezone offsets (e.g., +00:00, -05:00).
+    ///
+    /// The bug was in SyndicationDateTimeUtility.cs lines 185-189 where the else branch
+    /// returned string.Empty instead of the original value when no named timezone conversion
+    /// was needed. This caused TryParseRfc822DateTime to receive an empty string and fail.
+    ///
+    /// Fix: Changed the else branch to return the original value unchanged.
+    /// </summary>
+    [TestMethod]
+    public void TryParseRfc822DateTime_WithNumericTimezoneOffset_ParsesCorrectly()
+    {
+        // Arrange - Numeric offset format that was previously broken
+        string input = "Mon, 20 Jan 2025 12:00:00 +00:00";
+
+        // Act
+        bool result = SyndicationDateTimeUtility.TryParseRfc822DateTime(input, out DateTime parsed);
+
+        // Assert
+        result.ShouldBeTrue("Dates with numeric timezone offsets should parse successfully");
+        parsed.Year.ShouldBe(2025);
+        parsed.Month.ShouldBe(1);
+        parsed.Day.ShouldBe(20);
+        parsed.Hour.ShouldBe(12);
+        parsed.Minute.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void TryParseRfc822DateTime_WithPositiveNumericOffset_ParsesAndConvertsToUtc()
+    {
+        // Arrange - +05:00 offset
+        string input = "Mon, 20 Jan 2025 15:30:00 +05:00";
+
+        // Act
+        bool result = SyndicationDateTimeUtility.TryParseRfc822DateTime(input, out DateTime parsed);
+
+        // Assert
+        result.ShouldBeTrue();
+        parsed.Year.ShouldBe(2025);
+        // 15:30 +05:00 = 10:30 UTC
+        parsed.Hour.ShouldBe(10);
+        parsed.Minute.ShouldBe(30);
+    }
+
+    [TestMethod]
+    public void TryParseRfc822DateTime_WithNegativeNumericOffset_ParsesAndConvertsToUtc()
+    {
+        // Arrange - -08:00 offset (Pacific Standard Time)
+        string input = "Mon, 20 Jan 2025 04:00:00 -08:00";
+
+        // Act
+        bool result = SyndicationDateTimeUtility.TryParseRfc822DateTime(input, out DateTime parsed);
+
+        // Assert
+        result.ShouldBeTrue();
+        parsed.Year.ShouldBe(2025);
+        // 04:00 -08:00 = 12:00 UTC
+        parsed.Hour.ShouldBe(12);
+        parsed.Minute.ShouldBe(0);
+    }
+
+    [TestMethod]
+    public void TryParseRfc822DateTime_WithNumericOffsetWithoutColon_ParsesCorrectly()
+    {
+        // Arrange - Some feeds use +0000 format (without colon)
+        string input = "Mon, 20 Jan 2025 12:00:00 +0000";
+
+        // Act
+        bool result = SyndicationDateTimeUtility.TryParseRfc822DateTime(input, out DateTime parsed);
+
+        // Assert
+        result.ShouldBeTrue("Dates with compact numeric offsets (+0000) should parse");
+        parsed.Year.ShouldBe(2025);
+        parsed.Month.ShouldBe(1);
+        parsed.Day.ShouldBe(20);
+    }
+
+    [TestMethod]
+    public void TryParseRfc822DateTime_WithNumericOffsetCrossingDateBoundary_ParsesCorrectly()
+    {
+        // Arrange - Time that crosses date boundary when converting to UTC
+        // 02:00 on Jan 21 at +10:00 = 16:00 on Jan 20 UTC
+        string input = "Tue, 21 Jan 2025 02:00:00 +10:00";
+
+        // Act
+        bool result = SyndicationDateTimeUtility.TryParseRfc822DateTime(input, out DateTime parsed);
+
+        // Assert
+        result.ShouldBeTrue();
+        parsed.Day.ShouldBe(20);
+        parsed.Hour.ShouldBe(16);
+    }
+
+    [TestMethod]
+    public void TryParseRfc822DateTime_WithSingleDigitDayAndNumericOffset_ParsesCorrectly()
+    {
+        // Arrange - Single digit day with numeric offset
+        string input = "Fri, 3 Jan 2025 10:30:00 +00:00";
+
+        // Act
+        bool result = SyndicationDateTimeUtility.TryParseRfc822DateTime(input, out DateTime parsed);
+
+        // Assert
+        result.ShouldBeTrue();
+        parsed.Day.ShouldBe(3);
+        parsed.Month.ShouldBe(1);
+        parsed.Year.ShouldBe(2025);
+    }
+
+    [TestMethod]
+    public void TryParseRfc822DateTime_WithTwoDigitYearAndNumericOffset_ParsesCorrectly()
+    {
+        // Arrange - Two digit year with numeric offset
+        string input = "Mon, 20 Jan 25 12:00:00 +00:00";
+
+        // Act
+        bool result = SyndicationDateTimeUtility.TryParseRfc822DateTime(input, out DateTime parsed);
+
+        // Assert
+        result.ShouldBeTrue();
+        parsed.Year.ShouldBe(2025);
+    }
+
+    [TestMethod]
+    public void TryParseRfc822DateTime_WithFractionalSecondsAndNumericOffset_ParsesCorrectly()
+    {
+        // Arrange - Fractional seconds with numeric offset
+        string input = "Mon, 20 Jan 2025 12:30:45.123 +00:00";
+
+        // Act
+        bool result = SyndicationDateTimeUtility.TryParseRfc822DateTime(input, out DateTime parsed);
+
+        // Assert
+        result.ShouldBeTrue();
+        parsed.Second.ShouldBe(45);
+    }
+
+    [TestMethod]
+    public void ParseRfc822DateTime_WithNumericOffset_DoesNotThrow()
+    {
+        // Arrange
+        string input = "Mon, 20 Jan 2025 12:00:00 +00:00";
+
+        // Act
+        DateTime result = SyndicationDateTimeUtility.ParseRfc822DateTime(input);
+
+        // Assert
+        result.Year.ShouldBe(2025);
+        result.Month.ShouldBe(1);
+        result.Day.ShouldBe(20);
+    }
+
+    [TestMethod]
+    public void Rfc822_RoundTrip_WithNumericOffset_PreservesDateTime()
+    {
+        // Arrange - Parse a date with numeric offset, format it, parse again
+        string input = "Mon, 20 Jan 2025 12:00:00 +00:00";
+
+        // Act
+        bool firstParse = SyndicationDateTimeUtility.TryParseRfc822DateTime(input, out DateTime parsed);
+        string formatted = SyndicationDateTimeUtility.ToRfc822DateTime(parsed);
+        bool secondParse = SyndicationDateTimeUtility.TryParseRfc822DateTime(formatted, out DateTime reparsed);
+
+        // Assert
+        firstParse.ShouldBeTrue();
+        secondParse.ShouldBeTrue();
+        reparsed.Year.ShouldBe(parsed.Year);
+        reparsed.Month.ShouldBe(parsed.Month);
+        reparsed.Day.ShouldBe(parsed.Day);
+        reparsed.Hour.ShouldBe(parsed.Hour);
+        reparsed.Minute.ShouldBe(parsed.Minute);
+    }
+
+    #endregion
 }

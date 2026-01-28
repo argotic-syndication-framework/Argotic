@@ -184,9 +184,11 @@ public static class SyndicationDateTimeUtility
         }
         else
         {
+            // No timezone conversion needed, return the original value
+            return value;
         }
 
-        return string.Empty;
+        return zoneRepresentedAsLocalDifferential;
     }
 
     /// <summary>

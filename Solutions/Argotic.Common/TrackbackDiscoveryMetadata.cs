@@ -158,7 +158,7 @@ public class TrackbackDiscoveryMetadata : IComparable
         manager.AddNamespace("dc", DUBLIN_CORE_NAMESPACE);
         manager.AddNamespace("trackback", TRACKBACK_NAMESPACE);
 
-        XPathNavigator descriptionNavigator = navigator.SelectSingleNode("rdf:RDF\rdf:Description", manager);
+        XPathNavigator descriptionNavigator = navigator.SelectSingleNode("rdf:RDF/rdf:Description", manager);
 
         if (descriptionNavigator is { HasAttributes: true })
         {

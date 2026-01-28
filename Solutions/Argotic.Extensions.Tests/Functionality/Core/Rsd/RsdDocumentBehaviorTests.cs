@@ -1,6 +1,7 @@
 using System.Xml;
 using System.Xml.XPath;
 using Argotic.Common;
+using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Syndication.Specialized;
 using Shouldly;
 
@@ -554,6 +555,125 @@ public class RsdDocumentBehaviorTests
 
         // Assert
         api.HasExtensions.ShouldBeFalse();
+    }
+
+    #endregion
+
+    #region Async Operations Tests
+
+    [TestMethod]
+    public async Task RsdDocument_LoadAsync_LoadsDocumentCorrectly()
+    {
+        // Arrange
+        RsdDocument document = new RsdDocument();
+        bool eventRaised = false;
+        document.Loaded += (sender, args) => eventRaised = true;
+
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalRsd);
+        using HttpClient httpClient = new HttpClient(handler);
+
+        // Act
+        await document.LoadAsync(
+            new Uri("http://example.com/rsd.xml"),
+            httpClient,
+            cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        eventRaised.ShouldBeTrue();
+        document.EngineName.ShouldBe("Test Engine");
+        document.EngineLink.ShouldBe(new Uri("http://example.com"));
+        document.Homepage.ShouldBe(new Uri("http://example.com/blog"));
+        document.Interfaces.Count.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public async Task RsdDocument_CreateAsync_CreatesAndLoadsNewDocument()
+    {
+        // Arrange
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(RsdWithMultipleApis);
+        using HttpClient httpClient = new HttpClient(handler);
+
+        // Act
+        RsdDocument document = await RsdDocument.CreateAsync(
+            new Uri("http://example.com/rsd.xml"),
+            httpClient,
+            cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        document.ShouldNotBeNull();
+        document.EngineName.ShouldBe("Blog Platform");
+        document.Interfaces.Count.ShouldBe(3);
+    }
+
+    [TestMethod]
+    public async Task RsdDocument_LoadAsync_WithMultipleApis_LoadsAllInterfaces()
+    {
+        // Arrange
+        RsdDocument document = new RsdDocument();
+
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(RsdWithMultipleApis);
+        using HttpClient httpClient = new HttpClient(handler);
+
+        // Act
+        await document.LoadAsync(
+            new Uri("http://example.com/rsd.xml"),
+            httpClient,
+            cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        document.Interfaces.Count.ShouldBe(3);
+        document.Interfaces[0].Name.ShouldBe("MetaWeblog");
+        document.Interfaces[0].IsPreferred.ShouldBeTrue();
+        document.Interfaces[1].Name.ShouldBe("Blogger");
+        document.Interfaces[2].Name.ShouldBe("Atom");
+    }
+
+    [TestMethod]
+    public async Task RsdDocument_LoadAsync_IncludesSourceUriInEventArgs()
+    {
+        // Arrange
+        RsdDocument document = new RsdDocument();
+        Uri? sourceFromEvent = null;
+
+        document.Loaded += (sender, args) =>
+        {
+            sourceFromEvent = args.Source;
+        };
+
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalRsd);
+        using HttpClient httpClient = new HttpClient(handler);
+        Uri requestUri = new Uri("http://example.com/rsd.xml");
+
+        // Act
+        await document.LoadAsync(requestUri, httpClient, cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        sourceFromEvent.ShouldBe(requestUri);
+    }
+
+    [TestMethod]
+    public async Task RsdDocument_LoadAsync_WithSettings_AppliesSettings()
+    {
+        // Arrange
+        RsdDocument document = new RsdDocument();
+        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        {
+            AutoDetectExtensions = true
+        };
+
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalRsd);
+        using HttpClient httpClient = new HttpClient(handler);
+
+        // Act
+        await document.LoadAsync(
+            new Uri("http://example.com/rsd.xml"),
+            httpClient,
+            settings,
+            cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        document.EngineName.ShouldBe("Test Engine");
+        document.Interfaces.Count.ShouldBe(1);
     }
 
     #endregion

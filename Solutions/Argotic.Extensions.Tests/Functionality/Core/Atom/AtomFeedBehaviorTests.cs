@@ -697,6 +697,132 @@ public class AtomFeedBehaviorTests
 
     #endregion
 
+    #region Async Operations Tests
+
+    [TestMethod]
+    public async Task AtomFeed_LoadAsync_LoadsFeedCorrectly()
+    {
+        // Arrange
+        AtomFeed feed = new AtomFeed();
+        bool eventRaised = false;
+        feed.Loaded += (sender, args) => eventRaised = true;
+
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
+        using HttpClient httpClient = new HttpClient(handler);
+
+        // Act
+        await feed.LoadAsync(
+            new Uri("http://example.com/feed.atom"),
+            httpClient,
+            cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        eventRaised.ShouldBeTrue();
+        feed.Title.ShouldNotBeNull();
+        feed.Title.Content.ShouldBe("Test Feed");
+        feed.Id.ShouldNotBeNull();
+    }
+
+    [TestMethod]
+    public async Task AtomFeed_LoadAsync_WithEntries_LoadsAllEntries()
+    {
+        // Arrange
+        AtomFeed feed = new AtomFeed();
+
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.AtomWithEntries);
+        using HttpClient httpClient = new HttpClient(handler);
+
+        // Act
+        await feed.LoadAsync(
+            new Uri("http://example.com/feed.atom"),
+            httpClient,
+            cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        feed.Entries.Count.ShouldBe(2);
+        feed.Entries[0].Title.Content.ShouldBe("Recent Entry");
+        feed.Entries[1].Title.Content.ShouldBe("Old Entry");
+    }
+
+    [TestMethod]
+    public async Task AtomFeed_CreateAsync_CreatesAndLoadsNewFeed()
+    {
+        // Arrange
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
+        using HttpClient httpClient = new HttpClient(handler);
+
+        // Act
+        AtomFeed feed = await AtomFeed.CreateAsync(
+            new Uri("http://example.com/feed.atom"),
+            httpClient,
+            cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        feed.ShouldNotBeNull();
+        feed.Title.Content.ShouldBe("Test Feed");
+        feed.Format.ShouldBe(Argotic.Common.SyndicationContentFormat.Atom);
+    }
+
+    [TestMethod]
+    public async Task AtomFeed_LoadAsync_WithSettings_AppliesSettings()
+    {
+        // Arrange
+        const string atomWithExtension = """
+            <?xml version="1.0" encoding="UTF-8"?>
+            <feed xmlns="http://www.w3.org/2005/Atom" xmlns:dc="http://purl.org/dc/elements/1.1/">
+                <title>Test Feed</title>
+                <id>urn:uuid:12345678-1234-1234-1234-123456789012</id>
+                <updated>2024-01-01T00:00:00Z</updated>
+                <dc:creator>Test Author</dc:creator>
+            </feed>
+            """;
+
+        AtomFeed feed = new AtomFeed();
+        Argotic.Common.SyndicationResourceLoadSettings settings = new Argotic.Common.SyndicationResourceLoadSettings
+        {
+            AutoDetectExtensions = true
+        };
+
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(atomWithExtension);
+        using HttpClient httpClient = new HttpClient(handler);
+
+        // Act
+        await feed.LoadAsync(
+            new Uri("http://example.com/feed.atom"),
+            httpClient,
+            settings,
+            cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        feed.Title.Content.ShouldBe("Test Feed");
+        feed.HasExtensions.ShouldBeTrue();
+    }
+
+    [TestMethod]
+    public async Task AtomFeed_LoadAsync_IncludesSourceUriInEventArgs()
+    {
+        // Arrange
+        AtomFeed feed = new AtomFeed();
+        Uri? sourceFromEvent = null;
+
+        feed.Loaded += (sender, args) =>
+        {
+            sourceFromEvent = args.Source;
+        };
+
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
+        using HttpClient httpClient = new HttpClient(handler);
+        Uri requestUri = new Uri("http://example.com/feed.atom");
+
+        // Act
+        await feed.LoadAsync(requestUri, httpClient, cancellationToken: TestContext!.CancellationToken);
+
+        // Assert
+        sourceFromEvent.ShouldBe(requestUri);
+    }
+
+    #endregion
+
     #region Helper Methods
 
     private static AtomFeed CreateFeedWithEntries()

@@ -16,7 +16,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 [Serializable]
-public class YahooMediaRestriction : IComparable, IEquatable<YahooMediaRestriction>
+public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquatable<YahooMediaRestriction>
 {
 
     /// <summary>
@@ -349,29 +349,20 @@ public class YahooMediaRestriction : IComparable, IEquatable<YahooMediaRestricti
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(YahooMediaRestriction? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        YahooMediaRestriction value = obj as YahooMediaRestriction;
 
-        if (value != null)
-        {
-            int result = ComparisonUtility.CompareSequence(this.Entities, value.Entities, StringComparison.Ordinal);
-            result |= this.EntityType.CompareTo(value.EntityType);
-            result |= this.Relationship.CompareTo(value.Relationship);
+        int result = ComparisonUtility.CompareSequence(this.Entities, other.Entities, StringComparison.Ordinal);
+        result |= this.EntityType.CompareTo(other.EntityType);
+        result |= this.Relationship.CompareTo(other.Relationship);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

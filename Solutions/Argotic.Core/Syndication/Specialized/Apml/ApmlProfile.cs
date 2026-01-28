@@ -19,7 +19,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [Serializable]
-public class ApmlProfile : IComparable, IEquatable<ApmlProfile>, IExtensibleSyndicationObject
+public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -486,31 +486,22 @@ public class ApmlProfile : IComparable, IEquatable<ApmlProfile>, IExtensibleSynd
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(ApmlProfile? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        ApmlProfile value = obj as ApmlProfile;
 
-        if (value != null)
-        {
-            int result = ApmlProfile.CompareSequence(this.ExplicitConcepts, value.ExplicitConcepts);
-            result |= ApmlProfile.CompareSequence(this.ExplicitSources, value.ExplicitSources);
-            result |= ApmlProfile.CompareSequence(this.ImplicitConcepts, value.ImplicitConcepts);
-            result |= ApmlProfile.CompareSequence(this.ImplicitSources, value.ImplicitSources);
-            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+        int result = ApmlProfile.CompareSequence(this.ExplicitConcepts, other.ExplicitConcepts);
+        result |= ApmlProfile.CompareSequence(this.ExplicitSources, other.ExplicitSources);
+        result |= ApmlProfile.CompareSequence(this.ImplicitConcepts, other.ImplicitConcepts);
+        result |= ApmlProfile.CompareSequence(this.ImplicitSources, other.ImplicitSources);
+        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

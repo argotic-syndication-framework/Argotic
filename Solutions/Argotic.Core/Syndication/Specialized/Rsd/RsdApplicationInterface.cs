@@ -19,7 +19,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [Serializable]
-public class RsdApplicationInterface : IComparable, IEquatable<RsdApplicationInterface>, IExtensibleSyndicationObject
+public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEquatable<RsdApplicationInterface>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold the name of the application interface.
@@ -416,33 +416,24 @@ public class RsdApplicationInterface : IComparable, IEquatable<RsdApplicationInt
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(RsdApplicationInterface? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        RsdApplicationInterface value = obj as RsdApplicationInterface;
 
-        if (value != null)
-        {
-            int result = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= this.IsPreferred.CompareTo(value.IsPreferred);
-            result |= Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Notes, value.Notes, StringComparison.OrdinalIgnoreCase);
-            result |= ComparisonUtility.CompareSequence(this.Settings, value.Settings, StringComparison.Ordinal);
-            result |= string.Compare(this.WeblogId, value.WeblogId, StringComparison.OrdinalIgnoreCase);
+        int result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= this.IsPreferred.CompareTo(other.IsPreferred);
+        result |= Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Notes, other.Notes, StringComparison.OrdinalIgnoreCase);
+        result |= ComparisonUtility.CompareSequence(this.Settings, other.Settings, StringComparison.Ordinal);
+        result |= string.Compare(this.WeblogId, other.WeblogId, StringComparison.OrdinalIgnoreCase);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

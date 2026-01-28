@@ -17,7 +17,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-news/0.9/sitemap-news.xsd">News Sitemap 0.9 Schema</seealso>
 [Serializable]
-public class SitemapNewsExtension : SyndicationExtension, IComparable, IEquatable<SitemapNewsExtension>
+public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNewsExtension>, IEquatable<SitemapNewsExtension>
 {
     /// <summary>
     /// Private member to hold the publication information.
@@ -251,44 +251,34 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable, IEquatabl
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SitemapNewsExtension? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        SitemapNewsExtension other = obj as SitemapNewsExtension;
+        int result = 0;
 
-        if (other != null)
+        if (this.Publication != null && other.Publication != null)
         {
-            int result = 0;
-
-            if (this.Publication != null && other.Publication != null)
-            {
-                result = this.Publication.CompareTo(other.Publication);
-            }
-            else if (this.Publication != null)
-            {
-                result = 1;
-            }
-            else if (other.Publication != null)
-            {
-                result = -1;
-            }
-
-            result |= this.PublicationDate.CompareTo(other.PublicationDate);
-            result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
-
-            return result;
+            result = this.Publication.CompareTo(other.Publication);
         }
-        else
+        else if (this.Publication != null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            result = 1;
         }
+        else if (other.Publication != null)
+        {
+            result = -1;
+        }
+
+        result |= this.PublicationDate.CompareTo(other.PublicationDate);
+        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+
+        return result;
     }
 
     /// <summary>

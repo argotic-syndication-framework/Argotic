@@ -349,13 +349,21 @@ public class YahooMediaSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void YahooMediaContent_CompareTo_WrongType_ThrowsArgumentException()
+    public void YahooMediaContent_CompareTo_DifferentContent_ReturnsNonZero()
     {
         // Arrange
-        YahooMediaContent content = CreateBasicContent();
+        YahooMediaContent content1 = CreateBasicContent();
+        YahooMediaContent content2 = new(new Uri("http://example.com/other-video.mp4"))
+        {
+            ContentType = "video/mp4",
+            Medium = YahooMediaMedium.Video
+        };
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => content.CompareTo("not a content"));
+        // Act
+        int result = content1.CompareTo(content2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     #endregion

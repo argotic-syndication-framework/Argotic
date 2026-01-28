@@ -27,8 +27,8 @@ public class AtomPublishingControlSyndicationExtensionTest
     public void AtomPublishingControlCompareToTest()
     {
         AtomPublishingControlSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        AtomPublishingControlSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 

@@ -8,7 +8,7 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <seealso cref="SiteSummaryContentSyndicationExtensionContext.Items"/>
 [Serializable]
-public class SiteSummaryContentItem : IComparable, IEquatable<SiteSummaryContentItem>
+public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEquatable<SiteSummaryContentItem>
 {
 
     /// <summary>
@@ -209,29 +209,20 @@ public class SiteSummaryContentItem : IComparable, IEquatable<SiteSummaryContent
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SiteSummaryContentItem? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        SiteSummaryContentItem value = obj as SiteSummaryContentItem;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Encoding, value.Encoding, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
-            result |= Uri.Compare(this.Format, value.Format, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Encoding, other.Encoding, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        result |= Uri.Compare(this.Format, other.Format, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

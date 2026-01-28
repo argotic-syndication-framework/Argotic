@@ -20,7 +20,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IEquatable<AtomGenerator>, IExtensibleSyndicationObject
+public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenerator>, IEquatable<AtomGenerator>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold the version of the generating agent.
@@ -295,32 +295,22 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable, IEquatabl
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">The <see cref="AtomGenerator"/> to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(AtomGenerator? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        AtomGenerator value = obj as AtomGenerator;
+        int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Version, other.Version, StringComparison.OrdinalIgnoreCase);
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Version, value.Version, StringComparison.OrdinalIgnoreCase);
+        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
 
-            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
-
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

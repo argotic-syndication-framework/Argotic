@@ -330,13 +330,17 @@ public class XmlRpcStructureMemberTests
     }
 
     [TestMethod]
-    public void CompareTo_DifferentType_ThrowsArgumentException()
+    public void CompareTo_DifferentMember_ReturnsNonZero()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member1 = new XmlRpcStructureMember("name1", new XmlRpcScalarValue("value1"));
+        XmlRpcStructureMember member2 = new XmlRpcStructureMember("name2", new XmlRpcScalarValue("value2"));
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => member.CompareTo("not a member"));
+        // Act
+        int result = member1.CompareTo(member2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

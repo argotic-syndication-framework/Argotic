@@ -10,7 +10,7 @@ namespace Argotic.Syndication.Specialized;
 /// Represents an author of published content.
 /// </summary>
 [Serializable]
-public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IEquatable<BlogMLAuthor>, IExtensibleSyndicationObject
+public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEquatable<BlogMLAuthor>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -281,29 +281,20 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable, IEquatable<BlogMLA
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(BlogMLAuthor? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        BlogMLAuthor value = obj as BlogMLAuthor;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.EmailAddress, value.EmailAddress, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
 
-            result |= BlogMLUtility.CompareCommonObjects(this, value);
+        result |= BlogMLUtility.CompareCommonObjects(this, other);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

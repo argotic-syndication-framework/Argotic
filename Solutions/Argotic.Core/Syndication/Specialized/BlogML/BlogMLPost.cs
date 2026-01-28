@@ -18,7 +18,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [Serializable]
-public class BlogMLPost : IBlogMLCommonObject, IComparable, IEquatable<BlogMLPost>, IExtensibleSyndicationObject
+public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatable<BlogMLPost>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -1028,56 +1028,47 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable, IEquatable<BlogMLPos
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(BlogMLPost? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        BlogMLPost value = obj as BlogMLPost;
 
-        if (value != null)
+        int result = BlogMLPost.CompareSequence(this.Attachments, other.Attachments);
+        result |= ComparisonUtility.CompareSequence(this.Authors, other.Authors, StringComparison.OrdinalIgnoreCase);
+        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories, StringComparison.OrdinalIgnoreCase);
+        result |= BlogMLPost.CompareSequence(this.Comments, other.Comments);
+        result |= this.Content.CompareTo(other.Content);
+
+        if (this.Excerpt != null)
         {
-            int result = BlogMLPost.CompareSequence(this.Attachments, value.Attachments);
-            result |= ComparisonUtility.CompareSequence(this.Authors, value.Authors, StringComparison.OrdinalIgnoreCase);
-            result |= ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
-            result |= BlogMLPost.CompareSequence(this.Comments, value.Comments);
-            result |= this.Content.CompareTo(value.Content);
-
-            if (this.Excerpt != null)
-            {
-                result |= this.Excerpt.CompareTo(value.Excerpt);
-            }
-            else if (value.Excerpt != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Name != null)
-            {
-                result |= this.Name.CompareTo(value.Name);
-            }
-            else if (value.Name != null)
-            {
-                result |= -1;
-            }
-
-            result |= this.PostType.CompareTo(value.PostType);
-            result |= BlogMLPost.CompareSequence(this.Trackbacks, value.Trackbacks);
-            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Views, value.Views, StringComparison.OrdinalIgnoreCase);
-
-            result |= BlogMLUtility.CompareCommonObjects(this, value);
-
-            return result;
+            result |= this.Excerpt.CompareTo(other.Excerpt);
         }
-        else
+        else if (other.Excerpt != null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            result |= -1;
         }
+
+        if (this.Name != null)
+        {
+            result |= this.Name.CompareTo(other.Name);
+        }
+        else if (other.Name != null)
+        {
+            result |= -1;
+        }
+
+        result |= this.PostType.CompareTo(other.PostType);
+        result |= BlogMLPost.CompareSequence(this.Trackbacks, other.Trackbacks);
+        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Views, other.Views, StringComparison.OrdinalIgnoreCase);
+
+        result |= BlogMLUtility.CompareCommonObjects(this, other);
+
+        return result;
     }
 
     /// <summary>

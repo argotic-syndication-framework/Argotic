@@ -6,7 +6,7 @@ namespace Argotic.Common;
 /// Represents a discoverable syndication endpoint that is being broadcast by a web resource.
 /// </summary>
 [Serializable]
-public class DiscoverableSyndicationEndpoint : IComparable, IEquatable<DiscoverableSyndicationEndpoint>
+public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicationEndpoint>, IEquatable<DiscoverableSyndicationEndpoint>
 {
     /// <summary>
     /// Private member to hold the content MIME type of the syndication endpoint.
@@ -221,30 +221,20 @@ public class DiscoverableSyndicationEndpoint : IComparable, IEquatable<Discovera
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(DiscoverableSyndicationEndpoint? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        DiscoverableSyndicationEndpoint value = obj as DiscoverableSyndicationEndpoint;
+        int result = string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Source, other.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
-        if (value != null)
-        {
-            int result = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Source, value.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

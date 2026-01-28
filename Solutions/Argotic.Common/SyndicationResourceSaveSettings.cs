@@ -7,7 +7,7 @@ namespace Argotic.Common;
 /// Specifies a set of features to support on a <see cref="ISyndicationResource"/> object persisted by the <see cref="ISyndicationResource.Save(Stream, SyndicationResourceSaveSettings)"/> method.
 /// </summary>
 [Serializable]
-public sealed class SyndicationResourceSaveSettings : IComparable, IEquatable<SyndicationResourceSaveSettings>
+public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationResourceSaveSettings>, IEquatable<SyndicationResourceSaveSettings>
 {
     /// <summary>
     /// Private member to hold the character encoding to use when reading the syndication resource.
@@ -97,31 +97,21 @@ public sealed class SyndicationResourceSaveSettings : IComparable, IEquatable<Sy
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SyndicationResourceSaveSettings? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        SyndicationResourceSaveSettings value = obj as SyndicationResourceSaveSettings;
+        int result = string.Compare(this.CharacterEncoding.WebName, other.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
+        result |= this.MinimizeOutputSize.CompareTo(other.MinimizeOutputSize);
+        result |= ComparisonUtility.CompareSequence(this.SupportedExtensions, other.SupportedExtensions);
+        result |= this.AutoDetectExtensions.CompareTo(other.AutoDetectExtensions);
 
-        if (value != null)
-        {
-            int result = string.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result |= this.MinimizeOutputSize.CompareTo(value.MinimizeOutputSize);
-            result |= ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
-            result |= this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
-
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

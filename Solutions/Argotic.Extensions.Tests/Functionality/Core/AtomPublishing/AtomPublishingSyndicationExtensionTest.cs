@@ -415,10 +415,10 @@ public class AtomPublishingSyndicationExtensionTest
     {
         // Arrange
         AtomPublishingEditedSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
+        AtomPublishingEditedSyndicationExtension other = CreateExtension1();
 
         // Act
-        int actual = target.CompareTo(obj);
+        int actual = target.CompareTo(other);
 
         // Assert
         actual.ShouldBe(0);
@@ -438,14 +438,16 @@ public class AtomPublishingSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void CompareTo_WithDifferentType_ShouldThrowArgumentException()
+    public void CompareTo_WithNull_ShouldReturnPositive()
     {
         // Arrange
         AtomPublishingEditedSyndicationExtension target = CreateExtension1();
-        object obj = "not an extension";
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => target.CompareTo(obj));
+        // Act
+        int result = target.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
     }
 
     [TestMethod]

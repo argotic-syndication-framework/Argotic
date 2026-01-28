@@ -295,13 +295,25 @@ public class BlogMLTrackbackTests
     }
 
     [TestMethod]
-    public void CompareTo_WrongType_ThrowsArgumentException()
+    public void CompareTo_DifferentTrackback_ReturnsNonZero()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback1 = new BlogMLTrackback
+        {
+            Id = "tb1",
+            Url = new Uri("http://example.com/post1")
+        };
+        BlogMLTrackback trackback2 = new BlogMLTrackback
+        {
+            Id = "tb2",
+            Url = new Uri("http://example.com/post2")
+        };
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => trackback.CompareTo("not a trackback"));
+        // Act
+        int result = trackback1.CompareTo(trackback2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     #endregion

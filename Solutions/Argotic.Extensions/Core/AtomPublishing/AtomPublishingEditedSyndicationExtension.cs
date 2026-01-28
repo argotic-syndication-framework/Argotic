@@ -21,7 +21,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 [Serializable]
-public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IComparable, IEquatable<AtomPublishingEditedSyndicationExtension>
+public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IComparable<AtomPublishingEditedSyndicationExtension>, IEquatable<AtomPublishingEditedSyndicationExtension>
 {
 
     /// <summary>
@@ -149,34 +149,25 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(AtomPublishingEditedSyndicationExtension? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        AtomPublishingEditedSyndicationExtension value = obj as AtomPublishingEditedSyndicationExtension;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result |= this.Version.CompareTo(value.Version);
-            result |= string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result |= string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+        int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        result |= this.Version.CompareTo(other.Version);
+        result |= string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        result |= string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-            result |= this.Context.EditedOn.CompareTo(value.Context.EditedOn);
+        result |= this.Context.EditedOn.CompareTo(other.Context.EditedOn);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

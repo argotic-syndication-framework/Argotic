@@ -8,7 +8,7 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <seealso cref="LiveJournalSyndicationExtensionContext.Mood"/>
 [Serializable]
-public class LiveJournalMood : IComparable, IEquatable<LiveJournalMood>
+public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJournalMood>
 {
 
     /// <summary>
@@ -150,28 +150,19 @@ public class LiveJournalMood : IComparable, IEquatable<LiveJournalMood>
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(LiveJournalMood? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        LiveJournalMood value = obj as LiveJournalMood;
 
-        if (value != null)
-        {
-            int result = this.Id.CompareTo(value.Id);
-            result |= string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
+        int result = this.Id.CompareTo(other.Id);
+        result |= string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

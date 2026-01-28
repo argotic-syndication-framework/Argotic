@@ -444,17 +444,6 @@ public class GenericSyndicationItemTests
         result.ShouldNotBe(0);
     }
 
-    [TestMethod]
-    public void CompareTo_WithWrongType_ThrowsArgumentException()
-    {
-        // Arrange
-        var entry = new AtomEntryBuilder().WithTitle("Test").Build();
-        var item = new GenericSyndicationItem(entry);
-
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => item.CompareTo("string"));
-    }
-
     #endregion
 
     #region Equals Tests

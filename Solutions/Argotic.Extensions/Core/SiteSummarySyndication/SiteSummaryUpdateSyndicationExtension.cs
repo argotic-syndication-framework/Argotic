@@ -24,7 +24,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComparable, IEquatable<SiteSummaryUpdateSyndicationExtension>
+public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComparable<SiteSummaryUpdateSyndicationExtension>, IEquatable<SiteSummaryUpdateSyndicationExtension>
 {
 
     /// <summary>
@@ -222,29 +222,20 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SiteSummaryUpdateSyndicationExtension? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        SiteSummaryUpdateSyndicationExtension value = obj as SiteSummaryUpdateSyndicationExtension;
 
-        if (value != null)
-        {
-            int result = this.Context.Base.CompareTo(value.Context.Base);
-            result |= this.Context.Frequency.CompareTo(value.Context.Frequency);
-            result |= this.Context.Period.CompareTo(value.Context.Period);
+        int result = this.Context.Base.CompareTo(other.Context.Base);
+        result |= this.Context.Frequency.CompareTo(other.Context.Frequency);
+        result |= this.Context.Period.CompareTo(other.Context.Period);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

@@ -20,7 +20,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [Serializable]
-public class ApmlConcept : IComparable, IEquatable<ApmlConcept>, IExtensibleSyndicationObject
+public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -324,30 +324,21 @@ public class ApmlConcept : IComparable, IEquatable<ApmlConcept>, IExtensibleSynd
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(ApmlConcept? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        ApmlConcept value = obj as ApmlConcept;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.From, value.From, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Key, value.Key, StringComparison.OrdinalIgnoreCase);
-            result |= this.UpdatedOn.CompareTo(value.UpdatedOn);
-            result |= this.Value.CompareTo(value.Value);
+        int result = string.Compare(this.From, other.From, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Key, other.Key, StringComparison.OrdinalIgnoreCase);
+        result |= this.UpdatedOn.CompareTo(other.UpdatedOn);
+        result |= this.Value.CompareTo(other.Value);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

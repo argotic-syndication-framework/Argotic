@@ -19,7 +19,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssImage : IComparable, IEquatable<RssImage>, IExtensibleSyndicationObject
+public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -470,32 +470,23 @@ public class RssImage : IComparable, IEquatable<RssImage>, IExtensibleSyndicatio
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">The <see cref="RssImage"/> to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(RssImage? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        RssImage value = obj as RssImage;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result |= this.Height.CompareTo(value.Height);
-            result |= Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= this.Width.CompareTo(value.Width);
+        int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        result |= this.Height.CompareTo(other.Height);
+        result |= Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= this.Width.CompareTo(other.Width);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

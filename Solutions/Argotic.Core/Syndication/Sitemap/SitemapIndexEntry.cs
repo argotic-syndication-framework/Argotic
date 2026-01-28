@@ -19,7 +19,7 @@ namespace Argotic.Syndication;
 ///     </para>
 /// </remarks>
 [Serializable]
-public class SitemapIndexEntry : IComparable, IEquatable<SitemapIndexEntry>
+public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<SitemapIndexEntry>
 {
     /// <summary>
     /// Private member to hold the location of the sitemap.
@@ -210,32 +210,24 @@ public class SitemapIndexEntry : IComparable, IEquatable<SitemapIndexEntry>
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SitemapIndexEntry? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        if (obj is SitemapIndexEntry other)
+        int result = Uri.Compare(this.Location, other.Location, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+
+        if (result != 0)
         {
-            int result = Uri.Compare(this.Location, other.Location, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-
-            if (result != 0)
-            {
-                return result;
-            }
-
-            result = Nullable.Compare(this.LastModified, other.LastModified);
             return result;
         }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+
+        result = Nullable.Compare(this.LastModified, other.LastModified);
+        return result;
     }
 
     /// <summary>

@@ -28,8 +28,8 @@ public class TrackbackSyndicationExtensionTest
     public void TrackbackCompareToTest()
     {
         TrackbackSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        TrackbackSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 

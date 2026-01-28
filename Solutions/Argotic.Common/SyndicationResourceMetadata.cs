@@ -7,7 +7,7 @@ namespace Argotic.Common;
 /// Represents metadata associated with a <see cref="ISyndicationResource">syndication resource</see>.
 /// </summary>
 [Serializable]
-public class SyndicationResourceMetadata : IComparable, IEquatable<SyndicationResourceMetadata>
+public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetadata>, IEquatable<SyndicationResourceMetadata>
 {
     /// <summary>
     /// Private member to hold the syndication content format that the syndication resource conforms to.
@@ -760,63 +760,53 @@ public class SyndicationResourceMetadata : IComparable, IEquatable<SyndicationRe
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SyndicationResourceMetadata? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        SyndicationResourceMetadata value = obj as SyndicationResourceMetadata;
+        int result = this.Format.CompareTo(other.Format);
 
-        if (value != null)
+        if (this.Version != null)
         {
-            int result = this.Format.CompareTo(value.Format);
-
-            if (this.Version != null)
-            {
-                result |= this.Version.CompareTo(value.Version);
-            }
-            else if (value.Version != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Namespaces != null && value.Namespaces != null)
-            {
-                result |= ComparisonUtility.CompareSequence(this.Namespaces, value.Namespaces, StringComparison.Ordinal);
-            }
-            else if (this.Namespaces != null && value.Namespaces == null)
-            {
-                result |= 1;
-            }
-            else if (this.Namespaces == null && value.Namespaces != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Resource != null && value.Resource != null)
-            {
-                result |= string.Compare(this.Resource.OuterXml, value.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
-            }
-            else if (this.Resource != null && value.Resource == null)
-            {
-                result |= 1;
-            }
-            else if (this.Resource == null && value.Resource != null)
-            {
-                result |= -1;
-            }
-
-            return result;
+            result |= this.Version.CompareTo(other.Version);
         }
-        else
+        else if (other.Version != null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            result |= -1;
         }
+
+        if (this.Namespaces != null && other.Namespaces != null)
+        {
+            result |= ComparisonUtility.CompareSequence(this.Namespaces, other.Namespaces, StringComparison.Ordinal);
+        }
+        else if (this.Namespaces != null && other.Namespaces == null)
+        {
+            result |= 1;
+        }
+        else if (this.Namespaces == null && other.Namespaces != null)
+        {
+            result |= -1;
+        }
+
+        if (this.Resource != null && other.Resource != null)
+        {
+            result |= string.Compare(this.Resource.OuterXml, other.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
+        }
+        else if (this.Resource != null && other.Resource == null)
+        {
+            result |= 1;
+        }
+        else if (this.Resource == null && other.Resource != null)
+        {
+            result |= -1;
+        }
+
+        return result;
     }
 
     /// <summary>

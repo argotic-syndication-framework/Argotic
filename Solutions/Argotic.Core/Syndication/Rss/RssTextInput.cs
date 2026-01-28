@@ -19,7 +19,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssTextInput : IComparable, IEquatable<RssTextInput>, IExtensibleSyndicationObject
+public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -317,30 +317,21 @@ public class RssTextInput : IComparable, IEquatable<RssTextInput>, IExtensibleSy
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">The <see cref="RssTextInput"/> to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(RssTextInput? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        RssTextInput value = obj as RssTextInput;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

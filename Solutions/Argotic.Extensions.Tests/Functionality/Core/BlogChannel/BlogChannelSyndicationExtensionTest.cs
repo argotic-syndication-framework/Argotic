@@ -34,8 +34,8 @@ public class BlogChannelSyndicationExtensionTest
     public void BlogChannelCompareToTest()
     {
         BlogChannelSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        BlogChannelSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 

@@ -30,8 +30,8 @@ public class WellFormedWebCommentsSyndicationExtensionTest
     public void WellFormedWebCommentsCompareToTest()
     {
         WellFormedWebCommentsSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        WellFormedWebCommentsSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 

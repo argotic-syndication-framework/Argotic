@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso cref="FeedSynchronizationSyndicationExtensionContext"/>
 [Serializable]
-public class FeedSynchronizationItem : IComparable, IEquatable<FeedSynchronizationItem>
+public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEquatable<FeedSynchronizationItem>
 {
     /// <summary>
     /// Private member to hold the globally unique identifier for the item.
@@ -553,32 +553,23 @@ public class FeedSynchronizationItem : IComparable, IEquatable<FeedSynchronizati
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(FeedSynchronizationItem? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        FeedSynchronizationItem value = obj as FeedSynchronizationItem;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Id, value.Id, StringComparison.OrdinalIgnoreCase);
-            result |= this.ConflictPreservation.CompareTo(value.ConflictPreservation);
-            result |= this.TombstoneStatus.CompareTo(value.TombstoneStatus);
-            result |= this.Updates.CompareTo(value.Updates);
-            result |= FeedSynchronizationItem.CompareSequence(this.Histories, value.Histories);
-            result |= ComparisonUtility.CompareSequence(this.Conflicts, value.Conflicts);
+        int result = string.Compare(this.Id, other.Id, StringComparison.OrdinalIgnoreCase);
+        result |= this.ConflictPreservation.CompareTo(other.ConflictPreservation);
+        result |= this.TombstoneStatus.CompareTo(other.TombstoneStatus);
+        result |= this.Updates.CompareTo(other.Updates);
+        result |= FeedSynchronizationItem.CompareSequence(this.Histories, other.Histories);
+        result |= ComparisonUtility.CompareSequence(this.Conflicts, other.Conflicts);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

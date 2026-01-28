@@ -475,10 +475,10 @@ public class FeedHistorySyndicationExtensionTest
     {
         // Arrange
         FeedHistorySyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
+        FeedHistorySyndicationExtension other = CreateExtension1();
 
         // Act
-        int actual = target.CompareTo(obj);
+        int actual = target.CompareTo(other);
 
         // Assert
         actual.ShouldBe(0);
@@ -489,10 +489,10 @@ public class FeedHistorySyndicationExtensionTest
     {
         // Arrange
         FeedHistorySyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension2();
+        FeedHistorySyndicationExtension other = CreateExtension2();
 
         // Act
-        int actual = target.CompareTo(obj);
+        int actual = target.CompareTo(other);
 
         // Assert
         actual.ShouldNotBe(0);
@@ -512,14 +512,16 @@ public class FeedHistorySyndicationExtensionTest
     }
 
     [TestMethod]
-    public void CompareTo_WrongType_ThrowsArgumentException()
+    public void CompareTo_NullReturnsPositive()
     {
         // Arrange
         FeedHistorySyndicationExtension target = CreateExtension1();
-        object obj = "not an extension";
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => target.CompareTo(obj));
+        // Act
+        int result = target.CompareTo(null);
+
+        // Assert
+        result.ShouldBe(1);
     }
 
     [TestMethod]

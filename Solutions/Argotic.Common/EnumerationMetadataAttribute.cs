@@ -5,7 +5,7 @@ namespace Argotic.Common;
 /// </summary>
 [AttributeUsage(AttributeTargets.Field, Inherited = false, AllowMultiple = false)]
 [Serializable]
-public sealed class EnumerationMetadataAttribute : Attribute, IComparable, IEquatable<EnumerationMetadataAttribute>
+public sealed class EnumerationMetadataAttribute : Attribute, IComparable<EnumerationMetadataAttribute>, IEquatable<EnumerationMetadataAttribute>
 {
     /// <summary>
     ///  Private member to hold the display name for the attributed field.
@@ -86,29 +86,19 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable, IEqua
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(EnumerationMetadataAttribute? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        EnumerationMetadataAttribute value = obj as EnumerationMetadataAttribute;
+        int result = string.Compare(this.AlternateValue, other.AlternateValue, StringComparison.Ordinal);
+        result |= string.Compare(this.DisplayName, other.DisplayName, StringComparison.OrdinalIgnoreCase);
 
-        if (value != null)
-        {
-            int result = string.Compare(this.AlternateValue, value.AlternateValue, StringComparison.Ordinal);
-            result |= string.Compare(this.DisplayName, value.DisplayName, StringComparison.OrdinalIgnoreCase);
-
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

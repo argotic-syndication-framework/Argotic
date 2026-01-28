@@ -7,7 +7,7 @@ namespace Argotic.Syndication;
 /// Represents the pixel location of the edges of the outline window for a <see cref="OpmlDocument"/>.
 /// </summary>
 [Serializable]
-public class OpmlWindow : IComparable, IEquatable<OpmlWindow>
+public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlWindow"/> class.
@@ -169,30 +169,21 @@ public class OpmlWindow : IComparable, IEquatable<OpmlWindow>
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(OpmlWindow? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        OpmlWindow value = obj as OpmlWindow;
 
-        if (value != null)
-        {
-            int result = this.Bottom.CompareTo(value.Bottom);
-            result |= this.Left.CompareTo(value.Left);
-            result |= this.Right.CompareTo(value.Right);
-            result |= this.Top.CompareTo(value.Top);
+        int result = this.Bottom.CompareTo(other.Bottom);
+        result |= this.Left.CompareTo(other.Left);
+        result |= this.Right.CompareTo(other.Right);
+        result |= this.Top.CompareTo(other.Top);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

@@ -28,7 +28,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssGuid : IComparable, IEquatable<RssGuid>, IExtensibleSyndicationObject
+public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -252,28 +252,19 @@ public class RssGuid : IComparable, IEquatable<RssGuid>, IExtensibleSyndicationO
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">The <see cref="RssGuid"/> to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(RssGuid? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        RssGuid value = obj as RssGuid;
 
-        if (value != null)
-        {
-            int result = this.IsPermanentLink.CompareTo(value.IsPermanentLink);
-            result |= string.Compare(this.Value, value.Value, StringComparison.OrdinalIgnoreCase);
+        int result = this.IsPermanentLink.CompareTo(other.IsPermanentLink);
+        result |= string.Compare(this.Value, other.Value, StringComparison.OrdinalIgnoreCase);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

@@ -29,8 +29,8 @@ public class PheedSyndicationExtensionTest
     public void PheedCompareToTest()
     {
         PheedSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        PheedSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 

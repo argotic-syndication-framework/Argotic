@@ -34,8 +34,8 @@ public class LiveJournalSyndicationExtensionTest
     public void LiveJournalCompareToTest()
     {
         LiveJournalSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        LiveJournalSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 
@@ -277,13 +277,17 @@ public class LiveJournalSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void LiveJournalCompareToWrongTypeThrows()
+    public void LiveJournalCompareToWithDifferentExtensionReturnsNonZero()
     {
         // Arrange
         LiveJournalSyndicationExtension target = CreateExtension1();
+        LiveJournalSyndicationExtension other = CreateExtension2();
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => target.CompareTo("wrong type"));
+        // Act
+        int result = target.CompareTo(other);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

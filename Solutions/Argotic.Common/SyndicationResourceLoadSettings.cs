@@ -8,7 +8,7 @@ namespace Argotic.Common;
 /// Specifies a set of features to support on a <see cref="ISyndicationResource"/> object loaded by the <see cref="ISyndicationResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)"/> method.
 /// </summary>
 [Serializable]
-public sealed class SyndicationResourceLoadSettings : IComparable, IEquatable<SyndicationResourceLoadSettings>
+public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationResourceLoadSettings>, IEquatable<SyndicationResourceLoadSettings>
 {
     /// <summary>
     /// Private member to hold the character encoding to use when reading the syndication resource.
@@ -153,32 +153,22 @@ public sealed class SyndicationResourceLoadSettings : IComparable, IEquatable<Sy
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SyndicationResourceLoadSettings? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        SyndicationResourceLoadSettings value = obj as SyndicationResourceLoadSettings;
+        int result = string.Compare(this.CharacterEncoding.WebName, other.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
+        result |= this.RetrievalLimit.CompareTo(other.RetrievalLimit);
+        result |= this.Timeout.CompareTo(other.Timeout);
+        result |= this.AutoDetectExtensions.CompareTo(other.AutoDetectExtensions);
+        result |= ComparisonUtility.CompareSequence(this.SupportedExtensions, other.SupportedExtensions);
 
-        if (value != null)
-        {
-            int result = string.Compare(this.CharacterEncoding.WebName, value.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-            result |= this.RetrievalLimit.CompareTo(value.RetrievalLimit);
-            result |= this.Timeout.CompareTo(value.Timeout);
-            result |= this.AutoDetectExtensions.CompareTo(value.AutoDetectExtensions);
-            result |= ComparisonUtility.CompareSequence(this.SupportedExtensions, value.SupportedExtensions);
-
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

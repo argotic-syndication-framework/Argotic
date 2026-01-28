@@ -18,7 +18,7 @@ namespace Argotic.Net;
 ///     </code>
 /// </example>
 [Serializable]
-public class XmlRpcResponse : IComparable, IEquatable<XmlRpcResponse>
+public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResponse>
 {
     /// <summary>
     /// Private member to hold the response value that was returned for the remote procedure call.
@@ -266,60 +266,50 @@ public class XmlRpcResponse : IComparable, IEquatable<XmlRpcResponse>
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(XmlRpcResponse? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        XmlRpcResponse value = obj as XmlRpcResponse;
+        int result = 0;
 
-        if (value != null)
+        if (this.Fault != null)
         {
-            int result = 0;
-
-            if (this.Fault != null)
+            if (other.Fault != null)
             {
-                if (value.Fault != null)
-                {
-                    result |= this.Fault.CompareTo(value.Fault);
-                }
-                else
-                {
-                    result |= 1;
-                }
+                result |= this.Fault.CompareTo(other.Fault);
             }
-            else if (value.Fault != null)
+            else
             {
-                result |= -1;
+                result |= 1;
             }
-
-            if (this.Parameter != null)
-            {
-                if (value.Parameter != null)
-                {
-                    result |= string.Compare(this.Parameter.ToString(), value.Parameter.ToString(), StringComparison.Ordinal);
-                }
-                else
-                {
-                    result |= 1;
-                }
-            }
-            else if (value.Parameter != null)
-            {
-                result |= -1;
-            }
-
-            return result;
         }
-        else
+        else if (other.Fault != null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            result |= -1;
         }
+
+        if (this.Parameter != null)
+        {
+            if (other.Parameter != null)
+            {
+                result |= string.Compare(this.Parameter.ToString(), other.Parameter.ToString(), StringComparison.Ordinal);
+            }
+            else
+            {
+                result |= 1;
+            }
+        }
+        else if (other.Parameter != null)
+        {
+            result |= -1;
+        }
+
+        return result;
     }
 
     /// <summary>

@@ -57,8 +57,8 @@ public class DublinCoreElementSetSyndicationExtensionTest
     public void DublinCoreElementSetCompareToTest()
     {
         DublinCoreElementSetSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        DublinCoreElementSetSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 

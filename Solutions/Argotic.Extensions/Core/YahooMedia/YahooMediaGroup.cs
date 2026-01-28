@@ -9,7 +9,7 @@ namespace Argotic.Extensions.Core;
 /// <seealso cref="YahooMediaContent"/>
 /// <seealso cref="IYahooMediaCommonObjectEntities"/>
 [Serializable]
-public class YahooMediaGroup : IComparable, IEquatable<YahooMediaGroup>, IYahooMediaCommonObjectEntities
+public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMediaGroup>, IYahooMediaCommonObjectEntities
 {
 
     /// <summary>
@@ -403,29 +403,20 @@ public class YahooMediaGroup : IComparable, IEquatable<YahooMediaGroup>, IYahooM
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(YahooMediaGroup? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        YahooMediaGroup value = obj as YahooMediaGroup;
 
-        if (value != null)
-        {
-            int result = YahooMediaUtility.CompareSequence(this.Contents, value.Contents);
+        int result = YahooMediaUtility.CompareSequence(this.Contents, other.Contents);
 
-            result |= YahooMediaUtility.CompareCommonObjectEntities(this, value);
+        result |= YahooMediaUtility.CompareCommonObjectEntities(this, other);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

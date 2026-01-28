@@ -34,8 +34,8 @@ public class SiteSummarySlashSyndicationExtensionTest
     public void SiteSummarySlashCompareToTest()
     {
         SiteSummarySlashSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        SiteSummarySlashSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 
@@ -275,16 +275,6 @@ public class SiteSummarySlashSyndicationExtensionTest
 
         // Assert
         result.ShouldBe(1);
-    }
-
-    [TestMethod]
-    public void SiteSummarySlashCompareToWrongTypeThrows()
-    {
-        // Arrange
-        SiteSummarySlashSyndicationExtension target = CreateExtension1();
-
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => target.CompareTo("wrong type"));
     }
 
     private static SiteSummarySlashSyndicationExtension CreateExtension1()

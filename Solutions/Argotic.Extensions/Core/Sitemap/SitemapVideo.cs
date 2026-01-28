@@ -29,7 +29,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
 [Serializable]
-public class SitemapVideo : IComparable, IEquatable<SitemapVideo>
+public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>
 {
     /// <summary>
     /// Maximum length for video title per Google Video Sitemap 1.1 specification.
@@ -838,29 +838,19 @@ public class SitemapVideo : IComparable, IEquatable<SitemapVideo>
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SitemapVideo? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        SitemapVideo other = obj as SitemapVideo;
-
-        if (other != null)
-        {
-            int result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.ThumbnailLocation, other.ThumbnailLocation, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        int result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.ThumbnailLocation, other.ThumbnailLocation, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        return result;
     }
 
     /// <summary>

@@ -355,13 +355,25 @@ public class TrackbackDiscoveryMetadataTests
     }
 
     [TestMethod]
-    public void CompareTo_DifferentType_ThrowsArgumentException()
+    public void CompareTo_DifferentMetadata_ReturnsNonZero()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata1 = new TrackbackDiscoveryMetadata
+        {
+            About = new Uri("http://example.com/post/1"),
+            PingUrl = new Uri("http://example.com/trackback/1")
+        };
+        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        {
+            About = new Uri("http://example.com/post/2"),
+            PingUrl = new Uri("http://example.com/trackback/2")
+        };
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => metadata.CompareTo("not metadata"));
+        // Act
+        int result = metadata1.CompareTo(metadata2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

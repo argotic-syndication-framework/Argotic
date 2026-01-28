@@ -25,7 +25,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable, IEquatable<YahooMediaSyndicationExtension>
+public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<YahooMediaSyndicationExtension>, IEquatable<YahooMediaSyndicationExtension>
 {
     /// <summary>
     /// Private member to hold specific information about the extension.
@@ -291,30 +291,21 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable,
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(YahooMediaSyndicationExtension? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        YahooMediaSyndicationExtension value = obj as YahooMediaSyndicationExtension;
 
-        if (value != null)
-        {
-            int result = YahooMediaUtility.CompareSequence(this.Context.Contents, value.Context.Contents);
-            result |= YahooMediaUtility.CompareSequence(this.Context.Groups, value.Context.Groups);
+        int result = YahooMediaUtility.CompareSequence(this.Context.Contents, other.Context.Contents);
+        result |= YahooMediaUtility.CompareSequence(this.Context.Groups, other.Context.Groups);
 
-            result |= YahooMediaUtility.CompareCommonObjectEntities(this.Context, value.Context);
+        result |= YahooMediaUtility.CompareCommonObjectEntities(this.Context, other.Context);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

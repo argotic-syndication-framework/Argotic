@@ -335,15 +335,21 @@ public class DiscoverableSyndicationEndpointTests
     }
 
     [TestMethod]
-    public void CompareTo_DifferentType_ThrowsArgumentException()
+    public void CompareTo_DifferentEndpoint_ReturnsNonZero()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
-            new Uri("http://example.com/feed.rss"),
+        DiscoverableSyndicationEndpoint endpoint1 = new DiscoverableSyndicationEndpoint(
+            new Uri("http://example.com/feed1.rss"),
             "application/rss+xml");
+        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+            new Uri("http://example.com/feed2.rss"),
+            "application/atom+xml");
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => endpoint.CompareTo("not an endpoint"));
+        // Act
+        int result = endpoint1.CompareTo(endpoint2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

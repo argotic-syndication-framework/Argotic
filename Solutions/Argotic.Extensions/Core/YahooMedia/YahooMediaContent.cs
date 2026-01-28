@@ -15,7 +15,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso cref="IYahooMediaCommonObjectEntities"/>
 [Serializable]
-public class YahooMediaContent : IComparable, IEquatable<YahooMediaContent>, IYahooMediaCommonObjectEntities
+public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<YahooMediaContent>, IYahooMediaCommonObjectEntities
 {
 
     /// <summary>
@@ -788,47 +788,37 @@ public class YahooMediaContent : IComparable, IEquatable<YahooMediaContent>, IYa
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(YahooMediaContent? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        YahooMediaContent value = obj as YahooMediaContent;
+        int result = this.Bitrate.CompareTo(other.Bitrate);
+        result |= this.Channels.CompareTo(other.Channels);
+        result |= string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
+        result |= this.Duration.CompareTo(other.Duration);
+        result |= this.Expression.CompareTo(other.Expression);
+        result |= this.FileSize.CompareTo(other.FileSize);
+        result |= this.FrameRate.CompareTo(other.FrameRate);
+        result |= this.Height.CompareTo(other.Height);
+        result |= this.IsDefault.CompareTo(other.IsDefault);
 
-        if (value != null)
-        {
-            int result = this.Bitrate.CompareTo(value.Bitrate);
-            result |= this.Channels.CompareTo(value.Channels);
-            result |= string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result |= this.Duration.CompareTo(value.Duration);
-            result |= this.Expression.CompareTo(value.Expression);
-            result |= this.FileSize.CompareTo(value.FileSize);
-            result |= this.FrameRate.CompareTo(value.FrameRate);
-            result |= this.Height.CompareTo(value.Height);
-            result |= this.IsDefault.CompareTo(value.IsDefault);
+        string sourceLanguageName = this.Language != null ? this.Language.Name : string.Empty;
+        string targetLanguageName = other.Language != null ? other.Language.Name : string.Empty;
+        result |= string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
-            string sourceLanguageName = this.Language != null ? this.Language.Name : string.Empty;
-            string targetLanguageName = value.Language != null ? value.Language.Name : string.Empty;
-            result |= string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+        result |= this.Medium.CompareTo(other.Medium);
+        result |= this.SamplingRate.CompareTo(other.SamplingRate);
+        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= this.Width.CompareTo(other.Width);
 
-            result |= this.Medium.CompareTo(value.Medium);
-            result |= this.SamplingRate.CompareTo(value.SamplingRate);
-            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= this.Width.CompareTo(value.Width);
+        result |= YahooMediaUtility.CompareCommonObjectEntities(this, other);
 
-            result |= YahooMediaUtility.CompareCommonObjectEntities(this, value);
-
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

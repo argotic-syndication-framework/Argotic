@@ -27,8 +27,8 @@ public class FeedRankSyndicationExtensionTest
     public void FeedRankCompareToTest()
     {
         FeedRankSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        FeedRankSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 

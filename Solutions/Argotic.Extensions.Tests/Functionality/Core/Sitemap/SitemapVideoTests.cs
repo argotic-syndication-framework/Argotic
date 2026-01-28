@@ -405,13 +405,17 @@ public class SitemapVideoTests
     }
 
     [TestMethod]
-    public void CompareTo_ThrowsArgumentExceptionForInvalidType()
+    public void CompareTo_DifferentVideos_ReturnsNonZero()
     {
         // Arrange
-        SitemapVideo video = new(TestThumbnailUri, TestTitle, TestDescription);
+        SitemapVideo video1 = new(TestThumbnailUri, TestTitle, TestDescription);
+        SitemapVideo video2 = new(new Uri("http://example.com/other-thumb.jpg"), "Other Title", "Other Description");
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => video.CompareTo("Not a SitemapVideo"));
+        // Act
+        int result = video1.CompareTo(video2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

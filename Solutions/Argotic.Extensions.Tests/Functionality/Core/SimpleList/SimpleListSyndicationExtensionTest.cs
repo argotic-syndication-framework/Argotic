@@ -166,10 +166,10 @@ public class SimpleListSyndicationExtensionTest
     {
         // Arrange
         SimpleListSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
+        SimpleListSyndicationExtension other = CreateExtension1();
 
         // Act
-        int actual = target.CompareTo(obj);
+        int actual = target.CompareTo(other);
 
         // Assert
         actual.ShouldBe(0);
@@ -189,14 +189,15 @@ public class SimpleListSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void SimpleListCompareTo_WithWrongType_ThrowsArgumentException()
+    public void SimpleListCompareTo_WithDifferentExtension_ReturnsNonZero()
     {
         // Arrange
         SimpleListSyndicationExtension target = CreateExtension1();
-        object obj = "not an extension";
+        SimpleListSyndicationExtension other = new();
 
         // Act & Assert
-        Should.Throw<ArgumentException>(() => target.CompareTo(obj));
+        int result = target.CompareTo(other);
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

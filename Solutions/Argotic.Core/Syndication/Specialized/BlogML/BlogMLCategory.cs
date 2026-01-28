@@ -10,7 +10,7 @@ namespace Argotic.Syndication.Specialized;
 /// Represents an categorization taxonomy for published content.
 /// </summary>
 [Serializable]
-public class BlogMLCategory : IBlogMLCommonObject, IComparable, IEquatable<BlogMLCategory>, IExtensibleSyndicationObject
+public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, IEquatable<BlogMLCategory>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -326,30 +326,21 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable, IEquatable<BlogM
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(BlogMLCategory? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        BlogMLCategory value = obj as BlogMLCategory;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.ParentId, value.ParentId, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.ParentId, other.ParentId, StringComparison.OrdinalIgnoreCase);
 
-            result |= BlogMLUtility.CompareCommonObjects(this, value);
+        result |= BlogMLUtility.CompareCommonObjects(this, other);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

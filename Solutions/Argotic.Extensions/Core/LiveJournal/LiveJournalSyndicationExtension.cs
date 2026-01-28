@@ -22,7 +22,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable, IEquatable<LiveJournalSyndicationExtension>
+public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable<LiveJournalSyndicationExtension>, IEquatable<LiveJournalSyndicationExtension>
 {
     /// <summary>
     /// Private member to hold specific information about the extension.
@@ -153,77 +153,68 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(LiveJournalSyndicationExtension? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        LiveJournalSyndicationExtension value = obj as LiveJournalSyndicationExtension;
 
-        if (value != null)
+        int result = this.Context.IsPreformatted.CompareTo(other.Context.IsPreformatted);
+
+        if (this.Context.Mood != null)
         {
-            int result = this.Context.IsPreformatted.CompareTo(value.Context.IsPreformatted);
-
-            if (this.Context.Mood != null)
+            if (other.Context.Mood != null)
             {
-                if (value.Context.Mood != null)
-                {
-                    result |= this.Context.Mood.CompareTo(value.Context.Mood);
-                }
-                else
-                {
-                    result |= 1;
-                }
+                result |= this.Context.Mood.CompareTo(other.Context.Mood);
             }
-            else if (this.Context.Mood == null && value.Context.Mood != null)
+            else
             {
-                result |= -1;
+                result |= 1;
             }
-
-            result |= string.Compare(this.Context.Music, value.Context.Music, StringComparison.OrdinalIgnoreCase);
-
-            if (this.Context.Security != null)
-            {
-                if (value.Context.Security != null)
-                {
-                    result |= this.Context.Security.CompareTo(value.Context.Security);
-                }
-                else
-                {
-                    result |= 1;
-                }
-            }
-            else if (this.Context.Security == null && value.Context.Security != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Context.UserPicture != null)
-            {
-                if (value.Context.UserPicture != null)
-                {
-                    result |= this.Context.UserPicture.CompareTo(value.Context.UserPicture);
-                }
-                else
-                {
-                    result |= 1;
-                }
-            }
-            else if (this.Context.UserPicture == null && value.Context.UserPicture != null)
-            {
-                result |= -1;
-            }
-
-            return result;
         }
-        else
+        else if (this.Context.Mood == null && other.Context.Mood != null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            result |= -1;
         }
+
+        result |= string.Compare(this.Context.Music, other.Context.Music, StringComparison.OrdinalIgnoreCase);
+
+        if (this.Context.Security != null)
+        {
+            if (other.Context.Security != null)
+            {
+                result |= this.Context.Security.CompareTo(other.Context.Security);
+            }
+            else
+            {
+                result |= 1;
+            }
+        }
+        else if (this.Context.Security == null && other.Context.Security != null)
+        {
+            result |= -1;
+        }
+
+        if (this.Context.UserPicture != null)
+        {
+            if (other.Context.UserPicture != null)
+            {
+                result |= this.Context.UserPicture.CompareTo(other.Context.UserPicture);
+            }
+            else
+            {
+                result |= 1;
+            }
+        }
+        else if (this.Context.UserPicture == null && other.Context.UserPicture != null)
+        {
+            result |= -1;
+        }
+
+        return result;
     }
 
     /// <summary>

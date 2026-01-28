@@ -21,7 +21,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssItem : IComparable, IEquatable<RssItem>, IExtensibleSyndicationObject
+public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold the e-mail address of the person who wrote the item.
@@ -679,54 +679,44 @@ public class RssItem : IComparable, IEquatable<RssItem>, IExtensibleSyndicationO
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">The <see cref="RssItem"/> to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(RssItem? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        RssItem value = obj as RssItem;
+        int result = string.Compare(this.Author, other.Author, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Comments, other.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= this.PublicationDate.CompareTo(other.PublicationDate);
+        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
-        if (value != null)
+        if (this.Guid != null)
         {
-            int result = string.Compare(this.Author, value.Author, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Comments, value.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Link, value.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= this.PublicationDate.CompareTo(value.PublicationDate);
-            result |= string.Compare(this.Title, value.Title, StringComparison.OrdinalIgnoreCase);
-
-            if (this.Guid != null)
-            {
-                result |= this.Guid.CompareTo(value.Guid);
-            }
-            else if (this.Guid == null && value.Guid != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Source != null)
-            {
-                result |= this.Source.CompareTo(value.Source);
-            }
-            else if (this.Source == null && value.Source != null)
-            {
-                result |= -1;
-            }
-
-            result |= RssFeed.CompareSequence(this.Categories, value.Categories);
-            result |= RssItem.CompareSequence(this.Enclosures, value.Enclosures);
-
-            return result;
+            result |= this.Guid.CompareTo(other.Guid);
         }
-        else
+        else if (this.Guid == null && other.Guid != null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            result |= -1;
         }
+
+        if (this.Source != null)
+        {
+            result |= this.Source.CompareTo(other.Source);
+        }
+        else if (this.Source == null && other.Source != null)
+        {
+            result |= -1;
+        }
+
+        result |= RssFeed.CompareSequence(this.Categories, other.Categories);
+        result |= RssItem.CompareSequence(this.Enclosures, other.Enclosures);
+
+        return result;
     }
 
     /// <summary>

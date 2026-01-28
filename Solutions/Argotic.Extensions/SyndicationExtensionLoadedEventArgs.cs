@@ -13,7 +13,7 @@ namespace Argotic.Extensions;
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XmlReader)"/>
 [Serializable]
-public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable, IEquatable<SyndicationExtensionLoadedEventArgs>
+public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<SyndicationExtensionLoadedEventArgs>, IEquatable<SyndicationExtensionLoadedEventArgs>
 {
 
     /// <summary>
@@ -124,60 +124,50 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable, IEqua
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SyndicationExtensionLoadedEventArgs? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        SyndicationExtensionLoadedEventArgs? value = obj as SyndicationExtensionLoadedEventArgs;
+        int result = 0;
 
-        if (value != null)
+        if (this.Data != null)
         {
-            int result = 0;
-
-            if (this.Data != null)
+            if (other.Data != null)
             {
-                if (value.Data != null)
-                {
-                    result |= string.Compare(this.Data.OuterXml, value.Data.OuterXml, StringComparison.Ordinal);
-                }
-                else
-                {
-                    result |= 1;
-                }
+                result |= string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.Ordinal);
             }
-            else if (value.Data != null)
+            else
             {
-                result |= -1;
+                result |= 1;
             }
-
-            if (this.Extension != null)
-            {
-                if (value.Extension != null)
-                {
-                    result |= string.Compare(this.Extension.ToString(), value.Extension.ToString(), StringComparison.Ordinal);
-                }
-                else
-                {
-                    result |= 1;
-                }
-            }
-            else if (value.Extension != null)
-            {
-                result |= -1;
-            }
-
-            return result;
         }
-        else
+        else if (other.Data != null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            result |= -1;
         }
+
+        if (this.Extension != null)
+        {
+            if (other.Extension != null)
+            {
+                result |= string.Compare(this.Extension.ToString(), other.Extension.ToString(), StringComparison.Ordinal);
+            }
+            else
+            {
+                result |= 1;
+            }
+        }
+        else if (other.Extension != null)
+        {
+            result |= -1;
+        }
+
+        return result;
     }
 
     /// <summary>

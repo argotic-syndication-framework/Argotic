@@ -159,10 +159,10 @@ public class FeedSynchronizationSyndicationExtensionTest
     {
         // Arrange
         FeedSynchronizationSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
+        FeedSynchronizationSyndicationExtension other = CreateExtension1();
 
         // Act
-        int actual = target.CompareTo(obj);
+        int actual = target.CompareTo(other);
 
         // Assert
         actual.ShouldBe(0);
@@ -182,14 +182,17 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedSynchronizationCompareTo_WithWrongType_ThrowsArgumentException()
+    public void FeedSynchronizationCompareTo_WithDifferentExtension_ReturnsNonZero()
     {
         // Arrange
         FeedSynchronizationSyndicationExtension target = CreateExtension1();
-        object obj = "not an extension";
+        FeedSynchronizationSyndicationExtension other = CreateExtension2();
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => target.CompareTo(obj));
+        // Act
+        int actual = target.CompareTo(other);
+
+        // Assert
+        actual.ShouldNotBe(0);
     }
 
     [TestMethod]
@@ -1409,12 +1412,18 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationRelatedInformation_CompareTo_WrongType_ThrowsArgumentException()
     {
         // Arrange
-        FeedSynchronizationRelatedInformation info = new(
+        FeedSynchronizationRelatedInformation info1 = new(
             new Uri("http://example.com/feed"),
             FeedSynchronizationRelatedInformationType.Complete);
+        FeedSynchronizationRelatedInformation info2 = new(
+            new Uri("http://example.com/other-feed"),
+            FeedSynchronizationRelatedInformationType.Aggregated);
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => info.CompareTo("wrong type"));
+        // Act
+        int result = info1.CompareTo(info2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

@@ -193,13 +193,20 @@ public class XmlRpcArrayValueTests
     }
 
     [TestMethod]
-    public void CompareTo_DifferentType_ThrowsArgumentException()
+    public void CompareTo_DifferentValues_ReturnsNonZero()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        array1.Values.Add(new XmlRpcScalarValue(42));
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => array.CompareTo("not an array"));
+        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        array2.Values.Add(new XmlRpcScalarValue(99));
+
+        // Act
+        int result = array1.CompareTo(array2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

@@ -19,7 +19,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class OpmlOutline : IComparable, IEquatable<OpmlOutline>, IExtensibleSyndicationObject
+public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -588,35 +588,26 @@ public class OpmlOutline : IComparable, IEquatable<OpmlOutline>, IExtensibleSynd
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(OpmlOutline? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        OpmlOutline value = obj as OpmlOutline;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.ContentType, value.ContentType, StringComparison.OrdinalIgnoreCase);
-            result |= this.CreatedOn.CompareTo(value.CreatedOn);
-            result |= this.HasBreakpoint.CompareTo(value.HasBreakpoint);
-            result |= this.IsCommented.CompareTo(value.IsCommented);
-            result |= string.Compare(this.Text, value.Text, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
+        result |= this.CreatedOn.CompareTo(other.CreatedOn);
+        result |= this.HasBreakpoint.CompareTo(other.HasBreakpoint);
+        result |= this.IsCommented.CompareTo(other.IsCommented);
+        result |= string.Compare(this.Text, other.Text, StringComparison.OrdinalIgnoreCase);
 
-            result |= ComparisonUtility.CompareSequence(this.Attributes, value.Attributes, StringComparison.OrdinalIgnoreCase);
-            result |= ComparisonUtility.CompareSequence(this.Categories, value.Categories, StringComparison.OrdinalIgnoreCase);
-            result |= OpmlOutline.CompareSequence(this.Outlines, value.Outlines);
+        result |= ComparisonUtility.CompareSequence(this.Attributes, other.Attributes, StringComparison.OrdinalIgnoreCase);
+        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories, StringComparison.OrdinalIgnoreCase);
+        result |= OpmlOutline.CompareSequence(this.Outlines, other.Outlines);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

@@ -321,16 +321,6 @@ public class GenericSyndicationCategoryTests
         result.ShouldNotBe(0);
     }
 
-    [TestMethod]
-    public void CompareTo_WithWrongType_ThrowsArgumentException()
-    {
-        // Arrange
-        var category = new GenericSyndicationCategory("term");
-
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => category.CompareTo("string"));
-    }
-
     #endregion
 
     #region Equals Tests

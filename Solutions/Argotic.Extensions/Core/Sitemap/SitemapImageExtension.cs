@@ -16,7 +16,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-image/1.1/sitemap-image.xsd">Image Sitemap 1.1 Schema</seealso>
 [Serializable]
-public class SitemapImageExtension : SyndicationExtension, IComparable, IEquatable<SitemapImageExtension>
+public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapImageExtension>, IEquatable<SitemapImageExtension>
 {
     /// <summary>
     /// Private member to hold the collection of images.
@@ -192,27 +192,17 @@ public class SitemapImageExtension : SyndicationExtension, IComparable, IEquatab
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(SitemapImageExtension? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        SitemapImageExtension other = obj as SitemapImageExtension;
-
-        if (other != null)
-        {
-            int result = SitemapImageExtension.CompareSequence(this.Images, other.Images);
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        int result = SitemapImageExtension.CompareSequence(this.Images, other.Images);
+        return result;
     }
 
     /// <summary>

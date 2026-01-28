@@ -13,7 +13,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 [Serializable]
-public class YahooMediaCredit : IComparable, IEquatable<YahooMediaCredit>
+public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooMediaCredit>
 {
 
     /// <summary>
@@ -234,29 +234,20 @@ public class YahooMediaCredit : IComparable, IEquatable<YahooMediaCredit>
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(YahooMediaCredit? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        YahooMediaCredit value = obj as YahooMediaCredit;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Entity, value.Entity, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Role, value.Role, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        int result = string.Compare(this.Entity, other.Entity, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Role, other.Role, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

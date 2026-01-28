@@ -315,13 +315,13 @@ public class SitemapImageTests
     }
 
     [TestMethod]
-    public void CompareTo_DifferentType_ThrowsArgumentException()
+    public void CompareTo_Null_ReturnsPositive()
     {
         // Arrange
         SitemapImage image = new(new Uri("https://example.com/image.jpg"));
 
         // Act & Assert
-        Should.Throw<ArgumentException>(() => image.CompareTo("not an image"));
+        image.CompareTo(null).ShouldBe(1);
     }
 
     #endregion

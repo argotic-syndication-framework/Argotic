@@ -29,8 +29,8 @@ public class BasicGeocodingSyndicationExtensionTest
     public void BasicGeocodingCompareToTest()
     {
         BasicGeocodingSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        BasicGeocodingSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 

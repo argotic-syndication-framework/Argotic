@@ -32,7 +32,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomSource : IAtomCommonObjectAttributes, IComparable, IEquatable<AtomSource>, IExtensibleSyndicationObject
+public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, IEquatable<AtomSource>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold a permanent, universally unique identifier for the source.
@@ -406,98 +406,89 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable, IEquatable<A
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">The <see cref="AtomSource"/> to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(AtomSource? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        AtomSource value = obj as AtomSource;
 
-        if (value != null)
+        int result = AtomFeed.CompareSequence(this.Authors, other.Authors);
+        result |= AtomFeed.CompareSequence(this.Categories, other.Categories);
+        result |= AtomFeed.CompareSequence(this.Contributors, other.Contributors);
+
+        if (this.Generator != null)
         {
-            int result = AtomFeed.CompareSequence(this.Authors, value.Authors);
-            result |= AtomFeed.CompareSequence(this.Categories, value.Categories);
-            result |= AtomFeed.CompareSequence(this.Contributors, value.Contributors);
-
-            if (this.Generator != null)
-            {
-                result |= this.Generator.CompareTo(value.Generator);
-            }
-            else if (value.Generator != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Icon != null)
-            {
-                result |= this.Icon.CompareTo(value.Icon);
-            }
-            else if (value.Icon != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Id != null)
-            {
-                result |= this.Id.CompareTo(value.Id);
-            }
-            else if (value.Id != null)
-            {
-                result |= -1;
-            }
-
-            result |= AtomFeed.CompareSequence(this.Links, value.Links);
-
-            if (this.Logo != null)
-            {
-                result |= this.Logo.CompareTo(value.Logo);
-            }
-            else if (value.Logo != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Rights != null)
-            {
-                result |= this.Rights.CompareTo(value.Rights);
-            }
-            else if (value.Rights != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Subtitle != null)
-            {
-                result |= this.Subtitle.CompareTo(value.Subtitle);
-            }
-            else if (value.Subtitle != null)
-            {
-                result |= -1;
-            }
-
-            if (this.Title != null)
-            {
-                result |= this.Title.CompareTo(value.Title);
-            }
-            else if (value.Title != null)
-            {
-                result |= -1;
-            }
-
-            result |= this.UpdatedOn.CompareTo(value.UpdatedOn);
-
-            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
-
-            return result;
+            result |= this.Generator.CompareTo(other.Generator);
         }
-        else
+        else if (other.Generator != null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            result |= -1;
         }
+
+        if (this.Icon != null)
+        {
+            result |= this.Icon.CompareTo(other.Icon);
+        }
+        else if (other.Icon != null)
+        {
+            result |= -1;
+        }
+
+        if (this.Id != null)
+        {
+            result |= this.Id.CompareTo(other.Id);
+        }
+        else if (other.Id != null)
+        {
+            result |= -1;
+        }
+
+        result |= AtomFeed.CompareSequence(this.Links, other.Links);
+
+        if (this.Logo != null)
+        {
+            result |= this.Logo.CompareTo(other.Logo);
+        }
+        else if (other.Logo != null)
+        {
+            result |= -1;
+        }
+
+        if (this.Rights != null)
+        {
+            result |= this.Rights.CompareTo(other.Rights);
+        }
+        else if (other.Rights != null)
+        {
+            result |= -1;
+        }
+
+        if (this.Subtitle != null)
+        {
+            result |= this.Subtitle.CompareTo(other.Subtitle);
+        }
+        else if (other.Subtitle != null)
+        {
+            result |= -1;
+        }
+
+        if (this.Title != null)
+        {
+            result |= this.Title.CompareTo(other.Title);
+        }
+        else if (other.Title != null)
+        {
+            result |= -1;
+        }
+
+        result |= this.UpdatedOn.CompareTo(other.UpdatedOn);
+
+        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+
+        return result;
     }
 
     /// <summary>

@@ -352,13 +352,27 @@ public class BlogMLAttachmentTests
     }
 
     [TestMethod]
-    public void CompareTo_WrongType_ThrowsArgumentException()
+    public void CompareTo_DifferentAttachment_ReturnsNonZero()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment1 = new BlogMLAttachment
+        {
+            MimeType = "image/png",
+            Url = new Uri("http://example.com/image1.png"),
+            Size = 1000
+        };
+        BlogMLAttachment attachment2 = new BlogMLAttachment
+        {
+            MimeType = "image/jpeg",
+            Url = new Uri("http://example.com/image2.jpg"),
+            Size = 2000
+        };
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => attachment.CompareTo("not an attachment"));
+        // Act
+        int result = attachment1.CompareTo(attachment2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     #endregion

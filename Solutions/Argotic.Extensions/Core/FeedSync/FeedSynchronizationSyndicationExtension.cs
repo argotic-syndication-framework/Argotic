@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class FeedSynchronizationSyndicationExtension : SyndicationExtension, IComparable, IEquatable<FeedSynchronizationSyndicationExtension>
+public class FeedSynchronizationSyndicationExtension : SyndicationExtension, IComparable<FeedSynchronizationSyndicationExtension>, IEquatable<FeedSynchronizationSyndicationExtension>
 {
 
     /// <summary>
@@ -150,64 +150,55 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(FeedSynchronizationSyndicationExtension? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        FeedSynchronizationSyndicationExtension value = obj as FeedSynchronizationSyndicationExtension;
 
-        if (value != null)
+        int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        result |= this.Version.CompareTo(other.Version);
+        result |= string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        result |= string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
+
+        if (this.Context.Sharing != null)
         {
-            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result |= this.Version.CompareTo(value.Version);
-            result |= string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result |= string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
-
-            if (this.Context.Sharing != null)
+            if (other.Context.Sharing != null)
             {
-                if (value.Context.Sharing != null)
-                {
-                    result |= this.Context.Sharing.CompareTo(value.Context.Sharing);
-                }
-                else
-                {
-                    result |= 1;
-                }
+                result |= this.Context.Sharing.CompareTo(other.Context.Sharing);
             }
-            else if (this.Context.Sharing == null && value.Context.Sharing != null)
+            else
             {
-                result |= -1;
+                result |= 1;
             }
-
-            if (this.Context.Synchronization != null)
-            {
-                if (value.Context.Synchronization != null)
-                {
-                    result |= this.Context.Synchronization.CompareTo(value.Context.Synchronization);
-                }
-                else
-                {
-                    result |= 1;
-                }
-            }
-            else if (this.Context.Synchronization == null && value.Context.Synchronization != null)
-            {
-                result |= -1;
-            }
-
-            return result;
         }
-        else
+        else if (this.Context.Sharing == null && other.Context.Sharing != null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            result |= -1;
         }
+
+        if (this.Context.Synchronization != null)
+        {
+            if (other.Context.Synchronization != null)
+            {
+                result |= this.Context.Synchronization.CompareTo(other.Context.Synchronization);
+            }
+            else
+            {
+                result |= 1;
+            }
+        }
+        else if (this.Context.Synchronization == null && other.Context.Synchronization != null)
+        {
+            result |= -1;
+        }
+
+        return result;
     }
 
     /// <summary>

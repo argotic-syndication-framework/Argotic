@@ -46,8 +46,8 @@ public class ITunesSyndicationExtensionTest
     public void ITunesCompareToTest()
     {
         ITunesSyndicationExtension target = CreateExtension1();
-        object obj = CreateExtension1();
-        int actual = target.CompareTo(obj);
+        ITunesSyndicationExtension other = CreateExtension1();
+        int actual = target.CompareTo(other);
         actual.ShouldBe(0);
     }
 

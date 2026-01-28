@@ -13,7 +13,7 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 [Serializable]
-public class YahooMediaPlayer : IComparable, IEquatable<YahooMediaPlayer>
+public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooMediaPlayer>
 {
 
     /// <summary>
@@ -217,29 +217,20 @@ public class YahooMediaPlayer : IComparable, IEquatable<YahooMediaPlayer>
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(YahooMediaPlayer? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        YahooMediaPlayer value = obj as YahooMediaPlayer;
 
-        if (value != null)
-        {
-            int result = this.Height.CompareTo(value.Height);
-            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= this.Width.CompareTo(value.Width);
+        int result = this.Height.CompareTo(other.Height);
+        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= this.Width.CompareTo(other.Width);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

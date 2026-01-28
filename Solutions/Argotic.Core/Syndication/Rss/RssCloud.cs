@@ -22,7 +22,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssCloud : IComparable, IEquatable<RssCloud>, IExtensibleSyndicationObject
+public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -440,31 +440,22 @@ public class RssCloud : IComparable, IEquatable<RssCloud>, IExtensibleSyndicatio
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">The <see cref="RssCloud"/> to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(RssCloud? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        RssCloud value = obj as RssCloud;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Domain, value.Domain, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Path, value.Path, StringComparison.OrdinalIgnoreCase);
-            result |= this.Port.CompareTo(value.Port);
-            result |= this.Protocol.CompareTo(value.Protocol);
-            result |= string.Compare(this.RegisterProcedure, value.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.Domain, other.Domain, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Path, other.Path, StringComparison.OrdinalIgnoreCase);
+        result |= this.Port.CompareTo(other.Port);
+        result |= this.Protocol.CompareTo(other.Protocol);
+        result |= string.Compare(this.RegisterProcedure, other.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

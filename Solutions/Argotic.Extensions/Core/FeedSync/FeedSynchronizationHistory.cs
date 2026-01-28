@@ -11,7 +11,7 @@ namespace Argotic.Extensions.Core;
 /// <seealso cref="FeedSynchronizationItem.Histories"/>
 /// <seealso cref="FeedSynchronizationItem"/>
 [Serializable]
-public class FeedSynchronizationHistory : IComparable, IEquatable<FeedSynchronizationHistory>
+public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory>, IEquatable<FeedSynchronizationHistory>
 {
 
     /// <summary>
@@ -245,29 +245,20 @@ public class FeedSynchronizationHistory : IComparable, IEquatable<FeedSynchroniz
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(FeedSynchronizationHistory? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        FeedSynchronizationHistory value = obj as FeedSynchronizationHistory;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.By, value.By, StringComparison.OrdinalIgnoreCase);
-            result |= this.Sequence.CompareTo(value.Sequence);
-            result |= this.When.CompareTo(value.When);
+        int result = string.Compare(this.By, other.By, StringComparison.OrdinalIgnoreCase);
+        result |= this.Sequence.CompareTo(other.Sequence);
+        result |= this.When.CompareTo(other.When);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

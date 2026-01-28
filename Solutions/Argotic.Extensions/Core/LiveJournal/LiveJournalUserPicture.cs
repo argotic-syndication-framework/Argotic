@@ -8,7 +8,7 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <seealso cref="LiveJournalSyndicationExtensionContext.UserPicture"/>
 [Serializable]
-public class LiveJournalUserPicture : IComparable, IEquatable<LiveJournalUserPicture>
+public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEquatable<LiveJournalUserPicture>
 {
 
     /// <summary>
@@ -256,30 +256,21 @@ public class LiveJournalUserPicture : IComparable, IEquatable<LiveJournalUserPic
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(LiveJournalUserPicture? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        LiveJournalUserPicture value = obj as LiveJournalUserPicture;
 
-        if (value != null)
-        {
-            int result = this.Height.CompareTo(value.Height);
-            result |= string.Compare(this.Keyword, value.Keyword, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= this.Width.CompareTo(value.Width);
+        int result = this.Height.CompareTo(other.Height);
+        result |= string.Compare(this.Keyword, other.Keyword, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= this.Width.CompareTo(other.Width);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

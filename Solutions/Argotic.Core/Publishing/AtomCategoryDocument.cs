@@ -29,7 +29,7 @@ namespace Argotic.Publishing;
 /// <seealso cref="AtomMemberResources.Categories"/>
 [Serializable]
 [MimeMediaType(Name = "application", SubName = "atomcat+xml", Documentation = "http://bitworking.org/projects/atom/rfc5023.html#iana-atomcat")]
-public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparable, IEquatable<AtomCategoryDocument>
+public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparable<AtomCategoryDocument>, IEquatable<AtomCategoryDocument>
 {
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.
@@ -790,32 +790,22 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(AtomCategoryDocument? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
 
-        AtomCategoryDocument value = obj as AtomCategoryDocument;
+        int result = this.IsFixed.CompareTo(other.IsFixed);
+        result |= Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= AtomFeed.CompareSequence(this.Categories, other.Categories);
+        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
 
-        if (value != null)
-        {
-            int result = this.IsFixed.CompareTo(value.IsFixed);
-            result |= Uri.Compare(this.Scheme, value.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= AtomFeed.CompareSequence(this.Categories, value.Categories);
-            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
-
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

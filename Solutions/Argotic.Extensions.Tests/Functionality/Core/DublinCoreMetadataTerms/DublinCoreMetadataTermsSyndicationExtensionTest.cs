@@ -1116,10 +1116,10 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     {
         // Arrange
         DublinCoreMetadataTermsSyndicationExtension target = CreateFullExtension();
-        object obj = CreateFullExtension();
+        DublinCoreMetadataTermsSyndicationExtension other = CreateFullExtension();
 
         // Act
-        int actual = target.CompareTo(obj);
+        int actual = target.CompareTo(other);
 
         // Assert
         actual.ShouldBe(0);
@@ -1139,14 +1139,17 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void DublinCoreMetadataTermsCompareToThrowsForWrongType()
+    public void DublinCoreMetadataTermsCompareToDifferentExtensionReturnsNonZero()
     {
         // Arrange
         DublinCoreMetadataTermsSyndicationExtension target = CreateFullExtension();
-        object wrongType = "not an extension";
+        DublinCoreMetadataTermsSyndicationExtension other = new();
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => target.CompareTo(wrongType));
+        // Act
+        int result = target.CompareTo(other);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

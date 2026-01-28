@@ -16,7 +16,7 @@ namespace Argotic.Syndication.Specialized;
 ///     In both cases, the URL must be specified so that the implementor can figure out where to dump the attachment to.
 /// </remarks>
 [Serializable]
-public class BlogMLAttachment : IComparable, IEquatable<BlogMLAttachment>, IExtensibleSyndicationObject
+public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogMLAttachment>, IExtensibleSyndicationObject
 {
 
     /// <summary>
@@ -297,32 +297,23 @@ public class BlogMLAttachment : IComparable, IEquatable<BlogMLAttachment>, IExte
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(BlogMLAttachment? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        BlogMLAttachment value = obj as BlogMLAttachment;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Content, value.Content, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.ExternalUri, value.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= this.IsEmbedded.CompareTo(value.IsEmbedded);
-            result |= string.Compare(this.MimeType, value.MimeType, StringComparison.OrdinalIgnoreCase);
-            result |= this.Size.CompareTo(value.Size);
-            result |= Uri.Compare(this.Url, value.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.ExternalUri, other.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= this.IsEmbedded.CompareTo(other.IsEmbedded);
+        result |= string.Compare(this.MimeType, other.MimeType, StringComparison.OrdinalIgnoreCase);
+        result |= this.Size.CompareTo(other.Size);
+        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

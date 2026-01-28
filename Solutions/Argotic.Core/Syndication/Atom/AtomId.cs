@@ -90,7 +90,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomId : IAtomCommonObjectAttributes, IComparable, IEquatable<AtomId>, IExtensibleSyndicationObject
+public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatable<AtomId>, IExtensibleSyndicationObject
 {
     /// <summary>
     /// Private member to hold an IRI that represents a permanent, universally unique identifier for the entity.
@@ -286,29 +286,20 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable, IEquatable<AtomI
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">The <see cref="AtomId"/> to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(AtomId? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        AtomId value = obj as AtomId;
 
-        if (value != null)
-        {
-            int result = Uri.Compare(this.Uri, value.Uri, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.Ordinal);
+        int result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.Ordinal);
 
-            result |= AtomUtility.CompareCommonObjectAttributes(this, value);
+        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

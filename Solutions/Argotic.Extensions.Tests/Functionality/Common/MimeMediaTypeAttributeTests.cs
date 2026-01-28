@@ -255,13 +255,25 @@ public class MimeMediaTypeAttributeTests
     }
 
     [TestMethod]
-    public void CompareTo_DifferentType_ThrowsArgumentException()
+    public void CompareTo_DifferentAttribute_ReturnsNonZero()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute();
+        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        {
+            Name = "application",
+            SubName = "rss+xml"
+        };
+        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        {
+            Name = "text",
+            SubName = "xml"
+        };
 
-        // Act & Assert
-        Should.Throw<ArgumentException>(() => attribute.CompareTo("not an attribute"));
+        // Act
+        int result = attribute1.CompareTo(attribute2);
+
+        // Assert
+        result.ShouldNotBe(0);
     }
 
     [TestMethod]

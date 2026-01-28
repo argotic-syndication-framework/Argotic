@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class ITunesSyndicationExtension : SyndicationExtension, IComparable, IEquatable<ITunesSyndicationExtension>
+public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITunesSyndicationExtension>, IEquatable<ITunesSyndicationExtension>
 {
     /// <summary>
     /// Private member to hold specific information about the extension.
@@ -260,37 +260,28 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable, IEq
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(ITunesSyndicationExtension? other)
     {
-        if (obj == null)
+        if (other is null)
         {
             return 1;
         }
-        ITunesSyndicationExtension value = obj as ITunesSyndicationExtension;
 
-        if (value != null)
-        {
-            int result = string.Compare(this.Context.Author, value.Context.Author, StringComparison.OrdinalIgnoreCase);
-            result |= ITunesSyndicationExtension.CompareSequence(this.Context.Categories, value.Context.Categories);
-            result |= this.Context.Duration.CompareTo(value.Context.Duration);
-            result |= this.Context.ExplicitMaterial.CompareTo(value.Context.ExplicitMaterial);
-            result |= Uri.Compare(this.Context.Image, value.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-            result |= this.Context.IsBlocked.CompareTo(value.Context.IsBlocked);
-            result |= ComparisonUtility.CompareSequence(this.Context.Keywords, value.Context.Keywords, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Context.NewFeedUrl, value.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-            result |= this.Context.Owner.CompareTo(value.Context.Owner);
-            result |= string.Compare(this.Context.Subtitle, value.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Context.Summary, value.Context.Summary, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.Context.Author, other.Context.Author, StringComparison.OrdinalIgnoreCase);
+        result |= ITunesSyndicationExtension.CompareSequence(this.Context.Categories, other.Context.Categories);
+        result |= this.Context.Duration.CompareTo(other.Context.Duration);
+        result |= this.Context.ExplicitMaterial.CompareTo(other.Context.ExplicitMaterial);
+        result |= Uri.Compare(this.Context.Image, other.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        result |= this.Context.IsBlocked.CompareTo(other.Context.IsBlocked);
+        result |= ComparisonUtility.CompareSequence(this.Context.Keywords, other.Context.Keywords, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Compare(this.Context.NewFeedUrl, other.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        result |= this.Context.Owner.CompareTo(other.Context.Owner);
+        result |= string.Compare(this.Context.Subtitle, other.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Context.Summary, other.Context.Summary, StringComparison.OrdinalIgnoreCase);
 
-            return result;
-        }
-        else
-        {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
-        }
+        return result;
     }
 
     /// <summary>

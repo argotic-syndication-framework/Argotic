@@ -1,0 +1,387 @@
+using System.Globalization;
+using System.Xml;
+using System.Xml.XPath;
+
+namespace Argotic.Extensions.Core;
+
+/// <summary>
+/// Extends syndication specifications to provide a means of describing news content in sitemaps.
+/// </summary>
+/// <remarks>
+///     <para>
+///         The <see cref="SitemapNewsExtension"/> extends sitemap content to include news article information
+///         that helps search engines discover and understand news content on your site. This syndication extension
+///         conforms to the Google News Sitemap extension specification, which can be found at
+///         <a href="https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap">https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap</a>.
+///     </para>
+/// </remarks>
+[Serializable]
+public class SitemapNewsExtension : SyndicationExtension, IComparable
+{
+    /// <summary>
+    /// Private member to hold the publication information.
+    /// </summary>
+    private SitemapNewsPublication extensionPublication;
+
+    /// <summary>
+    /// Private member to hold the publication date.
+    /// </summary>
+    private DateTime extensionPublicationDate = DateTime.MinValue;
+
+    /// <summary>
+    /// Private member to hold the title.
+    /// </summary>
+    private string extensionTitle = string.Empty;
+
+    /// <summary>
+    /// Initializes a new instance of the <see cref="SitemapNewsExtension"/> class.
+    /// </summary>
+    public SitemapNewsExtension()
+        : base("news", "http://www.google.com/schemas/sitemap-news/0.9", new Version("0.9"), new Uri("https://developers.google.com/search/docs/crawling-indexing/sitemaps/news-sitemap"), "Google Sitemap News Extension", "Extends sitemaps to include news article information for search engine discovery.")
+    {
+    }
+
+    /// <summary>
+    /// Gets or sets the publication information for this news article.
+    /// </summary>
+    /// <value>
+    ///     A <see cref="SitemapNewsPublication"/> object that contains information about the publication
+    ///     that originally published the news article. The default value is <b>null</b>.
+    /// </value>
+    public SitemapNewsPublication Publication
+    {
+        get
+        {
+            return extensionPublication;
+        }
+
+        set
+        {
+            extensionPublication = value;
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the date and time the article was published.
+    /// </summary>
+    /// <value>
+    ///     A <see cref="DateTime"/> representing when the article was published.
+    ///     The default value is <see cref="DateTime.MinValue"/>, which indicates no date was specified.
+    /// </value>
+    /// <remarks>
+    ///     The publication date should be the date and time the article was originally published,
+    ///     not the date it was added to the sitemap.
+    /// </remarks>
+    public DateTime PublicationDate
+    {
+        get
+        {
+            return extensionPublicationDate;
+        }
+
+        set
+        {
+            extensionPublicationDate = value;
+        }
+    }
+
+    /// <summary>
+    /// Gets or sets the title of the news article.
+    /// </summary>
+    /// <value>The title of the news article.</value>
+    /// <remarks>
+    ///     The title should match the article's headline as it appears on your site.
+    /// </remarks>
+    public string Title
+    {
+        get
+        {
+            return extensionTitle;
+        }
+
+        set
+        {
+            if (string.IsNullOrEmpty(value))
+            {
+                extensionTitle = string.Empty;
+            }
+            else
+            {
+                extensionTitle = value.Trim();
+            }
+        }
+    }
+
+    /// <summary>
+    /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/>
+    /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
+    /// </summary>
+    /// <param name="extension">The <see cref="ISyndicationExtension"/> to be compared.</param>
+    /// <returns><b>true</b> if the <paramref name="extension"/> is the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>; otherwise, <b>false</b>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="extension"/> is a null reference.</exception>
+    public static bool MatchByType(ISyndicationExtension extension)
+    {
+        ArgumentNullException.ThrowIfNull(extension);
+        return extension.GetType() == typeof(SitemapNewsExtension);
+    }
+
+    /// <summary>
+    /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
+    /// </summary>
+    /// <param name="source">The <b>IXPathNavigable</b> used to load this <see cref="SitemapNewsExtension"/>.</param>
+    /// <returns><b>true</b> if the <see cref="SitemapNewsExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    public override bool Load(IXPathNavigable source)
+    {
+        bool wasLoaded = false;
+        ArgumentNullException.ThrowIfNull(source);
+
+        XPathNavigator navigator = source.CreateNavigator();
+        XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
+
+        XPathNavigator newsNavigator = navigator.SelectSingleNode("//news:news", manager);
+
+        if (newsNavigator != null)
+        {
+            XPathNavigator publicationNavigator = newsNavigator.SelectSingleNode("news:publication", manager);
+            XPathNavigator publicationDateNavigator = newsNavigator.SelectSingleNode("news:publication_date", manager);
+            XPathNavigator titleNavigator = newsNavigator.SelectSingleNode("news:title", manager);
+
+            if (publicationNavigator != null)
+            {
+                SitemapNewsPublication publication = new();
+                if (publication.Load(publicationNavigator, manager))
+                {
+                    this.extensionPublication = publication;
+                    wasLoaded = true;
+                }
+            }
+
+            if (publicationDateNavigator != null && !string.IsNullOrEmpty(publicationDateNavigator.Value))
+            {
+                if (DateTime.TryParse(publicationDateNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime publicationDate))
+                {
+                    this.extensionPublicationDate = publicationDate;
+                    wasLoaded = true;
+                }
+            }
+
+            if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
+            {
+                this.extensionTitle = titleNavigator.Value.Trim();
+                wasLoaded = true;
+            }
+        }
+
+        SyndicationExtensionLoadedEventArgs args = new(source, this);
+        this.OnExtensionLoaded(args);
+
+        return wasLoaded;
+    }
+
+    /// <summary>
+    /// Initializes the syndication extension using the supplied <see cref="XmlReader"/>.
+    /// </summary>
+    /// <param name="reader">The <b>XmlReader</b> used to load this <see cref="SitemapNewsExtension"/>.</param>
+    /// <returns><b>true</b> if the <see cref="SitemapNewsExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    public override bool Load(XmlReader reader)
+    {
+        ArgumentNullException.ThrowIfNull(reader);
+        XPathDocument document = new(reader);
+
+        return this.Load(document.CreateNavigator());
+    }
+
+    /// <summary>
+    /// Writes the syndication extension to the specified <see cref="XmlWriter"/>.
+    /// </summary>
+    /// <param name="writer">The <b>XmlWriter</b> to which you want to write the syndication extension.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    public override void WriteTo(XmlWriter writer)
+    {
+        ArgumentNullException.ThrowIfNull(writer);
+
+        writer.WriteStartElement("news", this.XmlNamespace);
+
+        this.Publication?.WriteTo(writer, this.XmlNamespace);
+
+        if (this.PublicationDate != DateTime.MinValue)
+        {
+            writer.WriteElementString("publication_date", this.XmlNamespace, this.PublicationDate.ToString("yyyy-MM-ddTHH:mm:sszzz", CultureInfo.InvariantCulture));
+        }
+
+        if (!string.IsNullOrEmpty(this.Title))
+        {
+            writer.WriteElementString("title", this.XmlNamespace, this.Title);
+        }
+
+        writer.WriteEndElement();
+    }
+
+    /// <summary>
+    /// Returns a <see cref="String"/> that represents the current <see cref="SitemapNewsExtension"/>.
+    /// </summary>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="SitemapNewsExtension"/>.</returns>
+    /// <remarks>
+    ///     This method returns the XML representation for the current instance.
+    /// </remarks>
+    public override string ToString()
+    {
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
+        {
+            ConformanceLevel = ConformanceLevel.Fragment,
+            Indent = true,
+            OmitXmlDeclaration = true
+        };
+
+        using (XmlWriter writer = XmlWriter.Create(stream, settings))
+        {
+            this.WriteTo(writer);
+        }
+
+        stream.Seek(0, SeekOrigin.Begin);
+
+        using StreamReader reader = new(stream);
+        return reader.ReadToEnd();
+    }
+
+    /// <summary>
+    /// Compares the current instance with another object of the same type.
+    /// </summary>
+    /// <param name="obj">An object to compare with this instance.</param>
+    /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
+    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
+    public int CompareTo(object? obj)
+    {
+        if (obj == null)
+        {
+            return 1;
+        }
+
+        SitemapNewsExtension other = obj as SitemapNewsExtension;
+
+        if (other != null)
+        {
+            int result = 0;
+
+            if (this.Publication != null && other.Publication != null)
+            {
+                result = this.Publication.CompareTo(other.Publication);
+            }
+            else if (this.Publication != null)
+            {
+                result = 1;
+            }
+            else if (other.Publication != null)
+            {
+                result = -1;
+            }
+
+            result |= this.PublicationDate.CompareTo(other.PublicationDate);
+            result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+
+            return result;
+        }
+        else
+        {
+            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+        }
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public override bool Equals(object? obj)
+    {
+        if (obj is not SitemapNewsExtension)
+        {
+            return false;
+        }
+
+        return this.CompareTo(obj) == 0;
+    }
+
+    /// <summary>
+    /// Returns a hash code for the current instance.
+    /// </summary>
+    /// <returns>A 32-bit signed integer hash code.</returns>
+    public override int GetHashCode()
+    {
+        return HashCode.Combine(this.Publication, this.PublicationDate, this.Title);
+    }
+
+    /// <summary>
+    /// Determines if operands are equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
+    public static bool operator ==(SitemapNewsExtension first, SitemapNewsExtension second)
+    {
+        if (first is null) return second is null;
+        return first.Equals(second);
+    }
+
+    /// <summary>
+    /// Determines if operands are not equal.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
+    public static bool operator !=(SitemapNewsExtension first, SitemapNewsExtension second)
+    {
+        return !(first == second);
+    }
+
+    /// <summary>
+    /// Determines if first operand is less than second operand.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
+    public static bool operator <(SitemapNewsExtension first, SitemapNewsExtension second)
+    {
+        if (first is null) return second is not null;
+        return first.CompareTo(second) < 0;
+    }
+
+    /// <summary>
+    /// Determines if first operand is greater than second operand.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
+    public static bool operator >(SitemapNewsExtension first, SitemapNewsExtension second)
+    {
+        if (first is null) return false;
+        return first.CompareTo(second) > 0;
+    }
+
+    /// <summary>
+    /// Determines if first operand is less than or equal to the second operand.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
+    public static bool operator <=(SitemapNewsExtension first, SitemapNewsExtension second)
+    {
+        if (first is null) return true;
+        return first.CompareTo(second) <= 0;
+    }
+
+    /// <summary>
+    /// Determines if first operand is greater than or equal to the second operand.
+    /// </summary>
+    /// <param name="first">Operand to be compared.</param>
+    /// <param name="second">Operand to compare to.</param>
+    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
+    public static bool operator >=(SitemapNewsExtension first, SitemapNewsExtension second)
+    {
+        if (first is null) return second is null;
+        return first.CompareTo(second) >= 0;
+    }
+}

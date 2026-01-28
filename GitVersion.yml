@@ -13,4 +13,4 @@ branches:
     - feature
     - support
     - hotfix
-next-version: "3001.0"
+next-version: "4000.0"

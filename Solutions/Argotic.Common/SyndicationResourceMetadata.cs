@@ -574,6 +574,70 @@ public class SyndicationResourceMetadata : IComparable
     }
 
     /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a Sitemap 0.9 formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><b>true</b> if <paramref name="resource"/> represents a Sitemap 0.9 formatted syndication resource; otherwise, <b>false</b>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    protected static bool TryParseSitemapResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("sm", "http://www.sitemaps.org/schemas/sitemap/0.9");
+
+        version = null;
+        if ((navigator = resource.SelectSingleNode("urlset", manager)) != null || (navigator = resource.SelectSingleNode("sm:urlset", manager)) != null)
+        {
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.sitemaps.org/schemas/sitemap/0.9"))
+            {
+                resourceConformsToFormat = true;
+                version = new Version(0, 9);
+            }
+        }
+
+        return resourceConformsToFormat;
+    }
+
+    /// <summary>
+    /// Determines if the specified <see cref="XPathNavigator"/> represents a Sitemap Index 0.9 formatted syndication resource.
+    /// </summary>
+    /// <param name="resource">A <see cref="XPathNavigator"/> that represents the syndication resource to attempt to parse.</param>
+    /// <param name="navigator">A <see cref="XPathNavigator"/> that can be used to navigate the root element of the syndication resource. This parameter is passed uninitialized.</param>
+    /// <param name="version">The version of the syndication specification that the resource conforms to. This parameter is passed uninitialized.</param>
+    /// <returns><b>true</b> if <paramref name="resource"/> represents a Sitemap Index 0.9 formatted syndication resource; otherwise, <b>false</b>.</returns>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    protected static bool TryParseSitemapIndexResource(XPathNavigator resource, out XPathNavigator navigator, out Version version)
+    {
+        bool resourceConformsToFormat = false;
+
+        ArgumentNullException.ThrowIfNull(resource);
+
+        XmlNamespaceManager manager = new(resource.NameTable);
+        manager.AddNamespace("sm", "http://www.sitemaps.org/schemas/sitemap/0.9");
+
+        version = null;
+        if ((navigator = resource.SelectSingleNode("sitemapindex", manager)) != null || (navigator = resource.SelectSingleNode("sm:sitemapindex", manager)) != null)
+        {
+            Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
+
+            if (namespaces.ContainsValue("http://www.sitemaps.org/schemas/sitemap/0.9"))
+            {
+                resourceConformsToFormat = true;
+                version = new Version(0, 9);
+            }
+        }
+
+        return resourceConformsToFormat;
+    }
+
+    /// <summary>
     /// Extracts the content format, version, and XML namespaces for a syndication resource from the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="resource">The <see cref="XPathNavigator"/> to extract the syndication resource meta-data from.</param>
@@ -653,6 +717,18 @@ public class SyndicationResourceMetadata : IComparable
         else if (SyndicationResourceMetadata.TryParseRssResource(resource, out navigator, out version))
         {
             resourceFormat = SyndicationContentFormat.Rss;
+            resourceRootNode = navigator;
+            resourceVersion = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseSitemapResource(resource, out navigator, out version))
+        {
+            resourceFormat = SyndicationContentFormat.Sitemap;
+            resourceRootNode = navigator;
+            resourceVersion = version;
+        }
+        else if (SyndicationResourceMetadata.TryParseSitemapIndexResource(resource, out navigator, out version))
+        {
+            resourceFormat = SyndicationContentFormat.SitemapIndex;
             resourceRootNode = navigator;
             resourceVersion = version;
         }

@@ -43,6 +43,12 @@ public static class SampleDataPath
     /// <summary>Gets the path to the sample Atom feed with extensions file.</summary>
     public static FilePath AtomFeedWithExtensions => BasePath.CombineWithFilePath("AtomFeedWithExtensions.xml");
 
+    /// <summary>Gets the path to the sample Sitemap file.</summary>
+    public static FilePath Sitemap => BasePath.CombineWithFilePath("sitemap.xml");
+
+    /// <summary>Gets the path to the sample Sitemap Index file.</summary>
+    public static FilePath SitemapIndex => BasePath.CombineWithFilePath("sitemap_index.xml");
+
     /// <summary>
     /// Opens a file for reading.
     /// </summary>

@@ -724,4 +724,292 @@ public static class FeedTestData
                                                  """;
 
     #endregion
+
+    #region Sitemap Test Data
+
+    /// <summary>
+    /// A minimal valid sitemap.
+    /// </summary>
+    public const string MinimalSitemap = """
+                                         <?xml version="1.0" encoding="UTF-8"?>
+                                         <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                             <url>
+                                                 <loc>https://www.example.com/</loc>
+                                             </url>
+                                         </urlset>
+                                         """;
+
+    /// <summary>
+    /// A sitemap with all optional elements.
+    /// </summary>
+    public const string FullSitemap = """
+                                      <?xml version="1.0" encoding="UTF-8"?>
+                                      <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                          <url>
+                                              <loc>https://www.example.com/</loc>
+                                              <lastmod>2024-01-15</lastmod>
+                                              <changefreq>daily</changefreq>
+                                              <priority>1.0</priority>
+                                          </url>
+                                          <url>
+                                              <loc>https://www.example.com/about</loc>
+                                              <lastmod>2024-01-10T12:00:00+00:00</lastmod>
+                                              <changefreq>monthly</changefreq>
+                                              <priority>0.8</priority>
+                                          </url>
+                                          <url>
+                                              <loc>https://www.example.com/contact</loc>
+                                              <lastmod>2024-01-05</lastmod>
+                                              <changefreq>yearly</changefreq>
+                                              <priority>0.5</priority>
+                                          </url>
+                                      </urlset>
+                                      """;
+
+    /// <summary>
+    /// A sitemap with various changefreq values.
+    /// </summary>
+    public const string SitemapWithAllChangeFrequencies = """
+                                                          <?xml version="1.0" encoding="UTF-8"?>
+                                                          <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                                              <url>
+                                                                  <loc>https://www.example.com/always</loc>
+                                                                  <changefreq>always</changefreq>
+                                                              </url>
+                                                              <url>
+                                                                  <loc>https://www.example.com/hourly</loc>
+                                                                  <changefreq>hourly</changefreq>
+                                                              </url>
+                                                              <url>
+                                                                  <loc>https://www.example.com/daily</loc>
+                                                                  <changefreq>daily</changefreq>
+                                                              </url>
+                                                              <url>
+                                                                  <loc>https://www.example.com/weekly</loc>
+                                                                  <changefreq>weekly</changefreq>
+                                                              </url>
+                                                              <url>
+                                                                  <loc>https://www.example.com/monthly</loc>
+                                                                  <changefreq>monthly</changefreq>
+                                                              </url>
+                                                              <url>
+                                                                  <loc>https://www.example.com/yearly</loc>
+                                                                  <changefreq>yearly</changefreq>
+                                                              </url>
+                                                              <url>
+                                                                  <loc>https://www.example.com/never</loc>
+                                                                  <changefreq>never</changefreq>
+                                                              </url>
+                                                          </urlset>
+                                                          """;
+
+    /// <summary>
+    /// A sitemap with URL entity escaping.
+    /// </summary>
+    public const string SitemapWithEscapedUrls = """
+                                                 <?xml version="1.0" encoding="UTF-8"?>
+                                                 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                                     <url>
+                                                         <loc>https://www.example.com/page?param1=value1&amp;param2=value2</loc>
+                                                     </url>
+                                                     <url>
+                                                         <loc>https://www.example.com/search?q=test%20query</loc>
+                                                     </url>
+                                                 </urlset>
+                                                 """;
+
+    /// <summary>
+    /// An empty sitemap with no URLs.
+    /// </summary>
+    public const string EmptySitemap = """
+                                       <?xml version="1.0" encoding="UTF-8"?>
+                                       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                       </urlset>
+                                       """;
+
+    /// <summary>
+    /// A sitemap with various date formats.
+    /// </summary>
+    public const string SitemapWithDateFormats = """
+                                                 <?xml version="1.0" encoding="UTF-8"?>
+                                                 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                                     <url>
+                                                         <loc>https://www.example.com/date-only</loc>
+                                                         <lastmod>2024-01-15</lastmod>
+                                                     </url>
+                                                     <url>
+                                                         <loc>https://www.example.com/datetime-utc</loc>
+                                                         <lastmod>2024-01-15T10:30:00Z</lastmod>
+                                                     </url>
+                                                     <url>
+                                                         <loc>https://www.example.com/datetime-offset</loc>
+                                                         <lastmod>2024-01-15T10:30:00+05:00</lastmod>
+                                                     </url>
+                                                     <url>
+                                                         <loc>https://www.example.com/datetime-negative-offset</loc>
+                                                         <lastmod>2024-01-15T10:30:00-08:00</lastmod>
+                                                     </url>
+                                                 </urlset>
+                                                 """;
+
+    /// <summary>
+    /// A minimal sitemap index.
+    /// </summary>
+    public const string MinimalSitemapIndex = """
+                                              <?xml version="1.0" encoding="UTF-8"?>
+                                              <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                                  <sitemap>
+                                                      <loc>https://www.example.com/sitemap1.xml</loc>
+                                                  </sitemap>
+                                              </sitemapindex>
+                                              """;
+
+    /// <summary>
+    /// A sitemap index with multiple sitemaps.
+    /// </summary>
+    public const string FullSitemapIndex = """
+                                           <?xml version="1.0" encoding="UTF-8"?>
+                                           <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                               <sitemap>
+                                                   <loc>https://www.example.com/sitemap1.xml</loc>
+                                                   <lastmod>2024-01-15T10:00:00Z</lastmod>
+                                               </sitemap>
+                                               <sitemap>
+                                                   <loc>https://www.example.com/sitemap2.xml</loc>
+                                                   <lastmod>2024-01-14T10:00:00Z</lastmod>
+                                               </sitemap>
+                                               <sitemap>
+                                                   <loc>https://www.example.com/sitemap3.xml</loc>
+                                               </sitemap>
+                                           </sitemapindex>
+                                           """;
+
+    /// <summary>
+    /// An empty sitemap index.
+    /// </summary>
+    public const string EmptySitemapIndex = """
+                                            <?xml version="1.0" encoding="UTF-8"?>
+                                            <sitemapindex xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                            </sitemapindex>
+                                            """;
+
+    /// <summary>
+    /// A sitemap with image extension.
+    /// </summary>
+    public const string SitemapWithImageExtension = """
+                                                    <?xml version="1.0" encoding="UTF-8"?>
+                                                    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+                                                            xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+                                                        <url>
+                                                            <loc>https://example.com/page.html</loc>
+                                                            <image:image>
+                                                                <image:loc>https://example.com/image1.jpg</image:loc>
+                                                            </image:image>
+                                                        </url>
+                                                    </urlset>
+                                                    """;
+
+    /// <summary>
+    /// A sitemap with multiple images per URL.
+    /// </summary>
+    public const string SitemapWithMultipleImages = """
+                                                    <?xml version="1.0" encoding="UTF-8"?>
+                                                    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+                                                            xmlns:image="http://www.google.com/schemas/sitemap-image/1.1">
+                                                        <url>
+                                                            <loc>https://example.com/gallery.html</loc>
+                                                            <image:image>
+                                                                <image:loc>https://example.com/photo1.jpg</image:loc>
+                                                            </image:image>
+                                                            <image:image>
+                                                                <image:loc>https://example.com/photo2.jpg</image:loc>
+                                                            </image:image>
+                                                            <image:image>
+                                                                <image:loc>https://example.com/photo3.jpg</image:loc>
+                                                            </image:image>
+                                                        </url>
+                                                    </urlset>
+                                                    """;
+
+    /// <summary>
+    /// A sitemap with video extension.
+    /// </summary>
+    public const string SitemapWithVideoExtension = """
+                                                    <?xml version="1.0" encoding="UTF-8"?>
+                                                    <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+                                                            xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
+                                                        <url>
+                                                            <loc>https://example.com/video-page.html</loc>
+                                                            <video:video>
+                                                                <video:thumbnail_loc>https://example.com/thumb.jpg</video:thumbnail_loc>
+                                                                <video:title>Example Video</video:title>
+                                                                <video:description>A sample video description</video:description>
+                                                                <video:content_loc>https://example.com/video.mp4</video:content_loc>
+                                                                <video:duration>600</video:duration>
+                                                                <video:publication_date>2024-01-15</video:publication_date>
+                                                            </video:video>
+                                                        </url>
+                                                    </urlset>
+                                                    """;
+
+    /// <summary>
+    /// A sitemap with news extension.
+    /// </summary>
+    public const string SitemapWithNewsExtension = """
+                                                   <?xml version="1.0" encoding="UTF-8"?>
+                                                   <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+                                                           xmlns:news="http://www.google.com/schemas/sitemap-news/0.9">
+                                                       <url>
+                                                           <loc>https://example.com/article.html</loc>
+                                                           <news:news>
+                                                               <news:publication>
+                                                                   <news:name>Example News</news:name>
+                                                                   <news:language>en</news:language>
+                                                               </news:publication>
+                                                               <news:publication_date>2024-01-15</news:publication_date>
+                                                               <news:title>Breaking News Article</news:title>
+                                                           </news:news>
+                                                       </url>
+                                                   </urlset>
+                                                   """;
+
+    /// <summary>
+    /// A sitemap with hreflang/xhtml:link extension.
+    /// </summary>
+    public const string SitemapWithHreflangExtension = """
+                                                       <?xml version="1.0" encoding="UTF-8"?>
+                                                       <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+                                                               xmlns:xhtml="http://www.w3.org/1999/xhtml">
+                                                           <url>
+                                                               <loc>https://example.com/en/page.html</loc>
+                                                               <xhtml:link rel="alternate" hreflang="en" href="https://example.com/en/page.html"/>
+                                                               <xhtml:link rel="alternate" hreflang="de" href="https://example.com/de/page.html"/>
+                                                               <xhtml:link rel="alternate" hreflang="fr" href="https://example.com/fr/page.html"/>
+                                                               <xhtml:link rel="alternate" hreflang="x-default" href="https://example.com/page.html"/>
+                                                           </url>
+                                                       </urlset>
+                                                       """;
+
+    /// <summary>
+    /// A sitemap with priority boundary values.
+    /// </summary>
+    public const string SitemapWithPriorityBoundaries = """
+                                                        <?xml version="1.0" encoding="UTF-8"?>
+                                                        <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+                                                            <url>
+                                                                <loc>https://www.example.com/min-priority</loc>
+                                                                <priority>0.0</priority>
+                                                            </url>
+                                                            <url>
+                                                                <loc>https://www.example.com/max-priority</loc>
+                                                                <priority>1.0</priority>
+                                                            </url>
+                                                            <url>
+                                                                <loc>https://www.example.com/default-priority</loc>
+                                                                <priority>0.5</priority>
+                                                            </url>
+                                                        </urlset>
+                                                        """;
+
+    #endregion
 }

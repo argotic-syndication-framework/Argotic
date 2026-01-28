@@ -125,6 +125,16 @@ public class SyndicationResourceAdapter
 
                 this.FillRssResource(resource, resourceMetadata);
                 break;
+
+            case SyndicationContentFormat.Sitemap:
+
+                this.FillSitemapResource(resource, resourceMetadata);
+                break;
+
+            case SyndicationContentFormat.SitemapIndex:
+
+                this.FillSitemapIndexResource(resource, resourceMetadata);
+                break;
         }
     }
 
@@ -340,6 +350,48 @@ public class SyndicationResourceAdapter
         {
             Rss090SyndicationResourceAdapter rss090Adapter = new(this.Navigator, this.Settings);
             rss090Adapter.Fill(rssFeed);
+        }
+    }
+
+    /// <summary>
+    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// </summary>
+    /// <param name="resource">The Sitemap <see cref="ISyndicationResource"/> to be filled.</param>
+    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    private void FillSitemapResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    {
+        ArgumentNullException.ThrowIfNull(resource);
+        ArgumentNullException.ThrowIfNull(resourceMetadata);
+
+        Sitemap sitemap = resource as Sitemap;
+
+        if (resourceMetadata.Version == new Version("0.9"))
+        {
+            Sitemap09SyndicationResourceAdapter adapter = new(this.Navigator, this.Settings);
+            adapter.Fill(sitemap);
+        }
+    }
+
+    /// <summary>
+    /// Modifies the <see cref="ISyndicationResource"/> to match the data source.
+    /// </summary>
+    /// <param name="resource">The Sitemap Index <see cref="ISyndicationResource"/> to be filled.</param>
+    /// <param name="resourceMetadata">A <see cref="SyndicationResourceMetadata"/> object that represents the meta-data describing the <paramref name="resource"/>.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="resource"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="resourceMetadata"/> is a null reference.</exception>
+    private void FillSitemapIndexResource(ISyndicationResource resource, SyndicationResourceMetadata resourceMetadata)
+    {
+        ArgumentNullException.ThrowIfNull(resource);
+        ArgumentNullException.ThrowIfNull(resourceMetadata);
+
+        SitemapIndex sitemapIndex = resource as SitemapIndex;
+
+        if (resourceMetadata.Version == new Version("0.9"))
+        {
+            Sitemap09SyndicationResourceAdapter adapter = new(this.Navigator, this.Settings);
+            adapter.Fill(sitemapIndex);
         }
     }
 }

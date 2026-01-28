@@ -96,5 +96,19 @@ public enum SyndicationContentFormat
     /// </summary>
     [EnumerationMetadata(DisplayName = "Atom Publishing Service 1.0", AlternateValue = "service")]
     [MimeMediaType(Name = "application", SubName = "atomsvc+xml", Documentation = "http://bitworking.org/projects/atom/rfc5023.html#iana-atomsvc")]
-    AtomServiceDocument = 12
+    AtomServiceDocument = 12,
+
+    /// <summary>
+    /// Indicates that the syndication resource conforms to the Sitemap 0.9 syndication format.
+    /// </summary>
+    [EnumerationMetadata(DisplayName = "Sitemap 0.9", AlternateValue = "urlset")]
+    [MimeMediaType(Name = "application", SubName = "xml", Documentation = "https://www.sitemaps.org/protocol.html")]
+    Sitemap = 13,
+
+    /// <summary>
+    /// Indicates that the syndication resource conforms to the Sitemap Index 0.9 syndication format.
+    /// </summary>
+    [EnumerationMetadata(DisplayName = "Sitemap Index 0.9", AlternateValue = "sitemapindex")]
+    [MimeMediaType(Name = "application", SubName = "xml", Documentation = "https://www.sitemaps.org/protocol.html")]
+    SitemapIndex = 14
 }

@@ -880,4 +880,56 @@ public static class ExampleOutput
     {
         AnsiConsole.MarkupLine($"  [dim]Items with {extensionName}:[/] {count}/{total}");
     }
+
+    // ========================================
+    // Sitemap Display Methods
+    // ========================================
+
+    /// <summary>
+    /// Displays information about a Sitemap.
+    /// </summary>
+    public static void ShowSitemap(Syndication.Sitemap sitemap)
+    {
+        AnsiConsole.MarkupLine($"  [dim]Sitemap URLs:[/] [blue]{sitemap.Urls.Count}[/]");
+        foreach (SitemapUrl url in sitemap.Urls.Take(5))
+        {
+            AnsiConsole.MarkupLine($"    - {Markup.Escape(url.Location?.ToString() ?? "")}");
+            if (url.LastModified.HasValue)
+            {
+                AnsiConsole.MarkupLine($"      [dim]Last Modified:[/] {url.LastModified.Value:yyyy-MM-dd}");
+            }
+            if (url.ChangeFrequency.HasValue)
+            {
+                AnsiConsole.MarkupLine($"      [dim]Change Frequency:[/] {url.ChangeFrequency.Value}");
+            }
+            if (url.Priority.HasValue)
+            {
+                AnsiConsole.MarkupLine($"      [dim]Priority:[/] {url.Priority.Value}");
+            }
+        }
+        if (sitemap.Urls.Count > 5)
+        {
+            AnsiConsole.MarkupLine($"    [dim]... and {sitemap.Urls.Count - 5} more[/]");
+        }
+    }
+
+    /// <summary>
+    /// Displays information about a SitemapIndex.
+    /// </summary>
+    public static void ShowSitemapIndex(SitemapIndex index)
+    {
+        AnsiConsole.MarkupLine($"  [dim]Sitemap Index:[/] [blue]{index.Sitemaps.Count} sitemaps[/]");
+        foreach (SitemapIndexEntry entry in index.Sitemaps.Take(5))
+        {
+            AnsiConsole.MarkupLine($"    - {Markup.Escape(entry.Location?.ToString() ?? "")}");
+            if (entry.LastModified.HasValue)
+            {
+                AnsiConsole.MarkupLine($"      [dim]Last Modified:[/] {entry.LastModified.Value:yyyy-MM-dd HH:mm:ss}");
+            }
+        }
+        if (index.Sitemaps.Count > 5)
+        {
+            AnsiConsole.MarkupLine($"    [dim]... and {index.Sitemaps.Count - 5} more[/]");
+        }
+    }
 }

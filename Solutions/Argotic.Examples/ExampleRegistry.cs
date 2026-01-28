@@ -43,6 +43,7 @@ public static class ExampleRegistry
         new("RSD", "Really Simple Discovery", "Rsd"),
         new("Network", "Trackback and XML-RPC protocols", "Net"),
         new("Generic", "Format-agnostic syndication", "Generic"),
+        new("Sitemap", "XML Sitemap protocol", "Sitemap"),
         new("Extensions", "Syndication extensions (iTunes, Dublin Core, etc.)", "Extensions")
     ];
 
@@ -220,6 +221,11 @@ public static class ExampleRegistry
         if (ns.Contains(".Net", StringComparison.OrdinalIgnoreCase))
         {
             return "Net";
+        }
+
+        if (ns.Contains(".Sitemap", StringComparison.OrdinalIgnoreCase))
+        {
+            return "Sitemap";
         }
 
         // Check type name for Generic

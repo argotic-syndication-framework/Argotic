@@ -159,9 +159,9 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaTextConstruct"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaTextConstruct"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaTextConstruct"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaTextConstruct"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance. A <i>generic</i> element name is used.
     /// </remarks>

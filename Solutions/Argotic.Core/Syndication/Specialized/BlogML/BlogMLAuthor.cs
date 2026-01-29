@@ -217,9 +217,9 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
         int result = string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
 
         result |= BlogMLUtility.CompareCommonObjects(this, other);
-
+cref="string"
         return result;
-    }
+    }cref="string"
 
     /// <summary>
     /// Determines whether the specified <see cref="BlogMLAuthor"/> is equal to the current instance.

@@ -243,9 +243,9 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.ExternalUri, other.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result |= Uri.Ccref="string"xternalUri, other.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
         result |= this.IsEmbedded.CompareTo(other.IsEmbedded);
-        result |= string.Compare(this.MimeType, other.MimeType, StringComparison.OrdinalIgnoreCase);
+        result |= stringcref="string".MimeType, other.MimeType, StringComparison.OrdinalIgnoreCase);
         result |= this.Size.CompareTo(other.Size);
         result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 

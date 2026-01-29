@@ -551,9 +551,9 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         else if (this.Source == null && other.Source != null)
         {
             result |= -1;
-        }
+        }cref="string"
 
-        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
+        result |= Comparcref="string"ompareSequence(this.Categories, other.Categories);
         result |= ComparisonUtility.CompareSequence(this.Enclosures, other.Enclosures);
 
         return result;

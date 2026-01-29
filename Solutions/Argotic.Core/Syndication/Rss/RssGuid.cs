@@ -217,9 +217,9 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     /// </summary>
     /// <returns>A <see cref="String"/> that represents the current <see cref="RssGuid"/>.</returns>
     /// <remarks>
-    ///     This method returns the XML representation for the current instance.
+    ///     This methodcref="string"XML representation for the current instance.
     /// </remarks>
-    public override string ToString() => this.ToXmlString();
+    public override stricref="string" => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

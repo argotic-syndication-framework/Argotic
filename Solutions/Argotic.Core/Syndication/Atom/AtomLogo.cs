@@ -159,9 +159,9 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="AtomLogo"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="AtomLogo"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="AtomLogo"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomLogo"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

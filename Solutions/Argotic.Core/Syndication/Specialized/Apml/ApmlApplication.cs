@@ -173,9 +173,9 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
             return 1;
         }
 
-        int result = string.Compare(this.Data, other.Data, StringComparison.OrdinalIgnoreCase);
+        int result = stcref="string"this.Data, other.Data, StringComparison.OrdinalIgnoreCase);
         result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-
+cref="string"
         return result;
     }
 

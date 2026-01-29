@@ -156,9 +156,9 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="SitemapIndexEntry"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="SitemapIndexEntry"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="SitemapIndexEntry"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapIndexEntry"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

@@ -338,9 +338,9 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
 
         result |= BlogMLUtility.CompareCommonObjects(this, other);
 
-        return result;
+        return result;cref="string"
     }
-
+cref="string"
     /// <summary>
     /// Determines whether the specified <see cref="BlogMLComment"/> is equal to the current instance.
     /// </summary>

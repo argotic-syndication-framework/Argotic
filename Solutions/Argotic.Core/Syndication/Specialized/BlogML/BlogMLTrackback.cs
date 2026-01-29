@@ -201,9 +201,9 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLTrackback"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLTrackback"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLTrackback"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLTrackback"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

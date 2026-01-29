@@ -522,7 +522,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// Gets the relevant keywords that describe this media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="IList{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this media object.
+    ///     A <see cref="IList{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe this media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
@@ -760,9 +760,9 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaContent"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaContent"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaContent"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaContent"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

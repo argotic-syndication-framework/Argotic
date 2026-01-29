@@ -228,9 +228,9 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcScalarValue"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcScalarValue"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcScalarValue"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

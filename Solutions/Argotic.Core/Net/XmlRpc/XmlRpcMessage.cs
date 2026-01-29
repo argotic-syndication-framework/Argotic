@@ -238,9 +238,9 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcMessage"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

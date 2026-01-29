@@ -47,9 +47,9 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="EnumerationMetadataAttribute"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="EnumerationMetadataAttribute"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="EnumerationMetadataAttribute"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="EnumerationMetadataAttribute"/>.</returns>
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>

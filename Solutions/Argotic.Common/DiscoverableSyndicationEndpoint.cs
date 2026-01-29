@@ -184,9 +184,9 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="DiscoverableSyndicationEndpoint"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="DiscoverableSyndicationEndpoint"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="DiscoverableSyndicationEndpoint"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="DiscoverableSyndicationEndpoint"/>.</returns>
     /// <remarks>
     ///     This method returns the XHTML representation for the current instance.
     /// </remarks>

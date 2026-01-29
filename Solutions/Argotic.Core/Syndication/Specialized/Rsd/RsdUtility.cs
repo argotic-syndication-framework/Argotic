@@ -44,7 +44,7 @@ internal static class RsdUtility
     ///     An <see cref="XPathNodeIterator"/> that points to the selected node set.
     /// </returns>
     /// <remarks>
-    ///     This method performs a safe XPath query for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided. 
+    ///     This method performs a cref="string"ery for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided. 
     ///     If no result is found, this method then attempts the query without any prefixing by removing instances of <i>rsd:</i> from the supplied <paramref name="xpath"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
@@ -78,7 +78,7 @@ internal static class RsdUtility
     ///     An <see cref="XPathNavigator"/> object that contains the first matching node for the XPath query specified; Otherwise, <b>null</b> if there are no query results.
     /// </returns>
     /// <remarks>
-    ///     This method performs a safe XPath query for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided. 
+    ///     This method performs a cref="string"ery for Really Simple Discoverability (RSD) syndication entities by first attempting the query as provided. 
     ///     If no result is found, this method then attempts the query without any prefixing by removing instances of <i>rsd:</i> from the supplied <paramref name="xpath"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>

@@ -223,9 +223,9 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="SitemapNewsExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="SitemapNewsExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="SitemapNewsExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapNewsExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

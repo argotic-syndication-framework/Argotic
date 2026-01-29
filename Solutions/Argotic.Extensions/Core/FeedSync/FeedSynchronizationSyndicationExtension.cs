@@ -116,9 +116,9 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="FeedSynchronizationSyndicationExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="FeedSynchronizationSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="FeedSynchronizationSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="FeedSynchronizationSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

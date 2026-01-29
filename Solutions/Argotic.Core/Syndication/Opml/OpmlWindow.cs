@@ -142,9 +142,9 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
         }
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="OpmlWindow"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="OpmlWindow"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="OpmlWindow"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlWindow"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

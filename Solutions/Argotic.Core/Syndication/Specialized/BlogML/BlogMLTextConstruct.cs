@@ -227,9 +227,9 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLTextConstruct"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLTextConstruct"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLTextConstruct"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLTextConstruct"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance, with a generic element name of <i>TextConstruct</i>.
     /// </remarks>

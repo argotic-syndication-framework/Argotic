@@ -89,9 +89,9 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     public Uri Source => eventSource;
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.</returns>
     /// <remarks>
     ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
     /// </remarks>

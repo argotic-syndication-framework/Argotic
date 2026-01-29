@@ -267,9 +267,9 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// </summary>
     /// <param name="other">The <see cref="RssEnclosure"/> to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    public int CompareTo(RssEnclosure? other)
+    public int CompareTcref="string"e? other)
     {
-        if (other is null)
+        if (other is nulcref="string"
         {
             return 1;
         }

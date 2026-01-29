@@ -117,9 +117,9 @@ public class PheedSyndicationExtension : SyndicationExtension, IComparable<Pheed
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="PheedSyndicationExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="PheedSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="PheedSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="PheedSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

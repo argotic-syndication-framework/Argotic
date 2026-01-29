@@ -203,9 +203,9 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
             return 1;
         }
 
-        int result = this.CreatedOn.CompareTo(other.CreatedOn);
+        int result = thcref="string"CompareTo(other.CreatedOn);
         result |= string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Generator, other.Generator, StringComparison.OrdinalIgnoreCase);
+        result |= stringcref="string".Generator, other.Generator, StringComparison.OrdinalIgnoreCase);
         result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
         return result;

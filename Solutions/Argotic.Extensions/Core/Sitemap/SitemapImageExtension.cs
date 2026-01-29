@@ -120,9 +120,9 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="SitemapImageExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="SitemapImageExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="SitemapImageExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapImageExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

@@ -136,9 +136,9 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="FeedHistoryLinkRelation"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="FeedHistoryLinkRelation"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="FeedHistoryLinkRelation"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="FeedHistoryLinkRelation"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

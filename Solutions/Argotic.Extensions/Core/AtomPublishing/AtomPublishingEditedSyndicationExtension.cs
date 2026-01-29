@@ -114,9 +114,9 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="AtomPublishingEditedSyndicationExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="AtomPublishingEditedSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="AtomPublishingEditedSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomPublishingEditedSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

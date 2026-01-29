@@ -14,14 +14,6 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
 {
 
     /// <summary>
-    /// Private member to hold the email address of the owner.
-    /// </summary>
-    private string ownerEmailAddress = string.Empty;
-    /// <summary>
-    /// Private member to hold the name of the owner.
-    /// </summary>
-    private string ownerName = string.Empty;
-    /// <summary>
     /// Initializes a new instance of the <see cref="ITunesOwner"/> class.
     /// </summary>
     public ITunesOwner()
@@ -39,29 +31,16 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
         this.EmailAddress = emailAddress;
         this.Name = name;
     }
+
     /// <summary>
     /// Gets or sets the email address of this owner.
     /// </summary>
     /// <value>The email address of this owner.</value>
     public string EmailAddress
     {
-        get
-        {
-            return ownerEmailAddress;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                ownerEmailAddress = string.Empty;
-            }
-            else
-            {
-                ownerEmailAddress = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the name of this owner.
@@ -69,23 +48,9 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
     /// <value>The name of this owner.</value>
     public string Name
     {
-        get
-        {
-            return ownerName;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                ownerName = string.Empty;
-            }
-            else
-            {
-                ownerName = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
     /// <summary>
     /// Loads this <see cref="ITunesOwner"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

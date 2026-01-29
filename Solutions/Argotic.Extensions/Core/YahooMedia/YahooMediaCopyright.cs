@@ -18,15 +18,6 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
 {
 
     /// <summary>
-    /// Private member to hold the url for a terms of use page or additional copyright information.
-    /// </summary>
-    private Uri copyrightUrl;
-    /// <summary>
-    /// Private member to hold the textual copyright notice.
-    /// </summary>
-    private string copyrightText = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaCopyright"/> class.
     /// </summary>
     public YahooMediaCopyright()
@@ -48,40 +39,15 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// <value>The human-readable copyright information.</value>
     public string Text
     {
-        get
-        {
-            return copyrightText;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                copyrightText = string.Empty;
-            }
-            else
-            {
-                copyrightText = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the location of a terms of use page or additional copyright information.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL for a terms of use page or additional copyright information.</value>
-    public Uri Url
-    {
-        get
-        {
-            return copyrightUrl;
-        }
-
-        set
-        {
-            copyrightUrl = value;
-        }
-    }
+    public Uri Url { get; set; }
     /// <summary>
     /// Loads this <see cref="YahooMediaCopyright"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

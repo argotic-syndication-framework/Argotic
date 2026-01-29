@@ -13,15 +13,6 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
 {
 
     /// <summary>
-    /// Private member to hold the URI that identifies the rating scheme.
-    /// </summary>
-    private Uri ratingScheme;
-    /// <summary>
-    /// Private member to hold the permissible audience value.
-    /// </summary>
-    private string ratingContent = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaRating"/> class.
     /// </summary>
     public YahooMediaRating()
@@ -85,17 +76,13 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get
-        {
-            return ratingContent;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            ratingContent = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a URI that identifies this rating scheme.
@@ -105,18 +92,7 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     ///     If no rating scheme is provided, the default scheme is <b>urn:simple</b>.
     /// </remarks>
     /// <seealso cref="SimpleScheme"/>
-    public Uri Scheme
-    {
-        get
-        {
-            return ratingScheme;
-        }
-
-        set
-        {
-            ratingScheme = value;
-        }
-    }
+    public Uri Scheme { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaRating"/> using the supplied <see cref="XPathNavigator"/>.

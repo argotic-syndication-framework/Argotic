@@ -39,17 +39,9 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </summary>
     private RssCloud channelCloud;
     /// <summary>
-    /// Private member to hold the human-readable copyright statement that applies to the feed.
-    /// </summary>
-    private string channelCopyrightNotice = string.Empty;
-    /// <summary>
     /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
     /// </summary>
     private static readonly Uri channelDocumentation = new("http://www.rssboard.org/rss-specification");
-    /// <summary>
-    /// Private member to hold a value that credits the software that created the feed.
-    /// </summary>
-    private string channelGenerator = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4)}, https://github.com/argotic-syndication-framework/argotic/";
     /// <summary>
     /// Private member to hold the graphical logo for the feed.
     /// </summary>
@@ -63,17 +55,9 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </summary>
     private DateTime channelLastBuildDate = DateTime.MinValue;
     /// <summary>
-    /// Private member to hold the e-mail address of the person to contact regarding the editorial content of the feed.
-    /// </summary>
-    private string channelManagingEditor = string.Empty;
-    /// <summary>
     /// Private member to hold the publication date and time of the feed's content.
     /// </summary>
     private DateTime channelPublicationDate = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold an advisory label for the content in a feed.
-    /// </summary>
-    private string channelRating = string.Empty;
     /// <summary>
     /// Private member to hold a form to submit a text query to the feed's publisher over the Common Gateway Interface (CGI).
     /// </summary>
@@ -82,10 +66,6 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// Private member to hold the maximum number of minutes to cache the data before an aggregator should request it again.
     /// </summary>
     private int channelTimeToLive = int.MinValue;
-    /// <summary>
-    /// Private member to hold the e-mail address of the person to contact about technical issues regarding the feed.
-    /// </summary>
-    private string channelWebmaster = string.Empty;
     /// <summary>
     /// Private member to hold a URL that points to where the feed can be retrieved from.
     /// </summary>
@@ -166,23 +146,9 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     public string Copyright
     {
-        get
-        {
-            return channelCopyrightNotice;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                channelCopyrightNotice = string.Empty;
-            }
-            else
-            {
-                channelCopyrightNotice = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets character data that provides a human-readable characterization or summary of this feed.
@@ -225,23 +191,9 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <value>A value that credits the software that created this feed. The default value is an agent that describes this syndication framework.</value>
     public string Generator
     {
-        get
-        {
-            return channelGenerator;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                channelGenerator = string.Empty;
-            }
-            else
-            {
-                channelGenerator = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4)}, https://github.com/argotic-syndication-framework/argotic/";
 
     /// <summary>
     /// Gets or sets the graphical logo for this feed.
@@ -334,29 +286,15 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <value>The e-mail address of the person to contact regarding the editorial content of this feed.</value>
     /// <remarks>
     ///     <para>
-    ///         There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification, 
+    ///         There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification,
     ///         the RFC 2368 guidelines for mailto links, or some other scheme. The recommended format for e-mail addresses is <i>username@hostname.tld (Real Name)</i>.
     ///     </para>
     /// </remarks>
     public string ManagingEditor
     {
-        get
-        {
-            return channelManagingEditor;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                channelManagingEditor = string.Empty;
-            }
-            else
-            {
-                channelManagingEditor = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the publication date and time of this feed's content.
@@ -387,29 +325,15 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <value>A string value, formatted according to the specification for the Platform for Internet Content Selection (PICS), that supplies an advisory label for the content in this feed.</value>
     /// <remarks>
     ///     <para>
-    ///         For further information on the <b>Platform for Internet Content Selection (PICS)</b> advisory label formatting specification, 
+    ///         For further information on the <b>Platform for Internet Content Selection (PICS)</b> advisory label formatting specification,
     ///         see <a href="http://www.w3.org/TR/REC-PICS-labels#General">http://www.w3.org/TR/REC-PICS-labels#General</a>.
     ///     </para>
     /// </remarks>
     public string Rating
     {
-        get
-        {
-            return channelRating;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                channelRating = string.Empty;
-            }
-            else
-            {
-                channelRating = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a URL that describes the feed itself.
@@ -525,29 +449,15 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <value>The e-mail address of the person to contact about technical issues regarding this feed.</value>
     /// <remarks>
     ///     <para>
-    ///         There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification, 
+    ///         There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification,
     ///         the RFC 2368 guidelines for mailto links, or some other scheme. The recommended format for e-mail addresses is <i>username@hostname.tld (Real Name)</i>.
     ///     </para>
     /// </remarks>
     public string Webmaster
     {
-        get
-        {
-            return channelWebmaster;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                channelWebmaster = string.Empty;
-            }
-            else
-            {
-                channelWebmaster = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -568,49 +478,6 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         return list.Find(match);
     }
 
-    /// <summary>
-    /// Compares two specified <see cref="IList{RssItem}"/> collections.
-    /// </summary>
-    /// <param name="source">The first collection.</param>
-    /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(IList<RssItem> source, IList<RssItem> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                result |= source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
     /// <summary>
     /// Loads this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -1163,8 +1030,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             result |= -1;
         }
 
-        result |= RssFeed.CompareSequence(this.Categories, other.Categories);
-        result |= RssChannel.CompareSequence(this.Items, other.Items);
+        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
+        result |= ComparisonUtility.CompareSequence(this.Items, other.Items);
         result |= ComparisonUtility.CompareSequence(this.SkipDays, other.SkipDays);
         result |= ComparisonUtility.CompareSequence(this.SkipHours, other.SkipHours);
 

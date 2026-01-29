@@ -1,8 +1,10 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
 using Shouldly;
+using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.FeedHistory;
 
@@ -1058,7 +1060,7 @@ public class FeedHistorySyndicationExtensionTest
         ];
 
         // Act
-        int result = FeedHistorySyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(0);
@@ -1079,7 +1081,7 @@ public class FeedHistorySyndicationExtensionTest
         ];
 
         // Act
-        int result = FeedHistorySyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(1);
@@ -1100,7 +1102,7 @@ public class FeedHistorySyndicationExtensionTest
         ];
 
         // Act
-        int result = FeedHistorySyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(-1);
@@ -1113,7 +1115,7 @@ public class FeedHistorySyndicationExtensionTest
         IList<FeedHistoryLinkRelation> target = [];
 
         // Act & Assert
-        Should.Throw<ArgumentNullException>(() => FeedHistorySyndicationExtension.CompareSequence(null!, target));
+        Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence(null!, target));
     }
 
     [TestMethod]
@@ -1123,7 +1125,7 @@ public class FeedHistorySyndicationExtensionTest
         IList<FeedHistoryLinkRelation> source = [];
 
         // Act & Assert
-        Should.Throw<ArgumentNullException>(() => FeedHistorySyndicationExtension.CompareSequence(source, null!));
+        Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence(source, null!));
     }
 
     [TestMethod]
@@ -1134,7 +1136,7 @@ public class FeedHistorySyndicationExtensionTest
         IList<FeedHistoryLinkRelation> target = [];
 
         // Act
-        int result = FeedHistorySyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(0);

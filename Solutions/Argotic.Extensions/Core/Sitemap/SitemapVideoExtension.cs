@@ -1,6 +1,8 @@
 using System.Xml;
 using System.Xml.XPath;
 
+using Argotic.Common;
+
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -29,7 +31,7 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
 [Serializable]
-public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVideoExtension>, IEquatable<SitemapVideoExtension>
+public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVideoExtension>, IEquatable<SitemapVideoExtension>, IComparisonOperators
 {
     /// <summary>
     /// Private member to hold the collection of videos.
@@ -52,50 +54,6 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     ///     associated with the sitemap URL. The default value is an <i>empty</i> collection.
     /// </value>
     public IList<SitemapVideo> Videos => extensionVideos;
-
-    /// <summary>
-    /// Compares two specified <see cref="IList{SitemapVideo}"/> collections.
-    /// </summary>
-    /// <param name="source">The first collection.</param>
-    /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(IList<SitemapVideo> source, IList<SitemapVideo> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                result |= source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/>
@@ -214,7 +172,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
             return 1;
         }
 
-        int result = SitemapVideoExtension.CompareSequence(this.Videos, other.Videos);
+        int result = ComparisonUtility.CompareSequence(this.Videos, other.Videos);
         return result;
     }
 
@@ -281,51 +239,4 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
         return !(first == second);
     }
 
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(SitemapVideoExtension first, SitemapVideoExtension second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(SitemapVideoExtension first, SitemapVideoExtension second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(SitemapVideoExtension first, SitemapVideoExtension second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(SitemapVideoExtension first, SitemapVideoExtension second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
-    }
 }

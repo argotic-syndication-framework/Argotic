@@ -26,18 +26,6 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
 {
 
     /// <summary>
-    /// Private member to hold the full namespace used in the groupable property.
-    /// </summary>
-    private Uri groupNamespace;
-    /// <summary>
-    /// Private member to hold the name of the groupable property.
-    /// </summary>
-    private string groupElement = string.Empty;
-    /// <summary>
-    /// Private member to hold a human-readable name for the groupable property.
-    /// </summary>
-    private string groupLabel = string.Empty;
-    /// <summary>
     /// Initializes a new instance of the <see cref="SimpleListGroup"/> class.
     /// </summary>
     public SimpleListGroup()
@@ -49,28 +37,14 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// </summary>
     /// <value>The name of this groupable property. The default value is <see cref="String.Empty"/>.</value>
     /// <remarks>
-    ///     If this property is equal to <see cref="String.Empty"/>, it is assumed that the <see cref="Label"/> property is included 
+    ///     If this property is equal to <see cref="String.Empty"/>, it is assumed that the <see cref="Label"/> property is included
     ///     and that this <see cref="SimpleListGroup"/> refers to the default sort order.
     /// </remarks>
     public string Element
     {
-        get
-        {
-            return groupElement;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                groupElement = string.Empty;
-            }
-            else
-            {
-                groupElement = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Get or sets a human-readable name for this groupable property.
@@ -84,23 +58,9 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// </remarks>
     public string Label
     {
-        get
-        {
-            return groupLabel;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                groupLabel = string.Empty;
-            }
-            else
-            {
-                groupLabel = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the full namespace identifier used to qualify this <see cref="Element"/>.
@@ -109,18 +69,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// <remarks>
     ///     If the value of this property is <b>null</b>, it is assumed that the <see cref="Element"/> does not live in a namespace.
     /// </remarks>
-    public Uri Namespace
-    {
-        get
-        {
-            return groupNamespace;
-        }
-
-        set
-        {
-            groupNamespace = value;
-        }
-    }
+    public Uri Namespace { get; set; }
 
     /// <summary>
     /// Loads this <see cref="SimpleListGroup"/> using the supplied <see cref="XPathNavigator"/>.

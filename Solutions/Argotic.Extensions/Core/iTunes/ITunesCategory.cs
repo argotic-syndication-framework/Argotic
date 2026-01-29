@@ -180,7 +180,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
         }
 
         int result = string.Compare(this.Text, other.Text, StringComparison.OrdinalIgnoreCase);
-        result |= ITunesSyndicationExtension.CompareSequence(this.Categories, other.Categories);
+        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
 
         return result;
     }

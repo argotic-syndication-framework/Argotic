@@ -15,18 +15,6 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
 {
 
     /// <summary>
-    /// Private member to hold the sequencing of individual updates for the purposes of conflict detection.
-    /// </summary>
-    private int historySequence = 1;
-    /// <summary>
-    /// Private member to hold the date-time for the device that performed the item modification.
-    /// </summary>
-    private DateTime historyWhen = DateTime.MinValue;
-    /// <summary>
-    /// Private member to hold the text value that uniquely identifies the endpoint that made the modification.
-    /// </summary>
-    private string historyBy = string.Empty;
-    /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationHistory"/> class.
     /// </summary>
     public FeedSynchronizationHistory()
@@ -62,85 +50,56 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// <value>A text value that uniquely identifies the endpoint that made the modification.</value>
     /// <remarks>
     ///     <para>
-    ///         Either or both of the <see cref="When"/> or <see cref="By"/> properties <b>must</b> be present; it is invalid to have neither. 
+    ///         Either or both of the <see cref="When"/> or <see cref="By"/> properties <b>must</b> be present; it is invalid to have neither.
     ///         It is <i>recommended</i> that implementers specify both <see cref="When"/> and <see cref="By"/> properties whenever possible.
     ///     </para>
     ///     <para>
-    ///         Implementations <b>should not</b> assume that the <see cref="By"/> property will be a human-readable indication of the author of the item; 
-    ///         it is simply intended as a unique identifier for use in the synchronization algorithm. 
+    ///         Implementations <b>should not</b> assume that the <see cref="By"/> property will be a human-readable indication of the author of the item;
+    ///         it is simply intended as a unique identifier for use in the synchronization algorithm.
     ///         The precise entity represented by an endpoint will vary depending on the application.
     ///     </para>
     /// </remarks>
     public string By
     {
-        get
-        {
-            return historyBy;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                historyBy = string.Empty;
-            }
-            else
-            {
-                historyBy = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the sequencing number used for the purpose of conflict detection.
     /// </summary>
     /// <value>An integer that is used in the sequencing of individual updates for the purposes of conflict detection. The default value is <b>1</b>.</value>
     /// <remarks>
-    ///     The sequence number is typically assigned by copying the <see cref="FeedSynchronizationItem.Updates"/> value on <see cref="FeedSynchronizationItem"/>, 
-    ///     after it has been incremented at the time of an update. 
+    ///     The sequence number is typically assigned by copying the <see cref="FeedSynchronizationItem.Updates"/> value on <see cref="FeedSynchronizationItem"/>,
+    ///     after it has been incremented at the time of an update.
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <b>1</b>.</exception>
     public int Sequence
     {
-        get
-        {
-            return historySequence;
-        }
-
+        get => field;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 1);
-            historySequence = value;
+            field = value;
         }
-    }
+    } = 1;
 
     /// <summary>
     /// Gets or sets the date-time for the device that performed the item modification.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that represents the date-time for the device that performed the item modification. 
+    ///     A <see cref="DateTime"/> that represents the date-time for the device that performed the item modification.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no date-time was specified.
     /// </value>
     /// <remarks>
     ///     <para>The value for this property <i>should</i> be interpreted as a best effort, uncalibrated value.</para>
     ///     <para>
-    ///         Either or both of the <see cref="When"/> or <see cref="By"/> properties <b>must</b> be present; it is invalid to have neither. 
+    ///         Either or both of the <see cref="When"/> or <see cref="By"/> properties <b>must</b> be present; it is invalid to have neither.
     ///         It is <i>recommended</i> that implementers specify both <see cref="When"/> and <see cref="By"/> properties whenever possible.
     ///     </para>
     ///     <para>The <see cref="DateTime"/> value should be provided in Coordinated Universal Time (UTC).</para>
     /// </remarks>
-    public DateTime When
-    {
-        get
-        {
-            return historyWhen;
-        }
-
-        set
-        {
-            historyWhen = value;
-        }
-    }
+    public DateTime When { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Loads this <see cref="FeedSynchronizationHistory"/> using the supplied <see cref="XPathNavigator"/>.

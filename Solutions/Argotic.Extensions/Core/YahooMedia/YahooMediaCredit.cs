@@ -19,18 +19,6 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
 {
 
     /// <summary>
-    /// Private member to hold the role the entity played.
-    /// </summary>
-    private string creditRole = string.Empty;
-    /// <summary>
-    /// Private member to hold the URI that identifies the role scheme.
-    /// </summary>
-    private Uri creditScheme;
-    /// <summary>
-    /// Private member to hold the name of the entity that contributed to the creation of the media object.
-    /// </summary>
-    private string creditEntityName = string.Empty;
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaCredit"/> class.
     /// </summary>
     public YahooMediaCredit()
@@ -71,46 +59,28 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Entity
     {
-        get
-        {
-            return creditEntityName;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            creditEntityName = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the role the entity played in the creation of the media object.
     /// </summary>
     /// <value>The role the entity played in the creation of the media object.</value>
     /// <remarks>
-    ///     All roles are converted to their lowercase equivalent. See <a href="http://www.ebu.ch/en/technical/metadata/specifications/role_codes.php">European Broadcasting Union Role Codes</a> 
+    ///     All roles are converted to their lowercase equivalent. See <a href="http://www.ebu.ch/en/technical/metadata/specifications/role_codes.php">European Broadcasting Union Role Codes</a>
     ///     for a listing of the default entity roles.
     /// </remarks>
     [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
     public string Role
     {
-        get
-        {
-            return creditRole;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                creditRole = string.Empty;
-            }
-            else
-            {
-                creditRole = value.ToLowerInvariant().Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.ToLowerInvariant().Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a URI that identifies this role scheme.
@@ -120,18 +90,7 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
     ///     If no rating scheme is provided, the default scheme is <b>urn:ebu</b>.
     /// </remarks>
     /// <seealso cref="EuropeanBroadcastingUnionRoleScheme"/>
-    public Uri Scheme
-    {
-        get
-        {
-            return creditScheme;
-        }
-
-        set
-        {
-            creditScheme = value;
-        }
-    }
+    public Uri Scheme { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaCredit"/> using the supplied <see cref="XPathNavigator"/>.

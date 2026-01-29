@@ -1,7 +1,9 @@
 using System.Xml;
+using Argotic.Common;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
 using Shouldly;
+using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.SimpleList;
 
@@ -506,7 +508,7 @@ public class SimpleListSyndicationExtensionTest
         };
 
         // Act
-        int result = SimpleListSyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(0);
@@ -527,7 +529,7 @@ public class SimpleListSyndicationExtensionTest
         };
 
         // Act
-        int result = SimpleListSyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(1);
@@ -548,7 +550,7 @@ public class SimpleListSyndicationExtensionTest
         };
 
         // Act
-        int result = SimpleListSyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(-1);
@@ -561,7 +563,7 @@ public class SimpleListSyndicationExtensionTest
         List<SimpleListGroup> target = new List<SimpleListGroup>();
 
         // Act & Assert
-        Should.Throw<ArgumentNullException>(() => SimpleListSyndicationExtension.CompareSequence((IList<SimpleListGroup>)null!, target));
+        Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence((IList<SimpleListGroup>)null!, target));
     }
 
     [TestMethod]
@@ -571,7 +573,7 @@ public class SimpleListSyndicationExtensionTest
         List<SimpleListGroup> source = new List<SimpleListGroup>();
 
         // Act & Assert
-        Should.Throw<ArgumentNullException>(() => SimpleListSyndicationExtension.CompareSequence(source, (IList<SimpleListGroup>)null!));
+        Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence(source, (IList<SimpleListGroup>)null!));
     }
 
     [TestMethod]
@@ -588,7 +590,7 @@ public class SimpleListSyndicationExtensionTest
         };
 
         // Act
-        int result = SimpleListSyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(0);
@@ -609,7 +611,7 @@ public class SimpleListSyndicationExtensionTest
         };
 
         // Act
-        int result = SimpleListSyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(1);
@@ -630,7 +632,7 @@ public class SimpleListSyndicationExtensionTest
         };
 
         // Act
-        int result = SimpleListSyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(-1);
@@ -643,7 +645,7 @@ public class SimpleListSyndicationExtensionTest
         List<SimpleListSort> target = new List<SimpleListSort>();
 
         // Act & Assert
-        Should.Throw<ArgumentNullException>(() => SimpleListSyndicationExtension.CompareSequence((IList<SimpleListSort>)null!, target));
+        Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence((IList<SimpleListSort>)null!, target));
     }
 
     [TestMethod]
@@ -653,7 +655,7 @@ public class SimpleListSyndicationExtensionTest
         List<SimpleListSort> source = new List<SimpleListSort>();
 
         // Act & Assert
-        Should.Throw<ArgumentNullException>(() => SimpleListSyndicationExtension.CompareSequence(source, (IList<SimpleListSort>)null!));
+        Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence(source, (IList<SimpleListSort>)null!));
     }
 
     #endregion

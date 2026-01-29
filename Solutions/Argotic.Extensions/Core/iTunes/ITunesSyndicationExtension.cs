@@ -23,7 +23,7 @@ namespace Argotic.Extensions.Core;
 ///     </code>
 /// </example>
 [Serializable]
-public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITunesSyndicationExtension>, IEquatable<ITunesSyndicationExtension>
+public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITunesSyndicationExtension>, IEquatable<ITunesSyndicationExtension>, IComparisonOperators
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtension"/> class.
@@ -52,49 +52,6 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
             field = value;
         }
     } = new();
-    /// <summary>
-    /// Compares two specified <see cref="Collection{ITunesCategory}"/> collections.
-    /// </summary>
-    /// <param name="source">The first collection.</param>
-    /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(IList<ITunesCategory> source, IList<ITunesCategory> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                result |= source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
 
     /// <summary>
     /// Returns the cloud protocol identifier for the supplied <see cref="ITunesExplicitMaterial"/>.
@@ -208,7 +165,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         }
 
         int result = string.Compare(this.Context.Author, other.Context.Author, StringComparison.OrdinalIgnoreCase);
-        result |= ITunesSyndicationExtension.CompareSequence(this.Context.Categories, other.Context.Categories);
+        result |= ComparisonUtility.CompareSequence(this.Context.Categories, other.Context.Categories);
         result |= this.Context.Duration.CompareTo(other.Context.Duration);
         result |= this.Context.ExplicitMaterial.CompareTo(other.Context.ExplicitMaterial);
         result |= Uri.Compare(this.Context.Image, other.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
@@ -291,51 +248,4 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         return !(first == second);
     }
 
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(ITunesSyndicationExtension first, ITunesSyndicationExtension second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
-    }
 }

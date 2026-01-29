@@ -1,6 +1,8 @@
 using System.Xml;
 using System.Xml.XPath;
 
+using Argotic.Common;
+
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -8,20 +10,20 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="SiteSummaryContentSyndicationExtension"/> extends syndicated content to specify the actual content of websites, in multiple formats. This syndication extension conforms to the 
+///         The <see cref="SiteSummaryContentSyndicationExtension"/> extends syndicated content to specify the actual content of websites, in multiple formats. This syndication extension conforms to the
 ///         <b>RDF Site Summary 1.0 Modules: Content</b> 1.0 specification, which can be found at <a href="http://web.resource.org/rss/1.0/modules/content/">http://web.resource.org/rss/1.0/modules/content/</a>.
 ///     </para>
 /// </remarks>
 /// <example>
 ///     <code lang="cs" title="The following code example demonstrates the usage of the SiteSummaryContentSyndicationExtension class.">
-///         <code 
-///             source="..\..\Argotic.Examples\\Extensions\Core\SiteSummaryContentSyndicationExtensionExample.cs" 
+///         <code
+///             source="..\..\Argotic.Examples\\Extensions\Core\SiteSummaryContentSyndicationExtensionExample.cs"
 ///             region="SiteSummaryContentSyndicationExtension"
 ///         />
 ///     </code>
 /// </example>
 [Serializable]
-public class SiteSummaryContentSyndicationExtension : SyndicationExtension, IComparable<SiteSummaryContentSyndicationExtension>, IEquatable<SiteSummaryContentSyndicationExtension>
+public class SiteSummaryContentSyndicationExtension : SyndicationExtension, IComparable<SiteSummaryContentSyndicationExtension>, IEquatable<SiteSummaryContentSyndicationExtension>, IComparisonOperators
 {
 
     /// <summary>
@@ -58,50 +60,6 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
             ArgumentNullException.ThrowIfNull(value);
             extensionContext = value;
         }
-    }
-
-    /// <summary>
-    /// Compares two specified <see cref="Collection{SiteSummaryContentItem}"/> collections.
-    /// </summary>
-    /// <param name="source">The first collection.</param>
-    /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(IList<SiteSummaryContentItem> source, IList<SiteSummaryContentItem> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                result |= source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
     }
 
     /// <summary>
@@ -200,7 +158,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
         }
 
         int result = string.Compare(this.Context.Encoded, other.Context.Encoded, StringComparison.Ordinal);
-        result |= SiteSummaryContentSyndicationExtension.CompareSequence(this.Context.Items, other.Context.Items);
+        result |= ComparisonUtility.CompareSequence(this.Context.Items, other.Context.Items);
 
         return result;
     }
@@ -268,51 +226,4 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
         return !(first == second);
     }
 
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(SiteSummaryContentSyndicationExtension first, SiteSummaryContentSyndicationExtension second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(SiteSummaryContentSyndicationExtension first, SiteSummaryContentSyndicationExtension second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(SiteSummaryContentSyndicationExtension first, SiteSummaryContentSyndicationExtension second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(SiteSummaryContentSyndicationExtension first, SiteSummaryContentSyndicationExtension second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
-    }
 }

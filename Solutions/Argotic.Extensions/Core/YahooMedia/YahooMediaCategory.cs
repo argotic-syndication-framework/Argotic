@@ -13,15 +13,6 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
 {
 
     /// <summary>
-    /// Private member to hold the human readable label for the category that can be displayed in end user applications.
-    /// </summary>
-    private string categoryLabel = string.Empty;
-    /// <summary>
-    /// Private member to hold the categorization taxonomy for the media object.
-    /// </summary>
-    private string categoryContent = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaCategory"/> class.
     /// </summary>
     public YahooMediaCategory()
@@ -59,17 +50,13 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get
-        {
-            return categoryContent;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            categoryContent = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the human readable label for this category.
@@ -77,23 +64,9 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     /// <value>The human readable label for this category that can be displayed in end user applications.</value>
     public string Label
     {
-        get
-        {
-            return categoryLabel;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                categoryLabel = string.Empty;
-            }
-            else
-            {
-                categoryLabel = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a URI that identifies this categorization scheme.

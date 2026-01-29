@@ -11,19 +11,6 @@ namespace Argotic.Extensions.Core;
 public class ITunesSyndicationExtensionContext
 {
     /// <summary>
-    /// Private member to hold the name of the artist of the podcast.
-    /// </summary>
-    private string extensionAuthor = string.Empty;
-    /// <summary>
-    /// Private member to hold a brief synopsis of the podcast.
-    /// </summary>
-    private string extensionSubtitle = string.Empty;
-    /// <summary>
-    /// Private member to hold the full description of the podcast.
-    /// </summary>
-    private string extensionSummary = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="ITunesSyndicationExtensionContext"/> class.
     /// </summary>
     public ITunesSyndicationExtensionContext()
@@ -36,23 +23,9 @@ public class ITunesSyndicationExtensionContext
     /// <value>The name of the artist of this podcast.</value>
     public string Author
     {
-        get
-        {
-            return extensionAuthor;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                extensionAuthor = string.Empty;
-            }
-            else
-            {
-                extensionAuthor = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets the categories to which this podcast belongs.
@@ -127,23 +100,9 @@ public class ITunesSyndicationExtensionContext
     /// </remarks>
     public string Subtitle
     {
-        get
-        {
-            return extensionSubtitle;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                extensionSubtitle = string.Empty;
-            }
-            else
-            {
-                extensionSubtitle = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the full description of this podcast.
@@ -151,23 +110,9 @@ public class ITunesSyndicationExtensionContext
     /// <value>The full description of this podcast.</value>
     public string Summary
     {
-        get
-        {
-            return extensionSummary;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                extensionSummary = string.Empty;
-            }
-            else
-            {
-                extensionSummary = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

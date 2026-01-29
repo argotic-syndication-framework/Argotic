@@ -1,19 +1,21 @@
 using System.Xml.XPath;
 
+using Argotic.Common;
+
 namespace Argotic.Extensions;
 
 /// <summary>
 /// Provides data for the <see cref="ISyndicationExtension.Loaded"/> event.
 /// </summary>
 /// <remarks>
-///     A <see cref="ISyndicationExtension.Loaded"/> event occurs whenever the <see cref="ISyndicationExtension.Load(System.Xml.XmlReader)"/> 
+///     A <see cref="ISyndicationExtension.Loaded"/> event occurs whenever the <see cref="ISyndicationExtension.Load(System.Xml.XmlReader)"/>
 ///     or <see cref="ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"/> methods are called.
 /// </remarks>
 /// <seealso cref="ISyndicationExtension"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XmlReader)"/>
 [Serializable]
-public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<SyndicationExtensionLoadedEventArgs>, IEquatable<SyndicationExtensionLoadedEventArgs>
+public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<SyndicationExtensionLoadedEventArgs>, IEquatable<SyndicationExtensionLoadedEventArgs>, IComparisonOperators
 {
 
     /// <summary>
@@ -227,51 +229,4 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
         return !(first == second);
     }
 
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(SyndicationExtensionLoadedEventArgs first, SyndicationExtensionLoadedEventArgs second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(SyndicationExtensionLoadedEventArgs first, SyndicationExtensionLoadedEventArgs second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(SyndicationExtensionLoadedEventArgs first, SyndicationExtensionLoadedEventArgs second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(SyndicationExtensionLoadedEventArgs first, SyndicationExtensionLoadedEventArgs second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
-    }
 }

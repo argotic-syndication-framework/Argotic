@@ -24,17 +24,9 @@ namespace Argotic.Syndication;
 public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
     /// <summary>
-    /// Private member to hold the e-mail address of the person who wrote the item.
-    /// </summary>
-    private string itemAuthor = string.Empty;
-    /// <summary>
     /// Private member to hold the URL of a web page that contains comments received in response to the item.
     /// </summary>
     private Uri itemComments;
-    /// <summary>
-    /// Private member to hold character data that contains the item's full content or a summary of its contents.
-    /// </summary>
-    private string itemDescription = string.Empty;
     /// <summary>
     /// Private member to hold the unique identifier for the item.
     /// </summary>
@@ -79,33 +71,19 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <value>The e-mail address of the person who wrote this item.</value>
     /// <remarks>
     ///     <para>
-    ///         There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification, 
+    ///         There is no requirement to follow a specific format for email addresses. Publishers can format addresses according to the RFC 2822 Address Specification,
     ///         the RFC 2368 guidelines for mailto links, or some other scheme. The recommended format for e-mail addresses is <i>username@hostname.tld (Real Name)</i>.
     ///     </para>
     ///     <para>
-    ///         A feed published by an individual <i>should</i> omit the item <see cref="RssItem.Author">author</see> 
+    ///         A feed published by an individual <i>should</i> omit the item <see cref="RssItem.Author">author</see>
     ///         and use the <see cref="RssChannel.ManagingEditor"/> or <see cref="RssChannel.Webmaster"/> channel properties to provide contact information.
     ///     </para>
     /// </remarks>
     public string Author
     {
-        get
-        {
-            return itemAuthor;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                itemAuthor = string.Empty;
-            }
-            else
-            {
-                itemAuthor = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets the categories or tags to which this item belongs.
@@ -139,33 +117,19 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <remarks>
     ///     <para>The description <i>may</i> be empty if the item specifies a <see cref="RssItem.Title"/>.</para>
     ///     <para>
-    ///         The description <b>must</b> be suitable for presentation as HTML. 
+    ///         The description <b>must</b> be suitable for presentation as HTML.
     ///         HTML markup must be encoded as character data either by employing the <b>HTML entities</b> (&lt; and &gt;) <i>or</i> a <b>CDATA</b> section.
     ///     </para>
     ///     <para>
-    ///         The description <i>should not</i> contain relative URLs, because the RSS format does not provide a means to identify the base URL of a document. 
+    ///         The description <i>should not</i> contain relative URLs, because the RSS format does not provide a means to identify the base URL of a document.
     ///         When a relative URL is present, an aggregator <i>may</i> attempt to resolve it to a full URL using the channel's <see cref="RssChannel.Link">link</see> as the base.
     ///     </para>
     /// </remarks>
     public string Description
     {
-        get
-        {
-            return itemDescription;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                itemDescription = string.Empty;
-            }
-            else
-            {
-                itemDescription = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets the media objects associated with this item.
@@ -312,49 +276,6 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         return this.Extensions.OfType<TExtension>().FirstOrDefault();
     }
 
-    /// <summary>
-    /// Compares two specified <see cref="IList{RssEnclosure}"/> collections.
-    /// </summary>
-    /// <param name="source">The first collection.</param>
-    /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(IList<RssEnclosure> source, IList<RssEnclosure> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                result |= source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
     /// <summary>
     /// Loads this <see cref="RssItem"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -694,8 +615,8 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             result |= -1;
         }
 
-        result |= RssFeed.CompareSequence(this.Categories, other.Categories);
-        result |= RssItem.CompareSequence(this.Enclosures, other.Enclosures);
+        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
+        result |= ComparisonUtility.CompareSequence(this.Enclosures, other.Enclosures);
 
         return result;
     }

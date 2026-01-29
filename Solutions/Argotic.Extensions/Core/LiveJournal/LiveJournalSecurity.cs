@@ -14,14 +14,6 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
 {
 
     /// <summary>
-    /// Private member to hold security type indicator.
-    /// </summary>
-    private LiveJournalSecurityType securityType = LiveJournalSecurityType.Public;
-    /// <summary>
-    /// Private member to hold an integer indicating the friend-groups mask.
-    /// </summary>
-    private int securityMask = int.MinValue;
-    /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalSecurity"/> class.
     /// </summary>
     public LiveJournalSecurity()
@@ -48,43 +40,22 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
         this.Accessibility = accessType;
         this.Mask = mask;
     }
+
     /// <summary>
     /// Gets or sets the accessibility type.
     /// </summary>
     /// <value>A <see cref="LiveJournalSecurityType"/> enumeration value that represents the access type. The default value is <see cref="LiveJournalSecurityType.Public"/>.</value>
-    public LiveJournalSecurityType Accessibility
-    {
-        get
-        {
-            return securityType;
-        }
-
-        set
-        {
-            securityType = value;
-        }
-    }
+    public LiveJournalSecurityType Accessibility { get; set; } = LiveJournalSecurityType.Public;
 
     /// <summary>
     /// Gets or sets the friend-groups mask.
     /// </summary>
     /// <value>An integer indicating the friend-groups mask used. The default value is <see cref="Int32.MinValue"/>, which indicates that no friend-groups mask was specified.</value>
     /// <remarks>
-    ///     This property only applies if the <see cref="Accessibility"/> property is <see cref="LiveJournalSecurityType.Friends">friends</see> 
+    ///     This property only applies if the <see cref="Accessibility"/> property is <see cref="LiveJournalSecurityType.Friends">friends</see>
     ///     and <b>only</b> if the author of the post is the same as the user who has authenticated the feed request.
     /// </remarks>
-    public int Mask
-    {
-        get
-        {
-            return securityMask;
-        }
-
-        set
-        {
-            securityMask = value;
-        }
-    }
+    public int Mask { get; set; } = int.MinValue;
 
     /// <summary>
     /// Returns the access level identifier for the supplied <see cref="LiveJournalSecurityType"/>.

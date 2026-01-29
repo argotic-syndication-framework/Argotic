@@ -1,5 +1,6 @@
 using Argotic.Common;
 using Shouldly;
+using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Common;
 

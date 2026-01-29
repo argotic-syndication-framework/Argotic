@@ -4,6 +4,7 @@ using System.Xml.XPath;
 using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Net;
 using Shouldly;
+using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Net.XmlRpc;
 

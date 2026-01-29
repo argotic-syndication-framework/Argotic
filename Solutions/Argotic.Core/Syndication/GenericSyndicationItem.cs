@@ -116,7 +116,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
             return 1;
         }
 
-        int result = GenericSyndicationFeed.CompareSequence(this.Categories, other.Categories);
+        int result = ComparisonUtility.CompareSequence(this.Categories, other.Categories);
         result |= string.Compare(this.Summary, other.Summary, StringComparison.OrdinalIgnoreCase);
         result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 

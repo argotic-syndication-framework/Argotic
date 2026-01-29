@@ -19,18 +19,6 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
 {
 
     /// <summary>
-    /// Private member to hold the URI for the related feed.
-    /// </summary>
-    private Uri relatedInformationLink;
-    /// <summary>
-    /// Private member to hold the name or description of the related feed.
-    /// </summary>
-    private string relatedInformationTitle = string.Empty;
-    /// <summary>
-    /// Private member to hold the type of the related feed.
-    /// </summary>
-    private FeedSynchronizationRelatedInformationType relatedInformationType = FeedSynchronizationRelatedInformationType.None;
-    /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationRelatedInformation"/> class.
     /// </summary>
     public FeedSynchronizationRelatedInformation()
@@ -62,6 +50,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     {
         this.Title = title;
     }
+
     /// <summary>
     /// Gets or sets the URI for this related feed.
     /// </summary>
@@ -72,15 +61,11 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Link
     {
-        get
-        {
-            return relatedInformationLink;
-        }
-
+        get => field;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            relatedInformationLink = value;
+            field = value;
         }
     }
 
@@ -88,37 +73,33 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// Gets or sets the type of the related feed.
     /// </summary>
     /// <value>
-    ///     A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration values that represents the type of the related feed. 
+    ///     A <see cref="FeedSynchronizationRelatedInformationType"/> enumeration values that represents the type of the related feed.
     ///     The default value is <see cref="FeedSynchronizationRelatedInformationType.None"/>, which indicates that no relation type has been specified.
     /// </value>
     /// <remarks>
     ///     <para>
-    ///         Publishers will generally include, in a feed, only the most recent modifications, additions, and deletions within some reasonable time window. 
+    ///         Publishers will generally include, in a feed, only the most recent modifications, additions, and deletions within some reasonable time window.
     ///         These feeds are referred to as <i>partial feeds</i>, whereas feeds containing the complete set of items are referred to as <i>complete feeds</i>.
     ///     </para>
     ///     <para>
-    ///         In the feed sharing context new subscribers, or existing subscribers failing to subscribe within the published feed window, will need to initially 
-    ///         copy a complete set of items from a publisher before being in a position to process incremental updates. As such, the specification provides for the 
+    ///         In the feed sharing context new subscribers, or existing subscribers failing to subscribe within the published feed window, will need to initially
+    ///         copy a complete set of items from a publisher before being in a position to process incremental updates. As such, the specification provides for the
     ///         ability for the latter feed to reference the complete feed.
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentException">The <paramref name="value"/> is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
     public FeedSynchronizationRelatedInformationType RelationType
     {
-        get
-        {
-            return relatedInformationType;
-        }
-
+        get => field;
         set
         {
             if (value == FeedSynchronizationRelatedInformationType.None)
             {
                 throw new ArgumentException($"The specified relation type of {value} is invalid.", nameof(value));
             }
-            relatedInformationType = value;
+            field = value;
         }
-    }
+    } = FeedSynchronizationRelatedInformationType.None;
 
     /// <summary>
     /// Gets or sets the name or description of this related feed.
@@ -126,23 +107,9 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <value>The name or description of this related feed.</value>
     public string Title
     {
-        get
-        {
-            return relatedInformationTitle;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                relatedInformationTitle = string.Empty;
-            }
-            else
-            {
-                relatedInformationTitle = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Returns the relation type identifier for the supplied <see cref="FeedSynchronizationRelatedInformationType"/>.

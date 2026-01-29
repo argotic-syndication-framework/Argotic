@@ -25,14 +25,6 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
 {
 
     /// <summary>
-    /// Private member to hold a slash-delimited string that identifies a hierarchical position in the taxonomy.
-    /// </summary>
-    private string categoryValue = string.Empty;
-    /// <summary>
-    /// Private member to hold a value that identifies the taxonomy in which the category is placed.
-    /// </summary>
-    private string categoryDomain = string.Empty;
-    /// <summary>
     /// Initializes a new instance of the <see cref="RssCategory"/> class.
     /// </summary>
     public RssCategory()
@@ -103,23 +95,9 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// <value>A string that identifies the taxonomy in which the category is placed. The default value is an empty string.</value>
     public string Domain
     {
-        get
-        {
-            return categoryDomain;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                categoryDomain = string.Empty;
-            }
-            else
-            {
-                categoryDomain = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a slash-delimited string that identifies a hierarchical position in the taxonomy.
@@ -130,23 +108,9 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// </remarks>
     public string Value
     {
-        get
-        {
-            return categoryValue;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                categoryValue = string.Empty;
-            }
-            else
-            {
-                categoryValue = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>

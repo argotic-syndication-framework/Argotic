@@ -10,11 +10,6 @@ namespace Argotic.Extensions.Core;
 public class LiveJournalSyndicationExtensionContext
 {
     /// <summary>
-    /// Private member to hold the current music.
-    /// </summary>
-    private string extensionMusic = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalSyndicationExtensionContext"/> class.
     /// </summary>
     public LiveJournalSyndicationExtensionContext()
@@ -45,23 +40,9 @@ public class LiveJournalSyndicationExtensionContext
     /// </remarks>
     public string Music
     {
-        get
-        {
-            return extensionMusic;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                extensionMusic = string.Empty;
-            }
-            else
-            {
-                extensionMusic = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the access level.

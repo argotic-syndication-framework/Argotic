@@ -1,7 +1,9 @@
 using System.Xml;
+using Argotic.Common;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
 using Shouldly;
+using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.SiteSummaryContent;
 
@@ -293,7 +295,7 @@ public class SiteSummaryContentSyndicationExtensionTest
         };
 
         // Act
-        int result = SiteSummaryContentSyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(0);
@@ -314,7 +316,7 @@ public class SiteSummaryContentSyndicationExtensionTest
         };
 
         // Act
-        int result = SiteSummaryContentSyndicationExtension.CompareSequence(source, target);
+        int result = ComparisonUtility.CompareSequence(source, target);
 
         // Assert
         result.ShouldBe(1);

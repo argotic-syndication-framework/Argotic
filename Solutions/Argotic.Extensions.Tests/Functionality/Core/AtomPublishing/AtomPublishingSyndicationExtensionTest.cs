@@ -3,6 +3,7 @@ using Argotic.Common;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
 using Shouldly;
+using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.AtomPublishing;
 

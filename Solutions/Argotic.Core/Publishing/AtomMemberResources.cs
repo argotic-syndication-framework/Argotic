@@ -31,7 +31,7 @@ namespace Argotic.Publishing;
 /// <seealso cref="ISyndicationExtension"/>
 /// <seealso cref="SyndicationExtension"/>
 [Serializable]
-public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberResources>, IEquatable<AtomMemberResources>, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
+public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberResources>, IEquatable<AtomMemberResources>, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparisonOperators
 {
     /// <summary>
     /// Private member to hold the base URI other than the base URI of the document or external entity.
@@ -222,51 +222,6 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
             ArgumentNullException.ThrowIfNull(value);
             collectionResourceLocation = value;
         }
-    }
-
-    /// <summary>
-    /// Compares two specified <see cref="IList{AtomAcceptedMediaRange}"/> collections.
-    /// </summary>
-    /// <param name="source">The first collection.</param>
-    /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(IList<AtomAcceptedMediaRange> source, IList<AtomAcceptedMediaRange> target)
-    {
-        int result = 0;
-
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                result |= source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
     }
 
     /// <summary>
@@ -664,8 +619,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
 
         int result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
         result |= this.Title.CompareTo(other.Title);
-        result |= AtomMemberResources.CompareSequence(this.Accepts, other.Accepts);
-        result |= AtomCategoryDocument.CompareSequence(this.Categories, other.Categories);
+        result |= ComparisonUtility.CompareSequence(this.Accepts, other.Accepts);
+        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
 
         return result;
     }
@@ -727,51 +682,4 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
         return !(first == second);
     }
 
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(AtomMemberResources first, AtomMemberResources second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(AtomMemberResources first, AtomMemberResources second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(AtomMemberResources first, AtomMemberResources second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(AtomMemberResources first, AtomMemberResources second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
-    }
 }

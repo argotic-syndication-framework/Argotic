@@ -18,15 +18,6 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
 {
 
     /// <summary>
-    /// Private member to hold the entity encoding utilized by the human-readable text.
-    /// </summary>
-    private YahooMediaTextConstructType textConstructType = YahooMediaTextConstructType.None;
-    /// <summary>
-    /// Private member to hold the content of the human-readable text.
-    /// </summary>
-    private string textConstructContent = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaTextConstruct"/> class.
     /// </summary>
     public YahooMediaTextConstruct()
@@ -67,40 +58,25 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get
-        {
-            return textConstructContent;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            textConstructContent = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the entity encoding utilized by this human-readable text.
     /// </summary>
     /// <value>
-    ///     An <see cref="YahooMediaTextConstruct"/> enumeration value that represents the entity encoding utilized by this human-readable text. 
+    ///     An <see cref="YahooMediaTextConstruct"/> enumeration value that represents the entity encoding utilized by this human-readable text.
     ///     The default value is <see cref="YahooMediaTextConstructType.None"/>.
     /// </value>
     /// <remarks>
     ///     If no entity encoding is specified, a default value of <see cref="YahooMediaTextConstructType.Plain"/> can be assumed.
     /// </remarks>
-    public YahooMediaTextConstructType TextType
-    {
-        get
-        {
-            return textConstructType;
-        }
-
-        set
-        {
-            textConstructType = value;
-        }
-    }
+    public YahooMediaTextConstructType TextType { get; set; } = YahooMediaTextConstructType.None;
 
     /// <summary>
     /// Returns the entity encoding type identifier for the supplied <see cref="YahooMediaTextConstructType"/>.

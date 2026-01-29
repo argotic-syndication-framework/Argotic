@@ -38,27 +38,6 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
         EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<SimpleListDataType>();
 
     /// <summary>
-    /// Private member to hold the full namespace used in the sortable property.
-    /// </summary>
-    private Uri sortNamespace;
-    /// <summary>
-    /// Private member to hold the name of the sortable property.
-    /// </summary>
-    private string sortElement = string.Empty;
-    /// <summary>
-    /// Private member to hold a human-readable name for the sortable property.
-    /// </summary>
-    private string sortLabel = string.Empty;
-    /// <summary>
-    /// Private member to hold the data-type of the sortable property.
-    /// </summary>
-    private SimpleListDataType sortDataType = SimpleListDataType.None;
-    /// <summary>
-    /// Private member to hold a value indicating if the sortable property is the default sort order in the list.
-    /// </summary>
-    private bool sortIsDefault;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SimpleListSort"/> class.
     /// </summary>
     public SimpleListSort()
@@ -74,67 +53,31 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// </remarks>
     /// <seealso cref="DataTypeAsString(SimpleListDataType)"/>
     /// <seealso cref="DataTypeByName(string)"/>
-    public SimpleListDataType DataType
-    {
-        get
-        {
-            return sortDataType;
-        }
-
-        set
-        {
-            sortDataType = value;
-        }
-    }
+    public SimpleListDataType DataType { get; set; } = SimpleListDataType.None;
 
     /// <summary>
     /// Get or sets the name of this sortable property.
     /// </summary>
     /// <value>The name of this sortable property. The default value is <see cref="String.Empty"/>.</value>
     /// <remarks>
-    ///     If this property is equal to <see cref="String.Empty"/>, it is assumed that the <see cref="Label"/> property is included 
+    ///     If this property is equal to <see cref="String.Empty"/>, it is assumed that the <see cref="Label"/> property is included
     ///     and that this <see cref="SimpleListSort"/> refers to the default sort order.
     /// </remarks>
     public string Element
     {
-        get
-        {
-            return sortElement;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                sortElement = string.Empty;
-            }
-            else
-            {
-                sortElement = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a value indicating if this sortable property is the default sort order in the list.
     /// </summary>
     /// <value><b>true</b> if this sortable property is the default sort order in the list; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
     /// <remarks>
-    ///     The items in the list <b>must</b> be already be sorted by the element, meaning the client <b>should not</b> expect to have to resort by this field if it displaying content directly from the list. 
+    ///     The items in the list <b>must</b> be already be sorted by the element, meaning the client <b>should not</b> expect to have to resort by this field if it displaying content directly from the list.
     ///     The client <i>should</i> respect only the first <see cref="SimpleListSort"/> that has a <see cref="IsDefault"/> property with a value of <b>true</b> that it encounters.
     /// </remarks>
-    public bool IsDefault
-    {
-        get
-        {
-            return sortIsDefault;
-        }
-
-        set
-        {
-            sortIsDefault = value;
-        }
-    }
+    public bool IsDefault { get; set; }
 
     /// <summary>
     /// Get or sets a human-readable name for this sortable property.
@@ -148,23 +91,9 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// </remarks>
     public string Label
     {
-        get
-        {
-            return sortLabel;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                sortLabel = string.Empty;
-            }
-            else
-            {
-                sortLabel = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the full namespace identifier used to qualify this <see cref="Element"/>.
@@ -173,18 +102,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <remarks>
     ///     If the value of this property is <b>null</b>, it is assumed that the <see cref="Element"/> does not live in a namespace.
     /// </remarks>
-    public Uri Namespace
-    {
-        get
-        {
-            return sortNamespace;
-        }
-
-        set
-        {
-            sortNamespace = value;
-        }
-    }
+    public Uri Namespace { get; set; }
 
     /// <summary>
     /// Returns the data type identifier for the supplied <see cref="SimpleListDataType"/>.

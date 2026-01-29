@@ -14,22 +14,6 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
 {
 
     /// <summary>
-    /// Private member to hold the URL of the GIF, JPEG, or PNG image.
-    /// </summary>
-    private Uri userPictureUrl;
-    /// <summary>
-    /// Private member to hold the keyword (phrase) associated with the picture.
-    /// </summary>
-    private string userPictureKeywords = string.Empty;
-    /// <summary>
-    /// Private member to hold the image width.
-    /// </summary>
-    private int userPictureWidth = int.MinValue;
-    /// <summary>
-    /// Private member to hold the image height.
-    /// </summary>
-    private int userPictureHeight = int.MinValue;
-    /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalUserPicture"/> class.
     /// </summary>
     public LiveJournalUserPicture()
@@ -56,6 +40,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
         this.Width = width;
         this.Height = height;
     }
+
     /// <summary>
     /// Gets or sets the height of this picture.
     /// </summary>
@@ -66,17 +51,13 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <b>100</b>.</exception>
     public int Height
     {
-        get
-        {
-            return userPictureHeight;
-        }
-
+        get => field;
         set
         {
             ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 100);
-            userPictureHeight = value;
+            field = value;
         }
-    }
+    } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the keyword or phrase associated with the picture.
@@ -87,17 +68,13 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Keyword
     {
-        get
-        {
-            return userPictureKeywords;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            userPictureKeywords = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the URL this picture.
@@ -106,15 +83,11 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Url
     {
-        get
-        {
-            return userPictureUrl;
-        }
-
+        get => field;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            userPictureUrl = value;
+            field = value;
         }
     }
 
@@ -128,17 +101,13 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <b>100</b>.</exception>
     public int Width
     {
-        get
-        {
-            return userPictureWidth;
-        }
-
+        get => field;
         set
         {
             ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 100);
-            userPictureWidth = value;
+            field = value;
         }
-    }
+    } = int.MinValue;
     /// <summary>
     /// Loads this <see cref="LiveJournalUserPicture"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

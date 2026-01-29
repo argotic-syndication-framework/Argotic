@@ -106,38 +106,12 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     protected static Version GetVersionFromAttribute(XPathNavigator navigator, string name)
     {
-        Version version = null;
-
         ArgumentNullException.ThrowIfNull(navigator);
         ArgumentException.ThrowIfNullOrEmpty(name);
 
         string value = navigator.GetAttribute(name, string.Empty);
 
-        if (!string.IsNullOrEmpty(value))
-        {
-            try
-            {
-                version = new Version(value);
-            }
-            catch (ArgumentOutOfRangeException)
-            {
-                return null;
-            }
-            catch (ArgumentException)
-            {
-                return null;
-            }
-            catch (FormatException)
-            {
-                return null;
-            }
-            catch (OverflowException)
-            {
-                return null;
-            }
-        }
-
-        return version;
+        return Version.TryParse(value, out var version) ? version : null;
     }
 
     /// <summary>

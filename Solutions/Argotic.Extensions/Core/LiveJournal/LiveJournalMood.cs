@@ -14,14 +14,6 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
 {
 
     /// <summary>
-    /// Private member to hold the textual content of the current mood.
-    /// </summary>
-    private string moodContent = string.Empty;
-    /// <summary>
-    /// Private member to hold a site specific identifier for the current mood.
-    /// </summary>
-    private int moodIdentifier = int.MinValue;
-    /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalMood"/> class.
     /// </summary>
     public LiveJournalMood()
@@ -36,34 +28,19 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get
-        {
-            return moodContent;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            moodContent = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a site specific identifier for this mood.
     /// </summary>
     /// <value>A site specific identifier for this mood. The default value is <see cref="Int32.MinValue"/>, which indicates no identifier was specified.</value>
-    public int Id
-    {
-        get
-        {
-            return moodIdentifier;
-        }
-
-        set
-        {
-            moodIdentifier = value;
-        }
-    }
+    public int Id { get; set; } = int.MinValue;
 
     /// <summary>
     /// Loads this <see cref="LiveJournalMood"/> using the supplied <see cref="XPathNavigator"/>.

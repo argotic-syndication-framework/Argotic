@@ -31,15 +31,6 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
         EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<YahooMediaHashAlgorithm>();
 
     /// <summary>
-    /// Private member to hold the algorithm used to create the hash.
-    /// </summary>
-    private YahooMediaHashAlgorithm hashAlgorithm = YahooMediaHashAlgorithm.None;
-    /// <summary>
-    /// Private member to hold the hash value.
-    /// </summary>
-    private string hashValue = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaHash"/> class.
     /// </summary>
     public YahooMediaHash()
@@ -61,24 +52,13 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// Gets or sets the algorithm used to create this hash.
     /// </summary>
     /// <value>
-    ///     A <see cref="YahooMediaHashAlgorithm"/> enumeration value that indicates the algorithm used to create this hash. 
+    ///     A <see cref="YahooMediaHashAlgorithm"/> enumeration value that indicates the algorithm used to create this hash.
     ///     The default value is <see cref="YahooMediaHashAlgorithm.None"/>, which indicates that no hash algorithm was specified.
     /// </value>
     /// <remarks>
     ///     If no algorithm is specified, it can be assumed that <see cref="YahooMediaHashAlgorithm.MD5"/> was used to create this hash.
     /// </remarks>
-    public YahooMediaHashAlgorithm Algorithm
-    {
-        get
-        {
-            return hashAlgorithm;
-        }
-
-        set
-        {
-            hashAlgorithm = value;
-        }
-    }
+    public YahooMediaHashAlgorithm Algorithm { get; set; } = YahooMediaHashAlgorithm.None;
 
     /// <summary>
     /// Gets or sets the value of this hash.
@@ -88,17 +68,13 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Value
     {
-        get
-        {
-            return hashValue;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            hashValue = value;
+            field = value;
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Computes the hash value for the supplied <see cref="Stream"/> using the specified <see cref="YahooMediaHashAlgorithm"/>.

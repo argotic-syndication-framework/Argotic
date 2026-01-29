@@ -17,18 +17,6 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
 {
 
     /// <summary>
-    /// Private member to hold a lower bound of items contained within the feed.
-    /// </summary>
-    private string sharingInformationSince = string.Empty;
-    /// <summary>
-    /// Private member to hold an upper bound of items contained within the feed.
-    /// </summary>
-    private string sharingInformationUntil = string.Empty;
-    /// <summary>
-    /// Private member to hold the publisher suggested date-time before which subscribers should read the feed in order to avoid missing item updates.
-    /// </summary>
-    private DateTime sharingInformationExpires = DateTime.MinValue;
-    /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationSharingInformation"/> class.
     /// </summary>
     public FeedSynchronizationSharingInformation()
@@ -61,25 +49,14 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// Gets or sets the publisher suggested date-time subscribers should read the feed in order to avoid missing item updates.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that represents the publisher suggested date-time before which subscribers <i>should</i> read the feed in order to avoid missing item updates. 
+    ///     A <see cref="DateTime"/> that represents the publisher suggested date-time before which subscribers <i>should</i> read the feed in order to avoid missing item updates.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no expiration date was specified.
     /// </value>
     /// <remarks>
     ///     <para>The value for this attribute <i>should</i> be interpreted as a best effort, uncalibrated value.</para>
     ///     <para>The <see cref="DateTime"/> value should be provided in Coordinated Universal Time (UTC).</para>
     /// </remarks>
-    public DateTime ExpiresOn
-    {
-        get
-        {
-            return sharingInformationExpires;
-        }
-
-        set
-        {
-            sharingInformationExpires = value;
-        }
-    }
+    public DateTime ExpiresOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets the related feeds or locations.
@@ -97,38 +74,24 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// <remarks>
     ///     <para>If this property is defined, the <see cref="Until"/> property <b>must</b> also be specified.</para>
     ///     <para>
-    ///         Publishers will generally include, in a feed, only the most recent modifications, additions, and deletions within some reasonable time window. 
+    ///         Publishers will generally include, in a feed, only the most recent modifications, additions, and deletions within some reasonable time window.
     ///         These feeds are referred to as <i>partial feeds</i>, whereas feeds containing the complete set of items are referred to as <i>complete feeds</i>.
     ///     </para>
     ///     <para>
-    ///         In the feed sharing context new subscribers, or existing subscribers failing to subscribe within the published feed window, will need to initially 
-    ///         copy a complete set of items from a publisher before being in a position to process incremental updates. As such, the specification provides for the 
+    ///         In the feed sharing context new subscribers, or existing subscribers failing to subscribe within the published feed window, will need to initially
+    ///         copy a complete set of items from a publisher before being in a position to process incremental updates. As such, the specification provides for the
     ///         ability for the latter feed to reference the complete feed.
     ///     </para>
     ///     <para>
-    ///         Subscribers <i>may</i> optionally use the <b>since</b> and <b>until</b> properties of <see cref="FeedSynchronizationSharingInformation"/> to ensure 
+    ///         Subscribers <i>may</i> optionally use the <b>since</b> and <b>until</b> properties of <see cref="FeedSynchronizationSharingInformation"/> to ensure
     ///         that all item updates are synchronized, even if the publisher periodically purges items from its feed.
     ///     </para>
     /// </remarks>
     public string Since
     {
-        get
-        {
-            return sharingInformationSince;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                sharingInformationSince = string.Empty;
-            }
-            else
-            {
-                sharingInformationSince = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets an upper bound of items contained within the feed.
@@ -137,38 +100,24 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// <remarks>
     ///     <para>If this property is defined, the <see cref="Since"/> property <b>must</b> also be specified.</para>
     ///     <para>
-    ///         Publishers will generally include, in a feed, only the most recent modifications, additions, and deletions within some reasonable time window. 
+    ///         Publishers will generally include, in a feed, only the most recent modifications, additions, and deletions within some reasonable time window.
     ///         These feeds are referred to as <i>partial feeds</i>, whereas feeds containing the complete set of items are referred to as <i>complete feeds</i>.
     ///     </para>
     ///     <para>
-    ///         In the feed sharing context new subscribers, or existing subscribers failing to subscribe within the published feed window, will need to initially 
-    ///         copy a complete set of items from a publisher before being in a position to process incremental updates. As such, the specification provides for the 
+    ///         In the feed sharing context new subscribers, or existing subscribers failing to subscribe within the published feed window, will need to initially
+    ///         copy a complete set of items from a publisher before being in a position to process incremental updates. As such, the specification provides for the
     ///         ability for the latter feed to reference the complete feed.
     ///     </para>
     ///     <para>
-    ///         Subscribers <i>may</i> optionally use the <b>since</b> and <b>until</b> properties of <see cref="FeedSynchronizationSharingInformation"/> to ensure 
+    ///         Subscribers <i>may</i> optionally use the <b>since</b> and <b>until</b> properties of <see cref="FeedSynchronizationSharingInformation"/> to ensure
     ///         that all item updates are synchronized, even if the publisher periodically purges items from its feed.
     ///     </para>
     /// </remarks>
     public string Until
     {
-        get
-        {
-            return sharingInformationUntil;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                sharingInformationUntil = string.Empty;
-            }
-            else
-            {
-                sharingInformationUntil = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Compares two specified <see cref="Collection{FeedSynchronizationRelatedInformation}"/> collections.

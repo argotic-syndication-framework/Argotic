@@ -26,23 +26,6 @@ namespace Argotic.Extensions.Core;
 public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEquatable<FeedSynchronizationItem>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the globally unique identifier for the item.
-    /// </summary>
-    private string synchronizationId = string.Empty;
-    /// <summary>
-    /// Private member to hold the number of updates applied to an item.
-    /// </summary>
-    private int synchronizationUpdates = 1;
-    /// <summary>
-    /// Private member to hold a value indicating that the item has been deleted and is a tombstone.
-    /// </summary>
-    private FeedSynchronizationTombstoneStatus synchronizationTombstoneStatus;
-    /// <summary>
-    /// Private member to hold a value indicating how conflict preservation is processed.
-    /// </summary>
-    private FeedSynchronizationConflictPreservationDirective synchronizationConflictPreservation;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationItem"/> class.
     /// </summary>
     public FeedSynchronizationItem()
@@ -105,18 +88,18 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     ///         The <see cref="Id">identifier</see> <b>must</b> be globally unique within the feed and it <b>must</b> be identical across feeds if an item is being shared or synchronized as part of multiple distinct independent feeds.
     ///     </para>
     ///     <para>
-    ///         Atom has a similar requirement for each entry to have a unique id. While the Atom entry <i>id</i> could be used for the sync id at the publisher’s discretion, 
-    ///         implementers <b>must not</b> assume that the Atom <i>id</i> for the entry matches the sync id. Likewise, if the RSS item includes a <i>guid</i>, 
+    ///         Atom has a similar requirement for each entry to have a unique id. While the Atom entry <i>id</i> could be used for the sync id at the publisher's discretion,
+    ///         implementers <b>must not</b> assume that the Atom <i>id</i> for the entry matches the sync id. Likewise, if the RSS item includes a <i>guid</i>,
     ///         implementers <b>must not</b> assume that the <i>guid</i> is the same as the sync id.
     ///     </para>
     ///     <para>
-    ///         In Atom feeds, it is acceptable to have multiple entries in the same feed with the same atom id element; in this case, the entries are considered different versions of the same entry. 
-    ///         It is allowed to use FeedSync in such a feed, but the <b>sx:sync/@id</b> attributes are still required to be different in each entry. 
+    ///         In Atom feeds, it is acceptable to have multiple entries in the same feed with the same atom id element; in this case, the entries are considered different versions of the same entry.
+    ///         It is allowed to use FeedSync in such a feed, but the <b>sx:sync/@id</b> attributes are still required to be different in each entry.
     ///         FeedSync considers those entries to be different sync items.
     ///     </para>
     ///     <para>
-    ///         The <see cref="Id">identifier</see> is assigned by the creator of the item, and <b>must not</b> be changed by subsequent publishers. 
-    ///         Applications will collate and compare these identifiers; therefore they <b>must</b> conform to the syntax for 
+    ///         The <see cref="Id">identifier</see> is assigned by the creator of the item, and <b>must not</b> be changed by subsequent publishers.
+    ///         Applications will collate and compare these identifiers; therefore they <b>must</b> conform to the syntax for
     ///         Namespace Specific Strings (the NSS portion of a URN) in <a href="http://www.ietf.org/rfc/rfc2141.txt">RFC 2141</a>.
     ///     </para>
     /// </remarks>
@@ -124,75 +107,49 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Id
     {
-        get
-        {
-            return synchronizationId;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            synchronizationId = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a value indicating whether conflict preservation is performed for this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that indicates whether conflict preservation is performed for this item. 
+    ///     A <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that indicates whether conflict preservation is performed for this item.
     ///     The default value is <see cref="FeedSynchronizationConflictPreservationDirective.None"/>, which indicates conflict preservation <b>must</b> be performed for the item.
     /// </value>
     /// <remarks>
     ///     <para>
-    ///         This value <b>must</b> only be set once, and <i>shall</i> only be set when the updates property value is <b>1</b>. 
+    ///         This value <b>must</b> only be set once, and <i>shall</i> only be set when the updates property value is <b>1</b>.
     ///         All updates to the item after the first update must propagate whatever state was set on the first update.
     ///     </para>
     ///     <para>
-    ///         Within this framework, <see cref="FeedSynchronizationConflictPreservationDirective.Ignore"/> is equivalent to <b>true</b> for the <i>noconflicts</i> attribute in the FeedSync specification, 
-    ///         while <see cref="FeedSynchronizationConflictPreservationDirective.Perform"/> is equivalent to <b>false</b> for the <i>noconflicts</i> attribute in the FeedSync specification. 
+    ///         Within this framework, <see cref="FeedSynchronizationConflictPreservationDirective.Ignore"/> is equivalent to <b>true</b> for the <i>noconflicts</i> attribute in the FeedSync specification,
+    ///         while <see cref="FeedSynchronizationConflictPreservationDirective.Perform"/> is equivalent to <b>false</b> for the <i>noconflicts</i> attribute in the FeedSync specification.
     ///         Specifying a value of <see cref="FeedSynchronizationConflictPreservationDirective.None"/> is equivalent to the <i>noconflicts</i> attribute not being present.
     ///     </para>
     /// </remarks>
-    public FeedSynchronizationConflictPreservationDirective ConflictPreservation
-    {
-        get
-        {
-            return synchronizationConflictPreservation;
-        }
-
-        set
-        {
-            synchronizationConflictPreservation = value;
-        }
-    }
+    public FeedSynchronizationConflictPreservationDirective ConflictPreservation { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if the item has been deleted.
     /// </summary>
     /// <value>
-    ///     A <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that indicates whether this item has been deleted. 
+    ///     A <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that indicates whether this item has been deleted.
     ///     The default value is <see cref="FeedSynchronizationTombstoneStatus.None"/>, which indicates the item has not been deleted.
     /// </value>
     /// <remarks>
     ///     <para>
-    ///         Within this framework, <see cref="FeedSynchronizationTombstoneStatus.Deleted"/> is equivalent to <b>true</b> for the <i>deleted</i> attribute in the FeedSync specification, 
-    ///         while <see cref="FeedSynchronizationTombstoneStatus.Present"/> is equivalent to <b>false</b> for the <i>deleted</i> attribute in the FeedSync specification. 
+    ///         Within this framework, <see cref="FeedSynchronizationTombstoneStatus.Deleted"/> is equivalent to <b>true</b> for the <i>deleted</i> attribute in the FeedSync specification,
+    ///         while <see cref="FeedSynchronizationTombstoneStatus.Present"/> is equivalent to <b>false</b> for the <i>deleted</i> attribute in the FeedSync specification.
     ///         Specifying a value of <see cref="FeedSynchronizationTombstoneStatus.None"/> is equivalent to the <i>deleted</i> attribute not being present.
     ///     </para>
     /// </remarks>
-    public FeedSynchronizationTombstoneStatus TombstoneStatus
-    {
-        get
-        {
-            return synchronizationTombstoneStatus;
-        }
-
-        set
-        {
-            synchronizationTombstoneStatus = value;
-        }
-    }
+    public FeedSynchronizationTombstoneStatus TombstoneStatus { get; set; }
 
     /// <summary>
     /// Gets or sets the number of updates applied to this item.
@@ -201,17 +158,13 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <b>1</b>.</exception>
     public int Updates
     {
-        get
-        {
-            return synchronizationUpdates;
-        }
-
+        get => field;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 1);
-            synchronizationUpdates = value;
+            field = value;
         }
-    }
+    } = 1;
     /// <summary>
     /// Compares two specified <see cref="IList{FeedSynchronizationHistory}"/> collections.
     /// </summary>

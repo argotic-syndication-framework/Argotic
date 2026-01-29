@@ -1,6 +1,8 @@
 using System.Xml;
 using System.Xml.XPath;
 
+using Argotic.Common;
+
 namespace Argotic.Extensions.Core;
 
 /// <summary>
@@ -8,21 +10,21 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <remarks>
 ///     <para>
-///         The <see cref="SimpleListSyndicationExtension"/> extends syndicated content to make exposing ordered lists of items easier and more accessible to users. 
-///         This syndication extension conforms to the <b>Simple List Extensions</b> 1.0a specification, which can be found 
+///         The <see cref="SimpleListSyndicationExtension"/> extends syndicated content to make exposing ordered lists of items easier and more accessible to users.
+///         This syndication extension conforms to the <b>Simple List Extensions</b> 1.0a specification, which can be found
 ///         at <a href="http://msdn2.microsoft.com/en-us/xml/bb190612.aspx">http://msdn2.microsoft.com/en-us/xml/bb190612.aspx</a>.
 ///     </para>
 /// </remarks>
 /// <example>
 ///     <code lang="cs" title="The following code example demonstrates the usage of the SimpleListSyndicationExtension class.">
-///         <code 
-///             source="..\..\Argotic.Examples\\Extensions\Core\SimpleListSyndicationExtensionExample.cs" 
+///         <code
+///             source="..\..\Argotic.Examples\\Extensions\Core\SimpleListSyndicationExtensionExample.cs"
 ///             region="SimpleListSyndicationExtension"
 ///         />
 ///     </code>
 /// </example>
 [Serializable]
-public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<SimpleListSyndicationExtension>, IEquatable<SimpleListSyndicationExtension>
+public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<SimpleListSyndicationExtension>, IEquatable<SimpleListSyndicationExtension>, IComparisonOperators
 {
 
     /// <summary>
@@ -59,94 +61,6 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
             ArgumentNullException.ThrowIfNull(value);
             extensionContext = value;
         }
-    }
-
-    /// <summary>
-    /// Compares two specified <see cref="Collection{SimpleListGroup}"/> collections.
-    /// </summary>
-    /// <param name="source">The first collection.</param>
-    /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(IList<SimpleListGroup> source, IList<SimpleListGroup> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                result |= source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
-
-    /// <summary>
-    /// Compares two specified <see cref="Collection{SimpleListSort}"/> collections.
-    /// </summary>
-    /// <param name="source">The first collection.</param>
-    /// <param name="target">The second collection.</param>
-    /// <returns>A 32-bit signed integer indicating the lexical relationship between the two comparands.</returns>
-    /// <remarks>
-    ///     <para>
-    ///         If the collections contain the same number of elements, determines the lexical relationship between the two sequences of comparands.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>greater than</i> the <paramref name="target"/> element count, returns <b>1</b>.
-    ///     </para>
-    ///     <para>
-    ///         If the <paramref name="source"/> has an element count that is <i>less than</i> the <paramref name="target"/> element count, returns <b>-1</b>.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
-    public static int CompareSequence(IList<SimpleListSort> source, IList<SimpleListSort> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                result |= source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
     }
 
     /// <summary>
@@ -245,8 +159,8 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
         }
 
         int result = this.Context.TreatAsList.CompareTo(other.Context.TreatAsList);
-        result |= SimpleListSyndicationExtension.CompareSequence(this.Context.Grouping, other.Context.Grouping);
-        result |= SimpleListSyndicationExtension.CompareSequence(this.Context.Sorting, other.Context.Sorting);
+        result |= ComparisonUtility.CompareSequence(this.Context.Grouping, other.Context.Grouping);
+        result |= ComparisonUtility.CompareSequence(this.Context.Sorting, other.Context.Sorting);
 
         return result;
     }
@@ -308,51 +222,4 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
         return !(first == second);
     }
 
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(SimpleListSyndicationExtension first, SimpleListSyndicationExtension second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(SimpleListSyndicationExtension first, SimpleListSyndicationExtension second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(SimpleListSyndicationExtension first, SimpleListSyndicationExtension second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to the second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(SimpleListSyndicationExtension first, SimpleListSyndicationExtension second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
-    }
 }

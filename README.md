@@ -1,13 +1,151 @@
-[![Build Status](https://dev.azure.com/endjin-labs/Argotic/_apis/build/status/argotic-syndication-framework.Argotic?branchName=master)](https://dev.azure.com/endjin-labs/Argotic/_build/latest?definitionId=3&branchName=master)
+[![Build Status](https://dev.azure.com/endjin-labs/Argotic/_apis/build/status/argotic-syndication-framework.Argotic?branchName=main)](https://dev.azure.com/endjin-labs/Argotic/_build/latest?definitionId=3&branchName=main)
 [![GitHub license](https://img.shields.io/badge/License-Apache%202-blue.svg)](https://raw.githubusercontent.com/argotic-syndication-framework/argotic/master/LICENSE)
 [![IMM](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/total?cache=false)](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/total?cache=false)
 
 
-The Argotic Syndication Framework was originally created by Brian Kuhn in 2007. Argotic is one of the most powerful and extensible web content syndication frameworks available to .NET developers, supporting RSS, ATOM, OPML, APML, RSD and BlogML. The project had become dormant, but has been brought back to life by [endjin](https://endjin.com), as Argotic is used to produce the [Azure Weekly Newsletter](https://azureweekly.info) and [Power BI Weekly Newsletter](https://powerbiweekly.info).
+The Argotic Syndication Framework was originally created by Brian Kuhn in 2007. Argotic is one of the most powerful and extensible web content syndication frameworks available to .NET developers, supporting [RSS](http://www.rssboard.org/rss-specification), [Atom](http://www.atomenabled.org/developers/syndication/atom-format-spec.php), [OPML](http://www.opml.org/spec2), [APML](http://apml.pbwiki.com), [BlogML](http://blogml.org), [RSD](http://cyber.law.harvard.edu/blogs/gems/tech/rsd.html), and [Sitemap](https://www.sitemaps.org/protocol.html). 
 
-The project has been updated to .NET Standard 2.0. The source code is in the process of being cleaned up and updated to support the latest C# / .NET idioms. Updated NuGet packages will be published shortly.
+The project had become dormant, but has been brought back to life by [endjin](https://endjin.com), as Argotic is used to produce the [Azure Weekly Newsletter](https://azureweekly.info), [Microsoft Fabric Weekly Newsletter](https://fabricweekly.info) and [Power BI Weekly Newsletter](https://powerbiweekly.info).
 
-See the [wiki](https://argotic-syndication-framework.github.io/Argotic) for detailed documentation.
+The project has been updated to .NET 10 with comprehensive C# modernization, including collection expressions, pattern matching, file-scoped namespaces, and nullable reference types. The codebase has been refactored to follow modern .NET idioms and best practices.
+
+## Requirements
+
+- [.NET 10 SDK](https://dotnet.microsoft.com/download/dotnet/10.0) or later
+
+> **Note:** This release drops support for .NET Standard 2.0/2.1, .NET 8, and .NET 9. If you need to target earlier frameworks, please use a previous version of the packages.
+
+## Installation
+
+Install the NuGet packages:
+
+```bash
+# Core syndication library
+dotnet add package Argotic.Core
+
+# Common utilities and interfaces
+dotnet add package Argotic.Common
+
+# Syndication extensions (iTunes, Dublin Core, Yahoo Media, etc.)
+dotnet add package Argotic.Extensions
+```
+
+Or via the Package Manager Console:
+
+```powershell
+Install-Package Argotic.Core
+Install-Package Argotic.Common
+Install-Package Argotic.Extensions
+```
+
+See the [wiki](https://argotic-syndication-framework.github.io/Argotic) for detailed documentation and the [CHANGELOG](CHANGELOG.md) for a complete list of changes in this release.
+
+## Building
+
+This project uses [ZeroFailed](https://github.com/zerofailed/ZeroFailed), a PowerShell-based build orchestration framework built on [InvokeBuild](https://github.com/nightroman/Invoke-Build).
+
+### Prerequisites
+
+- PowerShell 7.0 or later
+- .NET 10 SDK
+
+### Build Commands
+
+```powershell
+# Full build (compile, test, package)
+./build.ps1
+
+# Clean build (removes bin/obj folders first)
+./build.ps1 -Clean
+
+# Run specific tasks
+./build.ps1 -Tasks Build      # Compile only
+./build.ps1 -Tasks Test       # Run tests with code coverage
+./build.ps1 -Tasks Package    # Create NuGet packages
+
+# Release build
+./build.ps1 -Configuration Release
+
+# Verbose output
+./build.ps1 -LogLevel detailed
+```
+
+### Build Output
+
+- **NuGet packages**: `_packages/`
+- **Code coverage reports**: `_codeCoverage/`
+- **Test results**: `Solutions/Argotic.Extensions.Tests/TestResults/`
+
+### Direct .NET Commands
+
+You can also use standard .NET CLI commands:
+
+```bash
+# Build the solution
+dotnet build Solutions/Argotic.slnx
+
+# Run tests
+dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj
+
+# Run tests with coverage
+dotnet test --project Solutions/Argotic.Extensions.Tests/Argotic.Extensions.Tests.csproj --coverage --coverage-output-format cobertura
+```
+
+## Examples
+
+The `Argotic.Examples` project is an interactive CLI that demonstrates all features of the Argotic framework with 66 runnable examples.
+
+### Quick Start
+
+Use the PowerShell script to build and run all examples:
+
+```powershell
+# Run all examples
+./run-all-examples.ps1
+
+# Run examples in a specific category
+./run-all-examples.ps1 -Category Rss
+
+# Skip examples requiring network access
+./run-all-examples.ps1 -SkipNetwork
+
+# Output results as JSON (for CI/CD)
+./run-all-examples.ps1 -JsonOutput
+```
+
+### Running Examples with .NET CLI
+
+```bash
+# Interactive mode (default) - browse and run examples via menu
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj
+
+# List all available examples
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- list
+
+# List examples in a specific category
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- list --category Rss
+
+# Run a specific example
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- run "Rss Feed - Class"
+
+# Run all examples (batch mode)
+dotnet run --project Solutions/Argotic.Examples/Argotic.Examples.csproj -- run-all
+```
+
+### Example Categories
+
+| Category       | Description                                                         |
+|----------------|---------------------------------------------------------------------|
+| **Atom**       | Atom 1.0 feed and entry creation, loading, and serialization        |
+| **RSS**        | RSS 2.0 feed creation, loading, and serialization                   |
+| **OPML**       | Outline Processor Markup Language documents                         |
+| **APML**       | Attention Profiling Markup Language                                 |
+| **BlogML**     | Blog content import/export format                                   |
+| **RSD**        | Really Simple Discovery                                             |
+| **Sitemap**    | Sitemap 0.9 with video, image, and news extensions                  |
+| **Extensions** | 20+ syndication extensions (iTunes, Dublin Core, Yahoo Media, etc.) |
+| **Network**    | Trackback and XML-RPC client usage                                  |
+| **Generic**    | Format-agnostic syndication feed handling                           |
 
 *ar·got·ic* (_ahr-got-ik_)
 A specialized idiomatic vocabulary peculiar to a particular class or group of people.

@@ -126,9 +126,9 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="ITunesSyndicationExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="ITunesSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="ITunesSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="ITunesSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

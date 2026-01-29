@@ -200,9 +200,9 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="FeedSynchronizationRelatedInformation"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="FeedSynchronizationRelatedInformation"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="FeedSynchronizationRelatedInformation"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="FeedSynchronizationRelatedInformation"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

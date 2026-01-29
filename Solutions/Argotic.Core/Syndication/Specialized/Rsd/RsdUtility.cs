@@ -38,7 +38,7 @@ internal static class RsdUtility
     /// Selects a node set using the specified XPath expression with the <see cref="IXmlNamespaceResolver"/> object specified to resolve namespace prefixes.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to execute the XPath query against.</param>
-    /// <param name="xpath">A <see cref="String"/> representing an XPath expression. May be <i>/</i> delimited query. Query should <b>not</b> contain any prefixing.</param>
+    /// <param name="xpath">A <see cref="string"/> representing an XPath expression. May be <i>/</i> delimited query. Query should <b>not</b> contain any prefixing.</param>
     /// <param name="resolver">The <see cref="IXmlNamespaceResolver"/> object used to resolve namespace prefixes in the XPath query.</param>
     /// <returns>
     ///     An <see cref="XPathNodeIterator"/> that points to the selected node set.
@@ -72,7 +72,7 @@ internal static class RsdUtility
     /// Selects a single node in the <see cref="XPathNavigator"/> object using the specified XPath query with the <see cref="IXmlNamespaceResolver"/> object specified to resolve namespace prefixes.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to execute the XPath query against.</param>
-    /// <param name="xpath">A <see cref="String"/> representing an XPath expression. May be <i>/</i> delimited query. Query shound <b>not</b> contain any prefixing.</param>
+    /// <param name="xpath">A <see cref="string"/> representing an XPath expression. May be <i>/</i> delimited query. Query shound <b>not</b> contain any prefixing.</param>
     /// <param name="resolver">The <see cref="IXmlNamespaceResolver"/> object used to resolve namespace prefixes in the XPath query.</param>
     /// <returns>
     ///     An <see cref="XPathNavigator"/> object that contains the first matching node for the XPath query specified; Otherwise, <b>null</b> if there are no query results.

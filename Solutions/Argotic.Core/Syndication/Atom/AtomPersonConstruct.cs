@@ -210,9 +210,9 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="AtomPersonConstruct"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="AtomPersonConstruct"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="AtomPersonConstruct"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomPersonConstruct"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance, with a generic element name of <i>PersonConstruct</i>.
     /// </remarks>

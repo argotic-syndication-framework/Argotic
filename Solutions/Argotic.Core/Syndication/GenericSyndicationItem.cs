@@ -94,9 +94,9 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// </value>
     public string Title => itemTitle;
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationItem"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="GenericSyndicationItem"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.</returns>
     /// <remarks>
     ///     This method returns a human-readable representation for the current instance.
     /// </remarks>

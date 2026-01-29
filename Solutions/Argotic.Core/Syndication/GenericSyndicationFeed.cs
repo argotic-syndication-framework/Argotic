@@ -189,7 +189,7 @@ public class GenericSyndicationFeed
         return syndicationResource;
     }
     /// <summary>
-    /// Loads the syndication resource from the specified <see cref="String"/>.
+    /// Loads the syndication resource from the specified <see cref="string"/>.
     /// </summary>
     /// <param name="str">The <b>String</b> used to load the syndication resource.</param>
     /// <remarks>

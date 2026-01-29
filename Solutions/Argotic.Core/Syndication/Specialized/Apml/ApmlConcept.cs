@@ -244,9 +244,9 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="ApmlConcept"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="ApmlConcept"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="ApmlConcept"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="ApmlConcept"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

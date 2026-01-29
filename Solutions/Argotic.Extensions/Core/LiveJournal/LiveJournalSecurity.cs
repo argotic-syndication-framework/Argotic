@@ -139,9 +139,9 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="LiveJournalSecurity"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="LiveJournalSecurity"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="LiveJournalSecurity"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="LiveJournalSecurity"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

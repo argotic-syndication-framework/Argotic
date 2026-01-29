@@ -145,9 +145,9 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcStructureMember"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcStructureMember"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcStructureMember"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcStructureMember"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

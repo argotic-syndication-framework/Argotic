@@ -184,9 +184,9 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="ApmlHead"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="ApmlHead"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="ApmlHead"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="ApmlHead"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

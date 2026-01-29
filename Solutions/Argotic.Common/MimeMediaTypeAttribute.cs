@@ -61,9 +61,9 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.</returns>
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>

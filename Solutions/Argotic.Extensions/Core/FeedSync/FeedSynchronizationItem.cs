@@ -380,9 +380,9 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="FeedSynchronizationItem"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="FeedSynchronizationItem"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="FeedSynchronizationItem"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="FeedSynchronizationItem"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

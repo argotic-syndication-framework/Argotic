@@ -409,9 +409,9 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="ApmlSource"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="ApmlSource"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="ApmlSource"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="ApmlSource"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

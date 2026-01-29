@@ -38,7 +38,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// Gets the entities this restriction applies to.
     /// </summary>
     /// <value>
-    ///     A <see cref="IList{T}"/> collection of <see cref="String"/> objects that represent the entities this restriction applies to.
+    ///     A <see cref="IList{T}"/> collection of <see cref="string"/> objects that represent the entities this restriction applies to.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
@@ -223,9 +223,9 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaRestriction"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaRestriction"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaRestriction"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaRestriction"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

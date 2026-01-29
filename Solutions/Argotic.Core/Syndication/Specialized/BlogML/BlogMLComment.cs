@@ -312,9 +312,9 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLComment"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLComment"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLComment"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLComment"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

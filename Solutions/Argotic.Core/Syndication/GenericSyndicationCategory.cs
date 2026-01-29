@@ -97,9 +97,9 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// <value>A string that identifies the category.</value>
     public string Term => categoryTerm;
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationCategory"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="GenericSyndicationCategory"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.</returns>
     /// <remarks>
     ///     This method returns a human-readable representation for the current instance.
     /// </remarks>

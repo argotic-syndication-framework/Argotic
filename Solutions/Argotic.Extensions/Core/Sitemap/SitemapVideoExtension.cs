@@ -133,9 +133,9 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="SitemapVideoExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="SitemapVideoExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="SitemapVideoExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapVideoExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

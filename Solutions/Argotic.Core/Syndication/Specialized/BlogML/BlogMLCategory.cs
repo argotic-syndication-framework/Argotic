@@ -223,9 +223,9 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLCategory"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLCategory"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLCategory"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLCategory"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

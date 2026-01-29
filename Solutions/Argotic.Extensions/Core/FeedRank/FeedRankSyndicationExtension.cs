@@ -115,9 +115,9 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="FeedRankSyndicationExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="FeedRankSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="FeedRankSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="FeedRankSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

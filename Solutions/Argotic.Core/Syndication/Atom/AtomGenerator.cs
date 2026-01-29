@@ -217,9 +217,9 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="AtomGenerator"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="AtomGenerator"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="AtomGenerator"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomGenerator"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

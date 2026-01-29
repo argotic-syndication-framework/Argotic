@@ -154,9 +154,9 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaRating"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaRating"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaRating"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaRating"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

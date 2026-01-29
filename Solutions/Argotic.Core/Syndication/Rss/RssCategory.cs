@@ -212,9 +212,9 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="RssCategory"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="RssCategory"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="RssCategory"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="RssCategory"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

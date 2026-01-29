@@ -194,9 +194,9 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLAuthor"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLAuthor"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLAuthor"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLAuthor"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

@@ -120,9 +120,9 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="WellFormedWebCommentsSyndicationExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="WellFormedWebCommentsSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="WellFormedWebCommentsSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="WellFormedWebCommentsSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

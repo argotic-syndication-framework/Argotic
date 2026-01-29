@@ -282,9 +282,9 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="SitemapUrl"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="SitemapUrl"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="SitemapUrl"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapUrl"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

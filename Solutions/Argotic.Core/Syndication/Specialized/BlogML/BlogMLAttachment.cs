@@ -223,9 +223,9 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLAttachment"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLAttachment"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLAttachment"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLAttachment"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

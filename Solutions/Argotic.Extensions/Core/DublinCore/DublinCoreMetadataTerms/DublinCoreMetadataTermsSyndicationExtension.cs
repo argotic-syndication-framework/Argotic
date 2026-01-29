@@ -134,9 +134,9 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="DublinCoreMetadataTermsSyndicationExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="DublinCoreMetadataTermsSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="DublinCoreMetadataTermsSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="DublinCoreMetadataTermsSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

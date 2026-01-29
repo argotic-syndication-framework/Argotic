@@ -244,9 +244,9 @@ public class ApmlAuthor : IComparable<ApmlAuthor>, IEquatable<ApmlAuthor>, IExte
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="ApmlAuthor"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="ApmlAuthor"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="ApmlAuthor"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="ApmlAuthor"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

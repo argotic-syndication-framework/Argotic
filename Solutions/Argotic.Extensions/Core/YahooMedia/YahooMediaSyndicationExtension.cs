@@ -147,9 +147,9 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaSyndicationExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

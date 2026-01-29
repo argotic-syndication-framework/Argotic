@@ -509,9 +509,9 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="RssItem"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="RssItem"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="RssItem"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="RssItem"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

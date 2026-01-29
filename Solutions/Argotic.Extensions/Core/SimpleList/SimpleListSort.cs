@@ -239,9 +239,9 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="SimpleListSort"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="SimpleListSort"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="SimpleListSort"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="SimpleListSort"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

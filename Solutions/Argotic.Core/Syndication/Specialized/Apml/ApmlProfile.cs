@@ -342,9 +342,9 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="ApmlProfile"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="ApmlProfile"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="ApmlProfile"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="ApmlProfile"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

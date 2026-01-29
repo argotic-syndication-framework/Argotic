@@ -245,9 +245,9 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomAcceptedMediaRange"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

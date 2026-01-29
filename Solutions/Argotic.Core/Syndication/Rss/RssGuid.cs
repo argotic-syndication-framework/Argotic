@@ -213,9 +213,9 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="RssGuid"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="RssGuid"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="RssGuid"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="RssGuid"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

@@ -114,9 +114,9 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="XmlRpcArrayValue"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="XmlRpcArrayValue"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="XmlRpcArrayValue"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="XmlRpcArrayValue"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

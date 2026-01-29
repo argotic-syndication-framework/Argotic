@@ -314,9 +314,9 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="RsdApplicationInterface"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="RsdApplicationInterface"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="RsdApplicationInterface"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="RsdApplicationInterface"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

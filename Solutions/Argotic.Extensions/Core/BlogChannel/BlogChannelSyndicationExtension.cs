@@ -109,9 +109,9 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     }
 
     /// <summary>
-    /// Returns a <see cref="String"/> that represents the current <see cref="BlogChannelSyndicationExtension"/>.
+    /// Returns a <see cref="string"/> that represents the current <see cref="BlogChannelSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="String"/> that represents the current <see cref="BlogChannelSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogChannelSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

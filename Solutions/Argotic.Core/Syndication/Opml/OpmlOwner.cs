@@ -9,17 +9,9 @@ namespace Argotic.Syndication;
 /// Represents the owner of an <see cref="OpmlDocument"/>.
 /// </summary>
 [Serializable]
-public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, IComparisonOperators
+public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, IComparisonOperators, IXmlWritable
 {
 
-    /// <summary>
-    /// Private member to hold the name of the owner of the document.
-    /// </summary>
-    private string ownerName = string.Empty;
-    /// <summary>
-    /// Private member to hold email address of the owner of the document.
-    /// </summary>
-    private string ownerEmail = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlOwner"/> class.
     /// </summary>
@@ -66,23 +58,10 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <value>The email address of the owner of this document.</value>
     public string EmailAddress
     {
-        get
-        {
-            return ownerEmail;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                ownerEmail = string.Empty;
-            }
-            else
-            {
-                ownerEmail = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the http address of a web page that contains information that allows a human reader to communicate with the author of the document via email or other means.
@@ -102,23 +81,10 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <value>The name of the owner of this document.</value>
     public string Name
     {
-        get
-        {
-            return ownerName;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                ownerName = string.Empty;
-            }
-            else
-            {
-                ownerName = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
     /// <summary>
     /// Loads this <see cref="OpmlOwner"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -190,23 +156,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

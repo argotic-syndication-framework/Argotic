@@ -11,21 +11,13 @@ namespace Argotic.Syndication.Specialized;
 /// </summary>
 /// <seealso cref="BlogMLPost.Trackbacks"/>
 [Serializable]
-public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>, IEquatable<BlogMLTrackback>, IExtensibleSyndicationObject
+public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>, IEquatable<BlogMLTrackback>, IExtensibleSyndicationObject, IXmlWritable
 {
 
     /// <summary>
     /// Private member to hold the title of the web log entity.
     /// </summary>
     private BlogMLTextConstruct commonObjectBaseTitle = new();
-    /// <summary>
-    /// Private member to hold a unique identifier for the web log entity.
-    /// </summary>
-    private string commonObjectBaseId = string.Empty;
-    /// <summary>
-    /// Private member to hold the URL of the trackback.
-    /// </summary>
-    private Uri trackbackUrl;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLTrackback"/> class.
     /// </summary>
@@ -59,23 +51,10 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// <value>An identification string for this web log entity. The default value is an <b>empty</b> string, which indicated that no identifier was specified.</value>
     public string Id
     {
-        get
-        {
-            return commonObjectBaseId;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                commonObjectBaseId = string.Empty;
-            }
-            else
-            {
-                commonObjectBaseId = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this web log entity was last modified.
@@ -125,15 +104,12 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Url
     {
-        get
-        {
-            return trackbackUrl;
-        }
+        get => field;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            trackbackUrl = value;
+            field = value;
         }
     }
     /// <summary>
@@ -254,26 +230,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stream, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        stream.Seek(0, SeekOrigin.Begin);
-
-        using StreamReader reader = new(stream);
-        return reader.ReadToEnd();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

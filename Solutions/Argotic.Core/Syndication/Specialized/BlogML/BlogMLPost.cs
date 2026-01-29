@@ -18,7 +18,7 @@ namespace Argotic.Syndication.Specialized;
 ///     </code>
 /// </example>
 [Serializable]
-public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatable<BlogMLPost>, IExtensibleSyndicationObject
+public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatable<BlogMLPost>, IExtensibleSyndicationObject, IXmlWritable
 {
 
     /// <summary>
@@ -26,17 +26,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// </summary>
     private BlogMLTextConstruct commonObjectBaseTitle = new();
     /// <summary>
-    /// Private member to hold a unique identifier for the web log entity.
-    /// </summary>
-    private string commonObjectBaseId = string.Empty;
-    /// <summary>
     /// Private member to hold the textual content of the post.
     /// </summary>
     private BlogMLTextConstruct postContent = new();
-    /// <summary>
-    /// Private member to hold views of the post.
-    /// </summary>
-    private string postViews = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLPost"/> class.
     /// </summary>
@@ -71,23 +63,10 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <value>An identification string for this web log entity. The default value is an <b>empty</b> string, which indicated that no identifier was specified.</value>
     public string Id
     {
-        get
-        {
-            return commonObjectBaseId;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                commonObjectBaseId = string.Empty;
-            }
-            else
-            {
-                commonObjectBaseId = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this web log entity was last modified.
@@ -189,13 +168,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Gets a value indicating if this post has an excerpt.
     /// </summary>
     /// <value><b>true</b> if this post's <see cref="Excerpt"/> is not null; Otherwise, <b>false</b>.</value>
-    public bool HasExcerpt
-    {
-        get
-        {
-            return this.Excerpt != null;
-        }
-    }
+    public bool HasExcerpt => this.Excerpt != null;
 
     /// <summary>
     /// Gets or sets the name of this post.
@@ -230,23 +203,10 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <value>The views of this post.</value>
     public string Views
     {
-        get
-        {
-            return postViews;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                postViews = string.Empty;
-            }
-            else
-            {
-                postViews = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
     /// <summary>
     /// Compares two specified <see cref="IList{BlogMLAttachment}"/> collections.
     /// </summary>
@@ -1005,26 +965,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stream, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        stream.Seek(0, SeekOrigin.Begin);
-
-        using StreamReader reader = new(stream);
-        return reader.ReadToEnd();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

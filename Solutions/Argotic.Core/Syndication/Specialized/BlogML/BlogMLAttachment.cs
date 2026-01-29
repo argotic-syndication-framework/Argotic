@@ -16,17 +16,8 @@ namespace Argotic.Syndication.Specialized;
 ///     In both cases, the URL must be specified so that the implementor can figure out where to dump the attachment to.
 /// </remarks>
 [Serializable]
-public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogMLAttachment>, IExtensibleSyndicationObject, IComparisonOperators
+public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogMLAttachment>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
-
-    /// <summary>
-    /// Private member to hold the MIME type of the attachment.
-    /// </summary>
-    private string attachmentMimeType = string.Empty;
-    /// <summary>
-    /// Private member to hold the attachment resource content.
-    /// </summary>
-    private string attachmentContent = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLAttachment"/> class.
     /// </summary>
@@ -50,28 +41,15 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// </summary>
     /// <value>The content of this attachment resource.</value>
     /// <remarks>
-    ///     If <see cref="IsEmbedded"/> is <b>true</b>, the value of this property <b>must</b> be <i>base64</i> encoded. 
+    ///     If <see cref="IsEmbedded"/> is <b>true</b>, the value of this property <b>must</b> be <i>base64</i> encoded.
     ///     The attachment content <i>may</i> be an empty string if the <see cref="ExternalUri"/> or <see cref="Url"/> properties are specified.
     /// </remarks>
     public string Content
     {
-        get
-        {
-            return attachmentContent;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                attachmentContent = string.Empty;
-            }
-            else
-            {
-                attachmentContent = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a relative or fully qualified URL to this attachment.
@@ -93,17 +71,14 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string MimeType
     {
-        get
-        {
-            return attachmentMimeType;
-        }
+        get => field;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            attachmentMimeType = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the size of this attachment.
@@ -274,26 +249,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stream, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        stream.Seek(0, SeekOrigin.Begin);
-
-        using StreamReader reader = new(stream);
-        return reader.ReadToEnd();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Reflection;
 
 namespace Argotic.Common;
@@ -216,25 +217,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <returns>The alternate value if found, otherwise an empty string.</returns>
     public static string GetAlternateValue<TEnum>(TEnum value) where TEnum : struct, Enum
     {
-        foreach (FieldInfo fieldInfo in typeof(TEnum).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(TEnum))
-            {
-                TEnum enumValue = (TEnum)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (EqualityComparer<TEnum>.Default.Equals(enumValue, value))
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
-                    {
-                        return enumerationMetadata.AlternateValue;
-                    }
-                }
-            }
-        }
-
-        return string.Empty;
+        return EnumMetadataCache<TEnum>.EnumToAlternateValue.GetValueOrDefault(value, string.Empty);
     }
 
     /// <summary>
@@ -250,22 +233,88 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
 
-        foreach (FieldInfo fieldInfo in typeof(TEnum).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(TEnum))
-            {
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+        return EnumMetadataCache<TEnum>.AlternateValueToEnum.GetValueOrDefault(name, defaultValue);
+    }
 
-                if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
+    /// <summary>
+    /// Gets the cached mapping from enum values to their alternate value strings.
+    /// </summary>
+    /// <typeparam name="TEnum">The enum type.</typeparam>
+    /// <returns>A FrozenDictionary mapping enum values to alternate value strings.</returns>
+    public static FrozenDictionary<TEnum, string> GetAlternateValueMapping<TEnum>() where TEnum : struct, Enum
+    {
+        return EnumMetadataCache<TEnum>.EnumToAlternateValue;
+    }
+
+    /// <summary>
+    /// Gets the cached mapping from alternate value strings to enum values (case-insensitive).
+    /// </summary>
+    /// <typeparam name="TEnum">The enum type.</typeparam>
+    /// <returns>A FrozenDictionary mapping alternate value strings to enum values.</returns>
+    public static FrozenDictionary<string, TEnum> GetEnumByAlternateValueMapping<TEnum>() where TEnum : struct, Enum
+    {
+        return EnumMetadataCache<TEnum>.AlternateValueToEnum;
+    }
+
+    /// <summary>
+    /// Provides cached FrozenDictionary mappings for enum metadata lookups.
+    /// </summary>
+    /// <typeparam name="TEnum">The enum type.</typeparam>
+    private static class EnumMetadataCache<TEnum> where TEnum : struct, Enum
+    {
+        /// <summary>
+        /// Maps enum values to their alternate value strings.
+        /// </summary>
+        public static readonly FrozenDictionary<TEnum, string> EnumToAlternateValue = BuildEnumToAlternateValueMapping();
+
+        /// <summary>
+        /// Maps alternate value strings to their corresponding enum values (case-insensitive).
+        /// </summary>
+        public static readonly FrozenDictionary<string, TEnum> AlternateValueToEnum = BuildAlternateValueToEnumMapping();
+
+        private static FrozenDictionary<TEnum, string> BuildEnumToAlternateValueMapping()
+        {
+            var mappings = new Dictionary<TEnum, string>();
+
+            foreach (FieldInfo fieldInfo in typeof(TEnum).GetFields())
+            {
+                if (fieldInfo.FieldType == typeof(TEnum))
                 {
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
+                    TEnum enumValue = (TEnum)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+
+                    if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
                     {
-                        return (TEnum)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                        mappings[enumValue] = enumerationMetadata.AlternateValue;
                     }
                 }
             }
+
+            return mappings.ToFrozenDictionary();
         }
 
-        return defaultValue;
+        private static FrozenDictionary<string, TEnum> BuildAlternateValueToEnumMapping()
+        {
+            var mappings = new Dictionary<string, TEnum>(StringComparer.OrdinalIgnoreCase);
+
+            foreach (FieldInfo fieldInfo in typeof(TEnum).GetFields())
+            {
+                if (fieldInfo.FieldType == typeof(TEnum))
+                {
+                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+
+                    if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
+                    {
+                        if (!string.IsNullOrEmpty(enumerationMetadata.AlternateValue))
+                        {
+                            TEnum enumValue = (TEnum)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                            mappings[enumerationMetadata.AlternateValue] = enumValue;
+                        }
+                    }
+                }
+            }
+
+            return mappings.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase);
+        }
     }
 }

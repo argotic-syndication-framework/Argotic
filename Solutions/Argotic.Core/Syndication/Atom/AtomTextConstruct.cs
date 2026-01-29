@@ -22,15 +22,10 @@ namespace Argotic.Syndication;
 public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<AtomTextConstruct>, IAtomCommonObjectAttributes, IExtensibleSyndicationObject, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the content of the human-readable text.
-    /// </summary>
-    private string textConstructContent = string.Empty;
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomTextConstruct"/> class.
     /// </summary>
     public AtomTextConstruct()
     {
-
     }
 
     /// <summary>
@@ -85,23 +80,9 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     /// </remarks>
     public string Content
     {
-        get
-        {
-            return textConstructContent;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                textConstructContent = string.Empty;
-            }
-            else
-            {
-                textConstructContent = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the entity encoding utilized by this human-readable text.
@@ -365,11 +346,15 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= this.TextType.CompareTo(other.TextType);
+        if (result != 0) return result;
 
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        result = this.TextType.CompareTo(other.TextType);
+        if (result != 0) return result;
 
-        return result;
+        result = AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result != 0) return result;
+
+        return 0;
     }
 
     /// <summary>

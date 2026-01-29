@@ -11,7 +11,7 @@ namespace Argotic.Syndication.Specialized;
 /// </summary>
 /// <seealso cref="BlogMLPost.Comments"/>
 [Serializable]
-public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IEquatable<BlogMLComment>, IExtensibleSyndicationObject
+public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IEquatable<BlogMLComment>, IExtensibleSyndicationObject, IXmlWritable
 {
 
     /// <summary>
@@ -19,21 +19,9 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// </summary>
     private BlogMLTextConstruct commonObjectBaseTitle = new();
     /// <summary>
-    /// Private member to hold a unique identifier for the web log entity.
-    /// </summary>
-    private string commonObjectBaseId = string.Empty;
-    /// <summary>
     /// Private member to hold the textual content of the comment.
     /// </summary>
     private BlogMLTextConstruct commentContent = new();
-    /// <summary>
-    /// Private member to hold the author's name for the comment.
-    /// </summary>
-    private string commentUserName = string.Empty;
-    /// <summary>
-    /// Private member to hold the author's email address for the comment.
-    /// </summary>
-    private string commentUserEmailAddress = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLComment"/> class.
@@ -68,23 +56,10 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// <value>An identification string for this web log entity. The default value is an <b>empty</b> string, which indicated that no identifier was specified.</value>
     public string Id
     {
-        get
-        {
-            return commonObjectBaseId;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                commonObjectBaseId = string.Empty;
-            }
-            else
-            {
-                commonObjectBaseId = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this web log entity was last modified.
@@ -152,23 +127,10 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// <value>The author's email address for this comment.</value>
     public string UserEmailAddress
     {
-        get
-        {
-            return commentUserEmailAddress;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                commentUserEmailAddress = string.Empty;
-            }
-            else
-            {
-                commentUserEmailAddress = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the author's name for this comment.
@@ -178,17 +140,14 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string UserName
     {
-        get
-        {
-            return commentUserName;
-        }
+        get => field;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            commentUserName = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the author's homepage or web log for this comment.
@@ -385,26 +344,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stream, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        stream.Seek(0, SeekOrigin.Begin);
-
-        using StreamReader reader = new(stream);
-        return reader.ReadToEnd();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

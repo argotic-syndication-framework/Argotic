@@ -9,7 +9,7 @@ namespace Argotic.Syndication;
 /// Represents the pixel location of the edges of the outline window for a <see cref="OpmlDocument"/>.
 /// </summary>
 [Serializable]
-public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComparisonOperators
+public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComparisonOperators, IXmlWritable
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlWindow"/> class.
@@ -148,23 +148,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

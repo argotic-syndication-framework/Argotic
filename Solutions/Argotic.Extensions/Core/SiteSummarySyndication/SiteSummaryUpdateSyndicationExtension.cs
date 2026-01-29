@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -26,6 +27,17 @@ namespace Argotic.Extensions.Core;
 [Serializable]
 public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComparable<SiteSummaryUpdateSyndicationExtension>, IEquatable<SiteSummaryUpdateSyndicationExtension>
 {
+    /// <summary>
+    /// Cached mapping from SiteSummaryUpdatePeriod enum values to their string representations.
+    /// </summary>
+    private static readonly FrozenDictionary<SiteSummaryUpdatePeriod, string> PeriodToStringMapping =
+        EnumerationMetadataAttribute.GetAlternateValueMapping<SiteSummaryUpdatePeriod>();
+
+    /// <summary>
+    /// Cached mapping from string representations to SiteSummaryUpdatePeriod enum values (case-insensitive).
+    /// </summary>
+    private static readonly FrozenDictionary<string, SiteSummaryUpdatePeriod> StringToPeriodMapping =
+        EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<SiteSummaryUpdatePeriod>();
 
     /// <summary>
     /// Private member to hold specific information about the extension.
@@ -84,29 +96,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <returns>The period identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
     public static string PeriodAsString(SiteSummaryUpdatePeriod period)
     {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(SiteSummaryUpdatePeriod).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(SiteSummaryUpdatePeriod))
-            {
-                SiteSummaryUpdatePeriod updatePeriod = (SiteSummaryUpdatePeriod)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (updatePeriod == period)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
+        return PeriodToStringMapping.GetValueOrDefault(period, string.Empty);
     }
 
     /// <summary>
@@ -119,29 +109,9 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static SiteSummaryUpdatePeriod PeriodByName(string name)
     {
-        SiteSummaryUpdatePeriod updatePeriod = SiteSummaryUpdatePeriod.None;
         ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(SiteSummaryUpdatePeriod).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(SiteSummaryUpdatePeriod))
-            {
-                SiteSummaryUpdatePeriod period = (SiteSummaryUpdatePeriod)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        updatePeriod = period;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return updatePeriod;
+        return StringToPeriodMapping.GetValueOrDefault(name, SiteSummaryUpdatePeriod.None);
     }
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.

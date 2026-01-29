@@ -32,26 +32,13 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, IEquatable<AtomSource>, IExtensibleSyndicationObject
+public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, IEquatable<AtomSource>, IExtensibleSyndicationObject, IXmlWritable
 {
-    /// <summary>
-    /// Private member to hold a permanent, universally unique identifier for the source.
-    /// </summary>
-    private AtomId sourceId;
-    /// <summary>
-    /// Private member to hold information that conveys a human-readable title for the source.
-    /// </summary>
-    private AtomTextConstruct sourceTitle;
-    /// <summary>
-    /// Private member to hold a value indicating the most recent instant in time when the source was modified in a way the publisher considers significant.
-    /// </summary>
-    private DateTime sourceUpdatedOn = DateTime.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomSource"/> class.
     /// </summary>
     public AtomSource()
     {
-
     }
 
     /// <summary>
@@ -138,18 +125,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// Gets or sets a permanent, universally unique identifier for this source.
     /// </summary>
     /// <value>A <see cref="AtomId"/> object that represents a permanent, universally unique identifier for this source.</value>
-    public AtomId Id
-    {
-        get
-        {
-            return sourceId;
-        }
-
-        set
-        {
-            sourceId = value;
-        }
-    }
+    public AtomId Id { get; set; }
 
     /// <summary>
     /// Gets references from this source to one or more Web resources.
@@ -185,41 +161,19 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// Gets or sets information that conveys a human-readable title for this source.
     /// </summary>
     /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this source.</value>
-    public AtomTextConstruct Title
-    {
-        get
-        {
-            return sourceTitle;
-        }
-
-        set
-        {
-            sourceTitle = value;
-        }
-    }
+    public AtomTextConstruct Title { get; set; }
 
     /// <summary>
     /// Gets or sets a date-time indicating the most recent instant in time when this source was modified in a way the publisher considers significant.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this source was modified in a way the publisher considers significant. 
+    ///     A <see cref="DateTime"/> that indicates the most recent instant in time when this source was modified in a way the publisher considers significant.
     ///     Publishers <i>may</i> change the value of this element over time. The default value is <see cref="DateTime.MinValue"/>, which indicates that no update time was provided.
     /// </value>
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime UpdatedOn
-    {
-        get
-        {
-            return sourceUpdatedOn;
-        }
-
-        set
-        {
-            sourceUpdatedOn = value;
-        }
-    }
+    public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -383,26 +337,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stream, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        stream.Seek(0, SeekOrigin.Begin);
-
-        using StreamReader reader = new(stream);
-        return reader.ReadToEnd();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
@@ -416,79 +351,94 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         }
 
         int result = AtomFeed.CompareSequence(this.Authors, other.Authors);
-        result |= AtomFeed.CompareSequence(this.Categories, other.Categories);
-        result |= AtomFeed.CompareSequence(this.Contributors, other.Contributors);
+        if (result != 0) return result;
+
+        result = AtomFeed.CompareSequence(this.Categories, other.Categories);
+        if (result != 0) return result;
+
+        result = AtomFeed.CompareSequence(this.Contributors, other.Contributors);
+        if (result != 0) return result;
 
         if (this.Generator != null)
         {
-            result |= this.Generator.CompareTo(other.Generator);
+            result = this.Generator.CompareTo(other.Generator);
+            if (result != 0) return result;
         }
         else if (other.Generator != null)
         {
-            result |= -1;
+            return -1;
         }
 
         if (this.Icon != null)
         {
-            result |= this.Icon.CompareTo(other.Icon);
+            result = this.Icon.CompareTo(other.Icon);
+            if (result != 0) return result;
         }
         else if (other.Icon != null)
         {
-            result |= -1;
+            return -1;
         }
 
         if (this.Id != null)
         {
-            result |= this.Id.CompareTo(other.Id);
+            result = this.Id.CompareTo(other.Id);
+            if (result != 0) return result;
         }
         else if (other.Id != null)
         {
-            result |= -1;
+            return -1;
         }
 
-        result |= AtomFeed.CompareSequence(this.Links, other.Links);
+        result = AtomFeed.CompareSequence(this.Links, other.Links);
+        if (result != 0) return result;
 
         if (this.Logo != null)
         {
-            result |= this.Logo.CompareTo(other.Logo);
+            result = this.Logo.CompareTo(other.Logo);
+            if (result != 0) return result;
         }
         else if (other.Logo != null)
         {
-            result |= -1;
+            return -1;
         }
 
         if (this.Rights != null)
         {
-            result |= this.Rights.CompareTo(other.Rights);
+            result = this.Rights.CompareTo(other.Rights);
+            if (result != 0) return result;
         }
         else if (other.Rights != null)
         {
-            result |= -1;
+            return -1;
         }
 
         if (this.Subtitle != null)
         {
-            result |= this.Subtitle.CompareTo(other.Subtitle);
+            result = this.Subtitle.CompareTo(other.Subtitle);
+            if (result != 0) return result;
         }
         else if (other.Subtitle != null)
         {
-            result |= -1;
+            return -1;
         }
 
         if (this.Title != null)
         {
-            result |= this.Title.CompareTo(other.Title);
+            result = this.Title.CompareTo(other.Title);
+            if (result != 0) return result;
         }
         else if (other.Title != null)
         {
-            result |= -1;
+            return -1;
         }
 
-        result |= this.UpdatedOn.CompareTo(other.UpdatedOn);
+        result = this.UpdatedOn.CompareTo(other.UpdatedOn);
+        if (result != 0) return result;
 
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        result = AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result != 0) return result;
 
-        return result;
+        return 0;
     }
 
     /// <summary>

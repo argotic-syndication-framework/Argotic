@@ -1,3 +1,5 @@
+using System.Collections.Frozen;
+using System.Reflection;
 using System.Xml.XPath;
 
 namespace Argotic.Common;
@@ -8,6 +10,11 @@ namespace Argotic.Common;
 [Serializable]
 public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicationEndpoint>, IEquatable<DiscoverableSyndicationEndpoint>, IComparisonOperators
 {
+    /// <summary>
+    /// Cached mapping from MIME content type strings to SyndicationContentFormat enum values.
+    /// </summary>
+    private static readonly FrozenDictionary<string, SyndicationContentFormat> ContentTypeToFormatMapping = BuildContentTypeMapping();
+
     /// <summary>
     /// Private member to hold the content MIME type of the syndication endpoint.
     /// </summary>
@@ -70,38 +77,40 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     {
         get
         {
-            SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
-
             if (string.IsNullOrEmpty(this.ContentType))
             {
                 return SyndicationContentFormat.None;
             }
-            else
+
+            return ContentTypeToFormatMapping.GetValueOrDefault(this.ContentType, SyndicationContentFormat.None);
+        }
+    }
+
+    /// <summary>
+    /// Builds a cached mapping from MIME content type strings to SyndicationContentFormat enum values.
+    /// </summary>
+    private static FrozenDictionary<string, SyndicationContentFormat> BuildContentTypeMapping()
+    {
+        var mappings = new Dictionary<string, SyndicationContentFormat>(StringComparer.OrdinalIgnoreCase);
+
+        foreach (FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
+        {
+            if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
             {
-                foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
+                SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
+
+                if (customAttributes is { Length: > 0 } && customAttributes[0] is MimeMediaTypeAttribute mediaType)
                 {
-                    if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
-                    {
-                        SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                        object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
-
-                        if (customAttributes is { Length: > 0 })
-                        {
-                            MimeMediaTypeAttribute mediaType = customAttributes[0] as MimeMediaTypeAttribute;
-                            string contentType = $"{mediaType.Name}/{mediaType.SubName}";
-
-                            if (string.Equals(this.ContentType, contentType, StringComparison.OrdinalIgnoreCase))
-                            {
-                                syndicationFormat = format;
-                                break;
-                            }
-                        }
-                    }
+                    string contentType = $"{mediaType.Name}/{mediaType.SubName}";
+                    // Note: Some formats may share the same content type (e.g., Sitemap and SitemapIndex both use application/xml).
+                    // The first one encountered will be used; later ones are skipped.
+                    mappings.TryAdd(contentType, format);
                 }
             }
-
-            return syndicationFormat;
         }
+
+        return mappings.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase);
     }
 
     /// <summary>

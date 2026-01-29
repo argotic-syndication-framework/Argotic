@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -24,6 +25,17 @@ namespace Argotic.Extensions.Core;
 [Serializable]
 public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleListSort>, IComparisonOperators
 {
+    /// <summary>
+    /// Cached mapping from SimpleListDataType enum values to their string representations.
+    /// </summary>
+    private static readonly FrozenDictionary<SimpleListDataType, string> DataTypeToStringMapping =
+        EnumerationMetadataAttribute.GetAlternateValueMapping<SimpleListDataType>();
+
+    /// <summary>
+    /// Cached mapping from string representations to SimpleListDataType enum values (case-insensitive).
+    /// </summary>
+    private static readonly FrozenDictionary<string, SimpleListDataType> StringToDataTypeMapping =
+        EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<SimpleListDataType>();
 
     /// <summary>
     /// Private member to hold the full namespace used in the sortable property.
@@ -181,29 +193,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <returns>The data type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
     public static string DataTypeAsString(SimpleListDataType type)
     {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(SimpleListDataType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(SimpleListDataType))
-            {
-                SimpleListDataType dataType = (SimpleListDataType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (dataType == type)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
+        return DataTypeToStringMapping.GetValueOrDefault(type, string.Empty);
     }
 
     /// <summary>
@@ -216,29 +206,9 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static SimpleListDataType DataTypeByName(string name)
     {
-        SimpleListDataType dataType = SimpleListDataType.None;
         ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(SimpleListDataType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(SimpleListDataType))
-            {
-                SimpleListDataType type = (SimpleListDataType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        dataType = type;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return dataType;
+        return StringToDataTypeMapping.GetValueOrDefault(name, SimpleListDataType.None);
     }
 
     /// <summary>

@@ -1,3 +1,4 @@
+using System.Buffers;
 using System.Globalization;
 using System.Net;
 using System.Text;
@@ -16,6 +17,11 @@ public static class SyndicationEncodingUtility
     /// Private member to hold the lazily-initialized shared HttpClient instance.
     /// </summary>
     private static readonly Lazy<HttpClient> sharedHttpClient = new(CreateSharedHttpClient);
+
+    /// <summary>
+    /// Characters that are invalid in directory names.
+    /// </summary>
+    private static readonly SearchValues<char> s_invalidDirectoryChars = SearchValues.Create(@"\/:*?<>|");
 
     /// <summary>
     /// Creates a shared <see cref="HttpClient"/> instance configured for optimal connection pooling.
@@ -477,16 +483,23 @@ public static class SyndicationEncodingUtility
     {
         ArgumentException.ThrowIfNullOrEmpty(name);
 
-        string directoryName = name.Replace("\\", string.Empty, StringComparison.Ordinal);
-        directoryName = directoryName.Replace("/", string.Empty, StringComparison.Ordinal);
-        directoryName = directoryName.Replace(":", string.Empty, StringComparison.Ordinal);
-        directoryName = directoryName.Replace("*", string.Empty, StringComparison.Ordinal);
-        directoryName = directoryName.Replace("?", string.Empty, StringComparison.Ordinal);
-        directoryName = directoryName.Replace("<", string.Empty, StringComparison.Ordinal);
-        directoryName = directoryName.Replace(">", string.Empty, StringComparison.Ordinal);
-        directoryName = directoryName.Replace("|", string.Empty, StringComparison.Ordinal);
+        // Fast path: check if any invalid characters exist
+        if (!name.AsSpan().ContainsAny(s_invalidDirectoryChars))
+        {
+            return name;
+        }
 
-        return directoryName;
+        // Remove invalid characters using StringBuilder
+        StringBuilder result = new(name.Length);
+        foreach (char c in name)
+        {
+            if (!s_invalidDirectoryChars.Contains(c))
+            {
+                result.Append(c);
+            }
+        }
+
+        return result.ToString();
     }
 
     /// <summary>

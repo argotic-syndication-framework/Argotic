@@ -10,13 +10,8 @@ namespace Argotic.Syndication.Specialized;
 /// Represents machine or human readable text.
 /// </summary>
 [Serializable]
-public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<BlogMLTextConstruct>, IExtensibleSyndicationObject, IComparisonOperators
+public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<BlogMLTextConstruct>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritableWithElementName
 {
-
-    /// <summary>
-    /// Private member to hold the content of the text.
-    /// </summary>
-    private string textConstructContent = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLTextConstruct"/> class.
     /// </summary>
@@ -71,23 +66,10 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// <value>The content of this text.</value>
     public string Content
     {
-        get
-        {
-            return textConstructContent;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                textConstructContent = string.Empty;
-            }
-            else
-            {
-                textConstructContent = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the entity encoding utilized by this text.
@@ -271,6 +253,13 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     }
 
     /// <summary>
+    /// Saves the current <see cref="BlogMLTextConstruct"/> to the specified <see cref="XmlWriter"/> using the default element name "TextConstruct".
+    /// </summary>
+    /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
+    void IXmlWritable.WriteTo(XmlWriter writer) => this.WriteTo(writer, "TextConstruct");
+
+    /// <summary>
     /// Saves the current <see cref="BlogMLTextConstruct"/> to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
@@ -312,26 +301,7 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// <remarks>
     ///     This method returns the XML representation for the current instance, with a generic element name of <i>TextConstruct</i>.
     /// </remarks>
-    public override string ToString()
-    {
-        using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stream, settings))
-        {
-            this.WriteTo(writer, "TextConstruct");
-        }
-
-        stream.Seek(0, SeekOrigin.Begin);
-
-        using StreamReader reader = new(stream);
-        return reader.ReadToEnd();
-    }
+    public override string ToString() => this.ToXmlString("TextConstruct");
 
     /// <summary>
     /// Compares the current instance with another object of the same type.

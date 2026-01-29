@@ -31,37 +31,19 @@ internal static class AtomUtility
     /// Gets the XML namespace URI for the Atom 1.0 specification.
     /// </summary>
     /// <value>The XML namespace URI for the Atom 1.0 specification.</value>
-    public static string AtomNamespace
-    {
-        get
-        {
-            return ATOM_NAMESPACE;
-        }
-    }
+    public static string AtomNamespace => ATOM_NAMESPACE;
 
     /// <summary>
     /// Gets the XML namespace URI for the Atom Publishing Protocol 1.0 specification.
     /// </summary>
     /// <value>The XML namespace URI for the Atom Publishing Protocol 1.0 specification.</value>
-    public static string AtomPublishingNamespace
-    {
-        get
-        {
-            return ATOMPUB_NAMESPACE;
-        }
-    }
+    public static string AtomPublishingNamespace => ATOMPUB_NAMESPACE;
 
     /// <summary>
     /// Gets the XML namespace URI for the XHTML specification.
     /// </summary>
     /// <value>The XML namespace URI for the Extensible HyperText Markup Language (XHTML) specification.</value>
-    public static string XhtmlNamespace
-    {
-        get
-        {
-            return XHTML_NAMESPACE;
-        }
-    }
+    public static string XhtmlNamespace => XHTML_NAMESPACE;
     /// <summary>
     /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
     /// </summary>
@@ -85,26 +67,22 @@ internal static class AtomUtility
     /// <param name="source">A object that implements the <see cref="IAtomCommonObjectAttributes"/> interface to be compared.</param>
     /// <param name="target">A object that implements the <see cref="IAtomCommonObjectAttributes"/> to compare with the <paramref name="source"/>.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    public static int CompareCommonObjectAttributes(IAtomCommonObjectAttributes source, IAtomCommonObjectAttributes target)
+    public static int CompareCommonObjectAttributes(IAtomCommonObjectAttributes? source, IAtomCommonObjectAttributes? target)
     {
-        int result = 0;
-        if (source == null && target == null)
+        int result = (source, target) switch
         {
-            return 0;
-        }
-        else if (source != null && target == null)
-        {
-            return 1;
-        }
-        else if (source == null && target != null)
-        {
-            return -1;
-        }
-        result |= Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            (null, null) => 0,
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0
+        };
 
-        string sourceLanguageName = source.Language != null ? source.Language.Name : string.Empty;
-        string targetLanguageName = target.Language != null ? target.Language.Name : string.Empty;
-        result |= string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+        if (result != 0 || source is null || target is null) return result;
+
+        result = Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
+
+        result = string.Compare(source.Language?.Name ?? string.Empty, target.Language?.Name ?? string.Empty, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }

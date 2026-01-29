@@ -89,25 +89,13 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// Gets a string that identifies the categorization scheme.
     /// </summary>
     /// <value>A string that identifies the categorization scheme used by this category.</value>
-    public string Scheme
-    {
-        get
-        {
-            return categoryScheme;
-        }
-    }
+    public string Scheme => categoryScheme;
 
     /// <summary>
     /// Gets a string that identifies the category.
     /// </summary>
     /// <value>A string that identifies the category.</value>
-    public string Term
-    {
-        get
-        {
-            return categoryTerm;
-        }
-    }
+    public string Term => categoryTerm;
     /// <summary>
     /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationCategory"/>.
     /// </summary>

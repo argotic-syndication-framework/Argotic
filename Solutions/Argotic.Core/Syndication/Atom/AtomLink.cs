@@ -21,34 +21,13 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEquatable<AtomLink>, IExtensibleSyndicationObject
+public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEquatable<AtomLink>, IExtensibleSyndicationObject, IXmlWritable
 {
-    /// <summary>
-    /// Private member to hold an IRI that identifies the location of the Web resource.
-    /// </summary>
-    private Uri linkResourceLocation;
-    /// <summary>
-    /// Private member to hold a value that indicates the link relation type.
-    /// </summary>
-    private string linkRelation = string.Empty;
-    /// <summary>
-    /// Private member to hold an advisory media type for the Web resource.
-    /// </summary>
-    private string linkMediaType = string.Empty;
-    /// <summary>
-    /// Private member to hold human-readable information about the Web resource.
-    /// </summary>
-    private string linkTitle = string.Empty;
-    /// <summary>
-    /// Private member to hold an advisory length of the resource content in octets.
-    /// </summary>
-    private long linkLength = long.MinValue;
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomLink"/> class.
     /// </summary>
     public AtomLink()
     {
-
     }
 
     /// <summary>
@@ -156,28 +135,14 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// </summary>
     /// <value>An advisory MIME media type that provides a hint about the type of the representation that is expected to be returned by the Web resource.</value>
     /// <remarks>
-    ///     The advisory media type <b>does not</b> override the actual media type returned with the representation. 
+    ///     The advisory media type <b>does not</b> override the actual media type returned with the representation.
     ///     The value <b>must</b> conform to the syntax of a MIME media type as specified by <a href="http://www.ietf.org/rfc/rfc4288.txt">RFC 4288: Media Type Specifications and Registration Procedures</a>.
     /// </remarks>
     public string ContentType
     {
-        get
-        {
-            return linkMediaType;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                linkMediaType = string.Empty;
-            }
-            else
-            {
-                linkMediaType = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets an advisory length for this Web resource content in octets.
@@ -189,17 +154,13 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>zero</i>.</exception>
     public long Length
     {
-        get
-        {
-            return linkLength;
-        }
-
+        get => field;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 0);
-            linkLength = value;
+            field = value;
         }
-    }
+    } = long.MinValue;
 
     /// <summary>
     /// Gets or sets a value that indicates the link relation type of this Web resource.
@@ -253,51 +214,23 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// </remarks>
     public string Relation
     {
-        get
-        {
-            return linkRelation;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                linkRelation = string.Empty;
-            }
-            else
-            {
-                linkRelation = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets human-readable information about this Web resource.
     /// </summary>
     /// <value>Human-readable information about this Web resource.</value>
     /// <remarks>
-    ///     The <see cref="Title"/> property is <i>language-sensitive</i>, with the natural language of the value being specified by the <see cref="Language"/> property. 
+    ///     The <see cref="Title"/> property is <i>language-sensitive</i>, with the natural language of the value being specified by the <see cref="Language"/> property.
     ///     Entities represent their corresponding characters, not markup.
     /// </remarks>
     public string Title
     {
-        get
-        {
-            return linkTitle;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                linkTitle = string.Empty;
-            }
-            else
-            {
-                linkTitle = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets an IRI that identifies the location of this Web resource.
@@ -310,15 +243,11 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Uri
     {
-        get
-        {
-            return linkResourceLocation;
-        }
-
+        get => field;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            linkResourceLocation = value;
+            field = value;
         }
     }
     /// <summary>
@@ -490,24 +419,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
@@ -521,19 +433,29 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
         }
 
         int result = this.Length.CompareTo(other.Length);
-        result |= string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Relation, other.Relation, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
+
+        result = string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
+
+        result = string.Compare(this.Relation, other.Relation, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
         string sourceLanguageName = this.ContentLanguage != null ? this.ContentLanguage.Name : string.Empty;
         string targetLanguageName = other.ContentLanguage != null ? other.ContentLanguage.Name : string.Empty;
-        result |= string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+        result = string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        return result;
+        result = AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result != 0) return result;
+
+        return 0;
     }
 
     /// <summary>

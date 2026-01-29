@@ -1,4 +1,5 @@
-﻿using System.Globalization;
+﻿using System.Collections.Frozen;
+using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -12,53 +13,78 @@ namespace Argotic.Syndication.Specialized;
 /// <remarks>This utility class is not intended for use outside the Web Log Markup Language (BlogML) syndication entities within the framework.</remarks>
 internal static class BlogMLUtility
 {
-
     /// <summary>
     /// Private member to hold the Web Log Markup Language (BlogML) 2.0 namespace identifier.
     /// </summary>
     private const string BLOGML_NAMESPACE = "http://www.blogml.com/2006/09/BlogML";
+
+    /// <summary>
+    /// Cached mapping from BlogMLApprovalStatus enum values to their string representations.
+    /// </summary>
+    private static readonly FrozenDictionary<BlogMLApprovalStatus, string> s_statusToString = CreateStatusToStringMap();
+
+    /// <summary>
+    /// Cached mapping from string representations to BlogMLApprovalStatus enum values.
+    /// </summary>
+    private static readonly FrozenDictionary<string, BlogMLApprovalStatus> s_stringToStatus = CreateStringToStatusMap();
+
     /// <summary>
     /// Gets the XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.
     /// </summary>
     /// <value>The XML namespace URI for the Web Log Markup Language (BlogML) 2.0 specification.</value>
-    public static string BlogMLNamespace
+    public static string BlogMLNamespace => BLOGML_NAMESPACE;
+
+    /// <summary>
+    /// Creates the enum-to-string mapping for BlogMLApprovalStatus.
+    /// </summary>
+    private static FrozenDictionary<BlogMLApprovalStatus, string> CreateStatusToStringMap()
     {
-        get
+        var map = new Dictionary<BlogMLApprovalStatus, string>();
+        foreach (var fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
         {
-            return BLOGML_NAMESPACE;
+            if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
+            {
+                var status = (BlogMLApprovalStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                var customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+
+                if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
+                {
+                    map[status] = enumerationMetadata.AlternateValue;
+                }
+            }
         }
+        return map.ToFrozenDictionary();
     }
+
+    /// <summary>
+    /// Creates the string-to-enum mapping for BlogMLApprovalStatus.
+    /// </summary>
+    private static FrozenDictionary<string, BlogMLApprovalStatus> CreateStringToStatusMap()
+    {
+        var map = new Dictionary<string, BlogMLApprovalStatus>(StringComparer.OrdinalIgnoreCase);
+        foreach (var fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
+        {
+            if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
+            {
+                var status = (BlogMLApprovalStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
+                var customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+
+                if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
+                {
+                    map[enumerationMetadata.AlternateValue] = status;
+                }
+            }
+        }
+        return map.ToFrozenDictionary(StringComparer.OrdinalIgnoreCase);
+    }
+
     /// <summary>
     /// Returns the approval status identifier for the supplied <see cref="BlogMLApprovalStatus"/>.
     /// </summary>
     /// <param name="status">The <see cref="BlogMLApprovalStatus"/> to get the text construct identifier for.</param>
-    /// <returns>The approval status identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
-    public static string ApprovalStatusAsString(BlogMLApprovalStatus status)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
-            {
-                BlogMLApprovalStatus approvalStatus = (BlogMLApprovalStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (approvalStatus == status)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    /// <returns>The approval status identifier for the supplied <paramref name="status"/>, Otherwise, returns an empty string.</returns>
+    public static string ApprovalStatusAsString(BlogMLApprovalStatus status) =>
+        s_statusToString.GetValueOrDefault(status, string.Empty);
 
     /// <summary>
     /// Returns the <see cref="BlogMLApprovalStatus"/> enumeration value that corresponds to the specified approval status value.
@@ -66,33 +92,12 @@ internal static class BlogMLUtility
     /// <param name="value">The value of the approval status identifier.</param>
     /// <returns>A <see cref="BlogMLApprovalStatus"/> enumeration value that corresponds to the specified string, Otherwise, returns <b>BlogMLApprovalStatus.None</b>.</returns>
     /// <remarks>This method disregards case of specified approval status value.</remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public static BlogMLApprovalStatus ApprovalStatusByValue(string value)
     {
-        BlogMLApprovalStatus approvalStatus = BlogMLApprovalStatus.None;
         ArgumentException.ThrowIfNullOrEmpty(value);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLApprovalStatus).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
-            {
-                BlogMLApprovalStatus status = (BlogMLApprovalStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(value, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        approvalStatus = status;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return approvalStatus;
+        return s_stringToStatus.GetValueOrDefault(value, BlogMLApprovalStatus.None);
     }
 
     /// <summary>
@@ -101,37 +106,37 @@ internal static class BlogMLUtility
     /// <param name="source">A object that implements the <see cref="IBlogMLCommonObject"/> interface to be compared.</param>
     /// <param name="target">A object that implements the <see cref="IBlogMLCommonObject"/> to compare with the <paramref name="source"/>.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    public static int CompareCommonObjects(IBlogMLCommonObject source, IBlogMLCommonObject target)
+    public static int CompareCommonObjects(IBlogMLCommonObject? source, IBlogMLCommonObject? target)
     {
-        if (source == null && target == null)
+        int result = (source, target) switch
         {
-            return 0;
-        }
-        else if (source != null && target == null)
-        {
-            return 1;
-        }
-        else if (source == null && target != null)
-        {
-            return -1;
-        }
-        int result = source.ApprovalStatus.CompareTo(target.ApprovalStatus);
-        result |= source.CreatedOn.CompareTo(target.CreatedOn);
-        result |= string.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
-        result |= source.LastModifiedOn.CompareTo(target.LastModifiedOn);
+            (null, null) => 0,
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0
+        };
 
-        if (source.Title != null && target.Title != null)
+        if (result != 0 || source is null || target is null) return result;
+
+        result = source.ApprovalStatus.CompareTo(target.ApprovalStatus);
+        if (result != 0) return result;
+
+        result = source.CreatedOn.CompareTo(target.CreatedOn);
+        if (result != 0) return result;
+
+        result = string.Compare(source.Id, target.Id, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
+
+        result = source.LastModifiedOn.CompareTo(target.LastModifiedOn);
+        if (result != 0) return result;
+
+        result = (source.Title, target.Title) switch
         {
-            result |= source.Title.CompareTo(target.Title);
-        }
-        else if (source.Title != null && target.Title == null)
-        {
-            result |= 1;
-        }
-        else if (source.Title == null && target.Title != null)
-        {
-            result |= -1;
-        }
+            (null, null) => 0,
+            (not null, null) => 1,
+            (null, not null) => -1,
+            var (s, t) => s.CompareTo(t)
+        };
 
         return result;
     }

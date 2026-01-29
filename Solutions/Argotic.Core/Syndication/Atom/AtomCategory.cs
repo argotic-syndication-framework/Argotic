@@ -21,17 +21,8 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategory>, IEquatable<AtomCategory>, IExtensibleSyndicationObject
+public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategory>, IEquatable<AtomCategory>, IExtensibleSyndicationObject, IXmlWritable
 {
-    /// <summary>
-    /// Private member to hold a string that identifies the category to which the entry or feed belongs.
-    /// </summary>
-    private string categoryTerm = string.Empty;
-    /// <summary>
-    /// Private member to hold a human-readable label for display in end-user applications.
-    /// </summary>
-    private string categoryLabel = string.Empty;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomCategory"/> class.
     /// </summary>
@@ -96,23 +87,9 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// </remarks>
     public string Label
     {
-        get
-        {
-            return categoryLabel;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                categoryLabel = string.Empty;
-            }
-            else
-            {
-                categoryLabel = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets an IRI that identifies the categorization scheme used by this category.
@@ -132,17 +109,13 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Term
     {
-        get
-        {
-            return categoryTerm;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            categoryTerm = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
@@ -276,24 +249,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -308,12 +264,18 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
         }
 
         int result = string.Compare(this.Label, other.Label, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Term, other.Term, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        result = Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        return result;
+        result = string.Compare(this.Term, other.Term, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
+
+        result = AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result != 0) return result;
+
+        return 0;
     }
 
     /// <summary>

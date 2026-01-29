@@ -19,7 +19,7 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>, IExtensibleSyndicationObject, IComparisonOperators
+public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 
     /// <summary>
@@ -77,13 +77,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// Gets a value indicating if this syndication entity has one or more syndication extensions applied to it.
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
-    public bool HasExtensions
-    {
-        get
-        {
-            return this.Extensions.Count > 0;
-        }
-    }
+    public bool HasExtensions => this.Extensions.Count > 0;
     /// <summary>
     /// Gets or sets character data that provides a human-readable label explaining this form's purpose.
     /// </summary>
@@ -294,23 +288,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

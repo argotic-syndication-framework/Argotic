@@ -53,71 +53,46 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Gets the categories associated with this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this item. 
+    ///     A <see cref="Collection{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this item.
     /// </value>
-    public Collection<GenericSyndicationCategory> Categories
-    {
-        get
-        {
-            itemCategories ??= [];
-            return itemCategories;
-        }
-    }
+    public Collection<GenericSyndicationCategory> Categories => itemCategories ??= [];
 
     /// <summary>
     /// Gets a date-time indicating an instant in time associated with an event early in the life cycle of this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="DateTime"/> object that represents a date-time indicating an instant in time associated with an event early in the life cycle of this item. 
+    ///     A <see cref="DateTime"/> object that represents a date-time indicating an instant in time associated with an event early in the life cycle of this item.
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that publication date was specified.
     /// </value>
     /// <remarks>
-    ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="PublishedOn"/> will represent 
-    ///     the <see cref="AtomEntry.PublishedOn"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>, 
+    ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="PublishedOn"/> will represent
+    ///     the <see cref="AtomEntry.PublishedOn"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
     ///     the <see cref="AtomEntry.UpdatedOn"/> property value will be used if present.
     /// </remarks>
-    public DateTime PublishedOn
-    {
-        get
-        {
-            return itemPublishedOn;
-        }
-    }
+    public DateTime PublishedOn => itemPublishedOn;
 
     /// <summary>
     /// Gets a short summary, abstract, or excerpt for this item.
     /// </summary>
     /// <value>
-    ///     A short summary, abstract, or excerpt for this item. 
+    ///     A short summary, abstract, or excerpt for this item.
     ///     The default value is an <b>empty</b> string, which indicates that no excerpt was specified.
     /// </value>
     /// <remarks>
-    ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="Summary"/> will represent 
-    ///     the <see cref="AtomEntry.Summary"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>, 
+    ///     When an <see cref="AtomEntry"/> is being abstracted by this generic item, the <see cref="Summary"/> will represent
+    ///     the <see cref="AtomEntry.Summary"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
     ///     the <see cref="AtomEntry.Content"/> property value will be used if present.
     /// </remarks>
-    public string Summary
-    {
-        get
-        {
-            return itemSummary;
-        }
-    }
+    public string Summary => itemSummary;
 
     /// <summary>
     /// Gets the human-readable title for this item.
     /// </summary>
     /// <value>
-    ///     The human-readable title for this item. 
+    ///     The human-readable title for this item.
     ///     The default value is an <b>empty</b> string, which indicates that no title was specified.
     /// </value>
-    public string Title
-    {
-        get
-        {
-            return itemTitle;
-        }
-    }
+    public string Title => itemTitle;
     /// <summary>
     /// Returns a <see cref="String"/> that represents the current <see cref="GenericSyndicationItem"/>.
     /// </summary>

@@ -22,19 +22,10 @@ namespace Argotic.Syndication;
 public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<AtomPersonConstruct>, IAtomCommonObjectAttributes, IExtensibleSyndicationObject, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold a human-readable name for the person.
-    /// </summary>
-    private string personConstructName = string.Empty;
-    /// <summary>
-    /// Private member to hold an e-mail address associated with the person.
-    /// </summary>
-    private string personConstructEmailAddress = string.Empty;
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomPersonConstruct"/> class.
     /// </summary>
     public AtomPersonConstruct()
     {
-
     }
 
     /// <summary>
@@ -88,23 +79,9 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// </remarks>
     public string EmailAddress
     {
-        get
-        {
-            return personConstructEmailAddress;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                personConstructEmailAddress = string.Empty;
-            }
-            else
-            {
-                personConstructEmailAddress = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the human-readable name for this entity.
@@ -117,17 +94,13 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Name
     {
-        get
-        {
-            return personConstructName;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            personConstructName = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the IRI associated with this entity.
@@ -293,12 +266,18 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
         }
 
         int result = string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        return result;
+        result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
+
+        result = AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result != 0) return result;
+
+        return 0;
     }
 
     /// <summary>

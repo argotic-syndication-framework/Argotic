@@ -38,49 +38,9 @@ namespace Argotic.Syndication;
 public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExtensibleSyndicationObject
 {
     /// <summary>
-    /// Private member to hold the syndication format for this syndication resource.
-    /// </summary>
-    private const SyndicationContentFormat feedFormat = SyndicationContentFormat.Atom;
-    /// <summary>
-    /// Private member to hold the version of the syndication format for this syndication resource conforms to.
-    /// </summary>
-    private static readonly Version feedVersion = new(1, 0);
-    /// <summary>
     /// Private member to hold the collection of entries that comprise the distinct content published in the feed.
     /// </summary>
     private readonly List<AtomEntry> feedEntries = [];
-    /// <summary>
-    /// Private member to hold the agent used to generate the feed.
-    /// </summary>
-    private AtomGenerator feedGenerator;
-    /// <summary>
-    /// Private member to hold an image that provides iconic visual identification for the feed.
-    /// </summary>
-    private AtomIcon feedIcon;
-    /// <summary>
-    /// Private member to hold a permanent, universally unique identifier for the feed.
-    /// </summary>
-    private AtomId feedId;
-    /// <summary>
-    /// Private member to hold an image that provides visual identification for the feed.
-    /// </summary>
-    private AtomLogo feedLogo;
-    /// <summary>
-    /// Private member to hold information about rights held in and over the feed.
-    /// </summary>
-    private AtomTextConstruct feedRights;
-    /// <summary>
-    /// Private member to hold information that conveys a human-readable description or subtitle for the feed.
-    /// </summary>
-    private AtomTextConstruct feedSubtitle;
-    /// <summary>
-    /// Private member to hold information that conveys a human-readable title for the feed.
-    /// </summary>
-    private AtomTextConstruct feedTitle;
-    /// <summary>
-    /// Private member to hold a value indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.
-    /// </summary>
-    private DateTime feedUpdatedOn = DateTime.MinValue;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomFeed"/> class.
@@ -191,30 +151,13 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
     /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-    public SyndicationContentFormat Format
-    {
-        get
-        {
-            return feedFormat;
-        }
-    }
+    public SyndicationContentFormat Format => SyndicationContentFormat.Atom;
 
     /// <summary>
     /// Gets or sets the agent used to generate this feed.
     /// </summary>
     /// <value>A <see cref="AtomGenerator"/> object that represents the agent used to generate this feed. The default value is a <b>null</b> reference.</value>
-    public AtomGenerator Generator
-    {
-        get
-        {
-            return feedGenerator;
-        }
-
-        set
-        {
-            feedGenerator = value;
-        }
-    }
+    public AtomGenerator Generator { get; set; }
 
     /// <summary>
     /// Gets or sets an image that provides iconic visual identification for this feed.
@@ -223,18 +166,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of one (horizontal) to one (vertical) and <i>should</i> be suitable for presentation at a small size.
     /// </remarks>
-    public AtomIcon Icon
-    {
-        get
-        {
-            return feedIcon;
-        }
-
-        set
-        {
-            feedIcon = value;
-        }
-    }
+    public AtomIcon Icon { get; set; }
 
     /// <summary>
     /// Gets or sets a permanent, universally unique identifier for this feed.
@@ -250,15 +182,11 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomId Id
     {
-        get
-        {
-            return feedId;
-        }
-
+        get => field;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            feedId = value;
+            field = value;
         }
     }
 
@@ -285,18 +213,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of 2 (horizontal) to 1 (vertical).
     /// </remarks>
-    public AtomLogo Logo
-    {
-        get
-        {
-            return feedLogo;
-        }
-
-        set
-        {
-            feedLogo = value;
-        }
-    }
+    public AtomLogo Logo { get; set; }
 
     /// <summary>
     /// Gets or sets information about rights held in and over this feed.
@@ -305,35 +222,13 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <remarks>
     ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
     /// </remarks>
-    public AtomTextConstruct Rights
-    {
-        get
-        {
-            return feedRights;
-        }
-
-        set
-        {
-            feedRights = value;
-        }
-    }
+    public AtomTextConstruct Rights { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable description or subtitle for this feed.
     /// </summary>
     /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable description or subtitle for this feed.</value>
-    public AtomTextConstruct Subtitle
-    {
-        get
-        {
-            return feedSubtitle;
-        }
-
-        set
-        {
-            feedSubtitle = value;
-        }
-    }
+    public AtomTextConstruct Subtitle { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable title for this feed.
@@ -342,15 +237,11 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomTextConstruct Title
     {
-        get
-        {
-            return feedTitle;
-        }
-
+        get => field;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            feedTitle = value;
+            field = value;
         }
     }
 
@@ -364,30 +255,13 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime UpdatedOn
-    {
-        get
-        {
-            return feedUpdatedOn;
-        }
-
-        set
-        {
-            feedUpdatedOn = value;
-        }
-    }
+    public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
     /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-    public Version Version
-    {
-        get
-        {
-            return feedVersion;
-        }
-    }
+    public Version Version { get; } = new(1, 0);
 
     /// <summary>
     /// Compares two specified <see cref="IList{AtomCategory}"/> collections.
@@ -419,7 +293,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                int comparison = source[i].CompareTo(target[i]);
+                if (comparison != 0) return comparison;
             }
         }
         else if (source.Count > target.Count)
@@ -464,7 +339,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                int comparison = source[i].CompareTo(target[i]);
+                if (comparison != 0) return comparison;
             }
         }
         else if (source.Count > target.Count)
@@ -509,7 +385,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                int comparison = source[i].CompareTo(target[i]);
+                if (comparison != 0) return comparison;
             }
         }
         else if (source.Count > target.Count)
@@ -554,7 +431,8 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                int comparison = source[i].CompareTo(target[i]);
+                if (comparison != 0) return comparison;
             }
         }
         else if (source.Count > target.Count)

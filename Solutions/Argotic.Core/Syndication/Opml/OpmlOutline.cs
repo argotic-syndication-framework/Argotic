@@ -19,17 +19,9 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IExtensibleSyndicationObject, IComparisonOperators
+public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 
-    /// <summary>
-    /// Private member to hold the textual content of the outline.
-    /// </summary>
-    private string outlineText = string.Empty;
-    /// <summary>
-    /// Private member to hold a value indicating how the outline's attributes are interpreted.
-    /// </summary>
-    private string outlineType = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlOutline"/> class.
     /// </summary>
@@ -88,23 +80,10 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// <value>A value indicating how this outline's attributes should be interpreted.</value>
     public string ContentType
     {
-        get
-        {
-            return outlineType;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                outlineType = string.Empty;
-            }
-            else
-            {
-                outlineType = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this outline was created.
@@ -141,26 +120,16 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// </summary>
     /// <value><b>true</b> if the <see cref="ContentType"/> is <i>include</i> or <i>link</i>; Otherwise, <b>false</b>.</value>
     /// <seealso cref="OpmlOutline.CreateInclusionOutline(string, Uri)"/>
-    public bool IsInclusionOutline
-    {
-        get
-        {
-            return (string.Equals(this.ContentType, "include", StringComparison.OrdinalIgnoreCase) || string.Equals(this.ContentType, "link", StringComparison.OrdinalIgnoreCase));
-        }
-    }
+    public bool IsInclusionOutline =>
+        string.Equals(this.ContentType, "include", StringComparison.OrdinalIgnoreCase) || string.Equals(this.ContentType, "link", StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets a value indicating if this outline represents a subscription list.
     /// </summary>
     /// <value><b>true</b> if the <see cref="ContentType"/> is <i>rss</i> or <i>feed</i>; Otherwise, <b>false</b>.</value>
     /// <seealso cref="OpmlOutline.CreateSubscriptionListOutline(string, string, Uri)"/>
-    public bool IsSubscriptionListOutline
-    {
-        get
-        {
-            return (string.Equals(this.ContentType, "rss", StringComparison.OrdinalIgnoreCase) || string.Equals(this.ContentType, "feed", StringComparison.OrdinalIgnoreCase));
-        }
-    }
+    public bool IsSubscriptionListOutline =>
+        string.Equals(this.ContentType, "rss", StringComparison.OrdinalIgnoreCase) || string.Equals(this.ContentType, "feed", StringComparison.OrdinalIgnoreCase);
 
     /// <summary>
     /// Gets a collection of outlines that are children of this outline.
@@ -181,17 +150,14 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Text
     {
-        get
-        {
-            return outlineText;
-        }
+        get => field;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            outlineText = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -565,23 +531,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

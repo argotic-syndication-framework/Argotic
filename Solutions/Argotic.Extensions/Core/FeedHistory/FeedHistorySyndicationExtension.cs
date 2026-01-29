@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -27,6 +28,18 @@ namespace Argotic.Extensions.Core;
 [Serializable]
 public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable<FeedHistorySyndicationExtension>, IEquatable<FeedHistorySyndicationExtension>
 {
+    /// <summary>
+    /// Cached mapping from FeedHistoryLinkRelationType enum values to their string representations.
+    /// </summary>
+    private static readonly FrozenDictionary<FeedHistoryLinkRelationType, string> RelationTypeToStringMapping =
+        EnumerationMetadataAttribute.GetAlternateValueMapping<FeedHistoryLinkRelationType>();
+
+    /// <summary>
+    /// Cached mapping from string representations to FeedHistoryLinkRelationType enum values (case-insensitive).
+    /// </summary>
+    private static readonly FrozenDictionary<string, FeedHistoryLinkRelationType> StringToRelationTypeMapping =
+        EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<FeedHistoryLinkRelationType>();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedHistorySyndicationExtension"/> class.
     /// </summary>
@@ -106,29 +119,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// <returns>The link relation identifier for the supplied <paramref name="relation"/>, Otherwise, returns an empty string.</returns>
     public static string LinkRelationTypeAsString(FeedHistoryLinkRelationType relation)
     {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedHistoryLinkRelationType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(FeedHistoryLinkRelationType))
-            {
-                FeedHistoryLinkRelationType relationType = (FeedHistoryLinkRelationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (relationType == relation)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
+        return RelationTypeToStringMapping.GetValueOrDefault(relation, string.Empty);
     }
 
     /// <summary>
@@ -141,29 +132,9 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static FeedHistoryLinkRelationType LinkRelationTypeByName(string name)
     {
-        FeedHistoryLinkRelationType relationType = FeedHistoryLinkRelationType.None;
         ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedHistoryLinkRelationType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(FeedHistoryLinkRelationType))
-            {
-                FeedHistoryLinkRelationType relation = (FeedHistoryLinkRelationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        relationType = relation;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return relationType;
+        return StringToRelationTypeMapping.GetValueOrDefault(name, FeedHistoryLinkRelationType.None);
     }
 
     /// <summary>

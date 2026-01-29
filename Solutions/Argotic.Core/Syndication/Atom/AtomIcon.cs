@@ -23,20 +23,13 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEquatable<AtomIcon>, IExtensibleSyndicationObject
+public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEquatable<AtomIcon>, IExtensibleSyndicationObject, IXmlWritable
 {
-    /// <summary>
-    /// Private member to hold an IRI that identifies an image that provides iconic visual identification for the feed.
-    /// </summary>
-    private Uri iconUri;
-
-
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomIcon"/> class.
     /// </summary>
     public AtomIcon()
     {
-
     }
 
     /// <summary>
@@ -91,15 +84,11 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEqu
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Uri
     {
-        get
-        {
-            return iconUri;
-        }
-
+        get => field;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            iconUri = value;
+            field = value;
         }
     }
     /// <summary>
@@ -195,24 +184,7 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEqu
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
@@ -226,10 +198,12 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEqu
         }
 
         int result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        result = AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result != 0) return result;
 
-        return result;
+        return 0;
     }
 
     /// <summary>

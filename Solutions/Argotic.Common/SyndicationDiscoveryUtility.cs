@@ -1,4 +1,3 @@
-using System.Collections;
 using System.Collections.ObjectModel;
 using System.Net;
 using System.Text.RegularExpressions;
@@ -236,48 +235,45 @@ public static class SyndicationDiscoveryUtility
     }
 
     /// <summary>
-    /// Returns a <see cref="Hashtable"/> of the HTML attribute name/value pairs for the supplied content.
+    /// Returns a <see cref="Dictionary{TKey, TValue}"/> of the HTML attribute name/value pairs for the supplied content.
     /// </summary>
     /// <param name="content">The HTML content to parse.</param>
-    /// <returns>A <see cref="Hashtable"/> of the HTML attribute name/value pairs extracted the supplied <paramref name="content"/>.</returns>
+    /// <returns>A <see cref="Dictionary{TKey, TValue}"/> of the HTML attribute name/value pairs extracted the supplied <paramref name="content"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-    private static Hashtable ExtractHtmlAttributes(string content)
+    private static Dictionary<string, string> ExtractHtmlAttributes(string content)
     {
-        Hashtable hashtable = [];
+        Dictionary<string, string> attributes = new(StringComparer.OrdinalIgnoreCase);
         Regex attributePattern = new("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 
-        MatchCollection attributes = attributePattern.Matches(content);
+        MatchCollection matches = attributePattern.Matches(content);
 
-        foreach (Match attribute in attributes)
+        foreach (Match match in matches)
         {
-            if (attribute.Groups is { Count: > 0 })
+            if (match.Groups is { Count: > 0 })
             {
-                string name = attribute.Groups[1].Value;
+                string name = match.Groups[1].Value;
                 string value;
                 if (!string.IsNullOrEmpty(name))
                 {
-                    value = attribute.Groups[2].Value;
+                    value = match.Groups[2].Value;
                 }
                 else
                 {
-                    name = attribute.Groups[3].Value;
-                    value = attribute.Groups[4].Value;
+                    name = match.Groups[3].Value;
+                    value = match.Groups[4].Value;
                 }
 
-                name = name.ToUpperInvariant().Trim();
+                name = name.Trim();
                 value = value.Trim();
 
-                if (!hashtable.ContainsKey(name))
-                {
-                    hashtable.Add(name, value);
-                }
+                attributes.TryAdd(name, value);
             }
         }
 
-        return hashtable;
+        return attributes;
     }
 
     /// <summary>
@@ -299,11 +295,11 @@ public static class SyndicationDiscoveryUtility
 
         foreach (Match link in links)
         {
-            Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
+            var linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
-            if (linkAttributes.ContainsKey("HREF"))
+            if (linkAttributes.TryGetValue("HREF", out string href))
             {
-                if (Uri.TryCreate((string)linkAttributes["HREF"], UriKind.RelativeOrAbsolute, out Uri uri))
+                if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri uri))
                 {
                     results.Add(uri);
                 }
@@ -314,11 +310,11 @@ public static class SyndicationDiscoveryUtility
 
         foreach (Match anchor in anchors)
         {
-            Hashtable anchorAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(anchor.Value);
+            var anchorAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(anchor.Value);
 
-            if (anchorAttributes.ContainsKey("HREF"))
+            if (anchorAttributes.TryGetValue("HREF", out string href))
             {
-                if (Uri.TryCreate((string)anchorAttributes["HREF"], UriKind.RelativeOrAbsolute, out Uri uri))
+                if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri uri))
                 {
                     results.Add(uri);
                 }
@@ -591,14 +587,12 @@ public static class SyndicationDiscoveryUtility
 
         foreach (Match link in links)
         {
-            Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
+            var linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
-            if (linkAttributes.ContainsKey("HREF") && linkAttributes.ContainsKey("REL") && linkAttributes.ContainsKey("TYPE"))
+            if (linkAttributes.TryGetValue("HREF", out string href) &&
+                linkAttributes.TryGetValue("REL", out string rel) &&
+                linkAttributes.TryGetValue("TYPE", out string type))
             {
-                string href = (string)linkAttributes["HREF"];
-                string rel = (string)linkAttributes["REL"];
-                string type = (string)linkAttributes["TYPE"];
-
                 if (string.Equals(rel, "alternate", StringComparison.OrdinalIgnoreCase))
                 {
                     if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri url))
@@ -612,13 +606,9 @@ public static class SyndicationDiscoveryUtility
                             endpoint.ContentType = type;
                         }
 
-                        if (linkAttributes.ContainsKey("TITLE"))
+                        if (linkAttributes.TryGetValue("TITLE", out string title) && !string.IsNullOrEmpty(title))
                         {
-                            string title = (string)linkAttributes["TITLE"];
-                            if (!string.IsNullOrEmpty(title))
-                            {
-                                endpoint.Title = title;
-                            }
+                            endpoint.Title = title;
                         }
 
                         results.Add(endpoint);
@@ -745,13 +735,11 @@ public static class SyndicationDiscoveryUtility
 
         foreach (Match link in links)
         {
-            Hashtable linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
+            var linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
-            if (linkAttributes.ContainsKey("HREF") && linkAttributes.ContainsKey("REL"))
+            if (linkAttributes.TryGetValue("HREF", out string href) &&
+                linkAttributes.TryGetValue("REL", out string rel))
             {
-                string href = (string)linkAttributes["HREF"];
-                string rel = (string)linkAttributes["REL"];
-
                 if (string.Equals(rel, "pingback", StringComparison.OrdinalIgnoreCase))
                 {
                     if (Uri.TryCreate(href, UriKind.Absolute, out Uri uri))
@@ -762,21 +750,13 @@ public static class SyndicationDiscoveryUtility
                         };
                         pingbackAnchor.Attributes.Add("rel", rel);
 
-                        if (linkAttributes.ContainsKey("TYPE"))
+                        if (linkAttributes.TryGetValue("TYPE", out string type) && !string.IsNullOrEmpty(type))
                         {
-                            string type = (string)linkAttributes["TYPE"];
-                            if (!string.IsNullOrEmpty(type))
-                            {
-                                pingbackAnchor.Attributes.Add("type", type);
-                            }
+                            pingbackAnchor.Attributes.Add("type", type);
                         }
-                        if (linkAttributes.ContainsKey("TITLE"))
+                        if (linkAttributes.TryGetValue("TITLE", out string title) && !string.IsNullOrEmpty(title))
                         {
-                            string title = (string)linkAttributes["TITLE"];
-                            if (!string.IsNullOrEmpty(title))
-                            {
-                                pingbackAnchor.Title = title;
-                            }
+                            pingbackAnchor.Title = title;
                         }
                     }
                 }

@@ -69,17 +69,8 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>, IEquatable<AtomContent>, IExtensibleSyndicationObject
+public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>, IEquatable<AtomContent>, IExtensibleSyndicationObject, IXmlWritable
 {
-    /// <summary>
-    /// Private member to hold the local content of the entry.
-    /// </summary>
-    private string contentValue = string.Empty;
-    /// <summary>
-    /// Private member to hold a value indicating the entity encoding of the content.
-    /// </summary>
-    private string contentMediaType = string.Empty;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomContent"/> class.
     /// </summary>
@@ -175,23 +166,9 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// </remarks>
     public string Content
     {
-        get
-        {
-            return contentValue;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                contentValue = string.Empty;
-            }
-            else
-            {
-                contentValue = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a value indicating the entity encoding of this content.
@@ -249,23 +226,9 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// </remarks>
     public string ContentType
     {
-        get
-        {
-            return contentMediaType;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                contentMediaType = string.Empty;
-            }
-            else
-            {
-                contentMediaType = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets an IRI that identifies the remote location of this content.
@@ -444,24 +407,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -476,12 +422,18 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Source, other.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        result = string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        return result;
+        result = Uri.Compare(this.Source, other.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
+
+        result = AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result != 0) return result;
+
+        return 0;
     }
 
     /// <summary>

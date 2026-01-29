@@ -1,3 +1,4 @@
+using System.Collections.Frozen;
 using System.Security.Cryptography;
 using System.Xml;
 using System.Xml.XPath;
@@ -17,6 +18,17 @@ namespace Argotic.Extensions.Core;
 [Serializable]
 public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMediaHash>, IComparisonOperators
 {
+    /// <summary>
+    /// Cached mapping from YahooMediaHashAlgorithm enum values to their string representations.
+    /// </summary>
+    private static readonly FrozenDictionary<YahooMediaHashAlgorithm, string> AlgorithmToStringMapping =
+        EnumerationMetadataAttribute.GetAlternateValueMapping<YahooMediaHashAlgorithm>();
+
+    /// <summary>
+    /// Cached mapping from string representations to YahooMediaHashAlgorithm enum values (case-insensitive).
+    /// </summary>
+    private static readonly FrozenDictionary<string, YahooMediaHashAlgorithm> StringToAlgorithmMapping =
+        EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<YahooMediaHashAlgorithm>();
 
     /// <summary>
     /// Private member to hold the algorithm used to create the hash.
@@ -132,29 +144,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// <returns>The hash algorithm identifier for the supplied <paramref name="algorithm"/>, Otherwise, returns an empty string.</returns>
     public static string HashAlgorithmAsString(YahooMediaHashAlgorithm algorithm)
     {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaHashAlgorithm).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaHashAlgorithm))
-            {
-                YahooMediaHashAlgorithm hashAlgorithm = (YahooMediaHashAlgorithm)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (hashAlgorithm == algorithm)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
+        return AlgorithmToStringMapping.GetValueOrDefault(algorithm, string.Empty);
     }
 
     /// <summary>
@@ -167,29 +157,9 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaHashAlgorithm HashAlgorithmByName(string name)
     {
-        YahooMediaHashAlgorithm hashAlgorithm = YahooMediaHashAlgorithm.None;
         ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaHashAlgorithm).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaHashAlgorithm))
-            {
-                YahooMediaHashAlgorithm algorithm = (YahooMediaHashAlgorithm)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
 
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        hashAlgorithm = algorithm;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return hashAlgorithm;
+        return StringToAlgorithmMapping.GetValueOrDefault(name, YahooMediaHashAlgorithm.None);
     }
 
     /// <summary>

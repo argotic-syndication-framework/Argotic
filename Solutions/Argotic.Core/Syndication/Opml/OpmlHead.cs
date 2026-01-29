@@ -11,13 +11,9 @@ namespace Argotic.Syndication;
 /// Represents the header information for an <see cref="OpmlDocument"/>.
 /// </summary>
 [Serializable]
-public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensibleSyndicationObject, IComparisonOperators
+public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 
-    /// <summary>
-    /// Private member to hold the title of the document.
-    /// </summary>
-    private string headTitle = string.Empty;
     /// <summary>
     /// Private member to hold a collection of line numbers that are expanded.
     /// </summary>
@@ -95,23 +91,10 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <value>The title of this document.</value>
     public string Title
     {
-        get
-        {
-            return headTitle;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                headTitle = string.Empty;
-            }
-            else
-            {
-                headTitle = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a number indicating which line of this outline is displayed on the top line of the window.
@@ -322,23 +305,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

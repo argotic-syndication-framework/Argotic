@@ -20,17 +20,8 @@ namespace Argotic.Syndication;
 ///     </code>
 /// </example>
 [Serializable]
-public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenerator>, IEquatable<AtomGenerator>, IExtensibleSyndicationObject
+public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenerator>, IEquatable<AtomGenerator>, IExtensibleSyndicationObject, IXmlWritable
 {
-    /// <summary>
-    /// Private member to hold the version of the generating agent.
-    /// </summary>
-    private string generatorVersion;
-    /// <summary>
-    /// Private member to hold a human-readable name for the generating agent.
-    /// </summary>
-    private string generatorText = string.Empty;
-
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomGenerator"/> class.
     /// </summary>
@@ -94,17 +85,13 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get
-        {
-            return generatorText;
-        }
-
+        get => field;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            generatorText = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets an IRI that is relevant to the generating agent.
@@ -122,23 +109,9 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     /// <value>The version of the generating agent.</value>
     public string Version
     {
-        get
-        {
-            return generatorVersion;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                generatorVersion = string.Empty;
-            }
-            else
-            {
-                generatorVersion = value.Trim();
-            }
-        }
-    }
+        get => field;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
@@ -271,24 +244,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-
-        return stringWriter.ToString();
-    }
+    public override string ToString() => this.ToXmlString();
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -303,12 +259,18 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Version, other.Version, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
 
-        return result;
+        result = string.Compare(this.Version, other.Version, StringComparison.OrdinalIgnoreCase);
+        if (result != 0) return result;
+
+        result = AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result != 0) return result;
+
+        return 0;
     }
 
     /// <summary>

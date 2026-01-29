@@ -10,25 +10,13 @@ namespace Argotic.Syndication.Specialized;
 /// Represents an categorization taxonomy for published content.
 /// </summary>
 [Serializable]
-public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, IEquatable<BlogMLCategory>, IExtensibleSyndicationObject
+public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, IEquatable<BlogMLCategory>, IExtensibleSyndicationObject, IXmlWritable
 {
 
     /// <summary>
     /// Private member to hold the title of the web log entity.
     /// </summary>
     private BlogMLTextConstruct commonObjectBaseTitle = new();
-    /// <summary>
-    /// Private member to hold a unique identifier for the web log entity.
-    /// </summary>
-    private string commonObjectBaseId = string.Empty;
-    /// <summary>
-    /// Private member to hold the reference key to the parent of the category.
-    /// </summary>
-    private string categoryParentIdentifier = string.Empty;
-    /// <summary>
-    /// Private member to hold the description of the category.
-    /// </summary>
-    private string categoryDescription = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLCategory"/> class.
     /// </summary>
@@ -63,23 +51,10 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// <value>An identification string for this web log entity. The default value is an <b>empty</b> string, which indicated that no identifier was specified.</value>
     public string Id
     {
-        get
-        {
-            return commonObjectBaseId;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                commonObjectBaseId = string.Empty;
-            }
-            else
-            {
-                commonObjectBaseId = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a date-time indicating when this web log entity was last modified.
@@ -128,23 +103,10 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// <value>The description of this category.</value>
     public string Description
     {
-        get
-        {
-            return categoryDescription;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                categoryDescription = string.Empty;
-            }
-            else
-            {
-                categoryDescription = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a reference to the parent of this category.
@@ -152,23 +114,10 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// <value>A unique identifier that references the parent category that this category is a child of.</value>
     public string ParentId
     {
-        get
-        {
-            return categoryParentIdentifier;
-        }
+        get => field;
 
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                categoryParentIdentifier = string.Empty;
-            }
-            else
-            {
-                categoryParentIdentifier = value.Trim();
-            }
-        }
-    }
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -303,26 +252,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
-
-        using (XmlWriter writer = XmlWriter.Create(stream, settings))
-        {
-            this.WriteTo(writer);
-        }
-
-        stream.Seek(0, SeekOrigin.Begin);
-
-        using StreamReader reader = new(stream);
-        return reader.ReadToEnd();
-    }
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

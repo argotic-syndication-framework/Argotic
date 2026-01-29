@@ -181,32 +181,8 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// </summary>
     /// <param name="type">The <see cref="YahooMediaTextConstructType"/> to get the entity encoding type identifier for.</param>
     /// <returns>The entity encoding type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
-    public static string TextTypeAsString(YahooMediaTextConstructType type)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaTextConstructType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaTextConstructType))
-            {
-                YahooMediaTextConstructType constructType = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (constructType == type)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string TextTypeAsString(YahooMediaTextConstructType type) =>
+        EnumerationMetadataAttribute.GetAlternateValue(type);
 
     /// <summary>
     /// Returns the <see cref="YahooMediaTextConstructType"/> enumeration value that corresponds to the specified entity encoding type name.
@@ -216,32 +192,8 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <remarks>This method disregards case of specified entity encoding type name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static YahooMediaTextConstructType TextTypeByName(string name)
-    {
-        YahooMediaTextConstructType constructType = YahooMediaTextConstructType.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaTextConstructType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaTextConstructType))
-            {
-                YahooMediaTextConstructType type = (YahooMediaTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        constructType = type;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return constructType;
-    }
+    public static YahooMediaTextConstructType TextTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaTextConstructType.None);
 
     /// <summary>
     /// Loads this <see cref="YahooMediaText"/> using the supplied <see cref="XPathNavigator"/>.
@@ -397,8 +349,8 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = this.End.CompareTo(other.End);
 
-        string sourceLanguageName = this.Language != null ? this.Language.Name : string.Empty;
-        string targetLanguageName = other.Language != null ? other.Language.Name : string.Empty;
+        string sourceLanguageName = this.Language?.Name ?? string.Empty;
+        string targetLanguageName = other.Language?.Name ?? string.Empty;
         if (result == 0) result = string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
         if (result == 0) result = this.Start.CompareTo(other.Start);

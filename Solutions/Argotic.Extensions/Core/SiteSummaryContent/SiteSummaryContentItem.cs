@@ -168,7 +168,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
         SiteSummaryContentSyndicationExtension extension = new();
         writer.WriteStartElement("item", extension.XmlNamespace);
 
-        writer.WriteElementString("format", extension.XmlNamespace, this.Format != null ? this.Format.ToString() : string.Empty);
+        writer.WriteElementString("format", extension.XmlNamespace, this.Format?.ToString() ?? string.Empty);
 
         if (this.Encoding != null)
         {

@@ -168,7 +168,7 @@ public class FeedRankSyndicationExtensionContext
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         writer.WriteStartElement("rank", xmlNamespace);
 
-        writer.WriteAttributeString("scheme", xmlNamespace, this.Scheme != null ? this.Scheme.ToString() : string.Empty);
+        writer.WriteAttributeString("scheme", xmlNamespace, this.Scheme?.ToString() ?? string.Empty);
 
         if (this.Domain != null)
         {

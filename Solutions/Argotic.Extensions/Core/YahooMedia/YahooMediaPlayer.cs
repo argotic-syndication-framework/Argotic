@@ -173,7 +173,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
         YahooMediaSyndicationExtension extension = new();
         writer.WriteStartElement("player", extension.XmlNamespace);
 
-        writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
+        writer.WriteAttributeString("url", this.Url?.ToString() ?? string.Empty);
 
         if (this.Height != int.MinValue)
         {

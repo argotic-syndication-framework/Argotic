@@ -131,7 +131,7 @@ public class PheedSyndicationExtensionContext
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
-        writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail != null ? this.Thumbnail.ToString() : string.Empty);
-        writer.WriteElementString("imgsrc", xmlNamespace, this.Source != null ? this.Source.ToString() : string.Empty);
+        writer.WriteElementString("thumbnail", xmlNamespace, this.Thumbnail?.ToString() ?? string.Empty);
+        writer.WriteElementString("imgsrc", xmlNamespace, this.Source?.ToString() ?? string.Empty);
     }
 }

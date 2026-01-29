@@ -105,7 +105,7 @@ public class TrackbackSyndicationExtensionContext
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
-        writer.WriteElementString("ping", xmlNamespace, this.Ping != null ? this.Ping.ToString() : string.Empty);
+        writer.WriteElementString("ping", xmlNamespace, this.Ping?.ToString() ?? string.Empty);
 
         foreach (Uri about in this.Abouts)
         {

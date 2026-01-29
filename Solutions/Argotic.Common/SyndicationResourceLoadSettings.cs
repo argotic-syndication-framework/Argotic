@@ -53,11 +53,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Encoding CharacterEncoding
     {
-        get
-        {
-            return characterEncoding;
-        }
-
+        get => characterEncoding;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -76,11 +72,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than zero.</exception>
     public int RetrievalLimit
     {
-        get
-        {
-            return maximumEntitiesToRetrieve;
-        }
-
+        get => maximumEntitiesToRetrieve;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 0);
@@ -99,14 +91,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     ///     If <see cref="AutoDetectExtensions"/> is <b>true</b>, this collection will be automatically filled during the load operation based on the XML namespaces declared on the syndication resource.
     ///     Automatic detection will <b>not</b> remove any syndication extensions already added to this collection prior to the load operation execution.
     /// </remarks>
-    public Collection<Type> SupportedExtensions
-    {
-        get
-        {
-            supportedSyndicationExtensions ??= new Collection<Type>();
-            return supportedSyndicationExtensions;
-        }
-    }
+    public Collection<Type> SupportedExtensions => supportedSyndicationExtensions ??= new Collection<Type>();
 
     /// <summary>
     /// Gets or sets a value that specifies the amount of time after which asynchronous load operations will time-out.
@@ -116,11 +101,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
     public TimeSpan Timeout
     {
-        get
-        {
-            return requestTimeout;
-        }
-
+        get => requestTimeout;
         set
         {
             if (value.TotalMilliseconds < 0)

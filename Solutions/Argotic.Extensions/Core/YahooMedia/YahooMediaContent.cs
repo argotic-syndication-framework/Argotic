@@ -809,8 +809,8 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
         if (result == 0) result = this.Height.CompareTo(other.Height);
         if (result == 0) result = this.IsDefault.CompareTo(other.IsDefault);
 
-        string sourceLanguageName = this.Language != null ? this.Language.Name : string.Empty;
-        string targetLanguageName = other.Language != null ? other.Language.Name : string.Empty;
+        string sourceLanguageName = this.Language?.Name ?? string.Empty;
+        string targetLanguageName = other.Language?.Name ?? string.Empty;
         if (result == 0) result = string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
 
         if (result == 0) result = this.Medium.CompareTo(other.Medium);

@@ -95,11 +95,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Domain
     {
-        get
-        {
-            return cloudDomain;
-        }
-
+        get => cloudDomain;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -115,11 +111,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Path
     {
-        get
-        {
-            return cloudPath;
-        }
-
+        get => cloudPath;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -134,11 +126,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>zero</i>.</exception>
     public int Port
     {
-        get
-        {
-            return cloudPort;
-        }
-
+        get => cloudPort;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 0);
@@ -156,11 +144,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentException">The <paramref name="value"/> is equivalent to <see cref="RssCloudProtocol.None"/>.</exception>
     public RssCloudProtocol Protocol
     {
-        get
-        {
-            return cloudProtocol;
-        }
-
+        get => cloudProtocol;
         set
         {
             if (value == RssCloudProtocol.None)
@@ -179,11 +163,7 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string RegisterProcedure
     {
-        get
-        {
-            return cloudRegisterProcedure;
-        }
-
+        get => cloudRegisterProcedure;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -203,32 +183,8 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     ///         />
     ///     </code>
     /// </example>
-    public static string CloudProtocolAsString(RssCloudProtocol protocol)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(RssCloudProtocol).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(RssCloudProtocol))
-            {
-                RssCloudProtocol cloudProtocol = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (cloudProtocol == protocol)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string CloudProtocolAsString(RssCloudProtocol protocol) =>
+        EnumerationMetadataAttribute.GetAlternateValue(protocol);
 
     /// <summary>
     /// Returns the <see cref="RssCloudProtocol"/> enumeration value that corresponds to the specified protocol name.
@@ -246,32 +202,8 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     ///         />
     ///     </code>
     /// </example>
-    public static RssCloudProtocol CloudProtocolByName(string name)
-    {
-        RssCloudProtocol cloudProtocol = RssCloudProtocol.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(RssCloudProtocol).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(RssCloudProtocol))
-            {
-                RssCloudProtocol protocol = (RssCloudProtocol)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        cloudProtocol = protocol;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return cloudProtocol;
-    }
+    public static RssCloudProtocol CloudProtocolByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, RssCloudProtocol.None);
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>

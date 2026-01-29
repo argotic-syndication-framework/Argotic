@@ -116,32 +116,8 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// </summary>
     /// <param name="type">The <see cref="FeedSynchronizationRelatedInformationType"/> to get the relation type identifier for.</param>
     /// <returns>The relation type identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
-    public static string RelationTypeAsString(FeedSynchronizationRelatedInformationType type)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationRelatedInformationType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(FeedSynchronizationRelatedInformationType))
-            {
-                FeedSynchronizationRelatedInformationType relationType = (FeedSynchronizationRelatedInformationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (relationType == type)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string RelationTypeAsString(FeedSynchronizationRelatedInformationType type) =>
+        EnumerationMetadataAttribute.GetAlternateValue(type);
 
     /// <summary>
     /// Returns the <see cref="FeedSynchronizationRelatedInformationType"/> enumeration value that corresponds to the specified relation type name.
@@ -151,32 +127,8 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <remarks>This method disregards case of specified relation type name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static FeedSynchronizationRelatedInformationType RelationTypeByName(string name)
-    {
-        FeedSynchronizationRelatedInformationType relationType = FeedSynchronizationRelatedInformationType.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationRelatedInformationType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(FeedSynchronizationRelatedInformationType))
-            {
-                FeedSynchronizationRelatedInformationType type = (FeedSynchronizationRelatedInformationType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        relationType = type;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return relationType;
-    }
+    public static FeedSynchronizationRelatedInformationType RelationTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, FeedSynchronizationRelatedInformationType.None);
 
     /// <summary>
     /// Loads this <see cref="FeedSynchronizationRelatedInformation"/> using the supplied <see cref="XPathNavigator"/>.
@@ -237,7 +189,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
         FeedSynchronizationSyndicationExtension extension = new();
         writer.WriteStartElement("related", extension.XmlNamespace);
 
-        writer.WriteAttributeString("link", extension.XmlNamespace, this.Link != null ? this.Link.ToString() : string.Empty);
+        writer.WriteAttributeString("link", extension.XmlNamespace, this.Link?.ToString() ?? string.Empty);
         if (!string.IsNullOrEmpty(this.Title))
         {
             writer.WriteAttributeString("title", extension.XmlNamespace, this.Title);

@@ -86,11 +86,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Description
     {
-        get
-        {
-            return textInputDescription;
-        }
-
+        get => textInputDescription;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -105,11 +101,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Link
     {
-        get
-        {
-            return textInputLink;
-        }
-
+        get => textInputLink;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -129,11 +121,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Name
     {
-        get
-        {
-            return textInputName;
-        }
-
+        get => textInputName;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -149,11 +137,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Title
     {
-        get
-        {
-            return textInputTitle;
-        }
-
+        get => textInputTitle;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -274,7 +258,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
         writer.WriteStartElement("textInput");
 
         writer.WriteElementString("description", this.Description);
-        writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
+        writer.WriteElementString("link", this.Link?.ToString() ?? string.Empty);
         writer.WriteElementString("name", this.Name);
         writer.WriteElementString("title", this.Title);
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);

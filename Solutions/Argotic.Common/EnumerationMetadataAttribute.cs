@@ -32,22 +32,8 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <value>The alternate textual value for the attributed field.</value>
     public string AlternateValue
     {
-        get
-        {
-            return enumMetadataAlternateValue;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                enumMetadataAlternateValue = string.Empty;
-            }
-            else
-            {
-                enumMetadataAlternateValue = value.Trim();
-            }
-        }
+        get => enumMetadataAlternateValue;
+        set => enumMetadataAlternateValue = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     }
 
     /// <summary>
@@ -56,22 +42,8 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <value>The display name for the attributed field.</value>
     public string DisplayName
     {
-        get
-        {
-            return enumMetadataDisplayName;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                enumMetadataDisplayName = string.Empty;
-            }
-            else
-            {
-                enumMetadataDisplayName = value.Trim();
-            }
-        }
+        get => enumMetadataDisplayName;
+        set => enumMetadataDisplayName = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     }
 
     /// <summary>

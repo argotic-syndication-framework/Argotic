@@ -72,32 +72,8 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
     /// </summary>
     /// <param name="vocabulary">The <see cref="DublinCoreTypeVocabularies"/> to get the type vocabulary identifier for.</param>
     /// <returns>The type vocabulary identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
-    public static string TypeVocabularyAsString(DublinCoreTypeVocabularies vocabulary)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(DublinCoreTypeVocabularies).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(DublinCoreTypeVocabularies))
-            {
-                DublinCoreTypeVocabularies typeVocabulary = (DublinCoreTypeVocabularies)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (typeVocabulary == vocabulary)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string TypeVocabularyAsString(DublinCoreTypeVocabularies vocabulary) =>
+        EnumerationMetadataAttribute.GetAlternateValue(vocabulary);
 
     /// <summary>
     /// Returns the <see cref="DublinCoreTypeVocabularies"/> enumeration value that corresponds to the specified type vocabulary name.
@@ -107,32 +83,8 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
     /// <remarks>This method disregards case of specified type vocabulary name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static DublinCoreTypeVocabularies TypeVocabularyByName(string name)
-    {
-        DublinCoreTypeVocabularies typeVocabulary = DublinCoreTypeVocabularies.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(DublinCoreTypeVocabularies).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(DublinCoreTypeVocabularies))
-            {
-                DublinCoreTypeVocabularies vocabulary = (DublinCoreTypeVocabularies)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        typeVocabulary = vocabulary;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return typeVocabulary;
-    }
+    public static DublinCoreTypeVocabularies TypeVocabularyByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, DublinCoreTypeVocabularies.None);
 
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.

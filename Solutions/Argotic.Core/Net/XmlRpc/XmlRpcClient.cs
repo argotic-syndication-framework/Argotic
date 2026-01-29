@@ -235,33 +235,8 @@ public class XmlRpcClient
     ///         title="The following code example demonstrates the usage of the ScalarTypeAsString method."
     ///     />
     /// </example>
-    public static string ScalarTypeAsString(XmlRpcScalarValueType type)
-    {
-        string name = string.Empty;
-
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(XmlRpcScalarValueType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(XmlRpcScalarValueType))
-            {
-                XmlRpcScalarValueType valueType = (XmlRpcScalarValueType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (valueType == type)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string ScalarTypeAsString(XmlRpcScalarValueType type) =>
+        EnumerationMetadataAttribute.GetAlternateValue(type);
 
     /// <summary>
     /// Returns the <see cref="XmlRpcScalarValueType"/> enumeration value that corresponds to the specified scalar type name.
@@ -277,34 +252,8 @@ public class XmlRpcClient
     ///         title="The following code example demonstrates the usage of the ScalarTypeByName method."
     ///     />
     /// </example>
-    public static XmlRpcScalarValueType ScalarTypeByName(string name)
-    {
-        XmlRpcScalarValueType valueType = XmlRpcScalarValueType.None;
-
-        ArgumentException.ThrowIfNullOrEmpty(name);
-
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(XmlRpcScalarValueType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(XmlRpcScalarValueType))
-            {
-                XmlRpcScalarValueType type = (XmlRpcScalarValueType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        valueType = type;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return valueType;
-    }
+    public static XmlRpcScalarValueType ScalarTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, XmlRpcScalarValueType.None);
 
     /// <summary>
     /// Constructs a new <see cref="IXmlRpcValue"/> object from the specified <see cref="XPathNavigator"/>.

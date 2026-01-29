@@ -48,52 +48,27 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// </value>
     public SyndicationContentFormat Format
     {
-        get
-        {
-            return resourceFormat;
-        }
-
-        protected set
-        {
-            resourceFormat = value;
-        }
+        get => resourceFormat;
+        protected set => resourceFormat = value;
     }
 
     /// <summary>
     /// Gets a dictionary of the XML namespaces declared in the syndication resource.
     /// </summary>
     /// <value>A dictionary of the resource's XML namespaces, keyed off of the namespace prefix. If no XML namespaces are declared on the root element of the resource, returns an empty dictionary.</value>
-    public Dictionary<string, string> Namespaces
-    {
-        get
-        {
-            return resourceNamespaces;
-        }
-    }
+    public Dictionary<string, string> Namespaces => resourceNamespaces;
 
     /// <summary>
     /// Gets a read-only <see cref="XPathNavigator"/> object that can be used to navigate the root element of the syndication resource.
     /// </summary>
     /// <value>A read-only <see cref="XPathNavigator"/> object that can be used to navigate the root element of the syndication resource.</value>
-    public XPathNavigator Resource
-    {
-        get
-        {
-            return resourceRootNode;
-        }
-    }
+    public XPathNavigator Resource => resourceRootNode;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the syndication specification that the resource conforms to.
     /// </summary>
     /// <value>The version number of the syndication specification that the resource conforms to. If format version is unable to be determined, returns <b>null</b>.</value>
-    public Version Version
-    {
-        get
-        {
-            return resourceVersion;
-        }
-    }
+    public Version Version => resourceVersion;
 
     /// <summary>
     /// Returns a <see cref="Version"/> object for the value of the XML attribute in <paramref name="navigator"/> with a local name specified by <paramref name="name"/>.
@@ -724,9 +699,9 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     public override string ToString()
     {
         string format = this.Format.ToString();
-        string version = this.Version != null ? this.Version.ToString() : string.Empty;
-        string namespaces = this.Namespaces != null ? this.Namespaces.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string resource = this.Resource != null ? this.Resource.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string version = this.Version?.ToString() ?? string.Empty;
+        string namespaces = this.Namespaces?.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? string.Empty;
+        string resource = this.Resource?.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? string.Empty;
 
         return $"[SyndicationResourceMetadata(Format = \"{format}\", Version = \"{version}\", Namespaces = \"{namespaces}\", Resource = \"{resource}\")]";
     }

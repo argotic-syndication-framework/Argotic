@@ -104,11 +104,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Value
     {
-        get
-        {
-            return guidIdentifier;
-        }
-
+        get => guidIdentifier;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);

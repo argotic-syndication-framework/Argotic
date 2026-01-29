@@ -99,15 +99,8 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <value>A <see cref="Uri"/> that represents the URL of a web page that contains comments received in response to this item.</value>
     public Uri Comments
     {
-        get
-        {
-            return itemComments;
-        }
-
-        set
-        {
-            itemComments = value;
-        }
+        get => itemComments;
+        set => itemComments = value;
     }
 
     /// <summary>
@@ -160,15 +153,8 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     public RssGuid Guid
 #pragma warning restore CA1720
     {
-        get
-        {
-            return itemGuid;
-        }
-
-        set
-        {
-            itemGuid = value;
-        }
+        get => itemGuid;
+        set => itemGuid = value;
     }
 
     /// <summary>
@@ -177,15 +163,8 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <value>A <see cref="Uri"/> that represents the URL of a web page associated with this item.</value>
     public Uri Link
     {
-        get
-        {
-            return itemLink;
-        }
-
-        set
-        {
-            itemLink = value;
-        }
+        get => itemLink;
+        set => itemLink = value;
     }
 
     /// <summary>
@@ -202,15 +181,8 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </remarks>
     public DateTime PublicationDate
     {
-        get
-        {
-            return itemPublicationDate;
-        }
-
-        set
-        {
-            itemPublicationDate = value;
-        }
+        get => itemPublicationDate;
+        set => itemPublicationDate = value;
     }
 
     /// <summary>
@@ -221,15 +193,8 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </value>
     public RssSource Source
     {
-        get
-        {
-            return itemSource;
-        }
-
-        set
-        {
-            itemSource = value;
-        }
+        get => itemSource;
+        set => itemSource = value;
     }
 
     /// <summary>
@@ -241,36 +206,9 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </remarks>
     public string Title
     {
-        get
-        {
-            return itemTitle;
-        }
-
-        set
-        {
-            itemTitle = value?.Trim() ?? string.Empty;
-        }
+        get => itemTitle;
+        set => itemTitle = value?.Trim() ?? string.Empty;
     }
-    /// <summary>
-    /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-    /// </summary>
-    /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-    /// <returns>
-    ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-    /// </returns>
-    /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-    ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
-    {
-        ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = [.. this.Extensions];
-        return list.Find(match);
-    }
-
     public TExtension? FindExtension<TExtension>() where TExtension : ISyndicationExtension
     {
         return this.Extensions.OfType<TExtension>().FirstOrDefault();

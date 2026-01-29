@@ -45,11 +45,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Encoding CharacterEncoding
     {
-        get
-        {
-            return characterEncoding;
-        }
-
+        get => characterEncoding;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -73,14 +69,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <remarks>
     ///     During a save operation, each of these syndication extension types is instantiated and used to write the prefixed XML namespace declarations on the root syndication resource entity.
     /// </remarks>
-    public Collection<Type> SupportedExtensions
-    {
-        get
-        {
-            supportedSyndicationExtensions ??= new Collection<Type>();
-            return supportedSyndicationExtensions;
-        }
-    }
+    public Collection<Type> SupportedExtensions => supportedSyndicationExtensions ??= new Collection<Type>();
 
     /// <summary>
     /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.

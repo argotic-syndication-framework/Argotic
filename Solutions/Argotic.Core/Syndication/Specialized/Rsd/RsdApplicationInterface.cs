@@ -152,26 +152,6 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     } = string.Empty;
 
     /// <summary>
-    /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-    /// </summary>
-    /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-    /// <returns>
-    ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-    /// </returns>
-    /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-    ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
-    {
-        ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = [.. this.Extensions];
-        return list.Find(match);
-    }
-
-    /// <summary>
     /// Loads this <see cref="RsdApplicationInterface"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
@@ -301,7 +281,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
 
         writer.WriteAttributeString("name", this.Name);
         writer.WriteAttributeString("preferred", this.IsPreferred ? "true" : "false");
-        writer.WriteAttributeString("apiLink", this.Link != null ? this.Link.ToString() : string.Empty);
+        writer.WriteAttributeString("apiLink", this.Link?.ToString() ?? string.Empty);
         writer.WriteAttributeString("blogID", this.WeblogId);
 
         if (this.Documentation != null || !string.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)

@@ -85,25 +85,13 @@ public class GenericSyndicationFeed
     ///     Character data that provides a human-readable characterization or summary of this feed. 
     ///     The default value is an <b>empty</b> string, which indicates that no description was specified.
     /// </value>
-    public string Description
-    {
-        get
-        {
-            return feedDescription;
-        }
-    }
+    public string Description => feedDescription;
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication feed implements.
     /// </summary>
     /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication feed implements.</value>
-    public SyndicationContentFormat Format
-    {
-        get
-        {
-            return feedFormat;
-        }
-    }
+    public SyndicationContentFormat Format => feedFormat;
 
     /// <summary>
     /// Gets the distinct content published in this feed.
@@ -121,13 +109,7 @@ public class GenericSyndicationFeed
     ///     A <see cref="CultureInfo"/> that represents the natural or formal language in which this feed's content is written. 
     ///     The default value is a <b>null</b> reference, which indicates that no natural or formal language was specified.
     /// </value>
-    public CultureInfo Language
-    {
-        get
-        {
-            return feedLanguage;
-        }
-    }
+    public CultureInfo Language => feedLanguage;
 
     /// <summary>
     /// Gets a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant.
@@ -136,13 +118,7 @@ public class GenericSyndicationFeed
     ///     A <see cref="DateTime"/> object that represents a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant. 
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that update date was specified.
     /// </value>
-    public DateTime LastUpdatedOn
-    {
-        get
-        {
-            return feedLastUpdatedOn;
-        }
-    }
+    public DateTime LastUpdatedOn => feedLastUpdatedOn;
 
     /// <summary>
     /// Gets the syndication resource that is being abstracted by this generic feed.
@@ -151,13 +127,7 @@ public class GenericSyndicationFeed
     ///     An object that implements the <see cref="ISyndicationResource"/> interface that represents the actual syndication feed that is being abstracted by this generic feed. 
     ///     The default value is a <b>null</b> reference, which indicates that this generic feed has not been initialized using a syndication resource.
     /// </value>
-    public ISyndicationResource Resource
-    {
-        get
-        {
-            return feedResource;
-        }
-    }
+    public ISyndicationResource Resource => feedResource;
 
     /// <summary>
     /// Gets character data that provides the name of this feed.
@@ -166,13 +136,7 @@ public class GenericSyndicationFeed
     ///     Character data that provides the name of this feed. 
     ///     The default value is an <b>empty</b> string, which indicates that no title was specified.
     /// </value>
-    public string Title
-    {
-        get
-        {
-            return feedTitle;
-        }
-    }
+    public string Title => feedTitle;
 
     /// <summary>
     /// Asynchronously creates a new <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/>.

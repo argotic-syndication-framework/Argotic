@@ -74,15 +74,8 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// <value>The title of the source feed.</value>
     public string Title
     {
-        get
-        {
-            return sourceTitle;
-        }
-
-        set
-        {
-            sourceTitle = value?.Trim() ?? string.Empty;
-        }
+        get => sourceTitle;
+        set => sourceTitle = value?.Trim() ?? string.Empty;
     }
 
     /// <summary>
@@ -92,11 +85,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Url
     {
-        get
-        {
-            return sourceUrl;
-        }
-
+        get => sourceUrl;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -197,7 +186,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("source");
 
-        writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
+        writer.WriteAttributeString("url", this.Url?.ToString() ?? string.Empty);
 
         if (!string.IsNullOrEmpty(this.Title))
         {

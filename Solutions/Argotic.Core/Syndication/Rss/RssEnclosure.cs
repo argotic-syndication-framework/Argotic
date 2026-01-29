@@ -87,11 +87,7 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string ContentType
     {
-        get
-        {
-            return enclosureType;
-        }
-
+        get => enclosureType;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -117,11 +113,7 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>zero</i>.</exception>
     public long Length
     {
-        get
-        {
-            return enclosureLength;
-        }
-
+        get => enclosureLength;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 0);
@@ -136,11 +128,7 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Url
     {
-        get
-        {
-            return enclosureUrl;
-        }
-
+        get => enclosureUrl;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -261,7 +249,7 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
 
         writer.WriteAttributeString("length", this.Length != long.MinValue ? this.Length.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty);
         writer.WriteAttributeString("type", this.ContentType);
-        writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
+        writer.WriteAttributeString("url", this.Url?.ToString() ?? string.Empty);
         SyndicationExtensionAdapter.WriteExtensionsTo(this.Extensions, writer);
 
         writer.WriteEndElement();

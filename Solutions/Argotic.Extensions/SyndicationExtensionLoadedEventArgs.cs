@@ -114,11 +114,11 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// </remarks>
     public override string ToString()
     {
-        string name = this.Extension != null ? this.Extension.Name : string.Empty;
-        string prefix = this.Extension != null ? this.Extension.XmlPrefix : string.Empty;
-        string xmlNamespace = this.Extension != null ? this.Extension.XmlNamespace : string.Empty;
-        string extension = this.Extension != null ? this.Extension.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
-        string data = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string name = this.Extension?.Name ?? string.Empty;
+        string prefix = this.Extension?.XmlPrefix ?? string.Empty;
+        string xmlNamespace = this.Extension?.XmlNamespace ?? string.Empty;
+        string extension = this.Extension?.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? string.Empty;
+        string data = this.Data?.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? string.Empty;
 
         return $"[SyndicationExtensionLoadedEventArgs(Name = \"{name}\", Prefix = \"{prefix}\", Namespace = \"{xmlNamespace}\", Extension = \"{extension}\", Data = \"{data}\")]";
     }

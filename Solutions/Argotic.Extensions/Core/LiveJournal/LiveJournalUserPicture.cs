@@ -188,7 +188,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
         LiveJournalSyndicationExtension extension = new();
         writer.WriteStartElement("userpic", extension.XmlNamespace);
 
-        writer.WriteElementString("url", extension.XmlNamespace, this.Url != null ? this.Url.ToString() : string.Empty);
+        writer.WriteElementString("url", extension.XmlNamespace, this.Url?.ToString() ?? string.Empty);
         writer.WriteElementString("keyword", extension.XmlNamespace, this.Keyword);
         writer.WriteElementString("width", extension.XmlNamespace, this.Width != int.MinValue ? this.Width.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");
         writer.WriteElementString("height", extension.XmlNamespace, this.Height != int.MinValue ? this.Height.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : "0");

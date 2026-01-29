@@ -251,25 +251,6 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
         }
     }
     /// <summary>
-    /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-    /// </summary>
-    /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-    /// <returns>
-    ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-    /// </returns>
-    /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-    ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
-    {
-        ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = [.. this.Extensions];
-        return list.Find(match);
-    }
-    /// <summary>
     /// Loads this <see cref="AtomLink"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
@@ -382,7 +363,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
         writer.WriteStartElement("link", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        writer.WriteAttributeString("href", this.Uri != null ? this.Uri.ToString() : string.Empty);
+        writer.WriteAttributeString("href", this.Uri?.ToString() ?? string.Empty);
 
         if (!string.IsNullOrEmpty(this.Relation))
         {
@@ -441,8 +422,8 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
         result = string.Compare(this.Relation, other.Relation, StringComparison.OrdinalIgnoreCase);
         if (result != 0) return result;
 
-        string sourceLanguageName = this.ContentLanguage != null ? this.ContentLanguage.Name : string.Empty;
-        string targetLanguageName = other.ContentLanguage != null ? other.ContentLanguage.Name : string.Empty;
+        string sourceLanguageName = this.ContentLanguage?.Name ?? string.Empty;
+        string targetLanguageName = other.ContentLanguage?.Name ?? string.Empty;
         result = string.Compare(sourceLanguageName, targetLanguageName, StringComparison.OrdinalIgnoreCase);
         if (result != 0) return result;
 

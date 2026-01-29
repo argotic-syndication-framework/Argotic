@@ -214,32 +214,8 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// </summary>
     /// <param name="directive">The <see cref="FeedSynchronizationConflictPreservationDirective"/> to get the conflict preservation identifier for.</param>
     /// <returns>The conflict preservation identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
-    public static string ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective directive)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationConflictPreservationDirective).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(FeedSynchronizationConflictPreservationDirective))
-            {
-                FeedSynchronizationConflictPreservationDirective preservationDirective = (FeedSynchronizationConflictPreservationDirective)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (preservationDirective == directive)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective directive) =>
+        EnumerationMetadataAttribute.GetAlternateValue(directive);
 
     /// <summary>
     /// Returns the <see cref="FeedSynchronizationConflictPreservationDirective"/> enumeration value that corresponds to the specified conflict preservation name.
@@ -249,64 +225,16 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <remarks>This method disregards case of specified conflict preservation name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static FeedSynchronizationConflictPreservationDirective ConflictPreservationByName(string name)
-    {
-        FeedSynchronizationConflictPreservationDirective preservationDirective = FeedSynchronizationConflictPreservationDirective.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationConflictPreservationDirective).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(FeedSynchronizationConflictPreservationDirective))
-            {
-                FeedSynchronizationConflictPreservationDirective directive = (FeedSynchronizationConflictPreservationDirective)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        preservationDirective = directive;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return preservationDirective;
-    }
+    public static FeedSynchronizationConflictPreservationDirective ConflictPreservationByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, FeedSynchronizationConflictPreservationDirective.None);
 
     /// <summary>
     /// Returns the tombstone status identifier for the supplied <see cref="FeedSynchronizationTombstoneStatus"/>.
     /// </summary>
     /// <param name="status">The <see cref="FeedSynchronizationTombstoneStatus"/> to get the tombstone status identifier for.</param>
     /// <returns>The tombstone status identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
-    public static string TombstoneStatusAsString(FeedSynchronizationTombstoneStatus status)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationTombstoneStatus).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(FeedSynchronizationTombstoneStatus))
-            {
-                FeedSynchronizationTombstoneStatus tombstoneStatus = (FeedSynchronizationTombstoneStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (tombstoneStatus == status)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string TombstoneStatusAsString(FeedSynchronizationTombstoneStatus status) =>
+        EnumerationMetadataAttribute.GetAlternateValue(status);
 
     /// <summary>
     /// Returns the <see cref="FeedSynchronizationTombstoneStatus"/> enumeration value that corresponds to the specified tombstone status name.
@@ -316,32 +244,8 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <remarks>This method disregards case of specified tombstone status name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static FeedSynchronizationTombstoneStatus TombstoneStatusByName(string name)
-    {
-        FeedSynchronizationTombstoneStatus tombstoneStatus = FeedSynchronizationTombstoneStatus.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(FeedSynchronizationTombstoneStatus).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(FeedSynchronizationTombstoneStatus))
-            {
-                FeedSynchronizationTombstoneStatus status = (FeedSynchronizationTombstoneStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        tombstoneStatus = status;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return tombstoneStatus;
-    }
+    public static FeedSynchronizationTombstoneStatus TombstoneStatusByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, FeedSynchronizationTombstoneStatus.None);
 
     /// <summary>
     /// Loads this <see cref="FeedSynchronizationItem"/> using the supplied <see cref="XPathNavigator"/>.

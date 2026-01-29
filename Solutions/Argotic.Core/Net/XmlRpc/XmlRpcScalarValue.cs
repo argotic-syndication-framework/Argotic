@@ -221,7 +221,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
         }
         else
         {
-            writer.WriteString(this.Value != null ? this.Value.ToString() : string.Empty);
+            writer.WriteString(this.Value?.ToString() ?? string.Empty);
         }
 
         writer.WriteEndElement();

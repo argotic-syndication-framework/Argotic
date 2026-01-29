@@ -103,32 +103,8 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     ///         title="The following code example demonstrates the usage of the ConstructTypeAsString method." 
     ///     />
     /// </example>
-    public static string ConstructTypeAsString(AtomTextConstructType type)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(AtomTextConstructType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(AtomTextConstructType))
-            {
-                AtomTextConstructType constructType = (AtomTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (constructType == type)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string ConstructTypeAsString(AtomTextConstructType type) =>
+        EnumerationMetadataAttribute.GetAlternateValue(type);
 
     /// <summary>
     /// Returns the <see cref="AtomTextConstructType"/> enumeration value that corresponds to the specified text construct type name.
@@ -144,52 +120,8 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     ///         title="The following code example demonstrates the usage of the ConstructTypeByName method." 
     ///     />
     /// </example>
-    public static AtomTextConstructType ConstructTypeByName(string name)
-    {
-        AtomTextConstructType constructType = AtomTextConstructType.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(AtomTextConstructType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(AtomTextConstructType))
-            {
-                AtomTextConstructType type = (AtomTextConstructType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        constructType = type;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return constructType;
-    }
-    /// <summary>
-    /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-    /// </summary>
-    /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-    /// <returns>
-    ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-    /// </returns>
-    /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-    ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
-    {
-        ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = [.. this.Extensions];
-        return list.Find(match);
-    }
+    public static AtomTextConstructType ConstructTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, AtomTextConstructType.None);
     /// <summary>
     /// Loads this <see cref="AtomTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

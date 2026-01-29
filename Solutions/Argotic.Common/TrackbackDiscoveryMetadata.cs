@@ -64,11 +64,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri About
     {
-        get
-        {
-            return trackbackDiscoveryAbout;
-        }
-
+        get => trackbackDiscoveryAbout;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -83,11 +79,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Identifier
     {
-        get
-        {
-            return trackbackDiscoveryIdentifier;
-        }
-
+        get => trackbackDiscoveryIdentifier;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -102,11 +94,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri PingUrl
     {
-        get
-        {
-            return trackbackDiscoveryPingEndpoint;
-        }
-
+        get => trackbackDiscoveryPingEndpoint;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -120,22 +108,8 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <value>The title of the discoverable web log entry.</value>
     public string Title
     {
-        get
-        {
-            return trackbackDiscoveryTitle;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                trackbackDiscoveryTitle = string.Empty;
-            }
-            else
-            {
-                trackbackDiscoveryTitle = value.Trim();
-            }
-        }
+        get => trackbackDiscoveryTitle;
+        set => trackbackDiscoveryTitle = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     }
 
     /// <summary>
@@ -223,10 +197,10 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
         writer.WriteAttributeString("xmlns", "trackback", null, TRACKBACK_NAMESPACE);
 
         writer.WriteStartElement("rdf", "Description", RDF_NAMESPACE);
-        writer.WriteAttributeString("rdf", "about", RDF_NAMESPACE, this.About != null ? this.About.ToString() : string.Empty);
-        writer.WriteAttributeString("dc", "identifier", DUBLIN_CORE_NAMESPACE, this.Identifier != null ? this.Identifier.ToString() : string.Empty);
+        writer.WriteAttributeString("rdf", "about", RDF_NAMESPACE, this.About?.ToString() ?? string.Empty);
+        writer.WriteAttributeString("dc", "identifier", DUBLIN_CORE_NAMESPACE, this.Identifier?.ToString() ?? string.Empty);
         writer.WriteAttributeString("dc", "title", DUBLIN_CORE_NAMESPACE, !string.IsNullOrEmpty(this.Title) ? this.Title : string.Empty);
-        writer.WriteAttributeString("trackback", "ping", TRACKBACK_NAMESPACE, this.PingUrl != null ? this.PingUrl.ToString() : string.Empty);
+        writer.WriteAttributeString("trackback", "ping", TRACKBACK_NAMESPACE, this.PingUrl?.ToString() ?? string.Empty);
         writer.WriteEndElement();
 
         writer.WriteFullEndElement();

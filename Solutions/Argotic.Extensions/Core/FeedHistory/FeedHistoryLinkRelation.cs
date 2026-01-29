@@ -129,7 +129,7 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("link", "http://www.w3.org/2005/Atom");
 
-        writer.WriteAttributeString("href", this.Uri != null ? this.Uri.ToString() : string.Empty);
+        writer.WriteAttributeString("href", this.Uri?.ToString() ?? string.Empty);
         writer.WriteAttributeString("rel", this.RelationType != FeedHistoryLinkRelationType.None ? FeedHistorySyndicationExtension.LinkRelationTypeAsString(this.RelationType) : string.Empty);
 
         writer.WriteEndElement();

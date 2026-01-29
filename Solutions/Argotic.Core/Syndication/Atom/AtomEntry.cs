@@ -182,15 +182,8 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <value>A <see cref="AtomContent"/> object that represents information that contains or links to the content of this entry.</value>
     public AtomContent Content
     {
-        get
-        {
-            return entryContent;
-        }
-
-        set
-        {
-            entryContent = value;
-        }
+        get => entryContent;
+        set => entryContent = value;
     }
 
     /// <summary>
@@ -203,13 +196,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
     /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-    public SyndicationContentFormat Format
-    {
-        get
-        {
-            return feedFormat;
-        }
-    }
+    public SyndicationContentFormat Format => feedFormat;
 
     /// <summary>
     /// Gets or sets a permanent, universally unique identifier for this entry.
@@ -225,11 +212,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomId Id
     {
-        get
-        {
-            return entryId;
-        }
-
+        get => entryId;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -261,15 +244,8 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// </remarks>
     public DateTime PublishedOn
     {
-        get
-        {
-            return entryPublishedOn;
-        }
-
-        set
-        {
-            entryPublishedOn = value;
-        }
+        get => entryPublishedOn;
+        set => entryPublishedOn = value;
     }
 
     /// <summary>
@@ -282,15 +258,8 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// </remarks>
     public AtomTextConstruct Rights
     {
-        get
-        {
-            return entryRights;
-        }
-
-        set
-        {
-            entryRights = value;
-        }
+        get => entryRights;
+        set => entryRights = value;
     }
 
     /// <summary>
@@ -306,15 +275,8 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// </remarks>
     public AtomSource Source
     {
-        get
-        {
-            return entrySource;
-        }
-
-        set
-        {
-            entrySource = value;
-        }
+        get => entrySource;
+        set => entrySource = value;
     }
 
     /// <summary>
@@ -345,15 +307,8 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// </remarks>
     public AtomTextConstruct Summary
     {
-        get
-        {
-            return entrySummary;
-        }
-
-        set
-        {
-            entrySummary = value;
-        }
+        get => entrySummary;
+        set => entrySummary = value;
     }
 
     /// <summary>
@@ -363,11 +318,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomTextConstruct Title
     {
-        get
-        {
-            return entryTitle;
-        }
-
+        get => entryTitle;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -387,28 +338,15 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// </remarks>
     public DateTime UpdatedOn
     {
-        get
-        {
-            return entryUpdatedOn;
-        }
-
-        set
-        {
-            entryUpdatedOn = value;
-        }
+        get => entryUpdatedOn;
+        set => entryUpdatedOn = value;
     }
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
     /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-    public Version Version
-    {
-        get
-        {
-            return feedVersion;
-        }
-    }
+    public Version Version => feedVersion;
 
     /// <summary>
     /// Asynchronously creates a new <see cref="AtomEntry"/> instance using the specified <see cref="Uri"/>.
@@ -460,27 +398,6 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         AtomEntry syndicationResource = new();
         await syndicationResource.LoadAsync(source, httpClient, settings, requestOptions, cancellationToken).ConfigureAwait(false);
         return syndicationResource;
-    }
-
-    /// <summary>
-    /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-    /// </summary>
-    /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-    /// <returns>
-    ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-    /// </returns>
-    /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-    ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
-    {
-        ArgumentNullException.ThrowIfNull(match);
-
-        List<ISyndicationExtension> list = [.. this.Extensions];
-        return list.Find(match);
     }
 
     /// <summary>

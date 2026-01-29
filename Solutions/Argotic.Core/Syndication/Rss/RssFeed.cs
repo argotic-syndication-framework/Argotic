@@ -111,11 +111,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public RssChannel Channel
     {
-        get
-        {
-            return feedChannel;
-        }
-
+        get => feedChannel;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -127,25 +123,13 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
     /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-    public SyndicationContentFormat Format
-    {
-        get
-        {
-            return feedFormat;
-        }
-    }
+    public SyndicationContentFormat Format => feedFormat;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
     /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-    public Version Version
-    {
-        get
-        {
-            return feedVersion;
-        }
-    }
+    public Version Version => feedVersion;
     /// <summary>
     /// Creates a new <see cref="RssFeed"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
@@ -200,26 +184,6 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
         RssFeed syndicationResource = new();
         await syndicationResource.LoadAsync(source, httpClient, settings, requestOptions, cancellationToken).ConfigureAwait(false);
         return syndicationResource;
-    }
-
-    /// <summary>
-    /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-    /// </summary>
-    /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-    /// <returns>
-    ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-    /// </returns>
-    /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-    ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
-    {
-        ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = [.. this.Extensions];
-        return list.Find(match);
     }
 
     /// <summary>

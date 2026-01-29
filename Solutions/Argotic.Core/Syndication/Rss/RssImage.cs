@@ -331,9 +331,9 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("image");
 
-        writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
+        writer.WriteElementString("link", this.Link?.ToString() ?? string.Empty);
         writer.WriteElementString("title", this.Title);
-        writer.WriteElementString("url", this.Url != null ? this.Url.ToString() : string.Empty);
+        writer.WriteElementString("url", this.Url?.ToString() ?? string.Empty);
 
         if (!string.IsNullOrEmpty(this.Description))
         {

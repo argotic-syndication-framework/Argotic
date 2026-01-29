@@ -87,10 +87,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BlogMLTextConstruct Title
     {
-        get
-        {
-            return commonObjectBaseTitle;
-        }
+        get => commonObjectBaseTitle;
 
         set
         {
@@ -146,10 +143,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BlogMLTextConstruct Content
     {
-        get
-        {
-            return postContent;
-        }
+        get => postContent;
 
         set
         {
@@ -214,38 +208,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <returns>The post type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the PostTypeAsString method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs" 
-    ///             region="PostTypeAsString(BlogMLPostType type)" 
+    ///         <code
+    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs"
+    ///             region="PostTypeAsString(BlogMLPostType type)"
     ///         />
     ///     </code>
     /// </example>
-    public static string PostTypeAsString(BlogMLPostType type)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLPostType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(BlogMLPostType))
-            {
-                BlogMLPostType postType = (BlogMLPostType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (postType == type)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string PostTypeAsString(BlogMLPostType type) =>
+        EnumerationMetadataAttribute.GetAlternateValue(type);
 
     /// <summary>
     /// Returns the <see cref="BlogMLPostType"/> enumeration value that corresponds to the specified post type name.
@@ -257,57 +227,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     /// <example>
     ///     <code lang="cs" title="The following code example demonstrates the usage of the PostTypeByName method.">
-    ///         <code 
-    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs" 
-    ///             region="PostTypeByName(string name)" 
+    ///         <code
+    ///             source="..\..\Argotic.Examples\Core\BlogML\BlogMLPostExample.cs"
+    ///             region="PostTypeByName(string name)"
     ///         />
     ///     </code>
     /// </example>
-    public static BlogMLPostType PostTypeByName(string name)
-    {
-        BlogMLPostType postType = BlogMLPostType.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(BlogMLPostType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(BlogMLPostType))
-            {
-                BlogMLPostType type = (BlogMLPostType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        postType = type;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return postType;
-    }
-    /// <summary>
-    /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-    /// </summary>
-    /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-    /// <returns>
-    ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-    /// </returns>
-    /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-    ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
-    {
-        ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = [.. this.Extensions];
-        return list.Find(match);
-    }
+    public static BlogMLPostType PostTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, BlogMLPostType.None);
     /// <summary>
     /// Loads this <see cref="BlogMLPost"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

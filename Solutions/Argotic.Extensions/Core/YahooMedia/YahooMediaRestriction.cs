@@ -94,32 +94,8 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// </summary>
     /// <param name="relationship">The <see cref="YahooMediaRestrictionRelationship"/> to get the relationship identifier for.</param>
     /// <returns>The relationship identifier for the supplied <paramref name="relationship"/>, Otherwise, returns an empty string.</returns>
-    public static string RelationshipAsString(YahooMediaRestrictionRelationship relationship)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionRelationship).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaRestrictionRelationship))
-            {
-                YahooMediaRestrictionRelationship restrictionRelationship = (YahooMediaRestrictionRelationship)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (restrictionRelationship == relationship)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string RelationshipAsString(YahooMediaRestrictionRelationship relationship) =>
+        EnumerationMetadataAttribute.GetAlternateValue(relationship);
 
     /// <summary>
     /// Returns the <see cref="YahooMediaRestrictionRelationship"/> enumeration value that corresponds to the specified relationship name.
@@ -129,64 +105,16 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <remarks>This method disregards case of specified relationship name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static YahooMediaRestrictionRelationship RelationshipByName(string name)
-    {
-        YahooMediaRestrictionRelationship restrictionRelationship = YahooMediaRestrictionRelationship.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionRelationship).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaRestrictionRelationship))
-            {
-                YahooMediaRestrictionRelationship relationship = (YahooMediaRestrictionRelationship)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        restrictionRelationship = relationship;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return restrictionRelationship;
-    }
+    public static YahooMediaRestrictionRelationship RelationshipByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaRestrictionRelationship.None);
 
     /// <summary>
     /// Returns the restriction type identifier for the supplied <see cref="YahooMediaRestrictionType"/>.
     /// </summary>
     /// <param name="type">The <see cref="YahooMediaRestrictionType"/> to get the restriction type identifier for.</param>
     /// <returns>The restriction type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
-    public static string RestrictionTypeAsString(YahooMediaRestrictionType type)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaRestrictionType))
-            {
-                YahooMediaRestrictionType restrictionType = (YahooMediaRestrictionType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (restrictionType == type)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string RestrictionTypeAsString(YahooMediaRestrictionType type) =>
+        EnumerationMetadataAttribute.GetAlternateValue(type);
 
     /// <summary>
     /// Returns the <see cref="YahooMediaRestrictionType"/> enumeration value that corresponds to the specified restriction type name.
@@ -196,32 +124,8 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <remarks>This method disregards case of specified restriction type name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static YahooMediaRestrictionType RestrictionTypeByName(string name)
-    {
-        YahooMediaRestrictionType restrictionType = YahooMediaRestrictionType.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(YahooMediaRestrictionType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(YahooMediaRestrictionType))
-            {
-                YahooMediaRestrictionType type = (YahooMediaRestrictionType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        restrictionType = type;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return restrictionType;
-    }
+    public static YahooMediaRestrictionType RestrictionTypeByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaRestrictionType.None);
 
     /// <summary>
     /// Loads this <see cref="YahooMediaRestriction"/> using the supplied <see cref="XPathNavigator"/>.

@@ -126,15 +126,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </value>
     public RssCloud Cloud
     {
-        get
-        {
-            return channelCloud;
-        }
-
-        set
-        {
-            channelCloud = value;
-        }
+        get => channelCloud;
+        set => channelCloud = value;
     }
 
     /// <summary>
@@ -161,11 +154,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Description
     {
-        get
-        {
-            return channelDescription;
-        }
-
+        get => channelDescription;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -177,13 +166,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// Gets the URL of the RSS specification implemented by the software that created this feed.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the RSS specification implemented by the software that created this feed.</value>
-    public static Uri Documentation
-    {
-        get
-        {
-            return channelDocumentation;
-        }
-    }
+    public static Uri Documentation => channelDocumentation;
 
     /// <summary>
     /// Gets or sets a value that credits the software that created this feed.
@@ -203,15 +186,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </value>
     public RssImage Image
     {
-        get
-        {
-            return channelImage;
-        }
-
-        set
-        {
-            channelImage = value;
-        }
+        get => channelImage;
+        set => channelImage = value;
     }
 
     /// <summary>
@@ -230,15 +206,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     public CultureInfo Language
     {
-        get
-        {
-            return channelLanguage;
-        }
-
-        set
-        {
-            channelLanguage = value;
-        }
+        get => channelLanguage;
+        set => channelLanguage = value;
     }
 
     /// <summary>
@@ -250,15 +219,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </value>
     public DateTime LastBuildDate
     {
-        get
-        {
-            return channelLastBuildDate;
-        }
-
-        set
-        {
-            channelLastBuildDate = value;
-        }
+        get => channelLastBuildDate;
+        set => channelLastBuildDate = value;
     }
 
     /// <summary>
@@ -268,11 +230,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Link
     {
-        get
-        {
-            return channelLink;
-        }
-
+        get => channelLink;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -308,15 +266,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     public DateTime PublicationDate
     {
-        get
-        {
-            return channelPublicationDate;
-        }
-
-        set
-        {
-            channelPublicationDate = value;
-        }
+        get => channelPublicationDate;
+        set => channelPublicationDate = value;
     }
 
     /// <summary>
@@ -351,15 +302,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     public Uri SelfLink
     {
-        get
-        {
-            return channelSelfLink;
-        }
-
-        set
-        {
-            channelSelfLink = value;
-        }
+        get => channelSelfLink;
+        set => channelSelfLink = value;
     }
 
     /// <summary>
@@ -389,15 +333,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </value>
     public RssTextInput TextInput
     {
-        get
-        {
-            return channelTextInput;
-        }
-
-        set
-        {
-            channelTextInput = value;
-        }
+        get => channelTextInput;
+        set => channelTextInput = value;
     }
 
     /// <summary>
@@ -412,15 +349,8 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     public int TimeToLive
     {
-        get
-        {
-            return channelTimeToLive;
-        }
-
-        set
-        {
-            channelTimeToLive = value;
-        }
+        get => channelTimeToLive;
+        set => channelTimeToLive = value;
     }
 
     /// <summary>
@@ -431,11 +361,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Title
     {
-        get
-        {
-            return channelTitle;
-        }
-
+        get => channelTitle;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -458,26 +384,6 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         get => field;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
-    /// <summary>
-    /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
-    /// </summary>
-    /// <param name="match">The <see cref="Predicate{ISyndicationExtension}"/> delegate that defines the conditions of the <see cref="ISyndicationExtension"/> to search for.</param>
-    /// <returns>
-    ///     The first syndication extension that matches the conditions defined by the specified predicate, if found; otherwise, the default value for <see cref="ISyndicationExtension"/>.
-    /// </returns>
-    /// <remarks>
-    ///     The <see cref="Predicate{ISyndicationExtension}"/> is a delegate to a method that returns <b>true</b> if the object passed to it matches the conditions defined in the delegate.
-    ///     The elements of the current <see cref="Extensions"/> are individually passed to the <see cref="Predicate{ISyndicationExtension}"/> delegate, moving forward in
-    ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
-    {
-        ArgumentNullException.ThrowIfNull(match);
-        List<ISyndicationExtension> list = [.. this.Extensions];
-        return list.Find(match);
-    }
-
     /// <summary>
     /// Loads this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -566,7 +472,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         ArgumentNullException.ThrowIfNull(writer);
         writer.WriteStartElement("channel");
         writer.WriteElementString("title", this.Title);
-        writer.WriteElementString("link", this.Link != null ? this.Link.ToString() : string.Empty);
+        writer.WriteElementString("link", this.Link?.ToString() ?? string.Empty);
         writer.WriteElementString("description", this.Description);
 
         this.Cloud?.WriteTo(writer);

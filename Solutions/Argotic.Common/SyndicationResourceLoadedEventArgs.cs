@@ -69,13 +69,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// </summary>
     /// <value>An uninitialized instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.</value>
     /// <remarks>The value of Empty is a read-only instance of <see cref="SyndicationResourceLoadedEventArgs"/> equivalent to the result of calling the <see cref="SyndicationResourceLoadedEventArgs()"/> constructor.</remarks>
-    public static new SyndicationResourceLoadedEventArgs Empty
-    {
-        get
-        {
-            return emptyEventArguments;
-        }
-    }
+    public static new SyndicationResourceLoadedEventArgs Empty => emptyEventArguments;
 
     /// <summary>
     /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication resource.
@@ -83,13 +77,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// <value>
     ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication resource.
     /// </value>
-    public XPathNavigator Data
-    {
-        get
-        {
-            return eventNavigator;
-        }
-    }
+    public XPathNavigator Data => eventNavigator;
 
     /// <summary>
     /// Gets the <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
@@ -98,13 +86,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
     ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource, returns <b>null</b>.
     /// </value>
-    public Uri Source
-    {
-        get
-        {
-            return eventSource;
-        }
-    }
+    public Uri Source => eventSource;
 
     /// <summary>
     /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.
@@ -115,8 +97,8 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// </remarks>
     public override string ToString()
     {
-        string source = this.Source != null ? this.Source.ToString() : string.Empty;
-        string data = this.Data != null ? this.Data.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) : string.Empty;
+        string source = this.Source?.ToString() ?? string.Empty;
+        string data = this.Data?.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? string.Empty;
 
         return $"[SyndicationResourceLoadedEventArgs(Source = \"{source}\", Data = \"{data}\")]";
     }

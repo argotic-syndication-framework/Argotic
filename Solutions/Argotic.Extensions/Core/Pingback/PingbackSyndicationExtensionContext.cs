@@ -138,8 +138,8 @@ public class PingbackSyndicationExtensionContext
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
-        writer.WriteElementString("server", xmlNamespace, this.Server != null ? this.Server.ToString() : string.Empty);
-        writer.WriteElementString("target", xmlNamespace, this.Target != null ? this.Target.ToString() : string.Empty);
+        writer.WriteElementString("server", xmlNamespace, this.Server?.ToString() ?? string.Empty);
+        writer.WriteElementString("target", xmlNamespace, this.Target?.ToString() ?? string.Empty);
 
         foreach (Uri about in this.Abouts)
         {

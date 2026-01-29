@@ -73,18 +73,10 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     ///     If a format cannot be determined for the <see cref="ContentType">content type</see>, returns <see cref="SyndicationContentFormat.None"/>.
     /// </value>
     /// <remarks>The syndication content format is determined based upon the <see cref="ContentType"/> of the current instance.</remarks>
-    public SyndicationContentFormat ContentFormat
-    {
-        get
-        {
-            if (string.IsNullOrEmpty(this.ContentType))
-            {
-                return SyndicationContentFormat.None;
-            }
-
-            return ContentTypeToFormatMapping.GetValueOrDefault(this.ContentType, SyndicationContentFormat.None);
-        }
-    }
+    public SyndicationContentFormat ContentFormat =>
+        string.IsNullOrEmpty(this.ContentType)
+            ? SyndicationContentFormat.None
+            : ContentTypeToFormatMapping.GetValueOrDefault(this.ContentType, SyndicationContentFormat.None);
 
     /// <summary>
     /// Builds a cached mapping from MIME content type strings to SyndicationContentFormat enum values.
@@ -122,15 +114,10 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string ContentType
     {
-        get
-        {
-            return endpointMediaType;
-        }
-
+        get => endpointMediaType;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-
             endpointMediaType = value.Trim();
         }
     }
@@ -143,15 +130,10 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Source
     {
-        get
-        {
-            return endpointSource;
-        }
-
+        get => endpointSource;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-
             endpointSource = value;
         }
     }
@@ -163,22 +145,8 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <remarks>This property will be empty if no title attribute was assigned to the syndication endpoint link.</remarks>
     public string Title
     {
-        get
-        {
-            return endpointTitle;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                endpointTitle = string.Empty;
-            }
-            else
-            {
-                endpointTitle = value.Trim();
-            }
-        }
+        get => endpointTitle;
+        set => endpointTitle = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     }
 
     /// <summary>
@@ -224,7 +192,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// </remarks>
     public override string ToString()
     {
-        return $"<link rel=\"alternate\" type=\"{this.ContentType}\" title=\"{this.Title}\" href=\"{(this.Source != null ? this.Source.ToString() : string.Empty)}\" />";
+        return $"<link rel=\"alternate\" type=\"{this.ContentType}\" title=\"{this.Title}\" href=\"{this.Source?.ToString() ?? string.Empty}\" />";
     }
 
     /// <summary>

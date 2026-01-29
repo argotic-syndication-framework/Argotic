@@ -212,7 +212,7 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
         YahooMediaSyndicationExtension extension = new();
         writer.WriteStartElement("thumbnail", extension.XmlNamespace);
 
-        writer.WriteAttributeString("url", this.Url != null ? this.Url.ToString() : string.Empty);
+        writer.WriteAttributeString("url", this.Url?.ToString() ?? string.Empty);
 
         if (this.Height != int.MinValue)
         {

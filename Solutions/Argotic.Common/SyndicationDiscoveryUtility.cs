@@ -40,34 +40,8 @@ public static class SyndicationDiscoveryUtility
     /// <remarks>This method disregards case of specified format name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static SyndicationContentFormat SyndicationContentFormatByName(string name)
-    {
-        SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
-
-        ArgumentException.ThrowIfNullOrEmpty(name);
-
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
-            {
-                SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        syndicationFormat = format;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return syndicationFormat;
-    }
+    public static SyndicationContentFormat SyndicationContentFormatByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, SyndicationContentFormat.None);
 
     /// <summary>
     /// Asynchronously returns the <see cref="SyndicationContentFormat"/> of the syndicated resource located at the specified <see cref="Uri"/>.
@@ -156,8 +130,6 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     public static SyndicationContentFormat SyndicationContentFormatGet(XmlReader reader)
     {
-        SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
-
         ArgumentNullException.ThrowIfNull(reader);
 
         XmlDocument document = new();
@@ -165,27 +137,8 @@ public static class SyndicationDiscoveryUtility
 
         string rootElementName = document.DocumentElement.LocalName;
 
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
-            {
-                SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        syndicationFormat = format;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return syndicationFormat;
+        return EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<SyndicationContentFormat>()
+            .GetValueOrDefault(rootElementName, SyndicationContentFormat.None);
     }
 
     /// <summary>
@@ -199,7 +152,6 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     public static SyndicationContentFormat SyndicationContentFormatGet(XPathNavigator navigator)
     {
-        SyndicationContentFormat syndicationFormat = SyndicationContentFormat.None;
         ArgumentNullException.ThrowIfNull(navigator);
 
         XPathNavigator source = navigator.CreateNavigator();
@@ -211,27 +163,8 @@ public static class SyndicationDiscoveryUtility
 
         string rootElementName = source.LocalName;
 
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(SyndicationContentFormat).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
-            {
-                SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(rootElementName, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        syndicationFormat = format;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return syndicationFormat;
+        return EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<SyndicationContentFormat>()
+            .GetValueOrDefault(rootElementName, SyndicationContentFormat.None);
     }
 
     /// <summary>

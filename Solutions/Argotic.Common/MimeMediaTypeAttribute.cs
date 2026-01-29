@@ -36,29 +36,8 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <value>A <see cref="Uri"/> that points to the documentation the describes the MIME media type for the attributed field.</value>
     public string Documentation
     {
-        get
-        {
-            return mimeMediaDocumentation != null ? mimeMediaDocumentation.ToString() : string.Empty;
-        }
-
-        set
-        {
-            if (value == null)
-            {
-                mimeMediaDocumentation = null;
-            }
-            else
-            {
-                if (Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out Uri url))
-                {
-                    mimeMediaDocumentation = url;
-                }
-                else
-                {
-                    mimeMediaDocumentation = null;
-                }
-            }
-        }
+        get => mimeMediaDocumentation?.ToString() ?? string.Empty;
+        set => mimeMediaDocumentation = value != null && Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out Uri url) ? url : null;
     }
 
     /// <summary>
@@ -67,22 +46,8 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <value>The MIME media type name for the attributed field.</value>
     public string Name
     {
-        get
-        {
-            return mimeMediaTypeName;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                mimeMediaTypeName = string.Empty;
-            }
-            else
-            {
-                mimeMediaTypeName = value.Trim();
-            }
-        }
+        get => mimeMediaTypeName;
+        set => mimeMediaTypeName = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     }
 
     /// <summary>
@@ -91,22 +56,8 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <value>The MIME media subtype name for the attributed field.</value>
     public string SubName
     {
-        get
-        {
-            return mimeMediaSubTypeName;
-        }
-
-        set
-        {
-            if (string.IsNullOrEmpty(value))
-            {
-                mimeMediaSubTypeName = string.Empty;
-            }
-            else
-            {
-                mimeMediaSubTypeName = value.Trim();
-            }
-        }
+        get => mimeMediaSubTypeName;
+        set => mimeMediaSubTypeName = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     }
 
     /// <summary>
@@ -118,7 +69,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// </remarks>
     public override string ToString()
     {
-        return $"[MimeMediaType(Name = \"{this.Name}\", SubName = \"{this.SubName}\", Documentation = \"{(this.Documentation != null ? this.Documentation.ToString() : string.Empty)}\")]";
+        return $"[MimeMediaType(Name = \"{this.Name}\", SubName = \"{this.SubName}\", Documentation = \"{this.Documentation ?? string.Empty}\")]";
     }
 
     /// <summary>

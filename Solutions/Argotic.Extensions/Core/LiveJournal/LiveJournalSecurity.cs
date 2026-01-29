@@ -62,32 +62,8 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// </summary>
     /// <param name="level">The <see cref="LiveJournalSecurityType"/> to get the access level identifier for.</param>
     /// <returns>The access level identifier for the supplied <paramref name="level"/>, Otherwise, returns an empty string.</returns>
-    public static string AccessibilityAsString(LiveJournalSecurityType level)
-    {
-        string name = string.Empty;
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(LiveJournalSecurityType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(LiveJournalSecurityType))
-            {
-                LiveJournalSecurityType accessLevel = (LiveJournalSecurityType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-
-                if (accessLevel == level)
-                {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 })
-                    {
-                        EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                        name = enumerationMetadata.AlternateValue;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return name;
-    }
+    public static string AccessibilityAsString(LiveJournalSecurityType level) =>
+        EnumerationMetadataAttribute.GetAlternateValue(level);
 
     /// <summary>
     /// Returns the <see cref="LiveJournalSecurityType"/> enumeration value that corresponds to the specified access level name.
@@ -97,32 +73,8 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// <remarks>This method disregards case of specified access level name.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
-    public static LiveJournalSecurityType AccessibilityByName(string name)
-    {
-        LiveJournalSecurityType accessLevel = LiveJournalSecurityType.None;
-        ArgumentException.ThrowIfNullOrEmpty(name);
-        foreach (System.Reflection.FieldInfo fieldInfo in typeof(LiveJournalSecurityType).GetFields())
-        {
-            if (fieldInfo.FieldType == typeof(LiveJournalSecurityType))
-            {
-                LiveJournalSecurityType level = (LiveJournalSecurityType)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                if (customAttributes is { Length: > 0 })
-                {
-                    EnumerationMetadataAttribute enumerationMetadata = customAttributes[0] as EnumerationMetadataAttribute;
-
-                    if (string.Equals(name, enumerationMetadata.AlternateValue, StringComparison.OrdinalIgnoreCase))
-                    {
-                        accessLevel = level;
-                        break;
-                    }
-                }
-            }
-        }
-
-        return accessLevel;
-    }
+    public static LiveJournalSecurityType AccessibilityByName(string name) =>
+        EnumerationMetadataAttribute.GetEnumByAlternateValue(name, LiveJournalSecurityType.None);
 
     /// <summary>
     /// Loads this <see cref="LiveJournalSecurity"/> using the supplied <see cref="XPathNavigator"/>.

@@ -268,9 +268,9 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="TrackbackMessage"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="TrackbackMessage"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="TrackbackMessage"/>.</returns>
     /// <remarks>
     ///     This method returns the URL-encoded representation for the current instance.
     /// </remarks>

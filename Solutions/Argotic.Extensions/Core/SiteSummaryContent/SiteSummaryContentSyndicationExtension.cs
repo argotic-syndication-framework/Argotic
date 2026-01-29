@@ -118,9 +118,9 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="SiteSummaryContentSyndicationExtension"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="SiteSummaryContentSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SiteSummaryContentSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="SiteSummaryContentSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

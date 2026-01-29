@@ -361,9 +361,9 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
             return 1;
         }
 
-        int result = Cocref="string"ty.CompareSequence(this.ExplicitConcepts, other.ExplicitConcepts);
+        int result = ComparisonUtility.CompareSequence(this.ExplicitConcepts, other.ExplicitConcepts);
         result |= ComparisonUtility.CompareSequence(this.ExplicitSources, other.ExplicitSources);
-        result |= Comparcref="string"ompareSequence(this.ImplicitConcepts, other.ImplicitConcepts);
+        result |= ComparisonUtility.CompareSequence(this.ImplicitConcepts, other.ImplicitConcepts);
         result |= ComparisonUtility.CompareSequence(this.ImplicitSources, other.ImplicitSources);
         result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
 

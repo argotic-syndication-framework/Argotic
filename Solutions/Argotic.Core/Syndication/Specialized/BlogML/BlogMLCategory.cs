@@ -246,9 +246,9 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
         result |= string.Compare(this.ParentId, other.ParentId, StringComparison.OrdinalIgnoreCase);
 
         result |= BlogMLUtility.CompareCommonObjects(this, other);
-cref="string"
+
         return result;
-    }cref="string"
+    }
 
     /// <summary>
     /// Determines whether the specified <see cref="BlogMLCategory"/> is equal to the current instance.

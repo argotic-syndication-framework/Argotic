@@ -222,9 +222,9 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="AtomCategory"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="AtomCategory"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomCategory"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="AtomCategory"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

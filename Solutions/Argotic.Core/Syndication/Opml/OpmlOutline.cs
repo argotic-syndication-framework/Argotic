@@ -461,9 +461,9 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
         return outline;
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="OpmlOutline"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="OpmlOutline"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlOutline"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="OpmlOutline"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

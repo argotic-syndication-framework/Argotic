@@ -151,9 +151,9 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaCategory"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaCategory"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaCategory"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaCategory"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

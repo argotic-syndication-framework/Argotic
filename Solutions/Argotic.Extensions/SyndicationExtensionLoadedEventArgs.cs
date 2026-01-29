@@ -106,9 +106,9 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
         }
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationExtensionLoadedEventArgs"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationExtensionLoadedEventArgs"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationExtensionLoadedEventArgs"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationExtensionLoadedEventArgs"/>.</returns>
     /// <remarks>
     ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
     /// </remarks>

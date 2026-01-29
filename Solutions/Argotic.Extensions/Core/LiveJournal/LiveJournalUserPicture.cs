@@ -197,9 +197,9 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="LiveJournalUserPicture"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="LiveJournalUserPicture"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="LiveJournalUserPicture"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="LiveJournalUserPicture"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

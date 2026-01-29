@@ -936,9 +936,9 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             result |= -1;
         }
 
-        result |= Compacref="string"CompareSequence(this.Categories, other.Categories);
+        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
         result |= ComparisonUtility.CompareSequence(this.Items, other.Items);
-        result |= Comparcref="string"ompareSequence(this.SkipDays, other.SkipDays);
+        result |= ComparisonUtility.CompareSequence(this.SkipDays, other.SkipDays);
         result |= ComparisonUtility.CompareSequence(this.SkipHours, other.SkipHours);
 
         return result;

@@ -266,9 +266,9 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="RssTextInput"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="RssTextInput"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="RssTextInput"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="RssTextInput"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

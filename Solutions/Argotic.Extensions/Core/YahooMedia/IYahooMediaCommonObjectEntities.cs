@@ -77,7 +77,7 @@ interface IYahooMediaCommonObjectEntities
     /// Gets the relevant keywords that describe the media object.
     /// </summary>
     /// <value>
-    ///     A <see cref="IList{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe the media object.
+    ///     A <see cref="IList{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe the media object.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>

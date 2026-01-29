@@ -121,9 +121,9 @@ public class SitemapHreflangExtension : SyndicationExtension, IComparable<Sitema
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="SitemapHreflangExtension"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="SitemapHreflangExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapHreflangExtension"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="SitemapHreflangExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

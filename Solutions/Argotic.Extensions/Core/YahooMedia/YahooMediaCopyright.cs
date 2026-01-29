@@ -108,9 +108,9 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaCopyright"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaCopyright"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaCopyright"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaCopyright"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

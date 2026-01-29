@@ -690,9 +690,9 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceMetadata"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceMetadata"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceMetadata"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationResourceMetadata"/>.</returns>
     /// <remarks>
     ///     This method returns a human-readable string for the current instance. Hash code values are displayed for applicable properties.
     /// </remarks>

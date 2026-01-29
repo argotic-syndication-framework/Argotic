@@ -107,9 +107,9 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="CreativeCommonsSyndicationExtension"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="CreativeCommonsSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="CreativeCommonsSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="CreativeCommonsSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

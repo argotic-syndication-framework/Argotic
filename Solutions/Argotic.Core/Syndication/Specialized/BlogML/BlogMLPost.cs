@@ -710,9 +710,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         return wasLoaded;
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLPost"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="BlogMLPost"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="BlogMLPost"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="BlogMLPost"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

@@ -181,9 +181,9 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="SiteSummaryContentItem"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="SiteSummaryContentItem"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SiteSummaryContentItem"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="SiteSummaryContentItem"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

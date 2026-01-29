@@ -91,7 +91,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// Gets the relevant keywords that describe this syndication entity.
     /// </summary>
     /// <value>
-    ///     A <see cref="IList{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe this syndication entity.
+    ///     A <see cref="IList{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this syndication entity.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>

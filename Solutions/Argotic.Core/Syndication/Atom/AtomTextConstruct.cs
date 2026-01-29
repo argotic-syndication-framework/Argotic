@@ -239,9 +239,9 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="AtomTextConstruct"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="AtomTextConstruct"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomTextConstruct"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="AtomTextConstruct"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance, with a generic element name of <i>TextConstruct</i>.
     /// </remarks>

@@ -341,9 +341,9 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// </summary>
     /// <returns>A <see cref="String"/> that represents the current <see cref="RssCloud"/>.</returns>
     /// <remarks>
-    ///     This methodcref="string"XML representation for the current instance.
+    ///     This method returns the XML representation for the current instance.
     /// </remarks>
-    public override stricref="string" => this.ToXmlString();
+    public override string ToString() => this.ToXmlString();
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

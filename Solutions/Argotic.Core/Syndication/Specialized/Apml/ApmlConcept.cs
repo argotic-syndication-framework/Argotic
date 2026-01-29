@@ -260,9 +260,9 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
     {
         if (other is null)
         {
-            return 1;cref="string"
+            return 1;
         }
-cref="string"
+
         int result = string.Compare(this.From, other.From, StringComparison.OrdinalIgnoreCase);
         result |= string.Compare(this.Key, other.Key, StringComparison.OrdinalIgnoreCase);
         result |= this.UpdatedOn.CompareTo(other.UpdatedOn);

@@ -352,9 +352,9 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="RssImage"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="RssImage"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="RssImage"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="RssImage"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

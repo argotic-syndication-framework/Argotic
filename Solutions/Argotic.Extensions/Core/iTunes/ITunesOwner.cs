@@ -111,9 +111,9 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="ITunesOwner"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="ITunesOwner"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="ITunesOwner"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="ITunesOwner"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

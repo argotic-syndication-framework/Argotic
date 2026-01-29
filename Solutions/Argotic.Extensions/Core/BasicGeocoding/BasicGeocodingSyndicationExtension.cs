@@ -205,9 +205,9 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="BasicGeocodingSyndicationExtension"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="BasicGeocodingSyndicationExtension"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="BasicGeocodingSyndicationExtension"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="BasicGeocodingSyndicationExtension"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

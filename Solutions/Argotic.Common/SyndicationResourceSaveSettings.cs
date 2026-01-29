@@ -72,9 +72,9 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     public Collection<Type> SupportedExtensions => supportedSyndicationExtensions ??= new Collection<Type>();
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.</returns>
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>

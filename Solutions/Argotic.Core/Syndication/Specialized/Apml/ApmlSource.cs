@@ -428,9 +428,9 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
             return 1;
         }
 
-        int result = Cocref="string"ty.CompareSequence(this.Authors, other.Authors);
+        int result = ComparisonUtility.CompareSequence(this.Authors, other.Authors);
         result |= string.Compare(this.From, other.From, StringComparison.OrdinalIgnoreCase);
-        result |= stringcref="string".Key, other.Key, StringComparison.OrdinalIgnoreCase);
+        result |= string.Compare(this.Key, other.Key, StringComparison.OrdinalIgnoreCase);
         result |= string.Compare(this.MimeType, other.MimeType, StringComparison.OrdinalIgnoreCase);
         result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
         result |= this.UpdatedOn.CompareTo(other.UpdatedOn);

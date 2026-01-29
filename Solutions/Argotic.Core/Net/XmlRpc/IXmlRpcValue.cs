@@ -31,9 +31,9 @@ public interface IXmlRpcValue
     void WriteTo(XmlWriter writer);
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="IXmlRpcValue"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="IXmlRpcValue"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="IXmlRpcValue"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="IXmlRpcValue"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

@@ -120,9 +120,9 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.</returns>
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>

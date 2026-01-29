@@ -150,9 +150,9 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
         }
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="OpmlOwner"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="OpmlOwner"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlOwner"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="OpmlOwner"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

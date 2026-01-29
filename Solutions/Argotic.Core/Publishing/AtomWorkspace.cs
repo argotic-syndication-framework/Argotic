@@ -288,9 +288,9 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="AtomWorkspace"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="AtomWorkspace"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomWorkspace"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="AtomWorkspace"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

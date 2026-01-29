@@ -188,7 +188,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets the relevant keywords that describe this media group.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe this media group. 
+    ///     A <see cref="Collection{T}"/> collection of <see cref="String"/> objects that represent the relevant keywords that describe this media group. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
@@ -375,9 +375,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="YahooMediaGroup"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="YahooMediaGroup"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="YahooMediaGroup"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="YahooMediaGroup"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

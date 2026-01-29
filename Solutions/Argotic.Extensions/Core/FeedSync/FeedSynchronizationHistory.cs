@@ -175,9 +175,9 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="FeedSynchronizationHistory"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="FeedSynchronizationHistory"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="FeedSynchronizationHistory"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="FeedSynchronizationHistory"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

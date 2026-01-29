@@ -140,9 +140,9 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="ITunesCategory"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="ITunesCategory"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="ITunesCategory"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="ITunesCategory"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

@@ -197,9 +197,9 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="RssSource"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="RssSource"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="RssSource"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="RssSource"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

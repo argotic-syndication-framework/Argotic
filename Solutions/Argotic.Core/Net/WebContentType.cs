@@ -291,9 +291,9 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="WebContentType"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="WebContentType"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="WebContentType"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="WebContentType"/>.</returns>
     /// <remarks>
     ///     This method returns the MIME content type representation for the current instance.
     /// </remarks>

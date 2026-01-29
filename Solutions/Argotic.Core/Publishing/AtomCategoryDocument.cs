@@ -694,9 +694,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     }
 
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="AtomCategoryDocument"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="AtomCategoryDocument"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="AtomCategoryDocument"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="AtomCategoryDocument"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

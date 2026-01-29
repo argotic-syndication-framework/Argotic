@@ -279,9 +279,9 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
         writer.WriteEndElement();
     }
     /// <summary>
-    /// Returns a <see cref="string"/> that represents the current <see cref="OpmlHead"/>.
+    /// Returns a <see cref="String"/> that represents the current <see cref="OpmlHead"/>.
     /// </summary>
-    /// <returns>A <see cref="string"/> that represents the current <see cref="OpmlHead"/>.</returns>
+    /// <returns>A <see cref="String"/> that represents the current <see cref="OpmlHead"/>.</returns>
     /// <remarks>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>

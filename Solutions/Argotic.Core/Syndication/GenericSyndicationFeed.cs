@@ -225,7 +225,7 @@ public class GenericSyndicationFeed
     /// </summary>
     /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="GenericSyndicationFeed"/> instance. This value can be <b>null</b>.</param>
-    /// <remarks>cref="string"
+    /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="GenericSyndicationFeed.Loaded"/> event will be raised.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>

@@ -1,4 +1,4 @@
-[![Build Status](https://dev.azure.com/endjin-labs/Argotic/_apis/build/status/argotic-syndication-framework.Argotic?branchName=main)](https://dev.azure.com/endjin-labs/Argotic/_build/latest?definitionId=3&branchName=main)
+[![Build Status](https://github.com/argotic-syndication-framework/Argotic/actions/workflows/build.yml/badge.svg)](https://github.com/argotic-syndication-framework/Argotic/actions/workflows/build.yml)
 [![GitHub license](https://img.shields.io/badge/License-Apache%202-blue.svg)](https://raw.githubusercontent.com/argotic-syndication-framework/argotic/master/LICENSE)
 [![IMM](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/total?cache=false)](https://endimmfuncdev.azurewebsites.net/api/imm/github/argotic-syndication-framework/argotic/total?cache=false)
 
@@ -180,7 +180,7 @@ This project has adopted a code of conduct adapted from the [Contributor Covenan
 
 The [IP Maturity Model](https://github.com/endjin/Endjin.Ip.Maturity.Matrix) is endjin's IP quality framework; it defines a [configurable set of rules](https://github.com/endjin/Endjin.Ip.Maturity.Matrix.RuleDefinitions), which are committed into the [root of a repo](imm.yaml), and a [Azure Function HttpTrigger](https://github.com/endjin/Endjin.Ip.Maturity.Matrix/tree/master/Solutions/Endjin.Ip.Maturity.Matrix.Host) which can evaluate the ruleset, and render an svg badge for display in repo's `readme.md`.
 
-This approach is based on our 15+ years experience of delivering complex, high performance, bleeding-edge projects, and due diligence assessments of 3rd party systems. For detailed information about the ruleset see the [IP Maturity Matrix repo](https://github.com/endjin/Endjin.Ip.Maturity.Matrix).
+This approach is based on our 15+ years experience of delivering complex, high performance, bleeding-edge projects, and due diligence assessments of 3rd party systems. For detailed information about the ruleset see the [IP Maturity Model repo](https://github.com/endjin/Endjin.Ip.Maturity.Matrix).
 
 ## IMM for Argotic
 

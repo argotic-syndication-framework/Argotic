@@ -1,39 +1,24 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <TargetFramework>net10.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <LangVersion>14.0</LangVersion>
-        <Product>Argotic Syndication Framework</Product>
-        <Copyright>Copyright © Brian William Kuhn 2008</Copyright>
-        <Authors>Brian William Kuhn, endjin</Authors>
-    </PropertyGroup>
+  <PropertyGroup>
+    <Product>Argotic Syndication Framework</Product>
+    <PackageDescription>Main syndication library for RSS, Atom, OPML, APML, BlogML, RSD, and Sitemap formats. Provides reading, writing, and manipulation of web content syndication feeds.</PackageDescription>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <PackageDescription></PackageDescription>
-        <PackageTags></PackageTags>
-        <PackageReleaseNotes></PackageReleaseNotes>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.2" />
+    <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Microsoft.Extensions.Options" Version="10.0.2" />
-        <PackageReference Include="Microsoft.Extensions.Options.ConfigurationExtensions" Version="10.0.2" />
-        <PackageReference Include="Microsoft.Extensions.DependencyInjection.Abstractions" Version="10.0.2" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
+    <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
-        <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
-    </ItemGroup>
-
-    <PropertyGroup>
-        <EnableNETAnalyzers>true</EnableNETAnalyzers>
-        <AnalysisMode>AllEnabledByDefault</AnalysisMode>
-        <AnalysisLevel>latest</AnalysisLevel>
-    </PropertyGroup>
+  <ItemGroup>
+    <None Include="..\..\README.md" Pack="true" PackagePath="" />
+  </ItemGroup>
 
 </Project>

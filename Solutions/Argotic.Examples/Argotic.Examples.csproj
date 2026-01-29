@@ -1,44 +1,25 @@
 <Project Sdk="Microsoft.NET.Sdk">
 
-    <PropertyGroup>
-        <OutputType>Exe</OutputType>
-        <TargetFramework>net10.0</TargetFramework>
-        <Nullable>enable</Nullable>
-        <ImplicitUsings>enable</ImplicitUsings>
-        <LangVersion>14.0</LangVersion>
-        <RootNamespace>Argotic.Examples</RootNamespace>
-        <Authors>Brian William Kuhn, endjin</Authors>
-    </PropertyGroup>
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Argotic.Examples</RootNamespace>
+    <IsPackable>false</IsPackable>
+  </PropertyGroup>
 
-    <PropertyGroup>
-        <PackageLicenseExpression>Apache-2.0</PackageLicenseExpression>
-        <PackageDescription></PackageDescription>
-        <PackageTags></PackageTags>
-        <PackageReleaseNotes></PackageReleaseNotes>
-        <IncludeSymbols>true</IncludeSymbols>
-        <SymbolPackageFormat>snupkg</SymbolPackageFormat>
-    </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="Spectre.Console" Version="0.54.0" />
+    <PackageReference Include="Spectre.Console.Cli" Version="0.53.1" />
+    <PackageReference Include="Spectre.IO" Version="0.21.0" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <PackageReference Include="Spectre.Console" Version="0.54.0" />
-        <PackageReference Include="Spectre.Console.Cli" Version="0.53.1" />
-        <PackageReference Include="Spectre.IO" Version="0.21.0" />
-    </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
+    <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
+    <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+  </ItemGroup>
 
-    <ItemGroup>
-        <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
-        <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
-        <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
-    </ItemGroup>
-
-    <PropertyGroup>
-        <EnableNETAnalyzers>true</EnableNETAnalyzers>
-        <AnalysisMode>AllEnabledByDefault</AnalysisMode>
-        <AnalysisLevel>latest</AnalysisLevel>
-    </PropertyGroup>
-
-    <ItemGroup>
-        <None Include="SampleData\**\*" CopyToOutputDirectory="PreserveNewest" />
-    </ItemGroup>
+  <ItemGroup>
+    <None Include="SampleData\**\*" CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
 
 </Project>

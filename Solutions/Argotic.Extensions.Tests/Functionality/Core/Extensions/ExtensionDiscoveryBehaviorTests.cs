@@ -28,7 +28,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<itunes:author>Test Author</itunes:author>");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -49,7 +49,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<dc:creator>Test Creator</dc:creator>");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -70,7 +70,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<geo:lat>40.7128</geo:lat><geo:long>-74.0060</geo:long>");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -92,7 +92,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<itunes:author>Podcast Author</itunes:author><dc:creator>Dublin Core Creator</dc:creator>");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -119,7 +119,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<media:content url=""http://example.com/video.mp4"" type=""video/mp4"" />");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -139,7 +139,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<creativeCommons:license>http://creativecommons.org/licenses/by/4.0/</creativeCommons:license>");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -175,9 +175,9 @@ public class ExtensionDiscoveryBehaviorTests
             """;
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings { AutoDetectExtensions = true };
+        SyndicationResourceLoadSettings settings = new() { AutoDetectExtensions = true };
         feed.Load(reader, settings);
 
         // Assert
@@ -196,7 +196,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<dc:creator>Item Creator</dc:creator>");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -223,9 +223,9 @@ public class ExtensionDiscoveryBehaviorTests
             """;
 
         // Act
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings { AutoDetectExtensions = true };
+        SyndicationResourceLoadSettings settings = new() { AutoDetectExtensions = true };
         feed.Load(reader, settings);
 
         // Assert
@@ -255,9 +255,9 @@ public class ExtensionDiscoveryBehaviorTests
             """;
 
         // Act
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings { AutoDetectExtensions = true };
+        SyndicationResourceLoadSettings settings = new() { AutoDetectExtensions = true };
         feed.Load(reader, settings);
 
         // Assert
@@ -291,9 +291,9 @@ public class ExtensionDiscoveryBehaviorTests
             """;
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings { AutoDetectExtensions = true };
+        SyndicationResourceLoadSettings settings = new() { AutoDetectExtensions = true };
         feed.Load(reader, settings);
 
         // Assert - Channel level
@@ -322,7 +322,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd""",
             @"<itunes:author>Test Author</itunes:author>");
 
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
         RssItem item = feed.Channel.Items.First();
@@ -343,7 +343,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"xmlns:dc=""http://purl.org/dc/elements/1.1/""",
             @"<dc:creator>Test Creator</dc:creator>");
 
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
         RssItem item = feed.Channel.Items.First();
@@ -363,7 +363,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd""",
             @"<itunes:author>Test Author</itunes:author>");
 
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
         RssItem item = feed.Channel.Items.First();
@@ -384,7 +384,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"xmlns:dc=""http://purl.org/dc/elements/1.1/""",
             @"<dc:creator>Test Creator</dc:creator>");
 
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
         RssItem item = feed.Channel.Items.First();
@@ -402,7 +402,7 @@ public class ExtensionDiscoveryBehaviorTests
     public void HasExtensions_WhenNoExtensions_ReturnsFalse()
     {
         // Arrange
-        RssFeed feed = new RssFeed(new Uri("http://example.com"), "Test Feed")
+        RssFeed feed = new(new Uri("http://example.com"), "Test Feed")
         {
             Channel =
             {
@@ -429,7 +429,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"xmlns:dc=""http://purl.org/dc/elements/1.1/""",
             @"<dc:creator>Test Creator</dc:creator>");
 
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -446,7 +446,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"xmlns:itunes=""http://www.itunes.com/dtds/podcast-1.0.dtd"" xmlns:dc=""http://purl.org/dc/elements/1.1/"" xmlns:geo=""http://www.w3.org/2003/01/geo/wgs84_pos#""",
             @"<itunes:author>Podcast Author</itunes:author><dc:creator>Dublin Core Creator</dc:creator><geo:lat>40.7128</geo:lat><geo:long>-74.0060</geo:long>");
 
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
         RssItem item = feed.Channel.Items.First();
@@ -485,8 +485,8 @@ public class ExtensionDiscoveryBehaviorTests
             </rss>
             """;
 
-        RssFeed feed = new RssFeed();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        RssFeed feed = new();
+        SyndicationResourceLoadSettings settings = new()
         {
             AutoDetectExtensions = true
         };
@@ -515,8 +515,8 @@ public class ExtensionDiscoveryBehaviorTests
             </feed>
             """;
 
-        AtomFeed feed = new AtomFeed();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        AtomFeed feed = new();
+        SyndicationResourceLoadSettings settings = new()
         {
             AutoDetectExtensions = true
         };
@@ -545,7 +545,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<slash:comments>42</slash:comments>");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -566,7 +566,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<content:encoded><![CDATA[<p>Full content here</p>]]></content:encoded>");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 
@@ -586,7 +586,7 @@ public class ExtensionDiscoveryBehaviorTests
             @"<dcterms:abstract>Test abstract content</dcterms:abstract>");
 
         // Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
         feed.Load(reader);
 

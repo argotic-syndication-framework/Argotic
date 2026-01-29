@@ -16,7 +16,7 @@ public class TrackbackDiscoveryMetadataTests
     public void Constructor_Default_CreatesInstance()
     {
         // Arrange & Act
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
 
         // Assert
         metadata.ShouldNotBeNull();
@@ -32,8 +32,8 @@ public class TrackbackDiscoveryMetadataTests
         // Arrange
         // Note: The Load method has a bug in the XPath expression (uses \r instead of /)
         // so this test verifies the constructor doesn't throw and calls Load
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.TrackbackRdfMetadata));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.TrackbackRdfMetadata));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
 
@@ -64,8 +64,8 @@ public class TrackbackDiscoveryMetadataTests
     public void About_Set_SetsValue()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
-        Uri about = new Uri("http://example.com/post/1");
+        TrackbackDiscoveryMetadata metadata = new();
+        Uri about = new("http://example.com/post/1");
 
         // Act
         metadata.About = about;
@@ -78,7 +78,7 @@ public class TrackbackDiscoveryMetadataTests
     public void About_SetNull_ThrowsArgumentNullException()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => metadata.About = null!);
@@ -88,8 +88,8 @@ public class TrackbackDiscoveryMetadataTests
     public void Identifier_Set_SetsValue()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
-        Uri identifier = new Uri("http://example.com/post/1");
+        TrackbackDiscoveryMetadata metadata = new();
+        Uri identifier = new("http://example.com/post/1");
 
         // Act
         metadata.Identifier = identifier;
@@ -102,7 +102,7 @@ public class TrackbackDiscoveryMetadataTests
     public void Identifier_SetNull_ThrowsArgumentNullException()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => metadata.Identifier = null!);
@@ -112,8 +112,8 @@ public class TrackbackDiscoveryMetadataTests
     public void PingUrl_Set_SetsValue()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
-        Uri pingUrl = new Uri("http://example.com/trackback/1");
+        TrackbackDiscoveryMetadata metadata = new();
+        Uri pingUrl = new("http://example.com/trackback/1");
 
         // Act
         metadata.PingUrl = pingUrl;
@@ -126,7 +126,7 @@ public class TrackbackDiscoveryMetadataTests
     public void PingUrl_SetNull_ThrowsArgumentNullException()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => metadata.PingUrl = null!);
@@ -136,7 +136,7 @@ public class TrackbackDiscoveryMetadataTests
     public void Title_Set_SetsValue()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
 
         // Act
         metadata.Title = "Test Title";
@@ -149,7 +149,7 @@ public class TrackbackDiscoveryMetadataTests
     public void Title_SetWithWhitespace_TrimsValue()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
 
         // Act
         metadata.Title = "  Test Title  ";
@@ -162,7 +162,7 @@ public class TrackbackDiscoveryMetadataTests
     public void Title_SetNull_SetsEmpty()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
         metadata.Title = "Initial Title";
 
         // Act
@@ -176,7 +176,7 @@ public class TrackbackDiscoveryMetadataTests
     public void Title_SetEmpty_SetsEmpty()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
         metadata.Title = "Initial Title";
 
         // Act
@@ -192,9 +192,9 @@ public class TrackbackDiscoveryMetadataTests
         // Arrange
         // Note: The Load method has a bug in the XPath expression (uses \r instead of /)
         // so we can only test that it handles null correctly and doesn't throw for valid navigator
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.TrackbackRdfMetadata));
-        XPathDocument doc = new XPathDocument(stream);
+        TrackbackDiscoveryMetadata metadata = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.TrackbackRdfMetadata));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
 
@@ -215,7 +215,7 @@ public class TrackbackDiscoveryMetadataTests
     public void Load_NullNavigator_ThrowsArgumentNullException()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => metadata.Load(null!));
@@ -228,9 +228,9 @@ public class TrackbackDiscoveryMetadataTests
         // Test with a document that has no Description element at all
         string emptyRdf = "<empty />";
 
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(emptyRdf));
-        XPathDocument doc = new XPathDocument(stream);
+        TrackbackDiscoveryMetadata metadata = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(emptyRdf));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
         navigator.MoveToFirstChild();
@@ -246,7 +246,7 @@ public class TrackbackDiscoveryMetadataTests
     public void WriteTo_WithAllProperties_WritesCorrectXml()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata = new()
         {
             About = new Uri("http://example.com/post/1"),
             Identifier = new Uri("http://example.com/post/1"),
@@ -254,8 +254,8 @@ public class TrackbackDiscoveryMetadataTests
             PingUrl = new Uri("http://example.com/trackback/1")
         };
 
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             Indent = false,
             OmitXmlDeclaration = true,
@@ -269,7 +269,7 @@ public class TrackbackDiscoveryMetadataTests
         }
 
         stream.Seek(0, SeekOrigin.Begin);
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string result = reader.ReadToEnd();
 
         // Assert
@@ -284,7 +284,7 @@ public class TrackbackDiscoveryMetadataTests
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => metadata.WriteTo(null!));
@@ -294,7 +294,7 @@ public class TrackbackDiscoveryMetadataTests
     public void ToString_ReturnsXmlRepresentation()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata = new()
         {
             About = new Uri("http://example.com/post/1"),
             Identifier = new Uri("http://example.com/post/1"),
@@ -314,7 +314,7 @@ public class TrackbackDiscoveryMetadataTests
     public void CompareTo_EqualMetadata_ReturnsZero()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata1 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata1 = new()
         {
             About = new Uri("http://example.com/post/1"),
             Identifier = new Uri("http://example.com/post/1"),
@@ -322,7 +322,7 @@ public class TrackbackDiscoveryMetadataTests
             PingUrl = new Uri("http://example.com/trackback/1")
         };
 
-        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata2 = new()
         {
             About = new Uri("http://example.com/post/1"),
             Identifier = new Uri("http://example.com/post/1"),
@@ -341,7 +341,7 @@ public class TrackbackDiscoveryMetadataTests
     public void CompareTo_Null_ReturnsOne()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
@@ -358,12 +358,12 @@ public class TrackbackDiscoveryMetadataTests
     public void CompareTo_DifferentMetadata_ReturnsNonZero()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata1 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata1 = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
         };
-        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata2 = new()
         {
             About = new Uri("http://example.com/post/2"),
             PingUrl = new Uri("http://example.com/trackback/2")
@@ -380,7 +380,7 @@ public class TrackbackDiscoveryMetadataTests
     public void Equals_SameMetadata_ReturnsTrue()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata1 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata1 = new()
         {
             About = new Uri("http://example.com/post/1"),
             Identifier = new Uri("http://example.com/post/1"),
@@ -388,7 +388,7 @@ public class TrackbackDiscoveryMetadataTests
             PingUrl = new Uri("http://example.com/trackback/1")
         };
 
-        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata2 = new()
         {
             About = new Uri("http://example.com/post/1"),
             Identifier = new Uri("http://example.com/post/1"),
@@ -404,13 +404,13 @@ public class TrackbackDiscoveryMetadataTests
     public void Equals_DifferentMetadata_ReturnsFalse()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata1 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata1 = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
         };
 
-        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata2 = new()
         {
             About = new Uri("http://example.com/post/2"),
             PingUrl = new Uri("http://example.com/trackback/2")
@@ -424,7 +424,7 @@ public class TrackbackDiscoveryMetadataTests
     public void Equals_NonTrackbackDiscoveryMetadata_ReturnsFalse()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata();
+        TrackbackDiscoveryMetadata metadata = new();
 
         // Act & Assert
         metadata.Equals("not metadata").ShouldBeFalse();
@@ -434,7 +434,7 @@ public class TrackbackDiscoveryMetadataTests
     public void GetHashCode_DoesNotThrow()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
@@ -453,13 +453,13 @@ public class TrackbackDiscoveryMetadataTests
     public void OperatorEquals_EqualMetadata_ReturnsTrue()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata1 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata1 = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
         };
 
-        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata2 = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
@@ -484,13 +484,13 @@ public class TrackbackDiscoveryMetadataTests
     public void OperatorNotEquals_DifferentMetadata_ReturnsTrue()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata1 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata1 = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
         };
 
-        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata2 = new()
         {
             About = new Uri("http://example.com/post/2"),
             PingUrl = new Uri("http://example.com/trackback/2")
@@ -505,7 +505,7 @@ public class TrackbackDiscoveryMetadataTests
     {
         // Arrange
         TrackbackDiscoveryMetadata? metadata1 = null;
-        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata2 = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
@@ -520,7 +520,7 @@ public class TrackbackDiscoveryMetadataTests
     {
         // Arrange
         TrackbackDiscoveryMetadata? metadata1 = null;
-        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata2 = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
@@ -535,7 +535,7 @@ public class TrackbackDiscoveryMetadataTests
     {
         // Arrange
         TrackbackDiscoveryMetadata? metadata1 = null;
-        TrackbackDiscoveryMetadata metadata2 = new TrackbackDiscoveryMetadata
+        TrackbackDiscoveryMetadata metadata2 = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")

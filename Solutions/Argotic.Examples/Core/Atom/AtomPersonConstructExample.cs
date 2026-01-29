@@ -1,4 +1,4 @@
-﻿using Argotic.Syndication;
+using Argotic.Syndication;
 
 namespace Argotic.Examples.Core.Atom;
 
@@ -9,7 +9,7 @@ namespace Argotic.Examples.Core.Atom;
 ///     This class contains all the code examples that are referenced by the <see cref="AtomPersonConstruct"/> class. 
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class AtomPersonConstructExample
+internal static class AtomPersonConstructExample
 {
     /// <summary>
     /// Provides example code for the AtomPersonConstruct class.

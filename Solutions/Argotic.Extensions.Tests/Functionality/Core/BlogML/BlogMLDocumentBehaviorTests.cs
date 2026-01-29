@@ -179,7 +179,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenCreatedWithRootUrl_ContainsCorrectRootUrl()
     {
         // Arrange & Act
-        BlogMLDocument document = new BlogMLDocument
+        BlogMLDocument document = new()
         {
             RootUrl = new Uri("http://example.com")
         };
@@ -192,7 +192,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenCreatedWithTitle_ContainsCorrectTitle()
     {
         // Arrange & Act
-        BlogMLDocument document = new BlogMLDocument
+        BlogMLDocument document = new()
         {
             Title = new BlogMLTextConstruct("My Blog")
         };
@@ -206,7 +206,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenCreatedWithSubtitle_ContainsCorrectSubtitle()
     {
         // Arrange & Act
-        BlogMLDocument document = new BlogMLDocument
+        BlogMLDocument document = new()
         {
             Subtitle = new BlogMLTextConstruct("A test blog about testing")
         };
@@ -220,10 +220,10 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenCreatedWithGeneratedOn_ContainsCorrectDate()
     {
         // Arrange
-        DateTime generatedOn = new DateTime(2024, 1, 15, 12, 0, 0, DateTimeKind.Utc);
+        DateTime generatedOn = new(2024, 1, 15, 12, 0, 0, DateTimeKind.Utc);
 
         // Act
-        BlogMLDocument document = new BlogMLDocument
+        BlogMLDocument document = new()
         {
             GeneratedOn = generatedOn
         };
@@ -236,14 +236,14 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenPostsAdded_ContainsAllPosts()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
-        BlogMLPost post1 = new BlogMLPost
+        BlogMLDocument document = new();
+        BlogMLPost post1 = new()
         {
             Id = "1",
             Title = new BlogMLTextConstruct("First Post"),
             Content = new BlogMLTextConstruct("<p>Content 1</p>", BlogMLContentType.Html)
         };
-        BlogMLPost post2 = new BlogMLPost
+        BlogMLPost post2 = new()
         {
             Id = "2",
             Title = new BlogMLTextConstruct("Second Post"),
@@ -266,8 +266,8 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenPostWithContentAdded_PreservesContentType()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
-        BlogMLPost post = new BlogMLPost
+        BlogMLDocument document = new();
+        BlogMLPost post = new()
         {
             Id = "1",
             Title = new BlogMLTextConstruct("HTML Post"),
@@ -286,14 +286,14 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenCategoriesAdded_ContainsAllCategories()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
-        BlogMLCategory category1 = new BlogMLCategory
+        BlogMLDocument document = new();
+        BlogMLCategory category1 = new()
         {
             Id = "cat1",
             Title = new BlogMLTextConstruct("Technology"),
             ApprovalStatus = BlogMLApprovalStatus.Approved
         };
-        BlogMLCategory category2 = new BlogMLCategory
+        BlogMLCategory category2 = new()
         {
             Id = "cat2",
             Title = new BlogMLTextConstruct("Science"),
@@ -316,15 +316,15 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenAuthorsAdded_ContainsAllAuthors()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
-        BlogMLAuthor author1 = new BlogMLAuthor
+        BlogMLDocument document = new();
+        BlogMLAuthor author1 = new()
         {
             Id = "auth1",
             Title = new BlogMLTextConstruct("Admin"),
             EmailAddress = "admin@example.com",
             ApprovalStatus = BlogMLApprovalStatus.Approved
         };
-        BlogMLAuthor author2 = new BlogMLAuthor
+        BlogMLAuthor author2 = new()
         {
             Id = "auth2",
             Title = new BlogMLTextConstruct("Writer"),
@@ -348,15 +348,15 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenPostWithCommentsAdded_ContainsAllComments()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
-        BlogMLPost post = new BlogMLPost
+        BlogMLDocument document = new();
+        BlogMLPost post = new()
         {
             Id = "1",
             Title = new BlogMLTextConstruct("Post with Comments"),
             Content = new BlogMLTextConstruct("Content")
         };
 
-        BlogMLComment comment1 = new BlogMLComment
+        BlogMLComment comment1 = new()
         {
             Id = "c1",
             Title = new BlogMLTextConstruct("First Comment"),
@@ -365,7 +365,7 @@ public class BlogMLDocumentBehaviorTests
             UserEmailAddress = "john@example.com"
         };
 
-        BlogMLComment comment2 = new BlogMLComment
+        BlogMLComment comment2 = new()
         {
             Id = "c2",
             Title = new BlogMLTextConstruct("Second Comment"),
@@ -393,10 +393,10 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenLoadedFromMinimalXml_PopulatesBasicProperties()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(MinimalBlogML));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(MinimalBlogML));
         document.Load(stream);
 
         // Assert
@@ -411,10 +411,10 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenLoadedFromXmlWithPost_PopulatesPost()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(BlogMLWithPost));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(BlogMLWithPost));
         document.Load(stream);
 
         // Assert
@@ -431,10 +431,10 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenLoadedFromXmlWithComments_PopulatesComments()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(BlogMLWithComments));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(BlogMLWithComments));
         document.Load(stream);
 
         // Assert
@@ -457,10 +457,10 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenLoadedFromXmlWithCategories_PopulatesCategories()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(BlogMLWithCategories));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(BlogMLWithCategories));
         document.Load(stream);
 
         // Assert
@@ -480,10 +480,10 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenLoadedFromXmlWithAuthors_PopulatesAuthors()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(BlogMLWithAuthors));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(BlogMLWithAuthors));
         document.Load(stream);
 
         // Assert
@@ -503,10 +503,10 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenLoadedFromCompleteBlogML_PopulatesAllProperties()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(CompleteBlogML));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(CompleteBlogML));
         document.Load(stream);
 
         // Assert
@@ -533,7 +533,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenLoadedFromStream_RaisesLoadedEvent()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
         bool eventRaised = false;
         SyndicationResourceLoadedEventArgs? eventArgs = null;
 
@@ -544,7 +544,7 @@ public class BlogMLDocumentBehaviorTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(MinimalBlogML));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(MinimalBlogML));
         document.Load(stream);
 
         // Assert
@@ -556,7 +556,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenLoadedFromXmlReader_PopulatesProperties()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(MinimalBlogML));
@@ -578,10 +578,10 @@ public class BlogMLDocumentBehaviorTests
             </blog>
             """;
 
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Act & Assert
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(malformedXml));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(malformedXml));
         Should.Throw<XmlException>(() => document.Load(stream));
     }
 
@@ -593,7 +593,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesBasicProperties()
     {
         // Arrange
-        BlogMLDocument originalDocument = new BlogMLDocument
+        BlogMLDocument originalDocument = new()
         {
             RootUrl = new Uri("http://example.com/blog"),
             GeneratedOn = new DateTime(2024, 1, 15, 12, 0, 0, DateTimeKind.Utc),
@@ -602,12 +602,12 @@ public class BlogMLDocumentBehaviorTests
         };
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        BlogMLDocument loadedDocument = new BlogMLDocument();
+        BlogMLDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -624,12 +624,12 @@ public class BlogMLDocumentBehaviorTests
         BlogMLDocument originalDocument = CreateDocumentWithPosts();
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        BlogMLDocument loadedDocument = new BlogMLDocument();
+        BlogMLDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -647,13 +647,13 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesPostsWithComments()
     {
         // Arrange
-        BlogMLDocument originalDocument = new BlogMLDocument
+        BlogMLDocument originalDocument = new()
         {
             RootUrl = new Uri("http://example.com"),
             Title = new BlogMLTextConstruct("Comments Blog")
         };
 
-        BlogMLPost post = new BlogMLPost
+        BlogMLPost post = new()
         {
             Id = "1",
             Title = new BlogMLTextConstruct("Post with Comments"),
@@ -662,7 +662,7 @@ public class BlogMLDocumentBehaviorTests
             ApprovalStatus = BlogMLApprovalStatus.Approved
         };
 
-        BlogMLComment comment = new BlogMLComment
+        BlogMLComment comment = new()
         {
             Id = "c1",
             Title = new BlogMLTextConstruct("Comment Title"),
@@ -676,12 +676,12 @@ public class BlogMLDocumentBehaviorTests
         originalDocument.Posts.Add(post);
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        BlogMLDocument loadedDocument = new BlogMLDocument();
+        BlogMLDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -700,7 +700,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesCategories()
     {
         // Arrange
-        BlogMLDocument originalDocument = new BlogMLDocument
+        BlogMLDocument originalDocument = new()
         {
             RootUrl = new Uri("http://example.com"),
             Title = new BlogMLTextConstruct("Categories Blog")
@@ -723,7 +723,7 @@ public class BlogMLDocumentBehaviorTests
             CreatedOn = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)
         });
 
-        BlogMLPost post = new BlogMLPost
+        BlogMLPost post = new()
         {
             Id = "1",
             Title = new BlogMLTextConstruct("Tech Post"),
@@ -736,12 +736,12 @@ public class BlogMLDocumentBehaviorTests
         originalDocument.Posts.Add(post);
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        BlogMLDocument loadedDocument = new BlogMLDocument();
+        BlogMLDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -761,7 +761,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesAuthors()
     {
         // Arrange
-        BlogMLDocument originalDocument = new BlogMLDocument
+        BlogMLDocument originalDocument = new()
         {
             RootUrl = new Uri("http://example.com"),
             Title = new BlogMLTextConstruct("Authors Blog")
@@ -776,7 +776,7 @@ public class BlogMLDocumentBehaviorTests
             CreatedOn = new DateTime(2024, 1, 1, 0, 0, 0, DateTimeKind.Utc)
         });
 
-        BlogMLPost post = new BlogMLPost
+        BlogMLPost post = new()
         {
             Id = "1",
             Title = new BlogMLTextConstruct("Admin Post"),
@@ -788,12 +788,12 @@ public class BlogMLDocumentBehaviorTests
         originalDocument.Posts.Add(post);
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        BlogMLDocument loadedDocument = new BlogMLDocument();
+        BlogMLDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -810,7 +810,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_WhenSavedAndReloaded_PreservesExtendedProperties()
     {
         // Arrange
-        BlogMLDocument originalDocument = new BlogMLDocument
+        BlogMLDocument originalDocument = new()
         {
             RootUrl = new Uri("http://example.com"),
             Title = new BlogMLTextConstruct("Extended Props Blog")
@@ -820,12 +820,12 @@ public class BlogMLDocumentBehaviorTests
         originalDocument.ExtendedProperties.Add("Property2", "Value2");
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        BlogMLDocument loadedDocument = new BlogMLDocument();
+        BlogMLDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -838,17 +838,17 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_ParseSerializeParse_ProducesSameDocument()
     {
         // Arrange
-        BlogMLDocument firstDocument = new BlogMLDocument();
-        using MemoryStream firstStream = new MemoryStream(Encoding.UTF8.GetBytes(CompleteBlogML));
+        BlogMLDocument firstDocument = new();
+        using MemoryStream firstStream = new(Encoding.UTF8.GetBytes(CompleteBlogML));
         firstDocument.Load(firstStream);
 
         // Act - First serialize
-        using MemoryStream serializeStream = new MemoryStream();
+        using MemoryStream serializeStream = new();
         firstDocument.Save(serializeStream);
 
         // Act - Second parse
         serializeStream.Position = 0;
-        BlogMLDocument secondDocument = new BlogMLDocument();
+        BlogMLDocument secondDocument = new();
         secondDocument.Load(serializeStream);
 
         // Assert - Core properties match
@@ -877,17 +877,17 @@ public class BlogMLDocumentBehaviorTests
         BlogMLDocument originalDocument = CreateCompleteDocument();
 
         // Act - First round trip
-        using MemoryStream stream1 = new MemoryStream();
+        using MemoryStream stream1 = new();
         originalDocument.Save(stream1);
         stream1.Position = 0;
-        BlogMLDocument document1 = new BlogMLDocument();
+        BlogMLDocument document1 = new();
         document1.Load(stream1);
 
         // Act - Second round trip
-        using MemoryStream stream2 = new MemoryStream();
+        using MemoryStream stream2 = new();
         document1.Save(stream2);
         stream2.Position = 0;
-        BlogMLDocument document2 = new BlogMLDocument();
+        BlogMLDocument document2 = new();
         document2.Load(stream2);
 
         // Assert
@@ -906,7 +906,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_Format_ReturnsBlogML()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Assert
         document.Format.ShouldBe(SyndicationContentFormat.BlogML);
@@ -916,7 +916,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_Version_Returns2Point0()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Assert
         document.Version.Major.ShouldBe(2);
@@ -931,12 +931,12 @@ public class BlogMLDocumentBehaviorTests
     public async Task BlogMLDocument_LoadAsync_LoadsDocumentCorrectly()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
         bool eventRaised = false;
         document.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalBlogML);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await document.LoadAsync(
@@ -955,7 +955,7 @@ public class BlogMLDocumentBehaviorTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(BlogMLWithPost);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         BlogMLDocument document = await BlogMLDocument.CreateAsync(
@@ -974,7 +974,7 @@ public class BlogMLDocumentBehaviorTests
     public async Task BlogMLDocument_LoadAsync_IncludesSourceUriInEventArgs()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
         Uri? sourceFromEvent = null;
 
         document.Loaded += (sender, args) =>
@@ -983,8 +983,8 @@ public class BlogMLDocumentBehaviorTests
         };
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalBlogML);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri requestUri = new Uri("http://example.com/blog.xml");
+        using HttpClient httpClient = new(handler);
+        Uri requestUri = new("http://example.com/blog.xml");
 
         // Act
         await document.LoadAsync(requestUri, httpClient, cancellationToken: TestContext?.CancellationToken ?? CancellationToken.None);
@@ -1001,13 +1001,13 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_CreateNavigator_ReturnsValidNavigator()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument
+        BlogMLDocument document = new()
         {
             RootUrl = new Uri("http://example.com"),
             Title = new BlogMLTextConstruct("Navigator Test Blog")
         };
 
-        BlogMLPost post = new BlogMLPost
+        BlogMLPost post = new()
         {
             Id = "1",
             Title = new BlogMLTextConstruct("Test Post"),
@@ -1031,7 +1031,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument
+        BlogMLDocument document = new()
         {
             Title = new BlogMLTextConstruct("Test Blog")
         };
@@ -1044,7 +1044,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_FindExtension_ReturnsNullWhenNoMatch()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument
+        BlogMLDocument document = new()
         {
             Title = new BlogMLTextConstruct("Test Blog")
         };
@@ -1060,7 +1060,7 @@ public class BlogMLDocumentBehaviorTests
     public void BlogMLDocument_SetTitleToNull_ThrowsArgumentNullException()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
+        BlogMLDocument document = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => document.Title = null!);
@@ -1073,11 +1073,11 @@ public class BlogMLDocumentBehaviorTests
         BlogMLDocument document = CreateCompleteDocument();
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
 
         stream.Position = 0;
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         // Assert
@@ -1096,7 +1096,7 @@ public class BlogMLDocumentBehaviorTests
 
     private static BlogMLDocument CreateDocumentWithPosts()
     {
-        BlogMLDocument document = new BlogMLDocument
+        BlogMLDocument document = new()
         {
             RootUrl = new Uri("http://example.com"),
             GeneratedOn = new DateTime(2024, 1, 15, 12, 0, 0, DateTimeKind.Utc),
@@ -1120,7 +1120,7 @@ public class BlogMLDocumentBehaviorTests
 
     private static BlogMLDocument CreateCompleteDocument()
     {
-        BlogMLDocument document = new BlogMLDocument
+        BlogMLDocument document = new()
         {
             RootUrl = new Uri("http://example.com/blog"),
             GeneratedOn = new DateTime(2024, 1, 15, 12, 0, 0, DateTimeKind.Utc),
@@ -1147,7 +1147,7 @@ public class BlogMLDocumentBehaviorTests
 
         document.ExtendedProperties.Add("TestProperty", "TestValue");
 
-        BlogMLPost post = new BlogMLPost
+        BlogMLPost post = new()
         {
             Id = "1",
             Title = new BlogMLTextConstruct("Complete Post"),
@@ -1161,7 +1161,7 @@ public class BlogMLDocumentBehaviorTests
         post.Authors.Add("auth1");
         post.Categories.Add("cat1");
 
-        BlogMLComment comment = new BlogMLComment
+        BlogMLComment comment = new()
         {
             Id = "c1",
             Title = new BlogMLTextConstruct("Comment"),

@@ -2,7 +2,6 @@ using System.Xml;
 using System.Xml.XPath;
 
 using Argotic.Common;
-using Argotic.Data.Adapters;
 using Argotic.Extensions;
 
 namespace Argotic.Syndication;

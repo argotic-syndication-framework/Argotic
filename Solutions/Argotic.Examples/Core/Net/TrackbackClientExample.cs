@@ -10,7 +10,7 @@ namespace Argotic.Examples.Core.Net;
 ///     This class contains all the code examples that are referenced by the <see cref="TrackbackClient"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class TrackbackClientExample
+internal static class TrackbackClientExample
 {
     /// <summary>
     /// Provides example code for the TrackbackClient class.

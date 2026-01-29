@@ -12,7 +12,7 @@ namespace Argotic.Examples.Common;
 ///     This class contains all the code examples that are referenced by the <see cref="SyndicationDiscoveryUtility"/> class. 
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class SyndicationDiscoveryUtilityExample
+internal static class SyndicationDiscoveryUtilityExample
 {
     /// <summary>
     /// Provides example code for the SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(Uri) method
@@ -78,7 +78,7 @@ public static class SyndicationDiscoveryUtilityExample
         Uri source = new("https://endjin.com/rss.xml");
 
         using HttpClient client = new();
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, source);
+        using HttpRequestMessage request = new(HttpMethod.Get, source);
         request.Headers.UserAgent.ParseAdd("Some User Agent 1.0.0.0");
 
         using HttpResponseMessage httpResponse = await client.SendAsync(request).ConfigureAwait(false);

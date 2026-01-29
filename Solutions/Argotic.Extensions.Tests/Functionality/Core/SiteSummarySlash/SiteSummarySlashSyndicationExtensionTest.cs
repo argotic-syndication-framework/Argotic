@@ -55,7 +55,7 @@ public class SiteSummarySlashSyndicationExtensionTest
         // Verify GetHashCode does not throw
         SiteSummarySlashSyndicationExtension target = CreateExtension1();
         int hash = target.GetHashCode();
-        
+
         hash.ShouldNotBe(0);
     }
 

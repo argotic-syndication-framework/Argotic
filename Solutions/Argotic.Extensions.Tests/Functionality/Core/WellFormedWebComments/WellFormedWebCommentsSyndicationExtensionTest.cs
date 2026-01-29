@@ -51,7 +51,7 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         // Verify GetHashCode does not throw
         WellFormedWebCommentsSyndicationExtension target = CreateExtension1();
         int hash = target.GetHashCode();
-        
+
         hash.ShouldNotBe(0);
     }
 

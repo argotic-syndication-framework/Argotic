@@ -1,4 +1,4 @@
-﻿using Argotic.Syndication;
+using Argotic.Syndication;
 
 namespace Argotic.Examples.Core.Atom;
 
@@ -9,7 +9,7 @@ namespace Argotic.Examples.Core.Atom;
 ///     This class contains all the code examples that are referenced by the <see cref="AtomIcon"/> class. 
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class AtomIconExample
+internal static class AtomIconExample
 {
     /// <summary>
     /// Provides example code for the AtomIcon class.

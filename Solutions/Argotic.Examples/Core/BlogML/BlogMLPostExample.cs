@@ -1,4 +1,4 @@
-﻿using Argotic.Syndication.Specialized;
+using Argotic.Syndication.Specialized;
 
 namespace Argotic.Examples.Core.BlogML;
 
@@ -9,7 +9,7 @@ namespace Argotic.Examples.Core.BlogML;
 ///     This class contains all the code examples that are referenced by the <see cref="BlogMLPost"/> class. 
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class BlogMLPostExample
+internal static class BlogMLPostExample
 {
     /// <summary>
     /// Provides example code for the BlogMLPost class.

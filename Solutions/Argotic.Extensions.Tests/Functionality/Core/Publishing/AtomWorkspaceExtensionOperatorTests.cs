@@ -1,4 +1,3 @@
-using Argotic.Common;
 using Argotic.Extensions.Tests.Functionality.Common;
 using Argotic.Publishing;
 using Argotic.Syndication;

@@ -12,7 +12,7 @@ public class DiscoverableSyndicationEndpointTests
     public void Constructor_Default_CreatesInstance()
     {
         // Arrange & Act
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Assert
         endpoint.ShouldNotBeNull();
@@ -25,11 +25,11 @@ public class DiscoverableSyndicationEndpointTests
     public void Constructor_WithSourceAndContentType_SetsProperties()
     {
         // Arrange
-        Uri source = new Uri("http://example.com/feed.rss");
+        Uri source = new("http://example.com/feed.rss");
         string contentType = "application/rss+xml";
 
         // Act
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(source, contentType);
+        DiscoverableSyndicationEndpoint endpoint = new(source, contentType);
 
         // Assert
         endpoint.Source.ShouldBe(source);
@@ -41,12 +41,12 @@ public class DiscoverableSyndicationEndpointTests
     public void Constructor_WithSourceContentTypeAndTitle_SetsProperties()
     {
         // Arrange
-        Uri source = new Uri("http://example.com/feed.rss");
+        Uri source = new("http://example.com/feed.rss");
         string contentType = "application/rss+xml";
         string title = "Test RSS Feed";
 
         // Act
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(source, contentType, title);
+        DiscoverableSyndicationEndpoint endpoint = new(source, contentType, title);
 
         // Assert
         endpoint.Source.ShouldBe(source);
@@ -65,7 +65,7 @@ public class DiscoverableSyndicationEndpointTests
     public void Constructor_WithNullContentType_ThrowsArgumentException()
     {
         // Arrange
-        Uri source = new Uri("http://example.com/feed.rss");
+        Uri source = new("http://example.com/feed.rss");
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => new DiscoverableSyndicationEndpoint(source, null!));
@@ -75,7 +75,7 @@ public class DiscoverableSyndicationEndpointTests
     public void Constructor_WithEmptyContentType_ThrowsArgumentException()
     {
         // Arrange
-        Uri source = new Uri("http://example.com/feed.rss");
+        Uri source = new("http://example.com/feed.rss");
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => new DiscoverableSyndicationEndpoint(source, string.Empty));
@@ -85,7 +85,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ContentType_Set_SetsValue()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Act
         endpoint.ContentType = "application/atom+xml";
@@ -98,7 +98,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ContentType_SetWithWhitespace_TrimsValue()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Act
         endpoint.ContentType = "  application/atom+xml  ";
@@ -111,7 +111,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ContentType_SetNull_ThrowsArgumentException()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => endpoint.ContentType = null!);
@@ -121,7 +121,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ContentType_SetEmpty_ThrowsArgumentException()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => endpoint.ContentType = string.Empty);
@@ -131,8 +131,8 @@ public class DiscoverableSyndicationEndpointTests
     public void Source_Set_SetsValue()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
-        Uri source = new Uri("http://example.com/feed.rss");
+        DiscoverableSyndicationEndpoint endpoint = new();
+        Uri source = new("http://example.com/feed.rss");
 
         // Act
         endpoint.Source = source;
@@ -145,7 +145,7 @@ public class DiscoverableSyndicationEndpointTests
     public void Source_SetNull_ThrowsArgumentNullException()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => endpoint.Source = null!);
@@ -155,7 +155,7 @@ public class DiscoverableSyndicationEndpointTests
     public void Title_Set_SetsValue()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Act
         endpoint.Title = "Test Feed";
@@ -168,7 +168,7 @@ public class DiscoverableSyndicationEndpointTests
     public void Title_SetWithWhitespace_TrimsValue()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Act
         endpoint.Title = "  Test Feed  ";
@@ -181,7 +181,7 @@ public class DiscoverableSyndicationEndpointTests
     public void Title_SetNull_SetsEmpty()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
         endpoint.Title = "Initial Title";
 
         // Act
@@ -195,7 +195,7 @@ public class DiscoverableSyndicationEndpointTests
     public void Title_SetEmpty_SetsEmpty()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
         endpoint.Title = "Initial Title";
 
         // Act
@@ -209,7 +209,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ContentFormat_RssContentType_ReturnsRss()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 
@@ -224,7 +224,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ContentFormat_AtomContentType_ReturnsAtom()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint = new(
             new Uri("http://example.com/feed.atom"),
             "application/atom+xml");
 
@@ -239,7 +239,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ContentFormat_UnknownContentType_ReturnsNone()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint = new(
             new Uri("http://example.com/unknown"),
             "application/unknown");
 
@@ -254,7 +254,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ContentFormat_EmptyContentType_ReturnsNone()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Act
         SyndicationContentFormat format = endpoint.ContentFormat;
@@ -267,7 +267,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ContentFormat_OpmlContentType_ReturnsOpml()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint = new(
             new Uri("http://example.com/subscriptions.opml"),
             "text/x-opml");
 
@@ -282,7 +282,7 @@ public class DiscoverableSyndicationEndpointTests
     public void ToString_ReturnsXhtmlRepresentation()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml",
             "Test Feed");
@@ -302,12 +302,12 @@ public class DiscoverableSyndicationEndpointTests
     public void CompareTo_EqualEndpoints_ReturnsZero()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint1 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint1 = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml",
             "Test Feed");
 
-        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint2 = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml",
             "Test Feed");
@@ -323,7 +323,7 @@ public class DiscoverableSyndicationEndpointTests
     public void CompareTo_Null_ReturnsOne()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 
@@ -338,10 +338,10 @@ public class DiscoverableSyndicationEndpointTests
     public void CompareTo_DifferentEndpoint_ReturnsNonZero()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint1 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint1 = new(
             new Uri("http://example.com/feed1.rss"),
             "application/rss+xml");
-        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint2 = new(
             new Uri("http://example.com/feed2.rss"),
             "application/atom+xml");
 
@@ -356,12 +356,12 @@ public class DiscoverableSyndicationEndpointTests
     public void Equals_SameEndpoint_ReturnsTrue()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint1 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint1 = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml",
             "Test Feed");
 
-        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint2 = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml",
             "Test Feed");
@@ -374,11 +374,11 @@ public class DiscoverableSyndicationEndpointTests
     public void Equals_DifferentEndpoint_ReturnsFalse()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint1 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint1 = new(
             new Uri("http://example.com/feed1.rss"),
             "application/rss+xml");
 
-        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint2 = new(
             new Uri("http://example.com/feed2.rss"),
             "application/rss+xml");
 
@@ -390,7 +390,7 @@ public class DiscoverableSyndicationEndpointTests
     public void Equals_NonDiscoverableSyndicationEndpoint_ReturnsFalse()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 
@@ -402,7 +402,7 @@ public class DiscoverableSyndicationEndpointTests
     public void GetHashCode_DoesNotThrow()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 
@@ -419,11 +419,11 @@ public class DiscoverableSyndicationEndpointTests
     public void OperatorEquals_EqualEndpoints_ReturnsTrue()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint1 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint1 = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 
-        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint2 = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 
@@ -446,11 +446,11 @@ public class DiscoverableSyndicationEndpointTests
     public void OperatorNotEquals_DifferentEndpoints_ReturnsTrue()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint1 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint1 = new(
             new Uri("http://example.com/feed1.rss"),
             "application/rss+xml");
 
-        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint2 = new(
             new Uri("http://example.com/feed2.rss"),
             "application/rss+xml");
 
@@ -463,7 +463,7 @@ public class DiscoverableSyndicationEndpointTests
     {
         // Arrange
         DiscoverableSyndicationEndpoint? endpoint1 = null;
-        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint2 = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 
@@ -476,7 +476,7 @@ public class DiscoverableSyndicationEndpointTests
     {
         // Arrange
         DiscoverableSyndicationEndpoint? endpoint1 = null;
-        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint2 = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 
@@ -489,7 +489,7 @@ public class DiscoverableSyndicationEndpointTests
     {
         // Arrange
         DiscoverableSyndicationEndpoint? endpoint1 = null;
-        DiscoverableSyndicationEndpoint endpoint2 = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint2 = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 
@@ -512,7 +512,7 @@ public class DiscoverableSyndicationEndpointTests
     public async Task CreateNavigatorAsync_WithNullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint();
+        DiscoverableSyndicationEndpoint endpoint = new();
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(() => endpoint.CreateNavigatorAsync());
@@ -522,7 +522,7 @@ public class DiscoverableSyndicationEndpointTests
     public async Task CreateNavigatorAsync_WithNullHttpClient_ThrowsArgumentNullException()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new DiscoverableSyndicationEndpoint(
+        DiscoverableSyndicationEndpoint endpoint = new(
             new Uri("http://example.com/feed.rss"),
             "application/rss+xml");
 

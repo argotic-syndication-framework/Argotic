@@ -1,12 +1,11 @@
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
 using Argotic.Data.Adapters;
-using Argotic.Syndication;
 using Argotic.Extensions;
 using Argotic.Extensions.Core;
+using Argotic.Syndication;
 
 namespace Argotic.Publishing;
 

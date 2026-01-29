@@ -51,7 +51,7 @@ public class PingbackSyndicationExtensionTest
         // Verify GetHashCode does not throw
         PingbackSyndicationExtension target = CreateExtension1();
         int hash = target.GetHashCode();
-        
+
         hash.ShouldNotBe(0);
     }
 

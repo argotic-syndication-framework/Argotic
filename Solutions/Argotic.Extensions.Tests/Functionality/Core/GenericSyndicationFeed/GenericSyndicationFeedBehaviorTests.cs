@@ -23,7 +23,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.RssWithItems;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -38,7 +38,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.AtomWithEntries;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -53,7 +53,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.RssWithItems;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -67,7 +67,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.AtomWithEntries;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -81,7 +81,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.RssWithItems;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -95,7 +95,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.RssWithItems;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -113,7 +113,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.AtomWithEntries;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -135,7 +135,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.MinimalRss;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -149,7 +149,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.MinimalAtom;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -163,7 +163,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.MinimalOpml;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -177,7 +177,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.MinimalRss;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -195,7 +195,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.MinimalAtom;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -217,7 +217,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.RssWithItems;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -232,7 +232,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.AtomWithEntries;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -247,7 +247,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.RssWithItems;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -265,7 +265,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.AtomWithEntries;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -283,7 +283,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.RssWithItems;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -299,7 +299,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.AtomWithEntries;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -315,7 +315,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.RssWithItems;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -334,7 +334,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.AtomWithEntries;
 
         // Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         feed.Load(xml);
 
         // Assert
@@ -354,7 +354,7 @@ public class GenericSyndicationFeedBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.MinimalRss;
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
@@ -370,12 +370,12 @@ public class GenericSyndicationFeedBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.MinimalAtom;
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
         // Act
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(xml));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(xml));
         feed.Load(stream);
 
         // Assert
@@ -390,7 +390,7 @@ public class GenericSyndicationFeedBehaviorTests
     public void GenericSyndicationFeed_WhenCreated_HasDefaultValues()
     {
         // Arrange & Act
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
 
         // Assert
         feed.Format.ShouldBe(SyndicationContentFormat.None);
@@ -412,10 +412,10 @@ public class GenericSyndicationFeedBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.RssWithItems;
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(xml));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(xml));
         feed.Load(stream);
 
         // Assert
@@ -429,10 +429,10 @@ public class GenericSyndicationFeedBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.AtomWithEntries;
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(xml));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(xml));
         feed.Load(stream);
 
         // Assert

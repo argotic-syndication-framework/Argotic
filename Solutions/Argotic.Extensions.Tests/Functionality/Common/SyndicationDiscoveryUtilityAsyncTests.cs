@@ -22,8 +22,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(
             FeedTestData.HtmlWithRssLink,
             "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/page.html");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/page.html");
 
         // Act
         Collection<DiscoverableSyndicationEndpoint> endpoints =
@@ -56,8 +56,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
             </html>
             """;
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(htmlWithNoLinks, "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/no-feeds.html");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/no-feeds.html");
 
         // Act
         Collection<DiscoverableSyndicationEndpoint> endpoints =
@@ -89,8 +89,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
             </html>
             """;
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(htmlWithMultipleFeeds, "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/multi-feeds.html");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/multi-feeds.html");
 
         // Act
         Collection<DiscoverableSyndicationEndpoint> endpoints =
@@ -110,7 +110,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent("content");
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -124,7 +124,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     public async Task LocateDiscoverableSyndicationEndpointsAsync_NullHttpClient_ThrowsArgumentNullException()
     {
         // Arrange
-        Uri uri = new Uri("http://example.com/");
+        Uri uri = new("http://example.com/");
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -143,8 +143,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/feed.rss");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/feed.rss");
 
         // Act
         SyndicationContentFormat format = await SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(
@@ -161,8 +161,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/feed.atom");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/feed.atom");
 
         // Act
         SyndicationContentFormat format = await SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(
@@ -179,8 +179,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalOpml);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/subscriptions.opml");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/subscriptions.opml");
 
         // Act
         SyndicationContentFormat format = await SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(
@@ -203,8 +203,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
             </unknown>
             """;
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(unknownXml);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/unknown.xml");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/unknown.xml");
 
         // Act
         SyndicationContentFormat format = await SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(
@@ -221,7 +221,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -235,7 +235,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     public async Task SyndicationContentFormatGetAsync_NullHttpClient_ThrowsArgumentNullException()
     {
         // Arrange
-        Uri uri = new Uri("http://example.com/feed.rss");
+        Uri uri = new("http://example.com/feed.rss");
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -254,8 +254,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/feed.rss");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/feed.rss");
 
         // Act
         bool exists = await SyndicationDiscoveryUtility.UriExistsAsync(
@@ -272,8 +272,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithNotFound();
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/nonexistent.rss");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/nonexistent.rss");
 
         // Act
         bool exists = await SyndicationDiscoveryUtility.UriExistsAsync(
@@ -290,7 +290,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent("content");
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         bool exists = await SyndicationDiscoveryUtility.UriExistsAsync(
@@ -306,7 +306,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     public async Task UriExistsAsync_NullHttpClient_ThrowsArgumentNullException()
     {
         // Arrange
-        Uri uri = new Uri("http://example.com/feed.rss");
+        Uri uri = new("http://example.com/feed.rss");
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -321,8 +321,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithException(new HttpRequestException("Connection failed"));
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/feed.rss");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/feed.rss");
 
         // Act
         bool exists = await SyndicationDiscoveryUtility.UriExistsAsync(
@@ -345,9 +345,9 @@ public class SyndicationDiscoveryUtilityAsyncTests
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(
             FeedTestData.HtmlWithTargetLink,
             "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri source = new Uri("http://example.com/page.html");
-        Uri target = new Uri("http://example.com/target");
+        using HttpClient httpClient = new(handler);
+        Uri source = new("http://example.com/page.html");
+        Uri target = new("http://example.com/target");
 
         // Act
         bool references = await SyndicationDiscoveryUtility.SourceReferencesTargetAsync(
@@ -367,9 +367,9 @@ public class SyndicationDiscoveryUtilityAsyncTests
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(
             FeedTestData.HtmlWithTargetLink,
             "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri source = new Uri("http://example.com/page.html");
-        Uri target = new Uri("http://example.com/different-page");
+        using HttpClient httpClient = new(handler);
+        Uri source = new("http://example.com/page.html");
+        Uri target = new("http://example.com/different-page");
 
         // Act
         bool references = await SyndicationDiscoveryUtility.SourceReferencesTargetAsync(
@@ -387,8 +387,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent("content");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri target = new Uri("http://example.com/target");
+        using HttpClient httpClient = new(handler);
+        Uri target = new("http://example.com/target");
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -404,8 +404,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent("content");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri source = new Uri("http://example.com/page.html");
+        using HttpClient httpClient = new(handler);
+        Uri source = new("http://example.com/page.html");
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -427,8 +427,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(
             FeedTestData.HtmlWithPingbackLink,
             "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/post.html");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/post.html");
 
         // Act
         bool isPingbackEnabled = await SyndicationDiscoveryUtility.IsPingbackEnabledAsync(
@@ -456,8 +456,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
             </html>
             """;
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(htmlWithoutPingback, "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/no-pingback.html");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/no-pingback.html");
 
         // Act
         bool isPingbackEnabled = await SyndicationDiscoveryUtility.IsPingbackEnabledAsync(
@@ -474,7 +474,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent("content");
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -495,8 +495,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(
             FeedTestData.HtmlWithPingbackLink,
             "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/post.html");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/post.html");
 
         // Act
         Uri? pingbackServer = await SyndicationDiscoveryUtility.LocatePingbackNotificationServerAsync(
@@ -525,8 +525,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
             </html>
             """;
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(htmlWithoutPingback, "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/no-pingback.html");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/no-pingback.html");
 
         // Act
         Uri? pingbackServer = await SyndicationDiscoveryUtility.LocatePingbackNotificationServerAsync(
@@ -558,8 +558,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
             </html>
             """;
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(htmlWithoutTrackback, "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/no-trackback.html");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/no-trackback.html");
 
         // Act
         bool isTrackbackEnabled = await SyndicationDiscoveryUtility.IsTrackbackEnabledAsync(
@@ -576,7 +576,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent("content");
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -606,8 +606,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
             </html>
             """;
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(htmlWithoutTrackback, "text/html");
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/no-trackback.html");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/no-trackback.html");
 
         // Act
         Collection<TrackbackDiscoveryMetadata> metadata =
@@ -626,7 +626,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent("content");
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -644,13 +644,13 @@ public class SyndicationDiscoveryUtilityAsyncTests
     public async Task ConditionalGetAsync_ContentNotModified_ReturnsNotModifiedResult()
     {
         // Arrange
-        using MockHttpMessageHandler handler = new MockHttpMessageHandler((req, ct) =>
+        using MockHttpMessageHandler handler = new((req, ct) =>
         {
             ct.ThrowIfCancellationRequested();
             return Task.FromResult(new HttpResponseMessage(System.Net.HttpStatusCode.NotModified));
         });
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/feed.rss");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/feed.rss");
         DateTime lastModified = DateTime.UtcNow.AddHours(-1);
 
         // Act
@@ -670,7 +670,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     public async Task ConditionalGetAsync_ContentModified_ReturnsModifiedResult()
     {
         // Arrange
-        using MockHttpMessageHandler handler = new MockHttpMessageHandler((req, ct) =>
+        using MockHttpMessageHandler handler = new((req, ct) =>
         {
             ct.ThrowIfCancellationRequested();
             var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK)
@@ -680,8 +680,8 @@ public class SyndicationDiscoveryUtilityAsyncTests
             response.Content.Headers.LastModified = DateTimeOffset.UtcNow;
             return Task.FromResult(response);
         });
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri uri = new Uri("http://example.com/feed.rss");
+        using HttpClient httpClient = new(handler);
+        Uri uri = new("http://example.com/feed.rss");
         DateTime lastModified = DateTime.UtcNow.AddDays(-1);
 
         // Act
@@ -703,7 +703,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -719,7 +719,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     public async Task ConditionalGetAsync_NullHttpClient_ThrowsArgumentNullException()
     {
         // Arrange
-        Uri uri = new Uri("http://example.com/feed.rss");
+        Uri uri = new("http://example.com/feed.rss");
 
         // Act & Assert
         await Should.ThrowAsync<ArgumentNullException>(async () =>

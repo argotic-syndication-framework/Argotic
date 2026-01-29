@@ -5,13 +5,12 @@ namespace Argotic.Examples;
 /// <summary>
 /// Provides paths to sample data files for examples.
 /// </summary>
-public static class SampleDataPath
+internal static class SampleDataPath
 {
-    private static readonly IFileSystem FileSystem = Spectre.IO.FileSystem.Shared;
     private static readonly DirectoryPath BasePath = new DirectoryPath(AppContext.BaseDirectory).Combine("SampleData");
 
     /// <summary>Gets the file system instance for file operations.</summary>
-    public static IFileSystem Files => FileSystem;
+    public static IFileSystem Files { get; } = Spectre.IO.FileSystem.Shared;
 
     /// <summary>Gets the path to the sample RSS feed file.</summary>
     public static FilePath RssFeed => BasePath.CombineWithFilePath("RssFeed.xml");
@@ -65,6 +64,6 @@ public static class SampleDataPath
     /// <returns>A stream for reading the file.</returns>
     public static Stream OpenRead(FilePath path)
     {
-        return FileSystem.GetFile(path).OpenRead();
+        return Files.GetFile(path).OpenRead();
     }
 }

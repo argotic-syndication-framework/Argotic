@@ -1,4 +1,3 @@
-using Argotic.Extensions;
 using Argotic.Syndication;
 
 namespace Argotic.Extensions.Tests.Builders;
@@ -41,7 +40,7 @@ public class RssFeedBuilder
 
     public RssFeedBuilder WithItem(Action<RssItem> configure)
     {
-        RssItem item = new RssItem
+        RssItem item = new()
         {
             Title = $"Item {feed.Channel.Items.Count + 1}",
             Link = new Uri($"http://example.com/item{feed.Channel.Items.Count + 1}")
@@ -53,7 +52,7 @@ public class RssFeedBuilder
 
     public RssFeedBuilder WithItem(string title, string link, string? description = null)
     {
-        RssItem item = new RssItem
+        RssItem item = new()
         {
             Title = title,
             Link = new Uri(link)
@@ -145,7 +144,7 @@ public class RssItemBuilder
 
     public RssItemBuilder WithCategory(string category, string? domain = null)
     {
-        RssCategory rssCategory = new RssCategory { Value = category };
+        RssCategory rssCategory = new() { Value = category };
         if (domain != null)
             rssCategory.Domain = domain;
         item.Categories.Add(rssCategory);
@@ -233,7 +232,7 @@ public class AtomFeedBuilder
 
     public AtomFeedBuilder WithAuthor(string name, string? email = null, string? uri = null)
     {
-        AtomPersonConstruct author = new AtomPersonConstruct(name);
+        AtomPersonConstruct author = new(name);
         if (email != null)
             author.EmailAddress = email;
         if (uri != null)
@@ -244,7 +243,7 @@ public class AtomFeedBuilder
 
     public AtomFeedBuilder WithContributor(string name, string? email = null, string? uri = null)
     {
-        AtomPersonConstruct contributor = new AtomPersonConstruct(name);
+        AtomPersonConstruct contributor = new(name);
         if (email != null)
             contributor.EmailAddress = email;
         if (uri != null)
@@ -255,7 +254,7 @@ public class AtomFeedBuilder
 
     public AtomFeedBuilder WithCategory(string term, string? scheme = null, string? label = null)
     {
-        AtomCategory category = new AtomCategory(term);
+        AtomCategory category = new(term);
         if (scheme != null)
             category.Scheme = new Uri(scheme);
         if (label != null)
@@ -266,7 +265,7 @@ public class AtomFeedBuilder
 
     public AtomFeedBuilder WithLink(string href, string? rel = null, string? type = null, string? title = null)
     {
-        AtomLink link = new AtomLink(new Uri(href));
+        AtomLink link = new(new Uri(href));
         if (rel != null)
             link.Relation = rel;
         if (type != null)
@@ -289,7 +288,7 @@ public class AtomFeedBuilder
 
     public AtomFeedBuilder WithEntry(Action<AtomEntryBuilder> configure)
     {
-        AtomEntryBuilder builder = new AtomEntryBuilder();
+        AtomEntryBuilder builder = new();
         configure(builder);
         feed.Entries.Add(builder.Build());
         return this;
@@ -297,7 +296,7 @@ public class AtomFeedBuilder
 
     public AtomFeedBuilder WithEntry(string title, string id, DateTime updatedOn)
     {
-        AtomEntry entry = new AtomEntry(
+        AtomEntry entry = new(
             new AtomId(new Uri(id)),
             new AtomTextConstruct(title),
             updatedOn
@@ -389,7 +388,7 @@ public class AtomEntryBuilder
 
     public AtomEntryBuilder WithAuthor(string name, string? email = null, string? uri = null)
     {
-        AtomPersonConstruct author = new AtomPersonConstruct(name);
+        AtomPersonConstruct author = new(name);
         if (email != null)
             author.EmailAddress = email;
         if (uri != null)
@@ -400,7 +399,7 @@ public class AtomEntryBuilder
 
     public AtomEntryBuilder WithContributor(string name, string? email = null, string? uri = null)
     {
-        AtomPersonConstruct contributor = new AtomPersonConstruct(name);
+        AtomPersonConstruct contributor = new(name);
         if (email != null)
             contributor.EmailAddress = email;
         if (uri != null)
@@ -411,7 +410,7 @@ public class AtomEntryBuilder
 
     public AtomEntryBuilder WithCategory(string term, string? scheme = null, string? label = null)
     {
-        AtomCategory category = new AtomCategory(term);
+        AtomCategory category = new(term);
         if (scheme != null)
             category.Scheme = new Uri(scheme);
         if (label != null)
@@ -422,7 +421,7 @@ public class AtomEntryBuilder
 
     public AtomEntryBuilder WithLink(string href, string? rel = null, string? type = null, string? title = null)
     {
-        AtomLink link = new AtomLink(new Uri(href));
+        AtomLink link = new(new Uri(href));
         if (rel != null)
             link.Relation = rel;
         if (type != null)
@@ -517,7 +516,7 @@ public class OpmlDocumentBuilder
 
     public OpmlDocumentBuilder WithOutline(Action<OpmlOutlineBuilder> configure)
     {
-        OpmlOutlineBuilder builder = new OpmlOutlineBuilder();
+        OpmlOutlineBuilder builder = new();
         configure(builder);
         document.Outlines.Add(builder.Build());
         return this;
@@ -634,7 +633,7 @@ public class OpmlOutlineBuilder
 
     public OpmlOutlineBuilder WithChildOutline(Action<OpmlOutlineBuilder> configure)
     {
-        OpmlOutlineBuilder builder = new OpmlOutlineBuilder();
+        OpmlOutlineBuilder builder = new();
         configure(builder);
         outline.Outlines.Add(builder.Build());
         return this;

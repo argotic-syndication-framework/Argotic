@@ -77,7 +77,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenCreatedWithDefaultConstructor_HasEmptyCollections()
     {
         // Arrange & Act
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         // Assert
         document.Interfaces.ShouldNotBeNull();
@@ -90,7 +90,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenServicePropertiesSet_ContainsCorrectValues()
     {
         // Arrange & Act
-        RsdDocument document = new RsdDocument
+        RsdDocument document = new()
         {
             EngineName = "Blog Munging CMS",
             EngineLink = new Uri("http://www.blogmunging.com/"),
@@ -107,8 +107,8 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenApiInterfaceAdded_ContainsInterface()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        RsdApplicationInterface api = new RsdApplicationInterface(
+        RsdDocument document = new();
+        RsdApplicationInterface api = new(
             "MetaWeblog",
             new Uri("http://example.com/xmlrpc"),
             true,
@@ -127,7 +127,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenMultipleApisAdded_ContainsAllApis()
     {
         // Arrange
-        RsdDocument document = new RsdDocument
+        RsdDocument document = new()
         {
             EngineName = "Test CMS",
             EngineLink = new Uri("http://example.com/cms"),
@@ -150,7 +150,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenIndexerUsed_ReturnsCorrectInterface()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
         document.Interfaces.Add(new RsdApplicationInterface("MetaWeblog", new Uri("http://example.com/xmlrpc"), true, "1"));
         document.Interfaces.Add(new RsdApplicationInterface("Blogger", new Uri("http://example.com/blogger"), false, "2"));
 
@@ -167,7 +167,7 @@ public class RsdDocumentBehaviorTests
     public void RsdApplicationInterface_WhenCreatedWithOptionalProperties_ContainsAllProperties()
     {
         // Arrange & Act
-        RsdApplicationInterface api = new RsdApplicationInterface("Conversant", new Uri("http://example.com/api"), false, "123")
+        RsdApplicationInterface api = new("Conversant", new Uri("http://example.com/api"), false, "123")
         {
             Documentation = new Uri("http://example.com/docs/"),
             Notes = "Additional API notes here."
@@ -195,7 +195,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenLoadedFromXml_PopulatesServiceProperties()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(MinimalRsd));
@@ -211,7 +211,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenLoadedFromXml_PopulatesApiInterface()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(MinimalRsd));
@@ -230,7 +230,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenLoadedFromXmlWithMultipleApis_PopulatesAllInterfaces()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(RsdWithMultipleApis));
@@ -255,7 +255,7 @@ public class RsdDocumentBehaviorTests
         // This test documents the current behavior.
 
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(RsdWithApiSettings));
@@ -278,10 +278,10 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenLoadedFromStream_PopulatesProperties()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(MinimalRsd));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(MinimalRsd));
         document.Load(stream);
 
         // Assert
@@ -293,7 +293,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenLoaded_RaisesLoadedEvent()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
         bool eventRaised = false;
         SyndicationResourceLoadedEventArgs? eventArgs = null;
         document.Loaded += (sender, args) =>
@@ -315,7 +315,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenPreferredApiRequested_CanBeFoundInCollection()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
         using XmlReader reader = XmlReader.Create(new StringReader(RsdWithMultipleApis));
         document.Load(reader);
 
@@ -335,7 +335,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenSavedAndReloaded_PreservesServiceProperties()
     {
         // Arrange
-        RsdDocument originalDocument = new RsdDocument
+        RsdDocument originalDocument = new()
         {
             EngineName = "Round Trip CMS",
             EngineLink = new Uri("http://roundtrip.example.com/cms"),
@@ -343,11 +343,11 @@ public class RsdDocumentBehaviorTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
         stream.Position = 0;
 
-        RsdDocument loadedDocument = new RsdDocument();
+        RsdDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -360,7 +360,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenSavedAndReloaded_PreservesApiInterfaces()
     {
         // Arrange
-        RsdDocument originalDocument = new RsdDocument
+        RsdDocument originalDocument = new()
         {
             EngineName = "Test CMS",
             EngineLink = new Uri("http://example.com/cms"),
@@ -370,11 +370,11 @@ public class RsdDocumentBehaviorTests
         originalDocument.Interfaces.Add(new RsdApplicationInterface("Blogger", new Uri("http://example.com/blogger"), false, "456"));
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
         stream.Position = 0;
 
-        RsdDocument loadedDocument = new RsdDocument();
+        RsdDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -396,13 +396,13 @@ public class RsdDocumentBehaviorTests
         // This test documents the current behavior.
 
         // Arrange
-        RsdDocument originalDocument = new RsdDocument
+        RsdDocument originalDocument = new()
         {
             EngineName = "Settings CMS",
             EngineLink = new Uri("http://settings.example.com/"),
             Homepage = new Uri("http://settings.example.com/blog")
         };
-        RsdApplicationInterface api = new RsdApplicationInterface("Conversant", new Uri("http://example.com/api"), true, "blog123")
+        RsdApplicationInterface api = new("Conversant", new Uri("http://example.com/api"), true, "blog123")
         {
             Documentation = new Uri("http://example.com/docs/"),
             Notes = "Test notes for round trip"
@@ -412,11 +412,11 @@ public class RsdDocumentBehaviorTests
         originalDocument.Interfaces.Add(api);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
         stream.Position = 0;
 
-        RsdDocument loadedDocument = new RsdDocument();
+        RsdDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert - Basic API properties are preserved
@@ -440,17 +440,17 @@ public class RsdDocumentBehaviorTests
         RsdDocument originalDocument = CreateCompleteRsdDocument();
 
         // Act - First round trip
-        using MemoryStream stream1 = new MemoryStream();
+        using MemoryStream stream1 = new();
         originalDocument.Save(stream1);
         stream1.Position = 0;
-        RsdDocument document1 = new RsdDocument();
+        RsdDocument document1 = new();
         document1.Load(stream1);
 
         // Act - Second round trip
-        using MemoryStream stream2 = new MemoryStream();
+        using MemoryStream stream2 = new();
         document1.Save(stream2);
         stream2.Position = 0;
-        RsdDocument document2 = new RsdDocument();
+        RsdDocument document2 = new();
         document2.Load(stream2);
 
         // Assert
@@ -464,16 +464,16 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_WhenParsedFromXmlAndReserialized_MaintainsStructure()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
         using XmlReader reader = XmlReader.Create(new StringReader(RsdWithMultipleApis));
         document.Load(reader);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
         stream.Position = 0;
 
-        RsdDocument reloadedDocument = new RsdDocument();
+        RsdDocument reloadedDocument = new();
         reloadedDocument.Load(stream);
 
         // Assert
@@ -492,7 +492,7 @@ public class RsdDocumentBehaviorTests
     {
         // Note: RsdDocument currently returns SyndicationContentFormat.Opml due to implementation
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         // Assert
         document.Format.ShouldBe(SyndicationContentFormat.Opml);
@@ -502,7 +502,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_Version_Returns1_0()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         // Assert
         document.Version.ShouldBe(new Version(1, 0));
@@ -516,7 +516,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_CreateNavigator_ReturnsValidNavigator()
     {
         // Arrange
-        RsdDocument document = new RsdDocument
+        RsdDocument document = new()
         {
             EngineName = "Navigator Test CMS",
             EngineLink = new Uri("http://example.com/"),
@@ -541,7 +541,7 @@ public class RsdDocumentBehaviorTests
     public void RsdDocument_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         // Assert
         document.HasExtensions.ShouldBeFalse();
@@ -551,7 +551,7 @@ public class RsdDocumentBehaviorTests
     public void RsdApplicationInterface_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
         // Arrange
-        RsdApplicationInterface api = new RsdApplicationInterface("Test", new Uri("http://example.com/"), false, "1");
+        RsdApplicationInterface api = new("Test", new Uri("http://example.com/"), false, "1");
 
         // Assert
         api.HasExtensions.ShouldBeFalse();
@@ -565,12 +565,12 @@ public class RsdDocumentBehaviorTests
     public async Task RsdDocument_LoadAsync_LoadsDocumentCorrectly()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
         bool eventRaised = false;
         document.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalRsd);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await document.LoadAsync(
@@ -591,7 +591,7 @@ public class RsdDocumentBehaviorTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(RsdWithMultipleApis);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         RsdDocument document = await RsdDocument.CreateAsync(
@@ -609,10 +609,10 @@ public class RsdDocumentBehaviorTests
     public async Task RsdDocument_LoadAsync_WithMultipleApis_LoadsAllInterfaces()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(RsdWithMultipleApis);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await document.LoadAsync(
@@ -632,7 +632,7 @@ public class RsdDocumentBehaviorTests
     public async Task RsdDocument_LoadAsync_IncludesSourceUriInEventArgs()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
         Uri? sourceFromEvent = null;
 
         document.Loaded += (sender, args) =>
@@ -641,8 +641,8 @@ public class RsdDocumentBehaviorTests
         };
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalRsd);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri requestUri = new Uri("http://example.com/rsd.xml");
+        using HttpClient httpClient = new(handler);
+        Uri requestUri = new("http://example.com/rsd.xml");
 
         // Act
         await document.LoadAsync(requestUri, httpClient, cancellationToken: TestContext!.CancellationToken);
@@ -655,14 +655,14 @@ public class RsdDocumentBehaviorTests
     public async Task RsdDocument_LoadAsync_WithSettings_AppliesSettings()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        RsdDocument document = new();
+        SyndicationResourceLoadSettings settings = new()
         {
             AutoDetectExtensions = true
         };
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalRsd);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await document.LoadAsync(
@@ -682,7 +682,7 @@ public class RsdDocumentBehaviorTests
 
     private static RsdDocument CreateCompleteRsdDocument()
     {
-        RsdDocument document = new RsdDocument
+        RsdDocument document = new()
         {
             EngineName = "Complete CMS",
             EngineLink = new Uri("http://complete.example.com/cms"),
@@ -692,7 +692,7 @@ public class RsdDocumentBehaviorTests
         document.Interfaces.Add(new RsdApplicationInterface("MetaWeblog", new Uri("http://complete.example.com/xmlrpc"), true, "blog1"));
         document.Interfaces.Add(new RsdApplicationInterface("Blogger", new Uri("http://complete.example.com/blogger"), false, "blog1"));
 
-        RsdApplicationInterface advancedApi = new RsdApplicationInterface("Conversant", new Uri("http://complete.example.com/conversant"), false, "")
+        RsdApplicationInterface advancedApi = new("Conversant", new Uri("http://complete.example.com/conversant"), false, "")
         {
             Documentation = new Uri("http://complete.example.com/docs/"),
             Notes = "Full featured API with settings"

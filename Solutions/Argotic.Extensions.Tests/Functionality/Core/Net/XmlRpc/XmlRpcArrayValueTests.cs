@@ -17,7 +17,7 @@ public class XmlRpcArrayValueTests
     public void Constructor_Default_CreatesEmptyValues()
     {
         // Arrange & Act
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array = new();
 
         // Assert
         array.Values.ShouldBeEmpty();
@@ -27,8 +27,8 @@ public class XmlRpcArrayValueTests
     public void Constructor_WithIterator_PopulatesValues()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.XmlRpcArrayValue));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.XmlRpcArrayValue));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
         navigator.MoveToFirstChild(); // Move to value element
@@ -36,7 +36,7 @@ public class XmlRpcArrayValueTests
         XPathNodeIterator iterator = navigator.Select("array/data/value");
 
         // Act
-        XmlRpcArrayValue array = new XmlRpcArrayValue(iterator);
+        XmlRpcArrayValue array = new(iterator);
 
         // Assert
         array.Values.Count.ShouldBe(4);
@@ -53,9 +53,9 @@ public class XmlRpcArrayValueTests
     public void Load_ValidArrayXml_PopulatesValues()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.XmlRpcArrayValue));
-        XPathDocument doc = new XPathDocument(stream);
+        XmlRpcArrayValue array = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.XmlRpcArrayValue));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
         navigator.MoveToFirstChild(); // Move to value element
@@ -72,7 +72,7 @@ public class XmlRpcArrayValueTests
     public void Load_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => array.Load(null!));
@@ -82,10 +82,10 @@ public class XmlRpcArrayValueTests
     public void Load_EmptyNavigator_ReturnsFalse()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array = new();
         string emptyXml = "<value></value>";
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(emptyXml));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(emptyXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
         navigator.MoveToFirstChild();
@@ -102,12 +102,12 @@ public class XmlRpcArrayValueTests
     public void WriteTo_WithValues_WritesCorrectXml()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array = new();
         array.Values.Add(new XmlRpcScalarValue(42));
         array.Values.Add(new XmlRpcScalarValue("test"));
 
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = false,
@@ -121,7 +121,7 @@ public class XmlRpcArrayValueTests
         }
 
         stream.Seek(0, SeekOrigin.Begin);
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string result = reader.ReadToEnd();
 
         // Assert
@@ -136,7 +136,7 @@ public class XmlRpcArrayValueTests
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => array.WriteTo(null!));
@@ -146,11 +146,11 @@ public class XmlRpcArrayValueTests
     public void CompareTo_EqualArrays_ReturnsZero()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(1));
         array1.Values.Add(new XmlRpcScalarValue("hello"));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(1));
         array2.Values.Add(new XmlRpcScalarValue("hello"));
 
@@ -165,10 +165,10 @@ public class XmlRpcArrayValueTests
     public void CompareTo_DifferentArrays_ReturnsNonZero()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(1));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(1));
         array2.Values.Add(new XmlRpcScalarValue(2));
 
@@ -183,7 +183,7 @@ public class XmlRpcArrayValueTests
     public void CompareTo_Null_ReturnsOne()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array = new();
         array.Values.Add(new XmlRpcScalarValue(1));
 
         // Act
@@ -197,10 +197,10 @@ public class XmlRpcArrayValueTests
     public void CompareTo_DifferentValues_ReturnsNonZero()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(42));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(99));
 
         // Act
@@ -214,10 +214,10 @@ public class XmlRpcArrayValueTests
     public void Equals_SameValues_ReturnsTrue()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(42));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(42));
 
         // Act & Assert
@@ -228,10 +228,10 @@ public class XmlRpcArrayValueTests
     public void Equals_DifferentValues_ReturnsFalse()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(42));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(99));
 
         // Act & Assert
@@ -242,7 +242,7 @@ public class XmlRpcArrayValueTests
     public void Equals_NonXmlRpcArrayValue_ReturnsFalse()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array = new();
 
         // Act & Assert
         array.Equals("not an array").ShouldBeFalse();
@@ -252,7 +252,7 @@ public class XmlRpcArrayValueTests
     public void GetHashCode_DoesNotThrow()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array = new();
         array.Values.Add(new XmlRpcScalarValue(42));
 
         // Act
@@ -268,7 +268,7 @@ public class XmlRpcArrayValueTests
     public void ToString_ReturnsXmlRepresentation()
     {
         // Arrange
-        XmlRpcArrayValue array = new XmlRpcArrayValue();
+        XmlRpcArrayValue array = new();
         array.Values.Add(new XmlRpcScalarValue(42));
 
         // Act
@@ -285,10 +285,10 @@ public class XmlRpcArrayValueTests
     public void OperatorEquals_EqualArrays_ReturnsTrue()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(1));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(1));
 
         // Act & Assert
@@ -310,10 +310,10 @@ public class XmlRpcArrayValueTests
     public void OperatorNotEquals_DifferentArrays_ReturnsTrue()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(1));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(2));
 
         // Act & Assert
@@ -324,10 +324,10 @@ public class XmlRpcArrayValueTests
     public void OperatorLessThan_SmallerArray_ReturnsTrue()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(1));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(1));
         array2.Values.Add(new XmlRpcScalarValue(2));
 
@@ -340,7 +340,7 @@ public class XmlRpcArrayValueTests
     {
         // Arrange
         XmlRpcArrayValue? array1 = null;
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(1));
 
         // Act & Assert
@@ -351,11 +351,11 @@ public class XmlRpcArrayValueTests
     public void OperatorGreaterThan_LargerArray_ReturnsTrue()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(1));
         array1.Values.Add(new XmlRpcScalarValue(2));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(1));
 
         // Act & Assert
@@ -367,7 +367,7 @@ public class XmlRpcArrayValueTests
     {
         // Arrange
         XmlRpcArrayValue? array1 = null;
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
 
         // Act & Assert
         (array1 > array2).ShouldBeFalse();
@@ -377,10 +377,10 @@ public class XmlRpcArrayValueTests
     public void OperatorLessThanOrEqual_SmallerOrEqualArray_ReturnsTrue()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(1));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(1));
 
         // Act & Assert
@@ -392,7 +392,7 @@ public class XmlRpcArrayValueTests
     {
         // Arrange
         XmlRpcArrayValue? array1 = null;
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
 
         // Act & Assert
         (array1 <= array2).ShouldBeTrue();
@@ -402,10 +402,10 @@ public class XmlRpcArrayValueTests
     public void OperatorGreaterThanOrEqual_LargerOrEqualArray_ReturnsTrue()
     {
         // Arrange
-        XmlRpcArrayValue array1 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array1 = new();
         array1.Values.Add(new XmlRpcScalarValue(1));
 
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(1));
 
         // Act & Assert
@@ -428,7 +428,7 @@ public class XmlRpcArrayValueTests
     {
         // Arrange
         XmlRpcArrayValue? array1 = null;
-        XmlRpcArrayValue array2 = new XmlRpcArrayValue();
+        XmlRpcArrayValue array2 = new();
         array2.Values.Add(new XmlRpcScalarValue(1));
 
         // Act & Assert

@@ -6,14 +6,14 @@ namespace Argotic.Examples.Commands;
 /// <summary>
 /// Base settings shared by all commands.
 /// </summary>
-public class CommandSettings : Spectre.Console.Cli.CommandSettings
+internal class CommandSettings : Spectre.Console.Cli.CommandSettings
 {
 }
 
 /// <summary>
 /// Settings for the list command.
 /// </summary>
-public sealed class ListSettings : CommandSettings
+internal sealed class ListSettings : CommandSettings
 {
     [Description("Filter examples by category (e.g., Rss, Atom, Extensions)")]
     [CommandOption("-c|--category")]
@@ -23,7 +23,7 @@ public sealed class ListSettings : CommandSettings
 /// <summary>
 /// Settings for the run command.
 /// </summary>
-public sealed class RunSettings : CommandSettings
+internal sealed class RunSettings : CommandSettings
 {
     [Description("The name of the example to run (use 'list' to see available examples)")]
     [CommandArgument(0, "<name>")]
@@ -33,7 +33,7 @@ public sealed class RunSettings : CommandSettings
 /// <summary>
 /// Settings for the run-all command.
 /// </summary>
-public sealed class RunAllSettings : CommandSettings
+internal sealed class RunAllSettings : CommandSettings
 {
     [Description("Filter examples by category (e.g., Rss, Atom, Extensions)")]
     [CommandOption("-c|--category")]

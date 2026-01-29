@@ -55,7 +55,7 @@ public class LiveJournalSyndicationExtensionTest
         // Verify GetHashCode does not throw
         LiveJournalSyndicationExtension target = CreateExtension1();
         int hash = target.GetHashCode();
-        
+
         hash.ShouldNotBe(0);
     }
 

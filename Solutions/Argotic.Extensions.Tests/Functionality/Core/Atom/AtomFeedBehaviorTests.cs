@@ -20,12 +20,12 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_WhenCreatedWithRequiredProperties_ContainsCorrectValues()
     {
         // Arrange
-        AtomId id = new AtomId(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
-        AtomTextConstruct title = new AtomTextConstruct("My Test Feed");
-        DateTime updatedOn = new DateTime(2025, 1, 15, 12, 0, 0, DateTimeKind.Utc);
+        AtomId id = new(new Uri("urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6"));
+        AtomTextConstruct title = new("My Test Feed");
+        DateTime updatedOn = new(2025, 1, 15, 12, 0, 0, DateTimeKind.Utc);
 
         // Act
-        AtomFeed feed = new AtomFeed(id, title, updatedOn);
+        AtomFeed feed = new(id, title, updatedOn);
 
         // Assert
         feed.Id.ShouldNotBeNull();
@@ -39,14 +39,14 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_WhenEntriesAdded_ContainsAllEntries()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        AtomEntry entry1 = new AtomEntry
+        AtomFeed feed = new();
+        AtomEntry entry1 = new()
         {
             Id = new AtomId(new Uri("urn:uuid:entry-1")),
             Title = new AtomTextConstruct("First Entry"),
             UpdatedOn = DateTime.UtcNow
         };
-        AtomEntry entry2 = new AtomEntry
+        AtomEntry entry2 = new()
         {
             Id = new AtomId(new Uri("urn:uuid:entry-2")),
             Title = new AtomTextConstruct("Second Entry"),
@@ -67,12 +67,12 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_WhenAuthorsAdded_ContainsAllAuthors()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        AtomPersonConstruct author1 = new AtomPersonConstruct("John Doe")
+        AtomFeed feed = new();
+        AtomPersonConstruct author1 = new("John Doe")
         {
             EmailAddress = "john@example.com"
         };
-        AtomPersonConstruct author2 = new AtomPersonConstruct("Jane Smith")
+        AtomPersonConstruct author2 = new("Jane Smith")
         {
             EmailAddress = "jane@example.com",
             Uri = new Uri("http://example.com/jane")
@@ -94,9 +94,9 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_WhenLinksAdded_ContainsAllLinks()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        AtomLink selfLink = new AtomLink(new Uri("http://example.com/feed.xml"), "self");
-        AtomLink alternateLink = new AtomLink(new Uri("http://example.com/"), "alternate")
+        AtomFeed feed = new();
+        AtomLink selfLink = new(new Uri("http://example.com/feed.xml"), "self");
+        AtomLink alternateLink = new(new Uri("http://example.com/"), "alternate")
         {
             ContentType = "text/html",
             Title = "Website"
@@ -117,9 +117,9 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_WhenCategoriesAdded_ContainsAllCategories()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        AtomCategory category1 = new AtomCategory("technology");
-        AtomCategory category2 = new AtomCategory("news")
+        AtomFeed feed = new();
+        AtomCategory category1 = new("technology");
+        AtomCategory category2 = new("news")
         {
             Scheme = new Uri("http://example.com/categories"),
             Label = "News Articles"
@@ -146,7 +146,7 @@ public class AtomFeedBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.MinimalAtom;
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -164,7 +164,7 @@ public class AtomFeedBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.AtomWithEntries;
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -184,7 +184,7 @@ public class AtomFeedBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.AtomWithEntries;
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -202,7 +202,7 @@ public class AtomFeedBehaviorTests
     {
         // Arrange
         string malformedXml = FeedTestData.MalformedXml;
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         // Act & Assert
         Should.Throw<XmlException>(() =>
@@ -217,10 +217,10 @@ public class AtomFeedBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.MinimalAtom;
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(xml));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(xml));
         feed.Load(stream);
 
         // Assert
@@ -236,7 +236,7 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_WhenSavedAndReloaded_PreservesBasicProperties()
     {
         // Arrange
-        AtomFeed originalFeed = new AtomFeed
+        AtomFeed originalFeed = new()
         {
             Id = new AtomId(new Uri("urn:uuid:round-trip-test")),
             Title = new AtomTextConstruct("Round Trip Feed"),
@@ -246,11 +246,11 @@ public class AtomFeedBehaviorTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalFeed.Save(stream);
         stream.Position = 0;
 
-        AtomFeed loadedFeed = new AtomFeed();
+        AtomFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -269,11 +269,11 @@ public class AtomFeedBehaviorTests
         AtomFeed originalFeed = CreateFeedWithEntries();
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalFeed.Save(stream);
         stream.Position = 0;
 
-        AtomFeed loadedFeed = new AtomFeed();
+        AtomFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -289,13 +289,13 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_WhenSavedAndReloaded_PreservesEntrySummary()
     {
         // Arrange
-        AtomFeed originalFeed = new AtomFeed
+        AtomFeed originalFeed = new()
         {
             Id = new AtomId(new Uri("urn:uuid:summary-test")),
             Title = new AtomTextConstruct("Summary Test Feed"),
             UpdatedOn = DateTime.UtcNow
         };
-        AtomEntry entry = new AtomEntry
+        AtomEntry entry = new()
         {
             Id = new AtomId(new Uri("urn:uuid:entry-with-summary")),
             Title = new AtomTextConstruct("Entry With Summary"),
@@ -305,11 +305,11 @@ public class AtomFeedBehaviorTests
         originalFeed.Entries.Add(entry);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalFeed.Save(stream);
         stream.Position = 0;
 
-        AtomFeed loadedFeed = new AtomFeed();
+        AtomFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -324,17 +324,17 @@ public class AtomFeedBehaviorTests
         AtomFeed originalFeed = CreateCompleteFeed();
 
         // Act - First round trip
-        using MemoryStream stream1 = new MemoryStream();
+        using MemoryStream stream1 = new();
         originalFeed.Save(stream1);
         stream1.Position = 0;
-        AtomFeed feed1 = new AtomFeed();
+        AtomFeed feed1 = new();
         feed1.Load(stream1);
 
         // Act - Second round trip
-        using MemoryStream stream2 = new MemoryStream();
+        using MemoryStream stream2 = new();
         feed1.Save(stream2);
         stream2.Position = 0;
-        AtomFeed feed2 = new AtomFeed();
+        AtomFeed feed2 = new();
         feed2.Load(stream2);
 
         // Assert
@@ -352,7 +352,7 @@ public class AtomFeedBehaviorTests
     public void AtomTextConstruct_WhenCreatedWithPlainText_HasCorrectType()
     {
         // Arrange & Act
-        AtomTextConstruct textConstruct = new AtomTextConstruct("Plain text content")
+        AtomTextConstruct textConstruct = new("Plain text content")
         {
             TextType = AtomTextConstructType.Text
         };
@@ -366,7 +366,7 @@ public class AtomFeedBehaviorTests
     public void AtomTextConstruct_WhenCreatedWithHtml_HasCorrectType()
     {
         // Arrange & Act
-        AtomTextConstruct textConstruct = new AtomTextConstruct("<p>HTML content</p>")
+        AtomTextConstruct textConstruct = new("<p>HTML content</p>")
         {
             TextType = AtomTextConstructType.Html
         };
@@ -380,7 +380,7 @@ public class AtomFeedBehaviorTests
     public void AtomTextConstruct_WhenCreatedWithXhtml_HasCorrectType()
     {
         // Arrange & Act
-        AtomTextConstruct textConstruct = new AtomTextConstruct("XHTML content")
+        AtomTextConstruct textConstruct = new("XHTML content")
         {
             TextType = AtomTextConstructType.Xhtml
         };
@@ -393,7 +393,7 @@ public class AtomFeedBehaviorTests
     public void AtomTextConstruct_WhenSavedAndReloaded_PreservesTextType()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed
+        AtomFeed feed = new()
         {
             Id = new AtomId(new Uri("urn:uuid:text-type-test")),
             Title = new AtomTextConstruct("Feed with HTML Title")
@@ -404,10 +404,10 @@ public class AtomFeedBehaviorTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         feed.Save(stream);
         stream.Position = 0;
-        AtomFeed loadedFeed = new AtomFeed();
+        AtomFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -441,7 +441,7 @@ public class AtomFeedBehaviorTests
     public void AtomPersonConstruct_WhenCreatedWithAllProperties_ContainsCorrectValues()
     {
         // Arrange & Act
-        AtomPersonConstruct person = new AtomPersonConstruct("John Doe")
+        AtomPersonConstruct person = new("John Doe")
         {
             EmailAddress = "john@example.com",
             Uri = new Uri("http://example.com/john")
@@ -457,7 +457,7 @@ public class AtomFeedBehaviorTests
     public void AtomPersonConstruct_WhenSavedAndReloaded_PreservesAllProperties()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed
+        AtomFeed feed = new()
         {
             Id = new AtomId(new Uri("urn:uuid:person-test")),
             Title = new AtomTextConstruct("Person Test Feed"),
@@ -474,10 +474,10 @@ public class AtomFeedBehaviorTests
         });
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         feed.Save(stream);
         stream.Position = 0;
-        AtomFeed loadedFeed = new AtomFeed();
+        AtomFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -497,7 +497,7 @@ public class AtomFeedBehaviorTests
     public void AtomLink_WhenCreatedWithRelAttribute_ContainsCorrectValues()
     {
         // Arrange & Act
-        AtomLink link = new AtomLink(new Uri("http://example.com/"), "alternate");
+        AtomLink link = new(new Uri("http://example.com/"), "alternate");
 
         // Assert
         link.Uri.ShouldBe(new Uri("http://example.com/"));
@@ -508,7 +508,7 @@ public class AtomFeedBehaviorTests
     public void AtomLink_WhenCreatedWithAllAttributes_ContainsCorrectValues()
     {
         // Arrange & Act
-        AtomLink link = new AtomLink(new Uri("http://example.com/feed.xml"), "self")
+        AtomLink link = new(new Uri("http://example.com/feed.xml"), "self")
         {
             ContentType = "application/atom+xml",
             Title = "Feed Link",
@@ -526,7 +526,7 @@ public class AtomFeedBehaviorTests
     public void AtomLink_WhenSavedAndReloaded_PreservesAllAttributes()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed
+        AtomFeed feed = new()
         {
             Id = new AtomId(new Uri("urn:uuid:link-test")),
             Title = new AtomTextConstruct("Link Test Feed"),
@@ -548,10 +548,10 @@ public class AtomFeedBehaviorTests
         });
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         feed.Save(stream);
         stream.Position = 0;
-        AtomFeed loadedFeed = new AtomFeed();
+        AtomFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -573,7 +573,7 @@ public class AtomFeedBehaviorTests
     public void AtomLink_WithViaRelation_SetsCorrectly()
     {
         // Arrange & Act
-        AtomLink link = new AtomLink(new Uri("http://source.example.com/original"), "via");
+        AtomLink link = new(new Uri("http://source.example.com/original"), "via");
 
         // Assert
         link.Relation.ShouldBe("via");
@@ -583,7 +583,7 @@ public class AtomFeedBehaviorTests
     public void AtomLink_WithRelatedRelation_SetsCorrectly()
     {
         // Arrange & Act
-        AtomLink link = new AtomLink(new Uri("http://example.com/related-resource"), "related");
+        AtomLink link = new(new Uri("http://example.com/related-resource"), "related");
 
         // Assert
         link.Relation.ShouldBe("related");
@@ -597,7 +597,7 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_WhenGeneratorSet_SavesAndLoadsCorrectly()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed
+        AtomFeed feed = new()
         {
             Id = new AtomId(new Uri("urn:uuid:generator-test")),
             Title = new AtomTextConstruct("Generator Test"),
@@ -610,10 +610,10 @@ public class AtomFeedBehaviorTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         feed.Save(stream);
         stream.Position = 0;
-        AtomFeed loadedFeed = new AtomFeed();
+        AtomFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -627,7 +627,7 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_WhenIconAndLogoSet_SavesAndLoadsCorrectly()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed
+        AtomFeed feed = new()
         {
             Id = new AtomId(new Uri("urn:uuid:icon-logo-test")),
             Title = new AtomTextConstruct("Icon Logo Test"),
@@ -637,10 +637,10 @@ public class AtomFeedBehaviorTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         feed.Save(stream);
         stream.Position = 0;
-        AtomFeed loadedFeed = new AtomFeed();
+        AtomFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -658,7 +658,7 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_Format_ReturnsAtom()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         // Assert
         feed.Format.ShouldBe(Argotic.Common.SyndicationContentFormat.Atom);
@@ -668,7 +668,7 @@ public class AtomFeedBehaviorTests
     public void AtomFeed_Version_Returns1_0()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         // Assert
         feed.Version.ShouldBe(new Version(1, 0));
@@ -683,7 +683,7 @@ public class AtomFeedBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.MinimalAtom;
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
@@ -703,12 +703,12 @@ public class AtomFeedBehaviorTests
     public async Task AtomFeed_LoadAsync_LoadsFeedCorrectly()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(
@@ -727,10 +727,10 @@ public class AtomFeedBehaviorTests
     public async Task AtomFeed_LoadAsync_WithEntries_LoadsAllEntries()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.AtomWithEntries);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(
@@ -749,7 +749,7 @@ public class AtomFeedBehaviorTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         AtomFeed feed = await AtomFeed.CreateAsync(
@@ -777,14 +777,14 @@ public class AtomFeedBehaviorTests
             </feed>
             """;
 
-        AtomFeed feed = new AtomFeed();
-        Argotic.Common.SyndicationResourceLoadSettings settings = new Argotic.Common.SyndicationResourceLoadSettings
+        AtomFeed feed = new();
+        Argotic.Common.SyndicationResourceLoadSettings settings = new()
         {
             AutoDetectExtensions = true
         };
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(atomWithExtension);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(
@@ -802,7 +802,7 @@ public class AtomFeedBehaviorTests
     public async Task AtomFeed_LoadAsync_IncludesSourceUriInEventArgs()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
         Uri? sourceFromEvent = null;
 
         feed.Loaded += (sender, args) =>
@@ -811,8 +811,8 @@ public class AtomFeedBehaviorTests
         };
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri requestUri = new Uri("http://example.com/feed.atom");
+        using HttpClient httpClient = new(handler);
+        Uri requestUri = new("http://example.com/feed.atom");
 
         // Act
         await feed.LoadAsync(requestUri, httpClient, cancellationToken: TestContext!.CancellationToken);
@@ -827,7 +827,7 @@ public class AtomFeedBehaviorTests
 
     private static AtomFeed CreateFeedWithEntries()
     {
-        AtomFeed feed = new AtomFeed
+        AtomFeed feed = new()
         {
             Id = new AtomId(new Uri("urn:uuid:entries-test")),
             Title = new AtomTextConstruct("Feed With Entries"),
@@ -850,7 +850,7 @@ public class AtomFeedBehaviorTests
 
     private static AtomFeed CreateCompleteFeed()
     {
-        AtomFeed feed = new AtomFeed
+        AtomFeed feed = new()
         {
             Id = new AtomId(new Uri("urn:uuid:complete-feed")),
             Title = new AtomTextConstruct("Complete Feed"),
@@ -871,7 +871,7 @@ public class AtomFeedBehaviorTests
         feed.Links.Add(new AtomLink(new Uri("http://example.com/feed.xml"), "self"));
         feed.Links.Add(new AtomLink(new Uri("http://example.com/"), "alternate"));
 
-        AtomEntry entry = new AtomEntry
+        AtomEntry entry = new()
         {
             Id = new AtomId(new Uri("urn:uuid:complete-entry")),
             Title = new AtomTextConstruct("Complete Entry"),

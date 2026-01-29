@@ -1,8 +1,8 @@
 ﻿using System.Collections.ObjectModel;
+using System.Reflection;
 using System.Xml;
 using System.Xml.XPath;
 using Argotic.Common;
-using System.Reflection;
 
 namespace Argotic.Extensions;
 
@@ -11,14 +11,6 @@ namespace Argotic.Extensions;
 /// </summary>
 public class SyndicationExtensionAdapter
 {
-    /// <summary>
-    /// Private member to hold the XPathNavigator used to load a syndication extension.
-    /// </summary>
-    private readonly XPathNavigator adapterNavigator;
-    /// <summary>
-    /// Private member to hold the XPathNavigator used to configure the load of a syndication extension.
-    /// </summary>
-    private readonly SyndicationResourceLoadSettings adapterSettings = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtensionAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -32,8 +24,8 @@ public class SyndicationExtensionAdapter
         ArgumentNullException.ThrowIfNull(navigator);
         ArgumentNullException.ThrowIfNull(settings);
 
-        adapterNavigator = navigator;
-        adapterSettings = settings;
+        Navigator = navigator;
+        Settings = settings;
     }
     /// <summary>
     /// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
@@ -79,25 +71,13 @@ public class SyndicationExtensionAdapter
     /// Gets the <see cref="XPathNavigator"/> used to fill an extensible syndication resource.
     /// </summary>
     /// <value>The <see cref="XPathNavigator"/> used to fill an extensible syndication resource.</value>
-    public XPathNavigator Navigator
-    {
-        get
-        {
-            return adapterNavigator;
-        }
-    }
+    public XPathNavigator Navigator { get; }
 
     /// <summary>
     /// Gets the <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of an extensible syndication resource.
     /// </summary>
     /// <value>The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of an extensible syndication resource.</value>
-    public SyndicationResourceLoadSettings Settings
-    {
-        get
-        {
-            return adapterSettings;
-        }
-    }
+    public SyndicationResourceLoadSettings Settings { get; } = new();
     /// <summary>
     /// Fills the specified collection of <see cref="Type"/> objects using the supplied <see cref="IExtensibleSyndicationObject"/>.
     /// </summary>

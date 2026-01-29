@@ -1,6 +1,7 @@
-﻿namespace Argotic.Common;
 
 using System.Collections.Generic;
+
+namespace Argotic.Common;
 
 public class HtmlAnchor
 {

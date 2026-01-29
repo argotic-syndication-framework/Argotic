@@ -542,7 +542,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         {
             while (idIterator.MoveNext())
             {
-                SitemapVideoId videoId = new SitemapVideoId();
+                SitemapVideoId videoId = new();
                 if (videoId.Load(idIterator.Current))
                 {
                     this.videoIdentifiers.Add(videoId);
@@ -556,7 +556,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         {
             while (segmentIterator.MoveNext())
             {
-                SitemapVideoSegment segment = new SitemapVideoSegment();
+                SitemapVideoSegment segment = new();
                 if (segment.Load(segmentIterator.Current))
                 {
                     this.videoContentSegments.Add(segment);

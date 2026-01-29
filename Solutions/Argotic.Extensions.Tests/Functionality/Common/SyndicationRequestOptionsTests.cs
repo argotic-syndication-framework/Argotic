@@ -9,11 +9,11 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_SetsAcceptHeader()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             Accept = "application/xml"
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         options.ApplyTo(request);
 
@@ -23,11 +23,11 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_SetsUserAgentHeader()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             UserAgent = "TestApp/1.0"
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         options.ApplyTo(request);
 
@@ -37,11 +37,11 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_SetsRefererHeader()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             Referer = "http://example.com/source"
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         options.ApplyTo(request);
 
@@ -52,11 +52,11 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_WithInvalidReferer_DoesNotThrow()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             Referer = "not a valid uri"
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         // Should not throw
         Should.NotThrow(() => options.ApplyTo(request));
@@ -68,11 +68,11 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_WithRelativeReferer_SetsFileUri()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             Referer = "/relative/path"
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         options.ApplyTo(request);
 
@@ -84,7 +84,7 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_SetsCustomHeaders()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             CustomHeaders = new Dictionary<string, string>
             {
@@ -92,7 +92,7 @@ public class SyndicationRequestOptionsTests
                 ["X-Another-Header"] = "another-value"
             }
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         options.ApplyTo(request);
 
@@ -103,14 +103,14 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_DoesNotOverwriteExistingCustomHeaders()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             CustomHeaders = new Dictionary<string, string>
             {
                 ["X-Custom-Header"] = "new-value"
             }
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
         request.Headers.TryAddWithoutValidation("X-Custom-Header", "existing-value");
 
         options.ApplyTo(request);
@@ -124,7 +124,7 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_WithNullRequest_ThrowsArgumentNullException()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions();
+        SyndicationRequestOptions options = new();
 
         Should.Throw<ArgumentNullException>(() => options.ApplyTo(null!));
     }
@@ -132,8 +132,8 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_WithAllNullProperties_DoesNotModifyRequest()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions();
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        SyndicationRequestOptions options = new();
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         options.ApplyTo(request);
 
@@ -145,7 +145,7 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_WithAllPropertiesSet_SetsAllHeaders()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             Accept = "application/rss+xml",
             UserAgent = "Argotic/1.0",
@@ -155,7 +155,7 @@ public class SyndicationRequestOptionsTests
                 ["X-Test"] = "test-value"
             }
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         options.ApplyTo(request);
 
@@ -168,11 +168,11 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_WithEmptyReferer_DoesNotSetHeader()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             Referer = ""
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         // Empty string is not null, but TryCreate will fail for empty string
         options.ApplyTo(request);
@@ -183,11 +183,11 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void ApplyTo_AcceptWithMultipleTypes_SetsAllTypes()
     {
-        SyndicationRequestOptions options = new SyndicationRequestOptions
+        SyndicationRequestOptions options = new()
         {
             Accept = "application/xml, application/rss+xml"
         };
-        using HttpRequestMessage request = new HttpRequestMessage(HttpMethod.Get, "http://example.com");
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
         options.ApplyTo(request);
 
@@ -197,7 +197,7 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void Record_WithExpression_CreatesModifiedCopy()
     {
-        SyndicationRequestOptions original = new SyndicationRequestOptions
+        SyndicationRequestOptions original = new()
         {
             Accept = "application/xml",
             UserAgent = "OriginalAgent/1.0"
@@ -213,12 +213,12 @@ public class SyndicationRequestOptionsTests
     [TestMethod]
     public void Record_Equality_WorksCorrectly()
     {
-        SyndicationRequestOptions options1 = new SyndicationRequestOptions
+        SyndicationRequestOptions options1 = new()
         {
             Accept = "application/xml",
             UserAgent = "TestAgent/1.0"
         };
-        SyndicationRequestOptions options2 = new SyndicationRequestOptions
+        SyndicationRequestOptions options2 = new()
         {
             Accept = "application/xml",
             UserAgent = "TestAgent/1.0"

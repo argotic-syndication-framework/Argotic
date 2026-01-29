@@ -12,7 +12,7 @@ public class MimeMediaTypeAttributeTests
     public void Constructor_Default_CreatesInstance()
     {
         // Arrange & Act
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute();
+        MimeMediaTypeAttribute attribute = new();
 
         // Assert
         attribute.ShouldNotBeNull();
@@ -25,7 +25,7 @@ public class MimeMediaTypeAttributeTests
     public void Name_Set_SetsValue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute();
+        MimeMediaTypeAttribute attribute = new();
 
         // Act
         attribute.Name = "application";
@@ -38,7 +38,7 @@ public class MimeMediaTypeAttributeTests
     public void Name_SetWithWhitespace_TrimsValue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute();
+        MimeMediaTypeAttribute attribute = new();
 
         // Act
         attribute.Name = "  application  ";
@@ -51,7 +51,7 @@ public class MimeMediaTypeAttributeTests
     public void Name_SetNull_SetsEmpty()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute { Name = "application" };
+        MimeMediaTypeAttribute attribute = new() { Name = "application" };
 
         // Act
         attribute.Name = null!;
@@ -64,7 +64,7 @@ public class MimeMediaTypeAttributeTests
     public void Name_SetEmpty_SetsEmpty()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute { Name = "application" };
+        MimeMediaTypeAttribute attribute = new() { Name = "application" };
 
         // Act
         attribute.Name = string.Empty;
@@ -77,7 +77,7 @@ public class MimeMediaTypeAttributeTests
     public void SubName_Set_SetsValue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute();
+        MimeMediaTypeAttribute attribute = new();
 
         // Act
         attribute.SubName = "rss+xml";
@@ -90,7 +90,7 @@ public class MimeMediaTypeAttributeTests
     public void SubName_SetWithWhitespace_TrimsValue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute();
+        MimeMediaTypeAttribute attribute = new();
 
         // Act
         attribute.SubName = "  rss+xml  ";
@@ -103,7 +103,7 @@ public class MimeMediaTypeAttributeTests
     public void SubName_SetNull_SetsEmpty()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute { SubName = "rss+xml" };
+        MimeMediaTypeAttribute attribute = new() { SubName = "rss+xml" };
 
         // Act
         attribute.SubName = null!;
@@ -116,7 +116,7 @@ public class MimeMediaTypeAttributeTests
     public void SubName_SetEmpty_SetsEmpty()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute { SubName = "rss+xml" };
+        MimeMediaTypeAttribute attribute = new() { SubName = "rss+xml" };
 
         // Act
         attribute.SubName = string.Empty;
@@ -129,7 +129,7 @@ public class MimeMediaTypeAttributeTests
     public void Documentation_Set_SetsValue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute();
+        MimeMediaTypeAttribute attribute = new();
 
         // Act
         attribute.Documentation = "http://www.rssboard.org/rss-specification";
@@ -142,7 +142,7 @@ public class MimeMediaTypeAttributeTests
     public void Documentation_SetNull_SetsEmpty()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute = new()
         {
             Documentation = "http://example.com"
         };
@@ -158,7 +158,7 @@ public class MimeMediaTypeAttributeTests
     public void Documentation_SetInvalidUri_SetsEmpty()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute = new()
         {
             Documentation = "http://example.com"
         };
@@ -174,7 +174,7 @@ public class MimeMediaTypeAttributeTests
     public void ToString_ReturnsFormattedString()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute = new()
         {
             Name = "application",
             SubName = "rss+xml",
@@ -195,13 +195,13 @@ public class MimeMediaTypeAttributeTests
     public void CompareTo_EqualAttributes_ReturnsZero()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "rss+xml"
@@ -218,13 +218,13 @@ public class MimeMediaTypeAttributeTests
     public void CompareTo_DifferentAttributes_ReturnsNonZero()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "atom+xml"
@@ -241,7 +241,7 @@ public class MimeMediaTypeAttributeTests
     public void CompareTo_Null_ReturnsOne()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute = new()
         {
             Name = "application",
             SubName = "rss+xml"
@@ -258,12 +258,12 @@ public class MimeMediaTypeAttributeTests
     public void CompareTo_DifferentAttribute_ReturnsNonZero()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml"
         };
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "text",
             SubName = "xml"
@@ -280,14 +280,14 @@ public class MimeMediaTypeAttributeTests
     public void Equals_SameAttribute_ReturnsTrue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml",
             Documentation = "http://example.com"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "rss+xml",
@@ -302,13 +302,13 @@ public class MimeMediaTypeAttributeTests
     public void Equals_DifferentAttribute_ReturnsFalse()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "text",
             SubName = "xml"
@@ -322,7 +322,7 @@ public class MimeMediaTypeAttributeTests
     public void Equals_NonMimeMediaTypeAttribute_ReturnsFalse()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute();
+        MimeMediaTypeAttribute attribute = new();
 
         // Act & Assert
         attribute.Equals("not an attribute").ShouldBeFalse();
@@ -332,7 +332,7 @@ public class MimeMediaTypeAttributeTests
     public void GetHashCode_DoesNotThrow()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute = new()
         {
             Name = "application",
             SubName = "rss+xml"
@@ -351,13 +351,13 @@ public class MimeMediaTypeAttributeTests
     public void OperatorEquals_EqualAttributes_ReturnsTrue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "rss+xml"
@@ -382,13 +382,13 @@ public class MimeMediaTypeAttributeTests
     public void OperatorNotEquals_DifferentAttributes_ReturnsTrue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "atom+xml"
@@ -402,13 +402,13 @@ public class MimeMediaTypeAttributeTests
     public void OperatorLessThan_SmallerName_ReturnsTrue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "atom+xml"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "rss+xml"
@@ -423,7 +423,7 @@ public class MimeMediaTypeAttributeTests
     {
         // Arrange
         MimeMediaTypeAttribute? attribute1 = null;
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "rss+xml"
@@ -437,13 +437,13 @@ public class MimeMediaTypeAttributeTests
     public void OperatorGreaterThan_LargerName_ReturnsTrue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "atom+xml"
@@ -458,7 +458,7 @@ public class MimeMediaTypeAttributeTests
     {
         // Arrange
         MimeMediaTypeAttribute? attribute1 = null;
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "rss+xml"
@@ -472,13 +472,13 @@ public class MimeMediaTypeAttributeTests
     public void OperatorLessThanOrEqual_SmallerOrEqualName_ReturnsTrue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "rss+xml"
@@ -493,7 +493,7 @@ public class MimeMediaTypeAttributeTests
     {
         // Arrange
         MimeMediaTypeAttribute? attribute1 = null;
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "rss+xml"
@@ -507,13 +507,13 @@ public class MimeMediaTypeAttributeTests
     public void OperatorGreaterThanOrEqual_LargerOrEqualName_ReturnsTrue()
     {
         // Arrange
-        MimeMediaTypeAttribute attribute1 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute1 = new()
         {
             Name = "application",
             SubName = "rss+xml"
         };
 
-        MimeMediaTypeAttribute attribute2 = new MimeMediaTypeAttribute
+        MimeMediaTypeAttribute attribute2 = new()
         {
             Name = "application",
             SubName = "rss+xml"

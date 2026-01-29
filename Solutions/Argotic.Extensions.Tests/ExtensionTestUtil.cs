@@ -1,6 +1,6 @@
-using Argotic.Syndication;
 using System.Globalization;
 using System.Xml;
+using Argotic.Syndication;
 
 namespace Argotic.Extensions.Tests;
 

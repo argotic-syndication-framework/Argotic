@@ -11,7 +11,7 @@ public class RsdDocumentTests
     [TestMethod]
     public void Constructor_Default_CreatesEmptyDocument()
     {
-        RsdDocument document = new RsdDocument();
+        RsdDocument document = new();
 
         document.ShouldNotBeNull();
         document.Interfaces.Count.ShouldBe(0);
@@ -20,7 +20,7 @@ public class RsdDocumentTests
     [TestMethod]
     public void Properties_CanBeSet()
     {
-        RsdDocument document = new RsdDocument
+        RsdDocument document = new()
         {
             EngineName = "Test CMS",
             EngineLink = new Uri("http://example.com/cms"),
@@ -35,8 +35,8 @@ public class RsdDocumentTests
     [TestMethod]
     public void Interfaces_Add_AddsInterfaceCorrectly()
     {
-        RsdDocument document = new RsdDocument();
-        RsdApplicationInterface api = new RsdApplicationInterface(
+        RsdDocument document = new();
+        RsdApplicationInterface api = new(
             "MetaWeblog",
             new Uri("http://example.com/xml/rpc"),
             true,
@@ -55,7 +55,7 @@ public class RsdDocumentTests
     [TestMethod]
     public void Interface_CanHaveOptionalProperties()
     {
-        RsdApplicationInterface api = new RsdApplicationInterface(
+        RsdApplicationInterface api = new(
             "Conversant",
             new Uri("http://example.com/xml/rpc"),
             false,
@@ -74,7 +74,7 @@ public class RsdDocumentTests
     [TestMethod]
     public void Save_ProducesValidXml()
     {
-        RsdDocument document = new RsdDocument
+        RsdDocument document = new()
         {
             EngineName = "Test CMS",
             EngineLink = new Uri("http://example.com/cms"),
@@ -86,11 +86,11 @@ public class RsdDocumentTests
             true,
             "123"));
 
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
 
         stream.Position = 0;
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         xml.ShouldNotBeNullOrEmpty();
@@ -105,7 +105,7 @@ public class RsdDocumentTests
     public void RoundTrip_SaveAndLoad_PreservesData()
     {
         // Create a document
-        RsdDocument originalDocument = new RsdDocument
+        RsdDocument originalDocument = new()
         {
             EngineName = "Test CMS",
             EngineLink = new Uri("http://example.com/cms"),
@@ -118,12 +118,12 @@ public class RsdDocumentTests
             "123"));
 
         // Save to stream
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
 
         // Load from stream
         stream.Position = 0;
-        RsdDocument loadedDocument = new RsdDocument();
+        RsdDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Verify data preserved

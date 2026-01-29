@@ -11,7 +11,7 @@ namespace Argotic.Examples.Core.Sitemap;
 ///     This class contains all the code examples that are referenced by the <see cref="SitemapImageExtension"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class SitemapImageExtensionExample
+internal static class SitemapImageExtensionExample
 {
     /// <summary>
     /// Provides example code for the SitemapImageExtension class.

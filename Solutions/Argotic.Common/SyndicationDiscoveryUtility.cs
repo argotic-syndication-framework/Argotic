@@ -11,10 +11,6 @@ namespace Argotic.Common;
 /// </summary>
 public static class SyndicationDiscoveryUtility
 {
-    /// <summary>
-    /// Private member to hold the default user agent sent by the framework when making HTTP web requests.
-    /// </summary>
-    private static readonly string frameworkUserAgent = CreateFrameworkUserAgent();
 
     /// <summary>
     /// Creates the framework user agent string with defensive null handling.
@@ -30,7 +26,7 @@ public static class SyndicationDiscoveryUtility
     /// Gets the raw user agent string used by the framework when sending web requests.
     /// </summary>
     /// <value>A string that represents information such as the client application name, version, host operating system, and language.</value>
-    public static string FrameworkUserAgent => frameworkUserAgent;
+    public static string FrameworkUserAgent { get; } = CreateFrameworkUserAgent();
 
     /// <summary>
     /// Returns the <see cref="SyndicationContentFormat"/> enumeration value that corresponds to the specified format name.

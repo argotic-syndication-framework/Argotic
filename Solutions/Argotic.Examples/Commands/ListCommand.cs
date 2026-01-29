@@ -6,7 +6,7 @@ namespace Argotic.Examples.Commands;
 /// <summary>
 /// Lists all available examples.
 /// </summary>
-public sealed class ListCommand : Command<ListSettings>
+internal sealed class ListCommand : Command<ListSettings>
 {
     public override int Execute(CommandContext context, ListSettings settings, CancellationToken cancellationToken)
     {
@@ -33,7 +33,7 @@ public sealed class ListCommand : Command<ListSettings>
             categories = [matchedCategory];
         }
 
-        Table table = new Table();
+        Table table = new();
         table.AddColumn("Category");
         table.AddColumn("Example Name");
         table.AddColumn("Async");

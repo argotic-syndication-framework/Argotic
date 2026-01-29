@@ -12,7 +12,7 @@ public class OpmlDocumentTests
     [TestMethod]
     public void Constructor_Default_CreatesEmptyDocument()
     {
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         document.ShouldNotBeNull();
         document.Outlines.ShouldNotBeNull();
@@ -22,7 +22,7 @@ public class OpmlDocumentTests
     [TestMethod]
     public void Head_CanSetTitle()
     {
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head =
             {
@@ -36,10 +36,10 @@ public class OpmlDocumentTests
     [TestMethod]
     public void Head_CanSetDates()
     {
-        DateTime createdOn = new DateTime(2024, 1, 1, 12, 0, 0);
-        DateTime modifiedOn = new DateTime(2024, 1, 15, 12, 0, 0);
+        DateTime createdOn = new(2024, 1, 1, 12, 0, 0);
+        DateTime modifiedOn = new(2024, 1, 15, 12, 0, 0);
 
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head =
             {
@@ -55,7 +55,7 @@ public class OpmlDocumentTests
     [TestMethod]
     public void Head_CanSetOwner()
     {
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head =
             {
@@ -70,8 +70,8 @@ public class OpmlDocumentTests
     [TestMethod]
     public void AddOutline_AddsOutlineCorrectly()
     {
-        OpmlDocument document = new OpmlDocument();
-        OpmlOutline outline = new OpmlOutline("Test Outline");
+        OpmlDocument document = new();
+        OpmlOutline outline = new("Test Outline");
 
         document.Outlines.Add(outline);
 
@@ -82,8 +82,8 @@ public class OpmlDocumentTests
     [TestMethod]
     public void Outline_CanHaveNestedOutlines()
     {
-        OpmlDocument document = new OpmlDocument();
-        OpmlOutline containerOutline = new OpmlOutline("Feeds");
+        OpmlDocument document = new();
+        OpmlOutline containerOutline = new("Feeds");
         containerOutline.Outlines.Add(new OpmlOutline("Child 1"));
         containerOutline.Outlines.Add(new OpmlOutline("Child 2"));
 
@@ -109,8 +109,8 @@ public class OpmlDocumentTests
     [TestMethod]
     public void Load_MinimalOpml_LoadsCorrectly()
     {
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml));
-        OpmlDocument document = new OpmlDocument();
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml));
+        OpmlDocument document = new();
         document.Load(stream);
 
         document.Head.Title.ShouldBe("Test OPML");
@@ -121,7 +121,7 @@ public class OpmlDocumentTests
     [TestMethod]
     public void Save_ProducesValidXml()
     {
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head =
             {
@@ -130,11 +130,11 @@ public class OpmlDocumentTests
         };
         document.Outlines.Add(new OpmlOutline("Test Outline"));
 
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
 
         stream.Position = 0;
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         xml.ShouldNotBeNullOrEmpty();
@@ -150,7 +150,7 @@ public class OpmlDocumentTests
     public void RoundTrip_SaveAndLoad_PreservesData()
     {
         // Create a document
-        OpmlDocument originalDocument = new OpmlDocument
+        OpmlDocument originalDocument = new()
         {
             Head =
             {
@@ -161,12 +161,12 @@ public class OpmlDocumentTests
         originalDocument.Outlines.Add(new OpmlOutline("Outline 2"));
 
         // Save to stream
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
 
         // Load from stream
         stream.Position = 0;
-        OpmlDocument loadedDocument = new OpmlDocument();
+        OpmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Verify data preserved

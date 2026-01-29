@@ -12,14 +12,6 @@ namespace Argotic.Data.Adapters;
 /// </summary>
 public class SyndicationResourceAdapter
 {
-    /// <summary>
-    /// Private member to hold the XPathNavigator used to load a syndication resource.
-    /// </summary>
-    private readonly XPathNavigator adapterNavigator;
-    /// <summary>
-    /// Private member to hold the XPathNavigator used to configure the load of a syndication resource.
-    /// </summary>
-    private readonly SyndicationResourceLoadSettings adapterSettings = new();
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceAdapter"/> class using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -33,33 +25,21 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(navigator);
         ArgumentNullException.ThrowIfNull(settings);
 
-        adapterNavigator = navigator;
-        adapterSettings = settings;
+        Navigator = navigator;
+        Settings = settings;
     }
 
     /// <summary>
     /// Gets the <see cref="XPathNavigator"/> used to fill a syndication resource.
     /// </summary>
     /// <value>The <see cref="XPathNavigator"/> used to fill a syndication resource.</value>
-    public XPathNavigator Navigator
-    {
-        get
-        {
-            return adapterNavigator;
-        }
-    }
+    public XPathNavigator Navigator { get; }
 
     /// <summary>
     /// Gets the <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of a syndication resource.
     /// </summary>
     /// <value>The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of a syndication resource.</value>
-    public SyndicationResourceLoadSettings Settings
-    {
-        get
-        {
-            return adapterSettings;
-        }
-    }
+    public SyndicationResourceLoadSettings Settings { get; } = new();
 
     /// <summary>
     /// Modifies the <see cref="ISyndicationResource"/> to match the data source.

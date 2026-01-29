@@ -1,4 +1,3 @@
-using System.Globalization;
 using System.Text;
 using System.Xml.XPath;
 
@@ -21,12 +20,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_MinimalRss091_PopulatesChannel()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -41,12 +40,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_WithLanguage_ParsesCultureInfo()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -60,12 +59,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_WithSkipDays_ParsesDaysCorrectly()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -80,12 +79,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_WithSkipHours_ParsesHoursCorrectly()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -101,12 +100,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_WithItems_PopulatesItems()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -122,12 +121,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_WithImage_PopulatesImageWithDimensions()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -146,12 +145,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_WithTextInput_PopulatesTextInput()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -168,12 +167,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_WithOptionalElements_PopulatesOptionals()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -215,15 +214,15 @@ public class Rss091SyndicationResourceAdapterTests
             </rss>
             """;
 
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(rss091WithMultipleItems));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(rss091WithMultipleItems));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        SyndicationResourceLoadSettings settings = new()
         {
             RetrievalLimit = 2
         };
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -238,11 +237,11 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_NullResource_ThrowsArgumentNullException()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => adapter.Fill(null!));
@@ -252,7 +251,7 @@ public class Rss091SyndicationResourceAdapterTests
     public void Constructor_NullNavigator_ThrowsArgumentNullException()
     {
         // Arrange
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
+        SyndicationResourceLoadSettings settings = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new Rss091SyndicationResourceAdapter(null!, settings));
@@ -262,8 +261,8 @@ public class Rss091SyndicationResourceAdapterTests
     public void Constructor_NullSettings_ThrowsArgumentNullException()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
 
         // Act & Assert
@@ -274,12 +273,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_MinimalFeed_LeavesImageNull()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -292,12 +291,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_MinimalFeed_LeavesTextInputNull()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -310,12 +309,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_MinimalFeed_LeavesSkipDaysEmpty()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -328,12 +327,12 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_MinimalFeed_LeavesSkipHoursEmpty()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -358,12 +357,12 @@ public class Rss091SyndicationResourceAdapterTests
             </rss>
             """;
 
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(rss091WithEmptyLanguage));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(rss091WithEmptyLanguage));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act & Assert - Should not throw for empty language
         Should.NotThrow(() => adapter.Fill(feed));
@@ -391,12 +390,12 @@ public class Rss091SyndicationResourceAdapterTests
             </rss>
             """;
 
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(rss091WithInvalidSkipDay));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(rss091WithInvalidSkipDay));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act & Assert - Should not throw, just skip invalid day
         Should.NotThrow(() => adapter.Fill(feed));
@@ -408,15 +407,15 @@ public class Rss091SyndicationResourceAdapterTests
     public void Fill_WithZeroRetrievalLimit_RetrievesAllItems()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rss091Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        SyndicationResourceLoadSettings settings = new()
         {
             RetrievalLimit = 0  // 0 means no limit
         };
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -444,12 +443,12 @@ public class Rss091SyndicationResourceAdapterTests
             </rss>
             """;
 
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(rss091WithDates));
-        XPathDocument doc = new XPathDocument(stream);
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(rss091WithDates));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rss091SyndicationResourceAdapter adapter = new Rss091SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rss091SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act - Should not throw when encountering date elements
         Should.NotThrow(() => adapter.Fill(feed));

@@ -10,7 +10,7 @@ namespace Argotic.Examples.Core;
 ///     This class contains all the code examples that are referenced by the <see cref="GenericSyndicationFeed"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class GenericSyndicationFeedExample
+internal static class GenericSyndicationFeedExample
 {
     /// <summary>
     /// Provides example code for the GenericSyndicationFeed class.

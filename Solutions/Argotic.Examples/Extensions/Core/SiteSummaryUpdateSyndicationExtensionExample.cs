@@ -1,4 +1,4 @@
-﻿using Argotic.Extensions;
+using Argotic.Extensions;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
 
@@ -11,7 +11,7 @@ namespace Argotic.Examples.Extensions.Core;
 ///     This class contains all the code examples that are referenced by the <see cref="SiteSummaryUpdateSyndicationExtension"/> class. 
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class SiteSummaryUpdateSyndicationExtensionExample
+internal static class SiteSummaryUpdateSyndicationExtensionExample
 {
     /// <summary>
     /// Provides example code for the SiteSummaryUpdateSyndicationExtension class.

@@ -11,7 +11,7 @@ public class ApmlDocumentTests
     [TestMethod]
     public void Constructor_Default_CreatesEmptyDocument()
     {
-        ApmlDocument document = new ApmlDocument();
+        ApmlDocument document = new();
 
         document.ShouldNotBeNull();
         document.Profiles.Count().ShouldBe(0);
@@ -20,8 +20,8 @@ public class ApmlDocumentTests
     [TestMethod]
     public void Head_CanSetProperties()
     {
-        DateTime createdOn = new DateTime(2024, 1, 1, 12, 0, 0);
-        ApmlDocument document = new ApmlDocument
+        DateTime createdOn = new(2024, 1, 1, 12, 0, 0);
+        ApmlDocument document = new()
         {
             Head =
             {
@@ -41,7 +41,7 @@ public class ApmlDocumentTests
     [TestMethod]
     public void DefaultProfileName_CanBeSet()
     {
-        ApmlDocument document = new ApmlDocument
+        ApmlDocument document = new()
         {
             DefaultProfileName = "Work"
         };
@@ -52,8 +52,8 @@ public class ApmlDocumentTests
     [TestMethod]
     public void AddProfile_AddsProfileCorrectly()
     {
-        ApmlDocument document = new ApmlDocument();
-        ApmlProfile profile = new ApmlProfile
+        ApmlDocument document = new();
+        ApmlProfile profile = new()
         {
             Name = "Home"
         };
@@ -67,7 +67,7 @@ public class ApmlDocumentTests
     [TestMethod]
     public void Profile_CanHaveImplicitConcepts()
     {
-        ApmlProfile profile = new ApmlProfile
+        ApmlProfile profile = new()
         {
             Name = "Test"
         };
@@ -86,7 +86,7 @@ public class ApmlDocumentTests
     [TestMethod]
     public void Profile_CanHaveExplicitConcepts()
     {
-        ApmlProfile profile = new ApmlProfile
+        ApmlProfile profile = new()
         {
             Name = "Test"
         };
@@ -101,7 +101,7 @@ public class ApmlDocumentTests
     [TestMethod]
     public void Source_CanHaveAuthors()
     {
-        ApmlSource source = new ApmlSource
+        ApmlSource source = new()
         {
             Key = "http://feeds.example.com/feed",
             Name = "Example Feed",
@@ -119,7 +119,7 @@ public class ApmlDocumentTests
     [TestMethod]
     public void Save_ProducesValidXml()
     {
-        ApmlDocument document = new ApmlDocument
+        ApmlDocument document = new()
         {
             DefaultProfileName = "Work",
             Head =
@@ -127,15 +127,15 @@ public class ApmlDocumentTests
                 Title = "Test APML"
             }
         };
-        ApmlProfile profile = new ApmlProfile { Name = "Work" };
+        ApmlProfile profile = new() { Name = "Work" };
         profile.ExplicitConcepts.Add(new ApmlConcept("test", 0.5m));
         document.Profiles.Add(profile);
 
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
 
         stream.Position = 0;
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         xml.ShouldNotBeNullOrEmpty();
@@ -150,7 +150,7 @@ public class ApmlDocumentTests
     public void RoundTrip_SaveAndLoad_PreservesData()
     {
         // Create a document
-        ApmlDocument originalDocument = new ApmlDocument
+        ApmlDocument originalDocument = new()
         {
             DefaultProfileName = "Work",
             Head =
@@ -158,17 +158,17 @@ public class ApmlDocumentTests
                 Title = "Test APML"
             }
         };
-        ApmlProfile profile = new ApmlProfile { Name = "Work" };
+        ApmlProfile profile = new() { Name = "Work" };
         profile.ExplicitConcepts.Add(new ApmlConcept("test", 0.5m));
         originalDocument.Profiles.Add(profile);
 
         // Save to stream
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
 
         // Load from stream
         stream.Position = 0;
-        ApmlDocument loadedDocument = new ApmlDocument();
+        ApmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Verify data preserved

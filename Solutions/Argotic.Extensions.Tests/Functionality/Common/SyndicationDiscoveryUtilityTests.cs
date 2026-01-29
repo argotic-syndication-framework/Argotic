@@ -14,7 +14,7 @@ public class SyndicationDiscoveryUtilityTests
     [TestMethod]
     public void SyndicationContentFormatGet_FromRssStream_ReturnsRss()
     {
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
         SyndicationContentFormat format = SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
 
@@ -24,7 +24,7 @@ public class SyndicationDiscoveryUtilityTests
     [TestMethod]
     public void SyndicationContentFormatGet_FromAtomStream_ReturnsAtom()
     {
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
 
         SyndicationContentFormat format = SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
 
@@ -34,7 +34,7 @@ public class SyndicationDiscoveryUtilityTests
     [TestMethod]
     public void SyndicationContentFormatGet_FromOpmlStream_ReturnsOpml()
     {
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml));
 
         SyndicationContentFormat format = SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
 
@@ -50,7 +50,7 @@ public class SyndicationDiscoveryUtilityTests
                 <element>data</element>
             </unknown>
             """;
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(unknownXml));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(unknownXml));
 
         SyndicationContentFormat format = SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
 

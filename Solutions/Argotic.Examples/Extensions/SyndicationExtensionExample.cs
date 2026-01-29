@@ -7,13 +7,8 @@ namespace Argotic.Examples.Extensions;
 /// <summary>
 /// Provides a simple example of a custom syndication extension.
 /// </summary>
-public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
+internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
 {
-
-    /// <summary>
-    /// Private member to hold the value of the custom syndication extension's attribute.
-    /// </summary>
-    private string customExtensionAttribute = string.Empty;
     /// <summary>
     /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
     /// </summary>
@@ -28,23 +23,20 @@ public class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     /// <value>The value of the extension attribute.</value>
     public string MyAttribute
     {
-        get
-        {
-            return customExtensionAttribute;
-        }
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                customExtensionAttribute = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                customExtensionAttribute = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
     /// represents the same <see cref="Type"/> as this <see cref="MyCustomSyndicationExtension"/>.

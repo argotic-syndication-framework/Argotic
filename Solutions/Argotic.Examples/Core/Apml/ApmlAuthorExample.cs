@@ -1,4 +1,4 @@
-﻿using Argotic.Syndication.Specialized;
+using Argotic.Syndication.Specialized;
 
 namespace Argotic.Examples.Core.Apml;
 
@@ -9,7 +9,7 @@ namespace Argotic.Examples.Core.Apml;
 ///     This class contains all the code examples that are referenced by the <see cref="ApmlAuthor"/> class. 
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class ApmlAuthorExample
+internal static class ApmlAuthorExample
 {
     /// <summary>
     /// Provides example code for the ApmlAuthor class.

@@ -775,8 +775,8 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationSharingInformation_CompareSequence_EqualCollections_ReturnsZero()
     {
         // Arrange
-        List<FeedSynchronizationRelatedInformation> source = new List<FeedSynchronizationRelatedInformation>();
-        List<FeedSynchronizationRelatedInformation> target = new List<FeedSynchronizationRelatedInformation>();
+        List<FeedSynchronizationRelatedInformation> source = new();
+        List<FeedSynchronizationRelatedInformation> target = new();
 
         // Act
         int result = FeedSynchronizationSharingInformation.CompareSequence(source, target);
@@ -789,11 +789,11 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationSharingInformation_CompareSequence_SourceLarger_ReturnsPositive()
     {
         // Arrange
-        List<FeedSynchronizationRelatedInformation> source = new List<FeedSynchronizationRelatedInformation>
+        List<FeedSynchronizationRelatedInformation> source = new()
         {
             new(new Uri("http://example.com/feed1"), FeedSynchronizationRelatedInformationType.Complete)
         };
-        List<FeedSynchronizationRelatedInformation> target = new List<FeedSynchronizationRelatedInformation>();
+        List<FeedSynchronizationRelatedInformation> target = new();
 
         // Act
         int result = FeedSynchronizationSharingInformation.CompareSequence(source, target);
@@ -806,7 +806,7 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationSharingInformation_CompareSequence_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        List<FeedSynchronizationRelatedInformation> target = new List<FeedSynchronizationRelatedInformation>();
+        List<FeedSynchronizationRelatedInformation> target = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => FeedSynchronizationSharingInformation.CompareSequence(null!, target));
@@ -1001,8 +1001,8 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationItem_CompareSequence_EqualCollections_ReturnsZero()
     {
         // Arrange
-        List<FeedSynchronizationHistory> source = new List<FeedSynchronizationHistory> { new(1) };
-        List<FeedSynchronizationHistory> target = new List<FeedSynchronizationHistory> { new(1) };
+        List<FeedSynchronizationHistory> source = new() { new(1) };
+        List<FeedSynchronizationHistory> target = new() { new(1) };
 
         // Act
         int result = FeedSynchronizationItem.CompareSequence(source, target);
@@ -1015,8 +1015,8 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationItem_CompareSequence_SourceLarger_ReturnsPositive()
     {
         // Arrange
-        List<FeedSynchronizationHistory> source = new List<FeedSynchronizationHistory> { new(1), new(2) };
-        List<FeedSynchronizationHistory> target = new List<FeedSynchronizationHistory> { new(1) };
+        List<FeedSynchronizationHistory> source = new() { new(1), new(2) };
+        List<FeedSynchronizationHistory> target = new() { new(1) };
 
         // Act
         int result = FeedSynchronizationItem.CompareSequence(source, target);
@@ -1029,8 +1029,8 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationItem_CompareSequence_TargetLarger_ReturnsNegative()
     {
         // Arrange
-        List<FeedSynchronizationHistory> source = new List<FeedSynchronizationHistory> { new(1) };
-        List<FeedSynchronizationHistory> target = new List<FeedSynchronizationHistory> { new(1), new(2) };
+        List<FeedSynchronizationHistory> source = new() { new(1) };
+        List<FeedSynchronizationHistory> target = new() { new(1), new(2) };
 
         // Act
         int result = FeedSynchronizationItem.CompareSequence(source, target);
@@ -1043,7 +1043,7 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationItem_CompareSequence_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        List<FeedSynchronizationHistory> target = new List<FeedSynchronizationHistory>();
+        List<FeedSynchronizationHistory> target = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => FeedSynchronizationItem.CompareSequence(null!, target));
@@ -1575,7 +1575,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
         // Note: We only set When and Sequence, not By, to avoid a bug in FeedSynchronizationHistory.WriteTo
         // where the By property is written with attribute name "when" instead of "by", causing duplicate attributes.
-        FeedSynchronizationHistory history = new FeedSynchronizationHistory(1)
+        FeedSynchronizationHistory history = new(1)
         {
             When = new DateTime(2010, 6, 15, 10, 30, 0, DateTimeKind.Utc)
         };

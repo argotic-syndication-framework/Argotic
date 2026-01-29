@@ -13,7 +13,7 @@ public class TrackbackClientOptionsTests
     public void DefaultValues_AreCorrect()
     {
         // Arrange & Act
-        TrackbackClientOptions options = new TrackbackClientOptions();
+        TrackbackClientOptions options = new();
 
         // Assert
         options.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
@@ -25,7 +25,7 @@ public class TrackbackClientOptionsTests
     public void Timeout_SetProperty_RetainsValue()
     {
         // Arrange
-        TrackbackClientOptions options = new TrackbackClientOptions();
+        TrackbackClientOptions options = new();
         TimeSpan expectedTimeout = TimeSpan.FromSeconds(30);
 
         // Act
@@ -39,7 +39,7 @@ public class TrackbackClientOptionsTests
     public void UserAgent_SetProperty_RetainsValue()
     {
         // Arrange
-        TrackbackClientOptions options = new TrackbackClientOptions();
+        TrackbackClientOptions options = new();
         string expectedUserAgent = "TestTrackbackAgent/1.0";
 
         // Act
@@ -53,8 +53,8 @@ public class TrackbackClientOptionsTests
     public void Host_SetProperty_RetainsValue()
     {
         // Arrange
-        TrackbackClientOptions options = new TrackbackClientOptions();
-        Uri expectedHost = new Uri("http://example.com/trackback/1");
+        TrackbackClientOptions options = new();
+        Uri expectedHost = new("http://example.com/trackback/1");
 
         // Act
         options.Host = expectedHost;
@@ -69,10 +69,10 @@ public class TrackbackClientOptionsTests
         // Arrange
         TimeSpan expectedTimeout = TimeSpan.FromMinutes(1);
         string expectedUserAgent = "CompleteTrackbackAgent/2.0";
-        Uri expectedHost = new Uri("http://complete-example.com/trackback/post/123");
+        Uri expectedHost = new("http://complete-example.com/trackback/post/123");
 
         // Act
-        TrackbackClientOptions options = new TrackbackClientOptions
+        TrackbackClientOptions options = new()
         {
             Timeout = expectedTimeout,
             UserAgent = expectedUserAgent,
@@ -89,7 +89,7 @@ public class TrackbackClientOptionsTests
     public void UserAgent_SetToNull_ReturnsNull()
     {
         // Arrange
-        TrackbackClientOptions options = new TrackbackClientOptions
+        TrackbackClientOptions options = new()
         {
             UserAgent = "InitialAgent/1.0"
         };
@@ -105,7 +105,7 @@ public class TrackbackClientOptionsTests
     public void Host_SetToNull_ReturnsNull()
     {
         // Arrange
-        TrackbackClientOptions options = new TrackbackClientOptions
+        TrackbackClientOptions options = new()
         {
             Host = new Uri("http://example.com")
         };
@@ -127,7 +127,7 @@ public class XmlRpcClientOptionsTests
     public void DefaultValues_AreCorrect()
     {
         // Arrange & Act
-        XmlRpcClientOptions options = new XmlRpcClientOptions();
+        XmlRpcClientOptions options = new();
 
         // Assert
         options.Timeout.ShouldBe(TimeSpan.FromSeconds(15));
@@ -139,7 +139,7 @@ public class XmlRpcClientOptionsTests
     public void Timeout_SetProperty_RetainsValue()
     {
         // Arrange
-        XmlRpcClientOptions options = new XmlRpcClientOptions();
+        XmlRpcClientOptions options = new();
         TimeSpan expectedTimeout = TimeSpan.FromSeconds(45);
 
         // Act
@@ -153,7 +153,7 @@ public class XmlRpcClientOptionsTests
     public void UserAgent_SetProperty_RetainsValue()
     {
         // Arrange
-        XmlRpcClientOptions options = new XmlRpcClientOptions();
+        XmlRpcClientOptions options = new();
         string expectedUserAgent = "TestXmlRpcAgent/1.0";
 
         // Act
@@ -167,8 +167,8 @@ public class XmlRpcClientOptionsTests
     public void Host_SetProperty_RetainsValue()
     {
         // Arrange
-        XmlRpcClientOptions options = new XmlRpcClientOptions();
-        Uri expectedHost = new Uri("http://example.com/xmlrpc");
+        XmlRpcClientOptions options = new();
+        Uri expectedHost = new("http://example.com/xmlrpc");
 
         // Act
         options.Host = expectedHost;
@@ -183,10 +183,10 @@ public class XmlRpcClientOptionsTests
         // Arrange
         TimeSpan expectedTimeout = TimeSpan.FromMinutes(2);
         string expectedUserAgent = "CompleteXmlRpcAgent/2.0";
-        Uri expectedHost = new Uri("http://complete-example.com/xmlrpc/api");
+        Uri expectedHost = new("http://complete-example.com/xmlrpc/api");
 
         // Act
-        XmlRpcClientOptions options = new XmlRpcClientOptions
+        XmlRpcClientOptions options = new()
         {
             Timeout = expectedTimeout,
             UserAgent = expectedUserAgent,
@@ -203,7 +203,7 @@ public class XmlRpcClientOptionsTests
     public void UserAgent_SetToNull_ReturnsNull()
     {
         // Arrange
-        XmlRpcClientOptions options = new XmlRpcClientOptions
+        XmlRpcClientOptions options = new()
         {
             UserAgent = "InitialXmlRpcAgent/1.0"
         };
@@ -219,7 +219,7 @@ public class XmlRpcClientOptionsTests
     public void Host_SetToNull_ReturnsNull()
     {
         // Arrange
-        XmlRpcClientOptions options = new XmlRpcClientOptions
+        XmlRpcClientOptions options = new()
         {
             Host = new Uri("http://example.com/xmlrpc")
         };
@@ -235,7 +235,7 @@ public class XmlRpcClientOptionsTests
     public void Timeout_ZeroValue_IsAllowed()
     {
         // Arrange
-        XmlRpcClientOptions options = new XmlRpcClientOptions();
+        XmlRpcClientOptions options = new();
 
         // Act
         options.Timeout = TimeSpan.Zero;
@@ -251,7 +251,7 @@ public class XmlRpcClientOptionsTests
         // Validation should occur at the client level if needed.
 
         // Arrange
-        XmlRpcClientOptions options = new XmlRpcClientOptions();
+        XmlRpcClientOptions options = new();
 
         // Act
         options.Timeout = TimeSpan.FromSeconds(-1);

@@ -22,7 +22,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_WhenCreatedWithTitle_SetsHeadTitle()
     {
         // Arrange & Act
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head =
             {
@@ -38,7 +38,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_WhenCreatedWithDefaultConstructor_HasEmptyOutlines()
     {
         // Arrange & Act
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Assert
         document.ShouldNotBeNull();
@@ -51,9 +51,9 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_WhenOutlinesAdded_ContainsAllOutlines()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
-        OpmlOutline outline1 = new OpmlOutline("First Outline");
-        OpmlOutline outline2 = new OpmlOutline("Second Outline");
+        OpmlDocument document = new();
+        OpmlOutline outline1 = new("First Outline");
+        OpmlOutline outline2 = new("Second Outline");
 
         // Act
         document.Outlines.Add(outline1);
@@ -69,11 +69,11 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_WhenNestedOutlinesAdded_PreservesHierarchy()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
-        OpmlOutline parentOutline = new OpmlOutline("Parent");
-        OpmlOutline childOutline1 = new OpmlOutline("Child 1");
-        OpmlOutline childOutline2 = new OpmlOutline("Child 2");
-        OpmlOutline grandchildOutline = new OpmlOutline("Grandchild");
+        OpmlDocument document = new();
+        OpmlOutline parentOutline = new("Parent");
+        OpmlOutline childOutline1 = new("Child 1");
+        OpmlOutline childOutline2 = new("Child 2");
+        OpmlOutline grandchildOutline = new("Grandchild");
 
         // Act
         childOutline1.Outlines.Add(grandchildOutline);
@@ -94,7 +94,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_Indexer_ReturnsCorrectOutline()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
         document.Outlines.Add(new OpmlOutline("First"));
         document.Outlines.Add(new OpmlOutline("Second"));
         document.Outlines.Add(new OpmlOutline("Third"));
@@ -109,7 +109,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_Indexer_CanSetOutline()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
         document.Outlines.Add(new OpmlOutline("Original"));
 
         // Act
@@ -123,7 +123,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_HeadSetToNull_ThrowsArgumentNullException()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => document.Head = null!);
@@ -133,11 +133,11 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_HeadWithDates_SetsCreatedAndModifiedDates()
     {
         // Arrange
-        DateTime createdOn = new DateTime(2024, 1, 1, 12, 0, 0, DateTimeKind.Utc);
-        DateTime modifiedOn = new DateTime(2025, 1, 15, 12, 0, 0, DateTimeKind.Utc);
+        DateTime createdOn = new(2024, 1, 1, 12, 0, 0, DateTimeKind.Utc);
+        DateTime modifiedOn = new(2025, 1, 15, 12, 0, 0, DateTimeKind.Utc);
 
         // Act
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head =
             {
@@ -156,7 +156,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_HeadWithOwner_SetsOwnerProperties()
     {
         // Arrange & Act
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head =
             {
@@ -181,10 +181,10 @@ public class OpmlDocumentBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.MinimalOpml;
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(xml));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
         document.Load(stream);
 
         // Assert
@@ -196,10 +196,10 @@ public class OpmlDocumentBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.MinimalOpml;
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(xml));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
         document.Load(stream);
 
         // Assert
@@ -213,7 +213,7 @@ public class OpmlDocumentBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.MinimalOpml;
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -236,7 +236,7 @@ public class OpmlDocumentBehaviorTests
                 </head>
             </opml>
             """;
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Act & Assert
         Should.Throw<XmlException>(() =>
@@ -266,10 +266,10 @@ public class OpmlDocumentBehaviorTests
                 </body>
             </opml>
             """;
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(xml));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
         document.Load(stream);
 
         // Assert
@@ -287,7 +287,7 @@ public class OpmlDocumentBehaviorTests
     {
         // Arrange
         string xml = FeedTestData.MinimalOpml;
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
         bool eventRaised = false;
         SyndicationResourceLoadedEventArgs? eventArgs = null;
 
@@ -298,7 +298,7 @@ public class OpmlDocumentBehaviorTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(xml));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
         document.Load(stream);
 
         // Assert
@@ -314,7 +314,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_WhenSavedAndReloaded_PreservesBasicProperties()
     {
         // Arrange
-        OpmlDocument originalDocument = new OpmlDocument
+        OpmlDocument originalDocument = new()
         {
             Head =
             {
@@ -324,11 +324,11 @@ public class OpmlDocumentBehaviorTests
         originalDocument.Outlines.Add(new OpmlOutline("Test Outline"));
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
         stream.Position = 0;
 
-        OpmlDocument loadedDocument = new OpmlDocument();
+        OpmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -341,22 +341,22 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_WhenSavedAndReloaded_PreservesNestedOutlines()
     {
         // Arrange
-        OpmlDocument originalDocument = new OpmlDocument
+        OpmlDocument originalDocument = new()
         {
             Head = { Title = "Nested Outlines Test" }
         };
-        OpmlOutline parent = new OpmlOutline("Parent");
+        OpmlOutline parent = new("Parent");
         parent.Outlines.Add(new OpmlOutline("Child 1"));
         parent.Outlines.Add(new OpmlOutline("Child 2"));
         parent.Outlines[0].Outlines.Add(new OpmlOutline("Grandchild"));
         originalDocument.Outlines.Add(parent);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
         stream.Position = 0;
 
-        OpmlDocument loadedDocument = new OpmlDocument();
+        OpmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -373,10 +373,10 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_WhenSavedAndReloaded_PreservesHeadMetadata()
     {
         // Arrange
-        DateTime createdOn = new DateTime(2024, 1, 1, 12, 0, 0, DateTimeKind.Utc);
-        DateTime modifiedOn = new DateTime(2025, 1, 15, 12, 0, 0, DateTimeKind.Utc);
+        DateTime createdOn = new(2024, 1, 1, 12, 0, 0, DateTimeKind.Utc);
+        DateTime modifiedOn = new(2025, 1, 15, 12, 0, 0, DateTimeKind.Utc);
 
-        OpmlDocument originalDocument = new OpmlDocument
+        OpmlDocument originalDocument = new()
         {
             Head =
             {
@@ -392,11 +392,11 @@ public class OpmlDocumentBehaviorTests
         originalDocument.Outlines.Add(new OpmlOutline("Test"));
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalDocument.Save(stream);
         stream.Position = 0;
 
-        OpmlDocument loadedDocument = new OpmlDocument();
+        OpmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -417,17 +417,17 @@ public class OpmlDocumentBehaviorTests
         OpmlDocument originalDocument = CreateCompleteDocument();
 
         // Act - First round trip
-        using MemoryStream stream1 = new MemoryStream();
+        using MemoryStream stream1 = new();
         originalDocument.Save(stream1);
         stream1.Position = 0;
-        OpmlDocument document1 = new OpmlDocument();
+        OpmlDocument document1 = new();
         document1.Load(stream1);
 
         // Act - Second round trip
-        using MemoryStream stream2 = new MemoryStream();
+        using MemoryStream stream2 = new();
         document1.Save(stream2);
         stream2.Position = 0;
-        OpmlDocument document2 = new OpmlDocument();
+        OpmlDocument document2 = new();
         document2.Load(stream2);
 
         // Assert
@@ -439,17 +439,17 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_ParseSerializeParse_ProducesSameDocument()
     {
         // Arrange
-        OpmlDocument firstDocument = new OpmlDocument();
-        using MemoryStream firstStream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml));
+        OpmlDocument firstDocument = new();
+        using MemoryStream firstStream = new(Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml));
         firstDocument.Load(firstStream);
 
         // Act - First serialize
-        using MemoryStream serializeStream = new MemoryStream();
+        using MemoryStream serializeStream = new();
         firstDocument.Save(serializeStream);
 
         // Act - Second parse
         serializeStream.Position = 0;
-        OpmlDocument secondDocument = new OpmlDocument();
+        OpmlDocument secondDocument = new();
         secondDocument.Load(serializeStream);
 
         // Assert - Core properties match
@@ -509,7 +509,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_IsSubscriptionListOutline_ReturnsTrueForRssType()
     {
         // Arrange
-        OpmlOutline outline = new OpmlOutline("Test Feed")
+        OpmlOutline outline = new("Test Feed")
         {
             ContentType = "rss"
         };
@@ -522,7 +522,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_IsSubscriptionListOutline_ReturnsTrueForFeedType()
     {
         // Arrange
-        OpmlOutline outline = new OpmlOutline("Test Feed")
+        OpmlOutline outline = new("Test Feed")
         {
             ContentType = "feed"
         };
@@ -535,7 +535,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_WithSubscriptionOutlines_SavesAndLoadsCorrectly()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head = { Title = "My Subscriptions" }
         };
@@ -554,11 +554,11 @@ public class OpmlDocumentBehaviorTests
         document.Outlines.Add(feed2);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
         stream.Position = 0;
 
-        OpmlDocument loadedDocument = new OpmlDocument();
+        OpmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -607,7 +607,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_IsInclusionOutline_ReturnsTrueForIncludeType()
     {
         // Arrange
-        OpmlOutline outline = new OpmlOutline("Test Outline")
+        OpmlOutline outline = new("Test Outline")
         {
             ContentType = "include"
         };
@@ -620,7 +620,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_IsInclusionOutline_ReturnsTrueForLinkType()
     {
         // Arrange
-        OpmlOutline outline = new OpmlOutline("Test Outline")
+        OpmlOutline outline = new("Test Outline")
         {
             ContentType = "link"
         };
@@ -637,22 +637,22 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_WithCategories_SavesAndLoadsCorrectly()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head = { Title = "Categories Test" }
         };
 
-        OpmlOutline outline = new OpmlOutline("Categorized Outline");
+        OpmlOutline outline = new("Categorized Outline");
         outline.Categories.Add("Technology/Software");
         outline.Categories.Add("News");
         document.Outlines.Add(outline);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
         stream.Position = 0;
 
-        OpmlDocument loadedDocument = new OpmlDocument();
+        OpmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -665,22 +665,22 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_WithCustomAttributes_SavesAndLoadsCorrectly()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head = { Title = "Attributes Test" }
         };
 
-        OpmlOutline outline = new OpmlOutline("Custom Attributes Outline");
+        OpmlOutline outline = new("Custom Attributes Outline");
         outline.Attributes.Add("customAttr1", "value1");
         outline.Attributes.Add("customAttr2", "value2");
         document.Outlines.Add(outline);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
         stream.Position = 0;
 
-        OpmlDocument loadedDocument = new OpmlDocument();
+        OpmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -694,23 +694,23 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_WithIsCommented_SavesAndLoadsCorrectly()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head = { Title = "Comment Test" }
         };
 
-        OpmlOutline outline = new OpmlOutline("Commented Outline")
+        OpmlOutline outline = new("Commented Outline")
         {
             IsCommented = true
         };
         document.Outlines.Add(outline);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
         stream.Position = 0;
 
-        OpmlDocument loadedDocument = new OpmlDocument();
+        OpmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -721,23 +721,23 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_WithHasBreakpoint_SavesAndLoadsCorrectly()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head = { Title = "Breakpoint Test" }
         };
 
-        OpmlOutline outline = new OpmlOutline("Breakpoint Outline")
+        OpmlOutline outline = new("Breakpoint Outline")
         {
             HasBreakpoint = true
         };
         document.Outlines.Add(outline);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
         stream.Position = 0;
 
-        OpmlDocument loadedDocument = new OpmlDocument();
+        OpmlDocument loadedDocument = new();
         loadedDocument.Load(stream);
 
         // Assert
@@ -748,24 +748,24 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_WithCreatedOnDate_SerializesCreatedAttribute()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head = { Title = "Created Date Test" }
         };
 
-        DateTime createdDate = new DateTime(2024, 6, 15, 10, 30, 0, DateTimeKind.Utc);
-        OpmlOutline outline = new OpmlOutline("Dated Outline")
+        DateTime createdDate = new(2024, 6, 15, 10, 30, 0, DateTimeKind.Utc);
+        OpmlOutline outline = new("Dated Outline")
         {
             CreatedOn = createdDate
         };
         document.Outlines.Add(outline);
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
         stream.Position = 0;
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         // Assert - verify the created attribute is included in the serialized XML
@@ -778,8 +778,8 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_CreatedOnDate_CanBeSetAndRetrieved()
     {
         // Arrange & Act
-        DateTime createdDate = new DateTime(2024, 6, 15, 10, 30, 0, DateTimeKind.Utc);
-        OpmlOutline outline = new OpmlOutline("Dated Outline")
+        DateTime createdDate = new(2024, 6, 15, 10, 30, 0, DateTimeKind.Utc);
+        OpmlOutline outline = new("Dated Outline")
         {
             CreatedOn = createdDate
         };
@@ -796,7 +796,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_Format_ReturnsOpml()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Assert
         document.Format.ShouldBe(SyndicationContentFormat.Opml);
@@ -806,7 +806,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_Version_Returns2_0()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Assert
         document.Version.ShouldBe(new Version(2, 0));
@@ -816,7 +816,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlHead_Documentation_ReturnsOpmlSpecUrl()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Assert
         document.Head.Documentation.ShouldBe(new Uri("http://www.opml.org/spec2"));
@@ -830,7 +830,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_CreateNavigator_ReturnsValidNavigator()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head = { Title = "Navigator Test" }
         };
@@ -854,7 +854,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Assert
         document.HasExtensions.ShouldBeFalse();
@@ -865,7 +865,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlHead_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Assert
         document.Head.HasExtensions.ShouldBeFalse();
@@ -875,7 +875,7 @@ public class OpmlDocumentBehaviorTests
     public void OpmlOutline_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
         // Arrange
-        OpmlOutline outline = new OpmlOutline("Test");
+        OpmlOutline outline = new("Test");
 
         // Assert
         outline.HasExtensions.ShouldBeFalse();
@@ -889,12 +889,12 @@ public class OpmlDocumentBehaviorTests
     public async Task OpmlDocument_LoadAsync_LoadsDocumentCorrectly()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
         bool eventRaised = false;
         document.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalOpml);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await document.LoadAsync(
@@ -913,7 +913,7 @@ public class OpmlDocumentBehaviorTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalOpml);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         OpmlDocument document = await OpmlDocument.CreateAsync(
@@ -931,7 +931,7 @@ public class OpmlDocumentBehaviorTests
     public async Task OpmlDocument_LoadAsync_IncludesSourceUriInEventArgs()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
         Uri? sourceFromEvent = null;
 
         document.Loaded += (sender, args) =>
@@ -940,8 +940,8 @@ public class OpmlDocumentBehaviorTests
         };
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalOpml);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri requestUri = new Uri("http://example.com/subscriptions.opml");
+        using HttpClient httpClient = new(handler);
+        Uri requestUri = new("http://example.com/subscriptions.opml");
 
         // Act
         await document.LoadAsync(requestUri, httpClient, cancellationToken: TestContext!.CancellationToken);
@@ -958,18 +958,18 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_Save_ProducesValidXml()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head = { Title = "Save Test" }
         };
         document.Outlines.Add(new OpmlOutline("Test Outline"));
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         document.Save(stream);
         stream.Position = 0;
 
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         // Assert
@@ -987,15 +987,15 @@ public class OpmlDocumentBehaviorTests
     public void OpmlDocument_SaveWithXmlWriter_ProducesValidXml()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head = { Title = "XmlWriter Test" }
         };
         document.Outlines.Add(new OpmlOutline("Test Outline"));
 
         // Act
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             Indent = true,
             OmitXmlDeclaration = false
@@ -1007,7 +1007,7 @@ public class OpmlDocumentBehaviorTests
         }
 
         stream.Position = 0;
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         // Assert
@@ -1021,7 +1021,7 @@ public class OpmlDocumentBehaviorTests
 
     private static OpmlDocument CreateCompleteDocument()
     {
-        OpmlDocument document = new OpmlDocument
+        OpmlDocument document = new()
         {
             Head =
             {
@@ -1033,7 +1033,7 @@ public class OpmlDocumentBehaviorTests
         };
 
         // Add category folder with feeds
-        OpmlOutline techFolder = new OpmlOutline("Technology");
+        OpmlOutline techFolder = new("Technology");
         techFolder.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline(
             "Tech News",
             "rss",
@@ -1043,7 +1043,7 @@ public class OpmlDocumentBehaviorTests
             "rss",
             new Uri("http://programming.example.com/feed.xml")));
 
-        OpmlOutline newsFolder = new OpmlOutline("News");
+        OpmlOutline newsFolder = new("News");
         newsFolder.Outlines.Add(OpmlOutline.CreateSubscriptionListOutline(
             "World News",
             "rss",

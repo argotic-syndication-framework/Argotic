@@ -13,7 +13,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void WasModified_WhenResourceModified_ReturnsTrue()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };
@@ -33,7 +33,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void StatusCode_ReflectsHttpResponse()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };
@@ -53,8 +53,8 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void LastModified_ExtractsFromHeaders()
     {
-        DateTimeOffset lastModified = new DateTimeOffset(2024, 1, 15, 12, 0, 0, TimeSpan.Zero);
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        DateTimeOffset lastModified = new(2024, 1, 15, 12, 0, 0, TimeSpan.Zero);
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };
@@ -67,7 +67,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void LastModified_WhenNotPresent_ReturnsNull()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };
@@ -79,7 +79,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void ETag_ExtractsFromHeaders()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };
@@ -92,7 +92,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void ETag_WhenNotPresent_ReturnsNull()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };
@@ -104,7 +104,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void ContentLength_ExtractsFromHeaders()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("test content", Encoding.UTF8, "text/plain")
         };
@@ -125,7 +125,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void ContentType_ExtractsFromHeaders()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content", Encoding.UTF8, "application/xml")
         };
@@ -137,7 +137,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void ContentType_WhenNotPresent_ReturnsNull()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new ByteArrayContent([])
         };
@@ -150,14 +150,14 @@ public class ConditionalGetResultTests
     public void GetResponseStream_ReturnsContent()
     {
         const string expectedContent = "test content";
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent(expectedContent)
         };
         using ConditionalGetResult result = CreateResult(response, wasModified: true);
 
         using Stream stream = result.GetResponseStream();
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string content = reader.ReadToEnd();
 
         content.ShouldBe(expectedContent);
@@ -167,14 +167,14 @@ public class ConditionalGetResultTests
     public async Task GetResponseStreamAsync_ReturnsContent()
     {
         const string expectedContent = "test content";
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent(expectedContent)
         };
         using ConditionalGetResult result = CreateResult(response, wasModified: true);
 
         using Stream stream = await result.GetResponseStreamAsync(TestContext.CancellationToken);
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string content = await reader.ReadToEndAsync(TestContext.CancellationToken);
 
         content.ShouldBe(expectedContent);
@@ -203,7 +203,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void Dispose_DisposesUnderlyingResponse()
     {
-        HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };
@@ -218,7 +218,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void GetResponseStream_AfterDispose_ThrowsObjectDisposedException()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };
@@ -231,7 +231,7 @@ public class ConditionalGetResultTests
     [TestMethod]
     public async Task GetResponseStreamAsync_AfterDispose_ThrowsObjectDisposedException()
     {
-        using HttpResponseMessage response = new HttpResponseMessage(HttpStatusCode.OK)
+        using HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };

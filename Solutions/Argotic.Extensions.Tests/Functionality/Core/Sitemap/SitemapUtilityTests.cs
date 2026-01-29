@@ -1,6 +1,6 @@
+using System.Xml;
 using Argotic.Syndication;
 using Shouldly;
-using System.Xml;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.Sitemap;
 

@@ -26,7 +26,7 @@ public class CreateSafeNavigatorAsyncTests
     public async Task CreateSafeNavigatorAsync_WithCancelledToken_ThrowsOperationCanceledException()
     {
         // Arrange
-        using CancellationTokenSource cts = new CancellationTokenSource();
+        using CancellationTokenSource cts = new();
         await cts.CancelAsync();
 
         // Act & Assert
@@ -44,7 +44,7 @@ public class CreateSafeNavigatorAsyncTests
     public void CreateSafeNavigator_FromStream_ReturnsValidNavigator()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
         // Act
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);
@@ -58,7 +58,7 @@ public class CreateSafeNavigatorAsyncTests
     public void CreateSafeNavigator_FromStreamWithEncoding_ReturnsValidNavigator()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
         // Act
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream, System.Text.Encoding.UTF8);
@@ -72,7 +72,7 @@ public class CreateSafeNavigatorAsyncTests
     public void CreateSafeNavigator_WithValidXml_ReturnsValidNavigator()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
         // Act
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);

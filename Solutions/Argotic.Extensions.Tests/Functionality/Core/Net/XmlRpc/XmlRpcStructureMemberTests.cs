@@ -29,7 +29,7 @@ public class XmlRpcStructureMemberTests
     public void Constructor_Default_CreatesInstance()
     {
         // Arrange & Act
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
+        XmlRpcStructureMember member = new();
 
         // Assert
         member.ShouldNotBeNull();
@@ -41,10 +41,10 @@ public class XmlRpcStructureMemberTests
     {
         // Arrange
         string name = "testName";
-        XmlRpcScalarValue value = new XmlRpcScalarValue("testValue");
+        XmlRpcScalarValue value = new("testValue");
 
         // Act
-        XmlRpcStructureMember member = new XmlRpcStructureMember(name, value);
+        XmlRpcStructureMember member = new(name, value);
 
         // Assert
         member.Name.ShouldBe(name);
@@ -55,7 +55,7 @@ public class XmlRpcStructureMemberTests
     public void Constructor_WithNullName_ThrowsArgumentException()
     {
         // Arrange
-        XmlRpcScalarValue value = new XmlRpcScalarValue("test");
+        XmlRpcScalarValue value = new("test");
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => new XmlRpcStructureMember(null!, value));
@@ -65,7 +65,7 @@ public class XmlRpcStructureMemberTests
     public void Constructor_WithEmptyName_ThrowsArgumentException()
     {
         // Arrange
-        XmlRpcScalarValue value = new XmlRpcScalarValue("test");
+        XmlRpcScalarValue value = new("test");
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => new XmlRpcStructureMember(string.Empty, value));
@@ -82,7 +82,7 @@ public class XmlRpcStructureMemberTests
     public void Name_Set_TrimsValue()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
+        XmlRpcStructureMember member = new();
 
         // Act
         member.Name = "  testName  ";
@@ -95,7 +95,7 @@ public class XmlRpcStructureMemberTests
     public void Name_SetNull_ThrowsArgumentException()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
+        XmlRpcStructureMember member = new();
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => member.Name = null!);
@@ -105,7 +105,7 @@ public class XmlRpcStructureMemberTests
     public void Name_SetEmpty_ThrowsArgumentException()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
+        XmlRpcStructureMember member = new();
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => member.Name = string.Empty);
@@ -115,7 +115,7 @@ public class XmlRpcStructureMemberTests
     public void Value_SetNull_ThrowsArgumentNullException()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
+        XmlRpcStructureMember member = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => member.Value = null!);
@@ -125,9 +125,9 @@ public class XmlRpcStructureMemberTests
     public void Load_ValidMemberXml_PopulatesNameAndValue()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(ValidMemberXml));
-        XPathDocument doc = new XPathDocument(stream);
+        XmlRpcStructureMember member = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(ValidMemberXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
         navigator.MoveToFirstChild(); // Move to member element
@@ -147,9 +147,9 @@ public class XmlRpcStructureMemberTests
     public void Load_MemberWithIntegerValue_PopulatesCorrectly()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(MemberWithIntegerXml));
-        XPathDocument doc = new XPathDocument(stream);
+        XmlRpcStructureMember member = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(MemberWithIntegerXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
         navigator.MoveToFirstChild();
@@ -169,7 +169,7 @@ public class XmlRpcStructureMemberTests
     public void Load_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
+        XmlRpcStructureMember member = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => member.Load(null!));
@@ -179,10 +179,10 @@ public class XmlRpcStructureMemberTests
     public void Load_EmptyMember_ReturnsFalse()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
+        XmlRpcStructureMember member = new();
         string emptyXml = "<member></member>";
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(emptyXml));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(emptyXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToRoot();
         navigator.MoveToFirstChild();
@@ -198,10 +198,10 @@ public class XmlRpcStructureMemberTests
     public void WriteTo_ValidMember_WritesCorrectXml()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember("testName", new XmlRpcScalarValue("testValue"));
+        XmlRpcStructureMember member = new("testName", new XmlRpcScalarValue("testValue"));
 
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = false,
@@ -215,7 +215,7 @@ public class XmlRpcStructureMemberTests
         }
 
         stream.Seek(0, SeekOrigin.Begin);
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string result = reader.ReadToEnd();
 
         // Assert
@@ -230,7 +230,7 @@ public class XmlRpcStructureMemberTests
     {
         // Arrange
         // Test the null value handling in WriteTo
-        XmlRpcStructureMember member = new XmlRpcStructureMember();
+        XmlRpcStructureMember member = new();
 
         // Set the name using the property (which requires non-empty string)
         member.Name = "testName";
@@ -238,8 +238,8 @@ public class XmlRpcStructureMemberTests
         // The member's value is null by default - the WriteTo handles this case
         // by writing an empty value element
 
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings settings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings settings = new()
         {
             ConformanceLevel = ConformanceLevel.Fragment,
             Indent = false,
@@ -253,7 +253,7 @@ public class XmlRpcStructureMemberTests
         }
 
         stream.Seek(0, SeekOrigin.Begin);
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string result = reader.ReadToEnd();
 
         // Assert
@@ -267,7 +267,7 @@ public class XmlRpcStructureMemberTests
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member = new("name", new XmlRpcScalarValue("value"));
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => member.WriteTo(null!));
@@ -277,7 +277,7 @@ public class XmlRpcStructureMemberTests
     public void ToString_ReturnsXmlRepresentation()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember("testName", new XmlRpcScalarValue(42));
+        XmlRpcStructureMember member = new("testName", new XmlRpcScalarValue(42));
 
         // Act
         string result = member.ToString();
@@ -292,8 +292,8 @@ public class XmlRpcStructureMemberTests
     public void CompareTo_SameName_ReturnsZero()
     {
         // Arrange
-        XmlRpcStructureMember member1 = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
-        XmlRpcStructureMember member2 = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member1 = new("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member2 = new("name", new XmlRpcScalarValue("value"));
 
         // Act
         int result = member1.CompareTo(member2);
@@ -306,8 +306,8 @@ public class XmlRpcStructureMemberTests
     public void CompareTo_DifferentName_ReturnsNonZero()
     {
         // Arrange
-        XmlRpcStructureMember member1 = new XmlRpcStructureMember("aaa", new XmlRpcScalarValue("value"));
-        XmlRpcStructureMember member2 = new XmlRpcStructureMember("zzz", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member1 = new("aaa", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member2 = new("zzz", new XmlRpcScalarValue("value"));
 
         // Act
         int result = member1.CompareTo(member2);
@@ -320,7 +320,7 @@ public class XmlRpcStructureMemberTests
     public void CompareTo_Null_ReturnsOne()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member = new("name", new XmlRpcScalarValue("value"));
 
         // Act
         int result = member.CompareTo(null);
@@ -333,8 +333,8 @@ public class XmlRpcStructureMemberTests
     public void CompareTo_DifferentMember_ReturnsNonZero()
     {
         // Arrange
-        XmlRpcStructureMember member1 = new XmlRpcStructureMember("name1", new XmlRpcScalarValue("value1"));
-        XmlRpcStructureMember member2 = new XmlRpcStructureMember("name2", new XmlRpcScalarValue("value2"));
+        XmlRpcStructureMember member1 = new("name1", new XmlRpcScalarValue("value1"));
+        XmlRpcStructureMember member2 = new("name2", new XmlRpcScalarValue("value2"));
 
         // Act
         int result = member1.CompareTo(member2);
@@ -347,8 +347,8 @@ public class XmlRpcStructureMemberTests
     public void Equals_SameMember_ReturnsTrue()
     {
         // Arrange
-        XmlRpcStructureMember member1 = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
-        XmlRpcStructureMember member2 = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member1 = new("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member2 = new("name", new XmlRpcScalarValue("value"));
 
         // Act & Assert
         member1.Equals(member2).ShouldBeTrue();
@@ -358,8 +358,8 @@ public class XmlRpcStructureMemberTests
     public void Equals_DifferentMember_ReturnsFalse()
     {
         // Arrange
-        XmlRpcStructureMember member1 = new XmlRpcStructureMember("name1", new XmlRpcScalarValue("value"));
-        XmlRpcStructureMember member2 = new XmlRpcStructureMember("name2", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member1 = new("name1", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member2 = new("name2", new XmlRpcScalarValue("value"));
 
         // Act & Assert
         member1.Equals(member2).ShouldBeFalse();
@@ -369,7 +369,7 @@ public class XmlRpcStructureMemberTests
     public void Equals_NonXmlRpcStructureMember_ReturnsFalse()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member = new("name", new XmlRpcScalarValue("value"));
 
         // Act & Assert
         member.Equals("not a member").ShouldBeFalse();
@@ -379,7 +379,7 @@ public class XmlRpcStructureMemberTests
     public void GetHashCode_DoesNotThrow()
     {
         // Arrange
-        XmlRpcStructureMember member = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member = new("name", new XmlRpcScalarValue("value"));
 
         // Act
         int hash = member.GetHashCode();
@@ -394,8 +394,8 @@ public class XmlRpcStructureMemberTests
     public void OperatorEquals_EqualMembers_ReturnsTrue()
     {
         // Arrange
-        XmlRpcStructureMember member1 = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
-        XmlRpcStructureMember member2 = new XmlRpcStructureMember("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member1 = new("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member2 = new("name", new XmlRpcScalarValue("value"));
 
         // Act & Assert
         (member1 == member2).ShouldBeTrue();
@@ -416,8 +416,8 @@ public class XmlRpcStructureMemberTests
     public void OperatorNotEquals_DifferentMembers_ReturnsTrue()
     {
         // Arrange
-        XmlRpcStructureMember member1 = new XmlRpcStructureMember("name1", new XmlRpcScalarValue("value"));
-        XmlRpcStructureMember member2 = new XmlRpcStructureMember("name2", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member1 = new("name1", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember member2 = new("name2", new XmlRpcScalarValue("value"));
 
         // Act & Assert
         (member1 != member2).ShouldBeTrue();

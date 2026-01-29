@@ -1,4 +1,4 @@
-﻿using Argotic.Syndication.Specialized;
+using Argotic.Syndication.Specialized;
 
 namespace Argotic.Examples.Core.Rsd;
 
@@ -9,7 +9,7 @@ namespace Argotic.Examples.Core.Rsd;
 ///     This class contains all the code examples that are referenced by the <see cref="RsdApplicationInterface"/> class. 
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class RsdApplicationInterfaceExample
+internal static class RsdApplicationInterfaceExample
 {
     /// <summary>
     /// Provides example code for the RsdApplicationInterface class.

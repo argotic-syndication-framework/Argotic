@@ -22,12 +22,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_MinimalAtom03Feed_PopulatesFeed()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03Feed));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03Feed));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -44,12 +44,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_FullAtom03Feed_PopulatesAllProperties()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -101,12 +101,12 @@ public class Atom03SyndicationResourceAdapterTests
     {
         // Arrange - Note: Fill(AtomEntry) expects an entry wrapped in a feed or with atom:entry XPath available.
         // Testing the entry parsing by loading a full feed and checking entries instead.
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -130,12 +130,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_WithTextConstructEscapedMode_ParsesAsHtml()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -149,12 +149,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_WithXmlModeContent_ParsesXhtmlContent()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -173,12 +173,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_WithPersonConstruct_PopulatesAuthor()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -195,12 +195,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_WithContributors_PopulatesContributors()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -219,12 +219,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_WithGenerator_PopulatesGenerator()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -244,12 +244,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_EntryWithAuthors_PopulatesEntryAuthors()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -264,12 +264,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_EntryWithSummary_PopulatesSummary()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -284,12 +284,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_EntryWithCreated_PopulatesPublishedOn()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -310,11 +310,11 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_NullFeedResource_ThrowsArgumentNullException()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03Feed));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03Feed));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => adapter.Fill((AtomFeed)null!));
@@ -324,11 +324,11 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_NullEntryResource_ThrowsArgumentNullException()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03Entry));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03Entry));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => adapter.Fill((AtomEntry)null!));
@@ -338,7 +338,7 @@ public class Atom03SyndicationResourceAdapterTests
     public void Constructor_NullNavigator_ThrowsArgumentNullException()
     {
         // Arrange
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
+        SyndicationResourceLoadSettings settings = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new Atom03SyndicationResourceAdapter(null!, settings));
@@ -348,8 +348,8 @@ public class Atom03SyndicationResourceAdapterTests
     public void Constructor_NullSettings_ThrowsArgumentNullException()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03Feed));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03Feed));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
 
         // Act & Assert
@@ -364,12 +364,12 @@ public class Atom03SyndicationResourceAdapterTests
     public void Fill_WithLinks_PopulatesLinks()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Atom03FeedFull));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);
@@ -414,15 +414,15 @@ public class Atom03SyndicationResourceAdapterTests
             </feed>
             """;
 
-        AtomFeed feed = new AtomFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(atomWithMultipleEntries));
-        XPathDocument doc = new XPathDocument(stream);
+        AtomFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(atomWithMultipleEntries));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        SyndicationResourceLoadSettings settings = new()
         {
             RetrievalLimit = 2
         };
-        Atom03SyndicationResourceAdapter adapter = new Atom03SyndicationResourceAdapter(navigator, settings);
+        Atom03SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(feed);

@@ -49,7 +49,7 @@ public class TrackbackSyndicationExtensionTest
         // Verify GetHashCode does not throw
         TrackbackSyndicationExtension target = CreateExtension1();
         int hash = target.GetHashCode();
-        
+
         hash.ShouldNotBe(0);
     }
 

@@ -22,7 +22,7 @@ public class BlogMLAttachmentTests
     public void Constructor_Default_CreatesValidInstance()
     {
         // Arrange & Act
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Assert
         attachment.ShouldNotBeNull();
@@ -52,9 +52,9 @@ public class BlogMLAttachmentTests
                         url="http://example.com/image.png">SGVsbG8gV29ybGQ=</attachment>
             """;
 
-        BlogMLAttachment attachment = new BlogMLAttachment();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(attachmentXml));
-        XPathDocument doc = new XPathDocument(stream);
+        BlogMLAttachment attachment = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(attachmentXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToFirstChild();
 
@@ -82,9 +82,9 @@ public class BlogMLAttachmentTests
                         url="http://example.com/doc.pdf"/>
             """;
 
-        BlogMLAttachment attachment = new BlogMLAttachment();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(attachmentXml));
-        XPathDocument doc = new XPathDocument(stream);
+        BlogMLAttachment attachment = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(attachmentXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToFirstChild();
 
@@ -108,9 +108,9 @@ public class BlogMLAttachmentTests
                         url="http://example.com/video.mp4"/>
             """;
 
-        BlogMLAttachment attachment = new BlogMLAttachment();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(attachmentXml));
-        XPathDocument doc = new XPathDocument(stream);
+        BlogMLAttachment attachment = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(attachmentXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToFirstChild();
 
@@ -134,12 +134,12 @@ public class BlogMLAttachmentTests
                         url="http://example.com/photo.jpg">Base64Content</attachment>
             """;
 
-        BlogMLAttachment attachment = new BlogMLAttachment();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(attachmentXml));
-        XPathDocument doc = new XPathDocument(stream);
+        BlogMLAttachment attachment = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(attachmentXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToFirstChild();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
+        SyndicationResourceLoadSettings settings = new();
 
         // Act
         bool wasLoaded = attachment.Load(navigator, settings);
@@ -155,7 +155,7 @@ public class BlogMLAttachmentTests
     public void Load_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => attachment.Load(null!));
@@ -169,9 +169,9 @@ public class BlogMLAttachmentTests
             <attachment xmlns="http://www.blogml.com/2006/09/BlogML" mime-type="image/png"/>
             """;
 
-        BlogMLAttachment attachment = new BlogMLAttachment();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(attachmentXml));
-        XPathDocument doc = new XPathDocument(stream);
+        BlogMLAttachment attachment = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(attachmentXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToFirstChild();
 
@@ -187,7 +187,7 @@ public class BlogMLAttachmentTests
     public void WriteTo_EmbeddedContent_WritesCorrectXml()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment
+        BlogMLAttachment attachment = new()
         {
             IsEmbedded = true,
             MimeType = "image/png",
@@ -197,8 +197,8 @@ public class BlogMLAttachmentTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings writerSettings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings writerSettings = new()
         {
             Indent = true,
             OmitXmlDeclaration = true
@@ -210,7 +210,7 @@ public class BlogMLAttachmentTests
         }
 
         stream.Position = 0;
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         // Assert
@@ -226,7 +226,7 @@ public class BlogMLAttachmentTests
     public void WriteTo_ExternalUri_WritesExternalUriAttribute()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment
+        BlogMLAttachment attachment = new()
         {
             IsEmbedded = false,
             MimeType = "application/pdf",
@@ -235,14 +235,14 @@ public class BlogMLAttachmentTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         using (XmlWriter writer = XmlWriter.Create(stream))
         {
             attachment.WriteTo(writer);
         }
 
         stream.Position = 0;
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         // Assert
@@ -253,7 +253,7 @@ public class BlogMLAttachmentTests
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => attachment.WriteTo(null!));
@@ -263,7 +263,7 @@ public class BlogMLAttachmentTests
     public void ToString_ReturnsXmlRepresentation()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment
+        BlogMLAttachment attachment = new()
         {
             IsEmbedded = true,
             MimeType = "image/gif",
@@ -287,7 +287,7 @@ public class BlogMLAttachmentTests
     public void CompareTo_EqualAttachments_ReturnsZero()
     {
         // Arrange
-        BlogMLAttachment attachment1 = new BlogMLAttachment
+        BlogMLAttachment attachment1 = new()
         {
             IsEmbedded = true,
             MimeType = "image/png",
@@ -296,7 +296,7 @@ public class BlogMLAttachmentTests
             Content = "SGVsbG8="
         };
 
-        BlogMLAttachment attachment2 = new BlogMLAttachment
+        BlogMLAttachment attachment2 = new()
         {
             IsEmbedded = true,
             MimeType = "image/png",
@@ -316,13 +316,13 @@ public class BlogMLAttachmentTests
     public void CompareTo_DifferentAttachments_ReturnsNonZero()
     {
         // Arrange
-        BlogMLAttachment attachment1 = new BlogMLAttachment
+        BlogMLAttachment attachment1 = new()
         {
             MimeType = "image/png",
             Url = new Uri("http://example.com/image1.png")
         };
 
-        BlogMLAttachment attachment2 = new BlogMLAttachment
+        BlogMLAttachment attachment2 = new()
         {
             MimeType = "image/jpeg",
             Url = new Uri("http://example.com/image2.jpg")
@@ -339,7 +339,7 @@ public class BlogMLAttachmentTests
     public void CompareTo_NullObject_ReturnsPositive()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment
+        BlogMLAttachment attachment = new()
         {
             MimeType = "image/png"
         };
@@ -355,13 +355,13 @@ public class BlogMLAttachmentTests
     public void CompareTo_DifferentAttachment_ReturnsNonZero()
     {
         // Arrange
-        BlogMLAttachment attachment1 = new BlogMLAttachment
+        BlogMLAttachment attachment1 = new()
         {
             MimeType = "image/png",
             Url = new Uri("http://example.com/image1.png"),
             Size = 1000
         };
-        BlogMLAttachment attachment2 = new BlogMLAttachment
+        BlogMLAttachment attachment2 = new()
         {
             MimeType = "image/jpeg",
             Url = new Uri("http://example.com/image2.jpg"),
@@ -383,21 +383,21 @@ public class BlogMLAttachmentTests
     public void Operators_EqualityAndComparison_WorkCorrectly()
     {
         // Arrange
-        BlogMLAttachment attachment1 = new BlogMLAttachment
+        BlogMLAttachment attachment1 = new()
         {
             MimeType = "image/png",
             Url = new Uri("http://example.com/image.png"),
             Size = 1000
         };
 
-        BlogMLAttachment attachment2 = new BlogMLAttachment
+        BlogMLAttachment attachment2 = new()
         {
             MimeType = "image/png",
             Url = new Uri("http://example.com/image.png"),
             Size = 1000
         };
 
-        BlogMLAttachment attachment3 = new BlogMLAttachment
+        BlogMLAttachment attachment3 = new()
         {
             MimeType = "image/jpeg",
             Url = new Uri("http://example.com/image.jpg"),
@@ -419,7 +419,7 @@ public class BlogMLAttachmentTests
     public void Operator_Equality_WithNulls_WorksCorrectly()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment { MimeType = "image/png" };
+        BlogMLAttachment attachment = new() { MimeType = "image/png" };
         BlogMLAttachment? nullAttachment = null;
 
         // Act & Assert
@@ -432,8 +432,8 @@ public class BlogMLAttachmentTests
     public void Operator_Inequality_WorksCorrectly()
     {
         // Arrange
-        BlogMLAttachment attachment1 = new BlogMLAttachment { MimeType = "image/png" };
-        BlogMLAttachment attachment2 = new BlogMLAttachment { MimeType = "image/jpeg" };
+        BlogMLAttachment attachment1 = new() { MimeType = "image/png" };
+        BlogMLAttachment attachment2 = new() { MimeType = "image/jpeg" };
 
         // Act & Assert
         (attachment1 != attachment2).ShouldBeTrue();
@@ -443,8 +443,8 @@ public class BlogMLAttachmentTests
     public void Operator_LessThan_WorksCorrectly()
     {
         // Arrange
-        BlogMLAttachment attachment1 = new BlogMLAttachment { MimeType = "image/png", Size = 100 };
-        BlogMLAttachment attachment2 = new BlogMLAttachment { MimeType = "image/png", Size = 200 };
+        BlogMLAttachment attachment1 = new() { MimeType = "image/png", Size = 100 };
+        BlogMLAttachment attachment2 = new() { MimeType = "image/png", Size = 200 };
         BlogMLAttachment? nullAttachment = null;
 
         // Act & Assert
@@ -456,8 +456,8 @@ public class BlogMLAttachmentTests
     public void Operator_GreaterThan_WorksCorrectly()
     {
         // Arrange
-        BlogMLAttachment attachment1 = new BlogMLAttachment { MimeType = "image/png", Size = 200 };
-        BlogMLAttachment attachment2 = new BlogMLAttachment { MimeType = "image/png", Size = 100 };
+        BlogMLAttachment attachment1 = new() { MimeType = "image/png", Size = 200 };
+        BlogMLAttachment attachment2 = new() { MimeType = "image/png", Size = 100 };
         BlogMLAttachment? nullAttachment = null;
 
         // Act & Assert
@@ -469,8 +469,8 @@ public class BlogMLAttachmentTests
     public void Operator_LessThanOrEqual_WorksCorrectly()
     {
         // Arrange
-        BlogMLAttachment attachment1 = new BlogMLAttachment { MimeType = "image/png", Size = 100 };
-        BlogMLAttachment attachment2 = new BlogMLAttachment { MimeType = "image/png", Size = 100 };
+        BlogMLAttachment attachment1 = new() { MimeType = "image/png", Size = 100 };
+        BlogMLAttachment attachment2 = new() { MimeType = "image/png", Size = 100 };
         BlogMLAttachment? nullAttachment = null;
 
         // Act & Assert
@@ -482,8 +482,8 @@ public class BlogMLAttachmentTests
     public void Operator_GreaterThanOrEqual_WorksCorrectly()
     {
         // Arrange
-        BlogMLAttachment attachment1 = new BlogMLAttachment { MimeType = "image/png", Size = 100 };
-        BlogMLAttachment attachment2 = new BlogMLAttachment { MimeType = "image/png", Size = 100 };
+        BlogMLAttachment attachment1 = new() { MimeType = "image/png", Size = 100 };
+        BlogMLAttachment attachment2 = new() { MimeType = "image/png", Size = 100 };
         BlogMLAttachment? nullAttachment = null;
 
         // Act & Assert
@@ -499,7 +499,7 @@ public class BlogMLAttachmentTests
     public void FindExtension_WithPredicate_ReturnsCorrectly()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Act
         ISyndicationExtension? result = attachment.FindExtension(ext => ext.XmlNamespace == "http://nonexistent.example.com");
@@ -512,7 +512,7 @@ public class BlogMLAttachmentTests
     public void FindExtension_NullPredicate_ThrowsArgumentNullException()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => attachment.FindExtension(null!));
@@ -526,7 +526,7 @@ public class BlogMLAttachmentTests
     public void Content_SetAndGet_WorksCorrectly()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Act
         attachment.Content = "  test content  ";
@@ -539,7 +539,7 @@ public class BlogMLAttachmentTests
     public void Content_SetToNull_ReturnsEmptyString()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Act
         attachment.Content = null!;
@@ -552,7 +552,7 @@ public class BlogMLAttachmentTests
     public void MimeType_SetNull_ThrowsArgumentException()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => attachment.MimeType = null!);
@@ -562,7 +562,7 @@ public class BlogMLAttachmentTests
     public void MimeType_SetEmpty_ThrowsArgumentException()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Act & Assert
         Should.Throw<ArgumentException>(() => attachment.MimeType = string.Empty);
@@ -572,7 +572,7 @@ public class BlogMLAttachmentTests
     public void MimeType_SetValidValue_TrimsWhitespace()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment();
+        BlogMLAttachment attachment = new();
 
         // Act
         attachment.MimeType = "  image/png  ";
@@ -585,7 +585,7 @@ public class BlogMLAttachmentTests
     public void GetHashCode_ReturnsValue()
     {
         // Arrange
-        BlogMLAttachment attachment = new BlogMLAttachment
+        BlogMLAttachment attachment = new()
         {
             MimeType = "image/png",
             Url = new Uri("http://example.com/image.png")
@@ -606,8 +606,8 @@ public class BlogMLAttachmentTests
     public void Load_FromBlogMLDocument_ParsesAttachments()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.BlogMLWithAttachments));
+        BlogMLDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.BlogMLWithAttachments));
 
         // Act
         document.Load(stream);

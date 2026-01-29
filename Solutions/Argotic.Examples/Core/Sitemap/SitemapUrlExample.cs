@@ -1,5 +1,3 @@
-using System.Xml;
-using Argotic.Common;
 using Argotic.Syndication;
 
 namespace Argotic.Examples.Core.Sitemap;
@@ -11,7 +9,7 @@ namespace Argotic.Examples.Core.Sitemap;
 ///     This class contains all the code examples that are referenced by the <see cref="SitemapUrl"/> class.
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class SitemapUrlExample
+internal static class SitemapUrlExample
 {
     /// <summary>
     /// Provides example code for the SitemapUrl class.

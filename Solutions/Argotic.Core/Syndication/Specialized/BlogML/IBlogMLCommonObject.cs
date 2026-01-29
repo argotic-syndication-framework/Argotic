@@ -1,4 +1,4 @@
-﻿namespace Argotic.Syndication.Specialized;
+namespace Argotic.Syndication.Specialized;
 
 /// <summary>
 /// Allows an object to implement common Web Log Markup Language (BlogML) entity information by representing a set of properties, methods, indexers and events common to BlogML syndication resources.

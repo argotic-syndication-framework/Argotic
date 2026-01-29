@@ -13,8 +13,8 @@ public class LoadAsyncCancellationTests
     public async Task RssFeed_LoadAsync_ThrowsWhenCancelled()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using CancellationTokenSource cts = new CancellationTokenSource();
+        RssFeed feed = new();
+        using CancellationTokenSource cts = new();
         await cts.CancelAsync(); // Cancel immediately
 
         // Act & Assert
@@ -29,8 +29,8 @@ public class LoadAsyncCancellationTests
     public async Task AtomFeed_LoadAsync_ThrowsWhenCancelled()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
-        using CancellationTokenSource cts = new CancellationTokenSource();
+        AtomFeed feed = new();
+        using CancellationTokenSource cts = new();
         await cts.CancelAsync(); // Cancel immediately
 
         // Act & Assert
@@ -45,8 +45,8 @@ public class LoadAsyncCancellationTests
     public async Task OpmlDocument_LoadAsync_ThrowsWhenCancelled()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
-        using CancellationTokenSource cts = new CancellationTokenSource();
+        OpmlDocument document = new();
+        using CancellationTokenSource cts = new();
         await cts.CancelAsync(); // Cancel immediately
 
         // Act & Assert
@@ -61,8 +61,8 @@ public class LoadAsyncCancellationTests
     public async Task GenericSyndicationFeed_LoadAsync_ThrowsWhenCancelled()
     {
         // Arrange
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
-        using CancellationTokenSource cts = new CancellationTokenSource();
+        Syndication.GenericSyndicationFeed feed = new();
+        using CancellationTokenSource cts = new();
         await cts.CancelAsync(); // Cancel immediately
 
         // Act & Assert
@@ -77,7 +77,7 @@ public class LoadAsyncCancellationTests
     public async Task RssFeed_LoadAsync_WithNullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         // Act & Assert
         ArgumentNullException ex = await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -91,7 +91,7 @@ public class LoadAsyncCancellationTests
     public async Task AtomFeed_LoadAsync_WithNullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
 
         // Act & Assert
         ArgumentNullException ex = await Should.ThrowAsync<ArgumentNullException>(async () =>
@@ -105,7 +105,7 @@ public class LoadAsyncCancellationTests
     public async Task OpmlDocument_LoadAsync_WithNullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
 
         // Act & Assert
         ArgumentNullException ex = await Should.ThrowAsync<ArgumentNullException>(async () =>

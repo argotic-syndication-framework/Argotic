@@ -30,7 +30,7 @@ public static class SyndicationEncodingUtility
     private static HttpClient CreateSharedHttpClient()
     {
 #pragma warning disable CA2000 // HttpClient takes ownership of the handler; this is an intentional singleton
-        SocketsHttpHandler handler = new SocketsHttpHandler
+        SocketsHttpHandler handler = new()
 #pragma warning restore CA2000
         {
             PooledConnectionLifetime = TimeSpan.FromMinutes(15),

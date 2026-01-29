@@ -22,12 +22,12 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_MinimalRsd06_PopulatesDocument()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);
@@ -42,12 +42,12 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_WithApis_PopulatesInterfaces()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);
@@ -65,12 +65,12 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_FullRsd06_PopulatesAllInterfaces()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);
@@ -98,12 +98,12 @@ public class Rsd06SyndicationResourceAdapterTests
         // Note: The current RsdApplicationInterface.Load() implementation has a bug where it looks
         // for "rsd:api/rsd:settings" when the source is already positioned on the api element.
         // This test verifies the adapter correctly populates basic API properties.
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);
@@ -132,11 +132,11 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_NullResource_ThrowsArgumentNullException()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => adapter.Fill(null!));
@@ -146,7 +146,7 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Constructor_NullNavigator_ThrowsArgumentNullException()
     {
         // Arrange
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
+        SyndicationResourceLoadSettings settings = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new Rsd06SyndicationResourceAdapter(null!, settings));
@@ -156,8 +156,8 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Constructor_NullSettings_ThrowsArgumentNullException()
     {
         // Arrange
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
 
         // Act & Assert
@@ -172,12 +172,12 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_ServiceWithEngineName_PopulatesEngineName()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);
@@ -191,12 +191,12 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_ServiceWithEngineLink_PopulatesEngineLink()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);
@@ -210,12 +210,12 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_ServiceWithHomePageLink_PopulatesHomepage()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);
@@ -233,15 +233,15 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_WithRetrievalLimit_RespectsLimit()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        SyndicationResourceLoadSettings settings = new()
         {
             RetrievalLimit = 1
         };
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);
@@ -259,12 +259,12 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_ApiWithBlogId_PopulatesBlogId()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Minimal));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);
@@ -277,12 +277,12 @@ public class Rsd06SyndicationResourceAdapterTests
     public void Fill_ApiWithPreferredAttribute_PopulatesIsPreferred()
     {
         // Arrange
-        RsdDocument document = new RsdDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Full));
-        XPathDocument doc = new XPathDocument(stream);
+        RsdDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.Rsd06Full));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
-        Rsd06SyndicationResourceAdapter adapter = new Rsd06SyndicationResourceAdapter(navigator, settings);
+        SyndicationResourceLoadSettings settings = new();
+        Rsd06SyndicationResourceAdapter adapter = new(navigator, settings);
 
         // Act
         adapter.Fill(document);

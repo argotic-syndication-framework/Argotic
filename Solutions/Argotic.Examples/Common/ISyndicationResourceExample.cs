@@ -8,7 +8,7 @@ namespace Argotic.Examples.Common;
 /// <summary>
 /// Example implementation of the <see cref="ISyndicationResource"/> interface.
 /// </summary>
-public class MyCustomRssFeed : ISyndicationResource
+internal class MyCustomRssFeed : ISyndicationResource
 {
     /// <summary>
     /// Private member to hold the syndication format for this syndication resource.

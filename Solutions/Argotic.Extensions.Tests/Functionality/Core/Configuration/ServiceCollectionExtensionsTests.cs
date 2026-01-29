@@ -18,7 +18,7 @@ public class ServiceCollectionExtensionsTests
     public void AddXmlRpcClient_RegistersXmlRpcClient()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
 
         // Act
         services.AddXmlRpcClient();
@@ -33,7 +33,7 @@ public class ServiceCollectionExtensionsTests
     public void AddXmlRpcClient_WithNullConfigure_RegistersXmlRpcClient()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
 
         // Act
         services.AddXmlRpcClient(configure: null);
@@ -48,10 +48,10 @@ public class ServiceCollectionExtensionsTests
     public void AddXmlRpcClient_WithOptions_ConfiguresOptions()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
         TimeSpan expectedTimeout = TimeSpan.FromSeconds(30);
         string expectedUserAgent = "TestAgent/1.0";
-        Uri expectedHost = new Uri("http://example.com/xmlrpc");
+        Uri expectedHost = new("http://example.com/xmlrpc");
 
         // Act
         services.AddXmlRpcClient(options =>
@@ -73,8 +73,8 @@ public class ServiceCollectionExtensionsTests
     public void AddXmlRpcClient_WithConfiguration_BindsOptions()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
-        Dictionary<string, string?> configValues = new Dictionary<string, string?>
+        ServiceCollection services = new();
+        Dictionary<string, string?> configValues = new()
         {
             { "Argotic:XmlRpc:Timeout", "00:00:45" },
             { "Argotic:XmlRpc:UserAgent", "ConfiguredAgent/2.0" },
@@ -99,8 +99,8 @@ public class ServiceCollectionExtensionsTests
     public void AddXmlRpcClient_WithConfiguration_CustomSectionName_BindsOptions()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
-        Dictionary<string, string?> configValues = new Dictionary<string, string?>
+        ServiceCollection services = new();
+        Dictionary<string, string?> configValues = new()
         {
             { "CustomSection:Timeout", "00:01:00" },
             { "CustomSection:UserAgent", "CustomAgent/3.0" }
@@ -123,7 +123,7 @@ public class ServiceCollectionExtensionsTests
     public void AddXmlRpcClient_ReturnsSameServiceCollection()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
 
         // Act
         IServiceCollection result = services.AddXmlRpcClient();
@@ -136,7 +136,7 @@ public class ServiceCollectionExtensionsTests
     public void AddTrackbackClient_RegistersTrackbackClient()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
 
         // Act
         services.AddTrackbackClient();
@@ -151,7 +151,7 @@ public class ServiceCollectionExtensionsTests
     public void AddTrackbackClient_WithNullConfigure_RegistersTrackbackClient()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
 
         // Act
         services.AddTrackbackClient(configure: null);
@@ -166,10 +166,10 @@ public class ServiceCollectionExtensionsTests
     public void AddTrackbackClient_WithOptions_ConfiguresOptions()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
         TimeSpan expectedTimeout = TimeSpan.FromSeconds(20);
         string expectedUserAgent = "TrackbackTestAgent/1.0";
-        Uri expectedHost = new Uri("http://example.com/trackback/1");
+        Uri expectedHost = new("http://example.com/trackback/1");
 
         // Act
         services.AddTrackbackClient(options =>
@@ -191,8 +191,8 @@ public class ServiceCollectionExtensionsTests
     public void AddTrackbackClient_WithConfiguration_BindsOptions()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
-        Dictionary<string, string?> configValues = new Dictionary<string, string?>
+        ServiceCollection services = new();
+        Dictionary<string, string?> configValues = new()
         {
             { "Argotic:Trackback:Timeout", "00:00:25" },
             { "Argotic:Trackback:UserAgent", "TrackbackConfiguredAgent/2.0" },
@@ -217,8 +217,8 @@ public class ServiceCollectionExtensionsTests
     public void AddTrackbackClient_WithConfiguration_CustomSectionName_BindsOptions()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
-        Dictionary<string, string?> configValues = new Dictionary<string, string?>
+        ServiceCollection services = new();
+        Dictionary<string, string?> configValues = new()
         {
             { "MyTrackback:Timeout", "00:02:00" },
             { "MyTrackback:UserAgent", "CustomTrackbackAgent/3.0" }
@@ -241,7 +241,7 @@ public class ServiceCollectionExtensionsTests
     public void AddTrackbackClient_ReturnsSameServiceCollection()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
 
         // Act
         IServiceCollection result = services.AddTrackbackClient();
@@ -254,7 +254,7 @@ public class ServiceCollectionExtensionsTests
     public void AddXmlRpcClient_RegistersAsTransient()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
 
         // Act
         services.AddXmlRpcClient();
@@ -270,7 +270,7 @@ public class ServiceCollectionExtensionsTests
     public void AddTrackbackClient_RegistersAsTransient()
     {
         // Arrange
-        ServiceCollection services = new ServiceCollection();
+        ServiceCollection services = new();
 
         // Act
         services.AddTrackbackClient();

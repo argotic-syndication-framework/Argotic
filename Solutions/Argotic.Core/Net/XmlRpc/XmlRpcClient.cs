@@ -37,21 +37,9 @@ namespace Argotic.Net;
 public class XmlRpcClient
 {
     /// <summary>
-    /// Private member to hold the location of the host computer that client XML-RPC calls will be sent to.
-    /// </summary>
-    private Uri clientHost;
-    /// <summary>
-    /// Private member to hold information such as the application name, version, host operating system, and language.
-    /// </summary>
-    private string clientUserAgent = $"Argotic-Syndication-Framework/{System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient))!.GetName().Version!.ToString(4)}";
-    /// <summary>
     /// Private member to hold the HttpClient used for sending requests.
     /// </summary>
     private readonly HttpClient httpClient;
-    /// <summary>
-    /// Private member to hold a value that specifies the amount of time after which an asynchronous send operation times out.
-    /// </summary>
-    private TimeSpan clientTimeout = TimeSpan.FromSeconds(15);
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcClient"/> class using the shared <see cref="HttpClient"/>.
@@ -162,15 +150,12 @@ public class XmlRpcClient
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri Host
     {
-        get
-        {
-            return clientHost;
-        }
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            clientHost = value;
+            field = value;
         }
     }
 
@@ -182,10 +167,7 @@ public class XmlRpcClient
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
     public TimeSpan Timeout
     {
-        get
-        {
-            return clientTimeout;
-        }
+        get;
 
         set
         {
@@ -199,10 +181,10 @@ public class XmlRpcClient
             }
             else
             {
-                clientTimeout = value;
+                field = value;
             }
         }
-    }
+    } = TimeSpan.FromSeconds(15);
 
     /// <summary>
     /// Gets or sets information such as the client application name, version, host operating system, and language.
@@ -212,17 +194,14 @@ public class XmlRpcClient
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string UserAgent
     {
-        get
-        {
-            return clientUserAgent;
-        }
+        get;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            clientUserAgent = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = $"Argotic-Syndication-Framework/{System.Reflection.Assembly.GetAssembly(typeof(XmlRpcClient))!.GetName().Version!.ToString(4)}";
 
     /// <summary>
     /// Returns the scalar type identifier for the supplied <see cref="XmlRpcScalarValueType"/>.

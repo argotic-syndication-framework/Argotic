@@ -15,11 +15,11 @@ public class LoadAsyncSuccessTests
     public void RssFeed_Load_LoadsValidFeed()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
         // Act
         feed.Load(stream);
@@ -34,11 +34,11 @@ public class LoadAsyncSuccessTests
     public void AtomFeed_Load_LoadsValidFeed()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
 
         // Act
         feed.Load(stream);
@@ -53,11 +53,11 @@ public class LoadAsyncSuccessTests
     public void AtomEntry_Load_LoadsValidEntry()
     {
         // Arrange
-        AtomEntry entry = new AtomEntry();
+        AtomEntry entry = new();
         bool eventRaised = false;
         entry.Loaded += (sender, args) => eventRaised = true;
 
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtomEntry));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtomEntry));
 
         // Act
         entry.Load(stream);
@@ -71,11 +71,11 @@ public class LoadAsyncSuccessTests
     public void OpmlDocument_Load_LoadsValidDocument()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
         bool eventRaised = false;
         document.Loaded += (sender, args) => eventRaised = true;
 
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml));
 
         // Act
         document.Load(stream);
@@ -90,13 +90,13 @@ public class LoadAsyncSuccessTests
     public void RssFeed_Load_WithSettings_AppliesSettings()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        RssFeed feed = new();
+        SyndicationResourceLoadSettings settings = new()
         {
             AutoDetectExtensions = true
         };
 
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
         // Act
         feed.Load(stream, settings);
@@ -109,11 +109,11 @@ public class LoadAsyncSuccessTests
     public void GenericSyndicationFeed_Load_AutoDetectsRssFormat()
     {
         // Arrange
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
         // Act
         feed.Load(stream);
@@ -128,11 +128,11 @@ public class LoadAsyncSuccessTests
     public void GenericSyndicationFeed_Load_AutoDetectsAtomFormat()
     {
         // Arrange
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
-        using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
+        using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
 
         // Act
         feed.Load(stream);
@@ -147,12 +147,12 @@ public class LoadAsyncSuccessTests
     public async Task RssFeed_LoadAsync_WithHttpClient_LoadsValidFeed()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(new Uri("http://example.com/feed.xml"), httpClient, cancellationToken: TestContext.CancellationToken);
@@ -167,12 +167,12 @@ public class LoadAsyncSuccessTests
     public async Task AtomFeed_LoadAsync_WithHttpClient_LoadsValidFeed()
     {
         // Arrange
-        AtomFeed feed = new AtomFeed();
+        AtomFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(new Uri("http://example.com/feed.xml"), httpClient, cancellationToken: TestContext.CancellationToken);
@@ -187,12 +187,12 @@ public class LoadAsyncSuccessTests
     public async Task AtomEntry_LoadAsync_WithHttpClient_LoadsValidEntry()
     {
         // Arrange
-        AtomEntry entry = new AtomEntry();
+        AtomEntry entry = new();
         bool eventRaised = false;
         entry.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtomEntry);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await entry.LoadAsync(new Uri("http://example.com/entry.xml"), httpClient, cancellationToken: TestContext.CancellationToken);
@@ -206,12 +206,12 @@ public class LoadAsyncSuccessTests
     public async Task OpmlDocument_LoadAsync_WithHttpClient_LoadsValidDocument()
     {
         // Arrange
-        OpmlDocument document = new OpmlDocument();
+        OpmlDocument document = new();
         bool eventRaised = false;
         document.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalOpml);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await document.LoadAsync(new Uri("http://example.com/subscriptions.opml"), httpClient, cancellationToken: TestContext.CancellationToken);
@@ -226,12 +226,12 @@ public class LoadAsyncSuccessTests
     public async Task GenericSyndicationFeed_LoadAsync_WithHttpClient_AutoDetectsRssFormat()
     {
         // Arrange
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(new Uri("http://example.com/feed.xml"), httpClient, cancellationToken: TestContext.CancellationToken);
@@ -246,12 +246,12 @@ public class LoadAsyncSuccessTests
     public async Task GenericSyndicationFeed_LoadAsync_WithHttpClient_AutoDetectsAtomFormat()
     {
         // Arrange
-        Syndication.GenericSyndicationFeed feed = new Syndication.GenericSyndicationFeed();
+        Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(new Uri("http://example.com/feed.xml"), httpClient, cancellationToken: TestContext.CancellationToken);
@@ -266,14 +266,14 @@ public class LoadAsyncSuccessTests
     public async Task RssFeed_LoadAsync_WithSettings_AppliesSettings()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        RssFeed feed = new();
+        SyndicationResourceLoadSettings settings = new()
         {
             AutoDetectExtensions = true
         };
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(new Uri("http://example.com/feed.xml"), httpClient, settings, cancellationToken: TestContext.CancellationToken);

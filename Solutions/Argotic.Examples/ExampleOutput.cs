@@ -8,7 +8,7 @@ namespace Argotic.Examples;
 /// <summary>
 /// Helper class for displaying meaningful output from examples.
 /// </summary>
-public static class ExampleOutput
+internal static class ExampleOutput
 {
     /// <summary>
     /// Displays information about an RSS feed.

@@ -1,4 +1,4 @@
-﻿using Argotic.Syndication;
+using Argotic.Syndication;
 
 namespace Argotic.Examples.Core.Rss;
 
@@ -9,7 +9,7 @@ namespace Argotic.Examples.Core.Rss;
 ///     This class contains all the code examples that are referenced by the <see cref="RssGuid"/> class. 
 ///     The code examples are imported using the unique #region identifier that matches the method or entity that the sample code describes.
 /// </remarks>
-public static class RssGuidExample
+internal static class RssGuidExample
 {
     /// <summary>
     /// Provides example code for the RssGuid class.

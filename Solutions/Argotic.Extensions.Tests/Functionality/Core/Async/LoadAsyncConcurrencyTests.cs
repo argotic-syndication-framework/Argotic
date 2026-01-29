@@ -27,7 +27,7 @@ public class LoadAsyncConcurrencyTests
         // Act - Load all feeds from streams
         for (int i = 0; i < 5; i++)
         {
-            using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+            using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
             feeds[i].Load(stream);
         }
 
@@ -56,7 +56,7 @@ public class LoadAsyncConcurrencyTests
         // Act - Load all feeds from streams
         for (int i = 0; i < 5; i++)
         {
-            using MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
+            using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
             feeds[i].Load(stream);
         }
 
@@ -72,10 +72,10 @@ public class LoadAsyncConcurrencyTests
     public void MixedFeeds_MultipleConcurrentLoads_DoNotInterfere()
     {
         // Arrange - Create different types of feeds
-        RssFeed rssFeed = new RssFeed();
-        AtomFeed atomFeed = new AtomFeed();
-        OpmlDocument opmlDoc = new OpmlDocument();
-        Syndication.GenericSyndicationFeed genericFeed = new Syndication.GenericSyndicationFeed();
+        RssFeed rssFeed = new();
+        AtomFeed atomFeed = new();
+        OpmlDocument opmlDoc = new();
+        Syndication.GenericSyndicationFeed genericFeed = new();
 
         bool rssLoaded = false, atomLoaded = false, opmlLoaded = false, genericLoaded = false;
 
@@ -85,22 +85,22 @@ public class LoadAsyncConcurrencyTests
         genericFeed.Loaded += (sender, args) => genericLoaded = true;
 
         // Act - Load all feeds
-        using (MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss)))
+        using (MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss)))
         {
             rssFeed.Load(stream);
         }
 
-        using (MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom)))
+        using (MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom)))
         {
             atomFeed.Load(stream);
         }
 
-        using (MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml)))
+        using (MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml)))
         {
             opmlDoc.Load(stream);
         }
 
-        using (MemoryStream stream = new MemoryStream(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss)))
+        using (MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss)))
         {
             genericFeed.Load(stream);
         }
@@ -133,7 +133,7 @@ public class LoadAsyncConcurrencyTests
 
         // Act - Load all feeds concurrently using Task.WhenAll
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         Task[] loadTasks = new Task[5];
         for (int i = 0; i < 5; i++)
@@ -167,7 +167,7 @@ public class LoadAsyncConcurrencyTests
 
         // Act - Load all feeds concurrently using Task.WhenAll
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         Task[] loadTasks = new Task[5];
         for (int i = 0; i < 5; i++)
@@ -189,10 +189,10 @@ public class LoadAsyncConcurrencyTests
     public async Task MixedFeeds_ConcurrentLoadAsync_AllLoadSuccessfully()
     {
         // Arrange - Create different types of feeds
-        RssFeed rssFeed = new RssFeed();
-        AtomFeed atomFeed = new AtomFeed();
-        OpmlDocument opmlDoc = new OpmlDocument();
-        Syndication.GenericSyndicationFeed genericFeed = new Syndication.GenericSyndicationFeed();
+        RssFeed rssFeed = new();
+        AtomFeed atomFeed = new();
+        OpmlDocument opmlDoc = new();
+        Syndication.GenericSyndicationFeed genericFeed = new();
 
         bool rssLoaded = false, atomLoaded = false, opmlLoaded = false, genericLoaded = false;
 
@@ -203,16 +203,16 @@ public class LoadAsyncConcurrencyTests
 
         // Act - Load all feeds concurrently
         using MockHttpMessageHandler rssHandler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient rssClient = new HttpClient(rssHandler);
+        using HttpClient rssClient = new(rssHandler);
 
         using MockHttpMessageHandler atomHandler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
-        using HttpClient atomClient = new HttpClient(atomHandler);
+        using HttpClient atomClient = new(atomHandler);
 
         using MockHttpMessageHandler opmlHandler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalOpml);
-        using HttpClient opmlClient = new HttpClient(opmlHandler);
+        using HttpClient opmlClient = new(opmlHandler);
 
         using MockHttpMessageHandler genericHandler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient genericClient = new HttpClient(genericHandler);
+        using HttpClient genericClient = new(genericHandler);
 
         await Task.WhenAll(
             rssFeed.LoadAsync(new Uri("http://example.com/rss.xml"), rssClient, cancellationToken: TestContext.CancellationToken),

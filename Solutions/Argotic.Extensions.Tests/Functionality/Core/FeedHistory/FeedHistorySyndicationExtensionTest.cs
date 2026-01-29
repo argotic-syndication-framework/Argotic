@@ -1,5 +1,4 @@
 using System.Xml;
-using System.Xml.XPath;
 using Argotic.Common;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;

@@ -23,7 +23,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_WhenCreatedProgrammatically_ProducesValidXml()
     {
         // Arrange
-        RssFeed feed = new RssFeed(new Uri("http://example.com"), "Test Feed")
+        RssFeed feed = new(new Uri("http://example.com"), "Test Feed")
         {
             Channel =
             {
@@ -32,7 +32,7 @@ public class RssFeedBehaviorTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         feed.Save(stream);
         stream.Position = 0;
 
@@ -47,7 +47,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_WhenCreatedWithLinkAndTitle_SetsChannelProperties()
     {
         // Arrange & Act
-        RssFeed feed = new RssFeed(new Uri("http://example.com"), "Test Feed");
+        RssFeed feed = new(new Uri("http://example.com"), "Test Feed");
 
         // Assert
         feed.Channel.Link.ShouldBe(new Uri("http://example.com"));
@@ -58,7 +58,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_WhenCreatedWithDescription_SetsChannelDescription()
     {
         // Arrange & Act
-        RssFeed feed = new RssFeed("Test Description");
+        RssFeed feed = new("Test Description");
 
         // Assert
         feed.Channel.Description.ShouldBe("Test Description");
@@ -68,7 +68,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_WhenCreatedWithDefaultConstructor_HasEmptyChannel()
     {
         // Arrange & Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         // Assert
         feed.Channel.ShouldNotBeNull();
@@ -81,7 +81,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_AddingItemsToChannel_WorksCorrectly()
     {
         // Arrange
-        RssFeed feed = new RssFeed(new Uri("http://example.com"), "Test Feed")
+        RssFeed feed = new(new Uri("http://example.com"), "Test Feed")
         {
             Channel =
             {
@@ -89,14 +89,14 @@ public class RssFeedBehaviorTests
             }
         };
 
-        RssItem item1 = new RssItem
+        RssItem item1 = new()
         {
             Title = "First Item",
             Link = new Uri("http://example.com/item1"),
             Description = "First item description"
         };
 
-        RssItem item2 = new RssItem
+        RssItem item2 = new()
         {
             Title = "Second Item",
             Link = new Uri("http://example.com/item2"),
@@ -117,7 +117,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_SetChannelToNull_ThrowsArgumentNullException()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => feed.Channel = null!);
@@ -131,8 +131,8 @@ public class RssFeedBehaviorTests
     public void RssFeed_LoadingValidRssXml_PopulatesAllProperties()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
         // Act
         feed.Load(stream);
@@ -150,8 +150,8 @@ public class RssFeedBehaviorTests
     public void RssFeed_LoadingRssWithItems_PopulatesItemCollection()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.RssWithItems));
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.RssWithItems));
 
         // Act
         feed.Load(stream);
@@ -178,8 +178,8 @@ public class RssFeedBehaviorTests
     public void RssFeed_LoadingMalformedXml_ThrowsXmlException()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.MalformedXml));
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.MalformedXml));
 
         // Act & Assert
         Should.Throw<XmlException>(() => feed.Load(stream));
@@ -189,7 +189,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_LoadingValidRss_RaisesLoadedEvent()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         bool eventRaised = false;
         SyndicationResourceLoadedEventArgs? eventArgs = null;
 
@@ -199,7 +199,7 @@ public class RssFeedBehaviorTests
             eventArgs = args;
         };
 
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
         // Act
         feed.Load(stream);
@@ -229,13 +229,13 @@ public class RssFeedBehaviorTests
             </rss>
             """;
 
-        RssFeed feed = new RssFeed();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        RssFeed feed = new();
+        SyndicationResourceLoadSettings settings = new()
         {
             AutoDetectExtensions = true
         };
 
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(rssWithExtension));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(rssWithExtension));
 
         // Act
         feed.Load(stream, settings);
@@ -250,8 +250,8 @@ public class RssFeedBehaviorTests
     public void RssFeed_LoadingChannelCategories_PopulatesCategories()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.RssWithItems));
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.RssWithItems));
 
         // Act
         feed.Load(stream);
@@ -269,7 +269,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_RoundTrip_PreservesChannelProperties()
     {
         // Arrange
-        RssFeed originalFeed = new RssFeed(new Uri("http://example.com"), "Test Feed")
+        RssFeed originalFeed = new(new Uri("http://example.com"), "Test Feed")
         {
             Channel =
             {
@@ -282,12 +282,12 @@ public class RssFeedBehaviorTests
         };
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalFeed.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        RssFeed loadedFeed = new RssFeed();
+        RssFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -304,7 +304,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_RoundTrip_PreservesItems()
     {
         // Arrange
-        RssFeed originalFeed = new RssFeed(new Uri("http://example.com"), "Test Feed")
+        RssFeed originalFeed = new(new Uri("http://example.com"), "Test Feed")
         {
             Channel =
             {
@@ -312,7 +312,7 @@ public class RssFeedBehaviorTests
             }
         };
 
-        RssItem item = new RssItem
+        RssItem item = new()
         {
             Title = "Test Item",
             Link = new Uri("http://example.com/item"),
@@ -324,12 +324,12 @@ public class RssFeedBehaviorTests
         originalFeed.Channel.Items.Add(item);
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalFeed.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        RssFeed loadedFeed = new RssFeed();
+        RssFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -349,7 +349,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_RoundTrip_PreservesMultipleItems()
     {
         // Arrange
-        RssFeed originalFeed = new RssFeed(new Uri("http://example.com"), "Test Feed")
+        RssFeed originalFeed = new(new Uri("http://example.com"), "Test Feed")
         {
             Channel =
             {
@@ -368,12 +368,12 @@ public class RssFeedBehaviorTests
         }
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalFeed.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        RssFeed loadedFeed = new RssFeed();
+        RssFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -389,7 +389,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_RoundTrip_PreservesEnclosures()
     {
         // Arrange
-        RssFeed originalFeed = new RssFeed(new Uri("http://example.com"), "Test Feed")
+        RssFeed originalFeed = new(new Uri("http://example.com"), "Test Feed")
         {
             Channel =
             {
@@ -397,7 +397,7 @@ public class RssFeedBehaviorTests
             }
         };
 
-        RssItem item = new RssItem
+        RssItem item = new()
         {
             Title = "Podcast Episode"
         };
@@ -408,12 +408,12 @@ public class RssFeedBehaviorTests
         originalFeed.Channel.Items.Add(item);
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
+        using MemoryStream stream = new();
         originalFeed.Save(stream);
 
         // Act - Load
         stream.Position = 0;
-        RssFeed loadedFeed = new RssFeed();
+        RssFeed loadedFeed = new();
         loadedFeed.Load(stream);
 
         // Assert
@@ -441,20 +441,20 @@ public class RssFeedBehaviorTests
             </rss>
             """;
 
-        RssFeed originalFeed = new RssFeed();
-        SyndicationResourceLoadSettings loadSettings = new SyndicationResourceLoadSettings
+        RssFeed originalFeed = new();
+        SyndicationResourceLoadSettings loadSettings = new()
         {
             AutoDetectExtensions = true
         };
-        using MemoryStream loadStream = new MemoryStream(Encoding.UTF8.GetBytes(rssWithExtension));
+        using MemoryStream loadStream = new(Encoding.UTF8.GetBytes(rssWithExtension));
         originalFeed.Load(loadStream, loadSettings);
 
         // Capture original extension count
         int originalExtensionCount = originalFeed.Channel.Extensions.Count;
 
         // Act - Save
-        using MemoryStream stream = new MemoryStream();
-        SyndicationResourceSaveSettings saveSettings = new SyndicationResourceSaveSettings
+        using MemoryStream stream = new();
+        SyndicationResourceSaveSettings saveSettings = new()
         {
             AutoDetectExtensions = true
         };
@@ -462,7 +462,7 @@ public class RssFeedBehaviorTests
 
         // Act - Load
         stream.Position = 0;
-        RssFeed reloadedFeed = new RssFeed();
+        RssFeed reloadedFeed = new();
         reloadedFeed.Load(stream, loadSettings);
 
         // Assert
@@ -474,17 +474,17 @@ public class RssFeedBehaviorTests
     public void RssFeed_ParseSerializeParse_ProducesSameFeed()
     {
         // Arrange
-        RssFeed firstFeed = new RssFeed();
-        using MemoryStream firstStream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.RssWithItems));
+        RssFeed firstFeed = new();
+        using MemoryStream firstStream = new(Encoding.UTF8.GetBytes(FeedTestData.RssWithItems));
         firstFeed.Load(firstStream);
 
         // Act - First serialize
-        using MemoryStream serializeStream = new MemoryStream();
+        using MemoryStream serializeStream = new();
         firstFeed.Save(serializeStream);
 
         // Act - Second parse
         serializeStream.Position = 0;
-        RssFeed secondFeed = new RssFeed();
+        RssFeed secondFeed = new();
         secondFeed.Load(serializeStream);
 
         // Assert - Core properties match
@@ -510,12 +510,12 @@ public class RssFeedBehaviorTests
     public async Task RssFeed_LoadAsync_LoadsFeedCorrectly()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         bool eventRaised = false;
         feed.Loaded += (sender, args) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(
@@ -534,10 +534,10 @@ public class RssFeedBehaviorTests
     public async Task RssFeed_LoadAsync_WithItems_LoadsAllItems()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.RssWithItems);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(
@@ -556,7 +556,7 @@ public class RssFeedBehaviorTests
     {
         // Arrange
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         RssFeed feed = await RssFeed.CreateAsync(
@@ -586,14 +586,14 @@ public class RssFeedBehaviorTests
             </rss>
             """;
 
-        RssFeed feed = new RssFeed();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        RssFeed feed = new();
+        SyndicationResourceLoadSettings settings = new()
         {
             AutoDetectExtensions = true
         };
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(rssWithExtension);
-        using HttpClient httpClient = new HttpClient(handler);
+        using HttpClient httpClient = new(handler);
 
         // Act
         await feed.LoadAsync(
@@ -611,7 +611,7 @@ public class RssFeedBehaviorTests
     public async Task RssFeed_LoadAsync_IncludesSourceUriInEventArgs()
     {
         // Arrange
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
         Uri? sourceFromEvent = null;
 
         feed.Loaded += (sender, args) =>
@@ -620,8 +620,8 @@ public class RssFeedBehaviorTests
         };
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
-        using HttpClient httpClient = new HttpClient(handler);
-        Uri requestUri = new Uri("http://example.com/feed.xml");
+        using HttpClient httpClient = new(handler);
+        Uri requestUri = new("http://example.com/feed.xml");
 
         // Act
         await feed.LoadAsync(requestUri, httpClient, cancellationToken: TestContext.CancellationToken);
@@ -638,7 +638,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_CreateNavigator_ReturnsValidNavigator()
     {
         // Arrange
-        RssFeed feed = new RssFeed(new Uri("http://example.com"), "Test Feed")
+        RssFeed feed = new(new Uri("http://example.com"), "Test Feed")
         {
             Channel =
             {
@@ -676,12 +676,12 @@ public class RssFeedBehaviorTests
             </rss>
             """;
 
-        RssFeed feed = new RssFeed();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings
+        RssFeed feed = new();
+        SyndicationResourceLoadSettings settings = new()
         {
             AutoDetectExtensions = true
         };
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(rssWithExtension));
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(rssWithExtension));
         feed.Load(stream, settings);
 
         // Act
@@ -696,7 +696,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_HasExtensions_ReturnsFalseWhenNoExtensions()
     {
         // Arrange
-        RssFeed feed = new RssFeed(new Uri("http://example.com"), "Test Feed")
+        RssFeed feed = new(new Uri("http://example.com"), "Test Feed")
         {
             Channel =
             {
@@ -712,7 +712,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_Format_ReturnsRss()
     {
         // Arrange & Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         // Assert
         feed.Format.ShouldBe(SyndicationContentFormat.Rss);
@@ -722,7 +722,7 @@ public class RssFeedBehaviorTests
     public void RssFeed_Version_Returns2Point0()
     {
         // Arrange & Act
-        RssFeed feed = new RssFeed();
+        RssFeed feed = new();
 
         // Assert
         feed.Version.Major.ShouldBe(2);

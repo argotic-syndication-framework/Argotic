@@ -484,7 +484,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc3339DateTime_WithUtcDateTime_FormatsWithZSuffix()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
+        DateTime input = new(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc3339DateTime(input);
@@ -498,7 +498,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc3339DateTime_WithLocalDateTime_FormatsWithTimezoneOffset()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 10, 30, 0, DateTimeKind.Local);
+        DateTime input = new(2024, 1, 15, 10, 30, 0, DateTimeKind.Local);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc3339DateTime(input);
@@ -515,7 +515,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc3339DateTime_WithUnspecifiedKind_FormatsWithZSuffix()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 10, 30, 0, DateTimeKind.Unspecified);
+        DateTime input = new(2024, 1, 15, 10, 30, 0, DateTimeKind.Unspecified);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc3339DateTime(input);
@@ -529,7 +529,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc3339DateTime_PreservesDateComponents()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 12, 31, 23, 59, 59, DateTimeKind.Utc);
+        DateTime input = new(2024, 12, 31, 23, 59, 59, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc3339DateTime(input);
@@ -542,7 +542,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc3339DateTime_IncludesFractionalSeconds()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 10, 30, 0, 123, DateTimeKind.Utc);
+        DateTime input = new(2024, 1, 15, 10, 30, 0, 123, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc3339DateTime(input);
@@ -555,7 +555,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc3339DateTime_WithMidnight_FormatsCorrectly()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 0, 0, 0, DateTimeKind.Utc);
+        DateTime input = new(2024, 1, 15, 0, 0, 0, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc3339DateTime(input);
@@ -568,7 +568,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc3339DateTime_WithEndOfDay_FormatsCorrectly()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 23, 59, 59, DateTimeKind.Utc);
+        DateTime input = new(2024, 1, 15, 23, 59, 59, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc3339DateTime(input);
@@ -581,7 +581,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc3339DateTime_WithFebruaryDate_FormatsCorrectly()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 2, 28, 12, 0, 0, DateTimeKind.Utc);
+        DateTime input = new(2024, 2, 28, 12, 0, 0, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc3339DateTime(input);
@@ -598,7 +598,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc822DateTime_FormatsCorrectly()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
+        DateTime input = new(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc822DateTime(input);
@@ -615,7 +615,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc822DateTime_FollowsRfc1123Pattern()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
+        DateTime input = new(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc822DateTime(input);
@@ -629,7 +629,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc822DateTime_PreservesDateComponents()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 12, 31, 23, 59, 59, DateTimeKind.Utc);
+        DateTime input = new(2024, 12, 31, 23, 59, 59, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc822DateTime(input);
@@ -646,7 +646,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc822DateTime_WithDifferentDaysOfWeek_FormatsCorrectly()
     {
         // Arrange - Wednesday, February 14, 2024
-        DateTime input = new DateTime(2024, 2, 14, 12, 0, 0, DateTimeKind.Utc);
+        DateTime input = new(2024, 2, 14, 12, 0, 0, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc822DateTime(input);
@@ -661,7 +661,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc822DateTime_WithMidnight_FormatsCorrectly()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 0, 0, 0, DateTimeKind.Utc);
+        DateTime input = new(2024, 1, 15, 0, 0, 0, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc822DateTime(input);
@@ -674,7 +674,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc822DateTime_EndsWithGmt()
     {
         // Arrange
-        DateTime input = new DateTime(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
+        DateTime input = new(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc822DateTime(input);
@@ -687,7 +687,7 @@ public class SyndicationDateTimeUtilityTests
     public void ToRfc822DateTime_WithSingleDigitDay_PadsDayCorrectly()
     {
         // Arrange - Friday, January 5, 2024
-        DateTime input = new DateTime(2024, 1, 5, 10, 0, 0, DateTimeKind.Utc);
+        DateTime input = new(2024, 1, 5, 10, 0, 0, DateTimeKind.Utc);
 
         // Act
         string result = SyndicationDateTimeUtility.ToRfc822DateTime(input);
@@ -705,7 +705,7 @@ public class SyndicationDateTimeUtilityTests
     public void Rfc3339_RoundTrip_PreservesDateTime()
     {
         // Arrange
-        DateTime original = new DateTime(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
+        DateTime original = new(2024, 1, 15, 10, 30, 0, DateTimeKind.Utc);
 
         // Act
         string formatted = SyndicationDateTimeUtility.ToRfc3339DateTime(original);
@@ -725,7 +725,7 @@ public class SyndicationDateTimeUtilityTests
     public void Rfc3339_RoundTrip_WithLocalTime_PreservesEquivalentTime()
     {
         // Arrange
-        DateTime original = new DateTime(2024, 6, 20, 14, 45, 30, DateTimeKind.Local);
+        DateTime original = new(2024, 6, 20, 14, 45, 30, DateTimeKind.Local);
 
         // Act
         string formatted = SyndicationDateTimeUtility.ToRfc3339DateTime(original);
@@ -841,7 +841,7 @@ public class SyndicationDateTimeUtilityTests
 
         for (int month = 1; month <= 12; month++)
         {
-            DateTime input = new DateTime(2024, month, 15, 12, 0, 0, DateTimeKind.Utc);
+            DateTime input = new(2024, month, 15, 12, 0, 0, DateTimeKind.Utc);
             string result = SyndicationDateTimeUtility.ToRfc822DateTime(input);
             result.ShouldContain(expectedMonths[month - 1]);
         }
@@ -856,7 +856,7 @@ public class SyndicationDateTimeUtilityTests
 
         for (int day = 1; day <= 7; day++)
         {
-            DateTime input = new DateTime(2024, 1, day, 12, 0, 0, DateTimeKind.Utc);
+            DateTime input = new(2024, 1, day, 12, 0, 0, DateTimeKind.Utc);
             string result = SyndicationDateTimeUtility.ToRfc822DateTime(input);
             result.ShouldContain(expectedDays[day - 1]);
         }

@@ -22,7 +22,7 @@ public class BlogMLTrackbackTests
     public void Constructor_Default_CreatesValidInstance()
     {
         // Arrange & Act
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Assert
         trackback.ShouldNotBeNull();
@@ -54,9 +54,9 @@ public class BlogMLTrackbackTests
             </trackback>
             """;
 
-        BlogMLTrackback trackback = new BlogMLTrackback();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(trackbackXml));
-        XPathDocument doc = new XPathDocument(stream);
+        BlogMLTrackback trackback = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(trackbackXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToFirstChild();
 
@@ -81,9 +81,9 @@ public class BlogMLTrackbackTests
             <trackback xmlns="http://www.blogml.com/2006/09/BlogML" url="http://example.com/trackback"/>
             """;
 
-        BlogMLTrackback trackback = new BlogMLTrackback();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(trackbackXml));
-        XPathDocument doc = new XPathDocument(stream);
+        BlogMLTrackback trackback = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(trackbackXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToFirstChild();
 
@@ -109,12 +109,12 @@ public class BlogMLTrackbackTests
             </trackback>
             """;
 
-        BlogMLTrackback trackback = new BlogMLTrackback();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(trackbackXml));
-        XPathDocument doc = new XPathDocument(stream);
+        BlogMLTrackback trackback = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(trackbackXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToFirstChild();
-        SyndicationResourceLoadSettings settings = new SyndicationResourceLoadSettings();
+        SyndicationResourceLoadSettings settings = new();
 
         // Act
         bool wasLoaded = trackback.Load(navigator, settings);
@@ -130,7 +130,7 @@ public class BlogMLTrackbackTests
     public void Load_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => trackback.Load(null!));
@@ -144,9 +144,9 @@ public class BlogMLTrackbackTests
             <trackback xmlns="http://www.blogml.com/2006/09/BlogML" url="http://example.com/trackback"/>
             """;
 
-        BlogMLTrackback trackback = new BlogMLTrackback();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(trackbackXml));
-        XPathDocument doc = new XPathDocument(stream);
+        BlogMLTrackback trackback = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(trackbackXml));
+        XPathDocument doc = new(stream);
         XPathNavigator navigator = doc.CreateNavigator();
         navigator.MoveToFirstChild();
 
@@ -162,7 +162,7 @@ public class BlogMLTrackbackTests
     public void WriteTo_ValidTrackback_WritesCorrectXml()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback
+        BlogMLTrackback trackback = new()
         {
             Id = "tb1",
             Url = new Uri("http://example.com/trackback"),
@@ -172,8 +172,8 @@ public class BlogMLTrackbackTests
         };
 
         // Act
-        using MemoryStream stream = new MemoryStream();
-        XmlWriterSettings writerSettings = new XmlWriterSettings
+        using MemoryStream stream = new();
+        XmlWriterSettings writerSettings = new()
         {
             Indent = true,
             OmitXmlDeclaration = true
@@ -185,7 +185,7 @@ public class BlogMLTrackbackTests
         }
 
         stream.Position = 0;
-        using StreamReader reader = new StreamReader(stream);
+        using StreamReader reader = new(stream);
         string xml = reader.ReadToEnd();
 
         // Assert
@@ -201,7 +201,7 @@ public class BlogMLTrackbackTests
     public void WriteTo_NullWriter_ThrowsArgumentNullException()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => trackback.WriteTo(null!));
@@ -211,7 +211,7 @@ public class BlogMLTrackbackTests
     public void ToString_ReturnsXmlRepresentation()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback
+        BlogMLTrackback trackback = new()
         {
             Id = "tb1",
             Url = new Uri("http://example.com/trackback")
@@ -234,7 +234,7 @@ public class BlogMLTrackbackTests
     public void CompareTo_SameUrl_ReturnsZero()
     {
         // Arrange
-        BlogMLTrackback trackback1 = new BlogMLTrackback
+        BlogMLTrackback trackback1 = new()
         {
             Id = "tb1",
             Url = new Uri("http://example.com/post"),
@@ -242,7 +242,7 @@ public class BlogMLTrackbackTests
             CreatedOn = new DateTime(2025, 1, 16, 10, 0, 0, DateTimeKind.Utc)
         };
 
-        BlogMLTrackback trackback2 = new BlogMLTrackback
+        BlogMLTrackback trackback2 = new()
         {
             Id = "tb1",
             Url = new Uri("http://example.com/post"),
@@ -261,12 +261,12 @@ public class BlogMLTrackbackTests
     public void CompareTo_DifferentUrls_ReturnsNonZero()
     {
         // Arrange
-        BlogMLTrackback trackback1 = new BlogMLTrackback
+        BlogMLTrackback trackback1 = new()
         {
             Url = new Uri("http://example.com/post1")
         };
 
-        BlogMLTrackback trackback2 = new BlogMLTrackback
+        BlogMLTrackback trackback2 = new()
         {
             Url = new Uri("http://example.com/post2")
         };
@@ -282,7 +282,7 @@ public class BlogMLTrackbackTests
     public void CompareTo_NullObject_ReturnsPositive()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback
+        BlogMLTrackback trackback = new()
         {
             Url = new Uri("http://example.com/post")
         };
@@ -298,12 +298,12 @@ public class BlogMLTrackbackTests
     public void CompareTo_DifferentTrackback_ReturnsNonZero()
     {
         // Arrange
-        BlogMLTrackback trackback1 = new BlogMLTrackback
+        BlogMLTrackback trackback1 = new()
         {
             Id = "tb1",
             Url = new Uri("http://example.com/post1")
         };
-        BlogMLTrackback trackback2 = new BlogMLTrackback
+        BlogMLTrackback trackback2 = new()
         {
             Id = "tb2",
             Url = new Uri("http://example.com/post2")
@@ -324,21 +324,21 @@ public class BlogMLTrackbackTests
     public void Operators_Comparison_WorkCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback1 = new BlogMLTrackback
+        BlogMLTrackback trackback1 = new()
         {
             Id = "tb1",
             Url = new Uri("http://example.com/post1"),
             ApprovalStatus = BlogMLApprovalStatus.Approved
         };
 
-        BlogMLTrackback trackback2 = new BlogMLTrackback
+        BlogMLTrackback trackback2 = new()
         {
             Id = "tb1",
             Url = new Uri("http://example.com/post1"),
             ApprovalStatus = BlogMLApprovalStatus.Approved
         };
 
-        BlogMLTrackback trackback3 = new BlogMLTrackback
+        BlogMLTrackback trackback3 = new()
         {
             Id = "tb2",
             Url = new Uri("http://example.com/post2"),
@@ -360,7 +360,7 @@ public class BlogMLTrackbackTests
     public void Operator_Equality_WithNulls_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback { Url = new Uri("http://example.com/post") };
+        BlogMLTrackback trackback = new() { Url = new Uri("http://example.com/post") };
         BlogMLTrackback? nullTrackback = null;
 
         // Act & Assert
@@ -373,8 +373,8 @@ public class BlogMLTrackbackTests
     public void Operator_LessThan_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback1 = new BlogMLTrackback { Url = new Uri("http://example.com/a") };
-        BlogMLTrackback trackback2 = new BlogMLTrackback { Url = new Uri("http://example.com/z") };
+        BlogMLTrackback trackback1 = new() { Url = new Uri("http://example.com/a") };
+        BlogMLTrackback trackback2 = new() { Url = new Uri("http://example.com/z") };
         BlogMLTrackback? nullTrackback = null;
 
         // Act & Assert
@@ -386,8 +386,8 @@ public class BlogMLTrackbackTests
     public void Operator_GreaterThan_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback1 = new BlogMLTrackback { Url = new Uri("http://example.com/z") };
-        BlogMLTrackback trackback2 = new BlogMLTrackback { Url = new Uri("http://example.com/a") };
+        BlogMLTrackback trackback1 = new() { Url = new Uri("http://example.com/z") };
+        BlogMLTrackback trackback2 = new() { Url = new Uri("http://example.com/a") };
         BlogMLTrackback? nullTrackback = null;
 
         // Act & Assert
@@ -399,8 +399,8 @@ public class BlogMLTrackbackTests
     public void Operator_LessThanOrEqual_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback1 = new BlogMLTrackback { Url = new Uri("http://example.com/post") };
-        BlogMLTrackback trackback2 = new BlogMLTrackback { Url = new Uri("http://example.com/post") };
+        BlogMLTrackback trackback1 = new() { Url = new Uri("http://example.com/post") };
+        BlogMLTrackback trackback2 = new() { Url = new Uri("http://example.com/post") };
         BlogMLTrackback? nullTrackback = null;
 
         // Act & Assert
@@ -412,8 +412,8 @@ public class BlogMLTrackbackTests
     public void Operator_GreaterThanOrEqual_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback1 = new BlogMLTrackback { Url = new Uri("http://example.com/post") };
-        BlogMLTrackback trackback2 = new BlogMLTrackback { Url = new Uri("http://example.com/post") };
+        BlogMLTrackback trackback1 = new() { Url = new Uri("http://example.com/post") };
+        BlogMLTrackback trackback2 = new() { Url = new Uri("http://example.com/post") };
         BlogMLTrackback? nullTrackback = null;
 
         // Act & Assert
@@ -429,7 +429,7 @@ public class BlogMLTrackbackTests
     public void Id_SetAndGet_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Act
         trackback.Id = "  test-id  ";
@@ -442,7 +442,7 @@ public class BlogMLTrackbackTests
     public void Id_SetToNull_ReturnsEmptyString()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Act
         trackback.Id = null!;
@@ -455,7 +455,7 @@ public class BlogMLTrackbackTests
     public void Url_SetNull_ThrowsArgumentNullException()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => trackback.Url = null!);
@@ -465,7 +465,7 @@ public class BlogMLTrackbackTests
     public void Title_SetNull_ThrowsArgumentNullException()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => trackback.Title = null!);
@@ -475,8 +475,8 @@ public class BlogMLTrackbackTests
     public void Title_SetValidValue_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
-        BlogMLTextConstruct title = new BlogMLTextConstruct("Test Title");
+        BlogMLTrackback trackback = new();
+        BlogMLTextConstruct title = new("Test Title");
 
         // Act
         trackback.Title = title;
@@ -489,7 +489,7 @@ public class BlogMLTrackbackTests
     public void GetHashCode_ReturnsValue()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback
+        BlogMLTrackback trackback = new()
         {
             Id = "tb1",
             Url = new Uri("http://example.com/post")
@@ -510,7 +510,7 @@ public class BlogMLTrackbackTests
     public void FindExtension_WithPredicate_ReturnsCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Act
         ISyndicationExtension? result = trackback.FindExtension(ext => ext.XmlNamespace == "http://nonexistent.example.com");
@@ -523,7 +523,7 @@ public class BlogMLTrackbackTests
     public void FindExtension_NullPredicate_ThrowsArgumentNullException()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => trackback.FindExtension(null!));
@@ -537,8 +537,8 @@ public class BlogMLTrackbackTests
     public void Load_FromBlogMLDocument_ParsesTrackbacks()
     {
         // Arrange
-        BlogMLDocument document = new BlogMLDocument();
-        using MemoryStream stream = new MemoryStream(Encoding.UTF8.GetBytes(FeedTestData.BlogMLWithTrackbacks));
+        BlogMLDocument document = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(FeedTestData.BlogMLWithTrackbacks));
 
         // Act
         document.Load(stream);
@@ -570,7 +570,7 @@ public class BlogMLTrackbackTests
     public void ApprovalStatus_SetAndGet_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
+        BlogMLTrackback trackback = new();
 
         // Act
         trackback.ApprovalStatus = BlogMLApprovalStatus.Approved;
@@ -583,8 +583,8 @@ public class BlogMLTrackbackTests
     public void CreatedOn_SetAndGet_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
-        DateTime createdOn = new DateTime(2025, 1, 16, 10, 0, 0, DateTimeKind.Utc);
+        BlogMLTrackback trackback = new();
+        DateTime createdOn = new(2025, 1, 16, 10, 0, 0, DateTimeKind.Utc);
 
         // Act
         trackback.CreatedOn = createdOn;
@@ -597,8 +597,8 @@ public class BlogMLTrackbackTests
     public void LastModifiedOn_SetAndGet_WorksCorrectly()
     {
         // Arrange
-        BlogMLTrackback trackback = new BlogMLTrackback();
-        DateTime modifiedOn = new DateTime(2025, 1, 17, 12, 0, 0, DateTimeKind.Utc);
+        BlogMLTrackback trackback = new();
+        DateTime modifiedOn = new(2025, 1, 17, 12, 0, 0, DateTimeKind.Utc);
 
         // Act
         trackback.LastModifiedOn = modifiedOn;

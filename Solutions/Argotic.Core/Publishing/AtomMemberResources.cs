@@ -1,10 +1,9 @@
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
-
 using Argotic.Common;
-using Argotic.Syndication;
 using Argotic.Extensions;
+using Argotic.Syndication;
 
 namespace Argotic.Publishing;
 

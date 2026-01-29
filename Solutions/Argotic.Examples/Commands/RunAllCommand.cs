@@ -8,7 +8,7 @@ namespace Argotic.Examples.Commands;
 /// <summary>
 /// Runs all examples sequentially.
 /// </summary>
-public sealed class RunAllCommand : AsyncCommand<RunAllSettings>
+internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
 {
     private static readonly HashSet<string> NetworkExampleKeywords = new(StringComparer.OrdinalIgnoreCase)
     {
@@ -28,7 +28,7 @@ public sealed class RunAllCommand : AsyncCommand<RunAllSettings>
     {
         ExampleRegistry.Initialize();
 
-        List<ExampleResult> results = new List<ExampleResult>();
+        List<ExampleResult> results = new();
         List<ExampleCategory> categories = ExampleRegistry.Categories.ToList();
 
         if (!string.IsNullOrEmpty(settings.Category))
@@ -46,7 +46,7 @@ public sealed class RunAllCommand : AsyncCommand<RunAllSettings>
             categories = [matchedCategory];
         }
 
-        List<(string Category, ExampleInfo Example)> allExamples = new List<(string Category, ExampleInfo Example)>();
+        List<(string Category, ExampleInfo Example)> allExamples = new();
 
         foreach (ExampleCategory category in categories)
         {
@@ -73,7 +73,7 @@ public sealed class RunAllCommand : AsyncCommand<RunAllSettings>
 
         foreach ((string category, ExampleInfo example) in allExamples)
         {
-            ExampleResult result = new ExampleResult
+            ExampleResult result = new()
             {
                 Name = example.Name,
                 Category = category,
@@ -128,7 +128,7 @@ public sealed class RunAllCommand : AsyncCommand<RunAllSettings>
 
         if (settings.JsonOutput)
         {
-            JsonSerializerOptions jsonOptions = new JsonSerializerOptions { WriteIndented = true };
+            JsonSerializerOptions jsonOptions = new() { WriteIndented = true };
             var output = new
             {
                 Summary = new { Passed = passed, Failed = failed, Skipped = skipped, Total = results.Count },

@@ -6,7 +6,7 @@ namespace Argotic.Examples;
 /// Main runner for the Argotic Examples CLI application.
 /// Provides an interactive menu system for exploring and running examples.
 /// </summary>
-public class ExampleRunner
+internal class ExampleRunner
 {
     private const string ExitChoice = "[grey]Exit[/]";
     private const string BackChoice = "[grey]<< Back[/]";
@@ -77,7 +77,7 @@ public class ExampleRunner
             }
 
             // Build menu with class groupings
-            List<string> choices = new List<string> { BackChoice };
+            List<string> choices = new() { BackChoice };
             List<KeyValuePair<string, IReadOnlyList<ExampleInfo>>> orderedClasses = examplesByClass.OrderBy(kvp => kvp.Key).ToList();
 
             foreach ((string classNameItem, IReadOnlyList<ExampleInfo> examplesItem) in orderedClasses)
@@ -111,7 +111,7 @@ public class ExampleRunner
     {
         while (true)
         {
-            List<string> choices = new List<string> { BackChoice };
+            List<string> choices = new() { BackChoice };
             choices.AddRange(examples.Select(e =>
                 e.IsAsync
                     ? $"[cyan]{e.Name}[/] [dim](async)[/]"
@@ -140,7 +140,7 @@ public class ExampleRunner
     {
         AnsiConsole.WriteLine();
 
-        Panel panel = new Panel(example.Description)
+        Panel panel = new(example.Description)
         {
             Header = new PanelHeader($" {example.Name} ", Justify.Left),
             Border = BoxBorder.Rounded,
@@ -166,7 +166,7 @@ public class ExampleRunner
                 .SpinnerStyle(Style.Parse("blue"))
                 .StartAsync($"Running {example.Name}...", async ctx =>
                 {
-                    await example.RunAsync();
+                    await example.RunAsync().ConfigureAwait(false);
                 }).ConfigureAwait(false);
 
             AnsiConsole.MarkupLine("[green]Example completed successfully![/]");

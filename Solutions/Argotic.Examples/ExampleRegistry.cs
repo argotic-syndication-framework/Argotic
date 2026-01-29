@@ -11,7 +11,7 @@ namespace Argotic.Examples;
 /// <param name="MethodName">The method name for reference.</param>
 /// <param name="IsAsync">Whether the example method is asynchronous.</param>
 /// <param name="RunAsync">A function to execute the example.</param>
-public record ExampleInfo(string Name, string Description, string MethodName, bool IsAsync, Func<Task> RunAsync);
+internal record ExampleInfo(string Name, string Description, string MethodName, bool IsAsync, Func<Task> RunAsync);
 
 /// <summary>
 /// Represents a category of examples.
@@ -19,12 +19,12 @@ public record ExampleInfo(string Name, string Description, string MethodName, bo
 /// <param name="Name">The display name of the category.</param>
 /// <param name="Description">A description of the category.</param>
 /// <param name="Key">A unique key for the category.</param>
-public record ExampleCategory(string Name, string Description, string Key);
+internal record ExampleCategory(string Name, string Description, string Key);
 
 /// <summary>
 /// Discovers and catalogs example methods from the Argotic.Examples assembly.
 /// </summary>
-public static class ExampleRegistry
+internal static class ExampleRegistry
 {
     private static readonly Dictionary<string, List<(Type Type, MethodInfo Method)>> CategoryMethods = new(StringComparer.OrdinalIgnoreCase);
     private static bool isInitialized;
@@ -102,7 +102,7 @@ public static class ExampleRegistry
             return [];
         }
 
-        List<ExampleInfo> examples = new List<ExampleInfo>();
+        List<ExampleInfo> examples = new();
 
         foreach ((Type type, MethodInfo method) in methods)
         {
@@ -127,7 +127,7 @@ public static class ExampleRegistry
     {
         Initialize();
 
-        List<(string Category, ExampleInfo Example)> allExamples = new List<(string Category, ExampleInfo Example)>();
+        List<(string Category, ExampleInfo Example)> allExamples = new();
 
         foreach (ExampleCategory category in Categories)
         {
@@ -294,7 +294,7 @@ public static class ExampleRegistry
             return text;
         }
 
-        StringBuilder result = new System.Text.StringBuilder();
+        StringBuilder result = new();
         result.Append(text[0]);
 
         for (int i = 1; i < text.Length; i++)

@@ -1,4 +1,4 @@
-﻿namespace Argotic.Extensions;
+namespace Argotic.Extensions;
 
 /// <summary>
 /// Defines generalized extension properties, methods, indexers and events that a value type or class

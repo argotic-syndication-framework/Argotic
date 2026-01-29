@@ -144,7 +144,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -153,7 +153,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -162,7 +162,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -171,7 +171,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -180,7 +180,7 @@ public class BasicGeocodingSyndicationExtensionTest
     {
         BasicGeocodingSyndicationExtension first = CreateExtension1();
         BasicGeocodingSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

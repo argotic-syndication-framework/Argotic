@@ -278,13 +278,13 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// Gets or sets a value indicating whether a subscription is required to view the video.
     /// </summary>
     /// <value><b>true</b> if a subscription is required; otherwise, <b>false</b>. Default is <b>false</b>.</value>
-    public bool RequiresSubscription { get; set; } = false;
+    public bool RequiresSubscription { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating whether the video is a live stream.
     /// </summary>
     /// <value><b>true</b> if the video is a live stream; otherwise, <b>false</b>. Default is <b>false</b>.</value>
-    public bool Live { get; set; } = false;
+    public bool Live { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the video uploader.

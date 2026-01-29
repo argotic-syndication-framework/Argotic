@@ -119,7 +119,7 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -128,7 +128,7 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -137,7 +137,7 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -146,7 +146,7 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -155,7 +155,7 @@ public class CreativeCommonsSyndicationExtensionTest
     {
         CreativeCommonsSyndicationExtension first = CreateExtension1();
         CreativeCommonsSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

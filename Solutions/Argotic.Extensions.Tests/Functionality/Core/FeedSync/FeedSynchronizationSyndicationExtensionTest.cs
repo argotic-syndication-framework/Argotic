@@ -287,7 +287,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -301,7 +301,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension2();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -315,7 +315,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension? second = null;
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -329,7 +329,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -343,7 +343,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension2();
 
         // Act
-        bool actual = (first != second);
+        bool actual = first != second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -357,7 +357,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension2();
 
         // Act
-        bool actual = (first > second);
+        bool actual = first > second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -371,7 +371,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first > second);
+        bool result = first > second;
 
         // Assert
         result.ShouldBeFalse();
@@ -385,7 +385,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension2();
 
         // Act
-        bool actual = (first < second);
+        bool actual = first < second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -399,7 +399,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert
         result.ShouldBeTrue();
@@ -413,7 +413,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension? second = null;
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert
         result.ShouldBeFalse();
@@ -427,7 +427,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first >= second);
+        bool result = first >= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -441,7 +441,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first <= second);
+        bool result = first <= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -455,7 +455,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension? second = null;
 
         // Act
-        bool result = (first >= second);
+        bool result = first >= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -469,7 +469,7 @@ public class FeedSynchronizationSyndicationExtensionTest
         FeedSynchronizationSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first <= second);
+        bool result = first <= second;
 
         // Assert
         result.ShouldBeTrue();

@@ -126,7 +126,7 @@ public class PingbackSyndicationExtensionTest
     {
         PingbackSyndicationExtension first = CreateExtension1();
         PingbackSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -135,7 +135,7 @@ public class PingbackSyndicationExtensionTest
     {
         PingbackSyndicationExtension first = CreateExtension1();
         PingbackSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -144,7 +144,7 @@ public class PingbackSyndicationExtensionTest
     {
         PingbackSyndicationExtension first = CreateExtension1();
         PingbackSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -153,7 +153,7 @@ public class PingbackSyndicationExtensionTest
     {
         PingbackSyndicationExtension first = CreateExtension1();
         PingbackSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -162,7 +162,7 @@ public class PingbackSyndicationExtensionTest
     {
         PingbackSyndicationExtension first = CreateExtension1();
         PingbackSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

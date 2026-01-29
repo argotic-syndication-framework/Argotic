@@ -116,7 +116,7 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -125,7 +125,7 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -134,7 +134,7 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -143,7 +143,7 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -152,7 +152,7 @@ public class FeedRankSyndicationExtensionTest
     {
         FeedRankSyndicationExtension first = CreateExtension1();
         FeedRankSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

@@ -2,6 +2,7 @@ using System.Xml;
 using Argotic.Extensions.Core;
 using Argotic.Syndication;
 using Shouldly;
+
 using static Argotic.Common.ComparisonOperatorExtensions;
 
 namespace Argotic.Extensions.Tests.Functionality.Core.SiteSummarySlash;
@@ -128,7 +129,7 @@ public class SiteSummarySlashSyndicationExtensionTest
     {
         SiteSummarySlashSyndicationExtension first = CreateExtension1();
         SiteSummarySlashSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -137,7 +138,7 @@ public class SiteSummarySlashSyndicationExtensionTest
     {
         SiteSummarySlashSyndicationExtension first = CreateExtension1();
         SiteSummarySlashSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -146,7 +147,7 @@ public class SiteSummarySlashSyndicationExtensionTest
     {
         SiteSummarySlashSyndicationExtension first = CreateExtension1();
         SiteSummarySlashSyndicationExtension second = CreateExtension2();
-        bool result = (first > second);
+        bool result = first > second;
         // Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
     }
@@ -156,7 +157,7 @@ public class SiteSummarySlashSyndicationExtensionTest
     {
         SiteSummarySlashSyndicationExtension first = CreateExtension1();
         SiteSummarySlashSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -165,7 +166,7 @@ public class SiteSummarySlashSyndicationExtensionTest
     {
         SiteSummarySlashSyndicationExtension first = CreateExtension1();
         SiteSummarySlashSyndicationExtension second = CreateExtension2();
-        bool result = (first < second);
+        bool result = first < second;
         // Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
     }

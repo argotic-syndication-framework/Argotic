@@ -1,3 +1,4 @@
+#pragma warning disable CA1040
 namespace Argotic.Common;
 
 /// <summary>

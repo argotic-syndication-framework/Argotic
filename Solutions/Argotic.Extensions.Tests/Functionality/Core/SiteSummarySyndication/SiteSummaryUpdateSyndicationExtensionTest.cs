@@ -127,7 +127,7 @@ public class SiteSummaryUpdateSyndicationExtensionTest
     {
         SiteSummaryUpdateSyndicationExtension first = CreateExtension1();
         SiteSummaryUpdateSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -136,7 +136,7 @@ public class SiteSummaryUpdateSyndicationExtensionTest
     {
         SiteSummaryUpdateSyndicationExtension first = CreateExtension1();
         SiteSummaryUpdateSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -145,7 +145,7 @@ public class SiteSummaryUpdateSyndicationExtensionTest
     {
         SiteSummaryUpdateSyndicationExtension first = CreateExtension1();
         SiteSummaryUpdateSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -154,7 +154,7 @@ public class SiteSummaryUpdateSyndicationExtensionTest
     {
         SiteSummaryUpdateSyndicationExtension first = CreateExtension1();
         SiteSummaryUpdateSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -163,7 +163,7 @@ public class SiteSummaryUpdateSyndicationExtensionTest
     {
         SiteSummaryUpdateSyndicationExtension first = CreateExtension1();
         SiteSummaryUpdateSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

@@ -128,7 +128,7 @@ public class LiveJournalSyndicationExtensionTest
     {
         LiveJournalSyndicationExtension first = CreateExtension1();
         LiveJournalSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -137,7 +137,7 @@ public class LiveJournalSyndicationExtensionTest
     {
         LiveJournalSyndicationExtension first = CreateExtension1();
         LiveJournalSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -146,7 +146,7 @@ public class LiveJournalSyndicationExtensionTest
     {
         LiveJournalSyndicationExtension first = CreateExtension1();
         LiveJournalSyndicationExtension second = CreateExtension2();
-        bool result = (first > second);
+        bool result = first > second;
         // Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
     }
@@ -156,7 +156,7 @@ public class LiveJournalSyndicationExtensionTest
     {
         LiveJournalSyndicationExtension first = CreateExtension1();
         LiveJournalSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -165,7 +165,7 @@ public class LiveJournalSyndicationExtensionTest
     {
         LiveJournalSyndicationExtension first = CreateExtension1();
         LiveJournalSyndicationExtension second = CreateExtension2();
-        bool result = (first < second);
+        bool result = first < second;
         // Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
     }

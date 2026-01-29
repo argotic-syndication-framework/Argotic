@@ -152,7 +152,7 @@ public class ITunesSyndicationExtensionTest
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -161,7 +161,7 @@ public class ITunesSyndicationExtensionTest
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -170,7 +170,7 @@ public class ITunesSyndicationExtensionTest
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -179,7 +179,7 @@ public class ITunesSyndicationExtensionTest
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -188,7 +188,7 @@ public class ITunesSyndicationExtensionTest
     {
         ITunesSyndicationExtension first = CreateExtension1();
         ITunesSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

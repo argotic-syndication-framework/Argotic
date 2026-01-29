@@ -293,7 +293,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -307,7 +307,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension2();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -321,7 +321,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension? second = null;
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -335,7 +335,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -349,7 +349,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension2();
 
         // Act
-        bool actual = (first != second);
+        bool actual = first != second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -363,7 +363,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension2();
 
         // Act
-        bool result = (first > second);
+        bool result = first > second;
 
         // Assert - Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
@@ -377,7 +377,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first > second);
+        bool result = first > second;
 
         // Assert
         result.ShouldBeFalse();
@@ -391,7 +391,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension2();
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert - Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
@@ -405,7 +405,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert
         result.ShouldBeTrue();
@@ -419,7 +419,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension? second = null;
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert
         result.ShouldBeFalse();
@@ -433,7 +433,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first >= second);
+        bool result = first >= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -447,7 +447,7 @@ public class SimpleListSyndicationExtensionTest
         SimpleListSyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first <= second);
+        bool result = first <= second;
 
         // Assert
         result.ShouldBeTrue();

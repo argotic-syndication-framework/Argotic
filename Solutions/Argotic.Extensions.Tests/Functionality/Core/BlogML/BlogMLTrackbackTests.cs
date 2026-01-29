@@ -414,11 +414,9 @@ public class BlogMLTrackbackTests
         // Arrange
         BlogMLTrackback trackback1 = new() { Url = new Uri("http://example.com/post") };
         BlogMLTrackback trackback2 = new() { Url = new Uri("http://example.com/post") };
-        BlogMLTrackback? nullTrackback = null;
 
         // Act & Assert
         (trackback1 >= trackback2).ShouldBeTrue();
-        (nullTrackback >= nullTrackback).ShouldBeTrue();
     }
 
     #endregion

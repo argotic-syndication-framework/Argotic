@@ -146,7 +146,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         {
             throw new FormatException($"The supplied seconds of {secondsValue} does not represent a floating point number.");
         }
-        return (degrees + (minutes / 60) + (seconds / 3600));
+        return degrees + minutes / 60 + seconds / 3600;
     }
 
     /// <summary>

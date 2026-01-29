@@ -191,7 +191,7 @@ internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
             return false;
         }
 
-        return (this.CompareTo(obj) == 0);
+        return this.CompareTo(obj) == 0;
     }
 
     /// <summary>

@@ -126,7 +126,7 @@ public class WellFormedWebCommentsSyndicationExtensionTest
     {
         WellFormedWebCommentsSyndicationExtension first = CreateExtension1();
         WellFormedWebCommentsSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -135,7 +135,7 @@ public class WellFormedWebCommentsSyndicationExtensionTest
     {
         WellFormedWebCommentsSyndicationExtension first = CreateExtension1();
         WellFormedWebCommentsSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -144,7 +144,7 @@ public class WellFormedWebCommentsSyndicationExtensionTest
     {
         WellFormedWebCommentsSyndicationExtension first = CreateExtension1();
         WellFormedWebCommentsSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -153,7 +153,7 @@ public class WellFormedWebCommentsSyndicationExtensionTest
     {
         WellFormedWebCommentsSyndicationExtension first = CreateExtension1();
         WellFormedWebCommentsSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -162,7 +162,7 @@ public class WellFormedWebCommentsSyndicationExtensionTest
     {
         WellFormedWebCommentsSyndicationExtension first = CreateExtension1();
         WellFormedWebCommentsSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

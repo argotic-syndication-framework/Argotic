@@ -129,7 +129,7 @@ public class BlogChannelSyndicationExtensionTest
     {
         BlogChannelSyndicationExtension first = CreateExtension1();
         BlogChannelSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -138,7 +138,7 @@ public class BlogChannelSyndicationExtensionTest
     {
         BlogChannelSyndicationExtension first = CreateExtension1();
         BlogChannelSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -147,7 +147,7 @@ public class BlogChannelSyndicationExtensionTest
     {
         BlogChannelSyndicationExtension first = CreateExtension1();
         BlogChannelSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -156,7 +156,7 @@ public class BlogChannelSyndicationExtensionTest
     {
         BlogChannelSyndicationExtension first = CreateExtension1();
         BlogChannelSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -165,7 +165,7 @@ public class BlogChannelSyndicationExtensionTest
     {
         BlogChannelSyndicationExtension first = CreateExtension1();
         BlogChannelSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

@@ -255,7 +255,7 @@ public class TrackbackClient
         {
             using StreamWriter writer = new(stream, message.Encoding, leaveOpen: true);
             message.WriteTo(writer);
-            writer.Flush();
+            await writer.FlushAsync(cancellationToken).ConfigureAwait(false);
             payloadData = stream.ToArray();
         }
 

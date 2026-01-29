@@ -123,7 +123,7 @@ public class SiteSummaryContentSyndicationExtensionTest
     {
         SiteSummaryContentSyndicationExtension first = CreateExtension1();
         SiteSummaryContentSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -132,7 +132,7 @@ public class SiteSummaryContentSyndicationExtensionTest
     {
         SiteSummaryContentSyndicationExtension first = CreateExtension1();
         SiteSummaryContentSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -141,7 +141,7 @@ public class SiteSummaryContentSyndicationExtensionTest
     {
         SiteSummaryContentSyndicationExtension first = CreateExtension1();
         SiteSummaryContentSyndicationExtension second = CreateExtension2();
-        bool result = (first > second);
+        bool result = first > second;
         // Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
     }
@@ -151,7 +151,7 @@ public class SiteSummaryContentSyndicationExtensionTest
     {
         SiteSummaryContentSyndicationExtension first = CreateExtension1();
         SiteSummaryContentSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -160,7 +160,7 @@ public class SiteSummaryContentSyndicationExtensionTest
     {
         SiteSummaryContentSyndicationExtension first = CreateExtension1();
         SiteSummaryContentSyndicationExtension second = CreateExtension2();
-        bool result = (first < second);
+        bool result = first < second;
         // Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
     }

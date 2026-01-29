@@ -1236,7 +1236,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateFullExtension();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -1250,7 +1250,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateDifferentExtension();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -1264,7 +1264,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateFullExtension();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -1278,7 +1278,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension? second = null;
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -1292,7 +1292,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension? second = null;
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -1306,7 +1306,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateDifferentExtension();
 
         // Act
-        bool actual = (first != second);
+        bool actual = first != second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -1320,7 +1320,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateFullExtension();
 
         // Act
-        bool actual = (first != second);
+        bool actual = first != second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -1334,7 +1334,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateDifferentExtension();
 
         // Act
-        bool result = (first > second);
+        bool result = first > second;
 
         // Assert - Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
@@ -1348,7 +1348,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateFullExtension();
 
         // Act
-        bool result = (first > second);
+        bool result = first > second;
 
         // Assert
         result.ShouldBeFalse();
@@ -1362,7 +1362,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateDifferentExtension();
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert - Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
@@ -1376,7 +1376,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateFullExtension();
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert
         result.ShouldBeTrue();
@@ -1390,7 +1390,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension? second = null;
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert
         result.ShouldBeFalse();
@@ -1404,7 +1404,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateFullExtension();
 
         // Act
-        bool result = (first >= second);
+        bool result = first >= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -1418,7 +1418,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension? second = null;
 
         // Act
-        bool result = (first >= second);
+        bool result = first >= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -1432,7 +1432,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateFullExtension();
 
         // Act
-        bool result = (first <= second);
+        bool result = first <= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -1446,7 +1446,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension second = CreateFullExtension();
 
         // Act
-        bool result = (first <= second);
+        bool result = first <= second;
 
         // Assert
         result.ShouldBeTrue();

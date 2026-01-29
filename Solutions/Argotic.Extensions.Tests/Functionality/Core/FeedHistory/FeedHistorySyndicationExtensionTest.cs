@@ -601,7 +601,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension1();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -615,7 +615,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension2();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -629,7 +629,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension? second = null;
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -643,7 +643,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension1();
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -657,7 +657,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension? second = null;
 
         // Act
-        bool actual = (first == second);
+        bool actual = first == second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -671,7 +671,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension1();
 
         // Act
-        bool actual = (first != second);
+        bool actual = first != second;
 
         // Assert
         actual.ShouldBeFalse();
@@ -685,7 +685,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension2();
 
         // Act
-        bool actual = (first != second);
+        bool actual = first != second;
 
         // Assert
         actual.ShouldBeTrue();
@@ -699,7 +699,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension2();
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert - Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
@@ -713,7 +713,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert
         result.ShouldBeTrue();
@@ -727,7 +727,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension? second = null;
 
         // Act
-        bool result = (first < second);
+        bool result = first < second;
 
         // Assert
         result.ShouldBeFalse();
@@ -741,7 +741,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension2();
 
         // Act
-        bool result = (first > second);
+        bool result = first > second;
 
         // Assert - Just verify the operator works without throwing
         result.ShouldBeOneOf(true, false);
@@ -755,7 +755,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first > second);
+        bool result = first > second;
 
         // Assert
         result.ShouldBeFalse();
@@ -769,7 +769,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first <= second);
+        bool result = first <= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -783,7 +783,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first <= second);
+        bool result = first <= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -797,7 +797,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first >= second);
+        bool result = first >= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -811,7 +811,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension? second = null;
 
         // Act
-        bool result = (first >= second);
+        bool result = first >= second;
 
         // Assert
         result.ShouldBeTrue();
@@ -825,7 +825,7 @@ public class FeedHistorySyndicationExtensionTest
         FeedHistorySyndicationExtension second = CreateExtension1();
 
         // Act
-        bool result = (first >= second);
+        bool result = first >= second;
 
         // Assert
         result.ShouldBeFalse();

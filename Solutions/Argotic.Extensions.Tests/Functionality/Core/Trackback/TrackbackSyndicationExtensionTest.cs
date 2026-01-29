@@ -124,7 +124,7 @@ public class TrackbackSyndicationExtensionTest
     {
         TrackbackSyndicationExtension first = CreateExtension1();
         TrackbackSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -133,7 +133,7 @@ public class TrackbackSyndicationExtensionTest
     {
         TrackbackSyndicationExtension first = CreateExtension1();
         TrackbackSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -142,7 +142,7 @@ public class TrackbackSyndicationExtensionTest
     {
         TrackbackSyndicationExtension first = CreateExtension1();
         TrackbackSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -151,7 +151,7 @@ public class TrackbackSyndicationExtensionTest
     {
         TrackbackSyndicationExtension first = CreateExtension1();
         TrackbackSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -160,7 +160,7 @@ public class TrackbackSyndicationExtensionTest
     {
         TrackbackSyndicationExtension first = CreateExtension1();
         TrackbackSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

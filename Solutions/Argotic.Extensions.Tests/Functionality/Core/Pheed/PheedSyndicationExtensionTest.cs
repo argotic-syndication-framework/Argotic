@@ -124,7 +124,7 @@ public class PheedSyndicationExtensionTest
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -133,7 +133,7 @@ public class PheedSyndicationExtensionTest
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -142,7 +142,7 @@ public class PheedSyndicationExtensionTest
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -151,7 +151,7 @@ public class PheedSyndicationExtensionTest
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -160,7 +160,7 @@ public class PheedSyndicationExtensionTest
     {
         PheedSyndicationExtension first = CreateExtension1();
         PheedSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

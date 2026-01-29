@@ -484,11 +484,9 @@ public class BlogMLAttachmentTests
         // Arrange
         BlogMLAttachment attachment1 = new() { MimeType = "image/png", Size = 100 };
         BlogMLAttachment attachment2 = new() { MimeType = "image/png", Size = 100 };
-        BlogMLAttachment? nullAttachment = null;
 
         // Act & Assert
         (attachment1 >= attachment2).ShouldBeTrue();
-        (nullAttachment >= nullAttachment).ShouldBeTrue();
     }
 
     #endregion

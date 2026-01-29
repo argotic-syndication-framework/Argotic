@@ -173,7 +173,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeFalse();
     }
 
@@ -182,7 +182,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension1();
-        bool actual = (first == second);
+        bool actual = first == second;
         actual.ShouldBeTrue();
     }
 
@@ -191,7 +191,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool actual = (first > second);
+        bool actual = first > second;
         actual.ShouldBeFalse();
     }
 
@@ -200,7 +200,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool actual = (first != second);
+        bool actual = first != second;
         actual.ShouldBeTrue();
     }
 
@@ -209,7 +209,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
     {
         DublinCoreElementSetSyndicationExtension first = CreateExtension1();
         DublinCoreElementSetSyndicationExtension second = CreateExtension2();
-        bool actual = (first < second);
+        bool actual = first < second;
         actual.ShouldBeTrue();
     }
 

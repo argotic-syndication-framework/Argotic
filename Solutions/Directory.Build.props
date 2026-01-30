@@ -12,6 +12,7 @@
     <PackageProjectUrl>https://github.com/argotic-syndication-framework/Argotic</PackageProjectUrl>
     <PackageTags>syndication rss atom opml rsd blogml sitemap feed xml .net</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>icon.png</PackageIcon>
 
     <!-- Repository info -->
     <RepositoryUrl>https://github.com/argotic-syndication-framework/Argotic</RepositoryUrl>
@@ -33,6 +34,10 @@
     <AnalysisMode>AllEnabledByDefault</AnalysisMode>
     <AnalysisLevel>latest</AnalysisLevel>
   </PropertyGroup>
+
+  <ItemGroup>
+    <None Include="$(MSBuildThisFileDirectory)icon.png" Pack="true" PackagePath="" />
+  </ItemGroup>
 
   <!-- CI build setting -->
   <PropertyGroup Condition="'$(CI)' == 'true' OR '$(TF_BUILD)' == 'true'">

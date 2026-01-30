@@ -43,6 +43,7 @@ internal static class AtomFeedExample
 
         ExampleOutput.ShowAtomFeed(feed);
     }
+
     /// <summary>
     /// Provides example code for the AtomFeed.CreateAsync(Uri) method
     /// </summary>
@@ -60,6 +61,7 @@ internal static class AtomFeedExample
 
         ExampleOutput.ShowAtomFeed(feed);
     }
+
     /// <summary>
     /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
@@ -87,6 +89,7 @@ internal static class AtomFeedExample
             // Process the source URI
         }
     }
+
     /// <summary>
     /// Provides example code for the Load(IXPathNavigable) method
     /// </summary>

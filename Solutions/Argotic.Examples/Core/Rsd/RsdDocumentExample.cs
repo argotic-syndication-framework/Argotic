@@ -41,6 +41,7 @@ internal static class RsdDocumentExample
         document.Interfaces.Add(conversantApi);
         ExampleOutput.ShowRsdDocument(document);
     }
+
     /// <summary>
     /// Provides example code for the RsdDocument.CreateAsync(Uri) method
     /// </summary>
@@ -62,6 +63,7 @@ internal static class RsdDocumentExample
         }
         ExampleOutput.ShowRsdDocument(document);
     }
+
     /// <summary>
     /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
@@ -91,6 +93,7 @@ internal static class RsdDocumentExample
             // Process the source URI
         }
     }
+
     /// <summary>
     /// Provides example code for the Load(IXPathNavigable) method
     /// </summary>

@@ -163,6 +163,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
 
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="AtomPublishingControlSyndicationExtension"/>.
     /// </summary>
@@ -190,6 +191,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

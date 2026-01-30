@@ -108,6 +108,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     {
         this.Uri = uri;
     }
+
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
@@ -129,6 +130,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     ///     </para>
     /// </remarks>
     public CultureInfo Language { get; set; }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -140,6 +142,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets an IRI that represents a permanent, universally unique identifier for this entity.
     /// </summary>
@@ -159,6 +162,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
             field = value;
         }
     }
+
     /// <summary>
     /// Loads this <see cref="AtomId"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -226,6 +230,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="AtomId"/>.
     /// </summary>
@@ -234,6 +239,7 @@ public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatab
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

@@ -35,6 +35,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     /// Private member to hold a string value that uniquely identifies the item.
     /// </summary>
     private string guidIdentifier = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RssGuid"/> class.
     /// </summary>
@@ -64,6 +65,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     {
         this.IsPermanentLink = isPermanentUrl;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -75,6 +77,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets a value indicating if the guid represents a permanent URL of a web page associated with this item.
     /// </summary>
@@ -111,6 +114,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
             guidIdentifier = value.Trim();
         }
     }
+
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -212,6 +216,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="RssGuid"/>.
     /// </summary>
@@ -220,6 +225,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

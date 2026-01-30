@@ -18,6 +18,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// Private member to hold the title of the web log entity.
     /// </summary>
     private BlogMLTextConstruct commonObjectBaseTitle = new();
+
     /// <summary>
     /// Private member to hold the textual content of the comment.
     /// </summary>
@@ -29,6 +30,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     public BlogMLComment()
     {
     }
+
     /// <summary>
     /// Gets or sets the approval status of this web log entity.
     /// </summary>
@@ -88,6 +90,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
             commonObjectBaseTitle = value;
         }
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -99,6 +102,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the content of this comment.
     /// </summary>
@@ -148,6 +152,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// </summary>
     /// <value>The author's homepage or web log address for this comment.</value>
     public Uri UserUrl { get; set; }
+
     /// <summary>
     /// Loads this <see cref="BlogMLComment"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -311,6 +316,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLComment"/>.
     /// </summary>
@@ -319,6 +325,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

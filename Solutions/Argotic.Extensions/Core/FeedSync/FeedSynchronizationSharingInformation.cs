@@ -162,6 +162,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
 
         return result;
     }
+
     /// <summary>
     /// Loads this <see cref="FeedSynchronizationSharingInformation"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

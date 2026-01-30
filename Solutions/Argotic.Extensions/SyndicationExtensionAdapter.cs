@@ -27,6 +27,7 @@ public class SyndicationExtensionAdapter
         Navigator = navigator;
         Settings = settings;
     }
+
     /// <summary>
     /// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
     /// </summary>
@@ -67,6 +68,7 @@ public class SyndicationExtensionAdapter
             return extensions;
         }
     }
+
     /// <summary>
     /// Gets the <see cref="XPathNavigator"/> used to fill an extensible syndication resource.
     /// </summary>
@@ -78,6 +80,7 @@ public class SyndicationExtensionAdapter
     /// </summary>
     /// <value>The <see cref="SyndicationResourceLoadSettings"/> used to configure the fill of an extensible syndication resource.</value>
     public SyndicationResourceLoadSettings Settings { get; } = new();
+
     /// <summary>
     /// Fills the specified collection of <see cref="Type"/> objects using the supplied <see cref="IExtensibleSyndicationObject"/>.
     /// </summary>
@@ -226,6 +229,7 @@ public class SyndicationExtensionAdapter
             }
         }
     }
+
     /// <summary>
     /// Modifies the <see cref="IExtensibleSyndicationObject"/> to match the data source.
     /// </summary>

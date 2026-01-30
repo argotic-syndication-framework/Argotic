@@ -91,6 +91,7 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     ///     but you do not want to have to use entity references all the time.
     /// </remarks>
     public bool EscapeContent { get; set; } = true;
+
     /// <summary>
     /// Returns the text construct identifier for the supplied <see cref="BlogMLContentType"/>.
     /// </summary>

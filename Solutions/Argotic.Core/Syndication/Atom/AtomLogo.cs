@@ -41,6 +41,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
     {
         this.Uri = uri;
     }
+
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
@@ -62,6 +63,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
     ///     </para>
     /// </remarks>
     public CultureInfo Language { get; set; }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -73,6 +75,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets an IRI that identifies an image that provides visual identification for this feed.
     /// </summary>
@@ -91,6 +94,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
             field = value;
         }
     }
+
     /// <summary>
     /// Loads this <see cref="AtomLogo"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -158,6 +162,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="AtomLogo"/>.
     /// </summary>
@@ -166,6 +171,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

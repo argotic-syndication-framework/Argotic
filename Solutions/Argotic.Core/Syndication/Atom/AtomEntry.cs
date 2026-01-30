@@ -46,38 +46,47 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
     private const SyndicationContentFormat feedFormat = SyndicationContentFormat.Atom;
+
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
     private static readonly Version feedVersion = new(1, 0);
+
     /// <summary>
     /// Private member to hold information that contains or links to the content of the entry.
     /// </summary>
     private AtomContent entryContent;
+
     /// <summary>
     /// Private member to hold a permanent, universally unique identifier for the entry.
     /// </summary>
     private AtomId entryId;
+
     /// <summary>
     /// Private member to hold a value indicating an instant in time associated with an event early in the life cycle of the entry.
     /// </summary>
     private DateTime entryPublishedOn = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold information about rights held in and over the entry.
     /// </summary>
     private AtomTextConstruct entryRights;
+
     /// <summary>
     /// Private member to hold the meta-data of the source feed that the entry was copied from.
     /// </summary>
     private AtomSource entrySource;
+
     /// <summary>
     /// Private member to hold information that conveys a short summary, abstract, or excerpt of the entry.
     /// </summary>
     private AtomTextConstruct entrySummary;
+
     /// <summary>
     /// Private member to hold information that conveys a human-readable title for the entry.
     /// </summary>
     private AtomTextConstruct entryTitle;
+
     /// <summary>
     /// Private member to hold a value indicating the most recent instant in time when the entry was modified in a way the publisher considers significant.
     /// </summary>

@@ -54,6 +54,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
             field = value;
         }
     } = new();
+
     /// <summary>
     /// Converts the supplied decimal value to an equivalent degrees, minutes, seconds string representation.
     /// </summary>
@@ -161,6 +162,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         ArgumentNullException.ThrowIfNull(extension);
         return extension is BasicGeocodingSyndicationExtension;
     }
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>

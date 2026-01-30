@@ -13,10 +13,12 @@ public class PheedSyndicationExtensionContext
     /// Private member to hold a thumbnail sized version of the photograph.
     /// </summary>
     private Uri extensionThumbnail;
+
     /// <summary>
     /// Private member to hold a larger or original version of the photograph.
     /// </summary>
     private Uri extensionImageSource;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class.
     /// </summary>

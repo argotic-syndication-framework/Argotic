@@ -116,6 +116,7 @@ public class PheedSyndicationExtension : SyndicationExtension, IComparable<Pheed
         ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="PheedSyndicationExtension"/>.
     /// </summary>

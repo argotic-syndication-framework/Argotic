@@ -19,6 +19,7 @@ public class AtomPublishingEditedSyndicationExtensionContext
     {
 
     }
+
     /// <summary>
     /// Gets or sets a date-time indicating the most recent instant in time when this resource was edited.
     /// </summary>
@@ -30,6 +31,7 @@ public class AtomPublishingEditedSyndicationExtensionContext
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
     public DateTime EditedOn { get; set; } = DateTime.MinValue;
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

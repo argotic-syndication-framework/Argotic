@@ -18,54 +18,67 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Private member to hold a collection of media objects that are effectively the same content, yet different representations.
     /// </summary>
     private IList<YahooMediaContent> groupContents;
+
     /// <summary>
     /// Private member to hold the permissible audiences for the media group.
     /// </summary>
     private IList<YahooMediaRating> mediaObjectRatings;
+
     /// <summary>
     /// Private member to hold the title of the media group.
     /// </summary>
     private YahooMediaTextConstruct mediaObjectTitle;
+
     /// <summary>
     /// Private member to hold a short description of the media group.
     /// </summary>
     private YahooMediaTextConstruct mediaObjectDescription;
+
     /// <summary>
     /// Private member to hold the relevant keywords that describe the media group.
     /// </summary>
     private IList<string> mediaObjectKeywords;
+
     /// <summary>
     /// Private member to hold the representative images for the media group.
     /// </summary>
     private IList<YahooMediaThumbnail> mediaObjectThumbnails;
+
     /// <summary>
     /// Private member to hold a taxonomy that gives an indication of the type of content for the media group.
     /// </summary>
     private IList<YahooMediaCategory> mediaObjectCategories;
+
     /// <summary>
     /// Private member to hold the hash digests for the media group.
     /// </summary>
     private IList<YahooMediaHash> mediaObjectHashes;
+
     /// <summary>
     /// Private member to hold a web browser media player console the media group can be accessed through.
     /// </summary>
     private YahooMediaPlayer mediaObjectPlayer;
+
     /// <summary>
     /// Private member to hold the entities that contributed to the creation of the media group.
     /// </summary>
     private IList<YahooMediaCredit> mediaObjectCredits;
+
     /// <summary>
     /// Private member to hold the copyright information for the media group.
     /// </summary>
     private YahooMediaCopyright mediaObjectCopyright;
+
     /// <summary>
     /// Private member to hold the text transcript, closed captioning, or lyrics for the media group.
     /// </summary>
     private IList<YahooMediaText> mediaObjectTextSeries;
+
     /// <summary>
     /// Private member to hold the restrictions to be placed on aggregators that are rendering the media group.
     /// </summary>
     private IList<YahooMediaRestriction> mediaObjectRestrictions;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaGroup"/> class.
     /// </summary>

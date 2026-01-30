@@ -24,6 +24,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// Private member to hold a value indicating if the Trackback ping request failed.
     /// </summary>
     private bool responseHasError;
+
     /// <summary>
     /// Private member to hold information about the cause of the Trackback ping request failure.
     /// </summary>

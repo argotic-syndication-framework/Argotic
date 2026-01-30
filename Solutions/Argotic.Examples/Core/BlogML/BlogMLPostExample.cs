@@ -106,6 +106,7 @@ internal static class BlogMLPostExample
 
         ExampleOutput.ShowBlogMLPost(post);
     }
+
     /// <summary>
     /// Provides example code for the BlogMLPost.PostTypeAsString(BlogMLPostType) method
     /// </summary>

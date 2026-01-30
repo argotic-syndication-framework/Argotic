@@ -61,6 +61,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
         ArgumentNullException.ThrowIfNull(history);
         this.Histories.Add(history);
     }
+
     /// <summary>
     /// Gets the conflicting updates for this item.
     /// </summary>
@@ -165,6 +166,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
             field = value;
         }
     } = 1;
+
     /// <summary>
     /// Compares two specified <see cref="IList{FeedSynchronizationHistory}"/> collections.
     /// </summary>

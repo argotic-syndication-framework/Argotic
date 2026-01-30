@@ -25,6 +25,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     {
 
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -36,6 +37,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets content of this attachment.
     /// </summary>
@@ -91,6 +93,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the original URL of this attachment.</value>
     public Uri Url { get; set; }
+
     /// <summary>
     /// Loads this <see cref="BlogMLAttachment"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -222,6 +225,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLAttachment"/>.
     /// </summary>
@@ -230,6 +234,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

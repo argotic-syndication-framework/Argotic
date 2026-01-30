@@ -39,6 +39,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     {
         this.Content = content;
     }
+
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
@@ -60,6 +61,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     ///     </para>
     /// </remarks>
     public CultureInfo Language { get; set; }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -71,6 +73,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the content of this human-readable text.
     /// </summary>
@@ -92,6 +95,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     ///     The default value is <see cref="AtomTextConstructType.None"/>.
     /// </value>
     public AtomTextConstructType TextType { get; set; } = AtomTextConstructType.None;
+
     /// <summary>
     /// Returns the text construct identifier for the supplied <see cref="AtomTextConstructType"/>.
     /// </summary>
@@ -122,6 +126,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     /// </example>
     public static AtomTextConstructType ConstructTypeByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, AtomTextConstructType.None);
+
     /// <summary>
     /// Loads this <see cref="AtomTextConstruct"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -238,6 +243,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="AtomTextConstruct"/>.
     /// </summary>
@@ -265,6 +271,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

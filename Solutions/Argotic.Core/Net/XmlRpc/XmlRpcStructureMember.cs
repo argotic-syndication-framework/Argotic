@@ -15,6 +15,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     /// Private member to hold the name of the structure member.
     /// </summary>
     private string memberName = string.Empty;
+
     /// <summary>
     /// Private member to hold the value of the structure member.
     /// </summary>

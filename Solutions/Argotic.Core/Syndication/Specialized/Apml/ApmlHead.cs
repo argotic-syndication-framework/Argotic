@@ -30,6 +30,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
         this.CreatedOn = utcCreatedOn;
         this.Title = title;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -41,6 +42,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets a date-time indicating when this document was created.
     /// </summary>
@@ -79,6 +81,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
         get => field;
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
+
     /// <summary>
     /// Loads this <see cref="ApmlHead"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -183,6 +186,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="ApmlHead"/>.
     /// </summary>
@@ -191,6 +195,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

@@ -31,6 +31,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
     /// Private member to hold specific information about the extension.
     /// </summary>
     private FeedRankSyndicationExtensionContext extensionContext = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedRankSyndicationExtension"/> class.
     /// </summary>
@@ -38,6 +39,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
         : base("re", "http://purl.org/atompub/rank/1.0", new Version("1.0"), new Uri("http://xml.coverpages.org/draft-snell-atompub-feed-index-10.txt"), "Feed Ranking", "Extends syndication feeds to provide a means feed publishers to convey one or more numeric rankings for entries contained within feeds, each of which can be used, independently or in conjunction with the others, to establish a sorting order.")
     {
     }
+
     /// <summary>
     /// Gets or sets the <see cref="FeedRankSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
@@ -61,6 +63,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
             extensionContext = value;
         }
     }
+
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
@@ -73,6 +76,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
         ArgumentNullException.ThrowIfNull(extension);
         return extension is FeedRankSyndicationExtension;
     }
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
@@ -114,6 +118,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
         ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="FeedRankSyndicationExtension"/>.
     /// </summary>
@@ -141,6 +146,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

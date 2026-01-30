@@ -30,6 +30,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// Private member to hold specific information about the extension.
     /// </summary>
     private AtomPublishingEditedSyndicationExtensionContext extensionContext = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtension"/> class.
     /// </summary>
@@ -37,6 +38,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
         : base("app", "http://www.w3.org/2007/app", new Version("1.0"), new Uri("http://bitworking.org/projects/atom/rfc5023.html"), "Atom Publishing Protocol Editing", "Extends syndication resource memebers to provide a means of specifying a date construct whose content indicates the last time a resource was edited.")
     {
     }
+
     /// <summary>
     /// Gets or sets the <see cref="AtomPublishingEditedSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
@@ -60,6 +62,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
             extensionContext = value;
         }
     }
+
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
@@ -72,6 +75,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
         ArgumentNullException.ThrowIfNull(extension);
         return extension is AtomPublishingEditedSyndicationExtension;
     }
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
@@ -113,6 +117,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
         ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="AtomPublishingEditedSyndicationExtension"/>.
     /// </summary>

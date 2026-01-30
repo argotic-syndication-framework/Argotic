@@ -36,14 +36,17 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// Private member to hold the base URI other than the base URI of the document or external entity.
     /// </summary>
     private Uri commonObjectBaseUri;
+
     /// <summary>
     /// Private member to hold the natural or formal language in which the content is written.
     /// </summary>
     private CultureInfo commonObjectLanguage;
+
     /// <summary>
     /// Private member to hold an IRI that identifies the location of the collection.
     /// </summary>
     private Uri collectionResourceLocation;
+
     /// <summary>
     /// Private member to hold a human-readable title for the collection.
     /// </summary>

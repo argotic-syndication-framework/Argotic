@@ -19,11 +19,13 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// Private member to hold instance of event with no event data.
     /// </summary>
     private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments = new();
+
     /// <summary>
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication resource.
     /// </summary>
     [NonSerialized]
     private readonly XPathNavigator eventNavigator;
+
     /// <summary>
     /// Private member to hold the URI that the syndication resource information was retrieved from.
     /// </summary>

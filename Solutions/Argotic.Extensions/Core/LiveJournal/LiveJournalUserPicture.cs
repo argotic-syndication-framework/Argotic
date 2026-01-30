@@ -108,6 +108,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
             field = value;
         }
     } = int.MinValue;
+
     /// <summary>
     /// Loads this <see cref="LiveJournalUserPicture"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

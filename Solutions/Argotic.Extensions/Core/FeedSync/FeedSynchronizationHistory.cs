@@ -201,6 +201,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

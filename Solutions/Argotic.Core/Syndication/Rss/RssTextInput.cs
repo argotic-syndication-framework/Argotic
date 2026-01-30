@@ -26,18 +26,22 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// Private member to hold character data that provides a human-readable label explaining the form's purpose.
     /// </summary>
     private string textInputDescription = string.Empty;
+
     /// <summary>
     /// Private member to hold the URL of the CGI script that handles the query.
     /// </summary>
     private Uri textInputLink;
+
     /// <summary>
     /// Private member to hold the name of the form component that contains the query.
     /// </summary>
     private string textInputName = string.Empty;
+
     /// <summary>
     /// Private member to hold a value that labels the button used to submit the query.
     /// </summary>
     private string textInputTitle = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RssTextInput"/> class.
     /// </summary>
@@ -67,6 +71,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
         this.Name = name;
         this.Title = title;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -78,6 +83,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets character data that provides a human-readable label explaining this form's purpose.
     /// </summary>
@@ -144,6 +150,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
             textInputTitle = value.Trim();
         }
     }
+
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -170,6 +177,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
 
         return null;
     }
+
     /// <summary>
     /// Loads this <see cref="RssTextInput"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -265,6 +273,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="RssTextInput"/>.
     /// </summary>
@@ -273,6 +282,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

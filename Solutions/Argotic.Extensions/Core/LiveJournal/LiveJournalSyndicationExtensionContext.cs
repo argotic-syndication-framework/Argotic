@@ -62,6 +62,7 @@ public class LiveJournalSyndicationExtensionContext
     ///     If omitted, the LiveJournal entry uses the feed-level default picture.
     /// </remarks>
     public LiveJournalUserPicture UserPicture { get; set; }
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

@@ -27,26 +27,32 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// Private member to hold the URL of a web page that contains comments received in response to the item.
     /// </summary>
     private Uri itemComments;
+
     /// <summary>
     /// Private member to hold the unique identifier for the item.
     /// </summary>
     private RssGuid itemGuid;
+
     /// <summary>
     /// Private member to hold the URL of a web page associated with the item.
     /// </summary>
     private Uri itemLink;
+
     /// <summary>
     /// Private member to hold the publication date and time of the item.
     /// </summary>
     private DateTime itemPublicationDate = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold information about the source feed that the item was republished from.
     /// </summary>
     private RssSource itemSource;
+
     /// <summary>
     /// Private member to hold character data that provides the item's headline.
     /// </summary>
     private string itemTitle = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RssItem"/> class.
     /// </summary>
@@ -54,6 +60,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     {
 
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -65,6 +72,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the e-mail address of the person who wrote this item.
     /// </summary>
@@ -508,6 +516,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="RssItem"/>.
     /// </summary>
@@ -516,6 +525,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

@@ -117,6 +117,7 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
         ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SiteSummarySlashSyndicationExtension"/>.
     /// </summary>

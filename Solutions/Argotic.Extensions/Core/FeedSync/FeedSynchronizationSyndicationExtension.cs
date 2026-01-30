@@ -32,6 +32,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// Private member to hold specific information about the extension.
     /// </summary>
     private FeedSynchronizationSyndicationExtensionContext extensionContext = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtension"/> class.
     /// </summary>
@@ -39,6 +40,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
         : base("sx", "http://feedsync.org/2007/feedsync", new Version("1.0"), new Uri("http://dev.live.com/feedsync/spec/"), "FeedSync", "Extends syndication feeds to enable loosely-cooperating applications to use feeds as the basis for item sharing amongst two or more cross-subscribed feeds.")
     {
     }
+
     /// <summary>
     /// Gets or sets the <see cref="FeedSynchronizationSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
@@ -62,6 +64,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
             extensionContext = value;
         }
     }
+
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
@@ -74,6 +77,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
         ArgumentNullException.ThrowIfNull(extension);
         return extension is FeedSynchronizationSyndicationExtension;
     }
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
@@ -115,6 +119,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
         ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="FeedSynchronizationSyndicationExtension"/>.
     /// </summary>
@@ -142,6 +147,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

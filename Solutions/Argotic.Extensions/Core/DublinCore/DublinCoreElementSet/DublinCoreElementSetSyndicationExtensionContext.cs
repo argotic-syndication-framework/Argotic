@@ -17,50 +17,62 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// Private member to hold the entity responsible for making contributions to the resource.
     /// </summary>
     private string extensionContributor = string.Empty;
+
     /// <summary>
     /// Private member to hold the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
     /// </summary>
     private string extensionCoverage = string.Empty;
+
     /// <summary>
     /// Private member to hold the entity primarily responsible for making the resource.
     /// </summary>
     private string extensionCreator = string.Empty;
+
     /// <summary>
     /// Private member to hold an account of the resource.
     /// </summary>
     private string extensionDescription = string.Empty;
+
     /// <summary>
     /// Private member to hold the file format, physical medium, or dimensions of the resource.
     /// </summary>
     private string extensionFormat = string.Empty;
+
     /// <summary>
     /// Private member to hold an unambiguous reference to the resource within a given context.
     /// </summary>
     private string extensionIdentifier = string.Empty;
+
     /// <summary>
     /// Private member to hold the entity responsible for making the resource available.
     /// </summary>
     private string extensionPublisher = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource.
     /// </summary>
     private string extensionRelation = string.Empty;
+
     /// <summary>
     /// Private member to hold information about rights held in and over the resource.
     /// </summary>
     private string extensionRights = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource from which the described resource is derived.
     /// </summary>
     private string extesionSource = string.Empty;
+
     /// <summary>
     /// Private member to hold the topic of the resource.
     /// </summary>
     private string extensionSubject = string.Empty;
+
     /// <summary>
     /// Private member to hold the name given to the resource.
     /// </summary>
     private string extensionTitle = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> class.
     /// </summary>

@@ -14,10 +14,12 @@ public class PingbackSyndicationExtensionContext
     /// Private member to hold the URL of the Pingback server.
     /// </summary>
     private Uri extensionServer;
+
     /// <summary>
     /// Private member to hold the value that should be used as the target in a ping.
     /// </summary>
     private Uri extensionTarget;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="PingbackSyndicationExtensionContext"/> class.
     /// </summary>

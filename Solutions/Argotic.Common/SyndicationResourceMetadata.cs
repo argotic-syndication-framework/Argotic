@@ -13,14 +13,17 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// Private member to hold the syndication content format that the syndication resource conforms to.
     /// </summary>
     private SyndicationContentFormat resourceFormat = SyndicationContentFormat.None;
+
     /// <summary>
     /// Private member to hold the XML namespaces declared in the syndication resource's root element.
     /// </summary>
     private readonly Dictionary<string, string> resourceNamespaces = [];
+
     /// <summary>
     /// Private member to hold the version of the syndication specification that the resource conforms to.
     /// </summary>
     private Version resourceVersion;
+
     /// <summary>
     /// Private member to hold a XPath navigator that can be used to navigate the root element of the syndication resource.
     /// </summary>

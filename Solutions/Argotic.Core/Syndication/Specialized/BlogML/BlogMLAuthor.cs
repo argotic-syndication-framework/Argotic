@@ -17,6 +17,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     /// Private member to hold the title of the web log entity.
     /// </summary>
     private BlogMLTextConstruct commonObjectBaseTitle = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLAuthor"/> class.
     /// </summary>
@@ -24,6 +25,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     {
 
     }
+
     /// <summary>
     /// Gets or sets the approval status of this web log entity.
     /// </summary>
@@ -83,6 +85,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
             commonObjectBaseTitle = value;
         }
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -94,6 +97,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the email address of this author.
     /// </summary>
@@ -104,6 +108,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
+
     /// <summary>
     /// Loads this <see cref="BlogMLAuthor"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

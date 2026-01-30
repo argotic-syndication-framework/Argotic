@@ -36,14 +36,17 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
     private const SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomServiceDocument;
+
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
     private static readonly Version documentVersion = new(1, 0);
+
     /// <summary>
     /// Private member to hold the base URI other than the base URI of the document or external entity.
     /// </summary>
     private Uri commonObjectBaseUri;
+
     /// <summary>
     /// Private member to hold the natural or formal language in which the content is written.
     /// </summary>

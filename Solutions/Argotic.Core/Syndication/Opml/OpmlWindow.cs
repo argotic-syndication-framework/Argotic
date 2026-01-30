@@ -33,6 +33,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
         this.Right = right;
         this.Top = top;
     }
+
     /// <summary>
     /// Gets or sets the pixel location of the bottom edge of this window.
     /// </summary>
@@ -56,6 +57,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
     /// </summary>
     /// <value>The pixel location of the top edge of this window. The default value is <see cref="Int32.MinValue"/>, which indicates no pixel location was specified.</value>
     public int Top { get; set; } = int.MinValue;
+
     /// <summary>
     /// Loads this <see cref="OpmlWindow"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -141,6 +143,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
             writer.WriteElementString("windowRight", this.Right.ToString(System.Globalization.NumberFormatInfo.InvariantInfo));
         }
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="OpmlWindow"/>.
     /// </summary>
@@ -149,6 +152,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

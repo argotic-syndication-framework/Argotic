@@ -18,12 +18,14 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// Private member to hold the title of the web log entity.
     /// </summary>
     private BlogMLTextConstruct commonObjectBaseTitle = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLTrackback"/> class.
     /// </summary>
     public BlogMLTrackback()
     {
     }
+
     /// <summary>
     /// Gets or sets the approval status of this web log entity.
     /// </summary>
@@ -83,6 +85,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
             commonObjectBaseTitle = value;
         }
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -94,6 +97,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the URL of this trackback.
     /// </summary>
@@ -109,6 +113,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
             field = value;
         }
     }
+
     /// <summary>
     /// Loads this <see cref="BlogMLTrackback"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -200,6 +205,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLTrackback"/>.
     /// </summary>
@@ -208,6 +214,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

@@ -24,6 +24,7 @@ public class CreativeCommonsSyndicationExtensionContext
     ///     See <a href="http://creativecommons.org/licenses/">http://creativecommons.org/licenses/</a> for a listing of the current Creative Commons licenses.
     /// </remarks>
     public IList<Uri> Licenses { get; } = [];
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

@@ -87,6 +87,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
         this.From = from;
         this.UpdatedOn = utcUpdatedOn;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -98,6 +99,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets the authors of this source.
     /// </summary>
@@ -190,6 +192,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
             field = value;
         }
     } = decimal.MinValue;
+
     /// <summary>
     /// Loads this <see cref="ApmlSource"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -408,6 +411,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="ApmlSource"/>.
     /// </summary>
@@ -416,6 +420,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

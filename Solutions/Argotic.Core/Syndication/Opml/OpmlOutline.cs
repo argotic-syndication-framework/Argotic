@@ -43,6 +43,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     {
         this.Text = text;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -54,6 +55,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets a collection of key/value string pairs that represent custom attributes applied to this outline.
     /// </summary>
@@ -158,6 +160,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
             field = value.Trim();
         }
     } = string.Empty;
+
     /// <summary>
     /// Loads this <see cref="OpmlOutline"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -322,6 +325,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Creates a new <see cref="OpmlOutline"/> that represents an inclusion outline using the supplied parameters.
     /// </summary>
@@ -460,6 +464,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
 
         return outline;
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="OpmlOutline"/>.
     /// </summary>
@@ -468,6 +473,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

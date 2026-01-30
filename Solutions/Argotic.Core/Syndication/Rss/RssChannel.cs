@@ -26,50 +26,62 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// Private member to hold the URL of the website associated with the feed.
     /// </summary>
     private Uri channelLink;
+
     /// <summary>
     /// Private member to hold character data that provides the name of the feed.
     /// </summary>
     private string channelTitle = string.Empty;
+
     /// <summary>
     /// Private member to hold character data that provides a human-readable characterization or summary of the feed.
     /// </summary>
     private string channelDescription = string.Empty;
+
     /// <summary>
     /// Private member to hold meta-data necessary for monitoring updates to a feed using a web service that implements the RssCloud application programming interface.
     /// </summary>
     private RssCloud channelCloud;
+
     /// <summary>
     /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
     /// </summary>
     private static readonly Uri channelDocumentation = new("http://www.rssboard.org/rss-specification");
+
     /// <summary>
     /// Private member to hold the graphical logo for the feed.
     /// </summary>
     private RssImage channelImage;
+
     /// <summary>
     /// Private member to hold the natural language employed in the feed.
     /// </summary>
     private CultureInfo channelLanguage;
+
     /// <summary>
     /// Private member to hold the last date and time the content of the feed was updated.
     /// </summary>
     private DateTime channelLastBuildDate = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold the publication date and time of the feed's content.
     /// </summary>
     private DateTime channelPublicationDate = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold a form to submit a text query to the feed's publisher over the Common Gateway Interface (CGI).
     /// </summary>
     private RssTextInput channelTextInput;
+
     /// <summary>
     /// Private member to hold the maximum number of minutes to cache the data before an aggregator should request it again.
     /// </summary>
     private int channelTimeToLive = int.MinValue;
+
     /// <summary>
     /// Private member to hold a URL that points to where the feed can be retrieved from.
     /// </summary>
     private Uri channelSelfLink;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RssChannel"/> class.
     /// </summary>
@@ -108,6 +120,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets the categories or tags to which this channel belongs.
     /// </summary>
@@ -384,6 +397,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         get => field;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
+
     /// <summary>
     /// Loads this <see cref="RssChannel"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -861,6 +875,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
 
         return wasLoaded;
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="RssChannel"/>.
     /// </summary>
@@ -869,6 +884,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

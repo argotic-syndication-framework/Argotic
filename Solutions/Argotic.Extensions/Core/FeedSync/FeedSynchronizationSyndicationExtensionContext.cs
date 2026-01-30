@@ -17,6 +17,7 @@ public class FeedSynchronizationSyndicationExtensionContext
     {
 
     }
+
     /// <summary>
     /// Gets or sets information from a specific feed publisher to the specific feed consumer that requested the feed.
     /// </summary>
@@ -42,6 +43,7 @@ public class FeedSynchronizationSyndicationExtensionContext
     ///     </para>
     /// </remarks>
     public FeedSynchronizationItem Synchronization { get; set; }
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

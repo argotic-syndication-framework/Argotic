@@ -73,6 +73,7 @@ public class ApmlAuthor : IComparable<ApmlAuthor>, IEquatable<ApmlAuthor>, IExte
         this.From = from;
         this.UpdatedOn = utcUpdatedOn;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -84,6 +85,7 @@ public class ApmlAuthor : IComparable<ApmlAuthor>, IEquatable<ApmlAuthor>, IExte
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the name of the entity that contributed this author.
     /// </summary>
@@ -135,6 +137,7 @@ public class ApmlAuthor : IComparable<ApmlAuthor>, IEquatable<ApmlAuthor>, IExte
             field = value;
         }
     } = decimal.MinValue;
+
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -243,6 +246,7 @@ public class ApmlAuthor : IComparable<ApmlAuthor>, IEquatable<ApmlAuthor>, IExte
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="ApmlAuthor"/>.
     /// </summary>
@@ -251,6 +255,7 @@ public class ApmlAuthor : IComparable<ApmlAuthor>, IEquatable<ApmlAuthor>, IExte
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

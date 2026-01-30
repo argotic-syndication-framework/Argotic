@@ -24,18 +24,22 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// Private member to hold the type of the embedded text.
     /// </summary>
     private YahooMediaTextConstructType textType = YahooMediaTextConstructType.None;
+
     /// <summary>
     /// Private member to hold the primary language encapsulated in the media object.
     /// </summary>
     private CultureInfo textLanguage;
+
     /// <summary>
     /// Private member to hold the start time offset that the text starts being relevant to the media object.
     /// </summary>
     private TimeSpan textStart = TimeSpan.MinValue;
+
     /// <summary>
     /// Private member to hold the end time offset that the text stops being relevant to the media object.
     /// </summary>
     private TimeSpan textEnd = TimeSpan.MinValue;
+
     /// <summary>
     /// Private member to hold the text transcript, closed captioning, or lyrics for the media content.
     /// </summary>

@@ -38,6 +38,7 @@ internal static class OpmlDocumentExample
         document.Outlines.Add(containerOutline);
         ExampleOutput.ShowOpmlDocument(document);
     }
+
     /// <summary>
     /// Provides example code for the OpmlDocument.CreateAsync(Uri) method
     /// </summary>
@@ -89,6 +90,7 @@ internal static class OpmlDocumentExample
             // Process the source URI
         }
     }
+
     /// <summary>
     /// Provides example code for the Load(IXPathNavigable) method
     /// </summary>

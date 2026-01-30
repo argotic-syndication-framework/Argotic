@@ -23,10 +23,12 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// Private member to hold the type of relationship that the restriction represents.
     /// </summary>
     private YahooMediaRestrictionRelationship restrictionRelationship = YahooMediaRestrictionRelationship.None;
+
     /// <summary>
     /// Private member to hold the type of media that a restriction applies to.
     /// </summary>
     private YahooMediaRestrictionType restrictionType = YahooMediaRestrictionType.None;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaRestriction"/> class.
     /// </summary>

@@ -14,10 +14,12 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// Private member to hold the MIME media type name.
     /// </summary>
     private string mimeMediaTypeName = string.Empty;
+
     /// <summary>
     /// Private member to hold the MIME media subtype name.
     /// </summary>
     private string mimeMediaSubTypeName = string.Empty;
+
     /// <summary>
     /// Private member to hold a URI that points to the documentation the describes the MIME media type.
     /// </summary>

@@ -30,6 +30,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// Private member to hold specific information about the extension.
     /// </summary>
     private SiteSummaryContentSyndicationExtensionContext extensionContext = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryContentSyndicationExtension"/> class.
     /// </summary>

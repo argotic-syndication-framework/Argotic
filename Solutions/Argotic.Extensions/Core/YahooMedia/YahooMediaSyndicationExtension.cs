@@ -54,6 +54,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
             field = value;
         }
     } = new();
+
     /// <summary>
     /// Returns the content expression identifier for the supplied <see cref="YahooMediaExpression"/>.
     /// </summary>
@@ -104,6 +105,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static YahooMediaMedium MediumByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, YahooMediaMedium.None);
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>

@@ -17,222 +17,277 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// Private member to hold the summary of the resource.
     /// </summary>
     private string extensionAbstract = string.Empty;
+
     /// <summary>
     /// Private member to hold information about who can access the resource or an indication of its security status.
     /// </summary>
     private string extensionAccessRights = string.Empty;
+
     /// <summary>
     /// Private member to hold the method by which items are added to a collection.
     /// </summary>
     private string extensionAccrualMethod = string.Empty;
+
     /// <summary>
     /// Private member to hold the frequency with which items are added to a collection.
     /// </summary>
     private string extensionAccrualPeriodicity = string.Empty;
+
     /// <summary>
     /// Private member to hold the policy governing the addition of items to a collection.
     /// </summary>
     private string extensionAccrualPolicy = string.Empty;
+
     /// <summary>
     /// Private member to hold an alternative name for the resource.
     /// </summary>
     private string extensionAlternativeTitle = string.Empty;
+
     /// <summary>
     /// Private member to hold the class of entity for whom the resource is intended or useful.
     /// </summary>
     private string extensionAudience = string.Empty;
+
     /// <summary>
     /// Private member to hold the date (often a range) that the resource became or will become available.
     /// </summary>
     private string extensionDateAvailable = string.Empty;
+
     /// <summary>
     /// Private member to hold the bibliographic reference for the resource.
     /// </summary>
     private string extensionBibliographicCitation = string.Empty;
+
     /// <summary>
     /// Private member to hold the established standard to which the described resource conforms.
     /// </summary>
     private string extensionConformsTo = string.Empty;
+
     /// <summary>
     /// Private member to hold the entity responsible for making contributions to the resource.
     /// </summary>
     private string extensionContributor = string.Empty;
+
     /// <summary>
     /// Private member to hold the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
     /// </summary>
     private string extensionCoverage = string.Empty;
+
     /// <summary>
     /// Private member to hold the date of creation of the resource.
     /// </summary>
     private DateTime extensionDateCreated = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold the entity primarily responsible for making the resource.
     /// </summary>
     private string extensionCreator = string.Empty;
+
     /// <summary>
     /// Private member to hold a point or period of time associated with an event in the lifecycle of the resource.
     /// </summary>
     private DateTime extensionDate = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold the date of acceptance of the resource.
     /// </summary>
     private DateTime extensionDateAccepted = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold the date of copyright of the resource.
     /// </summary>
     private DateTime extensionDateCopyrighted = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold the date of submission of the resource.
     /// </summary>
     private DateTime extensionDateSubmitted = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold an account of the resource.
     /// </summary>
     private string extensionDescription = string.Empty;
+
     /// <summary>
     /// Private member to hold the class of entity, defined in terms of progression through an educational or training context, for which the described resource is intended.
     /// </summary>
     private string extensionAudienceEducationLevel = string.Empty;
+
     /// <summary>
     /// Private member to hold the size or duration of the resource.
     /// </summary>
     private string extensionExtent = string.Empty;
+
     /// <summary>
     /// Private member to hold the file format, physical medium, or dimensions of the resource.
     /// </summary>
     private string extensionFormat = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that is substantially the same as the pre-existing described resource, but in another format.
     /// </summary>
     private string extensionHasFormat = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that is included either physically or logically in the described resource.
     /// </summary>
     private string extensionHasPart = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that is a version, edition, or adaptation of the described resource.
     /// </summary>
     private string extensionHasVersion = string.Empty;
+
     /// <summary>
     /// Private member to hold an unambiguous reference to the resource within a given context.
     /// </summary>
     private string extensionIdentifier = string.Empty;
+
     /// <summary>
     /// Private member to hold the process, used to engender knowledge, attitudes and skills, that the described resource is designed to support.
     /// </summary>
     private string extensionInstructionalMethod = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that is substantially the same as the described resource, but in another format.
     /// </summary>
     private string extensionIsFormatOf = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource in which the described resource is physically or logically included.
     /// </summary>
     private string extensionIsPartOf = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that references, cites, or Otherwise, points to the described resource.
     /// </summary>
     private string extensionIsReferencedBy = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that supplants, displaces, or supersedes the described resource.
     /// </summary>
     private string extensionIsReplacedBy = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that requires the described resource to support its function, delivery, or coherence.
     /// </summary>
     private string extensionIsRequiredBy = string.Empty;
+
     /// <summary>
     /// Private member to hold the date of formal issuance (e.g., publication) of the resource.
     /// </summary>
     private DateTime extensionDateIssued = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold a related resource of which the described resource is a version, edition, or adaptation.
     /// </summary>
     private string extensionIsVersionOf = string.Empty;
+
     /// <summary>
     /// Private member to hold the language of the resource.
     /// </summary>
     private CultureInfo extensionLanguage;
+
     /// <summary>
     /// Private member to hold the legal document giving official permission to do something with the resource.
     /// </summary>
     private string extensionLicense = string.Empty;
+
     /// <summary>
     /// Private member to hold the entity that mediates access to the resource and for whom the resource is intended or useful.
     /// </summary>
     private string extensionMediator = string.Empty;
+
     /// <summary>
     /// Private member to hold the material or physical carrier of the resource.
     /// </summary>
     private string extensionMedium = string.Empty;
+
     /// <summary>
     /// Private member to hold the date on which the resource was changed.
     /// </summary>
     private DateTime extensionDateModified = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold the statement of any changes in ownership and custody of the resource since its creation that are significant for its authenticity, integrity, and interpretation.
     /// </summary>
     private string extensionProvenance = string.Empty;
+
     /// <summary>
     /// Private member to hold the entity responsible for making the resource available.
     /// </summary>
     private string extensionPublisher = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that is referenced, cited, or Otherwise, pointed to by the described resource.
     /// </summary>
     private string extensionReferences = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource.
     /// </summary>
     private string extensionRelation = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that is supplanted, displaced, or superseded by the described resource.
     /// </summary>
     private string extensionReplaces = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource that is required by the described resource to support its function, delivery, or coherence.
     /// </summary>
     private string extensionRequires = string.Empty;
+
     /// <summary>
     /// Private member to hold information about rights held in and over the resource.
     /// </summary>
     private string extensionRights = string.Empty;
+
     /// <summary>
     /// Private member to hold the person or organization owning or managing rights over the resource.
     /// </summary>
     private string extensionRightsHolder = string.Empty;
+
     /// <summary>
     /// Private member to hold a related resource from which the described resource is derived.
     /// </summary>
     private string extensionSource = string.Empty;
+
     /// <summary>
     /// Private member to hold the spatial characteristics of the resource.
     /// </summary>
     private string extensionSpatialCoverage = string.Empty;
+
     /// <summary>
     /// Private member to hold the topic of the resource.
     /// </summary>
     private string extensionSubject = string.Empty;
+
     /// <summary>
     /// Private member to hold the list of sub-units of the resource.
     /// </summary>
     private string extensionTableOfContents = string.Empty;
+
     /// <summary>
     /// Private member to hold the temporal characteristics of the resource.
     /// </summary>
     private string extensionTemporalCoverage = string.Empty;
+
     /// <summary>
     /// Private member to hold the name given to the resource.
     /// </summary>
     private string extensionTitle = string.Empty;
+
     /// <summary>
     /// Private member to hold the nature or genre of the resource.
     /// </summary>
     private DublinCoreTypeVocabularies extensionType = DublinCoreTypeVocabularies.None;
+
     /// <summary>
     /// Private member to hold the date (often a range) of validity of the resource.
     /// </summary>
     private string extensionDateValid = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> class.
     /// </summary>
@@ -1851,6 +1906,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
             extensionType = value;
         }
     }
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -1906,6 +1962,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
         this.WriteGroup4(writer, xmlNamespace);
         this.WriteGroup5(writer, xmlNamespace);
     }
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

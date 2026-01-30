@@ -41,6 +41,7 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEqu
     {
         this.Uri = uri;
     }
+
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
@@ -62,6 +63,7 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEqu
     ///     </para>
     /// </remarks>
     public CultureInfo Language { get; set; }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -73,6 +75,7 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEqu
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets an IRI that identifies an image that provides iconic visual identification for this feed.
     /// </summary>
@@ -91,6 +94,7 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEqu
             field = value;
         }
     }
+
     /// <summary>
     /// Loads this <see cref="AtomIcon"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -158,6 +162,7 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEqu
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="AtomIcon"/>.
     /// </summary>
@@ -166,6 +171,7 @@ public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEqu
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

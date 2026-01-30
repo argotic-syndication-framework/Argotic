@@ -27,6 +27,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     public ApmlProfile()
     {
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -38,6 +39,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets the explicit concepts of this profile.
     /// </summary>
@@ -77,6 +79,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
             field = value.Trim();
         }
     } = string.Empty;
+
     /// <summary>
     /// Loads this <see cref="ApmlProfile"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -341,6 +344,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="ApmlProfile"/>.
     /// </summary>
@@ -349,6 +353,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

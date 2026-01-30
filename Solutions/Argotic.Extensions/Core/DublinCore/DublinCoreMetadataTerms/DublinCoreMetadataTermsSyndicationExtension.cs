@@ -31,6 +31,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// Private member to hold specific information about the extension.
     /// </summary>
     private DublinCoreMetadataTermsSyndicationExtensionContext extensionContext = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="DublinCoreMetadataTermsSyndicationExtension"/> class.
     /// </summary>
@@ -38,6 +39,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
         : base("dcterms", "http://purl.org/dc/terms/", new Version("1.0"), new Uri("http://dublincore.org/documents/dcmi-terms/"), "Dublin Core Metadata Terms", "Extends syndication feeds to provide a meta-data term resource description vocabulary.")
     {
     }
+
     /// <summary>
     /// Gets or sets the <see cref="DublinCoreMetadataTermsSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
@@ -61,6 +63,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
             extensionContext = value;
         }
     }
+
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
@@ -92,6 +95,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
     public static DublinCoreTypeVocabularies TypeVocabularyByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, DublinCoreTypeVocabularies.None);
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
@@ -133,6 +137,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
         ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="DublinCoreMetadataTermsSyndicationExtension"/>.
     /// </summary>

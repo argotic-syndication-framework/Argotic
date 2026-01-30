@@ -27,22 +27,27 @@ public class GenericSyndicationFeed
     /// Private member to hold the underlying syndication resource that is being abstracted by this generic feed.
     /// </summary>
     private ISyndicationResource feedResource;
+
     /// <summary>
     /// Private member to hold the type of syndication format that the syndication feed implements.
     /// </summary>
     private SyndicationContentFormat feedFormat = SyndicationContentFormat.None;
+
     /// <summary>
     /// Private member to hold the title of the syndication feed.
     /// </summary>
     private string feedTitle = string.Empty;
+
     /// <summary>
     /// Private member to hold the description of the syndication feed.
     /// </summary>
     private string feedDescription = string.Empty;
+
     /// <summary>
     /// Private member to hold a date-time indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.
     /// </summary>
     private DateTime feedLastUpdatedOn = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold the natural or formal language in which the feed content is written.
     /// </summary>
@@ -188,6 +193,7 @@ public class GenericSyndicationFeed
 
         return syndicationResource;
     }
+
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="string"/>.
     /// </summary>
@@ -347,6 +353,7 @@ public class GenericSyndicationFeed
         feedResource = opmlDocument;
         feedFormat = SyndicationContentFormat.Opml;
     }
+
     /// <summary>
     /// Asynchronously loads this <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/>.
     /// </summary>
@@ -409,6 +416,7 @@ public class GenericSyndicationFeed
 
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source));
     }
+
     /// <summary>
     /// Loads the generic syndication feed using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>

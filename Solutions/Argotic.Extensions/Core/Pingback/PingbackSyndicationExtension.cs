@@ -32,6 +32,7 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
     /// Private member to hold specific information about the extension.
     /// </summary>
     private PingbackSyndicationExtensionContext extensionContext = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="PingbackSyndicationExtension"/> class.
     /// </summary>
@@ -39,6 +40,7 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
         : base("pingback", "http://madskills.com/public/xml/rss/module/pingback/", new Version("1.0"), new Uri("http://madskills.com/public/xml/rss/module/pingback/"), "Pingback Notification", "Extends syndication feeds to provide a means for publishers to request notification when an entity links to their content.")
     {
     }
+
     /// <summary>
     /// Gets or sets the <see cref="PingbackSyndicationExtensionContext"/> object associated with this extension.
     /// </summary>
@@ -117,6 +119,7 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
         ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="PingbackSyndicationExtension"/>.
     /// </summary>

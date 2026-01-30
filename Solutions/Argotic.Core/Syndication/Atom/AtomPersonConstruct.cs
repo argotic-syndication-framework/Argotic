@@ -38,6 +38,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     {
         this.Name = name;
     }
+
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
@@ -59,6 +60,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     ///     </para>
     /// </remarks>
     public CultureInfo Language { get; set; }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -70,6 +72,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the e-mail address associated with this entity.
     /// </summary>
@@ -111,6 +114,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
     public Uri Uri { get; set; }
+
     /// <summary>
     /// Loads this <see cref="AtomPersonConstruct"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -209,6 +213,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="AtomPersonConstruct"/>.
     /// </summary>
@@ -234,6 +239,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
 
         return stringWriter.ToString();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

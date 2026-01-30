@@ -19,6 +19,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     {
 
     }
+
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
@@ -40,6 +41,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     ///     </para>
     /// </remarks>
     public CultureInfo Language { get; set; }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -51,11 +53,13 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets a value indicating if client has requested to control the visibility of the resource.
     /// </summary>
     /// <value><b>true</b> if the client is requesting to control the visibility of the resource; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
     public bool IsDraft { get; set; }
+
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -75,6 +79,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         List<ISyndicationExtension> list = [.. this.Extensions];
         return list.Find(match);
     }
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

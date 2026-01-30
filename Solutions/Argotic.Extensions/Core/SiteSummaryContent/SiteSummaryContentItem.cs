@@ -17,10 +17,12 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// Private member to hold the textual content of the item.
     /// </summary>
     private string itemContent = string.Empty;
+
     /// <summary>
     /// Private member to hold a URI representing the format of the item.
     /// </summary>
     private Uri itemFormat;
+
     /// <summary>
     /// Private member to hold a URI representing the encoding of the item.
     /// </summary>

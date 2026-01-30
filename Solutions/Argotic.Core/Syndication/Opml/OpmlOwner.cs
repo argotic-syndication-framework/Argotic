@@ -52,6 +52,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     {
         this.Id = id;
     }
+
     /// <summary>
     /// Gets or sets the email address of the owner of this document.
     /// </summary>
@@ -85,6 +86,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
+
     /// <summary>
     /// Loads this <see cref="OpmlOwner"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -149,6 +151,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
             writer.WriteElementString("ownerId", this.Id.ToString());
         }
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="OpmlOwner"/>.
     /// </summary>
@@ -157,6 +160,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

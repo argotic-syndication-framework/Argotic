@@ -84,6 +84,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         ArgumentNullException.ThrowIfNull(extension);
         return extension is ITunesSyndicationExtension;
     }
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
@@ -125,6 +126,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="ITunesSyndicationExtension"/>.
     /// </summary>
@@ -152,6 +154,7 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

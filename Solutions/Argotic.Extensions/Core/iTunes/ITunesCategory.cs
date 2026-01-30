@@ -17,6 +17,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// Private member to hold the name of the category.
     /// </summary>
     private string categoryText = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ITunesCategory"/> class.
     /// </summary>

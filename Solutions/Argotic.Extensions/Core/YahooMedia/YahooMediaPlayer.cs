@@ -22,10 +22,12 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// Private member to hold the URL of the player console.
     /// </summary>
     private Uri playerUrl;
+
     /// <summary>
     /// Private member to hold the height of the browser window that the player console should be opened in.
     /// </summary>
     private int playerHeight = int.MinValue;
+
     /// <summary>
     /// Private member to hold the with of the browser window that the player console should be opened in.
     /// </summary>
@@ -60,6 +62,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
         this.Height = height;
         this.Width = width;
     }
+
     /// <summary>
     /// Gets or sets the height of the browser window that this player console should be opened in.
     /// </summary>
@@ -112,6 +115,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
             playerWidth = value;
         }
     }
+
     /// <summary>
     /// Loads this <see cref="YahooMediaPlayer"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

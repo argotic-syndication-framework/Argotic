@@ -13,26 +13,32 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// Private member to hold the XML namespace for Resource Description Framework (RDF) entities.
     /// </summary>
     private const string RDF_NAMESPACE = "http://www.w3.org/1999/02/22-rdf-syntax-ns#";
+
     /// <summary>
     /// Private member to hold the XML namespace for Dublin Core entities.
     /// </summary>
     private const string DUBLIN_CORE_NAMESPACE = "http://purl.org/dc/elements/1.1/";
+
     /// <summary>
     /// Private member to hold the XML namespace for Trackback entities.
     /// </summary>
     private const string TRACKBACK_NAMESPACE = "http://madskills.com/public/xml/rss/module/trackback/";
+
     /// <summary>
     /// Private member to hold the title of the discoverable web log entry.
     /// </summary>
     private string trackbackDiscoveryTitle = string.Empty;
+
     /// <summary>
     /// Private member to hold Resource Description Framework entity reference.
     /// </summary>
     private Uri trackbackDiscoveryAbout;
+
     /// <summary>
     /// Private member to hold the unique identifier of the discoverable web log entry.
     /// </summary>
     private Uri trackbackDiscoveryIdentifier;
+
     /// <summary>
     /// Private member to hold Trackback ping endpoint of the discoverable web log entry.
     /// </summary>

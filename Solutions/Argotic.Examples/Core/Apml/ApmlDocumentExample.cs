@@ -111,6 +111,7 @@ internal static class ApmlDocumentExample
 
         ExampleOutput.ShowApmlDocument(document);
     }
+
     /// <summary>
     /// Provides example code for the ApmlDocument.CreateAsync(Uri) method
     /// </summary>
@@ -133,6 +134,7 @@ internal static class ApmlDocumentExample
 
         ExampleOutput.ShowApmlDocument(document);
     }
+
     /// <summary>
     /// Provides example code for the LoadAsync(Uri) method with event notification
     /// </summary>
@@ -163,6 +165,7 @@ internal static class ApmlDocumentExample
             // Process the source URI
         }
     }
+
     /// <summary>
     /// Provides example code for the Load(IXPathNavigable) method
     /// </summary>

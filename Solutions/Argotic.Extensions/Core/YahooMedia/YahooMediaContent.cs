@@ -24,106 +24,132 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// Private member to hold the direct url to the media object.
     /// </summary>
     private Uri contentUrl;
+
     /// <summary>
     /// Private member to hold the number of bytes the media object represents on disk.
     /// </summary>
     private long contentFileSize = long.MinValue;
+
     /// <summary>
     /// Private member to hold the MIME type of the media object.
     /// </summary>
     private string contentMimeType = string.Empty;
+
     /// <summary>
     /// Private member to hold the type of the media object.
     /// </summary>
     private YahooMediaMedium contentMedium = YahooMediaMedium.None;
+
     /// <summary>
     /// Private member to hold a value indicating if the media object is the default object in a group.
     /// </summary>
     private bool contentIsDefault;
+
     /// <summary>
     /// Private member to hold the expressed version of the media object.
     /// </summary>
     private YahooMediaExpression contentExpression = YahooMediaExpression.None;
+
     /// <summary>
     /// Private member to hold the kilobits per second rate of the media object.
     /// </summary>
     private int contentBitrate = int.MinValue;
+
     /// <summary>
     /// Private member to hold the number of frames per second for the media object.
     /// </summary>
     private int contentFramerate = int.MinValue;
+
     /// <summary>
     /// Private member to hold the number of samples per second taken to create the media object.
     /// </summary>
     private decimal contentSamplingrate = decimal.MinValue;
+
     /// <summary>
     /// Private member to hold the number of audio channels in the media object.
     /// </summary>
     private int contentChannels = int.MinValue;
+
     /// <summary>
     /// Private member to hold the total play time for the media object.
     /// </summary>
     private TimeSpan contentDuration = TimeSpan.MinValue;
+
     /// <summary>
     /// Private member to hold the height of the media object.
     /// </summary>
     private int contentHeight = int.MinValue;
+
     /// <summary>
     /// Private member to hold the width of the media object.
     /// </summary>
     private int contentWidth = int.MinValue;
+
     /// <summary>
     /// Private member to hold the primary language encapsulated in the media object.
     /// </summary>
     private CultureInfo contentLanguage;
+
     /// <summary>
     /// Private member to hold the permissible audiences for the media object.
     /// </summary>
     private List<YahooMediaRating> mediaObjectRatings;
+
     /// <summary>
     /// Private member to hold the title of the media object.
     /// </summary>
     private YahooMediaTextConstruct mediaObjectTitle;
+
     /// <summary>
     /// Private member to hold a short description of the media object.
     /// </summary>
     private YahooMediaTextConstruct mediaObjectDescription;
+
     /// <summary>
     /// Private member to hold the relevant keywords that describe the media object.
     /// </summary>
     private List<string> mediaObjectKeywords;
+
     /// <summary>
     /// Private member to hold the representative images for the media object.
     /// </summary>
     private List<YahooMediaThumbnail> mediaObjectThumbnails;
+
     /// <summary>
     /// Private member to hold a taxonomy that gives an indication of the type of content for the media object.
     /// </summary>
     private List<YahooMediaCategory> mediaObjectCategories;
+
     /// <summary>
     /// Private member to hold the hash digests for the media object.
     /// </summary>
     private List<YahooMediaHash> mediaObjectHashes;
+
     /// <summary>
     /// Private member to hold a web browser media player console the media object can be accessed through.
     /// </summary>
     private YahooMediaPlayer mediaObjectPlayer;
+
     /// <summary>
     /// Private member to hold the entities that contributed to the creation of the media object.
     /// </summary>
     private List<YahooMediaCredit> mediaObjectCredits;
+
     /// <summary>
     /// Private member to hold the copyright information for the media object.
     /// </summary>
     private YahooMediaCopyright mediaObjectCopyright;
+
     /// <summary>
     /// Private member to hold the text transcript, closed captioning, or lyrics for the media object.
     /// </summary>
     private List<YahooMediaText> mediaObjectTextSeries;
+
     /// <summary>
     /// Private member to hold the restrictions to be placed on aggregators that are rendering the media object.
     /// </summary>
     private List<YahooMediaRestriction> mediaObjectRestrictions;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaContent"/> class.
     /// </summary>

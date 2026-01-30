@@ -21,10 +21,12 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// Private member to hold the content MIME type of the syndication endpoint.
     /// </summary>
     private string endpointMediaType = string.Empty;
+
     /// <summary>
     /// Private member to hold the title of the syndication endpoint.
     /// </summary>
     private string endpointTitle = string.Empty;
+
     /// <summary>
     /// Private member to hold the Uniform Resource Locator (URL) of the syndication endpoint.
     /// </summary>

@@ -32,6 +32,7 @@ internal static class AtomEntryExample
 
         ExampleOutput.ShowAtomEntry(entry);
     }
+
     /// <summary>
     /// Provides example code for the AtomEntry.CreateAsync(Uri) method
     /// </summary>
@@ -74,6 +75,7 @@ internal static class AtomEntryExample
             // Process the source URI
         }
     }
+
     /// <summary>
     /// Provides example code for the Load(IXPathNavigable) method
     /// </summary>

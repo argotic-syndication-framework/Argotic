@@ -35,18 +35,22 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
     private const SyndicationContentFormat documentFormat = SyndicationContentFormat.Apml;
+
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
     private static readonly Version documentVersion = new(0, 6);
+
     /// <summary>
     /// Private member to hold header information for the document.
     /// </summary>
     private ApmlHead documentHead = new();
+
     /// <summary>
     /// Private member to hold the name of the default profile for the document.
     /// </summary>
     private string documentDefaultProfileName = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="ApmlDocument"/> class.
     /// </summary>
@@ -54,6 +58,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
 
     }
+
     /// <summary>
     /// Gets or sets the <see cref="ApmlProfile"/> at the specified index.
     /// </summary>
@@ -71,12 +76,14 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
             this.Profiles[index] = value;
         }
     }
+
     /// <summary>
     /// Occurs when the syndication resource state has been changed by a load operation.
     /// </summary>
     /// <seealso cref="ApmlDocument.Load(IXPathNavigable)"/>
     /// <seealso cref="ApmlDocument.Load(XmlReader)"/>
     public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+
     /// <summary>
     /// Raises the <see cref="ApmlDocument.Loaded"/> event.
     /// </summary>
@@ -85,6 +92,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         this.Loaded?.Invoke(this, e);
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -96,6 +104,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets the applications for this document.
     /// </summary>
@@ -150,6 +159,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
     public Version Version => documentVersion;
+
     /// <summary>
     /// Creates a new <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
@@ -205,6 +215,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         await syndicationResource.LoadAsync(source, httpClient, settings, requestOptions, cancellationToken).ConfigureAwait(false);
         return syndicationResource;
     }
+
     /// <summary>
     /// Loads this <see cref="ApmlDocument"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
@@ -265,6 +276,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         this.OnDocumentLoaded(new SyndicationResourceLoadedEventArgs(navigator, source));
     }
+
     /// <summary>
     /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="ApmlDocument"/>.
     /// </summary>
@@ -586,6 +598,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>

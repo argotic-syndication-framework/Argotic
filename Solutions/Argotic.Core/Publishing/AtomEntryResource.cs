@@ -20,6 +20,7 @@ public class AtomEntryResource : AtomEntry
     /// Private member to hold the last time the entry was edited. If the entry has not been edited yet, indicates the time the entry was created.
     /// </summary>
     private DateTime entryResourceEditedOn = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold a value indicating if the client is requesting to control the visibility of the entry.
     /// </summary>

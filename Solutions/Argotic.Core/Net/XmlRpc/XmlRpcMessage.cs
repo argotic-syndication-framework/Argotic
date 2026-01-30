@@ -24,6 +24,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// Private member to hold the name of the method to be called.
     /// </summary>
     private string messageMethodName = string.Empty;
+
     /// <summary>
     /// Private member to hold the character encoding of the message.
     /// </summary>

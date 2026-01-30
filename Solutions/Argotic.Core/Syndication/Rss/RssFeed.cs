@@ -36,14 +36,17 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
     private const SyndicationContentFormat feedFormat = SyndicationContentFormat.Rss;
+
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
     private static readonly Version feedVersion = new(2, 0);
+
     /// <summary>
     /// Private member to hold information about the meta-data and contents of the feed.
     /// </summary>
     private RssChannel feedChannel = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RssFeed"/> class.
     /// </summary>
@@ -78,12 +81,14 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     {
         this.Channel.Description = description;
     }
+
     /// <summary>
     /// Occurs when the syndication resource state has been changed by a load operation.
     /// </summary>
     /// <seealso cref="RssFeed.Load(IXPathNavigable)"/>
     /// <seealso cref="RssFeed.Load(XmlReader)"/>
     public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+
     /// <summary>
     /// Raises the <see cref="RssFeed.Loaded"/> event.
     /// </summary>
@@ -104,6 +109,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets information about the meta-data and contents of the feed.
     /// </summary>
@@ -130,6 +136,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
     public Version Version => feedVersion;
+
     /// <summary>
     /// Creates a new <see cref="RssFeed"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.
     /// </summary>
@@ -550,6 +557,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>

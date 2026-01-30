@@ -17,6 +17,7 @@ internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     {
         // Class state initialized by abstract SyndicationExtension base class
     }
+
     /// <summary>
     /// Gets or sets the value of the extension attribute.
     /// </summary>
@@ -37,6 +38,7 @@ internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
             }
         }
     } = string.Empty;
+
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
     /// represents the same <see cref="Type"/> as this <see cref="MyCustomSyndicationExtension"/>.
@@ -57,6 +59,7 @@ internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
             return false;
         }
     }
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
@@ -117,6 +120,7 @@ internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="MyCustomSyndicationExtension"/>.
     /// </summary>
@@ -144,6 +148,7 @@ internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

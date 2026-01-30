@@ -15,10 +15,12 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// Private member to hold the section name.
     /// </summary>
     private string extensionSection = string.Empty;
+
     /// <summary>
     /// Private member to hold the department name.
     /// </summary>
     private string extensionDepartment = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummarySlashSyndicationExtensionContext"/> class.
     /// </summary>

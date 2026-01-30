@@ -56,6 +56,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         this.Title = title;
         this.UpdatedOn = utcUpdatedOn;
     }
+
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
@@ -77,6 +78,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     ///     </para>
     /// </remarks>
     public CultureInfo Language { get; set; }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -88,6 +90,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets the authors of this source.
     /// </summary>
@@ -174,6 +177,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
     public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
+
     /// <summary>
     /// Loads this <see cref="AtomSource"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -311,6 +315,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="AtomSource"/>.
     /// </summary>
@@ -319,6 +324,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

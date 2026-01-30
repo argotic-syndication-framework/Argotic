@@ -13,6 +13,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// Private member to hold the character encoding to use when reading the syndication resource.
     /// </summary>
     private Encoding characterEncoding = Encoding.UTF8;
+
     /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the save operation.
     /// </summary>

@@ -26,10 +26,12 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// Private member to hold the title of the source feed.
     /// </summary>
     private string sourceTitle = string.Empty;
+
     /// <summary>
     /// Private member to hold the URL of the source feed.
     /// </summary>
     private Uri sourceUrl;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RssSource"/> class.
     /// </summary>
@@ -57,6 +59,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     {
         this.Title = title;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -68,6 +71,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the title of the source feed.
     /// </summary>
@@ -92,6 +96,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
             sourceUrl = value;
         }
     }
+
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -118,6 +123,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
 
         return null;
     }
+
     /// <summary>
     /// Loads this <see cref="RssSource"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -196,6 +202,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="RssSource"/>.
     /// </summary>
@@ -204,6 +211,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

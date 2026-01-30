@@ -25,18 +25,22 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// Private member to hold maximum permissible height of an image.
     /// </summary>
     private const int MAX_HEIGHT = 400;
+
     /// <summary>
     /// Private member to hold maximum permissible width of an image.
     /// </summary>
     private const int MAX_WIDTH = 144;
+
     /// <summary>
     /// Private member to hold default height of an image.
     /// </summary>
     private const int DEFAULT_HEIGHT = 31;
+
     /// <summary>
     /// Private member to hold default width of an image.
     /// </summary>
     private const int DEFAULT_WIDTH = 88;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RssImage"/> class.
     /// </summary>
@@ -62,6 +66,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
         this.Title = title;
         this.Url = url;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -73,6 +78,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets the default height that should be assumed for images that do not explicitly define a height.
     /// </summary>
@@ -96,6 +102,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// </summary>
     /// <value>The maximum permissible width, in pixels, for an image.</value>
     public static int WidthMaximum => MAX_WIDTH;
+
     /// <summary>
     /// Gets or sets character data that provides a human-readable characterization of the site linked to this image.
     /// </summary>
@@ -200,6 +207,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
             field = value;
         }
     } = int.MinValue;
+
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -226,6 +234,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
 
         return null;
     }
+
     /// <summary>
     /// Loads this <see cref="RssImage"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -351,6 +360,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="RssImage"/>.
     /// </summary>
@@ -359,6 +369,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

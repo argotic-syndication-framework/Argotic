@@ -24,6 +24,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// Private member to hold the response value that was returned for the remote procedure call.
     /// </summary>
     private IXmlRpcValue responseParameter;
+
     /// <summary>
     /// Private member to hold the response fault information.
     /// </summary>

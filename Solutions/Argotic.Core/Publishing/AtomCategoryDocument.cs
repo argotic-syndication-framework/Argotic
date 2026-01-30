@@ -35,26 +35,32 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
     private const SyndicationContentFormat documentFormat = SyndicationContentFormat.AtomCategoryDocument;
+
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
     private static readonly Version documentVersion = new(1, 0);
+
     /// <summary>
     /// Private member to hold the base URI other than the base URI of the document or external entity.
     /// </summary>
     private Uri commonObjectBaseUri;
+
     /// <summary>
     /// Private member to hold the natural or formal language in which the content is written.
     /// </summary>
     private CultureInfo commonObjectLanguage;
+
     /// <summary>
     /// Private member to hold an IRI that identifies a categorization scheme that categories may inherit from.
     /// </summary>
     private Uri documentScheme;
+
     /// <summary>
     /// Private member to hold an IRI that identifies the location of the document.
     /// </summary>
     private Uri documentResourceLocation;
+
     /// <summary>
     /// Private member to hold a value indicating whether the document represents a fixed or open set of categories.
     /// </summary>

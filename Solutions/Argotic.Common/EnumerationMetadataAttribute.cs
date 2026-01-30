@@ -14,6 +14,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     ///  Private member to hold the display name for the attributed field.
     /// </summary>
     private string enumMetadataDisplayName = string.Empty;
+
     /// <summary>
     /// Private member to hold the alternate textual value for the attributed field.
     /// </summary>

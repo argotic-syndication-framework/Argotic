@@ -14,18 +14,22 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// Private member to hold the character encoding to use when reading the syndication resource.
     /// </summary>
     private Encoding characterEncoding = Encoding.UTF8;
+
     /// <summary>
     /// Private member to hold a value indicating the maximum number of resource entities to retrieve from a syndication resource.
     /// </summary>
     private int maximumEntitiesToRetrieve;
+
     /// <summary>
     /// Private member to hold a value that specifies the amount of time after which a asynchronous load operation call times out.
     /// </summary>
     private TimeSpan requestTimeout = TimeSpan.FromSeconds(15);
+
     /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the load operation.
     /// </summary>
     private Collection<Type> supportedSyndicationExtensions;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadSettings"/> class.
     /// </summary>

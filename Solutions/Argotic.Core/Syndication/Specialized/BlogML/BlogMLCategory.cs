@@ -17,6 +17,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// Private member to hold the title of the web log entity.
     /// </summary>
     private BlogMLTextConstruct commonObjectBaseTitle = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLCategory"/> class.
     /// </summary>
@@ -24,6 +25,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     {
 
     }
+
     /// <summary>
     /// Gets or sets the approval status of this web log entity.
     /// </summary>
@@ -83,6 +85,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
             commonObjectBaseTitle = value;
         }
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -94,6 +97,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the description of this category.
     /// </summary>
@@ -115,6 +119,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
+
     /// <summary>
     /// Loads this <see cref="BlogMLCategory"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -222,6 +227,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLCategory"/>.
     /// </summary>
@@ -230,6 +236,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

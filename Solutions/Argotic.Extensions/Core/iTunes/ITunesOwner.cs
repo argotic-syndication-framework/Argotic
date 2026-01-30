@@ -51,6 +51,7 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
         get => field;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
+
     /// <summary>
     /// Loads this <see cref="ITunesOwner"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -110,6 +111,7 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="ITunesOwner"/>.
     /// </summary>
@@ -137,6 +139,7 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

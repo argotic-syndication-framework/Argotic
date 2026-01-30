@@ -78,6 +78,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     {
         this.Domain = domain;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -89,6 +90,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets a string that identifies the taxonomy in which the category is placed.
     /// </summary>
@@ -111,6 +113,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
         get => field;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
+
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.
     /// </summary>
@@ -137,6 +140,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
 
         return null;
     }
+
     /// <summary>
     /// Loads this <see cref="RssCategory"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -211,6 +215,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="RssCategory"/>.
     /// </summary>
@@ -219,6 +224,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

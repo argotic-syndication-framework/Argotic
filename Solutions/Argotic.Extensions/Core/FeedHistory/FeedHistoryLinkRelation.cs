@@ -17,10 +17,12 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// Private member to hold an IRI that identifies the location of the link relation.
     /// </summary>
     private Uri linkRelationLocation;
+
     /// <summary>
     /// Private member to hold a value that indicates the type of the link relation.
     /// </summary>
     private FeedHistoryLinkRelationType linkRelationType = FeedHistoryLinkRelationType.None;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedHistoryLinkRelation"/> class.
     /// </summary>
@@ -40,6 +42,7 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
         this.RelationType = relation;
         this.Uri = href;
     }
+
     /// <summary>
     /// Gets or sets a value that indicates the type of this link relation.
     /// </summary>
@@ -78,6 +81,7 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
             linkRelationLocation = value;
         }
     }
+
     /// <summary>
     /// Loads this <see cref="FeedHistoryLinkRelation"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

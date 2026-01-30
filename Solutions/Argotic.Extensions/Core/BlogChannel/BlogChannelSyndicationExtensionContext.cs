@@ -17,6 +17,7 @@ public class BlogChannelSyndicationExtensionContext
     {
 
     }
+
     /// <summary>
     /// Gets or sets the URL of a weblog that the author is promoting.
     /// </summary>
@@ -46,6 +47,7 @@ public class BlogChannelSyndicationExtensionContext
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of an OPML file containing the author's feed subscriptions.</value>
     public Uri MySubscriptions { get; set; }
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

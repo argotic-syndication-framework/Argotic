@@ -45,6 +45,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
         this.Name = name;
         this.WeblogId = weblogId;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -56,6 +57,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the location of the documentation for this application interface.
     /// </summary>

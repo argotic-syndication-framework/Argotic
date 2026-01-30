@@ -15,10 +15,12 @@ public class FeedRankSyndicationExtensionContext
     /// Private member to hold the permanent, universally unique identifier for the ranking scheme.
     /// </summary>
     private Uri extensionScheme;
+
     /// <summary>
     /// Private member to hold the language sensitive, human-readable label for the rank.
     /// </summary>
     private string extensionLabel = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class.
     /// </summary>
@@ -37,6 +39,7 @@ public class FeedRankSyndicationExtensionContext
         this.Scheme = scheme;
         this.Value = value;
     }
+
     /// <summary>
     /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.
     /// </summary>
@@ -91,6 +94,7 @@ public class FeedRankSyndicationExtensionContext
     /// </summary>
     /// <value>The <see cref="Decimal"/> value of this rank. The default value is <see cref="Decimal.MinValue"/>, which indicates that no ranking value was specified.</value>
     public decimal Value { get; set; } = decimal.MinValue;
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

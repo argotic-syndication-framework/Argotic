@@ -15,10 +15,12 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// Private member to hold a string that identifies a hierarchical position in the taxonomy.
     /// </summary>
     private readonly string categoryTerm = string.Empty;
+
     /// <summary>
     /// Private member to hold a string that identifies the categorization scheme.
     /// </summary>
     private readonly string categoryScheme = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
     /// </summary>
@@ -85,6 +87,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
             categoryTerm = category.Value.Trim();
         }
     }
+
     /// <summary>
     /// Gets a string that identifies the categorization scheme.
     /// </summary>
@@ -96,6 +99,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// </summary>
     /// <value>A string that identifies the category.</value>
     public string Term => categoryTerm;
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.
     /// </summary>
@@ -107,6 +111,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     {
         return $"GenericSyndicationCategory(Term = {this.Term}, Scheme = {this.Scheme})";
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

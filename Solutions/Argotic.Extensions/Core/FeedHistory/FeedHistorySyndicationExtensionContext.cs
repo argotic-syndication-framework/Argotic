@@ -17,6 +17,7 @@ public class FeedHistorySyndicationExtensionContext
     {
 
     }
+
     /// <summary>
     /// Gets or sets a value indicating the feed is a set of linked feed documents that together contain the entries of a logical feed, without any guarantees about the stability of the documents' contents.
     /// </summary>
@@ -34,6 +35,7 @@ public class FeedHistorySyndicationExtensionContext
     /// </summary>
     /// <value>A collection of <see cref="FeedHistoryLinkRelation"/> objects that represent the relationships between feed documents.</value>
     public IList<FeedHistoryLinkRelation> Relations { get; } = [];
+
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.
     /// </summary>

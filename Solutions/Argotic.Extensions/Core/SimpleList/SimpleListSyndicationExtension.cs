@@ -31,6 +31,7 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
     /// Private member to hold specific information about the extension.
     /// </summary>
     private SimpleListSyndicationExtensionContext extensionContext = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="SimpleListSyndicationExtension"/> class.
     /// </summary>

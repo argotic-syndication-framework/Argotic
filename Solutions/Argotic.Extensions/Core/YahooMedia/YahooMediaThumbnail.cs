@@ -22,14 +22,17 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// Private member to hold the url of the thumbnail.
     /// </summary>
     private Uri thumbnailUrl;
+
     /// <summary>
     /// Private member to hold the height of the thumbnail.
     /// </summary>
     private int thumbnailHeight = int.MinValue;
+
     /// <summary>
     /// Private member to hold the width of the thumbnail.
     /// </summary>
     private int thumbnailWidth = int.MinValue;
+
     /// <summary>
     /// Private member to hold the time offset in relation to the media object.
     /// </summary>

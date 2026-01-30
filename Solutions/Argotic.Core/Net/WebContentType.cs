@@ -18,18 +18,22 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// Private member to hold the well known name for the character encoding parameter.
     /// </summary>
     private const string CHARSET_PARAMETER_NAME = "charset";
+
     /// <summary>
     /// Private member to hold the well known name for the type discriminator parameter.
     /// </summary>
     private const string TYPE_PARAMETER_NAME = "type";
+
     /// <summary>
     /// Private member to hold the type of the media content.
     /// </summary>
     private string webContentMediaType = string.Empty;
+
     /// <summary>
     /// Private member to hold the subtype of the media content.
     /// </summary>
     private string webContentMediaSubType = string.Empty;
+
     /// <summary>
     /// Private member to hold additional parameters applied to the media content.
     /// </summary>

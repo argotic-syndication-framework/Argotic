@@ -34,26 +34,32 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// Private member to hold the human-readable description of the syndication extension.
     /// </summary>
     private readonly string extensionDescription = string.Empty;
+
     /// <summary>
     /// Private member to hold a URL that points to documentation for the syndication extension.
     /// </summary>
     private readonly Uri extensionDocumentation;
+
     /// <summary>
     /// Private member to hold the human-readable name of the syndication extension.
     /// </summary>
     private readonly string extensionName = string.Empty;
+
     /// <summary>
     /// Private member to hold the version of the specification that the syndication extension conforms to.
     /// </summary>
     private readonly Version extensionVersion;
+
     /// <summary>
     /// Private member to hold the XML namespace that is used when qualifying the syndication extension's element and attribute names.
     /// </summary>
     private readonly string extensionXmlNamespace = string.Empty;
+
     /// <summary>
     /// Private member to hold the prefix used to associate the syndication extension's element and attribute names with the syndication extension's XML namespace.
     /// </summary>
     private readonly string extensionXmlPrefix = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtension"/> class.
     /// </summary>
@@ -184,12 +190,14 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
             return extensionXmlPrefix;
         }
     }
+
     /// <summary>
     /// Occurs when the <see cref="SyndicationExtension"/> state has been changed by a load operation.
     /// </summary>
     /// <seealso cref="SyndicationExtension.Load(IXPathNavigable)"/>
     /// <seealso cref="SyndicationExtension.Load(XmlReader)"/>
     public event EventHandler<SyndicationExtensionLoadedEventArgs> Loaded;
+
     /// <summary>
     /// Raises the <see cref="SyndicationExtension.Loaded"/> event.
     /// </summary>
@@ -201,6 +209,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
             handler(this, e);
         }
     }
+
     /// <summary>
     /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces utilized by this <see cref="SyndicationExtension"/>.
     /// </summary>

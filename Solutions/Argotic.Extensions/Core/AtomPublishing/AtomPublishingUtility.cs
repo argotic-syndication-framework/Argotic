@@ -15,18 +15,22 @@ internal static class AtomPublishingUtility
     /// Private member to hold the Atom 1.0 namespace identifier.
     /// </summary>
     private const string ATOM_NAMESPACE = "http://www.w3.org/2005/Atom";
+
     /// <summary>
     /// Private member to hold the Atom Publishing Protocol 1.0 namespace identifier.
     /// </summary>
     private const string ATOMPUB_NAMESPACE = "http://www.w3.org/2007/app";
+
     /// <summary>
     /// Private member to hold the XHTML namespace identifier.
     /// </summary>
     private const string XHTML_NAMESPACE = "http://www.w3.org/1999/xhtml";
+
     /// <summary>
     /// Private member to hold the XML 1.1 namespace identifier.
     /// </summary>
     private const string XML_NAMESPACE = "http://www.w3.org/XML/1998/namespace";
+
     /// <summary>
     /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Atom syndication entities.
     /// </summary>

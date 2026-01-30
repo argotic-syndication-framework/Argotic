@@ -62,6 +62,7 @@ public interface ISyndicationExtension
     {
         get;
     }
+
     /// <summary>
     /// Occurs when the syndication extension state has been changed by a load operation.
     /// </summary>

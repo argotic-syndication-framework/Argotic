@@ -87,6 +87,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     {
         this.Relation = relation;
     }
+
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
     /// </summary>
@@ -108,6 +109,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     ///     </para>
     /// </remarks>
     public CultureInfo Language { get; set; }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -119,6 +121,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the natural or formal language in which this Web resource content is written.
     /// </summary>
@@ -250,6 +253,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
             field = value;
         }
     }
+
     /// <summary>
     /// Loads this <see cref="AtomLink"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -393,6 +397,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="AtomLink"/>.
     /// </summary>
@@ -401,6 +406,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

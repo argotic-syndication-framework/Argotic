@@ -24,18 +24,22 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// Private member to hold the character encoding of the message.
     /// </summary>
     private Encoding messageEncoding = Encoding.UTF8;
+
     /// <summary>
     /// Private member to hold the title of the entry.
     /// </summary>
     private string messageTitle = string.Empty;
+
     /// <summary>
     /// Private member to hold an excerpt of the entry.
     /// </summary>
     private string messageExcerpt = string.Empty;
+
     /// <summary>
     /// Private member to hold the name of the weblog to which the entry was posted.
     /// </summary>
     private string messageWeblogName = string.Empty;
+
     /// <summary>
     /// Private member to hold the permalink for the entry.
     /// </summary>

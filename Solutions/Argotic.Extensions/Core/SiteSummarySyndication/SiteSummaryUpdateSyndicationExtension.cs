@@ -113,6 +113,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
 
         return StringToPeriodMapping.GetValueOrDefault(name, SiteSummaryUpdatePeriod.None);
     }
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
@@ -182,6 +183,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

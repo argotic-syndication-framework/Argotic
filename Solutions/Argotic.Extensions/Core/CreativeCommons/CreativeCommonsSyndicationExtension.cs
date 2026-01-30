@@ -53,6 +53,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
             field = value;
         }
     } = new();
+
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
     /// represents the same <see cref="Type"/> as this <see cref="SyndicationExtension"/>.
@@ -65,6 +66,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
         ArgumentNullException.ThrowIfNull(extension);
         return extension is CreativeCommonsSyndicationExtension;
     }
+
     /// <summary>
     /// Initializes the syndication extension using the supplied <see cref="IXPathNavigable"/>.
     /// </summary>
@@ -106,6 +108,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
         ArgumentNullException.ThrowIfNull(writer);
         this.Context.WriteTo(writer, this.XmlNamespace);
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="CreativeCommonsSyndicationExtension"/>.
     /// </summary>
@@ -133,6 +136,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
         using StreamReader reader = new(stream);
         return reader.ReadToEnd();
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

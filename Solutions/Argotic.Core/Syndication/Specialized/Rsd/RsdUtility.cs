@@ -14,11 +14,13 @@ internal static class RsdUtility
     /// Private member to hold the Really Simple Discoverability (RSD) 1.0 namespace identifier.
     /// </summary>
     private const string RSD_NAMESPACE = "http://archipelago.phrasewise.com/rsd";
+
     /// <summary>
     /// Gets the XML namespace URI for the Really Simple Discoverability (RSD) 1.0 specification.
     /// </summary>
     /// <value>The XML namespace URI for the Really Simple Discoverability (RSD) 1.0 specification.</value>
     public static string RsdNamespace => RSD_NAMESPACE;
+
     /// <summary>
     /// Initializes a <see cref="XmlNamespaceManager"/> object for resolving prefixed XML namespaces within Really Simple Discoverability (RSD) syndication entities.
     /// </summary>

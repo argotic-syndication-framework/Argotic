@@ -25,10 +25,12 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Private member to hold the title of the web log entity.
     /// </summary>
     private BlogMLTextConstruct commonObjectBaseTitle = new();
+
     /// <summary>
     /// Private member to hold the textual content of the post.
     /// </summary>
     private BlogMLTextConstruct postContent = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLPost"/> class.
     /// </summary>
@@ -95,6 +97,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             commonObjectBaseTitle = value;
         }
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -106,6 +109,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets the attachments for this post.
     /// </summary>
@@ -201,6 +205,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
+
     /// <summary>
     /// Returns the post type identifier for the supplied <see cref="BlogMLPostType"/>.
     /// </summary>
@@ -235,6 +240,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// </example>
     public static BlogMLPostType PostTypeByName(string name) =>
         EnumerationMetadataAttribute.GetEnumByAlternateValue(name, BlogMLPostType.None);
+
     /// <summary>
     /// Loads this <see cref="BlogMLPost"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -523,6 +529,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Modifies the <see cref="BlogMLPost"/> collection entities to match the supplied <see cref="XPathNavigator"/> data source.
     /// </summary>
@@ -709,6 +716,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 
         return wasLoaded;
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="BlogMLPost"/>.
     /// </summary>
@@ -717,6 +725,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

@@ -39,6 +39,7 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
     {
         this.Name = name;
     }
+
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
     /// </summary>
@@ -50,6 +51,7 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
     /// </summary>
     /// <value><b>true</b> if the <see cref="Extensions"/> collection for this entity contains one or more <see cref="ISyndicationExtension"/> objects, Otherwise, returns <b>false</b>.</value>
     public bool HasExtensions => this.Extensions.Count > 0;
+
     /// <summary>
     /// Gets or sets the textual data of this application.
     /// </summary>
@@ -78,6 +80,7 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
             field = value.Trim();
         }
     } = string.Empty;
+
     /// <summary>
     /// Loads this <see cref="ApmlApplication"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
@@ -153,6 +156,7 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="ApmlApplication"/>.
     /// </summary>
@@ -161,6 +165,7 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
     ///     This method returns the XML representation for the current instance.
     /// </remarks>
     public override string ToString() => this.ToXmlString();
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

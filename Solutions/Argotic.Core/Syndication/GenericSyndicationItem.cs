@@ -16,18 +16,22 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Private member to hold the title of the syndication item.
     /// </summary>
     private string itemTitle = string.Empty;
+
     /// <summary>
     /// Private member to hold the summary of the syndication item.
     /// </summary>
     private string itemSummary = string.Empty;
+
     /// <summary>
     /// Private member to hold the publication date of the item.
     /// </summary>
     private DateTime itemPublishedOn = DateTime.MinValue;
+
     /// <summary>
     /// Private member to hold the collection of categories associated with the item.
     /// </summary>
     private Collection<GenericSyndicationCategory> itemCategories = new();
+
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
     /// </summary>
@@ -49,6 +53,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
         ArgumentNullException.ThrowIfNull(item);
         this.LoadFrom(item);
     }
+
     /// <summary>
     /// Gets the categories associated with this item.
     /// </summary>
@@ -93,6 +98,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     ///     The default value is an <b>empty</b> string, which indicates that no title was specified.
     /// </value>
     public string Title => itemTitle;
+
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.
     /// </summary>
@@ -104,6 +110,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     {
         return $"GenericSyndicationItem(Title = {this.Title}, Summary = {this.Summary}, PublishedOn = {(this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty)})";
     }
+
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>

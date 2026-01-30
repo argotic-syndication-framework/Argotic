@@ -36,14 +36,17 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Private member to hold the syndication format for this syndication resource.
     /// </summary>
     private const SyndicationContentFormat documentFormat = SyndicationContentFormat.Opml;
+
     /// <summary>
     /// Private member to hold the version of the syndication format for this syndication resource conforms to.
     /// </summary>
     private static readonly Version documentVersion = new(1, 0);
+
     /// <summary>
     /// Private member to hold the name of the engine that is providing the services being described.
     /// </summary>
     private string documentServiceEngineName = string.Empty;
+
     /// <summary>
     /// Initializes a new instance of the <see cref="RsdDocument"/> class.
     /// </summary>
@@ -68,6 +71,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
             this.Interfaces[index] = value;
         }
     }
+
     /// <summary>
     /// Occurs when the syndication resource state has been changed by a load operation.
     /// </summary>
@@ -531,6 +535,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         writer.WriteEndElement();
     }
+
     /// <summary>
     /// Loads the syndication resource using the specified <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
     /// </summary>

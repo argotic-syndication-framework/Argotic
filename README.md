@@ -7,7 +7,7 @@ The Argotic Syndication Framework was originally created by Brian Kuhn in 2007. 
 
 The project had become dormant, but has been brought back to life by [endjin](https://endjin.com), as Argotic is used to produce the [Azure Weekly Newsletter](https://azureweekly.info), [Microsoft Fabric Weekly Newsletter](https://fabricweekly.info) and [Power BI Weekly Newsletter](https://powerbiweekly.info).
 
-The project has been updated to .NET 10 with comprehensive C# modernization, including collection expressions, pattern matching, file-scoped namespaces, and nullable reference types. The codebase has been refactored to follow modern .NET idioms and best practices.
+The project has been updated to .NET 10 with comprehensive C# modernization, including collection expressions, pattern matching, file-scoped namespaces, and nullable reference types. The codebase has been refactored to follow modern .NET idioms and best practices. There are *many* breaking changes.
 
 ## Requirements
 
@@ -39,6 +39,102 @@ Install-Package Argotic.Extensions
 ```
 
 See the [wiki](https://argotic-syndication-framework.github.io/Argotic) for detailed documentation and the [CHANGELOG](CHANGELOG.md) for a complete list of changes in this release.
+
+## Quick Start Examples
+
+### Reading an RSS Feed
+
+```csharp
+using Argotic.Syndication;
+
+// Load feed from a URL
+RssFeed feed = await RssFeed.CreateAsync(new Uri("https://endjin.com/rss.xml"));
+
+// Access feed metadata
+Console.WriteLine($"Feed: {feed.Channel.Title}");
+Console.WriteLine($"Description: {feed.Channel.Description}");
+
+// Iterate through items
+foreach (RssItem item in feed.Channel.Items)
+{
+    Console.WriteLine($"- {item.Title}");
+    Console.WriteLine($"  Link: {item.Link}");
+    Console.WriteLine($"  Published: {item.PublicationDate}");
+}
+```
+
+### Creating an RSS Feed
+
+```csharp
+using Argotic.Syndication;
+
+// Create a new feed
+RssFeed feed = new()
+{
+    Channel =
+    {
+        Title = "endjin blog",
+        Link = new Uri("https://endjin.com/blog"),
+        Description = "Latest posts from the endjin blog"
+    }
+};
+
+// Add items
+feed.Channel.Items.Add(new RssItem
+{
+    Title = "Polars Workloads on Microsoft Fabric",
+    Link = new Uri("https://endjin.com/blog/2026/01/polars-workloads-on-microsoft-fabric"),
+    Description = "A technical guide demonstrating how to leverage Polars within Microsoft Fabric for efficient data transformation.",
+    PublicationDate = DateTime.UtcNow
+});
+
+feed.Channel.Items.Add(new RssItem
+{
+    Title = "Practical Polars: Code Examples for Everyday Data Tasks",
+    Link = new Uri("https://endjin.com/blog/2026/01/practical-polars-code-examples-everyday-data-tasks"),
+    Description = "A hands-on guide featuring concrete code examples for common data workflows using Python Polars.",
+    PublicationDate = DateTime.UtcNow.AddDays(-1)
+});
+
+// Save to a stream or file
+using FileStream stream = File.Create("feed.xml");
+feed.Save(stream);
+```
+
+### Creating a Sitemap
+
+```csharp
+using Argotic.Syndication;
+
+// Create a new sitemap
+Sitemap sitemap = new();
+
+sitemap.Urls.Add(new SitemapUrl
+{
+    Location = new Uri("https://endjin.com/"),
+    LastModified = DateTime.UtcNow,
+    ChangeFrequency = SitemapChangeFrequency.Daily,
+    Priority = 1.0m
+});
+
+sitemap.Urls.Add(new SitemapUrl
+{
+    Location = new Uri("https://endjin.com/what-we-do"),
+    ChangeFrequency = SitemapChangeFrequency.Monthly,
+    Priority = 0.8m
+});
+
+sitemap.Urls.Add(new SitemapUrl
+{
+    Location = new Uri("https://endjin.com/who-we-are"),
+    ChangeFrequency = SitemapChangeFrequency.Monthly,
+    Priority = 0.8m
+});
+
+// Save the sitemap
+using FileStream stream = File.Create("sitemap.xml");
+sitemap.Save(stream);
+```
 
 ## Building
 

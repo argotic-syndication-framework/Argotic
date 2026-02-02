@@ -152,11 +152,12 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <param name="name">The alternate value name to search for.</param>
     /// <param name="defaultValue">The default value to return if not found.</param>
     /// <returns>The enum value if found, otherwise the default value.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     public static TEnum GetEnumByAlternateValue<TEnum>(string name, TEnum defaultValue) where TEnum : struct, Enum
     {
-        ArgumentException.ThrowIfNullOrEmpty(name);
+        if (string.IsNullOrEmpty(name))
+        {
+            return defaultValue;
+        }
 
         return EnumMetadataCache<TEnum>.AlternateValueToEnum.GetValueOrDefault(name, defaultValue);
     }

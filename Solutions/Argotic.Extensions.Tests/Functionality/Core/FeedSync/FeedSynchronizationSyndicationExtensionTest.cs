@@ -915,10 +915,10 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedSynchronizationItem_TombstoneStatusByName_NullInput_ThrowsArgumentException()
+    public void FeedSynchronizationItem_TombstoneStatusByName_NullInput_ReturnsNone()
     {
         // Act & Assert
-        Should.Throw<ArgumentException>(() => FeedSynchronizationItem.TombstoneStatusByName(null!));
+        FeedSynchronizationItem.TombstoneStatusByName(null!).ShouldBe(FeedSynchronizationTombstoneStatus.None);
     }
 
     [TestMethod]
@@ -939,10 +939,10 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedSynchronizationItem_ConflictPreservationByName_NullInput_ThrowsArgumentException()
+    public void FeedSynchronizationItem_ConflictPreservationByName_NullInput_ReturnsNone()
     {
         // Act & Assert
-        Should.Throw<ArgumentException>(() => FeedSynchronizationItem.ConflictPreservationByName(null!));
+        FeedSynchronizationItem.ConflictPreservationByName(null!).ShouldBe(FeedSynchronizationConflictPreservationDirective.None);
     }
 
     [TestMethod]
@@ -1314,17 +1314,17 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Null_ThrowsArgumentException()
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Null_ReturnsNone()
     {
         // Act & Assert
-        Should.Throw<ArgumentException>(() => FeedSynchronizationRelatedInformation.RelationTypeByName(null!));
+        FeedSynchronizationRelatedInformation.RelationTypeByName(null!).ShouldBe(FeedSynchronizationRelatedInformationType.None);
     }
 
     [TestMethod]
-    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Empty_ThrowsArgumentException()
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Empty_ReturnsNone()
     {
         // Act & Assert
-        Should.Throw<ArgumentException>(() => FeedSynchronizationRelatedInformation.RelationTypeByName(string.Empty));
+        FeedSynchronizationRelatedInformation.RelationTypeByName(string.Empty).ShouldBe(FeedSynchronizationRelatedInformationType.None);
     }
 
     [TestMethod]

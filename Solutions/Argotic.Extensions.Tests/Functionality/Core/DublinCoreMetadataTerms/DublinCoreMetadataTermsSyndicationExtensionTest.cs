@@ -1563,17 +1563,17 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void DublinCoreMetadataTermsTypeVocabularyByNameThrowsOnNull()
+    public void DublinCoreMetadataTermsTypeVocabularyByNameReturnsNoneOnNull()
     {
         // Arrange, Act & Assert
-        Should.Throw<ArgumentException>(() => DublinCoreMetadataTermsSyndicationExtension.TypeVocabularyByName(null!));
+        DublinCoreMetadataTermsSyndicationExtension.TypeVocabularyByName(null!).ShouldBe(DublinCoreTypeVocabularies.None);
     }
 
     [TestMethod]
-    public void DublinCoreMetadataTermsTypeVocabularyByNameThrowsOnEmpty()
+    public void DublinCoreMetadataTermsTypeVocabularyByNameReturnsNoneOnEmpty()
     {
         // Arrange, Act & Assert
-        Should.Throw<ArgumentException>(() => DublinCoreMetadataTermsSyndicationExtension.TypeVocabularyByName(string.Empty));
+        DublinCoreMetadataTermsSyndicationExtension.TypeVocabularyByName(string.Empty).ShouldBe(DublinCoreTypeVocabularies.None);
     }
 
     #endregion

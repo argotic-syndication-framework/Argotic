@@ -82,10 +82,10 @@ public class SyndicationDiscoveryUtilityTests
     }
 
     [TestMethod]
-    public void SyndicationContentFormatByName_NullOrEmpty_ThrowsArgumentException()
+    public void SyndicationContentFormatByName_NullOrEmpty_ReturnsNone()
     {
-        Should.Throw<ArgumentException>(() => SyndicationDiscoveryUtility.SyndicationContentFormatByName(null!));
-        Should.Throw<ArgumentException>(() => SyndicationDiscoveryUtility.SyndicationContentFormatByName(string.Empty));
+        SyndicationDiscoveryUtility.SyndicationContentFormatByName(null!).ShouldBe(SyndicationContentFormat.None);
+        SyndicationDiscoveryUtility.SyndicationContentFormatByName(string.Empty).ShouldBe(SyndicationContentFormat.None);
     }
 
     [TestMethod]

@@ -60,16 +60,16 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
                 int counter = 0;
                 while (urlIterator.MoveNext())
                 {
-                    SitemapUrl url = new();
                     counter++;
 
+                    if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
+                    SitemapUrl url = new();
                     if (url.Load(urlIterator.Current, this.Settings))
                     {
-                        if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                        {
-                            break;
-                        }
-
                         resource.Urls.Add(url);
                     }
                 }
@@ -102,16 +102,16 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
                 int counter = 0;
                 while (sitemapIterator.MoveNext())
                 {
-                    SitemapIndexEntry entry = new();
                     counter++;
 
+                    if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
+                    {
+                        break;
+                    }
+
+                    SitemapIndexEntry entry = new();
                     if (entry.Load(sitemapIterator.Current))
                     {
-                        if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
-                        {
-                            break;
-                        }
-
                         resource.Sitemaps.Add(entry);
                     }
                 }

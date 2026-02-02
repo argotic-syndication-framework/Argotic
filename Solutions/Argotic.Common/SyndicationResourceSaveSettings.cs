@@ -135,7 +135,21 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.CharacterEncoding?.WebName, this.MinimizeOutputSize, this.AutoDetectExtensions);
+        var hash = new HashCode();
+        hash.Add(this.CharacterEncoding?.WebName);
+        hash.Add(this.MinimizeOutputSize);
+        hash.Add(this.AutoDetectExtensions);
+        var extensions = this.supportedSyndicationExtensions;
+        if (extensions is not null)
+        {
+            hash.Add(extensions.Count);
+            foreach (var extension in extensions)
+            {
+                hash.Add(extension);
+            }
+        }
+
+        return hash.ToHashCode();
     }
 
     /// <summary>

@@ -16,7 +16,7 @@ public interface IXmlRpcValue
     /// Loads this <see cref="IXmlRpcValue"/> using the supplied <see cref="XPathNavigator"/>.
     /// </summary>
     /// <param name="source">The <see cref="XPathNavigator"/> to extract information from.</param>
-    /// <returns><b>true</b> if the <see cref="IXmlRpcValue"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
+    /// <returns><b>true</b> if the <see cref="IXmlRpcValue"/> was initialized using the supplied <paramref name="source"/>, otherwise <b>false</b>.</returns>
     /// <remarks>
     ///     <para>This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="IXmlRpcValue"/>.</para>
     /// </remarks>

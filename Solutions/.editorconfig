@@ -102,6 +102,8 @@ dotnet_diagnostic.SA1505.severity = warning
 dotnet_diagnostic.SA1508.severity = warning
 # SA1516: Elements should be separated by blank line
 dotnet_diagnostic.SA1516.severity = warning
+# SA1514: Element documentation header should be preceded by blank line
+dotnet_diagnostic.SA1514.severity = warning
 
 # Code style for 'this.' qualification (enables auto-fix for SA1101)
 dotnet_style_qualification_for_field = true:silent

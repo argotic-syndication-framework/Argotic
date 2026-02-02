@@ -48,7 +48,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     ///     A <see cref="IList{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the data elements for this array.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public IList<IXmlRpcValue> Values { get; } = [];
+    public IList<IXmlRpcValue> Values { get; } = new List<IXmlRpcValue>();
 
     /// <summary>
     /// Loads this <see cref="XmlRpcArrayValue"/> using the supplied <see cref="XPathNavigator"/>.
@@ -189,7 +189,14 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Values.Count);
+        var hash = new HashCode();
+        hash.Add(this.Values.Count);
+        foreach (var value in this.Values)
+        {
+            hash.Add(value);
+        }
+
+        return hash.ToHashCode();
     }
 
     /// <summary>

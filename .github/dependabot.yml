@@ -13,9 +13,7 @@ updates:
       patterns:
       - Microsoft.Extensions.*
 - package-ecosystem: "github-actions"
-  directories:
-    - "/"
-    - "actions/**/*"
+  directory: "/"
   schedule:
     interval: "daily"
   open-pull-requests-limit: 10

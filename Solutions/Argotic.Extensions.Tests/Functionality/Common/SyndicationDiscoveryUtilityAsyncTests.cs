@@ -663,7 +663,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
         // Assert
         result.WasModified.ShouldBeFalse();
-        result.StatusCode.ShouldBe(default(System.Net.HttpStatusCode));
+        result.StatusCode.ShouldBeNull();
     }
 
     [TestMethod]

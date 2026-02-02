@@ -9,7 +9,7 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
-- Update teh version from 3001.0.0 to 4000.0.0
+- Update the version from 3001.0.0 to 4000.0.0
 - **Target Framework**: Now targets .NET 10 only (dropped .NET Standard 2.0/2.1, .NET 8, .NET 9)
 - **Configuration**: Removed legacy `System.Configuration` classes:
   - `PrivilegedConfigurationManager`

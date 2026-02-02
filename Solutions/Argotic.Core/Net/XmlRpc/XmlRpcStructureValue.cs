@@ -52,7 +52,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     ///     This indexer uses a <i>case-insensitive</i> comparison of the specified member <paramref name="name"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public XmlRpcStructureMember this[string name]
     {
@@ -98,7 +98,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     ///     A <see cref="IList{T}"/> collection of <see cref="XmlRpcStructureMember"/> objects that represent this structure's members.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public IList<XmlRpcStructureMember> Members { get; } = [];
+    public IList<XmlRpcStructureMember> Members { get; } = new List<XmlRpcStructureMember>();
 
     /// <summary>
     /// Compares two specified <see cref="IList{XmlRpcStructureMember}"/> collections.

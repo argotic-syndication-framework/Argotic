@@ -43,8 +43,8 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     /// <summary>
     /// Gets the HTTP status code of the response.
     /// </summary>
-    /// <value>The <see cref="HttpStatusCode"/> of the response, or the default value if no response was received.</value>
-    public HttpStatusCode StatusCode { get; }
+    /// <value>The <see cref="HttpStatusCode"/> of the response, or null if no response was received.</value>
+    public HttpStatusCode? StatusCode { get; }
 
     /// <summary>
     /// Gets the date and time the resource was last modified.

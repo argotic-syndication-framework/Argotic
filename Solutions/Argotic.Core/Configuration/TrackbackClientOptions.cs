@@ -1,7 +1,7 @@
 namespace Argotic.Configuration;
 
 /// <summary>
-/// Configuration options for <see cref="Net.TrackbackClient"/>.
+/// Configuration options for <see cref="Argotic.Net.TrackbackClient"/>.
 /// </summary>
 public class TrackbackClientOptions
 {

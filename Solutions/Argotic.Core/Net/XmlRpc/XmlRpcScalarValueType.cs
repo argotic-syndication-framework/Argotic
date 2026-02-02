@@ -54,3 +54,5 @@ public enum XmlRpcScalarValueType
     [EnumerationMetadata(DisplayName = "String", AlternateValue = "string")]
     String = 6
 }
+
+#pragma warning restore CA1720

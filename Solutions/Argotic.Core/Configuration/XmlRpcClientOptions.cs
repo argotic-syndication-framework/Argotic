@@ -1,7 +1,7 @@
 namespace Argotic.Configuration;
 
 /// <summary>
-/// Configuration options for <see cref="Net.XmlRpcClient"/>.
+/// Configuration options for <see cref="Argotic.Net.XmlRpcClient"/>.
 /// </summary>
 public class XmlRpcClientOptions
 {

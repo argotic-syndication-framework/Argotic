@@ -34,7 +34,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     /// <param name="name">The name of this structure member.</param>
     /// <param name="value">An object that implements the <see cref="IXmlRpcValue"/> interface that represents the value of this structure member.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="name"/> is an empty string.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public XmlRpcStructureMember(string name, IXmlRpcValue value)
     {
@@ -47,7 +47,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     /// </summary>
     /// <value>The name of this structure member.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="value"/> is an empty string.</exception>
     public string Name
     {
         get
@@ -221,7 +221,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Name, this.Value);
+        return this.ToString().GetHashCode();
     }
 
     /// <summary>

@@ -134,4 +134,36 @@ public class ParsePipelineBenchmarks
         feed.Load(stream);
         return feed;
     }
+
+    /// <summary>
+    /// The same load with extension auto-detection switched off.
+    /// </summary>
+    /// <returns>The parsed feed.</returns>
+    /// <remarks>
+    /// <para>
+    /// The one experiment that can localise the object-model walk without a profiler.
+    /// <c>SyndicationResourceLoadSettings.AutoDetectExtensions</c> defaults to <see langword="true"/>,
+    /// and it gates the entire per-entity extension-detection path. Everything else about the two
+    /// loads is identical.
+    /// </para>
+    /// <para>
+    /// This is falsifiable in both directions, which is why it is worth running. If auto-detection
+    /// is the dominant cost, this benchmark collapses relative to
+    /// <see cref="WholeLoad"/> and the mechanism is named. If it lands close to
+    /// <see cref="WholeLoad"/>, the hypothesis is dead and the cost is in the element walk itself —
+    /// a result that would send the investigation somewhere else entirely.
+    /// </para>
+    /// <para>
+    /// Note the two are not behaviourally equivalent: with detection off, extension data is not
+    /// populated. This measures where time goes, and is not a proposed fix.
+    /// </para>
+    /// </remarks>
+    [Benchmark(Description = "g. Load(Stream), AutoDetectExtensions=false")]
+    public RssFeed WholeLoadWithoutExtensionDetection()
+    {
+        using MemoryStream stream = new(this.document, writable: false);
+        RssFeed feed = new();
+        feed.Load(stream, new SyndicationResourceLoadSettings { AutoDetectExtensions = false });
+        return feed;
+    }
 }

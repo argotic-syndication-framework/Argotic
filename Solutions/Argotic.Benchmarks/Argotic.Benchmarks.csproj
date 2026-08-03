@@ -1,0 +1,35 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <RootNamespace>Argotic.Benchmarks</RootNamespace>
+    <IsPackable>false</IsPackable>
+    <!--
+      BenchmarkDotNet refuses to measure an unoptimised assembly, so this project is only
+      meaningful in Release. It still compiles in Debug because it is part of the solution and
+      the verification gauntlet builds both configurations.
+    -->
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="BenchmarkDotNet" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\Argotic.Common\Argotic.Common.csproj" />
+    <ProjectReference Include="..\Argotic.Core\Argotic.Core.csproj" />
+    <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!--
+      Real sample documents are linked from the Examples project rather than copied, so there is
+      one source of truth for what a real Argotic input looks like. If those samples change, the
+      fidelity cross-check changes with them instead of silently drifting against a stale copy.
+    -->
+    <None Include="..\Argotic.Examples\SampleData\*.xml"
+          Link="SampleData\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
+</Project>

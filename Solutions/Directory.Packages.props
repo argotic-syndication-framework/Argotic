@@ -29,6 +29,11 @@
     <PackageVersion Include="Shouldly" Version="4.3.0" />
   </ItemGroup>
 
+  <!-- Benchmarking -->
+  <ItemGroup>
+    <PackageVersion Include="BenchmarkDotNet" Version="0.15.8" />
+  </ItemGroup>
+
   <!-- Examples CLI -->
   <ItemGroup>
     <PackageVersion Include="Spectre.Console" Version="0.57.2" />

@@ -69,7 +69,7 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
         XPathNavigator navigator = source.CreateNavigator();
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
-        XPathNodeIterator imageIterator = navigator.Select("//image:image", manager);
+        XPathNodeIterator imageIterator = navigator.Select("image:image", manager);
 
         if (imageIterator is { Count: > 0 })
         {
@@ -197,7 +197,7 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
         HashCode hash = new();
         foreach (SitemapImage image in this.Images)
         {
-            hash.Add(image);
+            hash.Add(HashCodeUtility.Component(image));
         }
 
         return hash.ToHashCode();

@@ -70,7 +70,7 @@ public class SitemapHreflangExtension : SyndicationExtension, IComparable<Sitema
         XPathNavigator navigator = source.CreateNavigator();
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
-        XPathNodeIterator linkIterator = navigator.Select("//xhtml:link", manager);
+        XPathNodeIterator linkIterator = navigator.Select("xhtml:link", manager);
 
         if (linkIterator is { Count: > 0 })
         {
@@ -198,7 +198,7 @@ public class SitemapHreflangExtension : SyndicationExtension, IComparable<Sitema
         HashCode hash = new();
         foreach (SitemapHreflangLink link in this.Links)
         {
-            hash.Add(link);
+            hash.Add(HashCodeUtility.Component(link));
         }
 
         return hash.ToHashCode();

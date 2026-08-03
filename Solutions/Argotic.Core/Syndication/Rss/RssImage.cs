@@ -383,11 +383,11 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
         }
 
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= this.Height.CompareTo(other.Height);
-        result |= Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= this.Width.CompareTo(other.Width);
+        if (result == 0) result = this.Height.CompareTo(other.Height);
+        if (result == 0) result = Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Width.CompareTo(other.Width);
 
         return result;
     }
@@ -425,11 +425,11 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     {
         return HashCode.Combine(
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Description ?? string.Empty),
-            this.Height,
-            this.Link,
+            HashCodeUtility.Component(this.Height),
+            HashCodeUtility.Component(this.Link),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Title ?? string.Empty),
-            this.Url,
-            this.Width);
+            HashCodeUtility.Component(this.Url),
+            HashCodeUtility.Component(this.Width));
     }
 
     /// <summary>

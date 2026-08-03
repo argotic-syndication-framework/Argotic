@@ -149,7 +149,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
         }
 
         int result = string.Compare(this.Text, other.Text, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -185,7 +185,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Text, this.Url);
+        return HashCode.Combine(HashCodeUtility.Component(this.Text), HashCodeUtility.Component(this.Url));
     }
 
     /// <summary>

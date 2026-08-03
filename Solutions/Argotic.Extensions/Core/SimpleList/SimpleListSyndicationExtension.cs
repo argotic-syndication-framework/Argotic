@@ -160,8 +160,8 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
         }
 
         int result = this.Context.TreatAsList.CompareTo(other.Context.TreatAsList);
-        result |= ComparisonUtility.CompareSequence(this.Context.Grouping, other.Context.Grouping);
-        result |= ComparisonUtility.CompareSequence(this.Context.Sorting, other.Context.Sorting);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Grouping, other.Context.Grouping);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Sorting, other.Context.Sorting);
 
         return result;
     }
@@ -197,7 +197,7 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Context.TreatAsList, this.Context.Grouping, this.Context.Sorting);
+        return HashCode.Combine(HashCodeUtility.Component(this.Context.TreatAsList), HashCodeUtility.Component(this.Context.Grouping), HashCodeUtility.Component(this.Context.Sorting));
     }
 
     /// <summary>

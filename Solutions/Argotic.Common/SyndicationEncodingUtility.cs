@@ -19,6 +19,12 @@ public static class SyndicationEncodingUtility
     private static readonly Lazy<HttpClient> sharedHttpClient = new(CreateSharedHttpClient);
 
     /// <summary>
+    /// The default time-out applied to requests made with the shared <see cref="HttpClient"/> when the caller supplies no bound of their own,
+    /// matching the 100-second default of the <see cref="HttpWebRequest"/> pipeline this framework previously used.
+    /// </summary>
+    internal static readonly TimeSpan DefaultRequestTimeout = TimeSpan.FromSeconds(100);
+
+    /// <summary>
     /// Characters that are invalid in directory names.
     /// </summary>
     private static readonly SearchValues<char> s_invalidDirectoryChars = SearchValues.Create(@"\/:*?<>|");
@@ -55,7 +61,8 @@ public static class SyndicationEncodingUtility
     /// Creates <see cref="XmlReaderSettings"/> configured for secure XML parsing.
     /// </summary>
     /// <returns>
-    ///     An <see cref="XmlReaderSettings"/> instance with DTD processing disabled to prevent XXE attacks.
+    ///     An <see cref="XmlReaderSettings"/> instance that parses internal DTD subsets (so entities declared by a feed resolve)
+    ///     while preventing XXE attacks: external entity resolution is disabled and entity expansion is capped.
     /// </returns>
     public static XmlReaderSettings CreateSafeXmlReaderSettings()
     {
@@ -65,7 +72,9 @@ public static class SyndicationEncodingUtility
             IgnoreComments = true,
             IgnoreProcessingInstructions = true,
             IgnoreWhitespace = true,
-            DtdProcessing = DtdProcessing.Ignore
+            DtdProcessing = DtdProcessing.Parse,
+            XmlResolver = null,
+            MaxCharactersFromEntities = 10_000_000
         };
     }
 
@@ -114,11 +123,10 @@ public static class SyndicationEncodingUtility
 
         byte[] buffer = SyndicationEncodingUtility.GetStreamBytes(stream);
 
-        Encoding encoding = Encoding.UTF8;
-        encoding = SyndicationEncodingUtility.GetXmlEncoding(buffer);
+        Encoding encoding = SyndicationEncodingUtility.GetXmlEncoding(buffer);
 
         using MemoryStream memoryStream = new(buffer);
-        return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, Encoding.UTF8);
+        return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
     }
 
     /// <summary>
@@ -177,6 +185,7 @@ public static class SyndicationEncodingUtility
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="HttpRequestException">The response status code does not indicate success.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static Task<XPathNavigator> CreateSafeNavigatorAsync(
         Uri source,
@@ -210,6 +219,7 @@ public static class SyndicationEncodingUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="HttpRequestException">The response status code does not indicate success.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
     public static async Task<XPathNavigator> CreateSafeNavigatorAsync(
         Uri source,
@@ -222,6 +232,7 @@ public static class SyndicationEncodingUtility
         ArgumentNullException.ThrowIfNull(httpClient);
 
         using HttpResponseMessage response = await SendHttpRequestAsync(source, httpClient, requestOptions, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 
         return encoding != null
@@ -258,11 +269,15 @@ public static class SyndicationEncodingUtility
     /// <remarks>
     ///     This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.
     ///     For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.
+    ///     Requests made through this overload are subject to a 100-second default time-out, mirroring the legacy <see cref="HttpWebRequest"/> behavior.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static Task<HttpResponseMessage> SendHttpRequestAsync(Uri source, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
+    /// <exception cref="OperationCanceledException">The request was canceled or exceeded the 100-second default time-out.</exception>
+    public static async Task<HttpResponseMessage> SendHttpRequestAsync(Uri source, SyndicationRequestOptions? requestOptions = null, CancellationToken cancellationToken = default)
     {
-        return SendHttpRequestAsync(source, SharedHttpClient, requestOptions, cancellationToken);
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(DefaultRequestTimeout);
+        return await SendHttpRequestAsync(source, SharedHttpClient, requestOptions, timeoutCts.Token).ConfigureAwait(false);
     }
 
     /// <summary>

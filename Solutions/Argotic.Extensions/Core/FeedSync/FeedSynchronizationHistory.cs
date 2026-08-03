@@ -215,8 +215,8 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
         }
 
         int result = string.Compare(this.By, other.By, StringComparison.OrdinalIgnoreCase);
-        result |= this.Sequence.CompareTo(other.Sequence);
-        result |= this.When.CompareTo(other.When);
+        if (result == 0) result = this.Sequence.CompareTo(other.Sequence);
+        if (result == 0) result = this.When.CompareTo(other.When);
 
         return result;
     }
@@ -252,7 +252,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.By, this.Sequence, this.When);
+        return HashCode.Combine(HashCodeUtility.Component(this.By), HashCodeUtility.Component(this.Sequence), HashCodeUtility.Component(this.When));
     }
 
     /// <summary>

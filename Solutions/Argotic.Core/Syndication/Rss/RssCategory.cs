@@ -238,7 +238,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
         }
 
         int result = string.Compare(this.Domain, other.Domain, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Value, other.Value, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Value, other.Value, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }

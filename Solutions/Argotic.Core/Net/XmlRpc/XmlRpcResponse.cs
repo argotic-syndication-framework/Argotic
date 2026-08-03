@@ -282,32 +282,32 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
         {
             if (other.Fault != null)
             {
-                result |= this.Fault.CompareTo(other.Fault);
+                if (result == 0) result = this.Fault.CompareTo(other.Fault);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (other.Fault != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.Parameter != null)
         {
             if (other.Parameter != null)
             {
-                result |= string.Compare(this.Parameter.ToString(), other.Parameter.ToString(), StringComparison.Ordinal);
+                if (result == 0) result = string.Compare(this.Parameter.ToString(), other.Parameter.ToString(), StringComparison.Ordinal);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (other.Parameter != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         return result;
@@ -344,7 +344,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Fault, this.Parameter?.ToString());
+        return HashCode.Combine(HashCodeUtility.Component(this.Fault), HashCodeUtility.Component(this.Parameter?.ToString()));
     }
 
     /// <summary>

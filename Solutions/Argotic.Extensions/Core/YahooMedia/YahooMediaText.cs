@@ -394,7 +394,7 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.End, this.Language?.Name, this.Start, this.TextType);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.End), HashCodeUtility.Component(this.Language?.Name), HashCodeUtility.Component(this.Start), HashCodeUtility.Component(this.TextType));
     }
 
     /// <summary>

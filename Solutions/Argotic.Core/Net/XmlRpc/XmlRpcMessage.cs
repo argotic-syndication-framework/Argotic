@@ -279,8 +279,8 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
         }
 
         int result = string.Compare(this.Encoding.WebName, other.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.MethodName, other.MethodName, StringComparison.OrdinalIgnoreCase);
-        result |= XmlRpcMessage.CompareSequence(this.Parameters, other.Parameters);
+        if (result == 0) result = string.Compare(this.MethodName, other.MethodName, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = XmlRpcMessage.CompareSequence(this.Parameters, other.Parameters);
 
         return result;
     }
@@ -316,7 +316,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Encoding?.WebName, this.MethodName, this.Parameters.Count);
+        return HashCode.Combine(HashCodeUtility.Component(this.Encoding?.WebName), HashCodeUtility.Component(this.MethodName), HashCodeUtility.Component(this.Parameters.Count));
     }
 
     /// <summary>

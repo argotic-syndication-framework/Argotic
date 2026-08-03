@@ -296,9 +296,9 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
         }
 
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -336,7 +336,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     {
         return HashCode.Combine(
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Description ?? string.Empty),
-            this.Link,
+            HashCodeUtility.Component(this.Link),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Name ?? string.Empty),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Title ?? string.Empty));
     }

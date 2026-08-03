@@ -279,10 +279,10 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
         }
 
         int result = this.DataType.CompareTo(other.DataType);
-        result |= string.Compare(this.Element, other.Element, StringComparison.OrdinalIgnoreCase);
-        result |= this.IsDefault.CompareTo(other.IsDefault);
-        result |= string.Compare(this.Label, other.Label, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Namespace, other.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.Element, other.Element, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.IsDefault.CompareTo(other.IsDefault);
+        if (result == 0) result = string.Compare(this.Label, other.Label, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Namespace, other.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
         return result;
     }
@@ -318,7 +318,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.DataType, this.Element, this.IsDefault, this.Label, this.Namespace);
+        return HashCode.Combine(HashCodeUtility.Component(this.DataType), HashCodeUtility.Component(this.Element), HashCodeUtility.Component(this.IsDefault), HashCodeUtility.Component(this.Label), HashCodeUtility.Component(this.Namespace));
     }
 
     /// <summary>

@@ -337,12 +337,12 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
         }
 
         int result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= this.IsPreferred.CompareTo(other.IsPreferred);
-        result |= Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Notes, other.Notes, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Settings, other.Settings, StringComparison.Ordinal);
-        result |= string.Compare(this.WeblogId, other.WeblogId, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.IsPreferred.CompareTo(other.IsPreferred);
+        if (result == 0) result = Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Notes, other.Notes, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Settings, other.Settings, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.WeblogId, other.WeblogId, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -379,13 +379,13 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     public override int GetHashCode()
     {
         return HashCode.Combine(
-            this.Documentation,
-            this.IsPreferred,
-            this.Link,
-            this.Name,
-            this.Notes,
-            this.Settings.Count,
-            this.WeblogId);
+            HashCodeUtility.Component(this.Documentation),
+            HashCodeUtility.Component(this.IsPreferred),
+            HashCodeUtility.Component(this.Link),
+            HashCodeUtility.Component(this.Name),
+            HashCodeUtility.Component(this.Notes),
+            HashCodeUtility.Component(this.Settings.Count),
+            HashCodeUtility.Component(this.WeblogId));
     }
 
     /// <summary>

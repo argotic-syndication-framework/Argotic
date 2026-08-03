@@ -161,8 +161,8 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
         }
 
         int result = Uri.Compare(this.Context.Server, other.Context.Server, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Context.Target, other.Context.Target, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Context.Abouts, other.Context.Abouts, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.Target, other.Context.Target, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Abouts, other.Context.Abouts, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -198,7 +198,7 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Context.Server, this.Context.Target, this.Context.Abouts);
+        return HashCode.Combine(HashCodeUtility.Component(this.Context.Server), HashCodeUtility.Component(this.Context.Target), HashCodeUtility.Component(this.Context.Abouts));
     }
 
     /// <summary>

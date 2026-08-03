@@ -139,7 +139,7 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
         }
 
         int result = this.Id.CompareTo(other.Id);
-        result |= string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -175,7 +175,7 @@ public class LiveJournalMood : IComparable<LiveJournalMood>, IEquatable<LiveJour
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Id, this.Content);
+        return HashCode.Combine(HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.Content));
     }
 
     /// <summary>

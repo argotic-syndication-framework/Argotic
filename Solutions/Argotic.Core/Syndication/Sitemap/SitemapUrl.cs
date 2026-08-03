@@ -211,7 +211,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
                 this.LastModified = lastModified;
                 wasLoaded = true;
             }
-            else if (DateTime.TryParse(lastmodNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal, out lastModified))
+            else if (DateTime.TryParse(lastmodNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out lastModified))
             {
                 this.LastModified = lastModified;
                 wasLoaded = true;
@@ -356,7 +356,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Location, this.LastModified, this.ChangeFrequency, this.Priority);
+        return HashCode.Combine(HashCodeUtility.Component(this.Location), HashCodeUtility.Component(this.LastModified), HashCodeUtility.Component(this.ChangeFrequency), HashCodeUtility.Component(this.Priority));
     }
 
     /// <summary>

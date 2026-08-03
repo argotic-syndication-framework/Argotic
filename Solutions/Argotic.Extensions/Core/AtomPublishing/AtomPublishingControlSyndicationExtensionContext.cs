@@ -93,13 +93,19 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        if (AtomPublishingUtility.FillCommonObjectAttributes(this, source))
+
+        // The extension is handed the navigator for the entry, whereas the draft flag and the common
+        // attributes belong to the app:control element written by WriteTo. Fall back to the supplied
+        // navigator so a caller that has already positioned on app:control still loads.
+        XPathNavigator controlNavigator = source.SelectSingleNode("app:control", manager) ?? source;
+
+        if (AtomPublishingUtility.FillCommonObjectAttributes(this, controlNavigator))
         {
             wasLoaded = true;
         }
-        if (source.HasChildren)
+        if (controlNavigator.HasChildren)
         {
-            XPathNavigator draftNavigator = source.SelectSingleNode("app:draft", manager);
+            XPathNavigator draftNavigator = controlNavigator.SelectSingleNode("app:draft", manager);
             if (draftNavigator != null && !string.IsNullOrEmpty(draftNavigator.Value))
             {
                 if (string.Equals(draftNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase))

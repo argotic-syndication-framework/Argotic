@@ -146,32 +146,32 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
         {
             if (other.Data != null)
             {
-                result |= string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.Ordinal);
+                if (result == 0) result = string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.Ordinal);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (other.Data != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.Extension != null)
         {
             if (other.Extension != null)
             {
-                result |= string.Compare(this.Extension.ToString(), other.Extension.ToString(), StringComparison.Ordinal);
+                if (result == 0) result = string.Compare(this.Extension.ToString(), other.Extension.ToString(), StringComparison.Ordinal);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (other.Extension != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         return result;
@@ -208,7 +208,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Data?.OuterXml, this.Extension?.ToString());
+        return HashCode.Combine(HashCodeUtility.Component(this.Data?.OuterXml), HashCodeUtility.Component(this.Extension?.ToString()));
     }
 
     /// <summary>

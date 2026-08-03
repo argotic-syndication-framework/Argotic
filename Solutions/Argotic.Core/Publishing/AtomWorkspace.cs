@@ -329,8 +329,8 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
         }
 
         int result = this.Title.CompareTo(other.Title);
-        result |= ComparisonUtility.CompareSequence(this.Collections, other.Collections);
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Collections, other.Collections);
+        if (result == 0) result = AtomUtility.CompareCommonObjectAttributes(this, other);
 
         return result;
     }
@@ -366,7 +366,7 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Title, this.BaseUri, this.Language);
+        return HashCode.Combine(HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.BaseUri), HashCodeUtility.Component(this.Language));
     }
 
     /// <summary>

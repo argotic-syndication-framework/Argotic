@@ -160,7 +160,7 @@ public class TrackbackSyndicationExtension : SyndicationExtension, IComparable<T
         }
 
         int result = Uri.Compare(this.Context.Ping, other.Context.Ping, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Context.Abouts, other.Context.Abouts, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Abouts, other.Context.Abouts, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -196,7 +196,7 @@ public class TrackbackSyndicationExtension : SyndicationExtension, IComparable<T
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Context.Ping, this.Context.Abouts);
+        return HashCode.Combine(HashCodeUtility.Component(this.Context.Ping), HashCodeUtility.Component(this.Context.Abouts));
     }
 
     /// <summary>

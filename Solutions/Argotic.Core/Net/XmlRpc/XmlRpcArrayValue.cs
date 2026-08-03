@@ -190,10 +190,10 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     public override int GetHashCode()
     {
         var hash = new HashCode();
-        hash.Add(this.Values.Count);
+        hash.Add(HashCodeUtility.Component(this.Values.Count));
         foreach (var value in this.Values)
         {
-            hash.Add(value);
+            hash.Add(HashCodeUtility.Component(value));
         }
 
         return hash.ToHashCode();

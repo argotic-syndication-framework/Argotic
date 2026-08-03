@@ -434,12 +434,12 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
         }
 
         int result = ComparisonUtility.CompareSequence(this.Authors, other.Authors);
-        result |= string.Compare(this.From, other.From, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Key, other.Key, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.MimeType, other.MimeType, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= this.UpdatedOn.CompareTo(other.UpdatedOn);
-        result |= this.Value.CompareTo(other.Value);
+        if (result == 0) result = string.Compare(this.From, other.From, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Key, other.Key, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.MimeType, other.MimeType, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.UpdatedOn.CompareTo(other.UpdatedOn);
+        if (result == 0) result = this.Value.CompareTo(other.Value);
 
         return result;
     }
@@ -476,13 +476,13 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
     public override int GetHashCode()
     {
         return HashCode.Combine(
-            this.Authors.Count,
+            HashCodeUtility.Component(this.Authors.Count),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.From ?? string.Empty),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Key ?? string.Empty),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.MimeType ?? string.Empty),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Name ?? string.Empty),
-            this.UpdatedOn,
-            this.Value);
+            HashCodeUtility.Component(this.UpdatedOn),
+            HashCodeUtility.Component(this.Value));
     }
 
     /// <summary>

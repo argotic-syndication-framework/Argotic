@@ -239,7 +239,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
         }
 
         int result = this.IsPermanentLink.CompareTo(other.IsPermanentLink);
-        result |= string.Compare(this.Value, other.Value, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Value, other.Value, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -276,7 +276,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     public override int GetHashCode()
     {
         return HashCode.Combine(
-            this.IsPermanentLink,
+            HashCodeUtility.Component(this.IsPermanentLink),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Value ?? string.Empty));
     }
 

@@ -58,8 +58,12 @@ internal static class ExampleRegistry
         }
 
         Assembly assembly = typeof(ExampleRegistry).Assembly;
+
+        // Example classes are declared `internal static`, so IsPublic excludes every one of them.
+        // Filter on top-level instead, which keeps the "not a nested helper" intent and also skips
+        // compiler-generated types.
         List<Type> exampleTypes = assembly.GetTypes()
-            .Where(t => t.IsClass && t.IsPublic && t.Name.EndsWith("Example", StringComparison.Ordinal))
+            .Where(t => t.IsClass && !t.IsNested && t.Name.EndsWith("Example", StringComparison.Ordinal))
             .ToList();
 
         foreach (Type type in exampleTypes)

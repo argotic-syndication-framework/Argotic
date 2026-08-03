@@ -247,14 +247,14 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         }
 
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= this.Version.CompareTo(other.Version);
-        result |= string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
-        result |= string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
+        if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Version.CompareTo(other.Version);
+        if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-        result |= this.Context.Latitude.CompareTo(other.Context.Latitude);
-        result |= this.Context.Longitude.CompareTo(other.Context.Longitude);
+        if (result == 0) result = this.Context.Latitude.CompareTo(other.Context.Latitude);
+        if (result == 0) result = this.Context.Longitude.CompareTo(other.Context.Longitude);
 
         return result;
     }
@@ -290,7 +290,7 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, this.XmlNamespace, this.XmlPrefix, this.Context.Latitude, this.Context.Longitude);
+        return HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(this.Context.Latitude), HashCodeUtility.Component(this.Context.Longitude));
     }
 
     /// <summary>

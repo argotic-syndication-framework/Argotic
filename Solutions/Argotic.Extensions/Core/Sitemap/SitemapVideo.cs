@@ -462,7 +462,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             wasLoaded = true;
         }
 
-        if (expirationNavigator != null && DateTime.TryParse(expirationNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime expiration))
+        if (expirationNavigator != null && DateTime.TryParse(expirationNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out DateTime expiration))
         {
             this.ExpirationDate = expiration;
             wasLoaded = true;
@@ -480,7 +480,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             wasLoaded = true;
         }
 
-        if (publicationNavigator != null && DateTime.TryParse(publicationNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime publication))
+        if (publicationNavigator != null && DateTime.TryParse(publicationNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out DateTime publication))
         {
             this.PublicationDate = publication;
             wasLoaded = true;
@@ -850,8 +850,8 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         }
 
         int result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.ThumbnailLocation, other.ThumbnailLocation, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.ThumbnailLocation, other.ThumbnailLocation, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
         return result;
     }
 
@@ -886,7 +886,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Title, this.ThumbnailLocation, this.Description);
+        return HashCode.Combine(HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.ThumbnailLocation), HashCodeUtility.Component(this.Description));
     }
 
     /// <summary>

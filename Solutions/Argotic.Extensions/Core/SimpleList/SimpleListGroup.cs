@@ -185,8 +185,8 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
         }
 
         int result = string.Compare(this.Element, other.Element, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Label, other.Label, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Namespace, other.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.Label, other.Label, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Namespace, other.Namespace, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
         return result;
     }
@@ -222,7 +222,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Element, this.Label, this.Namespace);
+        return HashCode.Combine(HashCodeUtility.Component(this.Element), HashCodeUtility.Component(this.Label), HashCodeUtility.Component(this.Namespace));
     }
 
     /// <summary>

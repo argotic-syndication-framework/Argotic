@@ -945,13 +945,52 @@ public class SyndicationEncodingUtilityTest
     #region CreateSafeXmlReaderSettings Tests
 
     [TestMethod]
-    public void CreateSafeXmlReaderSettings_DisablesDtdProcessing()
+    public void CreateSafeXmlReaderSettings_ParsesInternalDtdSubset()
+    {
+        // Arrange & Act
+        // Feeds that declare entities in an internal DTD subset must still load, so the subset is parsed
+        // rather than ignored; XXE is prevented by refusing to resolve external entities instead.
+        XmlReaderSettings settings = SyndicationEncodingUtility.CreateSafeXmlReaderSettings();
+
+        // Assert
+        settings.DtdProcessing.ShouldBe(System.Xml.DtdProcessing.Parse);
+    }
+
+    [TestMethod]
+    public void CreateSafeXmlReaderSettings_BoundsEntityExpansion()
     {
         // Arrange & Act
         XmlReaderSettings settings = SyndicationEncodingUtility.CreateSafeXmlReaderSettings();
 
         // Assert
-        settings.DtdProcessing.ShouldBe(System.Xml.DtdProcessing.Ignore);
+        settings.MaxCharactersFromEntities.ShouldBeGreaterThan(0);
+    }
+
+    [TestMethod]
+    public void CreateSafeNavigator_ResolvesEntityDeclaredInInternalDtdSubset()
+    {
+        // Arrange
+        string xml = "<?xml version=\"1.0\"?><!DOCTYPE rss [<!ENTITY nbsp \"&#160;\">]>"
+            + "<rss version=\"2.0\"><channel><title>a&nbsp;b</title></channel></rss>";
+
+        // Act
+        XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(xml);
+
+        // Assert
+        navigator.SelectSingleNode("//title").Value.ShouldBe("a b");
+    }
+
+    [TestMethod]
+    public void CreateSafeNavigator_DoesNotResolveExternalEntity()
+    {
+        // Arrange
+        string xml = "<?xml version=\"1.0\"?><!DOCTYPE r [<!ENTITY x SYSTEM \"file:///etc/passwd\">]><r>&x;</r>";
+
+        // Act
+        XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(xml);
+
+        // Assert
+        navigator.SelectSingleNode("//r").Value.ShouldBeEmpty();
     }
 
     [TestMethod]

@@ -196,7 +196,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
         {
             for (int i = 0; i < source.Count; i++)
             {
-                result |= source[i].CompareTo(target[i]);
+                if (result == 0) result = source[i].CompareTo(target[i]);
             }
         }
         else if (source.Count > target.Count)
@@ -422,11 +422,11 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
         }
 
         int result = string.Compare(this.Id, other.Id, StringComparison.OrdinalIgnoreCase);
-        result |= this.ConflictPreservation.CompareTo(other.ConflictPreservation);
-        result |= this.TombstoneStatus.CompareTo(other.TombstoneStatus);
-        result |= this.Updates.CompareTo(other.Updates);
-        result |= FeedSynchronizationItem.CompareSequence(this.Histories, other.Histories);
-        result |= ComparisonUtility.CompareSequence(this.Conflicts, other.Conflicts);
+        if (result == 0) result = this.ConflictPreservation.CompareTo(other.ConflictPreservation);
+        if (result == 0) result = this.TombstoneStatus.CompareTo(other.TombstoneStatus);
+        if (result == 0) result = this.Updates.CompareTo(other.Updates);
+        if (result == 0) result = FeedSynchronizationItem.CompareSequence(this.Histories, other.Histories);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Conflicts, other.Conflicts);
 
         return result;
     }
@@ -462,7 +462,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Id, this.ConflictPreservation, this.TombstoneStatus, this.Updates);
+        return HashCode.Combine(HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.ConflictPreservation), HashCodeUtility.Component(this.TombstoneStatus), HashCodeUtility.Component(this.Updates));
     }
 
     /// <summary>

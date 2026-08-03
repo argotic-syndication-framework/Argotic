@@ -239,7 +239,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, this.XmlNamespace, this.XmlPrefix);
+        return HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix));
     }
 
     /// <summary>

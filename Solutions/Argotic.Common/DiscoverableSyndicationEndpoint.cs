@@ -212,8 +212,8 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
         }
 
         int result = string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Source, other.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Source, other.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -249,7 +249,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.ContentType, this.Source, this.Title);
+        return HashCode.Combine(HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.Source), HashCodeUtility.Component(this.Title));
     }
 
     /// <summary>

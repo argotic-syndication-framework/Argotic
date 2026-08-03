@@ -225,7 +225,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
         }
 
         int result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -263,7 +263,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     {
         return HashCode.Combine(
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Title ?? string.Empty),
-            this.Url);
+            HashCodeUtility.Component(this.Url));
     }
 
     /// <summary>

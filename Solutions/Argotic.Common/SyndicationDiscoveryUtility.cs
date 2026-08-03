@@ -57,6 +57,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(source);
 
         using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(source, null, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         return SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
     }
@@ -88,6 +89,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(httpClient);
 
         using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(source, httpClient, null, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         return SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
     }
@@ -292,12 +294,14 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static Task<bool> SourceReferencesTargetAsync(
+    public static async Task<bool> SourceReferencesTargetAsync(
         Uri source,
         Uri target,
         CancellationToken cancellationToken = default)
     {
-        return SourceReferencesTargetAsync(source, target, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(SyndicationEncodingUtility.DefaultRequestTimeout);
+        return await SourceReferencesTargetAsync(source, target, SyndicationEncodingUtility.SharedHttpClient, timeoutCts.Token).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -331,6 +335,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(httpClient);
 
         using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(source, httpClient, null, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         using StreamReader reader = new(stream);
         string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
@@ -360,12 +365,23 @@ public static class SyndicationDiscoveryUtility
     /// </returns>
     /// <remarks>
     ///     This method will return <b>false</b> if the <paramref name="uri"/> is a null reference or the <paramref name="uri"/> is otherwise inaccessible.
+    ///     Requests are subject to a 100-second default time-out; a timed-out request is treated as inaccessible.
     /// </remarks>
-    public static Task<bool> UriExistsAsync(
+    public static async Task<bool> UriExistsAsync(
         Uri uri,
         CancellationToken cancellationToken = default)
     {
-        return UriExistsAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(SyndicationEncodingUtility.DefaultRequestTimeout);
+
+        try
+        {
+            return await UriExistsAsync(uri, SyndicationEncodingUtility.SharedHttpClient, timeoutCts.Token).ConfigureAwait(false);
+        }
+        catch (OperationCanceledException) when (!cancellationToken.IsCancellationRequested)
+        {
+            return false;
+        }
     }
 
     /// <summary>
@@ -421,13 +437,15 @@ public static class SyndicationDiscoveryUtility
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="ConditionalGetResult"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public static Task<ConditionalGetResult> ConditionalGetAsync(
+    public static async Task<ConditionalGetResult> ConditionalGetAsync(
         Uri source,
         DateTime lastModified,
         string entityTag,
         CancellationToken cancellationToken = default)
     {
-        return ConditionalGetAsync(source, lastModified, entityTag, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(SyndicationEncodingUtility.DefaultRequestTimeout);
+        return await ConditionalGetAsync(source, lastModified, entityTag, SyndicationEncodingUtility.SharedHttpClient, timeoutCts.Token).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -446,6 +464,7 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="HttpRequestException">The response status code does not indicate success or a lack of modification.</exception>
     public static async Task<ConditionalGetResult> ConditionalGetAsync(
         Uri source,
         DateTime lastModified,
@@ -456,9 +475,14 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(httpClient);
 
+        // HTTP validator times are UTC; treat Unspecified-kind values as UTC so the sent header and the comparison below agree.
+        DateTimeOffset lastModifiedOffset = lastModified.Kind == DateTimeKind.Unspecified
+            ? new DateTimeOffset(lastModified, TimeSpan.Zero)
+            : new DateTimeOffset(lastModified);
+
         using var request = new HttpRequestMessage(HttpMethod.Get, source);
         request.Headers.UserAgent.ParseAdd(FrameworkUserAgent);
-        request.Headers.IfModifiedSince = new DateTimeOffset(lastModified);
+        request.Headers.IfModifiedSince = lastModifiedOffset;
         if (!string.IsNullOrEmpty(entityTag))
         {
             request.Headers.IfNoneMatch.TryParseAdd(entityTag);
@@ -472,9 +496,21 @@ public static class SyndicationDiscoveryUtility
             return new ConditionalGetResult(null, wasModified: false);
         }
 
+        if (!response.IsSuccessStatusCode)
+        {
+            try
+            {
+                response.EnsureSuccessStatusCode();
+            }
+            finally
+            {
+                response.Dispose();
+            }
+        }
+
         // Check if actually modified by comparing Last-Modified header
-        var responseLastModified = response.Content.Headers.LastModified?.DateTime ?? DateTime.MinValue;
-        bool isModified = responseLastModified > lastModified;
+        DateTimeOffset responseLastModified = response.Content.Headers.LastModified ?? DateTimeOffset.MinValue;
+        bool isModified = responseLastModified > lastModifiedOffset;
 
         if (!isModified && response.StatusCode == HttpStatusCode.OK)
         {
@@ -584,11 +620,13 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static Task<Collection<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
+    public static async Task<Collection<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
         Uri uri,
         CancellationToken cancellationToken = default)
     {
-        return LocateDiscoverableSyndicationEndpointsAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(SyndicationEncodingUtility.DefaultRequestTimeout);
+        return await LocateDiscoverableSyndicationEndpointsAsync(uri, SyndicationEncodingUtility.SharedHttpClient, timeoutCts.Token).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -624,6 +662,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(httpClient);
 
         using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(stream);
     }
@@ -718,11 +757,13 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static Task<bool> IsPingbackEnabledAsync(
+    public static async Task<bool> IsPingbackEnabledAsync(
         Uri uri,
         CancellationToken cancellationToken = default)
     {
-        return IsPingbackEnabledAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(SyndicationEncodingUtility.DefaultRequestTimeout);
+        return await IsPingbackEnabledAsync(uri, SyndicationEncodingUtility.SharedHttpClient, timeoutCts.Token).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -764,6 +805,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(httpClient);
 
         using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
 
         if (response.Headers.TryGetValues("X-Pingback", out var values))
         {
@@ -806,11 +848,13 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static Task<Uri?> LocatePingbackNotificationServerAsync(
+    public static async Task<Uri?> LocatePingbackNotificationServerAsync(
         Uri uri,
         CancellationToken cancellationToken = default)
     {
-        return LocatePingbackNotificationServerAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(SyndicationEncodingUtility.DefaultRequestTimeout);
+        return await LocatePingbackNotificationServerAsync(uri, SyndicationEncodingUtility.SharedHttpClient, timeoutCts.Token).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -851,6 +895,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(httpClient);
 
         using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
 
         if (response.Headers.TryGetValues("X-Pingback", out var values))
         {
@@ -892,7 +937,7 @@ public static class SyndicationDiscoveryUtility
     public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
         Collection<TrackbackDiscoveryMetadata> results = new();
-        Regex rdfPattern = new("<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        Regex rdfPattern = new(@"<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         XmlNamespaceManager manager = new(new NameTable());
 
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -1024,11 +1069,13 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static Task<Collection<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
+    public static async Task<Collection<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
         Uri uri,
         CancellationToken cancellationToken = default)
     {
-        return LocateTrackbackNotificationServersAsync(uri, SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(SyndicationEncodingUtility.DefaultRequestTimeout);
+        return await LocateTrackbackNotificationServersAsync(uri, SyndicationEncodingUtility.SharedHttpClient, timeoutCts.Token).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -1064,6 +1111,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(httpClient);
 
         using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(stream);
     }

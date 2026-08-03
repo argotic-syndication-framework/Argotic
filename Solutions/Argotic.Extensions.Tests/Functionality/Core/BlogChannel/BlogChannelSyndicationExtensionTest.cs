@@ -145,10 +145,12 @@ public class BlogChannelSyndicationExtensionTest
     [TestMethod]
     public void BlogChannelOpGreaterThanTest()
     {
+        // Ordering is decided by the first member that differs: extension 1's blink URI ("promoted")
+        // sorts after extension 2's ("other-promoted"), so extension 1 is the greater of the two.
         BlogChannelSyndicationExtension first = CreateExtension1();
         BlogChannelSyndicationExtension second = CreateExtension2();
-        bool actual = first > second;
-        actual.ShouldBeFalse();
+        (first > second).ShouldBeTrue();
+        (second > first).ShouldBeFalse();
     }
 
     [TestMethod]
@@ -165,8 +167,8 @@ public class BlogChannelSyndicationExtensionTest
     {
         BlogChannelSyndicationExtension first = CreateExtension1();
         BlogChannelSyndicationExtension second = CreateExtension2();
-        bool actual = first < second;
-        actual.ShouldBeTrue();
+        (first < second).ShouldBeFalse();
+        (second < first).ShouldBeTrue();
     }
 
     [TestMethod]

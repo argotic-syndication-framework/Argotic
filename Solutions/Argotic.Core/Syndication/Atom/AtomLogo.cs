@@ -224,7 +224,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Uri);
+        return HashCode.Combine(HashCodeUtility.Component(this.Uri));
     }
 
     /// <summary>

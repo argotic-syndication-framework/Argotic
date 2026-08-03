@@ -327,7 +327,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.TextType);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.TextType));
     }
 
     /// <summary>

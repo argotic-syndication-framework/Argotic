@@ -340,7 +340,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.ExpiresOn, this.Since, this.Until);
+        return HashCode.Combine(HashCodeUtility.Component(this.ExpiresOn), HashCodeUtility.Component(this.Since), HashCodeUtility.Component(this.Until));
     }
 
     /// <summary>

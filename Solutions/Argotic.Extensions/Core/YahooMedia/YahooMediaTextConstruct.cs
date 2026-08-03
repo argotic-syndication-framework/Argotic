@@ -235,7 +235,7 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.TextType);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.TextType));
     }
 
     /// <summary>

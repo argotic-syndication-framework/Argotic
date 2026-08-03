@@ -180,7 +180,7 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
         }
 
         int result = this.RelationType.CompareTo(other.RelationType);
-        result |= Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -216,7 +216,7 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.RelationType, this.Uri);
+        return HashCode.Combine(HashCodeUtility.Component(this.RelationType), HashCodeUtility.Component(this.Uri));
     }
 
     /// <summary>

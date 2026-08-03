@@ -223,8 +223,8 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Encoding, other.Encoding, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
-        result |= Uri.Compare(this.Format, other.Format, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        if (result == 0) result = Uri.Compare(this.Encoding, other.Encoding, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        if (result == 0) result = Uri.Compare(this.Format, other.Format, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
         return result;
     }
@@ -260,7 +260,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.Encoding, this.Format);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.Encoding), HashCodeUtility.Component(this.Format));
     }
 
     /// <summary>

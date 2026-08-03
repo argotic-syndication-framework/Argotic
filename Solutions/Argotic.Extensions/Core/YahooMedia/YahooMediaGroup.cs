@@ -429,7 +429,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
 
         int result = YahooMediaUtility.CompareSequence(this.Contents, other.Contents);
 
-        result |= YahooMediaUtility.CompareCommonObjectEntities(this, other);
+        if (result == 0) result = YahooMediaUtility.CompareCommonObjectEntities(this, other);
 
         return result;
     }
@@ -465,7 +465,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Contents);
+        return HashCode.Combine(HashCodeUtility.Component(this.Contents));
     }
 
     /// <summary>

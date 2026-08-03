@@ -72,7 +72,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
         }
 
         int result = string.Compare(this.AlternateValue, other.AlternateValue, StringComparison.Ordinal);
-        result |= string.Compare(this.DisplayName, other.DisplayName, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.DisplayName, other.DisplayName, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -108,7 +108,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.AlternateValue, this.DisplayName);
+        return HashCode.Combine(HashCodeUtility.Component(this.AlternateValue), HashCodeUtility.Component(this.DisplayName));
     }
 
     /// <summary>

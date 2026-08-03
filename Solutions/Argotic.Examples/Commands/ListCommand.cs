@@ -8,7 +8,7 @@ namespace Argotic.Examples.Commands;
 /// </summary>
 internal sealed class ListCommand : Command<ListSettings>
 {
-    public override int Execute(CommandContext context, ListSettings settings, CancellationToken cancellationToken)
+    protected override int Execute(CommandContext context, ListSettings settings, CancellationToken cancellationToken)
     {
         ExampleRegistry.Initialize();
 

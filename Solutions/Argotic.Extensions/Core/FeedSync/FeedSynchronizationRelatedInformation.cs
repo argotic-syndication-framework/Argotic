@@ -277,7 +277,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Link, this.Title, this.RelationType);
+        return HashCode.Combine(HashCodeUtility.Component(this.Link), HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.RelationType));
     }
 
     /// <summary>

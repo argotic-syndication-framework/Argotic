@@ -340,7 +340,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Title, this.CreatedOn, this.ModifiedOn, this.VerticalScrollState, this.Owner, this.Window);
+        return HashCode.Combine(HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.ModifiedOn), HashCodeUtility.Component(this.VerticalScrollState), HashCodeUtility.Component(this.Owner), HashCodeUtility.Component(this.Window));
     }
 
     /// <summary>

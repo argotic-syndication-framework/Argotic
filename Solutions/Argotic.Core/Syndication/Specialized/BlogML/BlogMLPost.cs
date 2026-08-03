@@ -739,35 +739,35 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         }
 
         int result = ComparisonUtility.CompareSequence(this.Attachments, other.Attachments);
-        result |= ComparisonUtility.CompareSequence(this.Authors, other.Authors, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Comments, other.Comments);
-        result |= this.Content.CompareTo(other.Content);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Authors, other.Authors, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Categories, other.Categories, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Comments, other.Comments);
+        if (result == 0) result = this.Content.CompareTo(other.Content);
 
         if (this.Excerpt != null)
         {
-            result |= this.Excerpt.CompareTo(other.Excerpt);
+            if (result == 0) result = this.Excerpt.CompareTo(other.Excerpt);
         }
         else if (other.Excerpt != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.Name != null)
         {
-            result |= this.Name.CompareTo(other.Name);
+            if (result == 0) result = this.Name.CompareTo(other.Name);
         }
         else if (other.Name != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
-        result |= this.PostType.CompareTo(other.PostType);
-        result |= ComparisonUtility.CompareSequence(this.Trackbacks, other.Trackbacks);
-        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Views, other.Views, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.PostType.CompareTo(other.PostType);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Trackbacks, other.Trackbacks);
+        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Views, other.Views, StringComparison.OrdinalIgnoreCase);
 
-        result |= BlogMLUtility.CompareCommonObjects(this, other);
+        if (result == 0) result = BlogMLUtility.CompareCommonObjects(this, other);
 
         return result;
     }
@@ -803,7 +803,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.PostType, this.Url, this.Views, this.ApprovalStatus, this.CreatedOn, this.Id, this.LastModifiedOn);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.PostType), HashCodeUtility.Component(this.Url), HashCodeUtility.Component(this.Views), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn));
     }
 
     /// <summary>

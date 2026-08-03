@@ -197,8 +197,8 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
         }
 
         int result = this.Context.Base.CompareTo(other.Context.Base);
-        result |= this.Context.Frequency.CompareTo(other.Context.Frequency);
-        result |= this.Context.Period.CompareTo(other.Context.Period);
+        if (result == 0) result = this.Context.Frequency.CompareTo(other.Context.Frequency);
+        if (result == 0) result = this.Context.Period.CompareTo(other.Context.Period);
 
         return result;
     }
@@ -234,7 +234,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Context.Base, this.Context.Frequency, this.Context.Period);
+        return HashCode.Combine(HashCodeUtility.Component(this.Context.Base), HashCodeUtility.Component(this.Context.Frequency), HashCodeUtility.Component(this.Context.Period));
     }
 
     /// <summary>

@@ -282,7 +282,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Members.Count);
+        return HashCode.Combine(HashCodeUtility.Component(this.Members.Count));
     }
 
     /// <summary>

@@ -87,8 +87,8 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
         }
 
         int result = string.Compare(this.Documentation, other.Documentation, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.SubName, other.SubName, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.SubName, other.SubName, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -124,7 +124,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Documentation, this.Name, this.SubName);
+        return HashCode.Combine(HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.SubName));
     }
 
     /// <summary>

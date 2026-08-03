@@ -209,9 +209,9 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
         }
 
         int result = this.CreatedOn.CompareTo(other.CreatedOn);
-        result |= string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Generator, other.Generator, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Generator, other.Generator, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -248,7 +248,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     public override int GetHashCode()
     {
         return HashCode.Combine(
-            this.CreatedOn,
+            HashCodeUtility.Component(this.CreatedOn),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.EmailAddress ?? string.Empty),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Generator ?? string.Empty),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Title ?? string.Empty));

@@ -24,7 +24,7 @@ internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
         "Syndication Content Format Get"
     };
 
-    public override async Task<int> ExecuteAsync(CommandContext context, RunAllSettings settings, CancellationToken cancellationToken)
+    protected override async Task<int> ExecuteAsync(CommandContext context, RunAllSettings settings, CancellationToken cancellationToken)
     {
         ExampleRegistry.Initialize();
 

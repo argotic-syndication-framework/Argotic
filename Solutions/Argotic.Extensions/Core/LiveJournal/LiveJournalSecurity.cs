@@ -214,7 +214,7 @@ public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Mask);
+        return HashCode.Combine(HashCodeUtility.Component(this.Mask));
     }
 
     /// <summary>

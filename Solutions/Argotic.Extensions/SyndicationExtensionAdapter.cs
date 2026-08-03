@@ -218,13 +218,20 @@ public class SyndicationExtensionAdapter
         ArgumentNullException.ThrowIfNull(types);
         ArgumentNullException.ThrowIfNull(writer);
 
+        HashSet<string> declaredPrefixes = new(StringComparer.Ordinal);
+
         foreach (Type type in types)
         {
             if (type != null)
             {
                 if (Activator.CreateInstance(type) is ISyndicationExtension extension)
                 {
-                    extension.WriteXmlNamespaceDeclaration(writer);
+                    // Extensions can share a prefix - the Atom Publishing control and edited extensions
+                    // both use "app" - and repeating a declaration is not well-formed XML.
+                    if (declaredPrefixes.Add($"{extension.XmlPrefix}:{extension.XmlNamespace}"))
+                    {
+                        extension.WriteXmlNamespaceDeclaration(writer);
+                    }
                 }
             }
         }

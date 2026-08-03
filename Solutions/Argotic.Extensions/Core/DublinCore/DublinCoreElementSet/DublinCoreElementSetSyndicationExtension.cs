@@ -169,43 +169,43 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
         }
 
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= this.Version.CompareTo(other.Version);
-        result |= string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
-        result |= string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
+        if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Version.CompareTo(other.Version);
+        if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-        result |= string.Compare(this.Context.Contributor, other.Context.Contributor, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Coverage, other.Context.Coverage, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Creator, other.Context.Creator, StringComparison.OrdinalIgnoreCase);
-        result |= this.Context.Date.CompareTo(other.Context.Date);
-        result |= string.Compare(this.Context.Description, other.Context.Description, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Format, other.Context.Format, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Identifier, other.Context.Identifier, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.Context.Contributor, other.Context.Contributor, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Coverage, other.Context.Coverage, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Creator, other.Context.Creator, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.Date.CompareTo(other.Context.Date);
+        if (result == 0) result = string.Compare(this.Context.Description, other.Context.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Format, other.Context.Format, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Identifier, other.Context.Identifier, StringComparison.Ordinal);
 
         if (this.Context.Language != null)
         {
             if (other.Context.Language != null)
             {
-                result |= string.Compare(this.Context.Language.Name, other.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
+                if (result == 0) result = string.Compare(this.Context.Language.Name, other.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (this.Context.Language == null && other.Context.Language != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
-        result |= string.Compare(this.Context.Publisher, other.Context.Publisher, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Relation, other.Context.Relation, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Rights, other.Context.Rights, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Source, other.Context.Source, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Subject, other.Context.Subject, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Title, other.Context.Title, StringComparison.OrdinalIgnoreCase);
-        result |= this.Context.TypeVocabulary.CompareTo(other.Context.TypeVocabulary);
+        if (result == 0) result = string.Compare(this.Context.Publisher, other.Context.Publisher, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Relation, other.Context.Relation, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Rights, other.Context.Rights, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Source, other.Context.Source, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Subject, other.Context.Subject, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Title, other.Context.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.TypeVocabulary.CompareTo(other.Context.TypeVocabulary);
 
         return result;
     }
@@ -242,10 +242,10 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
     public override int GetHashCode()
     {
         return HashCode.Combine(
-            HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, this.XmlNamespace, this.XmlPrefix),
-            HashCode.Combine(this.Context.Contributor, this.Context.Coverage, this.Context.Creator, this.Context.Date, this.Context.Description, this.Context.Format),
-            HashCode.Combine(this.Context.Identifier, this.Context.Language, this.Context.Publisher, this.Context.Relation, this.Context.Rights),
-            HashCode.Combine(this.Context.Source, this.Context.Subject, this.Context.Title, this.Context.TypeVocabulary));
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix))),
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Contributor), HashCodeUtility.Component(this.Context.Coverage), HashCodeUtility.Component(this.Context.Creator), HashCodeUtility.Component(this.Context.Date), HashCodeUtility.Component(this.Context.Description), HashCodeUtility.Component(this.Context.Format))),
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Identifier), HashCodeUtility.Component(this.Context.Language), HashCodeUtility.Component(this.Context.Publisher), HashCodeUtility.Component(this.Context.Relation), HashCodeUtility.Component(this.Context.Rights))),
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Source), HashCodeUtility.Component(this.Context.Subject), HashCodeUtility.Component(this.Context.Title), HashCodeUtility.Component(this.Context.TypeVocabulary))));
     }
 
     /// <summary>

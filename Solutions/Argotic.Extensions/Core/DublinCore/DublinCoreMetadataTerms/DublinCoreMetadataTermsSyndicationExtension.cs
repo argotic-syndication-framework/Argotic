@@ -179,83 +179,83 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
         }
 
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= this.Version.CompareTo(other.Version);
-        result |= string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
-        result |= string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
+        if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Version.CompareTo(other.Version);
+        if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-        result |= string.Compare(this.Context.Abstract, other.Context.Abstract, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.AccessRights, other.Context.AccessRights, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.AccrualMethod, other.Context.AccrualMethod, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.AccrualPeriodicity, other.Context.AccrualPeriodicity, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.AccrualPolicy, other.Context.AccrualPolicy, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.AlternativeTitle, other.Context.AlternativeTitle, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Audience, other.Context.Audience, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.AudienceEducationLevel, other.Context.AudienceEducationLevel, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.BibliographicCitation, other.Context.BibliographicCitation, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.ConformsTo, other.Context.ConformsTo, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Contributor, other.Context.Contributor, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Coverage, other.Context.Coverage, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Creator, other.Context.Creator, StringComparison.OrdinalIgnoreCase);
-        result |= this.Context.Date.CompareTo(other.Context.Date);
-        result |= this.Context.DateAccepted.CompareTo(other.Context.DateAccepted);
-        result |= string.Compare(this.Context.DateAvailable, other.Context.DateAvailable, StringComparison.OrdinalIgnoreCase);
-        result |= this.Context.DateCopyrighted.CompareTo(other.Context.DateCopyrighted);
-        result |= this.Context.DateCreated.CompareTo(other.Context.DateCreated);
-        result |= this.Context.DateIssued.CompareTo(other.Context.DateIssued);
-        result |= this.Context.DateModified.CompareTo(other.Context.DateModified);
-        result |= this.Context.DateSubmitted.CompareTo(other.Context.DateSubmitted);
-        result |= string.Compare(this.Context.DateValid, other.Context.DateValid, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Description, other.Context.Description, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Extent, other.Context.Extent, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Format, other.Context.Format, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.HasFormat, other.Context.HasFormat, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.HasPart, other.Context.HasPart, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.HasVersion, other.Context.HasVersion, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Identifier, other.Context.Identifier, StringComparison.Ordinal);
-        result |= string.Compare(this.Context.InstructionalMethod, other.Context.InstructionalMethod, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.IsFormatOf, other.Context.IsFormatOf, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.IsPartOf, other.Context.IsPartOf, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.IsReferencedBy, other.Context.IsReferencedBy, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.IsReplacedBy, other.Context.IsReplacedBy, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.IsRequiredBy, other.Context.IsRequiredBy, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.IsVersionOf, other.Context.IsVersionOf, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Abstract, other.Context.Abstract, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.AccessRights, other.Context.AccessRights, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.AccrualMethod, other.Context.AccrualMethod, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.AccrualPeriodicity, other.Context.AccrualPeriodicity, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.AccrualPolicy, other.Context.AccrualPolicy, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.AlternativeTitle, other.Context.AlternativeTitle, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Audience, other.Context.Audience, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.AudienceEducationLevel, other.Context.AudienceEducationLevel, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.BibliographicCitation, other.Context.BibliographicCitation, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.ConformsTo, other.Context.ConformsTo, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Contributor, other.Context.Contributor, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Coverage, other.Context.Coverage, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Creator, other.Context.Creator, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.Date.CompareTo(other.Context.Date);
+        if (result == 0) result = this.Context.DateAccepted.CompareTo(other.Context.DateAccepted);
+        if (result == 0) result = string.Compare(this.Context.DateAvailable, other.Context.DateAvailable, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.DateCopyrighted.CompareTo(other.Context.DateCopyrighted);
+        if (result == 0) result = this.Context.DateCreated.CompareTo(other.Context.DateCreated);
+        if (result == 0) result = this.Context.DateIssued.CompareTo(other.Context.DateIssued);
+        if (result == 0) result = this.Context.DateModified.CompareTo(other.Context.DateModified);
+        if (result == 0) result = this.Context.DateSubmitted.CompareTo(other.Context.DateSubmitted);
+        if (result == 0) result = string.Compare(this.Context.DateValid, other.Context.DateValid, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Description, other.Context.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Extent, other.Context.Extent, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Format, other.Context.Format, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.HasFormat, other.Context.HasFormat, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.HasPart, other.Context.HasPart, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.HasVersion, other.Context.HasVersion, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Identifier, other.Context.Identifier, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.Context.InstructionalMethod, other.Context.InstructionalMethod, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.IsFormatOf, other.Context.IsFormatOf, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.IsPartOf, other.Context.IsPartOf, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.IsReferencedBy, other.Context.IsReferencedBy, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.IsReplacedBy, other.Context.IsReplacedBy, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.IsRequiredBy, other.Context.IsRequiredBy, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.IsVersionOf, other.Context.IsVersionOf, StringComparison.OrdinalIgnoreCase);
 
         if (this.Context.Language != null)
         {
             if (other.Context.Language != null)
             {
-                result |= string.Compare(this.Context.Language.Name, other.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
+                if (result == 0) result = string.Compare(this.Context.Language.Name, other.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (this.Context.Language == null && other.Context.Language != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
-        result |= string.Compare(this.Context.License, other.Context.License, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Mediator, other.Context.Mediator, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Medium, other.Context.Medium, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Provenance, other.Context.Provenance, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Publisher, other.Context.Publisher, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.References, other.Context.References, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Relation, other.Context.Relation, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Replaces, other.Context.Replaces, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Requires, other.Context.Requires, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Rights, other.Context.Rights, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.RightsHolder, other.Context.RightsHolder, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Source, other.Context.Source, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.SpatialCoverage, other.Context.SpatialCoverage, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Subject, other.Context.Subject, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.TableOfContents, other.Context.TableOfContents, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.TemporalCoverage, other.Context.TemporalCoverage, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Title, other.Context.Title, StringComparison.OrdinalIgnoreCase);
-        result |= this.Context.TypeVocabulary.CompareTo(other.Context.TypeVocabulary);
+        if (result == 0) result = string.Compare(this.Context.License, other.Context.License, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Mediator, other.Context.Mediator, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Medium, other.Context.Medium, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Provenance, other.Context.Provenance, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Publisher, other.Context.Publisher, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.References, other.Context.References, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Relation, other.Context.Relation, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Replaces, other.Context.Replaces, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Requires, other.Context.Requires, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Rights, other.Context.Rights, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.RightsHolder, other.Context.RightsHolder, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Source, other.Context.Source, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.SpatialCoverage, other.Context.SpatialCoverage, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Subject, other.Context.Subject, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.TableOfContents, other.Context.TableOfContents, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.TemporalCoverage, other.Context.TemporalCoverage, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Title, other.Context.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.TypeVocabulary.CompareTo(other.Context.TypeVocabulary);
 
         return result;
     }
@@ -292,10 +292,10 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     public override int GetHashCode()
     {
         return HashCode.Combine(
-            HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, this.XmlNamespace, this.XmlPrefix),
-            HashCode.Combine(this.Context.Abstract, this.Context.Contributor, this.Context.Creator, this.Context.Date, this.Context.Description, this.Context.Identifier),
-            HashCode.Combine(this.Context.Language, this.Context.Publisher, this.Context.Relation, this.Context.Rights, this.Context.Source),
-            HashCode.Combine(this.Context.Subject, this.Context.Title, this.Context.TypeVocabulary));
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix))),
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Abstract), HashCodeUtility.Component(this.Context.Contributor), HashCodeUtility.Component(this.Context.Creator), HashCodeUtility.Component(this.Context.Date), HashCodeUtility.Component(this.Context.Description), HashCodeUtility.Component(this.Context.Identifier))),
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Language), HashCodeUtility.Component(this.Context.Publisher), HashCodeUtility.Component(this.Context.Relation), HashCodeUtility.Component(this.Context.Rights), HashCodeUtility.Component(this.Context.Source))),
+            HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Subject), HashCodeUtility.Component(this.Context.Title), HashCodeUtility.Component(this.Context.TypeVocabulary))));
     }
 
     /// <summary>

@@ -167,14 +167,14 @@ internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
         {
             // Base class properties
             int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            result |= Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            result |= string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            result |= this.Version.CompareTo(value.Version);
-            result |= string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            result |= string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
+            if (result == 0) result = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+            if (result == 0) result = string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
+            if (result == 0) result = this.Version.CompareTo(value.Version);
+            if (result == 0) result = string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
+            if (result == 0) result = string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
             // Custom extension properties
-            result |= string.Compare(this.MyAttribute, value.MyAttribute, StringComparison.OrdinalIgnoreCase);
+            if (result == 0) result = string.Compare(this.MyAttribute, value.MyAttribute, StringComparison.OrdinalIgnoreCase);
 
             return result;
         }

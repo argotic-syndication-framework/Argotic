@@ -160,7 +160,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
         }
 
         int result = Uri.Compare(this.Context.Comments, other.Context.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Context.CommentsFeed, other.Context.CommentsFeed, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.CommentsFeed, other.Context.CommentsFeed, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -196,7 +196,7 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Context.Comments, this.Context.CommentsFeed);
+        return HashCode.Combine(HashCodeUtility.Component(this.Context.Comments), HashCodeUtility.Component(this.Context.CommentsFeed));
     }
 
     /// <summary>

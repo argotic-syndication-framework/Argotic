@@ -142,7 +142,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
         XPathNavigator navigator = source.CreateNavigator();
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
-        XPathNavigator newsNavigator = navigator.SelectSingleNode("//news:news", manager);
+        XPathNavigator newsNavigator = navigator.SelectSingleNode("news:news", manager);
 
         if (newsNavigator != null)
         {
@@ -162,7 +162,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
 
             if (publicationDateNavigator != null && !string.IsNullOrEmpty(publicationDateNavigator.Value))
             {
-                if (DateTime.TryParse(publicationDateNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.None, out DateTime publicationDate))
+                if (DateTime.TryParse(publicationDateNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out DateTime publicationDate))
                 {
                     this.extensionPublicationDate = publicationDate;
                     wasLoaded = true;
@@ -277,8 +277,8 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
             result = -1;
         }
 
-        result |= this.PublicationDate.CompareTo(other.PublicationDate);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.PublicationDate.CompareTo(other.PublicationDate);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -314,7 +314,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Publication, this.PublicationDate, this.Title);
+        return HashCode.Combine(HashCodeUtility.Component(this.Publication), HashCodeUtility.Component(this.PublicationDate), HashCodeUtility.Component(this.Title));
     }
 
     /// <summary>

@@ -149,16 +149,16 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
         }
 
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= this.Version.CompareTo(other.Version);
-        result |= string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
-        result |= string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
+        if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Version.CompareTo(other.Version);
+        if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-        result |= Uri.Compare(this.Context.Blink, other.Context.Blink, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Context.BlogRoll, other.Context.BlogRoll, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Context.Changes, other.Context.Changes, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Context.MySubscriptions, other.Context.MySubscriptions, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.Blink, other.Context.Blink, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.BlogRoll, other.Context.BlogRoll, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.Changes, other.Context.Changes, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.MySubscriptions, other.Context.MySubscriptions, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -194,7 +194,7 @@ public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Description, this.Documentation, this.Name, this.Version, HashCode.Combine(this.XmlNamespace, this.XmlPrefix, this.Context.Blink, this.Context.BlogRoll, this.Context.Changes, this.Context.MySubscriptions));
+        return HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(this.Context.Blink), HashCodeUtility.Component(this.Context.BlogRoll), HashCodeUtility.Component(this.Context.Changes), HashCodeUtility.Component(this.Context.MySubscriptions))));
     }
 
     /// <summary>

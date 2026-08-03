@@ -444,8 +444,15 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
 
         if (urlIterator is { Count: > 0 })
         {
+            int counter = 0;
             while (urlIterator.MoveNext())
             {
+                counter++;
+                if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 SitemapUrl url = new();
                 if (url.Load(urlIterator.Current, settings))
                 {

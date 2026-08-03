@@ -221,7 +221,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
 
         int result = string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
 
-        result |= BlogMLUtility.CompareCommonObjects(this, other);
+        if (result == 0) result = BlogMLUtility.CompareCommonObjects(this, other);
 
         return result;
     }
@@ -257,7 +257,7 @@ public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEqu
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.EmailAddress, this.ApprovalStatus, this.CreatedOn, this.Id, this.LastModifiedOn, this.Title);
+        return HashCode.Combine(HashCodeUtility.Component(this.EmailAddress), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn), HashCodeUtility.Component(this.Title));
     }
 
     /// <summary>

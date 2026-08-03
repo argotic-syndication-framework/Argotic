@@ -195,18 +195,86 @@ public class AtomEntryResource : AtomEntry
     public new void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
     {
         base.Load(source, settings);
+        this.LoadAtomPublishingExtensions();
+    }
 
-        AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
-        if (editedExtension != null)
-        {
-            this.EditedOn = editedExtension.Context.EditedOn;
-        }
+    /// <summary>
+    /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
+    /// </summary>
+    /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
+    /// <remarks>
+    ///     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
+    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
+    public new void Load(IXPathNavigable source)
+    {
+        this.Load(source, null);
+    }
 
-        AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
-        if (controlExtension != null)
-        {
-            this.IsDraft = controlExtension.Context.IsDraft;
-        }
+    /// <summary>
+    /// Loads the syndication resource from the specified <see cref="Stream"/>.
+    /// </summary>
+    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
+    /// <remarks>
+    ///     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
+    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
+    public new void Load(Stream stream)
+    {
+        this.Load(stream, null);
+    }
+
+    /// <summary>
+    /// Loads the syndication resource from the specified <see cref="Stream"/> and <see cref="SyndicationResourceLoadSettings"/>.
+    /// </summary>
+    /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
+    /// <remarks>
+    ///     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
+    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
+    public new void Load(Stream stream, SyndicationResourceLoadSettings settings)
+    {
+        base.Load(stream, settings);
+        this.LoadAtomPublishingExtensions();
+    }
+
+    /// <summary>
+    /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
+    /// </summary>
+    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
+    /// <remarks>
+    ///     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
+    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
+    public new void Load(XmlReader reader)
+    {
+        this.Load(reader, null);
+    }
+
+    /// <summary>
+    /// Loads the syndication resource from the specified <see cref="XmlReader"/> and <see cref="SyndicationResourceLoadSettings"/>.
+    /// </summary>
+    /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
+    /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the <see cref="AtomEntry"/> instance. This value can be <b>null</b>.</param>
+    /// <remarks>
+    ///     After the load operation has successfully completed, the <see cref="AtomEntry.Loaded"/> event will be raised.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
+    /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
+    public new void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
+    {
+        base.Load(reader, settings);
+        this.LoadAtomPublishingExtensions();
     }
 
     /// <summary>
@@ -267,17 +335,7 @@ public class AtomEntryResource : AtomEntry
         SyndicationResourceAdapter adapter = new(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.Atom);
 
-        AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
-        if (editedExtension != null)
-        {
-            this.EditedOn = editedExtension.Context.EditedOn;
-        }
-
-        AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
-        if (controlExtension != null)
-        {
-            this.IsDraft = controlExtension.Context.IsDraft;
-        }
+        this.LoadAtomPublishingExtensions();
 
         this.OnEntryLoaded(new SyndicationResourceLoadedEventArgs(navigator, source));
     }
@@ -328,5 +386,23 @@ public class AtomEntryResource : AtomEntry
         }
 
         base.Save(writer, settings);
+    }
+
+    /// <summary>
+    /// Populates the Atom Publishing Protocol members of this entry from the syndication extensions discovered during a load operation.
+    /// </summary>
+    private void LoadAtomPublishingExtensions()
+    {
+        AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+        if (editedExtension != null)
+        {
+            this.EditedOn = editedExtension.Context.EditedOn;
+        }
+
+        AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+        if (controlExtension != null)
+        {
+            this.IsDraft = controlExtension.Context.IsDraft;
+        }
     }
 }

@@ -174,8 +174,8 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
         }
 
         int result = string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Id, other.Id, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Id, other.Id, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -211,7 +211,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.EmailAddress, this.Id, this.Name);
+        return HashCode.Combine(HashCodeUtility.Component(this.EmailAddress), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.Name));
     }
 
     /// <summary>

@@ -159,9 +159,9 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
         }
 
         int result = this.Context.Comments.CompareTo(other.Context.Comments);
-        result |= string.Compare(this.Context.Department, other.Context.Department, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Section, other.Context.Section, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Context.HitParade, other.Context.HitParade);
+        if (result == 0) result = string.Compare(this.Context.Department, other.Context.Department, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Section, other.Context.Section, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.HitParade, other.Context.HitParade);
 
         return result;
     }
@@ -197,7 +197,7 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Context.Comments, this.Context.Department, this.Context.Section, this.Context.HitParade);
+        return HashCode.Combine(HashCodeUtility.Component(this.Context.Comments), HashCodeUtility.Component(this.Context.Department), HashCodeUtility.Component(this.Context.Section), HashCodeUtility.Component(this.Context.HitParade));
     }
 
     /// <summary>

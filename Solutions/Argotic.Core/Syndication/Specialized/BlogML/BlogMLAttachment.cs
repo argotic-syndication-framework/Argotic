@@ -248,11 +248,11 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.ExternalUri, other.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= this.IsEmbedded.CompareTo(other.IsEmbedded);
-        result |= string.Compare(this.MimeType, other.MimeType, StringComparison.OrdinalIgnoreCase);
-        result |= this.Size.CompareTo(other.Size);
-        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.ExternalUri, other.ExternalUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.IsEmbedded.CompareTo(other.IsEmbedded);
+        if (result == 0) result = string.Compare(this.MimeType, other.MimeType, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Size.CompareTo(other.Size);
+        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -288,7 +288,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.ExternalUri, this.IsEmbedded, this.MimeType, this.Size, this.Url);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.ExternalUri), HashCodeUtility.Component(this.IsEmbedded), HashCodeUtility.Component(this.MimeType), HashCodeUtility.Component(this.Size), HashCodeUtility.Component(this.Url));
     }
 
     /// <summary>

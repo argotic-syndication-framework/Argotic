@@ -305,10 +305,10 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
         }
 
         int result = string.Compare(this.Encoding.WebName, other.Encoding.WebName, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Excerpt, other.Excerpt, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Permalink, other.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.WeblogName, other.WeblogName, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Excerpt, other.Excerpt, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Permalink, other.Permalink, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.WeblogName, other.WeblogName, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -345,11 +345,11 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     public override int GetHashCode()
     {
         return HashCode.Combine(
-            this.Encoding?.WebName,
-            this.Excerpt,
-            this.Permalink,
-            this.Title,
-            this.WeblogName);
+            HashCodeUtility.Component(this.Encoding?.WebName),
+            HashCodeUtility.Component(this.Excerpt),
+            HashCodeUtility.Component(this.Permalink),
+            HashCodeUtility.Component(this.Title),
+            HashCodeUtility.Component(this.WeblogName));
     }
 
     /// <summary>

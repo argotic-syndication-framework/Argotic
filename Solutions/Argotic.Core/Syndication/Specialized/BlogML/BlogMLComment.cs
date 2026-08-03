@@ -339,11 +339,11 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
         }
 
         int result = this.Content.CompareTo(other.Content);
-        result |= string.Compare(this.UserEmailAddress, other.UserEmailAddress, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.UserName, other.UserName, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.UserUrl, other.UserUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.UserEmailAddress, other.UserEmailAddress, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.UserName, other.UserName, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.UserUrl, other.UserUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-        result |= BlogMLUtility.CompareCommonObjects(this, other);
+        if (result == 0) result = BlogMLUtility.CompareCommonObjects(this, other);
 
         return result;
     }
@@ -379,7 +379,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.UserEmailAddress, this.UserName, this.UserUrl, this.ApprovalStatus, this.CreatedOn, this.Id, this.LastModifiedOn);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.UserEmailAddress), HashCodeUtility.Component(this.UserName), HashCodeUtility.Component(this.UserUrl), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn));
     }
 
     /// <summary>

@@ -288,7 +288,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Label, this.Scheme, this.Term);
+        return HashCode.Combine(HashCodeUtility.Component(this.Label), HashCodeUtility.Component(this.Scheme), HashCodeUtility.Component(this.Term));
     }
 
     /// <summary>

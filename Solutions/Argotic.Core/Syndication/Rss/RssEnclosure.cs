@@ -284,8 +284,8 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
         }
 
         int result = string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
-        result |= this.Length.CompareTo(other.Length);
-        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Length.CompareTo(other.Length);
+        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -323,8 +323,8 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     {
         return HashCode.Combine(
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.ContentType ?? string.Empty),
-            this.Length,
-            this.Url);
+            HashCodeUtility.Component(this.Length),
+            HashCodeUtility.Component(this.Url));
     }
 
     /// <summary>

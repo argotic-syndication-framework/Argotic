@@ -23,7 +23,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <summary>
     /// Private member to hold a value that specifies the amount of time after which a asynchronous load operation call times out.
     /// </summary>
-    private TimeSpan requestTimeout = TimeSpan.FromSeconds(15);
+    private TimeSpan requestTimeout = TimeSpan.FromSeconds(100);
 
     /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the load operation.
@@ -100,7 +100,10 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <summary>
     /// Gets or sets a value that specifies the amount of time after which asynchronous load operations will time-out.
     /// </summary>
-    /// <value>An <see cref="TimeSpan"/> that specifies the time-out period. The default value is 15 seconds.</value>
+    /// <value>
+    ///     An <see cref="TimeSpan"/> that specifies the time-out period. The default value is 100 seconds,
+    ///     matching the default time-out of the framework's previous <see cref="System.Net.HttpWebRequest"/>-based pipeline.
+    /// </value>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is less than zero.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
     public TimeSpan Timeout
@@ -148,10 +151,10 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
         }
 
         int result = string.Compare(this.CharacterEncoding.WebName, other.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-        result |= this.RetrievalLimit.CompareTo(other.RetrievalLimit);
-        result |= this.Timeout.CompareTo(other.Timeout);
-        result |= this.AutoDetectExtensions.CompareTo(other.AutoDetectExtensions);
-        result |= ComparisonUtility.CompareSequence(this.SupportedExtensions, other.SupportedExtensions);
+        if (result == 0) result = this.RetrievalLimit.CompareTo(other.RetrievalLimit);
+        if (result == 0) result = this.Timeout.CompareTo(other.Timeout);
+        if (result == 0) result = this.AutoDetectExtensions.CompareTo(other.AutoDetectExtensions);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.SupportedExtensions, other.SupportedExtensions);
 
         return result;
     }
@@ -187,7 +190,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.CharacterEncoding?.WebName, this.RetrievalLimit, this.Timeout, this.AutoDetectExtensions);
+        return HashCode.Combine(HashCodeUtility.Component(this.CharacterEncoding?.WebName), HashCodeUtility.Component(this.RetrievalLimit), HashCodeUtility.Component(this.Timeout), HashCodeUtility.Component(this.AutoDetectExtensions));
     }
 
     /// <summary>

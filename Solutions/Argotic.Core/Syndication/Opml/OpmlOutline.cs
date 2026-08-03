@@ -487,14 +487,14 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
         }
 
         int result = string.Compare(this.ContentType, other.ContentType, StringComparison.OrdinalIgnoreCase);
-        result |= this.CreatedOn.CompareTo(other.CreatedOn);
-        result |= this.HasBreakpoint.CompareTo(other.HasBreakpoint);
-        result |= this.IsCommented.CompareTo(other.IsCommented);
-        result |= string.Compare(this.Text, other.Text, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.CreatedOn.CompareTo(other.CreatedOn);
+        if (result == 0) result = this.HasBreakpoint.CompareTo(other.HasBreakpoint);
+        if (result == 0) result = this.IsCommented.CompareTo(other.IsCommented);
+        if (result == 0) result = string.Compare(this.Text, other.Text, StringComparison.OrdinalIgnoreCase);
 
-        result |= ComparisonUtility.CompareSequence(this.Attributes, other.Attributes, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Outlines, other.Outlines);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Attributes, other.Attributes, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Categories, other.Categories, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Outlines, other.Outlines);
 
         return result;
     }
@@ -530,7 +530,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.ContentType, this.CreatedOn, this.HasBreakpoint, this.IsCommented, this.Text);
+        return HashCode.Combine(HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.HasBreakpoint), HashCodeUtility.Component(this.IsCommented), HashCodeUtility.Component(this.Text));
     }
 
     /// <summary>

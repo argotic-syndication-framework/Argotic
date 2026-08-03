@@ -124,8 +124,8 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
         }
 
         int result = ComparisonUtility.CompareSequence(this.Categories, other.Categories);
-        result |= string.Compare(this.Summary, other.Summary, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Summary, other.Summary, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -161,7 +161,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Categories.Count, this.Summary, this.Title);
+        return HashCode.Combine(HashCodeUtility.Component(this.Categories.Count), HashCodeUtility.Component(this.Summary), HashCodeUtility.Component(this.Title));
     }
 
     /// <summary>

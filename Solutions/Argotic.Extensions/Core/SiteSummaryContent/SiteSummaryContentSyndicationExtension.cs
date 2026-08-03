@@ -159,7 +159,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
         }
 
         int result = string.Compare(this.Context.Encoded, other.Context.Encoded, StringComparison.Ordinal);
-        result |= ComparisonUtility.CompareSequence(this.Context.Items, other.Context.Items);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Items, other.Context.Items);
 
         return result;
     }
@@ -199,7 +199,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
         hash.Add(this.Context.Encoded, StringComparer.Ordinal);
         foreach (SiteSummaryContentItem item in this.Context.Items)
         {
-            hash.Add(item);
+            hash.Add(HashCodeUtility.Component(item));
         }
         return hash.ToHashCode();
     }

@@ -725,37 +725,37 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
 
         if (this.Version != null)
         {
-            result |= this.Version.CompareTo(other.Version);
+            if (result == 0) result = this.Version.CompareTo(other.Version);
         }
         else if (other.Version != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.Namespaces != null && other.Namespaces != null)
         {
-            result |= ComparisonUtility.CompareSequence(this.Namespaces, other.Namespaces, StringComparison.Ordinal);
+            if (result == 0) result = ComparisonUtility.CompareSequence(this.Namespaces, other.Namespaces, StringComparison.Ordinal);
         }
         else if (this.Namespaces != null && other.Namespaces == null)
         {
-            result |= 1;
+            if (result == 0) result = 1;
         }
         else if (this.Namespaces == null && other.Namespaces != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.Resource != null && other.Resource != null)
         {
-            result |= string.Compare(this.Resource.OuterXml, other.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
+            if (result == 0) result = string.Compare(this.Resource.OuterXml, other.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
         }
         else if (this.Resource != null && other.Resource == null)
         {
-            result |= 1;
+            if (result == 0) result = 1;
         }
         else if (this.Resource == null && other.Resource != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         return result;
@@ -792,7 +792,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Format, this.Version, this.Resource?.OuterXml);
+        return HashCode.Combine(HashCodeUtility.Component(this.Format), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.Resource?.OuterXml));
     }
 
     /// <summary>

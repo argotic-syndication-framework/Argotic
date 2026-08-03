@@ -229,7 +229,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
 
         int result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
-        result |= BlogMLUtility.CompareCommonObjects(this, other);
+        if (result == 0) result = BlogMLUtility.CompareCommonObjects(this, other);
 
         return result;
     }
@@ -265,7 +265,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Url, this.ApprovalStatus, this.CreatedOn, this.Id, this.LastModifiedOn, this.Title);
+        return HashCode.Combine(HashCodeUtility.Component(this.Url), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn), HashCodeUtility.Component(this.Title));
     }
 
     /// <summary>

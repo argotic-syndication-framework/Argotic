@@ -303,7 +303,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.ValueType, this.Value);
+        return HashCode.Combine(HashCodeUtility.Component(this.ValueType), HashCodeUtility.Component(this.Value));
     }
 
     /// <summary>

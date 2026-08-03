@@ -166,9 +166,9 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
         }
 
         int result = this.Bottom.CompareTo(other.Bottom);
-        result |= this.Left.CompareTo(other.Left);
-        result |= this.Right.CompareTo(other.Right);
-        result |= this.Top.CompareTo(other.Top);
+        if (result == 0) result = this.Left.CompareTo(other.Left);
+        if (result == 0) result = this.Right.CompareTo(other.Right);
+        if (result == 0) result = this.Top.CompareTo(other.Top);
 
         return result;
     }
@@ -204,7 +204,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Bottom, this.Left, this.Right, this.Top);
+        return HashCode.Combine(HashCodeUtility.Component(this.Bottom), HashCodeUtility.Component(this.Left), HashCodeUtility.Component(this.Right), HashCodeUtility.Component(this.Top));
     }
 
     /// <summary>

@@ -239,7 +239,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
         }
 
         int result = this.Algorithm.CompareTo(other.Algorithm);
-        result |= string.Compare(this.Value, other.Value, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.Value, other.Value, StringComparison.Ordinal);
 
         return result;
     }
@@ -275,7 +275,7 @@ public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMedia
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Algorithm, this.Value);
+        return HashCode.Combine(HashCodeUtility.Component(this.Algorithm), HashCodeUtility.Component(this.Value));
     }
 
     /// <summary>

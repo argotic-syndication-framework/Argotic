@@ -599,9 +599,9 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
         }
 
         int result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= this.Title.CompareTo(other.Title);
-        result |= ComparisonUtility.CompareSequence(this.Accepts, other.Accepts);
-        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
+        if (result == 0) result = this.Title.CompareTo(other.Title);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Accepts, other.Accepts);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Categories, other.Categories);
 
         return result;
     }
@@ -637,7 +637,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Uri, this.Title);
+        return HashCode.Combine(HashCodeUtility.Component(this.Uri), HashCodeUtility.Component(this.Title));
     }
 
     /// <summary>

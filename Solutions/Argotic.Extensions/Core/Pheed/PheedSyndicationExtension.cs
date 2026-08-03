@@ -158,7 +158,7 @@ public class PheedSyndicationExtension : SyndicationExtension, IComparable<Pheed
         }
 
         int result = Uri.Compare(this.Context.Source, other.Context.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Context.Thumbnail, other.Context.Thumbnail, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.Thumbnail, other.Context.Thumbnail, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -194,7 +194,7 @@ public class PheedSyndicationExtension : SyndicationExtension, IComparable<Pheed
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Context.Source, this.Context.Thumbnail);
+        return HashCode.Combine(HashCodeUtility.Component(this.Context.Source), HashCodeUtility.Component(this.Context.Thumbnail));
     }
 
     /// <summary>

@@ -302,7 +302,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Entities, this.EntityType, this.Relationship);
+        return HashCode.Combine(HashCodeUtility.Component(this.Entities), HashCodeUtility.Component(this.EntityType), HashCodeUtility.Component(this.Relationship));
     }
 
     /// <summary>

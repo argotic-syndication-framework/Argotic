@@ -249,7 +249,7 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= this.ContentType.CompareTo(other.ContentType);
+        if (result == 0) result = this.ContentType.CompareTo(other.ContentType);
 
         return result;
     }
@@ -285,7 +285,7 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.ContentType);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.ContentType));
     }
 
     /// <summary>

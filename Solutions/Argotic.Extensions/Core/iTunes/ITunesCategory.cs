@@ -181,7 +181,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
         }
 
         int result = string.Compare(this.Text, other.Text, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Categories, other.Categories);
 
         return result;
     }
@@ -217,7 +217,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Text, this.Categories.Count);
+        return HashCode.Combine(HashCodeUtility.Component(this.Text), HashCodeUtility.Component(this.Categories.Count));
     }
 
     /// <summary>

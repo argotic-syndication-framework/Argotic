@@ -97,9 +97,9 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
         }
 
         int result = string.Compare(this.CharacterEncoding.WebName, other.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
-        result |= this.MinimizeOutputSize.CompareTo(other.MinimizeOutputSize);
-        result |= ComparisonUtility.CompareSequence(this.SupportedExtensions, other.SupportedExtensions);
-        result |= this.AutoDetectExtensions.CompareTo(other.AutoDetectExtensions);
+        if (result == 0) result = this.MinimizeOutputSize.CompareTo(other.MinimizeOutputSize);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.SupportedExtensions, other.SupportedExtensions);
+        if (result == 0) result = this.AutoDetectExtensions.CompareTo(other.AutoDetectExtensions);
 
         return result;
     }
@@ -136,16 +136,16 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     public override int GetHashCode()
     {
         var hash = new HashCode();
-        hash.Add(this.CharacterEncoding?.WebName);
-        hash.Add(this.MinimizeOutputSize);
-        hash.Add(this.AutoDetectExtensions);
+        hash.Add(HashCodeUtility.Component(this.CharacterEncoding?.WebName));
+        hash.Add(HashCodeUtility.Component(this.MinimizeOutputSize));
+        hash.Add(HashCodeUtility.Component(this.AutoDetectExtensions));
         var extensions = this.supportedSyndicationExtensions;
         if (extensions is not null)
         {
-            hash.Add(extensions.Count);
+            hash.Add(HashCodeUtility.Component(extensions.Count));
             foreach (var extension in extensions)
             {
-                hash.Add(extension);
+                hash.Add(HashCodeUtility.Component(extension));
             }
         }
 

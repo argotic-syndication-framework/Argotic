@@ -179,7 +179,7 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
         }
 
         int result = string.Compare(this.Data, other.Data, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }

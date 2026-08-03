@@ -164,50 +164,50 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
         {
             if (other.Context.Mood != null)
             {
-                result |= this.Context.Mood.CompareTo(other.Context.Mood);
+                if (result == 0) result = this.Context.Mood.CompareTo(other.Context.Mood);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (this.Context.Mood == null && other.Context.Mood != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
-        result |= string.Compare(this.Context.Music, other.Context.Music, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Music, other.Context.Music, StringComparison.OrdinalIgnoreCase);
 
         if (this.Context.Security != null)
         {
             if (other.Context.Security != null)
             {
-                result |= this.Context.Security.CompareTo(other.Context.Security);
+                if (result == 0) result = this.Context.Security.CompareTo(other.Context.Security);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (this.Context.Security == null && other.Context.Security != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.Context.UserPicture != null)
         {
             if (other.Context.UserPicture != null)
             {
-                result |= this.Context.UserPicture.CompareTo(other.Context.UserPicture);
+                if (result == 0) result = this.Context.UserPicture.CompareTo(other.Context.UserPicture);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (this.Context.UserPicture == null && other.Context.UserPicture != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         return result;
@@ -244,7 +244,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Context.IsPreformatted, this.Context.Mood, this.Context.Music, this.Context.Security, this.Context.UserPicture);
+        return HashCode.Combine(HashCodeUtility.Component(this.Context.IsPreformatted), HashCodeUtility.Component(this.Context.Mood), HashCodeUtility.Component(this.Context.Music), HashCodeUtility.Component(this.Context.Security), HashCodeUtility.Component(this.Context.UserPicture));
     }
 
     /// <summary>

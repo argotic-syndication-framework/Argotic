@@ -8,7 +8,7 @@ namespace Argotic.Examples.Commands;
 /// </summary>
 internal sealed class RunCommand : AsyncCommand<RunSettings>
 {
-    public override async Task<int> ExecuteAsync(CommandContext context, RunSettings settings, CancellationToken cancellationToken)
+    protected override async Task<int> ExecuteAsync(CommandContext context, RunSettings settings, CancellationToken cancellationToken)
     {
         ExampleRegistry.Initialize();
 

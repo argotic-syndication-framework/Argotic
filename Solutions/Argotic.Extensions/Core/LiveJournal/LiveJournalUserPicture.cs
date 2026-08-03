@@ -238,9 +238,9 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
         }
 
         int result = this.Height.CompareTo(other.Height);
-        result |= string.Compare(this.Keyword, other.Keyword, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= this.Width.CompareTo(other.Width);
+        if (result == 0) result = string.Compare(this.Keyword, other.Keyword, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Url, other.Url, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Width.CompareTo(other.Width);
 
         return result;
     }
@@ -276,7 +276,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Height, this.Keyword, this.Url, this.Width);
+        return HashCode.Combine(HashCodeUtility.Component(this.Height), HashCodeUtility.Component(this.Keyword), HashCodeUtility.Component(this.Url), HashCodeUtility.Component(this.Width));
     }
 
     /// <summary>

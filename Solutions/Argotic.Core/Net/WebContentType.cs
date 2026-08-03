@@ -273,11 +273,11 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
             {
                 if (target.TryGetValue(key, out string targetValue))
                 {
-                    result |= string.Compare(source[key], targetValue, StringComparison.Ordinal);
+                    if (result == 0) result = string.Compare(source[key], targetValue, StringComparison.Ordinal);
                 }
                 else
                 {
-                    result |= -1;
+                    if (result == 0) result = -1;
                     break;
                 }
             }
@@ -342,8 +342,8 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
         }
 
         int result = string.Compare(this.MediaType, other.MediaType, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.MediaSubtype, other.MediaSubtype, StringComparison.Ordinal);
-        result |= WebContentType.CompareSequence(this.Parameters, other.Parameters);
+        if (result == 0) result = string.Compare(this.MediaSubtype, other.MediaSubtype, StringComparison.Ordinal);
+        if (result == 0) result = WebContentType.CompareSequence(this.Parameters, other.Parameters);
 
         return result;
     }
@@ -379,7 +379,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.MediaType, this.MediaSubtype, this.Parameters.Count);
+        return HashCode.Combine(HashCodeUtility.Component(this.MediaType), HashCodeUtility.Component(this.MediaSubtype), HashCodeUtility.Component(this.Parameters.Count));
     }
 
     /// <summary>

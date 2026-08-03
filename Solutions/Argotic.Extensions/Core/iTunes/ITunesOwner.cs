@@ -153,7 +153,7 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
         }
 
         int result = string.Compare(this.EmailAddress, other.EmailAddress, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -189,7 +189,7 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.EmailAddress, this.Name);
+        return HashCode.Combine(HashCodeUtility.Component(this.EmailAddress), HashCodeUtility.Component(this.Name));
     }
 
     /// <summary>

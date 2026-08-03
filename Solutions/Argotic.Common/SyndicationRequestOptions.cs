@@ -63,6 +63,7 @@ public sealed record SyndicationRequestOptions
 
         if (UserAgent != null)
         {
+            request.Headers.UserAgent.Clear();
             request.Headers.UserAgent.TryParseAdd(UserAgent);
         }
 

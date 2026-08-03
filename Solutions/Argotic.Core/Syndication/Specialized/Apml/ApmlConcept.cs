@@ -269,9 +269,9 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
         }
 
         int result = string.Compare(this.From, other.From, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Key, other.Key, StringComparison.OrdinalIgnoreCase);
-        result |= this.UpdatedOn.CompareTo(other.UpdatedOn);
-        result |= this.Value.CompareTo(other.Value);
+        if (result == 0) result = string.Compare(this.Key, other.Key, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.UpdatedOn.CompareTo(other.UpdatedOn);
+        if (result == 0) result = this.Value.CompareTo(other.Value);
 
         return result;
     }
@@ -310,8 +310,8 @@ public class ApmlConcept : IComparable<ApmlConcept>, IEquatable<ApmlConcept>, IE
         return HashCode.Combine(
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.From ?? string.Empty),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Key ?? string.Empty),
-            this.UpdatedOn,
-            this.Value);
+            HashCodeUtility.Component(this.UpdatedOn),
+            HashCodeUtility.Component(this.Value));
     }
 
     /// <summary>

@@ -441,8 +441,15 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
 
         if (sitemapIterator is { Count: > 0 })
         {
+            int counter = 0;
             while (sitemapIterator.MoveNext())
             {
+                counter++;
+                if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
+                {
+                    break;
+                }
+
                 SitemapIndexEntry entry = new();
                 if (entry.Load(sitemapIterator.Current))
                 {

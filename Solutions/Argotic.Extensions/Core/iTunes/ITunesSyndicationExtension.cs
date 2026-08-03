@@ -168,16 +168,16 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
         }
 
         int result = string.Compare(this.Context.Author, other.Context.Author, StringComparison.OrdinalIgnoreCase);
-        result |= ComparisonUtility.CompareSequence(this.Context.Categories, other.Context.Categories);
-        result |= this.Context.Duration.CompareTo(other.Context.Duration);
-        result |= this.Context.ExplicitMaterial.CompareTo(other.Context.ExplicitMaterial);
-        result |= Uri.Compare(this.Context.Image, other.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        result |= this.Context.IsBlocked.CompareTo(other.Context.IsBlocked);
-        result |= ComparisonUtility.CompareSequence(this.Context.Keywords, other.Context.Keywords, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Context.NewFeedUrl, other.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
-        result |= this.Context.Owner.CompareTo(other.Context.Owner);
-        result |= string.Compare(this.Context.Subtitle, other.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Context.Summary, other.Context.Summary, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Categories, other.Context.Categories);
+        if (result == 0) result = this.Context.Duration.CompareTo(other.Context.Duration);
+        if (result == 0) result = this.Context.ExplicitMaterial.CompareTo(other.Context.ExplicitMaterial);
+        if (result == 0) result = Uri.Compare(this.Context.Image, other.Context.Image, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.IsBlocked.CompareTo(other.Context.IsBlocked);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Keywords, other.Context.Keywords, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Context.NewFeedUrl, other.Context.NewFeedUrl, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Context.Owner.CompareTo(other.Context.Owner);
+        if (result == 0) result = string.Compare(this.Context.Subtitle, other.Context.Subtitle, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Context.Summary, other.Context.Summary, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -214,17 +214,17 @@ public class ITunesSyndicationExtension : SyndicationExtension, IComparable<ITun
     public override int GetHashCode()
     {
         HashCode hash = new();
-        hash.Add(this.Context.Author);
-        hash.Add(this.Context.Categories.Count);
-        hash.Add(this.Context.Duration);
-        hash.Add(this.Context.ExplicitMaterial);
-        hash.Add(this.Context.Image);
-        hash.Add(this.Context.IsBlocked);
-        hash.Add(this.Context.Keywords.Count);
-        hash.Add(this.Context.NewFeedUrl);
-        hash.Add(this.Context.Owner);
-        hash.Add(this.Context.Subtitle);
-        hash.Add(this.Context.Summary);
+        hash.Add(HashCodeUtility.Component(this.Context.Author));
+        hash.Add(HashCodeUtility.Component(this.Context.Categories.Count));
+        hash.Add(HashCodeUtility.Component(this.Context.Duration));
+        hash.Add(HashCodeUtility.Component(this.Context.ExplicitMaterial));
+        hash.Add(HashCodeUtility.Component(this.Context.Image));
+        hash.Add(HashCodeUtility.Component(this.Context.IsBlocked));
+        hash.Add(HashCodeUtility.Component(this.Context.Keywords.Count));
+        hash.Add(HashCodeUtility.Component(this.Context.NewFeedUrl));
+        hash.Add(HashCodeUtility.Component(this.Context.Owner));
+        hash.Add(HashCodeUtility.Component(this.Context.Subtitle));
+        hash.Add(HashCodeUtility.Component(this.Context.Summary));
         return hash.ToHashCode();
     }
 

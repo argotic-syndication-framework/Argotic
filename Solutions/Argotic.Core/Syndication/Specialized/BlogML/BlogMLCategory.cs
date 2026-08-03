@@ -250,9 +250,9 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
         }
 
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.ParentId, other.ParentId, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.ParentId, other.ParentId, StringComparison.OrdinalIgnoreCase);
 
-        result |= BlogMLUtility.CompareCommonObjects(this, other);
+        if (result == 0) result = BlogMLUtility.CompareCommonObjects(this, other);
 
         return result;
     }
@@ -288,7 +288,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Description, this.ParentId, this.ApprovalStatus, this.CreatedOn, this.Id, this.LastModifiedOn, this.Title);
+        return HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.ParentId), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn), HashCodeUtility.Component(this.Title));
     }
 
     /// <summary>

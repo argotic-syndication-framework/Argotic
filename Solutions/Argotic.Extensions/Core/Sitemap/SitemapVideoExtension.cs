@@ -82,7 +82,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
         XPathNavigator navigator = source.CreateNavigator();
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
-        XPathNodeIterator videoIterator = navigator.Select("//video:video", manager);
+        XPathNodeIterator videoIterator = navigator.Select("video:video", manager);
 
         if (videoIterator is { Count: > 0 })
         {
@@ -210,7 +210,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
         HashCode hash = new();
         foreach (SitemapVideo video in this.Videos)
         {
-            hash.Add(video);
+            hash.Add(HashCodeUtility.Component(video));
         }
 
         return hash.ToHashCode();

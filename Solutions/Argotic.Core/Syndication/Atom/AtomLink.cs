@@ -476,7 +476,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Length, this.ContentType, this.Relation, this.ContentLanguage?.Name, this.Title, this.Uri);
+        return HashCode.Combine(HashCodeUtility.Component(this.Length), HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.Relation), HashCodeUtility.Component(this.ContentLanguage?.Name), HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.Uri));
     }
 
     /// <summary>

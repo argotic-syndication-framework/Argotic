@@ -118,8 +118,8 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
         }
 
         int result = 0;
-        result |= string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Source, other.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Source, other.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -155,7 +155,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Data?.OuterXml, this.Source);
+        return HashCode.Combine(HashCodeUtility.Component(this.Data?.OuterXml), HashCodeUtility.Component(this.Source));
     }
 
     /// <summary>

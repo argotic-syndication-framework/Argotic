@@ -283,7 +283,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.Uri, this.Version);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.Uri), HashCodeUtility.Component(this.Version));
     }
 
     /// <summary>

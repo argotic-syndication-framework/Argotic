@@ -881,20 +881,20 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     public override int GetHashCode()
     {
         HashCode hash = new();
-        hash.Add(this.Bitrate);
-        hash.Add(this.Channels);
-        hash.Add(this.ContentType);
-        hash.Add(this.Duration);
-        hash.Add(this.Expression);
-        hash.Add(this.FileSize);
-        hash.Add(this.FrameRate);
-        hash.Add(this.Height);
-        hash.Add(this.IsDefault);
-        hash.Add(this.Language?.Name);
-        hash.Add(this.Medium);
-        hash.Add(this.SamplingRate);
-        hash.Add(this.Url);
-        hash.Add(this.Width);
+        hash.Add(HashCodeUtility.Component(this.Bitrate));
+        hash.Add(HashCodeUtility.Component(this.Channels));
+        hash.Add(HashCodeUtility.Component(this.ContentType));
+        hash.Add(HashCodeUtility.Component(this.Duration));
+        hash.Add(HashCodeUtility.Component(this.Expression));
+        hash.Add(HashCodeUtility.Component(this.FileSize));
+        hash.Add(HashCodeUtility.Component(this.FrameRate));
+        hash.Add(HashCodeUtility.Component(this.Height));
+        hash.Add(HashCodeUtility.Component(this.IsDefault));
+        hash.Add(HashCodeUtility.Component(this.Language?.Name));
+        hash.Add(HashCodeUtility.Component(this.Medium));
+        hash.Add(HashCodeUtility.Component(this.SamplingRate));
+        hash.Add(HashCodeUtility.Component(this.Url));
+        hash.Add(HashCodeUtility.Component(this.Width));
         return hash.ToHashCode();
     }
 

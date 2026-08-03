@@ -253,9 +253,9 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
         }
 
         int result = Uri.Compare(this.About, other.About, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Identifier, other.Identifier, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.PingUrl, other.PingUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Identifier, other.Identifier, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.PingUrl, other.PingUrl, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -291,7 +291,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.About, this.Identifier, this.PingUrl, this.Title);
+        return HashCode.Combine(HashCodeUtility.Component(this.About), HashCodeUtility.Component(this.Identifier), HashCodeUtility.Component(this.PingUrl), HashCodeUtility.Component(this.Title));
     }
 
     /// <summary>

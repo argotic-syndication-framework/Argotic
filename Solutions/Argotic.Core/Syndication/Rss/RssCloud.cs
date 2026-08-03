@@ -369,10 +369,10 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
         }
 
         int result = string.Compare(this.Domain, other.Domain, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Path, other.Path, StringComparison.OrdinalIgnoreCase);
-        result |= this.Port.CompareTo(other.Port);
-        result |= this.Protocol.CompareTo(other.Protocol);
-        result |= string.Compare(this.RegisterProcedure, other.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Path, other.Path, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Port.CompareTo(other.Port);
+        if (result == 0) result = this.Protocol.CompareTo(other.Protocol);
+        if (result == 0) result = string.Compare(this.RegisterProcedure, other.RegisterProcedure, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -411,8 +411,8 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
         return HashCode.Combine(
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Domain ?? string.Empty),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Path ?? string.Empty),
-            this.Port,
-            this.Protocol,
+            HashCodeUtility.Component(this.Port),
+            HashCodeUtility.Component(this.Protocol),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.RegisterProcedure ?? string.Empty));
     }
 

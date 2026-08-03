@@ -125,7 +125,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
         }
 
         int result = string.Compare(this.Scheme, other.Scheme, StringComparison.Ordinal);
-        result |= string.Compare(this.Term, other.Term, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Term, other.Term, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -161,7 +161,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Scheme, this.Term);
+        return HashCode.Combine(HashCodeUtility.Component(this.Scheme), HashCodeUtility.Component(this.Term));
     }
 
     /// <summary>

@@ -898,64 +898,64 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         }
 
         int result = string.Compare(this.Copyright, other.Copyright, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Generator, other.Generator, StringComparison.OrdinalIgnoreCase);
-        result |= this.LastBuildDate.CompareTo(other.LastBuildDate);
-        result |= Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.ManagingEditor, other.ManagingEditor, StringComparison.OrdinalIgnoreCase);
-        result |= this.PublicationDate.CompareTo(other.PublicationDate);
-        result |= string.Compare(this.Rating, other.Rating, StringComparison.OrdinalIgnoreCase);
-        result |= this.TimeToLive.CompareTo(other.TimeToLive);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Webmaster, other.Webmaster, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Generator, other.Generator, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.LastBuildDate.CompareTo(other.LastBuildDate);
+        if (result == 0) result = Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.ManagingEditor, other.ManagingEditor, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.PublicationDate.CompareTo(other.PublicationDate);
+        if (result == 0) result = string.Compare(this.Rating, other.Rating, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.TimeToLive.CompareTo(other.TimeToLive);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Webmaster, other.Webmaster, StringComparison.OrdinalIgnoreCase);
 
         if (this.Cloud != null)
         {
-            result |= this.Cloud.CompareTo(other.Cloud);
+            if (result == 0) result = this.Cloud.CompareTo(other.Cloud);
         }
         else if (this.Cloud == null && other.Cloud != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.Image != null)
         {
-            result |= this.Image.CompareTo(other.Image);
+            if (result == 0) result = this.Image.CompareTo(other.Image);
         }
         else if (this.Image == null && other.Image != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.Language != null)
         {
             if (other.Language != null)
             {
-                result |= string.Compare(this.Language.Name, other.Language.Name, StringComparison.OrdinalIgnoreCase);
+                if (result == 0) result = string.Compare(this.Language.Name, other.Language.Name, StringComparison.OrdinalIgnoreCase);
             }
             else
             {
-                result |= 1;
+                if (result == 0) result = 1;
             }
         }
         else if (this.Language == null && other.Language != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.TextInput != null)
         {
-            result |= this.TextInput.CompareTo(other.TextInput);
+            if (result == 0) result = this.TextInput.CompareTo(other.TextInput);
         }
         else if (this.TextInput == null && other.TextInput != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
-        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
-        result |= ComparisonUtility.CompareSequence(this.Items, other.Items);
-        result |= ComparisonUtility.CompareSequence(this.SkipDays, other.SkipDays);
-        result |= ComparisonUtility.CompareSequence(this.SkipHours, other.SkipHours);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Categories, other.Categories);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Items, other.Items);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.SkipDays, other.SkipDays);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.SkipHours, other.SkipHours);
 
         return result;
     }
@@ -995,12 +995,12 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         hash.Add(this.Copyright, StringComparer.OrdinalIgnoreCase);
         hash.Add(this.Description, StringComparer.OrdinalIgnoreCase);
         hash.Add(this.Generator, StringComparer.OrdinalIgnoreCase);
-        hash.Add(this.LastBuildDate);
-        hash.Add(this.Link);
+        hash.Add(HashCodeUtility.Component(this.LastBuildDate));
+        hash.Add(HashCodeUtility.Component(this.Link));
         hash.Add(this.ManagingEditor, StringComparer.OrdinalIgnoreCase);
-        hash.Add(this.PublicationDate);
+        hash.Add(HashCodeUtility.Component(this.PublicationDate));
         hash.Add(this.Rating, StringComparer.OrdinalIgnoreCase);
-        hash.Add(this.TimeToLive);
+        hash.Add(HashCodeUtility.Component(this.TimeToLive));
         hash.Add(this.Title, StringComparer.OrdinalIgnoreCase);
         hash.Add(this.Webmaster, StringComparer.OrdinalIgnoreCase);
         return hash.ToHashCode();

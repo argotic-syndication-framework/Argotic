@@ -459,7 +459,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Id, this.Title, this.UpdatedOn, this.Generator, this.Icon, this.Logo, this.Rights);
+        return HashCode.Combine(HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.UpdatedOn), HashCodeUtility.Component(this.Generator), HashCodeUtility.Component(this.Icon), HashCodeUtility.Component(this.Logo), HashCodeUtility.Component(this.Rights));
     }
 
     /// <summary>

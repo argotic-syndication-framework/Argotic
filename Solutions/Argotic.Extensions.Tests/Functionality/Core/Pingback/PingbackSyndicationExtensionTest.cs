@@ -142,10 +142,12 @@ public class PingbackSyndicationExtensionTest
     [TestMethod]
     public void PingbackOpGreaterThanTest()
     {
+        // Ordering is decided by the first member that differs: extension 1's server path ("xmlrpc.php")
+        // sorts after extension 2's ("other-xmlrpc.php"), so extension 1 is the greater of the two.
         PingbackSyndicationExtension first = CreateExtension1();
         PingbackSyndicationExtension second = CreateExtension2();
-        bool actual = first > second;
-        actual.ShouldBeFalse();
+        (first > second).ShouldBeTrue();
+        (second > first).ShouldBeFalse();
     }
 
     [TestMethod]
@@ -162,8 +164,8 @@ public class PingbackSyndicationExtensionTest
     {
         PingbackSyndicationExtension first = CreateExtension1();
         PingbackSyndicationExtension second = CreateExtension2();
-        bool actual = first < second;
-        actual.ShouldBeTrue();
+        (first < second).ShouldBeFalse();
+        (second < first).ShouldBeTrue();
     }
 
     [TestMethod]

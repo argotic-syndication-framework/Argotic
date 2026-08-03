@@ -175,7 +175,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
         }
 
         int result = string.Compare(this.Hreflang, other.Hreflang, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Href, other.Href, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Href, other.Href, UriComponents.AbsoluteUri, UriFormat.Unescaped, StringComparison.OrdinalIgnoreCase);
         return result;
     }
 
@@ -210,7 +210,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Hreflang, this.Href);
+        return HashCode.Combine(HashCodeUtility.Component(this.Hreflang), HashCodeUtility.Component(this.Href));
     }
 
     /// <summary>

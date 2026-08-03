@@ -298,7 +298,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.EmailAddress, this.Name, this.Uri);
+        return HashCode.Combine(HashCodeUtility.Component(this.EmailAddress), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Uri));
     }
 
     /// <summary>

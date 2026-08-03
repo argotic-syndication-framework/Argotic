@@ -446,7 +446,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.ContentType, this.Source);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.Source));
     }
 
     /// <summary>

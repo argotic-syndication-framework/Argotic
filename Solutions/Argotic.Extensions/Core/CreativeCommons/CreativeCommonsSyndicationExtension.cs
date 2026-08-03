@@ -150,13 +150,13 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
         }
 
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= this.Version.CompareTo(other.Version);
-        result |= string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
-        result |= string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
+        if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Version.CompareTo(other.Version);
+        if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-        result |= ComparisonUtility.CompareSequence(this.Context.Licenses, other.Context.Licenses, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Context.Licenses, other.Context.Licenses, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -194,14 +194,14 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     {
         HashCode hash = new();
         hash.Add(this.Description, StringComparer.OrdinalIgnoreCase);
-        hash.Add(this.Documentation);
+        hash.Add(HashCodeUtility.Component(this.Documentation));
         hash.Add(this.Name, StringComparer.OrdinalIgnoreCase);
-        hash.Add(this.Version);
+        hash.Add(HashCodeUtility.Component(this.Version));
         hash.Add(this.XmlNamespace, StringComparer.Ordinal);
         hash.Add(this.XmlPrefix, StringComparer.Ordinal);
         foreach (Uri license in this.Context.Licenses)
         {
-            hash.Add(license);
+            hash.Add(HashCodeUtility.Component(license));
         }
         return hash.ToHashCode();
     }

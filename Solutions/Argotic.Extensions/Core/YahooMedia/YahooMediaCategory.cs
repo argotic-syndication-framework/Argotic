@@ -191,8 +191,8 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
         }
 
         int result = string.Compare(this.Content, other.Content, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Label, other.Label, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.Label, other.Label, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
         return result;
     }
@@ -228,7 +228,7 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Content, this.Label, this.Scheme);
+        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.Label), HashCodeUtility.Component(this.Scheme));
     }
 
     /// <summary>

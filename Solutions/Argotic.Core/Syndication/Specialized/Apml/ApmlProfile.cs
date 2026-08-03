@@ -367,10 +367,10 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
         }
 
         int result = ComparisonUtility.CompareSequence(this.ExplicitConcepts, other.ExplicitConcepts);
-        result |= ComparisonUtility.CompareSequence(this.ExplicitSources, other.ExplicitSources);
-        result |= ComparisonUtility.CompareSequence(this.ImplicitConcepts, other.ImplicitConcepts);
-        result |= ComparisonUtility.CompareSequence(this.ImplicitSources, other.ImplicitSources);
-        result |= string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.ExplicitSources, other.ExplicitSources);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.ImplicitConcepts, other.ImplicitConcepts);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.ImplicitSources, other.ImplicitSources);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
 
         return result;
     }
@@ -407,10 +407,10 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     public override int GetHashCode()
     {
         return HashCode.Combine(
-            this.ExplicitConcepts.Count,
-            this.ExplicitSources.Count,
-            this.ImplicitConcepts.Count,
-            this.ImplicitSources.Count,
+            HashCodeUtility.Component(this.ExplicitConcepts.Count),
+            HashCodeUtility.Component(this.ExplicitSources.Count),
+            HashCodeUtility.Component(this.ImplicitConcepts.Count),
+            HashCodeUtility.Component(this.ImplicitSources.Count),
             StringComparer.OrdinalIgnoreCase.GetHashCode(this.Name ?? string.Empty));
     }
 

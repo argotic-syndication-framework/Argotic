@@ -205,8 +205,8 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
         }
 
         int result = string.Compare(this.Entity, other.Entity, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Role, other.Role, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.Role, other.Role, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.Ordinal);
 
         return result;
     }
@@ -242,7 +242,7 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Entity, this.Role, this.Scheme);
+        return HashCode.Combine(HashCodeUtility.Component(this.Entity), HashCodeUtility.Component(this.Role), HashCodeUtility.Component(this.Scheme));
     }
 
     /// <summary>

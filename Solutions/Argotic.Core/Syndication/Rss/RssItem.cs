@@ -539,32 +539,32 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         }
 
         int result = string.Compare(this.Author, other.Author, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Comments, other.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= this.PublicationDate.CompareTo(other.PublicationDate);
-        result |= string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Comments, other.Comments, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Link, other.Link, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.PublicationDate.CompareTo(other.PublicationDate);
+        if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
         if (this.Guid != null)
         {
-            result |= this.Guid.CompareTo(other.Guid);
+            if (result == 0) result = this.Guid.CompareTo(other.Guid);
         }
         else if (this.Guid == null && other.Guid != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
         if (this.Source != null)
         {
-            result |= this.Source.CompareTo(other.Source);
+            if (result == 0) result = this.Source.CompareTo(other.Source);
         }
         else if (this.Source == null && other.Source != null)
         {
-            result |= -1;
+            if (result == 0) result = -1;
         }
 
-        result |= ComparisonUtility.CompareSequence(this.Categories, other.Categories);
-        result |= ComparisonUtility.CompareSequence(this.Enclosures, other.Enclosures);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Categories, other.Categories);
+        if (result == 0) result = ComparisonUtility.CompareSequence(this.Enclosures, other.Enclosures);
 
         return result;
     }
@@ -602,10 +602,10 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     {
         HashCode hash = new();
         hash.Add(this.Author, StringComparer.OrdinalIgnoreCase);
-        hash.Add(this.Comments);
+        hash.Add(HashCodeUtility.Component(this.Comments));
         hash.Add(this.Description, StringComparer.OrdinalIgnoreCase);
-        hash.Add(this.Link);
-        hash.Add(this.PublicationDate);
+        hash.Add(HashCodeUtility.Component(this.Link));
+        hash.Add(HashCodeUtility.Component(this.PublicationDate));
         hash.Add(this.Title, StringComparer.OrdinalIgnoreCase);
         return hash.ToHashCode();
     }

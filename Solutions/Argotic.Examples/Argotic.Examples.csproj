@@ -7,9 +7,9 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Spectre.Console" Version="0.54.0" />
-    <PackageReference Include="Spectre.Console.Cli" Version="0.53.1" />
-    <PackageReference Include="Spectre.IO" Version="0.21.0" />
+    <PackageReference Include="Spectre.Console" />
+    <PackageReference Include="Spectre.Console.Cli" />
+    <PackageReference Include="Spectre.IO" />
   </ItemGroup>
 
   <ItemGroup>

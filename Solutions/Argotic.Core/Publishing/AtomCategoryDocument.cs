@@ -737,10 +737,10 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         }
 
         int result = this.IsFixed.CompareTo(other.IsFixed);
-        result |= Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-        result |= AtomFeed.CompareSequence(this.Categories, other.Categories);
-        result |= AtomUtility.CompareCommonObjectAttributes(this, other);
+        if (result == 0) result = Uri.Compare(this.Scheme, other.Scheme, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Uri, other.Uri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = AtomFeed.CompareSequence(this.Categories, other.Categories);
+        if (result == 0) result = AtomUtility.CompareCommonObjectAttributes(this, other);
 
         return result;
     }
@@ -776,7 +776,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.IsFixed, this.Scheme, this.Uri, this.BaseUri, this.Language);
+        return HashCode.Combine(HashCodeUtility.Component(this.IsFixed), HashCodeUtility.Component(this.Scheme), HashCodeUtility.Component(this.Uri), HashCodeUtility.Component(this.BaseUri), HashCodeUtility.Component(this.Language));
     }
 
     /// <summary>

@@ -314,7 +314,7 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Height, this.Time, this.Url, this.Width);
+        return HashCode.Combine(HashCodeUtility.Component(this.Height), HashCodeUtility.Component(this.Time), HashCodeUtility.Component(this.Url), HashCodeUtility.Component(this.Width));
     }
 
     /// <summary>

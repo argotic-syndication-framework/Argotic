@@ -494,3 +494,4 @@ coverage.cobertura.xml
 CLAUDE.md
 Issues.txt
 dotnet/
+.explanations/

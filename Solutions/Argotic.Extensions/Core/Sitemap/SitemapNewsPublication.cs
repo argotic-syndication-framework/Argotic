@@ -168,7 +168,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
         }
 
         int result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        result |= string.Compare(this.Language, other.Language, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Language, other.Language, StringComparison.OrdinalIgnoreCase);
         return result;
     }
 
@@ -203,7 +203,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Name, this.Language);
+        return HashCode.Combine(HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Language));
     }
 
     /// <summary>

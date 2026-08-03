@@ -233,7 +233,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
         }
 
         int result = string.Compare(this.ErrorMessage, other.ErrorMessage, StringComparison.OrdinalIgnoreCase);
-        result |= this.HasError.CompareTo(other.HasError);
+        if (result == 0) result = this.HasError.CompareTo(other.HasError);
 
         return result;
     }
@@ -269,7 +269,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.ErrorMessage, this.HasError);
+        return HashCode.Combine(HashCodeUtility.Component(this.ErrorMessage), HashCodeUtility.Component(this.HasError));
     }
 
     /// <summary>

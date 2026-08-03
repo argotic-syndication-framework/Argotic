@@ -189,9 +189,9 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
         }
 
         int result = YahooMediaUtility.CompareSequence(this.Context.Contents, other.Context.Contents);
-        result |= YahooMediaUtility.CompareSequence(this.Context.Groups, other.Context.Groups);
+        if (result == 0) result = YahooMediaUtility.CompareSequence(this.Context.Groups, other.Context.Groups);
 
-        result |= YahooMediaUtility.CompareCommonObjectEntities(this.Context, other.Context);
+        if (result == 0) result = YahooMediaUtility.CompareCommonObjectEntities(this.Context, other.Context);
 
         return result;
     }
@@ -227,7 +227,7 @@ public class YahooMediaSyndicationExtension : SyndicationExtension, IComparable<
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return HashCode.Combine(this.Context);
+        return HashCode.Combine(HashCodeUtility.Component(this.Context));
     }
 
     /// <summary>

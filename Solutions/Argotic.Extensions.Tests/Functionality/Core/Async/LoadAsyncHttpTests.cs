@@ -12,24 +12,23 @@ namespace Argotic.Extensions.Tests.Functionality.Core.Async;
 public class LoadAsyncHttpTests
 {
     [TestMethod]
-    public async Task RssFeed_LoadAsync_WithNotFoundResponse_ThrowsXmlException()
+    public async Task RssFeed_LoadAsync_WithNotFoundResponse_ThrowsHttpRequestException()
     {
         // Arrange
-        // The LoadAsync method does not check HTTP status codes.
-        // A 404 response returns "Not Found" text which is not valid XML,
-        // so the XML parser throws an XmlException.
+        // An error response body must be surfaced as an HTTP failure rather than parsed as feed content,
+        // otherwise a server that returns well-formed XML with a 4xx/5xx status loads as an empty feed.
         RssFeed feed = new();
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithNotFound();
         using HttpClient httpClient = new(handler);
 
         // Act & Assert
-        await Should.ThrowAsync<XmlException>(
+        await Should.ThrowAsync<HttpRequestException>(
             async () => await feed.LoadAsync(new Uri("http://example.com/notfound.xml"), httpClient, cancellationToken: TestContext.CancellationToken));
     }
 
     [TestMethod]
-    public async Task AtomFeed_LoadAsync_WithNotFoundResponse_ThrowsXmlException()
+    public async Task AtomFeed_LoadAsync_WithNotFoundResponse_ThrowsHttpRequestException()
     {
         // Arrange
         AtomFeed feed = new();
@@ -38,12 +37,12 @@ public class LoadAsyncHttpTests
         using HttpClient httpClient = new(handler);
 
         // Act & Assert
-        await Should.ThrowAsync<XmlException>(
+        await Should.ThrowAsync<HttpRequestException>(
             async () => await feed.LoadAsync(new Uri("http://example.com/notfound.xml"), httpClient, cancellationToken: TestContext.CancellationToken));
     }
 
     [TestMethod]
-    public async Task GenericSyndicationFeed_LoadAsync_WithNotFoundResponse_ThrowsXmlException()
+    public async Task GenericSyndicationFeed_LoadAsync_WithNotFoundResponse_ThrowsHttpRequestException()
     {
         // Arrange
         Syndication.GenericSyndicationFeed feed = new();
@@ -52,7 +51,7 @@ public class LoadAsyncHttpTests
         using HttpClient httpClient = new(handler);
 
         // Act & Assert
-        await Should.ThrowAsync<XmlException>(
+        await Should.ThrowAsync<HttpRequestException>(
             async () => await feed.LoadAsync(new Uri("http://example.com/notfound.xml"), httpClient, cancellationToken: TestContext.CancellationToken));
     }
 

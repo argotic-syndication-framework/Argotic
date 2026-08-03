@@ -42,7 +42,7 @@ public static class ComparisonUtility
         {
             var (s, t) when s > t => 1,
             var (s, t) when s < t => -1,
-            _ => source.Select((item, i) => comparer(item, target[i])).Aggregate(0, (acc, r) => acc | r)
+            _ => source.Select((item, i) => comparer(item, target[i])).FirstOrDefault(r => r != 0)
         };
     }
 
@@ -155,10 +155,11 @@ public static class ComparisonUtility
         {
             var (s, t) when s > t => 1,
             var (s, t) when s < t => -1,
-            _ => source.Keys.Aggregate(0, (acc, key) =>
-                target.TryGetValue(key, out string? targetValue)
-                    ? acc | string.Compare(source[key], targetValue, comparisonType)
+            _ => source.Keys
+                .Select(key => target.TryGetValue(key, out string? targetValue)
+                    ? string.Compare(source[key], targetValue, comparisonType)
                     : -1)
+                .FirstOrDefault(r => r != 0)
         };
     }
 }

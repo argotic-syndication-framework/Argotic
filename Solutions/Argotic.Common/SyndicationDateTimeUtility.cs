@@ -112,76 +112,76 @@ public static class SyndicationDateTimeUtility
         string zoneRepresentedAsLocalDifferential;
         if (value.EndsWith(" UT", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" UT", StringComparison.Ordinal) + 1)], "+00:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" UT", StringComparison.OrdinalIgnoreCase) + 1)], "+00:00");
         }
         else if (value.EndsWith(" GMT", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" GMT", StringComparison.Ordinal) + 1)], "+00:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" GMT", StringComparison.OrdinalIgnoreCase) + 1)], "+00:00");
         }
         else if (value.Contains(" GMT", StringComparison.OrdinalIgnoreCase))
         {
-            int GMT_index = value.LastIndexOf(" GMT", StringComparison.Ordinal);
+            int GMT_index = value.LastIndexOf(" GMT", StringComparison.OrdinalIgnoreCase);
             zoneRepresentedAsLocalDifferential = string.Concat(value[..(GMT_index + 1)], value[(GMT_index + 4)..]);
         }
         else if (value.EndsWith(" EST", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" EST", StringComparison.Ordinal) + 1)], "-05:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" EST", StringComparison.OrdinalIgnoreCase) + 1)], "-05:00");
         }
         else if (value.EndsWith(" EDT", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" EDT", StringComparison.Ordinal) + 1)], "-04:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" EDT", StringComparison.OrdinalIgnoreCase) + 1)], "-04:00");
         }
         else if (value.EndsWith(" CST", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" CST", StringComparison.Ordinal) + 1)], "-06:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" CST", StringComparison.OrdinalIgnoreCase) + 1)], "-06:00");
         }
         else if (value.EndsWith(" CDT", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" CDT", StringComparison.Ordinal) + 1)], "-05:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" CDT", StringComparison.OrdinalIgnoreCase) + 1)], "-05:00");
         }
         else if (value.EndsWith(" MST", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" MST", StringComparison.Ordinal) + 1)], "-07:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" MST", StringComparison.OrdinalIgnoreCase) + 1)], "-07:00");
         }
         else if (value.EndsWith(" MDT", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" MDT", StringComparison.Ordinal) + 1)], "-06:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" MDT", StringComparison.OrdinalIgnoreCase) + 1)], "-06:00");
         }
         else if (value.EndsWith(" PST", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" PST", StringComparison.Ordinal) + 1)], "-08:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" PST", StringComparison.OrdinalIgnoreCase) + 1)], "-08:00");
         }
         else if (value.EndsWith(" PDT", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" PDT", StringComparison.Ordinal) + 1)], "-07:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" PDT", StringComparison.OrdinalIgnoreCase) + 1)], "-07:00");
         }
         else if (value.EndsWith(" Z", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" Z", StringComparison.Ordinal) + 1)], "+00:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" Z", StringComparison.OrdinalIgnoreCase) + 1)], "+00:00");
         }
         else if (value.EndsWith(" A", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" A", StringComparison.Ordinal) + 1)], "-01:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" A", StringComparison.OrdinalIgnoreCase) + 1)], "-01:00");
         }
         else if (value.EndsWith(" M", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" M", StringComparison.Ordinal) + 1)], "-12:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" M", StringComparison.OrdinalIgnoreCase) + 1)], "-12:00");
         }
         else if (value.EndsWith(" N", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" N", StringComparison.Ordinal) + 1)], "+01:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" N", StringComparison.OrdinalIgnoreCase) + 1)], "+01:00");
         }
         else if (value.EndsWith(" Y", StringComparison.OrdinalIgnoreCase))
         {
-            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" Y", StringComparison.Ordinal) + 1)], "+12:00");
+            zoneRepresentedAsLocalDifferential = string.Concat(value[..(value.LastIndexOf(" Y", StringComparison.OrdinalIgnoreCase) + 1)], "+12:00");
         }
         else if (value.EndsWith("CET", StringComparison.OrdinalIgnoreCase))
         {
-            return $"{value.TrimEnd("CET".ToCharArray())}+1:00";
+            return $"{value[..value.LastIndexOf("CET", StringComparison.OrdinalIgnoreCase)]}+1:00";
         }
         else if (value.EndsWith("CEST", StringComparison.OrdinalIgnoreCase))
         {
-            return $"{value.TrimEnd("CEST".ToCharArray())}+2:00";
+            return $"{value[..value.LastIndexOf("CEST", StringComparison.OrdinalIgnoreCase)]}+2:00";
         }
         else
         {

@@ -1,3 +1,4 @@
+using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Running;
 
 namespace Argotic.Benchmarks;
@@ -23,6 +24,9 @@ internal static class Program
     /// <param name="args">BenchmarkDotNet command-line arguments.</param>
     public static void Main(string[] args)
     {
-        BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args);
+        // The shared config supplies the diagnosers so every class reports the same columns;
+        // command-line arguments layer on top of it, so --job, --filter and --profiler still work.
+        IConfig config = new BenchmarkConfig();
+        BenchmarkSwitcher.FromAssembly(typeof(Program).Assembly).Run(args, config);
     }
 }

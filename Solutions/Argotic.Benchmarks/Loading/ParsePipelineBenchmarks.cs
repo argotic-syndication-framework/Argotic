@@ -18,24 +18,27 @@ namespace Argotic.Benchmarks.Loading;
 /// <see cref="XPathDocument"/>, then walk that document into Argotic's object model.
 /// </para>
 /// <para>
-/// <strong>Only public API is measured.</strong> Argotic's byte-buffering step
-/// (<c>GetStreamBytes</c>) is private, so it is deliberately NOT benchmarked directly — adding
-/// <c>InternalsVisibleTo</c> or widening its accessibility would change the shipped API surface
-/// in order to observe it. Instead the measured points are nested public calls, and the private
-/// stages fall out by subtraction:
+/// Most measured points are nested public calls, so the stages between them fall out by
+/// subtraction:
 /// </para>
 /// <list type="bullet">
 ///   <item><description>XPathDocument build ≈ <c>CreateSafeNavigator(string)</c> − <c>RemoveInvalidXmlHexadecimalCharacters</c></description></item>
-///   <item><description>buffer + decode ≈ <c>CreateSafeNavigator(Stream)</c> − <c>CreateSafeNavigator(string)</c> − <c>GetXmlEncoding</c></description></item>
+///   <item><description>decode ≈ <c>CreateSafeNavigator(Stream)</c> − <c>CreateSafeNavigator(string)</c> − <c>GetXmlEncoding</c> − <c>GetStreamBytes</c></description></item>
 ///   <item><description>object-model walk ≈ <c>Load(Stream)</c> − <c>CreateSafeNavigator(Stream)</c></description></item>
 /// </list>
 /// <para>
-/// Each measured point strictly contains the one before it, so the subtractions are well defined.
-/// The containment is also the built-in honesty check: if a nested call ever measures larger than
-/// the one containing it, the decomposition is wrong and no conclusion may be drawn from it.
+/// <c>GetStreamBytes</c> is measured directly. It is <c>internal</c> rather than public, and the
+/// harness reaches it through an <c>InternalsVisibleTo</c> grant added deliberately for this
+/// purpose — the alternative, inferring it by subtraction, buried the repository's most-allocating
+/// buffering step inside a residual.
+/// </para>
+/// <para>
+/// Each nested measured point strictly contains the ones inside it, so the subtractions are well
+/// defined. That containment is also the built-in honesty check: if a nested call ever measures
+/// larger than the one containing it, the decomposition is wrong and no conclusion may be drawn
+/// from it.
 /// </para>
 /// </remarks>
-[MemoryDiagnoser]
 [BenchmarkCategory("pipeline", "rss")]
 [SuppressMessage(
     "Design",
@@ -63,10 +66,25 @@ public class ParsePipelineBenchmarks
     }
 
     /// <summary>
-    /// Innermost measured point — encoding detection over the raw bytes.
+    /// Buffering the whole stream into a byte array — the load path's first act.
+    /// </summary>
+    /// <returns>The buffered bytes.</returns>
+    /// <remarks>
+    /// Reached via <c>InternalsVisibleTo</c>; see the class remarks for why this stage is measured
+    /// directly rather than inferred.
+    /// </remarks>
+    [Benchmark(Description = "a. GetStreamBytes")]
+    public byte[] BufferStream()
+    {
+        using MemoryStream stream = new(this.document, writable: false);
+        return SyndicationEncodingUtility.GetStreamBytes(stream);
+    }
+
+    /// <summary>
+    /// Encoding detection over the raw bytes.
     /// </summary>
     /// <returns>The detected encoding.</returns>
-    [Benchmark(Description = "a. GetXmlEncoding(bytes)")]
+    [Benchmark(Description = "b. GetXmlEncoding(bytes)")]
     public Encoding DetectEncoding()
     {
         return SyndicationEncodingUtility.GetXmlEncoding(this.document);
@@ -76,7 +94,7 @@ public class ParsePipelineBenchmarks
     /// Invalid-character stripping, which produces a second full copy of the document.
     /// </summary>
     /// <returns>The sanitised document.</returns>
-    [Benchmark(Description = "b. RemoveInvalidXmlHexadecimalCharacters")]
+    [Benchmark(Description = "c. RemoveInvalidXmlHexadecimalCharacters")]
     public string Sanitise()
     {
         return SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(this.decoded);
@@ -86,7 +104,7 @@ public class ParsePipelineBenchmarks
     /// Sanitising plus XPathDocument construction. Contains <see cref="Sanitise"/>.
     /// </summary>
     /// <returns>A navigator over the parsed document.</returns>
-    [Benchmark(Description = "c. CreateSafeNavigator(string)")]
+    [Benchmark(Description = "d. CreateSafeNavigator(string)")]
     public XPathNavigator NavigatorFromString()
     {
         return SyndicationEncodingUtility.CreateSafeNavigator(this.decoded);
@@ -97,7 +115,7 @@ public class ParsePipelineBenchmarks
     /// Contains <see cref="NavigatorFromString"/> and <see cref="DetectEncoding"/>.
     /// </summary>
     /// <returns>A navigator over the parsed document.</returns>
-    [Benchmark(Description = "d. CreateSafeNavigator(Stream)")]
+    [Benchmark(Description = "e. CreateSafeNavigator(Stream)")]
     public XPathNavigator NavigatorFromStream()
     {
         using MemoryStream stream = new(this.document, writable: false);
@@ -108,7 +126,7 @@ public class ParsePipelineBenchmarks
     /// The whole public load path. Contains every point above plus the object-model walk.
     /// </summary>
     /// <returns>The parsed feed.</returns>
-    [Benchmark(Baseline = true, Description = "e. whole Load(Stream)")]
+    [Benchmark(Baseline = true, Description = "f. whole Load(Stream)")]
     public RssFeed WholeLoad()
     {
         using MemoryStream stream = new(this.document, writable: false);

@@ -22,7 +22,6 @@ namespace Argotic.Benchmarks.Loading;
 /// is drawn from a synthetic-only measurement.
 /// </para>
 /// </remarks>
-[MemoryDiagnoser]
 [BenchmarkCategory("load", "rss", "fidelity")]
 [SuppressMessage(
     "Design",

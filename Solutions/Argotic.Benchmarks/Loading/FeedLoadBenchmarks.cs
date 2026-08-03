@@ -15,7 +15,6 @@ namespace Argotic.Benchmarks.Loading;
 /// performance target. This repository has no such target, so the curve is the only honest
 /// definition of "issue" available.
 /// </remarks>
-[MemoryDiagnoser]
 [BenchmarkCategory("load", "rss", "synthetic")]
 [SuppressMessage(
     "Design",

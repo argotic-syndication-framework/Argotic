@@ -69,6 +69,66 @@ internal static class FeedCorpus
     }
 
     /// <summary>
+    /// Generates an Atom 1.0 document with <paramref name="entryCount"/> entries, using the
+    /// element mix of the repository's real Atom sample.
+    /// </summary>
+    /// <param name="entryCount">The number of <c>entry</c> elements to emit.</param>
+    /// <returns>The generated document as UTF-8 bytes.</returns>
+    public static byte[] GenerateAtomUtf8(int entryCount)
+    {
+        StringBuilder builder = new(capacity: 1024 + (entryCount * 640));
+
+        builder.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+        builder.Append("<feed xmlns=\"http://www.w3.org/2005/Atom\">\n");
+        builder.Append("  <title type=\"text\">Synthetic Benchmark Feed</title>\n");
+        builder.Append("  <subtitle type=\"html\">A &lt;em&gt;synthetic&lt;/em&gt; Atom feed</subtitle>\n");
+        builder.Append("  <link href=\"https://example.com/\" rel=\"alternate\" type=\"text/html\"/>\n");
+        builder.Append("  <link href=\"https://example.com/feed.atom\" rel=\"self\" type=\"application/atom+xml\"/>\n");
+        builder.Append("  <id>urn:uuid:60a76c80-d399-11d9-b93C-0003939e0af6</id>\n");
+        builder.Append("  <updated>2024-01-01T12:00:00Z</updated>\n");
+        builder.Append("  <rights type=\"text\">Copyright 2026 Example Corporation.</rights>\n");
+        builder.Append("  <generator uri=\"https://github.com/argotic-syndication-framework/Argotic\" version=\"4.0\">Argotic Benchmarks</generator>\n");
+        builder.Append("  <author>\n    <name>Feed Author</name>\n    <email>author@example.com</email>\n  </author>\n");
+
+        for (int i = 0; i < entryCount; i++)
+        {
+            AppendAtomEntry(builder, i);
+        }
+
+        builder.Append("</feed>\n");
+
+        return Encoding.UTF8.GetBytes(builder.ToString());
+    }
+
+    /// <summary>
+    /// Generates a Sitemap 0.9 <c>urlset</c> with <paramref name="urlCount"/> entries.
+    /// </summary>
+    /// <param name="urlCount">The number of <c>url</c> elements to emit.</param>
+    /// <returns>The generated document as UTF-8 bytes.</returns>
+    public static byte[] GenerateSitemapUtf8(int urlCount)
+    {
+        StringBuilder builder = new(capacity: 512 + (urlCount * 192));
+
+        builder.Append("<?xml version=\"1.0\" encoding=\"UTF-8\"?>\n");
+        builder.Append("<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
+
+        for (int i = 0; i < urlCount; i++)
+        {
+            string ordinal = i.ToString(CultureInfo.InvariantCulture);
+            builder.Append("  <url>\n");
+            builder.Append("    <loc>https://www.example.com/page").Append(ordinal).Append("</loc>\n");
+            builder.Append("    <lastmod>2024-01-15</lastmod>\n");
+            builder.Append("    <changefreq>daily</changefreq>\n");
+            builder.Append("    <priority>0.8</priority>\n");
+            builder.Append("  </url>\n");
+        }
+
+        builder.Append("</urlset>\n");
+
+        return Encoding.UTF8.GetBytes(builder.ToString());
+    }
+
+    /// <summary>
     /// Reads one of the repository's real sample documents, linked into the benchmark output.
     /// </summary>
     /// <param name="fileName">The sample file name, e.g. <c>RssFeed.xml</c>.</param>
@@ -77,6 +137,42 @@ internal static class FeedCorpus
     {
         string path = Path.Combine(AppContext.BaseDirectory, "SampleData", fileName);
         return File.ReadAllBytes(path);
+    }
+
+    private static void AppendAtomEntry(StringBuilder builder, int index)
+    {
+        // Mirrors the real sample's variation: content type alternates text/html, and only some
+        // entries carry an entry-level author or a second category.
+        int shape = index % 3;
+        string ordinal = index.ToString(CultureInfo.InvariantCulture);
+
+        builder.Append("  <entry>\n");
+        builder.Append(shape == 1
+            ? "    <title type=\"html\">&lt;strong&gt;Synthetic Entry " + ordinal + "&lt;/strong&gt;</title>\n"
+            : "    <title type=\"text\">Synthetic Entry " + ordinal + "</title>\n");
+        builder.Append("    <link href=\"https://example.com/entry").Append(ordinal).Append("\" rel=\"alternate\" type=\"text/html\"/>\n");
+        builder.Append("    <link href=\"https://example.com/entry").Append(ordinal).Append("/related\" rel=\"related\"/>\n");
+        builder.Append("    <id>urn:uuid:1225c695-cfb8-4ebb-aaaa-").Append(ordinal.PadLeft(12, '0')).Append("</id>\n");
+        builder.Append("    <published>2024-01-01T09:00:00Z</published>\n");
+        builder.Append("    <updated>2024-01-01T10:00:00Z</updated>\n");
+        builder.Append("    <summary type=\"text\">Summary for synthetic entry ").Append(ordinal).Append(".</summary>\n");
+        builder.Append("    <content type=\"text\">Body content for synthetic entry ").Append(ordinal)
+               .Append(", long enough to resemble a real entry rather than a stub.</content>\n");
+
+        if (shape != 2)
+        {
+            builder.Append("    <author>\n      <name>Entry Author ").Append(ordinal)
+                   .Append("</name>\n      <email>entry").Append(ordinal).Append("@example.com</email>\n    </author>\n");
+        }
+
+        builder.Append("    <category term=\"synthetic\" label=\"Synthetic\"/>\n");
+
+        if (shape == 0)
+        {
+            builder.Append("    <category term=\"example\" scheme=\"https://example.com/tags\"/>\n");
+        }
+
+        builder.Append("  </entry>\n");
     }
 
     private static void AppendItem(StringBuilder builder, int index)

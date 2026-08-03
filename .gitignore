@@ -493,3 +493,4 @@ coverage.cobertura.xml
 .devcontainer/
 CLAUDE.md
 Issues.txt
+dotnet/

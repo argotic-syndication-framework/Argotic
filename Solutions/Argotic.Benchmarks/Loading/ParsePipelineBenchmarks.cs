@@ -47,6 +47,7 @@ namespace Argotic.Benchmarks.Loading;
 public class ParsePipelineBenchmarks
 {
     private byte[] document = [];
+    private byte[] documentWithExtensions = [];
     private string decoded = string.Empty;
 
     /// <summary>
@@ -62,6 +63,7 @@ public class ParsePipelineBenchmarks
     public void Setup()
     {
         this.document = FeedCorpus.GenerateRssUtf8(this.ItemCount);
+        this.documentWithExtensions = FeedCorpus.GenerateRssWithExtensionsUtf8(this.ItemCount);
         this.decoded = Encoding.UTF8.GetString(this.document);
     }
 
@@ -136,7 +138,32 @@ public class ParsePipelineBenchmarks
     }
 
     /// <summary>
-    /// The same load with extension auto-detection switched off.
+    /// The whole load, on a feed that DECLARES extension namespaces and carries extension elements.
+    /// </summary>
+    /// <returns>The parsed feed.</returns>
+    /// <remarks>
+    /// <para>
+    /// The load-bearing measurement for any change to extension detection, and the one the
+    /// extension-free benchmark cannot substitute for. A change that filters extension work by
+    /// declared namespace does no work at all on the extension-free document, so measuring only
+    /// that document guarantees a favourable number regardless of the change's real merit.
+    /// </para>
+    /// <para>
+    /// Here the namespaces match, the extensions are genuinely needed, and the work is genuinely
+    /// performed — so a change that helps only the easy case shows up as no improvement.
+    /// </para>
+    /// </remarks>
+    [Benchmark(Description = "h. Load(Stream), feed WITH extension namespaces")]
+    public RssFeed WholeLoadWithExtensions()
+    {
+        using MemoryStream stream = new(this.documentWithExtensions, writable: false);
+        RssFeed feed = new();
+        feed.Load(stream);
+        return feed;
+    }
+
+    /// <summary>
+    /// The same with extension auto-detection switched off.
     /// </summary>
     /// <returns>The parsed feed.</returns>
     /// <remarks>

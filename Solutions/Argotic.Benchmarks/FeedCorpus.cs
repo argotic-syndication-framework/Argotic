@@ -69,6 +69,76 @@ internal static class FeedCorpus
     }
 
     /// <summary>
+    /// Generates an RSS 2.0 document that DECLARES extension namespaces and carries extension
+    /// elements on every item, modelled on the repository's <c>RssFeedWithExtensions.xml</c>.
+    /// </summary>
+    /// <param name="itemCount">The number of <c>item</c> elements to emit.</param>
+    /// <returns>The generated document as UTF-8 bytes.</returns>
+    /// <remarks>
+    /// <para>
+    /// This exists because a blind prosecution panel found the extension-free corpus made an
+    /// experiment unfalsifiable. Any change that filters extension work by declared namespace
+    /// skips 100% of that work on a document declaring no namespaces, so measuring only
+    /// <see cref="GenerateRssUtf8"/> guarantees a favourable result no matter what the change does.
+    /// </para>
+    /// <para>
+    /// Production feeds are not extension-free — the newsletters this library serves aggregate
+    /// sources carrying Dublin Core, content:encoded, slash, syndication, iTunes and Media RSS.
+    /// This generator declares the same namespaces the real sample declares and emits matching
+    /// elements per item, so extension work is genuinely performed and a change that helps only
+    /// the extension-free case cannot hide.
+    /// </para>
+    /// </remarks>
+    public static byte[] GenerateRssWithExtensionsUtf8(int itemCount)
+    {
+        StringBuilder builder = new(capacity: 2048 + (itemCount * 1024));
+
+        builder.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n");
+        builder.Append("<rss version=\"2.0\"\n");
+        builder.Append("     xmlns:dc=\"http://purl.org/dc/elements/1.1/\"\n");
+        builder.Append("     xmlns:dcterms=\"http://purl.org/dc/terms/\"\n");
+        builder.Append("     xmlns:content=\"http://purl.org/rss/1.0/modules/content/\"\n");
+        builder.Append("     xmlns:slash=\"http://purl.org/rss/1.0/modules/slash/\"\n");
+        builder.Append("     xmlns:sy=\"http://purl.org/rss/1.0/modules/syndication/\"\n");
+        builder.Append("     xmlns:itunes=\"http://www.itunes.com/dtds/podcast-1.0.dtd\"\n");
+        builder.Append("     xmlns:media=\"http://search.yahoo.com/mrss/\">\n");
+        builder.Append("  <channel>\n");
+        builder.Append("    <title>Synthetic Extension-Bearing Feed</title>\n");
+        builder.Append("    <link>https://example.com/</link>\n");
+        builder.Append("    <description>A synthetic feed declaring the extension namespaces the real sample declares.</description>\n");
+        builder.Append("    <language>en-us</language>\n");
+        builder.Append("    <sy:updatePeriod>hourly</sy:updatePeriod>\n");
+        builder.Append("    <sy:updateFrequency>1</sy:updateFrequency>\n");
+        builder.Append("    <dc:publisher>Example Corporation</dc:publisher>\n");
+        builder.Append("    <itunes:author>Example Author</itunes:author>\n");
+
+        for (int i = 0; i < itemCount; i++)
+        {
+            string ordinal = i.ToString(CultureInfo.InvariantCulture);
+            builder.Append("    <item>\n");
+            builder.Append("      <title>Extension Article ").Append(ordinal).Append("</title>\n");
+            builder.Append("      <link>https://example.com/article").Append(ordinal).Append("</link>\n");
+            builder.Append("      <description>Body text for extension-bearing article ").Append(ordinal).Append(".</description>\n");
+            builder.Append("      <pubDate>Mon, 01 Jan 2024 10:00:00 GMT</pubDate>\n");
+            builder.Append("      <dc:creator>Article Author ").Append(ordinal).Append("</dc:creator>\n");
+            builder.Append("      <dc:subject>technology</dc:subject>\n");
+            builder.Append("      <dc:date>2024-01-01T10:00:00Z</dc:date>\n");
+            builder.Append("      <dcterms:abstract>An abstract of article ").Append(ordinal).Append("</dcterms:abstract>\n");
+            builder.Append("      <content:encoded><![CDATA[<p>Full content of article ").Append(ordinal)
+                   .Append(" with <strong>HTML</strong> formatting.</p>]]></content:encoded>\n");
+            builder.Append("      <slash:comments>42</slash:comments>\n");
+            builder.Append("      <slash:department>tech</slash:department>\n");
+            builder.Append("      <itunes:duration>00:31:00</itunes:duration>\n");
+            builder.Append("      <media:thumbnail url=\"https://example.com/thumb").Append(ordinal).Append(".jpg\"/>\n");
+            builder.Append("    </item>\n");
+        }
+
+        builder.Append("  </channel>\n</rss>\n");
+
+        return Encoding.UTF8.GetBytes(builder.ToString());
+    }
+
+    /// <summary>
     /// Generates an Atom 1.0 document with <paramref name="entryCount"/> entries, using the
     /// element mix of the repository's real Atom sample.
     /// </summary>

@@ -523,7 +523,12 @@ public static class SyndicationEncodingUtility
     /// <param name="stream">The <see cref="Stream"/> to get an array of bytes for.</param>
     /// <returns>An array of bytes that represent the data of the supplied <paramref name="stream"/>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
-    private static byte[] GetStreamBytes(Stream stream)
+    /// <remarks>
+    ///     Internal rather than private so the benchmark harness can measure this stage of the load
+    ///     pipeline directly. It is deliberately not public: exposing it would make it a permanent
+    ///     contract on a published library, and nothing outside this assembly needs it.
+    /// </remarks>
+    internal static byte[] GetStreamBytes(Stream stream)
     {
         int initialLength = 32768;
         int read = 0;

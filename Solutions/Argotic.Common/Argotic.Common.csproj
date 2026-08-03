@@ -10,4 +10,13 @@
     <None Include="..\..\README.md" Pack="true" PackagePath="" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!--
+      The benchmark harness measures individual stages of the load pipeline. GetStreamBytes is one
+      of those stages and is internal rather than public, so the harness needs this grant. Scoped
+      to the benchmark project alone - not the test project, which exercises public API only.
+    -->
+    <InternalsVisibleTo Include="Argotic.Benchmarks" />
+  </ItemGroup>
+
 </Project>

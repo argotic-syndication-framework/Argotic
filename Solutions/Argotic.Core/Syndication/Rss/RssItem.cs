@@ -217,6 +217,15 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         get => itemTitle;
         set => itemTitle = value?.Trim() ?? string.Empty;
     }
+
+    /// <summary>
+    /// Searches for the first syndication extension of the specified type that is attached to this item.
+    /// </summary>
+    /// <typeparam name="TExtension">The type of <see cref="ISyndicationExtension"/> to search for.</typeparam>
+    /// <returns>
+    ///     The first extension in <see cref="RssItem.Extensions"/> that is assignable to <typeparamref name="TExtension"/>,
+    ///     Otherwise, a <b>null</b> reference if this item has no extension of that type.
+    /// </returns>
     public TExtension? FindExtension<TExtension>() where TExtension : ISyndicationExtension
     {
         return this.Extensions.OfType<TExtension>().FirstOrDefault();

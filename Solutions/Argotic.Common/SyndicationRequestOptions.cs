@@ -7,7 +7,7 @@ namespace Argotic.Common;
 /// <para>
 /// This record provides a simple way to customize request-level settings like HTTP headers.
 /// For handler-level settings (credentials, proxy, cookies), configure the <see cref="HttpClient"/>
-/// directly or use <see cref="IHttpClientFactory"/> in dependency injection scenarios.
+/// directly or use <c>IHttpClientFactory</c> in dependency injection scenarios.
 /// </para>
 /// <para>
 /// Example usage:

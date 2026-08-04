@@ -256,32 +256,6 @@ public static class SyndicationDiscoveryUtility
     }
 
     /// <summary>
-    /// Returns a <see cref="Uri"/> that represents the absolute base URI of the supplied <see cref="HttpRequest"/>.
-    /// </summary>
-    /// <param name="request">The <see cref="HttpRequest"/> to generate an absolute base <see cref="Uri"/> for.</param>
-    /// <returns>
-    ///     A <see cref="Uri"/> that represents the absolute base URI of the supplied <see cref="HttpRequest"/>.
-    ///     If unable to build an absolute base <see cref="Uri"/>, returns the absolute URI of the supplied <see cref="HttpRequest"/>.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference.</exception>
-    /*public static Uri GetAbsoluteBaseUri(HttpRequest xrequest)
-    {
-        Uri baseUri = null;
-
-        ArgumentNullException.ThrowIfNull(request);
-
-        string baseUrlString    = request.Url.AbsoluteUri.Replace(request.Url.PathAndQuery, String.Empty);
-        baseUrlString           = String.Concat(baseUrlString, "/", request.ApplicationPath.TrimStart('/'));
-
-        if (!Uri.TryCreate(baseUrlString, UriKind.Absolute, out baseUri))
-        {
-            baseUri             = new Uri(request.Url.AbsoluteUri);
-        }
-
-        return baseUri;
-    }*/
-
-    /// <summary>
     /// Asynchronously returns a value indicating if the source <see cref="Uri"/> references the target <see cref="Uri"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that represents the source web resource that will be searched.</param>
@@ -672,7 +646,7 @@ public static class SyndicationDiscoveryUtility
     /// </summary>
     /// <param name="content">The HTML markup to parse.</param>
     /// <returns>
-    ///     A <see cref="HtmlAnchor"/> that represents the pingback auto-discovery link extracted from the <paramref name="html"/>.
+    ///     A <see cref="HtmlAnchor"/> that represents the pingback auto-discovery link extracted from the <paramref name="content"/>.
     ///     If no pingback auto-discovery link was found, returns <b>null</b>.
     /// </returns>
     /// <remarks>

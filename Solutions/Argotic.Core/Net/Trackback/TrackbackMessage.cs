@@ -59,7 +59,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <remarks>
     ///     The <paramref name="permalink"/> should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="permalink"/> is a null reference.</exception>
     public TrackbackMessage(Uri permalink)
     {
         this.Permalink = permalink;
@@ -193,7 +193,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <param name="source">The <see cref="NameValueCollection"/> to extract information from.</param>
     /// <returns><b>true</b> if the <see cref="TrackbackMessage"/> was initialized using the supplied <paramref name="source"/>, Otherwise, <b>false</b>.</returns>
     /// <remarks>
-    ///     <para>This method expects the supplied <paramref name="source"/> to be the <see cref="HttpRequest.Params">HTTP Request Parameters</see> or a similar subset.</para>
+    ///     <para>This method expects the supplied <paramref name="source"/> to be the <c>HttpRequest.Params</c> collection of an ASP.NET request or a similar subset.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     public bool Load(NameValueCollection source)

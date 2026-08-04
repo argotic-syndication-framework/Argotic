@@ -115,7 +115,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// Returns the relation type identifier for the supplied <see cref="FeedSynchronizationRelatedInformationType"/>.
     /// </summary>
     /// <param name="type">The <see cref="FeedSynchronizationRelatedInformationType"/> to get the relation type identifier for.</param>
-    /// <returns>The relation type identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The relation type identifier for the supplied <paramref name="type"/>, Otherwise, returns an empty string.</returns>
     public static string RelationTypeAsString(FeedSynchronizationRelatedInformationType type) =>
         EnumerationMetadataAttribute.GetAlternateValue(type);
 

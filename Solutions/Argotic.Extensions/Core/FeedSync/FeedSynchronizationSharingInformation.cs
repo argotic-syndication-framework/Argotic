@@ -120,7 +120,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     } = string.Empty;
 
     /// <summary>
-    /// Compares two specified <see cref="Collection{FeedSynchronizationRelatedInformation}"/> collections.
+    /// Compares two specified <see cref="IList{FeedSynchronizationRelatedInformation}"/> collections.
     /// </summary>
     /// <param name="source">The first collection.</param>
     /// <param name="target">The second collection.</param>

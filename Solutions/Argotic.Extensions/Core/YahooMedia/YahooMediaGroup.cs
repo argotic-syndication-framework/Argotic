@@ -90,7 +90,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets a collection of media objects that are effectively the same content, yet different representations.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaContent"/> objects that represent media objects that are effectively the same content, yet different representations. 
+    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaContent"/> objects that represent media objects that are effectively the same content, yet different representations. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     public IList<YahooMediaContent> Contents
@@ -106,7 +106,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets a taxonomy that gives an indication of the type of content for this media group.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this media group. 
+    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaCategory"/> objects that represent a taxonomy that gives an indication to the type of content for this media group. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     public IList<YahooMediaCategory> Categories
@@ -142,7 +142,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets the entities that contributed to the creation of this media group.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this media group. 
+    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaCredit"/> objects that represent the entities that contributed to the creation of this media group. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
@@ -182,7 +182,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets the hash digests for this media group.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this media group. 
+    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaHash"/> objects that represent the hash digests for this media group. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
@@ -201,7 +201,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets the relevant keywords that describe this media group.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe this media group. 
+    ///     An <see cref="IList{T}"/> collection of <see cref="string"/> objects that represent the relevant keywords that describe this media group. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
@@ -237,7 +237,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets the permissible audiences for this media group.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this media group. 
+    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaRating"/> objects that represent the permissible audiences for this media group. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
@@ -256,7 +256,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets the restrictions to be placed on aggregators that are rendering this media group.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this media group. 
+    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaRestriction"/> objects that represent restrictions to be placed on aggregators that are rendering this media group. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     public IList<YahooMediaRestriction> Restrictions
@@ -272,7 +272,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets the text transcript, closed captioning, or lyrics for this media group.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this media group. 
+    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaText"/> objects that represent text transcript, closed captioning, or lyrics for this media group. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
@@ -293,7 +293,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets the representative images for this media group.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this media group. 
+    ///     An <see cref="IList{T}"/> collection of <see cref="YahooMediaThumbnail"/> objects that represent images that are representative of this media group. 
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>

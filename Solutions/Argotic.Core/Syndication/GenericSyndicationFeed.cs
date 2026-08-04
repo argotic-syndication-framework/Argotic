@@ -201,8 +201,8 @@ public class GenericSyndicationFeed
     /// <remarks>
     ///     After the load operation has successfully completed, the <see cref="GenericSyndicationFeed.Loaded"/> event will be raised.
     /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
-    /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to a supported syndication content format. In this case, the feed remains empty.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="str"/> is a null reference.</exception>
+    /// <exception cref="FormatException">The <paramref name="str"/> data does not conform to a supported syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the feed remains empty.</exception>
     public void Load(string str)
     {
@@ -346,7 +346,7 @@ public class GenericSyndicationFeed
     /// feedFormat to Opml and feedResource to opmlDocument
     /// </summary>
     /// <param name="opmlDocument">The <see cref="OpmlDocument"/> to build an abstraction against.</param>
-    /// <exception cref="ArgumentNullException">The <paramref name="feed"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="opmlDocument"/> is a null reference.</exception>
     public void Parse(OpmlDocument opmlDocument)
     {
         ArgumentNullException.ThrowIfNull(opmlDocument);

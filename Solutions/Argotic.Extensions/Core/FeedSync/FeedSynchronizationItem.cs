@@ -215,7 +215,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Returns the conflict preservation identifier for the supplied <see cref="FeedSynchronizationConflictPreservationDirective"/>.
     /// </summary>
     /// <param name="directive">The <see cref="FeedSynchronizationConflictPreservationDirective"/> to get the conflict preservation identifier for.</param>
-    /// <returns>The conflict preservation identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The conflict preservation identifier for the supplied <paramref name="directive"/>, Otherwise, returns an empty string.</returns>
     public static string ConflictPreservationAsString(FeedSynchronizationConflictPreservationDirective directive) =>
         EnumerationMetadataAttribute.GetAlternateValue(directive);
 
@@ -234,7 +234,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// Returns the tombstone status identifier for the supplied <see cref="FeedSynchronizationTombstoneStatus"/>.
     /// </summary>
     /// <param name="status">The <see cref="FeedSynchronizationTombstoneStatus"/> to get the tombstone status identifier for.</param>
-    /// <returns>The tombstone status identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The tombstone status identifier for the supplied <paramref name="status"/>, Otherwise, returns an empty string.</returns>
     public static string TombstoneStatusAsString(FeedSynchronizationTombstoneStatus status) =>
         EnumerationMetadataAttribute.GetAlternateValue(status);
 

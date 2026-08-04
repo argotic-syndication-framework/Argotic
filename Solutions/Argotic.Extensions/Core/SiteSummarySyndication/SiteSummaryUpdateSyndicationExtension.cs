@@ -93,7 +93,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// Returns the period identifier for the supplied <see cref="SiteSummaryUpdatePeriod"/>.
     /// </summary>
     /// <param name="period">The <see cref="SiteSummaryUpdatePeriod"/> to get the period identifier for.</param>
-    /// <returns>The period identifier for the supplied <paramref name="vocabulary"/>, Otherwise, returns an empty string.</returns>
+    /// <returns>The period identifier for the supplied <paramref name="period"/>, Otherwise, returns an empty string.</returns>
     public static string PeriodAsString(SiteSummaryUpdatePeriod period)
     {
         return PeriodToStringMapping.GetValueOrDefault(period, string.Empty);

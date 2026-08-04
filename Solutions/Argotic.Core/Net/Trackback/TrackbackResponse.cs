@@ -8,7 +8,7 @@ namespace Argotic.Net;
 /// <summary>
 /// Represents the response to a Trackback ping request.
 /// </summary>
-/// <seealso cref="TrackbackClient.Send(TrackbackMessage)"/>
+/// <seealso cref="TrackbackClient.SendAsync(TrackbackMessage, CancellationToken)"/>
 /// <example>
 ///     <code lang="cs" title="The following code example demonstrates the usage of the TrackbackResponse class.">
 ///         <code

@@ -8,7 +8,7 @@ namespace Argotic.Net;
 /// <summary>
 /// Represents the response to an XML remote procedure call.
 /// </summary>
-/// <seealso cref="XmlRpcClient.Send(XmlRpcMessage)"/>
+/// <seealso cref="XmlRpcClient.SendAsync(XmlRpcMessage, CancellationToken)"/>
 /// <example>
 ///     <code lang="cs" title="The following code example demonstrates the usage of the XmlRpcResponse class.">
 ///         <code

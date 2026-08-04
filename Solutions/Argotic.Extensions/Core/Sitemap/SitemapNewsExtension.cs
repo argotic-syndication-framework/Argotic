@@ -139,7 +139,8 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
 
-        XPathNavigator navigator = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
         XPathNavigator? newsNavigator = navigator.SelectSingleNode("news:news", manager);

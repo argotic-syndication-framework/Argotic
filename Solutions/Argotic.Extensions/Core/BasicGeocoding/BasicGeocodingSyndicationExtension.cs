@@ -172,7 +172,8 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
     public override bool Load(IXPathNavigable source)
     {
         ArgumentNullException.ThrowIfNull(source);
-        XPathNavigator navigator = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         bool wasLoaded = this.Context.Load(navigator, this.CreateNamespaceManager(navigator));
         SyndicationExtensionLoadedEventArgs args = new(source, this);
         this.OnExtensionLoaded(args);

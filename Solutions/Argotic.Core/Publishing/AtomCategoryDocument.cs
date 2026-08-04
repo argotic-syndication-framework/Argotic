@@ -430,7 +430,8 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
             settings = new SyndicationResourceLoadSettings();
         }
 
-        XPathNavigator navigator = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
     }
 

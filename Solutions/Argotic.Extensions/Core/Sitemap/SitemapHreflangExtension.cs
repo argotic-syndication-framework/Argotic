@@ -67,7 +67,8 @@ public class SitemapHreflangExtension : SyndicationExtension, IComparable<Sitema
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
 
-        XPathNavigator navigator = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
         XPathNodeIterator linkIterator = navigator.Select("xhtml:link", manager);

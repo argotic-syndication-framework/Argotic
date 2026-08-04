@@ -79,7 +79,8 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
 
-        XPathNavigator navigator = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
         XPathNodeIterator videoIterator = navigator.Select("video:video", manager);

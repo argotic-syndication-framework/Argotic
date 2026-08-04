@@ -302,7 +302,6 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <remarks>
     ///     This method returns the MIME content type representation for the current instance.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
     public override string ToString()
     {
         StringBuilder builder = new();

@@ -75,7 +75,6 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
     ///     All roles are converted to their lowercase equivalent. See <a href="http://www.ebu.ch/en/technical/metadata/specifications/role_codes.php">European Broadcasting Union Role Codes</a>
     ///     for a listing of the default entity roles.
     /// </remarks>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1308:NormalizeStringsToUppercase")]
     public string Role
     {
         get => field;

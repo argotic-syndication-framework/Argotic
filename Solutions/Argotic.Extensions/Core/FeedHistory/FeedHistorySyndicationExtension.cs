@@ -192,7 +192,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
         int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
-        if (result == 0) result = this.Version.CompareTo(other.Version);
+        if (result == 0) result = Comparer<Version>.Default.Compare(this.Version, other.Version);
         if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
         if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 

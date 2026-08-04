@@ -725,7 +725,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
 
         if (this.Version != null)
         {
-            if (result == 0) result = this.Version.CompareTo(other.Version);
+            if (result == 0) result = Comparer<Version>.Default.Compare(this.Version, other.Version);
         }
         else if (other.Version != null)
         {

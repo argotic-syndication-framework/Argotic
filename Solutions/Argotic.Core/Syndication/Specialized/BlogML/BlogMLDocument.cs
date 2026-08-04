@@ -481,7 +481,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="BlogMLDocument"/> instance. This value can be <b>null</b>.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
-    public void Save(Stream stream, SyndicationResourceSaveSettings settings)
+    public void Save(Stream stream, SyndicationResourceSaveSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
 
@@ -528,7 +528,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
-    public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
+    public void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(settings);
@@ -607,7 +607,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object whose <see cref="SyndicationResourceSaveSettings.SupportedExtensions"/> collection is to be filled.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    private void FillExtensionTypes(SyndicationResourceSaveSettings settings)
+    private void FillExtensionTypes(SyndicationResourceSaveSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(settings);
 

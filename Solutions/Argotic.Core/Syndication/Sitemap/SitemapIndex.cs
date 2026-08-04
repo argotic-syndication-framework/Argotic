@@ -394,7 +394,7 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
-    public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
+    public void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(settings);

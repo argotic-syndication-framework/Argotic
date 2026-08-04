@@ -195,3 +195,9 @@ indent_size = 2
 # XML files
 [*.{xml,csproj,props,targets}]
 indent_size = 2
+
+# Windows tooling that expects CRLF. Must match the eol=crlf pins in /.gitattributes,
+# otherwise the working tree and the repository disagree and every formatter run
+# rewrites these files back and forth.
+[*.{sln,slnx,ps1,cmd,bat}]
+end_of_line = crlf

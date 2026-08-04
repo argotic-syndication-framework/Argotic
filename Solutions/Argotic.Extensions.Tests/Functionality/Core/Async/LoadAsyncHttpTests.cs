@@ -125,7 +125,7 @@ public class LoadAsyncHttpTests
         // Arrange
         RssFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithDelay(TimeSpan.FromMilliseconds(50), FeedTestData.MinimalRss);
         using HttpClient httpClient = new(handler);

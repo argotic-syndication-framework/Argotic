@@ -17,7 +17,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         RssFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
@@ -36,7 +36,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         AtomFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
 
@@ -55,7 +55,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         AtomEntry entry = new();
         bool eventRaised = false;
-        entry.Loaded += (sender, args) => eventRaised = true;
+        entry.Loaded += (_, _) => eventRaised = true;
 
         using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtomEntry));
 
@@ -73,7 +73,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         OpmlDocument document = new();
         bool eventRaised = false;
-        document.Loaded += (sender, args) => eventRaised = true;
+        document.Loaded += (_, _) => eventRaised = true;
 
         using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalOpml));
 
@@ -111,7 +111,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss));
 
@@ -130,7 +130,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalAtom));
 
@@ -149,7 +149,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         RssFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
         using HttpClient httpClient = new(handler);
@@ -169,7 +169,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         AtomFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
         using HttpClient httpClient = new(handler);
@@ -189,7 +189,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         AtomEntry entry = new();
         bool eventRaised = false;
-        entry.Loaded += (sender, args) => eventRaised = true;
+        entry.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtomEntry);
         using HttpClient httpClient = new(handler);
@@ -208,7 +208,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         OpmlDocument document = new();
         bool eventRaised = false;
-        document.Loaded += (sender, args) => eventRaised = true;
+        document.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalOpml);
         using HttpClient httpClient = new(handler);
@@ -228,7 +228,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
         using HttpClient httpClient = new(handler);
@@ -248,7 +248,7 @@ public class LoadAsyncSuccessTests
         // Arrange
         Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
         using HttpClient httpClient = new(handler);

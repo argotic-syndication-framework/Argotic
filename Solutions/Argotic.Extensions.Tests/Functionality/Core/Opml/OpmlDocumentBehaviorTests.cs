@@ -291,7 +291,7 @@ public class OpmlDocumentBehaviorTests
         bool eventRaised = false;
         SyndicationResourceLoadedEventArgs? eventArgs = null;
 
-        document.Loaded += (sender, args) =>
+        document.Loaded += (_, args) =>
         {
             eventRaised = true;
             eventArgs = args;
@@ -891,7 +891,7 @@ public class OpmlDocumentBehaviorTests
         // Arrange
         OpmlDocument document = new();
         bool eventRaised = false;
-        document.Loaded += (sender, args) => eventRaised = true;
+        document.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalOpml);
         using HttpClient httpClient = new(handler);
@@ -934,7 +934,7 @@ public class OpmlDocumentBehaviorTests
         OpmlDocument document = new();
         Uri? sourceFromEvent = null;
 
-        document.Loaded += (sender, args) =>
+        document.Loaded += (_, args) =>
         {
             sourceFromEvent = args.Source;
         };

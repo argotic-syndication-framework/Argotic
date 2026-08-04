@@ -193,7 +193,7 @@ public class RssFeedBehaviorTests
         bool eventRaised = false;
         SyndicationResourceLoadedEventArgs? eventArgs = null;
 
-        feed.Loaded += (sender, args) =>
+        feed.Loaded += (_, args) =>
         {
             eventRaised = true;
             eventArgs = args;
@@ -512,7 +512,7 @@ public class RssFeedBehaviorTests
         // Arrange
         RssFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);
         using HttpClient httpClient = new(handler);
@@ -614,7 +614,7 @@ public class RssFeedBehaviorTests
         RssFeed feed = new();
         Uri? sourceFromEvent = null;
 
-        feed.Loaded += (sender, args) =>
+        feed.Loaded += (_, args) =>
         {
             sourceFromEvent = args.Source;
         };

@@ -30,7 +30,7 @@ public class MockHttpMessageHandler : HttpMessageHandler
     /// <returns>A new <see cref="MockHttpMessageHandler"/>.</returns>
     public static MockHttpMessageHandler WithContent(string content, string contentType = "application/xml")
     {
-        return new MockHttpMessageHandler((req, ct) =>
+        return new MockHttpMessageHandler((_, ct) =>
         {
             ct.ThrowIfCancellationRequested();
             return Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
@@ -48,7 +48,7 @@ public class MockHttpMessageHandler : HttpMessageHandler
     /// <returns>A new <see cref="MockHttpMessageHandler"/>.</returns>
     public static MockHttpMessageHandler WithDelay(TimeSpan delay, string content)
     {
-        return new MockHttpMessageHandler(async (req, ct) =>
+        return new MockHttpMessageHandler(async (_, ct) =>
         {
             await Task.Delay(delay, ct);
             return new HttpResponseMessage(HttpStatusCode.OK)
@@ -64,7 +64,7 @@ public class MockHttpMessageHandler : HttpMessageHandler
     /// <returns>A new <see cref="MockHttpMessageHandler"/>.</returns>
     public static MockHttpMessageHandler WithNotFound()
     {
-        return new MockHttpMessageHandler((req, ct) =>
+        return new MockHttpMessageHandler((_, ct) =>
         {
             ct.ThrowIfCancellationRequested();
             return Task.FromResult(new HttpResponseMessage(HttpStatusCode.NotFound)
@@ -81,7 +81,7 @@ public class MockHttpMessageHandler : HttpMessageHandler
     /// <returns>A new <see cref="MockHttpMessageHandler"/>.</returns>
     public static MockHttpMessageHandler WithException(Exception exception)
     {
-        return new MockHttpMessageHandler((req, ct) =>
+        return new MockHttpMessageHandler((_, _) =>
         {
             throw exception;
         });

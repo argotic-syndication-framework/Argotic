@@ -356,7 +356,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.MinimalRss;
         Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         // Act
         feed.Load(xml);
@@ -372,7 +372,7 @@ public class GenericSyndicationFeedBehaviorTests
         string xml = FeedTestData.MinimalAtom;
         Syndication.GenericSyndicationFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         // Act
         using MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(xml));

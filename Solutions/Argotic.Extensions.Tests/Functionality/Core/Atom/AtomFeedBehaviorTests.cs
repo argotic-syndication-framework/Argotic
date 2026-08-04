@@ -685,7 +685,7 @@ public class AtomFeedBehaviorTests
         string xml = FeedTestData.MinimalAtom;
         AtomFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         // Act
         using XmlReader reader = XmlReader.Create(new StringReader(xml));
@@ -705,7 +705,7 @@ public class AtomFeedBehaviorTests
         // Arrange
         AtomFeed feed = new();
         bool eventRaised = false;
-        feed.Loaded += (sender, args) => eventRaised = true;
+        feed.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalAtom);
         using HttpClient httpClient = new(handler);
@@ -805,7 +805,7 @@ public class AtomFeedBehaviorTests
         AtomFeed feed = new();
         Uri? sourceFromEvent = null;
 
-        feed.Loaded += (sender, args) =>
+        feed.Loaded += (_, args) =>
         {
             sourceFromEvent = args.Source;
         };

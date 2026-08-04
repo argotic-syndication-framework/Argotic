@@ -644,7 +644,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     public async Task ConditionalGetAsync_ContentNotModified_ReturnsNotModifiedResult()
     {
         // Arrange
-        using MockHttpMessageHandler handler = new((req, ct) =>
+        using MockHttpMessageHandler handler = new((_, ct) =>
         {
             ct.ThrowIfCancellationRequested();
             return Task.FromResult(new HttpResponseMessage(System.Net.HttpStatusCode.NotModified));
@@ -670,7 +670,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
     public async Task ConditionalGetAsync_ContentModified_ReturnsModifiedResult()
     {
         // Arrange
-        using MockHttpMessageHandler handler = new((req, ct) =>
+        using MockHttpMessageHandler handler = new((_, ct) =>
         {
             ct.ThrowIfCancellationRequested();
             var response = new HttpResponseMessage(System.Net.HttpStatusCode.OK)

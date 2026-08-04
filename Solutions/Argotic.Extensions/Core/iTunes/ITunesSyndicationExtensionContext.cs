@@ -419,19 +419,18 @@ public class ITunesSyndicationExtensionContext
         {
             string[] durationParts = value.Split(':', StringSplitOptions.RemoveEmptyEntries);
 
-            if (durationParts.Length == 2)
+            // mm:ss and hh:mm:ss are matched separately. The two patterns cannot reuse names -
+            // a pattern variable declared in an `if` condition is scoped to the whole enclosing
+            // block, not to its own branch - so each is named for the format it matches.
+            if (durationParts is [string mmOnlyValue, string ssOnlyValue])
             {
-                if (int.TryParse(durationParts[0], out int minutes) && int.TryParse(durationParts[1], out int seconds))
+                if (int.TryParse(mmOnlyValue, out int minutes) && int.TryParse(ssOnlyValue, out int seconds))
                 {
                     timeSpan = new TimeSpan(0, minutes, seconds);
                 }
             }
-            else if (durationParts.Length >= 3)
+            else if (durationParts is [string hoursValue, string minutesValue, string secondsValue, ..])
             {
-                string hoursValue = durationParts[0];
-                string minutesValue = durationParts[1];
-                string secondsValue = durationParts[2];
-
                 if (int.TryParse(hoursValue, out int hours) && int.TryParse(minutesValue, out int minutes) && int.TryParse(secondsValue, out int seconds))
                 {
                     timeSpan = new TimeSpan(hours, minutes, seconds);

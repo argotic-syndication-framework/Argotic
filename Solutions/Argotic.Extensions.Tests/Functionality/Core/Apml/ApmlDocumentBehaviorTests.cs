@@ -435,7 +435,7 @@ public class ApmlDocumentBehaviorTests
         bool eventRaised = false;
         SyndicationResourceLoadedEventArgs? eventArgs = null;
 
-        document.Loaded += (sender, args) =>
+        document.Loaded += (_, args) =>
         {
             eventRaised = true;
             eventArgs = args;
@@ -788,7 +788,7 @@ public class ApmlDocumentBehaviorTests
         // Arrange
         ApmlDocument document = new();
         bool eventRaised = false;
-        document.Loaded += (sender, args) => eventRaised = true;
+        document.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalApml);
         using HttpClient httpClient = new(handler);
@@ -832,7 +832,7 @@ public class ApmlDocumentBehaviorTests
         ApmlDocument document = new();
         Uri? sourceFromEvent = null;
 
-        document.Loaded += (sender, args) =>
+        document.Loaded += (_, args) =>
         {
             sourceFromEvent = args.Source;
         };

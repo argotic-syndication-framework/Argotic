@@ -296,7 +296,7 @@ public class RsdDocumentBehaviorTests
         RsdDocument document = new();
         bool eventRaised = false;
         SyndicationResourceLoadedEventArgs? eventArgs = null;
-        document.Loaded += (sender, args) =>
+        document.Loaded += (_, args) =>
         {
             eventRaised = true;
             eventArgs = args;
@@ -567,7 +567,7 @@ public class RsdDocumentBehaviorTests
         // Arrange
         RsdDocument document = new();
         bool eventRaised = false;
-        document.Loaded += (sender, args) => eventRaised = true;
+        document.Loaded += (_, _) => eventRaised = true;
 
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(MinimalRsd);
         using HttpClient httpClient = new(handler);
@@ -635,7 +635,7 @@ public class RsdDocumentBehaviorTests
         RsdDocument document = new();
         Uri? sourceFromEvent = null;
 
-        document.Loaded += (sender, args) =>
+        document.Loaded += (_, args) =>
         {
             sourceFromEvent = args.Source;
         };

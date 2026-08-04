@@ -21,7 +21,7 @@ public class LoadAsyncConcurrencyTests
         {
             feeds[i] = new RssFeed();
             int index = i;
-            feeds[i].Loaded += (sender, args) => results[index] = true;
+            feeds[i].Loaded += (_, _) => results[index] = true;
         }
 
         // Act - Load all feeds from streams
@@ -50,7 +50,7 @@ public class LoadAsyncConcurrencyTests
         {
             feeds[i] = new AtomFeed();
             int index = i;
-            feeds[i].Loaded += (sender, args) => results[index] = true;
+            feeds[i].Loaded += (_, _) => results[index] = true;
         }
 
         // Act - Load all feeds from streams
@@ -79,10 +79,10 @@ public class LoadAsyncConcurrencyTests
 
         bool rssLoaded = false, atomLoaded = false, opmlLoaded = false, genericLoaded = false;
 
-        rssFeed.Loaded += (sender, args) => rssLoaded = true;
-        atomFeed.Loaded += (sender, args) => atomLoaded = true;
-        opmlDoc.Loaded += (sender, args) => opmlLoaded = true;
-        genericFeed.Loaded += (sender, args) => genericLoaded = true;
+        rssFeed.Loaded += (_, _) => rssLoaded = true;
+        atomFeed.Loaded += (_, _) => atomLoaded = true;
+        opmlDoc.Loaded += (_, _) => opmlLoaded = true;
+        genericFeed.Loaded += (_, _) => genericLoaded = true;
 
         // Act - Load all feeds
         using (MemoryStream stream = new(System.Text.Encoding.UTF8.GetBytes(FeedTestData.MinimalRss)))
@@ -128,7 +128,7 @@ public class LoadAsyncConcurrencyTests
         {
             feeds[i] = new RssFeed();
             int index = i;
-            feeds[i].Loaded += (sender, args) => results[index] = true;
+            feeds[i].Loaded += (_, _) => results[index] = true;
         }
 
         // Act - Load all feeds concurrently using Task.WhenAll
@@ -162,7 +162,7 @@ public class LoadAsyncConcurrencyTests
         {
             feeds[i] = new AtomFeed();
             int index = i;
-            feeds[i].Loaded += (sender, args) => results[index] = true;
+            feeds[i].Loaded += (_, _) => results[index] = true;
         }
 
         // Act - Load all feeds concurrently using Task.WhenAll
@@ -196,10 +196,10 @@ public class LoadAsyncConcurrencyTests
 
         bool rssLoaded = false, atomLoaded = false, opmlLoaded = false, genericLoaded = false;
 
-        rssFeed.Loaded += (sender, args) => rssLoaded = true;
-        atomFeed.Loaded += (sender, args) => atomLoaded = true;
-        opmlDoc.Loaded += (sender, args) => opmlLoaded = true;
-        genericFeed.Loaded += (sender, args) => genericLoaded = true;
+        rssFeed.Loaded += (_, _) => rssLoaded = true;
+        atomFeed.Loaded += (_, _) => atomLoaded = true;
+        opmlDoc.Loaded += (_, _) => opmlLoaded = true;
+        genericFeed.Loaded += (_, _) => genericLoaded = true;
 
         // Act - Load all feeds concurrently
         using MockHttpMessageHandler rssHandler = MockHttpMessageHandler.WithContent(FeedTestData.MinimalRss);

@@ -183,6 +183,15 @@ dotnet_diagnostic.CA1303.severity = none
 dotnet_diagnostic.CA1515.severity = none
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
+# CA5372: Use XmlReader for XPathDocument. Every XPathDocument in this project is built from a
+# const string literal compiled into the test assembly (see TestDoubles/FeedTestData.cs) - a
+# trusted source that cannot be tampered with, which is the condition Microsoft documents for
+# suppressing this rule:
+# https://learn.microsoft.com/en-us/dotnet/fundamentals/code-analysis/quality-rules/ca5372
+# Scoped to the test project, so the shipped libraries stay covered - they have zero violations
+# and parse through SyndicationEncodingUtility.CreateSafeNavigator, which passes an XmlReader with
+# XmlResolver = null and is regression-tested by CreateSafeNavigator_DoesNotResolveExternalEntity.
+dotnet_diagnostic.CA5372.severity = none
 
 # JSON files
 [*.json]

@@ -12,16 +12,6 @@ namespace Argotic.Net;
 public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquatable<XmlRpcStructureMember>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the name of the structure member.
-    /// </summary>
-    private string memberName = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the value of the structure member.
-    /// </summary>
-    private IXmlRpcValue? memberValue;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcStructureMember"/> class.
     /// </summary>
     public XmlRpcStructureMember()
@@ -50,14 +40,14 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     /// <exception cref="ArgumentException">The <paramref name="value"/> is an empty string.</exception>
     public string Name
     {
-        get => memberName;
+        get;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            memberName = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the value of this structure member.
@@ -66,12 +56,12 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public IXmlRpcValue? Value
     {
-        get => memberValue;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            memberValue = value;
+            field = value;
         }
     }
 

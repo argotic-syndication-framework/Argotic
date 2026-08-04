@@ -14,11 +14,6 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
 {
 
     /// <summary>
-    /// Private member to hold the name of the category.
-    /// </summary>
-    private string categoryText = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="ITunesCategory"/> class.
     /// </summary>
     public ITunesCategory()
@@ -58,14 +53,14 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Text
     {
-        get => categoryText;
+        get;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            categoryText = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Loads this <see cref="ITunesCategory"/> using the supplied <see cref="XPathNavigator"/>.

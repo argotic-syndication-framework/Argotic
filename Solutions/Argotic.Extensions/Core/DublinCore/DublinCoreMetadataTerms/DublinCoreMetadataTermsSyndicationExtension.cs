@@ -28,11 +28,6 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
 {
 
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private DublinCoreMetadataTermsSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="DublinCoreMetadataTermsSyndicationExtension"/> class.
     /// </summary>
     public DublinCoreMetadataTermsSyndicationExtension()
@@ -52,14 +47,14 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public DublinCoreMetadataTermsSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
@@ -231,7 +226,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
                 if (result == 0) result = 1;
             }
         }
-        else if (this.Context.Language == null && other.Context.Language != null)
+        else if (other.Context.Language != null)
         {
             if (result == 0) result = -1;
         }

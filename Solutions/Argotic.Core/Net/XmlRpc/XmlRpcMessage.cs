@@ -21,16 +21,6 @@ namespace Argotic.Net;
 public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessage>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the name of the method to be called.
-    /// </summary>
-    private string messageMethodName = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the character encoding of the message.
-    /// </summary>
-    private Encoding messageEncoding = Encoding.UTF8;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcMessage"/> class.
     /// </summary>
     public XmlRpcMessage()
@@ -73,14 +63,14 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Encoding Encoding
     {
-        get => messageEncoding;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            messageEncoding = value;
+            field = value;
         }
-    }
+    } = Encoding.UTF8;
 
     /// <summary>
     /// Gets or sets the name of the method to be called.
@@ -90,14 +80,14 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string MethodName
     {
-        get => messageMethodName;
+        get;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            messageMethodName = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets the method parameters.

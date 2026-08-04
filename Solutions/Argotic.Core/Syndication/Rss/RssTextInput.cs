@@ -23,26 +23,6 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
 {
 
     /// <summary>
-    /// Private member to hold character data that provides a human-readable label explaining the form's purpose.
-    /// </summary>
-    private string textInputDescription = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the URL of the CGI script that handles the query.
-    /// </summary>
-    private Uri? textInputLink;
-
-    /// <summary>
-    /// Private member to hold the name of the form component that contains the query.
-    /// </summary>
-    private string textInputName = string.Empty;
-
-    /// <summary>
-    /// Private member to hold a value that labels the button used to submit the query.
-    /// </summary>
-    private string textInputTitle = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="RssTextInput"/> class.
     /// </summary>
     public RssTextInput()
@@ -92,13 +72,13 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Description
     {
-        get => textInputDescription;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            textInputDescription = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the URL of the CGI script that handles the query.
@@ -107,11 +87,11 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Link
     {
-        get => textInputLink;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            textInputLink = value;
+            field = value;
         }
     }
 
@@ -127,13 +107,13 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Name
     {
-        get => textInputName;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            textInputName = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a value that labels the button used to submit the query.
@@ -143,13 +123,13 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Title
     {
-        get => textInputTitle;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            textInputTitle = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.

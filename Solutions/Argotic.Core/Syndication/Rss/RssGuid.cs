@@ -32,11 +32,6 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
 {
 
     /// <summary>
-    /// Private member to hold a string value that uniquely identifies the item.
-    /// </summary>
-    private string guidIdentifier = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="RssGuid"/> class.
     /// </summary>
     public RssGuid()
@@ -107,13 +102,13 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Value
     {
-        get => guidIdentifier;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            guidIdentifier = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Searches for a syndication extension that matches the conditions defined by the specified predicate, and returns the first occurrence within the <see cref="Extensions"/> collection.

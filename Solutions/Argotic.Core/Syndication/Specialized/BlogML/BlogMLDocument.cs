@@ -42,16 +42,6 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     private static readonly Version documentVersion = new(2, 0);
 
     /// <summary>
-    /// Private member to hold the title of the web log.
-    /// </summary>
-    private BlogMLTextConstruct documentTitle = new();
-
-    /// <summary>
-    /// Private member to hold the sub-title of the web log.
-    /// </summary>
-    private BlogMLTextConstruct? documentSubtitle;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLDocument"/> class.
     /// </summary>
     public BlogMLDocument()
@@ -141,11 +131,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets the sub-title of this web log.
     /// </summary>
     /// <value>A <see cref="BlogMLTextConstruct"/> object that represents the sub-title of this web log.</value>
-    public BlogMLTextConstruct? Subtitle
-    {
-        get => documentSubtitle;
-        set => documentSubtitle = value;
-    }
+    public BlogMLTextConstruct? Subtitle { get; set; }
 
     /// <summary>
     /// Gets or sets the title of this web log.
@@ -154,14 +140,14 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BlogMLTextConstruct Title
     {
-        get => documentTitle;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            documentTitle = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.

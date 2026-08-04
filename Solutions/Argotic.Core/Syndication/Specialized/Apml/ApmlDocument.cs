@@ -42,16 +42,6 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     private static readonly Version documentVersion = new(0, 6);
 
     /// <summary>
-    /// Private member to hold header information for the document.
-    /// </summary>
-    private ApmlHead documentHead = new();
-
-    /// <summary>
-    /// Private member to hold the name of the default profile for the document.
-    /// </summary>
-    private string documentDefaultProfileName = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="ApmlDocument"/> class.
     /// </summary>
     public ApmlDocument()
@@ -116,13 +106,13 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string DefaultProfileName
     {
-        get => documentDefaultProfileName;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            documentDefaultProfileName = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
@@ -137,13 +127,13 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public ApmlHead Head
     {
-        get => documentHead;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            documentHead = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets the attention profiles for this document.

@@ -14,11 +14,6 @@ public class SiteSummaryUpdateSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the frequency of updates in relation to the update period.
-    /// </summary>
-    private int extensionUpdateFrequency = int.MinValue;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtensionContext"/> class.
     /// </summary>
     public SiteSummaryUpdateSyndicationExtensionContext()
@@ -44,14 +39,14 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <b>1</b>.</exception>
     public int Frequency
     {
-        get => extensionUpdateFrequency;
+        get;
 
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 1);
-            extensionUpdateFrequency = value;
+            field = value;
         }
-    }
+    } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the period over which the feed format is updated.

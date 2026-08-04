@@ -43,16 +43,6 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     private static readonly Version documentVersion = new(1, 0);
 
     /// <summary>
-    /// Private member to hold the base URI other than the base URI of the document or external entity.
-    /// </summary>
-    private Uri? commonObjectBaseUri;
-
-    /// <summary>
-    /// Private member to hold the natural or formal language in which the content is written.
-    /// </summary>
-    private CultureInfo? commonObjectLanguage;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomServiceDocument"/> class.
     /// </summary>
     public AtomServiceDocument()
@@ -122,9 +112,9 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// </remarks>
     public Uri? BaseUri
     {
-        get => commonObjectBaseUri;
+        get;
 
-        set => commonObjectBaseUri = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -138,9 +128,9 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     /// </remarks>
     public CultureInfo? Language
     {
-        get => commonObjectLanguage;
+        get;
 
-        set => commonObjectLanguage = value;
+        set => field = value;
     }
 
     /// <summary>

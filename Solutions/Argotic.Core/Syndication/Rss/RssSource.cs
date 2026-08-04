@@ -23,16 +23,6 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
 {
 
     /// <summary>
-    /// Private member to hold the title of the source feed.
-    /// </summary>
-    private string sourceTitle = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the URL of the source feed.
-    /// </summary>
-    private Uri? sourceUrl;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="RssSource"/> class.
     /// </summary>
     public RssSource()
@@ -78,9 +68,9 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// <value>The title of the source feed.</value>
     public string Title
     {
-        get => sourceTitle;
-        set => sourceTitle = value?.Trim() ?? string.Empty;
-    }
+        get;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the URL of the source feed.
@@ -89,11 +79,11 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Url
     {
-        get => sourceUrl;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            sourceUrl = value;
+            field = value;
         }
     }
 

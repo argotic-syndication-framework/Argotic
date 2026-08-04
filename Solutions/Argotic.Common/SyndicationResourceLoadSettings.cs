@@ -11,21 +11,6 @@ namespace Argotic.Common;
 public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationResourceLoadSettings>, IEquatable<SyndicationResourceLoadSettings>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the character encoding to use when reading the syndication resource.
-    /// </summary>
-    private Encoding characterEncoding = Encoding.UTF8;
-
-    /// <summary>
-    /// Private member to hold a value indicating the maximum number of resource entities to retrieve from a syndication resource.
-    /// </summary>
-    private int maximumEntitiesToRetrieve;
-
-    /// <summary>
-    /// Private member to hold a value that specifies the amount of time after which a asynchronous load operation call times out.
-    /// </summary>
-    private TimeSpan requestTimeout = TimeSpan.FromSeconds(100);
-
-    /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the load operation.
     /// </summary>
     private Collection<Type>? supportedSyndicationExtensions;
@@ -57,13 +42,13 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Encoding CharacterEncoding
     {
-        get => characterEncoding;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            characterEncoding = value;
+            field = value;
         }
-    }
+    } = Encoding.UTF8;
 
     /// <summary>
     /// Gets or sets the maximum number of resource entities to retrieve from a syndication resource.
@@ -76,11 +61,11 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than zero.</exception>
     public int RetrievalLimit
     {
-        get => maximumEntitiesToRetrieve;
+        get;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 0);
-            maximumEntitiesToRetrieve = value;
+            field = value;
         }
     }
 
@@ -108,7 +93,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
     public TimeSpan Timeout
     {
-        get => requestTimeout;
+        get;
         set
         {
             if (value.TotalMilliseconds < 0)
@@ -121,10 +106,10 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
             }
             else
             {
-                requestTimeout = value;
+                field = value;
             }
         }
-    }
+    } = TimeSpan.FromSeconds(100);
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.

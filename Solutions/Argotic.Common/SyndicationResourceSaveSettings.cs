@@ -10,11 +10,6 @@ namespace Argotic.Common;
 public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationResourceSaveSettings>, IEquatable<SyndicationResourceSaveSettings>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the character encoding to use when reading the syndication resource.
-    /// </summary>
-    private Encoding characterEncoding = Encoding.UTF8;
-
-    /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the save operation.
     /// </summary>
     private Collection<Type>? supportedSyndicationExtensions;
@@ -46,13 +41,13 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Encoding CharacterEncoding
     {
-        get => characterEncoding;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            characterEncoding = value;
+            field = value;
         }
-    }
+    } = Encoding.UTF8;
 
     /// <summary>
     /// Gets or sets a value indicating if syndication resource persist operations should attempt to minimize the physical size of the resulting output.

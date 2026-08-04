@@ -14,66 +14,6 @@ public class DublinCoreElementSetSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the entity responsible for making contributions to the resource.
-    /// </summary>
-    private string extensionContributor = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
-    /// </summary>
-    private string extensionCoverage = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the entity primarily responsible for making the resource.
-    /// </summary>
-    private string extensionCreator = string.Empty;
-
-    /// <summary>
-    /// Private member to hold an account of the resource.
-    /// </summary>
-    private string extensionDescription = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the file format, physical medium, or dimensions of the resource.
-    /// </summary>
-    private string extensionFormat = string.Empty;
-
-    /// <summary>
-    /// Private member to hold an unambiguous reference to the resource within a given context.
-    /// </summary>
-    private string extensionIdentifier = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the entity responsible for making the resource available.
-    /// </summary>
-    private string extensionPublisher = string.Empty;
-
-    /// <summary>
-    /// Private member to hold a related resource.
-    /// </summary>
-    private string extensionRelation = string.Empty;
-
-    /// <summary>
-    /// Private member to hold information about rights held in and over the resource.
-    /// </summary>
-    private string extensionRights = string.Empty;
-
-    /// <summary>
-    /// Private member to hold a related resource from which the described resource is derived.
-    /// </summary>
-    private string extesionSource = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the topic of the resource.
-    /// </summary>
-    private string extensionSubject = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the name given to the resource.
-    /// </summary>
-    private string extensionTitle = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="DublinCoreElementSetSyndicationExtensionContext"/> class.
     /// </summary>
     public DublinCoreElementSetSyndicationExtensionContext()
@@ -89,20 +29,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Contributor
     {
-        get => extensionContributor;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionContributor = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionContributor = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the spatial or temporal topic of the resource, the spatial applicability of the resource, or the jurisdiction under which the resource is relevant.
@@ -121,20 +61,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Coverage
     {
-        get => extensionCoverage;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionCoverage = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionCoverage = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the entity primarily responsible for making the resource.
@@ -145,20 +85,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Creator
     {
-        get => extensionCreator;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionCreator = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionCreator = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a point or period of time associated with an event in the lifecycle of the resource.
@@ -181,20 +121,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Description
     {
-        get => extensionDescription;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionDescription = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionDescription = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the file format, physical medium, or dimensions of the resource.
@@ -206,20 +146,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Format
     {
-        get => extensionFormat;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionFormat = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionFormat = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets an unambiguous reference to the resource within a given context.
@@ -230,20 +170,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Identifier
     {
-        get => extensionIdentifier;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionIdentifier = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionIdentifier = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the language of the resource.
@@ -264,20 +204,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Publisher
     {
-        get => extensionPublisher;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionPublisher = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionPublisher = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a related resource.
@@ -288,20 +228,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Relation
     {
-        get => extensionRelation;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionRelation = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionRelation = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets information about rights held in and over the resource.
@@ -312,20 +252,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Rights
     {
-        get => extensionRights;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionRights = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionRights = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets a related resource from which the described resource is derived.
@@ -337,20 +277,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Source
     {
-        get => extesionSource;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extesionSource = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extesionSource = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the topic of the resource.
@@ -363,20 +303,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Subject
     {
-        get => extensionSubject;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionSubject = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionSubject = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the name given to the resource.
@@ -387,20 +327,20 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Title
     {
-        get => extensionTitle;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionTitle = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionTitle = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the nature or genre of the resource.

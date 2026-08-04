@@ -11,16 +11,6 @@ namespace Argotic.Common;
 public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTypeAttribute>, IEquatable<MimeMediaTypeAttribute>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the MIME media type name.
-    /// </summary>
-    private string mimeMediaTypeName = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the MIME media subtype name.
-    /// </summary>
-    private string mimeMediaSubTypeName = string.Empty;
-
-    /// <summary>
     /// Private member to hold a URI that points to the documentation the describes the MIME media type.
     /// </summary>
     private Uri? mimeMediaDocumentation;
@@ -48,9 +38,9 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <value>The MIME media type name for the attributed field.</value>
     public string Name
     {
-        get => mimeMediaTypeName;
-        set => mimeMediaTypeName = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
-    }
+        get;
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the MIME media subtype name for the attributed field.
@@ -58,9 +48,9 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <value>The MIME media subtype name for the attributed field.</value>
     public string SubName
     {
-        get => mimeMediaSubTypeName;
-        set => mimeMediaSubTypeName = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
-    }
+        get;
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="MimeMediaTypeAttribute"/>.

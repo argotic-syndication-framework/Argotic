@@ -26,16 +26,6 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     private const string TYPE_PARAMETER_NAME = "type";
 
     /// <summary>
-    /// Private member to hold the type of the media content.
-    /// </summary>
-    private string webContentMediaType = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the subtype of the media content.
-    /// </summary>
-    private string webContentMediaSubType = string.Empty;
-
-    /// <summary>
     /// Private member to hold additional parameters applied to the media content.
     /// </summary>
     private Dictionary<string, string>? webContentMediaParameters;
@@ -186,14 +176,14 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string MediaType
     {
-        get => webContentMediaType;
+        get;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            webContentMediaType = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the specific format for the general type of data this media content represents.
@@ -203,14 +193,14 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string MediaSubtype
     {
-        get => webContentMediaSubType;
+        get;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            webContentMediaSubType = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets the name/value pairs of additional parameters applied to this media content.

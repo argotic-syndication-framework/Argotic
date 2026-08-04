@@ -28,11 +28,6 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
 {
 
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private WellFormedWebCommentsSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="WellFormedWebCommentsSyndicationExtension"/> class.
     /// </summary>
     public WellFormedWebCommentsSyndicationExtension()
@@ -52,14 +47,14 @@ public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public WellFormedWebCommentsSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

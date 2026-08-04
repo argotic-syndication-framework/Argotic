@@ -27,11 +27,6 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
 {
 
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private AtomPublishingEditedSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingEditedSyndicationExtension"/> class.
     /// </summary>
     public AtomPublishingEditedSyndicationExtension()
@@ -51,14 +46,14 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomPublishingEditedSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

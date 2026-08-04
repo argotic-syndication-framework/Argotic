@@ -19,26 +19,6 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
 {
 
     /// <summary>
-    /// Private member to hold the url of the thumbnail.
-    /// </summary>
-    private Uri? thumbnailUrl;
-
-    /// <summary>
-    /// Private member to hold the height of the thumbnail.
-    /// </summary>
-    private int thumbnailHeight = int.MinValue;
-
-    /// <summary>
-    /// Private member to hold the width of the thumbnail.
-    /// </summary>
-    private int thumbnailWidth = int.MinValue;
-
-    /// <summary>
-    /// Private member to hold the time offset in relation to the media object.
-    /// </summary>
-    private TimeSpan thumbnailTime = TimeSpan.MinValue;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaThumbnail"/> class.
     /// </summary>
     public YahooMediaThumbnail()
@@ -74,10 +54,10 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <value>The height of this thumbnail, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
     public int Height
     {
-        get => thumbnailHeight;
+        get;
 
-        set => thumbnailHeight = value;
-    }
+        set => field = value;
+    } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the time offset in relation to the media object.
@@ -91,10 +71,10 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// </remarks>
     public TimeSpan Time
     {
-        get => thumbnailTime;
+        get;
 
-        set => thumbnailTime = value;
-    }
+        set => field = value;
+    } = TimeSpan.MinValue;
 
     /// <summary>
     /// Gets or sets the location of this thumbnail image.
@@ -103,12 +83,12 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Url
     {
-        get => thumbnailUrl;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            thumbnailUrl = value;
+            field = value;
         }
     }
 
@@ -118,10 +98,10 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <value>The width of this thumbnail, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
     public int Width
     {
-        get => thumbnailWidth;
+        get;
 
-        set => thumbnailWidth = value;
-    }
+        set => field = value;
+    } = int.MinValue;
 
     /// <summary>
     /// Loads this <see cref="YahooMediaThumbnail"/> using the supplied <see cref="XPathNavigator"/>.

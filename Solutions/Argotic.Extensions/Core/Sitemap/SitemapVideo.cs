@@ -85,16 +85,6 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     private string videoTitle = string.Empty;
 
     /// <summary>
-    /// Private member to hold the description of the video.
-    /// </summary>
-    private string videoDescription = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the uploader name.
-    /// </summary>
-    private string videoUploader = string.Empty;
-
-    /// <summary>
     /// Private member to hold the tags for the video.
     /// </summary>
     private readonly List<string> videoTags = [];
@@ -191,7 +181,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
     public string Description
     {
-        get => videoDescription;
+        get;
 
         set
         {
@@ -199,14 +189,14 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             string trimmedValue = value.Trim();
             if (trimmedValue.Length > MaxDescriptionLength)
             {
-                videoDescription = trimmedValue[..MaxDescriptionLength];
+                field = trimmedValue[..MaxDescriptionLength];
             }
             else
             {
-                videoDescription = trimmedValue;
+                field = trimmedValue;
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the URL pointing to the actual video media file.
@@ -283,28 +273,28 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <value>The name of the uploader, limited to 255 characters. Optional.</value>
     public string Uploader
     {
-        get => videoUploader;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                videoUploader = string.Empty;
+                field = string.Empty;
             }
             else
             {
                 string trimmedValue = value.Trim();
                 if (trimmedValue.Length > MaxUploaderLength)
                 {
-                    videoUploader = trimmedValue[..MaxUploaderLength];
+                    field = trimmedValue[..MaxUploaderLength];
                 }
                 else
                 {
-                    videoUploader = trimmedValue;
+                    field = trimmedValue;
                 }
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the URL of a page with information about the uploader.

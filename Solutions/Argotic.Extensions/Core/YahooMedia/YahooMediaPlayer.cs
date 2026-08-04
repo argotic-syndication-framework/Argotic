@@ -19,21 +19,6 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
 {
 
     /// <summary>
-    /// Private member to hold the URL of the player console.
-    /// </summary>
-    private Uri? playerUrl;
-
-    /// <summary>
-    /// Private member to hold the height of the browser window that the player console should be opened in.
-    /// </summary>
-    private int playerHeight = int.MinValue;
-
-    /// <summary>
-    /// Private member to hold the with of the browser window that the player console should be opened in.
-    /// </summary>
-    private int playerWidth = int.MinValue;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaPlayer"/> class.
     /// </summary>
     public YahooMediaPlayer()
@@ -69,10 +54,10 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <value>The height of the browser window that this player console should be opened in. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
     public int Height
     {
-        get => playerHeight;
+        get;
 
-        set => playerHeight = value;
-    }
+        set => field = value;
+    } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the location of this player console.
@@ -81,12 +66,12 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Url
     {
-        get => playerUrl;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            playerUrl = value;
+            field = value;
         }
     }
 
@@ -96,10 +81,10 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <value>The width of the browser window that this player console should be opened in. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
     public int Width
     {
-        get => playerWidth;
+        get;
 
-        set => playerWidth = value;
-    }
+        set => field = value;
+    } = int.MinValue;
 
     /// <summary>
     /// Loads this <see cref="YahooMediaPlayer"/> using the supplied <see cref="XPathNavigator"/>.

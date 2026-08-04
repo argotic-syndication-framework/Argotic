@@ -14,16 +14,6 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
 {
 
     /// <summary>
-    /// Private member to hold an IRI that identifies the location of the link relation.
-    /// </summary>
-    private Uri? linkRelationLocation;
-
-    /// <summary>
-    /// Private member to hold a value that indicates the type of the link relation.
-    /// </summary>
-    private FeedHistoryLinkRelationType linkRelationType = FeedHistoryLinkRelationType.None;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="FeedHistoryLinkRelation"/> class.
     /// </summary>
     public FeedHistoryLinkRelation()
@@ -52,10 +42,10 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// </value>
     public FeedHistoryLinkRelationType RelationType
     {
-        get => linkRelationType;
+        get;
 
-        set => linkRelationType = value;
-    }
+        set => field = value;
+    } = FeedHistoryLinkRelationType.None;
 
     /// <summary>
     /// Gets or sets an IRI that identifies the location of this link relation.
@@ -64,12 +54,12 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Uri
     {
-        get => linkRelationLocation;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            linkRelationLocation = value;
+            field = value;
         }
     }
 

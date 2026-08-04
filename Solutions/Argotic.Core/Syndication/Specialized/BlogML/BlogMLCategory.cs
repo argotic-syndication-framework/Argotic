@@ -14,11 +14,6 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
 {
 
     /// <summary>
-    /// Private member to hold the title of the web log entity.
-    /// </summary>
-    private BlogMLTextConstruct commonObjectBaseTitle = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLCategory"/> class.
     /// </summary>
     public BlogMLCategory()
@@ -77,14 +72,14 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BlogMLTextConstruct Title
     {
-        get => commonObjectBaseTitle;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            commonObjectBaseTitle = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.

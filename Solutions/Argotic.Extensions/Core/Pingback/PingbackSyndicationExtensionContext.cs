@@ -11,16 +11,6 @@ public class PingbackSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the URL of the Pingback server.
-    /// </summary>
-    private Uri? extensionServer;
-
-    /// <summary>
-    /// Private member to hold the value that should be used as the target in a ping.
-    /// </summary>
-    private Uri? extensionTarget;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="PingbackSyndicationExtensionContext"/> class.
     /// </summary>
     public PingbackSyndicationExtensionContext()
@@ -43,12 +33,12 @@ public class PingbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Server
     {
-        get => extensionServer;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionServer = value;
+            field = value;
         }
     }
 
@@ -59,12 +49,12 @@ public class PingbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Target
     {
-        get => extensionTarget;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionTarget = value;
+            field = value;
         }
     }
 

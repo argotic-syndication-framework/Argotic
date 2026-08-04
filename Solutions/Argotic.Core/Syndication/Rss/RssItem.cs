@@ -24,36 +24,6 @@ namespace Argotic.Syndication;
 public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
     /// <summary>
-    /// Private member to hold the URL of a web page that contains comments received in response to the item.
-    /// </summary>
-    private Uri? itemComments;
-
-    /// <summary>
-    /// Private member to hold the unique identifier for the item.
-    /// </summary>
-    private RssGuid? itemGuid;
-
-    /// <summary>
-    /// Private member to hold the URL of a web page associated with the item.
-    /// </summary>
-    private Uri? itemLink;
-
-    /// <summary>
-    /// Private member to hold the publication date and time of the item.
-    /// </summary>
-    private DateTime itemPublicationDate = DateTime.MinValue;
-
-    /// <summary>
-    /// Private member to hold information about the source feed that the item was republished from.
-    /// </summary>
-    private RssSource? itemSource;
-
-    /// <summary>
-    /// Private member to hold character data that provides the item's headline.
-    /// </summary>
-    private string itemTitle = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="RssItem"/> class.
     /// </summary>
     public RssItem()
@@ -105,11 +75,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// Gets or sets the URL of a web page that contains comments received in response to this item.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of a web page that contains comments received in response to this item.</value>
-    public Uri? Comments
-    {
-        get => itemComments;
-        set => itemComments = value;
-    }
+    public Uri? Comments { get; set; }
 
     /// <summary>
     /// Gets or sets character data that contains this item's full content or a summary of its contents.
@@ -161,19 +127,15 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     public RssGuid? Guid
 #pragma warning restore CA1720
     {
-        get => itemGuid;
-        set => itemGuid = value;
+        get;
+        set => field = value;
     }
 
     /// <summary>
     /// Gets or sets the URL of a web page associated with this item.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of a web page associated with this item.</value>
-    public Uri? Link
-    {
-        get => itemLink;
-        set => itemLink = value;
-    }
+    public Uri? Link { get; set; }
 
     /// <summary>
     /// Gets or sets the publication date and time of this item.
@@ -187,11 +149,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     ///     providing a means for publishers to embargo an item until that date. However, it is recommended that publishers <i>should not</i> 
     ///     include items in a feed until they are ready for publication.
     /// </remarks>
-    public DateTime PublicationDate
-    {
-        get => itemPublicationDate;
-        set => itemPublicationDate = value;
-    }
+    public DateTime PublicationDate { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the source feed that this item was republished from.
@@ -199,11 +157,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <value>
     ///     A <see cref="RssSource"/> object that represents the source feed that this item was republished from. The default value is a <b>null</b> reference.
     /// </value>
-    public RssSource? Source
-    {
-        get => itemSource;
-        set => itemSource = value;
-    }
+    public RssSource? Source { get; set; }
 
     /// <summary>
     /// Gets or sets character data that provides this item's headline.
@@ -214,9 +168,9 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </remarks>
     public string Title
     {
-        get => itemTitle;
-        set => itemTitle = value?.Trim() ?? string.Empty;
-    }
+        get;
+        set => field = value?.Trim() ?? string.Empty;
+    } = string.Empty;
 
     /// <summary>
     /// Searches for the first syndication extension of the specified type that is attached to this item.
@@ -579,7 +533,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         {
             if (result == 0) result = this.Guid.CompareTo(other.Guid);
         }
-        else if (this.Guid == null && other.Guid != null)
+        else if (other.Guid != null)
         {
             if (result == 0) result = -1;
         }
@@ -588,7 +542,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         {
             if (result == 0) result = this.Source.CompareTo(other.Source);
         }
-        else if (this.Source == null && other.Source != null)
+        else if (other.Source != null)
         {
             if (result == 0) result = -1;
         }

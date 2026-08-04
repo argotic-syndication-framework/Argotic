@@ -10,16 +10,6 @@ namespace Argotic.Extensions.Core;
 public class PheedSyndicationExtensionContext
 {
     /// <summary>
-    /// Private member to hold a thumbnail sized version of the photograph.
-    /// </summary>
-    private Uri? extensionThumbnail;
-
-    /// <summary>
-    /// Private member to hold a larger or original version of the photograph.
-    /// </summary>
-    private Uri? extensionImageSource;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class.
     /// </summary>
     public PheedSyndicationExtensionContext()
@@ -46,12 +36,12 @@ public class PheedSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Source
     {
-        get => extensionImageSource;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionImageSource = value;
+            field = value;
         }
     }
 
@@ -65,12 +55,12 @@ public class PheedSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Thumbnail
     {
-        get => extensionThumbnail;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionThumbnail = value;
+            field = value;
         }
     }
 

@@ -29,21 +29,6 @@ namespace Argotic.Publishing;
 public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspace>, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the base URI other than the base URI of the document or external entity.
-    /// </summary>
-    private Uri? commonObjectBaseUri;
-
-    /// <summary>
-    /// Private member to hold the natural or formal language in which the content is written.
-    /// </summary>
-    private CultureInfo? commonObjectLanguage;
-
-    /// <summary>
-    /// Private member to hold a human-readable title for the workspace.
-    /// </summary>
-    private AtomTextConstruct workspaceTitle = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomWorkspace"/> class.
     /// </summary>
     public AtomWorkspace()
@@ -108,9 +93,9 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
     /// </remarks>
     public Uri? BaseUri
     {
-        get => commonObjectBaseUri;
+        get;
 
-        set => commonObjectBaseUri = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -124,9 +109,9 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
     /// </remarks>
     public CultureInfo? Language
     {
-        get => commonObjectLanguage;
+        get;
 
-        set => commonObjectLanguage = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -160,14 +145,14 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomTextConstruct Title
     {
-        get => workspaceTitle;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            workspaceTitle = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Loads this <see cref="AtomWorkspace"/> using the supplied <see cref="XPathNavigator"/>.

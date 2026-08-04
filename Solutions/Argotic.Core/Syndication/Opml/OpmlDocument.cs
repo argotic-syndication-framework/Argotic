@@ -47,11 +47,6 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     private static readonly Version documentVersion = new(2, 0);
 
     /// <summary>
-    /// Private member to hold header information for the document.
-    /// </summary>
-    private OpmlHead documentHead = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="OpmlDocument"/> class.
     /// </summary>
     public OpmlDocument()
@@ -115,13 +110,13 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public OpmlHead Head
     {
-        get => documentHead;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            documentHead = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets the discrete entities for this document.

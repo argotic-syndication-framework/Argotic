@@ -15,16 +15,6 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
 {
 
     /// <summary>
-    /// Private member to hold the title of the web log entity.
-    /// </summary>
-    private BlogMLTextConstruct commonObjectBaseTitle = new();
-
-    /// <summary>
-    /// Private member to hold the textual content of the comment.
-    /// </summary>
-    private BlogMLTextConstruct commentContent = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLComment"/> class.
     /// </summary>
     public BlogMLComment()
@@ -82,14 +72,14 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BlogMLTextConstruct Title
     {
-        get => commonObjectBaseTitle;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            commonObjectBaseTitle = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
@@ -110,14 +100,14 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BlogMLTextConstruct Content
     {
-        get => commentContent;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            commentContent = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets or sets the author's email address for this comment.

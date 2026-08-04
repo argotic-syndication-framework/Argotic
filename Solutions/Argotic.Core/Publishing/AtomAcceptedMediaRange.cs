@@ -32,21 +32,6 @@ namespace Argotic.Publishing;
 public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEquatable<AtomAcceptedMediaRange>, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the base URI other than the base URI of the document or external entity.
-    /// </summary>
-    private Uri? commonObjectBaseUri;
-
-    /// <summary>
-    /// Private member to hold the natural or formal language in which the content is written.
-    /// </summary>
-    private CultureInfo? commonObjectLanguage;
-
-    /// <summary>
-    /// Private member to hold the value of the accepted media range.
-    /// </summary>
-    private string acceptedMediaRangeValue = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomAcceptedMediaRange"/> class.
     /// </summary>
     public AtomAcceptedMediaRange()
@@ -73,9 +58,9 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// </remarks>
     public Uri? BaseUri
     {
-        get => commonObjectBaseUri;
+        get;
 
-        set => commonObjectBaseUri = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -89,9 +74,9 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// </remarks>
     public CultureInfo? Language
     {
-        get => commonObjectLanguage;
+        get;
 
-        set => commonObjectLanguage = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -135,20 +120,20 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// <seealso cref="AtomAcceptedMediaRange.AtomEntryMediaRange"/>
     public string MediaRange
     {
-        get => acceptedMediaRangeValue;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                acceptedMediaRangeValue = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                acceptedMediaRangeValue = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Loads this <see cref="AtomAcceptedMediaRange"/> using the supplied <see cref="XPathNavigator"/>.

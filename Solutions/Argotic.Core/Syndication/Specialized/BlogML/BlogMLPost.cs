@@ -22,16 +22,6 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 {
 
     /// <summary>
-    /// Private member to hold the title of the web log entity.
-    /// </summary>
-    private BlogMLTextConstruct commonObjectBaseTitle = new();
-
-    /// <summary>
-    /// Private member to hold the textual content of the post.
-    /// </summary>
-    private BlogMLTextConstruct postContent = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLPost"/> class.
     /// </summary>
     public BlogMLPost()
@@ -89,14 +79,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BlogMLTextConstruct Title
     {
-        get => commonObjectBaseTitle;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            commonObjectBaseTitle = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
@@ -147,14 +137,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public BlogMLTextConstruct Content
     {
-        get => postContent;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            postContent = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets or sets the excerpt of this post.

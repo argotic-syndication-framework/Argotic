@@ -12,16 +12,6 @@ public class FeedRankSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the permanent, universally unique identifier for the ranking scheme.
-    /// </summary>
-    private Uri? extensionScheme;
-
-    /// <summary>
-    /// Private member to hold the language sensitive, human-readable label for the rank.
-    /// </summary>
-    private string extensionLabel = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="FeedRankSyndicationExtensionContext"/> class.
     /// </summary>
     public FeedRankSyndicationExtensionContext()
@@ -52,20 +42,20 @@ public class FeedRankSyndicationExtensionContext
     /// <value>The language sensitive, human-readable label for this rank.</value>
     public string Label
     {
-        get => extensionLabel;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionLabel = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionLabel = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking scheme.
@@ -74,12 +64,12 @@ public class FeedRankSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Scheme
     {
-        get => extensionScheme;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionScheme = value;
+            field = value;
         }
     }
 

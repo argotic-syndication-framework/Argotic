@@ -11,11 +11,6 @@ public class TrackbackSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the item's TrackBack URL.
-    /// </summary>
-    private Uri? extensionPing;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackSyndicationExtensionContext"/> class.
     /// </summary>
     public TrackbackSyndicationExtensionContext()
@@ -38,12 +33,12 @@ public class TrackbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Ping
     {
-        get => extensionPing;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionPing = value;
+            field = value;
         }
     }
 

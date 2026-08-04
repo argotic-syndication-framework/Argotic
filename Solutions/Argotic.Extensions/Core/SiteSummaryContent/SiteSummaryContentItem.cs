@@ -14,21 +14,6 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
 {
 
     /// <summary>
-    /// Private member to hold the textual content of the item.
-    /// </summary>
-    private string itemContent = string.Empty;
-
-    /// <summary>
-    /// Private member to hold a URI representing the format of the item.
-    /// </summary>
-    private Uri? itemFormat;
-
-    /// <summary>
-    /// Private member to hold a URI representing the encoding of the item.
-    /// </summary>
-    private Uri? itemEncoding;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryContentItem"/> class.
     /// </summary>
     public SiteSummaryContentItem()
@@ -53,14 +38,14 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get => itemContent;
+        get;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            itemContent = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the encoding of this item.
@@ -72,9 +57,9 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <seealso cref="SiteSummaryContentItem.WellFormedXmlEncoding"/>
     public Uri? Encoding
     {
-        get => itemEncoding;
+        get;
 
-        set => itemEncoding = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -84,12 +69,12 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Format
     {
-        get => itemFormat;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            itemFormat = value;
+            field = value;
         }
     }
 

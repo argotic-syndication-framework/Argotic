@@ -26,11 +26,6 @@ namespace Argotic.Extensions.Core;
 public class AtomPublishingControlSyndicationExtension : SyndicationExtension, IComparable<AtomPublishingControlSyndicationExtension>, IEquatable<AtomPublishingControlSyndicationExtension>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private AtomPublishingControlSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomPublishingControlSyndicationExtension"/> class.
     /// </summary>
     public AtomPublishingControlSyndicationExtension()
@@ -50,14 +45,14 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomPublishingControlSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

@@ -21,31 +21,6 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
 {
 
     /// <summary>
-    /// Private member to hold the type of the embedded text.
-    /// </summary>
-    private YahooMediaTextConstructType textType = YahooMediaTextConstructType.None;
-
-    /// <summary>
-    /// Private member to hold the primary language encapsulated in the media object.
-    /// </summary>
-    private CultureInfo? textLanguage;
-
-    /// <summary>
-    /// Private member to hold the start time offset that the text starts being relevant to the media object.
-    /// </summary>
-    private TimeSpan textStart = TimeSpan.MinValue;
-
-    /// <summary>
-    /// Private member to hold the end time offset that the text stops being relevant to the media object.
-    /// </summary>
-    private TimeSpan textEnd = TimeSpan.MinValue;
-
-    /// <summary>
-    /// Private member to hold the text transcript, closed captioning, or lyrics for the media content.
-    /// </summary>
-    private string textContent = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaText"/> class.
     /// </summary>
     public YahooMediaText()
@@ -74,14 +49,14 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get => textContent;
+        get;
 
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            textContent = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the end time offset that this text stops being relevant to the media object.
@@ -97,10 +72,10 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <seealso cref="Start"/>
     public TimeSpan End
     {
-        get => textEnd;
+        get;
 
-        set => textEnd = value;
-    }
+        set => field = value;
+    } = TimeSpan.MinValue;
 
     /// <summary>
     /// Gets or sets the primary language encapsulated in this media object.
@@ -116,9 +91,9 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// </remarks>
     public CultureInfo? Language
     {
-        get => textLanguage;
+        get;
 
-        set => textLanguage = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -131,10 +106,10 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <seealso cref="End"/>
     public TimeSpan Start
     {
-        get => textStart;
+        get;
 
-        set => textStart = value;
-    }
+        set => field = value;
+    } = TimeSpan.MinValue;
 
     /// <summary>
     /// Gets or sets the entity encoding utilized by this embedded text.
@@ -148,10 +123,10 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// </remarks>
     public YahooMediaTextConstructType TextType
     {
-        get => textType;
+        get;
 
-        set => textType = value;
-    }
+        set => field = value;
+    } = YahooMediaTextConstructType.None;
 
     /// <summary>
     /// Returns the entity encoding type identifier for the supplied <see cref="YahooMediaTextConstructType"/>.

@@ -42,31 +42,6 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     private static readonly Version documentVersion = new(1, 0);
 
     /// <summary>
-    /// Private member to hold the base URI other than the base URI of the document or external entity.
-    /// </summary>
-    private Uri? commonObjectBaseUri;
-
-    /// <summary>
-    /// Private member to hold the natural or formal language in which the content is written.
-    /// </summary>
-    private CultureInfo? commonObjectLanguage;
-
-    /// <summary>
-    /// Private member to hold an IRI that identifies a categorization scheme that categories may inherit from.
-    /// </summary>
-    private Uri? documentScheme;
-
-    /// <summary>
-    /// Private member to hold an IRI that identifies the location of the document.
-    /// </summary>
-    private Uri? documentResourceLocation;
-
-    /// <summary>
-    /// Private member to hold a value indicating whether the document represents a fixed or open set of categories.
-    /// </summary>
-    private bool documentIsFixed;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomCategoryDocument"/> class.
     /// </summary>
     public AtomCategoryDocument()
@@ -151,9 +126,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// </remarks>
     public Uri? BaseUri
     {
-        get => commonObjectBaseUri;
+        get;
 
-        set => commonObjectBaseUri = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -167,9 +142,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// </remarks>
     public CultureInfo? Language
     {
-        get => commonObjectLanguage;
+        get;
 
-        set => commonObjectLanguage = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -218,9 +193,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <value><b>true</b> if this document represents a fixed set of categories; Otherwise, <b>false</b>.</value>
     public bool IsFixed
     {
-        get => documentIsFixed;
+        get;
 
-        set => documentIsFixed = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -236,9 +211,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// </remarks>
     public Uri? Scheme
     {
-        get => documentScheme;
+        get;
 
-        set => documentScheme = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -255,9 +230,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// </remarks>
     public Uri? Uri
     {
-        get => documentResourceLocation;
+        get;
 
-        set => documentResourceLocation = value;
+        set => field = value;
     }
 
     /// <summary>

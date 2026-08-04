@@ -21,31 +21,6 @@ namespace Argotic.Net;
 public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<TrackbackMessage>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the character encoding of the message.
-    /// </summary>
-    private Encoding messageEncoding = Encoding.UTF8;
-
-    /// <summary>
-    /// Private member to hold the title of the entry.
-    /// </summary>
-    private string messageTitle = string.Empty;
-
-    /// <summary>
-    /// Private member to hold an excerpt of the entry.
-    /// </summary>
-    private string messageExcerpt = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the name of the weblog to which the entry was posted.
-    /// </summary>
-    private string messageWeblogName = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the permalink for the entry.
-    /// </summary>
-    private Uri? messageUrl;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackMessage"/> class.
     /// </summary>
     public TrackbackMessage()
@@ -72,14 +47,14 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Encoding Encoding
     {
-        get => messageEncoding;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            messageEncoding = value;
+            field = value;
         }
-    }
+    } = Encoding.UTF8;
 
     /// <summary>
     /// Gets or sets an excerpt for the entry.
@@ -90,20 +65,20 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// </remarks>
     public string Excerpt
     {
-        get => messageExcerpt;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                messageExcerpt = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                messageExcerpt = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the permalink for the entry.
@@ -115,12 +90,12 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Permalink
     {
-        get => messageUrl;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            messageUrl = value;
+            field = value;
         }
     }
 
@@ -133,20 +108,20 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// </remarks>
     public string Title
     {
-        get => messageTitle;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                messageTitle = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                messageTitle = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the name of the weblog to which the entry was posted.
@@ -157,20 +132,20 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// </remarks>
     public string WeblogName
     {
-        get => messageWeblogName;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                messageWeblogName = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                messageWeblogName = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Loads this <see cref="TrackbackMessage"/> using the supplied <see cref="NameValueCollection"/>.

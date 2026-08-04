@@ -27,11 +27,6 @@ namespace Argotic.Extensions.Core;
 public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable<LiveJournalSyndicationExtension>, IEquatable<LiveJournalSyndicationExtension>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private LiveJournalSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="LiveJournalSyndicationExtension"/> class.
     /// </summary>
     public LiveJournalSyndicationExtension()
@@ -51,14 +46,14 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public LiveJournalSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
@@ -169,7 +164,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
                 if (result == 0) result = 1;
             }
         }
-        else if (this.Context.Mood == null && other.Context.Mood != null)
+        else if (other.Context.Mood != null)
         {
             if (result == 0) result = -1;
         }
@@ -187,7 +182,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
                 if (result == 0) result = 1;
             }
         }
-        else if (this.Context.Security == null && other.Context.Security != null)
+        else if (other.Context.Security != null)
         {
             if (result == 0) result = -1;
         }
@@ -203,7 +198,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
                 if (result == 0) result = 1;
             }
         }
-        else if (this.Context.UserPicture == null && other.Context.UserPicture != null)
+        else if (other.Context.UserPicture != null)
         {
             if (result == 0) result = -1;
         }

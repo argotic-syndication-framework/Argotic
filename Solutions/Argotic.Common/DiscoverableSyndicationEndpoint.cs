@@ -16,21 +16,6 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     private static readonly FrozenDictionary<string, SyndicationContentFormat> ContentTypeToFormatMapping = BuildContentTypeMapping();
 
     /// <summary>
-    /// Private member to hold the content MIME type of the syndication endpoint.
-    /// </summary>
-    private string endpointMediaType = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the title of the syndication endpoint.
-    /// </summary>
-    private string endpointTitle = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the Uniform Resource Locator (URL) of the syndication endpoint.
-    /// </summary>
-    private Uri? endpointSource;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="DiscoverableSyndicationEndpoint"/> class.
     /// </summary>
     public DiscoverableSyndicationEndpoint()
@@ -116,13 +101,13 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string ContentType
     {
-        get => endpointMediaType;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            endpointMediaType = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the Uniform Resource Locator (URL) of the syndication endpoint.
@@ -132,11 +117,11 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Source
     {
-        get => endpointSource;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            endpointSource = value;
+            field = value;
         }
     }
 
@@ -147,9 +132,9 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <remarks>This property will be empty if no title attribute was assigned to the syndication endpoint link.</remarks>
     public string Title
     {
-        get => endpointTitle;
-        set => endpointTitle = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
-    }
+        get;
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Asynchronously initializes a read-only <see cref="XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="Source">endpoint location</see>.

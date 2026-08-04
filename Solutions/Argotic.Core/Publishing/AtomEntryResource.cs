@@ -17,16 +17,6 @@ namespace Argotic.Publishing;
 public class AtomEntryResource : AtomEntry
 {
     /// <summary>
-    /// Private member to hold the last time the entry was edited. If the entry has not been edited yet, indicates the time the entry was created.
-    /// </summary>
-    private DateTime entryResourceEditedOn = DateTime.MinValue;
-
-    /// <summary>
-    /// Private member to hold a value indicating if the client is requesting to control the visibility of the entry.
-    /// </summary>
-    private bool entryResourceIsDraft;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomEntryResource"/> class.
     /// </summary>
     public AtomEntryResource() : base()
@@ -102,10 +92,10 @@ public class AtomEntryResource : AtomEntry
     /// <seealso cref="AtomPublishingEditedSyndicationExtension"/>
     public DateTime EditedOn
     {
-        get => entryResourceEditedOn;
+        get;
 
-        set => entryResourceEditedOn = value;
-    }
+        set => field = value;
+    } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets a value indicating if client has requested to control the visibility of this entry.
@@ -114,9 +104,9 @@ public class AtomEntryResource : AtomEntry
     /// <seealso cref="AtomPublishingControlSyndicationExtension"/>
     public bool IsDraft
     {
-        get => entryResourceIsDraft;
+        get;
 
-        set => entryResourceIsDraft = value;
+        set => field = value;
     }
 
     /// <summary>

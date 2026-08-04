@@ -28,11 +28,6 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
 {
 
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private SimpleListSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SimpleListSyndicationExtension"/> class.
     /// </summary>
     public SimpleListSyndicationExtension()
@@ -52,14 +47,14 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public SimpleListSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

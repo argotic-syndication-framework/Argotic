@@ -29,11 +29,6 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
 {
 
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private FeedSynchronizationSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="FeedSynchronizationSyndicationExtension"/> class.
     /// </summary>
     public FeedSynchronizationSyndicationExtension()
@@ -53,14 +48,14 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public FeedSynchronizationSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 
@@ -178,7 +173,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
                     result = 1;
                 }
             }
-            else if (this.Context.Sharing == null && other.Context.Sharing != null)
+            else if (other.Context.Sharing != null)
             {
                 result = -1;
             }
@@ -197,7 +192,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
                     result = 1;
                 }
             }
-            else if (this.Context.Synchronization == null && other.Context.Synchronization != null)
+            else if (other.Context.Synchronization != null)
             {
                 result = -1;
             }

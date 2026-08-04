@@ -40,11 +40,6 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
         EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<SiteSummaryUpdatePeriod>();
 
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private SiteSummaryUpdateSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryUpdateSyndicationExtension"/> class.
     /// </summary>
     public SiteSummaryUpdateSyndicationExtension()
@@ -64,14 +59,14 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public SiteSummaryUpdateSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

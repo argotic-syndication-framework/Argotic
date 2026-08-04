@@ -53,46 +53,6 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     private static readonly Version feedVersion = new(1, 0);
 
     /// <summary>
-    /// Private member to hold information that contains or links to the content of the entry.
-    /// </summary>
-    private AtomContent? entryContent;
-
-    /// <summary>
-    /// Private member to hold a permanent, universally unique identifier for the entry.
-    /// </summary>
-    private AtomId? entryId;
-
-    /// <summary>
-    /// Private member to hold a value indicating an instant in time associated with an event early in the life cycle of the entry.
-    /// </summary>
-    private DateTime entryPublishedOn = DateTime.MinValue;
-
-    /// <summary>
-    /// Private member to hold information about rights held in and over the entry.
-    /// </summary>
-    private AtomTextConstruct? entryRights;
-
-    /// <summary>
-    /// Private member to hold the meta-data of the source feed that the entry was copied from.
-    /// </summary>
-    private AtomSource? entrySource;
-
-    /// <summary>
-    /// Private member to hold information that conveys a short summary, abstract, or excerpt of the entry.
-    /// </summary>
-    private AtomTextConstruct? entrySummary;
-
-    /// <summary>
-    /// Private member to hold information that conveys a human-readable title for the entry.
-    /// </summary>
-    private AtomTextConstruct? entryTitle;
-
-    /// <summary>
-    /// Private member to hold a value indicating the most recent instant in time when the entry was modified in a way the publisher considers significant.
-    /// </summary>
-    private DateTime entryUpdatedOn = DateTime.MinValue;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomEntry"/> class.
     /// </summary>
     public AtomEntry()
@@ -186,11 +146,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// Gets or sets information that contains or links to the content of this entry.
     /// </summary>
     /// <value>A <see cref="AtomContent"/> object that represents information that contains or links to the content of this entry.</value>
-    public AtomContent? Content
-    {
-        get => entryContent;
-        set => entryContent = value;
-    }
+    public AtomContent? Content { get; set; }
 
     /// <summary>
     /// Gets the entities who contributed to this entry.
@@ -218,11 +174,11 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomId? Id
     {
-        get => entryId;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            entryId = value;
+            field = value;
         }
     }
 
@@ -248,11 +204,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime PublishedOn
-    {
-        get => entryPublishedOn;
-        set => entryPublishedOn = value;
-    }
+    public DateTime PublishedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets information about rights held in and over this entry.
@@ -262,11 +214,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
     ///     If an <see cref="AtomEntry"/> does not provide any rights information, then the <see cref="AtomFeed.Rights"/> of the containing feed, if present, is considered to apply to the entry.
     /// </remarks>
-    public AtomTextConstruct? Rights
-    {
-        get => entryRights;
-        set => entryRights = value;
-    }
+    public AtomTextConstruct? Rights { get; set; }
 
     /// <summary>
     /// Gets or sets the meta-data of the source feed that this entry was copied from.
@@ -279,11 +227,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         (<see cref="AtomFeed.Id">id</see>, <see cref="AtomFeed.Title">title</see>, and <see cref="AtomFeed.UpdatedOn">updated</see>) in the <see cref="AtomSource"/>.
     ///     </para>
     /// </remarks>
-    public AtomSource? Source
-    {
-        get => entrySource;
-        set => entrySource = value;
-    }
+    public AtomSource? Source { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a short summary, abstract, or excerpt for this entry.
@@ -311,11 +255,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         </list>
     ///     </para>
     /// </remarks>
-    public AtomTextConstruct? Summary
-    {
-        get => entrySummary;
-        set => entrySummary = value;
-    }
+    public AtomTextConstruct? Summary { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable title for this entry.
@@ -324,11 +264,11 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomTextConstruct? Title
     {
-        get => entryTitle;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            entryTitle = value;
+            field = value;
         }
     }
 
@@ -342,11 +282,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime UpdatedOn
-    {
-        get => entryUpdatedOn;
-        set => entryUpdatedOn = value;
-    }
+    public DateTime UpdatedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.

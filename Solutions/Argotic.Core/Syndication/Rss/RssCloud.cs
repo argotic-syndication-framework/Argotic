@@ -26,31 +26,6 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
 {
 
     /// <summary>
-    /// Private member to hold the host name or IP address of the web service that monitors updates to the feed.
-    /// </summary>
-    private string cloudDomain = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the web service's path.
-    /// </summary>
-    private string cloudPath = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the web service's TCP port.
-    /// </summary>
-    private int cloudPort = 80;
-
-    /// <summary>
-    /// Private member to hold the protocol utilized by the web service.
-    /// </summary>
-    private RssCloudProtocol cloudProtocol = RssCloudProtocol.XmlRpc;
-
-    /// <summary>
-    /// Private member to hold message format the web service employs.
-    /// </summary>
-    private string cloudRegisterProcedure = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="RssCloud"/> class.
     /// </summary>
     public RssCloud()
@@ -102,13 +77,13 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Domain
     {
-        get => cloudDomain;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            cloudDomain = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the path of the web service that monitors updates to a feed.
@@ -118,13 +93,13 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Path
     {
-        get => cloudPath;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            cloudPath = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the TCP port of the web service that monitors updates to a feed.
@@ -133,13 +108,13 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>zero</i>.</exception>
     public int Port
     {
-        get => cloudPort;
+        get;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 0);
-            cloudPort = value;
+            field = value;
         }
-    }
+    } = 80;
 
     /// <summary>
     /// Gets or sets the message format utilized by the web service that monitors updates to a feed.
@@ -151,16 +126,16 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentException">The <paramref name="value"/> is equivalent to <see cref="RssCloudProtocol.None"/>.</exception>
     public RssCloudProtocol Protocol
     {
-        get => cloudProtocol;
+        get;
         set
         {
             if (value == RssCloudProtocol.None)
             {
                 throw new ArgumentException($"The specified cloud protocol of {value} is invalid.", nameof(value));
             }
-            cloudProtocol = value;
+            field = value;
         }
-    }
+    } = RssCloudProtocol.XmlRpc;
 
     /// <summary>
     /// Gets or sets the name of the remote procedure to call when requesting notification of feed updates.
@@ -170,13 +145,13 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string RegisterProcedure
     {
-        get => cloudRegisterProcedure;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            cloudRegisterProcedure = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Returns the cloud protocol identifier for the supplied <see cref="RssCloudProtocol"/>.

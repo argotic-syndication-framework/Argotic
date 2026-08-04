@@ -27,11 +27,6 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
 {
 
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private SiteSummarySlashSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummarySlashSyndicationExtension"/> class.
     /// </summary>
     public SiteSummarySlashSyndicationExtension()
@@ -51,14 +46,14 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public SiteSummarySlashSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

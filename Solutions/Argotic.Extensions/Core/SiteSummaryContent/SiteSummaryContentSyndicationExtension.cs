@@ -27,11 +27,6 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
 {
 
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private SiteSummaryContentSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryContentSyndicationExtension"/> class.
     /// </summary>
     public SiteSummaryContentSyndicationExtension()
@@ -51,14 +46,14 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public SiteSummaryContentSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

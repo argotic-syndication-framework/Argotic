@@ -25,26 +25,6 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     private const string TRACKBACK_NAMESPACE = "http://madskills.com/public/xml/rss/module/trackback/";
 
     /// <summary>
-    /// Private member to hold the title of the discoverable web log entry.
-    /// </summary>
-    private string trackbackDiscoveryTitle = string.Empty;
-
-    /// <summary>
-    /// Private member to hold Resource Description Framework entity reference.
-    /// </summary>
-    private Uri? trackbackDiscoveryAbout;
-
-    /// <summary>
-    /// Private member to hold the unique identifier of the discoverable web log entry.
-    /// </summary>
-    private Uri? trackbackDiscoveryIdentifier;
-
-    /// <summary>
-    /// Private member to hold Trackback ping endpoint of the discoverable web log entry.
-    /// </summary>
-    private Uri? trackbackDiscoveryPingEndpoint;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackDiscoveryMetadata"/> class.
     /// </summary>
     public TrackbackDiscoveryMetadata()
@@ -70,11 +50,11 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? About
     {
-        get => trackbackDiscoveryAbout;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            trackbackDiscoveryAbout = value;
+            field = value;
         }
     }
 
@@ -85,11 +65,11 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Identifier
     {
-        get => trackbackDiscoveryIdentifier;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            trackbackDiscoveryIdentifier = value;
+            field = value;
         }
     }
 
@@ -100,11 +80,11 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? PingUrl
     {
-        get => trackbackDiscoveryPingEndpoint;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            trackbackDiscoveryPingEndpoint = value;
+            field = value;
         }
     }
 
@@ -114,9 +94,9 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <value>The title of the discoverable web log entry.</value>
     public string Title
     {
-        get => trackbackDiscoveryTitle;
-        set => trackbackDiscoveryTitle = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
-    }
+        get;
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Loads this <see cref="TrackbackDiscoveryMetadata"/> using the supplied <see cref="XPathNavigator"/>.

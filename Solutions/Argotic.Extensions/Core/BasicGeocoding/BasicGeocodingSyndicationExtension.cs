@@ -127,8 +127,8 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
             throw new FormatException($"The supplied degrees, minutes, seconds of {degreesMinutesSeconds} does not contain a \\\" seconds delimiter.");
         }
         string degreesValue = degreesMinutesSeconds[..degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal)];
-        string minutesValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal) + 1, degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal) - degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal) - 1);
-        string secondsValue = degreesMinutesSeconds.Substring(degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal) + 1, degreesMinutesSeconds.IndexOf('"', StringComparison.Ordinal) - degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal) - 1);
+        string minutesValue = degreesMinutesSeconds[(degreesMinutesSeconds.IndexOf('°', StringComparison.Ordinal) + 1)..degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal)];
+        string secondsValue = degreesMinutesSeconds[(degreesMinutesSeconds.IndexOf('\'', StringComparison.Ordinal) + 1)..degreesMinutesSeconds.IndexOf('"', StringComparison.Ordinal)];
 
         degreesValue = degreesValue.Trim();
         minutesValue = minutesValue.Trim();

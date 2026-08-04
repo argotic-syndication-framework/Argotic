@@ -28,11 +28,6 @@ namespace Argotic.Extensions.Core;
 public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<FeedRankSyndicationExtension>, IEquatable<FeedRankSyndicationExtension>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private FeedRankSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="FeedRankSyndicationExtension"/> class.
     /// </summary>
     public FeedRankSyndicationExtension()
@@ -52,14 +47,14 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public FeedRankSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

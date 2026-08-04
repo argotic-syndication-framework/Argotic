@@ -11,11 +11,6 @@ public class SiteSummaryContentSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the entity-encoded or CDATA-escaped version of the content of the item.
-    /// </summary>
-    private string extensionEncoded = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryContentSyndicationExtensionContext"/> class.
     /// </summary>
     public SiteSummaryContentSyndicationExtensionContext()
@@ -31,20 +26,20 @@ public class SiteSummaryContentSyndicationExtensionContext
     /// </remarks>
     public string Encoded
     {
-        get => extensionEncoded;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionEncoded = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionEncoded = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets the alternative versions of this item's content.

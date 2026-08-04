@@ -23,64 +23,9 @@ namespace Argotic.Syndication;
 public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
     /// <summary>
-    /// Private member to hold the URL of the website associated with the feed.
-    /// </summary>
-    private Uri? channelLink;
-
-    /// <summary>
-    /// Private member to hold character data that provides the name of the feed.
-    /// </summary>
-    private string channelTitle = string.Empty;
-
-    /// <summary>
-    /// Private member to hold character data that provides a human-readable characterization or summary of the feed.
-    /// </summary>
-    private string channelDescription = string.Empty;
-
-    /// <summary>
-    /// Private member to hold meta-data necessary for monitoring updates to a feed using a web service that implements the RssCloud application programming interface.
-    /// </summary>
-    private RssCloud? channelCloud;
-
-    /// <summary>
     /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
     /// </summary>
     private static readonly Uri channelDocumentation = new("http://www.rssboard.org/rss-specification");
-
-    /// <summary>
-    /// Private member to hold the graphical logo for the feed.
-    /// </summary>
-    private RssImage? channelImage;
-
-    /// <summary>
-    /// Private member to hold the natural language employed in the feed.
-    /// </summary>
-    private CultureInfo? channelLanguage;
-
-    /// <summary>
-    /// Private member to hold the last date and time the content of the feed was updated.
-    /// </summary>
-    private DateTime channelLastBuildDate = DateTime.MinValue;
-
-    /// <summary>
-    /// Private member to hold the publication date and time of the feed's content.
-    /// </summary>
-    private DateTime channelPublicationDate = DateTime.MinValue;
-
-    /// <summary>
-    /// Private member to hold a form to submit a text query to the feed's publisher over the Common Gateway Interface (CGI).
-    /// </summary>
-    private RssTextInput? channelTextInput;
-
-    /// <summary>
-    /// Private member to hold the maximum number of minutes to cache the data before an aggregator should request it again.
-    /// </summary>
-    private int channelTimeToLive = int.MinValue;
-
-    /// <summary>
-    /// Private member to hold a URL that points to where the feed can be retrieved from.
-    /// </summary>
-    private Uri? channelSelfLink;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RssChannel"/> class.
@@ -137,11 +82,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///     updates to this feed using a web service that implements the RssCloud application programming interface. 
     ///     The default value is a <b>null</b> reference.
     /// </value>
-    public RssCloud? Cloud
-    {
-        get => channelCloud;
-        set => channelCloud = value;
-    }
+    public RssCloud? Cloud { get; set; }
 
     /// <summary>
     /// Gets or sets the human-readable copyright statement that applies to this feed.
@@ -167,13 +108,13 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Description
     {
-        get => channelDescription;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            channelDescription = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets the URL of the RSS specification implemented by the software that created this feed.
@@ -197,11 +138,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <value>
     ///     A <see cref="RssImage"/> object that represents the graphical logo for this feed. The default value is a <b>null</b> reference.
     /// </value>
-    public RssImage? Image
-    {
-        get => channelImage;
-        set => channelImage = value;
-    }
+    public RssImage? Image { get; set; }
 
     /// <summary>
     /// Gets the distinct content published in this feed.
@@ -217,11 +154,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///     The language <b>must</b> be identified using one of the <a href="http://www.rssboard.org/rss-language-codes">RSS language codes</a> 
     ///     or a <a href="http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes">W3C language code</a>.
     /// </remarks>
-    public CultureInfo? Language
-    {
-        get => channelLanguage;
-        set => channelLanguage = value;
-    }
+    public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets or sets the last date and time the content of this feed was updated.
@@ -230,11 +163,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///     A <see cref="DateTime"/> object that represents the last date and time the content of this feed was updated. 
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that no last build date was specified.
     /// </value>
-    public DateTime LastBuildDate
-    {
-        get => channelLastBuildDate;
-        set => channelLastBuildDate = value;
-    }
+    public DateTime LastBuildDate { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the URL of the website associated with this feed.
@@ -243,11 +172,11 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Link
     {
-        get => channelLink;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            channelLink = value;
+            field = value;
         }
     }
 
@@ -277,11 +206,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <remarks>
     ///     Publishers of daily, weekly or monthly periodicals can use this element to associate feed items with the date they most recently went to press.
     /// </remarks>
-    public DateTime PublicationDate
-    {
-        get => channelPublicationDate;
-        set => channelPublicationDate = value;
-    }
+    public DateTime PublicationDate { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets an advisory label for the content in this feed.
@@ -313,11 +238,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///         See <a href="http://www.rssboard.org/rss-profile#namespace-elements-atom-link">RSS Profile</a> for more information.
     ///     </para>
     /// </remarks>
-    public Uri? SelfLink
-    {
-        get => channelSelfLink;
-        set => channelSelfLink = value;
-    }
+    public Uri? SelfLink { get; set; }
 
     /// <summary>
     /// Gets the days of the week during which this feed is not updated.
@@ -344,11 +265,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///     A <see cref="TextInput"/> object that represents a form to submit a text query to this feed's publisher over the Common Gateway Interface (CGI). 
     ///     The default value is a <b>null</b> reference.
     /// </value>
-    public RssTextInput? TextInput
-    {
-        get => channelTextInput;
-        set => channelTextInput = value;
-    }
+    public RssTextInput? TextInput { get; set; }
 
     /// <summary>
     /// Gets or sets the maximum number of minutes to cache the data before a client should request it again.
@@ -360,11 +277,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <remarks>
     ///     Aggregators that support this property <i>should</i> treat it as a publisher's suggestion of a feed's update frequency, not a hard rule.
     /// </remarks>
-    public int TimeToLive
-    {
-        get => channelTimeToLive;
-        set => channelTimeToLive = value;
-    }
+    public int TimeToLive { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets character data that provides the name of this feed.
@@ -374,13 +287,13 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Title
     {
-        get => channelTitle;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            channelTitle = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the e-mail address of the person to contact about technical issues regarding this feed.
@@ -940,7 +853,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         {
             if (result == 0) result = this.Cloud.CompareTo(other.Cloud);
         }
-        else if (this.Cloud == null && other.Cloud != null)
+        else if (other.Cloud != null)
         {
             if (result == 0) result = -1;
         }
@@ -949,7 +862,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         {
             if (result == 0) result = this.Image.CompareTo(other.Image);
         }
-        else if (this.Image == null && other.Image != null)
+        else if (other.Image != null)
         {
             if (result == 0) result = -1;
         }
@@ -965,7 +878,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
                 if (result == 0) result = 1;
             }
         }
-        else if (this.Language == null && other.Language != null)
+        else if (other.Language != null)
         {
             if (result == 0) result = -1;
         }
@@ -974,7 +887,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         {
             if (result == 0) result = this.TextInput.CompareTo(other.TextInput);
         }
-        else if (this.TextInput == null && other.TextInput != null)
+        else if (other.TextInput != null)
         {
             if (result == 0) result = -1;
         }

@@ -25,16 +25,6 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     private IList<YahooMediaRating>? mediaObjectRatings;
 
     /// <summary>
-    /// Private member to hold the title of the media group.
-    /// </summary>
-    private YahooMediaTextConstruct? mediaObjectTitle;
-
-    /// <summary>
-    /// Private member to hold a short description of the media group.
-    /// </summary>
-    private YahooMediaTextConstruct? mediaObjectDescription;
-
-    /// <summary>
     /// Private member to hold the relevant keywords that describe the media group.
     /// </summary>
     private IList<string>? mediaObjectKeywords;
@@ -55,19 +45,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     private IList<YahooMediaHash>? mediaObjectHashes;
 
     /// <summary>
-    /// Private member to hold a web browser media player console the media group can be accessed through.
-    /// </summary>
-    private YahooMediaPlayer? mediaObjectPlayer;
-
-    /// <summary>
     /// Private member to hold the entities that contributed to the creation of the media group.
     /// </summary>
     private IList<YahooMediaCredit>? mediaObjectCredits;
-
-    /// <summary>
-    /// Private member to hold the copyright information for the media group.
-    /// </summary>
-    private YahooMediaCopyright? mediaObjectCopyright;
 
     /// <summary>
     /// Private member to hold the text transcript, closed captioning, or lyrics for the media group.
@@ -127,9 +107,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// </remarks>
     public YahooMediaCopyright? Copyright
     {
-        get => mediaObjectCopyright;
+        get;
 
-        set => mediaObjectCopyright = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -161,9 +141,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// </remarks>
     public YahooMediaTextConstruct? Description
     {
-        get => mediaObjectDescription;
+        get;
 
-        set => mediaObjectDescription = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -210,9 +190,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media group can be accessed through.</value>
     public YahooMediaPlayer? Player
     {
-        get => mediaObjectPlayer;
+        get;
 
-        set => mediaObjectPlayer = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -296,9 +276,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this media group.</value>
     public YahooMediaTextConstruct? Title
     {
-        get => mediaObjectTitle;
+        get;
 
-        set => mediaObjectTitle = value;
+        set => field = value;
     }
 
     /// <summary>

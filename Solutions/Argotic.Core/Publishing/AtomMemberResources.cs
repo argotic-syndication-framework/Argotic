@@ -34,26 +34,6 @@ namespace Argotic.Publishing;
 public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberResources>, IEquatable<AtomMemberResources>, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the base URI other than the base URI of the document or external entity.
-    /// </summary>
-    private Uri? commonObjectBaseUri;
-
-    /// <summary>
-    /// Private member to hold the natural or formal language in which the content is written.
-    /// </summary>
-    private CultureInfo? commonObjectLanguage;
-
-    /// <summary>
-    /// Private member to hold an IRI that identifies the location of the collection.
-    /// </summary>
-    private Uri? collectionResourceLocation;
-
-    /// <summary>
-    /// Private member to hold a human-readable title for the collection.
-    /// </summary>
-    private AtomTextConstruct collectionTitle = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="AtomMemberResources"/> class.
     /// </summary>
     public AtomMemberResources()
@@ -85,9 +65,9 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </remarks>
     public Uri? BaseUri
     {
-        get => commonObjectBaseUri;
+        get;
 
-        set => commonObjectBaseUri = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -101,9 +81,9 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </remarks>
     public CultureInfo? Language
     {
-        get => commonObjectLanguage;
+        get;
 
-        set => commonObjectLanguage = value;
+        set => field = value;
     }
 
     /// <summary>
@@ -159,14 +139,14 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomTextConstruct Title
     {
-        get => collectionTitle;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            collectionTitle = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets or sets an IRI that identifies the location of this <see cref="AtomMemberResources"/>.
@@ -179,12 +159,12 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Uri
     {
-        get => collectionResourceLocation;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            collectionResourceLocation = value;
+            field = value;
         }
     }
 

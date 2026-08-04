@@ -12,16 +12,6 @@ public class SiteSummarySlashSyndicationExtensionContext
 {
 
     /// <summary>
-    /// Private member to hold the section name.
-    /// </summary>
-    private string extensionSection = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the department name.
-    /// </summary>
-    private string extensionDepartment = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummarySlashSyndicationExtensionContext"/> class.
     /// </summary>
     public SiteSummarySlashSyndicationExtensionContext()
@@ -40,20 +30,20 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// <value>The name of the department.</value>
     public string Department
     {
-        get => extensionDepartment;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionDepartment = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionDepartment = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets the hit parade identifiers.
@@ -70,20 +60,20 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// <value>The name of the section.</value>
     public string Section
     {
-        get => extensionSection;
+        get;
 
         set
         {
             if (string.IsNullOrEmpty(value))
             {
-                extensionSection = string.Empty;
+                field = string.Empty;
             }
             else
             {
-                extensionSection = value.Trim();
+                field = value.Trim();
             }
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

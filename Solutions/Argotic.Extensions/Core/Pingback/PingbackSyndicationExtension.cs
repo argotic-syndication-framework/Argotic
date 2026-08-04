@@ -29,11 +29,6 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
 {
 
     /// <summary>
-    /// Private member to hold specific information about the extension.
-    /// </summary>
-    private PingbackSyndicationExtensionContext extensionContext = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="PingbackSyndicationExtension"/> class.
     /// </summary>
     public PingbackSyndicationExtension()
@@ -53,14 +48,14 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public PingbackSyndicationExtensionContext Context
     {
-        get => extensionContext;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            extensionContext = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Predicate delegate that returns a value indicating if the supplied <see cref="ISyndicationExtension"/> 

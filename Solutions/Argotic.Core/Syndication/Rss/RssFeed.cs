@@ -43,11 +43,6 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     private static readonly Version feedVersion = new(2, 0);
 
     /// <summary>
-    /// Private member to hold information about the meta-data and contents of the feed.
-    /// </summary>
-    private RssChannel feedChannel = new();
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="RssFeed"/> class.
     /// </summary>
     public RssFeed()
@@ -114,13 +109,13 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public RssChannel Channel
     {
-        get => feedChannel;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            feedChannel = value;
+            field = value;
         }
-    }
+    } = new();
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.

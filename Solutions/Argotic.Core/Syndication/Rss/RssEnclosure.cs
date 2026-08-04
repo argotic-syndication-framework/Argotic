@@ -30,21 +30,6 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
 {
 
     /// <summary>
-    /// Private member to hold the size of the media object in bytes.
-    /// </summary>
-    private long enclosureLength = long.MinValue;
-
-    /// <summary>
-    /// Private member to hold the media object's MIME media type.
-    /// </summary>
-    private string enclosureType = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the URL of the media object.
-    /// </summary>
-    private Uri? enclosureUrl;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="RssEnclosure"/> class.
     /// </summary>
     public RssEnclosure()
@@ -92,13 +77,13 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string ContentType
     {
-        get => enclosureType;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
-            enclosureType = value.Trim();
+            field = value.Trim();
         }
-    }
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the size of the media object.
@@ -118,13 +103,13 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <i>zero</i>.</exception>
     public long Length
     {
-        get => enclosureLength;
+        get;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 0);
-            enclosureLength = value;
+            field = value;
         }
-    }
+    } = long.MinValue;
 
     /// <summary>
     /// Gets or sets the URL of the media object.
@@ -133,11 +118,11 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Url
     {
-        get => enclosureUrl;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            enclosureUrl = value;
+            field = value;
         }
     }
 

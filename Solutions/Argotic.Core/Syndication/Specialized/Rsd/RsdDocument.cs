@@ -43,11 +43,6 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     private static readonly Version documentVersion = new(1, 0);
 
     /// <summary>
-    /// Private member to hold the name of the engine that is providing the services being described.
-    /// </summary>
-    private string documentServiceEngineName = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="RsdDocument"/> class.
     /// </summary>
     public RsdDocument()
@@ -109,9 +104,9 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <value>The name of the engine that is providing these discovery services.</value>
     public string EngineName
     {
-        get => documentServiceEngineName;
-        set => documentServiceEngineName = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
-    }
+        get;
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.

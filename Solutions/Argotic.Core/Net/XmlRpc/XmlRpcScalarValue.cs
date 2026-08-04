@@ -15,11 +15,6 @@ namespace Argotic.Net;
 public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, IEquatable<XmlRpcScalarValue>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold the value of the parameter.
-    /// </summary>
-    private object? scalarParameterValue;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class.
     /// </summary>
     public XmlRpcScalarValue()
@@ -123,12 +118,12 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public object? Value
     {
-        get => scalarParameterValue;
+        get;
 
         set
         {
             ArgumentNullException.ThrowIfNull(value);
-            scalarParameterValue = value;
+            field = value;
         }
     }
 

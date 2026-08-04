@@ -11,16 +11,6 @@ namespace Argotic.Common;
 public sealed class EnumerationMetadataAttribute : Attribute, IComparable<EnumerationMetadataAttribute>, IEquatable<EnumerationMetadataAttribute>, IComparisonOperators
 {
     /// <summary>
-    ///  Private member to hold the display name for the attributed field.
-    /// </summary>
-    private string enumMetadataDisplayName = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the alternate textual value for the attributed field.
-    /// </summary>
-    private string enumMetadataAlternateValue = string.Empty;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="EnumerationMetadataAttribute"/> class.
     /// </summary>
     public EnumerationMetadataAttribute() : base()
@@ -33,9 +23,9 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <value>The alternate textual value for the attributed field.</value>
     public string AlternateValue
     {
-        get => enumMetadataAlternateValue;
-        set => enumMetadataAlternateValue = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
-    }
+        get;
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Gets or sets the display name for the attributed field.
@@ -43,9 +33,9 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <value>The display name for the attributed field.</value>
     public string DisplayName
     {
-        get => enumMetadataDisplayName;
-        set => enumMetadataDisplayName = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
-    }
+        get;
+        set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
+    } = string.Empty;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="EnumerationMetadataAttribute"/>.

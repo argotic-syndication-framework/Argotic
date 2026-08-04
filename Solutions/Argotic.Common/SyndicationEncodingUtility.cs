@@ -11,7 +11,7 @@ namespace Argotic.Common;
 /// <summary>
 /// Provides methods for encoding and decoding information exposed by syndicated content. This class cannot be inherited.
 /// </summary>
-public static class SyndicationEncodingUtility
+public static partial class SyndicationEncodingUtility
 {
     /// <summary>
     /// Private member to hold the lazily-initialized shared HttpClient instance.
@@ -28,6 +28,26 @@ public static class SyndicationEncodingUtility
     /// Characters that are invalid in directory names.
     /// </summary>
     private static readonly SearchValues<char> s_invalidDirectoryChars = SearchValues.Create(@"\/:*?<>|");
+
+    /// <summary>
+    /// The number of leading characters of a document examined when looking for an XML declaration.
+    /// </summary>
+    /// <remarks>
+    ///     The declaration must be the first thing in the document and cannot legally exceed this,
+    ///     so nothing beyond it can affect the result.
+    /// </remarks>
+    private const int XmlDeclarationProbeLength = 512;
+
+    /// <summary>
+    /// Matches the <c>encoding</c> pseudo-attribute of an XML declaration.
+    /// </summary>
+    /// <returns>The compiled regular expression.</returns>
+    /// <remarks>
+    ///     Source-generated rather than interpreted: the pattern is a compile-time constant, so the
+    ///     generator emits a matcher directly instead of the engine parsing the pattern at run time.
+    /// </remarks>
+    [GeneratedRegex("""^<\?xml.+?encoding\s*=\s*(?:"(?<webName>[^"]*)"|(?<webName>\S+)).*?\?>""", RegexOptions.IgnoreCase | RegexOptions.Singleline)]
+    private static partial Regex XmlDeclarationEncodingRegex();
 
     /// <summary>
     /// Creates a shared <see cref="HttpClient"/> instance configured for optimal connection pooling.
@@ -389,8 +409,22 @@ public static class SyndicationEncodingUtility
     {
         ArgumentNullException.ThrowIfNull(data);
 
-        using MemoryStream stream = new(data);
-        return SyndicationEncodingUtility.GetXmlEncoding(stream);
+        if (data.Length == 0)
+        {
+            return Encoding.UTF8;
+        }
+
+        // An XML declaration is at offset 0 and cannot legally be long, so only the head of the
+        // document needs decoding. The previous implementation decoded the entire document into a
+        // string and ran the regex over all of it, which on a 1000-item feed cost megabytes to
+        // read a few dozen bytes. A StreamReader over the bounded slice is used rather than a
+        // direct ASCII decode so that byte-order-mark detection still happens - a UTF-16 document
+        // would otherwise decode to nonsense and silently fall back to UTF-8.
+        using MemoryStream stream = new(data, 0, Math.Min(data.Length, XmlDeclarationProbeLength), writable: false);
+        using StreamReader reader = new(stream, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
+        string declaration = reader.ReadToEnd();
+
+        return declaration.Length == 0 ? Encoding.UTF8 : SyndicationEncodingUtility.GetXmlEncoding(declaration);
     }
 
     /// <summary>
@@ -423,11 +457,16 @@ public static class SyndicationEncodingUtility
     public static Encoding GetXmlEncoding(string content)
     {
         Encoding encoding = Encoding.UTF8;
-        string encodingPattern = """^<\?xml.+?encoding\s*=\s*(?:"(?<webName>[^"]*)"|(?<webName>\S+)).*?\?>""";
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 
-        Match encodingMatch = Regex.Match(content, encodingPattern, RegexOptions.IgnoreCase | RegexOptions.Singleline);
+        // The pattern is anchored at the start, so only the head of the content can ever match.
+        // Bounding the input keeps a caller who passes a whole document off the slow path.
+        string probe = content.Length > XmlDeclarationProbeLength
+            ? content[..XmlDeclarationProbeLength]
+            : content;
+
+        Match encodingMatch = XmlDeclarationEncodingRegex().Match(probe);
         if (encodingMatch is { Groups.Count: > 0 })
         {
             Group group = encodingMatch.Groups["webName"];

@@ -34,6 +34,22 @@ namespace Argotic.Benchmarks.Loading;
 /// The measured points are nested, so the sub-steps fall out by subtraction: (a) is the property
 /// alone, (b) contains (a), and (c) contains (b).
 /// </para>
+/// <para>
+/// <strong>The question above has been answered, and acted on.</strong> The reflection scan was
+/// 0.13 of auto-detection's allocation and <c>Activator.CreateInstance</c> was the remaining ~0.85 —
+/// so the plausible fix would indeed have addressed a few percent, exactly as feared. The instances
+/// were then shown to be used read-only during probing (<c>ExistsInSource</c> is virtual but
+/// unoverridden, and reads only the immutable <c>XmlNamespace</c> and <c>XmlPrefix</c>), so
+/// <c>SyndicationExtensionAdapter.Fill</c> now probes with one cached instance per type. That cut
+/// <c>Load(Stream)</c> allocation by 74%.
+/// </para>
+/// <para>
+/// <strong>Consequently this class no longer measures what <c>Fill</c> does.</strong> It exercises
+/// the public <c>GetExtensions</c> overloads, which still allocate deliberately — what they return
+/// escapes to a caller who may do anything with it, so they cannot hand out shared instances. Read
+/// these numbers as the cost of the public API, not of a feed load; <c>ParsePipelineBenchmarks</c>
+/// f/g/h measure the path a load actually takes.
+/// </para>
 /// </remarks>
 [BenchmarkCategory("extensions", "diagnostic")]
 [SuppressMessage(

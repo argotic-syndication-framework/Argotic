@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Reflection;
 using System.Xml;
 using System.Xml.XPath;
@@ -26,6 +27,27 @@ public class SyndicationExtensionAdapter
         Navigator = navigator;
         Settings = settings;
     }
+
+    /// <summary>
+    /// One reusable instance per framework extension type, used only to probe a document.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///         <see cref="Fill(IExtensibleSyndicationObject, XmlNamespaceManager)"/> runs once per entity, so a
+    ///         thousand-item feed used to construct all twenty-odd framework extensions a thousand times over
+    ///         just to ask each one whether it applies. The benchmark decomposition attributes roughly 85% of
+    ///         auto-detection's allocation to those <see cref="Activator.CreateInstance(Type)"/> calls.
+    ///     </para>
+    ///     <para>
+    ///         Sharing them is safe because the probe only reads immutable per-type data:
+    ///         <see cref="SyndicationExtension.ExistsInSource(XPathNavigator)"/> is declared virtual but is not
+    ///         overridden anywhere in the solution, and its body reads only <c>XmlNamespace</c> and
+    ///         <c>XmlPrefix</c>, both fixed by each extension's constructor. Nothing here is handed to a caller
+    ///         or loaded into - a matching probe still gets a fresh instance for the actual
+    ///         <see cref="ISyndicationExtension.Load(IXPathNavigable)"/>.
+    ///     </para>
+    /// </remarks>
+    private static readonly Lazy<ImmutableArray<ISyndicationExtension>> FrameworkProbes = new(CreateFrameworkProbes);
 
     /// <summary>
     /// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
@@ -177,6 +199,62 @@ public class SyndicationExtensionAdapter
     }
 
     /// <summary>
+    /// Creates the shared probe instance for every framework extension type.
+    /// </summary>
+    /// <returns>One instance per type returned by <see cref="FrameworkExtensions"/>.</returns>
+    private static ImmutableArray<ISyndicationExtension> CreateFrameworkProbes()
+    {
+        ImmutableArray<ISyndicationExtension>.Builder probes = ImmutableArray.CreateBuilder<ISyndicationExtension>();
+
+        foreach (Type type in SyndicationExtensionAdapter.FrameworkExtensions)
+        {
+            if (Activator.CreateInstance(type) is ISyndicationExtension extension)
+            {
+                probes.Add(extension);
+            }
+        }
+
+        return probes.ToImmutable();
+    }
+
+    /// <summary>
+    /// Returns the extensions worth probing this document for, without instantiating the framework ones.
+    /// </summary>
+    /// <param name="types">User-defined syndication extension types to include.</param>
+    /// <param name="namespaces">The XML namespaces in scope, used to filter the framework extensions.</param>
+    /// <returns>The candidate extensions. These instances are shared and must be treated as read-only.</returns>
+    /// <remarks>
+    ///     Mirrors <see cref="GetExtensions(IList{Type}, IDictionary{string, string})"/>, but reuses the cached
+    ///     probes rather than constructing a fresh set. The public overload keeps allocating, because what it
+    ///     returns escapes to a caller who may do anything with it.
+    /// </remarks>
+    private static List<ISyndicationExtension> GetExtensionProbes(IList<Type> types, IDictionary<string, string> namespaces)
+    {
+        List<ISyndicationExtension> supportedExtensions = [];
+
+        foreach (ISyndicationExtension extension in SyndicationExtensionAdapter.FrameworkProbes.Value)
+        {
+            // Values.Contains rather than Dictionary.ContainsValue: the latter is not on IDictionary.
+            // Both are a linear scan over the values using the default equality comparer.
+            if ((namespaces.Values.Contains(extension.XmlNamespace) || namespaces.ContainsKey(extension.XmlPrefix))
+                && !supportedExtensions.Contains(extension))
+            {
+                supportedExtensions.Add(extension);
+            }
+        }
+
+        foreach (ISyndicationExtension extension in SyndicationExtensionAdapter.GetExtensions(types))
+        {
+            if (!supportedExtensions.Contains(extension))
+            {
+                supportedExtensions.Add(extension);
+            }
+        }
+
+        return supportedExtensions;
+    }
+
+    /// <summary>
     /// Saves the supplied <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects to the specified <see cref="XmlWriter"/>.
     /// </summary>
     /// <param name="extensions">A <see cref="IEnumerable{T}"/> collection of <see cref="ISyndicationExtension"/> objects that represent the syndication extensions to be written.</param>
@@ -253,25 +331,23 @@ public class SyndicationExtensionAdapter
     {
         ArgumentNullException.ThrowIfNull(entity);
         ArgumentNullException.ThrowIfNull(manager);
-        IList<ISyndicationExtension> extensions;
-        if (this.Settings.AutoDetectExtensions)
-        {
-            extensions = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions, this.Navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml));
-        }
-        else
-        {
-            extensions = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions);
-        }
+        IList<ISyndicationExtension> extensions = this.Settings.AutoDetectExtensions
+            ? SyndicationExtensionAdapter.GetExtensionProbes(this.Settings.SupportedExtensions, this.Navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml))
+            : SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions);
+
+        Type entityType = entity.GetType();
 
         foreach (ISyndicationExtension extension in extensions)
         {
-            if (extension.ExistsInSource(this.Navigator) && extension.GetType() != entity.GetType())
+            // The type test comes first because it is free, where ExistsInSource evaluates namespaces
+            // against the document. Both are side-effect free, so the order is not observable.
+            Type extensionType = extension.GetType();
+            if (extensionType != entityType
+                && extension.ExistsInSource(this.Navigator)
+                && Activator.CreateInstance(extensionType) is ISyndicationExtension instance
+                && instance.Load(this.Navigator))
             {
-                if (Activator.CreateInstance(extension.GetType()) is ISyndicationExtension instance
-                    && instance.Load(this.Navigator))
-                {
-                    entity.Extensions.Add(instance);
-                }
+                entity.Extensions.Add(instance);
             }
         }
     }

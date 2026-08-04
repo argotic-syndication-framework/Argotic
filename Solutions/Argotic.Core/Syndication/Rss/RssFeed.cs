@@ -196,12 +196,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     public XPathNavigator CreateNavigator()
     {
         using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Document,
-            Indent = true,
-            OmitXmlDeclaration = false
-        };
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateDocumentXmlWriterSettings();
 
         using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {

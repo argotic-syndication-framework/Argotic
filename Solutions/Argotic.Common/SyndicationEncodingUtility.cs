@@ -99,6 +99,55 @@ public static partial class SyndicationEncodingUtility
     }
 
     /// <summary>
+    /// Creates <see cref="XmlWriterSettings"/> for writing a syndication entity as an XML fragment.
+    /// </summary>
+    /// <param name="encoding">The character encoding to write with, or <b>null</b> to leave the writer's default.</param>
+    /// <returns>Settings that indent, omit the XML declaration, and permit a fragment rather than a whole document.</returns>
+    /// <remarks>
+    ///     Entities are written as fragments because they are composed into a document by their parent.
+    ///     This shape was repeated inline at 66 call sites before being named here.
+    /// </remarks>
+    public static XmlWriterSettings CreateFragmentXmlWriterSettings(Encoding? encoding = null)
+    {
+        XmlWriterSettings settings = new()
+        {
+            ConformanceLevel = ConformanceLevel.Fragment,
+            Indent = true,
+            OmitXmlDeclaration = true,
+        };
+
+        if (encoding is not null)
+        {
+            settings.Encoding = encoding;
+        }
+
+        return settings;
+    }
+
+    /// <summary>
+    /// Creates <see cref="XmlWriterSettings"/> for writing a complete syndication document.
+    /// </summary>
+    /// <param name="encoding">The character encoding to write with, or <b>null</b> to leave the writer's default.</param>
+    /// <returns>Settings that indent, emit the XML declaration, and require a well-formed document.</returns>
+    /// <remarks>This shape was repeated inline at 12 call sites before being named here.</remarks>
+    public static XmlWriterSettings CreateDocumentXmlWriterSettings(Encoding? encoding = null)
+    {
+        XmlWriterSettings settings = new()
+        {
+            ConformanceLevel = ConformanceLevel.Document,
+            Indent = true,
+            OmitXmlDeclaration = false,
+        };
+
+        if (encoding is not null)
+        {
+            settings.Encoding = encoding;
+        }
+
+        return settings;
+    }
+
+    /// <summary>
     /// Creates a <see cref="XPathNavigator"/> against the supplied XML data.
     /// </summary>
     /// <param name="xml">The XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>

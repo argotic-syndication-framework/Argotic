@@ -162,12 +162,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     public override string ToString()
     {
         using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateFragmentXmlWriterSettings();
 
         using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {

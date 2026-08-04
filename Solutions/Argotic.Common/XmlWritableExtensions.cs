@@ -17,12 +17,7 @@ public static class XmlWritableExtensions
         ArgumentNullException.ThrowIfNull(writable);
 
         using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateFragmentXmlWriterSettings();
 
         using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
         {
@@ -47,12 +42,7 @@ public static class XmlWritableExtensions
         ArgumentException.ThrowIfNullOrEmpty(elementName);
 
         using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateFragmentXmlWriterSettings();
 
         using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
         {

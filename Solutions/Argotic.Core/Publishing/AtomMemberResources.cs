@@ -537,12 +537,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     public override string ToString()
     {
         using StringWriter stringWriter = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateFragmentXmlWriterSettings();
 
         using (XmlWriter writer = XmlWriter.Create(stringWriter, settings))
         {

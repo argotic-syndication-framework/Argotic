@@ -254,12 +254,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     public override string ToString()
     {
         using MemoryStream stream = new();
-        XmlWriterSettings settings = new()
-        {
-            ConformanceLevel = ConformanceLevel.Fragment,
-            Indent = true,
-            OmitXmlDeclaration = true
-        };
+        XmlWriterSettings settings = SyndicationEncodingUtility.CreateFragmentXmlWriterSettings();
 
         using (XmlWriter writer = XmlWriter.Create(stream, settings))
         {

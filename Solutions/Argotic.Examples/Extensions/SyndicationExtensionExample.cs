@@ -170,7 +170,7 @@ internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
             int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
             if (result == 0) result = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
             if (result == 0) result = string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            if (result == 0) result = this.Version.CompareTo(value.Version);
+            if (result == 0) result = this.Version!.CompareTo(value.Version);
             if (result == 0) result = string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
             if (result == 0) result = string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 

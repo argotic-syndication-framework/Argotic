@@ -85,7 +85,7 @@ public class PheedSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        PheedSyndicationExtension itemExtension = item.FindExtension<PheedSyndicationExtension>();
+        PheedSyndicationExtension? itemExtension = item.FindExtension<PheedSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension)
             .ShouldBeOfType<PheedSyndicationExtension>();

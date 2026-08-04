@@ -84,7 +84,7 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        SiteSummaryUpdateSyndicationExtension itemExtension = item.FindExtension<SiteSummaryUpdateSyndicationExtension>();
+        SiteSummaryUpdateSyndicationExtension? itemExtension = item.FindExtension<SiteSummaryUpdateSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(SiteSummaryUpdateSyndicationExtension.MatchByType) as SiteSummaryUpdateSyndicationExtension)
             .ShouldBeOfType<SiteSummaryUpdateSyndicationExtension>();
@@ -215,7 +215,7 @@ public class SiteSummaryUpdateSyndicationExtensionTest
 
         // Assert
         RssItem item = feed.Channel.Items.Single();
-        SiteSummaryUpdateSyndicationExtension itemExtension = item.FindExtension<SiteSummaryUpdateSyndicationExtension>();
+        SiteSummaryUpdateSyndicationExtension? itemExtension = item.FindExtension<SiteSummaryUpdateSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         itemExtension.Context.Period.ShouldBe(SiteSummaryUpdatePeriod.Hourly);
         itemExtension.Context.Frequency.ShouldBe(2);

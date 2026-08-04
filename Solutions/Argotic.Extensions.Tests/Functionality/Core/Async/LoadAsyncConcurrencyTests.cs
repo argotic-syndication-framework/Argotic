@@ -64,7 +64,7 @@ public class LoadAsyncConcurrencyTests
         for (int i = 0; i < 5; i++)
         {
             results[i].ShouldBeTrue($"Feed {i} should have loaded successfully");
-            feeds[i].Title.Content.ShouldBe("Test Feed", $"Feed {i} should have correct title");
+            feeds[i].Title!.Content.ShouldBe("Test Feed", $"Feed {i} should have correct title");
         }
     }
 
@@ -112,7 +112,7 @@ public class LoadAsyncConcurrencyTests
         genericLoaded.ShouldBeTrue("Generic feed should have loaded");
 
         rssFeed.Channel.Title.ShouldBe("Test Feed");
-        atomFeed.Title.Content.ShouldBe("Test Feed");
+        atomFeed.Title!.Content.ShouldBe("Test Feed");
         opmlDoc.Head.Title.ShouldBe("Test OPML");
         genericFeed.Title.ShouldBe("Test Feed");
     }
@@ -181,7 +181,7 @@ public class LoadAsyncConcurrencyTests
         for (int i = 0; i < 5; i++)
         {
             results[i].ShouldBeTrue($"Feed {i} should have loaded successfully");
-            feeds[i].Title.Content.ShouldBe("Test Feed", $"Feed {i} should have correct title");
+            feeds[i].Title!.Content.ShouldBe("Test Feed", $"Feed {i} should have correct title");
         }
     }
 
@@ -227,7 +227,7 @@ public class LoadAsyncConcurrencyTests
         genericLoaded.ShouldBeTrue("Generic feed should have loaded");
 
         rssFeed.Channel.Title.ShouldBe("Test Feed");
-        atomFeed.Title.Content.ShouldBe("Test Feed");
+        atomFeed.Title!.Content.ShouldBe("Test Feed");
         opmlDoc.Head.Title.ShouldBe("Test OPML");
         genericFeed.Title.ShouldBe("Test Feed");
     }

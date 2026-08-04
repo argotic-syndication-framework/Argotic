@@ -113,7 +113,7 @@ public class ITunesSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        ITunesSyndicationExtension itemExtension = item.FindExtension<ITunesSyndicationExtension>();
+        ITunesSyndicationExtension? itemExtension = item.FindExtension<ITunesSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension)
             .ShouldBeOfType<ITunesSyndicationExtension>();
@@ -206,7 +206,7 @@ public class ITunesSyndicationExtensionTest
         context.Image.ShouldBe(new Uri("http://www.eexample.com/image.jpg"));
         context.IsBlocked.ShouldBeFalse();
         context.Keywords.Count.ShouldBe(2);
-        context.Owner.EmailAddress.ShouldBe("owner@bigstar.com");
+        context.Owner!.EmailAddress.ShouldBe("owner@bigstar.com");
         context.Owner.Name.ShouldBe("BigStar's Guy");
         context.Subtitle.ShouldBe("That song you like.");
         context.Summary.ShouldBe("Duh... That song you like");

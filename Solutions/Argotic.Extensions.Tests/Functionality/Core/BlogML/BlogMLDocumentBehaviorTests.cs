@@ -512,7 +512,7 @@ public class BlogMLDocumentBehaviorTests
         // Assert
         document.RootUrl.ShouldBe(new Uri("http://example.com"));
         document.Title.Content.ShouldBe("Complete Blog");
-        document.Subtitle.Content.ShouldBe("A complete test blog");
+        document.Subtitle!.Content.ShouldBe("A complete test blog");
         document.Authors.Count.ShouldBe(1);
         document.Categories.Count.ShouldBe(1);
         document.Posts.Count.ShouldBe(1);
@@ -854,7 +854,7 @@ public class BlogMLDocumentBehaviorTests
         // Assert - Core properties match
         secondDocument.RootUrl.ShouldBe(firstDocument.RootUrl);
         secondDocument.Title.Content.ShouldBe(firstDocument.Title.Content);
-        secondDocument.Subtitle.Content.ShouldBe(firstDocument.Subtitle.Content);
+        secondDocument.Subtitle!.Content.ShouldBe(firstDocument.Subtitle!.Content);
         secondDocument.Authors.Count.ShouldBe(firstDocument.Authors.Count);
         secondDocument.Categories.Count.ShouldBe(firstDocument.Categories.Count);
         secondDocument.Posts.Count.ShouldBe(firstDocument.Posts.Count);

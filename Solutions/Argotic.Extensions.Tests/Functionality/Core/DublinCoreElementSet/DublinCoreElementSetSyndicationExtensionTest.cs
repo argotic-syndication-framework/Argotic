@@ -134,7 +134,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        DublinCoreElementSetSyndicationExtension itemExtension = item.FindExtension<DublinCoreElementSetSyndicationExtension>();
+        DublinCoreElementSetSyndicationExtension? itemExtension = item.FindExtension<DublinCoreElementSetSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension)
             .ShouldBeOfType<DublinCoreElementSetSyndicationExtension>();
@@ -227,7 +227,7 @@ public class DublinCoreElementSetSyndicationExtensionTest
         context.Description.ShouldBe("That kind of thing");
         context.Format.ShouldBe("CDROM");
         context.Identifier.ShouldBe("MYTESTCDROM-1");
-        context.Language.Name.ShouldBe("en-US");
+        context.Language!.Name.ShouldBe("en-US");
         context.Publisher.ShouldBe("MeMeMe");
         context.Relation.ShouldBe("MYTESTCDROM-2");
         context.Rights.ShouldBe("Copyright 2010");

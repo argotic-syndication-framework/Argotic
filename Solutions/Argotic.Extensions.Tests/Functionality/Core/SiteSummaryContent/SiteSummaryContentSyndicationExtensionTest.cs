@@ -84,7 +84,7 @@ public class SiteSummaryContentSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        SiteSummaryContentSyndicationExtension itemExtension = item.FindExtension<SiteSummaryContentSyndicationExtension>();
+        SiteSummaryContentSyndicationExtension? itemExtension = item.FindExtension<SiteSummaryContentSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(SiteSummaryContentSyndicationExtension.MatchByType) as SiteSummaryContentSyndicationExtension)
             .ShouldBeOfType<SiteSummaryContentSyndicationExtension>();
@@ -198,7 +198,7 @@ public class SiteSummaryContentSyndicationExtensionTest
 
         // Assert
         RssItem item = feed.Channel.Items.Single();
-        SiteSummaryContentSyndicationExtension itemExtension = item.FindExtension<SiteSummaryContentSyndicationExtension>();
+        SiteSummaryContentSyndicationExtension? itemExtension = item.FindExtension<SiteSummaryContentSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         itemExtension.Context.Encoded.ShouldBe("<p>Test encoded content</p>");
     }

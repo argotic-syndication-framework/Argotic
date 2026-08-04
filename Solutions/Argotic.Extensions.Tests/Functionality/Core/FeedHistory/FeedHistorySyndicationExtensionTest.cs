@@ -337,7 +337,7 @@ public class FeedHistorySyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
         RssItem item = feed.Channel.Items.Single();
-        FeedHistorySyndicationExtension ext = item.FindExtension<FeedHistorySyndicationExtension>();
+        FeedHistorySyndicationExtension? ext = item.FindExtension<FeedHistorySyndicationExtension>();
 
         // Assert
         ext.ShouldNotBeNull();
@@ -356,7 +356,7 @@ public class FeedHistorySyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
         RssItem item = feed.Channel.Items.Single();
-        FeedHistorySyndicationExtension ext = item.FindExtension<FeedHistorySyndicationExtension>();
+        FeedHistorySyndicationExtension? ext = item.FindExtension<FeedHistorySyndicationExtension>();
 
         // Assert
         ext.ShouldNotBeNull();
@@ -375,7 +375,7 @@ public class FeedHistorySyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
         RssItem item = feed.Channel.Items.Single();
-        FeedHistorySyndicationExtension ext = item.FindExtension<FeedHistorySyndicationExtension>();
+        FeedHistorySyndicationExtension? ext = item.FindExtension<FeedHistorySyndicationExtension>();
 
         // Assert
         ext.ShouldNotBeNull();
@@ -418,7 +418,7 @@ public class FeedHistorySyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        FeedHistorySyndicationExtension itemExtension = item.FindExtension<FeedHistorySyndicationExtension>();
+        FeedHistorySyndicationExtension? itemExtension = item.FindExtension<FeedHistorySyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(FeedHistorySyndicationExtension.MatchByType) as FeedHistorySyndicationExtension)
             .ShouldBeOfType<FeedHistorySyndicationExtension>();

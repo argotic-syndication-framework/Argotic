@@ -30,7 +30,7 @@ internal static class PheedSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            PheedSyndicationExtension channelExtension = feed.Channel.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
+            PheedSyndicationExtension? channelExtension = feed.Channel.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
             if (channelExtension != null)
             {
                 ExampleOutput.ShowPheedExtension(channelExtension);
@@ -41,7 +41,7 @@ internal static class PheedSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                PheedSyndicationExtension itemExtension = item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
+                PheedSyndicationExtension? itemExtension = item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
                 if (itemExtension != null)
                 {
                     // Process extension for current item

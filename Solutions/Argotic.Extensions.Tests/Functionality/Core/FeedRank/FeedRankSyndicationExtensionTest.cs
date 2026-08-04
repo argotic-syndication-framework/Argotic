@@ -77,7 +77,7 @@ public class FeedRankSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        FeedRankSyndicationExtension itemExtension = item.FindExtension<FeedRankSyndicationExtension>();
+        FeedRankSyndicationExtension? itemExtension = item.FindExtension<FeedRankSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension)
             .ShouldBeOfType<FeedRankSyndicationExtension>();

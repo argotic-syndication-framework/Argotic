@@ -85,7 +85,7 @@ public class SiteSummarySlashSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        SiteSummarySlashSyndicationExtension itemExtension = item.FindExtension<SiteSummarySlashSyndicationExtension>();
+        SiteSummarySlashSyndicationExtension? itemExtension = item.FindExtension<SiteSummarySlashSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(SiteSummarySlashSyndicationExtension.MatchByType) as SiteSummarySlashSyndicationExtension)
             .ShouldBeOfType<SiteSummarySlashSyndicationExtension>();
@@ -205,7 +205,7 @@ public class SiteSummarySlashSyndicationExtensionTest
 
         // Assert
         RssItem item = feed.Channel.Items.Single();
-        SiteSummarySlashSyndicationExtension itemExtension = item.FindExtension<SiteSummarySlashSyndicationExtension>();
+        SiteSummarySlashSyndicationExtension? itemExtension = item.FindExtension<SiteSummarySlashSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         itemExtension.Context.Comments.ShouldBe(42);
         itemExtension.Context.Section.ShouldBe("Technology");

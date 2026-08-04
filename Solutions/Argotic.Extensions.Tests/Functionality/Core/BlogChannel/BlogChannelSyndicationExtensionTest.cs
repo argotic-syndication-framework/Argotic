@@ -90,7 +90,7 @@ public class BlogChannelSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        BlogChannelSyndicationExtension itemExtension = item.FindExtension<BlogChannelSyndicationExtension>();
+        BlogChannelSyndicationExtension? itemExtension = item.FindExtension<BlogChannelSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(BlogChannelSyndicationExtension.MatchByType) as BlogChannelSyndicationExtension)
             .ShouldBeOfType<BlogChannelSyndicationExtension>();

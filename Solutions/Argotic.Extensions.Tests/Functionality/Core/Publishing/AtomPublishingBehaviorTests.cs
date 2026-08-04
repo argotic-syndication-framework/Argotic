@@ -669,7 +669,7 @@ public class AtomPublishingBehaviorTests
         var resource = new AtomEntryResource(id, title, updatedOn);
 
         // Assert
-        resource.Title.Content.ShouldBe("Test Entry");
+        resource.Title!.Content.ShouldBe("Test Entry");
         resource.UpdatedOn.ShouldBe(updatedOn);
     }
 

@@ -98,7 +98,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     public bool Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
-        XPathNavigator navigator = source.CreateNavigator(); ;
+        XPathNavigator navigator = source.CreateNavigator();
 
         bool wasLoaded;
 

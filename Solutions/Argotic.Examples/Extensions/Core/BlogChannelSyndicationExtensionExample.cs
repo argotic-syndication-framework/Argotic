@@ -30,7 +30,7 @@ internal static class BlogChannelSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            BlogChannelSyndicationExtension channelExtension = feed.Channel.FindExtension(BlogChannelSyndicationExtension.MatchByType) as BlogChannelSyndicationExtension;
+            BlogChannelSyndicationExtension? channelExtension = feed.Channel.FindExtension(BlogChannelSyndicationExtension.MatchByType) as BlogChannelSyndicationExtension;
             if (channelExtension != null)
             {
                 ExampleOutput.ShowBlogChannelExtension(channelExtension);

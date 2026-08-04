@@ -173,7 +173,7 @@ public class SitemapImageTests
 
         // Assert
         result.ShouldBeTrue();
-        image.Location.ToString().ShouldBe("/images/photo.jpg");
+        image.Location!.ToString().ShouldBe("/images/photo.jpg");
     }
 
     [TestMethod]

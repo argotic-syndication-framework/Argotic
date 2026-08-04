@@ -87,7 +87,7 @@ public class WellFormedWebCommentsSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        WellFormedWebCommentsSyndicationExtension itemExtension = item.FindExtension<WellFormedWebCommentsSyndicationExtension>();
+        WellFormedWebCommentsSyndicationExtension? itemExtension = item.FindExtension<WellFormedWebCommentsSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(WellFormedWebCommentsSyndicationExtension.MatchByType) as WellFormedWebCommentsSyndicationExtension)
             .ShouldBeOfType<WellFormedWebCommentsSyndicationExtension>();

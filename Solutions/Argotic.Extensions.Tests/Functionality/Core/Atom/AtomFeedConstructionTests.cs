@@ -91,8 +91,8 @@ public class AtomFeedConstructionTests
 
         feed.Entries.Count.ShouldBe(1);
         AtomEntry addedEntry = feed.Entries.First();
-        addedEntry.Title.Content.ShouldBe("Test Entry");
-        addedEntry.Summary.Content.ShouldBe("Test summary text.");
+        addedEntry.Title!.Content.ShouldBe("Test Entry");
+        addedEntry.Summary!.Content.ShouldBe("Test summary text.");
     }
 
     [TestMethod]
@@ -113,7 +113,7 @@ public class AtomFeedConstructionTests
         feed.Entries.Add(entry);
 
         AtomEntry addedEntry = feed.Entries.First();
-        addedEntry.Content.Content.ShouldBe("<p>HTML content here</p>");
+        addedEntry.Content!.Content.ShouldBe("<p>HTML content here</p>");
         addedEntry.Content.ContentType.ShouldBe("html");
         addedEntry.Links.Count.ShouldBe(1);
         addedEntry.Authors.Count.ShouldBe(1);
@@ -177,7 +177,7 @@ public class AtomFeedConstructionTests
         loadedFeed.Load(stream);
 
         // Verify data preserved
-        loadedFeed.Title.Content.ShouldBe(originalFeed.Title.Content);
+        loadedFeed.Title!.Content.ShouldBe(originalFeed.Title!.Content);
         loadedFeed.Entries.Count.ShouldBe(originalFeed.Entries.Count);
     }
 

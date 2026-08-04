@@ -282,7 +282,7 @@ public class YahooMediaSyndicationExtensionTest
 
         // Assert
         loaded.ShouldBeTrue();
-        content.Url.ToString().ShouldBe("http://example.com/video.mp4");
+        content.Url!.ToString().ShouldBe("http://example.com/video.mp4");
         content.FileSize.ShouldBe(1024000);
         content.ContentType.ShouldBe("video/mp4");
         content.Medium.ShouldBe(YahooMediaMedium.Video);
@@ -294,7 +294,7 @@ public class YahooMediaSyndicationExtensionTest
         content.Duration.ShouldBe(TimeSpan.FromSeconds(120));
         content.Height.ShouldBe(720);
         content.Width.ShouldBe(1280);
-        content.Language.Name.ShouldBe("en-US");
+        content.Language!.Name.ShouldBe("en-US");
     }
 
     [TestMethod]
@@ -426,7 +426,7 @@ public class YahooMediaSyndicationExtensionTest
         group.Contents.Add(content2);
 
         // Assert
-        group.Contents.First(c => c.IsDefault).Url.ToString().ShouldBe("http://example.com/hd.mp4");
+        group.Contents!.First(c => c.IsDefault).Url.ToString().ShouldBe("http://example.com/hd.mp4");
     }
 
     [TestMethod]
@@ -571,7 +571,7 @@ public class YahooMediaSyndicationExtensionTest
 
         // Assert
         loaded.ShouldBeTrue();
-        thumbnail.Url.ToString().ShouldBe("http://example.com/thumb.jpg");
+        thumbnail.Url!.ToString().ShouldBe("http://example.com/thumb.jpg");
         thumbnail.Height.ShouldBe(100);
         thumbnail.Width.ShouldBe(200);
         thumbnail.Time.ShouldBe(TimeSpan.FromSeconds(30));
@@ -689,7 +689,7 @@ public class YahooMediaSyndicationExtensionTest
         // Assert
         loaded.ShouldBeTrue();
         rating.Content.ShouldBe("adult");
-        rating.Scheme.ToString().ShouldBe("urn:simple");
+        rating.Scheme!.ToString().ShouldBe("urn:simple");
     }
 
     [TestMethod]
@@ -811,7 +811,7 @@ public class YahooMediaSyndicationExtensionTest
         loaded.ShouldBeTrue();
         credit.Entity.ShouldBe("John Doe");
         credit.Role.ShouldBe("director");
-        credit.Scheme.ToString().ShouldBe("urn:ebu");
+        credit.Scheme!.ToString().ShouldBe("urn:ebu");
     }
 
     [TestMethod]
@@ -1214,18 +1214,18 @@ public class YahooMediaSyndicationExtensionTest
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
 
-        YahooMediaSyndicationExtension mediaExtension = item.FindExtension<YahooMediaSyndicationExtension>();
+        YahooMediaSyndicationExtension? mediaExtension = item.FindExtension<YahooMediaSyndicationExtension>();
         mediaExtension.ShouldNotBeNull();
         mediaExtension.Context.Contents.Count.ShouldBe(1);
 
         YahooMediaContent content = mediaExtension.Context.Contents[0];
-        content.Url.ToString().ShouldBe("http://example.com/video.mp4");
+        content.Url!.ToString().ShouldBe("http://example.com/video.mp4");
         content.ContentType.ShouldBe("video/mp4");
         content.Medium.ShouldBe(YahooMediaMedium.Video);
         content.Height.ShouldBe(720);
         content.Width.ShouldBe(1280);
-        content.Title.Content.ShouldBe("Test Video");
-        content.Description.Content.ShouldBe("A test video description");
+        content.Title!.Content.ShouldBe("Test Video");
+        content.Description!.Content.ShouldBe("A test video description");
         content.Thumbnails.Count.ShouldBe(1);
     }
 
@@ -1253,7 +1253,7 @@ public class YahooMediaSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
 
-        YahooMediaSyndicationExtension mediaExtension = item.FindExtension<YahooMediaSyndicationExtension>();
+        YahooMediaSyndicationExtension? mediaExtension = item.FindExtension<YahooMediaSyndicationExtension>();
         mediaExtension.ShouldNotBeNull();
         mediaExtension.Context.Groups.Count.ShouldBe(1);
 
@@ -1262,7 +1262,7 @@ public class YahooMediaSyndicationExtensionTest
         group.Contents[0].IsDefault.ShouldBeTrue();
         group.Contents[0].Height.ShouldBe(1080);
         group.Contents[1].Height.ShouldBe(480);
-        group.Title.Content.ShouldBe("Video Group");
+        group.Title!.Content.ShouldBe("Video Group");
     }
 
     [TestMethod]

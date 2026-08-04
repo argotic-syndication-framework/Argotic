@@ -393,13 +393,13 @@ public class AtomEntryResource : AtomEntry
     /// </summary>
     private void LoadAtomPublishingExtensions()
     {
-        AtomPublishingEditedSyndicationExtension editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
+        AtomPublishingEditedSyndicationExtension? editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
         if (editedExtension != null)
         {
             this.EditedOn = editedExtension.Context.EditedOn;
         }
 
-        AtomPublishingControlSyndicationExtension controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
+        AtomPublishingControlSyndicationExtension? controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
         if (controlExtension != null)
         {
             this.IsDraft = controlExtension.Context.IsDraft;

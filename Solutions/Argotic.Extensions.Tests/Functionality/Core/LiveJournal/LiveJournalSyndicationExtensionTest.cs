@@ -89,7 +89,7 @@ public class LiveJournalSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        LiveJournalSyndicationExtension itemExtension = item.FindExtension<LiveJournalSyndicationExtension>();
+        LiveJournalSyndicationExtension? itemExtension = item.FindExtension<LiveJournalSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension)
             .ShouldBeOfType<LiveJournalSyndicationExtension>();
@@ -209,7 +209,7 @@ public class LiveJournalSyndicationExtensionTest
 
         // Assert
         RssItem item = feed.Channel.Items.Single();
-        LiveJournalSyndicationExtension itemExtension = item.FindExtension<LiveJournalSyndicationExtension>();
+        LiveJournalSyndicationExtension? itemExtension = item.FindExtension<LiveJournalSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         itemExtension.Context.Music.ShouldBe("Test Music Track");
         itemExtension.Context.IsPreformatted.ShouldBeTrue();

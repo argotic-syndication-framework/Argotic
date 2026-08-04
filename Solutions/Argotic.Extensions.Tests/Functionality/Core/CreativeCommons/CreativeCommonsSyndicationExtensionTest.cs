@@ -80,7 +80,7 @@ public class CreativeCommonsSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        CreativeCommonsSyndicationExtension itemExtension = item.FindExtension<CreativeCommonsSyndicationExtension>();
+        CreativeCommonsSyndicationExtension? itemExtension = item.FindExtension<CreativeCommonsSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension)
             .ShouldBeOfType<CreativeCommonsSyndicationExtension>();

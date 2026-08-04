@@ -118,8 +118,8 @@ public class Rss092SyndicationResourceAdapterTests
 
         // Assert
         feed.Channel.Items[0].Source.ShouldNotBeNull();
-        feed.Channel.Items[0].Source.Title.ShouldBe("Other Feed");
-        feed.Channel.Items[0].Source.Url.ShouldBe(new Uri("http://other.example.com/feed.xml"));
+        feed.Channel!.Items[0].Source.Title.ShouldBe("Other Feed");
+        feed.Channel!.Items[0].Source.Url.ShouldBe(new Uri("http://other.example.com/feed.xml"));
     }
 
     [TestMethod]

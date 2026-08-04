@@ -87,7 +87,7 @@ public class PingbackSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        PingbackSyndicationExtension itemExtension = item.FindExtension<PingbackSyndicationExtension>();
+        PingbackSyndicationExtension? itemExtension = item.FindExtension<PingbackSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension)
             .ShouldBeOfType<PingbackSyndicationExtension>();

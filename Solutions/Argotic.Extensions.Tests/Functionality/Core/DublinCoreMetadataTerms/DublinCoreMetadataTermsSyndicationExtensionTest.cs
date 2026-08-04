@@ -1038,7 +1038,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
 
-        DublinCoreMetadataTermsSyndicationExtension itemExtension = item.FindExtension<DublinCoreMetadataTermsSyndicationExtension>();
+        DublinCoreMetadataTermsSyndicationExtension? itemExtension = item.FindExtension<DublinCoreMetadataTermsSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
 
         DublinCoreMetadataTermsSyndicationExtensionContext context = itemExtension.Context;
@@ -1065,7 +1065,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        DublinCoreMetadataTermsSyndicationExtension itemExtension = item.FindExtension<DublinCoreMetadataTermsSyndicationExtension>();
+        DublinCoreMetadataTermsSyndicationExtension? itemExtension = item.FindExtension<DublinCoreMetadataTermsSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as DublinCoreMetadataTermsSyndicationExtension)
             .ShouldBeOfType<DublinCoreMetadataTermsSyndicationExtension>();

@@ -46,7 +46,7 @@ public class LoadAsyncSuccessTests
         // Assert
         eventRaised.ShouldBeTrue("Loaded event should be raised");
         feed.Format.ShouldBe(SyndicationContentFormat.Atom);
-        feed.Title.Content.ShouldBe("Test Feed");
+        feed.Title!.Content.ShouldBe("Test Feed");
     }
 
     [TestMethod]
@@ -64,7 +64,7 @@ public class LoadAsyncSuccessTests
 
         // Assert
         eventRaised.ShouldBeTrue("Loaded event should be raised");
-        entry.Title.Content.ShouldBe("Test Entry");
+        entry.Title!.Content.ShouldBe("Test Entry");
     }
 
     [TestMethod]
@@ -180,7 +180,7 @@ public class LoadAsyncSuccessTests
         // Assert
         eventRaised.ShouldBeTrue("Loaded event should be raised");
         feed.Format.ShouldBe(SyndicationContentFormat.Atom);
-        feed.Title.Content.ShouldBe("Test Feed");
+        feed.Title!.Content.ShouldBe("Test Feed");
     }
 
     [TestMethod]
@@ -199,7 +199,7 @@ public class LoadAsyncSuccessTests
 
         // Assert
         eventRaised.ShouldBeTrue("Loaded event should be raised");
-        entry.Title.Content.ShouldBe("Test Entry");
+        entry.Title!.Content.ShouldBe("Test Entry");
     }
 
     [TestMethod]

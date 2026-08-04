@@ -109,7 +109,7 @@ public class RssFeedConstructionTests
         addedItem.Description.ShouldBe("Test item description");
         addedItem.Author.ShouldBe("test@example.com (Test Author)");
         addedItem.Categories.Count.ShouldBe(1);
-        addedItem.Guid.Value.ShouldBe("http://example.com/item");
+        addedItem.Guid!.Value.ShouldBe("http://example.com/item");
     }
 
     [TestMethod]

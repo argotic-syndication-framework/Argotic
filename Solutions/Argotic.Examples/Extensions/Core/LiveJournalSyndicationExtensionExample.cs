@@ -30,7 +30,7 @@ internal static class LiveJournalSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            LiveJournalSyndicationExtension channelExtension = feed.Channel.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension;
+            LiveJournalSyndicationExtension? channelExtension = feed.Channel.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension;
             if (channelExtension != null)
             {
                 ExampleOutput.ShowLiveJournalExtension(channelExtension);
@@ -41,7 +41,7 @@ internal static class LiveJournalSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                LiveJournalSyndicationExtension itemExtension = item.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension;
+                LiveJournalSyndicationExtension? itemExtension = item.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension;
                 if (itemExtension != null)
                 {
                     // Process extension for current item

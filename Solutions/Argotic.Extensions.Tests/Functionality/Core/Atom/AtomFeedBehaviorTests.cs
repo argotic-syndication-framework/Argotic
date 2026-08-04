@@ -254,8 +254,8 @@ public class AtomFeedBehaviorTests
         loadedFeed.Load(stream);
 
         // Assert
-        loadedFeed.Id.Uri.ShouldBe(originalFeed.Id.Uri);
-        loadedFeed.Title.Content.ShouldBe(originalFeed.Title.Content);
+        loadedFeed.Id!.Uri.ShouldBe(originalFeed.Id.Uri);
+        loadedFeed.Title!.Content.ShouldBe(originalFeed.Title.Content);
         loadedFeed.Subtitle.ShouldNotBeNull();
         loadedFeed.Subtitle.Content.ShouldBe(originalFeed.Subtitle.Content);
         loadedFeed.Rights.ShouldNotBeNull();
@@ -338,7 +338,7 @@ public class AtomFeedBehaviorTests
         feed2.Load(stream2);
 
         // Assert
-        feed2.Title.Content.ShouldBe(originalFeed.Title.Content);
+        feed2.Title!.Content.ShouldBe(originalFeed.Title!.Content);
         feed2.Entries.Count.ShouldBe(originalFeed.Entries.Count);
         feed2.Authors.Count.ShouldBe(originalFeed.Authors.Count);
         feed2.Categories.Count.ShouldBe(originalFeed.Categories.Count);
@@ -411,7 +411,7 @@ public class AtomFeedBehaviorTests
         loadedFeed.Load(stream);
 
         // Assert
-        loadedFeed.Title.TextType.ShouldBe(AtomTextConstructType.Html);
+        loadedFeed.Title!.TextType.ShouldBe(AtomTextConstructType.Html);
     }
 
     [TestMethod]
@@ -759,7 +759,7 @@ public class AtomFeedBehaviorTests
 
         // Assert
         feed.ShouldNotBeNull();
-        feed.Title.Content.ShouldBe("Test Feed");
+        feed.Title!.Content.ShouldBe("Test Feed");
         feed.Format.ShouldBe(Argotic.Common.SyndicationContentFormat.Atom);
     }
 
@@ -794,7 +794,7 @@ public class AtomFeedBehaviorTests
             cancellationToken: TestContext!.CancellationToken);
 
         // Assert
-        feed.Title.Content.ShouldBe("Test Feed");
+        feed.Title!.Content.ShouldBe("Test Feed");
         feed.HasExtensions.ShouldBeTrue();
     }
 

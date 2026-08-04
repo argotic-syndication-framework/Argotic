@@ -104,7 +104,7 @@ public class BasicGeocodingSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        BasicGeocodingSyndicationExtension itemExtension = item.FindExtension<BasicGeocodingSyndicationExtension>();
+        BasicGeocodingSyndicationExtension? itemExtension = item.FindExtension<BasicGeocodingSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension)
             .ShouldBeOfType<BasicGeocodingSyndicationExtension>();

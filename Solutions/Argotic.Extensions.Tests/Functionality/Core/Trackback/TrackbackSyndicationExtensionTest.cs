@@ -85,7 +85,7 @@ public class TrackbackSyndicationExtensionTest
         feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
-        TrackbackSyndicationExtension itemExtension = item.FindExtension<TrackbackSyndicationExtension>();
+        TrackbackSyndicationExtension? itemExtension = item.FindExtension<TrackbackSyndicationExtension>();
         itemExtension.ShouldNotBeNull();
         (item.FindExtension(TrackbackSyndicationExtension.MatchByType) as TrackbackSyndicationExtension)
             .ShouldBeOfType<TrackbackSyndicationExtension>();

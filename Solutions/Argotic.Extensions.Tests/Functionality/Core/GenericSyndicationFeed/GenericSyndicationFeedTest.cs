@@ -66,7 +66,7 @@ public class GenericSyndicationFeedTest
 
         AtomFeed? atomFeed = feed.Resource as AtomFeed;
         atomFeed.ShouldNotBeNull();
-        atomFeed.Title.Content.ShouldBe("Test Feed");
+        atomFeed.Title!.Content.ShouldBe("Test Feed");
     }
 
     [TestMethod]

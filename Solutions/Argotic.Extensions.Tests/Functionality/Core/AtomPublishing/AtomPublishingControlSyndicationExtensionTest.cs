@@ -161,7 +161,7 @@ public class AtomPublishingControlSyndicationExtensionTest
         context.ShouldNotBeNull();
         context.BaseUri.ShouldBe(new Uri("http://www.example.com/control.html"));
         context.IsDraft.ShouldBeTrue();
-        context.Language.Name.ShouldBe("en-US");
+        context.Language!.Name.ShouldBe("en-US");
     }
 
     private static AtomPublishingControlSyndicationExtension CreateExtension1()

@@ -66,6 +66,10 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// Gets or sets a value that credits the software that created this document.
     /// </summary>
     /// <value>A value that credits the software that created this document. The default value is an agent that describes this syndication framework.</value>
+    // Both null-forgiving operators in the default value are provable. Assembly.GetAssembly returns
+    // null only for a type with no backing assembly, which a typeof() of a type declared here cannot
+    // be, and AssemblyName.Version is always populated because the SDK emits an assembly version
+    // whether or not one is set explicitly.
     public string Generator
     {
         get;

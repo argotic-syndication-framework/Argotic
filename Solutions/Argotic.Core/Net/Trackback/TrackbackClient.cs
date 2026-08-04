@@ -187,6 +187,10 @@ public class TrackbackClient
     /// <value>Information such as the client application name, version, host operating system, and language. The default value is an agent that describes this syndication framework.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
+    // Both null-forgiving operators in the default value are provable. Assembly.GetAssembly returns
+    // null only for a type with no backing assembly, which a typeof() of a type declared here cannot
+    // be, and AssemblyName.Version is always populated because the SDK emits an assembly version
+    // whether or not one is set explicitly.
     public string UserAgent
     {
         get;

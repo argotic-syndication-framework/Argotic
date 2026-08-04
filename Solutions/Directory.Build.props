@@ -2,6 +2,11 @@
   <PropertyGroup>
     <TargetFramework>net10.0</TargetFramework>
     <Nullable>enable</Nullable>
+    <!-- Nullable warnings are errors. The solution is at zero of them, and the annotations are part
+         of the shipped public API - a CS86xx regression silently changes the contract consumers
+         compile against. Scoped to nullable rather than all warnings, which remains a separate
+         decision (see docs/build-warnings.md section 5). -->
+    <WarningsAsErrors>nullable</WarningsAsErrors>
     <ImplicitUsings>enable</ImplicitUsings>
     <LangVersion>14.0</LangVersion>
 

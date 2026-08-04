@@ -170,7 +170,7 @@ internal sealed class ExampleRunner
             await AnsiConsole.Status()
                 .Spinner(Spinner.Known.Dots)
                 .SpinnerStyle(Style.Parse("blue"))
-                .StartAsync($"Running {example.Name}...", async ctx =>
+                .StartAsync($"Running {example.Name}...", async _ =>
                 {
                     await example.RunAsync().ConfigureAwait(false);
                 }).ConfigureAwait(false);

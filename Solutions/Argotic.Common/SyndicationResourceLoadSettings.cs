@@ -10,11 +10,6 @@ namespace Argotic.Common;
 public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationResourceLoadSettings>, IEquatable<SyndicationResourceLoadSettings>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold a collection of types that represent the syndication extensions supported by the load operation.
-    /// </summary>
-    private List<Type>? supportedSyndicationExtensions;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadSettings"/> class.
     /// </summary>
     public SyndicationResourceLoadSettings()
@@ -79,7 +74,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     ///     If <see cref="AutoDetectExtensions"/> is <b>true</b>, this collection will be automatically filled during the load operation based on the XML namespaces declared on the syndication resource.
     ///     Automatic detection will <b>not</b> remove any syndication extensions already added to this collection prior to the load operation execution.
     /// </remarks>
-    public IList<Type> SupportedExtensions => supportedSyndicationExtensions ??= [];
+    public IList<Type> SupportedExtensions => field ??= [];
 
     /// <summary>
     /// Gets or sets a value that specifies the amount of time after which asynchronous load operations will time-out.

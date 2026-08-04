@@ -14,11 +14,6 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
 {
 
     /// <summary>
-    /// Private member to hold a collection of line numbers that are expanded.
-    /// </summary>
-    private List<int>? headExpansionState;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="OpmlHead"/> class.
     /// </summary>
     public OpmlHead()
@@ -63,14 +58,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     ///     The line numbers in the collection tell you which headlines to expand. The order is important. 
     ///     For each element in the collection, X, starting at the first summit, navigate flat down X times and expand. Repeat for each element in the collection.
     /// </remarks>
-    public IList<int> ExpansionState
-    {
-        get
-        {
-            headExpansionState ??= [];
-            return headExpansionState;
-        }
-    }
+    public IList<int> ExpansionState => field ??= [];
 
     /// <summary>
     /// Gets or sets a date-time indicating when this document was created.

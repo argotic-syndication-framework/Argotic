@@ -496,7 +496,7 @@ public static class SyndicationEncodingUtility
         ArgumentException.ThrowIfNullOrEmpty(name);
 
         // Fast path: check if any invalid characters exist
-        if (!name.AsSpan().ContainsAny(s_invalidDirectoryChars))
+        if (!name.ContainsAny(s_invalidDirectoryChars))
         {
             return name;
         }

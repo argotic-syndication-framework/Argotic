@@ -26,11 +26,6 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     private const string TYPE_PARAMETER_NAME = "type";
 
     /// <summary>
-    /// Private member to hold additional parameters applied to the media content.
-    /// </summary>
-    private Dictionary<string, string>? webContentMediaParameters;
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="WebContentType"/> class.
     /// </summary>
     public WebContentType()
@@ -211,14 +206,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// </remarks>
     /// <seealso cref="CharacterSet"/>
     /// <seealso cref="Discriminator"/>
-    public Dictionary<string, string> Parameters
-    {
-        get
-        {
-            webContentMediaParameters ??= new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
-            return webContentMediaParameters;
-        }
-    }
+    public Dictionary<string, string> Parameters => field ??= new(StringComparer.OrdinalIgnoreCase);
 
     /// <summary>
     /// Compares two specified <see cref="Dictionary{T, T}"/> collections.

@@ -703,18 +703,13 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (result == 0) result = -1;
         }
 
-        if (this.Resource is not null && other.Resource is not null)
+        if (result == 0) result = (this.Resource, other.Resource) switch
         {
-            if (result == 0) result = string.Compare(this.Resource.OuterXml, other.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
-        }
-        else if (this.Resource is not null && other.Resource is null)
-        {
-            if (result == 0) result = 1;
-        }
-        else if (this.Resource is null && other.Resource is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (XPathNavigator source, XPathNavigator target) => string.Compare(source.OuterXml, target.OuterXml, StringComparison.OrdinalIgnoreCase),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         return result;
     }

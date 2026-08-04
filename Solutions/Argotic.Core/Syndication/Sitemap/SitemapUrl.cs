@@ -150,7 +150,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
         get;
         set
         {
-            if (value.HasValue && (value.Value < 0.0m || value.Value > 1.0m))
+            if (value is < 0.0m or > 1.0m)
             {
                 throw new ArgumentOutOfRangeException(nameof(value), value, "Priority must be between 0.0 and 1.0.");
             }

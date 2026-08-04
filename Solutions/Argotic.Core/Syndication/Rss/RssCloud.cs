@@ -127,14 +127,9 @@ public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensible
     public RssCloudProtocol Protocol
     {
         get;
-        set
-        {
-            if (value == RssCloudProtocol.None)
-            {
-                throw new ArgumentException($"The specified cloud protocol of {value} is invalid.", nameof(value));
-            }
-            field = value;
-        }
+        set => field = value != RssCloudProtocol.None
+            ? value
+            : throw new ArgumentException($"The specified cloud protocol of {value} is invalid.", nameof(value));
     } = RssCloudProtocol.XmlRpc;
 
     /// <summary>

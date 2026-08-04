@@ -257,14 +257,14 @@ public class GenericSyndicationFeed
         feedResource = feed;
         feedFormat = SyndicationContentFormat.Atom;
 
-        if (feed.Title is not null && !string.IsNullOrEmpty(feed.Title.Content))
+        if (feed.Title?.Content is { Length: > 0 } title)
         {
-            feedTitle = feed.Title.Content;
+            feedTitle = title;
         }
 
-        if (feed.Subtitle is not null && !string.IsNullOrEmpty(feed.Subtitle.Content))
+        if (feed.Subtitle?.Content is { Length: > 0 } subtitle)
         {
-            feedDescription = feed.Subtitle.Content;
+            feedDescription = subtitle;
         }
 
         if (feed.UpdatedOn != DateTime.MinValue)

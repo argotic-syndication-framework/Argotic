@@ -188,9 +188,5 @@ public class CreativeCommonsSyndicationExtensionTest
         return nyc;
     }
 
-    public static CreativeCommonsSyndicationExtensionContext CreateContext1()
-    {
-        CreativeCommonsSyndicationExtensionContext nyc = new();
-        return nyc;
-    }
+    public static CreativeCommonsSyndicationExtensionContext CreateContext1() => new();
 }

@@ -151,17 +151,14 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        AtomFeed? atomFeed = resource as AtomFeed;
-        AtomEntry? atomEntry = resource as AtomEntry;
-
         if (resourceMetadata.Version == new Version("1.0"))
         {
             Atom10SyndicationResourceAdapter atom10Adapter = new(this.Navigator, this.Settings);
-            if (atomFeed is not null)
+            if (resource is AtomFeed atomFeed)
             {
                 atom10Adapter.Fill(atomFeed);
             }
-            else if (atomEntry is not null)
+            else if (resource is AtomEntry atomEntry)
             {
                 atom10Adapter.Fill(atomEntry);
             }
@@ -170,11 +167,11 @@ public class SyndicationResourceAdapter
         if (resourceMetadata.Version == new Version("0.3"))
         {
             Atom03SyndicationResourceAdapter atom03Adapter = new(this.Navigator, this.Settings);
-            if (atomFeed is not null)
+            if (resource is AtomFeed atomFeed)
             {
                 atom03Adapter.Fill(atomFeed);
             }
-            else if (atomEntry is not null)
+            else if (resource is AtomEntry atomEntry)
             {
                 atom03Adapter.Fill(atomEntry);
             }
@@ -193,12 +190,10 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        AtomCategoryDocument? categoryDocument = resource as AtomCategoryDocument;
-
         if (resourceMetadata.Version == new Version("1.0"))
         {
             AtomPublishing10SyndicationResourceAdapter atomPublishing10Adapter = new(this.Navigator, this.Settings);
-            if (categoryDocument is not null)
+            if (resource is AtomCategoryDocument categoryDocument)
             {
                 atomPublishing10Adapter.Fill(categoryDocument);
             }

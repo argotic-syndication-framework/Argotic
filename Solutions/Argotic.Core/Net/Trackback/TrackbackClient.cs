@@ -214,16 +214,13 @@ public class TrackbackClient
     {
         ArgumentNullException.ThrowIfNull(message);
 
-        if (this.Host is null)
-        {
-            throw new InvalidOperationException($"Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {message}");
-        }
+        Uri host = this.Host ?? throw new InvalidOperationException($"Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {message}");
 
         using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         timeoutCts.CancelAfter(this.Timeout);
 
         using HttpResponseMessage httpResponse = await SendRequestAsync(
-            this.Host, this.UserAgent, message, this.httpClient, timeoutCts.Token).ConfigureAwait(false);
+            host, this.UserAgent, message, this.httpClient, timeoutCts.Token).ConfigureAwait(false);
 
         return await TrackbackResponse.CreateAsync(httpResponse, timeoutCts.Token).ConfigureAwait(false);
     }

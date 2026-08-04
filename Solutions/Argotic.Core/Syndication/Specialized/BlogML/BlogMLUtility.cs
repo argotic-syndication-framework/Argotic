@@ -66,10 +66,9 @@ internal static class BlogMLUtility
         {
             if (fieldInfo.FieldType == typeof(BlogMLApprovalStatus))
             {
-                var status = (BlogMLApprovalStatus)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                var customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                var status = Enum.Parse<BlogMLApprovalStatus>(fieldInfo.Name);
 
-                if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
+                if (fieldInfo.GetCustomAttribute<EnumerationMetadataAttribute>(inherit: false) is { } enumerationMetadata)
                 {
                     map[enumerationMetadata.AlternateValue] = status;
                 }

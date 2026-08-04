@@ -9,8 +9,13 @@ namespace Argotic.Common;
 public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationResourceSaveSettings>, IEquatable<SyndicationResourceSaveSettings>, IComparisonOperators
 {
     /// <summary>
-    /// Private member to hold a collection of types that represent the syndication extensions supported by the save operation.
+    /// Private member to hold the syndication extensions supported during the save operation.
     /// </summary>
+    /// <remarks>
+    ///     Declared explicitly rather than using the C# 14 <c>field</c> keyword because
+    ///     <see cref="GetHashCode"/> reads it directly: hashing through the property would
+    ///     materialize an empty list for settings whose extensions were never touched.
+    /// </remarks>
     private List<Type>? supportedSyndicationExtensions;
 
     /// <summary>

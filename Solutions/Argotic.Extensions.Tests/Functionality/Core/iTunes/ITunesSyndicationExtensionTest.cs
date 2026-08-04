@@ -260,9 +260,5 @@ public class ITunesSyndicationExtensionTest
         return nyc;
     }
 
-    public static ITunesSyndicationExtensionContext CreateContext1()
-    {
-        ITunesSyndicationExtensionContext nyc = new();
-        return nyc;
-    }
+    public static ITunesSyndicationExtensionContext CreateContext1() => new();
 }

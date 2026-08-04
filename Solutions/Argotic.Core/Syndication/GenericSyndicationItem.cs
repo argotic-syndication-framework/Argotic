@@ -27,11 +27,6 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     private DateTime itemPublishedOn = DateTime.MinValue;
 
     /// <summary>
-    /// Private member to hold the collection of categories associated with the item.
-    /// </summary>
-    private List<GenericSyndicationCategory> itemCategories = [];
-
-    /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
     /// </summary>
     /// <param name="entry">The <see cref="AtomEntry"/> to build an abstraction against.</param>
@@ -59,7 +54,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// <value>
     ///     A <see cref="IList{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this item.
     /// </value>
-    public IList<GenericSyndicationCategory> Categories => itemCategories ??= [];
+    public IList<GenericSyndicationCategory> Categories => field ??= [];
 
     /// <summary>
     /// Gets a date-time indicating an instant in time associated with an event early in the life cycle of this item.
@@ -183,9 +178,9 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     {
         ArgumentNullException.ThrowIfNull(entry);
 
-        if (entry.Title is not null && !string.IsNullOrEmpty(entry.Title.Content))
+        if (entry.Title?.Content is { Length: > 0 } title)
         {
-            itemTitle = entry.Title.Content.Trim();
+            itemTitle = title.Trim();
         }
 
         if (entry.PublishedOn != DateTime.MinValue)
@@ -197,19 +192,19 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
             itemPublishedOn = entry.UpdatedOn;
         }
 
-        if (entry.Summary is not null && !string.IsNullOrEmpty(entry.Summary.Content))
+        if (entry.Summary?.Content is { Length: > 0 } summaryContent)
         {
-            itemSummary = entry.Summary.Content.Trim();
+            itemSummary = summaryContent.Trim();
         }
-        else if (entry.Content is not null && !string.IsNullOrEmpty(entry.Content.Content))
+        else if (entry.Content?.Content is { Length: > 0 } contentText)
         {
-            itemSummary = entry.Content.Content.Trim();
+            itemSummary = contentText.Trim();
         }
 
         foreach (AtomCategory category in entry.Categories)
         {
             GenericSyndicationCategory genericCategory = new(category);
-            itemCategories.Add(genericCategory);
+            this.Categories.Add(genericCategory);
         }
     }
 
@@ -239,7 +234,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
         foreach (RssCategory category in item.Categories)
         {
             GenericSyndicationCategory genericCategory = new(category);
-            itemCategories.Add(genericCategory);
+            this.Categories.Add(genericCategory);
         }
     }
 }

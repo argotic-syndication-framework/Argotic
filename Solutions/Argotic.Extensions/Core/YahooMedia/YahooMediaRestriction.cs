@@ -183,10 +183,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
 
         if (this.Entities.Count > 0)
         {
-            string[] entities = new string[this.Entities.Count];
-            this.Entities.CopyTo(entities, 0);
-
-            writer.WriteString(string.Join(" ", entities));
+            writer.WriteString(string.Join(" ", this.Entities));
         }
 
         writer.WriteEndElement();

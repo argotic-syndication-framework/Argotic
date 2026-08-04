@@ -261,15 +261,11 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
 
         if (this.ExpansionState.Count > 0)
         {
-            string[] values = new string[this.ExpansionState.Count];
-            int[] expansionStates = new int[this.ExpansionState.Count];
-            this.ExpansionState.CopyTo(expansionStates, 0);
-
-            for (int i = 0; i < expansionStates.Length; i++)
-            {
-                values[i] = expansionStates[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
-            }
-            writer.WriteElementString("expansionState", string.Join(",", values));
+            // The invariant formatting is kept deliberately: string.Join's IEnumerable<int> overload
+            // would format through the current culture, which changes the negative sign in some.
+            writer.WriteElementString(
+                "expansionState",
+                string.Join(",", this.ExpansionState.Select(state => state.ToString(System.Globalization.NumberFormatInfo.InvariantInfo))));
         }
 
         if (this.VerticalScrollState != int.MinValue)

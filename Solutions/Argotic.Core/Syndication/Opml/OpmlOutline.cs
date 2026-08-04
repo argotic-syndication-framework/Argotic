@@ -315,10 +315,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
 
         if (this.Categories.Count > 0)
         {
-            string[] categories = new string[this.Categories.Count];
-            this.Categories.CopyTo(categories, 0);
-
-            writer.WriteAttributeString("category", string.Join(",", categories));
+            writer.WriteAttributeString("category", string.Join(",", this.Categories));
         }
 
         if (this.Attributes.Count > 0)

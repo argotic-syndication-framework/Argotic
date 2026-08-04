@@ -76,10 +76,9 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
         {
             if (fieldInfo.FieldType == typeof(SyndicationContentFormat))
             {
-                SyndicationContentFormat format = (SyndicationContentFormat)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(MimeMediaTypeAttribute), false);
+                SyndicationContentFormat format = Enum.Parse<SyndicationContentFormat>(fieldInfo.Name);
 
-                if (customAttributes is { Length: > 0 } && customAttributes[0] is MimeMediaTypeAttribute mediaType)
+                if (fieldInfo.GetCustomAttribute<MimeMediaTypeAttribute>(inherit: false) is { } mediaType)
                 {
                     string contentType = $"{mediaType.Name}/{mediaType.SubName}";
                     // Note: Some formats may share the same content type (e.g., Sitemap and SitemapIndex both use application/xml).

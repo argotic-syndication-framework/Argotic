@@ -556,9 +556,6 @@ public static class SyndicationEncodingUtility
             }
         }
 
-        byte[] result = new byte[read];
-        Array.Copy(buffer, result, read);
-
-        return result;
+        return buffer[..read];
     }
 }

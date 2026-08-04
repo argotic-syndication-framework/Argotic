@@ -139,29 +139,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<FeedSynchronizationRelatedInformation> source, IList<FeedSynchronizationRelatedInformation> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Loads this <see cref="FeedSynchronizationSharingInformation"/> using the supplied <see cref="XPathNavigator"/>.

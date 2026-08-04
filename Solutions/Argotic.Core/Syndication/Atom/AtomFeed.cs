@@ -280,31 +280,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<AtomCategory> source, IList<AtomCategory> target)
-    {
-        int result = 0;
-
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                int comparison = source[i].CompareTo(target[i]);
-                if (comparison != 0) return comparison;
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{AtomLink}"/> collections.
@@ -326,31 +302,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<AtomLink> source, IList<AtomLink> target)
-    {
-        int result = 0;
-
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                int comparison = source[i].CompareTo(target[i]);
-                if (comparison != 0) return comparison;
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{AtomPersonConstruct}"/> collections.
@@ -372,31 +324,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<AtomPersonConstruct> source, IList<AtomPersonConstruct> target)
-    {
-        int result = 0;
-
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                int comparison = source[i].CompareTo(target[i]);
-                if (comparison != 0) return comparison;
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{AtomTextConstruct}"/> collections.
@@ -418,31 +346,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<AtomTextConstruct> source, IList<AtomTextConstruct> target)
-    {
-        int result = 0;
-
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                int comparison = source[i].CompareTo(target[i]);
-                if (comparison != 0) return comparison;
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Creates a new <see cref="AtomFeed"/> instance asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.

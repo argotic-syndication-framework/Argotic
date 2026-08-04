@@ -180,13 +180,12 @@ public class SiteSummarySlashSyndicationExtensionContext
 
         if (this.HitParade.Count > 0)
         {
-            string[] hitParade = new string[this.HitParade.Count];
-            for (int i = 0; i < this.HitParade.Count; i++)
-            {
-                hitParade[i] = this.HitParade[i].ToString(System.Globalization.NumberFormatInfo.InvariantInfo);
-            }
-
-            writer.WriteElementString("hit_parade", xmlNamespace, string.Join(",", hitParade));
+            // The invariant formatting is kept deliberately: string.Join's IEnumerable<int> overload
+            // would format through the current culture, which changes the negative sign in some.
+            writer.WriteElementString(
+                "hit_parade",
+                xmlNamespace,
+                string.Join(",", this.HitParade.Select(hit => hit.ToString(System.Globalization.NumberFormatInfo.InvariantInfo))));
         }
     }
 }

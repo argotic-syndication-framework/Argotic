@@ -193,10 +193,7 @@ public class ITunesSyndicationExtensionContext
 
         if (this.Keywords.Count > 0)
         {
-            string[] keywords = new string[this.Keywords.Count];
-            this.Keywords.CopyTo(keywords, 0);
-
-            writer.WriteElementString("keywords", xmlNamespace, string.Join(",", keywords));
+            writer.WriteElementString("keywords", xmlNamespace, string.Join(",", this.Keywords));
         }
 
         if (this.ExplicitMaterial != ITunesExplicitMaterial.None)

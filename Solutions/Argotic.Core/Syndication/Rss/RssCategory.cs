@@ -61,10 +61,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
         ArgumentNullException.ThrowIfNull(value);
         if (value.Count > 0)
         {
-            string[] hierarchy = new string[value.Count];
-            value.CopyTo(hierarchy, 0);
-
-            this.Value = string.Join("/", hierarchy);
+            this.Value = string.Join("/", value);
         }
     }
 

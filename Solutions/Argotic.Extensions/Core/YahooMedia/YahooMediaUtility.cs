@@ -55,29 +55,7 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<YahooMediaCategory> source, IList<YahooMediaCategory> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{YahooMediaContent}"/> collections.
@@ -99,29 +77,7 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<YahooMediaContent> source, IList<YahooMediaContent> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{YahooMediaCredit}"/> collections.
@@ -143,29 +99,7 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<YahooMediaCredit> source, IList<YahooMediaCredit> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{YahooMediaGroup}"/> collections.
@@ -187,29 +121,7 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<YahooMediaGroup> source, IList<YahooMediaGroup> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{YahooMediaHash}"/> collections.
@@ -231,29 +143,7 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<YahooMediaHash> source, IList<YahooMediaHash> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{YahooMediaRating}"/> collections.
@@ -275,29 +165,7 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<YahooMediaRating> source, IList<YahooMediaRating> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{YahooMediaRestriction}"/> collections.
@@ -319,29 +187,7 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<YahooMediaRestriction> source, IList<YahooMediaRestriction> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{YahooMediaText}"/> collections.
@@ -363,29 +209,7 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<YahooMediaText> source, IList<YahooMediaText> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Compares two specified <see cref="IList{YahooMediaThumbnail}"/> collections.
@@ -407,29 +231,7 @@ internal static class YahooMediaUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<YahooMediaThumbnail> source, IList<YahooMediaThumbnail> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Modifies the <see cref="IYahooMediaCommonObjectEntities"/> to match the data source.
@@ -482,10 +284,7 @@ internal static class YahooMediaUtility
 
         if (source.Keywords.Count > 0)
         {
-            string[] keywords = new string[source.Keywords.Count];
-            source.Keywords.CopyTo(keywords, 0);
-
-            writer.WriteElementString("keywords", extension.XmlNamespace, string.Join(",", keywords));
+            writer.WriteElementString("keywords", extension.XmlNamespace, string.Join(",", source.Keywords));
         }
 
         foreach (YahooMediaCategory category in source.Categories)

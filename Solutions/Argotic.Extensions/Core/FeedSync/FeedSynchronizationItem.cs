@@ -187,29 +187,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<FeedSynchronizationHistory> source, IList<FeedSynchronizationHistory> target)
-    {
-        int result = 0;
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(target);
-
-        if (source.Count == target.Count)
-        {
-            for (int i = 0; i < source.Count; i++)
-            {
-                if (result == 0) result = source[i].CompareTo(target[i]);
-            }
-        }
-        else if (source.Count > target.Count)
-        {
-            return 1;
-        }
-        else if (source.Count < target.Count)
-        {
-            return -1;
-        }
-
-        return result;
-    }
+        => ComparisonUtility.CompareSequence(source, target);
 
     /// <summary>
     /// Returns the conflict preservation identifier for the supplied <see cref="FeedSynchronizationConflictPreservationDirective"/>.

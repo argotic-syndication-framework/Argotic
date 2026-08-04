@@ -175,10 +175,9 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
             {
                 if (fieldInfo.FieldType == typeof(TEnum))
                 {
-                    TEnum enumValue = (TEnum)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
+                    TEnum enumValue = Enum.Parse<TEnum>(fieldInfo.Name);
 
-                    if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
+                    if (fieldInfo.GetCustomAttribute<EnumerationMetadataAttribute>(inherit: false) is { } enumerationMetadata)
                     {
                         mappings[enumValue] = enumerationMetadata.AlternateValue;
                     }
@@ -196,14 +195,11 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
             {
                 if (fieldInfo.FieldType == typeof(TEnum))
                 {
-                    object[] customAttributes = fieldInfo.GetCustomAttributes(typeof(EnumerationMetadataAttribute), false);
-
-                    if (customAttributes is { Length: > 0 } && customAttributes[0] is EnumerationMetadataAttribute enumerationMetadata)
+                    if (fieldInfo.GetCustomAttribute<EnumerationMetadataAttribute>(inherit: false) is { } enumerationMetadata)
                     {
                         if (!string.IsNullOrEmpty(enumerationMetadata.AlternateValue))
                         {
-                            TEnum enumValue = (TEnum)Enum.Parse(fieldInfo.FieldType, fieldInfo.Name);
-                            mappings[enumerationMetadata.AlternateValue] = enumValue;
+                            mappings[enumerationMetadata.AlternateValue] = Enum.Parse<TEnum>(fieldInfo.Name);
                         }
                     }
                 }

@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 using Argotic.Extensions;
 
 namespace Argotic.Examples.Extensions;
@@ -7,7 +8,17 @@ namespace Argotic.Examples.Extensions;
 /// <summary>
 /// Provides a simple example of a custom syndication extension.
 /// </summary>
-internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComparable
+/// <remarks>
+///     This example deliberately mirrors the comparison idiom used by every shipped extension:
+///     <see cref="IComparable{T}"/> and <see cref="IEquatable{T}"/> rather than the non-generic
+///     <see cref="IComparable"/>, and <see cref="IComparisonOperators"/> to inherit &lt;, &gt;,
+///     &lt;= and &gt;= from <see cref="ComparisonOperatorExtensions"/> instead of hand-writing them.
+/// </remarks>
+internal sealed class MyCustomSyndicationExtension
+    : SyndicationExtension,
+      IComparable<MyCustomSyndicationExtension>,
+      IEquatable<MyCustomSyndicationExtension>,
+      IComparisonOperators
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.
@@ -50,14 +61,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     {
         ArgumentNullException.ThrowIfNull(extension);
 
-        if (extension.GetType() == typeof(MyCustomSyndicationExtension))
-        {
-            return true;
-        }
-        else
-        {
-            return false;
-        }
+        return extension is MyCustomSyndicationExtension;
     }
 
     /// <summary>
@@ -153,34 +157,42 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <summary>
     /// Compares the current instance with another object of the same type.
     /// </summary>
-    /// <param name="obj">An object to compare with this instance.</param>
+    /// <param name="other">An object to compare with this instance.</param>
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
-    public int CompareTo(object? obj)
+    public int CompareTo(MyCustomSyndicationExtension? other)
     {
-        if (obj is null)
+        if (other is null)
         {
             return 1;
         }
-        if (obj is MyCustomSyndicationExtension value)
-        {
-            // Base class properties
-            int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);
-            if (result == 0) result = Uri.Compare(this.Documentation, value.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
-            if (result == 0) result = string.Compare(this.Name, value.Name, StringComparison.OrdinalIgnoreCase);
-            if (result == 0) result = this.Version!.CompareTo(value.Version);
-            if (result == 0) result = string.Compare(this.XmlNamespace, value.XmlNamespace, StringComparison.Ordinal);
-            if (result == 0) result = string.Compare(this.XmlPrefix, value.XmlPrefix, StringComparison.Ordinal);
 
-            // Custom extension properties
-            if (result == 0) result = string.Compare(this.MyAttribute, value.MyAttribute, StringComparison.OrdinalIgnoreCase);
+        // Base class properties
+        int result = string.Compare(this.Description, other.Description, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = Uri.Compare(this.Documentation, other.Documentation, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = string.Compare(this.Name, other.Name, StringComparison.OrdinalIgnoreCase);
+        if (result == 0) result = this.Version!.CompareTo(other.Version);
+        if (result == 0) result = string.Compare(this.XmlNamespace, other.XmlNamespace, StringComparison.Ordinal);
+        if (result == 0) result = string.Compare(this.XmlPrefix, other.XmlPrefix, StringComparison.Ordinal);
 
-            return result;
-        }
-        else
+        // Custom extension properties
+        if (result == 0) result = string.Compare(this.MyAttribute, other.MyAttribute, StringComparison.OrdinalIgnoreCase);
+
+        return result;
+    }
+
+    /// <summary>
+    /// Determines whether the specified <see cref="MyCustomSyndicationExtension"/> is equal to the current instance.
+    /// </summary>
+    /// <param name="other">The <see cref="MyCustomSyndicationExtension"/> to compare with the current instance.</param>
+    /// <returns><b>true</b> if the specified <see cref="MyCustomSyndicationExtension"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
+    public bool Equals(MyCustomSyndicationExtension? other)
+    {
+        if (other is null)
         {
-            throw new ArgumentException(string.Format(null, "obj is not of type {0}, type was found to be '{1}'.", this.GetType().FullName, obj.GetType().FullName), nameof(obj));
+            return false;
         }
+
+        return this.CompareTo(other) == 0;
     }
 
     /// <summary>
@@ -188,26 +200,25 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        if (obj is not MyCustomSyndicationExtension)
-        {
-            return false;
-        }
-
-        return this.CompareTo(obj) == 0;
-    }
+    public override bool Equals(object? obj) => obj is MyCustomSyndicationExtension other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        char[] charArray = this.ToString().ToCharArray();
-
-        return charArray.GetHashCode();
-    }
+    /// <remarks>
+    ///     The components are the members <see cref="CompareTo(MyCustomSyndicationExtension)"/> uses, passed through
+    ///     <see cref="HashCodeUtility.Component(string)"/> so that values comparing equal under
+    ///     <see cref="StringComparison.OrdinalIgnoreCase"/> hash equally.
+    /// </remarks>
+    public override int GetHashCode() => HashCode.Combine(
+        HashCodeUtility.Component(this.Description),
+        HashCodeUtility.Component(this.Documentation),
+        HashCodeUtility.Component(this.Name),
+        this.Version,
+        HashCodeUtility.Component(this.XmlNamespace),
+        HashCodeUtility.Component(this.XmlPrefix),
+        HashCodeUtility.Component(this.MyAttribute));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -229,51 +240,9 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
     public static bool operator !=(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second) => !(first == second);
 
-    /// <summary>
-    /// Determines if first operand is less than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
-    {
-        if (first is null) return second is not null;
-        return first.CompareTo(second) < 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
-    {
-        if (first is null) return false;
-        return first.CompareTo(second) > 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is less than or equal to second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
-    {
-        if (first is null) return true;
-        return first.CompareTo(second) <= 0;
-    }
-
-    /// <summary>
-    /// Determines if first operand is greater than or equal to second operand.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
-    {
-        if (first is null) return second is null;
-        return first.CompareTo(second) >= 0;
-    }
+    // <, >, <= and >= are not declared here. Implementing IComparisonOperators alongside
+    // IComparable<T> opts the type into the C# 14 extension operators in
+    // Argotic.Common.ComparisonOperatorExtensions, which is how every shipped type gets them.
+    // == and != must still be declared: predefined reference equality wins over an extension
+    // operator, so those two cannot be provided by the extension block.
 }

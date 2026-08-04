@@ -165,7 +165,7 @@ public class XmlRpcScalarValueTests
     [TestMethod]
     public void Constructor_WithBase64_SetsValue()
     {
-        byte[] bytes = new byte[] { 1, 2, 3, 4, 5 };
+        byte[] bytes = [1, 2, 3, 4, 5];
         XmlRpcScalarValue value = new(bytes);
 
         value.Value.ShouldBe(bytes);

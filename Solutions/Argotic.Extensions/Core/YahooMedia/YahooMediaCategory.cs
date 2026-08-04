@@ -50,7 +50,7 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -64,7 +64,7 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     /// <value>The human readable label for this category that can be displayed in end user applications.</value>
     public string Label
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

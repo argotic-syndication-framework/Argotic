@@ -77,7 +77,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Link
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -119,7 +119,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Name
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -133,7 +133,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <value>Human readable text that explains the features and settings for this application interface.</value>
     public string Notes
     {
-        get => field;
+        get;
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
 
@@ -149,7 +149,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <value>A custom web log identifier utilized by this application interface.</value>
     public string WeblogId
     {
-        get => field;
+        get;
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
 

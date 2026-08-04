@@ -85,7 +85,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -109,7 +109,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     /// <value>The version of the generating agent.</value>
     public string Version
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

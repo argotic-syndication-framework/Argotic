@@ -43,10 +43,13 @@ internal sealed class ExampleRunner
 
     private static ExampleCategory? ShowMainMenu()
     {
-        List<string> choices = ExampleRegistry.Categories
-            .Select(c => $"[blue]{c.Name}[/] - {c.Description}")
-            .Append(ExitChoice)
-            .ToList();
+        List<string> choices =
+        [
+            .. ExampleRegistry.Categories
+                        .Select(c => $"[blue]{c.Name}[/] - {c.Description}")
+,
+            ExitChoice,
+        ];
 
         string selection = AnsiConsole.Prompt(
             new SelectionPrompt<string>()
@@ -78,7 +81,7 @@ internal sealed class ExampleRunner
 
             // Build menu with class groupings
             List<string> choices = new() { BackChoice };
-            List<KeyValuePair<string, IReadOnlyList<ExampleInfo>>> orderedClasses = examplesByClass.OrderBy(kvp => kvp.Key).ToList();
+            List<KeyValuePair<string, IReadOnlyList<ExampleInfo>>> orderedClasses = [.. examplesByClass.OrderBy(kvp => kvp.Key)];
 
             foreach ((string classNameItem, IReadOnlyList<ExampleInfo> examplesItem) in orderedClasses)
             {

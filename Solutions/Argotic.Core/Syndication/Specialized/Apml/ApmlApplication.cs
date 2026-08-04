@@ -61,7 +61,7 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
     /// </remarks>
     public string Data
     {
-        get => field;
+        get;
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
 
@@ -73,7 +73,7 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Name
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);

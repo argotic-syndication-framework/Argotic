@@ -38,7 +38,7 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
     /// <value>The email address of this owner.</value>
     public string EmailAddress
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -48,7 +48,7 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
     /// <value>The name of this owner.</value>
     public string Name
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

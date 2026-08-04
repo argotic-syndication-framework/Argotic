@@ -61,7 +61,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// </remarks>
     public string By
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -76,7 +76,7 @@ public class FeedSynchronizationHistory : IComparable<FeedSynchronizationHistory
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <b>1</b>.</exception>
     public int Sequence
     {
-        get => field;
+        get;
         set
         {
             ArgumentOutOfRangeException.ThrowIfLessThan(value, 1);

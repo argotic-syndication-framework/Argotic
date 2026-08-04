@@ -116,7 +116,7 @@ public class SyndicationRequestOptionsTests
         options.ApplyTo(request);
 
         // Should keep the existing value, not overwrite
-        List<string> values = request.Headers.GetValues("X-Custom-Header").ToList();
+        List<string> values = [.. request.Headers.GetValues("X-Custom-Header")];
         values.ShouldContain("existing-value");
         values.ShouldNotContain("new-value");
     }

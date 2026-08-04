@@ -72,7 +72,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Name
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);

@@ -83,7 +83,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     /// </remarks>
     public string Content
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

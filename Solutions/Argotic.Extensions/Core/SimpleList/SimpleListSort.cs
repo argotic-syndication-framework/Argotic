@@ -65,7 +65,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// </remarks>
     public string Element
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -91,7 +91,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// </remarks>
     public string Label
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

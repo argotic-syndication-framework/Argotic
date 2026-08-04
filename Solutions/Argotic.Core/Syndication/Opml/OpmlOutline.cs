@@ -82,7 +82,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// <value>A value indicating how this outline's attributes should be interpreted.</value>
     public string ContentType
     {
-        get => field;
+        get;
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
@@ -152,7 +152,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Text
     {
-        get => field;
+        get;
 
         set
         {

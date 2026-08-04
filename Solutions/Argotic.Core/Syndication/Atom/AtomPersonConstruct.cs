@@ -82,7 +82,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// </remarks>
     public string EmailAddress
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -97,7 +97,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Name
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);

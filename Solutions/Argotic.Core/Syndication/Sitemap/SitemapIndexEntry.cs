@@ -64,7 +64,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Location
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);

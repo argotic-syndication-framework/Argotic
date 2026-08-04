@@ -94,7 +94,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <value>The title of this document.</value>
     public string Title
     {
-        get => field;
+        get;
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;

@@ -76,7 +76,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Location
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -147,7 +147,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than 0.0 or greater than 1.0.</exception>
     public decimal? Priority
     {
-        get => field;
+        get;
         set
         {
             if (value.HasValue && (value.Value < 0.0m || value.Value > 1.0m))

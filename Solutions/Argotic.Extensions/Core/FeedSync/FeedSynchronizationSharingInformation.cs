@@ -89,7 +89,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// </remarks>
     public string Since
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -115,7 +115,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
     /// </remarks>
     public string Until
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

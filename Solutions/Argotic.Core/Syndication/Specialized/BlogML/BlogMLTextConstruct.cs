@@ -66,7 +66,7 @@ public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<
     /// <value>The content of this text.</value>
     public string Content
     {
-        get => field;
+        get;
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;

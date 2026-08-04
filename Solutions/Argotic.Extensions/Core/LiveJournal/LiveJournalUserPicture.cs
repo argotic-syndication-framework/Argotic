@@ -51,7 +51,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <b>100</b>.</exception>
     public int Height
     {
-        get => field;
+        get;
         set
         {
             ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 100);
@@ -68,7 +68,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Keyword
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -83,7 +83,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Url
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -101,7 +101,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <b>100</b>.</exception>
     public int Width
     {
-        get => field;
+        get;
         set
         {
             ArgumentOutOfRangeException.ThrowIfGreaterThan(value, 100);

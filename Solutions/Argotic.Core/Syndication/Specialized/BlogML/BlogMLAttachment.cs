@@ -48,7 +48,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// </remarks>
     public string Content
     {
-        get => field;
+        get;
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
@@ -73,7 +73,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string MimeType
     {
-        get => field;
+        get;
 
         set
         {

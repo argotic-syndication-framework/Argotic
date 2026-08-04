@@ -97,7 +97,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// <value>A string that identifies the taxonomy in which the category is placed. The default value is an empty string.</value>
     public string Domain
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -110,7 +110,7 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     /// </remarks>
     public string Value
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

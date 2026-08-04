@@ -61,7 +61,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Link
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -90,7 +90,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <exception cref="ArgumentException">The <paramref name="value"/> is equal to <see cref="FeedSynchronizationRelatedInformationType.None"/>.</exception>
     public FeedSynchronizationRelatedInformationType RelationType
     {
-        get => field;
+        get;
         set
         {
             if (value == FeedSynchronizationRelatedInformationType.None)
@@ -107,7 +107,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     /// <value>The name or description of this related feed.</value>
     public string Title
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

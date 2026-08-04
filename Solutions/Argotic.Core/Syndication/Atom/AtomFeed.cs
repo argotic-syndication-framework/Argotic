@@ -182,7 +182,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomId? Id
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -237,7 +237,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomTextConstruct? Title
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);

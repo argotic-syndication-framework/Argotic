@@ -59,7 +59,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <value>The email address of the owner of this document.</value>
     public string EmailAddress
     {
-        get => field;
+        get;
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
@@ -82,7 +82,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <value>The name of the owner of this document.</value>
     public string Name
     {
-        get => field;
+        get;
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;

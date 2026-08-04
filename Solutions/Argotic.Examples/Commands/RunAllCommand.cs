@@ -31,7 +31,7 @@ internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
         ExampleRegistry.Initialize();
 
         List<ExampleResult> results = new();
-        List<ExampleCategory> categories = ExampleRegistry.Categories.ToList();
+        List<ExampleCategory> categories = [.. ExampleRegistry.Categories];
 
         if (!string.IsNullOrEmpty(settings.Category))
         {

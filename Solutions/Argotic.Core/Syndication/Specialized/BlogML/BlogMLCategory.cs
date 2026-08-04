@@ -53,7 +53,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// <value>An identification string for this web log entity. The default value is an <b>empty</b> string, which indicated that no identifier was specified.</value>
     public string Id
     {
-        get => field;
+        get;
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
@@ -104,7 +104,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// <value>The description of this category.</value>
     public string Description
     {
-        get => field;
+        get;
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
@@ -115,7 +115,7 @@ public class BlogMLCategory : IBlogMLCommonObject, IComparable<BlogMLCategory>, 
     /// <value>A unique identifier that references the parent category that this category is a child of.</value>
     public string ParentId
     {
-        get => field;
+        get;
 
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;

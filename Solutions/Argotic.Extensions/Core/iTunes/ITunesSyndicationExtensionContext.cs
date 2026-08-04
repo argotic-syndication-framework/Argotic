@@ -23,7 +23,7 @@ public class ITunesSyndicationExtensionContext
     /// <value>The name of the artist of this podcast.</value>
     public string Author
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -100,7 +100,7 @@ public class ITunesSyndicationExtensionContext
     /// </remarks>
     public string Subtitle
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -110,7 +110,7 @@ public class ITunesSyndicationExtensionContext
     /// <value>The full description of this podcast.</value>
     public string Summary
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

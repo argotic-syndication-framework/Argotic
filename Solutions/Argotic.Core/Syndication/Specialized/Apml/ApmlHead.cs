@@ -58,7 +58,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// <value>The email address of the owner of this document.</value>
     public string EmailAddress
     {
-        get => field;
+        get;
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
 
@@ -68,7 +68,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// <value>A value that credits the software that created this document. The default value is an agent that describes this syndication framework.</value>
     public string Generator
     {
-        get => field;
+        get;
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(ApmlHead))!.GetName().Version!.ToString(4)}, https://github.com/argotic-syndication-framework/argotic/";
 
@@ -78,7 +78,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// <value>The title of this document.</value>
     public string Title
     {
-        get => field;
+        get;
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
 

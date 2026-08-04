@@ -87,7 +87,7 @@ public class AtomLogo : IAtomCommonObjectAttributes, IComparable<AtomLogo>, IEqu
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Uri
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);

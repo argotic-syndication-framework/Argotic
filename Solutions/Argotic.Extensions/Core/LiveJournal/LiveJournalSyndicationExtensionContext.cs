@@ -40,7 +40,7 @@ public class LiveJournalSyndicationExtensionContext
     /// </remarks>
     public string Music
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

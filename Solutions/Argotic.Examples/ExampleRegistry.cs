@@ -62,17 +62,14 @@ internal static class ExampleRegistry
         // Example classes are declared `internal static`, so IsPublic excludes every one of them.
         // Filter on top-level instead, which keeps the "not a nested helper" intent and also skips
         // compiler-generated types.
-        List<Type> exampleTypes = assembly.GetTypes()
-            .Where(t => t.IsClass && !t.IsNested && t.Name.EndsWith("Example", StringComparison.Ordinal))
-            .ToList();
+        List<Type> exampleTypes = [.. assembly.GetTypes().Where(t => t.IsClass && !t.IsNested && t.Name.EndsWith("Example", StringComparison.Ordinal))];
 
         foreach (Type type in exampleTypes)
         {
             string category = DetermineCategory(type);
-            List<MethodInfo> methods = type.GetMethods(BindingFlags.Public | BindingFlags.Static)
+            List<MethodInfo> methods = [.. type.GetMethods(BindingFlags.Public | BindingFlags.Static)
                 .Where(m => m.Name.EndsWith("Example", StringComparison.Ordinal) ||
-                           m.Name.EndsWith("ExampleAsync", StringComparison.Ordinal))
-                .ToList();
+                           m.Name.EndsWith("ExampleAsync", StringComparison.Ordinal))];
 
             if (methods.Count > 0)
             {
@@ -163,7 +160,7 @@ internal static class ExampleRegistry
             .GroupBy(m => m.Type)
             .ToDictionary(
                 g => FormatClassName(g.Key),
-                g => (IReadOnlyList<ExampleInfo>)g.Select(m =>
+                g => (IReadOnlyList<ExampleInfo>)[.. g.Select(m =>
                 {
                     bool isAsync = m.Method.ReturnType == typeof(Task) ||
                                    (m.Method.ReturnType.IsGenericType && m.Method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>));
@@ -173,7 +170,7 @@ internal static class ExampleRegistry
                         m.Method.Name,
                         isAsync,
                         () => ExecuteMethodAsync(m.Method));
-                }).OrderBy(e => e.Name).ToList());
+                }).OrderBy(e => e.Name)]);
 
         return grouped;
     }

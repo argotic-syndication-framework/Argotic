@@ -115,7 +115,7 @@ public static class SitemapUtility
 
         if (decimal.TryParse(value, NumberStyles.Float, CultureInfo.InvariantCulture, out decimal parsedValue))
         {
-            if (parsedValue >= 0.0m && parsedValue <= 1.0m)
+            if (parsedValue is >= 0.0m and <= 1.0m)
             {
                 result = parsedValue;
                 return true;

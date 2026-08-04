@@ -42,7 +42,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// </remarks>
     public string Element
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -58,7 +58,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// </remarks>
     public string Label
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

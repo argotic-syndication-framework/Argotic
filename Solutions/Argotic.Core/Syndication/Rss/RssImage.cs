@@ -112,7 +112,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// </remarks>
     public string Description
     {
-        get => field;
+        get;
         set => field = string.IsNullOrEmpty(value) ? string.Empty : value.Trim();
     } = string.Empty;
 
@@ -126,7 +126,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <i>400</i>.</exception>
     public int Height
     {
-        get => field;
+        get;
         set
         {
             ArgumentOutOfRangeException.ThrowIfGreaterThan(value, MAX_HEIGHT);
@@ -144,7 +144,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Link
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -164,7 +164,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Title
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -182,7 +182,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Url
     {
-        get => field;
+        get;
         set
         {
             ArgumentNullException.ThrowIfNull(value);
@@ -200,7 +200,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is greater than <i>144</i>.</exception>
     public int Width
     {
-        get => field;
+        get;
         set
         {
             ArgumentOutOfRangeException.ThrowIfGreaterThan(value, MAX_WIDTH);

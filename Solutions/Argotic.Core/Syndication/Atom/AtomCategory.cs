@@ -87,7 +87,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// </remarks>
     public string Label
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -109,7 +109,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Term
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);

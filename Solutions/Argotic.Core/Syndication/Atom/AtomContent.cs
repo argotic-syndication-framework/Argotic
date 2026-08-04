@@ -166,7 +166,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// </remarks>
     public string Content
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -226,7 +226,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     /// </remarks>
     public string ContentType
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

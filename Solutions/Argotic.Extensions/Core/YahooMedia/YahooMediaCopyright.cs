@@ -39,7 +39,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// <value>The human-readable copyright information.</value>
     public string Text
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

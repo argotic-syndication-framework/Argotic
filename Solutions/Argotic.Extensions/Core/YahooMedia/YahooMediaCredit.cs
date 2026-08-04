@@ -59,7 +59,7 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Entity
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);
@@ -77,7 +77,7 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
     /// </remarks>
     public string Role
     {
-        get => field;
+        get;
         set => field = value?.ToLowerInvariant().Trim() ?? string.Empty;
     } = string.Empty;
 

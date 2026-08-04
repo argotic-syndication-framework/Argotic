@@ -58,7 +58,7 @@ public class YahooMediaTextConstruct : IComparable<YahooMediaTextConstruct>, IEq
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get => field;
+        get;
         set
         {
             ArgumentException.ThrowIfNullOrEmpty(value);

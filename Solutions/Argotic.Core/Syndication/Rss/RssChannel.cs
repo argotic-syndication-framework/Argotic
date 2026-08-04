@@ -152,7 +152,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     public string Copyright
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -187,7 +187,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <value>A value that credits the software that created this feed. The default value is an agent that describes this syndication framework.</value>
     public string Generator
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(RssChannel))?.GetName().Version?.ToString(4) ?? "unknown"}, https://github.com/argotic-syndication-framework/argotic/";
 
@@ -263,7 +263,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     public string ManagingEditor
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -295,7 +295,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     public string Rating
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 
@@ -394,7 +394,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     public string Webmaster
     {
-        get => field;
+        get;
         set => field = value?.Trim() ?? string.Empty;
     } = string.Empty;
 

@@ -104,7 +104,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
         string extension = this.Extension?.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? string.Empty;
         string data = this.Data?.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? string.Empty;
 
-        return $"[SyndicationExtensionLoadedEventArgs(Name = \"{name}\", Prefix = \"{prefix}\", Namespace = \"{xmlNamespace}\", Extension = \"{extension}\", Data = \"{data}\")]";
+        return $"""[SyndicationExtensionLoadedEventArgs(Name = "{name}", Prefix = "{prefix}", Namespace = "{xmlNamespace}", Extension = "{extension}", Data = "{data}")]""";
     }
 
     /// <summary>

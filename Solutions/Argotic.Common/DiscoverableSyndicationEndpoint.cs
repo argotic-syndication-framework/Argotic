@@ -173,7 +173,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <remarks>
     ///     This method returns the XHTML representation for the current instance.
     /// </remarks>
-    public override string ToString() => $"<link rel=\"alternate\" type=\"{this.ContentType}\" title=\"{this.Title}\" href=\"{this.Source?.ToString() ?? string.Empty}\" />";
+    public override string ToString() => $"""<link rel="alternate" type="{this.ContentType}" title="{this.Title}" href="{this.Source?.ToString() ?? string.Empty}" />""";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.

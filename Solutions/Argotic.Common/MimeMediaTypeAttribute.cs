@@ -59,7 +59,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>
-    public override string ToString() => $"[MimeMediaType(Name = \"{this.Name}\", SubName = \"{this.SubName}\", Documentation = \"{this.Documentation ?? string.Empty}\")]";
+    public override string ToString() => $"""[MimeMediaType(Name = "{this.Name}", SubName = "{this.SubName}", Documentation = "{this.Documentation ?? string.Empty}")]""";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.

@@ -117,7 +117,7 @@ internal static class ExampleRegistry
             examples.Add(new ExampleInfo(name, description, method.Name, isAsync, runAsync));
         }
 
-        return examples.OrderBy(e => e.Name).ToList();
+        return [.. examples.OrderBy(e => e.Name)];
     }
 
     /// <summary>

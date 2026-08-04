@@ -44,7 +44,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>
-    public override string ToString() => $"[EnumerationMetadata(DisplayName = \"{this.DisplayName}\", AlternateValue=\"{this.AlternateValue}\")]";
+    public override string ToString() => $"""[EnumerationMetadata(DisplayName = "{this.DisplayName}", AlternateValue="{this.AlternateValue}")]""";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.

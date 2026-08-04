@@ -174,7 +174,7 @@ public static class SyndicationDiscoveryUtility
     private static Dictionary<string, string> ExtractHtmlAttributes(string content)
     {
         Dictionary<string, string> attributes = new(StringComparer.OrdinalIgnoreCase);
-        Regex attributePattern = new("([a-zA-Z]+)=[\"']([^\"']+)[\"']|([a-zA-Z]+)=([^\"'>\r\n\t ]+)", RegexOptions.IgnoreCase);
+        Regex attributePattern = new("""([a-zA-Z]+)=["']([^"']+)["']|([a-zA-Z]+)=([^"'>\r\n\t ]+)""", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 

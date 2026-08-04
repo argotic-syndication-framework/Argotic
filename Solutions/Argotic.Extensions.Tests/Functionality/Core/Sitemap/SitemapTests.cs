@@ -124,8 +124,8 @@ public class SitemapTests
         XPathNodeIterator changefreqs = navigator.Select("//sm:url/sm:changefreq", manager);
 
         // Assert
-        var expectedValues = new[] { "always", "hourly", "daily", "weekly", "monthly", "yearly", "never" };
-        var actualValues = new List<string>();
+        string[] expectedValues = ["always", "hourly", "daily", "weekly", "monthly", "yearly", "never"];
+        List<string> actualValues = [];
 
         while (changefreqs.MoveNext())
         {
@@ -174,7 +174,7 @@ public class SitemapTests
 
         // Act
         XPathNodeIterator priorities = navigator.Select("//sm:url/sm:priority", manager);
-        var priorityValues = new List<decimal>();
+        List<decimal> priorityValues = [];
 
         while (priorities.MoveNext())
         {
@@ -207,7 +207,7 @@ public class SitemapTests
     public void ParsePriority_OutOfRange_ReturnsFalse()
     {
         // Arrange
-        var invalidValues = new[] { "1.1", "2.0", "-0.1", "-1.0", "100" };
+        string[] invalidValues = ["1.1", "2.0", "-0.1", "-1.0", "100"];
 
         foreach (var value in invalidValues)
         {
@@ -235,7 +235,7 @@ public class SitemapTests
 
         // Act
         XPathNodeIterator lastmods = navigator.Select("//sm:url/sm:lastmod", manager);
-        var dates = new List<string>();
+        List<string> dates = [];
 
         while (lastmods.MoveNext())
         {
@@ -408,7 +408,7 @@ public class SitemapTests
 
         // Act
         XPathNodeIterator lastmods = navigator.Select("//sm:sitemap/sm:lastmod", manager);
-        var dates = new List<string>();
+        List<string> dates = [];
 
         while (lastmods.MoveNext())
         {
@@ -588,7 +588,7 @@ public class SitemapTests
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(originalNav.NameTable);
 
         // Collect original data
-        var originalUrls = new List<(string loc, string? lastmod, string? changefreq, string? priority)>();
+        List<(string loc, string? lastmod, string? changefreq, string? priority)> originalUrls = [];
         XPathNodeIterator urlIterator = originalNav.Select("//sm:url", manager);
 
         while (urlIterator.MoveNext())
@@ -637,7 +637,7 @@ public class SitemapTests
         XPathNavigator newNav = newDoc.CreateNavigator();
         XmlNamespaceManager newManager = SitemapUtility.CreateNamespaceManager(newNav.NameTable);
 
-        var newUrls = new List<(string loc, string? lastmod, string? changefreq, string? priority)>();
+        List<(string loc, string? lastmod, string? changefreq, string? priority)> newUrls = [];
         XPathNodeIterator newUrlIterator = newNav.Select("//sm:url", newManager);
 
         while (newUrlIterator.MoveNext())

@@ -213,7 +213,7 @@ public class AtomPublishingBehaviorTests
             Uri = new Uri("http://example.com/posts"),
             Title = new AtomTextConstruct("Posts")
         };
-        var collections = new List<AtomMemberResources> { collection };
+        List<AtomMemberResources> collections = [collection];
 
         // Act
         var workspace = new AtomWorkspace(title, collections);
@@ -330,7 +330,7 @@ public class AtomPublishingBehaviorTests
     {
         // Arrange
         var workspace = new AtomWorkspace(new AtomTextConstruct("Main"));
-        var workspaces = new List<AtomWorkspace> { workspace };
+        List<AtomWorkspace> workspaces = [workspace];
 
         // Act
         var doc = new AtomServiceDocument(workspaces);
@@ -344,7 +344,7 @@ public class AtomPublishingBehaviorTests
     public void AtomServiceDocument_Constructor_WithEmptyWorkspaces_ThrowsException()
     {
         // Arrange
-        var workspaces = new List<AtomWorkspace>();
+        List<AtomWorkspace> workspaces = [];
 
         // Act & Assert
         Should.Throw<ArgumentOutOfRangeException>(() => new AtomServiceDocument(workspaces));

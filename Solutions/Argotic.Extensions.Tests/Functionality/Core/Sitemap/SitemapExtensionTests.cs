@@ -81,7 +81,7 @@ public class SitemapExtensionTests
 
         // Act
         XPathNodeIterator imageLocs = navigator.Select("//image:image/image:loc", manager);
-        var locations = new List<string>();
+        List<string> locations = [];
 
         while (imageLocs.MoveNext())
         {
@@ -127,7 +127,7 @@ public class SitemapExtensionTests
 
         // Act
         XPathNodeIterator imageNodes = navigator.Select("//image:image", manager);
-        var images = new List<SitemapImage>();
+        List<SitemapImage> images = [];
 
         while (imageNodes.MoveNext())
         {
@@ -414,7 +414,7 @@ public class SitemapExtensionTests
     public void NewsExtension_LanguageCode_ValidFormats()
     {
         // Valid language codes: 2-letter ISO 639-1, or "zh-cn", "zh-tw"
-        var validLanguageCodes = new[] { "en", "de", "fr", "es", "zh-cn", "zh-tw" };
+        string[] validLanguageCodes = ["en", "de", "fr", "es", "zh-cn", "zh-tw"];
 
         foreach (var code in validLanguageCodes)
         {
@@ -471,7 +471,7 @@ public class SitemapExtensionTests
 
         // Act
         XPathNodeIterator links = navigator.Select("//xhtml:link", manager);
-        var hreflangValues = new List<string>();
+        List<string> hreflangValues = [];
 
         while (links.MoveNext())
         {
@@ -501,7 +501,7 @@ public class SitemapExtensionTests
 
         // Act
         XPathNodeIterator links = navigator.Select("//xhtml:link", manager);
-        var hrefValues = new List<string>();
+        List<string> hrefValues = [];
 
         while (links.MoveNext())
         {

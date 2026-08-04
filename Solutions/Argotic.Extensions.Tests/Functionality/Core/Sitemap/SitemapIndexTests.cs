@@ -93,7 +93,7 @@ public class SitemapIndexTests
 
         // Act
         XPathNodeIterator locs = navigator.Select("//sm:sitemap/sm:loc", manager);
-        var locations = new List<string>();
+        List<string> locations = [];
 
         while (locs.MoveNext())
         {
@@ -117,7 +117,7 @@ public class SitemapIndexTests
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
         // Act
-        var sitemapData = new List<(string loc, string? lastmod)>();
+        List<(string loc, string? lastmod)> sitemapData = [];
         XPathNodeIterator sitemaps = navigator.Select("//sm:sitemap", manager);
 
         while (sitemaps.MoveNext())
@@ -350,7 +350,7 @@ public class SitemapIndexTests
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(originalNav.NameTable);
 
         // Collect original data
-        var originalSitemaps = new List<(string loc, string? lastmod)>();
+        List<(string loc, string? lastmod)> originalSitemaps = [];
         XPathNodeIterator sitemapIterator = originalNav.Select("//sm:sitemap", manager);
 
         while (sitemapIterator.MoveNext())
@@ -393,7 +393,7 @@ public class SitemapIndexTests
         XPathNavigator newNav = newDoc.CreateNavigator();
         XmlNamespaceManager newManager = SitemapUtility.CreateNamespaceManager(newNav.NameTable);
 
-        var newSitemaps = new List<(string loc, string? lastmod)>();
+        List<(string loc, string? lastmod)> newSitemaps = [];
         XPathNodeIterator newSitemapIterator = newNav.Select("//sm:sitemap", newManager);
 
         while (newSitemapIterator.MoveNext())
@@ -491,7 +491,7 @@ public class SitemapIndexTests
 
         // Act
         XPathNodeIterator locs = navigator.Select("//sm:sitemap/sm:loc", manager);
-        var locations = new List<string>();
+        List<string> locations = [];
         while (locs.MoveNext())
         {
             locations.Add(locs.Current!.Value);

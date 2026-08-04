@@ -110,7 +110,18 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new(RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd", manager), this.Settings);
+        XPathNavigator? extensionRoot = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd", manager);
+
+        if (extensionRoot == null)
+
+        {
+
+            return;
+
+        }
+
+
+        SyndicationExtensionAdapter adapter = new(extensionRoot, this.Settings);
         adapter.Fill(resource, manager);
     }
 }

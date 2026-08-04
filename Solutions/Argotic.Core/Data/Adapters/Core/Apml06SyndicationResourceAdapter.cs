@@ -110,7 +110,18 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter adapter = new(this.Navigator.SelectSingleNode("apml:APML", manager), this.Settings);
+        XPathNavigator? extensionRoot = this.Navigator.SelectSingleNode("apml:APML", manager);
+
+        if (extensionRoot == null)
+
+        {
+
+            return;
+
+        }
+
+
+        SyndicationExtensionAdapter adapter = new(extensionRoot, this.Settings);
         adapter.Fill(resource, manager);
     }
 }

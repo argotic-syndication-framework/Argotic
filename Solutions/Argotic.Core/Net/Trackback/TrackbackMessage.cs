@@ -204,7 +204,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
 
         if (source.Count > 0)
         {
-            foreach (string parameterName in source.AllKeys)
+            foreach (string? parameterName in source.AllKeys)
             {
                 if (string.Equals(parameterName, "url", StringComparison.OrdinalIgnoreCase))
                 {

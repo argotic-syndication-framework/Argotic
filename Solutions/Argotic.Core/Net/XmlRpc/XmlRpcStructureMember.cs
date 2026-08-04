@@ -109,7 +109,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
 
             if (valueNavigator != null)
             {
-                if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue value))
+                if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue? value))
                 {
                     this.Value = value;
                     wasLoaded = true;

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Xml;
@@ -251,7 +252,7 @@ public class XmlRpcClient
     /// <remarks>
     ///     The <paramref name="source"/> is expected to represent an XML-RPC <b>value</b> node.
     /// </remarks>
-    public static bool TryParseValue(XPathNavigator source, out IXmlRpcValue value)
+    public static bool TryParseValue(XPathNavigator source, [NotNullWhen(true)] out IXmlRpcValue? value)
     {
         if (source == null || !string.Equals(source.Name, "value", StringComparison.OrdinalIgnoreCase))
         {

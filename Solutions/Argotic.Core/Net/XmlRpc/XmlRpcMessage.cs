@@ -203,7 +203,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
                             continue;
                         }
 
-                        if (XmlRpcClient.TryParseValue(valueNode, out IXmlRpcValue value))
+                        if (XmlRpcClient.TryParseValue(valueNode, out IXmlRpcValue? value))
                         {
                             this.Parameters.Add(value);
                             wasLoaded = true;

@@ -22,7 +22,7 @@ public interface ISyndicationExtension
     /// Gets a <see cref="Uri"/> that points to documentation for the syndication extension.
     /// </summary>
     /// <value>A <see cref="Uri"/> that points to the documentation or implementation details for the syndication extension.</value>
-    Uri Documentation
+    Uri? Documentation
     {
         get;
     }
@@ -40,7 +40,7 @@ public interface ISyndicationExtension
     /// Gets the <see cref="Version"/> of the specification that the syndication extension conforms to.
     /// </summary>
     /// <value>The <see cref="Version"/> of the specification that the syndication extension conforms to.</value>
-    Version Version
+    Version? Version
     {
         get;
     }

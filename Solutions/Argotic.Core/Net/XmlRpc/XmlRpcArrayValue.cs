@@ -39,7 +39,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
                     continue;
                 }
 
-                if (XmlRpcClient.TryParseValue(iteratorNode, out IXmlRpcValue value))
+                if (XmlRpcClient.TryParseValue(iteratorNode, out IXmlRpcValue? value))
                 {
                     this.Values.Add(value);
                 }
@@ -87,7 +87,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
                             continue;
                         }
 
-                        if (XmlRpcClient.TryParseValue(valueNode, out IXmlRpcValue value))
+                        if (XmlRpcClient.TryParseValue(valueNode, out IXmlRpcValue? value))
                         {
                             this.Values.Add(value);
                             wasLoaded = true;

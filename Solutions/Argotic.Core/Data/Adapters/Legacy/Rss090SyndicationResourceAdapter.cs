@@ -109,7 +109,18 @@ public class Rss090SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        SyndicationExtensionAdapter feedExtensionAdapter = new(this.Navigator.SelectSingleNode("rdf:RDF", manager), this.Settings);
+        XPathNavigator? extensionRoot = this.Navigator.SelectSingleNode("rdf:RDF", manager);
+
+        if (extensionRoot == null)
+
+        {
+
+            return;
+
+        }
+
+
+        SyndicationExtensionAdapter feedExtensionAdapter = new(extensionRoot, this.Settings);
         feedExtensionAdapter.Fill(resource, manager);
     }
 

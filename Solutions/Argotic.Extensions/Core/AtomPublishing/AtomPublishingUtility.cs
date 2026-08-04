@@ -86,7 +86,7 @@ internal static class AtomPublishingUtility
         ArgumentNullException.ThrowIfNull(target);
         ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = AtomPublishingUtility.CreateNamespaceManager(source.NameTable);
-        string xmlBaseAttribute = source.GetAttribute("base", manager.LookupNamespace("xml"));
+        string xmlBaseAttribute = source.GetAttribute("base", manager.LookupNamespace("xml") ?? string.Empty);
         if (!string.IsNullOrEmpty(xmlBaseAttribute))
         {
             if (Uri.TryCreate(xmlBaseAttribute, UriKind.RelativeOrAbsolute, out Uri? baseUri))
@@ -95,7 +95,7 @@ internal static class AtomPublishingUtility
                 wasLoaded = true;
             }
         }
-        string xmlLangAttribute = source.GetAttribute("lang", manager.LookupNamespace("xml"));
+        string xmlLangAttribute = source.GetAttribute("lang", manager.LookupNamespace("xml") ?? string.Empty);
         if (!string.IsNullOrEmpty(xmlLangAttribute))
         {
             try

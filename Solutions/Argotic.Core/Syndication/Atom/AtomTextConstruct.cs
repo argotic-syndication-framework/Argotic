@@ -161,7 +161,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
 
         if (this.TextType == AtomTextConstructType.Xhtml)
         {
-            XPathNavigator xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
+            XPathNavigator? xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
             if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
                 this.Content = xhtmlDivNavigator.Value;
@@ -193,7 +193,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -336,7 +336,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(AtomTextConstruct first, AtomTextConstruct second)
+    public static bool operator ==(AtomTextConstruct? first, AtomTextConstruct? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -348,7 +348,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomTextConstruct first, AtomTextConstruct second)
+    public static bool operator !=(AtomTextConstruct? first, AtomTextConstruct? second)
     {
         return !(first == second);
     }

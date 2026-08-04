@@ -192,7 +192,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    public new void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
+    public new void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
     {
         base.Load(source, settings);
         this.LoadAtomPublishingExtensions();
@@ -239,7 +239,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    public new void Load(Stream stream, SyndicationResourceLoadSettings settings)
+    public new void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         base.Load(stream, settings);
         this.LoadAtomPublishingExtensions();
@@ -271,7 +271,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    public new void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
+    public new void Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
     {
         base.Load(reader, settings);
         this.LoadAtomPublishingExtensions();

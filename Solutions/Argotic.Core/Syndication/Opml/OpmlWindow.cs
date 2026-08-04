@@ -71,10 +71,10 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        XPathNavigator windowTopNavigator = source.SelectSingleNode("windowTop");
-        XPathNavigator windowLeftNavigator = source.SelectSingleNode("windowLeft");
-        XPathNavigator windowBottomNavigator = source.SelectSingleNode("windowBottom");
-        XPathNavigator windowRightNavigator = source.SelectSingleNode("windowRight");
+        XPathNavigator? windowTopNavigator = source.SelectSingleNode("windowTop");
+        XPathNavigator? windowLeftNavigator = source.SelectSingleNode("windowLeft");
+        XPathNavigator? windowBottomNavigator = source.SelectSingleNode("windowBottom");
+        XPathNavigator? windowRightNavigator = source.SelectSingleNode("windowRight");
 
         if (windowTopNavigator != null)
         {
@@ -213,7 +213,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(OpmlWindow first, OpmlWindow second)
+    public static bool operator ==(OpmlWindow? first, OpmlWindow? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -225,7 +225,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(OpmlWindow first, OpmlWindow second)
+    public static bool operator !=(OpmlWindow? first, OpmlWindow? second)
     {
         return !(first == second);
     }

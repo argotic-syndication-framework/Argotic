@@ -91,7 +91,7 @@ public interface ISyndicationResource
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
-    void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings);
+    void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
@@ -148,7 +148,7 @@ public interface ISyndicationResource
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
-    void Load(Stream stream, SyndicationResourceLoadSettings settings);
+    void Load(Stream stream, SyndicationResourceLoadSettings? settings);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
@@ -205,7 +205,7 @@ public interface ISyndicationResource
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the resource remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the resource remains empty.</exception>
-    void Load(XmlReader reader, SyndicationResourceLoadSettings settings);
+    void Load(XmlReader reader, SyndicationResourceLoadSettings? settings);
 
     /// <summary>
     /// Loads the syndication resource asynchronously using the specified <see cref="Uri"/> and the shared <see cref="HttpClient"/>.

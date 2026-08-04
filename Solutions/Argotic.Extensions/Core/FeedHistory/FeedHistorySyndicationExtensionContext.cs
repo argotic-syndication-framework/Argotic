@@ -56,8 +56,8 @@ public class FeedHistorySyndicationExtensionContext
         }
         if (source.HasChildren)
         {
-            XPathNavigator archiveNavigator = source.SelectSingleNode("fh:archive", manager);
-            XPathNavigator completeNavigator = source.SelectSingleNode("fh:complete", manager);
+            XPathNavigator? archiveNavigator = source.SelectSingleNode("fh:archive", manager);
+            XPathNavigator? completeNavigator = source.SelectSingleNode("fh:complete", manager);
             XPathNodeIterator linkIterator = source.Select("atom:link", manager);
 
             if (archiveNavigator != null)

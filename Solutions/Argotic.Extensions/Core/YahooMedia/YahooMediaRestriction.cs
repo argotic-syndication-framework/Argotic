@@ -311,7 +311,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(YahooMediaRestriction first, YahooMediaRestriction second)
+    public static bool operator ==(YahooMediaRestriction? first, YahooMediaRestriction? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -323,7 +323,7 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaRestriction first, YahooMediaRestriction second)
+    public static bool operator !=(YahooMediaRestriction? first, YahooMediaRestriction? second)
     {
         return !(first == second);
     }

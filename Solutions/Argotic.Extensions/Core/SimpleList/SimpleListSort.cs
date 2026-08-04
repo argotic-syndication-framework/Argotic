@@ -152,7 +152,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
 
             if (!string.IsNullOrEmpty(namespaceAttribute))
             {
-                if (Uri.TryCreate(namespaceAttribute, UriKind.RelativeOrAbsolute, out Uri elementNamespace))
+                if (Uri.TryCreate(namespaceAttribute, UriKind.RelativeOrAbsolute, out Uri? elementNamespace))
                 {
                     this.Namespace = elementNamespace;
                     wasLoaded = true;
@@ -327,7 +327,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(SimpleListSort first, SimpleListSort second)
+    public static bool operator ==(SimpleListSort? first, SimpleListSort? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -339,7 +339,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SimpleListSort first, SimpleListSort second)
+    public static bool operator !=(SimpleListSort? first, SimpleListSort? second)
     {
         return !(first == second);
     }

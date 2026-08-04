@@ -112,7 +112,7 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
             string schemeAttribute = source.GetAttribute("scheme", string.Empty);
             if (!string.IsNullOrEmpty(schemeAttribute))
             {
-                if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
+                if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri? scheme))
                 {
                     this.Scheme = scheme;
                     wasLoaded = true;
@@ -239,7 +239,7 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(YahooMediaRating first, YahooMediaRating second)
+    public static bool operator ==(YahooMediaRating? first, YahooMediaRating? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -251,7 +251,7 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaRating first, YahooMediaRating second)
+    public static bool operator !=(YahooMediaRating? first, YahooMediaRating? second)
     {
         return !(first == second);
     }

@@ -1978,16 +1978,16 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator abstractNavigator = source.SelectSingleNode("dcterms:abstract", manager);
-            XPathNavigator accessRightsNavigator = source.SelectSingleNode("dcterms:accessRights", manager);
-            XPathNavigator accrualMethodNavigator = source.SelectSingleNode("dcterms:accrualMethod", manager);
-            XPathNavigator accrualPeriodicityNavigator = source.SelectSingleNode("dcterms:accrualPeriodicity", manager);
-            XPathNavigator accrualPolicyNavigator = source.SelectSingleNode("dcterms:accrualPolicy", manager);
-            XPathNavigator alternativeNavigator = source.SelectSingleNode("dcterms:alternative", manager);
-            XPathNavigator audienceNavigator = source.SelectSingleNode("dcterms:audience", manager);
-            XPathNavigator availableNavigator = source.SelectSingleNode("dcterms:available", manager);
-            XPathNavigator bibliographicCitationNavigator = source.SelectSingleNode("dcterms:bibliographicCitation", manager);
-            XPathNavigator conformsToNavigator = source.SelectSingleNode("dcterms:conformsTo", manager);
+            XPathNavigator? abstractNavigator = source.SelectSingleNode("dcterms:abstract", manager);
+            XPathNavigator? accessRightsNavigator = source.SelectSingleNode("dcterms:accessRights", manager);
+            XPathNavigator? accrualMethodNavigator = source.SelectSingleNode("dcterms:accrualMethod", manager);
+            XPathNavigator? accrualPeriodicityNavigator = source.SelectSingleNode("dcterms:accrualPeriodicity", manager);
+            XPathNavigator? accrualPolicyNavigator = source.SelectSingleNode("dcterms:accrualPolicy", manager);
+            XPathNavigator? alternativeNavigator = source.SelectSingleNode("dcterms:alternative", manager);
+            XPathNavigator? audienceNavigator = source.SelectSingleNode("dcterms:audience", manager);
+            XPathNavigator? availableNavigator = source.SelectSingleNode("dcterms:available", manager);
+            XPathNavigator? bibliographicCitationNavigator = source.SelectSingleNode("dcterms:bibliographicCitation", manager);
+            XPathNavigator? conformsToNavigator = source.SelectSingleNode("dcterms:conformsTo", manager);
 
             if (abstractNavigator != null && !string.IsNullOrEmpty(abstractNavigator.Value))
             {
@@ -2068,16 +2068,16 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator contributorNavigator = source.SelectSingleNode("dcterms:contributor", manager);
-            XPathNavigator coverageNavigator = source.SelectSingleNode("dcterms:coverage", manager);
-            XPathNavigator createdNavigator = source.SelectSingleNode("dcterms:created", manager);
-            XPathNavigator creatorNavigator = source.SelectSingleNode("dcterms:creator", manager);
-            XPathNavigator dateNavigator = source.SelectSingleNode("dcterms:date", manager);
-            XPathNavigator dateAcceptedNavigator = source.SelectSingleNode("dcterms:dateAccepted", manager);
-            XPathNavigator dateCopyrightedNavigator = source.SelectSingleNode("dcterms:dateCopyrighted", manager);
-            XPathNavigator dateSubmittedNavigator = source.SelectSingleNode("dcterms:dateSubmitted", manager);
-            XPathNavigator descriptionNavigator = source.SelectSingleNode("dcterms:description", manager);
-            XPathNavigator educationLevelNavigator = source.SelectSingleNode("dcterms:educationLevel", manager);
+            XPathNavigator? contributorNavigator = source.SelectSingleNode("dcterms:contributor", manager);
+            XPathNavigator? coverageNavigator = source.SelectSingleNode("dcterms:coverage", manager);
+            XPathNavigator? createdNavigator = source.SelectSingleNode("dcterms:created", manager);
+            XPathNavigator? creatorNavigator = source.SelectSingleNode("dcterms:creator", manager);
+            XPathNavigator? dateNavigator = source.SelectSingleNode("dcterms:date", manager);
+            XPathNavigator? dateAcceptedNavigator = source.SelectSingleNode("dcterms:dateAccepted", manager);
+            XPathNavigator? dateCopyrightedNavigator = source.SelectSingleNode("dcterms:dateCopyrighted", manager);
+            XPathNavigator? dateSubmittedNavigator = source.SelectSingleNode("dcterms:dateSubmitted", manager);
+            XPathNavigator? descriptionNavigator = source.SelectSingleNode("dcterms:description", manager);
+            XPathNavigator? educationLevelNavigator = source.SelectSingleNode("dcterms:educationLevel", manager);
 
             if (contributorNavigator != null && !string.IsNullOrEmpty(contributorNavigator.Value))
             {
@@ -2173,16 +2173,16 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator extentNavigator = source.SelectSingleNode("dcterms:extent", manager);
-            XPathNavigator formatNavigator = source.SelectSingleNode("dcterms:format", manager);
-            XPathNavigator hasFormatNavigator = source.SelectSingleNode("dcterms:hasFormat", manager);
-            XPathNavigator hasPartNavigator = source.SelectSingleNode("dcterms:hasPart", manager);
-            XPathNavigator hasVersionNavigator = source.SelectSingleNode("dcterms:hasVersion", manager);
-            XPathNavigator identifierNavigator = source.SelectSingleNode("dcterms:identifier", manager);
-            XPathNavigator instructionalMethodNavigator = source.SelectSingleNode("dcterms:instructionalMethod", manager);
-            XPathNavigator isFormatOfNavigator = source.SelectSingleNode("dcterms:isFormatOf", manager);
-            XPathNavigator isPartOfNavigator = source.SelectSingleNode("dcterms:isPartOf", manager);
-            XPathNavigator isReferencedByNavigator = source.SelectSingleNode("dcterms:isReferencedBy", manager);
+            XPathNavigator? extentNavigator = source.SelectSingleNode("dcterms:extent", manager);
+            XPathNavigator? formatNavigator = source.SelectSingleNode("dcterms:format", manager);
+            XPathNavigator? hasFormatNavigator = source.SelectSingleNode("dcterms:hasFormat", manager);
+            XPathNavigator? hasPartNavigator = source.SelectSingleNode("dcterms:hasPart", manager);
+            XPathNavigator? hasVersionNavigator = source.SelectSingleNode("dcterms:hasVersion", manager);
+            XPathNavigator? identifierNavigator = source.SelectSingleNode("dcterms:identifier", manager);
+            XPathNavigator? instructionalMethodNavigator = source.SelectSingleNode("dcterms:instructionalMethod", manager);
+            XPathNavigator? isFormatOfNavigator = source.SelectSingleNode("dcterms:isFormatOf", manager);
+            XPathNavigator? isPartOfNavigator = source.SelectSingleNode("dcterms:isPartOf", manager);
+            XPathNavigator? isReferencedByNavigator = source.SelectSingleNode("dcterms:isReferencedBy", manager);
 
             if (extentNavigator != null && !string.IsNullOrEmpty(extentNavigator.Value))
             {
@@ -2263,16 +2263,16 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator isReplacedByNavigator = source.SelectSingleNode("dcterms:isReplacedBy", manager);
-            XPathNavigator isRequiredByNavigator = source.SelectSingleNode("dcterms:isRequiredBy", manager);
-            XPathNavigator issuedNavigator = source.SelectSingleNode("dcterms:issued", manager);
-            XPathNavigator isVersionOfNavigator = source.SelectSingleNode("dcterms:isVersionOf", manager);
-            XPathNavigator languageNavigator = source.SelectSingleNode("dcterms:language", manager);
-            XPathNavigator licenseNavigator = source.SelectSingleNode("dcterms:license", manager);
-            XPathNavigator mediatorNavigator = source.SelectSingleNode("dcterms:mediator", manager);
-            XPathNavigator mediumNavigator = source.SelectSingleNode("dcterms:medium", manager);
-            XPathNavigator modifiedNavigator = source.SelectSingleNode("dcterms:modified", manager);
-            XPathNavigator provenanceNavigator = source.SelectSingleNode("dcterms:provenance", manager);
+            XPathNavigator? isReplacedByNavigator = source.SelectSingleNode("dcterms:isReplacedBy", manager);
+            XPathNavigator? isRequiredByNavigator = source.SelectSingleNode("dcterms:isRequiredBy", manager);
+            XPathNavigator? issuedNavigator = source.SelectSingleNode("dcterms:issued", manager);
+            XPathNavigator? isVersionOfNavigator = source.SelectSingleNode("dcterms:isVersionOf", manager);
+            XPathNavigator? languageNavigator = source.SelectSingleNode("dcterms:language", manager);
+            XPathNavigator? licenseNavigator = source.SelectSingleNode("dcterms:license", manager);
+            XPathNavigator? mediatorNavigator = source.SelectSingleNode("dcterms:mediator", manager);
+            XPathNavigator? mediumNavigator = source.SelectSingleNode("dcterms:medium", manager);
+            XPathNavigator? modifiedNavigator = source.SelectSingleNode("dcterms:modified", manager);
+            XPathNavigator? provenanceNavigator = source.SelectSingleNode("dcterms:provenance", manager);
 
             if (isReplacedByNavigator != null && !string.IsNullOrEmpty(isReplacedByNavigator.Value))
             {
@@ -2367,16 +2367,16 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator publisherNavigator = source.SelectSingleNode("dcterms:publisher", manager);
-            XPathNavigator referencesNavigator = source.SelectSingleNode("dcterms:references", manager);
-            XPathNavigator relationNavigator = source.SelectSingleNode("dcterms:relation", manager);
-            XPathNavigator replacesNavigator = source.SelectSingleNode("dcterms:replaces", manager);
-            XPathNavigator requiresNavigator = source.SelectSingleNode("dcterms:requires", manager);
-            XPathNavigator rightsNavigator = source.SelectSingleNode("dcterms:rights", manager);
-            XPathNavigator rightsHolderNavigator = source.SelectSingleNode("dcterms:rightsHolder", manager);
-            XPathNavigator sourceNavigator = source.SelectSingleNode("dcterms:source", manager);
-            XPathNavigator spatialNavigator = source.SelectSingleNode("dcterms:spatial", manager);
-            XPathNavigator subjectNavigator = source.SelectSingleNode("dcterms:subject", manager);
+            XPathNavigator? publisherNavigator = source.SelectSingleNode("dcterms:publisher", manager);
+            XPathNavigator? referencesNavigator = source.SelectSingleNode("dcterms:references", manager);
+            XPathNavigator? relationNavigator = source.SelectSingleNode("dcterms:relation", manager);
+            XPathNavigator? replacesNavigator = source.SelectSingleNode("dcterms:replaces", manager);
+            XPathNavigator? requiresNavigator = source.SelectSingleNode("dcterms:requires", manager);
+            XPathNavigator? rightsNavigator = source.SelectSingleNode("dcterms:rights", manager);
+            XPathNavigator? rightsHolderNavigator = source.SelectSingleNode("dcterms:rightsHolder", manager);
+            XPathNavigator? sourceNavigator = source.SelectSingleNode("dcterms:source", manager);
+            XPathNavigator? spatialNavigator = source.SelectSingleNode("dcterms:spatial", manager);
+            XPathNavigator? subjectNavigator = source.SelectSingleNode("dcterms:subject", manager);
 
             if (publisherNavigator != null && !string.IsNullOrEmpty(publisherNavigator.Value))
             {
@@ -2457,11 +2457,11 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator tableOfContentsNavigator = source.SelectSingleNode("dcterms:tableOfContents", manager);
-            XPathNavigator temporalNavigator = source.SelectSingleNode("dcterms:temporal", manager);
-            XPathNavigator titleNavigator = source.SelectSingleNode("dcterms:title", manager);
-            XPathNavigator typeNavigator = source.SelectSingleNode("dcterms:type", manager);
-            XPathNavigator validNavigator = source.SelectSingleNode("dcterms:valid", manager);
+            XPathNavigator? tableOfContentsNavigator = source.SelectSingleNode("dcterms:tableOfContents", manager);
+            XPathNavigator? temporalNavigator = source.SelectSingleNode("dcterms:temporal", manager);
+            XPathNavigator? titleNavigator = source.SelectSingleNode("dcterms:title", manager);
+            XPathNavigator? typeNavigator = source.SelectSingleNode("dcterms:type", manager);
+            XPathNavigator? validNavigator = source.SelectSingleNode("dcterms:valid", manager);
 
             if (tableOfContentsNavigator != null && !string.IsNullOrEmpty(tableOfContentsNavigator.Value))
             {

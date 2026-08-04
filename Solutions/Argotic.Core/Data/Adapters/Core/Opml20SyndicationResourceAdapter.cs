@@ -30,7 +30,7 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public Opml20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    public Opml20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
@@ -45,10 +45,10 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = new(this.Navigator.NameTable);
 
-        XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("opml", manager);
+        XPathNavigator? documentNavigator = this.Navigator.SelectSingleNode("opml", manager);
         if (documentNavigator != null)
         {
-            XPathNavigator headNavigator = documentNavigator.SelectSingleNode("head", manager);
+            XPathNavigator? headNavigator = documentNavigator.SelectSingleNode("head", manager);
             if (headNavigator != null)
             {
                 resource.Head.Load(headNavigator, this.Settings);

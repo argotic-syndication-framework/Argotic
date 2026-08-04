@@ -267,7 +267,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 
             if (!string.IsNullOrEmpty(postUrlAttribute))
             {
-                if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
+                if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri? url))
                 {
                     this.Url = url;
                     wasLoaded = true;
@@ -293,9 +293,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 
         if (source.HasChildren)
         {
-            XPathNavigator contentNavigator = source.SelectSingleNode("blog:content", manager);
-            XPathNavigator postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
-            XPathNavigator excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
+            XPathNavigator? contentNavigator = source.SelectSingleNode("blog:content", manager);
+            XPathNavigator? postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
+            XPathNavigator? excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
 
             if (contentNavigator != null)
             {
@@ -347,7 +347,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
@@ -365,7 +365,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 
             if (!string.IsNullOrEmpty(postUrlAttribute))
             {
-                if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
+                if (Uri.TryCreate(postUrlAttribute, UriKind.RelativeOrAbsolute, out Uri? url))
                 {
                     this.Url = url;
                     wasLoaded = true;
@@ -391,9 +391,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 
         if (source.HasChildren)
         {
-            XPathNavigator contentNavigator = source.SelectSingleNode("blog:content", manager);
-            XPathNavigator postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
-            XPathNavigator excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
+            XPathNavigator? contentNavigator = source.SelectSingleNode("blog:content", manager);
+            XPathNavigator? postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
+            XPathNavigator? excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
 
             if (contentNavigator != null)
             {
@@ -636,7 +636,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+    private static bool FillPostCollections(BlogMLPost post, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(post);
@@ -812,7 +812,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(BlogMLPost first, BlogMLPost second)
+    public static bool operator ==(BlogMLPost? first, BlogMLPost? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -824,7 +824,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(BlogMLPost first, BlogMLPost second)
+    public static bool operator !=(BlogMLPost? first, BlogMLPost? second)
     {
         return !(first == second);
     }

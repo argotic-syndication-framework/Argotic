@@ -91,7 +91,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
         XPathNavigator source = document.CreateNavigator();
 
         TrackbackResponse result = new();
-        XPathNavigator responseNavigator = source.SelectSingleNode("response");
+        XPathNavigator? responseNavigator = source.SelectSingleNode("response");
         if (responseNavigator != null)
         {
             result.Load(responseNavigator);
@@ -141,8 +141,8 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
 
         if (source.HasChildren)
         {
-            XPathNavigator errorNavigator = source.SelectSingleNode("error");
-            XPathNavigator messageNavigator = source.SelectSingleNode("message");
+            XPathNavigator? errorNavigator = source.SelectSingleNode("error");
+            XPathNavigator? messageNavigator = source.SelectSingleNode("message");
 
             if (errorNavigator != null)
             {
@@ -278,7 +278,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(TrackbackResponse first, TrackbackResponse second)
+    public static bool operator ==(TrackbackResponse? first, TrackbackResponse? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -290,7 +290,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(TrackbackResponse first, TrackbackResponse second)
+    public static bool operator !=(TrackbackResponse? first, TrackbackResponse? second)
     {
         return !(first == second);
     }

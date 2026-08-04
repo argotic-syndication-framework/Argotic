@@ -30,7 +30,7 @@ public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public Rss20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    public Rss20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
@@ -45,11 +45,11 @@ public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = new(this.Navigator.NameTable);
 
-        XPathNavigator feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
+        XPathNavigator? feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
 
         if (feedNavigator != null)
         {
-            XPathNavigator channelNavigator = feedNavigator.SelectSingleNode("channel", manager);
+            XPathNavigator? channelNavigator = feedNavigator.SelectSingleNode("channel", manager);
             if (channelNavigator != null)
             {
                 resource.Channel.Load(channelNavigator, this.Settings);

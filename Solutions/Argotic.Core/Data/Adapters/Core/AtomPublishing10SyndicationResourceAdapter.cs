@@ -31,7 +31,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public AtomPublishing10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    public AtomPublishing10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
@@ -46,7 +46,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("app:categories", manager);
+        XPathNavigator? documentNavigator = this.Navigator.SelectSingleNode("app:categories", manager);
         if (documentNavigator != null)
         {
             AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);
@@ -73,7 +73,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
                     if (!string.IsNullOrEmpty(schemeAttribute))
                     {
-                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
+                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri? scheme))
                         {
                             resource.Scheme = scheme;
                         }
@@ -81,7 +81,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
                     if (!string.IsNullOrEmpty(hrefAttribute))
                     {
-                        if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
+                        if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri? href))
                         {
                             resource.Uri = href;
                         }
@@ -122,7 +122,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator documentNavigator = this.Navigator.SelectSingleNode("app:service", manager);
+        XPathNavigator? documentNavigator = this.Navigator.SelectSingleNode("app:service", manager);
         if (documentNavigator != null)
         {
             AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);

@@ -181,8 +181,8 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
 
         if (source.HasChildren)
         {
-            XPathNavigator methodNameNavigator = source.SelectSingleNode("methodName");
-            XPathNavigator parametersNavigator = source.SelectSingleNode("params");
+            XPathNavigator? methodNameNavigator = source.SelectSingleNode("methodName");
+            XPathNavigator? parametersNavigator = source.SelectSingleNode("params");
 
             if (methodNameNavigator != null && !string.IsNullOrEmpty(methodNameNavigator.Value))
             {
@@ -325,7 +325,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(XmlRpcMessage first, XmlRpcMessage second)
+    public static bool operator ==(XmlRpcMessage? first, XmlRpcMessage? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -337,7 +337,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(XmlRpcMessage first, XmlRpcMessage second)
+    public static bool operator !=(XmlRpcMessage? first, XmlRpcMessage? second)
     {
         return !(first == second);
     }

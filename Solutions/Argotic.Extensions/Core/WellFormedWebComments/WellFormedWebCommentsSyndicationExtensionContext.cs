@@ -44,12 +44,12 @@ public class WellFormedWebCommentsSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator commentNavigator = source.SelectSingleNode("wfw:comment", manager);
-            XPathNavigator commentRssNavigator = source.SelectSingleNode("wfw:commentRss", manager);
+            XPathNavigator? commentNavigator = source.SelectSingleNode("wfw:comment", manager);
+            XPathNavigator? commentRssNavigator = source.SelectSingleNode("wfw:commentRss", manager);
 
             if (commentNavigator != null)
             {
-                if (Uri.TryCreate(commentNavigator.Value, UriKind.RelativeOrAbsolute, out Uri comments))
+                if (Uri.TryCreate(commentNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? comments))
                 {
                     this.Comments = comments;
                     wasLoaded = true;
@@ -61,7 +61,7 @@ public class WellFormedWebCommentsSyndicationExtensionContext
 
             if (commentRssNavigator != null)
             {
-                if (Uri.TryCreate(commentRssNavigator.Value, UriKind.RelativeOrAbsolute, out Uri commentsFeed))
+                if (Uri.TryCreate(commentRssNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? commentsFeed))
                 {
                     this.CommentsFeed = commentsFeed;
                     wasLoaded = true;

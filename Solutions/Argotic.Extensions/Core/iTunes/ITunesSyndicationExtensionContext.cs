@@ -233,12 +233,12 @@ public class ITunesSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator authorNavigator = source.SelectSingleNode("itunes:author", manager);
-            XPathNavigator keywordsNavigator = source.SelectSingleNode("itunes:keywords", manager);
-            XPathNavigator newFeedUrlNavigator = source.SelectSingleNode("itunes:new-feed-url", manager);
-            XPathNavigator ownerNavigator = source.SelectSingleNode("itunes:owner", manager);
-            XPathNavigator subtitleNavigator = source.SelectSingleNode("itunes:subtitle", manager);
-            XPathNavigator summaryNavigator = source.SelectSingleNode("itunes:summary", manager);
+            XPathNavigator? authorNavigator = source.SelectSingleNode("itunes:author", manager);
+            XPathNavigator? keywordsNavigator = source.SelectSingleNode("itunes:keywords", manager);
+            XPathNavigator? newFeedUrlNavigator = source.SelectSingleNode("itunes:new-feed-url", manager);
+            XPathNavigator? ownerNavigator = source.SelectSingleNode("itunes:owner", manager);
+            XPathNavigator? subtitleNavigator = source.SelectSingleNode("itunes:subtitle", manager);
+            XPathNavigator? summaryNavigator = source.SelectSingleNode("itunes:summary", manager);
 
             XPathNodeIterator categoryIterator = source.Select("itunes:category", manager);
 
@@ -268,7 +268,7 @@ public class ITunesSyndicationExtensionContext
 
             if (newFeedUrlNavigator != null)
             {
-                if (Uri.TryCreate(newFeedUrlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri newFeedUrl))
+                if (Uri.TryCreate(newFeedUrlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? newFeedUrl))
                 {
                     this.NewFeedUrl = newFeedUrl;
                     wasLoaded = true;
@@ -329,10 +329,10 @@ public class ITunesSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator blockNavigator = source.SelectSingleNode("itunes:block", manager);
-            XPathNavigator imageNavigator = source.SelectSingleNode("itunes:image", manager);
-            XPathNavigator durationNavigator = source.SelectSingleNode("itunes:duration", manager);
-            XPathNavigator explicitNavigator = source.SelectSingleNode("itunes:explicit", manager);
+            XPathNavigator? blockNavigator = source.SelectSingleNode("itunes:block", manager);
+            XPathNavigator? imageNavigator = source.SelectSingleNode("itunes:image", manager);
+            XPathNavigator? durationNavigator = source.SelectSingleNode("itunes:duration", manager);
+            XPathNavigator? explicitNavigator = source.SelectSingleNode("itunes:explicit", manager);
 
             if (blockNavigator != null && !string.IsNullOrEmpty(blockNavigator.Value))
             {
@@ -353,7 +353,7 @@ public class ITunesSyndicationExtensionContext
                 string hrefAttribute = imageNavigator.GetAttribute("href", string.Empty);
                 if (!string.IsNullOrEmpty(hrefAttribute))
                 {
-                    if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri image))
+                    if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri? image))
                     {
                         this.Image = image;
                         wasLoaded = true;

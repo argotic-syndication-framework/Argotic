@@ -229,7 +229,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
 
         Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
         string existingXmlNamespace = string.Empty;
-        if (namespaces.TryGetValue(this.XmlPrefix, out string namespaceValue))
+        if (namespaces.TryGetValue(this.XmlPrefix, out string? namespaceValue))
         {
             existingXmlNamespace = namespaceValue;
         }

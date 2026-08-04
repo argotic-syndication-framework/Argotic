@@ -77,8 +77,8 @@ public class SiteSummaryContentSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator encodedNavigator = source.SelectSingleNode("content:encoded", manager);
-            XPathNavigator itemsNavigator = source.SelectSingleNode("content:items", manager);
+            XPathNavigator? encodedNavigator = source.SelectSingleNode("content:encoded", manager);
+            XPathNavigator? itemsNavigator = source.SelectSingleNode("content:items", manager);
 
             if (encodedNavigator != null && !string.IsNullOrEmpty(encodedNavigator.Value))
             {

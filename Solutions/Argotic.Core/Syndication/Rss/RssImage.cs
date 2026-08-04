@@ -250,17 +250,17 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = new(source.NameTable);
-        XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
-        XPathNavigator urlNavigator = source.SelectSingleNode("url", manager);
+        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
+        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator? urlNavigator = source.SelectSingleNode("url", manager);
 
-        XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator heightNavigator = source.SelectSingleNode("height", manager);
-        XPathNavigator widthNavigator = source.SelectSingleNode("width", manager);
+        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
+        XPathNavigator? heightNavigator = source.SelectSingleNode("height", manager);
+        XPathNavigator? widthNavigator = source.SelectSingleNode("width", manager);
 
         if (linkNavigator != null)
         {
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
                 this.Link = link;
                 wasLoaded = true;
@@ -276,7 +276,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
         }
         if (urlNavigator != null)
         {
-            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
+            if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? url))
             {
                 this.Url = url;
                 wasLoaded = true;
@@ -319,7 +319,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -438,7 +438,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(RssImage first, RssImage second)
+    public static bool operator ==(RssImage? first, RssImage? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -450,7 +450,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(RssImage first, RssImage second)
+    public static bool operator !=(RssImage? first, RssImage? second)
     {
         return !(first == second);
     }

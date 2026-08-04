@@ -39,7 +39,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     public string Documentation
     {
         get => mimeMediaDocumentation?.ToString() ?? string.Empty;
-        set => mimeMediaDocumentation = value != null && Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out Uri url) ? url : null;
+        set => mimeMediaDocumentation = value != null && Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out Uri? url) ? url : null;
     }
 
     /// <summary>
@@ -133,7 +133,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(MimeMediaTypeAttribute first, MimeMediaTypeAttribute second)
+    public static bool operator ==(MimeMediaTypeAttribute? first, MimeMediaTypeAttribute? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -145,7 +145,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(MimeMediaTypeAttribute first, MimeMediaTypeAttribute second)
+    public static bool operator !=(MimeMediaTypeAttribute? first, MimeMediaTypeAttribute? second)
     {
         return !(first == second);
     }

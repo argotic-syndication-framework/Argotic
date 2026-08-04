@@ -95,7 +95,7 @@ internal static class AtomPublishingUtility
         string xmlBaseAttribute = source.GetAttribute("base", manager.LookupNamespace("xml"));
         if (!string.IsNullOrEmpty(xmlBaseAttribute))
         {
-            if (Uri.TryCreate(xmlBaseAttribute, UriKind.RelativeOrAbsolute, out Uri baseUri))
+            if (Uri.TryCreate(xmlBaseAttribute, UriKind.RelativeOrAbsolute, out Uri? baseUri))
             {
                 target.BaseUri = baseUri;
                 wasLoaded = true;

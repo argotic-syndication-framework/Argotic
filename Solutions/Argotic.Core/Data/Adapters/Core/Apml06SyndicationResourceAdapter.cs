@@ -30,7 +30,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public Apml06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    public Apml06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
@@ -45,13 +45,13 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator headNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Head", manager);
+        XPathNavigator? headNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Head", manager);
         if (headNavigator != null)
         {
             resource.Head.Load(headNavigator, this.Settings);
         }
 
-        XPathNavigator bodyNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Body", manager);
+        XPathNavigator? bodyNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Body", manager);
         if (bodyNavigator != null)
         {
             if (bodyNavigator.HasAttributes)

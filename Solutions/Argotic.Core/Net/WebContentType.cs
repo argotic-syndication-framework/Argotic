@@ -110,7 +110,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     {
         get
         {
-            return this.Parameters.TryGetValue(CHARSET_PARAMETER_NAME, out string charsetValue) ? charsetValue : string.Empty;
+            return this.Parameters.TryGetValue(CHARSET_PARAMETER_NAME, out string? charsetValue) ? charsetValue : string.Empty;
         }
 
         set
@@ -142,7 +142,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     {
         get
         {
-            return this.Parameters.TryGetValue(TYPE_PARAMETER_NAME, out string typeValue) ? typeValue : string.Empty;
+            return this.Parameters.TryGetValue(TYPE_PARAMETER_NAME, out string? typeValue) ? typeValue : string.Empty;
         }
 
         set
@@ -271,7 +271,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
         {
             foreach (string key in source.Keys)
             {
-                if (target.TryGetValue(key, out string targetValue))
+                if (target.TryGetValue(key, out string? targetValue))
                 {
                     if (result == 0) result = string.Compare(source[key], targetValue, StringComparison.Ordinal);
                 }
@@ -388,7 +388,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(WebContentType first, WebContentType second)
+    public static bool operator ==(WebContentType? first, WebContentType? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -400,7 +400,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(WebContentType first, WebContentType second)
+    public static bool operator !=(WebContentType? first, WebContentType? second)
     {
         return !(first == second);
     }

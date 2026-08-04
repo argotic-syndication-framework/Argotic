@@ -96,10 +96,10 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
-        XPathNavigator titleNavigator = source.SelectSingleNode("apml:Title", manager);
-        XPathNavigator generatorNavigator = source.SelectSingleNode("apml:Generator", manager);
-        XPathNavigator userEmailNavigator = source.SelectSingleNode("apml:UserEmail", manager);
-        XPathNavigator dateCreatedNavigator = source.SelectSingleNode("apml:DateCreated", manager);
+        XPathNavigator? titleNavigator = source.SelectSingleNode("apml:Title", manager);
+        XPathNavigator? generatorNavigator = source.SelectSingleNode("apml:Generator", manager);
+        XPathNavigator? userEmailNavigator = source.SelectSingleNode("apml:UserEmail", manager);
+        XPathNavigator? dateCreatedNavigator = source.SelectSingleNode("apml:DateCreated", manager);
 
         if (titleNavigator != null)
         {
@@ -142,7 +142,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -260,7 +260,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(ApmlHead first, ApmlHead second)
+    public static bool operator ==(ApmlHead? first, ApmlHead? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -272,7 +272,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(ApmlHead first, ApmlHead second)
+    public static bool operator !=(ApmlHead? first, ApmlHead? second)
     {
         return !(first == second);
     }

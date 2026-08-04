@@ -208,7 +208,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
             {
                 if (string.Equals(parameterName, "url", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (Uri.TryCreate(source[parameterName], UriKind.RelativeOrAbsolute, out Uri url))
+                    if (Uri.TryCreate(source[parameterName], UriKind.RelativeOrAbsolute, out Uri? url))
                     {
                         this.Permalink = url;
                         wasLoaded = true;
@@ -358,7 +358,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(TrackbackMessage first, TrackbackMessage second)
+    public static bool operator ==(TrackbackMessage? first, TrackbackMessage? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -370,7 +370,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(TrackbackMessage first, TrackbackMessage second)
+    public static bool operator !=(TrackbackMessage? first, TrackbackMessage? second)
     {
         return !(first == second);
     }

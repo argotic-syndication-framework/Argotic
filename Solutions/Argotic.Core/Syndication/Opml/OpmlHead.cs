@@ -127,11 +127,11 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        XPathNavigator titleNavigator = source.SelectSingleNode("title");
-        XPathNavigator dateCreatedNavigator = source.SelectSingleNode("dateCreated");
-        XPathNavigator dateModifiedNavigator = source.SelectSingleNode("dateModified");
-        XPathNavigator expansionStateNavigator = source.SelectSingleNode("expansionState");
-        XPathNavigator verticalScrollStateNavigator = source.SelectSingleNode("vertScrollState");
+        XPathNavigator? titleNavigator = source.SelectSingleNode("title");
+        XPathNavigator? dateCreatedNavigator = source.SelectSingleNode("dateCreated");
+        XPathNavigator? dateModifiedNavigator = source.SelectSingleNode("dateModified");
+        XPathNavigator? expansionStateNavigator = source.SelectSingleNode("expansionState");
+        XPathNavigator? verticalScrollStateNavigator = source.SelectSingleNode("vertScrollState");
 
         if (titleNavigator != null)
         {
@@ -216,7 +216,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -349,7 +349,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(OpmlHead first, OpmlHead second)
+    public static bool operator ==(OpmlHead? first, OpmlHead? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -361,7 +361,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(OpmlHead first, OpmlHead second)
+    public static bool operator !=(OpmlHead? first, OpmlHead? second)
     {
         return !(first == second);
     }

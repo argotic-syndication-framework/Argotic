@@ -110,8 +110,8 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
 
-        XPathNavigator nameNavigator = source.SelectSingleNode("news:name", manager);
-        XPathNavigator languageNavigator = source.SelectSingleNode("news:language", manager);
+        XPathNavigator? nameNavigator = source.SelectSingleNode("news:name", manager);
+        XPathNavigator? languageNavigator = source.SelectSingleNode("news:language", manager);
 
         if (nameNavigator != null && !string.IsNullOrEmpty(nameNavigator.Value))
         {
@@ -221,7 +221,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(SitemapNewsPublication first, SitemapNewsPublication second)
+    public static bool operator ==(SitemapNewsPublication? first, SitemapNewsPublication? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -233,7 +233,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapNewsPublication first, SitemapNewsPublication second)
+    public static bool operator !=(SitemapNewsPublication? first, SitemapNewsPublication? second)
     {
         return !(first == second);
     }

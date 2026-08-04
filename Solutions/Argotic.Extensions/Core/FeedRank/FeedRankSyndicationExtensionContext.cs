@@ -110,7 +110,7 @@ public class FeedRankSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator rankNavigator = source.SelectSingleNode("re:rank", manager);
+            XPathNavigator? rankNavigator = source.SelectSingleNode("re:rank", manager);
             if (rankNavigator != null)
             {
                 if (rankNavigator.HasAttributes)
@@ -121,7 +121,7 @@ public class FeedRankSyndicationExtensionContext
 
                     if (!string.IsNullOrEmpty(schemeAttribute))
                     {
-                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri scheme))
+                        if (Uri.TryCreate(schemeAttribute, UriKind.RelativeOrAbsolute, out Uri? scheme))
                         {
                             this.Scheme = scheme;
                             wasLoaded = true;
@@ -130,7 +130,7 @@ public class FeedRankSyndicationExtensionContext
 
                     if (!string.IsNullOrEmpty(domainAttribute))
                     {
-                        if (Uri.TryCreate(domainAttribute, UriKind.RelativeOrAbsolute, out Uri domain))
+                        if (Uri.TryCreate(domainAttribute, UriKind.RelativeOrAbsolute, out Uri? domain))
                         {
                             this.Domain = domain;
                             wasLoaded = true;

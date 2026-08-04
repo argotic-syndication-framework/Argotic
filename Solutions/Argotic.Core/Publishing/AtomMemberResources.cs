@@ -420,7 +420,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
 
             if (!string.IsNullOrEmpty(hrefAttribute))
             {
-                if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri href))
+                if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri? href))
                 {
                     this.Uri = href;
                     wasLoaded = true;
@@ -430,7 +430,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
 
         if (navigator.HasChildren)
         {
-            XPathNavigator titleNavigator = navigator.SelectSingleNode("atom:title", manager);
+            XPathNavigator? titleNavigator = navigator.SelectSingleNode("atom:title", manager);
             XPathNodeIterator acceptIterator = navigator.Select("app:accept", manager);
             XPathNodeIterator categoriesIterator = navigator.Select("app:categories", manager);
 
@@ -481,7 +481,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -514,7 +514,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
     /// <returns><b>true</b> if the <see cref="AtomMemberResources"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
-    public bool Load(XmlReader reader, SyndicationResourceLoadSettings settings)
+    public bool Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(reader);
 
@@ -646,7 +646,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(AtomMemberResources first, AtomMemberResources second)
+    public static bool operator ==(AtomMemberResources? first, AtomMemberResources? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -658,7 +658,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomMemberResources first, AtomMemberResources second)
+    public static bool operator !=(AtomMemberResources? first, AtomMemberResources? second)
     {
         return !(first == second);
     }

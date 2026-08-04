@@ -228,9 +228,9 @@ public static class SyndicationDiscoveryUtility
         {
             var linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
-            if (linkAttributes.TryGetValue("HREF", out string href))
+            if (linkAttributes.TryGetValue("HREF", out string? href))
             {
-                if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri uri))
+                if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri? uri))
                 {
                     results.Add(uri);
                 }
@@ -243,9 +243,9 @@ public static class SyndicationDiscoveryUtility
         {
             var anchorAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(anchor.Value);
 
-            if (anchorAttributes.TryGetValue("HREF", out string href))
+            if (anchorAttributes.TryGetValue("HREF", out string? href))
             {
-                if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri uri))
+                if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri? uri))
                 {
                     results.Add(uri);
                 }
@@ -528,13 +528,13 @@ public static class SyndicationDiscoveryUtility
         {
             var linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
-            if (linkAttributes.TryGetValue("HREF", out string href) &&
-                linkAttributes.TryGetValue("REL", out string rel) &&
-                linkAttributes.TryGetValue("TYPE", out string type))
+            if (linkAttributes.TryGetValue("HREF", out string? href) &&
+                linkAttributes.TryGetValue("REL", out string? rel) &&
+                linkAttributes.TryGetValue("TYPE", out string? type))
             {
                 if (string.Equals(rel, "alternate", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri url))
+                    if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri? url))
                     {
                         DiscoverableSyndicationEndpoint endpoint = new()
                         {
@@ -545,7 +545,7 @@ public static class SyndicationDiscoveryUtility
                             endpoint.ContentType = type;
                         }
 
-                        if (linkAttributes.TryGetValue("TITLE", out string title) && !string.IsNullOrEmpty(title))
+                        if (linkAttributes.TryGetValue("TITLE", out string? title) && !string.IsNullOrEmpty(title))
                         {
                             endpoint.Title = title;
                         }
@@ -679,12 +679,12 @@ public static class SyndicationDiscoveryUtility
         {
             var linkAttributes = SyndicationDiscoveryUtility.ExtractHtmlAttributes(link.Value);
 
-            if (linkAttributes.TryGetValue("HREF", out string href) &&
-                linkAttributes.TryGetValue("REL", out string rel))
+            if (linkAttributes.TryGetValue("HREF", out string? href) &&
+                linkAttributes.TryGetValue("REL", out string? rel))
             {
                 if (string.Equals(rel, "pingback", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (Uri.TryCreate(href, UriKind.Absolute, out Uri uri))
+                    if (Uri.TryCreate(href, UriKind.Absolute, out Uri? uri))
                     {
                         pingbackAnchor = new HtmlAnchor
                         {
@@ -692,11 +692,11 @@ public static class SyndicationDiscoveryUtility
                         };
                         pingbackAnchor.Attributes.Add("rel", rel);
 
-                        if (linkAttributes.TryGetValue("TYPE", out string type) && !string.IsNullOrEmpty(type))
+                        if (linkAttributes.TryGetValue("TYPE", out string? type) && !string.IsNullOrEmpty(type))
                         {
                             pingbackAnchor.Attributes.Add("type", type);
                         }
-                        if (linkAttributes.TryGetValue("TITLE", out string title) && !string.IsNullOrEmpty(title))
+                        if (linkAttributes.TryGetValue("TITLE", out string? title) && !string.IsNullOrEmpty(title))
                         {
                             pingbackAnchor.Title = title;
                         }

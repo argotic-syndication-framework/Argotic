@@ -107,7 +107,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
         // Load the URL from the element value
         if (!string.IsNullOrEmpty(source.Value))
         {
-            if (Uri.TryCreate(source.Value, UriKind.RelativeOrAbsolute, out Uri location))
+            if (Uri.TryCreate(source.Value, UriKind.RelativeOrAbsolute, out Uri? location))
             {
                 this.segmentLocation = location;
                 wasLoaded = true;
@@ -216,7 +216,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(SitemapVideoSegment first, SitemapVideoSegment second)
+    public static bool operator ==(SitemapVideoSegment? first, SitemapVideoSegment? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -228,7 +228,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapVideoSegment first, SitemapVideoSegment second)
+    public static bool operator !=(SitemapVideoSegment? first, SitemapVideoSegment? second)
     {
         return !(first == second);
     }

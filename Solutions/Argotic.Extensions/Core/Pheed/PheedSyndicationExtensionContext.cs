@@ -96,12 +96,12 @@ public class PheedSyndicationExtensionContext
 
         if (source.HasChildren)
         {
-            XPathNavigator thumbnailNavigator = source.SelectSingleNode("photo:thumbnail", manager);
-            XPathNavigator imageSourceNavigator = source.SelectSingleNode("photo:imgsrc", manager);
+            XPathNavigator? thumbnailNavigator = source.SelectSingleNode("photo:thumbnail", manager);
+            XPathNavigator? imageSourceNavigator = source.SelectSingleNode("photo:imgsrc", manager);
 
             if (thumbnailNavigator != null)
             {
-                if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out Uri thumbnail))
+                if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? thumbnail))
                 {
                     this.Thumbnail = thumbnail;
                     wasLoaded = true;
@@ -110,7 +110,7 @@ public class PheedSyndicationExtensionContext
 
             if (imageSourceNavigator != null)
             {
-                if (Uri.TryCreate(imageSourceNavigator.Value, UriKind.RelativeOrAbsolute, out Uri original))
+                if (Uri.TryCreate(imageSourceNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? original))
                 {
                     this.Source = original;
                     wasLoaded = true;

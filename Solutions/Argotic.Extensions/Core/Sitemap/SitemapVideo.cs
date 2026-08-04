@@ -393,13 +393,13 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     {
         bool wasLoaded = false;
 
-        XPathNavigator thumbnailNavigator = source.SelectSingleNode("video:thumbnail_loc", manager);
-        XPathNavigator titleNavigator = source.SelectSingleNode("video:title", manager);
-        XPathNavigator descriptionNavigator = source.SelectSingleNode("video:description", manager);
+        XPathNavigator? thumbnailNavigator = source.SelectSingleNode("video:thumbnail_loc", manager);
+        XPathNavigator? titleNavigator = source.SelectSingleNode("video:title", manager);
+        XPathNavigator? descriptionNavigator = source.SelectSingleNode("video:description", manager);
 
         if (thumbnailNavigator != null && !string.IsNullOrEmpty(thumbnailNavigator.Value))
         {
-            if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out Uri thumbnailUrl))
+            if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? thumbnailUrl))
             {
                 this.videoThumbnailLocation = thumbnailUrl;
                 wasLoaded = true;
@@ -429,28 +429,28 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     {
         bool wasLoaded = false;
 
-        XPathNavigator contentLocNavigator = source.SelectSingleNode("video:content_loc", manager);
-        XPathNavigator playerLocNavigator = source.SelectSingleNode("video:player_loc", manager);
-        XPathNavigator durationNavigator = source.SelectSingleNode("video:duration", manager);
-        XPathNavigator expirationNavigator = source.SelectSingleNode("video:expiration_date", manager);
-        XPathNavigator ratingNavigator = source.SelectSingleNode("video:rating", manager);
-        XPathNavigator viewCountNavigator = source.SelectSingleNode("video:view_count", manager);
-        XPathNavigator publicationNavigator = source.SelectSingleNode("video:publication_date", manager);
-        XPathNavigator familyFriendlyNavigator = source.SelectSingleNode("video:family_friendly", manager);
-        XPathNavigator subscriptionNavigator = source.SelectSingleNode("video:requires_subscription", manager);
-        XPathNavigator liveNavigator = source.SelectSingleNode("video:live", manager);
-        XPathNavigator uploaderNavigator = source.SelectSingleNode("video:uploader", manager);
-        XPathNavigator platformNavigator = source.SelectSingleNode("video:platform", manager);
-        XPathNavigator restrictionNavigator = source.SelectSingleNode("video:restriction", manager);
+        XPathNavigator? contentLocNavigator = source.SelectSingleNode("video:content_loc", manager);
+        XPathNavigator? playerLocNavigator = source.SelectSingleNode("video:player_loc", manager);
+        XPathNavigator? durationNavigator = source.SelectSingleNode("video:duration", manager);
+        XPathNavigator? expirationNavigator = source.SelectSingleNode("video:expiration_date", manager);
+        XPathNavigator? ratingNavigator = source.SelectSingleNode("video:rating", manager);
+        XPathNavigator? viewCountNavigator = source.SelectSingleNode("video:view_count", manager);
+        XPathNavigator? publicationNavigator = source.SelectSingleNode("video:publication_date", manager);
+        XPathNavigator? familyFriendlyNavigator = source.SelectSingleNode("video:family_friendly", manager);
+        XPathNavigator? subscriptionNavigator = source.SelectSingleNode("video:requires_subscription", manager);
+        XPathNavigator? liveNavigator = source.SelectSingleNode("video:live", manager);
+        XPathNavigator? uploaderNavigator = source.SelectSingleNode("video:uploader", manager);
+        XPathNavigator? platformNavigator = source.SelectSingleNode("video:platform", manager);
+        XPathNavigator? restrictionNavigator = source.SelectSingleNode("video:restriction", manager);
         XPathNodeIterator tagIterator = source.Select("video:tag", manager);
 
-        if (contentLocNavigator != null && Uri.TryCreate(contentLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri contentUrl))
+        if (contentLocNavigator != null && Uri.TryCreate(contentLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? contentUrl))
         {
             this.ContentLocation = contentUrl;
             wasLoaded = true;
         }
 
-        if (playerLocNavigator != null && Uri.TryCreate(playerLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri playerUrl))
+        if (playerLocNavigator != null && Uri.TryCreate(playerLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? playerUrl))
         {
             this.PlayerLocation = playerUrl;
             wasLoaded = true;
@@ -508,7 +508,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         {
             this.Uploader = uploaderNavigator.Value;
             string uploaderInfoAttr = uploaderNavigator.GetAttribute("info", string.Empty);
-            if (!string.IsNullOrEmpty(uploaderInfoAttr) && Uri.TryCreate(uploaderInfoAttr, UriKind.RelativeOrAbsolute, out Uri uploaderInfo))
+            if (!string.IsNullOrEmpty(uploaderInfoAttr) && Uri.TryCreate(uploaderInfoAttr, UriKind.RelativeOrAbsolute, out Uri? uploaderInfo))
             {
                 this.UploaderInfo = uploaderInfo;
             }
@@ -904,7 +904,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(SitemapVideo first, SitemapVideo second)
+    public static bool operator ==(SitemapVideo? first, SitemapVideo? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -916,7 +916,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapVideo first, SitemapVideo second)
+    public static bool operator !=(SitemapVideo? first, SitemapVideo? second)
     {
         return !(first == second);
     }

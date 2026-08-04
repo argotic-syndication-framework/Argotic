@@ -100,9 +100,9 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        XPathNavigator ownerNameNavigator = source.SelectSingleNode("ownerName");
-        XPathNavigator ownerEmailNavigator = source.SelectSingleNode("ownerEmail");
-        XPathNavigator ownerIdNavigator = source.SelectSingleNode("ownerId");
+        XPathNavigator? ownerNameNavigator = source.SelectSingleNode("ownerName");
+        XPathNavigator? ownerEmailNavigator = source.SelectSingleNode("ownerEmail");
+        XPathNavigator? ownerIdNavigator = source.SelectSingleNode("ownerId");
 
         if (ownerNameNavigator != null)
         {
@@ -118,7 +118,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
 
         if (ownerIdNavigator != null)
         {
-            if (Uri.TryCreate(ownerIdNavigator.Value, UriKind.RelativeOrAbsolute, out Uri id))
+            if (Uri.TryCreate(ownerIdNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? id))
             {
                 this.Id = id;
                 wasLoaded = true;
@@ -220,7 +220,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(OpmlOwner first, OpmlOwner second)
+    public static bool operator ==(OpmlOwner? first, OpmlOwner? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -232,7 +232,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(OpmlOwner first, OpmlOwner second)
+    public static bool operator !=(OpmlOwner? first, OpmlOwner? second)
     {
         return !(first == second);
     }

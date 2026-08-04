@@ -192,10 +192,10 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = new(source.NameTable);
-        XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator nameNavigator = source.SelectSingleNode("name", manager);
-        XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
+        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
+        XPathNavigator? nameNavigator = source.SelectSingleNode("name", manager);
+        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
 
         if (descriptionNavigator != null)
         {
@@ -207,7 +207,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
         }
         if (linkNavigator != null)
         {
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
                 this.Link = link;
                 wasLoaded = true;
@@ -244,7 +244,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -347,7 +347,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(RssTextInput first, RssTextInput second)
+    public static bool operator ==(RssTextInput? first, RssTextInput? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -359,7 +359,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(RssTextInput first, RssTextInput second)
+    public static bool operator !=(RssTextInput? first, RssTextInput? second)
     {
         return !(first == second);
     }

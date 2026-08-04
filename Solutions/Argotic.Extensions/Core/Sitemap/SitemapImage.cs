@@ -80,12 +80,12 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
         // Try to find loc element - handle both cases:
         // 1. Navigator positioned at the <image> element (look for child)
         // 2. Navigator positioned at document root (look for descendant)
-        XPathNavigator locNavigator = source.SelectSingleNode("image:loc", manager);
+        XPathNavigator? locNavigator = source.SelectSingleNode("image:loc", manager);
         locNavigator ??= source.SelectSingleNode("descendant::image:loc", manager);
 
         if (locNavigator != null && !string.IsNullOrEmpty(locNavigator.Value))
         {
-            if (Uri.TryCreate(locNavigator.Value, UriKind.RelativeOrAbsolute, out Uri location))
+            if (Uri.TryCreate(locNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? location))
             {
                 this.imageLocation = location;
                 wasLoaded = true;
@@ -181,7 +181,7 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(SitemapImage first, SitemapImage second)
+    public static bool operator ==(SitemapImage? first, SitemapImage? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -193,7 +193,7 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapImage first, SitemapImage second)
+    public static bool operator !=(SitemapImage? first, SitemapImage? second)
     {
         return !(first == second);
     }

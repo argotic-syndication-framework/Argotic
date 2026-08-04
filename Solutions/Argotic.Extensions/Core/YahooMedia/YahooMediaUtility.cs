@@ -652,11 +652,11 @@ internal static class YahooMediaUtility
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator titleNavigator = source.SelectSingleNode("media:title", manager);
-            XPathNavigator descriptionNavigator = source.SelectSingleNode("media:description", manager);
-            XPathNavigator copyrightNavigator = source.SelectSingleNode("media:copyright", manager);
-            XPathNavigator playerNavigator = source.SelectSingleNode("media:player", manager);
-            XPathNavigator keywordNavigator = source.SelectSingleNode("media:keywords", manager);
+            XPathNavigator? titleNavigator = source.SelectSingleNode("media:title", manager);
+            XPathNavigator? descriptionNavigator = source.SelectSingleNode("media:description", manager);
+            XPathNavigator? copyrightNavigator = source.SelectSingleNode("media:copyright", manager);
+            XPathNavigator? playerNavigator = source.SelectSingleNode("media:player", manager);
+            XPathNavigator? keywordNavigator = source.SelectSingleNode("media:keywords", manager);
 
             if (titleNavigator != null)
             {

@@ -140,7 +140,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
 
             if (!string.IsNullOrEmpty(uriAttribute))
             {
-                if (Uri.TryCreate(uriAttribute, UriKind.RelativeOrAbsolute, out Uri uri))
+                if (Uri.TryCreate(uriAttribute, UriKind.RelativeOrAbsolute, out Uri? uri))
                 {
                     this.Uri = uri;
                     wasLoaded = true;
@@ -174,7 +174,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -292,7 +292,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(AtomGenerator first, AtomGenerator second)
+    public static bool operator ==(AtomGenerator? first, AtomGenerator? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -304,7 +304,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomGenerator first, AtomGenerator second)
+    public static bool operator !=(AtomGenerator? first, AtomGenerator? second)
     {
         return !(first == second);
     }

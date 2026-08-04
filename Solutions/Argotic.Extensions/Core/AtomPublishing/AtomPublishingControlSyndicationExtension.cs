@@ -95,7 +95,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
     /// <returns><b>true</b> if the <see cref="AtomPublishingControlSyndicationExtension"/> was able to be initialized using the supplied <paramref name="source"/>; Otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public bool Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
+    public bool Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         XPathNavigator navigator = source.CreateNavigator(); ;
@@ -138,7 +138,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> used to configure the load operation.</param>
     /// <returns><b>true</b> if the <see cref="AtomPublishingControlSyndicationExtension"/> was able to be initialized using the supplied <paramref name="reader"/>; Otherwise, <b>false</b>.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
-    public bool Load(XmlReader reader, SyndicationResourceLoadSettings settings)
+    public bool Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(reader);
 
@@ -257,7 +257,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(AtomPublishingControlSyndicationExtension first, AtomPublishingControlSyndicationExtension second)
+    public static bool operator ==(AtomPublishingControlSyndicationExtension? first, AtomPublishingControlSyndicationExtension? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -269,7 +269,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomPublishingControlSyndicationExtension first, AtomPublishingControlSyndicationExtension second)
+    public static bool operator !=(AtomPublishingControlSyndicationExtension? first, AtomPublishingControlSyndicationExtension? second)
     {
         return !(first == second);
     }

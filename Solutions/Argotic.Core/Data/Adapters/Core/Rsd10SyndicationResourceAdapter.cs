@@ -30,7 +30,7 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public Rsd10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    public Rsd10SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
@@ -63,7 +63,7 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (engineLinkNavigator != null)
             {
-                if (Uri.TryCreate(engineLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
+                if (Uri.TryCreate(engineLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
                 {
                     resource.EngineLink = link;
                 }
@@ -71,7 +71,7 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (homePageLinkNavigator != null)
             {
-                if (Uri.TryCreate(homePageLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri homepage))
+                if (Uri.TryCreate(homePageLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? homepage))
                 {
                     resource.Homepage = homepage;
                 }

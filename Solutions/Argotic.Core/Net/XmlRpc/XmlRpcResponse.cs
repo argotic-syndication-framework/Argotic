@@ -172,12 +172,12 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
 
         if (source.HasChildren)
         {
-            XPathNavigator parametersNavigator = source.SelectSingleNode("params");
-            XPathNavigator faultNavigator = source.SelectSingleNode("fault");
+            XPathNavigator? parametersNavigator = source.SelectSingleNode("params");
+            XPathNavigator? faultNavigator = source.SelectSingleNode("fault");
 
             if (parametersNavigator != null)
             {
-                XPathNavigator valueNavigator = parametersNavigator.SelectSingleNode("param/value");
+                XPathNavigator? valueNavigator = parametersNavigator.SelectSingleNode("param/value");
                 if (valueNavigator != null)
                 {
                     if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue value))
@@ -190,7 +190,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
 
             if (faultNavigator != null)
             {
-                XPathNavigator structNavigator = faultNavigator.SelectSingleNode("value");
+                XPathNavigator? structNavigator = faultNavigator.SelectSingleNode("value");
                 if (structNavigator != null)
                 {
                     XmlRpcStructureValue structure = new();
@@ -353,7 +353,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(XmlRpcResponse first, XmlRpcResponse second)
+    public static bool operator ==(XmlRpcResponse? first, XmlRpcResponse? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -365,7 +365,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(XmlRpcResponse first, XmlRpcResponse second)
+    public static bool operator !=(XmlRpcResponse? first, XmlRpcResponse? second)
     {
         return !(first == second);
     }

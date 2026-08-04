@@ -93,7 +93,7 @@ internal static class RsdUtility
         ArgumentException.ThrowIfNullOrEmpty(xpath);
         ArgumentNullException.ThrowIfNull(resolver);
 
-        XPathNavigator navigator = source.SelectSingleNode(xpath, resolver);
+        XPathNavigator? navigator = source.SelectSingleNode(xpath, resolver);
 
         if (navigator == null)
         {

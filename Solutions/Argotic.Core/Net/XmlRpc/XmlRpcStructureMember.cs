@@ -98,8 +98,8 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
 
         if (source.HasChildren)
         {
-            XPathNavigator nameNavigator = source.SelectSingleNode("name");
-            XPathNavigator valueNavigator = source.SelectSingleNode("value");
+            XPathNavigator? nameNavigator = source.SelectSingleNode("name");
+            XPathNavigator? valueNavigator = source.SelectSingleNode("value");
 
             if (nameNavigator != null && !string.IsNullOrEmpty(nameNavigator.Value))
             {

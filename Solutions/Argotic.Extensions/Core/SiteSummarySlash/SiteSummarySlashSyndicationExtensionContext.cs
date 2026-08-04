@@ -106,10 +106,10 @@ public class SiteSummarySlashSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator sectionNavigator = source.SelectSingleNode("slash:section", manager);
-            XPathNavigator departmentNavigator = source.SelectSingleNode("slash:department", manager);
-            XPathNavigator commentsNavigator = source.SelectSingleNode("slash:comments", manager);
-            XPathNavigator hitParadeNavigator = source.SelectSingleNode("slash:hit_parade", manager);
+            XPathNavigator? sectionNavigator = source.SelectSingleNode("slash:section", manager);
+            XPathNavigator? departmentNavigator = source.SelectSingleNode("slash:department", manager);
+            XPathNavigator? commentsNavigator = source.SelectSingleNode("slash:comments", manager);
+            XPathNavigator? hitParadeNavigator = source.SelectSingleNode("slash:hit_parade", manager);
 
             if (sectionNavigator != null && !string.IsNullOrEmpty(sectionNavigator.Value))
             {

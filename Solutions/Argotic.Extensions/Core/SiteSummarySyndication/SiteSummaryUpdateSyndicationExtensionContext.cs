@@ -80,9 +80,9 @@ public class SiteSummaryUpdateSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator updatePeriodNavigator = source.SelectSingleNode("sy:updatePeriod", manager);
-            XPathNavigator updateFrequencyNavigator = source.SelectSingleNode("sy:updateFrequency", manager);
-            XPathNavigator updateBaseNavigator = source.SelectSingleNode("sy:updateBase", manager);
+            XPathNavigator? updatePeriodNavigator = source.SelectSingleNode("sy:updatePeriod", manager);
+            XPathNavigator? updateFrequencyNavigator = source.SelectSingleNode("sy:updateFrequency", manager);
+            XPathNavigator? updateBaseNavigator = source.SelectSingleNode("sy:updateBase", manager);
 
             if (updatePeriodNavigator != null && !string.IsNullOrEmpty(updatePeriodNavigator.Value))
             {

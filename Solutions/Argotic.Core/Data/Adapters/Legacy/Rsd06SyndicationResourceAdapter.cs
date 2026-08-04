@@ -30,7 +30,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public Rsd06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    public Rsd06SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
@@ -63,7 +63,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (engineLinkNavigator != null)
             {
-                if (Uri.TryCreate(engineLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
+                if (Uri.TryCreate(engineLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
                 {
                     resource.EngineLink = link;
                 }
@@ -71,7 +71,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (homePageLinkNavigator != null)
             {
-                if (Uri.TryCreate(homePageLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri homepage))
+                if (Uri.TryCreate(homePageLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? homepage))
                 {
                     resource.Homepage = homepage;
                 }
@@ -86,7 +86,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                     counter++;
 
                     string rpcLinkAttribute = apiIterator.Current.GetAttribute("rpcLink", string.Empty);
-                    if (Uri.TryCreate(rpcLinkAttribute, UriKind.RelativeOrAbsolute, out Uri link))
+                    if (Uri.TryCreate(rpcLinkAttribute, UriKind.RelativeOrAbsolute, out Uri? link))
                     {
                         api.Link = link;
                     }

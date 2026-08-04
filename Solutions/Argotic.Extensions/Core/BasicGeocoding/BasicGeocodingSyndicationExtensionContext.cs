@@ -43,8 +43,8 @@ public class BasicGeocodingSyndicationExtensionContext
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        XPathNavigator latitudeNavigator = source.SelectSingleNode("geo:lat", manager);
-        XPathNavigator longitudeNavigator = source.SelectSingleNode("geo:long", manager);
+        XPathNavigator? latitudeNavigator = source.SelectSingleNode("geo:lat", manager);
+        XPathNavigator? longitudeNavigator = source.SelectSingleNode("geo:long", manager);
 
         if (latitudeNavigator != null)
         {

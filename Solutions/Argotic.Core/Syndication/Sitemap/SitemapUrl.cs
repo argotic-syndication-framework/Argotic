@@ -190,14 +190,14 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
 
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(source.NameTable);
 
-        XPathNavigator locNavigator = source.SelectSingleNode("sm:loc", manager);
-        XPathNavigator lastmodNavigator = source.SelectSingleNode("sm:lastmod", manager);
-        XPathNavigator changefreqNavigator = source.SelectSingleNode("sm:changefreq", manager);
-        XPathNavigator priorityNavigator = source.SelectSingleNode("sm:priority", manager);
+        XPathNavigator? locNavigator = source.SelectSingleNode("sm:loc", manager);
+        XPathNavigator? lastmodNavigator = source.SelectSingleNode("sm:lastmod", manager);
+        XPathNavigator? changefreqNavigator = source.SelectSingleNode("sm:changefreq", manager);
+        XPathNavigator? priorityNavigator = source.SelectSingleNode("sm:priority", manager);
 
         if (locNavigator != null)
         {
-            if (Uri.TryCreate(locNavigator.Value, UriKind.Absolute, out Uri location))
+            if (Uri.TryCreate(locNavigator.Value, UriKind.Absolute, out Uri? location))
             {
                 this.Location = location;
                 wasLoaded = true;

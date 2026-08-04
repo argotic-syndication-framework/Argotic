@@ -189,7 +189,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -286,7 +286,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(RssGuid first, RssGuid second)
+    public static bool operator ==(RssGuid? first, RssGuid? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -298,7 +298,7 @@ public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyn
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(RssGuid first, RssGuid second)
+    public static bool operator !=(RssGuid? first, RssGuid? second)
     {
         return !(first == second);
     }

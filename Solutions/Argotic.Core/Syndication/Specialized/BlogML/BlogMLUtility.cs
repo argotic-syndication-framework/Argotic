@@ -224,7 +224,7 @@ internal static class BlogMLUtility
 
         if (source.HasChildren)
         {
-            XPathNavigator titleNavigator = source.SelectSingleNode("blog:title", manager);
+            XPathNavigator? titleNavigator = source.SelectSingleNode("blog:title", manager);
             if (titleNavigator != null)
             {
                 BlogMLTextConstruct title = new();
@@ -249,7 +249,7 @@ internal static class BlogMLUtility
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public static bool FillCommonObject(IBlogMLCommonObject target, XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(target);
@@ -310,7 +310,7 @@ internal static class BlogMLUtility
 
         if (source.HasChildren)
         {
-            XPathNavigator titleNavigator = source.SelectSingleNode("blog:title", manager);
+            XPathNavigator? titleNavigator = source.SelectSingleNode("blog:title", manager);
             if (titleNavigator != null)
             {
                 BlogMLTextConstruct title = new();

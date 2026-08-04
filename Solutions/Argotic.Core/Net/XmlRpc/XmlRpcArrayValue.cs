@@ -67,7 +67,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
 
         if (source.HasChildren)
         {
-            XPathNavigator dataNavigator = source.SelectSingleNode("array/data");
+            XPathNavigator? dataNavigator = source.SelectSingleNode("array/data");
             if (dataNavigator is { HasChildren: true })
             {
                 XPathNodeIterator valueIterator = dataNavigator.Select("value");

@@ -577,14 +577,14 @@ public class DublinCoreElementSetSyndicationExtensionContext
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        XPathNavigator contributorNavigator = source.SelectSingleNode("dc:contributor", manager);
-        XPathNavigator creatorNavigator = source.SelectSingleNode("dc:creator", manager);
-        XPathNavigator dateNavigator = source.SelectSingleNode("dc:date", manager);
-        XPathNavigator descriptionNavigator = source.SelectSingleNode("dc:description", manager);
-        XPathNavigator languageNavigator = source.SelectSingleNode("dc:language", manager);
-        XPathNavigator publisherNavigator = source.SelectSingleNode("dc:publisher", manager);
-        XPathNavigator rightsNavigator = source.SelectSingleNode("dc:rights", manager);
-        XPathNavigator titleNavigator = source.SelectSingleNode("dc:title", manager);
+        XPathNavigator? contributorNavigator = source.SelectSingleNode("dc:contributor", manager);
+        XPathNavigator? creatorNavigator = source.SelectSingleNode("dc:creator", manager);
+        XPathNavigator? dateNavigator = source.SelectSingleNode("dc:date", manager);
+        XPathNavigator? descriptionNavigator = source.SelectSingleNode("dc:description", manager);
+        XPathNavigator? languageNavigator = source.SelectSingleNode("dc:language", manager);
+        XPathNavigator? publisherNavigator = source.SelectSingleNode("dc:publisher", manager);
+        XPathNavigator? rightsNavigator = source.SelectSingleNode("dc:rights", manager);
+        XPathNavigator? titleNavigator = source.SelectSingleNode("dc:title", manager);
 
         if (contributorNavigator != null && !string.IsNullOrEmpty(contributorNavigator.Value))
         {
@@ -661,13 +661,13 @@ public class DublinCoreElementSetSyndicationExtensionContext
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        XPathNavigator coverageNavigator = source.SelectSingleNode("dc:coverage", manager);
-        XPathNavigator formatNavigator = source.SelectSingleNode("dc:format", manager);
-        XPathNavigator identifierNavigator = source.SelectSingleNode("dc:identifier", manager);
-        XPathNavigator relationNavigator = source.SelectSingleNode("dc:relation", manager);
-        XPathNavigator sourceNavigator = source.SelectSingleNode("dc:source", manager);
-        XPathNavigator subjectNavigator = source.SelectSingleNode("dc:subject", manager);
-        XPathNavigator typeNavigator = source.SelectSingleNode("dc:type", manager);
+        XPathNavigator? coverageNavigator = source.SelectSingleNode("dc:coverage", manager);
+        XPathNavigator? formatNavigator = source.SelectSingleNode("dc:format", manager);
+        XPathNavigator? identifierNavigator = source.SelectSingleNode("dc:identifier", manager);
+        XPathNavigator? relationNavigator = source.SelectSingleNode("dc:relation", manager);
+        XPathNavigator? sourceNavigator = source.SelectSingleNode("dc:source", manager);
+        XPathNavigator? subjectNavigator = source.SelectSingleNode("dc:subject", manager);
+        XPathNavigator? typeNavigator = source.SelectSingleNode("dc:type", manager);
 
         if (coverageNavigator != null && !string.IsNullOrEmpty(coverageNavigator.Value))
         {

@@ -90,13 +90,13 @@ public class PingbackSyndicationExtensionContext
 
         if (source.HasChildren)
         {
-            XPathNavigator serverNavigator = source.SelectSingleNode("pingback:server", manager);
-            XPathNavigator targetNavigator = source.SelectSingleNode("pingback:target", manager);
+            XPathNavigator? serverNavigator = source.SelectSingleNode("pingback:server", manager);
+            XPathNavigator? targetNavigator = source.SelectSingleNode("pingback:target", manager);
             XPathNodeIterator aboutIterator = source.Select("pingback:about", manager);
 
             if (serverNavigator != null)
             {
-                if (Uri.TryCreate(serverNavigator.Value, UriKind.RelativeOrAbsolute, out Uri server))
+                if (Uri.TryCreate(serverNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? server))
                 {
                     this.Server = server;
                     wasLoaded = true;
@@ -105,7 +105,7 @@ public class PingbackSyndicationExtensionContext
 
             if (targetNavigator != null)
             {
-                if (Uri.TryCreate(targetNavigator.Value, UriKind.RelativeOrAbsolute, out Uri target))
+                if (Uri.TryCreate(targetNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? target))
                 {
                     this.Target = target;
                     wasLoaded = true;
@@ -116,7 +116,7 @@ public class PingbackSyndicationExtensionContext
             {
                 while (aboutIterator.MoveNext())
                 {
-                    if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri about))
+                    if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri? about))
                     {
                         this.Abouts.Add(about);
                         wasLoaded = true;

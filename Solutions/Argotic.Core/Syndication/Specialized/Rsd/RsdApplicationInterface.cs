@@ -191,7 +191,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
 
             if (!string.IsNullOrEmpty(apiLinkAttribute))
             {
-                if (Uri.TryCreate(apiLinkAttribute, UriKind.RelativeOrAbsolute, out Uri link))
+                if (Uri.TryCreate(apiLinkAttribute, UriKind.RelativeOrAbsolute, out Uri? link))
                 {
                     this.Link = link;
                     wasLoaded = true;
@@ -217,7 +217,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
 
                 if (docsNavigator != null)
                 {
-                    if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri documentation))
+                    if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? documentation))
                     {
                         this.Documentation = documentation;
                         wasLoaded = true;
@@ -260,7 +260,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -394,7 +394,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(RsdApplicationInterface first, RsdApplicationInterface second)
+    public static bool operator ==(RsdApplicationInterface? first, RsdApplicationInterface? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -406,7 +406,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(RsdApplicationInterface first, RsdApplicationInterface second)
+    public static bool operator !=(RsdApplicationInterface? first, RsdApplicationInterface? second)
     {
         return !(first == second);
     }

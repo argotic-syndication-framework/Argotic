@@ -124,7 +124,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
                 wasLoaded = true;
             }
 
-            if (!string.IsNullOrEmpty(hrefAttr) && Uri.TryCreate(hrefAttr, UriKind.RelativeOrAbsolute, out Uri href))
+            if (!string.IsNullOrEmpty(hrefAttr) && Uri.TryCreate(hrefAttr, UriKind.RelativeOrAbsolute, out Uri? href))
             {
                 this.linkHref = href;
                 wasLoaded = true;
@@ -228,7 +228,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(SitemapHreflangLink first, SitemapHreflangLink second)
+    public static bool operator ==(SitemapHreflangLink? first, SitemapHreflangLink? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -240,7 +240,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapHreflangLink first, SitemapHreflangLink second)
+    public static bool operator !=(SitemapHreflangLink? first, SitemapHreflangLink? second)
     {
         return !(first == second);
     }

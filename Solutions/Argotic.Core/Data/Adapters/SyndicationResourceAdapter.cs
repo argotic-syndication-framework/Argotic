@@ -20,7 +20,7 @@ public class SyndicationResourceAdapter
     /// <param name="settings">The <see cref="SyndicationResourceLoadSettings"/> object used to configure the load operation of the <see cref="ISyndicationResource"/>.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+    public SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(navigator);
         ArgumentNullException.ThrowIfNull(settings);

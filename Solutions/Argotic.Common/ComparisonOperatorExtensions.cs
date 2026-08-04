@@ -19,7 +19,7 @@ public static class ComparisonOperatorExtensions
         /// <param name="first">Operand to be compared.</param>
         /// <param name="second">Operand to compare to.</param>
         /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <(T first, T second)
+        public static bool operator <(T? first, T? second)
         {
             if (first is null) return second is not null;
             return first.CompareTo(second) < 0;
@@ -31,7 +31,7 @@ public static class ComparisonOperatorExtensions
         /// <param name="first">Operand to be compared.</param>
         /// <param name="second">Operand to compare to.</param>
         /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >(T first, T second)
+        public static bool operator >(T? first, T? second)
         {
             if (first is null) return false;
             return first.CompareTo(second) > 0;
@@ -43,7 +43,7 @@ public static class ComparisonOperatorExtensions
         /// <param name="first">Operand to be compared.</param>
         /// <param name="second">Operand to compare to.</param>
         /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-        public static bool operator <=(T first, T second)
+        public static bool operator <=(T? first, T? second)
         {
             if (first is null) return true;
             return first.CompareTo(second) <= 0;
@@ -55,7 +55,7 @@ public static class ComparisonOperatorExtensions
         /// <param name="first">Operand to be compared.</param>
         /// <param name="second">Operand to compare to.</param>
         /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-        public static bool operator >=(T first, T second)
+        public static bool operator >=(T? first, T? second)
         {
             if (first is null) return second is null;
             return first.CompareTo(second) >= 0;

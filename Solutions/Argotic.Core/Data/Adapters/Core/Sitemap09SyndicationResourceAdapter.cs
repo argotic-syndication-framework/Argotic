@@ -33,7 +33,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public Sitemap09SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings)
+    public Sitemap09SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings)
         : base(navigator, settings)
     {
     }
@@ -49,7 +49,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator urlsetNavigator = this.Navigator.SelectSingleNode("sm:urlset", manager);
+        XPathNavigator? urlsetNavigator = this.Navigator.SelectSingleNode("sm:urlset", manager);
 
         if (urlsetNavigator != null)
         {
@@ -91,7 +91,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator sitemapindexNavigator = this.Navigator.SelectSingleNode("sm:sitemapindex", manager);
+        XPathNavigator? sitemapindexNavigator = this.Navigator.SelectSingleNode("sm:sitemapindex", manager);
 
         if (sitemapindexNavigator != null)
         {

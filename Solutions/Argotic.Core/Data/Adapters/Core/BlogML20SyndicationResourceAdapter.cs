@@ -30,7 +30,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="navigator"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings settings) : base(navigator, settings)
+    public BlogML20SyndicationResourceAdapter(XPathNavigator navigator, SyndicationResourceLoadSettings? settings) : base(navigator, settings)
     {
     }
 
@@ -45,7 +45,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator blogNavigator = this.Navigator.SelectSingleNode("blog:blog", manager);
+        XPathNavigator? blogNavigator = this.Navigator.SelectSingleNode("blog:blog", manager);
         if (blogNavigator != null)
         {
             if (blogNavigator.HasAttributes)
@@ -63,7 +63,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
                 if (!string.IsNullOrEmpty(rootUrlAttribute))
                 {
-                    if (Uri.TryCreate(rootUrlAttribute, UriKind.RelativeOrAbsolute, out Uri rootUrl))
+                    if (Uri.TryCreate(rootUrlAttribute, UriKind.RelativeOrAbsolute, out Uri? rootUrl))
                     {
                         resource.RootUrl = rootUrl;
                     }
@@ -72,8 +72,8 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (blogNavigator.HasChildren)
             {
-                XPathNavigator titleNavigator = blogNavigator.SelectSingleNode("blog:title", manager);
-                XPathNavigator subtitleNavigator = blogNavigator.SelectSingleNode("blog:sub-title", manager);
+                XPathNavigator? titleNavigator = blogNavigator.SelectSingleNode("blog:title", manager);
+                XPathNavigator? subtitleNavigator = blogNavigator.SelectSingleNode("blog:sub-title", manager);
 
                 if (titleNavigator != null)
                 {
@@ -115,7 +115,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    private static void FillDocumentCollections(BlogMLDocument document, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+    private static void FillDocumentCollections(BlogMLDocument document, XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(document);
         ArgumentNullException.ThrowIfNull(source);

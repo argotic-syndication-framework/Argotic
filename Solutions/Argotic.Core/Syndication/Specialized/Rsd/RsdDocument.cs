@@ -315,7 +315,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    public void Load(IXPathNavigable source, SyndicationResourceLoadSettings settings)
+    public void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         if (settings == null)
@@ -360,7 +360,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    public void Load(Stream stream, SyndicationResourceLoadSettings settings)
+    public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
         if (settings != null)
@@ -407,7 +407,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    public void Load(XmlReader reader, SyndicationResourceLoadSettings settings)
+    public void Load(XmlReader reader, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(reader);
 
@@ -549,7 +549,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="eventData"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="navigator"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings settings, SyndicationResourceLoadedEventArgs eventData)
+    private void Load(XPathNavigator navigator, SyndicationResourceLoadSettings? settings, SyndicationResourceLoadedEventArgs eventData)
     {
         ArgumentNullException.ThrowIfNull(navigator);
         ArgumentNullException.ThrowIfNull(settings);

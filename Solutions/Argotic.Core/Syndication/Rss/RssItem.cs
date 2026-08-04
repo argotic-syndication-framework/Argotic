@@ -245,14 +245,14 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = new(source.NameTable);
-        XPathNavigator authorNavigator = source.SelectSingleNode("author", manager);
-        XPathNavigator commentsNavigator = source.SelectSingleNode("comments", manager);
-        XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator guidNavigator = source.SelectSingleNode("guid", manager);
-        XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator publicationNavigator = source.SelectSingleNode("pubDate", manager);
-        XPathNavigator sourceNavigator = source.SelectSingleNode("source", manager);
-        XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator? authorNavigator = source.SelectSingleNode("author", manager);
+        XPathNavigator? commentsNavigator = source.SelectSingleNode("comments", manager);
+        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
+        XPathNavigator? guidNavigator = source.SelectSingleNode("guid", manager);
+        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
+        XPathNavigator? publicationNavigator = source.SelectSingleNode("pubDate", manager);
+        XPathNavigator? sourceNavigator = source.SelectSingleNode("source", manager);
+        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
 
         XPathNodeIterator categoryIterator = source.Select("category", manager);
         XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);
@@ -270,7 +270,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
 
         if (linkNavigator != null)
         {
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
                 this.Link = link;
                 wasLoaded = true;
@@ -285,7 +285,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
 
         if (commentsNavigator != null)
         {
-            if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri comments))
+            if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? comments))
             {
                 this.Comments = comments;
                 wasLoaded = true;
@@ -359,20 +359,20 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
         XmlNamespaceManager manager = new(source.NameTable);
-        XPathNavigator authorNavigator = source.SelectSingleNode("author", manager);
-        XPathNavigator commentsNavigator = source.SelectSingleNode("comments", manager);
-        XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator guidNavigator = source.SelectSingleNode("guid", manager);
-        XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator publicationNavigator = source.SelectSingleNode("pubDate", manager);
-        XPathNavigator sourceNavigator = source.SelectSingleNode("source", manager);
-        XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator? authorNavigator = source.SelectSingleNode("author", manager);
+        XPathNavigator? commentsNavigator = source.SelectSingleNode("comments", manager);
+        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
+        XPathNavigator? guidNavigator = source.SelectSingleNode("guid", manager);
+        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
+        XPathNavigator? publicationNavigator = source.SelectSingleNode("pubDate", manager);
+        XPathNavigator? sourceNavigator = source.SelectSingleNode("source", manager);
+        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
 
         XPathNodeIterator categoryIterator = source.Select("category", manager);
         XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);
@@ -390,7 +390,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
 
         if (linkNavigator != null)
         {
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
                 this.Link = link;
                 wasLoaded = true;
@@ -404,7 +404,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
 
         if (commentsNavigator != null)
         {
-            if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri comments))
+            if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? comments))
             {
                 this.Comments = comments;
                 wasLoaded = true;
@@ -625,7 +625,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(RssItem first, RssItem second)
+    public static bool operator ==(RssItem? first, RssItem? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -637,7 +637,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(RssItem first, RssItem second)
+    public static bool operator !=(RssItem? first, RssItem? second)
     {
         return !(first == second);
     }

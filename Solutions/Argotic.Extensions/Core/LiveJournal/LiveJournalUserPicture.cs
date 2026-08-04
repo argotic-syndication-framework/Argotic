@@ -128,14 +128,14 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
 
         if (source.HasChildren)
         {
-            XPathNavigator urlNavigator = source.SelectSingleNode("url", manager);
-            XPathNavigator keywordNavigator = source.SelectSingleNode("keyword", manager);
-            XPathNavigator widthNavigator = source.SelectSingleNode("width", manager);
-            XPathNavigator heightNavigator = source.SelectSingleNode("height", manager);
+            XPathNavigator? urlNavigator = source.SelectSingleNode("url", manager);
+            XPathNavigator? keywordNavigator = source.SelectSingleNode("keyword", manager);
+            XPathNavigator? widthNavigator = source.SelectSingleNode("width", manager);
+            XPathNavigator? heightNavigator = source.SelectSingleNode("height", manager);
 
             if (urlNavigator != null)
             {
-                if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri url))
+                if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? url))
                 {
                     this.Url = url;
                     wasLoaded = true;
@@ -285,7 +285,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(LiveJournalUserPicture first, LiveJournalUserPicture second)
+    public static bool operator ==(LiveJournalUserPicture? first, LiveJournalUserPicture? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -297,7 +297,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(LiveJournalUserPicture first, LiveJournalUserPicture second)
+    public static bool operator !=(LiveJournalUserPicture? first, LiveJournalUserPicture? second)
     {
         return !(first == second);
     }

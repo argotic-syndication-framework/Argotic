@@ -78,11 +78,11 @@ public class LiveJournalSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator musicNavigator = source.SelectSingleNode("lj:music", manager);
-            XPathNavigator moodNavigator = source.SelectSingleNode("lj:mood", manager);
-            XPathNavigator securityNavigator = source.SelectSingleNode("lj:security", manager);
-            XPathNavigator userPictureNavigator = source.SelectSingleNode("lj:userpic", manager);
-            XPathNavigator preformattedNavigator = source.SelectSingleNode("lj:preformatted", manager);
+            XPathNavigator? musicNavigator = source.SelectSingleNode("lj:music", manager);
+            XPathNavigator? moodNavigator = source.SelectSingleNode("lj:mood", manager);
+            XPathNavigator? securityNavigator = source.SelectSingleNode("lj:security", manager);
+            XPathNavigator? userPictureNavigator = source.SelectSingleNode("lj:userpic", manager);
+            XPathNavigator? preformattedNavigator = source.SelectSingleNode("lj:preformatted", manager);
 
             if (musicNavigator != null && !string.IsNullOrEmpty(musicNavigator.Value))
             {

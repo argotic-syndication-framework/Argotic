@@ -423,16 +423,16 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
         XmlNamespaceManager manager = new(source.NameTable);
         manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
-        XPathNavigator descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
+        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
+        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
 
         if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
@@ -442,7 +442,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
 
         if (linkNavigator != null)
         {
-            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri link))
+            if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
                 this.Link = link;
                 wasLoaded = true;
@@ -604,7 +604,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+    private bool LoadCollections(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
@@ -706,24 +706,24 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+    private bool LoadOptionals(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
-        XPathNavigator cloudNavigator = source.SelectSingleNode("cloud", manager);
-        XPathNavigator copyrightNavigator = source.SelectSingleNode("copyright", manager);
-        XPathNavigator generatorNavigator = source.SelectSingleNode("generator", manager);
-        XPathNavigator imageNavigator = source.SelectSingleNode("image", manager);
-        XPathNavigator languageNavigator = source.SelectSingleNode("language", manager);
-        XPathNavigator lastBuildDateNavigator = source.SelectSingleNode("lastBuildDate", manager);
-        XPathNavigator managingEditorNavigator = source.SelectSingleNode("managingEditor", manager);
-        XPathNavigator publicationNavigator = source.SelectSingleNode("pubDate", manager);
-        XPathNavigator ratingNavigator = source.SelectSingleNode("rating", manager);
-        XPathNavigator textInputNavigator = source.SelectSingleNode("textInput", manager);
-        XPathNavigator timeToLiveNavigator = source.SelectSingleNode("ttl", manager);
-        XPathNavigator webMasterNavigator = source.SelectSingleNode("webMaster", manager);
+        XPathNavigator? cloudNavigator = source.SelectSingleNode("cloud", manager);
+        XPathNavigator? copyrightNavigator = source.SelectSingleNode("copyright", manager);
+        XPathNavigator? generatorNavigator = source.SelectSingleNode("generator", manager);
+        XPathNavigator? imageNavigator = source.SelectSingleNode("image", manager);
+        XPathNavigator? languageNavigator = source.SelectSingleNode("language", manager);
+        XPathNavigator? lastBuildDateNavigator = source.SelectSingleNode("lastBuildDate", manager);
+        XPathNavigator? managingEditorNavigator = source.SelectSingleNode("managingEditor", manager);
+        XPathNavigator? publicationNavigator = source.SelectSingleNode("pubDate", manager);
+        XPathNavigator? ratingNavigator = source.SelectSingleNode("rating", manager);
+        XPathNavigator? textInputNavigator = source.SelectSingleNode("textInput", manager);
+        XPathNavigator? timeToLiveNavigator = source.SelectSingleNode("ttl", manager);
+        XPathNavigator? webMasterNavigator = source.SelectSingleNode("webMaster", manager);
 
         if (cloudNavigator != null)
         {
@@ -841,7 +841,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
-    private bool LoadProfile(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+    private bool LoadProfile(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
@@ -861,7 +861,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
                         string hrefAttribute = atomLinkIterator.Current.GetAttribute("href", string.Empty);
                         if (!string.IsNullOrEmpty(hrefAttribute))
                         {
-                            if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri atomLink))
+                            if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri? atomLink))
                             {
                                 this.SelfLink = atomLink;
                                 wasLoaded = true;
@@ -1012,7 +1012,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(RssChannel first, RssChannel second)
+    public static bool operator ==(RssChannel? first, RssChannel? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -1024,7 +1024,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(RssChannel first, RssChannel second)
+    public static bool operator !=(RssChannel? first, RssChannel? second)
     {
         return !(first == second);
     }

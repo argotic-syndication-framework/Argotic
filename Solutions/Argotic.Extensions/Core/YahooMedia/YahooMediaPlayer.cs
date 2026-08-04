@@ -137,7 +137,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
 
             if (!string.IsNullOrEmpty(urlAttribute))
             {
-                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri url))
+                if (Uri.TryCreate(urlAttribute, UriKind.RelativeOrAbsolute, out Uri? url))
                 {
                     this.Url = url;
                     wasLoaded = true;
@@ -279,7 +279,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(YahooMediaPlayer first, YahooMediaPlayer second)
+    public static bool operator ==(YahooMediaPlayer? first, YahooMediaPlayer? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -291,7 +291,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaPlayer first, YahooMediaPlayer second)
+    public static bool operator !=(YahooMediaPlayer? first, YahooMediaPlayer? second)
     {
         return !(first == second);
     }

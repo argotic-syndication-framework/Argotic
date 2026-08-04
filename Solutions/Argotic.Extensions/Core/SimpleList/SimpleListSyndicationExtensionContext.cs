@@ -59,8 +59,8 @@ public class SimpleListSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator treatAsNavigator = source.SelectSingleNode("cf:treatAs", manager);
-            XPathNavigator listInformationNavigator = source.SelectSingleNode("cf:listinfo", manager);
+            XPathNavigator? treatAsNavigator = source.SelectSingleNode("cf:treatAs", manager);
+            XPathNavigator? listInformationNavigator = source.SelectSingleNode("cf:listinfo", manager);
 
             if (treatAsNavigator != null && string.Equals(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase))
             {

@@ -105,7 +105,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         }
         if (controlNavigator.HasChildren)
         {
-            XPathNavigator draftNavigator = controlNavigator.SelectSingleNode("app:draft", manager);
+            XPathNavigator? draftNavigator = controlNavigator.SelectSingleNode("app:draft", manager);
             if (draftNavigator != null && !string.IsNullOrEmpty(draftNavigator.Value))
             {
                 if (string.Equals(draftNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase))
@@ -138,7 +138,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="manager"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, XmlNamespaceManager manager, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);

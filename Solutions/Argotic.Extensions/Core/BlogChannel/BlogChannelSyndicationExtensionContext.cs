@@ -63,14 +63,14 @@ public class BlogChannelSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator blogRollNavigator = source.SelectSingleNode("blogChannel:blogRoll", manager);
-            XPathNavigator mySubscriptionsNavigator = source.SelectSingleNode("blogChannel:mySubscriptions", manager);
-            XPathNavigator blinkNavigator = source.SelectSingleNode("blogChannel:blink", manager);
-            XPathNavigator changesNavigator = source.SelectSingleNode("blogChannel:changes", manager);
+            XPathNavigator? blogRollNavigator = source.SelectSingleNode("blogChannel:blogRoll", manager);
+            XPathNavigator? mySubscriptionsNavigator = source.SelectSingleNode("blogChannel:mySubscriptions", manager);
+            XPathNavigator? blinkNavigator = source.SelectSingleNode("blogChannel:blink", manager);
+            XPathNavigator? changesNavigator = source.SelectSingleNode("blogChannel:changes", manager);
 
             if (blogRollNavigator != null)
             {
-                if (Uri.TryCreate(blogRollNavigator.Value, UriKind.RelativeOrAbsolute, out Uri blogRoll))
+                if (Uri.TryCreate(blogRollNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? blogRoll))
                 {
                     this.BlogRoll = blogRoll;
                     wasLoaded = true;
@@ -79,7 +79,7 @@ public class BlogChannelSyndicationExtensionContext
 
             if (mySubscriptionsNavigator != null)
             {
-                if (Uri.TryCreate(mySubscriptionsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri mySubscriptions))
+                if (Uri.TryCreate(mySubscriptionsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? mySubscriptions))
                 {
                     this.MySubscriptions = mySubscriptions;
                     wasLoaded = true;
@@ -88,7 +88,7 @@ public class BlogChannelSyndicationExtensionContext
 
             if (blinkNavigator != null)
             {
-                if (Uri.TryCreate(blinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri blink))
+                if (Uri.TryCreate(blinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? blink))
                 {
                     this.Blink = blink;
                     wasLoaded = true;
@@ -97,7 +97,7 @@ public class BlogChannelSyndicationExtensionContext
 
             if (changesNavigator != null)
             {
-                if (Uri.TryCreate(changesNavigator.Value, UriKind.RelativeOrAbsolute, out Uri changes))
+                if (Uri.TryCreate(changesNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? changes))
                 {
                     this.Changes = changes;
                     wasLoaded = true;

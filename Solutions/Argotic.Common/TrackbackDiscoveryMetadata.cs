@@ -138,7 +138,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
         manager.AddNamespace("dc", DUBLIN_CORE_NAMESPACE);
         manager.AddNamespace("trackback", TRACKBACK_NAMESPACE);
 
-        XPathNavigator descriptionNavigator = navigator.SelectSingleNode("rdf:RDF/rdf:Description", manager);
+        XPathNavigator? descriptionNavigator = navigator.SelectSingleNode("rdf:RDF/rdf:Description", manager);
 
         if (descriptionNavigator is { HasAttributes: true })
         {
@@ -154,7 +154,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
 
             if (!string.IsNullOrEmpty(aboutAttribute))
             {
-                if (Uri.TryCreate(aboutAttribute, UriKind.RelativeOrAbsolute, out Uri about))
+                if (Uri.TryCreate(aboutAttribute, UriKind.RelativeOrAbsolute, out Uri? about))
                 {
                     this.About = about;
                     wasLoaded = true;
@@ -163,7 +163,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
 
             if (!string.IsNullOrEmpty(identifierAttribute))
             {
-                if (Uri.TryCreate(identifierAttribute, UriKind.RelativeOrAbsolute, out Uri identifier))
+                if (Uri.TryCreate(identifierAttribute, UriKind.RelativeOrAbsolute, out Uri? identifier))
                 {
                     this.Identifier = identifier;
                     wasLoaded = true;
@@ -178,7 +178,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
 
             if (!string.IsNullOrEmpty(pingAttribute))
             {
-                if (Uri.TryCreate(pingAttribute, UriKind.RelativeOrAbsolute, out Uri ping))
+                if (Uri.TryCreate(pingAttribute, UriKind.RelativeOrAbsolute, out Uri? ping))
                 {
                     this.PingUrl = ping;
                     wasLoaded = true;
@@ -300,7 +300,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
+    public static bool operator ==(TrackbackDiscoveryMetadata? first, TrackbackDiscoveryMetadata? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -312,7 +312,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(TrackbackDiscoveryMetadata first, TrackbackDiscoveryMetadata second)
+    public static bool operator !=(TrackbackDiscoveryMetadata? first, TrackbackDiscoveryMetadata? second)
     {
         return !(first == second);
     }

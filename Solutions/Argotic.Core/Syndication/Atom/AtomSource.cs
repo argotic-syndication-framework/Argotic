@@ -196,9 +196,9 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         {
             wasLoaded = true;
         }
-        XPathNavigator idNavigator = source.SelectSingleNode("atom:id", manager);
-        XPathNavigator titleNavigator = source.SelectSingleNode("atom:title", manager);
-        XPathNavigator updatedNavigator = source.SelectSingleNode("atom:updated", manager);
+        XPathNavigator? idNavigator = source.SelectSingleNode("atom:id", manager);
+        XPathNavigator? titleNavigator = source.SelectSingleNode("atom:title", manager);
+        XPathNavigator? updatedNavigator = source.SelectSingleNode("atom:updated", manager);
 
         if (idNavigator != null)
         {
@@ -251,7 +251,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings settings)
+    public bool Load(XPathNavigator source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
@@ -468,7 +468,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(AtomSource first, AtomSource second)
+    public static bool operator ==(AtomSource? first, AtomSource? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -480,7 +480,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomSource first, AtomSource second)
+    public static bool operator !=(AtomSource? first, AtomSource? second)
     {
         return !(first == second);
     }
@@ -577,11 +577,11 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        XPathNavigator generatorNavigator = source.SelectSingleNode("atom:generator", manager);
-        XPathNavigator iconNavigator = source.SelectSingleNode("atom:icon", manager);
-        XPathNavigator logoNavigator = source.SelectSingleNode("atom:logo", manager);
-        XPathNavigator rightsNavigator = source.SelectSingleNode("atom:rights", manager);
-        XPathNavigator subtitleNavigator = source.SelectSingleNode("atom:subtitle", manager);
+        XPathNavigator? generatorNavigator = source.SelectSingleNode("atom:generator", manager);
+        XPathNavigator? iconNavigator = source.SelectSingleNode("atom:icon", manager);
+        XPathNavigator? logoNavigator = source.SelectSingleNode("atom:logo", manager);
+        XPathNavigator? rightsNavigator = source.SelectSingleNode("atom:rights", manager);
+        XPathNavigator? subtitleNavigator = source.SelectSingleNode("atom:subtitle", manager);
 
         if (generatorNavigator != null)
         {

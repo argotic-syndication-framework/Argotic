@@ -69,8 +69,8 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
         {
-            XPathNavigator emailNavigator = source.SelectSingleNode("itunes:email", manager);
-            XPathNavigator nameNavigator = source.SelectSingleNode("itunes:name", manager);
+            XPathNavigator? emailNavigator = source.SelectSingleNode("itunes:email", manager);
+            XPathNavigator? nameNavigator = source.SelectSingleNode("itunes:name", manager);
 
             if (emailNavigator != null && !string.IsNullOrEmpty(emailNavigator.Value))
             {
@@ -198,7 +198,7 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(ITunesOwner first, ITunesOwner second)
+    public static bool operator ==(ITunesOwner? first, ITunesOwner? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -210,7 +210,7 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(ITunesOwner first, ITunesOwner second)
+    public static bool operator !=(ITunesOwner? first, ITunesOwner? second)
     {
         return !(first == second);
     }

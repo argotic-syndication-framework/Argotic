@@ -310,7 +310,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
         if (source.HasChildren)
         {
             XPathNodeIterator historyIterator = source.Select("sx:history", manager);
-            XPathNavigator conflictsNavigator = source.SelectSingleNode("sx:conflicts", manager);
+            XPathNavigator? conflictsNavigator = source.SelectSingleNode("sx:conflicts", manager);
 
             if (historyIterator is { Count: > 0 })
             {
@@ -471,7 +471,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(FeedSynchronizationItem first, FeedSynchronizationItem second)
+    public static bool operator ==(FeedSynchronizationItem? first, FeedSynchronizationItem? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -483,7 +483,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(FeedSynchronizationItem first, FeedSynchronizationItem second)
+    public static bool operator !=(FeedSynchronizationItem? first, FeedSynchronizationItem? second)
     {
         return !(first == second);
     }

@@ -59,8 +59,8 @@ public class FeedSynchronizationSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator sharingNavigator = source.SelectSingleNode("sx:sharing", manager);
-            XPathNavigator syncNavigator = source.SelectSingleNode("sx:sync", manager);
+            XPathNavigator? sharingNavigator = source.SelectSingleNode("sx:sharing", manager);
+            XPathNavigator? syncNavigator = source.SelectSingleNode("sx:sync", manager);
 
             if (sharingNavigator != null)
             {

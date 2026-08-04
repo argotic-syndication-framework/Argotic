@@ -105,12 +105,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <remarks>
     ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
     /// </remarks>
-    public YahooMediaCopyright? Copyright
-    {
-        get;
-
-        set => field = value;
-    }
+    public YahooMediaCopyright? Copyright { get; set; }
 
     /// <summary>
     /// Gets the entities that contributed to the creation of this media group.
@@ -139,12 +134,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <remarks>
     ///     Media object descriptions are typically a sentence in length.
     /// </remarks>
-    public YahooMediaTextConstruct? Description
-    {
-        get;
-
-        set => field = value;
-    }
+    public YahooMediaTextConstruct? Description { get; set; }
 
     /// <summary>
     /// Gets the hash digests for this media group.
@@ -188,12 +178,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets or sets a web browser media player console this media group can be accessed through.
     /// </summary>
     /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media group can be accessed through.</value>
-    public YahooMediaPlayer? Player
-    {
-        get;
-
-        set => field = value;
-    }
+    public YahooMediaPlayer? Player { get; set; }
 
     /// <summary>
     /// Gets the permissible audiences for this media group.
@@ -274,12 +259,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets or sets the title of this media group.
     /// </summary>
     /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this media group.</value>
-    public YahooMediaTextConstruct? Title
-    {
-        get;
-
-        set => field = value;
-    }
+    public YahooMediaTextConstruct? Title { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaGroup"/> using the supplied <see cref="XPathNavigator"/>.

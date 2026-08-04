@@ -409,12 +409,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <remarks>
     ///     Date may be used to express temporal information at any level of granularity. The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime Date
-    {
-        get;
-
-        set => field = value;
-    } = DateTime.MinValue;
+    public DateTime Date { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the date of acceptance of the resource.
@@ -429,12 +424,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     ///         Examples of resources to which a <see cref="DateAccepted">Date Accepted</see> may be relevant are a thesis (accepted by a university department) or an article (accepted by a journal).
     ///     </para>
     /// </remarks>
-    public DateTime DateAccepted
-    {
-        get;
-
-        set => field = value;
-    } = DateTime.MinValue;
+    public DateTime DateAccepted { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the date that the resource became or will become available.
@@ -472,12 +462,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <remarks>
     ///     <para>The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).</para>
     /// </remarks>
-    public DateTime DateCopyrighted
-    {
-        get;
-
-        set => field = value;
-    } = DateTime.MinValue;
+    public DateTime DateCopyrighted { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the date of creation of the resource.
@@ -489,12 +474,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime DateCreated
-    {
-        get;
-
-        set => field = value;
-    } = DateTime.MinValue;
+    public DateTime DateCreated { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the date of issuance of the resource.
@@ -506,12 +486,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime DateIssued
-    {
-        get;
-
-        set => field = value;
-    } = DateTime.MinValue;
+    public DateTime DateIssued { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the date on which the resource was changed.
@@ -523,12 +498,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <remarks>
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
-    public DateTime DateModified
-    {
-        get;
-
-        set => field = value;
-    } = DateTime.MinValue;
+    public DateTime DateModified { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the date of submission of the resource.
@@ -543,12 +513,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     ///         Examples of resources to which a <see cref="DateSubmitted">Date Submitted</see> may be relevant are a thesis (accepted by a university department) or an article (accepted by a journal).
     ///     </para>
     /// </remarks>
-    public DateTime DateSubmitted
-    {
-        get;
-
-        set => field = value;
-    } = DateTime.MinValue;
+    public DateTime DateSubmitted { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the date that the resource is valid for.
@@ -943,12 +908,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>. 
     ///     This framework conforms to this best practice by utilizing the <see cref="CultureInfo"/> class to represent the language of a resource.
     /// </remarks>
-    public CultureInfo? Language
-    {
-        get;
-
-        set => field = value;
-    }
+    public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets or sets the legal document giving official permission to do something with the resource.
@@ -1433,12 +1393,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     ///     </para>
     ///     <para>To describe the file format, physical medium, or dimensions of the resource, use the <see cref="Format"/> property.</para>
     /// </remarks>
-    public DublinCoreTypeVocabularies TypeVocabulary
-    {
-        get;
-
-        set => field = value;
-    } = DublinCoreTypeVocabularies.None;
+    public DublinCoreTypeVocabularies TypeVocabulary { get; set; } = DublinCoreTypeVocabularies.None;
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

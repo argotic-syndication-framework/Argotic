@@ -95,23 +95,13 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// Gets or sets the kilobits per second rate of this media object.
     /// </summary>
     /// <value>The <i>kilobits</i> per second rate of this media object. The default value is <see cref="Int32.MinValue"/>, which indicates that no bit-rate was specified.</value>
-    public int Bitrate
-    {
-        get;
-
-        set => field = value;
-    } = int.MinValue;
+    public int Bitrate { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the number of audio channels in this media object.
     /// </summary>
     /// <value>The number of audio channels in this media object. The default value is <see cref="Int32.MinValue"/>, which indicates that no audio channels were specified.</value>
-    public int Channels
-    {
-        get;
-
-        set => field = value;
-    } = int.MinValue;
+    public int Channels { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the content type of this media object.
@@ -141,12 +131,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// Gets or sets the total play time for this media object.
     /// </summary>
     /// <value>A <see cref="TimeSpan"/> that represents the total playing time for this media object. The default value is <see cref="TimeSpan.MinValue"/>, which indicates that no duration was specified.</value>
-    public TimeSpan Duration
-    {
-        get;
-
-        set => field = value;
-    } = TimeSpan.MinValue;
+    public TimeSpan Duration { get; set; } = TimeSpan.MinValue;
 
     /// <summary>
     /// Gets or sets the expressed version of this media object.
@@ -155,45 +140,25 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     ///     A <see cref="YahooMediaExpression"/> enumeration value that represents the expressed version of this media object. 
     ///     The default value is <see cref="YahooMediaExpression.None"/>, which indicates that no expression version was specified.
     /// </value>
-    public YahooMediaExpression Expression
-    {
-        get;
-
-        set => field = value;
-    } = YahooMediaExpression.None;
+    public YahooMediaExpression Expression { get; set; } = YahooMediaExpression.None;
 
     /// <summary>
     /// Gets or sets the file size of this media object.
     /// </summary>
     /// <value>The number of bytes this media object represents on disk. The default value is <see cref="Int64.MinValue"/>, which indicates that no file size was specified.</value>
-    public long FileSize
-    {
-        get;
-
-        set => field = value;
-    } = long.MinValue;
+    public long FileSize { get; set; } = long.MinValue;
 
     /// <summary>
     /// Gets or sets the number of frames per second for this media object.
     /// </summary>
     /// <value>The number of frames per second for this media object. The default value is <see cref="Int32.MinValue"/>, which indicates that no frame-rate was specified.</value>
-    public int FrameRate
-    {
-        get;
-
-        set => field = value;
-    } = int.MinValue;
+    public int FrameRate { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the height of this media object.
     /// </summary>
     /// <value>The height of this media object, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
-    public int Height
-    {
-        get;
-
-        set => field = value;
-    } = int.MinValue;
+    public int Height { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets a value indicating if this media object is the default object in a group.
@@ -202,12 +167,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// <remarks>
     ///     There should <b>only</b> be one default media object per <see cref="YahooMediaGroup"/>.
     /// </remarks>
-    public bool IsDefault
-    {
-        get;
-
-        set => field = value;
-    }
+    public bool IsDefault { get; set; }
 
     /// <summary>
     /// Gets or sets the primary language encapsulated in this media object.
@@ -221,12 +181,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo? Language
-    {
-        get;
-
-        set => field = value;
-    }
+    public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets or sets the content medium of this media object.
@@ -235,12 +190,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     ///     A <see cref="YahooMediaMedium"/> enumeration value that represents the type of this media object. 
     ///     The default value is <see cref="YahooMediaMedium.None"/>, which indicates that no content medium was specified.
     /// </value>
-    public YahooMediaMedium Medium
-    {
-        get;
-
-        set => field = value;
-    } = YahooMediaMedium.None;
+    public YahooMediaMedium Medium { get; set; } = YahooMediaMedium.None;
 
     /// <summary>
     /// Gets or sets the number of samples per second taken to create this media object.
@@ -249,34 +199,19 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// <remarks>
     ///     This property is expressed in thousands of samples per second (kHz).
     /// </remarks>
-    public decimal SamplingRate
-    {
-        get;
-
-        set => field = value;
-    } = decimal.MinValue;
+    public decimal SamplingRate { get; set; } = decimal.MinValue;
 
     /// <summary>
     /// Gets or sets the location of this media object.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the direct URL to this media object.</value>
-    public Uri? Url
-    {
-        get;
-
-        set => field = value;
-    }
+    public Uri? Url { get; set; }
 
     /// <summary>
     /// Gets or sets the width of this media object.
     /// </summary>
     /// <value>The width of this media object, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
-    public int Width
-    {
-        get;
-
-        set => field = value;
-    } = int.MinValue;
+    public int Width { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets a taxonomy that gives an indication of the type of content for this media object.
@@ -301,12 +236,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// <remarks>
     ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
     /// </remarks>
-    public YahooMediaCopyright? Copyright
-    {
-        get;
-
-        set => field = value;
-    }
+    public YahooMediaCopyright? Copyright { get; set; }
 
     /// <summary>
     /// Gets the entities that contributed to the creation of this media object.
@@ -335,12 +265,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// <remarks>
     ///     Media object descriptions are typically a sentence in length.
     /// </remarks>
-    public YahooMediaTextConstruct? Description
-    {
-        get;
-
-        set => field = value;
-    }
+    public YahooMediaTextConstruct? Description { get; set; }
 
     /// <summary>
     /// Gets the hash digests for this media object.
@@ -384,12 +309,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// Gets or sets a web browser media player console this media object can be accessed through.
     /// </summary>
     /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media object can be accessed through.</value>
-    public YahooMediaPlayer? Player
-    {
-        get;
-
-        set => field = value;
-    }
+    public YahooMediaPlayer? Player { get; set; }
 
     /// <summary>
     /// Gets the permissible audiences for this media object.
@@ -470,12 +390,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// Gets or sets the title of this media object.
     /// </summary>
     /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this media object.</value>
-    public YahooMediaTextConstruct? Title
-    {
-        get;
-
-        set => field = value;
-    }
+    public YahooMediaTextConstruct? Title { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaContent"/> using the supplied <see cref="XPathNavigator"/>.

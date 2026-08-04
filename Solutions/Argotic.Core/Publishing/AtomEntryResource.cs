@@ -90,24 +90,14 @@ public class AtomEntryResource : AtomEntry
     ///     The <see cref="DateTime"/> should be provided in Coordinated Universal Time (UTC).
     /// </remarks>
     /// <seealso cref="AtomPublishingEditedSyndicationExtension"/>
-    public DateTime EditedOn
-    {
-        get;
-
-        set => field = value;
-    } = DateTime.MinValue;
+    public DateTime EditedOn { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets a value indicating if client has requested to control the visibility of this entry.
     /// </summary>
     /// <value><b>true</b> if the client is requesting to control the visibility of this entry; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
     /// <seealso cref="AtomPublishingControlSyndicationExtension"/>
-    public bool IsDraft
-    {
-        get;
-
-        set => field = value;
-    }
+    public bool IsDraft { get; set; }
 
     /// <summary>
     /// Creates a new <see cref="AtomEntryResource"/> instance using data from the specified <see cref="Uri"/>.

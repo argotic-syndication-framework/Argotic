@@ -55,12 +55,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     ///     An encoding is a reversable method of including content within syndicated content.
     /// </remarks>
     /// <seealso cref="SiteSummaryContentItem.WellFormedXmlEncoding"/>
-    public Uri? Encoding
-    {
-        get;
-
-        set => field = value;
-    }
+    public Uri? Encoding { get; set; }
 
     /// <summary>
     /// Gets or sets the format of this item.

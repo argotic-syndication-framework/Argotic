@@ -52,12 +52,7 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// Gets or sets the height of this thumbnail.
     /// </summary>
     /// <value>The height of this thumbnail, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
-    public int Height
-    {
-        get;
-
-        set => field = value;
-    } = int.MinValue;
+    public int Height { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the time offset in relation to the media object.
@@ -69,12 +64,7 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <remarks>
     ///     Typically this property is used when creating multiple keyframes within a single video.
     /// </remarks>
-    public TimeSpan Time
-    {
-        get;
-
-        set => field = value;
-    } = TimeSpan.MinValue;
+    public TimeSpan Time { get; set; } = TimeSpan.MinValue;
 
     /// <summary>
     /// Gets or sets the location of this thumbnail image.
@@ -96,12 +86,7 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// Gets or sets the width of this thumbnail.
     /// </summary>
     /// <value>The width of this thumbnail, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
-    public int Width
-    {
-        get;
-
-        set => field = value;
-    } = int.MinValue;
+    public int Width { get; set; } = int.MinValue;
 
     /// <summary>
     /// Loads this <see cref="YahooMediaThumbnail"/> using the supplied <see cref="XPathNavigator"/>.

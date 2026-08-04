@@ -24,7 +24,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// The maximum allowed duration in seconds for a video segment (8 hours).
     /// </summary>
     /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd"/>
-    public const int MaxDuration = 28800;
+    public const int MaxDuration = 28_800;
 
     /// <summary>
     /// Private member to hold the URL of the video segment.

@@ -21,12 +21,6 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments = new();
 
     /// <summary>
-    /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication resource.
-    /// </summary>
-    [NonSerialized]
-    private readonly XPathNavigator? eventNavigator;
-
-    /// <summary>
     /// Private member to hold the URI that the syndication resource information was retrieved from.
     /// </summary>
     private readonly Uri? eventSource;
@@ -47,7 +41,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     {
         ArgumentNullException.ThrowIfNull(data);
 
-        eventNavigator = data.CreateNavigator();
+        this.Data = data.CreateNavigator();
     }
 
     /// <summary>
@@ -79,7 +73,10 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// <value>
     ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication resource.
     /// </value>
-    public XPathNavigator? Data => eventNavigator;
+    // [field:] targets the compiler-generated backing field, so the auto-property keeps the
+    // [NonSerialized] that the hand-written field used to carry (C# 7.3).
+    [field: NonSerialized]
+    public XPathNavigator? Data { get; }
 
     /// <summary>
     /// Gets the <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.

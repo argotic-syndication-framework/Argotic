@@ -527,7 +527,7 @@ public static class SyndicationEncodingUtility
     /// </remarks>
     internal static byte[] GetStreamBytes(Stream stream)
     {
-        int initialLength = 32768;
+        int initialLength = 32_768;
         int read = 0;
         int chunk;
 

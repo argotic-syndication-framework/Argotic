@@ -124,12 +124,8 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     ///     A publisher <i>should</i> provide a guid for each item.
     /// </remarks>
 #pragma warning disable CA1720 // RSS 2.0 names this element <guid>; the property matches the specification
-    public RssGuid? Guid
+    public RssGuid? Guid { get; set; }
 #pragma warning restore CA1720
-    {
-        get;
-        set => field = value;
-    }
 
     /// <summary>
     /// Gets or sets the URL of a web page associated with this item.

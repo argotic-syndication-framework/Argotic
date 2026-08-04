@@ -51,23 +51,13 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// Gets or sets the type of media that this restriction applies to.
     /// </summary>
     /// <value>A <see cref="YahooMediaRestrictionType"/> enumeration value that indicates the type of media that this restriction applies to.</value>
-    public YahooMediaRestrictionType EntityType
-    {
-        get;
-
-        set => field = value;
-    } = YahooMediaRestrictionType.None;
+    public YahooMediaRestrictionType EntityType { get; set; } = YahooMediaRestrictionType.None;
 
     /// <summary>
     /// Gets or sets the type of relationship that this restriction represents.
     /// </summary>
     /// <value>A <see cref="YahooMediaRestrictionRelationship"/> enumeration value that indicates the type of relationship that this restriction represents.</value>
-    public YahooMediaRestrictionRelationship Relationship
-    {
-        get;
-
-        set => field = value;
-    } = YahooMediaRestrictionRelationship.None;
+    public YahooMediaRestrictionRelationship Relationship { get; set; } = YahooMediaRestrictionRelationship.None;
 
     /// <summary>
     /// Returns the relationship identifier for the supplied <see cref="YahooMediaRestrictionRelationship"/>.

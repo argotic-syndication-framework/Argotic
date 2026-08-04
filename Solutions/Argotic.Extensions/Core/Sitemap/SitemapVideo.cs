@@ -62,7 +62,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <summary>
     /// The maximum allowed duration in seconds.
     /// </summary>
-    public const int MaxDuration = 28800;
+    public const int MaxDuration = 28_800;
 
     /// <summary>
     /// The minimum allowed rating value.

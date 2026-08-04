@@ -73,11 +73,11 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
         if (degreesAsString.Contains('.', StringComparison.Ordinal))
         {
             string[] degreesParts = degreesAsString.Split('.', StringSplitOptions.RemoveEmptyEntries);
-            if (degreesParts.Length == 2)
+            if (degreesParts is [string wholeDegrees, string fractionalDegrees])
             {
-                degreesPart = degreesParts[0];
+                degreesPart = wholeDegrees;
 
-                if (decimal.TryParse("." + degreesParts[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal fractionalValue))
+                if (decimal.TryParse("." + fractionalDegrees, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal fractionalValue))
                 {
                     decimal minutes = decimal.Multiply(fractionalValue, multiplier);
 
@@ -85,11 +85,11 @@ public class BasicGeocodingSyndicationExtension : SyndicationExtension, ICompara
                     if (minutesAsString.Contains('.', StringComparison.Ordinal))
                     {
                         string[] minutesParts = minutesAsString.Split('.', StringSplitOptions.RemoveEmptyEntries);
-                        if (minutesParts.Length == 2)
+                        if (minutesParts is [string wholeMinutes, string fractionalMinutes])
                         {
-                            minutesPart = minutesParts[0];
+                            minutesPart = wholeMinutes;
 
-                            if (decimal.TryParse("." + minutesParts[1], NumberStyles.Float, NumberFormatInfo.InvariantInfo, out fractionalValue))
+                            if (decimal.TryParse("." + fractionalMinutes, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out fractionalValue))
                             {
                                 decimal seconds = decimal.Multiply(fractionalValue, multiplier);
                                 secondsPart = decimal.Round(seconds, 2).ToString(NumberFormatInfo.InvariantInfo);

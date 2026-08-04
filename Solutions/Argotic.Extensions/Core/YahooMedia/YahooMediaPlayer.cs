@@ -52,12 +52,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// Gets or sets the height of the browser window that this player console should be opened in.
     /// </summary>
     /// <value>The height of the browser window that this player console should be opened in. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
-    public int Height
-    {
-        get;
-
-        set => field = value;
-    } = int.MinValue;
+    public int Height { get; set; } = int.MinValue;
 
     /// <summary>
     /// Gets or sets the location of this player console.
@@ -79,12 +74,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// Gets or sets the width of the browser window that this player console should be opened in.
     /// </summary>
     /// <value>The width of the browser window that this player console should be opened in. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
-    public int Width
-    {
-        get;
-
-        set => field = value;
-    } = int.MinValue;
+    public int Width { get; set; } = int.MinValue;
 
     /// <summary>
     /// Loads this <see cref="YahooMediaPlayer"/> using the supplied <see cref="XPathNavigator"/>.

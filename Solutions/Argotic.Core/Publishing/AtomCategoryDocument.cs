@@ -124,12 +124,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
     ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
     /// </remarks>
-    public Uri? BaseUri
-    {
-        get;
-
-        set => field = value;
-    }
+    public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
@@ -140,12 +135,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo? Language
-    {
-        get;
-
-        set => field = value;
-    }
+    public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
@@ -191,12 +181,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// Gets or sets a value indicating whether this document represents a fixed or open set of categories.
     /// </summary>
     /// <value><b>true</b> if this document represents a fixed set of categories; Otherwise, <b>false</b>.</value>
-    public bool IsFixed
-    {
-        get;
-
-        set => field = value;
-    }
+    public bool IsFixed { get; set; }
 
     /// <summary>
     /// Gets or sets an IRI that identifies the categorization scheme used by this document.
@@ -209,12 +194,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
     ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
-    public Uri? Scheme
-    {
-        get;
-
-        set => field = value;
-    }
+    public Uri? Scheme { get; set; }
 
     /// <summary>
     /// Gets or sets an IRI that identifies the location of this <see cref="AtomCategoryDocument"/>.
@@ -228,12 +208,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
     ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
-    public Uri? Uri
-    {
-        get;
-
-        set => field = value;
-    }
+    public Uri? Uri { get; set; }
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.

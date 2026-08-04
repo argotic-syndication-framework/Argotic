@@ -40,12 +40,7 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     ///     A <see cref="FeedHistoryLinkRelationType"/> enumeration value that indicates the link relation type. 
     ///     The default value is <see cref="FeedHistoryLinkRelationType.None"/>, which indicates no relationship type was specified.
     /// </value>
-    public FeedHistoryLinkRelationType RelationType
-    {
-        get;
-
-        set => field = value;
-    } = FeedHistoryLinkRelationType.None;
+    public FeedHistoryLinkRelationType RelationType { get; set; } = FeedHistoryLinkRelationType.None;
 
     /// <summary>
     /// Gets or sets an IRI that identifies the location of this link relation.

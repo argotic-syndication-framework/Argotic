@@ -24,12 +24,6 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     private static readonly SyndicationExtensionLoadedEventArgs emptyEventArguments = new();
 
     /// <summary>
-    /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication extension.
-    /// </summary>
-    [NonSerialized]
-    private readonly XPathNavigator? eventNavigator;
-
-    /// <summary>
     /// Private member to hold the syndication extension that resulted from the load operation.
     /// </summary>
     private readonly ISyndicationExtension? eventExtension;
@@ -50,7 +44,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     {
         ArgumentNullException.ThrowIfNull(data);
 
-        eventNavigator = data.CreateNavigator();
+        this.Data = data.CreateNavigator();
     }
 
     /// <summary>
@@ -82,7 +76,10 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// <value>
     ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
     /// </value>
-    public XPathNavigator? Data => eventNavigator;
+    // [field:] targets the compiler-generated backing field, so the auto-property keeps the
+    // [NonSerialized] that the hand-written field used to carry (C# 7.3).
+    [field: NonSerialized]
+    public XPathNavigator? Data { get; }
 
     /// <summary>
     /// Gets the <see cref="ISyndicationExtension"/> that resulted from the load operation.

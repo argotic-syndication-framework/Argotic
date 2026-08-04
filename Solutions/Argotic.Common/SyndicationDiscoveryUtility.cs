@@ -106,13 +106,11 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        XmlReaderSettings settings = new()
-        {
-            IgnoreComments = true,
-            IgnoreWhitespace = true
-        };
-
-        using XmlReader reader = XmlReader.Create(stream, settings);
+        // The shared factory rather than settings of its own. These previously left DtdProcessing at
+        // the .NET default of Prohibit, while the loader parses internal DTD subsets deliberately so
+        // that entities a feed declares resolve - meaning a feed Load accepted was one whose format
+        // detection threw.
+        using XmlReader reader = XmlReader.Create(stream, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         return SyndicationDiscoveryUtility.SyndicationContentFormatGet(reader);
     }
 
@@ -129,10 +127,13 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(reader);
 
-        XmlDocument document = new();
-        document.Load(reader);
-
-        string rootElementName = document.DocumentElement?.LocalName ?? string.Empty;
+        // Only the root element's name is needed, so the reader is advanced to it rather than a whole
+        // DOM being built. Microsoft's XML performance guidance is explicit that the DOM reads the
+        // entire document into memory - typically three to four times its size on disk - and that
+        // MoveToContent is the way to skip to what you actually want.
+        string rootElementName = reader.MoveToContent() == XmlNodeType.Element
+            ? reader.LocalName
+            : string.Empty;
 
         return EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<SyndicationContentFormat>()
             .GetValueOrDefault(rootElementName, SyndicationContentFormat.None);

@@ -97,6 +97,30 @@ public class SyndicationDiscoveryUtilityTests
     }
 
     [TestMethod]
+    public void SyndicationContentFormatGet_FeedWithInternalDtd_DetectsFormat()
+    {
+        // Format detection used reader settings of its own that left DtdProcessing at the .NET
+        // default of Prohibit, while the loader parses internal DTD subsets deliberately so that
+        // entities a feed declares resolve. A feed that Load accepts must not be one whose format
+        // detection rejects.
+        const string xml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <!DOCTYPE rss [<!ENTITY brand "Example">]>
+            <rss version="2.0">
+              <channel>
+                <title>&brand; Feed</title>
+                <link>https://example.com</link>
+                <description>Feed with an internal DTD subset</description>
+              </channel>
+            </rss>
+            """;
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
+
+        SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream)
+            .ShouldBe(SyndicationContentFormat.Rss);
+    }
+
+    [TestMethod]
     public void ExtractUrls_FromHtmlWithLinks_ExtractsUrls()
     {
         const string html = """

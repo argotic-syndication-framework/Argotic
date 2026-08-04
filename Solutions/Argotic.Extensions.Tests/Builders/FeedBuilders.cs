@@ -40,6 +40,7 @@ public class RssFeedBuilder
 
     public RssFeedBuilder WithItem(Action<RssItem> configure)
     {
+        ArgumentNullException.ThrowIfNull(configure);
         RssItem item = new()
         {
             Title = $"Item {feed.Channel.Items.Count + 1}",
@@ -288,6 +289,7 @@ public class AtomFeedBuilder
 
     public AtomFeedBuilder WithEntry(Action<AtomEntryBuilder> configure)
     {
+        ArgumentNullException.ThrowIfNull(configure);
         AtomEntryBuilder builder = new();
         configure(builder);
         feed.Entries.Add(builder.Build());
@@ -504,6 +506,7 @@ public class OpmlDocumentBuilder
 
     public OpmlDocumentBuilder WithHead(Action<OpmlHead> configure)
     {
+        ArgumentNullException.ThrowIfNull(configure);
         configure(document.Head);
         return this;
     }
@@ -516,6 +519,7 @@ public class OpmlDocumentBuilder
 
     public OpmlDocumentBuilder WithOutline(Action<OpmlOutlineBuilder> configure)
     {
+        ArgumentNullException.ThrowIfNull(configure);
         OpmlOutlineBuilder builder = new();
         configure(builder);
         document.Outlines.Add(builder.Build());
@@ -633,6 +637,7 @@ public class OpmlOutlineBuilder
 
     public OpmlOutlineBuilder WithChildOutline(Action<OpmlOutlineBuilder> configure)
     {
+        ArgumentNullException.ThrowIfNull(configure);
         OpmlOutlineBuilder builder = new();
         configure(builder);
         outline.Outlines.Add(builder.Build());

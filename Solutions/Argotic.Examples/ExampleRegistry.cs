@@ -11,7 +11,7 @@ namespace Argotic.Examples;
 /// <param name="MethodName">The method name for reference.</param>
 /// <param name="IsAsync">Whether the example method is asynchronous.</param>
 /// <param name="RunAsync">A function to execute the example.</param>
-internal record ExampleInfo(string Name, string Description, string MethodName, bool IsAsync, Func<Task> RunAsync);
+internal sealed record ExampleInfo(string Name, string Description, string MethodName, bool IsAsync, Func<Task> RunAsync);
 
 /// <summary>
 /// Represents a category of examples.
@@ -19,7 +19,7 @@ internal record ExampleInfo(string Name, string Description, string MethodName, 
 /// <param name="Name">The display name of the category.</param>
 /// <param name="Description">A description of the category.</param>
 /// <param name="Key">A unique key for the category.</param>
-internal record ExampleCategory(string Name, string Description, string Key);
+internal sealed record ExampleCategory(string Name, string Description, string Key);
 
 /// <summary>
 /// Discovers and catalogs example methods from the Argotic.Examples assembly.

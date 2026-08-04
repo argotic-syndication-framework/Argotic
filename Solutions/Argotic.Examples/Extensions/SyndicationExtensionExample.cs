@@ -7,7 +7,7 @@ namespace Argotic.Examples.Extensions;
 /// <summary>
 /// Provides a simple example of a custom syndication extension.
 /// </summary>
-internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
+internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComparable
 {
     /// <summary>
     /// Initializes a new instance of the <see cref="MyCustomSyndicationExtension"/> class.

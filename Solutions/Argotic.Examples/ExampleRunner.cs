@@ -6,7 +6,7 @@ namespace Argotic.Examples;
 /// Main runner for the Argotic Examples CLI application.
 /// Provides an interactive menu system for exploring and running examples.
 /// </summary>
-internal class ExampleRunner
+internal sealed class ExampleRunner
 {
     private const string ExitChoice = "[grey]Exit[/]";
     private const string BackChoice = "[grey]<< Back[/]";

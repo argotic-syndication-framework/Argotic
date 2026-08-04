@@ -95,6 +95,12 @@ dotnet_diagnostic.SA1201.severity = silent
 dotnet_diagnostic.CA1036.severity = none
 # CA2225: Operator overloads have named alternates
 dotnet_diagnostic.CA2225.severity = none
+# CA1308: Normalize strings to uppercase. Every site normalises an input token in order to match
+# spec-defined literals that are themselves lower case ASCII - the sitemap changefreq values
+# ("always", "hourly", ...) and the video id types ("tms:series", ...). Following the rule would
+# mean rewriting those literals in upper case, which reads worse against the specification and
+# gains nothing: the Turkish-I hazard the rule exists for cannot arise on this token set.
+dotnet_diagnostic.CA1308.severity = none
 
 # SA1505: Opening brace should not be followed by blank line
 dotnet_diagnostic.SA1505.severity = warning
@@ -170,6 +176,10 @@ dotnet_diagnostic.CA2007.severity = none
 dotnet_diagnostic.CA1034.severity = none
 # CA1303: Do not pass literals as localized parameters - console output is not localized
 dotnet_diagnostic.CA1303.severity = none
+# CA1812: Internal class apparently never instantiated. The commands and settings types are
+# constructed by Spectre.Console.Cli through reflection when it binds the command line, so the
+# analyzer cannot see the instantiation. Removing them would break the sample runner.
+dotnet_diagnostic.CA1812.severity = none
 
 # Test files. Scoped to the whole test project rather than a filename pattern: the suite
 # mixes *Test.cs and *Tests.cs, and the builders/test-doubles/base classes carry the same

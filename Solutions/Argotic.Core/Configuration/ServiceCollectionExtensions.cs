@@ -41,6 +41,9 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration,
         string sectionName = "Argotic:XmlRpc")
     {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configuration);
+
         services.Configure<XmlRpcClientOptions>(configuration.GetSection(sectionName));
         services.AddTransient<XmlRpcClient>();
         return services;
@@ -77,6 +80,9 @@ public static class ServiceCollectionExtensions
         IConfiguration configuration,
         string sectionName = "Argotic:Trackback")
     {
+        ArgumentNullException.ThrowIfNull(services);
+        ArgumentNullException.ThrowIfNull(configuration);
+
         services.Configure<TrackbackClientOptions>(configuration.GetSection(sectionName));
         services.AddTransient<TrackbackClient>();
         return services;

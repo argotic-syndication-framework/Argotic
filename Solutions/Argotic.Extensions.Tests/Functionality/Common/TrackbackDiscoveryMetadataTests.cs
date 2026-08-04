@@ -429,22 +429,24 @@ public class TrackbackDiscoveryMetadataTests
     }
 
     [TestMethod]
-    public void GetHashCode_DoesNotThrow()
+    public void GetHashCode_EqualMetadata_ReturnSameValue()
     {
         // Arrange
-        TrackbackDiscoveryMetadata metadata = new()
+        TrackbackDiscoveryMetadata first = new()
+        {
+            About = new Uri("http://example.com/post/1"),
+            PingUrl = new Uri("http://example.com/trackback/1")
+        };
+        TrackbackDiscoveryMetadata second = new()
         {
             About = new Uri("http://example.com/post/1"),
             PingUrl = new Uri("http://example.com/trackback/1")
         };
 
-        // Act
-        int hash = metadata.GetHashCode();
-
-        // Assert
-        // The implementation uses charArray.GetHashCode() which is not deterministic,
-        // so we just verify it doesn't throw and returns a value
-        hash.ShouldNotBe(0);
+        // Act & Assert
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     [TestMethod]

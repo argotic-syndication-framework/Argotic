@@ -190,7 +190,14 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => this.Location?.GetHashCode() ?? 0;
+    /// <remarks>
+    ///     Routed through <see cref="HashCodeUtility.Component(Uri)"/> rather than calling
+    ///     <see cref="Uri.GetHashCode"/> directly. <see cref="CompareTo(SitemapVideoSegment)"/> compares
+    ///     the location with <see cref="StringComparison.OrdinalIgnoreCase"/>, but <see cref="Uri.GetHashCode"/>
+    ///     is case-sensitive over the path, so two segments differing only in path case compared equal
+    ///     yet hashed differently.
+    /// </remarks>
+    public override int GetHashCode() => HashCodeUtility.Component(this.Location);
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SitemapVideoSegment"/>.

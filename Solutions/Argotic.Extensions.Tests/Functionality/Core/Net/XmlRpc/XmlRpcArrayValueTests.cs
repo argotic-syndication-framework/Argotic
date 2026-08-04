@@ -247,19 +247,18 @@ public class XmlRpcArrayValueTests
     }
 
     [TestMethod]
-    public void GetHashCode_DoesNotThrow()
+    public void GetHashCode_EqualArrays_ReturnSameValue()
     {
         // Arrange
-        XmlRpcArrayValue array = new();
-        array.Values.Add(new XmlRpcScalarValue(42));
+        XmlRpcArrayValue first = new();
+        first.Values.Add(new XmlRpcScalarValue(42));
+        XmlRpcArrayValue second = new();
+        second.Values.Add(new XmlRpcScalarValue(42));
 
-        // Act
-        int hash = array.GetHashCode();
-
-        // Assert
-        // The implementation uses charArray.GetHashCode() which is not deterministic,
-        // so we just verify it doesn't throw and returns a value
-        hash.ShouldNotBe(0);
+        // Act & Assert
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     [TestMethod]

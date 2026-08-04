@@ -1198,14 +1198,8 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         // Arrange
         DublinCoreMetadataTermsSyndicationExtension target = CreateFullExtension();
 
-        // Act
-        int hashCode = target.GetHashCode();
-
-        // Assert - GetHashCode should return an integer value
-        // Note: The current implementation has a known issue where GetHashCode
-        // is not consistent (uses charArray.GetHashCode() on a new array each time).
-        // This test just verifies the method can be called without error.
-        hashCode.ShouldBeOfType<int>();
+        // Act & Assert - the hash is content-based, so it is stable across calls
+        target.GetHashCode().ShouldBe(target.GetHashCode());
     }
 
     [TestMethod]
@@ -1215,11 +1209,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         DublinCoreMetadataTermsSyndicationExtension target = CreateFullExtension();
         DublinCoreMetadataTermsSyndicationExtension other = CreateFullExtension();
 
-        // Act & Assert - Verify objects are equal via Equals method
-        // Note: The current GetHashCode implementation has a known issue where it
-        // returns different values for equal objects (uses charArray.GetHashCode()
-        // on a new array each time). This test verifies Equals works correctly.
+        // Act & Assert - equal objects must hash equally, which is what this test's name promises
         target.Equals(other).ShouldBeTrue();
+        target.GetHashCode().ShouldBe(other.GetHashCode());
     }
 
     #endregion

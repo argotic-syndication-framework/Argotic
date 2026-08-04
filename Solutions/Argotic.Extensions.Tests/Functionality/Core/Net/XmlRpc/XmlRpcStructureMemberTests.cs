@@ -374,18 +374,16 @@ public class XmlRpcStructureMemberTests
     }
 
     [TestMethod]
-    public void GetHashCode_DoesNotThrow()
+    public void GetHashCode_EqualMembers_ReturnSameValue()
     {
         // Arrange
-        XmlRpcStructureMember member = new("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember first = new("name", new XmlRpcScalarValue("value"));
+        XmlRpcStructureMember second = new("name", new XmlRpcScalarValue("value"));
 
-        // Act
-        int hash = member.GetHashCode();
-
-        // Assert
-        // The implementation uses charArray.GetHashCode() which is not deterministic,
-        // so we just verify it doesn't throw and returns a value
-        hash.ShouldNotBe(0);
+        // Act & Assert
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     [TestMethod]

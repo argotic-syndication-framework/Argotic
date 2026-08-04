@@ -185,7 +185,27 @@ public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Context.TreatAsList), HashCodeUtility.Component(this.Context.Grouping), HashCodeUtility.Component(this.Context.Sorting));
+    /// <remarks>
+    ///     The collection members are folded in element by element. Passing the collection itself to
+    ///     <see cref="HashCodeUtility.Component{T}(T)"/> would hash the list reference, so two instances
+    ///     that <see cref="CompareTo"/> reports as equal hashed differently.
+    /// </remarks>
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+        hash.Add(HashCodeUtility.Component(this.Context.TreatAsList));
+        foreach (SimpleListGroup group in this.Context.Grouping)
+        {
+            hash.Add(HashCodeUtility.Component(group));
+        }
+
+        foreach (SimpleListSort sort in this.Context.Sorting)
+        {
+            hash.Add(HashCodeUtility.Component(sort));
+        }
+
+        return hash.ToHashCode();
+    }
 
     /// <summary>
     /// Determines if operands are equal.

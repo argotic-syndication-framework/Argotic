@@ -397,20 +397,16 @@ public class DiscoverableSyndicationEndpointTests
     }
 
     [TestMethod]
-    public void GetHashCode_DoesNotThrow()
+    public void GetHashCode_EqualEndpoints_ReturnSameValue()
     {
         // Arrange
-        DiscoverableSyndicationEndpoint endpoint = new(
-            new Uri("http://example.com/feed.rss"),
-            "application/rss+xml");
+        DiscoverableSyndicationEndpoint first = new(new Uri("http://example.com/feed.rss"), "application/rss+xml");
+        DiscoverableSyndicationEndpoint second = new(new Uri("http://example.com/feed.rss"), "application/rss+xml");
 
-        // Act
-        int hash = endpoint.GetHashCode();
-
-        // Assert
-        // The implementation uses charArray.GetHashCode() which is not deterministic,
-        // so we just verify it doesn't throw and returns a value
-        hash.ShouldNotBe(0);
+        // Act & Assert
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     [TestMethod]

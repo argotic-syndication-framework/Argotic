@@ -186,7 +186,23 @@ public class PingbackSyndicationExtension : SyndicationExtension, IComparable<Pi
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Context.Server), HashCodeUtility.Component(this.Context.Target), HashCodeUtility.Component(this.Context.Abouts));
+    /// <remarks>
+    ///     The collection members are folded in element by element. Passing the collection itself to
+    ///     <see cref="HashCodeUtility.Component{T}(T)"/> would hash the list reference, so two instances
+    ///     that <see cref="CompareTo"/> reports as equal hashed differently.
+    /// </remarks>
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+        hash.Add(HashCodeUtility.Component(this.Context.Server));
+        hash.Add(HashCodeUtility.Component(this.Context.Target));
+        foreach (Uri about in this.Context.Abouts)
+        {
+            hash.Add(HashCodeUtility.Component(about));
+        }
+
+        return hash.ToHashCode();
+    }
 
     /// <summary>
     /// Determines if operands are equal.

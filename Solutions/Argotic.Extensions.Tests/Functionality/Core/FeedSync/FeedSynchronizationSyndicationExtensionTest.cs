@@ -264,15 +264,16 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedSyncGetHashCode_DoesNotThrow()
+    public void FeedSyncGetHashCode_EqualExtensions_ReturnSameValue()
     {
         // Arrange
-        FeedSynchronizationSyndicationExtension target = CreateExtension1();
+        FeedSynchronizationSyndicationExtension first = CreateExtension1();
+        FeedSynchronizationSyndicationExtension second = CreateExtension1();
 
-        // Act & Assert - GetHashCode should not throw
-        // Note: The current implementation uses charArray.GetHashCode() which returns
-        // identity hash codes, not consistent content-based hashes. This is a known issue.
-        Should.NotThrow(() => target.GetHashCode());
+        // Act & Assert
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     #endregion

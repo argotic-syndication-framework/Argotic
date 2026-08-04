@@ -185,7 +185,24 @@ public class SiteSummarySlashSyndicationExtension : SyndicationExtension, ICompa
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Context.Comments), HashCodeUtility.Component(this.Context.Department), HashCodeUtility.Component(this.Context.Section), HashCodeUtility.Component(this.Context.HitParade));
+    /// <remarks>
+    ///     The collection members are folded in element by element. Passing the collection itself to
+    ///     <see cref="HashCodeUtility.Component{T}(T)"/> would hash the list reference, so two instances
+    ///     that <see cref="CompareTo"/> reports as equal hashed differently.
+    /// </remarks>
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+        hash.Add(HashCodeUtility.Component(this.Context.Comments));
+        hash.Add(HashCodeUtility.Component(this.Context.Department));
+        hash.Add(HashCodeUtility.Component(this.Context.Section));
+        foreach (int hit in this.Context.HitParade)
+        {
+            hash.Add(HashCodeUtility.Component(hit));
+        }
+
+        return hash.ToHashCode();
+    }
 
     /// <summary>
     /// Determines if operands are equal.

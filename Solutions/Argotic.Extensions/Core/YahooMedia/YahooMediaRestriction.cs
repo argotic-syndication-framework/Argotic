@@ -262,7 +262,23 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Entities), HashCodeUtility.Component(this.EntityType), HashCodeUtility.Component(this.Relationship));
+    /// <remarks>
+    ///     The collection members are folded in element by element. Passing the collection itself to
+    ///     <see cref="HashCodeUtility.Component{T}(T)"/> would hash the list reference, so two instances
+    ///     that <see cref="CompareTo"/> reports as equal hashed differently.
+    /// </remarks>
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+        hash.Add(HashCodeUtility.Component(this.EntityType));
+        hash.Add(HashCodeUtility.Component(this.Relationship));
+        foreach (string entity in this.Entities)
+        {
+            hash.Add(HashCodeUtility.Component(entity));
+        }
+
+        return hash.ToHashCode();
+    }
 
     /// <summary>
     /// Determines if operands are equal.

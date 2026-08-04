@@ -513,19 +513,16 @@ public class AtomPublishingSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void GetHashCode_ShouldReturnInteger()
+    public void GetHashCode_EqualExtensions_ReturnSameValue()
     {
         // Arrange
-        AtomPublishingEditedSyndicationExtension target = CreateExtension1();
+        AtomPublishingEditedSyndicationExtension first = CreateExtension1();
+        AtomPublishingEditedSyndicationExtension second = CreateExtension1();
 
-        // Act
-        int hash = target.GetHashCode();
-
-        // Assert
-        // Note: The current implementation uses charArray.GetHashCode() which returns
-        // the object reference hash, not a content-based hash. This test verifies
-        // the method executes without error.
-        hash.ShouldBeOfType<int>();
+        // Act & Assert
+        first.Equals(second).ShouldBeTrue();
+        first.GetHashCode().ShouldBe(second.GetHashCode());
+        first.GetHashCode().ShouldBe(first.GetHashCode());
     }
 
     [TestMethod]

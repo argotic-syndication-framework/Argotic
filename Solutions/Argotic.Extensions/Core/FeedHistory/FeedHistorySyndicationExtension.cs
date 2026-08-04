@@ -226,7 +226,29 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.IsArchive), HashCodeUtility.Component(this.Context.IsComplete), HashCodeUtility.Component(this.Context.Relations))));
+    /// <remarks>
+    ///     The collection members are folded in element by element. Passing the collection itself to
+    ///     <see cref="HashCodeUtility.Component{T}(T)"/> would hash the list reference, so two instances
+    ///     that <see cref="CompareTo"/> reports as equal hashed differently.
+    /// </remarks>
+    public override int GetHashCode()
+    {
+        HashCode hash = new();
+        hash.Add(HashCodeUtility.Component(this.Description));
+        hash.Add(HashCodeUtility.Component(this.Documentation));
+        hash.Add(HashCodeUtility.Component(this.Name));
+        hash.Add(HashCodeUtility.Component(this.Version));
+        hash.Add(HashCodeUtility.Component(this.XmlNamespace));
+        hash.Add(HashCodeUtility.Component(this.XmlPrefix));
+        hash.Add(HashCodeUtility.Component(this.Context.IsArchive));
+        hash.Add(HashCodeUtility.Component(this.Context.IsComplete));
+        foreach (FeedHistoryLinkRelation relation in this.Context.Relations)
+        {
+            hash.Add(HashCodeUtility.Component(relation));
+        }
+
+        return hash.ToHashCode();
+    }
 
     /// <summary>
     /// Determines if operands are equal.

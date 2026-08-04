@@ -30,8 +30,7 @@ internal static class TrackbackSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            TrackbackSyndicationExtension? channelExtension = feed.Channel.FindExtension(TrackbackSyndicationExtension.MatchByType) as TrackbackSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(TrackbackSyndicationExtension.MatchByType) is TrackbackSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowTrackbackExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class TrackbackSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                TrackbackSyndicationExtension? itemExtension = item.FindExtension(TrackbackSyndicationExtension.MatchByType) as TrackbackSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(TrackbackSyndicationExtension.MatchByType) is TrackbackSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

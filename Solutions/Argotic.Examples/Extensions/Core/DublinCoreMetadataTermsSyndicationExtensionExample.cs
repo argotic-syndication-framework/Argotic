@@ -30,8 +30,7 @@ internal static class DublinCoreMetadataTermsSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            DublinCoreMetadataTermsSyndicationExtension? channelExtension = feed.Channel.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as DublinCoreMetadataTermsSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) is DublinCoreMetadataTermsSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowDublinCoreMetadataTermsExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class DublinCoreMetadataTermsSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                DublinCoreMetadataTermsSyndicationExtension? itemExtension = item.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as DublinCoreMetadataTermsSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) is DublinCoreMetadataTermsSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

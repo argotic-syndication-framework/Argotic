@@ -30,8 +30,7 @@ internal static class YahooMediaSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            YahooMediaSyndicationExtension? channelExtension = feed.Channel.FindExtension(YahooMediaSyndicationExtension.MatchByType) as YahooMediaSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(YahooMediaSyndicationExtension.MatchByType) is YahooMediaSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowYahooMediaExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class YahooMediaSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                YahooMediaSyndicationExtension? itemExtension = item.FindExtension(YahooMediaSyndicationExtension.MatchByType) as YahooMediaSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(YahooMediaSyndicationExtension.MatchByType) is YahooMediaSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

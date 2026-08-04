@@ -30,8 +30,7 @@ internal static class FeedRankSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            FeedRankSyndicationExtension? channelExtension = feed.Channel.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(FeedRankSyndicationExtension.MatchByType) is FeedRankSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowFeedRankExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class FeedRankSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                FeedRankSyndicationExtension? itemExtension = item.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(FeedRankSyndicationExtension.MatchByType) is FeedRankSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

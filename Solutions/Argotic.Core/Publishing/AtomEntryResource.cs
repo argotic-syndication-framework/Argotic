@@ -349,14 +349,12 @@ public class AtomEntryResource : AtomEntry
     /// </summary>
     private void LoadAtomPublishingExtensions()
     {
-        AtomPublishingEditedSyndicationExtension? editedExtension = this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) as AtomPublishingEditedSyndicationExtension;
-        if (editedExtension is not null)
+        if (this.FindExtension(AtomPublishingEditedSyndicationExtension.MatchByType) is AtomPublishingEditedSyndicationExtension editedExtension)
         {
             this.EditedOn = editedExtension.Context.EditedOn;
         }
 
-        AtomPublishingControlSyndicationExtension? controlExtension = this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) as AtomPublishingControlSyndicationExtension;
-        if (controlExtension is not null)
+        if (this.FindExtension(AtomPublishingControlSyndicationExtension.MatchByType) is AtomPublishingControlSyndicationExtension controlExtension)
         {
             this.IsDraft = controlExtension.Context.IsDraft;
         }

@@ -30,8 +30,7 @@ internal static class WellFormedWebCommentsSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            WellFormedWebCommentsSyndicationExtension? channelExtension = feed.Channel.FindExtension(WellFormedWebCommentsSyndicationExtension.MatchByType) as WellFormedWebCommentsSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(WellFormedWebCommentsSyndicationExtension.MatchByType) is WellFormedWebCommentsSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowWellFormedWebCommentsExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class WellFormedWebCommentsSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                WellFormedWebCommentsSyndicationExtension? itemExtension = item.FindExtension(WellFormedWebCommentsSyndicationExtension.MatchByType) as WellFormedWebCommentsSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(WellFormedWebCommentsSyndicationExtension.MatchByType) is WellFormedWebCommentsSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

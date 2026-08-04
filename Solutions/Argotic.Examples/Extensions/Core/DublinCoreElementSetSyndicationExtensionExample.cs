@@ -30,8 +30,7 @@ internal static class DublinCoreElementSetSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            DublinCoreElementSetSyndicationExtension? channelExtension = feed.Channel.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) is DublinCoreElementSetSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowDublinCoreExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class DublinCoreElementSetSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                DublinCoreElementSetSyndicationExtension? itemExtension = item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) is DublinCoreElementSetSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

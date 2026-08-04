@@ -30,8 +30,7 @@ internal static class SimpleListSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            SimpleListSyndicationExtension? channelExtension = feed.Channel.FindExtension(SimpleListSyndicationExtension.MatchByType) as SimpleListSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(SimpleListSyndicationExtension.MatchByType) is SimpleListSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowSimpleListExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class SimpleListSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                SimpleListSyndicationExtension? itemExtension = item.FindExtension(SimpleListSyndicationExtension.MatchByType) as SimpleListSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(SimpleListSyndicationExtension.MatchByType) is SimpleListSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

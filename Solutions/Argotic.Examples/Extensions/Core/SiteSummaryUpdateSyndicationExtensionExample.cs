@@ -30,8 +30,7 @@ internal static class SiteSummaryUpdateSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            SiteSummaryUpdateSyndicationExtension? channelExtension = feed.Channel.FindExtension(SiteSummaryUpdateSyndicationExtension.MatchByType) as SiteSummaryUpdateSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(SiteSummaryUpdateSyndicationExtension.MatchByType) is SiteSummaryUpdateSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowUpdateExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class SiteSummaryUpdateSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                SiteSummaryUpdateSyndicationExtension? itemExtension = item.FindExtension(SiteSummaryUpdateSyndicationExtension.MatchByType) as SiteSummaryUpdateSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(SiteSummaryUpdateSyndicationExtension.MatchByType) is SiteSummaryUpdateSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

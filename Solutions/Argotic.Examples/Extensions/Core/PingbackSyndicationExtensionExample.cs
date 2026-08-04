@@ -30,8 +30,7 @@ internal static class PingbackSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            PingbackSyndicationExtension? channelExtension = feed.Channel.FindExtension(PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(PingbackSyndicationExtension.MatchByType) is PingbackSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowPingbackExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class PingbackSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                PingbackSyndicationExtension? itemExtension = item.FindExtension(PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(PingbackSyndicationExtension.MatchByType) is PingbackSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

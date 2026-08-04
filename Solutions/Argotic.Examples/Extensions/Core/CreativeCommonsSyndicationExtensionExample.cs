@@ -30,8 +30,7 @@ internal static class CreativeCommonsSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            CreativeCommonsSyndicationExtension? channelExtension = feed.Channel.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) is CreativeCommonsSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowCreativeCommonsExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class CreativeCommonsSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                CreativeCommonsSyndicationExtension? itemExtension = item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) is CreativeCommonsSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

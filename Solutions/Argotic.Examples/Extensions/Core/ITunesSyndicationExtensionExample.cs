@@ -30,8 +30,7 @@ internal static class ITunesSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            ITunesSyndicationExtension? channelExtension = feed.Channel.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(ITunesSyndicationExtension.MatchByType) is ITunesSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowITunesExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class ITunesSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                ITunesSyndicationExtension? itemExtension = item.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(ITunesSyndicationExtension.MatchByType) is ITunesSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

@@ -162,9 +162,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
         {
             return 1;
         }
-        MyCustomSyndicationExtension? value = obj as MyCustomSyndicationExtension;
-
-        if (value is not null)
+        if (obj is MyCustomSyndicationExtension value)
         {
             // Base class properties
             int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);

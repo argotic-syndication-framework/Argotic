@@ -30,8 +30,7 @@ internal static class BasicGeocodingSyndicationExtensionExample
         // Extensible framework entities provide properties/methods to determine if entity is extended and predicate based searching against available extensions
         if (feed.Channel.HasExtensions)
         {
-            BasicGeocodingSyndicationExtension? channelExtension = feed.Channel.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension;
-            if (channelExtension is not null)
+            if (feed.Channel.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) is BasicGeocodingSyndicationExtension channelExtension)
             {
                 ExampleOutput.ShowBasicGeocodingExtension(channelExtension);
             }
@@ -41,8 +40,7 @@ internal static class BasicGeocodingSyndicationExtensionExample
         {
             if (item.HasExtensions)
             {
-                BasicGeocodingSyndicationExtension? itemExtension = item.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension;
-                if (itemExtension is not null)
+                if (item.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) is BasicGeocodingSyndicationExtension itemExtension)
                 {
                     // Process extension for current item
                 }

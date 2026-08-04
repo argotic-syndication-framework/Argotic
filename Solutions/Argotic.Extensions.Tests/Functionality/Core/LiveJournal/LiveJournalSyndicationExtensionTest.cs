@@ -120,7 +120,7 @@ public class LiveJournalSyndicationExtensionTest
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
-        output.Replace(Environment.NewLine, "").ShouldBe(toStringText.Replace(Environment.NewLine, ""));
+        output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
     [TestMethod]

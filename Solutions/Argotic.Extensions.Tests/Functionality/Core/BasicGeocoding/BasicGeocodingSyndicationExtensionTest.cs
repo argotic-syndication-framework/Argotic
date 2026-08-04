@@ -136,7 +136,7 @@ public class BasicGeocodingSyndicationExtensionTest
         target.WriteTo(writer);
         writer.Flush();
         string output = sw.ToString();
-        output.Replace(Environment.NewLine, "").ShouldBe(nycText.Replace(Environment.NewLine, ""));
+        output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(nycText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
     [TestMethod]

@@ -45,6 +45,6 @@ internal static class ExtensionTestUtil
 
     internal static string GetWrappedXml(string namespc, string strExt)
     {
-        return string.Format(strFullXml1, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version?.ToString() ?? "0.0.0.0", strExt);
+        return string.Format(CultureInfo.InvariantCulture, strFullXml1, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version?.ToString() ?? "0.0.0.0", strExt);
     }
 }

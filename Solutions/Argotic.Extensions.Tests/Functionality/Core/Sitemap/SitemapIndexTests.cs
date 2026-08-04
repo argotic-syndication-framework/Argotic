@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
@@ -426,9 +427,9 @@ public class SitemapIndexTests
 
         for (int i = 1; i <= 100; i++)
         {
-            builder.AppendLine($"  <sitemap>");
-            builder.AppendLine($"    <loc>https://example.com/sitemap{i}.xml</loc>");
-            builder.AppendLine($"  </sitemap>");
+            builder.AppendLine(CultureInfo.InvariantCulture, $"  <sitemap>");
+            builder.AppendLine(CultureInfo.InvariantCulture, $"    <loc>https://example.com/sitemap{i}.xml</loc>");
+            builder.AppendLine(CultureInfo.InvariantCulture, $"  </sitemap>");
         }
 
         builder.AppendLine("</sitemapindex>");

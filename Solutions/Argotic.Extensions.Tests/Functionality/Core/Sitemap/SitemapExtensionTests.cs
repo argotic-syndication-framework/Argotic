@@ -419,7 +419,7 @@ public class SitemapExtensionTests
         foreach (var code in validLanguageCodes)
         {
             // Assert - Language codes are 2 characters or hyphenated
-            (code.Length == 2 || code.Contains('-')).ShouldBeTrue($"Invalid language code format: {code}");
+            (code.Length == 2 || code.Contains('-', StringComparison.Ordinal)).ShouldBeTrue($"Invalid language code format: {code}");
         }
     }
 

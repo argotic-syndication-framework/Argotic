@@ -508,7 +508,7 @@ public class SyndicationDateTimeUtilityTests
         // Local time should have a timezone offset (e.g., +05:00 or -08:00)
         result.ShouldNotEndWith("Z");
         // Should contain either + or - for timezone offset
-        (result.Contains('+') || result.Contains('-')).ShouldBeTrue();
+        (result.Contains('+', StringComparison.Ordinal) || result.Contains('-', StringComparison.Ordinal)).ShouldBeTrue();
     }
 
     [TestMethod]

@@ -321,11 +321,11 @@ internal static class ExampleRegistry
     private static string GetMethodDescription(Type type, MethodInfo method)
     {
         // Generate a description based on the method name and type
-        string className = type.Name.Replace("Example", string.Empty);
+        string className = type.Name.Replace("Example", string.Empty, StringComparison.Ordinal);
         string methodName = method.Name
-            .Replace("ExampleAsync", string.Empty)
-            .Replace("Example", string.Empty)
-            .Replace("Async", string.Empty);
+            .Replace("ExampleAsync", string.Empty, StringComparison.Ordinal)
+            .Replace("Example", string.Empty, StringComparison.Ordinal)
+            .Replace("Async", string.Empty, StringComparison.Ordinal);
 
         return methodName switch
         {

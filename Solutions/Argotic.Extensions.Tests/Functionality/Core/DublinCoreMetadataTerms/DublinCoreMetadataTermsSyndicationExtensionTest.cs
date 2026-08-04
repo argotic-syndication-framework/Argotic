@@ -1483,7 +1483,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         string output = sw.ToString();
 
         // Assert
-        output.Replace(Environment.NewLine, "").ShouldBe(toStringText.Replace(Environment.NewLine, ""));
+        output.Replace(Environment.NewLine, "", StringComparison.Ordinal).ShouldBe(toStringText.Replace(Environment.NewLine, "", StringComparison.Ordinal));
     }
 
     [TestMethod]

@@ -183,6 +183,12 @@ dotnet_diagnostic.CA1303.severity = none
 dotnet_diagnostic.CA1515.severity = none
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
+# CA1054: URI parameters should not be strings. All 14 sites are the fluent test builders in
+# Builders/FeedBuilders.cs, which take URLs as string literals so the tests read as data. The rule
+# guards public API design, and nothing in this project is public API - it is not packable. Its
+# fixer is also unsafe here: it generates NotImplementedException stub overloads rather than
+# changing the parameter (see section 3.4 of docs/build-warnings.md).
+dotnet_diagnostic.CA1054.severity = none
 # CA1508: Avoid dead conditional code. Every site in this project is an equality-contract
 # assertion - (nullTrackback == null).ShouldBeTrue(), video.Equals(null).ShouldBeFalse(),
 # item1 == item2 over two locally arranged instances. The condition being statically decidable

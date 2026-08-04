@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Net;
 using System.Text;
 
@@ -306,15 +307,15 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     {
         StringBuilder builder = new();
 
-        builder.Append($"{this.MediaType.ToLowerInvariant()}/{this.MediaSubtype}");
+        builder.Append(CultureInfo.InvariantCulture, $"{this.MediaType.ToLowerInvariant()}/{this.MediaSubtype}");
 
         if (!string.IsNullOrEmpty(this.Discriminator))
         {
-            builder.Append($";{TYPE_PARAMETER_NAME}={this.Discriminator}");
+            builder.Append(CultureInfo.InvariantCulture, $";{TYPE_PARAMETER_NAME}={this.Discriminator}");
         }
         if (!string.IsNullOrEmpty(this.CharacterSet))
         {
-            builder.Append($";{CHARSET_PARAMETER_NAME}={this.CharacterSet}");
+            builder.Append(CultureInfo.InvariantCulture, $";{CHARSET_PARAMETER_NAME}={this.CharacterSet}");
         }
 
         foreach (string parameterName in this.Parameters.Keys)
@@ -322,7 +323,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
             string parameterValue = !string.IsNullOrEmpty(this.Parameters[parameterName]) ? this.Parameters[parameterName].Trim() : string.Empty;
             if (!string.Equals(parameterName, TYPE_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase) && !string.Equals(parameterName, CHARSET_PARAMETER_NAME, StringComparison.OrdinalIgnoreCase))
             {
-                builder.Append($";{parameterName}={parameterValue}");
+                builder.Append(CultureInfo.InvariantCulture, $";{parameterName}={parameterValue}");
             }
         }
 

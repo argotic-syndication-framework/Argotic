@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
@@ -1107,7 +1108,7 @@ public class BlogMLDocumentBehaviorTests
         {
             document.Posts.Add(new BlogMLPost
             {
-                Id = i.ToString(),
+                Id = i.ToString(CultureInfo.InvariantCulture),
                 Title = new BlogMLTextConstruct($"Post {i}"),
                 Content = new BlogMLTextConstruct($"<p>Content {i}</p>", BlogMLContentType.Html),
                 CreatedOn = new DateTime(2024, 1, i, 10, 0, 0, DateTimeKind.Utc),

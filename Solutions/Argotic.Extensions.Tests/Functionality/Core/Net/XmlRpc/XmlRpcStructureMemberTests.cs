@@ -260,7 +260,7 @@ public class XmlRpcStructureMemberTests
         result.ShouldContain("<member>");
         result.ShouldContain("<name>testName</name>");
         // The XML writer may output self-closing tag <value /> or empty element <value></value>
-        (result.Contains("<value />") || result.Contains("<value></value>")).ShouldBeTrue();
+        (result.Contains("<value />", StringComparison.Ordinal) || result.Contains("<value></value>", StringComparison.Ordinal)).ShouldBeTrue();
     }
 
     [TestMethod]

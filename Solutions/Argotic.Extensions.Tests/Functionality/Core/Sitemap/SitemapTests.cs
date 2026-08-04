@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
@@ -196,7 +197,7 @@ public class SitemapTests
         // Arrange & Act & Assert
         for (decimal d = 0.0m; d <= 1.0m; d += 0.1m)
         {
-            bool result = SitemapUtility.TryParsePriority(d.ToString("0.0"), out decimal parsed);
+            bool result = SitemapUtility.TryParsePriority(d.ToString("0.0", CultureInfo.InvariantCulture), out decimal parsed);
             result.ShouldBeTrue($"Failed for priority: {d}");
             parsed.ShouldBe(d, 0.001m, $"Parsed value mismatch for: {d}");
         }

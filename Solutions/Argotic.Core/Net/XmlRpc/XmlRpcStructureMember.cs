@@ -221,7 +221,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     /// <returns>A 32-bit signed integer hash code.</returns>
     public override int GetHashCode()
     {
-        return this.ToString().GetHashCode();
+        return this.ToString().GetHashCode(StringComparison.Ordinal);
     }
 
     /// <summary>

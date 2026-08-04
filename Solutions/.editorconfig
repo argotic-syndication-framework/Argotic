@@ -183,6 +183,14 @@ dotnet_diagnostic.CA1303.severity = none
 dotnet_diagnostic.CA1515.severity = none
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
+# CA1508: Avoid dead conditional code. Every site in this project is an equality-contract
+# assertion - (nullTrackback == null).ShouldBeTrue(), video.Equals(null).ShouldBeFalse(),
+# item1 == item2 over two locally arranged instances. The condition being statically decidable
+# is exactly what the test asserts, so the rule fires on the basic shape of a unit test:
+# arrange known values, assert the known outcome. Removing the conditions would delete the
+# operator and Equals coverage they exist to provide. Shipped code is not suppressed - its 12
+# sites were genuine dead code and were fixed.
+dotnet_diagnostic.CA1508.severity = none
 # CA5372: Use XmlReader for XPathDocument. Every XPathDocument in this project is built from a
 # const string literal compiled into the test assembly (see TestDoubles/FeedTestData.cs) - a
 # trusted source that cannot be tampered with, which is the condition Microsoft documents for

@@ -27,12 +27,12 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication extension.
     /// </summary>
     [NonSerialized]
-    private readonly XPathNavigator eventNavigator;
+    private readonly XPathNavigator? eventNavigator;
 
     /// <summary>
     /// Private member to hold the syndication extension that resulted from the load operation.
     /// </summary>
-    private readonly ISyndicationExtension eventExtension;
+    private readonly ISyndicationExtension? eventExtension;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class.
@@ -88,7 +88,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// <value>
     ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
     /// </value>
-    public XPathNavigator Data
+    public XPathNavigator? Data
     {
         get
         {
@@ -102,7 +102,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// <value>
     ///     The <see cref="ISyndicationExtension"/> that resulted from the load operation. 
     /// </value>
-    public ISyndicationExtension Extension
+    public ISyndicationExtension? Extension
     {
         get
         {

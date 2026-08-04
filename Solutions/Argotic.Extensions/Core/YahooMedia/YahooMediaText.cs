@@ -28,7 +28,7 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <summary>
     /// Private member to hold the primary language encapsulated in the media object.
     /// </summary>
-    private CultureInfo textLanguage;
+    private CultureInfo? textLanguage;
 
     /// <summary>
     /// Private member to hold the start time offset that the text starts being relevant to the media object.
@@ -123,7 +123,7 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo Language
+    public CultureInfo? Language
     {
         get
         {

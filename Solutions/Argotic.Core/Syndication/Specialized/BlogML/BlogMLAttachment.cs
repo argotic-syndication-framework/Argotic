@@ -57,7 +57,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// Gets or sets a relative or fully qualified URL to this attachment.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents a relative or fully qualified URL to this attachment resource.</value>
-    public Uri ExternalUri { get; set; }
+    public Uri? ExternalUri { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if this attachment is embedded.
@@ -92,7 +92,7 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
     /// Gets or sets the original URL of this attachment.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the original URL of this attachment.</value>
-    public Uri Url { get; set; }
+    public Uri? Url { get; set; }
 
     /// <summary>
     /// Loads this <see cref="BlogMLAttachment"/> using the supplied <see cref="XPathNavigator"/>.

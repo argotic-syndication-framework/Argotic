@@ -17,7 +17,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <summary>
     /// Private member to hold a collection of line numbers that are expanded.
     /// </summary>
-    private Collection<int> headExpansionState;
+    private Collection<int>? headExpansionState;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlHead"/> class.
@@ -86,7 +86,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// Gets or sets information that describes the owner of this document.
     /// </summary>
     /// <value>A <see cref="OpmlOwner"/> object that provides information that describes the owner of this document.</value>
-    public OpmlOwner Owner { get; set; }
+    public OpmlOwner? Owner { get; set; }
 
     /// <summary>
     /// Gets or sets the title of this document.
@@ -112,7 +112,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// Gets or sets information that describes the pixel location of the edges of the outline window for this document.
     /// </summary>
     /// <value>A <see cref="OpmlWindow"/> object that provides information that describes the pixel location of the edges of the outline window for this document.</value>
-    public OpmlWindow Window { get; set; }
+    public OpmlWindow? Window { get; set; }
 
     /// <summary>
     /// Loads this <see cref="OpmlHead"/> using the supplied <see cref="XPathNavigator"/>.

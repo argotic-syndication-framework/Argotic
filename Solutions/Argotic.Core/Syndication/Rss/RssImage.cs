@@ -142,7 +142,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     ///     The value of this property <i>should</i> be the same URL as the channel's <see cref="RssChannel.Link">link</see> property.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Link
+    public Uri? Link
     {
         get => field;
         set
@@ -180,7 +180,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     ///     The image <b>must</b> be in the <i>GIF</i>, <i>JPEG</i> or <i>PNG</i> formats.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Url
+    public Uri? Url
     {
         get => field;
         set

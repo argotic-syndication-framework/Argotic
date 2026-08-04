@@ -19,7 +19,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     /// <summary>
     /// Private member to hold the value of the structure member.
     /// </summary>
-    private IXmlRpcValue memberValue;
+    private IXmlRpcValue? memberValue;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcStructureMember"/> class.
@@ -67,7 +67,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
     /// </summary>
     /// <value>An object that implements the <see cref="IXmlRpcValue"/> interface that represents the value of this structure member.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public IXmlRpcValue Value
+    public IXmlRpcValue? Value
     {
         get
         {

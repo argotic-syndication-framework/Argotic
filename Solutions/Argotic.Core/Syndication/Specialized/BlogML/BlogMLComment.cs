@@ -151,7 +151,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// Gets or sets the author's homepage or web log for this comment.
     /// </summary>
     /// <value>The author's homepage or web log address for this comment.</value>
-    public Uri UserUrl { get; set; }
+    public Uri? UserUrl { get; set; }
 
     /// <summary>
     /// Loads this <see cref="BlogMLComment"/> using the supplied <see cref="XPathNavigator"/>.

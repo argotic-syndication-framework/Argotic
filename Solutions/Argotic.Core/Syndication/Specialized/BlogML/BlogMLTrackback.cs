@@ -103,7 +103,7 @@ public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of this trackback.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Url
+    public Uri? Url
     {
         get => field;
 

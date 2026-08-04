@@ -23,7 +23,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// <summary>
     /// Private member to hold the direct url to the media object.
     /// </summary>
-    private Uri contentUrl;
+    private Uri? contentUrl;
 
     /// <summary>
     /// Private member to hold the number of bytes the media object represents on disk.
@@ -88,67 +88,67 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// <summary>
     /// Private member to hold the primary language encapsulated in the media object.
     /// </summary>
-    private CultureInfo contentLanguage;
+    private CultureInfo? contentLanguage;
 
     /// <summary>
     /// Private member to hold the permissible audiences for the media object.
     /// </summary>
-    private List<YahooMediaRating> mediaObjectRatings;
+    private List<YahooMediaRating>? mediaObjectRatings;
 
     /// <summary>
     /// Private member to hold the title of the media object.
     /// </summary>
-    private YahooMediaTextConstruct mediaObjectTitle;
+    private YahooMediaTextConstruct? mediaObjectTitle;
 
     /// <summary>
     /// Private member to hold a short description of the media object.
     /// </summary>
-    private YahooMediaTextConstruct mediaObjectDescription;
+    private YahooMediaTextConstruct? mediaObjectDescription;
 
     /// <summary>
     /// Private member to hold the relevant keywords that describe the media object.
     /// </summary>
-    private List<string> mediaObjectKeywords;
+    private List<string>? mediaObjectKeywords;
 
     /// <summary>
     /// Private member to hold the representative images for the media object.
     /// </summary>
-    private List<YahooMediaThumbnail> mediaObjectThumbnails;
+    private List<YahooMediaThumbnail>? mediaObjectThumbnails;
 
     /// <summary>
     /// Private member to hold a taxonomy that gives an indication of the type of content for the media object.
     /// </summary>
-    private List<YahooMediaCategory> mediaObjectCategories;
+    private List<YahooMediaCategory>? mediaObjectCategories;
 
     /// <summary>
     /// Private member to hold the hash digests for the media object.
     /// </summary>
-    private List<YahooMediaHash> mediaObjectHashes;
+    private List<YahooMediaHash>? mediaObjectHashes;
 
     /// <summary>
     /// Private member to hold a web browser media player console the media object can be accessed through.
     /// </summary>
-    private YahooMediaPlayer mediaObjectPlayer;
+    private YahooMediaPlayer? mediaObjectPlayer;
 
     /// <summary>
     /// Private member to hold the entities that contributed to the creation of the media object.
     /// </summary>
-    private List<YahooMediaCredit> mediaObjectCredits;
+    private List<YahooMediaCredit>? mediaObjectCredits;
 
     /// <summary>
     /// Private member to hold the copyright information for the media object.
     /// </summary>
-    private YahooMediaCopyright mediaObjectCopyright;
+    private YahooMediaCopyright? mediaObjectCopyright;
 
     /// <summary>
     /// Private member to hold the text transcript, closed captioning, or lyrics for the media object.
     /// </summary>
-    private List<YahooMediaText> mediaObjectTextSeries;
+    private List<YahooMediaText>? mediaObjectTextSeries;
 
     /// <summary>
     /// Private member to hold the restrictions to be placed on aggregators that are rendering the media object.
     /// </summary>
-    private List<YahooMediaRestriction> mediaObjectRestrictions;
+    private List<YahooMediaRestriction>? mediaObjectRestrictions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaContent"/> class.
@@ -362,7 +362,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo Language
+    public CultureInfo? Language
     {
         get
         {
@@ -419,7 +419,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// Gets or sets the location of this media object.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the direct URL to this media object.</value>
-    public Uri Url
+    public Uri? Url
     {
         get
         {
@@ -472,7 +472,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// <remarks>
     ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
     /// </remarks>
-    public YahooMediaCopyright Copyright
+    public YahooMediaCopyright? Copyright
     {
         get
         {
@@ -512,7 +512,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// <remarks>
     ///     Media object descriptions are typically a sentence in length.
     /// </remarks>
-    public YahooMediaTextConstruct Description
+    public YahooMediaTextConstruct? Description
     {
         get
         {
@@ -567,7 +567,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// Gets or sets a web browser media player console this media object can be accessed through.
     /// </summary>
     /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media object can be accessed through.</value>
-    public YahooMediaPlayer Player
+    public YahooMediaPlayer? Player
     {
         get
         {
@@ -659,7 +659,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
     /// Gets or sets the title of this media object.
     /// </summary>
     /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this media object.</value>
-    public YahooMediaTextConstruct Title
+    public YahooMediaTextConstruct? Title
     {
         get
         {

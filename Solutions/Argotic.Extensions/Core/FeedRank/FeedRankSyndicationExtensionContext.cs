@@ -14,7 +14,7 @@ public class FeedRankSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the permanent, universally unique identifier for the ranking scheme.
     /// </summary>
-    private Uri extensionScheme;
+    private Uri? extensionScheme;
 
     /// <summary>
     /// Private member to hold the language sensitive, human-readable label for the rank.
@@ -44,7 +44,7 @@ public class FeedRankSyndicationExtensionContext
     /// Gets or sets the <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.
     /// </summary>
     /// <value>The <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking domain.</value>
-    public Uri Domain { get; set; }
+    public Uri? Domain { get; set; }
 
     /// <summary>
     /// Gets or sets the language sensitive, human-readable label for this rank.
@@ -75,7 +75,7 @@ public class FeedRankSyndicationExtensionContext
     /// </summary>
     /// <value>The <see cref="Uri"/> that describes the permanent, universally unique identifier for this ranking scheme.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Scheme
+    public Uri? Scheme
     {
         get
         {

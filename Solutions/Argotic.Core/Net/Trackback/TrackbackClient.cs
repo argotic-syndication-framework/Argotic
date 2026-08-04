@@ -143,7 +143,7 @@ public class TrackbackClient
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the host computer used for Trackback transactions.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Host
+    public Uri? Host
     {
         get;
 

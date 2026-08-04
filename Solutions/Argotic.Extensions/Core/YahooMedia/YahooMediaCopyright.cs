@@ -47,7 +47,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
     /// Gets or sets the location of a terms of use page or additional copyright information.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL for a terms of use page or additional copyright information.</value>
-    public Uri Url { get; set; }
+    public Uri? Url { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaCopyright"/> using the supplied <see cref="XPathNavigator"/>.

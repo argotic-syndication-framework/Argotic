@@ -55,12 +55,12 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <summary>
     /// Private member to hold information that contains or links to the content of the entry.
     /// </summary>
-    private AtomContent entryContent;
+    private AtomContent? entryContent;
 
     /// <summary>
     /// Private member to hold a permanent, universally unique identifier for the entry.
     /// </summary>
-    private AtomId entryId;
+    private AtomId? entryId;
 
     /// <summary>
     /// Private member to hold a value indicating an instant in time associated with an event early in the life cycle of the entry.
@@ -70,22 +70,22 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// <summary>
     /// Private member to hold information about rights held in and over the entry.
     /// </summary>
-    private AtomTextConstruct entryRights;
+    private AtomTextConstruct? entryRights;
 
     /// <summary>
     /// Private member to hold the meta-data of the source feed that the entry was copied from.
     /// </summary>
-    private AtomSource entrySource;
+    private AtomSource? entrySource;
 
     /// <summary>
     /// Private member to hold information that conveys a short summary, abstract, or excerpt of the entry.
     /// </summary>
-    private AtomTextConstruct entrySummary;
+    private AtomTextConstruct? entrySummary;
 
     /// <summary>
     /// Private member to hold information that conveys a human-readable title for the entry.
     /// </summary>
-    private AtomTextConstruct entryTitle;
+    private AtomTextConstruct? entryTitle;
 
     /// <summary>
     /// Private member to hold a value indicating the most recent instant in time when the entry was modified in a way the publisher considers significant.
@@ -122,7 +122,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// </summary>
     /// <seealso cref="AtomEntry.Load(IXPathNavigable)"/>
     /// <seealso cref="AtomEntry.Load(XmlReader)"/>
-    public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+    public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
     /// Raises the <see cref="AtomEntry.Loaded"/> event.
@@ -142,7 +142,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
     ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
     /// </remarks>
-    public Uri BaseUri { get; set; }
+    public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
@@ -153,7 +153,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo Language { get; set; }
+    public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
@@ -189,7 +189,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// Gets or sets information that contains or links to the content of this entry.
     /// </summary>
     /// <value>A <see cref="AtomContent"/> object that represents information that contains or links to the content of this entry.</value>
-    public AtomContent Content
+    public AtomContent? Content
     {
         get => entryContent;
         set => entryContent = value;
@@ -219,7 +219,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public AtomId Id
+    public AtomId? Id
     {
         get => entryId;
         set
@@ -265,7 +265,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
     ///     If an <see cref="AtomEntry"/> does not provide any rights information, then the <see cref="AtomFeed.Rights"/> of the containing feed, if present, is considered to apply to the entry.
     /// </remarks>
-    public AtomTextConstruct Rights
+    public AtomTextConstruct? Rights
     {
         get => entryRights;
         set => entryRights = value;
@@ -282,7 +282,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         (<see cref="AtomFeed.Id">id</see>, <see cref="AtomFeed.Title">title</see>, and <see cref="AtomFeed.UpdatedOn">updated</see>) in the <see cref="AtomSource"/>.
     ///     </para>
     /// </remarks>
-    public AtomSource Source
+    public AtomSource? Source
     {
         get => entrySource;
         set => entrySource = value;
@@ -314,7 +314,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         </list>
     ///     </para>
     /// </remarks>
-    public AtomTextConstruct Summary
+    public AtomTextConstruct? Summary
     {
         get => entrySummary;
         set => entrySummary = value;
@@ -325,7 +325,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// </summary>
     /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this entry.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public AtomTextConstruct Title
+    public AtomTextConstruct? Title
     {
         get => entryTitle;
         set

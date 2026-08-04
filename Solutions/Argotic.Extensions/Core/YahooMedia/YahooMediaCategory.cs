@@ -76,7 +76,7 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     ///     If no categorization scheme is provided, the default scheme can be assumed to be <b>http://search.yahoo.com/mrss/category_schema</b>.
     /// </remarks>
     /// <seealso cref="DefaultScheme"/>
-    public Uri Scheme { get; set; }
+    public Uri? Scheme { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaCategory"/> using the supplied <see cref="XPathNavigator"/>.

@@ -81,7 +81,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of a GIF, JPEG, or PNG for this picture.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Url
+    public Uri? Url
     {
         get => field;
         set

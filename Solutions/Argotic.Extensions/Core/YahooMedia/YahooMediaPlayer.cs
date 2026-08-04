@@ -21,7 +21,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <summary>
     /// Private member to hold the URL of the player console.
     /// </summary>
-    private Uri playerUrl;
+    private Uri? playerUrl;
 
     /// <summary>
     /// Private member to hold the height of the browser window that the player console should be opened in.
@@ -85,7 +85,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of this player console that plays the media.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Url
+    public Uri? Url
     {
         get
         {

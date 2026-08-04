@@ -102,7 +102,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
     /// <remarks>
     ///     If the value of this property is <b>null</b>, it is assumed that the <see cref="Element"/> does not live in a namespace.
     /// </remarks>
-    public Uri Namespace { get; set; }
+    public Uri? Namespace { get; set; }
 
     /// <summary>
     /// Returns the data type identifier for the supplied <see cref="SimpleListDataType"/>.

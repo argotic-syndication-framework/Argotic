@@ -21,7 +21,7 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <summary>
     /// Private member to hold the url of the thumbnail.
     /// </summary>
-    private Uri thumbnailUrl;
+    private Uri? thumbnailUrl;
 
     /// <summary>
     /// Private member to hold the height of the thumbnail.
@@ -113,7 +113,7 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of this thumbnail image.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Url
+    public Uri? Url
     {
         get
         {

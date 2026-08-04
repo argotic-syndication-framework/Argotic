@@ -17,67 +17,67 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <summary>
     /// Private member to hold a collection of media objects that are effectively the same content, yet different representations.
     /// </summary>
-    private IList<YahooMediaContent> groupContents;
+    private IList<YahooMediaContent>? groupContents;
 
     /// <summary>
     /// Private member to hold the permissible audiences for the media group.
     /// </summary>
-    private IList<YahooMediaRating> mediaObjectRatings;
+    private IList<YahooMediaRating>? mediaObjectRatings;
 
     /// <summary>
     /// Private member to hold the title of the media group.
     /// </summary>
-    private YahooMediaTextConstruct mediaObjectTitle;
+    private YahooMediaTextConstruct? mediaObjectTitle;
 
     /// <summary>
     /// Private member to hold a short description of the media group.
     /// </summary>
-    private YahooMediaTextConstruct mediaObjectDescription;
+    private YahooMediaTextConstruct? mediaObjectDescription;
 
     /// <summary>
     /// Private member to hold the relevant keywords that describe the media group.
     /// </summary>
-    private IList<string> mediaObjectKeywords;
+    private IList<string>? mediaObjectKeywords;
 
     /// <summary>
     /// Private member to hold the representative images for the media group.
     /// </summary>
-    private IList<YahooMediaThumbnail> mediaObjectThumbnails;
+    private IList<YahooMediaThumbnail>? mediaObjectThumbnails;
 
     /// <summary>
     /// Private member to hold a taxonomy that gives an indication of the type of content for the media group.
     /// </summary>
-    private IList<YahooMediaCategory> mediaObjectCategories;
+    private IList<YahooMediaCategory>? mediaObjectCategories;
 
     /// <summary>
     /// Private member to hold the hash digests for the media group.
     /// </summary>
-    private IList<YahooMediaHash> mediaObjectHashes;
+    private IList<YahooMediaHash>? mediaObjectHashes;
 
     /// <summary>
     /// Private member to hold a web browser media player console the media group can be accessed through.
     /// </summary>
-    private YahooMediaPlayer mediaObjectPlayer;
+    private YahooMediaPlayer? mediaObjectPlayer;
 
     /// <summary>
     /// Private member to hold the entities that contributed to the creation of the media group.
     /// </summary>
-    private IList<YahooMediaCredit> mediaObjectCredits;
+    private IList<YahooMediaCredit>? mediaObjectCredits;
 
     /// <summary>
     /// Private member to hold the copyright information for the media group.
     /// </summary>
-    private YahooMediaCopyright mediaObjectCopyright;
+    private YahooMediaCopyright? mediaObjectCopyright;
 
     /// <summary>
     /// Private member to hold the text transcript, closed captioning, or lyrics for the media group.
     /// </summary>
-    private IList<YahooMediaText> mediaObjectTextSeries;
+    private IList<YahooMediaText>? mediaObjectTextSeries;
 
     /// <summary>
     /// Private member to hold the restrictions to be placed on aggregators that are rendering the media group.
     /// </summary>
-    private IList<YahooMediaRestriction> mediaObjectRestrictions;
+    private IList<YahooMediaRestriction>? mediaObjectRestrictions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="YahooMediaGroup"/> class.
@@ -125,7 +125,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <remarks>
     ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
     /// </remarks>
-    public YahooMediaCopyright Copyright
+    public YahooMediaCopyright? Copyright
     {
         get
         {
@@ -165,7 +165,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <remarks>
     ///     Media object descriptions are typically a sentence in length.
     /// </remarks>
-    public YahooMediaTextConstruct Description
+    public YahooMediaTextConstruct? Description
     {
         get
         {
@@ -220,7 +220,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets or sets a web browser media player console this media group can be accessed through.
     /// </summary>
     /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media group can be accessed through.</value>
-    public YahooMediaPlayer Player
+    public YahooMediaPlayer? Player
     {
         get
         {
@@ -312,7 +312,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// Gets or sets the title of this media group.
     /// </summary>
     /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this media group.</value>
-    public YahooMediaTextConstruct Title
+    public YahooMediaTextConstruct? Title
     {
         get
         {

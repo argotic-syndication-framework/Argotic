@@ -74,7 +74,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     ///     <para>This value must be less than 2,048 characters.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Location
+    public Uri? Location
     {
         get => field;
         set

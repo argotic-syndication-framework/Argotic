@@ -30,7 +30,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// <summary>
     /// Private member to hold the URL of the source feed.
     /// </summary>
-    private Uri sourceUrl;
+    private Uri? sourceUrl;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RssSource"/> class.
@@ -87,7 +87,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the source feed.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Url
+    public Uri? Url
     {
         get => sourceUrl;
         set

@@ -87,7 +87,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <seealso cref="RssFeed.Load(IXPathNavigable)"/>
     /// <seealso cref="RssFeed.Load(XmlReader)"/>
-    public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+    public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
     /// Raises the <see cref="RssFeed.Loaded"/> event.

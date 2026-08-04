@@ -74,7 +74,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     /// <remarks>
     ///     The owner identifier may also may be used to identify the author. No two authors should have the same identifier.
     /// </remarks>
-    public Uri Id { get; set; }
+    public Uri? Id { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the owner of this document.

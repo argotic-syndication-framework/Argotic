@@ -17,7 +17,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <summary>
     /// Private member to hold the value of the parameter.
     /// </summary>
-    private object scalarParameterValue;
+    private object? scalarParameterValue;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcScalarValue"/> class.
@@ -121,7 +121,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     ///     <para>The <paramref name="value"/> should represent a <see cref="Type"/> that is appropriate for this parameter's <see cref="ValueType"/>.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public object Value
+    public object? Value
     {
         get
         {

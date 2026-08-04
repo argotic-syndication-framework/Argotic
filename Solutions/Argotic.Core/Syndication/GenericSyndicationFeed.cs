@@ -26,7 +26,7 @@ public class GenericSyndicationFeed
     /// <summary>
     /// Private member to hold the underlying syndication resource that is being abstracted by this generic feed.
     /// </summary>
-    private ISyndicationResource feedResource;
+    private ISyndicationResource? feedResource;
 
     /// <summary>
     /// Private member to hold the type of syndication format that the syndication feed implements.
@@ -51,7 +51,7 @@ public class GenericSyndicationFeed
     /// <summary>
     /// Private member to hold the natural or formal language in which the feed content is written.
     /// </summary>
-    private CultureInfo feedLanguage;
+    private CultureInfo? feedLanguage;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationFeed"/> class.
@@ -64,7 +64,7 @@ public class GenericSyndicationFeed
     /// Occurs when the generic syndication feed state has been changed by a load operation.
     /// </summary>
     /// <seealso cref="GenericSyndicationFeed.LoadAsync(Uri, CancellationToken)"/>
-    public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+    public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
     /// Raises the <see cref="GenericSyndicationFeed.Loaded"/> event.
@@ -114,7 +114,7 @@ public class GenericSyndicationFeed
     ///     A <see cref="CultureInfo"/> that represents the natural or formal language in which this feed's content is written. 
     ///     The default value is a <b>null</b> reference, which indicates that no natural or formal language was specified.
     /// </value>
-    public CultureInfo Language => feedLanguage;
+    public CultureInfo? Language => feedLanguage;
 
     /// <summary>
     /// Gets a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant.
@@ -132,7 +132,7 @@ public class GenericSyndicationFeed
     ///     An object that implements the <see cref="ISyndicationResource"/> interface that represents the actual syndication feed that is being abstracted by this generic feed. 
     ///     The default value is a <b>null</b> reference, which indicates that this generic feed has not been initialized using a syndication resource.
     /// </value>
-    public ISyndicationResource Resource => feedResource;
+    public ISyndicationResource? Resource => feedResource;
 
     /// <summary>
     /// Gets character data that provides the name of this feed.

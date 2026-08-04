@@ -132,7 +132,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
     ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
     /// </remarks>
-    public Uri BaseUri { get; set; }
+    public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
@@ -143,7 +143,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo Language { get; set; }
+    public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
@@ -248,7 +248,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
     ///     <para>See <a href="http://www.ietf.org/rfc/rfc3987.txt">RFC 3987: Internationalized Resource Identifiers</a> for the IRI technical specification.</para>
     ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
-    public Uri Source { get; set; }
+    public Uri? Source { get; set; }
 
     /// <summary>
     /// Loads this <see cref="AtomContent"/> using the supplied <see cref="XPathNavigator"/>.

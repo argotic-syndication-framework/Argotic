@@ -25,7 +25,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Private member to hold the URL of the website associated with the feed.
     /// </summary>
-    private Uri channelLink;
+    private Uri? channelLink;
 
     /// <summary>
     /// Private member to hold character data that provides the name of the feed.
@@ -40,7 +40,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Private member to hold meta-data necessary for monitoring updates to a feed using a web service that implements the RssCloud application programming interface.
     /// </summary>
-    private RssCloud channelCloud;
+    private RssCloud? channelCloud;
 
     /// <summary>
     /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
@@ -50,12 +50,12 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Private member to hold the graphical logo for the feed.
     /// </summary>
-    private RssImage channelImage;
+    private RssImage? channelImage;
 
     /// <summary>
     /// Private member to hold the natural language employed in the feed.
     /// </summary>
-    private CultureInfo channelLanguage;
+    private CultureInfo? channelLanguage;
 
     /// <summary>
     /// Private member to hold the last date and time the content of the feed was updated.
@@ -70,7 +70,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Private member to hold a form to submit a text query to the feed's publisher over the Common Gateway Interface (CGI).
     /// </summary>
-    private RssTextInput channelTextInput;
+    private RssTextInput? channelTextInput;
 
     /// <summary>
     /// Private member to hold the maximum number of minutes to cache the data before an aggregator should request it again.
@@ -80,7 +80,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <summary>
     /// Private member to hold a URL that points to where the feed can be retrieved from.
     /// </summary>
-    private Uri channelSelfLink;
+    private Uri? channelSelfLink;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RssChannel"/> class.
@@ -137,7 +137,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///     updates to this feed using a web service that implements the RssCloud application programming interface. 
     ///     The default value is a <b>null</b> reference.
     /// </value>
-    public RssCloud Cloud
+    public RssCloud? Cloud
     {
         get => channelCloud;
         set => channelCloud = value;
@@ -197,7 +197,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// <value>
     ///     A <see cref="RssImage"/> object that represents the graphical logo for this feed. The default value is a <b>null</b> reference.
     /// </value>
-    public RssImage Image
+    public RssImage? Image
     {
         get => channelImage;
         set => channelImage = value;
@@ -217,7 +217,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///     The language <b>must</b> be identified using one of the <a href="http://www.rssboard.org/rss-language-codes">RSS language codes</a> 
     ///     or a <a href="http://www.w3.org/TR/REC-html40/struct/dirlang.html#langcodes">W3C language code</a>.
     /// </remarks>
-    public CultureInfo Language
+    public CultureInfo? Language
     {
         get => channelLanguage;
         set => channelLanguage = value;
@@ -241,7 +241,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the website associated with this feed.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Link
+    public Uri? Link
     {
         get => channelLink;
         set
@@ -313,7 +313,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///         See <a href="http://www.rssboard.org/rss-profile#namespace-elements-atom-link">RSS Profile</a> for more information.
     ///     </para>
     /// </remarks>
-    public Uri SelfLink
+    public Uri? SelfLink
     {
         get => channelSelfLink;
         set => channelSelfLink = value;
@@ -344,7 +344,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     ///     A <see cref="TextInput"/> object that represents a form to submit a text query to this feed's publisher over the Common Gateway Interface (CGI). 
     ///     The default value is a <b>null</b> reference.
     /// </value>
-    public RssTextInput TextInput
+    public RssTextInput? TextInput
     {
         get => channelTextInput;
         set => channelTextInput = value;

@@ -21,7 +21,7 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
     /// <summary>
     /// Private member to hold the URL of the image.
     /// </summary>
-    private Uri imageLocation;
+    private Uri? imageLocation;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SitemapImage"/> class.
@@ -49,7 +49,7 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
     ///     The URL must be from the same domain as the page containing the sitemap, or from an allowed CDN domain.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Location
+    public Uri? Location
     {
         get
         {

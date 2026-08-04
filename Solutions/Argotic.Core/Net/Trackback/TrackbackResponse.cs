@@ -28,7 +28,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// <summary>
     /// Private member to hold information about the cause of the Trackback ping request failure.
     /// </summary>
-    private string responseErrorMessage;
+    private string? responseErrorMessage;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackResponse"/> class.
@@ -104,7 +104,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// Gets information about cause of the Trackback ping request failure.
     /// </summary>
     /// <value>Information about the cause of the Trackback ping request failure. The default value is an <b>empty</b> string.</value>
-    public string ErrorMessage
+    public string? ErrorMessage
     {
         get
         {

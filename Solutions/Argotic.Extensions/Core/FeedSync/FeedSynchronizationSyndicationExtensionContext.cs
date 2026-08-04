@@ -25,7 +25,7 @@ public class FeedSynchronizationSyndicationExtensionContext
     ///     A <see cref="FeedSynchronizationSharingInformation"/> object that represents information from a specific feed publisher to the specific feed consumer that requested the feed.
     ///     The default value is <b>null</b>.
     /// </value>
-    public FeedSynchronizationSharingInformation Sharing { get; set; }
+    public FeedSynchronizationSharingInformation? Sharing { get; set; }
 
     /// <summary>
     /// Gets or sets the information required for synchronization.
@@ -42,7 +42,7 @@ public class FeedSynchronizationSyndicationExtensionContext
     ///         Only the items and entries that include the <see cref="FeedSynchronizationItem"/> element participate in FeedSync synchronization.
     ///     </para>
     /// </remarks>
-    public FeedSynchronizationItem Synchronization { get; set; }
+    public FeedSynchronizationItem? Synchronization { get; set; }
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

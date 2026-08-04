@@ -37,7 +37,7 @@ interface IYahooMediaCommonObjectEntities
     /// <remarks>
     ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
     /// </remarks>
-    YahooMediaCopyright Copyright { get; set; }
+    YahooMediaCopyright? Copyright { get; set; }
 
     /// <summary>
     /// Gets the entities that contributed to the creation of the media object.
@@ -59,7 +59,7 @@ interface IYahooMediaCommonObjectEntities
     /// <remarks>
     ///     Media object descriptions are typically a sentence in length.
     /// </remarks>
-    YahooMediaTextConstruct Description { get; set; }
+    YahooMediaTextConstruct? Description { get; set; }
 
     /// <summary>
     /// Gets the hash digests for the media object.
@@ -89,7 +89,7 @@ interface IYahooMediaCommonObjectEntities
     /// Gets or sets a web browser media player console the media object can be accessed through.
     /// </summary>
     /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console the media object can be accessed through.</value>
-    YahooMediaPlayer Player { get; set; }
+    YahooMediaPlayer? Player { get; set; }
 
     /// <summary>
     /// Gets the permissible audiences for the media object.
@@ -142,5 +142,5 @@ interface IYahooMediaCommonObjectEntities
     /// Gets or sets the title of the media object.
     /// </summary>
     /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of the media object.</value>
-    YahooMediaTextConstruct Title { get; set; }
+    YahooMediaTextConstruct? Title { get; set; }
 }

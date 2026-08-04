@@ -35,17 +35,17 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <summary>
     /// Private member to hold the base URI other than the base URI of the document or external entity.
     /// </summary>
-    private Uri commonObjectBaseUri;
+    private Uri? commonObjectBaseUri;
 
     /// <summary>
     /// Private member to hold the natural or formal language in which the content is written.
     /// </summary>
-    private CultureInfo commonObjectLanguage;
+    private CultureInfo? commonObjectLanguage;
 
     /// <summary>
     /// Private member to hold an IRI that identifies the location of the collection.
     /// </summary>
-    private Uri collectionResourceLocation;
+    private Uri? collectionResourceLocation;
 
     /// <summary>
     /// Private member to hold a human-readable title for the collection.
@@ -82,7 +82,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
     ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
     /// </remarks>
-    public Uri BaseUri
+    public Uri? BaseUri
     {
         get
         {
@@ -104,7 +104,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo Language
+    public CultureInfo? Language
     {
         get
         {
@@ -191,7 +191,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     ///     <para>See <a href="http://msdn2.microsoft.com/en-us/library/system.uri.aspx">System.Uri</a> for enabling support for IRIs within Microsoft .NET framework applications.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Uri
+    public Uri? Uri
     {
         get
         {

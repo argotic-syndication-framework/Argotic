@@ -72,7 +72,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// </summary>
     /// <seealso cref="AtomFeed.Load(IXPathNavigable)"/>
     /// <seealso cref="AtomFeed.Load(XmlReader)"/>
-    public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+    public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
     /// Raises the <see cref="AtomFeed.Loaded"/> event.
@@ -92,7 +92,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
     ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
     /// </remarks>
-    public Uri BaseUri { get; set; }
+    public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
@@ -103,7 +103,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo Language { get; set; }
+    public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
@@ -157,7 +157,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// Gets or sets the agent used to generate this feed.
     /// </summary>
     /// <value>A <see cref="AtomGenerator"/> object that represents the agent used to generate this feed. The default value is a <b>null</b> reference.</value>
-    public AtomGenerator Generator { get; set; }
+    public AtomGenerator? Generator { get; set; }
 
     /// <summary>
     /// Gets or sets an image that provides iconic visual identification for this feed.
@@ -166,7 +166,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of one (horizontal) to one (vertical) and <i>should</i> be suitable for presentation at a small size.
     /// </remarks>
-    public AtomIcon Icon { get; set; }
+    public AtomIcon? Icon { get; set; }
 
     /// <summary>
     /// Gets or sets a permanent, universally unique identifier for this feed.
@@ -180,7 +180,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public AtomId Id
+    public AtomId? Id
     {
         get => field;
         set
@@ -213,7 +213,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of 2 (horizontal) to 1 (vertical).
     /// </remarks>
-    public AtomLogo Logo { get; set; }
+    public AtomLogo? Logo { get; set; }
 
     /// <summary>
     /// Gets or sets information about rights held in and over this feed.
@@ -222,20 +222,20 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <remarks>
     ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
     /// </remarks>
-    public AtomTextConstruct Rights { get; set; }
+    public AtomTextConstruct? Rights { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable description or subtitle for this feed.
     /// </summary>
     /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable description or subtitle for this feed.</value>
-    public AtomTextConstruct Subtitle { get; set; }
+    public AtomTextConstruct? Subtitle { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable title for this feed.
     /// </summary>
     /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this feed.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public AtomTextConstruct Title
+    public AtomTextConstruct? Title
     {
         get => field;
         set

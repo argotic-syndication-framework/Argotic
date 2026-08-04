@@ -59,7 +59,7 @@ public class ITunesSyndicationExtensionContext
     ///     iTunes supports images in <i>JPEG</i> and <i>PNG</i> formats.
     ///     The URL <b>must</b> end in ".jpg" or ".png".
     /// </remarks>
-    public Uri Image { get; set; }
+    public Uri? Image { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if this podcast is blocked from appearing in the iTunes Podcast directory.
@@ -80,7 +80,7 @@ public class ITunesSyndicationExtensionContext
     /// <remarks>
     ///     It is recommended that you should maintain the old feed for 48 hours before retiring it. At that point, iTunes will have updated the directory with the new feed URL.
     /// </remarks>
-    public Uri NewFeedUrl { get; set; }
+    public Uri? NewFeedUrl { get; set; }
 
     /// <summary>
     /// Gets or sets information that can be used to contact the owner of this podcast.
@@ -89,7 +89,7 @@ public class ITunesSyndicationExtensionContext
     ///     A <see cref="ITunesOwner"/> object that represents information that can be used to contact the owner of this podcast.
     ///     The default value is a <b>null</b> reference.
     /// </value>
-    public ITunesOwner Owner { get; set; }
+    public ITunesOwner? Owner { get; set; }
 
     /// <summary>
     /// Gets or sets a brief synopsis of this podcast.

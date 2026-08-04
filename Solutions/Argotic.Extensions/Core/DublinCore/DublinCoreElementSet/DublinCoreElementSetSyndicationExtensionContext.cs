@@ -271,7 +271,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>.
     ///     This framework conforms to this best practice by utilizing the <see cref="CultureInfo"/> class to represent the language of a resource.
     /// </remarks>
-    public CultureInfo Language { get; set; }
+    public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets or sets the entity responsible for making the resource available.

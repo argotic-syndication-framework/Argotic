@@ -29,7 +29,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// <summary>
     /// Private member to hold the URL of the video segment.
     /// </summary>
-    private Uri segmentLocation;
+    private Uri? segmentLocation;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SitemapVideoSegment"/> class.
@@ -70,7 +70,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     ///     The URL must point to the actual video segment content file.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Location
+    public Uri? Location
     {
         get
         {

@@ -77,7 +77,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <summary>
     /// Private member to hold the URL of the video thumbnail.
     /// </summary>
-    private Uri videoThumbnailLocation;
+    private Uri? videoThumbnailLocation;
 
     /// <summary>
     /// Private member to hold the title of the video.
@@ -141,7 +141,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the video thumbnail. This is a required property.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri ThumbnailLocation
+    public Uri? ThumbnailLocation
     {
         get
         {
@@ -224,7 +224,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <remarks>
     ///     Either <see cref="ContentLocation"/> or <see cref="PlayerLocation"/> must be specified.
     /// </remarks>
-    public Uri ContentLocation { get; set; }
+    public Uri? ContentLocation { get; set; }
 
     /// <summary>
     /// Gets or sets the URL pointing to a player for the video.
@@ -233,7 +233,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <remarks>
     ///     Either <see cref="ContentLocation"/> or <see cref="PlayerLocation"/> must be specified.
     /// </remarks>
-    public Uri PlayerLocation { get; set; }
+    public Uri? PlayerLocation { get; set; }
 
     /// <summary>
     /// Gets or sets the duration of the video in seconds.
@@ -322,7 +322,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// Gets or sets the URL of a page with information about the uploader.
     /// </summary>
     /// <value>A <see cref="Uri"/> pointing to information about the uploader. Optional.</value>
-    public Uri UploaderInfo { get; set; }
+    public Uri? UploaderInfo { get; set; }
 
     /// <summary>
     /// Gets or sets the platforms on which the video can be played.
@@ -340,7 +340,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// Gets or sets the country restriction as a space-delimited list of ISO 3166 country codes.
     /// </summary>
     /// <value>A space-delimited string of ISO 3166 country codes. Optional.</value>
-    public string Restriction { get; set; }
+    public string? Restriction { get; set; }
 
     /// <summary>
     /// Gets or sets the relationship type for country restrictions.

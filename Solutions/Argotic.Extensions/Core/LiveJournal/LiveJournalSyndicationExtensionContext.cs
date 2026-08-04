@@ -29,7 +29,7 @@ public class LiveJournalSyndicationExtensionContext
     /// Gets or sets the current mood.
     /// </summary>
     /// <value>A <see cref="LiveJournalMood"/> object that represents the current mood.</value>
-    public LiveJournalMood Mood { get; set; }
+    public LiveJournalMood? Mood { get; set; }
 
     /// <summary>
     /// Gets or sets the current music.
@@ -52,7 +52,7 @@ public class LiveJournalSyndicationExtensionContext
     ///     If absent, the entry is assumed to be <see cref="LiveJournalSecurityType.Public">publicly</see> accessible.
     ///     All feeds requested without authentication will <b>only</b> contain public entries.
     /// </remarks>
-    public LiveJournalSecurity Security { get; set; }
+    public LiveJournalSecurity? Security { get; set; }
 
     /// <summary>
     /// Gets or sets theassociated user picture.
@@ -61,7 +61,7 @@ public class LiveJournalSyndicationExtensionContext
     /// <remarks>
     ///     If omitted, the LiveJournal entry uses the feed-level default picture.
     /// </remarks>
-    public LiveJournalUserPicture UserPicture { get; set; }
+    public LiveJournalUserPicture? UserPicture { get; set; }
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

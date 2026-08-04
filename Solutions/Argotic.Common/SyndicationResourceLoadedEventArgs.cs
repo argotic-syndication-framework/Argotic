@@ -24,12 +24,12 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// Private member to hold read-only XPathNavigator object for navigating the XML data used to load the syndication resource.
     /// </summary>
     [NonSerialized]
-    private readonly XPathNavigator eventNavigator;
+    private readonly XPathNavigator? eventNavigator;
 
     /// <summary>
     /// Private member to hold the URI that the syndication resource information was retrieved from.
     /// </summary>
-    private readonly Uri eventSource;
+    private readonly Uri? eventSource;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.
@@ -79,7 +79,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// <value>
     ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication resource.
     /// </value>
-    public XPathNavigator Data => eventNavigator;
+    public XPathNavigator? Data => eventNavigator;
 
     /// <summary>
     /// Gets the <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
@@ -88,7 +88,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
     ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource, returns <b>null</b>.
     /// </value>
-    public Uri Source => eventSource;
+    public Uri? Source => eventSource;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.

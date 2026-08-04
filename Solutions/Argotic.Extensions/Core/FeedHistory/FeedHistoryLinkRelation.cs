@@ -16,7 +16,7 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// <summary>
     /// Private member to hold an IRI that identifies the location of the link relation.
     /// </summary>
-    private Uri linkRelationLocation;
+    private Uri? linkRelationLocation;
 
     /// <summary>
     /// Private member to hold a value that indicates the type of the link relation.
@@ -68,7 +68,7 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents an Internationalized Resource Identifier (IRI) that identifies the location of this link relation.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Uri
+    public Uri? Uri
     {
         get
         {

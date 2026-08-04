@@ -17,7 +17,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the save operation.
     /// </summary>
-    private Collection<Type> supportedSyndicationExtensions;
+    private Collection<Type>? supportedSyndicationExtensions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceSaveSettings"/> class.

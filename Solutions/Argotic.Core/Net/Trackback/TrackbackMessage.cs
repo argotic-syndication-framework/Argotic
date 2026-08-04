@@ -43,7 +43,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <summary>
     /// Private member to hold the permalink for the entry.
     /// </summary>
-    private Uri messageUrl;
+    private Uri? messageUrl;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackMessage"/> class.
@@ -119,7 +119,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     ///     The permalink should point as closely as possible to the actual entry on the HTML page, as it will be used when linking to the entry in question.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Permalink
+    public Uri? Permalink
     {
         get
         {

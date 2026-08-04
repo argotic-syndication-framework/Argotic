@@ -90,7 +90,7 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
     ///     If no rating scheme is provided, the default scheme is <b>urn:ebu</b>.
     /// </remarks>
     /// <seealso cref="EuropeanBroadcastingUnionRoleScheme"/>
-    public Uri Scheme { get; set; }
+    public Uri? Scheme { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaCredit"/> using the supplied <see cref="XPathNavigator"/>.

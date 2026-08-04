@@ -28,7 +28,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the load operation.
     /// </summary>
-    private Collection<Type> supportedSyndicationExtensions;
+    private Collection<Type>? supportedSyndicationExtensions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadSettings"/> class.

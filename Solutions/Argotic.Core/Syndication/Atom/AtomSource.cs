@@ -66,7 +66,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     ///         The value of this property is interpreted as a URI Reference as defined in <a href="http://www.ietf.org/rfc/rfc2396.txt">RFC 2396: Uniform Resource Identifiers</a>,
     ///         after processing according to <a href="http://www.w3.org/TR/xmlbase/#escaping">XML Base, Section 3.1 (URI Reference Encoding and Escaping)</a>.</para>
     /// </remarks>
-    public Uri BaseUri { get; set; }
+    public Uri? BaseUri { get; set; }
 
     /// <summary>
     /// Gets or sets the natural or formal language in which the content is written.
@@ -77,7 +77,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     ///         The value of this property is a language identifier as defined by <a href="http://www.ietf.org/rfc/rfc3066.txt">RFC 3066: Tags for the Identification of Languages</a>, or its successor.
     ///     </para>
     /// </remarks>
-    public CultureInfo Language { get; set; }
+    public CultureInfo? Language { get; set; }
 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
@@ -113,7 +113,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// Gets or sets the agent used to generate this source.
     /// </summary>
     /// <value>A <see cref="AtomGenerator"/> object that represents the agent used to generate this source. The default value is a <b>null</b> reference.</value>
-    public AtomGenerator Generator { get; set; }
+    public AtomGenerator? Generator { get; set; }
 
     /// <summary>
     /// Gets or sets an image that provides iconic visual identification for this source.
@@ -122,13 +122,13 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of one (horizontal) to one (vertical) and <i>should</i> be suitable for presentation at a small size.
     /// </remarks>
-    public AtomIcon Icon { get; set; }
+    public AtomIcon? Icon { get; set; }
 
     /// <summary>
     /// Gets or sets a permanent, universally unique identifier for this source.
     /// </summary>
     /// <value>A <see cref="AtomId"/> object that represents a permanent, universally unique identifier for this source.</value>
-    public AtomId Id { get; set; }
+    public AtomId? Id { get; set; }
 
     /// <summary>
     /// Gets references from this source to one or more Web resources.
@@ -143,7 +143,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <remarks>
     ///     The image <i>should</i> have an aspect ratio of 2 (horizontal) to 1 (vertical).
     /// </remarks>
-    public AtomLogo Logo { get; set; }
+    public AtomLogo? Logo { get; set; }
 
     /// <summary>
     /// Gets or sets information about rights held in and over this source.
@@ -152,19 +152,19 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <remarks>
     ///     The <see cref="Rights"/> property <i>should not</i> be used to convey machine-readable licensing information.
     /// </remarks>
-    public AtomTextConstruct Rights { get; set; }
+    public AtomTextConstruct? Rights { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable description or subtitle for this source.
     /// </summary>
     /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable description or subtitle for this source.</value>
-    public AtomTextConstruct Subtitle { get; set; }
+    public AtomTextConstruct? Subtitle { get; set; }
 
     /// <summary>
     /// Gets or sets information that conveys a human-readable title for this source.
     /// </summary>
     /// <value>A <see cref="AtomTextConstruct"/> object that represents information that conveys a human-readable title for this source.</value>
-    public AtomTextConstruct Title { get; set; }
+    public AtomTextConstruct? Title { get; set; }
 
     /// <summary>
     /// Gets or sets a date-time indicating the most recent instant in time when this source was modified in a way the publisher considers significant.

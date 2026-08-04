@@ -24,7 +24,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     /// <summary>
     /// Private member to hold the publication information.
     /// </summary>
-    private SitemapNewsPublication extensionPublication;
+    private SitemapNewsPublication? extensionPublication;
 
     /// <summary>
     /// Private member to hold the publication date.
@@ -51,7 +51,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     ///     A <see cref="SitemapNewsPublication"/> object that contains information about the publication
     ///     that originally published the news article. The default value is <b>null</b>.
     /// </value>
-    public SitemapNewsPublication Publication
+    public SitemapNewsPublication? Publication
     {
         get
         {

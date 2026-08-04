@@ -26,17 +26,17 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <summary>
     /// Private member to hold the URL of a web page that contains comments received in response to the item.
     /// </summary>
-    private Uri itemComments;
+    private Uri? itemComments;
 
     /// <summary>
     /// Private member to hold the unique identifier for the item.
     /// </summary>
-    private RssGuid itemGuid;
+    private RssGuid? itemGuid;
 
     /// <summary>
     /// Private member to hold the URL of a web page associated with the item.
     /// </summary>
-    private Uri itemLink;
+    private Uri? itemLink;
 
     /// <summary>
     /// Private member to hold the publication date and time of the item.
@@ -46,7 +46,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <summary>
     /// Private member to hold information about the source feed that the item was republished from.
     /// </summary>
-    private RssSource itemSource;
+    private RssSource? itemSource;
 
     /// <summary>
     /// Private member to hold character data that provides the item's headline.
@@ -105,7 +105,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// Gets or sets the URL of a web page that contains comments received in response to this item.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of a web page that contains comments received in response to this item.</value>
-    public Uri Comments
+    public Uri? Comments
     {
         get => itemComments;
         set => itemComments = value;
@@ -158,7 +158,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     ///     A publisher <i>should</i> provide a guid for each item.
     /// </remarks>
 #pragma warning disable CA1720
-    public RssGuid Guid
+    public RssGuid? Guid
 #pragma warning restore CA1720
     {
         get => itemGuid;
@@ -169,7 +169,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// Gets or sets the URL of a web page associated with this item.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of a web page associated with this item.</value>
-    public Uri Link
+    public Uri? Link
     {
         get => itemLink;
         set => itemLink = value;
@@ -199,7 +199,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <value>
     ///     A <see cref="RssSource"/> object that represents the source feed that this item was republished from. The default value is a <b>null</b> reference.
     /// </value>
-    public RssSource Source
+    public RssSource? Source
     {
         get => itemSource;
         set => itemSource = value;

@@ -30,7 +30,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// <summary>
     /// Private member to hold the URL of the CGI script that handles the query.
     /// </summary>
-    private Uri textInputLink;
+    private Uri? textInputLink;
 
     /// <summary>
     /// Private member to hold the name of the form component that contains the query.
@@ -105,7 +105,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the CGI script that handles the query.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Link
+    public Uri? Link
     {
         get => textInputLink;
         set

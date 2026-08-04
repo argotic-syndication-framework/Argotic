@@ -42,7 +42,7 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// <summary>
     /// Private member to hold the URL of the media object.
     /// </summary>
-    private Uri enclosureUrl;
+    private Uri? enclosureUrl;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RssEnclosure"/> class.
@@ -131,7 +131,7 @@ public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>,
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the media object.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Url
+    public Uri? Url
     {
         get => enclosureUrl;
         set

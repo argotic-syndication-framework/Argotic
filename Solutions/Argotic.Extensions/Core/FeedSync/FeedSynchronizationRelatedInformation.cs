@@ -59,7 +59,7 @@ public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchroniza
     ///     The value <b>must not</b> be a relative reference.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Link
+    public Uri? Link
     {
         get => field;
         set

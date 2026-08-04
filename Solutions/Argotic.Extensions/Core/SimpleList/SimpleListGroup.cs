@@ -69,7 +69,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
     /// <remarks>
     ///     If the value of this property is <b>null</b>, it is assumed that the <see cref="Element"/> does not live in a namespace.
     /// </remarks>
-    public Uri Namespace { get; set; }
+    public Uri? Namespace { get; set; }
 
     /// <summary>
     /// Loads this <see cref="SimpleListGroup"/> using the supplied <see cref="XPathNavigator"/>.

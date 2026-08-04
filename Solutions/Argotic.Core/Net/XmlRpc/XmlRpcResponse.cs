@@ -23,12 +23,12 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// <summary>
     /// Private member to hold the response value that was returned for the remote procedure call.
     /// </summary>
-    private IXmlRpcValue responseParameter;
+    private IXmlRpcValue? responseParameter;
 
     /// <summary>
     /// Private member to hold the response fault information.
     /// </summary>
-    private XmlRpcStructureValue responseFault;
+    private XmlRpcStructureValue? responseFault;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class.
@@ -131,7 +131,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// </value>
     /// <seealso cref="XmlRpcResponse(XmlRpcStructureValue)"/>
     /// <seealso cref="XmlRpcResponse(int, string)"/>
-    public XmlRpcStructureValue Fault
+    public XmlRpcStructureValue? Fault
     {
         get
         {
@@ -147,7 +147,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     ///     If the remote procedure call raised an exception, will return <b>null</b> and the <see cref="Fault"/> <i>should</i> be populated.
     /// </value>
     /// <seealso cref="XmlRpcResponse(IXmlRpcValue)"/>
-    public IXmlRpcValue Parameter
+    public IXmlRpcValue? Parameter
     {
         get
         {

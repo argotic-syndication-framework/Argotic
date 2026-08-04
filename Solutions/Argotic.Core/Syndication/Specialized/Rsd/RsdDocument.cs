@@ -77,7 +77,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <seealso cref="RsdDocument.Load(IXPathNavigable)"/>
     /// <seealso cref="RsdDocument.Load(XmlReader)"/>
-    public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+    public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
     /// Raises the <see cref="RsdDocument.Loaded"/> event.
@@ -104,7 +104,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets the homepage of the engine that is providing these discovery services.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the homepage of the engine that is providing these discovery services.</value>
-    public Uri EngineLink { get; set; }
+    public Uri? EngineLink { get; set; }
 
     /// <summary>
     /// Gets or sets the name of the engine that is providing these discovery services.
@@ -126,7 +126,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets the homepage of the website that is hosting these discovery services.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents homepage of the website that is hosting these discovery services.</value>
-    public Uri Homepage { get; set; }
+    public Uri? Homepage { get; set; }
 
     /// <summary>
     /// Gets the application interfaces that comprise the discoverable services for this document.

@@ -82,7 +82,7 @@ public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <seealso cref="OpmlDocument.Load(IXPathNavigable)"/>
     /// <seealso cref="OpmlDocument.Load(XmlReader)"/>
-    public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+    public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
     /// Raises the <see cref="OpmlDocument.Loaded"/> event.

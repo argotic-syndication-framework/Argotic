@@ -13,12 +13,12 @@ public class PingbackSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the URL of the Pingback server.
     /// </summary>
-    private Uri extensionServer;
+    private Uri? extensionServer;
 
     /// <summary>
     /// Private member to hold the value that should be used as the target in a ping.
     /// </summary>
-    private Uri extensionTarget;
+    private Uri? extensionTarget;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PingbackSyndicationExtensionContext"/> class.
@@ -41,7 +41,7 @@ public class PingbackSyndicationExtensionContext
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the Pingback server.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Server
+    public Uri? Server
     {
         get
         {
@@ -60,7 +60,7 @@ public class PingbackSyndicationExtensionContext
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the value that should be used as the <i>targetURI</i> in a ping.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Target
+    public Uri? Target
     {
         get
         {

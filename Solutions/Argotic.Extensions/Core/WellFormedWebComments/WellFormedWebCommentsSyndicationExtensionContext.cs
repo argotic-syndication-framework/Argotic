@@ -21,13 +21,13 @@ public class WellFormedWebCommentsSyndicationExtensionContext
     /// Gets or sets the URL that comment entries are to be posted to.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URI that comment entries are to be posted to.</value>
-    public Uri Comments { get; set; }
+    public Uri? Comments { get; set; }
 
     /// <summary>
     /// Gets or sets the URL of the syndication feed for comment entries.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URI of the syndication feed for comment entries.</value>
-    public Uri CommentsFeed { get; set; }
+    public Uri? CommentsFeed { get; set; }
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

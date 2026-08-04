@@ -30,7 +30,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <summary>
     /// Private member to hold the Uniform Resource Locator (URL) of the syndication endpoint.
     /// </summary>
-    private Uri endpointSource;
+    private Uri? endpointSource;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DiscoverableSyndicationEndpoint"/> class.
@@ -132,7 +132,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <value>The <see cref="Uri"/> of the syndication endpoint.</value>
     /// <remarks>The <see cref="Uri"/>can be either <b>Relative</b> or <b>Absolute</b>. It is up to the caller to resolve the endpoint source as appropriate.</remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Source
+    public Uri? Source
     {
         get => endpointSource;
         set

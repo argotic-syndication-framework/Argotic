@@ -23,7 +23,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <summary>
     /// Private member to hold a URI that points to the documentation the describes the MIME media type.
     /// </summary>
-    private Uri mimeMediaDocumentation;
+    private Uri? mimeMediaDocumentation;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="MimeMediaTypeAttribute"/> class.

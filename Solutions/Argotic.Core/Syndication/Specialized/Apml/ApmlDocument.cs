@@ -82,7 +82,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <seealso cref="ApmlDocument.Load(IXPathNavigable)"/>
     /// <seealso cref="ApmlDocument.Load(XmlReader)"/>
-    public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+    public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
     /// Raises the <see cref="ApmlDocument.Loaded"/> event.

@@ -186,7 +186,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <summary>
     /// Private member to hold the language of the resource.
     /// </summary>
-    private CultureInfo extensionLanguage;
+    private CultureInfo? extensionLanguage;
 
     /// <summary>
     /// Private member to hold the legal document giving official permission to do something with the resource.
@@ -1347,7 +1347,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     ///     Recommended best practice is to use a controlled vocabulary such as <a href="http://www.ietf.org/rfc/rfc4646.txt">RFC 4646</a>. 
     ///     This framework conforms to this best practice by utilizing the <see cref="CultureInfo"/> class to represent the language of a resource.
     /// </remarks>
-    public CultureInfo Language
+    public CultureInfo? Language
     {
         get
         {

@@ -12,12 +12,12 @@ public class PheedSyndicationExtensionContext
     /// <summary>
     /// Private member to hold a thumbnail sized version of the photograph.
     /// </summary>
-    private Uri extensionThumbnail;
+    private Uri? extensionThumbnail;
 
     /// <summary>
     /// Private member to hold a larger or original version of the photograph.
     /// </summary>
-    private Uri extensionImageSource;
+    private Uri? extensionImageSource;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="PheedSyndicationExtensionContext"/> class.
@@ -44,7 +44,7 @@ public class PheedSyndicationExtensionContext
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents a URL to the original version of this photograph.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Source
+    public Uri? Source
     {
         get
         {
@@ -66,7 +66,7 @@ public class PheedSyndicationExtensionContext
     ///     The maximum size of the longest dimension <b>must be</b> 120 pixels.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Thumbnail
+    public Uri? Thumbnail
     {
         get
         {

@@ -160,7 +160,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Gets or sets the excerpt of this post.
     /// </summary>
     /// <value>A <see cref="BlogMLTextConstruct"/> that represents an excerpt of this post.</value>
-    public BlogMLTextConstruct Excerpt { get; set; }
+    public BlogMLTextConstruct? Excerpt { get; set; }
 
     /// <summary>
     /// Gets a value indicating if this post has an excerpt.
@@ -172,7 +172,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Gets or sets the name of this post.
     /// </summary>
     /// <value>A <see cref="BlogMLTextConstruct"/> that represents the name of this post.</value>
-    public BlogMLTextConstruct Name { get; set; }
+    public BlogMLTextConstruct? Name { get; set; }
 
     /// <summary>
     /// Gets or sets the type of web log entry this post represents.
@@ -193,7 +193,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Gets or sets the URL of this post.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of this post.</value>
-    public Uri Url { get; set; }
+    public Uri? Url { get; set; }
 
     /// <summary>
     /// Gets or sets the views of this post.

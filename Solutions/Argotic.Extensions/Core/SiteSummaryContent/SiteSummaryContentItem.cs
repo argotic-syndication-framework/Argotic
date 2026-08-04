@@ -21,12 +21,12 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <summary>
     /// Private member to hold a URI representing the format of the item.
     /// </summary>
-    private Uri itemFormat;
+    private Uri? itemFormat;
 
     /// <summary>
     /// Private member to hold a URI representing the encoding of the item.
     /// </summary>
-    private Uri itemEncoding;
+    private Uri? itemEncoding;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SiteSummaryContentItem"/> class.
@@ -79,7 +79,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     ///     An encoding is a reversable method of including content within syndicated content.
     /// </remarks>
     /// <seealso cref="SiteSummaryContentItem.WellFormedXmlEncoding"/>
-    public Uri Encoding
+    public Uri? Encoding
     {
         get
         {
@@ -97,7 +97,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the format of this item.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Format
+    public Uri? Format
     {
         get
         {

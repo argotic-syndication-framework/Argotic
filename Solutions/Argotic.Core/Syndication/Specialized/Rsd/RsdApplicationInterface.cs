@@ -62,7 +62,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// Gets or sets the location of the documentation for this application interface.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the location of the documentation for this application interface.</value>
-    public Uri Documentation { get; set; }
+    public Uri? Documentation { get; set; }
 
     /// <summary>
     /// Gets or sets a value indicating if this application interface is preferred.
@@ -75,7 +75,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the endpoint of this application interface clients should use to communication with the service.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Link
+    public Uri? Link
     {
         get => field;
         set

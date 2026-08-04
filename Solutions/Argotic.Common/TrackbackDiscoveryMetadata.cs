@@ -32,17 +32,17 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// <summary>
     /// Private member to hold Resource Description Framework entity reference.
     /// </summary>
-    private Uri trackbackDiscoveryAbout;
+    private Uri? trackbackDiscoveryAbout;
 
     /// <summary>
     /// Private member to hold the unique identifier of the discoverable web log entry.
     /// </summary>
-    private Uri trackbackDiscoveryIdentifier;
+    private Uri? trackbackDiscoveryIdentifier;
 
     /// <summary>
     /// Private member to hold Trackback ping endpoint of the discoverable web log entry.
     /// </summary>
-    private Uri trackbackDiscoveryPingEndpoint;
+    private Uri? trackbackDiscoveryPingEndpoint;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackDiscoveryMetadata"/> class.
@@ -68,7 +68,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the Resource Description Framework (RDF) entity reference.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri About
+    public Uri? About
     {
         get => trackbackDiscoveryAbout;
         set
@@ -83,7 +83,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the unique identifier for the discoverable web log entry.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Identifier
+    public Uri? Identifier
     {
         get => trackbackDiscoveryIdentifier;
         set
@@ -98,7 +98,7 @@ public class TrackbackDiscoveryMetadata : IComparable<TrackbackDiscoveryMetadata
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the Trackback ping URL for the discoverable web log entry.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri PingUrl
+    public Uri? PingUrl
     {
         get => trackbackDiscoveryPingEndpoint;
         set

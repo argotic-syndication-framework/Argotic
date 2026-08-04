@@ -37,7 +37,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <summary>
     /// Private member to hold additional parameters applied to the media content.
     /// </summary>
-    private Dictionary<string, string> webContentMediaParameters;
+    private Dictionary<string, string>? webContentMediaParameters;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="WebContentType"/> class.
@@ -167,7 +167,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// </returns>
     /// <exception cref="ArgumentException">The <see cref="CharacterSet"/> is not a valid code page name.</exception>
     /// <exception cref="ArgumentException">The code page indicated by <see cref="CharacterSet"/> is not supported by the underlying platform.</exception>
-    public Encoding Encoding
+    public Encoding? Encoding
     {
         get
         {

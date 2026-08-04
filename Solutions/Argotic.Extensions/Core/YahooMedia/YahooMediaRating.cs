@@ -92,7 +92,7 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     ///     If no rating scheme is provided, the default scheme is <b>urn:simple</b>.
     /// </remarks>
     /// <seealso cref="SimpleScheme"/>
-    public Uri Scheme { get; set; }
+    public Uri? Scheme { get; set; }
 
     /// <summary>
     /// Loads this <see cref="YahooMediaRating"/> using the supplied <see cref="XPathNavigator"/>.

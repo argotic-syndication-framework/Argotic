@@ -26,7 +26,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// <summary>
     /// Private member to hold the URL of the alternate version.
     /// </summary>
-    private Uri linkHref;
+    private Uri? linkHref;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SitemapHreflangLink"/> class.
@@ -82,7 +82,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the alternate version. This is a required property.</value>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Uri Href
+    public Uri? Href
     {
         get
         {

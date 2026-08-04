@@ -49,7 +49,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// <summary>
     /// Private member to hold the sub-title of the web log.
     /// </summary>
-    private BlogMLTextConstruct documentSubtitle;
+    private BlogMLTextConstruct? documentSubtitle;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="BlogMLDocument"/> class.
@@ -63,7 +63,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </summary>
     /// <seealso cref="BlogMLDocument.Load(IXPathNavigable)"/>
     /// <seealso cref="BlogMLDocument.Load(XmlReader)"/>
-    public event EventHandler<SyndicationResourceLoadedEventArgs> Loaded;
+    public event EventHandler<SyndicationResourceLoadedEventArgs>? Loaded;
 
     /// <summary>
     /// Raises the <see cref="BlogMLDocument.Loaded"/> event.
@@ -138,13 +138,13 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Gets or sets the root URL of this web log.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the base URL of this web log.</value>
-    public Uri RootUrl { get; set; }
+    public Uri? RootUrl { get; set; }
 
     /// <summary>
     /// Gets or sets the sub-title of this web log.
     /// </summary>
     /// <value>A <see cref="BlogMLTextConstruct"/> object that represents the sub-title of this web log.</value>
-    public BlogMLTextConstruct Subtitle
+    public BlogMLTextConstruct? Subtitle
     {
         get => documentSubtitle;
         set => documentSubtitle = value;

@@ -38,7 +38,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <summary>
     /// Private member to hold a URL that points to documentation for the syndication extension.
     /// </summary>
-    private readonly Uri extensionDocumentation;
+    private readonly Uri? extensionDocumentation;
 
     /// <summary>
     /// Private member to hold the human-readable name of the syndication extension.
@@ -48,7 +48,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// <summary>
     /// Private member to hold the version of the specification that the syndication extension conforms to.
     /// </summary>
-    private readonly Version extensionVersion;
+    private readonly Version? extensionVersion;
 
     /// <summary>
     /// Private member to hold the XML namespace that is used when qualifying the syndication extension's element and attribute names.
@@ -135,7 +135,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// Gets a <see cref="Uri"/> that points to documentation for this syndication extension.
     /// </summary>
     /// <value>A <see cref="Uri"/> that points to the documentation or implementation details for this syndication extension.</value>
-    public Uri Documentation
+    public Uri? Documentation
     {
         get
         {
@@ -159,7 +159,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// Gets the <see cref="Version"/> of the specification that this syndication extension conforms to.
     /// </summary>
     /// <value>The <see cref="Version"/> of the specification that this syndication extension conforms to.</value>
-    public Version Version
+    public Version? Version
     {
         get
         {
@@ -196,7 +196,7 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// </summary>
     /// <seealso cref="SyndicationExtension.Load(IXPathNavigable)"/>
     /// <seealso cref="SyndicationExtension.Load(XmlReader)"/>
-    public event EventHandler<SyndicationExtensionLoadedEventArgs> Loaded;
+    public event EventHandler<SyndicationExtensionLoadedEventArgs>? Loaded;
 
     /// <summary>
     /// Raises the <see cref="SyndicationExtension.Loaded"/> event.

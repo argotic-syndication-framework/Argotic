@@ -51,7 +51,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// <remarks>
     ///     If the media is operating under a <i>Creative Commons license</i>, a <see cref="CreativeCommonsSyndicationExtension">Creative Commons extension</see> should be used instead.
     /// </remarks>
-    public YahooMediaCopyright Copyright { get; set; }
+    public YahooMediaCopyright? Copyright { get; set; }
 
     /// <summary>
     /// Gets the entities that contributed to the creation of this syndication entity.
@@ -73,7 +73,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// <remarks>
     ///     Media object descriptions are typically a sentence in length.
     /// </remarks>
-    public YahooMediaTextConstruct Description { get; set; }
+    public YahooMediaTextConstruct? Description { get; set; }
 
     /// <summary>
     /// Gets the hash digests for this syndication entity.
@@ -103,7 +103,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// Gets or sets a web browser media player console this syndication entity can be accessed through.
     /// </summary>
     /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this syndication entity can be accessed through.</value>
-    public YahooMediaPlayer Player { get; set; }
+    public YahooMediaPlayer? Player { get; set; }
 
     /// <summary>
     /// Gets the permissible audiences for this syndication entity.
@@ -156,7 +156,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
     /// Gets or sets the title of this syndication entity.
     /// </summary>
     /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this syndication entity.</value>
-    public YahooMediaTextConstruct Title { get; set; }
+    public YahooMediaTextConstruct? Title { get; set; }
 
     /// <summary>
     /// Initializes the syndication extension context using the supplied <see cref="XPathNavigator"/>.

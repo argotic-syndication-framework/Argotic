@@ -484,11 +484,9 @@ public class SimpleListSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void SimpleListMatchByType_WithNull_ThrowsArgumentNullException()
-    {
+    public void SimpleListMatchByType_WithNull_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => SimpleListSyndicationExtension.MatchByType(null!));
-    }
 
     #endregion
 
@@ -498,14 +496,14 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Groups_EqualCollections_ReturnsZero()
     {
         // Arrange
-        List<SimpleListGroup> source = new()
-        {
+        List<SimpleListGroup> source =
+        [
             new() { Element = "category", Label = "Category" }
-        };
-        List<SimpleListGroup> target = new()
-        {
+        ];
+        List<SimpleListGroup> target =
+        [
             new() { Element = "category", Label = "Category" }
-        };
+        ];
 
         // Act
         int result = ComparisonUtility.CompareSequence(source, target);
@@ -518,15 +516,15 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Groups_SourceLarger_ReturnsPositive()
     {
         // Arrange
-        List<SimpleListGroup> source = new()
-        {
+        List<SimpleListGroup> source =
+        [
             new() { Element = "category1" },
             new() { Element = "category2" }
-        };
-        List<SimpleListGroup> target = new()
-        {
+        ];
+        List<SimpleListGroup> target =
+        [
             new() { Element = "category1" }
-        };
+        ];
 
         // Act
         int result = ComparisonUtility.CompareSequence(source, target);
@@ -539,15 +537,15 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Groups_TargetLarger_ReturnsNegative()
     {
         // Arrange
-        List<SimpleListGroup> source = new()
-        {
+        List<SimpleListGroup> source =
+        [
             new() { Element = "category1" }
-        };
-        List<SimpleListGroup> target = new()
-        {
+        ];
+        List<SimpleListGroup> target =
+        [
             new() { Element = "category1" },
             new() { Element = "category2" }
-        };
+        ];
 
         // Act
         int result = ComparisonUtility.CompareSequence(source, target);
@@ -560,7 +558,7 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Groups_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        List<SimpleListGroup> target = new();
+        List<SimpleListGroup> target = [];
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence((IList<SimpleListGroup>)null!, target));
@@ -570,7 +568,7 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Groups_NullTarget_ThrowsArgumentNullException()
     {
         // Arrange
-        List<SimpleListGroup> source = new();
+        List<SimpleListGroup> source = [];
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence(source, (IList<SimpleListGroup>)null!));
@@ -580,14 +578,14 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Sorts_EqualCollections_ReturnsZero()
     {
         // Arrange
-        List<SimpleListSort> source = new()
-        {
+        List<SimpleListSort> source =
+        [
             new() { Element = "price", DataType = SimpleListDataType.Number }
-        };
-        List<SimpleListSort> target = new()
-        {
+        ];
+        List<SimpleListSort> target =
+        [
             new() { Element = "price", DataType = SimpleListDataType.Number }
-        };
+        ];
 
         // Act
         int result = ComparisonUtility.CompareSequence(source, target);
@@ -600,15 +598,15 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Sorts_SourceLarger_ReturnsPositive()
     {
         // Arrange
-        List<SimpleListSort> source = new()
-        {
+        List<SimpleListSort> source =
+        [
             new() { Element = "price1" },
             new() { Element = "price2" }
-        };
-        List<SimpleListSort> target = new()
-        {
+        ];
+        List<SimpleListSort> target =
+        [
             new() { Element = "price1" }
-        };
+        ];
 
         // Act
         int result = ComparisonUtility.CompareSequence(source, target);
@@ -621,15 +619,15 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Sorts_TargetLarger_ReturnsNegative()
     {
         // Arrange
-        List<SimpleListSort> source = new()
-        {
+        List<SimpleListSort> source =
+        [
             new() { Element = "price1" }
-        };
-        List<SimpleListSort> target = new()
-        {
+        ];
+        List<SimpleListSort> target =
+        [
             new() { Element = "price1" },
             new() { Element = "price2" }
-        };
+        ];
 
         // Act
         int result = ComparisonUtility.CompareSequence(source, target);
@@ -642,7 +640,7 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Sorts_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        List<SimpleListSort> target = new();
+        List<SimpleListSort> target = [];
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence((IList<SimpleListSort>)null!, target));
@@ -652,7 +650,7 @@ public class SimpleListSyndicationExtensionTest
     public void SimpleListCompareSequence_Sorts_NullTarget_ThrowsArgumentNullException()
     {
         // Arrange
-        List<SimpleListSort> source = new();
+        List<SimpleListSort> source = [];
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => ComparisonUtility.CompareSequence(source, (IList<SimpleListSort>)null!));
@@ -840,18 +838,14 @@ public class SimpleListSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void SimpleListSort_DataTypeByName_NullInput_ThrowsArgumentException()
-    {
+    public void SimpleListSort_DataTypeByName_NullInput_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => SimpleListSort.DataTypeByName(null!));
-    }
 
     [TestMethod]
-    public void SimpleListSort_DataTypeByName_EmptyInput_ThrowsArgumentException()
-    {
+    public void SimpleListSort_DataTypeByName_EmptyInput_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => SimpleListSort.DataTypeByName(string.Empty));
-    }
 
     [TestMethod]
     public void SimpleListSort_DataTypeByName_UnknownValue_ReturnsNone()

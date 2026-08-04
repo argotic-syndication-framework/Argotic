@@ -70,7 +70,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <remarks>
     ///     During a save operation, each of these syndication extension types is instantiated and used to write the prefixed XML namespace declarations on the root syndication resource entity.
     /// </remarks>
-    public Collection<Type> SupportedExtensions => supportedSyndicationExtensions ??= new Collection<Type>();
+    public Collection<Type> SupportedExtensions => supportedSyndicationExtensions ??= [];
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.
@@ -79,10 +79,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        return $"[SyndicationResourceSaveSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", MinimizeOutputSize = \"{this.MinimizeOutputSize}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
-    }
+    public override string ToString() => $"[SyndicationResourceSaveSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", MinimizeOutputSize = \"{this.MinimizeOutputSize}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -124,10 +121,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SyndicationResourceSaveSettings other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SyndicationResourceSaveSettings other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
@@ -170,8 +164,5 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SyndicationResourceSaveSettings? first, SyndicationResourceSaveSettings? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SyndicationResourceSaveSettings? first, SyndicationResourceSaveSettings? second) => !(first == second);
 }

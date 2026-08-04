@@ -40,10 +40,7 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// <value>The name of the department.</value>
     public string Department
     {
-        get
-        {
-            return extensionDepartment;
-        }
+        get => extensionDepartment;
 
         set
         {
@@ -73,10 +70,7 @@ public class SiteSummarySlashSyndicationExtensionContext
     /// <value>The name of the section.</value>
     public string Section
     {
-        get
-        {
-            return extensionSection;
-        }
+        get => extensionSection;
 
         set
         {

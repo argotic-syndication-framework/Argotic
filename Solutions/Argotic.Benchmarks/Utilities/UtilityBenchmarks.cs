@@ -76,38 +76,26 @@ public class UtilityBenchmarks
     /// </summary>
     /// <returns>The comparison result.</returns>
     [Benchmark(Baseline = true, Description = "CompareSequence, identical (worst case)")]
-    public int CompareIdentical()
-    {
-        return ComparisonUtility.CompareSequence(this.reference, this.identical, StringComparison.Ordinal);
-    }
+    public int CompareIdentical() => ComparisonUtility.CompareSequence(this.reference, this.identical, StringComparison.Ordinal);
 
     /// <summary>
     /// Best case for the short-circuiting rewrite: the first element already differs.
     /// </summary>
     /// <returns>The comparison result.</returns>
     [Benchmark(Description = "CompareSequence, differs at first (best case)")]
-    public int CompareDiffersFirst()
-    {
-        return ComparisonUtility.CompareSequence(this.reference, this.differsFirst, StringComparison.Ordinal);
-    }
+    public int CompareDiffersFirst() => ComparisonUtility.CompareSequence(this.reference, this.differsFirst, StringComparison.Ordinal);
 
     /// <summary>
     /// Hash component for a string, as used by the framework's equality-consistent hashing.
     /// </summary>
     /// <returns>The hash component.</returns>
     [Benchmark(Description = "HashCodeUtility.Component(string)")]
-    public int HashStringComponent()
-    {
-        return HashCodeUtility.Component(this.sampleUriText);
-    }
+    public int HashStringComponent() => HashCodeUtility.Component(this.sampleUriText);
 
     /// <summary>
     /// Hash component for a Uri.
     /// </summary>
     /// <returns>The hash component.</returns>
     [Benchmark(Description = "HashCodeUtility.Component(Uri)")]
-    public int HashUriComponent()
-    {
-        return HashCodeUtility.Component(this.sampleUri);
-    }
+    public int HashUriComponent() => HashCodeUtility.Component(this.sampleUri);
 }

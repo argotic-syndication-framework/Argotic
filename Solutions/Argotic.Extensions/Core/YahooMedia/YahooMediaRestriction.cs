@@ -63,15 +63,9 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <value>A <see cref="YahooMediaRestrictionType"/> enumeration value that indicates the type of media that this restriction applies to.</value>
     public YahooMediaRestrictionType EntityType
     {
-        get
-        {
-            return restrictionType;
-        }
+        get => restrictionType;
 
-        set
-        {
-            restrictionType = value;
-        }
+        set => restrictionType = value;
     }
 
     /// <summary>
@@ -80,15 +74,9 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <value>A <see cref="YahooMediaRestrictionRelationship"/> enumeration value that indicates the type of relationship that this restriction represents.</value>
     public YahooMediaRestrictionRelationship Relationship
     {
-        get
-        {
-            return restrictionRelationship;
-        }
+        get => restrictionRelationship;
 
-        set
-        {
-            restrictionRelationship = value;
-        }
+        set => restrictionRelationship = value;
     }
 
     /// <summary>
@@ -291,19 +279,13 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is YahooMediaRestriction other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is YahooMediaRestriction other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Entities), HashCodeUtility.Component(this.EntityType), HashCodeUtility.Component(this.Relationship));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Entities), HashCodeUtility.Component(this.EntityType), HashCodeUtility.Component(this.Relationship));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -323,8 +305,5 @@ public class YahooMediaRestriction : IComparable<YahooMediaRestriction>, IEquata
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaRestriction? first, YahooMediaRestriction? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(YahooMediaRestriction? first, YahooMediaRestriction? second) => !(first == second);
 }

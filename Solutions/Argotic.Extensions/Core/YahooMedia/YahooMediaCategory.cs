@@ -34,13 +34,7 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     /// Gets the default categorization scheme for media objects.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the categorization scheme for media objects, which has a value of <b>http://search.yahoo.com/mrss/category_schema</b>.</value>
-    public static Uri DefaultScheme
-    {
-        get
-        {
-            return new Uri("http://search.yahoo.com/mrss/category_schema");
-        }
-    }
+    public static Uri DefaultScheme => new("http://search.yahoo.com/mrss/category_schema");
 
     /// <summary>
     /// Gets or sets the categorization taxonomy for this media object.
@@ -217,19 +211,13 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is YahooMediaCategory other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is YahooMediaCategory other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.Label), HashCodeUtility.Component(this.Scheme));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.Label), HashCodeUtility.Component(this.Scheme));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -249,8 +237,5 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaCategory? first, YahooMediaCategory? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(YahooMediaCategory? first, YahooMediaCategory? second) => !(first == second);
 }

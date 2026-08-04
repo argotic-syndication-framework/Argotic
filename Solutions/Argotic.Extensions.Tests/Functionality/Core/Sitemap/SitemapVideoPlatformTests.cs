@@ -12,32 +12,24 @@ public class SitemapVideoPlatformTests
     #region SitemapVideoPlatform Enum Tests
 
     [TestMethod]
-    public void SitemapVideoPlatform_None_HasValueZero()
-    {
+    public void SitemapVideoPlatform_None_HasValueZero() =>
         // Assert
         ((int)SitemapVideoPlatform.None).ShouldBe(0);
-    }
 
     [TestMethod]
-    public void SitemapVideoPlatform_Web_HasValueOne()
-    {
+    public void SitemapVideoPlatform_Web_HasValueOne() =>
         // Assert
         ((int)SitemapVideoPlatform.Web).ShouldBe(1);
-    }
 
     [TestMethod]
-    public void SitemapVideoPlatform_Mobile_HasValueTwo()
-    {
+    public void SitemapVideoPlatform_Mobile_HasValueTwo() =>
         // Assert
         ((int)SitemapVideoPlatform.Mobile).ShouldBe(2);
-    }
 
     [TestMethod]
-    public void SitemapVideoPlatform_Tv_HasValueFour()
-    {
+    public void SitemapVideoPlatform_Tv_HasValueFour() =>
         // Assert
         ((int)SitemapVideoPlatform.Tv).ShouldBe(4);
-    }
 
     [TestMethod]
     public void SitemapVideoPlatform_IsFlagsEnum()
@@ -160,11 +152,9 @@ public class SitemapVideoPlatformTests
     }
 
     [TestMethod]
-    public void SitemapVideoRelationship_AllowAndDeny_AreDifferent()
-    {
+    public void SitemapVideoRelationship_AllowAndDeny_AreDifferent() =>
         // Assert
         SitemapVideoRelationship.Allow.ShouldNotBe(SitemapVideoRelationship.Deny);
-    }
 
     [TestMethod]
     public void SitemapVideoRelationship_CanBeUsedInSwitch()

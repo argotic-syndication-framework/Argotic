@@ -103,7 +103,7 @@ internal static class ExampleRegistry
             return [];
         }
 
-        List<ExampleInfo> examples = new();
+        List<ExampleInfo> examples = [];
 
         foreach ((Type type, MethodInfo method) in methods)
         {
@@ -112,7 +112,7 @@ internal static class ExampleRegistry
             bool isAsync = method.ReturnType == typeof(Task) ||
                            (method.ReturnType.IsGenericType && method.ReturnType.GetGenericTypeDefinition() == typeof(Task<>));
 
-            Func<Task> runAsync = () => ExecuteMethodAsync(method);
+            Task runAsync() => ExecuteMethodAsync(method);
 
             examples.Add(new ExampleInfo(name, description, method.Name, isAsync, runAsync));
         }
@@ -128,7 +128,7 @@ internal static class ExampleRegistry
     {
         Initialize();
 
-        List<(string Category, ExampleInfo Example)> allExamples = new();
+        List<(string Category, ExampleInfo Example)> allExamples = [];
 
         foreach (ExampleCategory category in Categories)
         {

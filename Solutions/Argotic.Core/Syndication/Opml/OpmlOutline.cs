@@ -402,10 +402,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="type"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference.</exception>
-    public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl)
-    {
-        return OpmlOutline.CreateSubscriptionListOutline(text, type, xmlUrl, null, string.Empty, string.Empty, string.Empty, null);
-    }
+    public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl) => OpmlOutline.CreateSubscriptionListOutline(text, type, xmlUrl, null, string.Empty, string.Empty, string.Empty, null);
 
     /// <summary>
     /// Creates a new <see cref="OpmlOutline"/> that represents a subscription list outline using the supplied parameters.
@@ -531,19 +528,13 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is OpmlOutline other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is OpmlOutline other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.HasBreakpoint), HashCodeUtility.Component(this.IsCommented), HashCodeUtility.Component(this.Text));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.HasBreakpoint), HashCodeUtility.Component(this.IsCommented), HashCodeUtility.Component(this.Text));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -563,10 +554,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(OpmlOutline? first, OpmlOutline? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(OpmlOutline? first, OpmlOutline? second) => !(first == second);
 
     /// <summary>
     /// Loads this <see cref="OpmlOutline"/> using attributes defined on the supplied <see cref="XPathNavigator"/>.

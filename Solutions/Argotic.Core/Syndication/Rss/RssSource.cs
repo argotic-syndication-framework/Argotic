@@ -250,10 +250,7 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is RssSource other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is RssSource other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
@@ -284,8 +281,5 @@ public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensi
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(RssSource? first, RssSource? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(RssSource? first, RssSource? second) => !(first == second);
 }

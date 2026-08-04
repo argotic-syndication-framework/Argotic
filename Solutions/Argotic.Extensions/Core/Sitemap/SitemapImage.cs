@@ -51,10 +51,7 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Location
     {
-        get
-        {
-            return imageLocation;
-        }
+        get => imageLocation;
 
         set
         {
@@ -152,28 +149,19 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SitemapImage other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SitemapImage other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return this.Location?.GetHashCode() ?? 0;
-    }
+    public override int GetHashCode() => this.Location?.GetHashCode() ?? 0;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SitemapImage"/>.
     /// </summary>
     /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapImage"/>.</returns>
-    public override string ToString()
-    {
-        return this.Location?.ToString() ?? string.Empty;
-    }
+    public override string ToString() => this.Location?.ToString() ?? string.Empty;
 
     /// <summary>
     /// Determines if operands are equal.
@@ -193,9 +181,6 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapImage? first, SitemapImage? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SitemapImage? first, SitemapImage? second) => !(first == second);
 
 }

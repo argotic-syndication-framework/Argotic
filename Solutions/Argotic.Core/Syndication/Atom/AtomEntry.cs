@@ -128,10 +128,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     /// Raises the <see cref="AtomEntry.Loaded"/> event.
     /// </summary>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
-    protected virtual void OnEntryLoaded(SyndicationResourceLoadedEventArgs e)
-    {
-        this.Loaded?.Invoke(this, e);
-    }
+    protected virtual void OnEntryLoaded(SyndicationResourceLoadedEventArgs e) => this.Loaded?.Invoke(this, e);
 
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
@@ -458,10 +455,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         />
     ///     </code>
     /// </example>
-    public void Load(IXPathNavigable source)
-    {
-        this.Load(source, null);
-    }
+    public void Load(IXPathNavigable source) => this.Load(source, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -506,10 +500,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         />
     ///     </code>
     /// </example>
-    public void Load(Stream stream)
-    {
-        this.Load(stream, null);
-    }
+    public void Load(Stream stream) => this.Load(stream, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
@@ -554,10 +545,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         />
     ///     </code>
     /// </example>
-    public void Load(XmlReader reader)
-    {
-        this.Load(reader, null);
-    }
+    public void Load(XmlReader reader) => this.Load(reader, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
@@ -588,10 +576,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///     This method uses the shared <see cref="HttpClient"/> from <see cref="SyndicationEncodingUtility.SharedHttpClient"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default)
-    {
-        return LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
-    }
+    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
 
     /// <summary>
     /// Asynchronously loads the <see cref="AtomEntry"/> from the specified <see cref="Uri"/> using the specified <see cref="HttpClient"/>.
@@ -650,10 +635,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     ///         />
     ///     </code>
     /// </example>
-    public void Save(Stream stream)
-    {
-        this.Save(stream, null);
-    }
+    public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.

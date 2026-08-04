@@ -196,18 +196,14 @@ public class SitemapUtilityTests
     }
 
     [TestMethod]
-    public void ChangeFrequencyByName_NullValue_ThrowsArgumentException()
-    {
+    public void ChangeFrequencyByName_NullValue_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => SitemapUtility.ChangeFrequencyByName(null!));
-    }
 
     [TestMethod]
-    public void ChangeFrequencyByName_EmptyValue_ThrowsArgumentException()
-    {
+    public void ChangeFrequencyByName_EmptyValue_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => SitemapUtility.ChangeFrequencyByName(string.Empty));
-    }
 
     #endregion
 
@@ -455,18 +451,14 @@ public class SitemapUtilityTests
     }
 
     [TestMethod]
-    public void CreateNamespaceManager_NullNameTable_ThrowsArgumentNullException()
-    {
+    public void CreateNamespaceManager_NullNameTable_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => SitemapUtility.CreateNamespaceManager(null!));
-    }
 
     [TestMethod]
-    public void SitemapNamespace_ReturnsCorrectValue()
-    {
+    public void SitemapNamespace_ReturnsCorrectValue() =>
         // Assert
         SitemapUtility.SitemapNamespace.ShouldBe("http://www.sitemaps.org/schemas/sitemap/0.9");
-    }
 
     #endregion
 

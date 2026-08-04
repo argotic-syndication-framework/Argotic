@@ -102,15 +102,9 @@ public class AtomEntryResource : AtomEntry
     /// <seealso cref="AtomPublishingEditedSyndicationExtension"/>
     public DateTime EditedOn
     {
-        get
-        {
-            return entryResourceEditedOn;
-        }
+        get => entryResourceEditedOn;
 
-        set
-        {
-            entryResourceEditedOn = value;
-        }
+        set => entryResourceEditedOn = value;
     }
 
     /// <summary>
@@ -120,15 +114,9 @@ public class AtomEntryResource : AtomEntry
     /// <seealso cref="AtomPublishingControlSyndicationExtension"/>
     public bool IsDraft
     {
-        get
-        {
-            return entryResourceIsDraft;
-        }
+        get => entryResourceIsDraft;
 
-        set
-        {
-            entryResourceIsDraft = value;
-        }
+        set => entryResourceIsDraft = value;
     }
 
     /// <summary>
@@ -208,10 +196,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    public new void Load(IXPathNavigable source)
-    {
-        this.Load(source, null);
-    }
+    public new void Load(IXPathNavigable source) => this.Load(source, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
@@ -223,10 +208,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    public new void Load(Stream stream)
-    {
-        this.Load(stream, null);
-    }
+    public new void Load(Stream stream) => this.Load(stream, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -255,10 +237,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the entry remains empty.</exception>
-    public new void Load(XmlReader reader)
-    {
-        this.Load(reader, null);
-    }
+    public new void Load(XmlReader reader) => this.Load(reader, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -291,10 +270,7 @@ public class AtomEntryResource : AtomEntry
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the entry remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public new Task LoadAsync(Uri source, CancellationToken cancellationToken = default)
-    {
-        return LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
-    }
+    public new Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
 
     /// <summary>
     /// Loads this <see cref="AtomEntryResource"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.

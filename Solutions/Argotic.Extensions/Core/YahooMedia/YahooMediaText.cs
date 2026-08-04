@@ -74,10 +74,7 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get
-        {
-            return textContent;
-        }
+        get => textContent;
 
         set
         {
@@ -100,15 +97,9 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <seealso cref="Start"/>
     public TimeSpan End
     {
-        get
-        {
-            return textEnd;
-        }
+        get => textEnd;
 
-        set
-        {
-            textEnd = value;
-        }
+        set => textEnd = value;
     }
 
     /// <summary>
@@ -125,15 +116,9 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// </remarks>
     public CultureInfo? Language
     {
-        get
-        {
-            return textLanguage;
-        }
+        get => textLanguage;
 
-        set
-        {
-            textLanguage = value;
-        }
+        set => textLanguage = value;
     }
 
     /// <summary>
@@ -146,15 +131,9 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <seealso cref="End"/>
     public TimeSpan Start
     {
-        get
-        {
-            return textStart;
-        }
+        get => textStart;
 
-        set
-        {
-            textStart = value;
-        }
+        set => textStart = value;
     }
 
     /// <summary>
@@ -169,15 +148,9 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// </remarks>
     public YahooMediaTextConstructType TextType
     {
-        get
-        {
-            return textType;
-        }
+        get => textType;
 
-        set
-        {
-            textType = value;
-        }
+        set => textType = value;
     }
 
     /// <summary>
@@ -383,19 +356,13 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is YahooMediaText other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is YahooMediaText other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.End), HashCodeUtility.Component(this.Language?.Name), HashCodeUtility.Component(this.Start), HashCodeUtility.Component(this.TextType));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.End), HashCodeUtility.Component(this.Language?.Name), HashCodeUtility.Component(this.Start), HashCodeUtility.Component(this.TextType));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -415,8 +382,5 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaText? first, YahooMediaText? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(YahooMediaText? first, YahooMediaText? second) => !(first == second);
 }

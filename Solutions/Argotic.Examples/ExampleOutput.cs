@@ -155,10 +155,7 @@ internal static class ExampleOutput
     /// <summary>
     /// Displays a message indicating an object was saved.
     /// </summary>
-    public static void ShowSaved(string typeName)
-    {
-        AnsiConsole.MarkupLine($"  [green]Saved[/] [dim]{Markup.Escape(typeName)}[/] to stream");
-    }
+    public static void ShowSaved(string typeName) => AnsiConsole.MarkupLine($"  [green]Saved[/] [dim]{Markup.Escape(typeName)}[/] to stream");
 
     private static int CountOutlines(IEnumerable<OpmlOutline> outlines)
     {
@@ -430,10 +427,7 @@ internal static class ExampleOutput
     /// <summary>
     /// Displays information about an APML application.
     /// </summary>
-    public static void ShowApmlApplication(ApmlApplication application)
-    {
-        AnsiConsole.MarkupLine($"  [dim]Name:[/] {Markup.Escape(application.Name)}");
-    }
+    public static void ShowApmlApplication(ApmlApplication application) => AnsiConsole.MarkupLine($"  [dim]Name:[/] {Markup.Escape(application.Name)}");
 
     /// <summary>
     /// Displays information about an APML author.
@@ -456,10 +450,7 @@ internal static class ExampleOutput
     /// <summary>
     /// Displays information about an APML profile.
     /// </summary>
-    public static void ShowApmlProfile(ApmlProfile profile)
-    {
-        AnsiConsole.MarkupLine($"  [dim]Name:[/] {Markup.Escape(profile.Name)}");
-    }
+    public static void ShowApmlProfile(ApmlProfile profile) => AnsiConsole.MarkupLine($"  [dim]Name:[/] {Markup.Escape(profile.Name)}");
 
     /// <summary>
     /// Displays information about an APML source.
@@ -876,10 +867,7 @@ internal static class ExampleOutput
     /// <summary>
     /// Displays information about items with a specific extension type.
     /// </summary>
-    public static void ShowItemsWithExtension(int count, int total, string extensionName)
-    {
-        AnsiConsole.MarkupLine($"  [dim]Items with {extensionName}:[/] {count}/{total}");
-    }
+    public static void ShowItemsWithExtension(int count, int total, string extensionName) => AnsiConsole.MarkupLine($"  [dim]Items with {extensionName}:[/] {count}/{total}");
 
     // ========================================
     // Sitemap Display Methods

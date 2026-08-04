@@ -52,10 +52,7 @@ public class FeedRankSyndicationExtensionContext
     /// <value>The language sensitive, human-readable label for this rank.</value>
     public string Label
     {
-        get
-        {
-            return extensionLabel;
-        }
+        get => extensionLabel;
 
         set
         {
@@ -77,10 +74,7 @@ public class FeedRankSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Scheme
     {
-        get
-        {
-            return extensionScheme;
-        }
+        get => extensionScheme;
 
         set
         {

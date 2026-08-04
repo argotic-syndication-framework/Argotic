@@ -80,7 +80,7 @@ internal sealed class ExampleRunner
             }
 
             // Build menu with class groupings
-            List<string> choices = new() { BackChoice };
+            List<string> choices = [BackChoice];
             List<KeyValuePair<string, IReadOnlyList<ExampleInfo>>> orderedClasses = [.. examplesByClass.OrderBy(kvp => kvp.Key)];
 
             foreach ((string classNameItem, IReadOnlyList<ExampleInfo> examplesItem) in orderedClasses)
@@ -114,11 +114,14 @@ internal sealed class ExampleRunner
     {
         while (true)
         {
-            List<string> choices = new() { BackChoice };
-            choices.AddRange(examples.Select(e =>
-                e.IsAsync
-                    ? $"[cyan]{e.Name}[/] [dim](async)[/]"
-                    : $"[cyan]{e.Name}[/]"));
+            List<string> choices =
+            [
+                BackChoice,
+                .. examples.Select(e =>
+                    e.IsAsync
+                        ? $"[cyan]{e.Name}[/] [dim](async)[/]"
+                        : $"[cyan]{e.Name}[/]"),
+            ];
 
             string selection = AnsiConsole.Prompt(
                 new SelectionPrompt<string>()

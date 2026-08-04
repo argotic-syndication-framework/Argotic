@@ -35,18 +35,14 @@ public class GenericSyndicationCategoryTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullTerm_ThrowsArgumentException()
-    {
+    public void Constructor_WithNullTerm_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new GenericSyndicationCategory((string)null!));
-    }
 
     [TestMethod]
-    public void Constructor_WithEmptyTerm_ThrowsArgumentException()
-    {
+    public void Constructor_WithEmptyTerm_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => new GenericSyndicationCategory(string.Empty));
-    }
 
     #endregion
 
@@ -160,11 +156,9 @@ public class GenericSyndicationCategoryTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullAtomCategory_ThrowsArgumentNullException()
-    {
+    public void Constructor_WithNullAtomCategory_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new GenericSyndicationCategory((AtomCategory)null!));
-    }
 
     [TestMethod]
     public void Constructor_WithAtomCategory_NoScheme_SetsSchemeToEmpty()
@@ -224,11 +218,9 @@ public class GenericSyndicationCategoryTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullRssCategory_ThrowsArgumentNullException()
-    {
+    public void Constructor_WithNullRssCategory_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new GenericSyndicationCategory((RssCategory)null!));
-    }
 
     [TestMethod]
     public void Constructor_WithRssCategory_NoDomain_SetsSchemeToEmpty()

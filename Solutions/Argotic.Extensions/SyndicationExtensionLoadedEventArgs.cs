@@ -74,13 +74,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// </summary>
     /// <value>An uninitialized instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class.</value>
     /// <remarks>The value of Empty is a read-only instance of <see cref="SyndicationExtensionLoadedEventArgs"/> equivalent to the result of calling the <see cref="SyndicationExtensionLoadedEventArgs()"/> constructor.</remarks>
-    public static new SyndicationExtensionLoadedEventArgs Empty
-    {
-        get
-        {
-            return emptyEventArguments;
-        }
-    }
+    public static new SyndicationExtensionLoadedEventArgs Empty => emptyEventArguments;
 
     /// <summary>
     /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
@@ -88,13 +82,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// <value>
     ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
     /// </value>
-    public XPathNavigator? Data
-    {
-        get
-        {
-            return eventNavigator;
-        }
-    }
+    public XPathNavigator? Data => eventNavigator;
 
     /// <summary>
     /// Gets the <see cref="ISyndicationExtension"/> that resulted from the load operation.
@@ -102,13 +90,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// <value>
     ///     The <see cref="ISyndicationExtension"/> that resulted from the load operation. 
     /// </value>
-    public ISyndicationExtension? Extension
-    {
-        get
-        {
-            return eventExtension;
-        }
-    }
+    public ISyndicationExtension? Extension => eventExtension;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationExtensionLoadedEventArgs"/>.
@@ -197,19 +179,13 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SyndicationExtensionLoadedEventArgs other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SyndicationExtensionLoadedEventArgs other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Data?.OuterXml), HashCodeUtility.Component(this.Extension?.ToString()));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Data?.OuterXml), HashCodeUtility.Component(this.Extension?.ToString()));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -229,9 +205,6 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SyndicationExtensionLoadedEventArgs? first, SyndicationExtensionLoadedEventArgs? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SyndicationExtensionLoadedEventArgs? first, SyndicationExtensionLoadedEventArgs? second) => !(first == second);
 
 }

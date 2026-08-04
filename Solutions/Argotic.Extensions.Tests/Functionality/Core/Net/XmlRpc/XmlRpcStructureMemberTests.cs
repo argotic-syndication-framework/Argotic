@@ -72,11 +72,9 @@ public class XmlRpcStructureMemberTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullValue_ThrowsArgumentNullException()
-    {
+    public void Constructor_WithNullValue_ThrowsArgumentNullException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() => new XmlRpcStructureMember("name", null!));
-    }
 
     [TestMethod]
     public void Name_Set_TrimsValue()

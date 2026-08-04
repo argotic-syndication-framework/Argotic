@@ -36,10 +36,7 @@ public class FeedLoadBenchmarks
     /// than string building.
     /// </summary>
     [GlobalSetup]
-    public void Setup()
-    {
-        this.document = FeedCorpus.GenerateRssUtf8(this.ItemCount);
-    }
+    public void Setup() => this.document = FeedCorpus.GenerateRssUtf8(this.ItemCount);
 
     /// <summary>
     /// Parses via <see cref="RssFeed.Load(Stream)"/> — the surface a caller uses for a response

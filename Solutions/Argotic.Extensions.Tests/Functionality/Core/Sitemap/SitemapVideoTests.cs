@@ -44,39 +44,29 @@ public class SitemapVideoTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullThumbnail_ThrowsArgumentNullException()
-    {
+    public void Constructor_WithNullThumbnail_ThrowsArgumentNullException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() => new SitemapVideo(null!, TestTitle, TestDescription));
-    }
 
     [TestMethod]
-    public void Constructor_WithNullTitle_ThrowsArgumentException()
-    {
+    public void Constructor_WithNullTitle_ThrowsArgumentException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentException>(() => new SitemapVideo(TestThumbnailUri, null!, TestDescription));
-    }
 
     [TestMethod]
-    public void Constructor_WithEmptyTitle_ThrowsArgumentException()
-    {
+    public void Constructor_WithEmptyTitle_ThrowsArgumentException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentException>(() => new SitemapVideo(TestThumbnailUri, string.Empty, TestDescription));
-    }
 
     [TestMethod]
-    public void Constructor_WithNullDescription_ThrowsArgumentException()
-    {
+    public void Constructor_WithNullDescription_ThrowsArgumentException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentException>(() => new SitemapVideo(TestThumbnailUri, TestTitle, null!));
-    }
 
     [TestMethod]
-    public void Constructor_WithEmptyDescription_ThrowsArgumentException()
-    {
+    public void Constructor_WithEmptyDescription_ThrowsArgumentException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentException>(() => new SitemapVideo(TestThumbnailUri, TestTitle, string.Empty));
-    }
 
     #endregion
 
@@ -111,11 +101,9 @@ public class SitemapVideoTests
     }
 
     [TestMethod]
-    public void MaxTitleLength_EqualsOneHundred()
-    {
+    public void MaxTitleLength_EqualsOneHundred() =>
         // Assert
         SitemapVideo.MaxTitleLength.ShouldBe(100);
-    }
 
     #endregion
 
@@ -150,54 +138,42 @@ public class SitemapVideoTests
     }
 
     [TestMethod]
-    public void MaxDescriptionLength_EqualsTwoThousandFortyEight()
-    {
+    public void MaxDescriptionLength_EqualsTwoThousandFortyEight() =>
         // Assert
         SitemapVideo.MaxDescriptionLength.ShouldBe(2048);
-    }
 
     #endregion
 
     #region Duration and Rating Constant Tests
 
     [TestMethod]
-    public void MinDuration_EqualsOne()
-    {
+    public void MinDuration_EqualsOne() =>
         // Assert
         SitemapVideo.MinDuration.ShouldBe(1);
-    }
 
     [TestMethod]
-    public void MaxDuration_EqualsTwentyEightThousandEightHundred()
-    {
+    public void MaxDuration_EqualsTwentyEightThousandEightHundred() =>
         // Assert
         SitemapVideo.MaxDuration.ShouldBe(28800);
-    }
 
     [TestMethod]
-    public void MinRating_EqualsZeroPointZero()
-    {
+    public void MinRating_EqualsZeroPointZero() =>
         // Assert
         SitemapVideo.MinRating.ShouldBe(0.0m);
-    }
 
     [TestMethod]
-    public void MaxRating_EqualsFivePointZero()
-    {
+    public void MaxRating_EqualsFivePointZero() =>
         // Assert
         SitemapVideo.MaxRating.ShouldBe(5.0m);
-    }
 
     #endregion
 
     #region Tag Tests
 
     [TestMethod]
-    public void MaxTagCount_EqualsThirtyTwo()
-    {
+    public void MaxTagCount_EqualsThirtyTwo() =>
         // Assert
         SitemapVideo.MaxTagCount.ShouldBe(32);
-    }
 
     [TestMethod]
     public void Tags_ReturnsEmptyListByDefault()
@@ -293,11 +269,9 @@ public class SitemapVideoTests
     }
 
     [TestMethod]
-    public void MaxUploaderLength_EqualsTwoHundredFiftyFive()
-    {
+    public void MaxUploaderLength_EqualsTwoHundredFiftyFive() =>
         // Assert
         SitemapVideo.MaxUploaderLength.ShouldBe(255);
-    }
 
     [TestMethod]
     public void Uploader_NullValue_SetsEmptyString()

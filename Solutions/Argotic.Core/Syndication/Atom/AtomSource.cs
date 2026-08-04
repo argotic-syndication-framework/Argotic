@@ -448,19 +448,13 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is AtomSource other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is AtomSource other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.UpdatedOn), HashCodeUtility.Component(this.Generator), HashCodeUtility.Component(this.Icon), HashCodeUtility.Component(this.Logo), HashCodeUtility.Component(this.Rights));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.UpdatedOn), HashCodeUtility.Component(this.Generator), HashCodeUtility.Component(this.Icon), HashCodeUtility.Component(this.Logo), HashCodeUtility.Component(this.Rights));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -480,10 +474,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomSource? first, AtomSource? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(AtomSource? first, AtomSource? second) => !(first == second);
 
     /// <summary>
     /// Loads this <see cref="AtomSource"/> collection elements using the supplied <see cref="XPathNavigator"/>.

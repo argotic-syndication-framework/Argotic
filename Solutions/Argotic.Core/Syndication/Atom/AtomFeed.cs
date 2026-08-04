@@ -78,10 +78,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// Raises the <see cref="AtomFeed.Loaded"/> event.
     /// </summary>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
-    protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e)
-    {
-        this.Loaded?.Invoke(this, e);
-    }
+    protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e) => this.Loaded?.Invoke(this, e);
 
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
@@ -552,10 +549,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         />
     ///     </code>
     /// </example>
-    public void Load(IXPathNavigable source)
-    {
-        this.Load(source, null);
-    }
+    public void Load(IXPathNavigable source) => this.Load(source, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -600,10 +594,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         />
     ///     </code>
     /// </example>
-    public void Load(Stream stream)
-    {
-        this.Load(stream, null);
-    }
+    public void Load(Stream stream) => this.Load(stream, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
@@ -648,10 +639,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         />
     ///     </code>
     /// </example>
-    public void Load(XmlReader reader)
-    {
-        this.Load(reader, null);
-    }
+    public void Load(XmlReader reader) => this.Load(reader, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
@@ -686,10 +674,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the feed remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default)
-    {
-        return LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
-    }
+    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
 
     /// <summary>
     /// Loads this <see cref="AtomFeed"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
@@ -747,10 +732,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     ///         />
     ///     </code>
     /// </example>
-    public void Save(Stream stream)
-    {
-        this.Save(stream, null);
-    }
+    public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.

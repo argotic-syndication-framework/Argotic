@@ -53,15 +53,9 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     /// </value>
     public SitemapNewsPublication? Publication
     {
-        get
-        {
-            return extensionPublication;
-        }
+        get => extensionPublication;
 
-        set
-        {
-            extensionPublication = value;
-        }
+        set => extensionPublication = value;
     }
 
     /// <summary>
@@ -77,15 +71,9 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     /// </remarks>
     public DateTime PublicationDate
     {
-        get
-        {
-            return extensionPublicationDate;
-        }
+        get => extensionPublicationDate;
 
-        set
-        {
-            extensionPublicationDate = value;
-        }
+        set => extensionPublicationDate = value;
     }
 
     /// <summary>
@@ -97,10 +85,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     /// </remarks>
     public string Title
     {
-        get
-        {
-            return extensionTitle;
-        }
+        get => extensionTitle;
 
         set
         {
@@ -304,19 +289,13 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SitemapNewsExtension other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SitemapNewsExtension other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Publication), HashCodeUtility.Component(this.PublicationDate), HashCodeUtility.Component(this.Title));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Publication), HashCodeUtility.Component(this.PublicationDate), HashCodeUtility.Component(this.Title));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -336,9 +315,6 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapNewsExtension? first, SitemapNewsExtension? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SitemapNewsExtension? first, SitemapNewsExtension? second) => !(first == second);
 
 }

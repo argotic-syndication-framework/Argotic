@@ -52,10 +52,7 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public FeedRankSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
+        get => extensionContext;
 
         set
         {
@@ -195,19 +192,13 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is FeedRankSyndicationExtension other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is FeedRankSyndicationExtension other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Domain), HashCodeUtility.Component(this.Context.Label), HashCodeUtility.Component(this.Context.Scheme), HashCodeUtility.Component(this.Context.Value))));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.Domain), HashCodeUtility.Component(this.Context.Label), HashCodeUtility.Component(this.Context.Scheme), HashCodeUtility.Component(this.Context.Value))));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -227,9 +218,6 @@ public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<Fe
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(FeedRankSyndicationExtension? first, FeedRankSyndicationExtension? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(FeedRankSyndicationExtension? first, FeedRankSyndicationExtension? second) => !(first == second);
 
 }

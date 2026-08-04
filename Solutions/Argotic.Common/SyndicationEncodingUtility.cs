@@ -190,10 +190,7 @@ public static class SyndicationEncodingUtility
     public static Task<XPathNavigator> CreateSafeNavigatorAsync(
         Uri source,
         Encoding? encoding,
-        CancellationToken cancellationToken = default)
-    {
-        return CreateSafeNavigatorAsync(source, SharedHttpClient, encoding, null, cancellationToken);
-    }
+        CancellationToken cancellationToken = default) => CreateSafeNavigatorAsync(source, SharedHttpClient, encoding, null, cancellationToken);
 
     /// <summary>
     /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> asynchronously using the specified <see cref="HttpClient"/>.

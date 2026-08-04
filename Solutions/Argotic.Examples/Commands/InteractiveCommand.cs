@@ -9,7 +9,6 @@ internal sealed class InteractiveCommand : AsyncCommand
 {
     protected override async Task<int> ExecuteAsync(CommandContext context, CancellationToken cancellationToken)
     {
-        ExampleRunner runner = new();
         await ExampleRunner.RunAsync().ConfigureAwait(false);
         return 0;
     }

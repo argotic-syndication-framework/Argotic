@@ -368,19 +368,13 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is BlogMLComment other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is BlogMLComment other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.UserEmailAddress), HashCodeUtility.Component(this.UserName), HashCodeUtility.Component(this.UserUrl), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.UserEmailAddress), HashCodeUtility.Component(this.UserName), HashCodeUtility.Component(this.UserUrl), HashCodeUtility.Component(this.ApprovalStatus), HashCodeUtility.Component(this.CreatedOn), HashCodeUtility.Component(this.Id), HashCodeUtility.Component(this.LastModifiedOn));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -400,9 +394,6 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(BlogMLComment? first, BlogMLComment? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(BlogMLComment? first, BlogMLComment? second) => !(first == second);
 
 }

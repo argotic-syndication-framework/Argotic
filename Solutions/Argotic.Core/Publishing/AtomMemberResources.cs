@@ -85,15 +85,9 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </remarks>
     public Uri? BaseUri
     {
-        get
-        {
-            return commonObjectBaseUri;
-        }
+        get => commonObjectBaseUri;
 
-        set
-        {
-            commonObjectBaseUri = value;
-        }
+        set => commonObjectBaseUri = value;
     }
 
     /// <summary>
@@ -107,15 +101,9 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </remarks>
     public CultureInfo? Language
     {
-        get
-        {
-            return commonObjectLanguage;
-        }
+        get => commonObjectLanguage;
 
-        set
-        {
-            commonObjectLanguage = value;
-        }
+        set => commonObjectLanguage = value;
     }
 
     /// <summary>
@@ -171,10 +159,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomTextConstruct Title
     {
-        get
-        {
-            return collectionTitle;
-        }
+        get => collectionTitle;
 
         set
         {
@@ -194,10 +179,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Uri
     {
-        get
-        {
-            return collectionResourceLocation;
-        }
+        get => collectionResourceLocation;
 
         set
         {
@@ -643,19 +625,13 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is AtomMemberResources other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is AtomMemberResources other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Uri), HashCodeUtility.Component(this.Title));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Uri), HashCodeUtility.Component(this.Title));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -675,9 +651,6 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomMemberResources? first, AtomMemberResources? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(AtomMemberResources? first, AtomMemberResources? second) => !(first == second);
 
 }

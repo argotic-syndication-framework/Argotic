@@ -52,15 +52,9 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// </value>
     public FeedHistoryLinkRelationType RelationType
     {
-        get
-        {
-            return linkRelationType;
-        }
+        get => linkRelationType;
 
-        set
-        {
-            linkRelationType = value;
-        }
+        set => linkRelationType = value;
     }
 
     /// <summary>
@@ -70,10 +64,7 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Uri
     {
-        get
-        {
-            return linkRelationLocation;
-        }
+        get => linkRelationLocation;
 
         set
         {
@@ -205,19 +196,13 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is FeedHistoryLinkRelation other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is FeedHistoryLinkRelation other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.RelationType), HashCodeUtility.Component(this.Uri));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.RelationType), HashCodeUtility.Component(this.Uri));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -237,9 +222,6 @@ public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEq
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(FeedHistoryLinkRelation? first, FeedHistoryLinkRelation? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(FeedHistoryLinkRelation? first, FeedHistoryLinkRelation? second) => !(first == second);
 
 }

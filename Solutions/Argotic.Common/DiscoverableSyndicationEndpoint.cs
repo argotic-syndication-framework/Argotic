@@ -158,10 +158,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <returns>A task that represents the asynchronous operation. The task result contains a read-only <see cref="XPathNavigator"/> object for navigating the auto-discoverable syndicated content.</returns>
     /// <exception cref="ArgumentNullException">The <see cref="Source"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public Task<XPathNavigator> CreateNavigatorAsync(CancellationToken cancellationToken = default)
-    {
-        return CreateNavigatorAsync(SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
-    }
+    public Task<XPathNavigator> CreateNavigatorAsync(CancellationToken cancellationToken = default) => CreateNavigatorAsync(SyndicationEncodingUtility.SharedHttpClient, cancellationToken);
 
     /// <summary>
     /// Asynchronously initializes a read-only <see cref="XPathNavigator"/> object for navigating through the auto-discoverable syndicated content located at the <see cref="Source">endpoint location</see> using the specified <see cref="HttpClient"/>.
@@ -192,10 +189,7 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <remarks>
     ///     This method returns the XHTML representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        return $"<link rel=\"alternate\" type=\"{this.ContentType}\" title=\"{this.Title}\" href=\"{this.Source?.ToString() ?? string.Empty}\" />";
-    }
+    public override string ToString() => $"<link rel=\"alternate\" type=\"{this.ContentType}\" title=\"{this.Title}\" href=\"{this.Source?.ToString() ?? string.Empty}\" />";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -236,19 +230,13 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is DiscoverableSyndicationEndpoint other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is DiscoverableSyndicationEndpoint other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.Source), HashCodeUtility.Component(this.Title));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.ContentType), HashCodeUtility.Component(this.Source), HashCodeUtility.Component(this.Title));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -268,8 +256,5 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(DiscoverableSyndicationEndpoint? first, DiscoverableSyndicationEndpoint? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(DiscoverableSyndicationEndpoint? first, DiscoverableSyndicationEndpoint? second) => !(first == second);
 }

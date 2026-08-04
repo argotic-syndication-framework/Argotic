@@ -104,25 +104,13 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// Gets information about cause of the Trackback ping request failure.
     /// </summary>
     /// <value>Information about the cause of the Trackback ping request failure. The default value is an <b>empty</b> string.</value>
-    public string? ErrorMessage
-    {
-        get
-        {
-            return responseErrorMessage;
-        }
-    }
+    public string? ErrorMessage => responseErrorMessage;
 
     /// <summary>
     /// Gets a value indicating if the Trackback ping request failed.
     /// </summary>
     /// <value><b>true</b> if the Trackback ping response contains an error indicator; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
-    public bool HasError
-    {
-        get
-        {
-            return responseHasError;
-        }
-    }
+    public bool HasError => responseHasError;
 
     /// <summary>
     /// Loads this <see cref="TrackbackResponse"/> using the supplied <see cref="XPathNavigator"/>.
@@ -258,19 +246,13 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is TrackbackResponse other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is TrackbackResponse other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.ErrorMessage), HashCodeUtility.Component(this.HasError));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.ErrorMessage), HashCodeUtility.Component(this.HasError));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -290,8 +272,5 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(TrackbackResponse? first, TrackbackResponse? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(TrackbackResponse? first, TrackbackResponse? second) => !(first == second);
 }

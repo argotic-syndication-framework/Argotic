@@ -72,10 +72,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Encoding Encoding
     {
-        get
-        {
-            return messageEncoding;
-        }
+        get => messageEncoding;
 
         set
         {
@@ -93,10 +90,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// </remarks>
     public string Excerpt
     {
-        get
-        {
-            return messageExcerpt;
-        }
+        get => messageExcerpt;
 
         set
         {
@@ -121,10 +115,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Permalink
     {
-        get
-        {
-            return messageUrl;
-        }
+        get => messageUrl;
 
         set
         {
@@ -142,10 +133,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// </remarks>
     public string Title
     {
-        get
-        {
-            return messageTitle;
-        }
+        get => messageTitle;
 
         set
         {
@@ -169,10 +157,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// </remarks>
     public string WeblogName
     {
-        get
-        {
-            return messageWeblogName;
-        }
+        get => messageWeblogName;
 
         set
         {
@@ -336,10 +321,7 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is TrackbackMessage other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is TrackbackMessage other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
@@ -373,8 +355,5 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(TrackbackMessage? first, TrackbackMessage? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(TrackbackMessage? first, TrackbackMessage? second) => !(first == second);
 }

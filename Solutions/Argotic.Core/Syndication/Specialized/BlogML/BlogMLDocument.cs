@@ -69,10 +69,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// Raises the <see cref="BlogMLDocument.Loaded"/> event.
     /// </summary>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
-    protected virtual void OnDocumentLoaded(SyndicationResourceLoadedEventArgs e)
-    {
-        this.Loaded?.Invoke(this, e);
-    }
+    protected virtual void OnDocumentLoaded(SyndicationResourceLoadedEventArgs e) => this.Loaded?.Invoke(this, e);
 
     /// <summary>
     /// Gets the syndication extensions applied to this syndication entity.
@@ -241,10 +238,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
-    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default)
-    {
-        return LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
-    }
+    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
 
     /// <summary>
     /// Loads this <see cref="BlogMLDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
@@ -338,10 +332,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         />
     ///     </code>
     /// </example>
-    public void Load(IXPathNavigable source)
-    {
-        this.Load(source, null);
-    }
+    public void Load(IXPathNavigable source) => this.Load(source, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -384,10 +375,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         />
     ///     </code>
     /// </example>
-    public void Load(Stream stream)
-    {
-        this.Load(stream, null);
-    }
+    public void Load(Stream stream) => this.Load(stream, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
@@ -431,10 +419,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         />
     ///     </code>
     /// </example>
-    public void Load(XmlReader reader)
-    {
-        this.Load(reader, null);
-    }
+    public void Load(XmlReader reader) => this.Load(reader, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
@@ -469,10 +454,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         />
     ///     </code>
     /// </example>
-    public void Save(Stream stream)
-    {
-        this.Save(stream, null);
-    }
+    public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.

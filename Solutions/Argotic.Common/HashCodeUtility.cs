@@ -24,20 +24,14 @@ public static class HashCodeUtility
     /// </summary>
     /// <param name="value">The string to generate a hash code component for. This value can be <b>null</b>.</param>
     /// <returns>A hash code component that is equal for strings that differ only by case, or <b>0</b> if <paramref name="value"/> is a null reference.</returns>
-    public static int Component(string? value)
-    {
-        return value is null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(value);
-    }
+    public static int Component(string? value) => value is null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(value);
 
     /// <summary>
     /// Returns a hash code component for the supplied <see cref="Uri"/> that disregards case.
     /// </summary>
     /// <param name="value">The <see cref="Uri"/> to generate a hash code component for. This value can be <b>null</b>.</param>
     /// <returns>A hash code component that is equal for URIs that differ only by case, or <b>0</b> if <paramref name="value"/> is a null reference.</returns>
-    public static int Component(Uri? value)
-    {
-        return value is null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(value.ToString());
-    }
+    public static int Component(Uri? value) => value is null ? 0 : StringComparer.OrdinalIgnoreCase.GetHashCode(value.ToString());
 
     /// <summary>
     /// Returns the supplied value unchanged.
@@ -45,8 +39,5 @@ public static class HashCodeUtility
     /// <typeparam name="T">The type of the value to generate a hash code component for.</typeparam>
     /// <param name="value">The value to generate a hash code component for.</param>
     /// <returns>The supplied <paramref name="value"/>, whose own hash code is already consistent with how it is compared.</returns>
-    public static T Component<T>(T value)
-    {
-        return value;
-    }
+    public static T Component<T>(T value) => value;
 }

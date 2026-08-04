@@ -46,10 +46,7 @@ public class PheedSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Source
     {
-        get
-        {
-            return extensionImageSource;
-        }
+        get => extensionImageSource;
 
         set
         {
@@ -68,10 +65,7 @@ public class PheedSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Thumbnail
     {
-        get
-        {
-            return extensionThumbnail;
-        }
+        get => extensionThumbnail;
 
         set
         {

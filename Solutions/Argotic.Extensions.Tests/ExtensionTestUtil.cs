@@ -46,8 +46,5 @@ internal static class ExtensionTestUtil
 
     private static readonly CompositeFormat FullXmlFormat = CompositeFormat.Parse(strFullXml1);
 
-    internal static string GetWrappedXml(string namespc, string strExt)
-    {
-        return string.Format(CultureInfo.InvariantCulture, FullXmlFormat, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version?.ToString() ?? "0.0.0.0", strExt);
-    }
+    internal static string GetWrappedXml(string namespc, string strExt) => string.Format(CultureInfo.InvariantCulture, FullXmlFormat, namespc, typeof(ExtensionTestUtil).Assembly.GetName().Version?.ToString() ?? "0.0.0.0", strExt);
 }

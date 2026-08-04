@@ -54,7 +54,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     ///     A <see cref="IList{T}"/> collection of <see cref="IXmlRpcValue"/> objects that represent the data elements for this array.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
-    public IList<IXmlRpcValue> Values { get; } = new List<IXmlRpcValue>();
+    public IList<IXmlRpcValue> Values { get; } = [];
 
     /// <summary>
     /// Loads this <see cref="XmlRpcArrayValue"/> using the supplied <see cref="XPathNavigator"/>.
@@ -190,10 +190,7 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is XmlRpcArrayValue other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is XmlRpcArrayValue other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
@@ -229,9 +226,6 @@ public class XmlRpcArrayValue : IXmlRpcValue, IComparable<XmlRpcArrayValue>, IEq
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(XmlRpcArrayValue? first, XmlRpcArrayValue? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(XmlRpcArrayValue? first, XmlRpcArrayValue? second) => !(first == second);
 
 }

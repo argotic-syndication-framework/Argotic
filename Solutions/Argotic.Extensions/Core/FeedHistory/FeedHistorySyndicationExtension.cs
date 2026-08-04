@@ -73,10 +73,7 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// </summary>
     /// <param name="relation">The <see cref="FeedHistoryLinkRelationType"/> to get the link relation identifier for.</param>
     /// <returns>The link relation identifier for the supplied <paramref name="relation"/>, Otherwise, returns an empty string.</returns>
-    public static string LinkRelationTypeAsString(FeedHistoryLinkRelationType relation)
-    {
-        return RelationTypeToStringMapping.GetValueOrDefault(relation, string.Empty);
-    }
+    public static string LinkRelationTypeAsString(FeedHistoryLinkRelationType relation) => RelationTypeToStringMapping.GetValueOrDefault(relation, string.Empty);
 
     /// <summary>
     /// Returns the <see cref="FeedHistoryLinkRelationType"/> enumeration value that corresponds to the specified link relation.
@@ -223,19 +220,13 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is FeedHistorySyndicationExtension other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is FeedHistorySyndicationExtension other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.IsArchive), HashCodeUtility.Component(this.Context.IsComplete), HashCodeUtility.Component(this.Context.Relations))));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(HashCode.Combine(HashCodeUtility.Component(this.Context.IsArchive), HashCodeUtility.Component(this.Context.IsComplete), HashCodeUtility.Component(this.Context.Relations))));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -255,9 +246,6 @@ public class FeedHistorySyndicationExtension : SyndicationExtension, IComparable
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(FeedHistorySyndicationExtension? first, FeedHistorySyndicationExtension? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(FeedHistorySyndicationExtension? first, FeedHistorySyndicationExtension? second) => !(first == second);
 
 }

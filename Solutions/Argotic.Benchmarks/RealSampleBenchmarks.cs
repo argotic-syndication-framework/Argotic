@@ -52,10 +52,7 @@ public class RealSampleBenchmarks
     /// Reads the current sample document into memory.
     /// </summary>
     [GlobalSetup]
-    public void Setup()
-    {
-        this.content = FeedCorpus.ReadRealSample(this.SampleFile);
-    }
+    public void Setup() => this.content = FeedCorpus.ReadRealSample(this.SampleFile);
 
     /// <summary>
     /// Determines a document's syndication format — what an aggregator does before parsing.

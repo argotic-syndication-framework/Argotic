@@ -27,25 +27,13 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
     /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-    public SyndicationContentFormat Format
-    {
-        get
-        {
-            return feedFormat;
-        }
-    }
+    public SyndicationContentFormat Format => feedFormat;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
     /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-    public Version Version
-    {
-        get
-        {
-            return feedVersion;
-        }
-    }
+    public Version Version => feedVersion;
 
     /// <summary>
     /// Occurs when the syndication resource state has been changed by a load operation.
@@ -58,10 +46,7 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// Raises the <see cref="MyCustomRssFeed.Loaded"/> event.
     /// </summary>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
-    protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e)
-    {
-        Loaded?.Invoke(this, e);
-    }
+    protected virtual void OnFeedLoaded(SyndicationResourceLoadedEventArgs e) => Loaded?.Invoke(this, e);
 
     /// <summary>
     /// Initializes a read-only <see cref="XPathNavigator"/> object for navigating through nodes in this <see cref="MyCustomRssFeed"/>.
@@ -94,10 +79,7 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/>.
     /// </summary>
     /// <param name="source">The <b>IXPathNavigable</b> used to load the syndication resource.</param>
-    public void Load(IXPathNavigable source)
-    {
-        this.Load(source, null);
-    }
+    public void Load(IXPathNavigable source) => this.Load(source, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -118,10 +100,7 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
     /// </summary>
     /// <param name="stream">The <b>Stream</b> used to load the syndication resource.</param>
-    public void Load(Stream stream)
-    {
-        this.Load(stream, null);
-    }
+    public void Load(Stream stream) => this.Load(stream, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
@@ -145,10 +124,7 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
     /// </summary>
     /// <param name="reader">The <b>XmlReader</b> used to load the syndication resource.</param>
-    public void Load(XmlReader reader)
-    {
-        this.Load(reader, null);
-    }
+    public void Load(XmlReader reader) => this.Load(reader, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
@@ -173,10 +149,7 @@ internal class MyCustomRssFeed : ISyndicationResource
     ///     <para>This method uses the shared <see cref="HttpClient"/> for simple scenarios without custom credentials or proxy.</para>
     ///     <para>For scenarios requiring authentication, proxy, or other handler-level configuration, use the overload that accepts an <see cref="HttpClient"/>.</para>
     /// </remarks>
-    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default)
-    {
-        return LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
-    }
+    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
 
     /// <summary>
     /// Loads this <see cref="MyCustomRssFeed"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
@@ -217,10 +190,7 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
     /// </summary>
     /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
-    public void Save(Stream stream)
-    {
-        this.Save(stream, null);
-    }
+    public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.

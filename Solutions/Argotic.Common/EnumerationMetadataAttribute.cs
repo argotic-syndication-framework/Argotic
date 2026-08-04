@@ -54,10 +54,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        return $"[EnumerationMetadata(DisplayName = \"{this.DisplayName}\", AlternateValue=\"{this.AlternateValue}\")]";
-    }
+    public override string ToString() => $"[EnumerationMetadata(DisplayName = \"{this.DisplayName}\", AlternateValue=\"{this.AlternateValue}\")]";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -97,19 +94,13 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is EnumerationMetadataAttribute other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is EnumerationMetadataAttribute other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.AlternateValue), HashCodeUtility.Component(this.DisplayName));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.AlternateValue), HashCodeUtility.Component(this.DisplayName));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -129,10 +120,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(EnumerationMetadataAttribute? first, EnumerationMetadataAttribute? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(EnumerationMetadataAttribute? first, EnumerationMetadataAttribute? second) => !(first == second);
 
     /// <summary>
     /// Gets the alternate value for the specified enum value using its <see cref="EnumerationMetadataAttribute"/>.
@@ -140,10 +128,7 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// <typeparam name="TEnum">The enum type.</typeparam>
     /// <param name="value">The enum value to get the alternate value for.</param>
     /// <returns>The alternate value if found, otherwise an empty string.</returns>
-    public static string GetAlternateValue<TEnum>(TEnum value) where TEnum : struct, Enum
-    {
-        return EnumMetadataCache<TEnum>.EnumToAlternateValue.GetValueOrDefault(value, string.Empty);
-    }
+    public static string GetAlternateValue<TEnum>(TEnum value) where TEnum : struct, Enum => EnumMetadataCache<TEnum>.EnumToAlternateValue.GetValueOrDefault(value, string.Empty);
 
     /// <summary>
     /// Gets the enum value that corresponds to the specified alternate value name.
@@ -167,20 +152,14 @@ public sealed class EnumerationMetadataAttribute : Attribute, IComparable<Enumer
     /// </summary>
     /// <typeparam name="TEnum">The enum type.</typeparam>
     /// <returns>A FrozenDictionary mapping enum values to alternate value strings.</returns>
-    public static FrozenDictionary<TEnum, string> GetAlternateValueMapping<TEnum>() where TEnum : struct, Enum
-    {
-        return EnumMetadataCache<TEnum>.EnumToAlternateValue;
-    }
+    public static FrozenDictionary<TEnum, string> GetAlternateValueMapping<TEnum>() where TEnum : struct, Enum => EnumMetadataCache<TEnum>.EnumToAlternateValue;
 
     /// <summary>
     /// Gets the cached mapping from alternate value strings to enum values (case-insensitive).
     /// </summary>
     /// <typeparam name="TEnum">The enum type.</typeparam>
     /// <returns>A FrozenDictionary mapping alternate value strings to enum values.</returns>
-    public static FrozenDictionary<string, TEnum> GetEnumByAlternateValueMapping<TEnum>() where TEnum : struct, Enum
-    {
-        return EnumMetadataCache<TEnum>.AlternateValueToEnum;
-    }
+    public static FrozenDictionary<string, TEnum> GetEnumByAlternateValueMapping<TEnum>() where TEnum : struct, Enum => EnumMetadataCache<TEnum>.AlternateValueToEnum;
 
     /// <summary>
     /// Provides cached FrozenDictionary mappings for enum metadata lookups.

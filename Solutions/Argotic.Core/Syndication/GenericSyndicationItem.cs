@@ -30,7 +30,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// <summary>
     /// Private member to hold the collection of categories associated with the item.
     /// </summary>
-    private Collection<GenericSyndicationCategory> itemCategories = new();
+    private Collection<GenericSyndicationCategory> itemCategories = [];
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
@@ -106,10 +106,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// <remarks>
     ///     This method returns a human-readable representation for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        return $"GenericSyndicationItem(Title = {this.Title}, Summary = {this.Summary}, PublishedOn = {(this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty)})";
-    }
+    public override string ToString() => $"GenericSyndicationItem(Title = {this.Title}, Summary = {this.Summary}, PublishedOn = {(this.PublishedOn != DateTime.MinValue ? this.PublishedOn.ToLongDateString() : string.Empty)})";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -150,19 +147,13 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is GenericSyndicationItem other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is GenericSyndicationItem other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Categories.Count), HashCodeUtility.Component(this.Summary), HashCodeUtility.Component(this.Title));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Categories.Count), HashCodeUtility.Component(this.Summary), HashCodeUtility.Component(this.Title));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -182,10 +173,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(GenericSyndicationItem? first, GenericSyndicationItem? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(GenericSyndicationItem? first, GenericSyndicationItem? second) => !(first == second);
 
     /// <summary>
     /// Loads the generic syndication item using the supplied <see cref="AtomEntry"/>.

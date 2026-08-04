@@ -168,10 +168,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     ///     This method expects the supplied <paramref name="source"/> to be positioned on the XML element that represents a <see cref="SitemapUrl"/>.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
-    public bool Load(XPathNavigator source)
-    {
-        return this.Load(source, null);
-    }
+    public bool Load(XPathNavigator source) => this.Load(source, null);
 
     /// <summary>
     /// Loads this <see cref="SitemapUrl"/> using the supplied <see cref="XPathNavigator"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -345,19 +342,13 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SitemapUrl other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SitemapUrl other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Location), HashCodeUtility.Component(this.LastModified), HashCodeUtility.Component(this.ChangeFrequency), HashCodeUtility.Component(this.Priority));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Location), HashCodeUtility.Component(this.LastModified), HashCodeUtility.Component(this.ChangeFrequency), HashCodeUtility.Component(this.Priority));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -381,8 +372,5 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapUrl? first, SitemapUrl? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SitemapUrl? first, SitemapUrl? second) => !(first == second);
 }

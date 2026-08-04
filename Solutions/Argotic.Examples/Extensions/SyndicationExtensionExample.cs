@@ -229,10 +229,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second) => !(first == second);
 
     /// <summary>
     /// Determines if first operand is less than second operand.

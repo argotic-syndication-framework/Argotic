@@ -109,10 +109,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// </remarks>
     public string CharacterSet
     {
-        get
-        {
-            return this.Parameters.TryGetValue(CHARSET_PARAMETER_NAME, out string? charsetValue) ? charsetValue : string.Empty;
-        }
+        get => this.Parameters.TryGetValue(CHARSET_PARAMETER_NAME, out string? charsetValue) ? charsetValue : string.Empty;
 
         set
         {
@@ -141,10 +138,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// </remarks>
     public string Discriminator
     {
-        get
-        {
-            return this.Parameters.TryGetValue(TYPE_PARAMETER_NAME, out string? typeValue) ? typeValue : string.Empty;
-        }
+        get => this.Parameters.TryGetValue(TYPE_PARAMETER_NAME, out string? typeValue) ? typeValue : string.Empty;
 
         set
         {
@@ -192,10 +186,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string MediaType
     {
-        get
-        {
-            return webContentMediaType;
-        }
+        get => webContentMediaType;
 
         set
         {
@@ -212,10 +203,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string MediaSubtype
     {
-        get
-        {
-            return webContentMediaSubType;
-        }
+        get => webContentMediaSubType;
 
         set
         {
@@ -368,19 +356,13 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is WebContentType other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is WebContentType other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.MediaType), HashCodeUtility.Component(this.MediaSubtype), HashCodeUtility.Component(this.Parameters.Count));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.MediaType), HashCodeUtility.Component(this.MediaSubtype), HashCodeUtility.Component(this.Parameters.Count));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -400,9 +382,6 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(WebContentType? first, WebContentType? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(WebContentType? first, WebContentType? second) => !(first == second);
 
 }

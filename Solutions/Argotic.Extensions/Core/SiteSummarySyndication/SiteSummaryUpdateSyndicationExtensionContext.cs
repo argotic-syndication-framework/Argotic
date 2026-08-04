@@ -44,10 +44,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
     /// <exception cref="ArgumentOutOfRangeException">The <paramref name="value"/> is less than <b>1</b>.</exception>
     public int Frequency
     {
-        get
-        {
-            return extensionUpdateFrequency;
-        }
+        get => extensionUpdateFrequency;
 
         set
         {

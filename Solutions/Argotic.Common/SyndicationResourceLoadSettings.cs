@@ -95,7 +95,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     ///     If <see cref="AutoDetectExtensions"/> is <b>true</b>, this collection will be automatically filled during the load operation based on the XML namespaces declared on the syndication resource.
     ///     Automatic detection will <b>not</b> remove any syndication extensions already added to this collection prior to the load operation execution.
     /// </remarks>
-    public Collection<Type> SupportedExtensions => supportedSyndicationExtensions ??= new Collection<Type>();
+    public Collection<Type> SupportedExtensions => supportedSyndicationExtensions ??= [];
 
     /// <summary>
     /// Gets or sets a value that specifies the amount of time after which asynchronous load operations will time-out.
@@ -133,10 +133,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        return $"[SyndicationResourceLoadSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", RetrievalLimit = \"{this.RetrievalLimit}\", Timeout = \"{this.Timeout.TotalMilliseconds}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
-    }
+    public override string ToString() => $"[SyndicationResourceLoadSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", RetrievalLimit = \"{this.RetrievalLimit}\", Timeout = \"{this.Timeout.TotalMilliseconds}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -179,19 +176,13 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SyndicationResourceLoadSettings other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SyndicationResourceLoadSettings other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.CharacterEncoding?.WebName), HashCodeUtility.Component(this.RetrievalLimit), HashCodeUtility.Component(this.Timeout), HashCodeUtility.Component(this.AutoDetectExtensions));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.CharacterEncoding?.WebName), HashCodeUtility.Component(this.RetrievalLimit), HashCodeUtility.Component(this.Timeout), HashCodeUtility.Component(this.AutoDetectExtensions));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -211,9 +202,6 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SyndicationResourceLoadSettings? first, SyndicationResourceLoadSettings? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SyndicationResourceLoadSettings? first, SyndicationResourceLoadSettings? second) => !(first == second);
 
 }

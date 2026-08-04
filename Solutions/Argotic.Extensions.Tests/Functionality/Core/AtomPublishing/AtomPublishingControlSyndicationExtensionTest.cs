@@ -194,8 +194,5 @@ public class AtomPublishingControlSyndicationExtensionTest
         return nyc;
     }
 
-    public static AtomPublishingControlSyndicationExtensionContext CreateContext1()
-    {
-        return new AtomPublishingControlSyndicationExtensionContext();
-    }
+    public static AtomPublishingControlSyndicationExtensionContext CreateContext1() => new();
 }

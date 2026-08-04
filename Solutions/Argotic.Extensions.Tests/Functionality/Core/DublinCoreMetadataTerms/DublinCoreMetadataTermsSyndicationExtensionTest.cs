@@ -1102,11 +1102,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void DublinCoreMetadataTermsMatchByTypeThrowsOnNull()
-    {
+    public void DublinCoreMetadataTermsMatchByTypeThrowsOnNull() =>
         // Arrange, Act & Assert
         Should.Throw<ArgumentNullException>(() => DublinCoreMetadataTermsSyndicationExtension.MatchByType(null!));
-    }
 
     #endregion
 
@@ -1563,18 +1561,14 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void DublinCoreMetadataTermsTypeVocabularyByNameReturnsNoneOnNull()
-    {
+    public void DublinCoreMetadataTermsTypeVocabularyByNameReturnsNoneOnNull() =>
         // Arrange, Act & Assert
         DublinCoreMetadataTermsSyndicationExtension.TypeVocabularyByName(null!).ShouldBe(DublinCoreTypeVocabularies.None);
-    }
 
     [TestMethod]
-    public void DublinCoreMetadataTermsTypeVocabularyByNameReturnsNoneOnEmpty()
-    {
+    public void DublinCoreMetadataTermsTypeVocabularyByNameReturnsNoneOnEmpty() =>
         // Arrange, Act & Assert
         DublinCoreMetadataTermsSyndicationExtension.TypeVocabularyByName(string.Empty).ShouldBe(DublinCoreTypeVocabularies.None);
-    }
 
     #endregion
 

@@ -216,7 +216,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<Uri> ExtractUrls(string content)
     {
-        Collection<Uri> results = new();
+        Collection<Uri> results = [];
         Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
         Regex anchorPattern = new("<a[^>]+", RegexOptions.IgnoreCase);
 
@@ -517,7 +517,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
     {
-        Collection<DiscoverableSyndicationEndpoint> results = new();
+        Collection<DiscoverableSyndicationEndpoint> results = [];
         Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -910,7 +910,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
-        Collection<TrackbackDiscoveryMetadata> results = new();
+        Collection<TrackbackDiscoveryMetadata> results = [];
         Regex rdfPattern = new(@"<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         XmlNamespaceManager manager = new(new NameTable());
 

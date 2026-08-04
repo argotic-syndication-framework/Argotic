@@ -621,10 +621,7 @@ public class ExtensionDiscoveryBehaviorTests
     }
 
     [TestMethod]
-    public void FrameworkExtensions_DoesNotReturnTheAbstractBase()
-    {
-        SyndicationExtensionAdapter.FrameworkExtensions.ShouldNotContain(typeof(SyndicationExtension));
-    }
+    public void FrameworkExtensions_DoesNotReturnTheAbstractBase() => SyndicationExtensionAdapter.FrameworkExtensions.ShouldNotContain(typeof(SyndicationExtension));
 
     [TestMethod]
     public void FrameworkExtensions_ReturnsExtensionsAddedAfterTheHandMaintainedList()

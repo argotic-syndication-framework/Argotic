@@ -226,10 +226,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     ///     The first extension in <see cref="RssItem.Extensions"/> that is assignable to <typeparamref name="TExtension"/>,
     ///     Otherwise, a <b>null</b> reference if this item has no extension of that type.
     /// </returns>
-    public TExtension? FindExtension<TExtension>() where TExtension : ISyndicationExtension
-    {
-        return this.Extensions.OfType<TExtension>().FirstOrDefault();
-    }
+    public TExtension? FindExtension<TExtension>() where TExtension : ISyndicationExtension => this.Extensions.OfType<TExtension>().FirstOrDefault();
 
     /// <summary>
     /// Loads this <see cref="RssItem"/> using the supplied <see cref="XPathNavigator"/>.
@@ -622,10 +619,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is RssItem other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is RssItem other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
@@ -661,8 +655,5 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(RssItem? first, RssItem? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(RssItem? first, RssItem? second) => !(first == second);
 }

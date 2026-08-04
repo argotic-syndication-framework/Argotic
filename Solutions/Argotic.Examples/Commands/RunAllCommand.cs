@@ -30,7 +30,7 @@ internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
     {
         ExampleRegistry.Initialize();
 
-        List<ExampleResult> results = new();
+        List<ExampleResult> results = [];
         List<ExampleCategory> categories = [.. ExampleRegistry.Categories];
 
         if (!string.IsNullOrEmpty(settings.Category))
@@ -48,7 +48,7 @@ internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
             categories = [matchedCategory];
         }
 
-        List<(string Category, ExampleInfo Example)> allExamples = new();
+        List<(string Category, ExampleInfo Example)> allExamples = [];
 
         foreach (ExampleCategory category in categories)
         {

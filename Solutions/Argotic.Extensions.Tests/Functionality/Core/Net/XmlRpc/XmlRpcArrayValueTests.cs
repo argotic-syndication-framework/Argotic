@@ -43,11 +43,9 @@ public class XmlRpcArrayValueTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullIterator_ThrowsArgumentNullException()
-    {
+    public void Constructor_WithNullIterator_ThrowsArgumentNullException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() => new XmlRpcArrayValue(null!));
-    }
 
     [TestMethod]
     public void Load_ValidArrayXml_PopulatesValues()

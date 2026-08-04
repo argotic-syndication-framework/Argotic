@@ -127,15 +127,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// </remarks>
     public YahooMediaCopyright? Copyright
     {
-        get
-        {
-            return mediaObjectCopyright;
-        }
+        get => mediaObjectCopyright;
 
-        set
-        {
-            mediaObjectCopyright = value;
-        }
+        set => mediaObjectCopyright = value;
     }
 
     /// <summary>
@@ -167,15 +161,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// </remarks>
     public YahooMediaTextConstruct? Description
     {
-        get
-        {
-            return mediaObjectDescription;
-        }
+        get => mediaObjectDescription;
 
-        set
-        {
-            mediaObjectDescription = value;
-        }
+        set => mediaObjectDescription = value;
     }
 
     /// <summary>
@@ -222,15 +210,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <value>A <see cref="YahooMediaPlayer"/> that represents a web browser media player console this media group can be accessed through.</value>
     public YahooMediaPlayer? Player
     {
-        get
-        {
-            return mediaObjectPlayer;
-        }
+        get => mediaObjectPlayer;
 
-        set
-        {
-            mediaObjectPlayer = value;
-        }
+        set => mediaObjectPlayer = value;
     }
 
     /// <summary>
@@ -314,15 +296,9 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <value>A <see cref="YahooMediaTextConstruct"/> that represents the title of this media group.</value>
     public YahooMediaTextConstruct? Title
     {
-        get
-        {
-            return mediaObjectTitle;
-        }
+        get => mediaObjectTitle;
 
-        set
-        {
-            mediaObjectTitle = value;
-        }
+        set => mediaObjectTitle = value;
     }
 
     /// <summary>
@@ -460,19 +436,13 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is YahooMediaGroup other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is YahooMediaGroup other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Contents));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Contents));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -492,8 +462,5 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaGroup? first, YahooMediaGroup? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(YahooMediaGroup? first, YahooMediaGroup? second) => !(first == second);
 }

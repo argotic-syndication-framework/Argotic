@@ -182,10 +182,7 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is CreativeCommonsSyndicationExtension other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is CreativeCommonsSyndicationExtension other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
@@ -225,9 +222,6 @@ public class CreativeCommonsSyndicationExtension : SyndicationExtension, ICompar
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(CreativeCommonsSyndicationExtension? first, CreativeCommonsSyndicationExtension? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(CreativeCommonsSyndicationExtension? first, CreativeCommonsSyndicationExtension? second) => !(first == second);
 
 }

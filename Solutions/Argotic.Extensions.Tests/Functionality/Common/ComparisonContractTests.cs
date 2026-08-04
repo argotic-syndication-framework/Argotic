@@ -88,11 +88,9 @@ public class ComparisonContractTests
     }
 
     [TestMethod]
-    public void HashCodeUtility_Component_DisregardsCaseForStrings()
-    {
+    public void HashCodeUtility_Component_DisregardsCaseForStrings() =>
         // Act & Assert
         HashCodeUtility.Component("abc").ShouldBe(HashCodeUtility.Component("ABC"));
-    }
 
     [TestMethod]
     public void HashCodeUtility_Component_DisregardsCaseForUris()

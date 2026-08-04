@@ -38,10 +38,7 @@ public class TrackbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Ping
     {
-        get
-        {
-            return extensionPing;
-        }
+        get => extensionPing;
 
         set
         {

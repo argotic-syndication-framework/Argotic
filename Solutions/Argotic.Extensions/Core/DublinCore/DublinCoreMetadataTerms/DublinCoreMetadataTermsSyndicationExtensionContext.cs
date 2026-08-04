@@ -301,10 +301,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <value>The summary of the resource.</value>
     public string Abstract
     {
-        get
-        {
-            return extensionAbstract;
-        }
+        get => extensionAbstract;
 
         set
         {
@@ -336,10 +333,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string AccessRights
     {
-        get
-        {
-            return extensionAccessRights;
-        }
+        get => extensionAccessRights;
 
         set
         {
@@ -369,10 +363,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string AccrualMethod
     {
-        get
-        {
-            return extensionAccrualMethod;
-        }
+        get => extensionAccrualMethod;
 
         set
         {
@@ -402,10 +393,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string AccrualPeriodicity
     {
-        get
-        {
-            return extensionAccrualPeriodicity;
-        }
+        get => extensionAccrualPeriodicity;
 
         set
         {
@@ -435,10 +423,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string AccrualPolicy
     {
-        get
-        {
-            return extensionAccrualPolicy;
-        }
+        get => extensionAccrualPolicy;
 
         set
         {
@@ -462,10 +447,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string AlternativeTitle
     {
-        get
-        {
-            return extensionAlternativeTitle;
-        }
+        get => extensionAlternativeTitle;
 
         set
         {
@@ -495,10 +477,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Audience
     {
-        get
-        {
-            return extensionAudience;
-        }
+        get => extensionAudience;
 
         set
         {
@@ -528,10 +507,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string AudienceEducationLevel
     {
-        get
-        {
-            return extensionAudienceEducationLevel;
-        }
+        get => extensionAudienceEducationLevel;
 
         set
         {
@@ -555,10 +531,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string BibliographicCitation
     {
-        get
-        {
-            return extensionBibliographicCitation;
-        }
+        get => extensionBibliographicCitation;
 
         set
         {
@@ -588,10 +561,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string ConformsTo
     {
-        get
-        {
-            return extensionConformsTo;
-        }
+        get => extensionConformsTo;
 
         set
         {
@@ -621,10 +591,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Contributor
     {
-        get
-        {
-            return extensionContributor;
-        }
+        get => extensionContributor;
 
         set
         {
@@ -661,10 +628,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Coverage
     {
-        get
-        {
-            return extensionCoverage;
-        }
+        get => extensionCoverage;
 
         set
         {
@@ -695,10 +659,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Creator
     {
-        get
-        {
-            return extensionCreator;
-        }
+        get => extensionCreator;
 
         set
         {
@@ -725,15 +686,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public DateTime Date
     {
-        get
-        {
-            return extensionDate;
-        }
+        get => extensionDate;
 
-        set
-        {
-            extensionDate = value;
-        }
+        set => extensionDate = value;
     }
 
     /// <summary>
@@ -751,15 +706,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public DateTime DateAccepted
     {
-        get
-        {
-            return extensionDateAccepted;
-        }
+        get => extensionDateAccepted;
 
-        set
-        {
-            extensionDateAccepted = value;
-        }
+        set => extensionDateAccepted = value;
     }
 
     /// <summary>
@@ -773,10 +722,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string DateAvailable
     {
-        get
-        {
-            return extensionDateAvailable;
-        }
+        get => extensionDateAvailable;
 
         set
         {
@@ -803,15 +749,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public DateTime DateCopyrighted
     {
-        get
-        {
-            return extensionDateCopyrighted;
-        }
+        get => extensionDateCopyrighted;
 
-        set
-        {
-            extensionDateCopyrighted = value;
-        }
+        set => extensionDateCopyrighted = value;
     }
 
     /// <summary>
@@ -826,15 +766,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public DateTime DateCreated
     {
-        get
-        {
-            return extensionDateCreated;
-        }
+        get => extensionDateCreated;
 
-        set
-        {
-            extensionDateCreated = value;
-        }
+        set => extensionDateCreated = value;
     }
 
     /// <summary>
@@ -849,15 +783,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public DateTime DateIssued
     {
-        get
-        {
-            return extensionDateIssued;
-        }
+        get => extensionDateIssued;
 
-        set
-        {
-            extensionDateIssued = value;
-        }
+        set => extensionDateIssued = value;
     }
 
     /// <summary>
@@ -872,15 +800,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public DateTime DateModified
     {
-        get
-        {
-            return extensionDateModified;
-        }
+        get => extensionDateModified;
 
-        set
-        {
-            extensionDateModified = value;
-        }
+        set => extensionDateModified = value;
     }
 
     /// <summary>
@@ -898,15 +820,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public DateTime DateSubmitted
     {
-        get
-        {
-            return extensionDateSubmitted;
-        }
+        get => extensionDateSubmitted;
 
-        set
-        {
-            extensionDateSubmitted = value;
-        }
+        set => extensionDateSubmitted = value;
     }
 
     /// <summary>
@@ -920,10 +836,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string DateValid
     {
-        get
-        {
-            return extensionDateValid;
-        }
+        get => extensionDateValid;
 
         set
         {
@@ -947,10 +860,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Description
     {
-        get
-        {
-            return extensionDescription;
-        }
+        get => extensionDescription;
 
         set
         {
@@ -981,10 +891,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Extent
     {
-        get
-        {
-            return extensionExtent;
-        }
+        get => extensionExtent;
 
         set
         {
@@ -1018,10 +925,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Format
     {
-        get
-        {
-            return extensionFormat;
-        }
+        get => extensionFormat;
 
         set
         {
@@ -1045,10 +949,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string HasFormat
     {
-        get
-        {
-            return extensionHasFormat;
-        }
+        get => extensionHasFormat;
 
         set
         {
@@ -1072,10 +973,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string HasPart
     {
-        get
-        {
-            return extensionHasPart;
-        }
+        get => extensionHasPart;
 
         set
         {
@@ -1099,10 +997,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string HasVersion
     {
-        get
-        {
-            return extensionHasVersion;
-        }
+        get => extensionHasVersion;
 
         set
         {
@@ -1126,10 +1021,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Identifier
     {
-        get
-        {
-            return extensionIdentifier;
-        }
+        get => extensionIdentifier;
 
         set
         {
@@ -1159,10 +1051,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string InstructionalMethod
     {
-        get
-        {
-            return extensionInstructionalMethod;
-        }
+        get => extensionInstructionalMethod;
 
         set
         {
@@ -1186,10 +1075,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string IsFormatOf
     {
-        get
-        {
-            return extensionIsFormatOf;
-        }
+        get => extensionIsFormatOf;
 
         set
         {
@@ -1213,10 +1099,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string IsPartOf
     {
-        get
-        {
-            return extensionIsPartOf;
-        }
+        get => extensionIsPartOf;
 
         set
         {
@@ -1240,10 +1123,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string IsReferencedBy
     {
-        get
-        {
-            return extensionIsReferencedBy;
-        }
+        get => extensionIsReferencedBy;
 
         set
         {
@@ -1267,10 +1147,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string IsReplacedBy
     {
-        get
-        {
-            return extensionIsReplacedBy;
-        }
+        get => extensionIsReplacedBy;
 
         set
         {
@@ -1294,10 +1171,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string IsRequiredBy
     {
-        get
-        {
-            return extensionIsRequiredBy;
-        }
+        get => extensionIsRequiredBy;
 
         set
         {
@@ -1321,10 +1195,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string IsVersionOf
     {
-        get
-        {
-            return extensionIsVersionOf;
-        }
+        get => extensionIsVersionOf;
 
         set
         {
@@ -1349,15 +1220,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public CultureInfo? Language
     {
-        get
-        {
-            return extensionLanguage;
-        }
+        get => extensionLanguage;
 
-        set
-        {
-            extensionLanguage = value;
-        }
+        set => extensionLanguage = value;
     }
 
     /// <summary>
@@ -1375,10 +1240,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string License
     {
-        get
-        {
-            return extensionLicense;
-        }
+        get => extensionLicense;
 
         set
         {
@@ -1409,10 +1271,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Mediator
     {
-        get
-        {
-            return extensionMediator;
-        }
+        get => extensionMediator;
 
         set
         {
@@ -1443,10 +1302,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Medium
     {
-        get
-        {
-            return extensionMedium;
-        }
+        get => extensionMedium;
 
         set
         {
@@ -1477,10 +1333,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Provenance
     {
-        get
-        {
-            return extensionProvenance;
-        }
+        get => extensionProvenance;
 
         set
         {
@@ -1511,10 +1364,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Publisher
     {
-        get
-        {
-            return extensionPublisher;
-        }
+        get => extensionPublisher;
 
         set
         {
@@ -1540,10 +1390,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string References
     {
-        get
-        {
-            return extensionReferences;
-        }
+        get => extensionReferences;
 
         set
         {
@@ -1570,10 +1417,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Relation
     {
-        get
-        {
-            return extensionRelation;
-        }
+        get => extensionRelation;
 
         set
         {
@@ -1599,10 +1443,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Replaces
     {
-        get
-        {
-            return extensionReplaces;
-        }
+        get => extensionReplaces;
 
         set
         {
@@ -1628,10 +1469,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Requires
     {
-        get
-        {
-            return extensionRequires;
-        }
+        get => extensionRequires;
 
         set
         {
@@ -1663,10 +1501,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Rights
     {
-        get
-        {
-            return extensionRights;
-        }
+        get => extensionRights;
 
         set
         {
@@ -1696,10 +1531,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string RightsHolder
     {
-        get
-        {
-            return extensionRightsHolder;
-        }
+        get => extensionRightsHolder;
 
         set
         {
@@ -1729,10 +1561,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Source
     {
-        get
-        {
-            return extensionSource;
-        }
+        get => extensionSource;
 
         set
         {
@@ -1753,10 +1582,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <value>The spatial characteristics of the resource.</value>
     public string SpatialCoverage
     {
-        get
-        {
-            return extensionSpatialCoverage;
-        }
+        get => extensionSpatialCoverage;
 
         set
         {
@@ -1787,10 +1613,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Subject
     {
-        get
-        {
-            return extensionSubject;
-        }
+        get => extensionSubject;
 
         set
         {
@@ -1811,10 +1634,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <value>The list of sub-units of the resource.</value>
     public string TableOfContents
     {
-        get
-        {
-            return extensionTableOfContents;
-        }
+        get => extensionTableOfContents;
 
         set
         {
@@ -1835,10 +1655,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// <value>The temporal characteristics of the resource.</value>
     public string TemporalCoverage
     {
-        get
-        {
-            return extensionTemporalCoverage;
-        }
+        get => extensionTemporalCoverage;
 
         set
         {
@@ -1862,10 +1679,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public string Title
     {
-        get
-        {
-            return extensionTitle;
-        }
+        get => extensionTitle;
 
         set
         {
@@ -1896,15 +1710,9 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
     /// </remarks>
     public DublinCoreTypeVocabularies TypeVocabulary
     {
-        get
-        {
-            return extensionType;
-        }
+        get => extensionType;
 
-        set
-        {
-            extensionType = value;
-        }
+        set => extensionType = value;
     }
 
     /// <summary>

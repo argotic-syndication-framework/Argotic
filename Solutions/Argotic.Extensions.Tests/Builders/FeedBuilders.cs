@@ -277,15 +277,9 @@ public class AtomFeedBuilder
         return this;
     }
 
-    public AtomFeedBuilder WithSelfLink(string href)
-    {
-        return WithLink(href, "self", "application/atom+xml");
-    }
+    public AtomFeedBuilder WithSelfLink(string href) => WithLink(href, "self", "application/atom+xml");
 
-    public AtomFeedBuilder WithAlternateLink(string href, string? type = null)
-    {
-        return WithLink(href, "alternate", type ?? "text/html");
-    }
+    public AtomFeedBuilder WithAlternateLink(string href, string? type = null) => WithLink(href, "alternate", type ?? "text/html");
 
     public AtomFeedBuilder WithEntry(Action<AtomEntryBuilder> configure)
     {
@@ -434,10 +428,7 @@ public class AtomEntryBuilder
         return this;
     }
 
-    public AtomEntryBuilder WithAlternateLink(string href, string? type = null)
-    {
-        return WithLink(href, "alternate", type ?? "text/html");
-    }
+    public AtomEntryBuilder WithAlternateLink(string href, string? type = null) => WithLink(href, "alternate", type ?? "text/html");
 
     public AtomEntryBuilder WithExtension(ISyndicationExtension extension)
     {

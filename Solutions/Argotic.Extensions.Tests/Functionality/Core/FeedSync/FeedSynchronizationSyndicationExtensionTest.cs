@@ -506,11 +506,9 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedSynchronizationMatchByType_WithNull_ThrowsArgumentNullException()
-    {
+    public void FeedSynchronizationMatchByType_WithNull_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => FeedSynchronizationSyndicationExtension.MatchByType(null!));
-    }
 
     #endregion
 
@@ -775,8 +773,8 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationSharingInformation_CompareSequence_EqualCollections_ReturnsZero()
     {
         // Arrange
-        List<FeedSynchronizationRelatedInformation> source = new();
-        List<FeedSynchronizationRelatedInformation> target = new();
+        List<FeedSynchronizationRelatedInformation> source = [];
+        List<FeedSynchronizationRelatedInformation> target = [];
 
         // Act
         int result = FeedSynchronizationSharingInformation.CompareSequence(source, target);
@@ -789,11 +787,11 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationSharingInformation_CompareSequence_SourceLarger_ReturnsPositive()
     {
         // Arrange
-        List<FeedSynchronizationRelatedInformation> source = new()
-        {
+        List<FeedSynchronizationRelatedInformation> source =
+        [
             new(new Uri("http://example.com/feed1"), FeedSynchronizationRelatedInformationType.Complete)
-        };
-        List<FeedSynchronizationRelatedInformation> target = new();
+        ];
+        List<FeedSynchronizationRelatedInformation> target = [];
 
         // Act
         int result = FeedSynchronizationSharingInformation.CompareSequence(source, target);
@@ -806,7 +804,7 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationSharingInformation_CompareSequence_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        List<FeedSynchronizationRelatedInformation> target = new();
+        List<FeedSynchronizationRelatedInformation> target = [];
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => FeedSynchronizationSharingInformation.CompareSequence(null!, target));
@@ -915,11 +913,9 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedSynchronizationItem_TombstoneStatusByName_NullInput_ReturnsNone()
-    {
+    public void FeedSynchronizationItem_TombstoneStatusByName_NullInput_ReturnsNone() =>
         // Act & Assert
         FeedSynchronizationItem.TombstoneStatusByName(null!).ShouldBe(FeedSynchronizationTombstoneStatus.None);
-    }
 
     [TestMethod]
     public void FeedSynchronizationItem_ConflictPreservationAsString_ReturnsCorrectValue()
@@ -939,11 +935,9 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedSynchronizationItem_ConflictPreservationByName_NullInput_ReturnsNone()
-    {
+    public void FeedSynchronizationItem_ConflictPreservationByName_NullInput_ReturnsNone() =>
         // Act & Assert
         FeedSynchronizationItem.ConflictPreservationByName(null!).ShouldBe(FeedSynchronizationConflictPreservationDirective.None);
-    }
 
     [TestMethod]
     public void FeedSynchronizationItem_ToString_ReturnsXml()
@@ -1001,8 +995,8 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationItem_CompareSequence_EqualCollections_ReturnsZero()
     {
         // Arrange
-        List<FeedSynchronizationHistory> source = new() { new(1) };
-        List<FeedSynchronizationHistory> target = new() { new(1) };
+        List<FeedSynchronizationHistory> source = [new(1)];
+        List<FeedSynchronizationHistory> target = [new(1)];
 
         // Act
         int result = FeedSynchronizationItem.CompareSequence(source, target);
@@ -1015,8 +1009,8 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationItem_CompareSequence_SourceLarger_ReturnsPositive()
     {
         // Arrange
-        List<FeedSynchronizationHistory> source = new() { new(1), new(2) };
-        List<FeedSynchronizationHistory> target = new() { new(1) };
+        List<FeedSynchronizationHistory> source = [new(1), new(2)];
+        List<FeedSynchronizationHistory> target = [new(1)];
 
         // Act
         int result = FeedSynchronizationItem.CompareSequence(source, target);
@@ -1029,8 +1023,8 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationItem_CompareSequence_TargetLarger_ReturnsNegative()
     {
         // Arrange
-        List<FeedSynchronizationHistory> source = new() { new(1) };
-        List<FeedSynchronizationHistory> target = new() { new(1), new(2) };
+        List<FeedSynchronizationHistory> source = [new(1)];
+        List<FeedSynchronizationHistory> target = [new(1), new(2)];
 
         // Act
         int result = FeedSynchronizationItem.CompareSequence(source, target);
@@ -1043,7 +1037,7 @@ public class FeedSynchronizationSyndicationExtensionTest
     public void FeedSynchronizationItem_CompareSequence_NullSource_ThrowsArgumentNullException()
     {
         // Arrange
-        List<FeedSynchronizationHistory> target = new();
+        List<FeedSynchronizationHistory> target = [];
 
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => FeedSynchronizationItem.CompareSequence(null!, target));
@@ -1314,18 +1308,14 @@ public class FeedSynchronizationSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Null_ReturnsNone()
-    {
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Null_ReturnsNone() =>
         // Act & Assert
         FeedSynchronizationRelatedInformation.RelationTypeByName(null!).ShouldBe(FeedSynchronizationRelatedInformationType.None);
-    }
 
     [TestMethod]
-    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Empty_ReturnsNone()
-    {
+    public void FeedSynchronizationRelatedInformation_RelationTypeByName_Empty_ReturnsNone() =>
         // Act & Assert
         FeedSynchronizationRelatedInformation.RelationTypeByName(string.Empty).ShouldBe(FeedSynchronizationRelatedInformationType.None);
-    }
 
     [TestMethod]
     public void FeedSynchronizationRelatedInformation_ToString_ReturnsXml()

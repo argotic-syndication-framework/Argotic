@@ -73,15 +73,9 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// </remarks>
     public Uri? BaseUri
     {
-        get
-        {
-            return commonObjectBaseUri;
-        }
+        get => commonObjectBaseUri;
 
-        set
-        {
-            commonObjectBaseUri = value;
-        }
+        set => commonObjectBaseUri = value;
     }
 
     /// <summary>
@@ -95,15 +89,9 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// </remarks>
     public CultureInfo? Language
     {
-        get
-        {
-            return commonObjectLanguage;
-        }
+        get => commonObjectLanguage;
 
-        set
-        {
-            commonObjectLanguage = value;
-        }
+        set => commonObjectLanguage = value;
     }
 
     /// <summary>
@@ -122,25 +110,13 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// Gets a <see cref="MediaRange"/> that indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to a <see cref="AtomMemberResources"/>.
     /// </summary>
     /// <value>A <see cref="MediaRange"/> value that indicates that <see cref="AtomEntry">Atom Entry Documents</see> can be added to a <see cref="AtomMemberResources"/>.</value>
-    public static string AtomEntryMediaRange
-    {
-        get
-        {
-            return "application/atom+xml;type=entry";
-        }
-    }
+    public static string AtomEntryMediaRange => "application/atom+xml;type=entry";
 
     /// <summary>
     /// Gets a <see cref="MediaRange"/> that indicates that <see cref="AtomFeed">Atom Feed Documents</see> can be added to a <see cref="AtomMemberResources"/>.
     /// </summary>
     /// <value>A <see cref="MediaRange"/> value that indicates that <see cref="AtomFeed">Atom Feed Documents</see> can be added to a <see cref="AtomMemberResources"/>.</value>
-    public static string AtomFeedMediaRange
-    {
-        get
-        {
-            return "application/atom+xml;type=feed";
-        }
-    }
+    public static string AtomFeedMediaRange => "application/atom+xml;type=feed";
 
     /// <summary>
     /// Gets or sets the value of this accepted media range.
@@ -159,10 +135,7 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// <seealso cref="AtomAcceptedMediaRange.AtomEntryMediaRange"/>
     public string MediaRange
     {
-        get
-        {
-            return acceptedMediaRangeValue;
-        }
+        get => acceptedMediaRangeValue;
 
         set
         {
@@ -311,19 +284,13 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is AtomAcceptedMediaRange other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is AtomAcceptedMediaRange other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.MediaRange), HashCodeUtility.Component(this.BaseUri), HashCodeUtility.Component(this.Language));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.MediaRange), HashCodeUtility.Component(this.BaseUri), HashCodeUtility.Component(this.Language));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -343,8 +310,5 @@ public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEqua
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomAcceptedMediaRange? first, AtomAcceptedMediaRange? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(AtomAcceptedMediaRange? first, AtomAcceptedMediaRange? second) => !(first == second);
 }

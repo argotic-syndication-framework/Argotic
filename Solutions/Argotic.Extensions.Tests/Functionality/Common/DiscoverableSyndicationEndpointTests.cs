@@ -55,11 +55,9 @@ public class DiscoverableSyndicationEndpointTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullSource_ThrowsArgumentNullException()
-    {
+    public void Constructor_WithNullSource_ThrowsArgumentNullException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() => new DiscoverableSyndicationEndpoint(null!, "application/rss+xml"));
-    }
 
     [TestMethod]
     public void Constructor_WithNullContentType_ThrowsArgumentException()

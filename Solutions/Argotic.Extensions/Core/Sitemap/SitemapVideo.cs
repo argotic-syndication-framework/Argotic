@@ -143,10 +143,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? ThumbnailLocation
     {
-        get
-        {
-            return videoThumbnailLocation;
-        }
+        get => videoThumbnailLocation;
 
         set
         {
@@ -166,10 +163,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
     public string Title
     {
-        get
-        {
-            return videoTitle;
-        }
+        get => videoTitle;
 
         set
         {
@@ -197,10 +191,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
     public string Description
     {
-        get
-        {
-            return videoDescription;
-        }
+        get => videoDescription;
 
         set
         {
@@ -292,10 +283,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <value>The name of the uploader, limited to 255 characters. Optional.</value>
     public string Uploader
     {
-        get
-        {
-            return videoUploader;
-        }
+        get => videoUploader;
 
         set
         {
@@ -888,28 +876,19 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SitemapVideo other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SitemapVideo other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.ThumbnailLocation), HashCodeUtility.Component(this.Description));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Title), HashCodeUtility.Component(this.ThumbnailLocation), HashCodeUtility.Component(this.Description));
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SitemapVideo"/>.
     /// </summary>
     /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapVideo"/>.</returns>
-    public override string ToString()
-    {
-        return this.Title ?? string.Empty;
-    }
+    public override string ToString() => this.Title ?? string.Empty;
 
     /// <summary>
     /// Determines if operands are equal.
@@ -929,9 +908,6 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapVideo? first, SitemapVideo? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SitemapVideo? first, SitemapVideo? second) => !(first == second);
 
 }

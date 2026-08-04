@@ -89,10 +89,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Contributor
     {
-        get
-        {
-            return extensionContributor;
-        }
+        get => extensionContributor;
 
         set
         {
@@ -124,10 +121,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Coverage
     {
-        get
-        {
-            return extensionCoverage;
-        }
+        get => extensionCoverage;
 
         set
         {
@@ -151,10 +145,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Creator
     {
-        get
-        {
-            return extensionCreator;
-        }
+        get => extensionCreator;
 
         set
         {
@@ -190,10 +181,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Description
     {
-        get
-        {
-            return extensionDescription;
-        }
+        get => extensionDescription;
 
         set
         {
@@ -218,10 +206,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Format
     {
-        get
-        {
-            return extensionFormat;
-        }
+        get => extensionFormat;
 
         set
         {
@@ -245,10 +230,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Identifier
     {
-        get
-        {
-            return extensionIdentifier;
-        }
+        get => extensionIdentifier;
 
         set
         {
@@ -282,10 +264,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Publisher
     {
-        get
-        {
-            return extensionPublisher;
-        }
+        get => extensionPublisher;
 
         set
         {
@@ -309,10 +288,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Relation
     {
-        get
-        {
-            return extensionRelation;
-        }
+        get => extensionRelation;
 
         set
         {
@@ -336,10 +312,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Rights
     {
-        get
-        {
-            return extensionRights;
-        }
+        get => extensionRights;
 
         set
         {
@@ -364,10 +337,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Source
     {
-        get
-        {
-            return extesionSource;
-        }
+        get => extesionSource;
 
         set
         {
@@ -393,10 +363,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Subject
     {
-        get
-        {
-            return extensionSubject;
-        }
+        get => extensionSubject;
 
         set
         {
@@ -420,10 +387,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
     /// </remarks>
     public string Title
     {
-        get
-        {
-            return extensionTitle;
-        }
+        get => extensionTitle;
 
         set
         {

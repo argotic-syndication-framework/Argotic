@@ -64,10 +64,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public SiteSummaryUpdateSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
+        get => extensionContext;
 
         set
         {
@@ -94,10 +91,7 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// </summary>
     /// <param name="period">The <see cref="SiteSummaryUpdatePeriod"/> to get the period identifier for.</param>
     /// <returns>The period identifier for the supplied <paramref name="period"/>, Otherwise, returns an empty string.</returns>
-    public static string PeriodAsString(SiteSummaryUpdatePeriod period)
-    {
-        return PeriodToStringMapping.GetValueOrDefault(period, string.Empty);
-    }
+    public static string PeriodAsString(SiteSummaryUpdatePeriod period) => PeriodToStringMapping.GetValueOrDefault(period, string.Empty);
 
     /// <summary>
     /// Returns the <see cref="SiteSummaryUpdatePeriod"/> enumeration value that corresponds to the specified period name.
@@ -224,19 +218,13 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SiteSummaryUpdateSyndicationExtension other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SiteSummaryUpdateSyndicationExtension other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Context.Base), HashCodeUtility.Component(this.Context.Frequency), HashCodeUtility.Component(this.Context.Period));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Context.Base), HashCodeUtility.Component(this.Context.Frequency), HashCodeUtility.Component(this.Context.Period));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -256,9 +244,6 @@ public class SiteSummaryUpdateSyndicationExtension : SyndicationExtension, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SiteSummaryUpdateSyndicationExtension? first, SiteSummaryUpdateSyndicationExtension? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SiteSummaryUpdateSyndicationExtension? first, SiteSummaryUpdateSyndicationExtension? second) => !(first == second);
 
 }

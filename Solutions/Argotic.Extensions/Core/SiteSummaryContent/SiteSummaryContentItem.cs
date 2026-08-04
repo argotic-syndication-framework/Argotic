@@ -40,13 +40,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// </summary>
     /// <value>A <see cref="Uri"/> with a value of <b>http://www.w3.org/TR/REC-xml#dt-wellformed</b> that indicates that the encoding is well-formed XML.</value>
     /// <seealso cref="SiteSummaryContentItem.Encoding"/>
-    public static Uri WellFormedXmlEncoding
-    {
-        get
-        {
-            return new Uri("http://www.w3.org/TR/REC-xml#dt-wellformed");
-        }
-    }
+    public static Uri WellFormedXmlEncoding => new("http://www.w3.org/TR/REC-xml#dt-wellformed");
 
     /// <summary>
     /// Gets or sets the textual content of this item.
@@ -59,10 +53,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is an empty string.</exception>
     public string Content
     {
-        get
-        {
-            return itemContent;
-        }
+        get => itemContent;
 
         set
         {
@@ -81,15 +72,9 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <seealso cref="SiteSummaryContentItem.WellFormedXmlEncoding"/>
     public Uri? Encoding
     {
-        get
-        {
-            return itemEncoding;
-        }
+        get => itemEncoding;
 
-        set
-        {
-            itemEncoding = value;
-        }
+        set => itemEncoding = value;
     }
 
     /// <summary>
@@ -99,10 +84,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Format
     {
-        get
-        {
-            return itemFormat;
-        }
+        get => itemFormat;
 
         set
         {
@@ -249,19 +231,13 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SiteSummaryContentItem other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SiteSummaryContentItem other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.Encoding), HashCodeUtility.Component(this.Format));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.Encoding), HashCodeUtility.Component(this.Format));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -281,8 +257,5 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SiteSummaryContentItem? first, SiteSummaryContentItem? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SiteSummaryContentItem? first, SiteSummaryContentItem? second) => !(first == second);
 }

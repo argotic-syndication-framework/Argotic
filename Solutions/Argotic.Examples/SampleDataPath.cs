@@ -62,8 +62,5 @@ internal static class SampleDataPath
     /// </summary>
     /// <param name="path">The path to the file to open.</param>
     /// <returns>A stream for reading the file.</returns>
-    public static Stream OpenRead(FilePath path)
-    {
-        return Files.GetFile(path).OpenRead();
-    }
+    public static Stream OpenRead(FilePath path) => Files.GetFile(path).OpenRead();
 }

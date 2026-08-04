@@ -455,11 +455,9 @@ public class FeedHistorySyndicationExtensionTest
     }
 
     [TestMethod]
-    public void MatchByType_WithNullExtension_ThrowsArgumentNullException()
-    {
+    public void MatchByType_WithNullExtension_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => FeedHistorySyndicationExtension.MatchByType(null!));
-    }
 
     #endregion
 
@@ -1024,18 +1022,14 @@ public class FeedHistorySyndicationExtensionTest
     }
 
     [TestMethod]
-    public void LinkRelationTypeByName_NullName_ThrowsArgumentException()
-    {
+    public void LinkRelationTypeByName_NullName_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => FeedHistorySyndicationExtension.LinkRelationTypeByName(null!));
-    }
 
     [TestMethod]
-    public void LinkRelationTypeByName_EmptyName_ThrowsArgumentException()
-    {
+    public void LinkRelationTypeByName_EmptyName_ThrowsArgumentException() =>
         // Act & Assert
         Should.Throw<ArgumentException>(() => FeedHistorySyndicationExtension.LinkRelationTypeByName(""));
-    }
 
     [TestMethod]
     public void CompareSequence_EqualCollections_ReturnsZero()

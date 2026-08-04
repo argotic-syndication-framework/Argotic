@@ -118,10 +118,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomCategory this[int index]
     {
-        get
-        {
-            return this.Categories[index];
-        }
+        get => this.Categories[index];
 
         set
         {
@@ -141,10 +138,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// Raises the <see cref="AtomCategoryDocument.Loaded"/> event.
     /// </summary>
     /// <param name="e">A <see cref="SyndicationResourceLoadedEventArgs"/> that contains the event data.</param>
-    protected virtual void OnDocumentLoaded(SyndicationResourceLoadedEventArgs e)
-    {
-        this.Loaded?.Invoke(this, e);
-    }
+    protected virtual void OnDocumentLoaded(SyndicationResourceLoadedEventArgs e) => this.Loaded?.Invoke(this, e);
 
     /// <summary>
     /// Gets or sets the base URI other than the base URI of the document or external entity.
@@ -157,15 +151,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// </remarks>
     public Uri? BaseUri
     {
-        get
-        {
-            return commonObjectBaseUri;
-        }
+        get => commonObjectBaseUri;
 
-        set
-        {
-            commonObjectBaseUri = value;
-        }
+        set => commonObjectBaseUri = value;
     }
 
     /// <summary>
@@ -179,15 +167,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// </remarks>
     public CultureInfo? Language
     {
-        get
-        {
-            return commonObjectLanguage;
-        }
+        get => commonObjectLanguage;
 
-        set
-        {
-            commonObjectLanguage = value;
-        }
+        set => commonObjectLanguage = value;
     }
 
     /// <summary>
@@ -209,13 +191,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <remarks>
     ///     See <a href="http://www.iana.org/assignments/media-types">http://www.iana.org/assignments/media-types</a> for a listing of the registered IANA MIME media types and subtypes.
     /// </remarks>
-    public static string MediaType
-    {
-        get
-        {
-            return "application/atomcat+xml";
-        }
-    }
+    public static string MediaType => "application/atomcat+xml";
 
     /// <summary>
     /// Gets the categories associated with this document.
@@ -234,13 +210,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication resource implements.
     /// </summary>
     /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication resource implements.</value>
-    public SyndicationContentFormat Format
-    {
-        get
-        {
-            return documentFormat;
-        }
-    }
+    public SyndicationContentFormat Format => documentFormat;
 
     /// <summary>
     /// Gets or sets a value indicating whether this document represents a fixed or open set of categories.
@@ -248,15 +218,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <value><b>true</b> if this document represents a fixed set of categories; Otherwise, <b>false</b>.</value>
     public bool IsFixed
     {
-        get
-        {
-            return documentIsFixed;
-        }
+        get => documentIsFixed;
 
-        set
-        {
-            documentIsFixed = value;
-        }
+        set => documentIsFixed = value;
     }
 
     /// <summary>
@@ -272,15 +236,9 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// </remarks>
     public Uri? Scheme
     {
-        get
-        {
-            return documentScheme;
-        }
+        get => documentScheme;
 
-        set
-        {
-            documentScheme = value;
-        }
+        set => documentScheme = value;
     }
 
     /// <summary>
@@ -297,28 +255,16 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// </remarks>
     public Uri? Uri
     {
-        get
-        {
-            return documentResourceLocation;
-        }
+        get => documentResourceLocation;
 
-        set
-        {
-            documentResourceLocation = value;
-        }
+        set => documentResourceLocation = value;
     }
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to.
     /// </summary>
     /// <value>The <see cref="Version"/> of the <see cref="SyndicationContentFormat"/> that this syndication resource conforms to. The default value is <b>2.0</b>.</value>
-    public Version Version
-    {
-        get
-        {
-            return documentVersion;
-        }
-    }
+    public Version Version => documentVersion;
 
     /// <summary>
     /// Asynchronously creates a new <see cref="AtomCategoryDocument"/> instance using the specified <see cref="Uri"/>.
@@ -405,10 +351,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    public void Load(IXPathNavigable source)
-    {
-        this.Load(source, null);
-    }
+    public void Load(IXPathNavigable source) => this.Load(source, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="IXPathNavigable"/> and <see cref="SyndicationResourceLoadSettings"/>.
@@ -445,10 +388,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="stream"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    public void Load(Stream stream)
-    {
-        this.Load(stream, null);
-    }
+    public void Load(Stream stream) => this.Load(stream, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="Stream"/>.
@@ -485,10 +425,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="reader"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="XmlException">There is a load or parse error in the XML. In this case, the document remains empty.</exception>
-    public void Load(XmlReader reader)
-    {
-        this.Load(reader, null);
-    }
+    public void Load(XmlReader reader) => this.Load(reader, null);
 
     /// <summary>
     /// Loads the syndication resource from the specified <see cref="XmlReader"/>.
@@ -523,10 +460,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="FormatException">The <paramref name="source"/> data does not conform to the expected syndication content format. In this case, the document remains empty.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default)
-    {
-        return LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
-    }
+    public Task LoadAsync(Uri source, CancellationToken cancellationToken = default) => LoadAsync(source, SyndicationEncodingUtility.SharedHttpClient, null, null, cancellationToken);
 
     /// <summary>
     /// Loads this <see cref="AtomCategoryDocument"/> instance asynchronously using the specified <see cref="Uri"/> and <see cref="HttpClient"/>.
@@ -576,10 +510,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <param name="stream">The <b>Stream</b> to which you want to save the syndication resource.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="XmlException">The operation would not result in well-formed XML for the syndication resource.</exception>
-    public void Save(Stream stream)
-    {
-        this.Save(stream, null);
-    }
+    public void Save(Stream stream) => this.Save(stream, null);
 
     /// <summary>
     /// Saves the syndication resource to the specified <see cref="Stream"/>.
@@ -766,19 +697,13 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is AtomCategoryDocument other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is AtomCategoryDocument other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.IsFixed), HashCodeUtility.Component(this.Scheme), HashCodeUtility.Component(this.Uri), HashCodeUtility.Component(this.BaseUri), HashCodeUtility.Component(this.Language));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.IsFixed), HashCodeUtility.Component(this.Scheme), HashCodeUtility.Component(this.Uri), HashCodeUtility.Component(this.BaseUri), HashCodeUtility.Component(this.Language));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -798,9 +723,6 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomCategoryDocument? first, AtomCategoryDocument? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(AtomCategoryDocument? first, AtomCategoryDocument? second) => !(first == second);
 
 }

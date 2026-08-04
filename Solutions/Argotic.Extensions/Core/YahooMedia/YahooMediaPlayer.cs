@@ -69,15 +69,9 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <value>The height of the browser window that this player console should be opened in. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
     public int Height
     {
-        get
-        {
-            return playerHeight;
-        }
+        get => playerHeight;
 
-        set
-        {
-            playerHeight = value;
-        }
+        set => playerHeight = value;
     }
 
     /// <summary>
@@ -87,10 +81,7 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Url
     {
-        get
-        {
-            return playerUrl;
-        }
+        get => playerUrl;
 
         set
         {
@@ -105,15 +96,9 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <value>The width of the browser window that this player console should be opened in. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
     public int Width
     {
-        get
-        {
-            return playerWidth;
-        }
+        get => playerWidth;
 
-        set
-        {
-            playerWidth = value;
-        }
+        set => playerWidth = value;
     }
 
     /// <summary>
@@ -259,19 +244,13 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is YahooMediaPlayer other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is YahooMediaPlayer other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Height), HashCodeUtility.Component(this.Url), HashCodeUtility.Component(this.Width));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Height), HashCodeUtility.Component(this.Url), HashCodeUtility.Component(this.Width));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -291,8 +270,5 @@ public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooM
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaPlayer? first, YahooMediaPlayer? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(YahooMediaPlayer? first, YahooMediaPlayer? second) => !(first == second);
 }

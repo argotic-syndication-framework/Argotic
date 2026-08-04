@@ -20,10 +20,7 @@ public class MockHttpMessageHandler : HttpMessageHandler
     }
 
     /// <inheritdoc/>
-    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken)
-    {
-        return _sendAsync(request, cancellationToken);
-    }
+    protected override Task<HttpResponseMessage> SendAsync(HttpRequestMessage request, CancellationToken cancellationToken) => _sendAsync(request, cancellationToken);
 
     /// <summary>
     /// Creates a handler that returns the specified content.

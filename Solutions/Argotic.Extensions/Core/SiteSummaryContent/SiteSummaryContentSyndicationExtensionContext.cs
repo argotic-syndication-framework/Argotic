@@ -31,10 +31,7 @@ public class SiteSummaryContentSyndicationExtensionContext
     /// </remarks>
     public string Encoded
     {
-        get
-        {
-            return extensionEncoded;
-        }
+        get => extensionEncoded;
 
         set
         {

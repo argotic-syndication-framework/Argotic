@@ -69,10 +69,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>
-    public override string ToString()
-    {
-        return $"[MimeMediaType(Name = \"{this.Name}\", SubName = \"{this.SubName}\", Documentation = \"{this.Documentation ?? string.Empty}\")]";
-    }
+    public override string ToString() => $"[MimeMediaType(Name = \"{this.Name}\", SubName = \"{this.SubName}\", Documentation = \"{this.Documentation ?? string.Empty}\")]";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -113,19 +110,13 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is MimeMediaTypeAttribute other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is MimeMediaTypeAttribute other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.SubName));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.SubName));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -145,9 +136,6 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(MimeMediaTypeAttribute? first, MimeMediaTypeAttribute? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(MimeMediaTypeAttribute? first, MimeMediaTypeAttribute? second) => !(first == second);
 
 }

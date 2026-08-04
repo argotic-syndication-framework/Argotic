@@ -204,10 +204,7 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is ApmlApplication other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is ApmlApplication other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
@@ -238,8 +235,5 @@ public class ApmlApplication : IComparable<ApmlApplication>, IEquatable<ApmlAppl
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(ApmlApplication? first, ApmlApplication? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(ApmlApplication? first, ApmlApplication? second) => !(first == second);
 }

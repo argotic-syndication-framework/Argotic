@@ -131,13 +131,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// </value>
     /// <seealso cref="XmlRpcResponse(XmlRpcStructureValue)"/>
     /// <seealso cref="XmlRpcResponse(int, string)"/>
-    public XmlRpcStructureValue? Fault
-    {
-        get
-        {
-            return responseFault;
-        }
-    }
+    public XmlRpcStructureValue? Fault => responseFault;
 
     /// <summary>
     /// Gets the response information that was returned for the remote procedure call.
@@ -147,13 +141,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     ///     If the remote procedure call raised an exception, will return <b>null</b> and the <see cref="Fault"/> <i>should</i> be populated.
     /// </value>
     /// <seealso cref="XmlRpcResponse(IXmlRpcValue)"/>
-    public IXmlRpcValue? Parameter
-    {
-        get
-        {
-            return responseParameter;
-        }
-    }
+    public IXmlRpcValue? Parameter => responseParameter;
 
     /// <summary>
     /// Loads this <see cref="XmlRpcResponse"/> using the supplied <see cref="XPathNavigator"/>.
@@ -333,19 +321,13 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is XmlRpcResponse other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is XmlRpcResponse other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Fault), HashCodeUtility.Component(this.Parameter?.ToString()));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Fault), HashCodeUtility.Component(this.Parameter?.ToString()));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -365,8 +347,5 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(XmlRpcResponse? first, XmlRpcResponse? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(XmlRpcResponse? first, XmlRpcResponse? second) => !(first == second);
 }

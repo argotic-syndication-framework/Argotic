@@ -34,37 +34,19 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     /// Gets the media simple rating scheme adult content rating.
     /// </summary>
     /// <value>The media simple rating scheme <b>adult</b> content rating value.</value>
-    public static string SimpleAdultRating
-    {
-        get
-        {
-            return "adult";
-        }
-    }
+    public static string SimpleAdultRating => "adult";
 
     /// <summary>
     /// Gets the media simple rating scheme non-adult content rating.
     /// </summary>
     /// <value>The media simple rating scheme <b>nonadult</b> content rating value.</value>
-    public static string SimpleNonAdultRating
-    {
-        get
-        {
-            return "nonadult";
-        }
-    }
+    public static string SimpleNonAdultRating => "nonadult";
 
     /// <summary>
     /// Gets the media simple rating scheme.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the media simple rating scheme. The simple scheme has a value of <b>urn:simple</b>.</value>
-    public static Uri SimpleScheme
-    {
-        get
-        {
-            return new Uri("urn:simple");
-        }
-    }
+    public static Uri SimpleScheme => new("urn:simple");
 
     /// <summary>
     /// Gets or sets the permissible audience for this media object.
@@ -219,19 +201,13 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is YahooMediaRating other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is YahooMediaRating other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.Scheme));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Content), HashCodeUtility.Component(this.Scheme));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -251,8 +227,5 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaRating? first, YahooMediaRating? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(YahooMediaRating? first, YahooMediaRating? second) => !(first == second);
 }

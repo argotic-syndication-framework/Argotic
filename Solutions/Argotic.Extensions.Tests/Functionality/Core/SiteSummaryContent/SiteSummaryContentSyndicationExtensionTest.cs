@@ -285,14 +285,14 @@ public class SiteSummaryContentSyndicationExtensionTest
     public void SiteSummaryContentCompareSequenceTest()
     {
         // Arrange
-        IList<SiteSummaryContentItem> source = new List<SiteSummaryContentItem>
-        {
+        IList<SiteSummaryContentItem> source =
+        [
             new() { Content = "Content 1", Format = new Uri("http://example.com/1") }
-        };
-        IList<SiteSummaryContentItem> target = new List<SiteSummaryContentItem>
-        {
+        ];
+        IList<SiteSummaryContentItem> target =
+        [
             new() { Content = "Content 1", Format = new Uri("http://example.com/1") }
-        };
+        ];
 
         // Act
         int result = ComparisonUtility.CompareSequence(source, target);
@@ -305,15 +305,15 @@ public class SiteSummaryContentSyndicationExtensionTest
     public void SiteSummaryContentCompareSequenceDifferentCountsTest()
     {
         // Arrange
-        IList<SiteSummaryContentItem> source = new List<SiteSummaryContentItem>
-        {
+        IList<SiteSummaryContentItem> source =
+        [
             new() { Content = "Content 1", Format = new Uri("http://example.com/1") },
             new() { Content = "Content 2", Format = new Uri("http://example.com/2") }
-        };
-        IList<SiteSummaryContentItem> target = new List<SiteSummaryContentItem>
-        {
+        ];
+        IList<SiteSummaryContentItem> target =
+        [
             new() { Content = "Content 1", Format = new Uri("http://example.com/1") }
-        };
+        ];
 
         // Act
         int result = ComparisonUtility.CompareSequence(source, target);

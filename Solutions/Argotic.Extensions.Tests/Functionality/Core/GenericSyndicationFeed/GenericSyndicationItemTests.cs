@@ -163,11 +163,9 @@ public class GenericSyndicationItemTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullAtomEntry_ThrowsArgumentNullException()
-    {
+    public void Constructor_WithNullAtomEntry_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new GenericSyndicationItem((AtomEntry)null!));
-    }
 
     #endregion
 
@@ -259,11 +257,9 @@ public class GenericSyndicationItemTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullRssItem_ThrowsArgumentNullException()
-    {
+    public void Constructor_WithNullRssItem_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new GenericSyndicationItem((RssItem)null!));
-    }
 
     #endregion
 

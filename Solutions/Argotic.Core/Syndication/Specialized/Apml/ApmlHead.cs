@@ -240,10 +240,7 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is ApmlHead other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is ApmlHead other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
@@ -276,8 +273,5 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(ApmlHead? first, ApmlHead? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(ApmlHead? first, ApmlHead? second) => !(first == second);
 }

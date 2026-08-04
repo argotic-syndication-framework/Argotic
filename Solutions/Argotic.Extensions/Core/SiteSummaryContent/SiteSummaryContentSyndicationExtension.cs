@@ -51,10 +51,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public SiteSummaryContentSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
+        get => extensionContext;
 
         set
         {
@@ -185,10 +182,7 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SiteSummaryContentSyndicationExtension other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SiteSummaryContentSyndicationExtension other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
@@ -223,9 +217,6 @@ public class SiteSummaryContentSyndicationExtension : SyndicationExtension, ICom
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SiteSummaryContentSyndicationExtension? first, SiteSummaryContentSyndicationExtension? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SiteSummaryContentSyndicationExtension? first, SiteSummaryContentSyndicationExtension? second) => !(first == second);
 
 }

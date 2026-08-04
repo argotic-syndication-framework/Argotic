@@ -54,11 +54,9 @@ public class TrackbackDiscoveryMetadataTests
     }
 
     [TestMethod]
-    public void Constructor_WithNullNavigator_ThrowsArgumentNullException()
-    {
+    public void Constructor_WithNullNavigator_ThrowsArgumentNullException() =>
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() => new TrackbackDiscoveryMetadata(null!));
-    }
 
     [TestMethod]
     public void About_Set_SetsValue()

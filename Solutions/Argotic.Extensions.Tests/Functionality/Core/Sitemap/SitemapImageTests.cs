@@ -39,11 +39,9 @@ public class SitemapImageTests
     }
 
     [TestMethod]
-    public void SitemapImage_ConstructorWithNullLocation_ThrowsArgumentNullException()
-    {
+    public void SitemapImage_ConstructorWithNullLocation_ThrowsArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => new SitemapImage(null!));
-    }
 
     #endregion
 

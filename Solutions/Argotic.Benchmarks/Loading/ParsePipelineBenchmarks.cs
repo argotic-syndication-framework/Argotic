@@ -87,30 +87,21 @@ public class ParsePipelineBenchmarks
     /// </summary>
     /// <returns>The detected encoding.</returns>
     [Benchmark(Description = "b. GetXmlEncoding(bytes)")]
-    public Encoding DetectEncoding()
-    {
-        return SyndicationEncodingUtility.GetXmlEncoding(this.document);
-    }
+    public Encoding DetectEncoding() => SyndicationEncodingUtility.GetXmlEncoding(this.document);
 
     /// <summary>
     /// Invalid-character stripping, which produces a second full copy of the document.
     /// </summary>
     /// <returns>The sanitised document.</returns>
     [Benchmark(Description = "c. RemoveInvalidXmlHexadecimalCharacters")]
-    public string Sanitise()
-    {
-        return SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(this.decoded);
-    }
+    public string Sanitise() => SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(this.decoded);
 
     /// <summary>
     /// Sanitising plus XPathDocument construction. Contains <see cref="Sanitise"/>.
     /// </summary>
     /// <returns>A navigator over the parsed document.</returns>
     [Benchmark(Description = "d. CreateSafeNavigator(string)")]
-    public XPathNavigator NavigatorFromString()
-    {
-        return SyndicationEncodingUtility.CreateSafeNavigator(this.decoded);
-    }
+    public XPathNavigator NavigatorFromString() => SyndicationEncodingUtility.CreateSafeNavigator(this.decoded);
 
     /// <summary>
     /// The whole navigator construction from a stream: buffer, sniff, decode, sanitise, build.

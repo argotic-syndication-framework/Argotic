@@ -22,15 +22,9 @@ public class AtomPublishingSyndicationExtensionTest
     private readonly DateTime testEditedDate = new(2023, 6, 15, 10, 30, 0, DateTimeKind.Utc);
     private readonly DateTime testEditedDate2 = new(2024, 1, 20, 14, 45, 0, DateTimeKind.Utc);
 
-    private static string GetExtensionXml(DateTime editedOn)
-    {
-        return $"<app:edited>{SyndicationDateTimeUtility.ToRfc3339DateTime(editedOn)}</app:edited>";
-    }
+    private static string GetExtensionXml(DateTime editedOn) => $"<app:edited>{SyndicationDateTimeUtility.ToRfc3339DateTime(editedOn)}</app:edited>";
 
-    private static string GetToStringXml(DateTime editedOn)
-    {
-        return $"<edited xmlns=\"{AppNamespace}\">{SyndicationDateTimeUtility.ToRfc3339DateTime(editedOn)}</edited>";
-    }
+    private static string GetToStringXml(DateTime editedOn) => $"<edited xmlns=\"{AppNamespace}\">{SyndicationDateTimeUtility.ToRfc3339DateTime(editedOn)}</edited>";
 
     public TestContext? TestContext { get; set; }
 
@@ -401,11 +395,9 @@ public class AtomPublishingSyndicationExtensionTest
     }
 
     [TestMethod]
-    public void MatchByType_WithNullExtension_ShouldThrowArgumentNullException()
-    {
+    public void MatchByType_WithNullExtension_ShouldThrowArgumentNullException() =>
         // Act & Assert
         Should.Throw<ArgumentNullException>(() => AtomPublishingEditedSyndicationExtension.MatchByType(null!));
-    }
 
     #endregion
 

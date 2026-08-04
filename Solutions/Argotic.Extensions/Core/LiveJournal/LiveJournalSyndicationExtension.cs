@@ -51,10 +51,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public LiveJournalSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
+        get => extensionContext;
 
         set
         {
@@ -234,19 +231,13 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is LiveJournalSyndicationExtension other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is LiveJournalSyndicationExtension other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Context.IsPreformatted), HashCodeUtility.Component(this.Context.Mood), HashCodeUtility.Component(this.Context.Music), HashCodeUtility.Component(this.Context.Security), HashCodeUtility.Component(this.Context.UserPicture));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Context.IsPreformatted), HashCodeUtility.Component(this.Context.Mood), HashCodeUtility.Component(this.Context.Music), HashCodeUtility.Component(this.Context.Security), HashCodeUtility.Component(this.Context.UserPicture));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -266,9 +257,6 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(LiveJournalSyndicationExtension? first, LiveJournalSyndicationExtension? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(LiveJournalSyndicationExtension? first, LiveJournalSyndicationExtension? second) => !(first == second);
 
 }

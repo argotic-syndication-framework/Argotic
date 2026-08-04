@@ -61,10 +61,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
     public string Name
     {
-        get
-        {
-            return publicationName;
-        }
+        get => publicationName;
 
         set
         {
@@ -84,10 +81,7 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
     public string Language
     {
-        get
-        {
-            return publicationLanguage;
-        }
+        get => publicationLanguage;
 
         set
         {
@@ -192,28 +186,19 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SitemapNewsPublication other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SitemapNewsPublication other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Language));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Language));
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SitemapNewsPublication"/>.
     /// </summary>
     /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapNewsPublication"/>.</returns>
-    public override string ToString()
-    {
-        return $"{this.Name} ({this.Language})";
-    }
+    public override string ToString() => $"{this.Name} ({this.Language})";
 
     /// <summary>
     /// Determines if operands are equal.
@@ -233,9 +218,6 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapNewsPublication? first, SitemapNewsPublication? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SitemapNewsPublication? first, SitemapNewsPublication? second) => !(first == second);
 
 }

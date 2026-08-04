@@ -51,10 +51,7 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public AtomPublishingEditedSyndicationExtensionContext Context
     {
-        get
-        {
-            return extensionContext;
-        }
+        get => extensionContext;
 
         set
         {
@@ -191,19 +188,13 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is AtomPublishingEditedSyndicationExtension other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is AtomPublishingEditedSyndicationExtension other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(this.Context.EditedOn));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Description), HashCodeUtility.Component(this.Documentation), HashCodeUtility.Component(this.Name), HashCodeUtility.Component(this.Version), HashCodeUtility.Component(this.XmlNamespace), HashCodeUtility.Component(this.XmlPrefix), HashCodeUtility.Component(this.Context.EditedOn));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -223,9 +214,6 @@ public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IC
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomPublishingEditedSyndicationExtension? first, AtomPublishingEditedSyndicationExtension? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(AtomPublishingEditedSyndicationExtension? first, AtomPublishingEditedSyndicationExtension? second) => !(first == second);
 
 }

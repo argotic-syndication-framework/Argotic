@@ -74,15 +74,9 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <value>The height of this thumbnail, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no height was specified.</value>
     public int Height
     {
-        get
-        {
-            return thumbnailHeight;
-        }
+        get => thumbnailHeight;
 
-        set
-        {
-            thumbnailHeight = value;
-        }
+        set => thumbnailHeight = value;
     }
 
     /// <summary>
@@ -97,15 +91,9 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// </remarks>
     public TimeSpan Time
     {
-        get
-        {
-            return thumbnailTime;
-        }
+        get => thumbnailTime;
 
-        set
-        {
-            thumbnailTime = value;
-        }
+        set => thumbnailTime = value;
     }
 
     /// <summary>
@@ -115,10 +103,7 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Url
     {
-        get
-        {
-            return thumbnailUrl;
-        }
+        get => thumbnailUrl;
 
         set
         {
@@ -133,15 +118,9 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <value>The width of this thumbnail, typically in pixels. The default value is <see cref="Int32.MinValue"/>, which indicates that no width was specified.</value>
     public int Width
     {
-        get
-        {
-            return thumbnailWidth;
-        }
+        get => thumbnailWidth;
 
-        set
-        {
-            thumbnailWidth = value;
-        }
+        set => thumbnailWidth = value;
     }
 
     /// <summary>
@@ -303,19 +282,13 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is YahooMediaThumbnail other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is YahooMediaThumbnail other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Height), HashCodeUtility.Component(this.Time), HashCodeUtility.Component(this.Url), HashCodeUtility.Component(this.Width));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Height), HashCodeUtility.Component(this.Time), HashCodeUtility.Component(this.Url), HashCodeUtility.Component(this.Width));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -335,8 +308,5 @@ public class YahooMediaThumbnail : IComparable<YahooMediaThumbnail>, IEquatable<
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(YahooMediaThumbnail? first, YahooMediaThumbnail? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(YahooMediaThumbnail? first, YahooMediaThumbnail? second) => !(first == second);
 }

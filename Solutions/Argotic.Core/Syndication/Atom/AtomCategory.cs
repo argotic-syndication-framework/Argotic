@@ -277,19 +277,13 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is AtomCategory other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is AtomCategory other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Label), HashCodeUtility.Component(this.Scheme), HashCodeUtility.Component(this.Term));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Label), HashCodeUtility.Component(this.Scheme), HashCodeUtility.Component(this.Term));
 
     /// <summary>
     /// Determines if operands are equal.
@@ -309,9 +303,6 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(AtomCategory? first, AtomCategory? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(AtomCategory? first, AtomCategory? second) => !(first == second);
 
 }

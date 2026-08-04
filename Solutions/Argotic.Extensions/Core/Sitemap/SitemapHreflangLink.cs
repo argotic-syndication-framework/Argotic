@@ -65,10 +65,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// <exception cref="ArgumentException">The <paramref name="value"/> is null or empty.</exception>
     public string Hreflang
     {
-        get
-        {
-            return linkHreflang;
-        }
+        get => linkHreflang;
 
         set
         {
@@ -84,10 +81,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Href
     {
-        get
-        {
-            return linkHref;
-        }
+        get => linkHref;
 
         set
         {
@@ -199,28 +193,19 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SitemapHreflangLink other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SitemapHreflangLink other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return HashCode.Combine(HashCodeUtility.Component(this.Hreflang), HashCodeUtility.Component(this.Href));
-    }
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Hreflang), HashCodeUtility.Component(this.Href));
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SitemapHreflangLink"/>.
     /// </summary>
     /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapHreflangLink"/>.</returns>
-    public override string ToString()
-    {
-        return $"{this.Hreflang}: {this.Href}";
-    }
+    public override string ToString() => $"{this.Hreflang}: {this.Href}";
 
     /// <summary>
     /// Determines if operands are equal.
@@ -240,9 +225,6 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapHreflangLink? first, SitemapHreflangLink? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SitemapHreflangLink? first, SitemapHreflangLink? second) => !(first == second);
 
 }

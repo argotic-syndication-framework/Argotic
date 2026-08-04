@@ -43,10 +43,7 @@ public class PingbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Server
     {
-        get
-        {
-            return extensionServer;
-        }
+        get => extensionServer;
 
         set
         {
@@ -62,10 +59,7 @@ public class PingbackSyndicationExtensionContext
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Target
     {
-        get
-        {
-            return extensionTarget;
-        }
+        get => extensionTarget;
 
         set
         {

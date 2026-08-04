@@ -72,10 +72,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
     public Uri? Location
     {
-        get
-        {
-            return segmentLocation;
-        }
+        get => segmentLocation;
 
         set
         {
@@ -187,28 +184,19 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// </summary>
     /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
     /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj)
-    {
-        return obj is SitemapVideoSegment other && this.Equals(other);
-    }
+    public override bool Equals(object? obj) => obj is SitemapVideoSegment other && this.Equals(other);
 
     /// <summary>
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode()
-    {
-        return this.Location?.GetHashCode() ?? 0;
-    }
+    public override int GetHashCode() => this.Location?.GetHashCode() ?? 0;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SitemapVideoSegment"/>.
     /// </summary>
     /// <returns>A <see cref="string"/> that represents the current <see cref="SitemapVideoSegment"/>.</returns>
-    public override string ToString()
-    {
-        return this.Location?.ToString() ?? string.Empty;
-    }
+    public override string ToString() => this.Location?.ToString() ?? string.Empty;
 
     /// <summary>
     /// Determines if operands are equal.
@@ -228,8 +216,5 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SitemapVideoSegment? first, SitemapVideoSegment? second)
-    {
-        return !(first == second);
-    }
+    public static bool operator !=(SitemapVideoSegment? first, SitemapVideoSegment? second) => !(first == second);
 }

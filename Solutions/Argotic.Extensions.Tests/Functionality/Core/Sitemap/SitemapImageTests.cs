@@ -564,7 +564,8 @@ public class SitemapImageTests
 
     private static XPathNavigator CreateNavigator(string xml)
     {
-        XPathDocument document = new(new StringReader(xml));
+        using StringReader documentReader = new(xml);
+        XPathDocument document = new(documentReader);
         return document.CreateNavigator();
     }
 

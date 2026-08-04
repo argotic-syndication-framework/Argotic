@@ -24,7 +24,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithImageExtension_HasImageNamespace()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithImageExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithImageExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
 
         // Act
@@ -40,7 +41,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithImageExtension_ExtractsImageLocation()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithImageExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithImageExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -56,7 +58,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithMultipleImages_ExtractsAllImages()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithMultipleImages));
+        using StringReader documentReader = new(FeedTestData.SitemapWithMultipleImages);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -71,7 +74,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithMultipleImages_ExtractsAllImageLocations()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithMultipleImages));
+        using StringReader documentReader = new(FeedTestData.SitemapWithMultipleImages);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -95,7 +99,8 @@ public class SitemapExtensionTests
     public void SitemapImage_LoadFromXPath_WorksCorrectly()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithImageExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithImageExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -115,7 +120,8 @@ public class SitemapExtensionTests
     public void SitemapImage_LoadMultiple_WorksCorrectly()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithMultipleImages));
+        using StringReader documentReader = new(FeedTestData.SitemapWithMultipleImages);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -147,7 +153,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithVideoExtension_HasVideoNamespace()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithVideoExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithVideoExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
 
         // Act
@@ -163,7 +170,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithVideoExtension_ExtractsVideoElements()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithVideoExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithVideoExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -178,7 +186,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithVideoExtension_ExtractsThumbnailLocation()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithVideoExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithVideoExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -194,7 +203,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithVideoExtension_ExtractsTitle()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithVideoExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithVideoExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -210,7 +220,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithVideoExtension_ExtractsDescription()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithVideoExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithVideoExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -226,7 +237,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithVideoExtension_ExtractsContentLocation()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithVideoExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithVideoExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -242,7 +254,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithVideoExtension_ExtractsDuration()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithVideoExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithVideoExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -259,7 +272,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithVideoExtension_ExtractsPublicationDate()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithVideoExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithVideoExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -296,7 +310,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithNewsExtension_HasNewsNamespace()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithNewsExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithNewsExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
 
         // Act
@@ -312,7 +327,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithNewsExtension_ExtractsNewsElement()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithNewsExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithNewsExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -327,7 +343,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithNewsExtension_ExtractsPublicationName()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithNewsExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithNewsExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -343,7 +360,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithNewsExtension_ExtractsPublicationLanguage()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithNewsExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithNewsExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -359,7 +377,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithNewsExtension_ExtractsNewsTitle()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithNewsExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithNewsExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -375,7 +394,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithNewsExtension_ExtractsPublicationDate()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithNewsExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithNewsExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -411,7 +431,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithHreflangExtension_HasXhtmlNamespace()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithHreflangExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithHreflangExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
 
         // Act
@@ -427,7 +448,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithHreflangExtension_ExtractsAlternateLinks()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithHreflangExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithHreflangExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -442,7 +464,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithHreflangExtension_ExtractsHreflangAttributes()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithHreflangExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithHreflangExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -471,7 +494,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithHreflangExtension_ExtractsHrefAttributes()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithHreflangExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithHreflangExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -501,7 +525,8 @@ public class SitemapExtensionTests
     {
         // Hreflang implementation should include self-referencing link
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithHreflangExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithHreflangExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -531,7 +556,8 @@ public class SitemapExtensionTests
     public void ParseSitemapWithHreflangExtension_AllLinksHaveAlternateRel()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithHreflangExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithHreflangExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -551,7 +577,8 @@ public class SitemapExtensionTests
     {
         // x-default is a special hreflang value for the default/fallback page
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithHreflangExtension));
+        using StringReader documentReader = new(FeedTestData.SitemapWithHreflangExtension);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 
@@ -586,7 +613,8 @@ public class SitemapExtensionTests
             </urlset>
             """;
 
-        XPathDocument document = new(new StringReader(combinedSitemap));
+        using StringReader documentReader = new(combinedSitemap);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
 
         // Act
@@ -619,7 +647,8 @@ public class SitemapExtensionTests
             </urlset>
             """;
 
-        XPathDocument document = new(new StringReader(combinedSitemap));
+        using StringReader documentReader = new(combinedSitemap);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = CreateNamespaceManager(navigator);
 

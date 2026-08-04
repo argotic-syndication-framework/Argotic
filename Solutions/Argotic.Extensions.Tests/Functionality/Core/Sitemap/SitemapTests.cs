@@ -20,7 +20,8 @@ public class SitemapTests
     public void ParseMinimalSitemap_ContainsOneUrl()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.MinimalSitemap));
+        using StringReader documentReader = new(FeedTestData.MinimalSitemap);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -35,7 +36,8 @@ public class SitemapTests
     public void ParseMinimalSitemap_ExtractsLocation()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.MinimalSitemap));
+        using StringReader documentReader = new(FeedTestData.MinimalSitemap);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -51,7 +53,8 @@ public class SitemapTests
     public void ParseFullSitemap_ContainsThreeUrls()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.FullSitemap));
+        using StringReader documentReader = new(FeedTestData.FullSitemap);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -66,7 +69,8 @@ public class SitemapTests
     public void ParseFullSitemap_ExtractsAllOptionalElements()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.FullSitemap));
+        using StringReader documentReader = new(FeedTestData.FullSitemap);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -90,7 +94,8 @@ public class SitemapTests
     public void ParseEmptySitemap_ContainsNoUrls()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.EmptySitemap));
+        using StringReader documentReader = new(FeedTestData.EmptySitemap);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -109,7 +114,8 @@ public class SitemapTests
     public void ParseSitemapWithAllChangeFrequencies_ExtractsAllValues()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithAllChangeFrequencies));
+        using StringReader documentReader = new(FeedTestData.SitemapWithAllChangeFrequencies);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -160,7 +166,8 @@ public class SitemapTests
     public void ParseSitemapWithPriorityBoundaries_ExtractsBoundaryValues()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithPriorityBoundaries));
+        using StringReader documentReader = new(FeedTestData.SitemapWithPriorityBoundaries);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -220,7 +227,8 @@ public class SitemapTests
     public void ParseSitemapWithDateFormats_ExtractsAllDates()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithDateFormats));
+        using StringReader documentReader = new(FeedTestData.SitemapWithDateFormats);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -289,7 +297,8 @@ public class SitemapTests
     public void ParseSitemapWithEscapedUrls_HandlesAmpersandCorrectly()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithEscapedUrls));
+        using StringReader documentReader = new(FeedTestData.SitemapWithEscapedUrls);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -306,7 +315,8 @@ public class SitemapTests
     public void ParseSitemapWithEscapedUrls_HandlesEncodedSpaceCorrectly()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.SitemapWithEscapedUrls));
+        using StringReader documentReader = new(FeedTestData.SitemapWithEscapedUrls);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -341,7 +351,8 @@ public class SitemapTests
     public void ParseMinimalSitemapIndex_ContainsOneSitemap()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.MinimalSitemapIndex));
+        using StringReader documentReader = new(FeedTestData.MinimalSitemapIndex);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -356,7 +367,8 @@ public class SitemapTests
     public void ParseMinimalSitemapIndex_ExtractsLocation()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.MinimalSitemapIndex));
+        using StringReader documentReader = new(FeedTestData.MinimalSitemapIndex);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -372,7 +384,8 @@ public class SitemapTests
     public void ParseFullSitemapIndex_ContainsThreeSitemaps()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.FullSitemapIndex));
+        using StringReader documentReader = new(FeedTestData.FullSitemapIndex);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -387,7 +400,8 @@ public class SitemapTests
     public void ParseFullSitemapIndex_ExtractsLastmodDates()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.FullSitemapIndex));
+        using StringReader documentReader = new(FeedTestData.FullSitemapIndex);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -410,7 +424,8 @@ public class SitemapTests
     public void ParseEmptySitemapIndex_ContainsNoSitemaps()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.EmptySitemapIndex));
+        using StringReader documentReader = new(FeedTestData.EmptySitemapIndex);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -429,7 +444,8 @@ public class SitemapTests
     public void DetectSitemapFormat_UrlsetRoot_IsSitemap()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.MinimalSitemap));
+        using StringReader documentReader = new(FeedTestData.MinimalSitemap);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
 
         // Act
@@ -445,7 +461,8 @@ public class SitemapTests
     public void DetectSitemapFormat_SitemapindexRoot_IsSitemapIndex()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.MinimalSitemapIndex));
+        using StringReader documentReader = new(FeedTestData.MinimalSitemapIndex);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
 
         // Act
@@ -461,7 +478,8 @@ public class SitemapTests
     public void DetectSitemapNamespace_CorrectNamespace()
     {
         // Arrange
-        XPathDocument document = new(new StringReader(FeedTestData.MinimalSitemap));
+        using StringReader documentReader = new(FeedTestData.MinimalSitemap);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
 
         // Act
@@ -507,7 +525,8 @@ public class SitemapTests
         string xml = stringWriter.ToString();
 
         // Assert - Verify XML can be parsed back
-        XPathDocument document = new(new StringReader(xml));
+        using StringReader documentReader = new(xml);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -544,7 +563,8 @@ public class SitemapTests
         string xml = stringWriter.ToString();
 
         // Assert - Verify XML can be parsed back
-        XPathDocument document = new(new StringReader(xml));
+        using StringReader documentReader = new(xml);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -561,7 +581,8 @@ public class SitemapTests
     public void RoundTrip_ParseWriteParse_PreservesUrlData()
     {
         // Arrange - Parse original
-        XPathDocument originalDoc = new(new StringReader(FeedTestData.FullSitemap));
+        using StringReader originalDocReader = new(FeedTestData.FullSitemap);
+        XPathDocument originalDoc = new(originalDocReader);
         XPathNavigator originalNav = originalDoc.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(originalNav.NameTable);
 
@@ -610,7 +631,8 @@ public class SitemapTests
         string xml = stringWriter.ToString();
 
         // Parse again
-        XPathDocument newDoc = new(new StringReader(xml));
+        using StringReader newDocReader = new(xml);
+        XPathDocument newDoc = new(newDocReader);
         XPathNavigator newNav = newDoc.CreateNavigator();
         XmlNamespaceManager newManager = SitemapUtility.CreateNamespaceManager(newNav.NameTable);
 
@@ -656,7 +678,8 @@ public class SitemapTests
             </urlset>
             """;
 
-        XPathDocument document = new(new StringReader(sitemapWithWhitespace));
+        using StringReader documentReader = new(sitemapWithWhitespace);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -686,7 +709,8 @@ public class SitemapTests
             </urlset>
             """;
 
-        XPathDocument document = new(new StringReader(sitemapWithInternational));
+        using StringReader documentReader = new(sitemapWithInternational);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -712,7 +736,8 @@ public class SitemapTests
             </urlset>
             """;
 
-        XPathDocument document = new(new StringReader(sitemapWithLongUrl));
+        using StringReader documentReader = new(sitemapWithLongUrl);
+        XPathDocument document = new(documentReader);
         XPathNavigator navigator = document.CreateNavigator();
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(navigator.NameTable);
 

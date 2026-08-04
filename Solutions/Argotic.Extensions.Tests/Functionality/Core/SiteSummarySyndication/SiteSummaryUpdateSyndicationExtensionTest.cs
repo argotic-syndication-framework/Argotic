@@ -11,10 +11,6 @@ public class SiteSummaryUpdateSyndicationExtensionTest
 {
     private const string Namespc = @"xmlns:sy=""http://purl.org/rss/1.0/modules/syndication/""";
 
-    private readonly string toStringText = "<updatePeriod xmlns=\"http://purl.org/rss/1.0/modules/syndication/\">hourly</updatePeriod>" + Environment.NewLine +
-                                           "<updateFrequency xmlns=\"http://purl.org/rss/1.0/modules/syndication/\">2</updateFrequency>" + Environment.NewLine +
-                                           "<updateBase xmlns=\"http://purl.org/rss/1.0/modules/syndication/\">2010-08-01T00:00:00Z</updateBase>";
-
     private const string StrExtXml = "<sy:updatePeriod>hourly</sy:updatePeriod>"
                                      + "<sy:updateFrequency>2</sy:updateFrequency>"
                                      + "<sy:updateBase>2010-08-01T00:00:00Z</sy:updateBase>";
@@ -85,7 +81,7 @@ public class SiteSummaryUpdateSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
         SiteSummaryUpdateSyndicationExtension itemExtension = item.FindExtension<SiteSummaryUpdateSyndicationExtension>();

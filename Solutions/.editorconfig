@@ -153,8 +153,9 @@ dotnet_naming_style.begins_with_i.capitalization = pascal_case
 
 dotnet_naming_style.pascal_case.capitalization = pascal_case
 
-# Source code files
-[src/**/*.cs]
+# Application (non-library) code. The sample runner is an executable, not a shipped
+# package, so the library-authoring rules below do not apply to it.
+[Argotic.Examples/**.cs]
 # CA1848: Use LoggerMessage delegates for performance
 dotnet_diagnostic.CA1848.severity = none
 # CA1031: Do not catch general exception types
@@ -167,14 +168,18 @@ dotnet_diagnostic.CA1050.severity = none
 dotnet_diagnostic.CA2007.severity = none
 # CA1034: Nested types are ok for settings
 dotnet_diagnostic.CA1034.severity = none
+# CA1303: Do not pass literals as localized parameters - console output is not localized
+dotnet_diagnostic.CA1303.severity = none
 
-# Test files
-[**/*Tests.cs]
+# Test files. Scoped to the whole test project rather than a filename pattern: the suite
+# mixes *Test.cs and *Tests.cs, and the builders/test-doubles/base classes carry the same
+# relaxations without matching either suffix.
+[Argotic.Extensions.Tests/**.cs]
 # CA1707: Allow underscores in test method names
 dotnet_diagnostic.CA1707.severity = none
 # CA1303: Do not pass literals as localized parameters
 dotnet_diagnostic.CA1303.severity = none
-# CA1515: Consider making public types internal
+# CA1515: MSTest requires public test classes, so they cannot be made internal
 dotnet_diagnostic.CA1515.severity = none
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none

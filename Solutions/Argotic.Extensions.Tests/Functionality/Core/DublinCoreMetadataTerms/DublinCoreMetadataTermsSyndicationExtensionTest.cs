@@ -1034,7 +1034,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         feed.Load(reader);
 
         // Assert
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
 
@@ -1062,7 +1062,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionTest
         feed.Load(reader);
 
         // Assert
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
         DublinCoreMetadataTermsSyndicationExtension itemExtension = item.FindExtension<DublinCoreMetadataTermsSyndicationExtension>();

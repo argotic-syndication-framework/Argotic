@@ -81,7 +81,7 @@ public class SiteSummaryContentSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
         SiteSummaryContentSyndicationExtension itemExtension = item.FindExtension<SiteSummaryContentSyndicationExtension>();

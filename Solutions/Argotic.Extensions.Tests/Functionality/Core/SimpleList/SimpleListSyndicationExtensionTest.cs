@@ -757,7 +757,7 @@ public class SimpleListSyndicationExtensionTest
 
         // Assert
         feed.ShouldNotBeNull();
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
     }
 
     [TestMethod]

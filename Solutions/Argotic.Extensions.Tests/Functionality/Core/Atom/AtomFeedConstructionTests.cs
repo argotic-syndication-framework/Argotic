@@ -89,7 +89,7 @@ public class AtomFeedConstructionTests
 
         feed.Entries.Add(entry);
 
-        feed.Entries.Count().ShouldBe(1);
+        feed.Entries.Count.ShouldBe(1);
         AtomEntry addedEntry = feed.Entries.First();
         addedEntry.Title.Content.ShouldBe("Test Entry");
         addedEntry.Summary.Content.ShouldBe("Test summary text.");
@@ -178,7 +178,7 @@ public class AtomFeedConstructionTests
 
         // Verify data preserved
         loadedFeed.Title.Content.ShouldBe(originalFeed.Title.Content);
-        loadedFeed.Entries.Count().ShouldBe(originalFeed.Entries.Count());
+        loadedFeed.Entries.Count.ShouldBe(originalFeed.Entries.Count);
     }
 
     [TestMethod]

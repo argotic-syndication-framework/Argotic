@@ -100,7 +100,7 @@ public class BlogMLDocumentConstructionTests
 
         document.Posts.Add(post);
 
-        document.Posts.Count().ShouldBe(1);
+        document.Posts.Count.ShouldBe(1);
         document.Posts[0].Id.ShouldBe("1");
         document.Posts[0].Title.Content.ShouldBe("Test Blog Post");
         document.Posts[0].Content.Content.ShouldBe("<p>Test content</p>");
@@ -200,7 +200,7 @@ public class BlogMLDocumentConstructionTests
         loadedDocument.Title.Content.ShouldBe(originalDocument.Title.Content);
         loadedDocument.Authors.Count.ShouldBe(originalDocument.Authors.Count);
         loadedDocument.Categories.Count.ShouldBe(originalDocument.Categories.Count);
-        loadedDocument.Posts.Count().ShouldBe(originalDocument.Posts.Count());
+        loadedDocument.Posts.Count.ShouldBe(originalDocument.Posts.Count);
     }
 
     [TestMethod]

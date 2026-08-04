@@ -11,17 +11,11 @@ namespace Argotic.Extensions.Tests.Functionality.Core.FeedHistory;
 public class FeedHistorySyndicationExtensionTest
 {
     private const string Namespc = @"xmlns:fh=""http://purl.org/syndication/history/1.0""";
-    private const string AtomNamespc = @"xmlns:atom=""http://www.w3.org/2005/Atom""";
-    private const string CombinedNamespc = @"xmlns:fh=""http://purl.org/syndication/history/1.0"" xmlns:atom=""http://www.w3.org/2005/Atom""";
 
     private readonly string toStringText = "<archive xmlns=\"http://purl.org/syndication/history/1.0\" />" + Environment.NewLine +
                                            "<complete xmlns=\"http://purl.org/syndication/history/1.0\" />";
 
     private const string StrExtXml = "<fh:archive /><fh:complete />";
-
-    private const string StrExtXmlWithRelations = "<fh:archive /><fh:complete />" +
-        "<atom:link href=\"http://example.com/feed/prev\" rel=\"previous\" />" +
-        "<atom:link href=\"http://example.com/feed/next\" rel=\"next\" />";
 
     public TestContext? TestContext { get; set; }
 
@@ -421,7 +415,7 @@ public class FeedHistorySyndicationExtensionTest
         feed.Load(reader);
 
         // Assert
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
         FeedHistorySyndicationExtension itemExtension = item.FindExtension<FeedHistorySyndicationExtension>();

@@ -67,7 +67,7 @@ public class AtomPublishingControlSyndicationExtensionTest
 
         // Basic feed structure should be intact
         feed.Channel.ShouldNotBeNull();
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
     }
 
     [TestMethod]

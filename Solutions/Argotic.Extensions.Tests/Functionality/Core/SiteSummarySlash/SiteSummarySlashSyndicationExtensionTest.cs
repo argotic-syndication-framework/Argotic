@@ -12,11 +12,6 @@ public class SiteSummarySlashSyndicationExtensionTest
 {
     private const string Namespc = @"xmlns:slash=""http://purl.org/rss/1.0/modules/slash/""";
 
-    private readonly string toStringText = "<comments xmlns=\"http://purl.org/rss/1.0/modules/slash/\">42</comments>" + Environment.NewLine +
-                                           "<section xmlns=\"http://purl.org/rss/1.0/modules/slash/\"><![CDATA[Technology]]></section>" + Environment.NewLine +
-                                           "<department xmlns=\"http://purl.org/rss/1.0/modules/slash/\"><![CDATA[Software]]></department>" + Environment.NewLine +
-                                           "<hit_parade xmlns=\"http://purl.org/rss/1.0/modules/slash/\">100,200,300</hit_parade>";
-
     private const string StrExtXml = "<slash:comments>42</slash:comments>"
                                      + "<slash:section><![CDATA[Technology]]></slash:section>"
                                      + "<slash:department><![CDATA[Software]]></slash:department>"
@@ -87,7 +82,7 @@ public class SiteSummarySlashSyndicationExtensionTest
         RssFeed feed = new();
         feed.Load(reader);
 
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
         RssItem item = feed.Channel.Items.Single();
         item.HasExtensions.ShouldBeTrue();
         SiteSummarySlashSyndicationExtension itemExtension = item.FindExtension<SiteSummarySlashSyndicationExtension>();

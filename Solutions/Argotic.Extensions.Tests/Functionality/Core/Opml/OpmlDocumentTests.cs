@@ -16,7 +16,7 @@ public class OpmlDocumentTests
 
         document.ShouldNotBeNull();
         document.Outlines.ShouldNotBeNull();
-        document.Outlines.Count().ShouldBe(0);
+        document.Outlines.Count.ShouldBe(0);
     }
 
     [TestMethod]
@@ -75,7 +75,7 @@ public class OpmlDocumentTests
 
         document.Outlines.Add(outline);
 
-        document.Outlines.Count().ShouldBe(1);
+        document.Outlines.Count.ShouldBe(1);
         document.Outlines.First().Text.ShouldBe("Test Outline");
     }
 
@@ -114,7 +114,7 @@ public class OpmlDocumentTests
         document.Load(stream);
 
         document.Head.Title.ShouldBe("Test OPML");
-        document.Outlines.Count().ShouldBe(1);
+        document.Outlines.Count.ShouldBe(1);
         document.Outlines.First().Text.ShouldBe("Test Outline");
     }
 
@@ -171,6 +171,6 @@ public class OpmlDocumentTests
 
         // Verify data preserved
         loadedDocument.Head.Title.ShouldBe(originalDocument.Head.Title);
-        loadedDocument.Outlines.Count().ShouldBe(originalDocument.Outlines.Count());
+        loadedDocument.Outlines.Count.ShouldBe(originalDocument.Outlines.Count);
     }
 }

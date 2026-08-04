@@ -625,7 +625,7 @@ public class FeedSynchronizationSyndicationExtensionTest
 
         // Assert
         feed.ShouldNotBeNull();
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
     }
 
     [TestMethod]

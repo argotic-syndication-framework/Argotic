@@ -102,7 +102,7 @@ public class RssFeedConstructionTests
 
         feed.Channel.Items.Add(item);
 
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
         RssItem addedItem = feed.Channel.Items.First();
         addedItem.Title.ShouldBe("Test Item");
         addedItem.Link.ShouldBe(new Uri("http://example.com/item"));
@@ -174,7 +174,7 @@ public class RssFeedConstructionTests
         // Verify data preserved
         loadedFeed.Channel.Title.ShouldBe(originalFeed.Channel.Title);
         loadedFeed.Channel.Description.ShouldBe(originalFeed.Channel.Description);
-        loadedFeed.Channel.Items.Count().ShouldBe(originalFeed.Channel.Items.Count());
+        loadedFeed.Channel.Items.Count.ShouldBe(originalFeed.Channel.Items.Count);
     }
 
     [TestMethod]

@@ -22,12 +22,12 @@ public class AtomPublishingSyndicationExtensionTest
     private readonly DateTime testEditedDate = new(2023, 6, 15, 10, 30, 0, DateTimeKind.Utc);
     private readonly DateTime testEditedDate2 = new(2024, 1, 20, 14, 45, 0, DateTimeKind.Utc);
 
-    private string GetExtensionXml(DateTime editedOn)
+    private static string GetExtensionXml(DateTime editedOn)
     {
         return $"<app:edited>{SyndicationDateTimeUtility.ToRfc3339DateTime(editedOn)}</app:edited>";
     }
 
-    private string GetToStringXml(DateTime editedOn)
+    private static string GetToStringXml(DateTime editedOn)
     {
         return $"<edited xmlns=\"{AppNamespace}\">{SyndicationDateTimeUtility.ToRfc3339DateTime(editedOn)}</edited>";
     }
@@ -270,7 +270,7 @@ public class AtomPublishingSyndicationExtensionTest
 
         // Assert
         feed.Channel.ShouldNotBeNull();
-        feed.Channel.Items.Count().ShouldBe(1);
+        feed.Channel.Items.Count.ShouldBe(1);
     }
 
     [TestMethod]

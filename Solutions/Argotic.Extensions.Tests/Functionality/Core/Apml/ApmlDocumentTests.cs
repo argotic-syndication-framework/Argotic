@@ -14,7 +14,7 @@ public class ApmlDocumentTests
         ApmlDocument document = new();
 
         document.ShouldNotBeNull();
-        document.Profiles.Count().ShouldBe(0);
+        document.Profiles.Count.ShouldBe(0);
     }
 
     [TestMethod]
@@ -60,7 +60,7 @@ public class ApmlDocumentTests
 
         document.Profiles.Add(profile);
 
-        document.Profiles.Count().ShouldBe(1);
+        document.Profiles.Count.ShouldBe(1);
         document.Profiles.First().Name.ShouldBe("Home");
     }
 
@@ -173,6 +173,6 @@ public class ApmlDocumentTests
 
         // Verify data preserved
         loadedDocument.Head.Title.ShouldBe(originalDocument.Head.Title);
-        loadedDocument.Profiles.Count().ShouldBe(originalDocument.Profiles.Count());
+        loadedDocument.Profiles.Count.ShouldBe(originalDocument.Profiles.Count);
     }
 }

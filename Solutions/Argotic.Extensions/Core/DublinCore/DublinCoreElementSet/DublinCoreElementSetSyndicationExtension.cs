@@ -194,7 +194,7 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
                 if (result == 0) result = 1;
             }
         }
-        else if (this.Context.Language == null && other.Context.Language != null)
+        else if (other.Context.Language != null)
         {
             if (result == 0) result = -1;
         }

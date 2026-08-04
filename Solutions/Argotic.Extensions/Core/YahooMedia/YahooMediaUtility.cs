@@ -544,16 +544,16 @@ internal static class YahooMediaUtility
         {
             if (target.Copyright != null)
             {
-                if (result == 0) result = source.Copyright.CompareTo(target.Copyright);
+                result = source.Copyright.CompareTo(target.Copyright);
             }
             else
             {
-                if (result == 0) result = 1;
+                result = 1;
             }
         }
         else if (target.Copyright != null)
         {
-            if (result == 0) result = -1;
+            result = -1;
         }
 
         if (source.Description != null)

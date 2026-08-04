@@ -146,16 +146,16 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
         {
             if (other.Data != null)
             {
-                if (result == 0) result = string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.Ordinal);
+                result = string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.Ordinal);
             }
             else
             {
-                if (result == 0) result = 1;
+                result = 1;
             }
         }
         else if (other.Data != null)
         {
-            if (result == 0) result = -1;
+            result = -1;
         }
 
         if (this.Extension != null)

@@ -69,7 +69,7 @@ internal static class AtomPublishingUtility
         {
             return -1;
         }
-        if (result == 0) result = Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+        result = Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         string sourceLanguageName = source.Language?.Name ?? string.Empty;
         string targetLanguageName = target.Language?.Name ?? string.Empty;

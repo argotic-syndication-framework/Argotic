@@ -282,16 +282,16 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
         {
             if (other.Fault != null)
             {
-                if (result == 0) result = this.Fault.CompareTo(other.Fault);
+                result = this.Fault.CompareTo(other.Fault);
             }
             else
             {
-                if (result == 0) result = 1;
+                result = 1;
             }
         }
         else if (other.Fault != null)
         {
-            if (result == 0) result = -1;
+            result = -1;
         }
 
         if (this.Parameter != null)

@@ -117,8 +117,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
             return 1;
         }
 
-        int result = 0;
-        if (result == 0) result = string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
+        int result = string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = Uri.Compare(this.Source, other.Source, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         return result;

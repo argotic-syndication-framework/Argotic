@@ -207,12 +207,12 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
 
         if (source.HasChildren)
         {
-            XPathNavigator settingsNavigator = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
+            XPathNavigator? settingsNavigator = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
 
             if (settingsNavigator != null)
             {
-                XPathNavigator docsNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
-                XPathNavigator notesNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
+                XPathNavigator? docsNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
+                XPathNavigator? notesNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
                 XPathNodeIterator settingIterator = RsdUtility.SelectSafe(settingsNavigator, "rsd:setting", manager);
 
                 if (docsNavigator != null)

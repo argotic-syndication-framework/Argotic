@@ -87,7 +87,7 @@ internal static class RsdUtility
     /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="xpath"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="resolver"/> is a null reference.</exception>
-    public static XPathNavigator SelectSafeSingleNode(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
+    public static XPathNavigator? SelectSafeSingleNode(XPathNavigator source, string xpath, IXmlNamespaceResolver resolver)
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentException.ThrowIfNullOrEmpty(xpath);

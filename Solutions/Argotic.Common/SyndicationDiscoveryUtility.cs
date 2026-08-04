@@ -666,9 +666,9 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-    public static HtmlAnchor ExtractPingbackNotificationServer(string content)
+    public static HtmlAnchor? ExtractPingbackNotificationServer(string content)
     {
-        HtmlAnchor pingbackAnchor = null;
+        HtmlAnchor? pingbackAnchor = null;
         Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -795,7 +795,7 @@ public static class SyndicationDiscoveryUtility
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         using StreamReader reader = new(stream);
         string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
-        HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
+        HtmlAnchor? link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
 
         return link != null;
     }
@@ -885,7 +885,7 @@ public static class SyndicationDiscoveryUtility
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         using StreamReader reader = new(stream);
         string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
-        HtmlAnchor link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
+        HtmlAnchor? link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
 
         if (link != null && Uri.TryCreate(link.HRef, UriKind.Absolute, out Uri? href))
         {

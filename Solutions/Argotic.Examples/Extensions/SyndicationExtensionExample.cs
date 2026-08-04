@@ -162,7 +162,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
         {
             return 1;
         }
-        MyCustomSyndicationExtension value = obj as MyCustomSyndicationExtension;
+        MyCustomSyndicationExtension? value = obj as MyCustomSyndicationExtension;
 
         if (value != null)
         {

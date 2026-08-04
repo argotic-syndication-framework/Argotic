@@ -66,7 +66,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
         {
             ArgumentException.ThrowIfNullOrEmpty(name);
 
-            XmlRpcStructureMember result = null;
+            XmlRpcStructureMember? result = null;
 
             foreach (XmlRpcStructureMember member in this.Members)
             {

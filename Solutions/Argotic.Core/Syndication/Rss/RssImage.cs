@@ -221,7 +221,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
     ///     the <see cref="Extensions"/>, starting with the first element and ending with the last element. Processing is stopped when a match is found.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="match"/> is a null reference.</exception>
-    public ISyndicationExtension FindExtension(Predicate<ISyndicationExtension> match)
+    public ISyndicationExtension? FindExtension(Predicate<ISyndicationExtension> match)
     {
         ArgumentNullException.ThrowIfNull(match);
         foreach (ISyndicationExtension extension in this.Extensions)

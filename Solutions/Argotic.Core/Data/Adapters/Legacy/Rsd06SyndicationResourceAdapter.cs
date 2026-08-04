@@ -45,15 +45,15 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = RsdUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager) ??
+        XPathNavigator? serviceNavigator = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/rsd:service", manager) ??
                                           //  dasBlog places an empty default XML namespace on the <service> element, this is a hack/compromise
                                           RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/service", manager);
 
         if (serviceNavigator != null)
         {
-            XPathNavigator engineNameNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineName", manager);
-            XPathNavigator engineLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineLink", manager);
-            XPathNavigator homePageLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:homePageLink", manager);
+            XPathNavigator? engineNameNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineName", manager);
+            XPathNavigator? engineLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineLink", manager);
+            XPathNavigator? homePageLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:homePageLink", manager);
             XPathNodeIterator apiIterator = RsdUtility.SelectSafe(serviceNavigator, "rsd:apis/rsd:api", manager);
 
             if (engineNameNavigator != null && !string.IsNullOrEmpty(engineNameNavigator.Value))

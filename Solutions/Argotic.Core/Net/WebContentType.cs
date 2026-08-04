@@ -172,7 +172,7 @@ public class WebContentType : IComparable<WebContentType>, IEquatable<WebContent
     {
         get
         {
-            Encoding encoding = null;
+            Encoding? encoding = null;
             string characterSet = this.CharacterSet;
 
             if (!string.IsNullOrEmpty(characterSet))

@@ -130,7 +130,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        ApmlDocument apmlDocument = resource as ApmlDocument;
+        ApmlDocument? apmlDocument = resource as ApmlDocument;
 
         if (resourceMetadata.Version == new Version("0.6"))
         {
@@ -151,8 +151,8 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        AtomFeed atomFeed = resource as AtomFeed;
-        AtomEntry atomEntry = resource as AtomEntry;
+        AtomFeed? atomFeed = resource as AtomFeed;
+        AtomEntry? atomEntry = resource as AtomEntry;
 
         if (resourceMetadata.Version == new Version("1.0"))
         {
@@ -193,7 +193,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        AtomCategoryDocument categoryDocument = resource as AtomCategoryDocument;
+        AtomCategoryDocument? categoryDocument = resource as AtomCategoryDocument;
 
         if (resourceMetadata.Version == new Version("1.0"))
         {
@@ -221,7 +221,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        BlogMLDocument blogMLDocument = resource as BlogMLDocument;
+        BlogMLDocument? blogMLDocument = resource as BlogMLDocument;
         BlogML20SyndicationResourceAdapter blogML20Adapter = new(this.Navigator, this.Settings);
 
         if (resourceMetadata.Version == new Version("2.0"))
@@ -242,7 +242,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        OpmlDocument opmlDocument = resource as OpmlDocument;
+        OpmlDocument? opmlDocument = resource as OpmlDocument;
         Opml20SyndicationResourceAdapter opml20Adapter = new(this.Navigator, this.Settings);
 
         if (resourceMetadata.Version == new Version("2.0"))
@@ -273,7 +273,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        RsdDocument rsdDocument = resource as RsdDocument;
+        RsdDocument? rsdDocument = resource as RsdDocument;
 
         if (resourceMetadata.Version == new Version("1.0"))
         {
@@ -300,7 +300,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        RssFeed rssFeed = resource as RssFeed;
+        RssFeed? rssFeed = resource as RssFeed;
 
         if (resourceMetadata.Version == new Version("2.0"))
         {
@@ -345,7 +345,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        Sitemap sitemap = resource as Sitemap;
+        Sitemap? sitemap = resource as Sitemap;
 
         if (resourceMetadata.Version == new Version("0.9"))
         {
@@ -366,7 +366,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        SitemapIndex sitemapIndex = resource as SitemapIndex;
+        SitemapIndex? sitemapIndex = resource as SitemapIndex;
 
         if (resourceMetadata.Version == new Version("0.9"))
         {

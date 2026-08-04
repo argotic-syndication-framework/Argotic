@@ -382,7 +382,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <param name="type">The data type used to determine string representation.</param>
     /// <param name="scalar">The scalar value to convert.</param>
     /// <returns>The string representation of the current instance's <see cref="Value"/>, based on its <see cref="ValueType"/>.</returns>
-    private static string ValueAsString(XmlRpcScalarValueType type, object scalar)
+    private static string? ValueAsString(XmlRpcScalarValueType type, object scalar)
     {
         string value = string.Empty;
 

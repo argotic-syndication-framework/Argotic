@@ -316,8 +316,14 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
             {
                 while (historyIterator.MoveNext())
                 {
+                    XPathNavigator? historyNode = historyIterator.Current;
+                    if (historyNode == null)
+                    {
+                        continue;
+                    }
+
                     FeedSynchronizationHistory history = new();
-                    if (history.Load(historyIterator.Current))
+                    if (history.Load(historyNode))
                     {
                         this.Histories.Add(history);
                         wasLoaded = true;

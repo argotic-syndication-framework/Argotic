@@ -156,11 +156,17 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (skipDaysIterator.MoveNext())
             {
-                if (!string.IsNullOrEmpty(skipDaysIterator.Current.Value))
+                XPathNavigator? skipDaysNode = skipDaysIterator.Current;
+                if (skipDaysNode == null)
+                {
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty(skipDaysNode.Value))
                 {
                     try
                     {
-                        DayOfWeek day = Enum.Parse<DayOfWeek>(skipDaysIterator.Current.Value, true);
+                        DayOfWeek day = Enum.Parse<DayOfWeek>(skipDaysNode.Value, true);
                         if (!channel.SkipDays.Contains(day))
                         {
                             channel.SkipDays.Add(day);
@@ -168,7 +174,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
                     catch (ArgumentException)
                     {
-                        System.Diagnostics.Trace.TraceWarning("Rss091SyndicationResourceAdapter unable to determine DayOfWeek with a name of {0}.", skipDaysIterator.Current.Value);
+                        System.Diagnostics.Trace.TraceWarning("Rss091SyndicationResourceAdapter unable to determine DayOfWeek with a name of {0}.", skipDaysNode.Value);
                     }
                 }
             }
@@ -178,7 +184,13 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (skipHoursIterator.MoveNext())
             {
-                if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
+                XPathNavigator? skipHoursNode = skipHoursIterator.Current;
+                if (skipHoursNode == null)
+                {
+                    continue;
+                }
+
+                if (int.TryParse(skipHoursNode.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
                     hour -= 1; // Convert to zero-based range
 
@@ -199,6 +211,12 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (itemIterator.MoveNext())
             {
+                XPathNavigator? itemNode = itemIterator.Current;
+                if (itemNode == null)
+                {
+                    continue;
+                }
+
                 RssItem item = new();
                 counter++;
 
@@ -207,9 +225,9 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
                     break;
                 }
 
-                XPathNavigator? titleNavigator = itemIterator.Current.SelectSingleNode("title", manager);
-                XPathNavigator? linkNavigator = itemIterator.Current.SelectSingleNode("link", manager);
-                XPathNavigator? descriptionNavigator = itemIterator.Current.SelectSingleNode("description", manager);
+                XPathNavigator? titleNavigator = itemNode.SelectSingleNode("title", manager);
+                XPathNavigator? linkNavigator = itemNode.SelectSingleNode("link", manager);
+                XPathNavigator? descriptionNavigator = itemNode.SelectSingleNode("description", manager);
 
                 if (titleNavigator != null)
                 {
@@ -229,7 +247,7 @@ public class Rss091SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
                 }
 
-                SyndicationExtensionAdapter adapter = new(itemIterator.Current, settings);
+                SyndicationExtensionAdapter adapter = new(itemNode, settings);
                 adapter.Fill(item);
 
                 channel.Items.Add(item);

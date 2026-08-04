@@ -268,7 +268,7 @@ public class GenericSyndicationFeed
             feedTitle = feed.Title.Content;
         }
 
-        if (feed.Subtitle != null && !string.IsNullOrEmpty(feed.Title.Content))
+        if (feed.Subtitle != null && !string.IsNullOrEmpty(feed.Subtitle.Content))
         {
             feedDescription = feed.Subtitle.Content;
         }

@@ -93,8 +93,14 @@ public class SiteSummaryContentSyndicationExtensionContext
                 {
                     while (itemIterator.MoveNext())
                     {
+                        XPathNavigator? itemNode = itemIterator.Current;
+                        if (itemNode == null)
+                        {
+                            continue;
+                        }
+
                         SiteSummaryContentItem item = new();
-                        if (item.Load(itemIterator.Current))
+                        if (item.Load(itemNode))
                         {
                             this.Items.Add(item);
                             wasLoaded = true;

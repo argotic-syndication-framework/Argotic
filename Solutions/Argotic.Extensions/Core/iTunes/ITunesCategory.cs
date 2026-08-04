@@ -103,8 +103,14 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
             {
                 while (categoryIterator.MoveNext())
                 {
+                    XPathNavigator? categoryNode = categoryIterator.Current;
+                    if (categoryNode == null)
+                    {
+                        continue;
+                    }
+
                     ITunesCategory category = new();
-                    if (category.Load(categoryIterator.Current))
+                    if (category.Load(categoryNode))
                     {
                         this.Categories.Add(category);
                         wasLoaded = true;

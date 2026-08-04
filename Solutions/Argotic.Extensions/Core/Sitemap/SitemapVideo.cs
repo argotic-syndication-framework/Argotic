@@ -542,8 +542,14 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         {
             while (idIterator.MoveNext())
             {
+                XPathNavigator? idNode = idIterator.Current;
+                if (idNode == null)
+                {
+                    continue;
+                }
+
                 SitemapVideoId videoId = new();
-                if (videoId.Load(idIterator.Current))
+                if (videoId.Load(idNode))
                 {
                     this.videoIdentifiers.Add(videoId);
                     wasLoaded = true;
@@ -556,8 +562,14 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         {
             while (segmentIterator.MoveNext())
             {
+                XPathNavigator? segmentNode = segmentIterator.Current;
+                if (segmentNode == null)
+                {
+                    continue;
+                }
+
                 SitemapVideoSegment segment = new();
-                if (segment.Load(segmentIterator.Current))
+                if (segment.Load(segmentNode))
                 {
                     this.videoContentSegments.Add(segment);
                     wasLoaded = true;

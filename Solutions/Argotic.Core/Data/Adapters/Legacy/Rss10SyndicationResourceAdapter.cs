@@ -73,6 +73,12 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (itemIterator.MoveNext())
             {
+                XPathNavigator? itemNode = itemIterator.Current;
+                if (itemNode == null)
+                {
+                    continue;
+                }
+
                 RssItem item = new();
                 counter++;
 
@@ -81,9 +87,9 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
                     break;
                 }
 
-                XPathNavigator? itemTitleNavigator = itemIterator.Current.SelectSingleNode("rss:title", manager);
-                XPathNavigator? itemLinkNavigator = itemIterator.Current.SelectSingleNode("rss:link", manager);
-                XPathNavigator? itemDescriptionNavigator = itemIterator.Current.SelectSingleNode("rss:description", manager);
+                XPathNavigator? itemTitleNavigator = itemNode.SelectSingleNode("rss:title", manager);
+                XPathNavigator? itemLinkNavigator = itemNode.SelectSingleNode("rss:link", manager);
+                XPathNavigator? itemDescriptionNavigator = itemNode.SelectSingleNode("rss:description", manager);
 
                 if (itemTitleNavigator != null)
                 {
@@ -103,7 +109,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
                     item.Description = itemDescriptionNavigator.Value;
                 }
 
-                SyndicationExtensionAdapter itemExtensionAdapter = new(itemIterator.Current, this.Settings);
+                SyndicationExtensionAdapter itemExtensionAdapter = new(itemNode, this.Settings);
                 itemExtensionAdapter.Fill(item, manager);
 
                 resource.Channel.Items.Add(item);

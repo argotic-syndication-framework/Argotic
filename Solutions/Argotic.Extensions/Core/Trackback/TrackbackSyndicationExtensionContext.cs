@@ -81,7 +81,13 @@ public class TrackbackSyndicationExtensionContext
             {
                 while (aboutIterator.MoveNext())
                 {
-                    if (Uri.TryCreate(aboutIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri? about))
+                    XPathNavigator? aboutNode = aboutIterator.Current;
+                    if (aboutNode == null)
+                    {
+                        continue;
+                    }
+
+                    if (Uri.TryCreate(aboutNode.Value, UriKind.RelativeOrAbsolute, out Uri? about))
                     {
                         this.Abouts.Add(about);
                         wasLoaded = true;

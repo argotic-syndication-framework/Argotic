@@ -60,10 +60,16 @@ public class Opml20SyndicationResourceAdapter : SyndicationResourceAdapter
                 int counter = 0;
                 while (outlineIterator.MoveNext())
                 {
+                    XPathNavigator? outlineNode = outlineIterator.Current;
+                    if (outlineNode == null)
+                    {
+                        continue;
+                    }
+
                     OpmlOutline outline = new();
                     counter++;
 
-                    if (outline.Load(outlineIterator.Current, this.Settings))
+                    if (outline.Load(outlineNode, this.Settings))
                     {
                         if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
                         {

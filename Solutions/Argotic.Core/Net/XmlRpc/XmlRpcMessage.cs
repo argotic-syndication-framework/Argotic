@@ -197,7 +197,13 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
                 {
                     while (valueIterator.MoveNext())
                     {
-                        if (XmlRpcClient.TryParseValue(valueIterator.Current, out IXmlRpcValue value))
+                        XPathNavigator? valueNode = valueIterator.Current;
+                        if (valueNode == null)
+                        {
+                            continue;
+                        }
+
+                        if (XmlRpcClient.TryParseValue(valueNode, out IXmlRpcValue value))
                         {
                             this.Parameters.Add(value);
                             wasLoaded = true;

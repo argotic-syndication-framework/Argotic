@@ -255,11 +255,17 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (skipDaysIterator.MoveNext())
             {
-                if (!string.IsNullOrEmpty(skipDaysIterator.Current.Value))
+                XPathNavigator? skipDaysNode = skipDaysIterator.Current;
+                if (skipDaysNode == null)
+                {
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty(skipDaysNode.Value))
                 {
                     try
                     {
-                        DayOfWeek day = Enum.Parse<DayOfWeek>(skipDaysIterator.Current.Value, true);
+                        DayOfWeek day = Enum.Parse<DayOfWeek>(skipDaysNode.Value, true);
                         if (!channel.SkipDays.Contains(day))
                         {
                             channel.SkipDays.Add(day);
@@ -267,7 +273,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
                     catch (ArgumentException)
                     {
-                        System.Diagnostics.Trace.TraceWarning("Rss092SyndicationResourceAdapter unable to determine DayOfWeek with a name of {0}.", skipDaysIterator.Current.Value);
+                        System.Diagnostics.Trace.TraceWarning("Rss092SyndicationResourceAdapter unable to determine DayOfWeek with a name of {0}.", skipDaysNode.Value);
                     }
                 }
             }
@@ -277,7 +283,13 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (skipHoursIterator.MoveNext())
             {
-                if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
+                XPathNavigator? skipHoursNode = skipHoursIterator.Current;
+                if (skipHoursNode == null)
+                {
+                    continue;
+                }
+
+                if (int.TryParse(skipHoursNode.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
                     hour -= 1; // Convert to zero-based range
 
@@ -298,6 +310,12 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (itemIterator.MoveNext())
             {
+                XPathNavigator? itemNode = itemIterator.Current;
+                if (itemNode == null)
+                {
+                    continue;
+                }
+
                 RssItem item = new();
                 counter++;
 
@@ -306,7 +324,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
                     break;
                 }
 
-                Rss092SyndicationResourceAdapter.FillItem(item, itemIterator.Current, manager, settings);
+                Rss092SyndicationResourceAdapter.FillItem(item, itemNode, manager, settings);
 
                 channel.Items.Add(item);
             }
@@ -570,8 +588,14 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (enclosureIterator.MoveNext())
             {
+                XPathNavigator? enclosureNode = enclosureIterator.Current;
+                if (enclosureNode == null)
+                {
+                    continue;
+                }
+
                 RssEnclosure enclosure = new();
-                Rss092SyndicationResourceAdapter.FillEnclosure(enclosure, enclosureIterator.Current, manager, settings);
+                Rss092SyndicationResourceAdapter.FillEnclosure(enclosure, enclosureNode, manager, settings);
 
                 item.Enclosures.Add(enclosure);
             }
@@ -581,8 +605,14 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (categoryIterator.MoveNext())
             {
+                XPathNavigator? categoryNode = categoryIterator.Current;
+                if (categoryNode == null)
+                {
+                    continue;
+                }
+
                 RssCategory category = new();
-                Rss092SyndicationResourceAdapter.FillCategory(category, categoryIterator.Current, manager, settings);
+                Rss092SyndicationResourceAdapter.FillCategory(category, categoryNode, manager, settings);
 
                 item.Categories.Add(category);
             }

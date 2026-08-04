@@ -510,8 +510,14 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         {
             while (authorIterator.MoveNext())
             {
+                XPathNavigator? authorNode = authorIterator.Current;
+                if (authorNode == null)
+                {
+                    continue;
+                }
+
                 AtomPersonConstruct author = new();
-                if (author.Load(authorIterator.Current))
+                if (author.Load(authorNode))
                 {
                     this.Authors.Add(author);
                     wasLoaded = true;
@@ -523,8 +529,14 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         {
             while (categoryIterator.MoveNext())
             {
+                XPathNavigator? categoryNode = categoryIterator.Current;
+                if (categoryNode == null)
+                {
+                    continue;
+                }
+
                 AtomCategory category = new();
-                if (category.Load(categoryIterator.Current))
+                if (category.Load(categoryNode))
                 {
                     this.Categories.Add(category);
                     wasLoaded = true;
@@ -536,8 +548,14 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         {
             while (contributorIterator.MoveNext())
             {
+                XPathNavigator? contributorNode = contributorIterator.Current;
+                if (contributorNode == null)
+                {
+                    continue;
+                }
+
                 AtomPersonConstruct contributor = new();
-                if (contributor.Load(contributorIterator.Current))
+                if (contributor.Load(contributorNode))
                 {
                     this.Contributors.Add(contributor);
                     wasLoaded = true;
@@ -549,8 +567,14 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         {
             while (linkIterator.MoveNext())
             {
+                XPathNavigator? linkNode = linkIterator.Current;
+                if (linkNode == null)
+                {
+                    continue;
+                }
+
                 AtomLink link = new();
-                if (link.Load(linkIterator.Current))
+                if (link.Load(linkNode))
                 {
                     this.Links.Add(link);
                     wasLoaded = true;

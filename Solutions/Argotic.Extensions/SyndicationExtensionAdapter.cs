@@ -280,9 +280,8 @@ public class SyndicationExtensionAdapter
         {
             if (extension.ExistsInSource(this.Navigator) && extension.GetType() != entity.GetType())
             {
-                ISyndicationExtension instance = (ISyndicationExtension)Activator.CreateInstance(extension.GetType());
-
-                if (instance.Load(this.Navigator))
+                if (Activator.CreateInstance(extension.GetType()) is ISyndicationExtension instance
+                    && instance.Load(this.Navigator))
                 {
                     entity.Extensions.Add(instance);
                 }

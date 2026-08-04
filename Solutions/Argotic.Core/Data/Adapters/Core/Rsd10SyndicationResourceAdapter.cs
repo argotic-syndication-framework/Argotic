@@ -82,10 +82,16 @@ public class Rsd10SyndicationResourceAdapter : SyndicationResourceAdapter
                 int counter = 0;
                 while (apiIterator.MoveNext())
                 {
+                    XPathNavigator? apiNode = apiIterator.Current;
+                    if (apiNode == null)
+                    {
+                        continue;
+                    }
+
                     RsdApplicationInterface api = new();
                     counter++;
 
-                    if (api.Load(apiIterator.Current, this.Settings))
+                    if (api.Load(apiNode, this.Settings))
                     {
                         if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
                         {

@@ -96,8 +96,14 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                     {
                         while (categoryIterator.MoveNext())
                         {
+                            XPathNavigator? categoryNode = categoryIterator.Current;
+                            if (categoryNode == null)
+                            {
+                                continue;
+                            }
+
                             AtomCategory category = new();
-                            if (category.Load(categoryIterator.Current, this.Settings))
+                            if (category.Load(categoryNode, this.Settings))
                             {
                                 resource.Categories.Add(category);
                             }
@@ -135,8 +141,14 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
                 {
                     while (workspaceIterator.MoveNext())
                     {
+                        XPathNavigator? workspaceNode = workspaceIterator.Current;
+                        if (workspaceNode == null)
+                        {
+                            continue;
+                        }
+
                         AtomWorkspace workspace = new();
-                        if (workspace.Load(workspaceIterator.Current, this.Settings))
+                        if (workspace.Load(workspaceNode, this.Settings))
                         {
                             resource.Workspaces.Add(workspace);
                         }

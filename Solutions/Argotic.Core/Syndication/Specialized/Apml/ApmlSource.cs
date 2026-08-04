@@ -270,8 +270,14 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
             {
                 while (authorIterator.MoveNext())
                 {
+                    XPathNavigator? authorNode = authorIterator.Current;
+                    if (authorNode == null)
+                    {
+                        continue;
+                    }
+
                     ApmlAuthor author = new();
-                    if (author.Load(authorIterator.Current))
+                    if (author.Load(authorNode))
                     {
                         this.Authors.Add(author);
                         wasLoaded = true;
@@ -363,8 +369,14 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
             {
                 while (authorIterator.MoveNext())
                 {
+                    XPathNavigator? authorNode = authorIterator.Current;
+                    if (authorNode == null)
+                    {
+                        continue;
+                    }
+
                     ApmlAuthor author = new();
-                    if (author.Load(authorIterator.Current, settings))
+                    if (author.Load(authorNode, settings))
                     {
                         this.Authors.Add(author);
                         wasLoaded = true;

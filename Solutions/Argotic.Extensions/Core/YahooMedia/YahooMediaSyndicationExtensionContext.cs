@@ -180,8 +180,14 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
             {
                 while (contentIterator.MoveNext())
                 {
+                    XPathNavigator? contentNode = contentIterator.Current;
+                    if (contentNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaContent content = new();
-                    if (content.Load(contentIterator.Current))
+                    if (content.Load(contentNode))
                     {
                         this.Contents.Add(content);
                         wasLoaded = true;
@@ -193,8 +199,14 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
             {
                 while (groupIterator.MoveNext())
                 {
+                    XPathNavigator? groupNode = groupIterator.Current;
+                    if (groupNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaGroup group = new();
-                    if (group.Load(groupIterator.Current))
+                    if (group.Load(groupNode))
                     {
                         this.Groups.Add(group);
                         wasLoaded = true;

@@ -421,7 +421,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
                 break;
 
             case XmlRpcScalarValueType.String:
-                value = Convert.ToString(scalar, CultureInfo.InvariantCulture).Trim();
+                value = (Convert.ToString(scalar, CultureInfo.InvariantCulture) ?? string.Empty).Trim();
                 break;
         }
 

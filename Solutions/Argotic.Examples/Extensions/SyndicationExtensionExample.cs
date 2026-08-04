@@ -70,7 +70,8 @@ internal class MyCustomSyndicationExtension : SyndicationExtension, IComparable
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        XPathNavigator navigator = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         if (navigator.HasAttributes)
         {
             string myAttribute = navigator.GetAttribute("someAttribute", string.Empty);

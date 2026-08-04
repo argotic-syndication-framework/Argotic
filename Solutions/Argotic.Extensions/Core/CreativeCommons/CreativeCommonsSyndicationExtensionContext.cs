@@ -45,7 +45,13 @@ public class CreativeCommonsSyndicationExtensionContext
             {
                 while (licenseIterator.MoveNext())
                 {
-                    if (Uri.TryCreate(licenseIterator.Current.Value, UriKind.RelativeOrAbsolute, out Uri? license))
+                    XPathNavigator? licenseNode = licenseIterator.Current;
+                    if (licenseNode == null)
+                    {
+                        continue;
+                    }
+
+                    if (Uri.TryCreate(licenseNode.Value, UriKind.RelativeOrAbsolute, out Uri? license))
                     {
                         this.Licenses.Add(license);
                         wasLoaded = true;

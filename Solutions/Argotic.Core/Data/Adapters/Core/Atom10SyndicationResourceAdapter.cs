@@ -187,8 +187,14 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (authorIterator.MoveNext())
             {
+                XPathNavigator? authorNode = authorIterator.Current;
+                if (authorNode == null)
+                {
+                    continue;
+                }
+
                 AtomPersonConstruct author = new();
-                if (author.Load(authorIterator.Current, settings))
+                if (author.Load(authorNode, settings))
                 {
                     entry.Authors.Add(author);
                 }
@@ -199,8 +205,14 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (categoryIterator.MoveNext())
             {
+                XPathNavigator? categoryNode = categoryIterator.Current;
+                if (categoryNode == null)
+                {
+                    continue;
+                }
+
                 AtomCategory category = new();
-                if (category.Load(categoryIterator.Current, settings))
+                if (category.Load(categoryNode, settings))
                 {
                     entry.Categories.Add(category);
                 }
@@ -211,8 +223,14 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (contributorIterator.MoveNext())
             {
+                XPathNavigator? contributorNode = contributorIterator.Current;
+                if (contributorNode == null)
+                {
+                    continue;
+                }
+
                 AtomPersonConstruct contributor = new();
-                if (contributor.Load(contributorIterator.Current, settings))
+                if (contributor.Load(contributorNode, settings))
                 {
                     entry.Contributors.Add(contributor);
                 }
@@ -223,8 +241,14 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (linkIterator.MoveNext())
             {
+                XPathNavigator? linkNode = linkIterator.Current;
+                if (linkNode == null)
+                {
+                    continue;
+                }
+
                 AtomLink link = new();
-                if (link.Load(linkIterator.Current, settings))
+                if (link.Load(linkNode, settings))
                 {
                     entry.Links.Add(link);
                 }
@@ -323,8 +347,14 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (authorIterator.MoveNext())
             {
+                XPathNavigator? authorNode = authorIterator.Current;
+                if (authorNode == null)
+                {
+                    continue;
+                }
+
                 AtomPersonConstruct author = new();
-                if (author.Load(authorIterator.Current, settings))
+                if (author.Load(authorNode, settings))
                 {
                     feed.Authors.Add(author);
                 }
@@ -335,8 +365,14 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (categoryIterator.MoveNext())
             {
+                XPathNavigator? categoryNode = categoryIterator.Current;
+                if (categoryNode == null)
+                {
+                    continue;
+                }
+
                 AtomCategory category = new();
-                if (category.Load(categoryIterator.Current, settings))
+                if (category.Load(categoryNode, settings))
                 {
                     feed.Categories.Add(category);
                 }
@@ -347,8 +383,14 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (contributorIterator.MoveNext())
             {
+                XPathNavigator? contributorNode = contributorIterator.Current;
+                if (contributorNode == null)
+                {
+                    continue;
+                }
+
                 AtomPersonConstruct contributor = new();
-                if (contributor.Load(contributorIterator.Current, settings))
+                if (contributor.Load(contributorNode, settings))
                 {
                     feed.Contributors.Add(contributor);
                 }
@@ -360,10 +402,16 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (entryIterator.MoveNext())
             {
+                XPathNavigator? entryNode = entryIterator.Current;
+                if (entryNode == null)
+                {
+                    continue;
+                }
+
                 AtomEntry entry = new();
                 counter++;
 
-                Atom10SyndicationResourceAdapter.FillEntry(entry, entryIterator.Current, manager, settings);
+                Atom10SyndicationResourceAdapter.FillEntry(entry, entryNode, manager, settings);
 
                 if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
                 {
@@ -378,8 +426,14 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (linkIterator.MoveNext())
             {
+                XPathNavigator? linkNode = linkIterator.Current;
+                if (linkNode == null)
+                {
+                    continue;
+                }
+
                 AtomLink link = new();
-                if (link.Load(linkIterator.Current, settings))
+                if (link.Load(linkNode, settings))
                 {
                     feed.Links.Add(link);
                 }

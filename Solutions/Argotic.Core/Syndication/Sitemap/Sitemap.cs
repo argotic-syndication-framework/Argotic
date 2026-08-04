@@ -447,6 +447,12 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
             int counter = 0;
             while (urlIterator.MoveNext())
             {
+                XPathNavigator? urlNode = urlIterator.Current;
+                if (urlNode == null)
+                {
+                    continue;
+                }
+
                 counter++;
                 if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
                 {
@@ -454,7 +460,7 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
                 }
 
                 SitemapUrl url = new();
-                if (url.Load(urlIterator.Current, settings))
+                if (url.Load(urlNode, settings))
                 {
                     this.Urls.Add(url);
                 }

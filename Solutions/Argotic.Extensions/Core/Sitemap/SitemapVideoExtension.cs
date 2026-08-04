@@ -88,8 +88,14 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
         {
             while (videoIterator.MoveNext())
             {
+                XPathNavigator? videoNode = videoIterator.Current;
+                if (videoNode == null)
+                {
+                    continue;
+                }
+
                 SitemapVideo video = new();
-                if (video.Load(videoIterator.Current, manager))
+                if (video.Load(videoNode, manager))
                 {
                     this.extensionVideos.Add(video);
                     wasLoaded = true;

@@ -82,16 +82,22 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                 int counter = 0;
                 while (apiIterator.MoveNext())
                 {
+                    XPathNavigator? apiNode = apiIterator.Current;
+                    if (apiNode == null)
+                    {
+                        continue;
+                    }
+
                     RsdApplicationInterface api = new();
                     counter++;
 
-                    string rpcLinkAttribute = apiIterator.Current.GetAttribute("rpcLink", string.Empty);
+                    string rpcLinkAttribute = apiNode.GetAttribute("rpcLink", string.Empty);
                     if (Uri.TryCreate(rpcLinkAttribute, UriKind.RelativeOrAbsolute, out Uri? link))
                     {
                         api.Link = link;
                     }
 
-                    if (api.Load(apiIterator.Current, this.Settings) || api.Link != null)
+                    if (api.Load(apiNode, this.Settings) || api.Link != null)
                     {
                         if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
                         {

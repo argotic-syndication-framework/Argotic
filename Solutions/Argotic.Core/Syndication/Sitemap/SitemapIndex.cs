@@ -444,6 +444,12 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
             int counter = 0;
             while (sitemapIterator.MoveNext())
             {
+                XPathNavigator? sitemapNode = sitemapIterator.Current;
+                if (sitemapNode == null)
+                {
+                    continue;
+                }
+
                 counter++;
                 if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
                 {
@@ -451,7 +457,7 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
                 }
 
                 SitemapIndexEntry entry = new();
-                if (entry.Load(sitemapIterator.Current))
+                if (entry.Load(sitemapNode))
                 {
                     this.Sitemaps.Add(entry);
                 }

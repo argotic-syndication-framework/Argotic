@@ -56,20 +56,14 @@ internal static class AtomPublishingUtility
     /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
     public static int CompareCommonObjectAttributes(IAtomPublishingCommonObjectAttributes source, IAtomPublishingCommonObjectAttributes target)
     {
-        int result = 0;
-        if (source == null && target == null)
+        switch (source, target)
         {
-            return 0;
+            case (null, null): return 0;
+            case (not null, null): return 1;
+            case (null, not null): return -1;
         }
-        else if (source != null && target == null)
-        {
-            return 1;
-        }
-        else if (source == null && target != null)
-        {
-            return -1;
-        }
-        result = Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
+
+        int result = Uri.Compare(source.BaseUri, target.BaseUri, UriComponents.AbsoluteUri, UriFormat.SafeUnescaped, StringComparison.OrdinalIgnoreCase);
 
         string sourceLanguageName = source.Language?.Name ?? string.Empty;
         string targetLanguageName = target.Language?.Name ?? string.Empty;

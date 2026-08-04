@@ -325,8 +325,14 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         {
             while (categoryIterator.MoveNext())
             {
+                XPathNavigator? categoryNode = categoryIterator.Current;
+                if (categoryNode == null)
+                {
+                    continue;
+                }
+
                 RssCategory category = new();
-                if (category.Load(categoryIterator.Current))
+                if (category.Load(categoryNode))
                 {
                     this.Categories.Add(category);
                 }
@@ -337,8 +343,14 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         {
             while (enclosureIterator.MoveNext())
             {
+                XPathNavigator? enclosureNode = enclosureIterator.Current;
+                if (enclosureNode == null)
+                {
+                    continue;
+                }
+
                 RssEnclosure enclosure = new();
-                if (enclosure.Load(enclosureIterator.Current))
+                if (enclosure.Load(enclosureNode))
                 {
                     this.Enclosures.Add(enclosure);
                 }
@@ -443,8 +455,14 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         {
             while (categoryIterator.MoveNext())
             {
+                XPathNavigator? categoryNode = categoryIterator.Current;
+                if (categoryNode == null)
+                {
+                    continue;
+                }
+
                 RssCategory category = new();
-                if (category.Load(categoryIterator.Current, settings))
+                if (category.Load(categoryNode, settings))
                 {
                     this.Categories.Add(category);
                 }
@@ -455,8 +473,14 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         {
             while (enclosureIterator.MoveNext())
             {
+                XPathNavigator? enclosureNode = enclosureIterator.Current;
+                if (enclosureNode == null)
+                {
+                    continue;
+                }
+
                 RssEnclosure enclosure = new();
-                if (enclosure.Load(enclosureIterator.Current, settings))
+                if (enclosure.Load(enclosureNode, settings))
                 {
                     this.Enclosures.Add(enclosure);
                 }

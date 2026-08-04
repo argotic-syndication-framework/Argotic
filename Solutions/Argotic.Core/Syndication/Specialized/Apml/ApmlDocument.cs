@@ -526,10 +526,7 @@ public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
 
-            if (this.Head != null)
-            {
-                SyndicationExtensionAdapter.FillExtensionTypes(this.Head, settings.SupportedExtensions);
-            }
+            SyndicationExtensionAdapter.FillExtensionTypes(this.Head, settings.SupportedExtensions);
 
             foreach (ApmlApplication application in this.Applications)
             {

@@ -214,8 +214,14 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
             {
                 while (relatedIterator.MoveNext())
                 {
+                    XPathNavigator? relatedNode = relatedIterator.Current;
+                    if (relatedNode == null)
+                    {
+                        continue;
+                    }
+
                     FeedSynchronizationRelatedInformation relation = new();
-                    if (relation.Load(relatedIterator.Current))
+                    if (relation.Load(relatedNode))
                     {
                         this.Relations.Add(relation);
                         wasLoaded = true;

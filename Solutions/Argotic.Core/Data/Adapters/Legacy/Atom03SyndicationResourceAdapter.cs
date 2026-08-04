@@ -434,7 +434,13 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (authorIterator.MoveNext())
             {
-                AtomPersonConstruct author = Atom03SyndicationResourceAdapter.CreatePerson(authorIterator.Current, manager, settings);
+                XPathNavigator? authorNode = authorIterator.Current;
+                if (authorNode == null)
+                {
+                    continue;
+                }
+
+                AtomPersonConstruct author = Atom03SyndicationResourceAdapter.CreatePerson(authorNode, manager, settings);
                 entry.Authors.Add(author);
             }
         }
@@ -443,7 +449,13 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (contributorIterator.MoveNext())
             {
-                AtomPersonConstruct contributor = Atom03SyndicationResourceAdapter.CreatePerson(contributorIterator.Current, manager, settings);
+                XPathNavigator? contributorNode = contributorIterator.Current;
+                if (contributorNode == null)
+                {
+                    continue;
+                }
+
+                AtomPersonConstruct contributor = Atom03SyndicationResourceAdapter.CreatePerson(contributorNode, manager, settings);
                 entry.Contributors.Add(contributor);
             }
         }
@@ -452,8 +464,14 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (linkIterator.MoveNext())
             {
+                XPathNavigator? linkNode = linkIterator.Current;
+                if (linkNode == null)
+                {
+                    continue;
+                }
+
                 AtomLink link = new();
-                if (link.Load(linkIterator.Current, settings))
+                if (link.Load(linkNode, settings))
                 {
                     entry.Links.Add(link);
                 }
@@ -535,7 +553,13 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (authorIterator.MoveNext())
             {
-                AtomPersonConstruct author = Atom03SyndicationResourceAdapter.CreatePerson(authorIterator.Current, manager, settings);
+                XPathNavigator? authorNode = authorIterator.Current;
+                if (authorNode == null)
+                {
+                    continue;
+                }
+
+                AtomPersonConstruct author = Atom03SyndicationResourceAdapter.CreatePerson(authorNode, manager, settings);
                 feed.Authors.Add(author);
             }
         }
@@ -544,7 +568,13 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (contributorIterator.MoveNext())
             {
-                AtomPersonConstruct contributor = Atom03SyndicationResourceAdapter.CreatePerson(contributorIterator.Current, manager, settings);
+                XPathNavigator? contributorNode = contributorIterator.Current;
+                if (contributorNode == null)
+                {
+                    continue;
+                }
+
+                AtomPersonConstruct contributor = Atom03SyndicationResourceAdapter.CreatePerson(contributorNode, manager, settings);
                 feed.Contributors.Add(contributor);
             }
         }
@@ -554,10 +584,16 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (entryIterator.MoveNext())
             {
+                XPathNavigator? entryNode = entryIterator.Current;
+                if (entryNode == null)
+                {
+                    continue;
+                }
+
                 AtomEntry entry = new();
                 counter++;
 
-                Atom03SyndicationResourceAdapter.FillEntry(entry, entryIterator.Current, manager, settings);
+                Atom03SyndicationResourceAdapter.FillEntry(entry, entryNode, manager, settings);
 
                 if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
                 {
@@ -572,8 +608,14 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (linkIterator.MoveNext())
             {
+                XPathNavigator? linkNode = linkIterator.Current;
+                if (linkNode == null)
+                {
+                    continue;
+                }
+
                 AtomLink link = new();
-                if (link.Load(linkIterator.Current, settings))
+                if (link.Load(linkNode, settings))
                 {
                     feed.Links.Add(link);
                 }

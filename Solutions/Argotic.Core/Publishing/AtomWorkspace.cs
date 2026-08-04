@@ -227,8 +227,14 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
             {
                 while (collectionIterator.MoveNext())
                 {
+                    XPathNavigator? collectionNode = collectionIterator.Current;
+                    if (collectionNode == null)
+                    {
+                        continue;
+                    }
+
                     AtomMemberResources collection = new();
-                    if (collection.Load(collectionIterator.Current))
+                    if (collection.Load(collectionNode))
                     {
                         this.Collections.Add(collection);
                         wasLoaded = true;

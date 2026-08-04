@@ -348,8 +348,14 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
             {
                 while (contentIterator.MoveNext())
                 {
+                    XPathNavigator? contentNode = contentIterator.Current;
+                    if (contentNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaContent content = new();
-                    if (content.Load(contentIterator.Current))
+                    if (content.Load(contentNode))
                     {
                         this.Contents.Add(content);
                         wasLoaded = true;

@@ -234,8 +234,14 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
                 {
                     while (settingIterator.MoveNext())
                     {
-                        string settingName = settingIterator.Current.GetAttribute("name", string.Empty);
-                        string settingValue = settingIterator.Current.Value;
+                        XPathNavigator? settingNode = settingIterator.Current;
+                        if (settingNode == null)
+                        {
+                            continue;
+                        }
+
+                        string settingName = settingNode.GetAttribute("name", string.Empty);
+                        string settingValue = settingNode.Value;
 
                         if (this.Settings.TryAdd(settingName, settingValue))
                         {

@@ -558,7 +558,13 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (categoriesIterator.MoveNext())
             {
-                string referenceId = categoriesIterator.Current.GetAttribute("ref", string.Empty);
+                XPathNavigator? categoriesNode = categoriesIterator.Current;
+                if (categoriesNode == null)
+                {
+                    continue;
+                }
+
+                string referenceId = categoriesNode.GetAttribute("ref", string.Empty);
                 if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Categories.Add(referenceId);
@@ -571,8 +577,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (commentsIterator.MoveNext())
             {
+                XPathNavigator? commentsNode = commentsIterator.Current;
+                if (commentsNode == null)
+                {
+                    continue;
+                }
+
                 BlogMLComment comment = new();
-                if (comment.Load(commentsIterator.Current))
+                if (comment.Load(commentsNode))
                 {
                     post.Comments.Add(comment);
                     wasLoaded = true;
@@ -584,8 +596,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (trackbacksIterator.MoveNext())
             {
+                XPathNavigator? trackbacksNode = trackbacksIterator.Current;
+                if (trackbacksNode == null)
+                {
+                    continue;
+                }
+
                 BlogMLTrackback trackback = new();
-                if (trackback.Load(trackbacksIterator.Current))
+                if (trackback.Load(trackbacksNode))
                 {
                     post.Trackbacks.Add(trackback);
                     wasLoaded = true;
@@ -597,8 +615,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (attachmentsIterator.MoveNext())
             {
+                XPathNavigator? attachmentsNode = attachmentsIterator.Current;
+                if (attachmentsNode == null)
+                {
+                    continue;
+                }
+
                 BlogMLAttachment attachment = new();
-                if (attachment.Load(attachmentsIterator.Current))
+                if (attachment.Load(attachmentsNode))
                 {
                     post.Attachments.Add(attachment);
                     wasLoaded = true;
@@ -610,7 +634,13 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (authorsIterator.MoveNext())
             {
-                string referenceId = authorsIterator.Current.GetAttribute("ref", string.Empty);
+                XPathNavigator? authorsNode = authorsIterator.Current;
+                if (authorsNode == null)
+                {
+                    continue;
+                }
+
+                string referenceId = authorsNode.GetAttribute("ref", string.Empty);
                 if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Authors.Add(referenceId);
@@ -653,7 +683,13 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (categoriesIterator.MoveNext())
             {
-                string referenceId = categoriesIterator.Current.GetAttribute("ref", string.Empty);
+                XPathNavigator? categoriesNode = categoriesIterator.Current;
+                if (categoriesNode == null)
+                {
+                    continue;
+                }
+
+                string referenceId = categoriesNode.GetAttribute("ref", string.Empty);
                 if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Categories.Add(referenceId);
@@ -666,8 +702,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (commentsIterator.MoveNext())
             {
+                XPathNavigator? commentsNode = commentsIterator.Current;
+                if (commentsNode == null)
+                {
+                    continue;
+                }
+
                 BlogMLComment comment = new();
-                if (comment.Load(commentsIterator.Current, settings))
+                if (comment.Load(commentsNode, settings))
                 {
                     post.Comments.Add(comment);
                     wasLoaded = true;
@@ -679,8 +721,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (trackbacksIterator.MoveNext())
             {
+                XPathNavigator? trackbacksNode = trackbacksIterator.Current;
+                if (trackbacksNode == null)
+                {
+                    continue;
+                }
+
                 BlogMLTrackback trackback = new();
-                if (trackback.Load(trackbacksIterator.Current, settings))
+                if (trackback.Load(trackbacksNode, settings))
                 {
                     post.Trackbacks.Add(trackback);
                     wasLoaded = true;
@@ -692,8 +740,14 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (attachmentsIterator.MoveNext())
             {
+                XPathNavigator? attachmentsNode = attachmentsIterator.Current;
+                if (attachmentsNode == null)
+                {
+                    continue;
+                }
+
                 BlogMLAttachment attachment = new();
-                if (attachment.Load(attachmentsIterator.Current, settings))
+                if (attachment.Load(attachmentsNode, settings))
                 {
                     post.Attachments.Add(attachment);
                     wasLoaded = true;
@@ -705,7 +759,13 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         {
             while (authorsIterator.MoveNext())
             {
-                string referenceId = authorsIterator.Current.GetAttribute("ref", string.Empty);
+                XPathNavigator? authorsNode = authorsIterator.Current;
+                if (authorsNode == null)
+                {
+                    continue;
+                }
+
+                string referenceId = authorsNode.GetAttribute("ref", string.Empty);
                 if (!string.IsNullOrEmpty(referenceId))
                 {
                     post.Authors.Add(referenceId);

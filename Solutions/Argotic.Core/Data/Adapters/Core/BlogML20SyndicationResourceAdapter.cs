@@ -131,8 +131,14 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (authorsIterator.MoveNext())
             {
+                XPathNavigator? authorsNode = authorsIterator.Current;
+                if (authorsNode == null)
+                {
+                    continue;
+                }
+
                 BlogMLAuthor author = new();
-                if (author.Load(authorsIterator.Current, settings))
+                if (author.Load(authorsNode, settings))
                 {
                     document.Authors.Add(author);
                 }
@@ -143,10 +149,16 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (extendedPropertiesIterator.MoveNext())
             {
-                if (extendedPropertiesIterator.Current.HasAttributes)
+                XPathNavigator? extendedPropertiesNode = extendedPropertiesIterator.Current;
+                if (extendedPropertiesNode == null)
                 {
-                    string propertyName = extendedPropertiesIterator.Current.GetAttribute("name", string.Empty);
-                    string propertyValue = extendedPropertiesIterator.Current.GetAttribute("value", string.Empty);
+                    continue;
+                }
+
+                if (extendedPropertiesNode.HasAttributes)
+                {
+                    string propertyName = extendedPropertiesNode.GetAttribute("name", string.Empty);
+                    string propertyValue = extendedPropertiesNode.GetAttribute("value", string.Empty);
 
                     if (!string.IsNullOrEmpty(propertyName) && !document.ExtendedProperties.ContainsKey(propertyName))
                     {
@@ -160,8 +172,14 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
         {
             while (categoriesIterator.MoveNext())
             {
+                XPathNavigator? categoriesNode = categoriesIterator.Current;
+                if (categoriesNode == null)
+                {
+                    continue;
+                }
+
                 BlogMLCategory category = new();
-                if (category.Load(categoriesIterator.Current, settings))
+                if (category.Load(categoriesNode, settings))
                 {
                     document.Categories.Add(category);
                 }
@@ -173,10 +191,16 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             int counter = 0;
             while (postsIterator.MoveNext())
             {
+                XPathNavigator? postsNode = postsIterator.Current;
+                if (postsNode == null)
+                {
+                    continue;
+                }
+
                 BlogMLPost post = new();
                 counter++;
 
-                if (post.Load(postsIterator.Current, settings))
+                if (post.Load(postsNode, settings))
                 {
                     if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
                     {

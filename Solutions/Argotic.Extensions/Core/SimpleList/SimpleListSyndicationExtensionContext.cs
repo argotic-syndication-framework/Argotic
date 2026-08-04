@@ -77,8 +77,14 @@ public class SimpleListSyndicationExtensionContext
                 {
                     while (sortIterator.MoveNext())
                     {
+                        XPathNavigator? sortNode = sortIterator.Current;
+                        if (sortNode == null)
+                        {
+                            continue;
+                        }
+
                         SimpleListSort sort = new();
-                        if (sort.Load(sortIterator.Current))
+                        if (sort.Load(sortNode))
                         {
                             this.Sorting.Add(sort);
                             wasLoaded = true;
@@ -90,8 +96,14 @@ public class SimpleListSyndicationExtensionContext
                 {
                     while (groupIterator.MoveNext())
                     {
+                        XPathNavigator? groupNode = groupIterator.Current;
+                        if (groupNode == null)
+                        {
+                            continue;
+                        }
+
                         SimpleListGroup group = new();
-                        if (group.Load(groupIterator.Current))
+                        if (group.Load(groupNode))
                         {
                             this.Grouping.Add(group);
                             wasLoaded = true;

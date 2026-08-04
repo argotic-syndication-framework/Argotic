@@ -405,7 +405,8 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
 
         ArgumentNullException.ThrowIfNull(source);
 
-        XPathNavigator navigator = source.CreateNavigator();
+        XPathNavigator navigator = source.CreateNavigator()
+            ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(navigator.NameTable);
 
@@ -447,8 +448,14 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
             {
                 while (acceptIterator.MoveNext())
                 {
+                    XPathNavigator? acceptNode = acceptIterator.Current;
+                    if (acceptNode == null)
+                    {
+                        continue;
+                    }
+
                     AtomAcceptedMediaRange mediaRange = new();
-                    if (mediaRange.Load(acceptIterator.Current))
+                    if (mediaRange.Load(acceptNode))
                     {
                         this.Accepts.Add(mediaRange);
                         wasLoaded = true;
@@ -460,8 +467,14 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
             {
                 while (categoriesIterator.MoveNext())
                 {
+                    XPathNavigator? categoriesNode = categoriesIterator.Current;
+                    if (categoriesNode == null)
+                    {
+                        continue;
+                    }
+
                     AtomCategoryDocument categories = new();
-                    categories.Load(categoriesIterator.Current);
+                    categories.Load(categoriesNode);
                     wasLoaded = true;
                 }
             }

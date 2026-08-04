@@ -977,7 +977,9 @@ public class SyndicationEncodingUtilityTest
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(xml);
 
         // Assert
-        navigator.SelectSingleNode("//title").Value.ShouldBe("a b");
+        XPathNavigator? titleNode = navigator.SelectSingleNode("//title");
+        titleNode.ShouldNotBeNull();
+        titleNode.Value.ShouldBe("a b");
     }
 
     [TestMethod]
@@ -990,7 +992,9 @@ public class SyndicationEncodingUtilityTest
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(xml);
 
         // Assert
-        navigator.SelectSingleNode("//r").Value.ShouldBeEmpty();
+        XPathNavigator? rootNode = navigator.SelectSingleNode("//r");
+        rootNode.ShouldNotBeNull();
+        rootNode.Value.ShouldBeEmpty();
     }
 
     [TestMethod]

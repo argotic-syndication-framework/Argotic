@@ -200,8 +200,14 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
             {
                 while (outlinesIterator.MoveNext())
                 {
+                    XPathNavigator? outlinesNode = outlinesIterator.Current;
+                    if (outlinesNode == null)
+                    {
+                        continue;
+                    }
+
                     OpmlOutline outline = new();
-                    if (outline.Load(outlinesIterator.Current))
+                    if (outline.Load(outlinesNode))
                     {
                         this.Outlines.Add(outline);
                         wasLoaded = true;
@@ -254,8 +260,14 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
             {
                 while (outlinesIterator.MoveNext())
                 {
+                    XPathNavigator? outlinesNode = outlinesIterator.Current;
+                    if (outlinesNode == null)
+                    {
+                        continue;
+                    }
+
                     OpmlOutline outline = new();
-                    if (outline.Load(outlinesIterator.Current, settings))
+                    if (outline.Load(outlinesNode, settings))
                     {
                         this.Outlines.Add(outline);
                         wasLoaded = true;

@@ -133,7 +133,7 @@ public static class SyndicationDiscoveryUtility
         XmlDocument document = new();
         document.Load(reader);
 
-        string rootElementName = document.DocumentElement.LocalName;
+        string rootElementName = document.DocumentElement?.LocalName ?? string.Empty;
 
         return EnumerationMetadataAttribute.GetEnumByAlternateValueMapping<SyndicationContentFormat>()
             .GetValueOrDefault(rootElementName, SyndicationContentFormat.None);

@@ -116,8 +116,14 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 {
                     while (conceptsIterator.MoveNext())
                     {
+                        XPathNavigator? conceptsNode = conceptsIterator.Current;
+                        if (conceptsNode == null)
+                        {
+                            continue;
+                        }
+
                         ApmlConcept concept = new();
-                        if (concept.Load(conceptsIterator.Current))
+                        if (concept.Load(conceptsNode))
                         {
                             this.ImplicitConcepts.Add(concept);
                             wasLoaded = true;
@@ -130,8 +136,14 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 {
                     while (sourcesIterator.MoveNext())
                     {
+                        XPathNavigator? sourcesNode = sourcesIterator.Current;
+                        if (sourcesNode == null)
+                        {
+                            continue;
+                        }
+
                         ApmlSource attentionSource = new();
-                        if (attentionSource.Load(sourcesIterator.Current))
+                        if (attentionSource.Load(sourcesNode))
                         {
                             this.ImplicitSources.Add(attentionSource);
                             wasLoaded = true;
@@ -147,8 +159,14 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 {
                     while (conceptsIterator.MoveNext())
                     {
+                        XPathNavigator? conceptsNode = conceptsIterator.Current;
+                        if (conceptsNode == null)
+                        {
+                            continue;
+                        }
+
                         ApmlConcept concept = new();
-                        if (concept.Load(conceptsIterator.Current))
+                        if (concept.Load(conceptsNode))
                         {
                             this.ExplicitConcepts.Add(concept);
                             wasLoaded = true;
@@ -161,8 +179,14 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 {
                     while (sourcesIterator.MoveNext())
                     {
+                        XPathNavigator? sourcesNode = sourcesIterator.Current;
+                        if (sourcesNode == null)
+                        {
+                            continue;
+                        }
+
                         ApmlSource attentionSource = new();
-                        if (attentionSource.Load(sourcesIterator.Current))
+                        if (attentionSource.Load(sourcesNode))
                         {
                             this.ExplicitSources.Add(attentionSource);
                             wasLoaded = true;
@@ -214,8 +238,14 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 {
                     while (conceptsIterator.MoveNext())
                     {
+                        XPathNavigator? conceptsNode = conceptsIterator.Current;
+                        if (conceptsNode == null)
+                        {
+                            continue;
+                        }
+
                         ApmlConcept concept = new();
-                        if (concept.Load(conceptsIterator.Current, settings))
+                        if (concept.Load(conceptsNode, settings))
                         {
                             this.ImplicitConcepts.Add(concept);
                             wasLoaded = true;
@@ -228,8 +258,14 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 {
                     while (sourcesIterator.MoveNext())
                     {
+                        XPathNavigator? sourcesNode = sourcesIterator.Current;
+                        if (sourcesNode == null)
+                        {
+                            continue;
+                        }
+
                         ApmlSource attentionSource = new();
-                        if (attentionSource.Load(sourcesIterator.Current, settings))
+                        if (attentionSource.Load(sourcesNode, settings))
                         {
                             this.ImplicitSources.Add(attentionSource);
                             wasLoaded = true;
@@ -245,8 +281,14 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 {
                     while (conceptsIterator.MoveNext())
                     {
+                        XPathNavigator? conceptsNode = conceptsIterator.Current;
+                        if (conceptsNode == null)
+                        {
+                            continue;
+                        }
+
                         ApmlConcept concept = new();
-                        if (concept.Load(conceptsIterator.Current, settings))
+                        if (concept.Load(conceptsNode, settings))
                         {
                             this.ExplicitConcepts.Add(concept);
                             wasLoaded = true;
@@ -259,8 +301,14 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 {
                     while (sourcesIterator.MoveNext())
                     {
+                        XPathNavigator? sourcesNode = sourcesIterator.Current;
+                        if (sourcesNode == null)
+                        {
+                            continue;
+                        }
+
                         ApmlSource attentionSource = new();
-                        if (attentionSource.Load(sourcesIterator.Current, settings))
+                        if (attentionSource.Load(sourcesNode, settings))
                         {
                             this.ExplicitSources.Add(attentionSource);
                             wasLoaded = true;

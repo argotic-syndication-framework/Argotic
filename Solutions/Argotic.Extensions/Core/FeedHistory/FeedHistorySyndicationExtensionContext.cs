@@ -76,12 +76,18 @@ public class FeedHistorySyndicationExtensionContext
             {
                 while (linkIterator.MoveNext())
                 {
-                    string relAttribute = linkIterator.Current.GetAttribute("rel", string.Empty);
+                    XPathNavigator? linkNode = linkIterator.Current;
+                    if (linkNode == null)
+                    {
+                        continue;
+                    }
+
+                    string relAttribute = linkNode.GetAttribute("rel", string.Empty);
 
                     if (!string.IsNullOrEmpty(relAttribute) && FeedHistorySyndicationExtension.LinkRelationTypeByName(relAttribute) != FeedHistoryLinkRelationType.None)
                     {
                         FeedHistoryLinkRelation relation = new();
-                        if (relation.Load(linkIterator.Current))
+                        if (relation.Load(linkNode))
                         {
                             this.Relations.Add(relation);
                             wasLoaded = true;

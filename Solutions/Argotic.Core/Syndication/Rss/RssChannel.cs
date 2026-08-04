@@ -189,7 +189,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     {
         get => field;
         set => field = value?.Trim() ?? string.Empty;
-    } = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(RssChannel)).GetName().Version.ToString(4)}, https://github.com/argotic-syndication-framework/argotic/";
+    } = $"Argotic Syndication Framework {System.Reflection.Assembly.GetAssembly(typeof(RssChannel))?.GetName().Version?.ToString(4) ?? "unknown"}, https://github.com/argotic-syndication-framework/argotic/";
 
     /// <summary>
     /// Gets or sets the graphical logo for this feed.
@@ -619,8 +619,14 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         {
             while (categoryIterator.MoveNext())
             {
+                XPathNavigator? categoryNode = categoryIterator.Current;
+                if (categoryNode == null)
+                {
+                    continue;
+                }
+
                 RssCategory category = new();
-                if (category.Load(categoryIterator.Current, settings))
+                if (category.Load(categoryNode, settings))
                 {
                     this.Categories.Add(category);
                     wasLoaded = true;
@@ -632,11 +638,17 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         {
             while (skipDaysIterator.MoveNext())
             {
-                if (!string.IsNullOrEmpty(skipDaysIterator.Current.Value))
+                XPathNavigator? skipDaysNode = skipDaysIterator.Current;
+                if (skipDaysNode == null)
+                {
+                    continue;
+                }
+
+                if (!string.IsNullOrEmpty(skipDaysNode.Value))
                 {
                     try
                     {
-                        DayOfWeek day = Enum.Parse<DayOfWeek>(skipDaysIterator.Current.Value, true);
+                        DayOfWeek day = Enum.Parse<DayOfWeek>(skipDaysNode.Value, true);
                         if (!this.SkipDays.Contains(day))
                         {
                             this.SkipDays.Add(day);
@@ -645,7 +657,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
                     }
                     catch (ArgumentException)
                     {
-                        System.Diagnostics.Trace.TraceWarning("RssChannel unable to determine DayOfWeek with a name of {0}.", skipDaysIterator.Current.Value);
+                        System.Diagnostics.Trace.TraceWarning("RssChannel unable to determine DayOfWeek with a name of {0}.", skipDaysNode.Value);
                     }
                 }
             }
@@ -655,7 +667,13 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         {
             while (skipHoursIterator.MoveNext())
             {
-                if (int.TryParse(skipHoursIterator.Current.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
+                XPathNavigator? skipHoursNode = skipHoursIterator.Current;
+                if (skipHoursNode == null)
+                {
+                    continue;
+                }
+
+                if (int.TryParse(skipHoursNode.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int hour))
                 {
                     if (!this.SkipHours.Contains(hour) && hour is >= 0 and <= 23)
                     {
@@ -675,10 +693,16 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             int counter = 0;
             while (itemIterator.MoveNext())
             {
+                XPathNavigator? itemNode = itemIterator.Current;
+                if (itemNode == null)
+                {
+                    continue;
+                }
+
                 RssItem item = new();
                 counter++;
 
-                if (item.Load(itemIterator.Current, settings))
+                if (item.Load(itemNode, settings))
                 {
                     if (settings.RetrievalLimit != 0 && counter > settings.RetrievalLimit)
                     {
@@ -853,12 +877,18 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         {
             while (atomLinkIterator.MoveNext())
             {
-                if (atomLinkIterator.Current.HasAttributes)
+                XPathNavigator? atomLinkNode = atomLinkIterator.Current;
+                if (atomLinkNode == null)
                 {
-                    string relAttribute = atomLinkIterator.Current.GetAttribute("rel", string.Empty);
+                    continue;
+                }
+
+                if (atomLinkNode.HasAttributes)
+                {
+                    string relAttribute = atomLinkNode.GetAttribute("rel", string.Empty);
                     if (string.Equals(relAttribute, "self", StringComparison.OrdinalIgnoreCase))
                     {
-                        string hrefAttribute = atomLinkIterator.Current.GetAttribute("href", string.Empty);
+                        string hrefAttribute = atomLinkNode.GetAttribute("href", string.Empty);
                         if (!string.IsNullOrEmpty(hrefAttribute))
                         {
                             if (Uri.TryCreate(hrefAttribute, UriKind.RelativeOrAbsolute, out Uri? atomLink))

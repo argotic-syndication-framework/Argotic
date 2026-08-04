@@ -751,8 +751,14 @@ internal static class YahooMediaUtility
             {
                 while (categoryIterator.MoveNext())
                 {
+                    XPathNavigator? categoryNode = categoryIterator.Current;
+                    if (categoryNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaCategory category = new();
-                    if (category.Load(categoryIterator.Current))
+                    if (category.Load(categoryNode))
                     {
                         target.Categories.Add(category);
                         wasLoaded = true;
@@ -764,8 +770,14 @@ internal static class YahooMediaUtility
             {
                 while (creditIterator.MoveNext())
                 {
+                    XPathNavigator? creditNode = creditIterator.Current;
+                    if (creditNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaCredit credit = new();
-                    if (credit.Load(creditIterator.Current))
+                    if (credit.Load(creditNode))
                     {
                         target.Credits.Add(credit);
                         wasLoaded = true;
@@ -777,8 +789,14 @@ internal static class YahooMediaUtility
             {
                 while (ratingIterator.MoveNext())
                 {
+                    XPathNavigator? ratingNode = ratingIterator.Current;
+                    if (ratingNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaRating rating = new();
-                    if (rating.Load(ratingIterator.Current))
+                    if (rating.Load(ratingNode))
                     {
                         target.Ratings.Add(rating);
                         wasLoaded = true;
@@ -790,8 +808,14 @@ internal static class YahooMediaUtility
             {
                 while (thumbnailIterator.MoveNext())
                 {
+                    XPathNavigator? thumbnailNode = thumbnailIterator.Current;
+                    if (thumbnailNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaThumbnail thumbnail = new();
-                    if (thumbnail.Load(thumbnailIterator.Current))
+                    if (thumbnail.Load(thumbnailNode))
                     {
                         target.Thumbnails.Add(thumbnail);
                         wasLoaded = true;
@@ -830,8 +854,14 @@ internal static class YahooMediaUtility
             {
                 while (hashIterator.MoveNext())
                 {
+                    XPathNavigator? hashNode = hashIterator.Current;
+                    if (hashNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaHash hash = new();
-                    if (hash.Load(hashIterator.Current))
+                    if (hash.Load(hashNode))
                     {
                         target.Hashes.Add(hash);
                         wasLoaded = true;
@@ -843,8 +873,14 @@ internal static class YahooMediaUtility
             {
                 while (restrictionIterator.MoveNext())
                 {
+                    XPathNavigator? restrictionNode = restrictionIterator.Current;
+                    if (restrictionNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaRestriction restriction = new();
-                    if (restriction.Load(restrictionIterator.Current))
+                    if (restriction.Load(restrictionNode))
                     {
                         target.Restrictions.Add(restriction);
                         wasLoaded = true;
@@ -856,8 +892,14 @@ internal static class YahooMediaUtility
             {
                 while (textIterator.MoveNext())
                 {
+                    XPathNavigator? textNode = textIterator.Current;
+                    if (textNode == null)
+                    {
+                        continue;
+                    }
+
                     YahooMediaText text = new();
-                    if (text.Load(textIterator.Current))
+                    if (text.Load(textNode))
                     {
                         target.TextSeries.Add(text);
                         wasLoaded = true;

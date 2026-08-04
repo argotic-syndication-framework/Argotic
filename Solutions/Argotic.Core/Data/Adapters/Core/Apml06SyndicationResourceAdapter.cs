@@ -69,10 +69,16 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
                 int counter = 0;
                 while (profileIterator.MoveNext())
                 {
+                    XPathNavigator? profileNode = profileIterator.Current;
+                    if (profileNode == null)
+                    {
+                        continue;
+                    }
+
                     ApmlProfile profile = new();
                     counter++;
 
-                    if (profile.Load(profileIterator.Current, this.Settings))
+                    if (profile.Load(profileNode, this.Settings))
                     {
                         if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
                         {
@@ -89,8 +95,14 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
             {
                 while (applicationIterator.MoveNext())
                 {
+                    XPathNavigator? applicationNode = applicationIterator.Current;
+                    if (applicationNode == null)
+                    {
+                        continue;
+                    }
+
                     ApmlApplication application = new();
-                    if (application.Load(applicationIterator.Current, this.Settings))
+                    if (application.Load(applicationNode, this.Settings))
                     {
                         resource.Applications.Add(application);
                     }

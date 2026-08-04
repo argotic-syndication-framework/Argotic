@@ -75,8 +75,14 @@ public class SitemapImageExtension : SyndicationExtension, IComparable<SitemapIm
         {
             while (imageIterator.MoveNext())
             {
+                XPathNavigator? imageNode = imageIterator.Current;
+                if (imageNode == null)
+                {
+                    continue;
+                }
+
                 SitemapImage image = new();
-                if (image.Load(imageIterator.Current, manager))
+                if (image.Load(imageNode, manager))
                 {
                     this.extensionImages.Add(image);
                     wasLoaded = true;

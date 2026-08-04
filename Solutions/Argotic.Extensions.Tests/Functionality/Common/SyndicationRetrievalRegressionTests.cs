@@ -1,5 +1,6 @@
 using System.Collections.ObjectModel;
 using System.Text;
+using System.Xml.XPath;
 using Argotic.Common;
 using Shouldly;
 
@@ -24,7 +25,9 @@ public class SyndicationRetrievalRegressionTests
         using MemoryStream stream = new(data);
 
         // Act
-        string title = SyndicationEncodingUtility.CreateSafeNavigator(stream).SelectSingleNode("//title").Value;
+        XPathNavigator? titleNode = SyndicationEncodingUtility.CreateSafeNavigator(stream).SelectSingleNode("//title");
+        titleNode.ShouldNotBeNull();
+        string title = titleNode.Value;
 
         // Assert
         title.ShouldBe("Café Crème");

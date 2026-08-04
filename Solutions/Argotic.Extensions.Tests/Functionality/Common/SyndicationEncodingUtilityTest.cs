@@ -362,6 +362,75 @@ public class SyndicationEncodingUtilityTest
             SyndicationEncodingUtility.GetXmlEncoding((Stream)null!));
     }
 
+    // The byte[] overload only decodes the head of the document rather than all of it. These cases
+    // cover the two things that makes possible to get wrong: the byte-order mark, which is consumed
+    // before the declaration is readable, and the boundary where the declaration does not fit in
+    // the probe window. Both were previously untested - the only positive test for this overload
+    // passed a 54-byte document with no BOM, which exercises neither.
+
+    [TestMethod]
+    public void GetXmlEncoding_FromByteArray_Utf8ByteOrderMark_DetectsEncoding()
+    {
+        byte[] data = [.. Encoding.UTF8.GetPreamble(), .. Encoding.UTF8.GetBytes("""<?xml version="1.0" encoding="utf-8"?><r/>""")];
+
+        SyndicationEncodingUtility.GetXmlEncoding(data).WebName.ShouldBe("utf-8");
+    }
+
+    [TestMethod]
+    public void GetXmlEncoding_FromByteArray_Utf16LittleEndianByteOrderMark_DetectsEncoding()
+    {
+        byte[] data = [.. Encoding.Unicode.GetPreamble(), .. Encoding.Unicode.GetBytes("""<?xml version="1.0" encoding="utf-16"?><r/>""")];
+
+        SyndicationEncodingUtility.GetXmlEncoding(data).WebName.ShouldBe("utf-16");
+    }
+
+    [TestMethod]
+    public void GetXmlEncoding_FromByteArray_Utf16BigEndianByteOrderMark_DetectsEncoding()
+    {
+        byte[] data = [.. Encoding.BigEndianUnicode.GetPreamble(), .. Encoding.BigEndianUnicode.GetBytes("""<?xml version="1.0" encoding="utf-16"?><r/>""")];
+
+        SyndicationEncodingUtility.GetXmlEncoding(data).WebName.ShouldBe("utf-16");
+    }
+
+    [TestMethod]
+    public void GetXmlEncoding_FromByteArray_DocumentFarLargerThanProbeWindow_DetectsEncoding()
+    {
+        // The declaration is at the start but the document is 50 KB; only the head should be read.
+        byte[] data = Encoding.UTF8.GetBytes(
+            """<?xml version="1.0" encoding="iso-8859-1"?><r>""" + new string('x', 50_000) + "</r>");
+
+        SyndicationEncodingUtility.GetXmlEncoding(data).WebName.ShouldBe("iso-8859-1");
+    }
+
+    [TestMethod]
+    public void GetXmlEncoding_FromByteArray_DeclarationOverrunsProbeWindow_StillDetectsEncoding()
+    {
+        // XML permits arbitrary whitespace between the declaration's pseudo-attributes, so a legal
+        // declaration can run past the probe window. Nothing does this in practice, but the fast
+        // path must not change the answer when it happens.
+        byte[] data = Encoding.UTF8.GetBytes(
+            """<?xml version="1.0" """ + new string(' ', 600) + """encoding="iso-8859-1"?><r/>""");
+
+        data.Length.ShouldBeGreaterThan(512);
+        SyndicationEncodingUtility.GetXmlEncoding(data).WebName.ShouldBe("iso-8859-1");
+    }
+
+    [TestMethod]
+    public void GetXmlEncoding_FromByteArray_LargeDocumentWithNoDeclaration_DefaultsToUtf8()
+    {
+        byte[] data = Encoding.UTF8.GetBytes("<r>" + new string('x', 50_000) + "</r>");
+
+        SyndicationEncodingUtility.GetXmlEncoding(data).ShouldBe(Encoding.UTF8);
+    }
+
+    [TestMethod]
+    public void GetXmlEncoding_FromByteArray_Empty_ThrowsArgumentException()
+    {
+        // Inherited from the string overload's guard rather than designed, but it is the documented
+        // behaviour consumers compile against, and the bounded-probe rewrite must preserve it.
+        Should.Throw<ArgumentException>(() => SyndicationEncodingUtility.GetXmlEncoding(Array.Empty<byte>()));
+    }
+
     #endregion
 
     #region CreateSafeNavigator Tests

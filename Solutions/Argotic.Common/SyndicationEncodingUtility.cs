@@ -409,22 +409,39 @@ public static partial class SyndicationEncodingUtility
     {
         ArgumentNullException.ThrowIfNull(data);
 
-        if (data.Length == 0)
+        // The declaration sits at offset 0, so decoding the head of the document is normally enough.
+        // The previous implementation decoded the whole document and ran the regex over all of it,
+        // which on a 1000-item feed cost megabytes to read a few dozen bytes.
+        //
+        // A StreamReader over the bounded slice, rather than a direct ASCII decode, so that
+        // byte-order-mark detection still happens - a UTF-16 document would otherwise decode to
+        // nonsense and silently fall back to UTF-8.
+        if (data.Length > XmlDeclarationProbeLength)
         {
-            return Encoding.UTF8;
+            using MemoryStream head = new(data, 0, XmlDeclarationProbeLength, writable: false);
+            using StreamReader headReader = new(head, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
+            string prefix = headReader.ReadToEnd();
+
+            Match prefixMatch = XmlDeclarationEncodingRegex().Match(prefix);
+            if (prefixMatch.Success)
+            {
+                return SyndicationEncodingUtility.EncodingFromMatch(prefixMatch);
+            }
+
+            // A declaration may legally contain arbitrary whitespace between its pseudo-attributes,
+            // so one can run past the probe window. That never happens in practice, but "never in
+            // practice" is not the same as "cannot", and the fast path must not change the answer:
+            // if the document opens a declaration that did not fit, fall back to reading it whole.
+            if (!prefix.TrimStart().StartsWith("<?xml", StringComparison.OrdinalIgnoreCase))
+            {
+                return Encoding.UTF8;
+            }
         }
 
-        // An XML declaration is at offset 0 and cannot legally be long, so only the head of the
-        // document needs decoding. The previous implementation decoded the entire document into a
-        // string and ran the regex over all of it, which on a 1000-item feed cost megabytes to
-        // read a few dozen bytes. A StreamReader over the bounded slice is used rather than a
-        // direct ASCII decode so that byte-order-mark detection still happens - a UTF-16 document
-        // would otherwise decode to nonsense and silently fall back to UTF-8.
-        using MemoryStream stream = new(data, 0, Math.Min(data.Length, XmlDeclarationProbeLength), writable: false);
-        using StreamReader reader = new(stream, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
-        string declaration = reader.ReadToEnd();
-
-        return declaration.Length == 0 ? Encoding.UTF8 : SyndicationEncodingUtility.GetXmlEncoding(declaration);
+        // Delegating to the Stream overload preserves the original behaviour exactly, including the
+        // ArgumentException an empty array produces by way of the string overload's guard.
+        using MemoryStream stream = new(data);
+        return SyndicationEncodingUtility.GetXmlEncoding(stream);
     }
 
     /// <summary>
@@ -456,17 +473,24 @@ public static partial class SyndicationEncodingUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static Encoding GetXmlEncoding(string content)
     {
-        Encoding encoding = Encoding.UTF8;
-
         ArgumentException.ThrowIfNullOrEmpty(content);
 
-        // The pattern is anchored at the start, so only the head of the content can ever match.
-        // Bounding the input keeps a caller who passes a whole document off the slow path.
-        string probe = content.Length > XmlDeclarationProbeLength
-            ? content[..XmlDeclarationProbeLength]
-            : content;
+        // Deliberately unbounded. A declaration may legally contain arbitrary whitespace between its
+        // pseudo-attributes, so truncating the input here would change the answer for a document
+        // whose declaration runs long - and this overload is public API. The byte[] overload gets
+        // the bounded fast path instead, falling back to this one when the declaration overruns it.
+        return SyndicationEncodingUtility.EncodingFromMatch(XmlDeclarationEncodingRegex().Match(content));
+    }
 
-        Match encodingMatch = XmlDeclarationEncodingRegex().Match(probe);
+    /// <summary>
+    /// Resolves the <see cref="Encoding"/> named by an XML declaration match.
+    /// </summary>
+    /// <param name="encodingMatch">The result of matching <see cref="XmlDeclarationEncodingRegex"/>.</param>
+    /// <returns>The named encoding, or <see cref="Encoding.UTF8"/> if the match failed or named an unknown encoding.</returns>
+    private static Encoding EncodingFromMatch(Match encodingMatch)
+    {
+        Encoding encoding = Encoding.UTF8;
+
         if (encodingMatch is { Groups.Count: > 0 })
         {
             Group group = encodingMatch.Groups["webName"];

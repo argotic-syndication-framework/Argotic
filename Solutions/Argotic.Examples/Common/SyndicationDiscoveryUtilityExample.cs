@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using Argotic.Common;
 using Argotic.Syndication;
 using Spectre.Console;
@@ -111,7 +110,7 @@ internal static class SyndicationDiscoveryUtilityExample
     {
         Uri source = new("https://www.dotnetrocks.com/");
 
-        Collection<DiscoverableSyndicationEndpoint> endpoints = await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(source).ConfigureAwait(false);
+        IList<DiscoverableSyndicationEndpoint> endpoints = await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(source).ConfigureAwait(false);
 
         foreach (DiscoverableSyndicationEndpoint endpoint in endpoints)
         {
@@ -193,7 +192,7 @@ internal static class SyndicationDiscoveryUtilityExample
     {
         Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
 
-        Collection<TrackbackDiscoveryMetadata> endpoints = await SyndicationDiscoveryUtility.LocateTrackbackNotificationServersAsync(source).ConfigureAwait(false);
+        IList<TrackbackDiscoveryMetadata> endpoints = await SyndicationDiscoveryUtility.LocateTrackbackNotificationServersAsync(source).ConfigureAwait(false);
         foreach (TrackbackDiscoveryMetadata endpoint in endpoints)
         {
             Argotic.Net.TrackbackClient client = new(endpoint.PingUrl!);

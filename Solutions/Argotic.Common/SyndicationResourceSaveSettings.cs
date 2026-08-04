@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Text;
 
 namespace Argotic.Common;
@@ -12,7 +11,7 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the save operation.
     /// </summary>
-    private Collection<Type>? supportedSyndicationExtensions;
+    private List<Type>? supportedSyndicationExtensions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceSaveSettings"/> class.
@@ -59,13 +58,13 @@ public sealed class SyndicationResourceSaveSettings : IComparable<SyndicationRes
     /// Gets the syndication extensions that extend the syndication resource.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent syndication extension instances used during the save operation.
+    ///     A <see cref="IList{T}"/> collection of <see cref="Type"/> objects that represent syndication extension instances used during the save operation.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     During a save operation, each of these syndication extension types is instantiated and used to write the prefixed XML namespace declarations on the root syndication resource entity.
     /// </remarks>
-    public Collection<Type> SupportedExtensions => supportedSyndicationExtensions ??= [];
+    public IList<Type> SupportedExtensions => supportedSyndicationExtensions ??= [];
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceSaveSettings"/>.

@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using Argotic.Common;
 using Argotic.Extensions.Tests.TestDoubles;
 using Shouldly;
@@ -26,7 +25,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
         Uri uri = new("http://example.com/page.html");
 
         // Act
-        Collection<DiscoverableSyndicationEndpoint> endpoints =
+        IList<DiscoverableSyndicationEndpoint> endpoints =
             await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(
                 uri,
                 httpClient,
@@ -60,7 +59,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
         Uri uri = new("http://example.com/no-feeds.html");
 
         // Act
-        Collection<DiscoverableSyndicationEndpoint> endpoints =
+        IList<DiscoverableSyndicationEndpoint> endpoints =
             await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(
                 uri,
                 httpClient,
@@ -93,7 +92,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
         Uri uri = new("http://example.com/multi-feeds.html");
 
         // Act
-        Collection<DiscoverableSyndicationEndpoint> endpoints =
+        IList<DiscoverableSyndicationEndpoint> endpoints =
             await SyndicationDiscoveryUtility.LocateDiscoverableSyndicationEndpointsAsync(
                 uri,
                 httpClient,
@@ -610,7 +609,7 @@ public class SyndicationDiscoveryUtilityAsyncTests
         Uri uri = new("http://example.com/no-trackback.html");
 
         // Act
-        Collection<TrackbackDiscoveryMetadata> metadata =
+        IList<TrackbackDiscoveryMetadata> metadata =
             await SyndicationDiscoveryUtility.LocateTrackbackNotificationServersAsync(
                 uri,
                 httpClient,

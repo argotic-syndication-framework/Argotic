@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Reflection;
 using System.Xml;
 using System.Xml.XPath;
@@ -32,9 +31,9 @@ public class SyndicationExtensionAdapter
     /// Gets the collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
     /// </summary>
     /// <value>
-    ///     <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
+    ///     <see cref="IList{T}"/> collection of <see cref="Type"/> objects that represent <see cref="ISyndicationExtension"/> instances natively supported by the framework.
     /// </value>
-    public static Collection<Type> FrameworkExtensions
+    public static IList<Type> FrameworkExtensions
     {
         get
         {
@@ -45,7 +44,7 @@ public class SyndicationExtensionAdapter
             // Filtering on !IsAbstract rather than excluding SyndicationExtension by name also covers
             // any future abstract intermediate base: GetExtensions calls Activator.CreateInstance on
             // everything returned here, so an abstract type would throw at runtime.
-            Collection<Type> extensions =
+            List<Type> extensions =
             [
                 .. Assembly.GetExecutingAssembly()
                             .GetExportedTypes()
@@ -72,7 +71,7 @@ public class SyndicationExtensionAdapter
     /// Fills the specified collection of <see cref="Type"/> objects using the supplied <see cref="IExtensibleSyndicationObject"/>.
     /// </summary>
     /// <param name="entity">A <see cref="IExtensibleSyndicationObject"/> to extract syndication extensions from.</param>
-    /// <param name="types">The <see cref="Collection{T}"/> collection of <see cref="Type"/> objects to be filled.</param>
+    /// <param name="types">The <see cref="IList{T}"/> collection of <see cref="Type"/> objects to be filled.</param>
     /// <remarks>
     ///    This method provides implementers of the <see cref="ISyndicationResource"/> interface with a simple way 
     ///    to fill a <see cref="SyndicationResourceSaveSettings.SupportedExtensions"/> collection when implementing the 
@@ -80,7 +79,7 @@ public class SyndicationExtensionAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="entity"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
-    public static void FillExtensionTypes(IExtensibleSyndicationObject entity, Collection<Type> types)
+    public static void FillExtensionTypes(IExtensibleSyndicationObject entity, IList<Type> types)
     {
         ArgumentNullException.ThrowIfNull(entity);
         ArgumentNullException.ThrowIfNull(types);
@@ -104,16 +103,16 @@ public class SyndicationExtensionAdapter
     /// <summary>
     /// Creates a collection of <see cref="ISyndicationExtension"/> instances for the specified types.
     /// </summary>
-    /// <param name="types">A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects to be instantiated.</param>
-    /// <returns>A <see cref="Collection{T}"/> collection of <see cref="ISyndicationExtension"/> objects instantiated using the supplied <paramref name="types"/>.</returns>
+    /// <param name="types">A <see cref="IList{T}"/> collection of <see cref="Type"/> objects to be instantiated.</param>
+    /// <returns>A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects instantiated using the supplied <paramref name="types"/>.</returns>
     /// <remarks>
-    ///     <para>Each <see cref="ISyndicationExtension"/> instance in the <see cref="Collection{T}"/> collection will be instantiated using its default constructor. </para>
+    ///     <para>Each <see cref="ISyndicationExtension"/> instance in the <see cref="IList{T}"/> collection will be instantiated using its default constructor. </para>
     ///     <para>Types that are a null reference or do not implement the <see cref="ISyndicationExtension"/> interface are ignored.</para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
-    public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types)
+    public static IList<ISyndicationExtension> GetExtensions(IList<Type> types)
     {
-        Collection<ISyndicationExtension> extensions = [];
+        List<ISyndicationExtension> extensions = [];
         ArgumentNullException.ThrowIfNull(types);
 
         foreach (Type type in types)
@@ -133,10 +132,10 @@ public class SyndicationExtensionAdapter
     /// <summary>
     /// Creates a collection of <see cref="ISyndicationExtension"/> instances for the specified types.
     /// </summary>
-    /// <param name="types">A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent user-defined syndication extensions to be instantiated.</param>
+    /// <param name="types">A <see cref="IList{T}"/> collection of <see cref="Type"/> objects that represent user-defined syndication extensions to be instantiated.</param>
     /// <param name="namespaces">A collection of XML nameapces that are used to filter the available native framework syndication extensions.</param>
     /// <returns>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="ISyndicationExtension"/> objects instantiated using the supplied <paramref name="types"/> and <paramref name="namespaces"/>.
+    ///     A <see cref="IList{T}"/> collection of <see cref="ISyndicationExtension"/> objects instantiated using the supplied <paramref name="types"/> and <paramref name="namespaces"/>.
     /// </returns>
     /// <remarks>
     ///     This method instantiates all the available native framework syndication extensions, and then filters them based on the XML namespaces and prefixes contained in the supplied <paramref name="namespaces"/>. 
@@ -144,17 +143,19 @@ public class SyndicationExtensionAdapter
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="namespaces"/> is a null reference.</exception>
-    public static Collection<ISyndicationExtension> GetExtensions(Collection<Type> types, Dictionary<string, string> namespaces)
+    public static IList<ISyndicationExtension> GetExtensions(IList<Type> types, IDictionary<string, string> namespaces)
     {
-        Collection<ISyndicationExtension> supportedExtensions = [];
+        List<ISyndicationExtension> supportedExtensions = [];
         ArgumentNullException.ThrowIfNull(types);
         ArgumentNullException.ThrowIfNull(namespaces);
 
-        Collection<ISyndicationExtension> nativeExtensions = SyndicationExtensionAdapter.GetExtensions(SyndicationExtensionAdapter.FrameworkExtensions);
+        IList<ISyndicationExtension> nativeExtensions = SyndicationExtensionAdapter.GetExtensions(SyndicationExtensionAdapter.FrameworkExtensions);
 
         foreach (ISyndicationExtension extension in nativeExtensions)
         {
-            if (namespaces.ContainsValue(extension.XmlNamespace) || namespaces.ContainsKey(extension.XmlPrefix))
+            // Values.Contains rather than Dictionary.ContainsValue: the latter is not on IDictionary.
+            // Both are a linear scan over the values using the default equality comparer.
+            if (namespaces.Values.Contains(extension.XmlNamespace) || namespaces.ContainsKey(extension.XmlPrefix))
             {
                 if (!supportedExtensions.Contains(extension))
                 {
@@ -163,7 +164,7 @@ public class SyndicationExtensionAdapter
             }
         }
 
-        Collection<ISyndicationExtension> userExtensions = SyndicationExtensionAdapter.GetExtensions(types);
+        IList<ISyndicationExtension> userExtensions = SyndicationExtensionAdapter.GetExtensions(types);
         foreach (ISyndicationExtension extension in userExtensions)
         {
             if (!supportedExtensions.Contains(extension))
@@ -194,13 +195,13 @@ public class SyndicationExtensionAdapter
     }
 
     /// <summary>
-    /// Writes the prefixed XML namespace declarations for the supplied <see cref="Collection{T}"/> collection of syndication extension <see cref="Type"/> objects to the specified <see cref="XmlWriter"/>.
+    /// Writes the prefixed XML namespace declarations for the supplied <see cref="IList{T}"/> collection of syndication extension <see cref="Type"/> objects to the specified <see cref="XmlWriter"/>.
     /// </summary>
-    /// <param name="types">A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent the syndication extensions to write prefixed XML namespace declarations for.</param>
+    /// <param name="types">A <see cref="IList{T}"/> collection of <see cref="Type"/> objects that represent the syndication extensions to write prefixed XML namespace declarations for.</param>
     /// <param name="writer">The <see cref="XmlWriter"/> to which you want to save.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="types"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="writer"/> is a null reference.</exception>
-    public static void WriteXmlNamespaceDeclarations(Collection<Type> types, XmlWriter writer)
+    public static void WriteXmlNamespaceDeclarations(IList<Type> types, XmlWriter writer)
     {
         ArgumentNullException.ThrowIfNull(types);
         ArgumentNullException.ThrowIfNull(writer);
@@ -252,10 +253,10 @@ public class SyndicationExtensionAdapter
     {
         ArgumentNullException.ThrowIfNull(entity);
         ArgumentNullException.ThrowIfNull(manager);
-        Collection<ISyndicationExtension> extensions;
+        IList<ISyndicationExtension> extensions;
         if (this.Settings.AutoDetectExtensions)
         {
-            extensions = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions, (Dictionary<string, string>)this.Navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml));
+            extensions = SyndicationExtensionAdapter.GetExtensions(this.Settings.SupportedExtensions, this.Navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml));
         }
         else
         {

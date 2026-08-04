@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -52,11 +51,11 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RssCategory"/> class using the supplied <see cref="Collection{T}"/>.
+    /// Initializes a new instance of the <see cref="RssCategory"/> class using the supplied <see cref="IList{T}"/>.
     /// </summary>
     /// <param name="value">A collection of strings that describe the hierarchical position in the taxonomy. The order of collection elements determines the taxonomy hierarchy.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public RssCategory(Collection<string> value)
+    public RssCategory(IList<string> value)
     {
         ArgumentNullException.ThrowIfNull(value);
         if (value.Count > 0)
@@ -66,12 +65,12 @@ public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IE
     }
 
     /// <summary>
-    /// Initializes a new instance of the <see cref="RssCategory"/> class using the supplied <see cref="Collection{T}"/> and taxonomy identifier.
+    /// Initializes a new instance of the <see cref="RssCategory"/> class using the supplied <see cref="IList{T}"/> and taxonomy identifier.
     /// </summary>
     /// <param name="value">A collection of strings that describe the hierarchical position in the taxonomy. The order of collection elements determines the taxonomy hierarchy.</param>
     /// <param name="domain">A string that identifies the taxonomy in which the category is placed.</param>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public RssCategory(Collection<string> value, string domain) : this(value)
+    public RssCategory(IList<string> value, string domain) : this(value)
     {
         this.Domain = domain;
     }

@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -17,7 +16,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <summary>
     /// Private member to hold a collection of line numbers that are expanded.
     /// </summary>
-    private Collection<int>? headExpansionState;
+    private List<int>? headExpansionState;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="OpmlHead"/> class.
@@ -59,12 +58,12 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     /// <summary>
     /// Gets a collection of line numbers that are expanded within the outline.
     /// </summary>
-    /// <value>A <see cref="Collection{T}"/> of integers that represent the line numbers that are expanded within the outline.</value>
+    /// <value>A <see cref="IList{T}"/> of integers that represent the line numbers that are expanded within the outline.</value>
     /// <remarks>
     ///     The line numbers in the collection tell you which headlines to expand. The order is important. 
     ///     For each element in the collection, X, starting at the first summit, navigate flat down X times and expand. Repeat for each element in the collection.
     /// </remarks>
-    public Collection<int> ExpansionState
+    public IList<int> ExpansionState
     {
         get
         {

@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml.XPath;
 using Argotic.Common;
@@ -100,7 +99,7 @@ public class SyndicationRetrievalRegressionTests
             """;
 
         // Act
-        Collection<TrackbackDiscoveryMetadata> servers =
+        IList<TrackbackDiscoveryMetadata> servers =
             SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(content);
 
         // Assert

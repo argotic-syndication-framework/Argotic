@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Xml;
 
 using Argotic.Common;
@@ -606,7 +605,7 @@ public class ExtensionDiscoveryBehaviorTests
     [TestMethod]
     public void FrameworkExtensions_ReturnsOnlyInstantiableSyndicationExtensions()
     {
-        Collection<Type> types = SyndicationExtensionAdapter.FrameworkExtensions;
+        IList<Type> types = SyndicationExtensionAdapter.FrameworkExtensions;
 
         types.ShouldNotBeEmpty();
         foreach (Type type in types)
@@ -629,7 +628,7 @@ public class ExtensionDiscoveryBehaviorTests
         // These six were missing from the hand-maintained list that used to sit behind a disabled
         // #if branch in SyndicationExtensionAdapter. Because that branch never compiled, nothing
         // caught the drift. This asserts the reflection scan does not have the same blind spot.
-        Collection<Type> types = SyndicationExtensionAdapter.FrameworkExtensions;
+        IList<Type> types = SyndicationExtensionAdapter.FrameworkExtensions;
 
         types.ShouldContain(typeof(AtomPublishingControlSyndicationExtension));
         types.ShouldContain(typeof(AtomPublishingEditedSyndicationExtension));
@@ -643,7 +642,7 @@ public class ExtensionDiscoveryBehaviorTests
     public void FrameworkExtensions_EveryReturnedTypeCanBeInstantiated()
     {
         // The scan feeds GetExtensions directly, so instantiability is the real contract.
-        Collection<ISyndicationExtension> extensions =
+        IList<ISyndicationExtension> extensions =
             SyndicationExtensionAdapter.GetExtensions(SyndicationExtensionAdapter.FrameworkExtensions);
 
         extensions.Count.ShouldBe(SyndicationExtensionAdapter.FrameworkExtensions.Count);

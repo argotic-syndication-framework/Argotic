@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Text;
 using Argotic.Common;
 using Argotic.Extensions.Tests.TestDoubles;
@@ -110,7 +109,7 @@ public class SyndicationDiscoveryUtilityTests
             </html>
             """;
 
-        Collection<Uri> urls = SyndicationDiscoveryUtility.ExtractUrls(html);
+        IList<Uri> urls = SyndicationDiscoveryUtility.ExtractUrls(html);
 
         urls.Count.ShouldBe(2);
         urls.ShouldContain(new Uri("http://example.com/link1"));
@@ -122,7 +121,7 @@ public class SyndicationDiscoveryUtilityTests
     {
         const string text = "This is plain text with no URLs.";
 
-        Collection<Uri> urls = SyndicationDiscoveryUtility.ExtractUrls(text);
+        IList<Uri> urls = SyndicationDiscoveryUtility.ExtractUrls(text);
 
         urls.Count.ShouldBe(0);
     }

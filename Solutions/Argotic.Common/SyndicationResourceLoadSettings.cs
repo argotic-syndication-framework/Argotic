@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Text;
 using System.Xml.XPath;
 
@@ -13,7 +12,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <summary>
     /// Private member to hold a collection of types that represent the syndication extensions supported by the load operation.
     /// </summary>
-    private Collection<Type>? supportedSyndicationExtensions;
+    private List<Type>? supportedSyndicationExtensions;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadSettings"/> class.
@@ -73,14 +72,14 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// Gets the syndication extensions to attempt to load from a syndication resource.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="Type"/> objects that represent syndication extension instances to attempt to instantiate during the load operation.
+    ///     A <see cref="IList{T}"/> collection of <see cref="Type"/> objects that represent syndication extension instances to attempt to instantiate during the load operation.
     ///     The default value is an <i>empty</i> collection.
     /// </value>
     /// <remarks>
     ///     If <see cref="AutoDetectExtensions"/> is <b>true</b>, this collection will be automatically filled during the load operation based on the XML namespaces declared on the syndication resource.
     ///     Automatic detection will <b>not</b> remove any syndication extensions already added to this collection prior to the load operation execution.
     /// </remarks>
-    public Collection<Type> SupportedExtensions => supportedSyndicationExtensions ??= [];
+    public IList<Type> SupportedExtensions => supportedSyndicationExtensions ??= [];
 
     /// <summary>
     /// Gets or sets a value that specifies the amount of time after which asynchronous load operations will time-out.

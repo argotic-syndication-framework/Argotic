@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 using System.Net;
 using System.Text.RegularExpressions;
 using System.Xml;
@@ -214,9 +213,9 @@ public static class SyndicationDiscoveryUtility
     /// <returns>A collection of <see cref="Uri"/> instances that represent HTML anchor elements and header links in the supplied HTML markup.</returns>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-    public static Collection<Uri> ExtractUrls(string content)
+    public static IList<Uri> ExtractUrls(string content)
     {
-        Collection<Uri> results = [];
+        List<Uri> results = [];
         Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
         Regex anchorPattern = new("<a[^>]+", RegexOptions.IgnoreCase);
 
@@ -313,7 +312,7 @@ public static class SyndicationDiscoveryUtility
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
         using StreamReader reader = new(stream);
         string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
-        Collection<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(content);
+        IList<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(content);
 
         if (links is { Count: > 0 })
         {
@@ -515,9 +514,9 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-    public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
+    public static IList<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
     {
-        Collection<DiscoverableSyndicationEndpoint> results = [];
+        List<DiscoverableSyndicationEndpoint> results = [];
         Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
 
         ArgumentException.ThrowIfNullOrEmpty(content);
@@ -571,7 +570,7 @@ public static class SyndicationDiscoveryUtility
     ///     further information about the auto-discovery of syndicated content.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
-    public static Collection<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(Stream stream)
+    public static IList<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(Stream stream)
     {
         ArgumentNullException.ThrowIfNull(stream);
 
@@ -594,7 +593,7 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static async Task<Collection<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
+    public static async Task<IList<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
         Uri uri,
         CancellationToken cancellationToken = default)
     {
@@ -627,7 +626,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static async Task<Collection<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
+    public static async Task<IList<DiscoverableSyndicationEndpoint>> LocateDiscoverableSyndicationEndpointsAsync(
         Uri uri,
         HttpClient httpClient,
         CancellationToken cancellationToken = default)
@@ -908,9 +907,9 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-    public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
+    public static IList<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(string content)
     {
-        Collection<TrackbackDiscoveryMetadata> results = [];
+        List<TrackbackDiscoveryMetadata> results = [];
         Regex rdfPattern = new(@"<rdf:RDF\b[^>]*>(.*?)</rdf:RDF>", RegexOptions.IgnoreCase | RegexOptions.Singleline);
         XmlNamespaceManager manager = new(new NameTable());
 
@@ -951,7 +950,7 @@ public static class SyndicationDiscoveryUtility
     ///     further information about the auto-discovery of Trackback ping URLs.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
-    public static Collection<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(Stream stream)
+    public static IList<TrackbackDiscoveryMetadata> ExtractTrackbackNotificationServers(Stream stream)
     {
         ArgumentNullException.ThrowIfNull(stream);
 
@@ -985,7 +984,7 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(uri);
 
-        Collection<TrackbackDiscoveryMetadata> endpoints = await LocateTrackbackNotificationServersAsync(uri, cancellationToken).ConfigureAwait(false);
+        IList<TrackbackDiscoveryMetadata> endpoints = await LocateTrackbackNotificationServersAsync(uri, cancellationToken).ConfigureAwait(false);
         return endpoints.Count > 0;
     }
 
@@ -1024,7 +1023,7 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(uri);
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        Collection<TrackbackDiscoveryMetadata> endpoints = await LocateTrackbackNotificationServersAsync(uri, httpClient, cancellationToken).ConfigureAwait(false);
+        IList<TrackbackDiscoveryMetadata> endpoints = await LocateTrackbackNotificationServersAsync(uri, httpClient, cancellationToken).ConfigureAwait(false);
         return endpoints.Count > 0;
     }
 
@@ -1043,7 +1042,7 @@ public static class SyndicationDiscoveryUtility
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static async Task<Collection<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
+    public static async Task<IList<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
         Uri uri,
         CancellationToken cancellationToken = default)
     {
@@ -1076,7 +1075,7 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="uri"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
     /// <exception cref="OperationCanceledException">The operation was canceled via the <paramref name="cancellationToken"/>.</exception>
-    public static async Task<Collection<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
+    public static async Task<IList<TrackbackDiscoveryMetadata>> LocateTrackbackNotificationServersAsync(
         Uri uri,
         HttpClient httpClient,
         CancellationToken cancellationToken = default)

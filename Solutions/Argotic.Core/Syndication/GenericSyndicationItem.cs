@@ -1,4 +1,3 @@
-using System.Collections.ObjectModel;
 
 using Argotic.Common;
 
@@ -30,7 +29,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// <summary>
     /// Private member to hold the collection of categories associated with the item.
     /// </summary>
-    private Collection<GenericSyndicationCategory> itemCategories = [];
+    private List<GenericSyndicationCategory> itemCategories = [];
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
@@ -58,9 +57,9 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     /// Gets the categories associated with this item.
     /// </summary>
     /// <value>
-    ///     A <see cref="Collection{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this item.
+    ///     A <see cref="IList{T}"/> collection of <see cref="GenericSyndicationCategory"/> objects that represent the categories associated with this item.
     /// </value>
-    public Collection<GenericSyndicationCategory> Categories => itemCategories ??= [];
+    public IList<GenericSyndicationCategory> Categories => itemCategories ??= [];
 
     /// <summary>
     /// Gets a date-time indicating an instant in time associated with an event early in the life cycle of this item.

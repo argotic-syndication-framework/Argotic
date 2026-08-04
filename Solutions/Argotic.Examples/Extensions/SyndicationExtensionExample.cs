@@ -217,7 +217,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
+    public static bool operator ==(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
     {
         if (first is null) return second is null;
         return first.Equals(second);
@@ -229,7 +229,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
+    public static bool operator !=(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
     {
         return !(first == second);
     }
@@ -240,7 +240,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the first operand is less than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
+    public static bool operator <(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
     {
         if (first is null) return second is not null;
         return first.CompareTo(second) < 0;
@@ -252,7 +252,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the first operand is greater than the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
+    public static bool operator >(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
     {
         if (first is null) return false;
         return first.CompareTo(second) > 0;
@@ -264,7 +264,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the first operand is less than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator <=(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
+    public static bool operator <=(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
     {
         if (first is null) return true;
         return first.CompareTo(second) <= 0;
@@ -276,7 +276,7 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <param name="first">Operand to be compared.</param>
     /// <param name="second">Operand to compare to.</param>
     /// <returns><b>true</b> if the first operand is greater than or equal to the second, otherwise; <b>false</b>.</returns>
-    public static bool operator >=(MyCustomSyndicationExtension first, MyCustomSyndicationExtension second)
+    public static bool operator >=(MyCustomSyndicationExtension? first, MyCustomSyndicationExtension? second)
     {
         if (first is null) return second is null;
         return first.CompareTo(second) >= 0;

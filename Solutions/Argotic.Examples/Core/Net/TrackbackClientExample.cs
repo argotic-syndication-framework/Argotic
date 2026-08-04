@@ -51,6 +51,6 @@ internal static class TrackbackClientExample
             // }
         }
 
-        ExampleOutput.ShowTrackbackClient(client.Host, message.WeblogName, message.Title);
+        ExampleOutput.ShowTrackbackClient(client.Host!, message.WeblogName, message.Title);
     }
 }

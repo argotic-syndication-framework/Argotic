@@ -426,7 +426,7 @@ public class YahooMediaSyndicationExtensionTest
         group.Contents.Add(content2);
 
         // Assert
-        group.Contents!.First(c => c.IsDefault).Url.ToString().ShouldBe("http://example.com/hd.mp4");
+        group.Contents!.First(c => c.IsDefault).Url!.ToString().ShouldBe("http://example.com/hd.mp4");
     }
 
     [TestMethod]

@@ -59,8 +59,8 @@ public class AtomFeedBehaviorTests
 
         // Assert
         feed.Entries.Count.ShouldBe(2);
-        feed.Entries[0].Title.Content.ShouldBe("First Entry");
-        feed.Entries[1].Title.Content.ShouldBe("Second Entry");
+        feed.Entries[0].Title!.Content.ShouldBe("First Entry");
+        feed.Entries[1].Title!.Content.ShouldBe("Second Entry");
     }
 
     [TestMethod]
@@ -175,8 +175,8 @@ public class AtomFeedBehaviorTests
         feed.Title.Content.ShouldBe("Test Feed");
         feed.Entries.ShouldNotBeEmpty();
         feed.Entries.Count.ShouldBe(2);
-        feed.Entries[0].Title.Content.ShouldBe("Recent Entry");
-        feed.Entries[1].Title.Content.ShouldBe("Old Entry");
+        feed.Entries[0].Title!.Content.ShouldBe("Recent Entry");
+        feed.Entries[1].Title!.Content.ShouldBe("Old Entry");
     }
 
     [TestMethod]
@@ -280,8 +280,8 @@ public class AtomFeedBehaviorTests
         loadedFeed.Entries.Count.ShouldBe(originalFeed.Entries.Count);
         for (int i = 0; i < originalFeed.Entries.Count; i++)
         {
-            loadedFeed.Entries[i].Title.Content.ShouldBe(originalFeed.Entries[i].Title.Content);
-            loadedFeed.Entries[i].Id.Uri.ShouldBe(originalFeed.Entries[i].Id.Uri);
+            loadedFeed.Entries[i].Title!.Content.ShouldBe(originalFeed.Entries[i].Title!.Content);
+            loadedFeed.Entries[i].Id!.Uri.ShouldBe(originalFeed.Entries[i].Id!.Uri);
         }
     }
 
@@ -314,7 +314,7 @@ public class AtomFeedBehaviorTests
 
         // Assert
         loadedFeed.Entries[0].Summary.ShouldNotBeNull();
-        loadedFeed.Entries[0].Summary.Content.ShouldBe("This is the entry summary text.");
+        loadedFeed.Entries[0].Summary!.Content.ShouldBe("This is the entry summary text.");
     }
 
     [TestMethod]
@@ -740,8 +740,8 @@ public class AtomFeedBehaviorTests
 
         // Assert
         feed.Entries.Count.ShouldBe(2);
-        feed.Entries[0].Title.Content.ShouldBe("Recent Entry");
-        feed.Entries[1].Title.Content.ShouldBe("Old Entry");
+        feed.Entries[0].Title!.Content.ShouldBe("Recent Entry");
+        feed.Entries[1].Title!.Content.ShouldBe("Old Entry");
     }
 
     [TestMethod]

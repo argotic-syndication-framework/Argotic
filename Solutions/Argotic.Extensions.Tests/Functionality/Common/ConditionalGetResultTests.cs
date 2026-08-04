@@ -203,10 +203,13 @@ public class ConditionalGetResultTests
     [TestMethod]
     public void Dispose_DisposesUnderlyingResponse()
     {
+        // Ownership transfers to ConditionalGetResult; that it disposes the response is what this test asserts.
+#pragma warning disable CA2000
         HttpResponseMessage response = new(HttpStatusCode.OK)
         {
             Content = new StringContent("content")
         };
+#pragma warning restore CA2000
         ConditionalGetResult result = CreateResult(response, wasModified: true);
 
         result.Dispose();

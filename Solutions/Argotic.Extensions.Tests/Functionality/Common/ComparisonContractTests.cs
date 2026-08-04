@@ -114,7 +114,7 @@ public class ComparisonContractTests
     public void HashCodeUtility_Component_TreatsNullAsZero()
     {
         // Act & Assert
-        HashCodeUtility.Component((string)null).ShouldBe(0);
-        HashCodeUtility.Component((Uri)null).ShouldBe(0);
+        HashCodeUtility.Component((string)null!).ShouldBe(0);
+        HashCodeUtility.Component((Uri)null!).ShouldBe(0);
     }
 }

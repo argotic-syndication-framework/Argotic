@@ -414,7 +414,7 @@ public static class SyndicationDiscoveryUtility
     public static async Task<ConditionalGetResult> ConditionalGetAsync(
         Uri source,
         DateTime lastModified,
-        string entityTag,
+        string? entityTag,
         CancellationToken cancellationToken = default)
     {
         using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
@@ -442,7 +442,7 @@ public static class SyndicationDiscoveryUtility
     public static async Task<ConditionalGetResult> ConditionalGetAsync(
         Uri source,
         DateTime lastModified,
-        string entityTag,
+        string? entityTag,
         HttpClient httpClient,
         CancellationToken cancellationToken = default)
     {

@@ -91,7 +91,7 @@ internal static class SyndicationDiscoveryUtilityExample
             and some amount of time passes. Consumer can now use a conditional GET operation to determine if
             the web resource has changed since it was last retrieved. This minimizes bandwidth usage significantly.
         */
-        using ConditionalGetResult conditionalResponse = await SyndicationDiscoveryUtility.ConditionalGetAsync(source, lastModified, entityTag).ConfigureAwait(false);
+        using ConditionalGetResult conditionalResponse = await SyndicationDiscoveryUtility.ConditionalGetAsync(source, lastModified, entityTag!).ConfigureAwait(false);
         if (conditionalResponse.WasModified)
         {
             // Web resource has been modified since last retrieval, consumer would process the new data.
@@ -118,7 +118,7 @@ internal static class SyndicationDiscoveryUtilityExample
             if (endpoint.ContentFormat == SyndicationContentFormat.Rss)
             {
                 RssFeed feed = new();
-                await feed.LoadAsync(endpoint.Source).ConfigureAwait(false);
+                await feed.LoadAsync(endpoint.Source!).ConfigureAwait(false);
                 if (feed.Channel.HasExtensions)
                 {
                     // Process feed extensions
@@ -196,7 +196,7 @@ internal static class SyndicationDiscoveryUtilityExample
         Collection<TrackbackDiscoveryMetadata> endpoints = await SyndicationDiscoveryUtility.LocateTrackbackNotificationServersAsync(source).ConfigureAwait(false);
         foreach (TrackbackDiscoveryMetadata endpoint in endpoints)
         {
-            Argotic.Net.TrackbackClient client = new(endpoint.PingUrl);
+            Argotic.Net.TrackbackClient client = new(endpoint.PingUrl!);
             Argotic.Net.TrackbackMessage message = new();
 
             //  Build Trackback url-encoded message to be sent

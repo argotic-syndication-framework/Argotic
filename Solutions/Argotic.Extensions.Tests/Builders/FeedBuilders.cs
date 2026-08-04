@@ -137,9 +137,9 @@ public class RssItemBuilder
         return this;
     }
 
-    public RssItemBuilder WithGuid(string guid, bool isPermanentLink = true)
+    public RssItemBuilder WithGuid(string guidValue, bool isPermanentLink = true)
     {
-        item.Guid = new RssGuid(guid, isPermanentLink);
+        item.Guid = new RssGuid(guidValue, isPermanentLink);
         return this;
     }
 

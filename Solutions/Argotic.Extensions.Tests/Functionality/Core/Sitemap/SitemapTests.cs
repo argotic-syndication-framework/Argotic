@@ -691,9 +691,9 @@ public class SitemapTests
 
         // Assert - XPath Value includes whitespace, so we need to trim
         loc?.Trim().ShouldBe("https://www.example.com/");
-        SitemapUtility.TryParseChangeFrequency(changefreq?.Trim() ?? "", out var freq);
+        SitemapUtility.TryParseChangeFrequency(changefreq?.Trim() ?? "", out var freq).ShouldBeTrue();
         freq.ShouldBe(SitemapChangeFrequency.Daily);
-        SitemapUtility.TryParsePriority(priority?.Trim() ?? "", out var pri);
+        SitemapUtility.TryParsePriority(priority?.Trim() ?? "", out var pri).ShouldBeTrue();
         pri.ShouldBe(0.8m);
     }
 

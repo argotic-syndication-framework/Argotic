@@ -162,7 +162,7 @@ public class Atom03SyndicationResourceAdapterTests
         // Assert - entry content has mode="xml" which maps to Xhtml
         feed.Entries.Count.ShouldBe(1);
         feed.Entries[0].Content.ShouldNotBeNull();
-        feed.Entries[0].Content.Content.ShouldBe("Entry content in XHTML");
+        feed.Entries[0].Content!.Content.ShouldBe("Entry content in XHTML");
     }
 
     #endregion
@@ -276,8 +276,8 @@ public class Atom03SyndicationResourceAdapterTests
 
         // Assert
         feed.Entries[0].Summary.ShouldNotBeNull();
-        feed.Entries[0].Summary.Content.ShouldBe("Entry summary");
-        feed.Entries[0].Summary.TextType.ShouldBe(AtomTextConstructType.Html);
+        feed.Entries[0].Summary!.Content.ShouldBe("Entry summary");
+        feed.Entries[0].Summary!.TextType.ShouldBe(AtomTextConstructType.Html);
     }
 
     [TestMethod]

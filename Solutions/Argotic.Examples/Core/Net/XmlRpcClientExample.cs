@@ -52,6 +52,6 @@ internal static class XmlRpcClientExample
             // }
         }
 
-        ExampleOutput.ShowXmlRpcClient(client.Host, message.MethodName);
+        ExampleOutput.ShowXmlRpcClient(client.Host!, message.MethodName!);
     }
 }

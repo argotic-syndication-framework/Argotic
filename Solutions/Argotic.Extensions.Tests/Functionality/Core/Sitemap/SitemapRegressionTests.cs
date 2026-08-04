@@ -28,7 +28,7 @@ public class SitemapRegressionTests
         </urlset>
         """;
 
-    private static Argotic.Syndication.Sitemap LoadSitemap(string xml, SyndicationResourceLoadSettings settings = null)
+    private static Argotic.Syndication.Sitemap LoadSitemap(string xml, SyndicationResourceLoadSettings? settings = null)
     {
         Argotic.Syndication.Sitemap sitemap = new();
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));

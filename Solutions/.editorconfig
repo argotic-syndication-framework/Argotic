@@ -193,6 +193,11 @@ dotnet_diagnostic.CA1303.severity = none
 dotnet_diagnostic.CA1515.severity = none
 # CA2007: Consider calling ConfigureAwait on the awaited task
 dotnet_diagnostic.CA2007.severity = none
+# CA2025: Ensure tasks using IDisposable instances complete before the instances are disposed. All
+# four sites are safe: the two handler lambdas transfer ownership of the HttpResponseMessage to the
+# caller, which is how HttpMessageHandler is meant to work, and the two concurrency tests await
+# Task.WhenAll inside the using scope that owns the HttpClient. The analyzer cannot see either.
+dotnet_diagnostic.CA2025.severity = none
 # CA1054: URI parameters should not be strings. All 14 sites are the fluent test builders in
 # Builders/FeedBuilders.cs, which take URLs as string literals so the tests read as data. The rule
 # guards public API design, and nothing in this project is public API - it is not packable. Its

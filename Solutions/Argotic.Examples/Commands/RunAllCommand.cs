@@ -10,6 +10,8 @@ namespace Argotic.Examples.Commands;
 /// </summary>
 internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
 {
+    private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
+
     private static readonly HashSet<string> NetworkExampleKeywords = new(StringComparer.OrdinalIgnoreCase)
     {
         "Load Uri",
@@ -128,13 +130,12 @@ internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
 
         if (settings.JsonOutput)
         {
-            JsonSerializerOptions jsonOptions = new() { WriteIndented = true };
             var output = new
             {
                 Summary = new { Passed = passed, Failed = failed, Skipped = skipped, Total = results.Count },
                 Results = results
             };
-            Console.WriteLine(JsonSerializer.Serialize(output, jsonOptions));
+            Console.WriteLine(JsonSerializer.Serialize(output, JsonOptions));
         }
         else
         {

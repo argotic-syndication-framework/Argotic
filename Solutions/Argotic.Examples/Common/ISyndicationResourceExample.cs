@@ -8,6 +8,9 @@ namespace Argotic.Examples.Common;
 /// <summary>
 /// Example implementation of the <see cref="ISyndicationResource"/> interface.
 /// </summary>
+// CA1852 suggests sealing this, but it declares a protected virtual member and exists to
+// demonstrate extending the framework - sealing it would defeat the example (and not compile).
+#pragma warning disable CA1852
 internal class MyCustomRssFeed : ISyndicationResource
 {
     /// <summary>
@@ -255,7 +258,7 @@ internal class MyCustomRssFeed : ISyndicationResource
     /// </summary>
     /// <param name="writer">The <b>XmlWriter</b> to which you want to save the syndication resource.</param>
     /// <param name="settings">The <see cref="SyndicationResourceSaveSettings"/> object used to configure the persistence of the <see cref="MyCustomRssFeed"/> instance.</param>
-    public void Save(XmlWriter writer, SyndicationResourceSaveSettings settings)
+    public void Save(XmlWriter writer, SyndicationResourceSaveSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentNullException.ThrowIfNull(settings);
@@ -283,3 +286,4 @@ internal class MyCustomRssFeed : ISyndicationResource
         this.OnFeedLoaded(eventData);
     }
 }
+#pragma warning restore CA1852

@@ -28,6 +28,10 @@ internal sealed class RunSettings : CommandSettings
     [Description("The name of the example to run (use 'list' to see available examples)")]
     [CommandArgument(0, "<name>")]
     public string Name { get; init; } = string.Empty;
+
+    [Description("Disambiguate the example by category (e.g., Rss, Atom, Extensions)")]
+    [CommandOption("-c|--category")]
+    public string? Category { get; init; }
 }
 
 /// <summary>

@@ -7,6 +7,10 @@ app.Configure(config =>
 {
     config.SetApplicationName("argotic-examples");
 
+    // Without this an unrecognised option is accepted and ignored, so a mistyped or unsupported
+    // flag looks like it worked. Better to fail than to run something other than what was asked.
+    config.UseStrictParsing();
+
     config.AddCommand<ListCommand>("list")
         .WithDescription("List all available examples")
         .WithExample("list")
@@ -14,8 +18,8 @@ app.Configure(config =>
 
     config.AddCommand<RunCommand>("run")
         .WithDescription("Run a specific example by name")
-        .WithExample("run", "Rss Feed - Class")
-        .WithExample("run", "AtomFeed");
+        .WithExample("run", "Channel - Class")
+        .WithExample("run", "Feed - Class", "--category", "Rss");
 
     config.AddCommand<RunAllCommand>("run-all")
         .WithDescription("Run all examples sequentially")

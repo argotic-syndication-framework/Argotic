@@ -39,32 +39,21 @@ public class SyndicationExtensionAdapter
         get
         {
             Collection<Type> extensions = new();
-#if true
+
+            // Discovered by reflection rather than a hand-maintained list. The list this replaced sat
+            // behind a disabled #if branch where the compiler never checked it, and had silently
+            // drifted six extensions out of date by the time it was removed.
+            //
+            // Filtering on !IsAbstract rather than excluding SyndicationExtension by name also covers
+            // any future abstract intermediate base: GetExtensions calls Activator.CreateInstance on
+            // everything returned here, so an abstract type would throw at runtime.
             foreach (Type type in Assembly.GetExecutingAssembly()
                         .GetExportedTypes()
-                        .Where(t => typeof(SyndicationExtension).IsAssignableFrom(t) && t != typeof(SyndicationExtension)))
+                        .Where(t => typeof(SyndicationExtension).IsAssignableFrom(t) && !t.IsAbstract))
+            {
                 extensions.Add(type);
-#else
-				extensions.Add(typeof(BasicGeocodingSyndicationExtension));
-				extensions.Add(typeof(BlogChannelSyndicationExtension));
-				extensions.Add(typeof(CreativeCommonsSyndicationExtension));
-				extensions.Add(typeof(DublinCoreElementSetSyndicationExtension));
-				extensions.Add(typeof(DublinCoreMetadataTermsSyndicationExtension));
-				extensions.Add(typeof(FeedHistorySyndicationExtension));
-				extensions.Add(typeof(FeedRankSyndicationExtension));
-				extensions.Add(typeof(FeedSynchronizationSyndicationExtension));
-				extensions.Add(typeof(ITunesSyndicationExtension));
-				extensions.Add(typeof(LiveJournalSyndicationExtension));
-				extensions.Add(typeof(PheedSyndicationExtension));
-				extensions.Add(typeof(PingbackSyndicationExtension));
-				extensions.Add(typeof(SimpleListSyndicationExtension));
-				extensions.Add(typeof(SiteSummaryContentSyndicationExtension));
-				extensions.Add(typeof(SiteSummarySlashSyndicationExtension));
-				extensions.Add(typeof(SiteSummaryUpdateSyndicationExtension));
-				extensions.Add(typeof(TrackbackSyndicationExtension));
-				extensions.Add(typeof(WellFormedWebCommentsSyndicationExtension));
-				extensions.Add(typeof(YahooMediaSyndicationExtension));
-#endif
+            }
+
             return extensions;
         }
     }

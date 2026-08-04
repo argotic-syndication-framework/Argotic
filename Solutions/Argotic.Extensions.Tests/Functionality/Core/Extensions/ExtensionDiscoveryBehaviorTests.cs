@@ -1,3 +1,4 @@
+using System.Collections.ObjectModel;
 using System.Xml;
 
 using Argotic.Common;
@@ -596,6 +597,59 @@ public class ExtensionDiscoveryBehaviorTests
         DublinCoreMetadataTermsSyndicationExtension? extension = item.FindExtension<DublinCoreMetadataTermsSyndicationExtension>();
         extension.ShouldNotBeNull();
         extension.Context.Abstract.ShouldBe("Test abstract content");
+    }
+
+    #endregion
+
+    #region FrameworkExtensions Reflection Scan
+
+    [TestMethod]
+    public void FrameworkExtensions_ReturnsOnlyInstantiableSyndicationExtensions()
+    {
+        Collection<Type> types = SyndicationExtensionAdapter.FrameworkExtensions;
+
+        types.ShouldNotBeEmpty();
+        foreach (Type type in types)
+        {
+            typeof(SyndicationExtension).IsAssignableFrom(type).ShouldBeTrue($"{type.Name} does not derive from SyndicationExtension");
+
+            // GetExtensions calls Activator.CreateInstance on everything returned here, so anything
+            // abstract or lacking a parameterless constructor would throw at load time.
+            type.IsAbstract.ShouldBeFalse($"{type.Name} is abstract and cannot be instantiated");
+            type.GetConstructor(Type.EmptyTypes).ShouldNotBeNull($"{type.Name} has no parameterless constructor");
+        }
+    }
+
+    [TestMethod]
+    public void FrameworkExtensions_DoesNotReturnTheAbstractBase()
+    {
+        SyndicationExtensionAdapter.FrameworkExtensions.ShouldNotContain(typeof(SyndicationExtension));
+    }
+
+    [TestMethod]
+    public void FrameworkExtensions_ReturnsExtensionsAddedAfterTheHandMaintainedList()
+    {
+        // These six were missing from the hand-maintained list that used to sit behind a disabled
+        // #if branch in SyndicationExtensionAdapter. Because that branch never compiled, nothing
+        // caught the drift. This asserts the reflection scan does not have the same blind spot.
+        Collection<Type> types = SyndicationExtensionAdapter.FrameworkExtensions;
+
+        types.ShouldContain(typeof(AtomPublishingControlSyndicationExtension));
+        types.ShouldContain(typeof(AtomPublishingEditedSyndicationExtension));
+        types.ShouldContain(typeof(SitemapImageExtension));
+        types.ShouldContain(typeof(SitemapNewsExtension));
+        types.ShouldContain(typeof(SitemapVideoExtension));
+        types.ShouldContain(typeof(SitemapHreflangExtension));
+    }
+
+    [TestMethod]
+    public void FrameworkExtensions_EveryReturnedTypeCanBeInstantiated()
+    {
+        // The scan feeds GetExtensions directly, so instantiability is the real contract.
+        Collection<ISyndicationExtension> extensions =
+            SyndicationExtensionAdapter.GetExtensions(SyndicationExtensionAdapter.FrameworkExtensions);
+
+        extensions.Count.ShouldBe(SyndicationExtensionAdapter.FrameworkExtensions.Count);
     }
 
     #endregion

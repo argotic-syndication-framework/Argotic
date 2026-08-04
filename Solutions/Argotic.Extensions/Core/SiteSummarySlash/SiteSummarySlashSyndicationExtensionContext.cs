@@ -95,19 +95,19 @@ public class SiteSummarySlashSyndicationExtensionContext
             XPathNavigator? commentsNavigator = source.SelectSingleNode("slash:comments", manager);
             XPathNavigator? hitParadeNavigator = source.SelectSingleNode("slash:hit_parade", manager);
 
-            if (sectionNavigator != null && !string.IsNullOrEmpty(sectionNavigator.Value))
+            if (sectionNavigator is not null && !string.IsNullOrEmpty(sectionNavigator.Value))
             {
                 this.Section = sectionNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (departmentNavigator != null && !string.IsNullOrEmpty(departmentNavigator.Value))
+            if (departmentNavigator is not null && !string.IsNullOrEmpty(departmentNavigator.Value))
             {
                 this.Department = departmentNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (commentsNavigator != null)
+            if (commentsNavigator is not null)
             {
                 if (int.TryParse(commentsNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int comments))
                 {
@@ -116,7 +116,7 @@ public class SiteSummarySlashSyndicationExtensionContext
                 }
             }
 
-            if (hitParadeNavigator != null && !string.IsNullOrEmpty(hitParadeNavigator.Value))
+            if (hitParadeNavigator is not null && !string.IsNullOrEmpty(hitParadeNavigator.Value))
             {
                 if (hitParadeNavigator.Value.Contains(',', StringComparison.Ordinal))
                 {

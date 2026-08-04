@@ -385,7 +385,7 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        if (uri == null)
+        if (uri is null)
         {
             return false;
         }
@@ -490,7 +490,7 @@ public static class SyndicationDiscoveryUtility
         {
             // Server may not support conditional GET properly, consider it modified if we got content
             isModified = response.Content.Headers.ContentLength > 0 ||
-                         response.Content.Headers.ContentType != null;
+                         response.Content.Headers.ContentType is not null;
         }
 
         if (!isModified)
@@ -797,7 +797,7 @@ public static class SyndicationDiscoveryUtility
         string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
         HtmlAnchor? link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
 
-        return link != null;
+        return link is not null;
     }
 
     /// <summary>
@@ -887,7 +887,7 @@ public static class SyndicationDiscoveryUtility
         string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
         HtmlAnchor? link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
 
-        if (link != null && Uri.TryCreate(link.HRef, UriKind.Absolute, out Uri? href))
+        if (link is not null && Uri.TryCreate(link.HRef, UriKind.Absolute, out Uri? href))
         {
             return href;
         }

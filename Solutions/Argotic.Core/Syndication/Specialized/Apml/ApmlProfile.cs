@@ -109,7 +109,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
             XPathNavigator? implicitDataNavigator = source.SelectSingleNode("apml:ImplicitData", manager);
             XPathNavigator? explicitDataNavigator = source.SelectSingleNode("apml:ExplicitData", manager);
 
-            if (implicitDataNavigator != null)
+            if (implicitDataNavigator is not null)
             {
                 XPathNodeIterator conceptsIterator = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                 if (conceptsIterator is { Count: > 0 })
@@ -117,7 +117,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                     while (conceptsIterator.MoveNext())
                     {
                         XPathNavigator? conceptsNode = conceptsIterator.Current;
-                        if (conceptsNode == null)
+                        if (conceptsNode is null)
                         {
                             continue;
                         }
@@ -137,7 +137,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                     while (sourcesIterator.MoveNext())
                     {
                         XPathNavigator? sourcesNode = sourcesIterator.Current;
-                        if (sourcesNode == null)
+                        if (sourcesNode is null)
                         {
                             continue;
                         }
@@ -152,7 +152,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 }
             }
 
-            if (explicitDataNavigator != null)
+            if (explicitDataNavigator is not null)
             {
                 XPathNodeIterator conceptsIterator = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                 if (conceptsIterator is { Count: > 0 })
@@ -160,7 +160,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                     while (conceptsIterator.MoveNext())
                     {
                         XPathNavigator? conceptsNode = conceptsIterator.Current;
-                        if (conceptsNode == null)
+                        if (conceptsNode is null)
                         {
                             continue;
                         }
@@ -180,7 +180,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                     while (sourcesIterator.MoveNext())
                     {
                         XPathNavigator? sourcesNode = sourcesIterator.Current;
-                        if (sourcesNode == null)
+                        if (sourcesNode is null)
                         {
                             continue;
                         }
@@ -231,7 +231,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
             XPathNavigator? implicitDataNavigator = source.SelectSingleNode("apml:ImplicitData", manager);
             XPathNavigator? explicitDataNavigator = source.SelectSingleNode("apml:ExplicitData", manager);
 
-            if (implicitDataNavigator != null)
+            if (implicitDataNavigator is not null)
             {
                 XPathNodeIterator conceptsIterator = implicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                 if (conceptsIterator is { Count: > 0 })
@@ -239,7 +239,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                     while (conceptsIterator.MoveNext())
                     {
                         XPathNavigator? conceptsNode = conceptsIterator.Current;
-                        if (conceptsNode == null)
+                        if (conceptsNode is null)
                         {
                             continue;
                         }
@@ -259,7 +259,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                     while (sourcesIterator.MoveNext())
                     {
                         XPathNavigator? sourcesNode = sourcesIterator.Current;
-                        if (sourcesNode == null)
+                        if (sourcesNode is null)
                         {
                             continue;
                         }
@@ -274,7 +274,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                 }
             }
 
-            if (explicitDataNavigator != null)
+            if (explicitDataNavigator is not null)
             {
                 XPathNodeIterator conceptsIterator = explicitDataNavigator.Select("apml:Concepts/apml:Concept", manager);
                 if (conceptsIterator is { Count: > 0 })
@@ -282,7 +282,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                     while (conceptsIterator.MoveNext())
                     {
                         XPathNavigator? conceptsNode = conceptsIterator.Current;
-                        if (conceptsNode == null)
+                        if (conceptsNode is null)
                         {
                             continue;
                         }
@@ -302,7 +302,7 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
                     while (sourcesIterator.MoveNext())
                     {
                         XPathNavigator? sourcesNode = sourcesIterator.Current;
-                        if (sourcesNode == null)
+                        if (sourcesNode is null)
                         {
                             continue;
                         }

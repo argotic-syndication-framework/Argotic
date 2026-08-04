@@ -157,11 +157,11 @@ public class SyndicationResourceAdapter
         if (resourceMetadata.Version == new Version("1.0"))
         {
             Atom10SyndicationResourceAdapter atom10Adapter = new(this.Navigator, this.Settings);
-            if (atomFeed != null)
+            if (atomFeed is not null)
             {
                 atom10Adapter.Fill(atomFeed);
             }
-            else if (atomEntry != null)
+            else if (atomEntry is not null)
             {
                 atom10Adapter.Fill(atomEntry);
             }
@@ -170,11 +170,11 @@ public class SyndicationResourceAdapter
         if (resourceMetadata.Version == new Version("0.3"))
         {
             Atom03SyndicationResourceAdapter atom03Adapter = new(this.Navigator, this.Settings);
-            if (atomFeed != null)
+            if (atomFeed is not null)
             {
                 atom03Adapter.Fill(atomFeed);
             }
-            else if (atomEntry != null)
+            else if (atomEntry is not null)
             {
                 atom03Adapter.Fill(atomEntry);
             }
@@ -198,7 +198,7 @@ public class SyndicationResourceAdapter
         if (resourceMetadata.Version == new Version("1.0"))
         {
             AtomPublishing10SyndicationResourceAdapter atomPublishing10Adapter = new(this.Navigator, this.Settings);
-            if (categoryDocument != null)
+            if (categoryDocument is not null)
             {
                 atomPublishing10Adapter.Fill(categoryDocument);
             }

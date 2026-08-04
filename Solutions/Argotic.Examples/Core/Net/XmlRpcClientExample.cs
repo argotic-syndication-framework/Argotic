@@ -40,7 +40,7 @@ internal static class XmlRpcClientExample
         // XmlRpcResponse response = await client.SendAsync(message).ConfigureAwait(false);
 
         // For demonstration, we just verify the client and message are configured correctly
-        if (client.Host != null && message.MethodName != null)
+        if (client.Host is not null && message.MethodName is not null)
         {
             // Client is configured and ready to send
             // Verify response to the XML-RPC call

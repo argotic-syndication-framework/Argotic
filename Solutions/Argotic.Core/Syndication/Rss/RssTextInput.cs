@@ -177,7 +177,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
         XPathNavigator? nameNavigator = source.SelectSingleNode("name", manager);
         XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
 
-        if (descriptionNavigator != null)
+        if (descriptionNavigator is not null)
         {
             if (!string.IsNullOrEmpty(descriptionNavigator.Value))
             {
@@ -185,7 +185,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
                 wasLoaded = true;
             }
         }
-        if (linkNavigator != null)
+        if (linkNavigator is not null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
@@ -193,7 +193,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
                 wasLoaded = true;
             }
         }
-        if (nameNavigator != null)
+        if (nameNavigator is not null)
         {
             if (!string.IsNullOrEmpty(nameNavigator.Value))
             {
@@ -201,7 +201,7 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
                 wasLoaded = true;
             }
         }
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {

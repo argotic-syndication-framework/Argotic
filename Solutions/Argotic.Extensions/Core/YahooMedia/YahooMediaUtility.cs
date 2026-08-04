@@ -540,9 +540,9 @@ internal static class YahooMediaUtility
         }
 
         int result = 0;
-        if (source.Copyright != null)
+        if (source.Copyright is not null)
         {
-            if (target.Copyright != null)
+            if (target.Copyright is not null)
             {
                 result = source.Copyright.CompareTo(target.Copyright);
             }
@@ -551,14 +551,14 @@ internal static class YahooMediaUtility
                 result = 1;
             }
         }
-        else if (target.Copyright != null)
+        else if (target.Copyright is not null)
         {
             result = -1;
         }
 
-        if (source.Description != null)
+        if (source.Description is not null)
         {
-            if (target.Description != null)
+            if (target.Description is not null)
             {
                 if (result == 0) result = source.Description.CompareTo(target.Description);
             }
@@ -567,14 +567,14 @@ internal static class YahooMediaUtility
                 if (result == 0) result = 1;
             }
         }
-        else if (target.Description != null)
+        else if (target.Description is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (source.Player != null)
+        if (source.Player is not null)
         {
-            if (target.Player != null)
+            if (target.Player is not null)
             {
                 if (result == 0) result = source.Player.CompareTo(target.Player);
             }
@@ -583,14 +583,14 @@ internal static class YahooMediaUtility
                 if (result == 0) result = 1;
             }
         }
-        else if (target.Player != null)
+        else if (target.Player is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (source.Title != null)
+        if (source.Title is not null)
         {
-            if (target.Title != null)
+            if (target.Title is not null)
             {
                 if (result == 0) result = source.Title.CompareTo(target.Title);
             }
@@ -599,7 +599,7 @@ internal static class YahooMediaUtility
                 if (result == 0) result = 1;
             }
         }
-        else if (target.Title != null)
+        else if (target.Title is not null)
         {
             if (result == 0) result = -1;
         }
@@ -658,7 +658,7 @@ internal static class YahooMediaUtility
             XPathNavigator? playerNavigator = source.SelectSingleNode("media:player", manager);
             XPathNavigator? keywordNavigator = source.SelectSingleNode("media:keywords", manager);
 
-            if (titleNavigator != null)
+            if (titleNavigator is not null)
             {
                 YahooMediaTextConstruct title = new();
                 if (title.Load(titleNavigator))
@@ -668,7 +668,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (descriptionNavigator != null)
+            if (descriptionNavigator is not null)
             {
                 YahooMediaTextConstruct description = new();
                 if (description.Load(descriptionNavigator))
@@ -678,7 +678,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (copyrightNavigator != null)
+            if (copyrightNavigator is not null)
             {
                 YahooMediaCopyright copyright = new();
                 if (copyright.Load(copyrightNavigator))
@@ -688,7 +688,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (playerNavigator != null)
+            if (playerNavigator is not null)
             {
                 YahooMediaPlayer player = new();
                 if (player.Load(playerNavigator))
@@ -698,7 +698,7 @@ internal static class YahooMediaUtility
                 }
             }
 
-            if (keywordNavigator != null && !string.IsNullOrEmpty(keywordNavigator.Value))
+            if (keywordNavigator is not null && !string.IsNullOrEmpty(keywordNavigator.Value))
             {
                 if (keywordNavigator.Value.Contains(',', StringComparison.Ordinal))
                 {
@@ -752,7 +752,7 @@ internal static class YahooMediaUtility
                 while (categoryIterator.MoveNext())
                 {
                     XPathNavigator? categoryNode = categoryIterator.Current;
-                    if (categoryNode == null)
+                    if (categoryNode is null)
                     {
                         continue;
                     }
@@ -771,7 +771,7 @@ internal static class YahooMediaUtility
                 while (creditIterator.MoveNext())
                 {
                     XPathNavigator? creditNode = creditIterator.Current;
-                    if (creditNode == null)
+                    if (creditNode is null)
                     {
                         continue;
                     }
@@ -790,7 +790,7 @@ internal static class YahooMediaUtility
                 while (ratingIterator.MoveNext())
                 {
                     XPathNavigator? ratingNode = ratingIterator.Current;
-                    if (ratingNode == null)
+                    if (ratingNode is null)
                     {
                         continue;
                     }
@@ -809,7 +809,7 @@ internal static class YahooMediaUtility
                 while (thumbnailIterator.MoveNext())
                 {
                     XPathNavigator? thumbnailNode = thumbnailIterator.Current;
-                    if (thumbnailNode == null)
+                    if (thumbnailNode is null)
                     {
                         continue;
                     }
@@ -855,7 +855,7 @@ internal static class YahooMediaUtility
                 while (hashIterator.MoveNext())
                 {
                     XPathNavigator? hashNode = hashIterator.Current;
-                    if (hashNode == null)
+                    if (hashNode is null)
                     {
                         continue;
                     }
@@ -874,7 +874,7 @@ internal static class YahooMediaUtility
                 while (restrictionIterator.MoveNext())
                 {
                     XPathNavigator? restrictionNode = restrictionIterator.Current;
-                    if (restrictionNode == null)
+                    if (restrictionNode is null)
                     {
                         continue;
                     }
@@ -893,7 +893,7 @@ internal static class YahooMediaUtility
                 while (textIterator.MoveNext())
                 {
                     XPathNavigator? textNode = textIterator.Current;
-                    if (textNode == null)
+                    if (textNode is null)
                     {
                         continue;
                     }

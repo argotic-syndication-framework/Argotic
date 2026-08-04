@@ -359,7 +359,7 @@ internal static class ExampleRegistry
                 await task.ConfigureAwait(false);
             }
         }
-        catch (TargetInvocationException ex) when (ex.InnerException != null)
+        catch (TargetInvocationException ex) when (ex.InnerException is not null)
         {
             throw ex.InnerException;
         }

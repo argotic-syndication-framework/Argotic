@@ -153,9 +153,9 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
 
         int result = this.Context.IsPreformatted.CompareTo(other.Context.IsPreformatted);
 
-        if (this.Context.Mood != null)
+        if (this.Context.Mood is not null)
         {
-            if (other.Context.Mood != null)
+            if (other.Context.Mood is not null)
             {
                 if (result == 0) result = this.Context.Mood.CompareTo(other.Context.Mood);
             }
@@ -164,16 +164,16 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
                 if (result == 0) result = 1;
             }
         }
-        else if (other.Context.Mood != null)
+        else if (other.Context.Mood is not null)
         {
             if (result == 0) result = -1;
         }
 
         if (result == 0) result = string.Compare(this.Context.Music, other.Context.Music, StringComparison.OrdinalIgnoreCase);
 
-        if (this.Context.Security != null)
+        if (this.Context.Security is not null)
         {
-            if (other.Context.Security != null)
+            if (other.Context.Security is not null)
             {
                 if (result == 0) result = this.Context.Security.CompareTo(other.Context.Security);
             }
@@ -182,14 +182,14 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
                 if (result == 0) result = 1;
             }
         }
-        else if (other.Context.Security != null)
+        else if (other.Context.Security is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (this.Context.UserPicture != null)
+        if (this.Context.UserPicture is not null)
         {
-            if (other.Context.UserPicture != null)
+            if (other.Context.UserPicture is not null)
             {
                 if (result == 0) result = this.Context.UserPicture.CompareTo(other.Context.UserPicture);
             }
@@ -198,7 +198,7 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
                 if (result == 0) result = 1;
             }
         }
-        else if (other.Context.UserPicture != null)
+        else if (other.Context.UserPicture is not null)
         {
             if (result == 0) result = -1;
         }

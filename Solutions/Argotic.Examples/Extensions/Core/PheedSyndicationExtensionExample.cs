@@ -31,7 +31,7 @@ internal static class PheedSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             PheedSyndicationExtension? channelExtension = feed.Channel.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowPheedExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class PheedSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 PheedSyndicationExtension? itemExtension = item.FindExtension(PheedSyndicationExtension.MatchByType) as PheedSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

@@ -105,7 +105,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
         XPathNavigator? locNavigator = source.SelectSingleNode("sm:loc", manager);
         XPathNavigator? lastmodNavigator = source.SelectSingleNode("sm:lastmod", manager);
 
-        if (locNavigator != null)
+        if (locNavigator is not null)
         {
             if (Uri.TryCreate(locNavigator.Value, UriKind.Absolute, out Uri? location))
             {
@@ -114,7 +114,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
             }
         }
 
-        if (lastmodNavigator != null)
+        if (lastmodNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(lastmodNavigator.Value, out DateTime lastModified))
             {
@@ -142,7 +142,7 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
 
         writer.WriteStartElement("sitemap", SitemapUtility.SitemapNamespace);
 
-        if (this.Location != null)
+        if (this.Location is not null)
         {
             writer.WriteElementString("loc", SitemapUtility.SitemapNamespace, this.Location.ToString());
         }

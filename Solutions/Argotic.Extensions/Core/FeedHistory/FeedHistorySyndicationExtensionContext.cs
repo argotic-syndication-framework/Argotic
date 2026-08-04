@@ -60,13 +60,13 @@ public class FeedHistorySyndicationExtensionContext
             XPathNavigator? completeNavigator = source.SelectSingleNode("fh:complete", manager);
             XPathNodeIterator linkIterator = source.Select("atom:link", manager);
 
-            if (archiveNavigator != null)
+            if (archiveNavigator is not null)
             {
                 this.IsArchive = true;
                 wasLoaded = true;
             }
 
-            if (completeNavigator != null)
+            if (completeNavigator is not null)
             {
                 this.IsComplete = true;
                 wasLoaded = true;
@@ -77,7 +77,7 @@ public class FeedHistorySyndicationExtensionContext
                 while (linkIterator.MoveNext())
                 {
                     XPathNavigator? linkNode = linkIterator.Current;
-                    if (linkNode == null)
+                    if (linkNode is null)
                     {
                         continue;
                     }

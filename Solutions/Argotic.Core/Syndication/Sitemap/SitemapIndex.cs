@@ -228,7 +228,7 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings != null)
+        if (settings is not null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
         }
@@ -428,7 +428,7 @@ public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
             while (sitemapIterator.MoveNext())
             {
                 XPathNavigator? sitemapNode = sitemapIterator.Current;
-                if (sitemapNode == null)
+                if (sitemapNode is null)
                 {
                     continue;
                 }

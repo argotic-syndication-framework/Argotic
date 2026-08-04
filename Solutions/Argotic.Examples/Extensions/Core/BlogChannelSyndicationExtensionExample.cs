@@ -31,7 +31,7 @@ internal static class BlogChannelSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             BlogChannelSyndicationExtension? channelExtension = feed.Channel.FindExtension(BlogChannelSyndicationExtension.MatchByType) as BlogChannelSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowBlogChannelExtension(channelExtension);
             }

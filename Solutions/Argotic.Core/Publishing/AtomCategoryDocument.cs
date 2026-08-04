@@ -318,10 +318,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceLoadSettings();
-        }
+        settings ??= new SyndicationResourceLoadSettings();
 
         XPathNavigator navigator = source.CreateNavigator()
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
@@ -355,7 +352,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings != null)
+        if (settings is not null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
         }
@@ -473,10 +470,7 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceSaveSettings();
-        }
+        settings ??= new SyndicationResourceSaveSettings();
 
         XmlWriterSettings writerSettings = new()
         {
@@ -536,12 +530,12 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
             writer.WriteAttributeString("fixed", "yes");
         }
 
-        if (this.Scheme != null)
+        if (this.Scheme is not null)
         {
             writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }
 
-        if (this.Uri != null)
+        if (this.Uri is not null)
         {
             writer.WriteAttributeString("href", this.Uri.ToString());
         }

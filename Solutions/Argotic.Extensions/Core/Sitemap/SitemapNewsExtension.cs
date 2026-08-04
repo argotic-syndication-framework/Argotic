@@ -130,13 +130,13 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
 
         XPathNavigator? newsNavigator = navigator.SelectSingleNode("news:news", manager);
 
-        if (newsNavigator != null)
+        if (newsNavigator is not null)
         {
             XPathNavigator? publicationNavigator = newsNavigator.SelectSingleNode("news:publication", manager);
             XPathNavigator? publicationDateNavigator = newsNavigator.SelectSingleNode("news:publication_date", manager);
             XPathNavigator? titleNavigator = newsNavigator.SelectSingleNode("news:title", manager);
 
-            if (publicationNavigator != null)
+            if (publicationNavigator is not null)
             {
                 SitemapNewsPublication publication = new();
                 if (publication.Load(publicationNavigator, manager))
@@ -146,7 +146,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
                 }
             }
 
-            if (publicationDateNavigator != null && !string.IsNullOrEmpty(publicationDateNavigator.Value))
+            if (publicationDateNavigator is not null && !string.IsNullOrEmpty(publicationDateNavigator.Value))
             {
                 if (DateTime.TryParse(publicationDateNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out DateTime publicationDate))
                 {
@@ -155,7 +155,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
                 }
             }
 
-            if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
+            if (titleNavigator is not null && !string.IsNullOrEmpty(titleNavigator.Value))
             {
                 this.extensionTitle = titleNavigator.Value.Trim();
                 wasLoaded = true;
@@ -250,15 +250,15 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
 
         int result = 0;
 
-        if (this.Publication != null && other.Publication != null)
+        if (this.Publication is not null && other.Publication is not null)
         {
             result = this.Publication.CompareTo(other.Publication);
         }
-        else if (this.Publication != null)
+        else if (this.Publication is not null)
         {
             result = 1;
         }
-        else if (other.Publication != null)
+        else if (other.Publication is not null)
         {
             result = -1;
         }

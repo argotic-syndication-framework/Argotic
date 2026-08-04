@@ -152,7 +152,7 @@ public class ITunesSyndicationExtensionContext
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
-        if (this.NewFeedUrl != null)
+        if (this.NewFeedUrl is not null)
         {
             writer.WriteElementString("new-feed-url", xmlNamespace, this.NewFeedUrl.ToString());
         }
@@ -174,7 +174,7 @@ public class ITunesSyndicationExtensionContext
 
         this.Owner?.WriteTo(writer);
 
-        if (this.Image != null)
+        if (this.Image is not null)
         {
             writer.WriteStartElement("image", xmlNamespace);
             writer.WriteAttributeString("href", this.Image.ToString());
@@ -242,13 +242,13 @@ public class ITunesSyndicationExtensionContext
 
             XPathNodeIterator categoryIterator = source.Select("itunes:category", manager);
 
-            if (authorNavigator != null && !string.IsNullOrEmpty(authorNavigator.Value))
+            if (authorNavigator is not null && !string.IsNullOrEmpty(authorNavigator.Value))
             {
                 this.Author = authorNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (keywordsNavigator != null && !string.IsNullOrEmpty(keywordsNavigator.Value))
+            if (keywordsNavigator is not null && !string.IsNullOrEmpty(keywordsNavigator.Value))
             {
                 if (keywordsNavigator.Value.Contains(',', StringComparison.Ordinal))
                 {
@@ -266,7 +266,7 @@ public class ITunesSyndicationExtensionContext
                 }
             }
 
-            if (newFeedUrlNavigator != null)
+            if (newFeedUrlNavigator is not null)
             {
                 if (Uri.TryCreate(newFeedUrlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? newFeedUrl))
                 {
@@ -275,7 +275,7 @@ public class ITunesSyndicationExtensionContext
                 }
             }
 
-            if (ownerNavigator != null)
+            if (ownerNavigator is not null)
             {
                 ITunesOwner owner = new();
                 if (owner.Load(ownerNavigator))
@@ -285,13 +285,13 @@ public class ITunesSyndicationExtensionContext
                 }
             }
 
-            if (subtitleNavigator != null && !string.IsNullOrEmpty(subtitleNavigator.Value))
+            if (subtitleNavigator is not null && !string.IsNullOrEmpty(subtitleNavigator.Value))
             {
                 this.Subtitle = subtitleNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (summaryNavigator != null && !string.IsNullOrEmpty(summaryNavigator.Value))
+            if (summaryNavigator is not null && !string.IsNullOrEmpty(summaryNavigator.Value))
             {
                 this.Summary = summaryNavigator.Value;
                 wasLoaded = true;
@@ -302,7 +302,7 @@ public class ITunesSyndicationExtensionContext
                 while (categoryIterator.MoveNext())
                 {
                     XPathNavigator? categoryNode = categoryIterator.Current;
-                    if (categoryNode == null)
+                    if (categoryNode is null)
                     {
                         continue;
                     }
@@ -340,7 +340,7 @@ public class ITunesSyndicationExtensionContext
             XPathNavigator? durationNavigator = source.SelectSingleNode("itunes:duration", manager);
             XPathNavigator? explicitNavigator = source.SelectSingleNode("itunes:explicit", manager);
 
-            if (blockNavigator != null && !string.IsNullOrEmpty(blockNavigator.Value))
+            if (blockNavigator is not null && !string.IsNullOrEmpty(blockNavigator.Value))
             {
                 if (string.Equals(blockNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase))
                 {
@@ -367,7 +367,7 @@ public class ITunesSyndicationExtensionContext
                 }
             }
 
-            if (durationNavigator != null && !string.IsNullOrEmpty(durationNavigator.Value))
+            if (durationNavigator is not null && !string.IsNullOrEmpty(durationNavigator.Value))
             {
                 TimeSpan duration = ITunesSyndicationExtensionContext.ParseDuration(durationNavigator.Value);
                 if (duration != TimeSpan.MinValue)
@@ -377,7 +377,7 @@ public class ITunesSyndicationExtensionContext
                 }
             }
 
-            if (explicitNavigator != null && !string.IsNullOrEmpty(explicitNavigator.Value))
+            if (explicitNavigator is not null && !string.IsNullOrEmpty(explicitNavigator.Value))
             {
                 ITunesExplicitMaterial explicitMaterial = ITunesSyndicationExtension.ExplicitMaterialByName(explicitNavigator.Value.Trim());
                 if (explicitMaterial != ITunesExplicitMaterial.None)

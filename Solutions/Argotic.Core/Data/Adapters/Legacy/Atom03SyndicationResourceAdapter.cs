@@ -66,7 +66,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? entryNavigator = this.Navigator.SelectSingleNode("atom:entry", manager);
 
-        if (entryNavigator != null)
+        if (entryNavigator is not null)
         {
             Atom03SyndicationResourceAdapter.FillEntry(resource, entryNavigator, manager, this.Settings);
         }
@@ -85,7 +85,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? feedNavigator = this.Navigator.SelectSingleNode("atom:feed", manager);
 
-        if (feedNavigator != null)
+        if (feedNavigator is not null)
         {
             AtomUtility.FillCommonObjectAttributes(resource, feedNavigator);
 
@@ -93,18 +93,18 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             XPathNavigator? titleNavigator = feedNavigator.SelectSingleNode("atom:title", manager);
             XPathNavigator? modifiedNavigator = feedNavigator.SelectSingleNode("atom:modified", manager);
 
-            if (idNavigator != null)
+            if (idNavigator is not null)
             {
                 resource.Id = new AtomId();
                 resource.Id.Load(idNavigator, this.Settings);
             }
 
-            if (titleNavigator != null)
+            if (titleNavigator is not null)
             {
                 resource.Title = Atom03SyndicationResourceAdapter.CreateTextContent(titleNavigator, manager, this.Settings);
             }
 
-            if (modifiedNavigator != null)
+            if (modifiedNavigator is not null)
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(modifiedNavigator.Value, out DateTime updatedOn))
                 {
@@ -158,7 +158,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         if (string.Equals(modeAttribute, "xml", StringComparison.OrdinalIgnoreCase))
         {
             XPathNavigator? xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
-            if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
+            if (xhtmlDivNavigator is not null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
                 content.Content = xhtmlDivNavigator.Value;
             }
@@ -258,12 +258,12 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator? urlNavigator = source.SelectSingleNode("atom:url", manager);
         XPathNavigator? emailNavigator = source.SelectSingleNode("atom:email", manager);
 
-        if (nameNavigator != null)
+        if (nameNavigator is not null)
         {
             person.Name = nameNavigator.Value;
         }
 
-        if (urlNavigator != null)
+        if (urlNavigator is not null)
         {
             if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? uri))
             {
@@ -271,7 +271,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (emailNavigator != null)
+        if (emailNavigator is not null)
         {
             person.EmailAddress = emailNavigator.Value;
         }
@@ -332,7 +332,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         if (content.TextType == AtomTextConstructType.Xhtml)
         {
             XPathNavigator? xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
-            if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
+            if (xhtmlDivNavigator is not null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
                 content.Content = xhtmlDivNavigator.Value;
             }
@@ -379,18 +379,18 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator? titleNavigator = source.SelectSingleNode("atom:title", manager);
         XPathNavigator? modifiedNavigator = source.SelectSingleNode("atom:modified", manager);
 
-        if (idNavigator != null)
+        if (idNavigator is not null)
         {
             entry.Id = new AtomId();
             entry.Id.Load(idNavigator, settings);
         }
 
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             entry.Title = Atom03SyndicationResourceAdapter.CreateTextContent(titleNavigator, manager, settings);
         }
 
-        if (modifiedNavigator != null)
+        if (modifiedNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(modifiedNavigator.Value, out DateTime updatedOn))
             {
@@ -435,7 +435,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             while (authorIterator.MoveNext())
             {
                 XPathNavigator? authorNode = authorIterator.Current;
-                if (authorNode == null)
+                if (authorNode is null)
                 {
                     continue;
                 }
@@ -450,7 +450,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             while (contributorIterator.MoveNext())
             {
                 XPathNavigator? contributorNode = contributorIterator.Current;
-                if (contributorNode == null)
+                if (contributorNode is null)
                 {
                     continue;
                 }
@@ -465,7 +465,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             while (linkIterator.MoveNext())
             {
                 XPathNavigator? linkNode = linkIterator.Current;
-                if (linkNode == null)
+                if (linkNode is null)
                 {
                     continue;
                 }
@@ -504,12 +504,12 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator? createdNavigator = source.SelectSingleNode("atom:created", manager);
         XPathNavigator? summaryNavigator = source.SelectSingleNode("atom:summary", manager);
 
-        if (contentNavigator != null)
+        if (contentNavigator is not null)
         {
             entry.Content = Atom03SyndicationResourceAdapter.CreateContent(contentNavigator, manager, settings);
         }
 
-        if (createdNavigator != null)
+        if (createdNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(createdNavigator.Value, out DateTime publishedOn))
             {
@@ -517,7 +517,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (summaryNavigator != null)
+        if (summaryNavigator is not null)
         {
             entry.Summary = Atom03SyndicationResourceAdapter.CreateTextContent(summaryNavigator, manager, settings);
         }
@@ -554,7 +554,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             while (authorIterator.MoveNext())
             {
                 XPathNavigator? authorNode = authorIterator.Current;
-                if (authorNode == null)
+                if (authorNode is null)
                 {
                     continue;
                 }
@@ -569,7 +569,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             while (contributorIterator.MoveNext())
             {
                 XPathNavigator? contributorNode = contributorIterator.Current;
-                if (contributorNode == null)
+                if (contributorNode is null)
                 {
                     continue;
                 }
@@ -585,7 +585,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             while (entryIterator.MoveNext())
             {
                 XPathNavigator? entryNode = entryIterator.Current;
-                if (entryNode == null)
+                if (entryNode is null)
                 {
                     continue;
                 }
@@ -609,7 +609,7 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
             while (linkIterator.MoveNext())
             {
                 XPathNavigator? linkNode = linkIterator.Current;
-                if (linkNode == null)
+                if (linkNode is null)
                 {
                     continue;
                 }
@@ -648,17 +648,17 @@ public class Atom03SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator? copyrightNavigator = source.SelectSingleNode("atom:copyright", manager);
         XPathNavigator? taglineNavigator = source.SelectSingleNode("atom:tagline", manager);
 
-        if (generatorNavigator != null)
+        if (generatorNavigator is not null)
         {
             feed.Generator = Atom03SyndicationResourceAdapter.CreateGenerator(generatorNavigator, manager, settings);
         }
 
-        if (copyrightNavigator != null)
+        if (copyrightNavigator is not null)
         {
             feed.Rights = Atom03SyndicationResourceAdapter.CreateTextContent(copyrightNavigator, manager, settings);
         }
 
-        if (taglineNavigator != null)
+        if (taglineNavigator is not null)
         {
             feed.Subtitle = Atom03SyndicationResourceAdapter.CreateTextContent(taglineNavigator, manager, settings);
         }

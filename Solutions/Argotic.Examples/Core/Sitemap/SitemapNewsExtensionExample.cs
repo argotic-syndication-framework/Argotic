@@ -53,7 +53,7 @@ internal static class SitemapNewsExtensionExample
         foreach (SitemapUrl url in sitemap.Urls)
         {
             SitemapNewsExtension? newsExtension = url.FindExtension(SitemapNewsExtension.MatchByType) as SitemapNewsExtension;
-            if (newsExtension != null)
+            if (newsExtension is not null)
             {
                 Console.WriteLine($"URL: {url.Location}");
                 ExampleOutput.ShowSitemapNewsExtension(newsExtension);

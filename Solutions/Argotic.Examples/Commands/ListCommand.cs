@@ -19,7 +19,7 @@ internal sealed class ListCommand : Command<ListSettings>
                 c.Key.Equals(settings.Category, StringComparison.OrdinalIgnoreCase) ||
                 c.Name.Equals(settings.Category, StringComparison.OrdinalIgnoreCase));
 
-            if (matchedCategory == null)
+            if (matchedCategory is null)
             {
                 AnsiConsole.MarkupLine($"[red]Unknown category:[/] {settings.Category}");
                 AnsiConsole.MarkupLine("[dim]Available categories:[/]");

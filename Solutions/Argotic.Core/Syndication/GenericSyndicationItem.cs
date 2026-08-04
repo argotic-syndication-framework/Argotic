@@ -184,7 +184,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     {
         ArgumentNullException.ThrowIfNull(entry);
 
-        if (entry.Title != null && !string.IsNullOrEmpty(entry.Title.Content))
+        if (entry.Title is not null && !string.IsNullOrEmpty(entry.Title.Content))
         {
             itemTitle = entry.Title.Content.Trim();
         }
@@ -198,11 +198,11 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
             itemPublishedOn = entry.UpdatedOn;
         }
 
-        if (entry.Summary != null && !string.IsNullOrEmpty(entry.Summary.Content))
+        if (entry.Summary is not null && !string.IsNullOrEmpty(entry.Summary.Content))
         {
             itemSummary = entry.Summary.Content.Trim();
         }
-        else if (entry.Content != null && !string.IsNullOrEmpty(entry.Content.Content))
+        else if (entry.Content is not null && !string.IsNullOrEmpty(entry.Content.Content))
         {
             itemSummary = entry.Content.Content.Trim();
         }

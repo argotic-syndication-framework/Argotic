@@ -375,7 +375,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         XPathNavigator? titleNavigator = source.SelectSingleNode("video:title", manager);
         XPathNavigator? descriptionNavigator = source.SelectSingleNode("video:description", manager);
 
-        if (thumbnailNavigator != null && !string.IsNullOrEmpty(thumbnailNavigator.Value))
+        if (thumbnailNavigator is not null && !string.IsNullOrEmpty(thumbnailNavigator.Value))
         {
             if (Uri.TryCreate(thumbnailNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? thumbnailUrl))
             {
@@ -384,14 +384,14 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             }
         }
 
-        if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
+        if (titleNavigator is not null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
             string trimmedTitle = titleNavigator.Value.Trim();
             this.videoTitle = trimmedTitle.Length > MaxTitleLength ? trimmedTitle[..MaxTitleLength] : trimmedTitle;
             wasLoaded = true;
         }
 
-        if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
+        if (descriptionNavigator is not null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
             this.Description = descriptionNavigator.Value;
             wasLoaded = true;
@@ -422,67 +422,67 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         XPathNavigator? restrictionNavigator = source.SelectSingleNode("video:restriction", manager);
         XPathNodeIterator tagIterator = source.Select("video:tag", manager);
 
-        if (contentLocNavigator != null && Uri.TryCreate(contentLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? contentUrl))
+        if (contentLocNavigator is not null && Uri.TryCreate(contentLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? contentUrl))
         {
             this.ContentLocation = contentUrl;
             wasLoaded = true;
         }
 
-        if (playerLocNavigator != null && Uri.TryCreate(playerLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? playerUrl))
+        if (playerLocNavigator is not null && Uri.TryCreate(playerLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? playerUrl))
         {
             this.PlayerLocation = playerUrl;
             wasLoaded = true;
         }
 
-        if (durationNavigator != null && int.TryParse(durationNavigator.Value, out int duration))
+        if (durationNavigator is not null && int.TryParse(durationNavigator.Value, out int duration))
         {
             this.Duration = duration;
             wasLoaded = true;
         }
 
-        if (expirationNavigator != null && DateTime.TryParse(expirationNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out DateTime expiration))
+        if (expirationNavigator is not null && DateTime.TryParse(expirationNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out DateTime expiration))
         {
             this.ExpirationDate = expiration;
             wasLoaded = true;
         }
 
-        if (ratingNavigator != null && decimal.TryParse(ratingNavigator.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal rating))
+        if (ratingNavigator is not null && decimal.TryParse(ratingNavigator.Value, NumberStyles.Number, CultureInfo.InvariantCulture, out decimal rating))
         {
             this.Rating = rating;
             wasLoaded = true;
         }
 
-        if (viewCountNavigator != null && int.TryParse(viewCountNavigator.Value, out int viewCount))
+        if (viewCountNavigator is not null && int.TryParse(viewCountNavigator.Value, out int viewCount))
         {
             this.ViewCount = viewCount;
             wasLoaded = true;
         }
 
-        if (publicationNavigator != null && DateTime.TryParse(publicationNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out DateTime publication))
+        if (publicationNavigator is not null && DateTime.TryParse(publicationNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out DateTime publication))
         {
             this.PublicationDate = publication;
             wasLoaded = true;
         }
 
-        if (familyFriendlyNavigator != null)
+        if (familyFriendlyNavigator is not null)
         {
             this.FamilyFriendly = string.Equals(familyFriendlyNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase);
             wasLoaded = true;
         }
 
-        if (subscriptionNavigator != null)
+        if (subscriptionNavigator is not null)
         {
             this.RequiresSubscription = string.Equals(subscriptionNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase);
             wasLoaded = true;
         }
 
-        if (liveNavigator != null)
+        if (liveNavigator is not null)
         {
             this.Live = string.Equals(liveNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase);
             wasLoaded = true;
         }
 
-        if (uploaderNavigator != null)
+        if (uploaderNavigator is not null)
         {
             this.Uploader = uploaderNavigator.Value;
             string uploaderInfoAttr = uploaderNavigator.GetAttribute("info", string.Empty);
@@ -493,12 +493,12 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             wasLoaded = true;
         }
 
-        if (platformNavigator != null)
+        if (platformNavigator is not null)
         {
             wasLoaded |= LoadPlatform(platformNavigator);
         }
 
-        if (restrictionNavigator != null)
+        if (restrictionNavigator is not null)
         {
             wasLoaded |= LoadRestriction(restrictionNavigator);
         }
@@ -508,7 +508,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             while (tagIterator.MoveNext() && this.videoTags.Count < MaxTagCount)
             {
                 XPathNavigator? tagNode = tagIterator.Current;
-                if (tagNode != null && !string.IsNullOrEmpty(tagNode.Value))
+                if (tagNode is not null && !string.IsNullOrEmpty(tagNode.Value))
                 {
                     this.videoTags.Add(tagNode.Value.Trim());
                     wasLoaded = true;
@@ -522,7 +522,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             while (idIterator.MoveNext())
             {
                 XPathNavigator? idNode = idIterator.Current;
-                if (idNode == null)
+                if (idNode is null)
                 {
                     continue;
                 }
@@ -542,7 +542,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
             while (segmentIterator.MoveNext())
             {
                 XPathNavigator? segmentNode = segmentIterator.Current;
-                if (segmentNode == null)
+                if (segmentNode is null)
                 {
                     continue;
                 }
@@ -636,7 +636,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         writer.WriteStartElement("video", xmlNamespace);
 
         // Required elements
-        if (this.ThumbnailLocation != null)
+        if (this.ThumbnailLocation is not null)
         {
             writer.WriteElementString("thumbnail_loc", xmlNamespace, this.ThumbnailLocation.ToString());
         }
@@ -662,12 +662,12 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     /// </summary>
     private void WriteOptionalElements(XmlWriter writer, string xmlNamespace)
     {
-        if (this.ContentLocation != null)
+        if (this.ContentLocation is not null)
         {
             writer.WriteElementString("content_loc", xmlNamespace, this.ContentLocation.ToString());
         }
 
-        if (this.PlayerLocation != null)
+        if (this.PlayerLocation is not null)
         {
             writer.WriteElementString("player_loc", xmlNamespace, this.PlayerLocation.ToString());
         }
@@ -728,7 +728,7 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         if (!string.IsNullOrEmpty(this.Uploader))
         {
             writer.WriteStartElement("uploader", xmlNamespace);
-            if (this.UploaderInfo != null)
+            if (this.UploaderInfo is not null)
             {
                 writer.WriteAttributeString("info", this.UploaderInfo.ToString());
             }

@@ -207,7 +207,7 @@ public class SimpleListSort : IComparable<SimpleListSort>, IEquatable<SimpleList
         SimpleListSyndicationExtension extension = new();
         writer.WriteStartElement("sort", extension.XmlNamespace);
 
-        if (this.Namespace != null)
+        if (this.Namespace is not null)
         {
             writer.WriteAttributeString("ns", this.Namespace.ToString());
         }

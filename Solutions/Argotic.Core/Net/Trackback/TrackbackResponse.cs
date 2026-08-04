@@ -92,7 +92,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
 
         TrackbackResponse result = new();
         XPathNavigator? responseNavigator = source.SelectSingleNode("response");
-        if (responseNavigator != null)
+        if (responseNavigator is not null)
         {
             result.Load(responseNavigator);
         }
@@ -132,7 +132,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
             XPathNavigator? errorNavigator = source.SelectSingleNode("error");
             XPathNavigator? messageNavigator = source.SelectSingleNode("message");
 
-            if (errorNavigator != null)
+            if (errorNavigator is not null)
             {
                 if (string.Equals(errorNavigator.Value, "0", StringComparison.OrdinalIgnoreCase))
                 {
@@ -146,7 +146,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
                 }
             }
 
-            if (messageNavigator != null)
+            if (messageNavigator is not null)
             {
                 responseErrorMessage = !string.IsNullOrEmpty(messageNavigator.Value) ? messageNavigator.Value : string.Empty;
                 wasLoaded = true;

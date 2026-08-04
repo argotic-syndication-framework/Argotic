@@ -162,9 +162,9 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
 
         if (result == 0)
         {
-            if (this.Context.Sharing != null)
+            if (this.Context.Sharing is not null)
             {
-                if (other.Context.Sharing != null)
+                if (other.Context.Sharing is not null)
                 {
                     result = this.Context.Sharing.CompareTo(other.Context.Sharing);
                 }
@@ -173,7 +173,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
                     result = 1;
                 }
             }
-            else if (other.Context.Sharing != null)
+            else if (other.Context.Sharing is not null)
             {
                 result = -1;
             }
@@ -181,9 +181,9 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
 
         if (result == 0)
         {
-            if (this.Context.Synchronization != null)
+            if (this.Context.Synchronization is not null)
             {
-                if (other.Context.Synchronization != null)
+                if (other.Context.Synchronization is not null)
                 {
                     result = this.Context.Synchronization.CompareTo(other.Context.Synchronization);
                 }
@@ -192,7 +192,7 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
                     result = 1;
                 }
             }
-            else if (other.Context.Synchronization != null)
+            else if (other.Context.Synchronization is not null)
             {
                 result = -1;
             }

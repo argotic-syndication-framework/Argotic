@@ -430,7 +430,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
         YahooMediaSyndicationExtension extension = new();
         writer.WriteStartElement("content", extension.XmlNamespace);
 
-        if (this.Url != null)
+        if (this.Url is not null)
         {
             writer.WriteAttributeString("url", this.Url.ToString());
         }
@@ -495,7 +495,7 @@ public class YahooMediaContent : IComparable<YahooMediaContent>, IEquatable<Yaho
             writer.WriteAttributeString("width", this.Width.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.Language != null)
+        if (this.Language is not null)
         {
             writer.WriteAttributeString("lang", this.Language.Name);
         }

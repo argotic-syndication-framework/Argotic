@@ -225,7 +225,7 @@ internal static class BlogMLUtility
         if (source.HasChildren)
         {
             XPathNavigator? titleNavigator = source.SelectSingleNode("blog:title", manager);
-            if (titleNavigator != null)
+            if (titleNavigator is not null)
             {
                 BlogMLTextConstruct title = new();
                 if (title.Load(titleNavigator))
@@ -311,7 +311,7 @@ internal static class BlogMLUtility
         if (source.HasChildren)
         {
             XPathNavigator? titleNavigator = source.SelectSingleNode("blog:title", manager);
-            if (titleNavigator != null)
+            if (titleNavigator is not null)
             {
                 BlogMLTextConstruct title = new();
                 if (title.Load(titleNavigator, settings))

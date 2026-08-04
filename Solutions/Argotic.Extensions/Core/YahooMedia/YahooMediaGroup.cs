@@ -285,7 +285,7 @@ public class YahooMediaGroup : IComparable<YahooMediaGroup>, IEquatable<YahooMed
                 while (contentIterator.MoveNext())
                 {
                     XPathNavigator? contentNode = contentIterator.Current;
-                    if (contentNode == null)
+                    if (contentNode is null)
                     {
                         continue;
                     }

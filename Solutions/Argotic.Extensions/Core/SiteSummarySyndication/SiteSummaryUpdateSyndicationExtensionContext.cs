@@ -76,7 +76,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
             XPathNavigator? updateFrequencyNavigator = source.SelectSingleNode("sy:updateFrequency", manager);
             XPathNavigator? updateBaseNavigator = source.SelectSingleNode("sy:updateBase", manager);
 
-            if (updatePeriodNavigator != null && !string.IsNullOrEmpty(updatePeriodNavigator.Value))
+            if (updatePeriodNavigator is not null && !string.IsNullOrEmpty(updatePeriodNavigator.Value))
             {
                 SiteSummaryUpdatePeriod period = SiteSummaryUpdateSyndicationExtension.PeriodByName(updatePeriodNavigator.Value);
                 if (period != SiteSummaryUpdatePeriod.None)
@@ -86,7 +86,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
                 }
             }
 
-            if (updateFrequencyNavigator != null)
+            if (updateFrequencyNavigator is not null)
             {
                 if (int.TryParse(updateFrequencyNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int frequency))
                 {
@@ -95,7 +95,7 @@ public class SiteSummaryUpdateSyndicationExtensionContext
                 }
             }
 
-            if (updateBaseNavigator != null)
+            if (updateBaseNavigator is not null)
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updateBaseNavigator.Value, out DateTime updateBase))
                 {

@@ -76,7 +76,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
         XPathNavigator? windowBottomNavigator = source.SelectSingleNode("windowBottom");
         XPathNavigator? windowRightNavigator = source.SelectSingleNode("windowRight");
 
-        if (windowTopNavigator != null)
+        if (windowTopNavigator is not null)
         {
             if (int.TryParse(windowTopNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int top))
             {
@@ -85,7 +85,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
             }
         }
 
-        if (windowLeftNavigator != null)
+        if (windowLeftNavigator is not null)
         {
             if (int.TryParse(windowLeftNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int left))
             {
@@ -94,7 +94,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
             }
         }
 
-        if (windowBottomNavigator != null)
+        if (windowBottomNavigator is not null)
         {
             if (int.TryParse(windowBottomNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int bottom))
             {
@@ -103,7 +103,7 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
             }
         }
 
-        if (windowRightNavigator != null)
+        if (windowRightNavigator is not null)
         {
             if (int.TryParse(windowRightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int right))
             {

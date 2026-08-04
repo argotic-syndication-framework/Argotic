@@ -31,7 +31,7 @@ internal static class SimpleListSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             SimpleListSyndicationExtension? channelExtension = feed.Channel.FindExtension(SimpleListSyndicationExtension.MatchByType) as SimpleListSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowSimpleListExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class SimpleListSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 SimpleListSyndicationExtension? itemExtension = item.FindExtension(SimpleListSyndicationExtension.MatchByType) as SimpleListSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

@@ -31,7 +31,7 @@ internal static class FeedHistorySyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             FeedHistorySyndicationExtension? channelExtension = feed.Channel.FindExtension(FeedHistorySyndicationExtension.MatchByType) as FeedHistorySyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowFeedHistoryExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class FeedHistorySyndicationExtensionExample
             if (item.HasExtensions)
             {
                 FeedHistorySyndicationExtension? itemExtension = item.FindExtension(FeedHistorySyndicationExtension.MatchByType) as FeedHistorySyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

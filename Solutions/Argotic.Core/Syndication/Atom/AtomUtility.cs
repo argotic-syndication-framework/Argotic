@@ -144,11 +144,11 @@ internal static class AtomUtility
     {
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(writer);
-        if (source.BaseUri != null)
+        if (source.BaseUri is not null)
         {
             writer.WriteAttributeString("xml", "base", XML_NAMESPACE, source.BaseUri.ToString());
         }
-        if (source.Language != null)
+        if (source.Language is not null)
         {
             writer.WriteAttributeString("xml", "lang", XML_NAMESPACE, source.Language.Name);
         }

@@ -376,7 +376,7 @@ public class SitemapIndexTests
         {
             writer.WriteStartElement("sitemap", SitemapUtility.SitemapNamespace);
             writer.WriteElementString("loc", SitemapUtility.SitemapNamespace, sitemap.loc);
-            if (sitemap.lastmod != null)
+            if (sitemap.lastmod is not null)
                 writer.WriteElementString("lastmod", SitemapUtility.SitemapNamespace, sitemap.lastmod);
             writer.WriteEndElement();
         }

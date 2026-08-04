@@ -93,7 +93,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
             XPathNavigator? formatNavigator = source.SelectSingleNode("content:format", manager);
             XPathNavigator? encodingNavigator = source.SelectSingleNode("content:encoding", manager);
 
-            if (formatNavigator != null)
+            if (formatNavigator is not null)
             {
                 if (Uri.TryCreate(formatNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? format))
                 {
@@ -102,7 +102,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
                 }
             }
 
-            if (encodingNavigator != null)
+            if (encodingNavigator is not null)
             {
                 if (Uri.TryCreate(encodingNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? encoding))
                 {
@@ -134,7 +134,7 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
 
         writer.WriteElementString("format", extension.XmlNamespace, this.Format?.ToString() ?? string.Empty);
 
-        if (this.Encoding != null)
+        if (this.Encoding is not null)
         {
             writer.WriteElementString("encoding", extension.XmlNamespace, this.Encoding.ToString());
         }

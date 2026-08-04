@@ -47,7 +47,7 @@ public class WellFormedWebCommentsSyndicationExtensionContext
             XPathNavigator? commentNavigator = source.SelectSingleNode("wfw:comment", manager);
             XPathNavigator? commentRssNavigator = source.SelectSingleNode("wfw:commentRss", manager);
 
-            if (commentNavigator != null)
+            if (commentNavigator is not null)
             {
                 if (Uri.TryCreate(commentNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? comments))
                 {
@@ -59,7 +59,7 @@ public class WellFormedWebCommentsSyndicationExtensionContext
             // Early in specification, there was a typo that incorrectly named the comment feed element, this handles the scenario where publisher used incorrect element name
             commentRssNavigator ??= source.SelectSingleNode("wfw:commentRSS", manager);
 
-            if (commentRssNavigator != null)
+            if (commentRssNavigator is not null)
             {
                 if (Uri.TryCreate(commentRssNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? commentsFeed))
                 {
@@ -84,12 +84,12 @@ public class WellFormedWebCommentsSyndicationExtensionContext
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
-        if (this.Comments != null)
+        if (this.Comments is not null)
         {
             writer.WriteElementString("comment", xmlNamespace, this.Comments.ToString());
         }
 
-        if (this.CommentsFeed != null)
+        if (this.CommentsFeed is not null)
         {
             writer.WriteElementString("commentRss", xmlNamespace, this.CommentsFeed.ToString());
         }

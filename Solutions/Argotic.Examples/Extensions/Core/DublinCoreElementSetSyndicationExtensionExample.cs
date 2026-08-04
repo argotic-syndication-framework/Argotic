@@ -31,7 +31,7 @@ internal static class DublinCoreElementSetSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             DublinCoreElementSetSyndicationExtension? channelExtension = feed.Channel.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowDublinCoreExtension(channelExtension);
             }
@@ -42,14 +42,14 @@ internal static class DublinCoreElementSetSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 DublinCoreElementSetSyndicationExtension? itemExtension = item.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) as DublinCoreElementSetSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }
             }
         }
 
-        int count = feed.Channel.Items.Count(i => i.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) != null);
+        int count = feed.Channel.Items.Count(i => i.FindExtension(DublinCoreElementSetSyndicationExtension.MatchByType) is not null);
         ExampleOutput.ShowItemsWithExtension(count, feed.Channel.Items.Count, "DublinCore");
 
         // By default the framework will automatically determine what XML namespace attributes (xmlns) to write

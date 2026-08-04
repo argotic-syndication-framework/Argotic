@@ -29,7 +29,7 @@ public sealed class MimeMediaTypeAttribute : Attribute, IComparable<MimeMediaTyp
     public string Documentation
     {
         get => mimeMediaDocumentation?.ToString() ?? string.Empty;
-        set => mimeMediaDocumentation = value != null && Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out Uri? url) ? url : null;
+        set => mimeMediaDocumentation = value is not null && Uri.TryCreate(value, UriKind.RelativeOrAbsolute, out Uri? url) ? url : null;
     }
 
     /// <summary>

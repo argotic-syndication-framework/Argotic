@@ -46,7 +46,7 @@ public class CreativeCommonsSyndicationExtensionContext
                 while (licenseIterator.MoveNext())
                 {
                     XPathNavigator? licenseNode = licenseIterator.Current;
-                    if (licenseNode == null)
+                    if (licenseNode is null)
                     {
                         continue;
                     }

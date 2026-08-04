@@ -192,7 +192,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
         if (source.HasChildren)
         {
             XPathNavigator? contentNavigator = source.SelectSingleNode("blog:content", manager);
-            if (contentNavigator != null)
+            if (contentNavigator is not null)
             {
                 BlogMLTextConstruct content = new();
                 if (content.Load(contentNavigator))
@@ -260,7 +260,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
         if (source.HasChildren)
         {
             XPathNavigator? contentNavigator = source.SelectSingleNode("blog:content", manager);
-            if (contentNavigator != null)
+            if (contentNavigator is not null)
             {
                 BlogMLTextConstruct content = new();
                 if (content.Load(contentNavigator))
@@ -295,7 +295,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
             writer.WriteAttributeString("user-email", this.UserEmailAddress);
         }
 
-        if (this.UserUrl != null)
+        if (this.UserUrl is not null)
         {
             writer.WriteAttributeString("user-url", this.UserUrl.ToString());
         }

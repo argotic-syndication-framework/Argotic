@@ -31,7 +31,7 @@ internal static class ITunesSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             ITunesSyndicationExtension? channelExtension = feed.Channel.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowITunesExtension(channelExtension);
             }
@@ -42,14 +42,14 @@ internal static class ITunesSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 ITunesSyndicationExtension? itemExtension = item.FindExtension(ITunesSyndicationExtension.MatchByType) as ITunesSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }
             }
         }
 
-        int count = feed.Channel.Items.Count(i => i.FindExtension(ITunesSyndicationExtension.MatchByType) != null);
+        int count = feed.Channel.Items.Count(i => i.FindExtension(ITunesSyndicationExtension.MatchByType) is not null);
         ExampleOutput.ShowItemsWithExtension(count, feed.Channel.Items.Count, "iTunes");
 
         // By default the framework will automatically determine what XML namespace attributes (xmlns) to write

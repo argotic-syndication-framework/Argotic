@@ -126,7 +126,7 @@ public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleLi
         SimpleListSyndicationExtension extension = new();
         writer.WriteStartElement("group", extension.XmlNamespace);
 
-        if (this.Namespace != null)
+        if (this.Namespace is not null)
         {
             writer.WriteAttributeString("ns", this.Namespace.ToString());
         }

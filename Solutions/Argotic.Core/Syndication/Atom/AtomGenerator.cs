@@ -199,7 +199,7 @@ public class AtomGenerator : IAtomCommonObjectAttributes, IComparable<AtomGenera
         writer.WriteStartElement("generator", AtomUtility.AtomNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (this.Uri != null)
+        if (this.Uri is not null)
         {
             writer.WriteAttributeString("uri", this.Uri.ToString());
         }

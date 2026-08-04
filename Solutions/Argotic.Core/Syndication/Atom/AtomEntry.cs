@@ -408,10 +408,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceLoadSettings();
-        }
+        settings ??= new SyndicationResourceLoadSettings();
 
         XPathNavigator navigator = source.CreateNavigator()
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
@@ -453,7 +450,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings != null)
+        if (settings is not null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
         }
@@ -584,10 +581,7 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceSaveSettings();
-        }
+        settings ??= new SyndicationResourceSaveSettings();
 
         XmlWriterSettings writerSettings = new()
         {
@@ -640,27 +634,27 @@ public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExt
         {
             SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
 
-            if (this.Content != null)
+            if (this.Content is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Content, settings.SupportedExtensions);
             }
-            if (this.Id != null)
+            if (this.Id is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Id, settings.SupportedExtensions);
             }
-            if (this.Rights != null)
+            if (this.Rights is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Rights, settings.SupportedExtensions);
             }
-            if (this.Source != null)
+            if (this.Source is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Source, settings.SupportedExtensions);
             }
-            if (this.Summary != null)
+            if (this.Summary is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Summary, settings.SupportedExtensions);
             }
-            if (this.Title != null)
+            if (this.Title is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Title, settings.SupportedExtensions);
             }

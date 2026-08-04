@@ -137,13 +137,13 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
         XPathNavigator? uriNavigator = source.SelectSingleNode("atom:uri", manager);
         XPathNavigator? emailNavigator = source.SelectSingleNode("atom:email", manager);
 
-        if (nameNavigator != null)
+        if (nameNavigator is not null)
         {
             this.Name = nameNavigator.Value;
             wasLoaded = true;
         }
 
-        if (uriNavigator != null)
+        if (uriNavigator is not null)
         {
             if (Uri.TryCreate(uriNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? uri))
             {
@@ -152,7 +152,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
             }
         }
 
-        if (emailNavigator != null)
+        if (emailNavigator is not null)
         {
             this.EmailAddress = emailNavigator.Value;
             wasLoaded = true;
@@ -200,7 +200,7 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
 
         writer.WriteElementString("name", AtomUtility.AtomNamespace, this.Name);
 
-        if (this.Uri != null)
+        if (this.Uri is not null)
         {
             writer.WriteElementString("uri", AtomUtility.AtomNamespace, this.Uri.ToString());
         }

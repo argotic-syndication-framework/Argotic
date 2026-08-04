@@ -566,10 +566,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceLoadSettings();
-        }
+        settings ??= new SyndicationResourceLoadSettings();
 
         XPathNavigator navigator = source.CreateNavigator()
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
@@ -611,7 +608,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings != null)
+        if (settings is not null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
         }
@@ -745,10 +742,7 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceSaveSettings();
-        }
+        settings ??= new SyndicationResourceSaveSettings();
 
         XmlWriterSettings writerSettings = new()
         {
@@ -802,31 +796,31 @@ public class AtomFeed : ISyndicationResource, IAtomCommonObjectAttributes, IExte
         {
             SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
 
-            if (this.Generator != null)
+            if (this.Generator is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Generator, settings.SupportedExtensions);
             }
-            if (this.Icon != null)
+            if (this.Icon is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Icon, settings.SupportedExtensions);
             }
-            if (this.Id != null)
+            if (this.Id is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Id, settings.SupportedExtensions);
             }
-            if (this.Logo != null)
+            if (this.Logo is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Logo, settings.SupportedExtensions);
             }
-            if (this.Rights != null)
+            if (this.Rights is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Rights, settings.SupportedExtensions);
             }
-            if (this.Subtitle != null)
+            if (this.Subtitle is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Subtitle, settings.SupportedExtensions);
             }
-            if (this.Title != null)
+            if (this.Title is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Title, settings.SupportedExtensions);
             }

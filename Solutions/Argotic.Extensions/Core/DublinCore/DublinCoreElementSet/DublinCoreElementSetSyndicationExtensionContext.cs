@@ -427,7 +427,7 @@ public class DublinCoreElementSetSyndicationExtensionContext
             writer.WriteElementString("identifier", xmlNamespace, this.Identifier);
         }
 
-        if (this.Language != null)
+        if (this.Language is not null)
         {
             writer.WriteElementString("language", xmlNamespace, this.Language.Name);
         }
@@ -490,19 +490,19 @@ public class DublinCoreElementSetSyndicationExtensionContext
         XPathNavigator? rightsNavigator = source.SelectSingleNode("dc:rights", manager);
         XPathNavigator? titleNavigator = source.SelectSingleNode("dc:title", manager);
 
-        if (contributorNavigator != null && !string.IsNullOrEmpty(contributorNavigator.Value))
+        if (contributorNavigator is not null && !string.IsNullOrEmpty(contributorNavigator.Value))
         {
             this.Contributor = contributorNavigator.Value;
             wasLoaded = true;
         }
 
-        if (creatorNavigator != null && !string.IsNullOrEmpty(creatorNavigator.Value))
+        if (creatorNavigator is not null && !string.IsNullOrEmpty(creatorNavigator.Value))
         {
             this.Creator = creatorNavigator.Value;
             wasLoaded = true;
         }
 
-        if (dateNavigator != null)
+        if (dateNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateNavigator.Value, out DateTime date))
             {
@@ -511,13 +511,13 @@ public class DublinCoreElementSetSyndicationExtensionContext
             }
         }
 
-        if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
+        if (descriptionNavigator is not null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
             this.Description = descriptionNavigator.Value;
             wasLoaded = true;
         }
 
-        if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
+        if (languageNavigator is not null && !string.IsNullOrEmpty(languageNavigator.Value))
         {
             try
             {
@@ -531,19 +531,19 @@ public class DublinCoreElementSetSyndicationExtensionContext
             }
         }
 
-        if (publisherNavigator != null && !string.IsNullOrEmpty(publisherNavigator.Value))
+        if (publisherNavigator is not null && !string.IsNullOrEmpty(publisherNavigator.Value))
         {
             this.Publisher = publisherNavigator.Value;
             wasLoaded = true;
         }
 
-        if (rightsNavigator != null && !string.IsNullOrEmpty(rightsNavigator.Value))
+        if (rightsNavigator is not null && !string.IsNullOrEmpty(rightsNavigator.Value))
         {
             this.Rights = rightsNavigator.Value;
             wasLoaded = true;
         }
 
-        if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
+        if (titleNavigator is not null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
             this.Title = titleNavigator.Value;
             wasLoaded = true;
@@ -573,43 +573,43 @@ public class DublinCoreElementSetSyndicationExtensionContext
         XPathNavigator? subjectNavigator = source.SelectSingleNode("dc:subject", manager);
         XPathNavigator? typeNavigator = source.SelectSingleNode("dc:type", manager);
 
-        if (coverageNavigator != null && !string.IsNullOrEmpty(coverageNavigator.Value))
+        if (coverageNavigator is not null && !string.IsNullOrEmpty(coverageNavigator.Value))
         {
             this.Coverage = coverageNavigator.Value;
             wasLoaded = true;
         }
 
-        if (formatNavigator != null && !string.IsNullOrEmpty(formatNavigator.Value))
+        if (formatNavigator is not null && !string.IsNullOrEmpty(formatNavigator.Value))
         {
             this.Format = formatNavigator.Value;
             wasLoaded = true;
         }
 
-        if (identifierNavigator != null && !string.IsNullOrEmpty(identifierNavigator.Value))
+        if (identifierNavigator is not null && !string.IsNullOrEmpty(identifierNavigator.Value))
         {
             this.Identifier = identifierNavigator.Value;
             wasLoaded = true;
         }
 
-        if (relationNavigator != null && !string.IsNullOrEmpty(relationNavigator.Value))
+        if (relationNavigator is not null && !string.IsNullOrEmpty(relationNavigator.Value))
         {
             this.Relation = relationNavigator.Value;
             wasLoaded = true;
         }
 
-        if (sourceNavigator != null && !string.IsNullOrEmpty(sourceNavigator.Value))
+        if (sourceNavigator is not null && !string.IsNullOrEmpty(sourceNavigator.Value))
         {
             this.Source = sourceNavigator.Value;
             wasLoaded = true;
         }
 
-        if (subjectNavigator != null && !string.IsNullOrEmpty(subjectNavigator.Value))
+        if (subjectNavigator is not null && !string.IsNullOrEmpty(subjectNavigator.Value))
         {
             this.Subject = subjectNavigator.Value;
             wasLoaded = true;
         }
 
-        if (typeNavigator != null && !string.IsNullOrEmpty(typeNavigator.Value))
+        if (typeNavigator is not null && !string.IsNullOrEmpty(typeNavigator.Value))
         {
             DublinCoreTypeVocabularies typeVocabulary = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName(typeNavigator.Value);
             if (typeVocabulary != DublinCoreTypeVocabularies.None)

@@ -334,10 +334,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
-        if (settings == null)
-        {
-            settings = new SyndicationResourceLoadSettings();
-        }
+        settings ??= new SyndicationResourceLoadSettings();
         XPathNavigator navigator = source.CreateNavigator()
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
@@ -377,7 +374,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
-        if (settings != null)
+        if (settings is not null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
         }
@@ -453,10 +450,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceSaveSettings();
-        }
+        settings ??= new SyndicationResourceSaveSettings();
         XmlWriterSettings writerSettings = new()
         {
             OmitXmlDeclaration = false,
@@ -514,7 +508,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
             writer.WriteAttributeString("date-created", SyndicationDateTimeUtility.ToRfc3339DateTime(this.GeneratedOn));
         }
 
-        if (this.RootUrl != null)
+        if (this.RootUrl is not null)
         {
             writer.WriteAttributeString("root-url", this.RootUrl.ToString());
         }
@@ -581,11 +575,11 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
 
         SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
 
-        if (this.Subtitle != null)
+        if (this.Subtitle is not null)
         {
             SyndicationExtensionAdapter.FillExtensionTypes(this.Subtitle, settings.SupportedExtensions);
         }
-        if (this.Title != null)
+        if (this.Title is not null)
         {
             SyndicationExtensionAdapter.FillExtensionTypes(this.Title, settings.SupportedExtensions);
         }
@@ -594,7 +588,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             SyndicationExtensionAdapter.FillExtensionTypes(author, settings.SupportedExtensions);
 
-            if (author.Title != null)
+            if (author.Title is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(author.Title, settings.SupportedExtensions);
             }
@@ -604,7 +598,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             SyndicationExtensionAdapter.FillExtensionTypes(category, settings.SupportedExtensions);
 
-            if (category.Title != null)
+            if (category.Title is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(category.Title, settings.SupportedExtensions);
             }
@@ -614,19 +608,19 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         {
             SyndicationExtensionAdapter.FillExtensionTypes(post, settings.SupportedExtensions);
 
-            if (post.Content != null)
+            if (post.Content is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(post.Content, settings.SupportedExtensions);
             }
-            if (post.Excerpt != null)
+            if (post.Excerpt is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(post.Excerpt, settings.SupportedExtensions);
             }
-            if (post.Name != null)
+            if (post.Name is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(post.Name, settings.SupportedExtensions);
             }
-            if (post.Title != null)
+            if (post.Title is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(post.Title, settings.SupportedExtensions);
             }
@@ -640,11 +634,11 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(comment, settings.SupportedExtensions);
 
-                if (comment.Content != null)
+                if (comment.Content is not null)
                 {
                     SyndicationExtensionAdapter.FillExtensionTypes(comment.Content, settings.SupportedExtensions);
                 }
-                if (comment.Title != null)
+                if (comment.Title is not null)
                 {
                     SyndicationExtensionAdapter.FillExtensionTypes(comment.Title, settings.SupportedExtensions);
                 }

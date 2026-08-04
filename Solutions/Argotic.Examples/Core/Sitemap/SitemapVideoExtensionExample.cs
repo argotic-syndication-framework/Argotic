@@ -75,7 +75,7 @@ internal static class SitemapVideoExtensionExample
         foreach (SitemapUrl url in sitemap.Urls)
         {
             SitemapVideoExtension? videoExtension = url.FindExtension(SitemapVideoExtension.MatchByType) as SitemapVideoExtension;
-            if (videoExtension != null && videoExtension.Videos.Count > 0)
+            if (videoExtension is not null && videoExtension.Videos.Count > 0)
             {
                 Console.WriteLine($"URL: {url.Location}");
                 foreach (SitemapVideo video in videoExtension.Videos)

@@ -126,12 +126,12 @@ public class YahooMediaCategory : IComparable<YahooMediaCategory>, IEquatable<Ya
         YahooMediaSyndicationExtension extension = new();
         writer.WriteStartElement("category", extension.XmlNamespace);
 
-        if (this.Scheme != null)
+        if (this.Scheme is not null)
         {
             writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }
 
-        if (this.Label != null)
+        if (this.Label is not null)
         {
             writer.WriteAttributeString("label", this.Label);
         }

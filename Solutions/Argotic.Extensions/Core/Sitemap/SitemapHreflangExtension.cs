@@ -78,7 +78,7 @@ public class SitemapHreflangExtension : SyndicationExtension, IComparable<Sitema
             while (linkIterator.MoveNext())
             {
                 XPathNavigator? linkNode = linkIterator.Current;
-                if (linkNode == null)
+                if (linkNode is null)
                 {
                     continue;
                 }

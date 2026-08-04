@@ -122,7 +122,7 @@ public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooM
         YahooMediaSyndicationExtension extension = new();
         writer.WriteStartElement("rating", extension.XmlNamespace);
 
-        if (this.Scheme != null)
+        if (this.Scheme is not null)
         {
             writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }

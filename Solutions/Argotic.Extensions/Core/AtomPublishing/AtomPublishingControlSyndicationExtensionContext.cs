@@ -106,7 +106,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         if (controlNavigator.HasChildren)
         {
             XPathNavigator? draftNavigator = controlNavigator.SelectSingleNode("app:draft", manager);
-            if (draftNavigator != null && !string.IsNullOrEmpty(draftNavigator.Value))
+            if (draftNavigator is not null && !string.IsNullOrEmpty(draftNavigator.Value))
             {
                 if (string.Equals(draftNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase))
                 {

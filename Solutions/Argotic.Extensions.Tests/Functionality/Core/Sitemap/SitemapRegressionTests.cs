@@ -32,7 +32,7 @@ public class SitemapRegressionTests
     {
         Argotic.Syndication.Sitemap sitemap = new();
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
-        if (settings == null)
+        if (settings is null)
         {
             sitemap.Load(stream);
         }

@@ -155,7 +155,7 @@ internal static class SyndicationDiscoveryUtilityExample
         Uri source = new("https://devblogs.microsoft.com/dotnet/announcing-dotnet-10/");
 
         Uri? pingbackServer = await SyndicationDiscoveryUtility.LocatePingbackNotificationServerAsync(source).ConfigureAwait(false);
-        if (pingbackServer != null)
+        if (pingbackServer is not null)
         {
             Argotic.Net.XmlRpcClient client = new(pingbackServer);
             Argotic.Net.XmlRpcMessage message = new();

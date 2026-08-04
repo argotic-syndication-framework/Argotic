@@ -78,7 +78,7 @@ public class PingbackSyndicationExtensionContext
             XPathNavigator? targetNavigator = source.SelectSingleNode("pingback:target", manager);
             XPathNodeIterator aboutIterator = source.Select("pingback:about", manager);
 
-            if (serverNavigator != null)
+            if (serverNavigator is not null)
             {
                 if (Uri.TryCreate(serverNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? server))
                 {
@@ -87,7 +87,7 @@ public class PingbackSyndicationExtensionContext
                 }
             }
 
-            if (targetNavigator != null)
+            if (targetNavigator is not null)
             {
                 if (Uri.TryCreate(targetNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? target))
                 {
@@ -101,7 +101,7 @@ public class PingbackSyndicationExtensionContext
                 while (aboutIterator.MoveNext())
                 {
                     XPathNavigator? aboutNode = aboutIterator.Current;
-                    if (aboutNode == null)
+                    if (aboutNode is null)
                     {
                         continue;
                     }
@@ -135,7 +135,7 @@ public class PingbackSyndicationExtensionContext
 
         foreach (Uri about in this.Abouts)
         {
-            if (about != null)
+            if (about is not null)
             {
                 writer.WriteElementString("about", xmlNamespace, about.ToString());
             }

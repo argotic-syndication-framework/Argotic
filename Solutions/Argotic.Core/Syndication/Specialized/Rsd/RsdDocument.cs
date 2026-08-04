@@ -304,10 +304,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
-        if (settings == null)
-        {
-            settings = new SyndicationResourceLoadSettings();
-        }
+        settings ??= new SyndicationResourceLoadSettings();
         XPathNavigator navigator = source.CreateNavigator()
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
@@ -347,7 +344,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
-        if (settings != null)
+        if (settings is not null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
         }
@@ -423,10 +420,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceSaveSettings();
-        }
+        settings ??= new SyndicationResourceSaveSettings();
         XmlWriterSettings writerSettings = new()
         {
             OmitXmlDeclaration = false,
@@ -491,12 +485,12 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
             writer.WriteElementString("engineName", RsdUtility.RsdNamespace, this.EngineName);
         }
 
-        if (this.EngineLink != null)
+        if (this.EngineLink is not null)
         {
             writer.WriteElementString("engineLink", RsdUtility.RsdNamespace, this.EngineLink.ToString());
         }
 
-        if (this.Homepage != null)
+        if (this.Homepage is not null)
         {
             writer.WriteElementString("homePageLink", RsdUtility.RsdNamespace, this.Homepage.ToString());
         }

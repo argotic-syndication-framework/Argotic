@@ -107,13 +107,13 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
         XPathNavigator? nameNavigator = source.SelectSingleNode("news:name", manager);
         XPathNavigator? languageNavigator = source.SelectSingleNode("news:language", manager);
 
-        if (nameNavigator != null && !string.IsNullOrEmpty(nameNavigator.Value))
+        if (nameNavigator is not null && !string.IsNullOrEmpty(nameNavigator.Value))
         {
             this.publicationName = nameNavigator.Value.Trim();
             wasLoaded = true;
         }
 
-        if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
+        if (languageNavigator is not null && !string.IsNullOrEmpty(languageNavigator.Value))
         {
             this.publicationLanguage = languageNavigator.Value.Trim();
             wasLoaded = true;

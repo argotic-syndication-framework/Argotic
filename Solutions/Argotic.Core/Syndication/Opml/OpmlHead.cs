@@ -133,13 +133,13 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
         XPathNavigator? expansionStateNavigator = source.SelectSingleNode("expansionState");
         XPathNavigator? verticalScrollStateNavigator = source.SelectSingleNode("vertScrollState");
 
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             this.Title = titleNavigator.Value;
             wasLoaded = true;
         }
 
-        if (dateCreatedNavigator != null)
+        if (dateCreatedNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(dateCreatedNavigator.Value, out DateTime createdOn))
             {
@@ -148,7 +148,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
             }
         }
 
-        if (dateModifiedNavigator != null)
+        if (dateModifiedNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(dateModifiedNavigator.Value, out DateTime modifiedOn))
             {
@@ -163,7 +163,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
             this.Owner = owner;
         }
 
-        if (expansionStateNavigator != null && !string.IsNullOrEmpty(expansionStateNavigator.Value))
+        if (expansionStateNavigator is not null && !string.IsNullOrEmpty(expansionStateNavigator.Value))
         {
             if (expansionStateNavigator.Value.Contains(',', StringComparison.Ordinal))
             {
@@ -187,7 +187,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
             }
         }
 
-        if (verticalScrollStateNavigator != null)
+        if (verticalScrollStateNavigator is not null)
         {
             if (int.TryParse(verticalScrollStateNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int verticalScrollState))
             {
@@ -254,7 +254,7 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
 
         this.Owner?.WriteTo(writer);
 
-        if (this.Documentation != null)
+        if (this.Documentation is not null)
         {
             writer.WriteElementString("docs", this.Documentation.ToString());
         }

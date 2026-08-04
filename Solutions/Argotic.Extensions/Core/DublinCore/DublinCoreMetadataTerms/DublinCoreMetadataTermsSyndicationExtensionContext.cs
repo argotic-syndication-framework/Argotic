@@ -1477,61 +1477,61 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
             XPathNavigator? bibliographicCitationNavigator = source.SelectSingleNode("dcterms:bibliographicCitation", manager);
             XPathNavigator? conformsToNavigator = source.SelectSingleNode("dcterms:conformsTo", manager);
 
-            if (abstractNavigator != null && !string.IsNullOrEmpty(abstractNavigator.Value))
+            if (abstractNavigator is not null && !string.IsNullOrEmpty(abstractNavigator.Value))
             {
                 this.Abstract = abstractNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (accessRightsNavigator != null && !string.IsNullOrEmpty(accessRightsNavigator.Value))
+            if (accessRightsNavigator is not null && !string.IsNullOrEmpty(accessRightsNavigator.Value))
             {
                 this.AccessRights = accessRightsNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (accrualMethodNavigator != null && !string.IsNullOrEmpty(accrualMethodNavigator.Value))
+            if (accrualMethodNavigator is not null && !string.IsNullOrEmpty(accrualMethodNavigator.Value))
             {
                 this.AccrualMethod = accrualMethodNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (accrualPeriodicityNavigator != null && !string.IsNullOrEmpty(accrualPeriodicityNavigator.Value))
+            if (accrualPeriodicityNavigator is not null && !string.IsNullOrEmpty(accrualPeriodicityNavigator.Value))
             {
                 this.AccrualPeriodicity = accrualPeriodicityNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (accrualPolicyNavigator != null && !string.IsNullOrEmpty(accrualPolicyNavigator.Value))
+            if (accrualPolicyNavigator is not null && !string.IsNullOrEmpty(accrualPolicyNavigator.Value))
             {
                 this.AccrualPolicy = accrualPolicyNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (alternativeNavigator != null && !string.IsNullOrEmpty(alternativeNavigator.Value))
+            if (alternativeNavigator is not null && !string.IsNullOrEmpty(alternativeNavigator.Value))
             {
                 this.AlternativeTitle = alternativeNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (audienceNavigator != null && !string.IsNullOrEmpty(audienceNavigator.Value))
+            if (audienceNavigator is not null && !string.IsNullOrEmpty(audienceNavigator.Value))
             {
                 this.Audience = audienceNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (availableNavigator != null && !string.IsNullOrEmpty(availableNavigator.Value))
+            if (availableNavigator is not null && !string.IsNullOrEmpty(availableNavigator.Value))
             {
                 this.DateAvailable = availableNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (bibliographicCitationNavigator != null && !string.IsNullOrEmpty(bibliographicCitationNavigator.Value))
+            if (bibliographicCitationNavigator is not null && !string.IsNullOrEmpty(bibliographicCitationNavigator.Value))
             {
                 this.BibliographicCitation = bibliographicCitationNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (conformsToNavigator != null && !string.IsNullOrEmpty(conformsToNavigator.Value))
+            if (conformsToNavigator is not null && !string.IsNullOrEmpty(conformsToNavigator.Value))
             {
                 this.ConformsTo = conformsToNavigator.Value;
                 wasLoaded = true;
@@ -1567,19 +1567,19 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
             XPathNavigator? descriptionNavigator = source.SelectSingleNode("dcterms:description", manager);
             XPathNavigator? educationLevelNavigator = source.SelectSingleNode("dcterms:educationLevel", manager);
 
-            if (contributorNavigator != null && !string.IsNullOrEmpty(contributorNavigator.Value))
+            if (contributorNavigator is not null && !string.IsNullOrEmpty(contributorNavigator.Value))
             {
                 this.Contributor = contributorNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (coverageNavigator != null && !string.IsNullOrEmpty(coverageNavigator.Value))
+            if (coverageNavigator is not null && !string.IsNullOrEmpty(coverageNavigator.Value))
             {
                 this.Coverage = coverageNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (createdNavigator != null)
+            if (createdNavigator is not null)
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(createdNavigator.Value, out DateTime createdOn))
                 {
@@ -1588,13 +1588,13 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
                 }
             }
 
-            if (creatorNavigator != null && !string.IsNullOrEmpty(creatorNavigator.Value))
+            if (creatorNavigator is not null && !string.IsNullOrEmpty(creatorNavigator.Value))
             {
                 this.Creator = creatorNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (dateNavigator != null)
+            if (dateNavigator is not null)
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateNavigator.Value, out DateTime date))
                 {
@@ -1603,7 +1603,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
                 }
             }
 
-            if (dateAcceptedNavigator != null)
+            if (dateAcceptedNavigator is not null)
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateAcceptedNavigator.Value, out DateTime dateAccepted))
                 {
@@ -1612,7 +1612,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
                 }
             }
 
-            if (dateCopyrightedNavigator != null)
+            if (dateCopyrightedNavigator is not null)
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCopyrightedNavigator.Value, out DateTime dateCopyrighted))
                 {
@@ -1621,7 +1621,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
                 }
             }
 
-            if (dateSubmittedNavigator != null)
+            if (dateSubmittedNavigator is not null)
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateSubmittedNavigator.Value, out DateTime dateSubmitted))
                 {
@@ -1630,13 +1630,13 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
                 }
             }
 
-            if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
+            if (descriptionNavigator is not null && !string.IsNullOrEmpty(descriptionNavigator.Value))
             {
                 this.Description = descriptionNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (educationLevelNavigator != null && !string.IsNullOrEmpty(educationLevelNavigator.Value))
+            if (educationLevelNavigator is not null && !string.IsNullOrEmpty(educationLevelNavigator.Value))
             {
                 this.AudienceEducationLevel = educationLevelNavigator.Value;
                 wasLoaded = true;
@@ -1672,61 +1672,61 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
             XPathNavigator? isPartOfNavigator = source.SelectSingleNode("dcterms:isPartOf", manager);
             XPathNavigator? isReferencedByNavigator = source.SelectSingleNode("dcterms:isReferencedBy", manager);
 
-            if (extentNavigator != null && !string.IsNullOrEmpty(extentNavigator.Value))
+            if (extentNavigator is not null && !string.IsNullOrEmpty(extentNavigator.Value))
             {
                 this.Extent = extentNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (formatNavigator != null && !string.IsNullOrEmpty(formatNavigator.Value))
+            if (formatNavigator is not null && !string.IsNullOrEmpty(formatNavigator.Value))
             {
                 this.Format = formatNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (hasFormatNavigator != null && !string.IsNullOrEmpty(hasFormatNavigator.Value))
+            if (hasFormatNavigator is not null && !string.IsNullOrEmpty(hasFormatNavigator.Value))
             {
                 this.HasFormat = hasFormatNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (hasPartNavigator != null && !string.IsNullOrEmpty(hasPartNavigator.Value))
+            if (hasPartNavigator is not null && !string.IsNullOrEmpty(hasPartNavigator.Value))
             {
                 this.HasPart = hasPartNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (hasVersionNavigator != null && !string.IsNullOrEmpty(hasVersionNavigator.Value))
+            if (hasVersionNavigator is not null && !string.IsNullOrEmpty(hasVersionNavigator.Value))
             {
                 this.HasVersion = hasVersionNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (identifierNavigator != null && !string.IsNullOrEmpty(identifierNavigator.Value))
+            if (identifierNavigator is not null && !string.IsNullOrEmpty(identifierNavigator.Value))
             {
                 this.Identifier = identifierNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (instructionalMethodNavigator != null && !string.IsNullOrEmpty(instructionalMethodNavigator.Value))
+            if (instructionalMethodNavigator is not null && !string.IsNullOrEmpty(instructionalMethodNavigator.Value))
             {
                 this.InstructionalMethod = instructionalMethodNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (isFormatOfNavigator != null && !string.IsNullOrEmpty(isFormatOfNavigator.Value))
+            if (isFormatOfNavigator is not null && !string.IsNullOrEmpty(isFormatOfNavigator.Value))
             {
                 this.IsFormatOf = isFormatOfNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (isPartOfNavigator != null && !string.IsNullOrEmpty(isPartOfNavigator.Value))
+            if (isPartOfNavigator is not null && !string.IsNullOrEmpty(isPartOfNavigator.Value))
             {
                 this.IsPartOf = isPartOfNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (isReferencedByNavigator != null && !string.IsNullOrEmpty(isReferencedByNavigator.Value))
+            if (isReferencedByNavigator is not null && !string.IsNullOrEmpty(isReferencedByNavigator.Value))
             {
                 this.IsReferencedBy = isReferencedByNavigator.Value;
                 wasLoaded = true;
@@ -1762,19 +1762,19 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
             XPathNavigator? modifiedNavigator = source.SelectSingleNode("dcterms:modified", manager);
             XPathNavigator? provenanceNavigator = source.SelectSingleNode("dcterms:provenance", manager);
 
-            if (isReplacedByNavigator != null && !string.IsNullOrEmpty(isReplacedByNavigator.Value))
+            if (isReplacedByNavigator is not null && !string.IsNullOrEmpty(isReplacedByNavigator.Value))
             {
                 this.IsReplacedBy = isReplacedByNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (isRequiredByNavigator != null && !string.IsNullOrEmpty(isRequiredByNavigator.Value))
+            if (isRequiredByNavigator is not null && !string.IsNullOrEmpty(isRequiredByNavigator.Value))
             {
                 this.IsRequiredBy = isRequiredByNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (issuedNavigator != null)
+            if (issuedNavigator is not null)
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(issuedNavigator.Value, out DateTime issuedOn))
                 {
@@ -1783,13 +1783,13 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
                 }
             }
 
-            if (isVersionOfNavigator != null && !string.IsNullOrEmpty(isVersionOfNavigator.Value))
+            if (isVersionOfNavigator is not null && !string.IsNullOrEmpty(isVersionOfNavigator.Value))
             {
                 this.IsVersionOf = isVersionOfNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
+            if (languageNavigator is not null && !string.IsNullOrEmpty(languageNavigator.Value))
             {
                 try
                 {
@@ -1803,25 +1803,25 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
                 }
             }
 
-            if (licenseNavigator != null && !string.IsNullOrEmpty(licenseNavigator.Value))
+            if (licenseNavigator is not null && !string.IsNullOrEmpty(licenseNavigator.Value))
             {
                 this.License = licenseNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (mediatorNavigator != null && !string.IsNullOrEmpty(mediatorNavigator.Value))
+            if (mediatorNavigator is not null && !string.IsNullOrEmpty(mediatorNavigator.Value))
             {
                 this.Mediator = mediatorNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (mediumNavigator != null && !string.IsNullOrEmpty(mediumNavigator.Value))
+            if (mediumNavigator is not null && !string.IsNullOrEmpty(mediumNavigator.Value))
             {
                 this.Medium = mediumNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (modifiedNavigator != null)
+            if (modifiedNavigator is not null)
             {
                 if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(modifiedNavigator.Value, out DateTime modifiedOn))
                 {
@@ -1830,7 +1830,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
                 }
             }
 
-            if (provenanceNavigator != null && !string.IsNullOrEmpty(provenanceNavigator.Value))
+            if (provenanceNavigator is not null && !string.IsNullOrEmpty(provenanceNavigator.Value))
             {
                 this.Provenance = provenanceNavigator.Value;
                 wasLoaded = true;
@@ -1866,61 +1866,61 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
             XPathNavigator? spatialNavigator = source.SelectSingleNode("dcterms:spatial", manager);
             XPathNavigator? subjectNavigator = source.SelectSingleNode("dcterms:subject", manager);
 
-            if (publisherNavigator != null && !string.IsNullOrEmpty(publisherNavigator.Value))
+            if (publisherNavigator is not null && !string.IsNullOrEmpty(publisherNavigator.Value))
             {
                 this.Publisher = publisherNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (referencesNavigator != null && !string.IsNullOrEmpty(referencesNavigator.Value))
+            if (referencesNavigator is not null && !string.IsNullOrEmpty(referencesNavigator.Value))
             {
                 this.References = referencesNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (relationNavigator != null && !string.IsNullOrEmpty(relationNavigator.Value))
+            if (relationNavigator is not null && !string.IsNullOrEmpty(relationNavigator.Value))
             {
                 this.Relation = relationNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (replacesNavigator != null && !string.IsNullOrEmpty(replacesNavigator.Value))
+            if (replacesNavigator is not null && !string.IsNullOrEmpty(replacesNavigator.Value))
             {
                 this.Replaces = replacesNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (requiresNavigator != null && !string.IsNullOrEmpty(requiresNavigator.Value))
+            if (requiresNavigator is not null && !string.IsNullOrEmpty(requiresNavigator.Value))
             {
                 this.Requires = requiresNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (rightsNavigator != null && !string.IsNullOrEmpty(rightsNavigator.Value))
+            if (rightsNavigator is not null && !string.IsNullOrEmpty(rightsNavigator.Value))
             {
                 this.Rights = rightsNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (rightsHolderNavigator != null && !string.IsNullOrEmpty(rightsHolderNavigator.Value))
+            if (rightsHolderNavigator is not null && !string.IsNullOrEmpty(rightsHolderNavigator.Value))
             {
                 this.RightsHolder = rightsHolderNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (sourceNavigator != null && !string.IsNullOrEmpty(sourceNavigator.Value))
+            if (sourceNavigator is not null && !string.IsNullOrEmpty(sourceNavigator.Value))
             {
                 this.Source = sourceNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (spatialNavigator != null && !string.IsNullOrEmpty(spatialNavigator.Value))
+            if (spatialNavigator is not null && !string.IsNullOrEmpty(spatialNavigator.Value))
             {
                 this.SpatialCoverage = spatialNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (subjectNavigator != null && !string.IsNullOrEmpty(subjectNavigator.Value))
+            if (subjectNavigator is not null && !string.IsNullOrEmpty(subjectNavigator.Value))
             {
                 this.Subject = subjectNavigator.Value;
                 wasLoaded = true;
@@ -1951,25 +1951,25 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
             XPathNavigator? typeNavigator = source.SelectSingleNode("dcterms:type", manager);
             XPathNavigator? validNavigator = source.SelectSingleNode("dcterms:valid", manager);
 
-            if (tableOfContentsNavigator != null && !string.IsNullOrEmpty(tableOfContentsNavigator.Value))
+            if (tableOfContentsNavigator is not null && !string.IsNullOrEmpty(tableOfContentsNavigator.Value))
             {
                 this.TableOfContents = tableOfContentsNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (temporalNavigator != null && !string.IsNullOrEmpty(temporalNavigator.Value))
+            if (temporalNavigator is not null && !string.IsNullOrEmpty(temporalNavigator.Value))
             {
                 this.TemporalCoverage = temporalNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
+            if (titleNavigator is not null && !string.IsNullOrEmpty(titleNavigator.Value))
             {
                 this.Title = titleNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (typeNavigator != null && !string.IsNullOrEmpty(typeNavigator.Value))
+            if (typeNavigator is not null && !string.IsNullOrEmpty(typeNavigator.Value))
             {
                 DublinCoreTypeVocabularies typeVocabulary = DublinCoreElementSetSyndicationExtension.TypeVocabularyByName(typeNavigator.Value);
                 if (typeVocabulary != DublinCoreTypeVocabularies.None)
@@ -1979,7 +1979,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
                 }
             }
 
-            if (validNavigator != null && !string.IsNullOrEmpty(validNavigator.Value))
+            if (validNavigator is not null && !string.IsNullOrEmpty(validNavigator.Value))
             {
                 this.DateValid = validNavigator.Value;
                 wasLoaded = true;
@@ -2210,7 +2210,7 @@ public class DublinCoreMetadataTermsSyndicationExtensionContext
             writer.WriteElementString("isVersionOf", xmlNamespace, this.IsVersionOf);
         }
 
-        if (this.Language != null)
+        if (this.Language is not null)
         {
             writer.WriteElementString("language", xmlNamespace, this.Language.Name);
         }

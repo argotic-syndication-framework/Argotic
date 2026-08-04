@@ -133,7 +133,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
             XPathNavigator? widthNavigator = source.SelectSingleNode("width", manager);
             XPathNavigator? heightNavigator = source.SelectSingleNode("height", manager);
 
-            if (urlNavigator != null)
+            if (urlNavigator is not null)
             {
                 if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? url))
                 {
@@ -142,13 +142,13 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
                 }
             }
 
-            if (keywordNavigator != null && !string.IsNullOrEmpty(keywordNavigator.Value))
+            if (keywordNavigator is not null && !string.IsNullOrEmpty(keywordNavigator.Value))
             {
                 this.Keyword = keywordNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (widthNavigator != null)
+            if (widthNavigator is not null)
             {
                 if (int.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int width))
                 {
@@ -161,7 +161,7 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
                 }
             }
 
-            if (heightNavigator != null)
+            if (heightNavigator is not null)
             {
                 if (int.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int height))
                 {

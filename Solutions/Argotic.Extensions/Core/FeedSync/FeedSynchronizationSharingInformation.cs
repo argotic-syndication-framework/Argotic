@@ -215,7 +215,7 @@ public class FeedSynchronizationSharingInformation : IComparable<FeedSynchroniza
                 while (relatedIterator.MoveNext())
                 {
                     XPathNavigator? relatedNode = relatedIterator.Current;
-                    if (relatedNode == null)
+                    if (relatedNode is null)
                     {
                         continue;
                     }

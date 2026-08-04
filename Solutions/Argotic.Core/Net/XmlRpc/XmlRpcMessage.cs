@@ -168,13 +168,13 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
             XPathNavigator? methodNameNavigator = source.SelectSingleNode("methodName");
             XPathNavigator? parametersNavigator = source.SelectSingleNode("params");
 
-            if (methodNameNavigator != null && !string.IsNullOrEmpty(methodNameNavigator.Value))
+            if (methodNameNavigator is not null && !string.IsNullOrEmpty(methodNameNavigator.Value))
             {
                 this.MethodName = methodNameNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (parametersNavigator != null)
+            if (parametersNavigator is not null)
             {
                 XPathNodeIterator valueIterator = parametersNavigator.Select("param/value");
                 if (valueIterator is { Count: > 0 })
@@ -182,7 +182,7 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
                     while (valueIterator.MoveNext())
                     {
                         XPathNavigator? valueNode = valueIterator.Current;
-                        if (valueNode == null)
+                        if (valueNode is null)
                         {
                             continue;
                         }

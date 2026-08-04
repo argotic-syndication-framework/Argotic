@@ -295,7 +295,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
         if (string.Equals(this.ContentType, "xhtml", StringComparison.OrdinalIgnoreCase))
         {
             XPathNavigator? xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
-            if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
+            if (xhtmlDivNavigator is not null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
                 this.Content = xhtmlDivNavigator.InnerXml;
                 wasLoaded = true;
@@ -350,7 +350,7 @@ public class AtomContent : IAtomCommonObjectAttributes, IComparable<AtomContent>
         {
             writer.WriteAttributeString("type", this.ContentType);
         }
-        if (this.Source != null)
+        if (this.Source is not null)
         {
             writer.WriteAttributeString("src", this.Source.ToString());
         }

@@ -206,7 +206,7 @@ public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategor
 
         writer.WriteAttributeString("term", this.Term);
 
-        if (this.Scheme != null)
+        if (this.Scheme is not null)
         {
             writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }

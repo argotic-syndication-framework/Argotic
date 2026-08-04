@@ -104,19 +104,19 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
         XPathNavigator? ownerEmailNavigator = source.SelectSingleNode("ownerEmail");
         XPathNavigator? ownerIdNavigator = source.SelectSingleNode("ownerId");
 
-        if (ownerNameNavigator != null)
+        if (ownerNameNavigator is not null)
         {
             this.Name = ownerNameNavigator.Value;
             wasLoaded = true;
         }
 
-        if (ownerEmailNavigator != null)
+        if (ownerEmailNavigator is not null)
         {
             this.EmailAddress = ownerEmailNavigator.Value;
             wasLoaded = true;
         }
 
-        if (ownerIdNavigator != null)
+        if (ownerIdNavigator is not null)
         {
             if (Uri.TryCreate(ownerIdNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? id))
             {
@@ -146,7 +146,7 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
             writer.WriteElementString("ownerEmail", this.EmailAddress);
         }
 
-        if (this.Id != null)
+        if (this.Id is not null)
         {
             writer.WriteElementString("ownerId", this.Id.ToString());
         }

@@ -344,13 +344,13 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
         XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
 
-        if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
+        if (descriptionNavigator is not null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
             this.Description = descriptionNavigator.Value;
             wasLoaded = true;
         }
 
-        if (linkNavigator != null)
+        if (linkNavigator is not null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
@@ -359,7 +359,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             }
         }
 
-        if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
+        if (titleNavigator is not null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
             this.Title = titleNavigator.Value;
             wasLoaded = true;
@@ -415,7 +415,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
 
         this.Image?.WriteTo(writer);
 
-        if (this.Language != null)
+        if (this.Language is not null)
         {
             writer.WriteElementString("language", this.Language.Name);
         }
@@ -477,7 +477,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             category.WriteTo(writer);
         }
 
-        if (this.SelfLink != null)
+        if (this.SelfLink is not null)
         {
             writer.WriteStartElement("link", "http://www.w3.org/2005/Atom");
             writer.WriteAttributeString("href", this.SelfLink.ToString());
@@ -530,7 +530,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             while (categoryIterator.MoveNext())
             {
                 XPathNavigator? categoryNode = categoryIterator.Current;
-                if (categoryNode == null)
+                if (categoryNode is null)
                 {
                     continue;
                 }
@@ -549,7 +549,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             while (skipDaysIterator.MoveNext())
             {
                 XPathNavigator? skipDaysNode = skipDaysIterator.Current;
-                if (skipDaysNode == null)
+                if (skipDaysNode is null)
                 {
                     continue;
                 }
@@ -578,7 +578,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             while (skipHoursIterator.MoveNext())
             {
                 XPathNavigator? skipHoursNode = skipHoursIterator.Current;
-                if (skipHoursNode == null)
+                if (skipHoursNode is null)
                 {
                     continue;
                 }
@@ -604,7 +604,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             while (itemIterator.MoveNext())
             {
                 XPathNavigator? itemNode = itemIterator.Current;
-                if (itemNode == null)
+                if (itemNode is null)
                 {
                     continue;
                 }
@@ -659,7 +659,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         XPathNavigator? timeToLiveNavigator = source.SelectSingleNode("ttl", manager);
         XPathNavigator? webMasterNavigator = source.SelectSingleNode("webMaster", manager);
 
-        if (cloudNavigator != null)
+        if (cloudNavigator is not null)
         {
             RssCloud cloud = new();
             if (cloud.Load(cloudNavigator, settings))
@@ -669,19 +669,19 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             }
         }
 
-        if (copyrightNavigator != null)
+        if (copyrightNavigator is not null)
         {
             this.Copyright = copyrightNavigator.Value;
             wasLoaded = true;
         }
 
-        if (generatorNavigator != null)
+        if (generatorNavigator is not null)
         {
             this.Generator = generatorNavigator.Value;
             wasLoaded = true;
         }
 
-        if (imageNavigator != null)
+        if (imageNavigator is not null)
         {
             RssImage image = new();
             if (image.Load(imageNavigator, settings))
@@ -691,7 +691,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             }
         }
 
-        if (languageNavigator != null && !string.IsNullOrEmpty(languageNavigator.Value))
+        if (languageNavigator is not null && !string.IsNullOrEmpty(languageNavigator.Value))
         {
             try
             {
@@ -705,7 +705,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             }
         }
 
-        if (lastBuildDateNavigator != null)
+        if (lastBuildDateNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(lastBuildDateNavigator.Value, out DateTime lastBuildDate))
             {
@@ -714,13 +714,13 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             }
         }
 
-        if (managingEditorNavigator != null)
+        if (managingEditorNavigator is not null)
         {
             this.ManagingEditor = managingEditorNavigator.Value;
             wasLoaded = true;
         }
 
-        if (publicationNavigator != null)
+        if (publicationNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out DateTime publicationDate))
             {
@@ -729,13 +729,13 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             }
         }
 
-        if (ratingNavigator != null)
+        if (ratingNavigator is not null)
         {
             this.Rating = ratingNavigator.Value;
             wasLoaded = true;
         }
 
-        if (textInputNavigator != null)
+        if (textInputNavigator is not null)
         {
             RssTextInput textInput = new();
             if (textInput.Load(textInputNavigator, settings))
@@ -745,7 +745,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             }
         }
 
-        if (timeToLiveNavigator != null)
+        if (timeToLiveNavigator is not null)
         {
             if (int.TryParse(timeToLiveNavigator.Value, NumberStyles.Integer, NumberFormatInfo.InvariantInfo, out int timeToLive))
             {
@@ -754,7 +754,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             }
         }
 
-        if (webMasterNavigator != null)
+        if (webMasterNavigator is not null)
         {
             this.Webmaster = webMasterNavigator.Value;
             wasLoaded = true;
@@ -788,7 +788,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             while (atomLinkIterator.MoveNext())
             {
                 XPathNavigator? atomLinkNode = atomLinkIterator.Current;
-                if (atomLinkNode == null)
+                if (atomLinkNode is null)
                 {
                     continue;
                 }
@@ -849,27 +849,27 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Webmaster, other.Webmaster, StringComparison.OrdinalIgnoreCase);
 
-        if (this.Cloud != null)
+        if (this.Cloud is not null)
         {
             if (result == 0) result = this.Cloud.CompareTo(other.Cloud);
         }
-        else if (other.Cloud != null)
+        else if (other.Cloud is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (this.Image != null)
+        if (this.Image is not null)
         {
             if (result == 0) result = this.Image.CompareTo(other.Image);
         }
-        else if (other.Image != null)
+        else if (other.Image is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (this.Language != null)
+        if (this.Language is not null)
         {
-            if (other.Language != null)
+            if (other.Language is not null)
             {
                 if (result == 0) result = string.Compare(this.Language.Name, other.Language.Name, StringComparison.OrdinalIgnoreCase);
             }
@@ -878,16 +878,16 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
                 if (result == 0) result = 1;
             }
         }
-        else if (other.Language != null)
+        else if (other.Language is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (this.TextInput != null)
+        if (this.TextInput is not null)
         {
             if (result == 0) result = this.TextInput.CompareTo(other.TextInput);
         }
-        else if (other.TextInput != null)
+        else if (other.TextInput is not null)
         {
             if (result == 0) result = -1;
         }

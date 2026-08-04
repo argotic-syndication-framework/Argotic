@@ -49,19 +49,19 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                                           //  dasBlog places an empty default XML namespace on the <service> element, this is a hack/compromise
                                           RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd/service", manager);
 
-        if (serviceNavigator != null)
+        if (serviceNavigator is not null)
         {
             XPathNavigator? engineNameNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineName", manager);
             XPathNavigator? engineLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:engineLink", manager);
             XPathNavigator? homePageLinkNavigator = RsdUtility.SelectSafeSingleNode(serviceNavigator, "rsd:homePageLink", manager);
             XPathNodeIterator apiIterator = RsdUtility.SelectSafe(serviceNavigator, "rsd:apis/rsd:api", manager);
 
-            if (engineNameNavigator != null && !string.IsNullOrEmpty(engineNameNavigator.Value))
+            if (engineNameNavigator is not null && !string.IsNullOrEmpty(engineNameNavigator.Value))
             {
                 resource.EngineName = engineNameNavigator.Value;
             }
 
-            if (engineLinkNavigator != null)
+            if (engineLinkNavigator is not null)
             {
                 if (Uri.TryCreate(engineLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
                 {
@@ -69,7 +69,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                 }
             }
 
-            if (homePageLinkNavigator != null)
+            if (homePageLinkNavigator is not null)
             {
                 if (Uri.TryCreate(homePageLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? homepage))
                 {
@@ -83,7 +83,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                 while (apiIterator.MoveNext())
                 {
                     XPathNavigator? apiNode = apiIterator.Current;
-                    if (apiNode == null)
+                    if (apiNode is null)
                     {
                         continue;
                     }
@@ -97,7 +97,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
                         api.Link = link;
                     }
 
-                    if (api.Load(apiNode, this.Settings) || api.Link != null)
+                    if (api.Load(apiNode, this.Settings) || api.Link is not null)
                     {
                         if (this.Settings.RetrievalLimit != 0 && counter > this.Settings.RetrievalLimit)
                         {
@@ -112,7 +112,7 @@ public class Rsd06SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? extensionRoot = RsdUtility.SelectSafeSingleNode(this.Navigator, "rsd:rsd", manager);
 
-        if (extensionRoot == null)
+        if (extensionRoot is null)
 
         {
 

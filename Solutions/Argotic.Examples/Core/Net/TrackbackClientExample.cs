@@ -41,7 +41,7 @@ internal static class TrackbackClientExample
         // TrackbackResponse response = await client.SendAsync(message).ConfigureAwait(false);
 
         // For demonstration, we just verify the client and message are configured correctly
-        if (client.Host != null && message.Permalink != null)
+        if (client.Host is not null && message.Permalink is not null)
         {
             // Client is configured and ready to send
             // Verify response to the trackback ping

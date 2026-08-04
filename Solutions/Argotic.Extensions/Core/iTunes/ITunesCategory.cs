@@ -96,7 +96,7 @@ public class ITunesCategory : IComparable<ITunesCategory>, IEquatable<ITunesCate
                 while (categoryIterator.MoveNext())
                 {
                     XPathNavigator? categoryNode = categoryIterator.Current;
-                    if (categoryNode == null)
+                    if (categoryNode is null)
                     {
                         continue;
                     }

@@ -31,7 +31,7 @@ internal static class TrackbackSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             TrackbackSyndicationExtension? channelExtension = feed.Channel.FindExtension(TrackbackSyndicationExtension.MatchByType) as TrackbackSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowTrackbackExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class TrackbackSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 TrackbackSyndicationExtension? itemExtension = item.FindExtension(TrackbackSyndicationExtension.MatchByType) as TrackbackSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

@@ -203,19 +203,19 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
 
         XPathNodeIterator categoryIterator = source.Select("category", manager);
         XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             this.Title = titleNavigator.Value;
             wasLoaded = true;
         }
 
-        if (descriptionNavigator != null)
+        if (descriptionNavigator is not null)
         {
             this.Description = descriptionNavigator.Value;
             wasLoaded = true;
         }
 
-        if (linkNavigator != null)
+        if (linkNavigator is not null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
@@ -224,13 +224,13 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             }
         }
 
-        if (authorNavigator != null)
+        if (authorNavigator is not null)
         {
             this.Author = authorNavigator.Value;
             wasLoaded = true;
         }
 
-        if (commentsNavigator != null)
+        if (commentsNavigator is not null)
         {
             if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? comments))
             {
@@ -239,7 +239,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             }
         }
 
-        if (guidNavigator != null)
+        if (guidNavigator is not null)
         {
             RssGuid guid = new();
             if (guid.Load(guidNavigator))
@@ -249,7 +249,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             }
         }
 
-        if (publicationNavigator != null)
+        if (publicationNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out DateTime publicationDate))
             {
@@ -258,7 +258,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             }
         }
 
-        if (sourceNavigator != null)
+        if (sourceNavigator is not null)
         {
             RssSource sourceFeed = new();
             if (sourceFeed.Load(sourceNavigator))
@@ -273,7 +273,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             while (categoryIterator.MoveNext())
             {
                 XPathNavigator? categoryNode = categoryIterator.Current;
-                if (categoryNode == null)
+                if (categoryNode is null)
                 {
                     continue;
                 }
@@ -291,7 +291,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             while (enclosureIterator.MoveNext())
             {
                 XPathNavigator? enclosureNode = enclosureIterator.Current;
-                if (enclosureNode == null)
+                if (enclosureNode is null)
                 {
                     continue;
                 }
@@ -335,19 +335,19 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
 
         XPathNodeIterator categoryIterator = source.Select("category", manager);
         XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             this.Title = titleNavigator.Value;
             wasLoaded = true;
         }
 
-        if (descriptionNavigator != null)
+        if (descriptionNavigator is not null)
         {
             this.Description = descriptionNavigator.Value;
             wasLoaded = true;
         }
 
-        if (linkNavigator != null)
+        if (linkNavigator is not null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
@@ -355,13 +355,13 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
                 wasLoaded = true;
             }
         }
-        if (authorNavigator != null)
+        if (authorNavigator is not null)
         {
             this.Author = authorNavigator.Value;
             wasLoaded = true;
         }
 
-        if (commentsNavigator != null)
+        if (commentsNavigator is not null)
         {
             if (Uri.TryCreate(commentsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? comments))
             {
@@ -370,7 +370,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             }
         }
 
-        if (guidNavigator != null)
+        if (guidNavigator is not null)
         {
             RssGuid guid = new();
             if (guid.Load(guidNavigator, settings))
@@ -380,7 +380,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             }
         }
 
-        if (publicationNavigator != null)
+        if (publicationNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc822DateTime(publicationNavigator.Value, out DateTime publicationDate))
             {
@@ -389,7 +389,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             }
         }
 
-        if (sourceNavigator != null)
+        if (sourceNavigator is not null)
         {
             RssSource sourceFeed = new();
             if (sourceFeed.Load(sourceNavigator, settings))
@@ -403,7 +403,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             while (categoryIterator.MoveNext())
             {
                 XPathNavigator? categoryNode = categoryIterator.Current;
-                if (categoryNode == null)
+                if (categoryNode is null)
                 {
                     continue;
                 }
@@ -421,7 +421,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             while (enclosureIterator.MoveNext())
             {
                 XPathNavigator? enclosureNode = enclosureIterator.Current;
-                if (enclosureNode == null)
+                if (enclosureNode is null)
                 {
                     continue;
                 }
@@ -459,7 +459,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             writer.WriteElementString("description", this.Description);
         }
 
-        if (this.Link != null)
+        if (this.Link is not null)
         {
             writer.WriteElementString("link", this.Link.ToString());
         }
@@ -469,7 +469,7 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
             writer.WriteElementString("author", this.Author);
         }
 
-        if (this.Comments != null)
+        if (this.Comments is not null)
         {
             writer.WriteElementString("comments", this.Comments.ToString());
         }
@@ -525,20 +525,20 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         if (result == 0) result = this.PublicationDate.CompareTo(other.PublicationDate);
         if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);
 
-        if (this.Guid != null)
+        if (this.Guid is not null)
         {
             if (result == 0) result = this.Guid.CompareTo(other.Guid);
         }
-        else if (other.Guid != null)
+        else if (other.Guid is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (this.Source != null)
+        if (this.Source is not null)
         {
             if (result == 0) result = this.Source.CompareTo(other.Source);
         }
-        else if (other.Source != null)
+        else if (other.Source is not null)
         {
             if (result == 0) result = -1;
         }

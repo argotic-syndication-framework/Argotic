@@ -141,7 +141,7 @@ public class SitemapVideoSegment : IComparable<SitemapVideoSegment>, IEquatable<
             writer.WriteAttributeString("duration", this.Duration.Value.ToString(CultureInfo.InvariantCulture));
         }
 
-        if (this.Location != null)
+        if (this.Location is not null)
         {
             writer.WriteString(this.Location.ToString());
         }

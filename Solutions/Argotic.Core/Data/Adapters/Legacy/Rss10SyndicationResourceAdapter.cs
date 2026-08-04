@@ -48,20 +48,20 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
         manager.AddNamespace("rss", "http://purl.org/rss/1.0/");
 
         XPathNavigator? channelNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:channel", manager);
-        if (channelNavigator != null)
+        if (channelNavigator is not null)
         {
             Rss10SyndicationResourceAdapter.FillChannel(resource.Channel, channelNavigator, manager, this.Settings);
         }
 
         XPathNavigator? imageNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:image", manager);
-        if (imageNavigator != null)
+        if (imageNavigator is not null)
         {
             resource.Channel.Image = new RssImage();
             Rss10SyndicationResourceAdapter.FillImage(resource.Channel.Image, imageNavigator, manager, this.Settings);
         }
 
         XPathNavigator? textInputNavigator = this.Navigator.SelectSingleNode("rdf:RDF/rss:textinput", manager);
-        if (textInputNavigator != null)
+        if (textInputNavigator is not null)
         {
             resource.Channel.TextInput = new RssTextInput();
             Rss10SyndicationResourceAdapter.FillTextInput(resource.Channel.TextInput, textInputNavigator, manager, this.Settings);
@@ -74,7 +74,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             while (itemIterator.MoveNext())
             {
                 XPathNavigator? itemNode = itemIterator.Current;
-                if (itemNode == null)
+                if (itemNode is null)
                 {
                     continue;
                 }
@@ -91,12 +91,12 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
                 XPathNavigator? itemLinkNavigator = itemNode.SelectSingleNode("rss:link", manager);
                 XPathNavigator? itemDescriptionNavigator = itemNode.SelectSingleNode("rss:description", manager);
 
-                if (itemTitleNavigator != null)
+                if (itemTitleNavigator is not null)
                 {
                     item.Title = itemTitleNavigator.Value;
                 }
 
-                if (itemLinkNavigator != null)
+                if (itemLinkNavigator is not null)
                 {
                     if (Uri.TryCreate(itemLinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
                     {
@@ -104,7 +104,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
                 }
 
-                if (itemDescriptionNavigator != null)
+                if (itemDescriptionNavigator is not null)
                 {
                     item.Description = itemDescriptionNavigator.Value;
                 }
@@ -118,7 +118,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? extensionRoot = this.Navigator.SelectSingleNode("rdf:RDF", manager);
 
-        if (extensionRoot == null)
+        if (extensionRoot is null)
 
         {
 
@@ -153,12 +153,12 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator? linkNavigator = navigator.SelectSingleNode("rss:link", manager);
         XPathNavigator? titleNavigator = navigator.SelectSingleNode("rss:title", manager);
 
-        if (descriptionNavigator != null && !string.IsNullOrEmpty(descriptionNavigator.Value))
+        if (descriptionNavigator is not null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
             channel.Description = descriptionNavigator.Value;
         }
 
-        if (linkNavigator != null)
+        if (linkNavigator is not null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
@@ -166,7 +166,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (titleNavigator != null && !string.IsNullOrEmpty(titleNavigator.Value))
+        if (titleNavigator is not null && !string.IsNullOrEmpty(titleNavigator.Value))
         {
             channel.Title = titleNavigator.Value;
         }
@@ -197,7 +197,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator? titleNavigator = navigator.SelectSingleNode("rss:title", manager);
         XPathNavigator? urlNavigator = navigator.SelectSingleNode("rss:url", manager);
 
-        if (linkNavigator != null)
+        if (linkNavigator is not null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
@@ -205,7 +205,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
@@ -213,7 +213,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (urlNavigator != null)
+        if (urlNavigator is not null)
         {
             if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? url))
             {
@@ -248,7 +248,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
         XPathNavigator? nameNavigator = navigator.SelectSingleNode("rss:name", manager);
         XPathNavigator? titleNavigator = navigator.SelectSingleNode("rss:title", manager);
 
-        if (descriptionNavigator != null)
+        if (descriptionNavigator is not null)
         {
             if (!string.IsNullOrEmpty(descriptionNavigator.Value))
             {
@@ -256,7 +256,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (linkNavigator != null)
+        if (linkNavigator is not null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
@@ -264,7 +264,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (nameNavigator != null)
+        if (nameNavigator is not null)
         {
             if (!string.IsNullOrEmpty(nameNavigator.Value))
             {
@@ -272,7 +272,7 @@ public class Rss10SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {

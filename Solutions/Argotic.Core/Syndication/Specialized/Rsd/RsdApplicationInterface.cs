@@ -209,13 +209,13 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
         {
             XPathNavigator? settingsNavigator = RsdUtility.SelectSafeSingleNode(source, "rsd:api/rsd:settings", manager);
 
-            if (settingsNavigator != null)
+            if (settingsNavigator is not null)
             {
                 XPathNavigator? docsNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:docs", manager);
                 XPathNavigator? notesNavigator = RsdUtility.SelectSafeSingleNode(settingsNavigator, "rsd:notes", manager);
                 XPathNodeIterator settingIterator = RsdUtility.SelectSafe(settingsNavigator, "rsd:setting", manager);
 
-                if (docsNavigator != null)
+                if (docsNavigator is not null)
                 {
                     if (Uri.TryCreate(docsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? documentation))
                     {
@@ -224,7 +224,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
                     }
                 }
 
-                if (notesNavigator != null)
+                if (notesNavigator is not null)
                 {
                     this.Notes = notesNavigator.Value;
                     wasLoaded = true;
@@ -235,7 +235,7 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
                     while (settingIterator.MoveNext())
                     {
                         XPathNavigator? settingNode = settingIterator.Current;
-                        if (settingNode == null)
+                        if (settingNode is null)
                         {
                             continue;
                         }
@@ -292,11 +292,11 @@ public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEq
         writer.WriteAttributeString("apiLink", this.Link?.ToString() ?? string.Empty);
         writer.WriteAttributeString("blogID", this.WeblogId);
 
-        if (this.Documentation != null || !string.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
+        if (this.Documentation is not null || !string.IsNullOrEmpty(this.Notes) || this.Settings.Count > 0)
         {
             writer.WriteStartElement("settings", RsdUtility.RsdNamespace);
 
-            if (this.Documentation != null)
+            if (this.Documentation is not null)
             {
                 writer.WriteElementString("docs", RsdUtility.RsdNamespace, this.Documentation.ToString());
             }

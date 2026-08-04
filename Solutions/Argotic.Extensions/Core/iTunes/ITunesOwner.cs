@@ -72,13 +72,13 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
             XPathNavigator? emailNavigator = source.SelectSingleNode("itunes:email", manager);
             XPathNavigator? nameNavigator = source.SelectSingleNode("itunes:name", manager);
 
-            if (emailNavigator != null && !string.IsNullOrEmpty(emailNavigator.Value))
+            if (emailNavigator is not null && !string.IsNullOrEmpty(emailNavigator.Value))
             {
                 this.EmailAddress = emailNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (nameNavigator != null && !string.IsNullOrEmpty(nameNavigator.Value))
+            if (nameNavigator is not null && !string.IsNullOrEmpty(nameNavigator.Value))
             {
                 this.Name = nameNavigator.Value;
                 wasLoaded = true;

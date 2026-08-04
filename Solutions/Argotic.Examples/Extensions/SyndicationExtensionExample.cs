@@ -158,13 +158,13 @@ internal sealed class MyCustomSyndicationExtension : SyndicationExtension, IComp
     /// <exception cref="ArgumentException">The <paramref name="obj"/> is not the expected <see cref="Type"/>.</exception>
     public int CompareTo(object? obj)
     {
-        if (obj == null)
+        if (obj is null)
         {
             return 1;
         }
         MyCustomSyndicationExtension? value = obj as MyCustomSyndicationExtension;
 
-        if (value != null)
+        if (value is not null)
         {
             // Base class properties
             int result = string.Compare(this.Description, value.Description, StringComparison.OrdinalIgnoreCase);

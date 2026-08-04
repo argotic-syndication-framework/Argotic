@@ -144,7 +144,7 @@ public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooM
             writer.WriteAttributeString("role", this.Role);
         }
 
-        if (this.Scheme != null)
+        if (this.Scheme is not null)
         {
             writer.WriteAttributeString("scheme", this.Scheme.ToString());
         }

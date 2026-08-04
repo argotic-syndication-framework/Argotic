@@ -84,13 +84,13 @@ public class LiveJournalSyndicationExtensionContext
             XPathNavigator? userPictureNavigator = source.SelectSingleNode("lj:userpic", manager);
             XPathNavigator? preformattedNavigator = source.SelectSingleNode("lj:preformatted", manager);
 
-            if (musicNavigator != null && !string.IsNullOrEmpty(musicNavigator.Value))
+            if (musicNavigator is not null && !string.IsNullOrEmpty(musicNavigator.Value))
             {
                 this.Music = musicNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (moodNavigator != null)
+            if (moodNavigator is not null)
             {
                 LiveJournalMood mood = new();
                 if (mood.Load(moodNavigator))
@@ -100,7 +100,7 @@ public class LiveJournalSyndicationExtensionContext
                 }
             }
 
-            if (securityNavigator != null)
+            if (securityNavigator is not null)
             {
                 LiveJournalSecurity security = new();
                 if (security.Load(securityNavigator))
@@ -110,7 +110,7 @@ public class LiveJournalSyndicationExtensionContext
                 }
             }
 
-            if (userPictureNavigator != null)
+            if (userPictureNavigator is not null)
             {
                 LiveJournalUserPicture userPicture = new();
                 if (userPicture.Load(userPictureNavigator))
@@ -120,7 +120,7 @@ public class LiveJournalSyndicationExtensionContext
                 }
             }
 
-            if (preformattedNavigator != null)
+            if (preformattedNavigator is not null)
             {
                 this.IsPreformatted = true;
                 wasLoaded = true;

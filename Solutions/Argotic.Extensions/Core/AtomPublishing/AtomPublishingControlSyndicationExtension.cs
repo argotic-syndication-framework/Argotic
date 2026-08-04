@@ -95,7 +95,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
 
         bool wasLoaded;
 
-        if (settings != null)
+        if (settings is not null)
         {
             wasLoaded = Context.Load(navigator, CreateNamespaceManager(navigator), settings);
         }
@@ -135,10 +135,7 @@ public class AtomPublishingControlSyndicationExtension : SyndicationExtension, I
     {
         ArgumentNullException.ThrowIfNull(reader);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceLoadSettings();
-        }
+        settings ??= new SyndicationResourceLoadSettings();
 
         XPathDocument document = new(reader);
 

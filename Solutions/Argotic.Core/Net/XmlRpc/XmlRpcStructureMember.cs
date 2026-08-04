@@ -85,13 +85,13 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
             XPathNavigator? nameNavigator = source.SelectSingleNode("name");
             XPathNavigator? valueNavigator = source.SelectSingleNode("value");
 
-            if (nameNavigator != null && !string.IsNullOrEmpty(nameNavigator.Value))
+            if (nameNavigator is not null && !string.IsNullOrEmpty(nameNavigator.Value))
             {
                 this.Name = nameNavigator.Value;
                 wasLoaded = true;
             }
 
-            if (valueNavigator != null)
+            if (valueNavigator is not null)
             {
                 if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue? value))
                 {
@@ -117,7 +117,7 @@ public class XmlRpcStructureMember : IComparable<XmlRpcStructureMember>, IEquata
 
         writer.WriteElementString("name", this.Name);
 
-        if (this.Value != null)
+        if (this.Value is not null)
         {
             this.Value.WriteTo(writer);
         }

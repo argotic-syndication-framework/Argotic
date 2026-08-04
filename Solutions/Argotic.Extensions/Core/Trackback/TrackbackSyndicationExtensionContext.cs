@@ -60,7 +60,7 @@ public class TrackbackSyndicationExtensionContext
             XPathNavigator? pingNavigator = source.SelectSingleNode("trackback:ping", manager);
             XPathNodeIterator aboutIterator = source.Select("trackback:about", manager);
 
-            if (pingNavigator != null)
+            if (pingNavigator is not null)
             {
                 if (Uri.TryCreate(pingNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? ping))
                 {
@@ -74,7 +74,7 @@ public class TrackbackSyndicationExtensionContext
                 while (aboutIterator.MoveNext())
                 {
                     XPathNavigator? aboutNode = aboutIterator.Current;
-                    if (aboutNode == null)
+                    if (aboutNode is null)
                     {
                         continue;
                     }
@@ -107,7 +107,7 @@ public class TrackbackSyndicationExtensionContext
 
         foreach (Uri about in this.Abouts)
         {
-            if (about != null)
+            if (about is not null)
             {
                 writer.WriteElementString("about", xmlNamespace, about.ToString());
             }

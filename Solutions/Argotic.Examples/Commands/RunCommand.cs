@@ -84,7 +84,7 @@ internal sealed class RunCommand : AsyncCommand<RunSettings>
         catch (Exception ex)
         {
             AnsiConsole.MarkupLine($"[red]Error:[/] {Markup.Escape(ex.Message)}");
-            if (ex.InnerException != null)
+            if (ex.InnerException is not null)
             {
                 AnsiConsole.MarkupLine($"[dim]Inner: {Markup.Escape(ex.InnerException.Message)}[/]");
             }

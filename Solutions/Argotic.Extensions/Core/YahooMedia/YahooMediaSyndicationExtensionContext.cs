@@ -181,7 +181,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
                 while (contentIterator.MoveNext())
                 {
                     XPathNavigator? contentNode = contentIterator.Current;
-                    if (contentNode == null)
+                    if (contentNode is null)
                     {
                         continue;
                     }
@@ -200,7 +200,7 @@ public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEnti
                 while (groupIterator.MoveNext())
                 {
                     XPathNavigator? groupNode = groupIterator.Current;
-                    if (groupNode == null)
+                    if (groupNode is null)
                     {
                         continue;
                     }

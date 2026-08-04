@@ -215,9 +215,9 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
         if (result == 0) result = string.Compare(this.Context.IsRequiredBy, other.Context.IsRequiredBy, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.IsVersionOf, other.Context.IsVersionOf, StringComparison.OrdinalIgnoreCase);
 
-        if (this.Context.Language != null)
+        if (this.Context.Language is not null)
         {
-            if (other.Context.Language != null)
+            if (other.Context.Language is not null)
             {
                 if (result == 0) result = string.Compare(this.Context.Language.Name, other.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
             }
@@ -226,7 +226,7 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
                 if (result == 0) result = 1;
             }
         }
-        else if (other.Context.Language != null)
+        else if (other.Context.Language is not null)
         {
             if (result == 0) result = -1;
         }

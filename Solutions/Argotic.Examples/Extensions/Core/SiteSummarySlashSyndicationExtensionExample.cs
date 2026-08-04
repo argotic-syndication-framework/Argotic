@@ -31,7 +31,7 @@ internal static class SiteSummarySlashSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             SiteSummarySlashSyndicationExtension? channelExtension = feed.Channel.FindExtension(SiteSummarySlashSyndicationExtension.MatchByType) as SiteSummarySlashSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowSlashExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class SiteSummarySlashSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 SiteSummarySlashSyndicationExtension? itemExtension = item.FindExtension(SiteSummarySlashSyndicationExtension.MatchByType) as SiteSummarySlashSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

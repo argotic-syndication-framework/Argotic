@@ -54,7 +54,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     {
         ArgumentNullException.ThrowIfNull(category);
 
-        if (category.Scheme != null)
+        if (category.Scheme is not null)
         {
             categoryScheme = category.Scheme.ToString();
         }

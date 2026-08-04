@@ -121,9 +121,9 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
 
         int result = 0;
 
-        if (this.Data != null)
+        if (this.Data is not null)
         {
-            if (other.Data != null)
+            if (other.Data is not null)
             {
                 result = string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.Ordinal);
             }
@@ -132,14 +132,14 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
                 result = 1;
             }
         }
-        else if (other.Data != null)
+        else if (other.Data is not null)
         {
             result = -1;
         }
 
-        if (this.Extension != null)
+        if (this.Extension is not null)
         {
-            if (other.Extension != null)
+            if (other.Extension is not null)
             {
                 if (result == 0) result = string.Compare(this.Extension.ToString(), other.Extension.ToString(), StringComparison.Ordinal);
             }
@@ -148,7 +148,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
                 if (result == 0) result = 1;
             }
         }
-        else if (other.Extension != null)
+        else if (other.Extension is not null)
         {
             if (result == 0) result = -1;
         }

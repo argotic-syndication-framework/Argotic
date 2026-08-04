@@ -156,7 +156,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
     /// Gets a value indicating if this post has an excerpt.
     /// </summary>
     /// <value><b>true</b> if this post's <see cref="Excerpt"/> is not null; Otherwise, <b>false</b>.</value>
-    public bool HasExcerpt => this.Excerpt != null;
+    public bool HasExcerpt => this.Excerpt is not null;
 
     /// <summary>
     /// Gets or sets the name of this post.
@@ -287,7 +287,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             XPathNavigator? postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
             XPathNavigator? excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
 
-            if (contentNavigator != null)
+            if (contentNavigator is not null)
             {
                 BlogMLTextConstruct content = new();
                 if (content.Load(contentNavigator))
@@ -297,7 +297,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
                 }
             }
 
-            if (postNameNavigator != null)
+            if (postNameNavigator is not null)
             {
                 BlogMLTextConstruct name = new();
                 if (name.Load(postNameNavigator))
@@ -307,7 +307,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
                 }
             }
 
-            if (excerptNavigator != null)
+            if (excerptNavigator is not null)
             {
                 BlogMLTextConstruct excerpt = new();
                 if (excerpt.Load(excerptNavigator))
@@ -385,7 +385,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             XPathNavigator? postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
             XPathNavigator? excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
 
-            if (contentNavigator != null)
+            if (contentNavigator is not null)
             {
                 BlogMLTextConstruct content = new();
                 if (content.Load(contentNavigator, settings))
@@ -395,7 +395,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
                 }
             }
 
-            if (postNameNavigator != null)
+            if (postNameNavigator is not null)
             {
                 BlogMLTextConstruct name = new();
                 if (name.Load(postNameNavigator, settings))
@@ -405,7 +405,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
                 }
             }
 
-            if (excerptNavigator != null)
+            if (excerptNavigator is not null)
             {
                 BlogMLTextConstruct excerpt = new();
                 if (excerpt.Load(excerptNavigator, settings))
@@ -437,7 +437,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         writer.WriteStartElement("post", BlogMLUtility.BlogMLNamespace);
         BlogMLUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (this.Url != null)
+        if (this.Url is not null)
         {
             writer.WriteAttributeString("post-url", this.Url.ToString());
         }
@@ -549,7 +549,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (categoriesIterator.MoveNext())
             {
                 XPathNavigator? categoriesNode = categoriesIterator.Current;
-                if (categoriesNode == null)
+                if (categoriesNode is null)
                 {
                     continue;
                 }
@@ -568,7 +568,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (commentsIterator.MoveNext())
             {
                 XPathNavigator? commentsNode = commentsIterator.Current;
-                if (commentsNode == null)
+                if (commentsNode is null)
                 {
                     continue;
                 }
@@ -587,7 +587,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (trackbacksIterator.MoveNext())
             {
                 XPathNavigator? trackbacksNode = trackbacksIterator.Current;
-                if (trackbacksNode == null)
+                if (trackbacksNode is null)
                 {
                     continue;
                 }
@@ -606,7 +606,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (attachmentsIterator.MoveNext())
             {
                 XPathNavigator? attachmentsNode = attachmentsIterator.Current;
-                if (attachmentsNode == null)
+                if (attachmentsNode is null)
                 {
                     continue;
                 }
@@ -625,7 +625,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (authorsIterator.MoveNext())
             {
                 XPathNavigator? authorsNode = authorsIterator.Current;
-                if (authorsNode == null)
+                if (authorsNode is null)
                 {
                     continue;
                 }
@@ -674,7 +674,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (categoriesIterator.MoveNext())
             {
                 XPathNavigator? categoriesNode = categoriesIterator.Current;
-                if (categoriesNode == null)
+                if (categoriesNode is null)
                 {
                     continue;
                 }
@@ -693,7 +693,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (commentsIterator.MoveNext())
             {
                 XPathNavigator? commentsNode = commentsIterator.Current;
-                if (commentsNode == null)
+                if (commentsNode is null)
                 {
                     continue;
                 }
@@ -712,7 +712,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (trackbacksIterator.MoveNext())
             {
                 XPathNavigator? trackbacksNode = trackbacksIterator.Current;
-                if (trackbacksNode == null)
+                if (trackbacksNode is null)
                 {
                     continue;
                 }
@@ -731,7 +731,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (attachmentsIterator.MoveNext())
             {
                 XPathNavigator? attachmentsNode = attachmentsIterator.Current;
-                if (attachmentsNode == null)
+                if (attachmentsNode is null)
                 {
                     continue;
                 }
@@ -750,7 +750,7 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
             while (authorsIterator.MoveNext())
             {
                 XPathNavigator? authorsNode = authorsIterator.Current;
-                if (authorsNode == null)
+                if (authorsNode is null)
                 {
                     continue;
                 }
@@ -794,20 +794,20 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
         if (result == 0) result = ComparisonUtility.CompareSequence(this.Comments, other.Comments);
         if (result == 0) result = this.Content.CompareTo(other.Content);
 
-        if (this.Excerpt != null)
+        if (this.Excerpt is not null)
         {
             if (result == 0) result = this.Excerpt.CompareTo(other.Excerpt);
         }
-        else if (other.Excerpt != null)
+        else if (other.Excerpt is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (this.Name != null)
+        if (this.Name is not null)
         {
             if (result == 0) result = this.Name.CompareTo(other.Name);
         }
-        else if (other.Name != null)
+        else if (other.Name is not null)
         {
             if (result == 0) result = -1;
         }

@@ -62,7 +62,7 @@ public class SimpleListSyndicationExtensionContext
             XPathNavigator? treatAsNavigator = source.SelectSingleNode("cf:treatAs", manager);
             XPathNavigator? listInformationNavigator = source.SelectSingleNode("cf:listinfo", manager);
 
-            if (treatAsNavigator != null && string.Equals(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase))
+            if (treatAsNavigator is not null && string.Equals(treatAsNavigator.Value, "list", StringComparison.OrdinalIgnoreCase))
             {
                 this.TreatAsList = true;
                 wasLoaded = true;
@@ -78,7 +78,7 @@ public class SimpleListSyndicationExtensionContext
                     while (sortIterator.MoveNext())
                     {
                         XPathNavigator? sortNode = sortIterator.Current;
-                        if (sortNode == null)
+                        if (sortNode is null)
                         {
                             continue;
                         }
@@ -97,7 +97,7 @@ public class SimpleListSyndicationExtensionContext
                     while (groupIterator.MoveNext())
                     {
                         XPathNavigator? groupNode = groupIterator.Current;
-                        if (groupNode == null)
+                        if (groupNode is null)
                         {
                             continue;
                         }

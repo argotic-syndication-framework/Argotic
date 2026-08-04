@@ -34,7 +34,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
             while (iterator.MoveNext())
             {
                 XPathNavigator? iteratorNode = iterator.Current;
-                if (iteratorNode == null)
+                if (iteratorNode is null)
                 {
                     continue;
                 }
@@ -179,7 +179,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
                 while (memberIterator.MoveNext())
                 {
                     XPathNavigator? memberNode = memberIterator.Current;
-                    if (memberNode == null)
+                    if (memberNode is null)
                     {
                         continue;
                     }

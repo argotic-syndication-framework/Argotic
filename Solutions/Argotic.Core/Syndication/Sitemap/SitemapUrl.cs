@@ -192,7 +192,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
         XPathNavigator? changefreqNavigator = source.SelectSingleNode("sm:changefreq", manager);
         XPathNavigator? priorityNavigator = source.SelectSingleNode("sm:priority", manager);
 
-        if (locNavigator != null)
+        if (locNavigator is not null)
         {
             if (Uri.TryCreate(locNavigator.Value, UriKind.Absolute, out Uri? location))
             {
@@ -201,7 +201,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
             }
         }
 
-        if (lastmodNavigator != null)
+        if (lastmodNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(lastmodNavigator.Value, out DateTime lastModified))
             {
@@ -215,7 +215,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
             }
         }
 
-        if (changefreqNavigator != null)
+        if (changefreqNavigator is not null)
         {
             if (SitemapUtility.TryParseChangeFrequency(changefreqNavigator.Value, out SitemapChangeFrequency changeFrequency))
             {
@@ -224,7 +224,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
             }
         }
 
-        if (priorityNavigator != null)
+        if (priorityNavigator is not null)
         {
             if (SitemapUtility.TryParsePriority(priorityNavigator.Value, out decimal priority))
             {
@@ -233,7 +233,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
             }
         }
 
-        if (settings != null)
+        if (settings is not null)
         {
             SyndicationExtensionAdapter adapter = new(source, settings);
             adapter.Fill(this);
@@ -253,7 +253,7 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
 
         writer.WriteStartElement("url", SitemapUtility.SitemapNamespace);
 
-        if (this.Location != null)
+        if (this.Location is not null)
         {
             writer.WriteElementString("loc", SitemapUtility.SitemapNamespace, this.Location.ToString());
         }

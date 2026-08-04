@@ -226,7 +226,7 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings != null)
+        if (settings is not null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
         }
@@ -431,7 +431,7 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
             while (urlIterator.MoveNext())
             {
                 XPathNavigator? urlNode = urlIterator.Current;
-                if (urlNode == null)
+                if (urlNode is null)
                 {
                     continue;
                 }

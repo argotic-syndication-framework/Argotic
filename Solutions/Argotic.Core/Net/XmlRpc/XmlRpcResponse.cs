@@ -114,7 +114,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
 
         XmlRpcResponse result = new();
         XPathNavigator? methodResponseNavigator = source.SelectSingleNode("methodResponse");
-        if (methodResponseNavigator != null)
+        if (methodResponseNavigator is not null)
         {
             result.Load(methodResponseNavigator);
         }
@@ -163,10 +163,10 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
             XPathNavigator? parametersNavigator = source.SelectSingleNode("params");
             XPathNavigator? faultNavigator = source.SelectSingleNode("fault");
 
-            if (parametersNavigator != null)
+            if (parametersNavigator is not null)
             {
                 XPathNavigator? valueNavigator = parametersNavigator.SelectSingleNode("param/value");
-                if (valueNavigator != null)
+                if (valueNavigator is not null)
                 {
                     if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue? value))
                     {
@@ -176,10 +176,10 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
                 }
             }
 
-            if (faultNavigator != null)
+            if (faultNavigator is not null)
             {
                 XPathNavigator? structNavigator = faultNavigator.SelectSingleNode("value");
-                if (structNavigator != null)
+                if (structNavigator is not null)
                 {
                     XmlRpcStructureValue structure = new();
                     if (structure.Load(structNavigator))
@@ -205,7 +205,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
 
         writer.WriteStartElement("methodResponse");
 
-        if (this.Parameter != null)
+        if (this.Parameter is not null)
         {
             writer.WriteStartElement("params");
             writer.WriteStartElement("param");
@@ -214,7 +214,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
             writer.WriteEndElement();
         }
 
-        if (this.Fault != null)
+        if (this.Fault is not null)
         {
             writer.WriteStartElement("fault");
             this.Fault.WriteTo(writer);
@@ -266,9 +266,9 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
 
         int result = 0;
 
-        if (this.Fault != null)
+        if (this.Fault is not null)
         {
-            if (other.Fault != null)
+            if (other.Fault is not null)
             {
                 result = this.Fault.CompareTo(other.Fault);
             }
@@ -277,14 +277,14 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
                 result = 1;
             }
         }
-        else if (other.Fault != null)
+        else if (other.Fault is not null)
         {
             result = -1;
         }
 
-        if (this.Parameter != null)
+        if (this.Parameter is not null)
         {
-            if (other.Parameter != null)
+            if (other.Parameter is not null)
             {
                 if (result == 0) result = string.Compare(this.Parameter.ToString(), other.Parameter.ToString(), StringComparison.Ordinal);
             }
@@ -293,7 +293,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
                 if (result == 0) result = 1;
             }
         }
-        else if (other.Parameter != null)
+        else if (other.Parameter is not null)
         {
             if (result == 0) result = -1;
         }

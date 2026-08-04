@@ -31,7 +31,7 @@ internal sealed class ExampleRunner
         {
             ExampleCategory? category = ShowMainMenu();
 
-            if (category == null)
+            if (category is null)
             {
                 AnsiConsole.MarkupLine("[yellow]Goodbye![/]");
                 break;
@@ -196,7 +196,7 @@ internal sealed class ExampleRunner
         {
             AnsiConsole.MarkupLine($"[red]Error:[/] {Markup.Escape(ex.Message)}");
 
-            if (ex.InnerException != null)
+            if (ex.InnerException is not null)
             {
                 AnsiConsole.MarkupLine($"[dim]Inner: {Markup.Escape(ex.InnerException.Message)}[/]");
             }

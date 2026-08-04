@@ -258,7 +258,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
         XPathNavigator? heightNavigator = source.SelectSingleNode("height", manager);
         XPathNavigator? widthNavigator = source.SelectSingleNode("width", manager);
 
-        if (linkNavigator != null)
+        if (linkNavigator is not null)
         {
             if (Uri.TryCreate(linkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? link))
             {
@@ -266,7 +266,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
                 wasLoaded = true;
             }
         }
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             if (!string.IsNullOrEmpty(titleNavigator.Value))
             {
@@ -274,7 +274,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
                 wasLoaded = true;
             }
         }
-        if (urlNavigator != null)
+        if (urlNavigator is not null)
         {
             if (Uri.TryCreate(urlNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? url))
             {
@@ -283,12 +283,12 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
             }
         }
 
-        if (descriptionNavigator != null)
+        if (descriptionNavigator is not null)
         {
             this.Description = descriptionNavigator.Value;
             wasLoaded = true;
         }
-        if (heightNavigator != null)
+        if (heightNavigator is not null)
         {
             if (int.TryParse(heightNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int height))
             {
@@ -296,7 +296,7 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
                 wasLoaded = true;
             }
         }
-        if (widthNavigator != null)
+        if (widthNavigator is not null)
         {
             if (int.TryParse(widthNavigator.Value, System.Globalization.NumberStyles.Integer, System.Globalization.NumberFormatInfo.InvariantInfo, out int width))
             {

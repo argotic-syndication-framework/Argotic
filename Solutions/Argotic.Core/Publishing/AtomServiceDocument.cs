@@ -267,10 +267,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceLoadSettings();
-        }
+        settings ??= new SyndicationResourceLoadSettings();
 
         XPathNavigator navigator = source.CreateNavigator()
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
@@ -304,7 +301,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings != null)
+        if (settings is not null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
         }
@@ -422,10 +419,7 @@ public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationO
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceSaveSettings();
-        }
+        settings ??= new SyndicationResourceSaveSettings();
 
         XmlWriterSettings writerSettings = new()
         {

@@ -56,23 +56,23 @@ public sealed record SyndicationRequestOptions
     {
         ArgumentNullException.ThrowIfNull(request);
 
-        if (Accept != null)
+        if (Accept is not null)
         {
             request.Headers.Accept.TryParseAdd(Accept);
         }
 
-        if (UserAgent != null)
+        if (UserAgent is not null)
         {
             request.Headers.UserAgent.Clear();
             request.Headers.UserAgent.TryParseAdd(UserAgent);
         }
 
-        if (Referer != null && Uri.TryCreate(Referer, UriKind.Absolute, out var referrerUri))
+        if (Referer is not null && Uri.TryCreate(Referer, UriKind.Absolute, out var referrerUri))
         {
             request.Headers.Referrer = referrerUri;
         }
 
-        if (CustomHeaders != null)
+        if (CustomHeaders is not null)
         {
             foreach (var (key, value) in CustomHeaders)
             {

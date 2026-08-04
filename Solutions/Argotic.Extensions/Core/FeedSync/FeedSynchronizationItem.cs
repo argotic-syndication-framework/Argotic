@@ -317,7 +317,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
                 while (historyIterator.MoveNext())
                 {
                     XPathNavigator? historyNode = historyIterator.Current;
-                    if (historyNode == null)
+                    if (historyNode is null)
                     {
                         continue;
                     }
@@ -337,7 +337,7 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
                 while (childrenIterator.MoveNext())
                 {
                     XPathNavigator? conflictNode = childrenIterator.Current;
-                    if (conflictNode != null)
+                    if (conflictNode is not null)
                     {
                         this.Conflicts.Add(conflictNode);
                         wasLoaded = true;

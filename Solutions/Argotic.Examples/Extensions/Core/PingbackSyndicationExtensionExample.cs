@@ -31,7 +31,7 @@ internal static class PingbackSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             PingbackSyndicationExtension? channelExtension = feed.Channel.FindExtension(PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowPingbackExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class PingbackSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 PingbackSyndicationExtension? itemExtension = item.FindExtension(PingbackSyndicationExtension.MatchByType) as PingbackSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

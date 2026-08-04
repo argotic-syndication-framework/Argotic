@@ -215,7 +215,7 @@ public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMedia
             writer.WriteAttributeString("type", YahooMediaText.TextTypeAsString(this.TextType));
         }
 
-        if (this.Language != null)
+        if (this.Language is not null)
         {
             writer.WriteAttributeString("lang", this.Language.Name);
         }

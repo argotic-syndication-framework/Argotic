@@ -72,7 +72,7 @@ public class SiteSummaryContentSyndicationExtensionContext
             XPathNavigator? encodedNavigator = source.SelectSingleNode("content:encoded", manager);
             XPathNavigator? itemsNavigator = source.SelectSingleNode("content:items", manager);
 
-            if (encodedNavigator != null && !string.IsNullOrEmpty(encodedNavigator.Value))
+            if (encodedNavigator is not null && !string.IsNullOrEmpty(encodedNavigator.Value))
             {
                 this.Encoded = encodedNavigator.Value;
                 wasLoaded = true;
@@ -86,7 +86,7 @@ public class SiteSummaryContentSyndicationExtensionContext
                     while (itemIterator.MoveNext())
                     {
                         XPathNavigator? itemNode = itemIterator.Current;
-                        if (itemNode == null)
+                        if (itemNode is null)
                         {
                             continue;
                         }

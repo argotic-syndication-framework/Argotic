@@ -70,7 +70,7 @@ internal static class AtomEntryExample
     private static void EntryLoadedCallback(object? sender, SyndicationResourceLoadedEventArgs e)
     {
         // Process the loaded entry using e.Data or e.Source
-        if (e.Source != null)
+        if (e.Source is not null)
         {
             // Process the source URI
         }

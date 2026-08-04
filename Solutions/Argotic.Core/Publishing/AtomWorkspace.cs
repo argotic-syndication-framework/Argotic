@@ -171,7 +171,7 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
             XPathNavigator? titleNavigator = source.SelectSingleNode("atom:title", manager);
             XPathNodeIterator collectionIterator = source.Select("app:collection", manager);
 
-            if (titleNavigator != null)
+            if (titleNavigator is not null)
             {
                 this.Title = new AtomTextConstruct();
                 if (this.Title.Load(titleNavigator))
@@ -185,7 +185,7 @@ public class AtomWorkspace : IComparable<AtomWorkspace>, IEquatable<AtomWorkspac
                 while (collectionIterator.MoveNext())
                 {
                     XPathNavigator? collectionNode = collectionIterator.Current;
-                    if (collectionNode == null)
+                    if (collectionNode is null)
                     {
                         continue;
                     }

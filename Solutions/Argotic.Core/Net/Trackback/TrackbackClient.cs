@@ -214,7 +214,7 @@ public class TrackbackClient
     {
         ArgumentNullException.ThrowIfNull(message);
 
-        if (this.Host == null)
+        if (this.Host is null)
         {
             throw new InvalidOperationException($"Unable to send Trackback message. The Host property has not been initialized. \n\r Message payload: {message}");
         }

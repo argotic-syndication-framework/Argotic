@@ -616,11 +616,11 @@ public class SitemapTests
         {
             writer.WriteStartElement("url", SitemapUtility.SitemapNamespace);
             writer.WriteElementString("loc", SitemapUtility.SitemapNamespace, url.loc);
-            if (url.lastmod != null)
+            if (url.lastmod is not null)
                 writer.WriteElementString("lastmod", SitemapUtility.SitemapNamespace, url.lastmod);
-            if (url.changefreq != null)
+            if (url.changefreq is not null)
                 writer.WriteElementString("changefreq", SitemapUtility.SitemapNamespace, url.changefreq);
-            if (url.priority != null)
+            if (url.priority is not null)
                 writer.WriteElementString("priority", SitemapUtility.SitemapNamespace, url.priority);
             writer.WriteEndElement();
         }

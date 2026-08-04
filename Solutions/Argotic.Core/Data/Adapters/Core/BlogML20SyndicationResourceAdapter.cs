@@ -46,7 +46,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
         XPathNavigator? blogNavigator = this.Navigator.SelectSingleNode("blog:blog", manager);
-        if (blogNavigator != null)
+        if (blogNavigator is not null)
         {
             if (blogNavigator.HasAttributes)
             {
@@ -75,7 +75,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
                 XPathNavigator? titleNavigator = blogNavigator.SelectSingleNode("blog:title", manager);
                 XPathNavigator? subtitleNavigator = blogNavigator.SelectSingleNode("blog:sub-title", manager);
 
-                if (titleNavigator != null)
+                if (titleNavigator is not null)
                 {
                     BlogMLTextConstruct title = new();
                     if (title.Load(titleNavigator))
@@ -84,7 +84,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
                     }
                 }
 
-                if (subtitleNavigator != null)
+                if (subtitleNavigator is not null)
                 {
                     BlogMLTextConstruct subtitle = new();
                     if (subtitle.Load(subtitleNavigator))
@@ -132,7 +132,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             while (authorsIterator.MoveNext())
             {
                 XPathNavigator? authorsNode = authorsIterator.Current;
-                if (authorsNode == null)
+                if (authorsNode is null)
                 {
                     continue;
                 }
@@ -150,7 +150,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             while (extendedPropertiesIterator.MoveNext())
             {
                 XPathNavigator? extendedPropertiesNode = extendedPropertiesIterator.Current;
-                if (extendedPropertiesNode == null)
+                if (extendedPropertiesNode is null)
                 {
                     continue;
                 }
@@ -173,7 +173,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             while (categoriesIterator.MoveNext())
             {
                 XPathNavigator? categoriesNode = categoriesIterator.Current;
-                if (categoriesNode == null)
+                if (categoriesNode is null)
                 {
                     continue;
                 }
@@ -192,7 +192,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
             while (postsIterator.MoveNext())
             {
                 XPathNavigator? postsNode = postsIterator.Current;
-                if (postsNode == null)
+                if (postsNode is null)
                 {
                     continue;
                 }

@@ -88,7 +88,7 @@ internal static class RsdDocumentExample
     private static void ResourceLoadedCallback(object? sender, SyndicationResourceLoadedEventArgs e)
     {
         // Process the loaded document using e.Data or e.Source
-        if (e.Source != null)
+        if (e.Source is not null)
         {
             // Process the source URI
         }

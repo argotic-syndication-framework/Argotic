@@ -184,9 +184,9 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
         if (result == 0) result = string.Compare(this.Context.Format, other.Context.Format, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.Identifier, other.Context.Identifier, StringComparison.Ordinal);
 
-        if (this.Context.Language != null)
+        if (this.Context.Language is not null)
         {
-            if (other.Context.Language != null)
+            if (other.Context.Language is not null)
             {
                 if (result == 0) result = string.Compare(this.Context.Language.Name, other.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
             }
@@ -195,7 +195,7 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
                 if (result == 0) result = 1;
             }
         }
-        else if (other.Context.Language != null)
+        else if (other.Context.Language is not null)
         {
             if (result == 0) result = -1;
         }

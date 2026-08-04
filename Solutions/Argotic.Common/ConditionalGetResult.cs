@@ -24,7 +24,7 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
         this.response = response;
         WasModified = wasModified;
 
-        if (response != null)
+        if (response is not null)
         {
             StatusCode = response.StatusCode;
             LastModified = response.Content.Headers.LastModified;

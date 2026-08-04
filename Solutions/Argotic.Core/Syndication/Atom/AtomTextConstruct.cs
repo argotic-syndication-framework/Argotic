@@ -162,7 +162,7 @@ public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<Atom
         if (this.TextType == AtomTextConstructType.Xhtml)
         {
             XPathNavigator? xhtmlDivNavigator = source.SelectSingleNode("xhtml:div", manager);
-            if (xhtmlDivNavigator != null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
+            if (xhtmlDivNavigator is not null && !string.IsNullOrEmpty(xhtmlDivNavigator.Value))
             {
                 this.Content = xhtmlDivNavigator.Value;
                 wasLoaded = true;

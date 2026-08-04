@@ -148,7 +148,7 @@ public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<
             writer.WriteAttributeString("hreflang", this.Hreflang);
         }
 
-        if (this.Href != null)
+        if (this.Href is not null)
         {
             writer.WriteAttributeString("href", this.Href.ToString());
         }

@@ -391,7 +391,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
             XPathNodeIterator acceptIterator = navigator.Select("app:accept", manager);
             XPathNodeIterator categoriesIterator = navigator.Select("app:categories", manager);
 
-            if (titleNavigator != null)
+            if (titleNavigator is not null)
             {
                 this.Title = new AtomTextConstruct();
                 if (this.Title.Load(titleNavigator))
@@ -405,7 +405,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
                 while (acceptIterator.MoveNext())
                 {
                     XPathNavigator? acceptNode = acceptIterator.Current;
-                    if (acceptNode == null)
+                    if (acceptNode is null)
                     {
                         continue;
                     }
@@ -424,7 +424,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
                 while (categoriesIterator.MoveNext())
                 {
                     XPathNavigator? categoriesNode = categoriesIterator.Current;
-                    if (categoriesNode == null)
+                    if (categoriesNode is null)
                     {
                         continue;
                     }
@@ -487,10 +487,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     {
         ArgumentNullException.ThrowIfNull(reader);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceLoadSettings();
-        }
+        settings ??= new SyndicationResourceLoadSettings();
         XPathDocument document = new(reader);
 
         return this.Load(document.CreateNavigator(), settings);
@@ -508,7 +505,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
         writer.WriteStartElement("collection", AtomUtility.AtomPublishingNamespace);
         AtomUtility.WriteCommonObjectAttributes(this, writer);
 
-        if (this.Uri != null)
+        if (this.Uri is not null)
         {
             writer.WriteAttributeString("href", this.Uri.ToString());
         }

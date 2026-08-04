@@ -122,7 +122,7 @@ internal static class RssFeedExample
     private static void FeedLoadedCallback(object? sender, SyndicationResourceLoadedEventArgs e)
     {
         // Process the loaded feed using e.Data or e.Source
-        if (e.Source != null)
+        if (e.Source is not null)
         {
             // Process the source URI
         }

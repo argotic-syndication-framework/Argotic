@@ -80,7 +80,7 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
         XPathNavigator? locNavigator = source.SelectSingleNode("image:loc", manager);
         locNavigator ??= source.SelectSingleNode("descendant::image:loc", manager);
 
-        if (locNavigator != null && !string.IsNullOrEmpty(locNavigator.Value))
+        if (locNavigator is not null && !string.IsNullOrEmpty(locNavigator.Value))
         {
             if (Uri.TryCreate(locNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? location))
             {
@@ -106,7 +106,7 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
 
         writer.WriteStartElement("image", xmlNamespace);
 
-        if (this.Location != null)
+        if (this.Location is not null)
         {
             writer.WriteElementString("loc", xmlNamespace, this.Location.ToString());
         }

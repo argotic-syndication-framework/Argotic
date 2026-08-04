@@ -31,7 +31,7 @@ internal static class FeedRankSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             FeedRankSyndicationExtension? channelExtension = feed.Channel.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowFeedRankExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class FeedRankSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 FeedRankSyndicationExtension? itemExtension = item.FindExtension(FeedRankSyndicationExtension.MatchByType) as FeedRankSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

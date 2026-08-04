@@ -90,7 +90,7 @@ public class SitemapVideoExtension : SyndicationExtension, IComparable<SitemapVi
             while (videoIterator.MoveNext())
             {
                 XPathNavigator? videoNode = videoIterator.Current;
-                if (videoNode == null)
+                if (videoNode is null)
                 {
                     continue;
                 }

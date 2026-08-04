@@ -46,13 +46,13 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
         XPathNavigator? headNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Head", manager);
-        if (headNavigator != null)
+        if (headNavigator is not null)
         {
             resource.Head.Load(headNavigator, this.Settings);
         }
 
         XPathNavigator? bodyNavigator = this.Navigator.SelectSingleNode("apml:APML/apml:Body", manager);
-        if (bodyNavigator != null)
+        if (bodyNavigator is not null)
         {
             if (bodyNavigator.HasAttributes)
             {
@@ -70,7 +70,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
                 while (profileIterator.MoveNext())
                 {
                     XPathNavigator? profileNode = profileIterator.Current;
-                    if (profileNode == null)
+                    if (profileNode is null)
                     {
                         continue;
                     }
@@ -96,7 +96,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
                 while (applicationIterator.MoveNext())
                 {
                     XPathNavigator? applicationNode = applicationIterator.Current;
-                    if (applicationNode == null)
+                    if (applicationNode is null)
                     {
                         continue;
                     }
@@ -112,7 +112,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? extensionRoot = this.Navigator.SelectSingleNode("apml:APML", manager);
 
-        if (extensionRoot == null)
+        if (extensionRoot is null)
 
         {
 

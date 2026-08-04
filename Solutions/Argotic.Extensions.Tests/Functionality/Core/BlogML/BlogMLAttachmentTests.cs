@@ -423,8 +423,8 @@ public class BlogMLAttachmentTests
         BlogMLAttachment? nullAttachment = null;
 
         // Act & Assert
-        (nullAttachment == null).ShouldBeTrue();
-        (attachment == null).ShouldBeFalse();
+        (nullAttachment is null).ShouldBeTrue();
+        (attachment is null).ShouldBeFalse();
         (null == attachment).ShouldBeFalse();
     }
 

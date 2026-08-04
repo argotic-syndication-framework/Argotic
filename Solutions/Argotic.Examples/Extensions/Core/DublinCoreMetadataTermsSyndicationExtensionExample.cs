@@ -31,7 +31,7 @@ internal static class DublinCoreMetadataTermsSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             DublinCoreMetadataTermsSyndicationExtension? channelExtension = feed.Channel.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as DublinCoreMetadataTermsSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowDublinCoreMetadataTermsExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class DublinCoreMetadataTermsSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 DublinCoreMetadataTermsSyndicationExtension? itemExtension = item.FindExtension(DublinCoreMetadataTermsSyndicationExtension.MatchByType) as DublinCoreMetadataTermsSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

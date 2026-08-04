@@ -62,7 +62,7 @@ public class FeedSynchronizationSyndicationExtensionContext
             XPathNavigator? sharingNavigator = source.SelectSingleNode("sx:sharing", manager);
             XPathNavigator? syncNavigator = source.SelectSingleNode("sx:sync", manager);
 
-            if (sharingNavigator != null)
+            if (sharingNavigator is not null)
             {
                 FeedSynchronizationSharingInformation sharing = new();
                 if (sharing.Load(sharingNavigator))
@@ -72,7 +72,7 @@ public class FeedSynchronizationSyndicationExtensionContext
                 }
             }
 
-            if (syncNavigator != null)
+            if (syncNavigator is not null)
             {
                 FeedSynchronizationItem synchronization = new();
                 if (synchronization.Load(syncNavigator))

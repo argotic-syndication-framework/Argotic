@@ -31,7 +31,7 @@ internal static class BasicGeocodingSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             BasicGeocodingSyndicationExtension? channelExtension = feed.Channel.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowBasicGeocodingExtension(channelExtension);
             }
@@ -42,14 +42,14 @@ internal static class BasicGeocodingSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 BasicGeocodingSyndicationExtension? itemExtension = item.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) as BasicGeocodingSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }
             }
         }
 
-        int count = feed.Channel.Items.Count(i => i.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) != null);
+        int count = feed.Channel.Items.Count(i => i.FindExtension(BasicGeocodingSyndicationExtension.MatchByType) is not null);
         ExampleOutput.ShowItemsWithExtension(count, feed.Channel.Items.Count, "BasicGeocoding");
 
         // By default the framework will automatically determine what XML namespace attributes (xmlns) to write

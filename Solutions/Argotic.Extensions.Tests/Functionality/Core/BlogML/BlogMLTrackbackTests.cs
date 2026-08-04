@@ -364,8 +364,8 @@ public class BlogMLTrackbackTests
         BlogMLTrackback? nullTrackback = null;
 
         // Act & Assert
-        (nullTrackback == null).ShouldBeTrue();
-        (trackback == null).ShouldBeFalse();
+        (nullTrackback is null).ShouldBeTrue();
+        (trackback is null).ShouldBeFalse();
         (null == trackback).ShouldBeFalse();
     }
 

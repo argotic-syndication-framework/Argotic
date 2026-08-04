@@ -258,7 +258,7 @@ public class XmlRpcClient
     /// </remarks>
     public static bool TryParseValue(XPathNavigator source, [NotNullWhen(true)] out IXmlRpcValue? value)
     {
-        if (source == null || !string.Equals(source.Name, "value", StringComparison.OrdinalIgnoreCase))
+        if (source is null || !string.Equals(source.Name, "value", StringComparison.OrdinalIgnoreCase))
         {
             value = null;
             return false;
@@ -413,7 +413,7 @@ public class XmlRpcClient
     {
         ArgumentNullException.ThrowIfNull(message);
 
-        if (this.Host == null)
+        if (this.Host is null)
         {
             throw new InvalidOperationException($"Unable to send XML-RPC message. The Host property has not been initialized. \n\r Message payload: {message}");
         }

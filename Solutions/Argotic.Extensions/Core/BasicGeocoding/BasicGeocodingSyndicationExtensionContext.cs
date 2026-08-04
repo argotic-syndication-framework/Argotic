@@ -46,7 +46,7 @@ public class BasicGeocodingSyndicationExtensionContext
         XPathNavigator? latitudeNavigator = source.SelectSingleNode("geo:lat", manager);
         XPathNavigator? longitudeNavigator = source.SelectSingleNode("geo:long", manager);
 
-        if (latitudeNavigator != null)
+        if (latitudeNavigator is not null)
         {
             if (decimal.TryParse(latitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal latitude))
             {
@@ -55,7 +55,7 @@ public class BasicGeocodingSyndicationExtensionContext
             }
         }
 
-        if (longitudeNavigator != null)
+        if (longitudeNavigator is not null)
         {
             if (decimal.TryParse(longitudeNavigator.Value, NumberStyles.Float, NumberFormatInfo.InvariantInfo, out decimal longitude))
             {

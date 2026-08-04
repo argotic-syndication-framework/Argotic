@@ -31,7 +31,7 @@ internal static class CreativeCommonsSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             CreativeCommonsSyndicationExtension? channelExtension = feed.Channel.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowCreativeCommonsExtension(channelExtension);
             }
@@ -42,14 +42,14 @@ internal static class CreativeCommonsSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 CreativeCommonsSyndicationExtension? itemExtension = item.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) as CreativeCommonsSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }
             }
         }
 
-        int count = feed.Channel.Items.Count(i => i.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) != null);
+        int count = feed.Channel.Items.Count(i => i.FindExtension(CreativeCommonsSyndicationExtension.MatchByType) is not null);
         ExampleOutput.ShowItemsWithExtension(count, feed.Channel.Items.Count, "CreativeCommons");
 
         // By default the framework will automatically determine what XML namespace attributes (xmlns) to write

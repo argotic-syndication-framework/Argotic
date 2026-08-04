@@ -31,7 +31,7 @@ internal static class YahooMediaSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             YahooMediaSyndicationExtension? channelExtension = feed.Channel.FindExtension(YahooMediaSyndicationExtension.MatchByType) as YahooMediaSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowYahooMediaExtension(channelExtension);
             }
@@ -42,14 +42,14 @@ internal static class YahooMediaSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 YahooMediaSyndicationExtension? itemExtension = item.FindExtension(YahooMediaSyndicationExtension.MatchByType) as YahooMediaSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }
             }
         }
 
-        int count = feed.Channel.Items.Count(i => i.FindExtension(YahooMediaSyndicationExtension.MatchByType) != null);
+        int count = feed.Channel.Items.Count(i => i.FindExtension(YahooMediaSyndicationExtension.MatchByType) is not null);
         ExampleOutput.ShowItemsWithExtension(count, feed.Channel.Items.Count, "YahooMedia");
 
         // By default the framework will automatically determine what XML namespace attributes (xmlns) to write

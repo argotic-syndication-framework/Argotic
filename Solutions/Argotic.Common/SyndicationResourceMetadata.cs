@@ -109,7 +109,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("apml", "http://www.apml.org/apml-0.6");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("APML", manager)) != null || (navigator = resource.SelectSingleNode("apml:APML", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("APML", manager)) is not null || (navigator = resource.SelectSingleNode("apml:APML", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -117,10 +117,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (namespaces.ContainsValue("http://www.apml.org/apml-0.6"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(0, 6);
-                }
+                version ??= new Version(0, 6);
             }
         }
 
@@ -145,7 +142,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("feed", manager)) != null || (navigator = resource.SelectSingleNode("atom:feed", manager)) != null || (navigator = resource.SelectSingleNode("atom03:feed", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("feed", manager)) is not null || (navigator = resource.SelectSingleNode("atom:feed", manager)) is not null || (navigator = resource.SelectSingleNode("atom03:feed", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -153,21 +150,15 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (namespaces.ContainsValue("http://www.w3.org/2005/Atom"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(1, 0);
-                }
+                version ??= new Version(1, 0);
             }
             else if (namespaces.ContainsValue("http://purl.org/atom/ns#"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(0, 3);
-                }
+                version ??= new Version(0, 3);
             }
         }
-        else if ((navigator = resource.SelectSingleNode("entry", manager)) != null || (navigator = resource.SelectSingleNode("atom:entry", manager)) != null || (navigator = resource.SelectSingleNode("atom03:entry", manager)) != null)
+        else if ((navigator = resource.SelectSingleNode("entry", manager)) is not null || (navigator = resource.SelectSingleNode("atom:entry", manager)) is not null || (navigator = resource.SelectSingleNode("atom03:entry", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -175,18 +166,12 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (namespaces.ContainsValue("http://www.w3.org/2005/Atom"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(1, 0);
-                }
+                version ??= new Version(1, 0);
             }
             else if (namespaces.ContainsValue("http://purl.org/atom/ns#"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(0, 3);
-                }
+                version ??= new Version(0, 3);
             }
         }
 
@@ -212,7 +197,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("app", "http://www.w3.org/2007/app");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("categories", manager)) != null || (navigator = resource.SelectSingleNode("app:categories", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("categories", manager)) is not null || (navigator = resource.SelectSingleNode("app:categories", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -220,10 +205,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (namespaces.ContainsValue("http://www.w3.org/2007/app"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(1, 0);
-                }
+                version ??= new Version(1, 0);
             }
         }
 
@@ -250,7 +232,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("app", "http://www.w3.org/2007/app");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("service", manager)) != null || (navigator = resource.SelectSingleNode("app:service", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("service", manager)) is not null || (navigator = resource.SelectSingleNode("app:service", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -258,10 +240,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (namespaces.ContainsValue("http://www.w3.org/2007/app"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(1, 0);
-                }
+                version ??= new Version(1, 0);
             }
         }
 
@@ -286,7 +265,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("blogML", "http://www.blogml.com/2006/09/BlogML");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("blog", manager)) != null || (navigator = resource.SelectSingleNode("blogML:blog", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("blog", manager)) is not null || (navigator = resource.SelectSingleNode("blogML:blog", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -294,10 +273,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (namespaces.ContainsValue("http://www.blogml.com/2006/09/BlogML"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(2, 0);
-                }
+                version ??= new Version(2, 0);
             }
         }
 
@@ -322,7 +298,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("micro", "http://www.mozilla.org/microsummaries/0.1");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("generator", manager)) != null || (navigator = resource.SelectSingleNode("micro:generator", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("generator", manager)) is not null || (navigator = resource.SelectSingleNode("micro:generator", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -330,10 +306,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (namespaces.ContainsValue("http://www.mozilla.org/microsummaries/0.1"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(0, 1);
-                }
+                version ??= new Version(0, 1);
             }
         }
 
@@ -355,15 +328,12 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         ArgumentNullException.ThrowIfNull(resource);
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("NewsML")) != null)
+        if ((navigator = resource.SelectSingleNode("NewsML")) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
 
             resourceConformsToFormat = true;
-            if (version == null)
-            {
-                version = new Version(2, 0);
-            }
+            version ??= new Version(2, 0);
         }
 
         return resourceConformsToFormat;
@@ -387,7 +357,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("search", "http://a9.com/-/spec/opensearch/1.1/");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("OpenSearchDescription", manager)) != null || (navigator = resource.SelectSingleNode("search:OpenSearchDescription", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("OpenSearchDescription", manager)) is not null || (navigator = resource.SelectSingleNode("search:OpenSearchDescription", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -395,10 +365,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (namespaces.ContainsValue("http://a9.com/-/spec/opensearch/1.1/"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(1, 1);
-                }
+                version ??= new Version(1, 1);
             }
         }
 
@@ -420,15 +387,12 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         ArgumentNullException.ThrowIfNull(resource);
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("opml")) != null)
+        if ((navigator = resource.SelectSingleNode("opml")) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
 
             resourceConformsToFormat = true;
-            if (version == null)
-            {
-                version = new Version(2, 0);
-            }
+            version ??= new Version(2, 0);
         }
 
         return resourceConformsToFormat;
@@ -452,7 +416,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("rsd", "http://archipelago.phrasewise.com/rsd");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("rsd", manager)) != null || (navigator = resource.SelectSingleNode("rsd:rsd", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("rsd", manager)) is not null || (navigator = resource.SelectSingleNode("rsd:rsd", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -460,12 +424,9 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
             if (namespaces.ContainsValue("http://archipelago.phrasewise.com/rsd"))
             {
                 resourceConformsToFormat = true;
-                if (version == null)
-                {
-                    version = new Version(1, 0);
-                }
+                version ??= new Version(1, 0);
             }
-            else if (string.Equals(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) && version != null)
+            else if (string.Equals(navigator.Name, "rsd", StringComparison.OrdinalIgnoreCase) && version is not null)
             {
                 //  Most web log software actually fails to provide the default XML namespace per RSD spec, so this is a hack/compromise
                 resourceConformsToFormat = true;
@@ -495,17 +456,14 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("rss10", "http://purl.org/rss/1.0/");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("rss", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("rss", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
 
             resourceConformsToFormat = true;
-            if (version == null)
-            {
-                version = new Version(2, 0);
-            }
+            version ??= new Version(2, 0);
         }
-        else if ((navigator = resource.SelectSingleNode("rdf:RDF", manager)) != null)
+        else if ((navigator = resource.SelectSingleNode("rdf:RDF", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -543,7 +501,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("sm", "http://www.sitemaps.org/schemas/sitemap/0.9");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("urlset", manager)) != null || (navigator = resource.SelectSingleNode("sm:urlset", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("urlset", manager)) is not null || (navigator = resource.SelectSingleNode("sm:urlset", manager)) is not null)
         {
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -575,7 +533,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("sm", "http://www.sitemaps.org/schemas/sitemap/0.9");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("sitemapindex", manager)) != null || (navigator = resource.SelectSingleNode("sm:sitemapindex", manager)) != null)
+        if ((navigator = resource.SelectSingleNode("sitemapindex", manager)) is not null || (navigator = resource.SelectSingleNode("sm:sitemapindex", manager)) is not null)
         {
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -723,37 +681,37 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
 
         int result = this.Format.CompareTo(other.Format);
 
-        if (this.Version != null)
+        if (this.Version is not null)
         {
             if (result == 0) result = Comparer<Version>.Default.Compare(this.Version, other.Version);
         }
-        else if (other.Version != null)
+        else if (other.Version is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (this.Namespaces != null && other.Namespaces != null)
+        if (this.Namespaces is not null && other.Namespaces is not null)
         {
             if (result == 0) result = ComparisonUtility.CompareSequence(this.Namespaces, other.Namespaces, StringComparison.Ordinal);
         }
-        else if (this.Namespaces != null && other.Namespaces == null)
+        else if (this.Namespaces is not null && other.Namespaces is null)
         {
             if (result == 0) result = 1;
         }
-        else if (this.Namespaces == null && other.Namespaces != null)
+        else if (this.Namespaces is null && other.Namespaces is not null)
         {
             if (result == 0) result = -1;
         }
 
-        if (this.Resource != null && other.Resource != null)
+        if (this.Resource is not null && other.Resource is not null)
         {
             if (result == 0) result = string.Compare(this.Resource.OuterXml, other.Resource.OuterXml, StringComparison.OrdinalIgnoreCase);
         }
-        else if (this.Resource != null && other.Resource == null)
+        else if (this.Resource is not null && other.Resource is null)
         {
             if (result == 0) result = 1;
         }
-        else if (this.Resource == null && other.Resource != null)
+        else if (this.Resource is null && other.Resource is not null)
         {
             if (result == 0) result = -1;
         }

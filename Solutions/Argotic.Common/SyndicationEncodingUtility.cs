@@ -232,7 +232,7 @@ public static class SyndicationEncodingUtility
         response.EnsureSuccessStatusCode();
         using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
 
-        return encoding != null
+        return encoding is not null
             ? CreateSafeNavigator(stream, encoding)
             : CreateSafeNavigator(stream);
     }
@@ -431,7 +431,7 @@ public static class SyndicationEncodingUtility
         if (encodingMatch is { Groups.Count: > 0 })
         {
             Group group = encodingMatch.Groups["webName"];
-            if (group != null)
+            if (group is not null)
             {
                 try
                 {

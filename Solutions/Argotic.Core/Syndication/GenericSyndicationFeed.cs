@@ -235,7 +235,7 @@ public class GenericSyndicationFeed
     {
         ArgumentNullException.ThrowIfNull(stream);
         XPathNavigator navigator;
-        if (settings != null)
+        if (settings is not null)
         {
             navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding);
         }
@@ -257,12 +257,12 @@ public class GenericSyndicationFeed
         feedResource = feed;
         feedFormat = SyndicationContentFormat.Atom;
 
-        if (feed.Title != null && !string.IsNullOrEmpty(feed.Title.Content))
+        if (feed.Title is not null && !string.IsNullOrEmpty(feed.Title.Content))
         {
             feedTitle = feed.Title.Content;
         }
 
-        if (feed.Subtitle != null && !string.IsNullOrEmpty(feed.Subtitle.Content))
+        if (feed.Subtitle is not null && !string.IsNullOrEmpty(feed.Subtitle.Content))
         {
             feedDescription = feed.Subtitle.Content;
         }
@@ -272,7 +272,7 @@ public class GenericSyndicationFeed
             feedLastUpdatedOn = feed.UpdatedOn;
         }
 
-        if (feed.Language != null)
+        if (feed.Language is not null)
         {
             feedLanguage = feed.Language;
         }
@@ -316,7 +316,7 @@ public class GenericSyndicationFeed
             feedLastUpdatedOn = feed.Channel.LastBuildDate;
         }
 
-        if (feed.Channel.Language != null)
+        if (feed.Channel.Language is not null)
         {
             feedLanguage = feed.Channel.Language;
         }

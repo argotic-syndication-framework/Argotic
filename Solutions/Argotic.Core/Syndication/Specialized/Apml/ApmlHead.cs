@@ -105,25 +105,25 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
         XPathNavigator? userEmailNavigator = source.SelectSingleNode("apml:UserEmail", manager);
         XPathNavigator? dateCreatedNavigator = source.SelectSingleNode("apml:DateCreated", manager);
 
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             this.Title = titleNavigator.Value;
             wasLoaded = true;
         }
 
-        if (generatorNavigator != null)
+        if (generatorNavigator is not null)
         {
             this.Generator = generatorNavigator.Value;
             wasLoaded = true;
         }
 
-        if (userEmailNavigator != null)
+        if (userEmailNavigator is not null)
         {
             this.EmailAddress = userEmailNavigator.Value;
             wasLoaded = true;
         }
 
-        if (dateCreatedNavigator != null)
+        if (dateCreatedNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(dateCreatedNavigator.Value, out DateTime createdOn))
             {

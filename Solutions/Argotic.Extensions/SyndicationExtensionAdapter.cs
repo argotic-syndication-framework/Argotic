@@ -89,7 +89,7 @@ public class SyndicationExtensionAdapter
         {
             foreach (ISyndicationExtension extension in entity.Extensions)
             {
-                if (extension != null)
+                if (extension is not null)
                 {
                     Type type = extension.GetType();
                     if (!types.Contains(type))
@@ -118,7 +118,7 @@ public class SyndicationExtensionAdapter
 
         foreach (Type type in types)
         {
-            if (type != null)
+            if (type is not null)
             {
                 if (Activator.CreateInstance(type) is ISyndicationExtension extension)
                 {
@@ -209,7 +209,7 @@ public class SyndicationExtensionAdapter
 
         foreach (Type type in types)
         {
-            if (type != null)
+            if (type is not null)
             {
                 if (Activator.CreateInstance(type) is ISyndicationExtension extension)
                 {

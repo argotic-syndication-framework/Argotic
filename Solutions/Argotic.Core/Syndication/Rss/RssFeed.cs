@@ -250,10 +250,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(IXPathNavigable source, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(source);
-        if (settings == null)
-        {
-            settings = new SyndicationResourceLoadSettings();
-        }
+        settings ??= new SyndicationResourceLoadSettings();
         XPathNavigator navigator = source.CreateNavigator()
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator));
@@ -293,7 +290,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
-        if (settings != null)
+        if (settings is not null)
         {
             this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
         }
@@ -427,10 +424,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings == null)
-        {
-            settings = new SyndicationResourceSaveSettings();
-        }
+        settings ??= new SyndicationResourceSaveSettings();
 
         XmlWriterSettings writerSettings = new()
         {
@@ -478,7 +472,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
         writer.WriteStartElement("rss");
         writer.WriteAttributeString("version", this.Version.ToString());
 
-        if (this.Channel.SelfLink != null)
+        if (this.Channel.SelfLink is not null)
         {
             writer.WriteAttributeString("xmlns", "atom", null, "http://www.w3.org/2005/Atom");
         }
@@ -487,15 +481,15 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
         {
             SyndicationExtensionAdapter.FillExtensionTypes(this, settings.SupportedExtensions);
             SyndicationExtensionAdapter.FillExtensionTypes(this.Channel, settings.SupportedExtensions);
-            if (this.Channel.Cloud != null)
+            if (this.Channel.Cloud is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Channel.Cloud, settings.SupportedExtensions);
             }
-            if (this.Channel.Image != null)
+            if (this.Channel.Image is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Channel.Image, settings.SupportedExtensions);
             }
-            if (this.Channel.TextInput != null)
+            if (this.Channel.TextInput is not null)
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(this.Channel.TextInput, settings.SupportedExtensions);
             }
@@ -508,11 +502,11 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
             {
                 SyndicationExtensionAdapter.FillExtensionTypes(item, settings.SupportedExtensions);
 
-                if (item.Guid != null)
+                if (item.Guid is not null)
                 {
                     SyndicationExtensionAdapter.FillExtensionTypes(item.Guid, settings.SupportedExtensions);
                 }
-                if (item.Source != null)
+                if (item.Source is not null)
                 {
                     SyndicationExtensionAdapter.FillExtensionTypes(item.Source, settings.SupportedExtensions);
                 }

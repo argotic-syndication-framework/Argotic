@@ -95,7 +95,7 @@ public class YahooMediaCopyright : IComparable<YahooMediaCopyright>, IEquatable<
         YahooMediaSyndicationExtension extension = new();
         writer.WriteStartElement("copyright", extension.XmlNamespace);
 
-        if (this.Url != null)
+        if (this.Url is not null)
         {
             writer.WriteAttributeString("url", this.Url.ToString());
         }

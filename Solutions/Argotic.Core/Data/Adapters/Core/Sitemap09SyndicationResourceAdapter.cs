@@ -51,7 +51,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? urlsetNavigator = this.Navigator.SelectSingleNode("sm:urlset", manager);
 
-        if (urlsetNavigator != null)
+        if (urlsetNavigator is not null)
         {
             XPathNodeIterator urlIterator = urlsetNavigator.Select("sm:url", manager);
 
@@ -61,7 +61,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
                 while (urlIterator.MoveNext())
                 {
                     XPathNavigator? urlNode = urlIterator.Current;
-                    if (urlNode == null)
+                    if (urlNode is null)
                     {
                         continue;
                     }
@@ -99,7 +99,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? sitemapindexNavigator = this.Navigator.SelectSingleNode("sm:sitemapindex", manager);
 
-        if (sitemapindexNavigator != null)
+        if (sitemapindexNavigator is not null)
         {
             XPathNodeIterator sitemapIterator = sitemapindexNavigator.Select("sm:sitemap", manager);
 
@@ -109,7 +109,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
                 while (sitemapIterator.MoveNext())
                 {
                     XPathNavigator? sitemapNode = sitemapIterator.Current;
-                    if (sitemapNode == null)
+                    if (sitemapNode is null)
                     {
                         continue;
                     }

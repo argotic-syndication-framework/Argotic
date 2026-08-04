@@ -201,7 +201,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
                 while (outlinesIterator.MoveNext())
                 {
                     XPathNavigator? outlinesNode = outlinesIterator.Current;
-                    if (outlinesNode == null)
+                    if (outlinesNode is null)
                     {
                         continue;
                     }
@@ -261,7 +261,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
                 while (outlinesIterator.MoveNext())
                 {
                     XPathNavigator? outlinesNode = outlinesIterator.Current;
-                    if (outlinesNode == null)
+                    if (outlinesNode is null)
                     {
                         continue;
                     }
@@ -446,7 +446,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
         outline.ContentType = type;
         outline.Attributes.Add("xmlUrl", xmlUrl.ToString());
 
-        if (htmlUrl != null)
+        if (htmlUrl is not null)
         {
             outline.Attributes.Add("htmlUrl", htmlUrl.ToString());
         }
@@ -466,7 +466,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
             outline.Attributes.Add("description", description.Trim());
         }
 
-        if (language != null)
+        if (language is not null)
         {
             outline.Attributes.Add("language", language.Name);
         }

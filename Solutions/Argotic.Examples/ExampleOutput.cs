@@ -52,7 +52,7 @@ internal static class ExampleOutput
     {
         AnsiConsole.MarkupLine($"  [dim]Atom Entry:[/] [blue]{Markup.Escape(entry.Title?.Content ?? "")}[/]");
         AnsiConsole.MarkupLine($"  [dim]Updated:[/] {entry.UpdatedOn}");
-        if (entry.Summary != null)
+        if (entry.Summary is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]Summary:[/] {Markup.Escape(Truncate(entry.Summary.Content, 80))}");
         }
@@ -127,7 +127,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowCreated(string typeName, string? name = null)
     {
-        if (name != null)
+        if (name is not null)
         {
             AnsiConsole.MarkupLine($"  [green]Created[/] [dim]{Markup.Escape(typeName)}:[/] {Markup.Escape(name)}");
         }
@@ -142,7 +142,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowLoaded(string typeName, string? details = null)
     {
-        if (details != null)
+        if (details is not null)
         {
             AnsiConsole.MarkupLine($"  [green]Loaded[/] [dim]{Markup.Escape(typeName)}:[/] {Markup.Escape(details)}");
         }
@@ -193,7 +193,7 @@ internal static class ExampleOutput
     public static void ShowRssChannel(RssChannel channel)
     {
         AnsiConsole.MarkupLine($"  [dim]Title:[/] {Markup.Escape(channel.Title)}");
-        if (channel.Link != null)
+        if (channel.Link is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]Link:[/] {Markup.Escape(channel.Link.ToString())}");
         }
@@ -210,7 +210,7 @@ internal static class ExampleOutput
         {
             AnsiConsole.MarkupLine($"  [dim]Author:[/] {Markup.Escape(item.Author)}");
         }
-        if (item.Link != null)
+        if (item.Link is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]Link:[/] {Markup.Escape(item.Link.ToString())}");
         }
@@ -243,7 +243,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowRssEnclosure(RssEnclosure enclosure)
     {
-        if (enclosure.Url != null)
+        if (enclosure.Url is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]URL:[/] {Markup.Escape(enclosure.Url.ToString())}");
         }
@@ -265,7 +265,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowRssImage(RssImage image)
     {
-        if (image.Url != null)
+        if (image.Url is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]URL:[/] {Markup.Escape(image.Url.ToString())}");
         }
@@ -287,7 +287,7 @@ internal static class ExampleOutput
     public static void ShowRssSource(RssSource source)
     {
         AnsiConsole.MarkupLine($"  [dim]Title:[/] {Markup.Escape(source.Title)}");
-        if (source.Url != null)
+        if (source.Url is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]URL:[/] {Markup.Escape(source.Url.ToString())}");
         }
@@ -307,7 +307,7 @@ internal static class ExampleOutput
         {
             AnsiConsole.MarkupLine($"  [dim]Label:[/] {Markup.Escape(category.Label)}");
         }
-        if (category.Scheme != null)
+        if (category.Scheme is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]Scheme:[/] {Markup.Escape(category.Scheme.ToString())}");
         }
@@ -318,7 +318,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowAtomLink(AtomLink link)
     {
-        if (link.Uri != null)
+        if (link.Uri is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]URI:[/] {Markup.Escape(link.Uri.ToString())}");
         }
@@ -357,7 +357,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowAtomIcon(AtomIcon icon)
     {
-        if (icon.Uri != null)
+        if (icon.Uri is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]URI:[/] {Markup.Escape(icon.Uri.ToString())}");
         }
@@ -368,7 +368,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowAtomLogo(AtomLogo logo)
     {
-        if (logo.Uri != null)
+        if (logo.Uri is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]URI:[/] {Markup.Escape(logo.Uri.ToString())}");
         }
@@ -379,7 +379,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowAtomId(AtomId id)
     {
-        if (id.Uri != null)
+        if (id.Uri is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]ID:[/] {Markup.Escape(id.Uri.ToString())}");
         }
@@ -402,7 +402,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowAtomSource(AtomSource source)
     {
-        if (source.Title != null)
+        if (source.Title is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]Title:[/] {Markup.Escape(source.Title.Content)}");
         }
@@ -490,7 +490,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowBlogMLPost(BlogMLPost post)
     {
-        if (post.Title != null)
+        if (post.Title is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]Title:[/] {Markup.Escape(post.Title.Content)}");
         }
@@ -519,7 +519,7 @@ internal static class ExampleOutput
     public static void ShowRsdApplicationInterface(RsdApplicationInterface api)
     {
         AnsiConsole.MarkupLine($"  [dim]Name:[/] {Markup.Escape(api.Name)}");
-        if (api.Link != null)
+        if (api.Link is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]Link:[/] {Markup.Escape(api.Link.ToString())}");
         }
@@ -535,7 +535,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowTrackbackClient(Uri host, string weblogName, string title)
     {
-        if (host != null)
+        if (host is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]Host:[/] {Markup.Escape(host.ToString())}");
         }
@@ -554,7 +554,7 @@ internal static class ExampleOutput
     /// </summary>
     public static void ShowXmlRpcClient(Uri host, string methodName)
     {
-        if (host != null)
+        if (host is not null)
         {
             AnsiConsole.MarkupLine($"  [dim]Host:[/] {Markup.Escape(host.ToString())}");
         }
@@ -679,11 +679,11 @@ internal static class ExampleOutput
     public static void ShowBlogChannelExtension(BlogChannelSyndicationExtension ext)
     {
         AnsiConsole.MarkupLine("  [blue]Blog Channel Extension:[/]");
-        if (ext.Context.BlogRoll != null)
+        if (ext.Context.BlogRoll is not null)
         {
             AnsiConsole.MarkupLine($"    [dim]BlogRoll:[/] {Markup.Escape(ext.Context.BlogRoll.ToString())}");
         }
-        if (ext.Context.MySubscriptions != null)
+        if (ext.Context.MySubscriptions is not null)
         {
             AnsiConsole.MarkupLine($"    [dim]MySubscriptions:[/] {Markup.Escape(ext.Context.MySubscriptions.ToString())}");
         }
@@ -717,7 +717,7 @@ internal static class ExampleOutput
     public static void ShowFeedSyncExtension(FeedSynchronizationSyndicationExtension ext)
     {
         AnsiConsole.MarkupLine("  [blue]Feed Sync Extension:[/]");
-        if (ext.Context.Sharing != null)
+        if (ext.Context.Sharing is not null)
         {
             AnsiConsole.MarkupLine($"    [dim]Since:[/] {ext.Context.Sharing.Since}");
             AnsiConsole.MarkupLine($"    [dim]Until:[/] {ext.Context.Sharing.Until}");
@@ -730,7 +730,7 @@ internal static class ExampleOutput
     public static void ShowLiveJournalExtension(LiveJournalSyndicationExtension ext)
     {
         AnsiConsole.MarkupLine("  [blue]LiveJournal Extension:[/]");
-        if (ext.Context.Mood != null && !string.IsNullOrEmpty(ext.Context.Mood.Content))
+        if (ext.Context.Mood is not null && !string.IsNullOrEmpty(ext.Context.Mood.Content))
         {
             AnsiConsole.MarkupLine($"    [dim]Mood:[/] {Markup.Escape(ext.Context.Mood.Content)}");
         }
@@ -746,7 +746,7 @@ internal static class ExampleOutput
     public static void ShowPheedExtension(PheedSyndicationExtension ext)
     {
         AnsiConsole.MarkupLine("  [blue]Pheed Extension:[/]");
-        if (ext.Context.Thumbnail != null)
+        if (ext.Context.Thumbnail is not null)
         {
             AnsiConsole.MarkupLine($"    [dim]Thumbnail:[/] {Markup.Escape(ext.Context.Thumbnail.ToString())}");
         }
@@ -758,7 +758,7 @@ internal static class ExampleOutput
     public static void ShowPingbackExtension(PingbackSyndicationExtension ext)
     {
         AnsiConsole.MarkupLine("  [blue]Pingback Extension:[/]");
-        if (ext.Context.Server != null)
+        if (ext.Context.Server is not null)
         {
             AnsiConsole.MarkupLine($"    [dim]Server:[/] {Markup.Escape(ext.Context.Server.ToString())}");
         }
@@ -827,7 +827,7 @@ internal static class ExampleOutput
     public static void ShowTrackbackExtension(TrackbackSyndicationExtension ext)
     {
         AnsiConsole.MarkupLine("  [blue]Trackback Extension:[/]");
-        if (ext.Context.Ping != null)
+        if (ext.Context.Ping is not null)
         {
             AnsiConsole.MarkupLine($"    [dim]Ping URL:[/] {Markup.Escape(ext.Context.Ping.ToString())}");
         }
@@ -843,11 +843,11 @@ internal static class ExampleOutput
     public static void ShowWellFormedWebCommentsExtension(WellFormedWebCommentsSyndicationExtension ext)
     {
         AnsiConsole.MarkupLine("  [blue]WFW Comments Extension:[/]");
-        if (ext.Context.Comments != null)
+        if (ext.Context.Comments is not null)
         {
             AnsiConsole.MarkupLine($"    [dim]Comment URL:[/] {Markup.Escape(ext.Context.Comments.ToString())}");
         }
-        if (ext.Context.CommentsFeed != null)
+        if (ext.Context.CommentsFeed is not null)
         {
             AnsiConsole.MarkupLine($"    [dim]Comment RSS:[/] {Markup.Escape(ext.Context.CommentsFeed.ToString())}");
         }
@@ -971,7 +971,7 @@ internal static class ExampleOutput
         {
             AnsiConsole.MarkupLine($"    [dim]Title:[/] [blue]{Markup.Escape(extension.Title)}[/]");
         }
-        if (extension.Publication != null)
+        if (extension.Publication is not null)
         {
             AnsiConsole.MarkupLine($"    [dim]Publication:[/] {Markup.Escape(extension.Publication.Name)} ({Markup.Escape(extension.Publication.Language)})");
         }

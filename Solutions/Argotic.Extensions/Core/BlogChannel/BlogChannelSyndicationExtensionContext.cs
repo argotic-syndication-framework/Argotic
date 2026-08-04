@@ -68,7 +68,7 @@ public class BlogChannelSyndicationExtensionContext
             XPathNavigator? blinkNavigator = source.SelectSingleNode("blogChannel:blink", manager);
             XPathNavigator? changesNavigator = source.SelectSingleNode("blogChannel:changes", manager);
 
-            if (blogRollNavigator != null)
+            if (blogRollNavigator is not null)
             {
                 if (Uri.TryCreate(blogRollNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? blogRoll))
                 {
@@ -77,7 +77,7 @@ public class BlogChannelSyndicationExtensionContext
                 }
             }
 
-            if (mySubscriptionsNavigator != null)
+            if (mySubscriptionsNavigator is not null)
             {
                 if (Uri.TryCreate(mySubscriptionsNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? mySubscriptions))
                 {
@@ -86,7 +86,7 @@ public class BlogChannelSyndicationExtensionContext
                 }
             }
 
-            if (blinkNavigator != null)
+            if (blinkNavigator is not null)
             {
                 if (Uri.TryCreate(blinkNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? blink))
                 {
@@ -95,7 +95,7 @@ public class BlogChannelSyndicationExtensionContext
                 }
             }
 
-            if (changesNavigator != null)
+            if (changesNavigator is not null)
             {
                 if (Uri.TryCreate(changesNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? changes))
                 {
@@ -120,22 +120,22 @@ public class BlogChannelSyndicationExtensionContext
     {
         ArgumentNullException.ThrowIfNull(writer);
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
-        if (this.BlogRoll != null)
+        if (this.BlogRoll is not null)
         {
             writer.WriteElementString("blogRoll", xmlNamespace, this.BlogRoll.ToString());
         }
 
-        if (this.MySubscriptions != null)
+        if (this.MySubscriptions is not null)
         {
             writer.WriteElementString("mySubscriptions", xmlNamespace, this.MySubscriptions.ToString());
         }
 
-        if (this.Blink != null)
+        if (this.Blink is not null)
         {
             writer.WriteElementString("blink", xmlNamespace, this.Blink.ToString());
         }
 
-        if (this.Changes != null)
+        if (this.Changes is not null)
         {
             writer.WriteElementString("changes", xmlNamespace, this.Changes.ToString());
         }

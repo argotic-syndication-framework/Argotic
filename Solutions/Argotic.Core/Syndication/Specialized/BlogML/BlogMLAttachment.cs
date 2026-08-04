@@ -207,12 +207,12 @@ public class BlogMLAttachment : IComparable<BlogMLAttachment>, IEquatable<BlogML
             writer.WriteAttributeString("size", this.Size.ToString(NumberFormatInfo.InvariantInfo));
         }
 
-        if (this.ExternalUri != null)
+        if (this.ExternalUri is not null)
         {
             writer.WriteAttributeString("external-uri", this.ExternalUri.ToString());
         }
 
-        if (this.Url != null)
+        if (this.Url is not null)
         {
             writer.WriteAttributeString("url", this.Url.ToString());
         }

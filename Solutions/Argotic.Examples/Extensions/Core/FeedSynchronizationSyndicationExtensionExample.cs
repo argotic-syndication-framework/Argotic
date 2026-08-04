@@ -31,7 +31,7 @@ internal static class FeedSynchronizationSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             FeedSynchronizationSyndicationExtension? channelExtension = feed.Channel.FindExtension(FeedSynchronizationSyndicationExtension.MatchByType) as FeedSynchronizationSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowFeedSyncExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class FeedSynchronizationSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 FeedSynchronizationSyndicationExtension? itemExtension = item.FindExtension(FeedSynchronizationSyndicationExtension.MatchByType) as FeedSynchronizationSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

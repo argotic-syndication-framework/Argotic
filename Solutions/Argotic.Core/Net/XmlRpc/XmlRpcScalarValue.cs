@@ -369,7 +369,7 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     {
         string value = string.Empty;
 
-        if (scalar == null)
+        if (scalar is null)
         {
             return string.Empty;
         }

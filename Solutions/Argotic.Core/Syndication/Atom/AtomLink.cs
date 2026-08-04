@@ -379,7 +379,7 @@ public class AtomLink : IAtomCommonObjectAttributes, IComparable<AtomLink>, IEqu
             writer.WriteAttributeString("type", this.ContentType);
         }
 
-        if (this.ContentLanguage != null)
+        if (this.ContentLanguage is not null)
         {
             writer.WriteAttributeString("hreflang", this.ContentLanguage.Name);
         }

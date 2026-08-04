@@ -200,7 +200,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         XPathNavigator? titleNavigator = source.SelectSingleNode("atom:title", manager);
         XPathNavigator? updatedNavigator = source.SelectSingleNode("atom:updated", manager);
 
-        if (idNavigator != null)
+        if (idNavigator is not null)
         {
             this.Id = new AtomId();
             if (this.Id.Load(idNavigator))
@@ -209,7 +209,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             }
         }
 
-        if (titleNavigator != null)
+        if (titleNavigator is not null)
         {
             this.Title = new AtomTextConstruct();
             if (this.Title.Load(titleNavigator))
@@ -218,7 +218,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             }
         }
 
-        if (updatedNavigator != null)
+        if (updatedNavigator is not null)
         {
             if (SyndicationDateTimeUtility.TryParseRfc3339DateTime(updatedNavigator.Value, out DateTime updatedOn))
             {
@@ -346,32 +346,32 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         result = AtomFeed.CompareSequence(this.Contributors, other.Contributors);
         if (result != 0) return result;
 
-        if (this.Generator != null)
+        if (this.Generator is not null)
         {
             result = this.Generator.CompareTo(other.Generator);
             if (result != 0) return result;
         }
-        else if (other.Generator != null)
+        else if (other.Generator is not null)
         {
             return -1;
         }
 
-        if (this.Icon != null)
+        if (this.Icon is not null)
         {
             result = this.Icon.CompareTo(other.Icon);
             if (result != 0) return result;
         }
-        else if (other.Icon != null)
+        else if (other.Icon is not null)
         {
             return -1;
         }
 
-        if (this.Id != null)
+        if (this.Id is not null)
         {
             result = this.Id.CompareTo(other.Id);
             if (result != 0) return result;
         }
-        else if (other.Id != null)
+        else if (other.Id is not null)
         {
             return -1;
         }
@@ -379,42 +379,42 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         result = AtomFeed.CompareSequence(this.Links, other.Links);
         if (result != 0) return result;
 
-        if (this.Logo != null)
+        if (this.Logo is not null)
         {
             result = this.Logo.CompareTo(other.Logo);
             if (result != 0) return result;
         }
-        else if (other.Logo != null)
+        else if (other.Logo is not null)
         {
             return -1;
         }
 
-        if (this.Rights != null)
+        if (this.Rights is not null)
         {
             result = this.Rights.CompareTo(other.Rights);
             if (result != 0) return result;
         }
-        else if (other.Rights != null)
+        else if (other.Rights is not null)
         {
             return -1;
         }
 
-        if (this.Subtitle != null)
+        if (this.Subtitle is not null)
         {
             result = this.Subtitle.CompareTo(other.Subtitle);
             if (result != 0) return result;
         }
-        else if (other.Subtitle != null)
+        else if (other.Subtitle is not null)
         {
             return -1;
         }
 
-        if (this.Title != null)
+        if (this.Title is not null)
         {
             result = this.Title.CompareTo(other.Title);
             if (result != 0) return result;
         }
-        else if (other.Title != null)
+        else if (other.Title is not null)
         {
             return -1;
         }
@@ -502,7 +502,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             while (authorIterator.MoveNext())
             {
                 XPathNavigator? authorNode = authorIterator.Current;
-                if (authorNode == null)
+                if (authorNode is null)
                 {
                     continue;
                 }
@@ -521,7 +521,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             while (categoryIterator.MoveNext())
             {
                 XPathNavigator? categoryNode = categoryIterator.Current;
-                if (categoryNode == null)
+                if (categoryNode is null)
                 {
                     continue;
                 }
@@ -540,7 +540,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             while (contributorIterator.MoveNext())
             {
                 XPathNavigator? contributorNode = contributorIterator.Current;
-                if (contributorNode == null)
+                if (contributorNode is null)
                 {
                     continue;
                 }
@@ -559,7 +559,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             while (linkIterator.MoveNext())
             {
                 XPathNavigator? linkNode = linkIterator.Current;
-                if (linkNode == null)
+                if (linkNode is null)
                 {
                     continue;
                 }
@@ -598,7 +598,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         XPathNavigator? rightsNavigator = source.SelectSingleNode("atom:rights", manager);
         XPathNavigator? subtitleNavigator = source.SelectSingleNode("atom:subtitle", manager);
 
-        if (generatorNavigator != null)
+        if (generatorNavigator is not null)
         {
             this.Generator = new AtomGenerator();
             if (this.Generator.Load(generatorNavigator))
@@ -607,7 +607,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             }
         }
 
-        if (iconNavigator != null)
+        if (iconNavigator is not null)
         {
             this.Icon = new AtomIcon();
             if (this.Icon.Load(iconNavigator))
@@ -616,7 +616,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             }
         }
 
-        if (logoNavigator != null)
+        if (logoNavigator is not null)
         {
             this.Logo = new AtomLogo();
             if (this.Logo.Load(logoNavigator))
@@ -625,7 +625,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             }
         }
 
-        if (rightsNavigator != null)
+        if (rightsNavigator is not null)
         {
             this.Rights = new AtomTextConstruct();
             if (this.Rights.Load(rightsNavigator))
@@ -634,7 +634,7 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
             }
         }
 
-        if (subtitleNavigator != null)
+        if (subtitleNavigator is not null)
         {
             this.Subtitle = new AtomTextConstruct();
             if (this.Subtitle.Load(subtitleNavigator))

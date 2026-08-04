@@ -47,10 +47,10 @@ public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XPathNavigator? feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
 
-        if (feedNavigator != null)
+        if (feedNavigator is not null)
         {
             XPathNavigator? channelNavigator = feedNavigator.SelectSingleNode("channel", manager);
-            if (channelNavigator != null)
+            if (channelNavigator is not null)
             {
                 resource.Channel.Load(channelNavigator, this.Settings);
             }

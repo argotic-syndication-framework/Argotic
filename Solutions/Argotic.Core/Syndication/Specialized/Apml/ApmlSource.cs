@@ -271,7 +271,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
                 while (authorIterator.MoveNext())
                 {
                     XPathNavigator? authorNode = authorIterator.Current;
-                    if (authorNode == null)
+                    if (authorNode is null)
                     {
                         continue;
                     }
@@ -370,7 +370,7 @@ public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExte
                 while (authorIterator.MoveNext())
                 {
                     XPathNavigator? authorNode = authorIterator.Current;
-                    if (authorNode == null)
+                    if (authorNode is null)
                     {
                         continue;
                     }

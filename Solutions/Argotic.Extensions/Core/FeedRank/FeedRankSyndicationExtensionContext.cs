@@ -95,7 +95,7 @@ public class FeedRankSyndicationExtensionContext
         if (source.HasChildren)
         {
             XPathNavigator? rankNavigator = source.SelectSingleNode("re:rank", manager);
-            if (rankNavigator != null)
+            if (rankNavigator is not null)
             {
                 if (rankNavigator.HasAttributes)
                 {
@@ -158,7 +158,7 @@ public class FeedRankSyndicationExtensionContext
 
         writer.WriteAttributeString("scheme", xmlNamespace, this.Scheme?.ToString() ?? string.Empty);
 
-        if (this.Domain != null)
+        if (this.Domain is not null)
         {
             writer.WriteAttributeString("domain", xmlNamespace, this.Domain.ToString());
         }

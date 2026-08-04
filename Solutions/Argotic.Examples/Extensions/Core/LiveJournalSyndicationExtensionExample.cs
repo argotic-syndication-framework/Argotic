@@ -31,7 +31,7 @@ internal static class LiveJournalSyndicationExtensionExample
         if (feed.Channel.HasExtensions)
         {
             LiveJournalSyndicationExtension? channelExtension = feed.Channel.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension;
-            if (channelExtension != null)
+            if (channelExtension is not null)
             {
                 ExampleOutput.ShowLiveJournalExtension(channelExtension);
             }
@@ -42,7 +42,7 @@ internal static class LiveJournalSyndicationExtensionExample
             if (item.HasExtensions)
             {
                 LiveJournalSyndicationExtension? itemExtension = item.FindExtension(LiveJournalSyndicationExtension.MatchByType) as LiveJournalSyndicationExtension;
-                if (itemExtension != null)
+                if (itemExtension is not null)
                 {
                     // Process extension for current item
                 }

@@ -95,7 +95,7 @@ internal static class RsdUtility
 
         XPathNavigator? navigator = source.SelectSingleNode(xpath, resolver);
 
-        if (navigator == null)
+        if (navigator is null)
         {
             string safeXpath = xpath.Replace("rsd:", string.Empty, StringComparison.Ordinal);
             navigator = source.SelectSingleNode(safeXpath, resolver);

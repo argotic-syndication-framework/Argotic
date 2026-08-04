@@ -192,14 +192,14 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = new(source.NameTable);
-        XPathNavigator? authorNavigator = source.SelectSingleNode("author", manager);
-        XPathNavigator? commentsNavigator = source.SelectSingleNode("comments", manager);
-        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator? guidNavigator = source.SelectSingleNode("guid", manager);
-        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator? publicationNavigator = source.SelectSingleNode("pubDate", manager);
-        XPathNavigator? sourceNavigator = source.SelectSingleNode("source", manager);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator? authorNavigator = source.SelectChildElement("author");
+        XPathNavigator? commentsNavigator = source.SelectChildElement("comments");
+        XPathNavigator? descriptionNavigator = source.SelectChildElement("description");
+        XPathNavigator? guidNavigator = source.SelectChildElement("guid");
+        XPathNavigator? linkNavigator = source.SelectChildElement("link");
+        XPathNavigator? publicationNavigator = source.SelectChildElement("pubDate");
+        XPathNavigator? sourceNavigator = source.SelectChildElement("source");
+        XPathNavigator? titleNavigator = source.SelectChildElement("title");
 
         XPathNodeIterator categoryIterator = source.Select("category", manager);
         XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);
@@ -324,14 +324,14 @@ public class RssItem : IComparable<RssItem>, IEquatable<RssItem>, IExtensibleSyn
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(settings);
         XmlNamespaceManager manager = new(source.NameTable);
-        XPathNavigator? authorNavigator = source.SelectSingleNode("author", manager);
-        XPathNavigator? commentsNavigator = source.SelectSingleNode("comments", manager);
-        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator? guidNavigator = source.SelectSingleNode("guid", manager);
-        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator? publicationNavigator = source.SelectSingleNode("pubDate", manager);
-        XPathNavigator? sourceNavigator = source.SelectSingleNode("source", manager);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator? authorNavigator = source.SelectChildElement("author");
+        XPathNavigator? commentsNavigator = source.SelectChildElement("comments");
+        XPathNavigator? descriptionNavigator = source.SelectChildElement("description");
+        XPathNavigator? guidNavigator = source.SelectChildElement("guid");
+        XPathNavigator? linkNavigator = source.SelectChildElement("link");
+        XPathNavigator? publicationNavigator = source.SelectChildElement("pubDate");
+        XPathNavigator? sourceNavigator = source.SelectChildElement("source");
+        XPathNavigator? titleNavigator = source.SelectChildElement("title");
 
         XPathNodeIterator categoryIterator = source.Select("category", manager);
         XPathNodeIterator enclosureIterator = source.Select("enclosure", manager);

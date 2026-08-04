@@ -340,9 +340,9 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         ArgumentNullException.ThrowIfNull(settings);
         XmlNamespaceManager manager = new(source.NameTable);
         manager.AddNamespace("atom", "http://www.w3.org/2005/Atom");
-        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator? descriptionNavigator = source.SelectChildElement("description");
+        XPathNavigator? linkNavigator = source.SelectChildElement("link");
+        XPathNavigator? titleNavigator = source.SelectChildElement("title");
 
         if (descriptionNavigator is not null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
@@ -646,18 +646,18 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
-        XPathNavigator? cloudNavigator = source.SelectSingleNode("cloud", manager);
-        XPathNavigator? copyrightNavigator = source.SelectSingleNode("copyright", manager);
-        XPathNavigator? generatorNavigator = source.SelectSingleNode("generator", manager);
-        XPathNavigator? imageNavigator = source.SelectSingleNode("image", manager);
-        XPathNavigator? languageNavigator = source.SelectSingleNode("language", manager);
-        XPathNavigator? lastBuildDateNavigator = source.SelectSingleNode("lastBuildDate", manager);
-        XPathNavigator? managingEditorNavigator = source.SelectSingleNode("managingEditor", manager);
-        XPathNavigator? publicationNavigator = source.SelectSingleNode("pubDate", manager);
-        XPathNavigator? ratingNavigator = source.SelectSingleNode("rating", manager);
-        XPathNavigator? textInputNavigator = source.SelectSingleNode("textInput", manager);
-        XPathNavigator? timeToLiveNavigator = source.SelectSingleNode("ttl", manager);
-        XPathNavigator? webMasterNavigator = source.SelectSingleNode("webMaster", manager);
+        XPathNavigator? cloudNavigator = source.SelectChildElement("cloud");
+        XPathNavigator? copyrightNavigator = source.SelectChildElement("copyright");
+        XPathNavigator? generatorNavigator = source.SelectChildElement("generator");
+        XPathNavigator? imageNavigator = source.SelectChildElement("image");
+        XPathNavigator? languageNavigator = source.SelectChildElement("language");
+        XPathNavigator? lastBuildDateNavigator = source.SelectChildElement("lastBuildDate");
+        XPathNavigator? managingEditorNavigator = source.SelectChildElement("managingEditor");
+        XPathNavigator? publicationNavigator = source.SelectChildElement("pubDate");
+        XPathNavigator? ratingNavigator = source.SelectChildElement("rating");
+        XPathNavigator? textInputNavigator = source.SelectChildElement("textInput");
+        XPathNavigator? timeToLiveNavigator = source.SelectChildElement("ttl");
+        XPathNavigator? webMasterNavigator = source.SelectChildElement("webMaster");
 
         if (cloudNavigator is not null)
         {

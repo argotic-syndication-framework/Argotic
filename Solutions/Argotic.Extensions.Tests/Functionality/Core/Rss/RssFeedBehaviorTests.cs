@@ -127,6 +127,66 @@ public class RssFeedBehaviorTests
 
     #region Feed Parsing Tests
 
+    // guid and ttl were parsed by RssItem and RssChannel but appeared in no fixture anywhere in the
+    // suite - they were only ever set through the object model, so the two SelectSingleNode calls
+    // that read them were executed by no test. Added before those lines were rewritten.
+
+    [TestMethod]
+    public void RssFeed_LoadingItemWithGuid_PopulatesGuid()
+    {
+        // Arrange
+        const string xml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <rss version="2.0">
+              <channel>
+                <title>Test Feed</title>
+                <link>http://example.com</link>
+                <description>A test feed</description>
+                <item>
+                  <title>Item</title>
+                  <guid isPermaLink="false">urn:uuid:6a7b1c2d</guid>
+                </item>
+              </channel>
+            </rss>
+            """;
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
+
+        // Act
+        feed.Load(stream);
+
+        // Assert
+        RssItem item = feed.Channel.Items.Single();
+        item.Guid.ShouldNotBeNull();
+        item.Guid.Value.ShouldBe("urn:uuid:6a7b1c2d");
+        item.Guid.IsPermanentLink.ShouldBeFalse();
+    }
+
+    [TestMethod]
+    public void RssFeed_LoadingChannelWithTimeToLive_PopulatesTimeToLive()
+    {
+        // Arrange
+        const string xml = """
+            <?xml version="1.0" encoding="utf-8"?>
+            <rss version="2.0">
+              <channel>
+                <title>Test Feed</title>
+                <link>http://example.com</link>
+                <description>A test feed</description>
+                <ttl>60</ttl>
+              </channel>
+            </rss>
+            """;
+        RssFeed feed = new();
+        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
+
+        // Act
+        feed.Load(stream);
+
+        // Assert
+        feed.Channel.TimeToLive.ShouldBe(60);
+    }
+
     [TestMethod]
     public void RssFeed_LoadingValidRssXml_PopulatesAllProperties()
     {

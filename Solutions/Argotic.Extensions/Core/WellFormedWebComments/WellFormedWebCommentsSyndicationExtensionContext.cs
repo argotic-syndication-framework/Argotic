@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -44,8 +45,8 @@ public class WellFormedWebCommentsSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator? commentNavigator = source.SelectSingleNode("wfw:comment", manager);
-            XPathNavigator? commentRssNavigator = source.SelectSingleNode("wfw:commentRss", manager);
+            XPathNavigator? commentNavigator = source.SelectChildElement("wfw", "comment", manager);
+            XPathNavigator? commentRssNavigator = source.SelectChildElement("wfw", "commentRss", manager);
 
             if (commentNavigator is not null)
             {
@@ -57,7 +58,7 @@ public class WellFormedWebCommentsSyndicationExtensionContext
             }
 
             // Early in specification, there was a typo that incorrectly named the comment feed element, this handles the scenario where publisher used incorrect element name
-            commentRssNavigator ??= source.SelectSingleNode("wfw:commentRSS", manager);
+            commentRssNavigator ??= source.SelectChildElement("wfw", "commentRSS", manager);
 
             if (commentRssNavigator is not null)
             {

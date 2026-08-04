@@ -187,10 +187,10 @@ public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExte
 
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(source.NameTable);
 
-        XPathNavigator? locNavigator = source.SelectSingleNode("sm:loc", manager);
-        XPathNavigator? lastmodNavigator = source.SelectSingleNode("sm:lastmod", manager);
-        XPathNavigator? changefreqNavigator = source.SelectSingleNode("sm:changefreq", manager);
-        XPathNavigator? priorityNavigator = source.SelectSingleNode("sm:priority", manager);
+        XPathNavigator? locNavigator = source.SelectChildElement("sm", "loc", manager);
+        XPathNavigator? lastmodNavigator = source.SelectChildElement("sm", "lastmod", manager);
+        XPathNavigator? changefreqNavigator = source.SelectChildElement("sm", "changefreq", manager);
+        XPathNavigator? priorityNavigator = source.SelectChildElement("sm", "priority", manager);
 
         if (locNavigator is not null)
         {

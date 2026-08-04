@@ -113,7 +113,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
         XPathNavigator source = document.CreateNavigator();
 
         XmlRpcResponse result = new();
-        XPathNavigator? methodResponseNavigator = source.SelectSingleNode("methodResponse");
+        XPathNavigator? methodResponseNavigator = source.SelectChildElement("methodResponse");
         if (methodResponseNavigator is not null)
         {
             result.Load(methodResponseNavigator);
@@ -160,8 +160,8 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
 
         if (source.HasChildren)
         {
-            XPathNavigator? parametersNavigator = source.SelectSingleNode("params");
-            XPathNavigator? faultNavigator = source.SelectSingleNode("fault");
+            XPathNavigator? parametersNavigator = source.SelectChildElement("params");
+            XPathNavigator? faultNavigator = source.SelectChildElement("fault");
 
             if (parametersNavigator is not null)
             {
@@ -178,7 +178,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
 
             if (faultNavigator is not null)
             {
-                XPathNavigator? structNavigator = faultNavigator.SelectSingleNode("value");
+                XPathNavigator? structNavigator = faultNavigator.SelectChildElement("value");
                 if (structNavigator is not null)
                 {
                     XmlRpcStructureValue structure = new();

@@ -104,8 +104,8 @@ public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEqua
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
 
-        XPathNavigator? nameNavigator = source.SelectSingleNode("news:name", manager);
-        XPathNavigator? languageNavigator = source.SelectSingleNode("news:language", manager);
+        XPathNavigator? nameNavigator = source.SelectChildElement("news", "name", manager);
+        XPathNavigator? languageNavigator = source.SelectChildElement("news", "language", manager);
 
         if (nameNavigator is not null && !string.IsNullOrEmpty(nameNavigator.Value))
         {

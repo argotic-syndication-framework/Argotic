@@ -45,7 +45,7 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = BlogMLUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator? blogNavigator = this.Navigator.SelectSingleNode("blog:blog", manager);
+        XPathNavigator? blogNavigator = this.Navigator.SelectChildElement("blog", "blog", manager);
         if (blogNavigator is not null)
         {
             if (blogNavigator.HasAttributes)
@@ -72,8 +72,8 @@ public class BlogML20SyndicationResourceAdapter : SyndicationResourceAdapter
 
             if (blogNavigator.HasChildren)
             {
-                XPathNavigator? titleNavigator = blogNavigator.SelectSingleNode("blog:title", manager);
-                XPathNavigator? subtitleNavigator = blogNavigator.SelectSingleNode("blog:sub-title", manager);
+                XPathNavigator? titleNavigator = blogNavigator.SelectChildElement("blog", "title", manager);
+                XPathNavigator? subtitleNavigator = blogNavigator.SelectChildElement("blog", "sub-title", manager);
 
                 if (titleNavigator is not null)
                 {

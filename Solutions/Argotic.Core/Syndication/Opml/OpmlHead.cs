@@ -114,11 +114,11 @@ public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensible
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("title");
-        XPathNavigator? dateCreatedNavigator = source.SelectSingleNode("dateCreated");
-        XPathNavigator? dateModifiedNavigator = source.SelectSingleNode("dateModified");
-        XPathNavigator? expansionStateNavigator = source.SelectSingleNode("expansionState");
-        XPathNavigator? verticalScrollStateNavigator = source.SelectSingleNode("vertScrollState");
+        XPathNavigator? titleNavigator = source.SelectChildElement("title");
+        XPathNavigator? dateCreatedNavigator = source.SelectChildElement("dateCreated");
+        XPathNavigator? dateModifiedNavigator = source.SelectChildElement("dateModified");
+        XPathNavigator? expansionStateNavigator = source.SelectChildElement("expansionState");
+        XPathNavigator? verticalScrollStateNavigator = source.SelectChildElement("vertScrollState");
 
         if (titleNavigator is not null)
         {

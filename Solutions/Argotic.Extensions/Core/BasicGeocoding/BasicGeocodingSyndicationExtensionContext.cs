@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -43,8 +44,8 @@ public class BasicGeocodingSyndicationExtensionContext
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        XPathNavigator? latitudeNavigator = source.SelectSingleNode("geo:lat", manager);
-        XPathNavigator? longitudeNavigator = source.SelectSingleNode("geo:long", manager);
+        XPathNavigator? latitudeNavigator = source.SelectChildElement("geo", "lat", manager);
+        XPathNavigator? longitudeNavigator = source.SelectChildElement("geo", "long", manager);
 
         if (latitudeNavigator is not null)
         {

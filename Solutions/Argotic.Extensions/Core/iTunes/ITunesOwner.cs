@@ -69,8 +69,8 @@ public class ITunesOwner : IComparable<ITunesOwner>, IEquatable<ITunesOwner>, IC
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
         {
-            XPathNavigator? emailNavigator = source.SelectSingleNode("itunes:email", manager);
-            XPathNavigator? nameNavigator = source.SelectSingleNode("itunes:name", manager);
+            XPathNavigator? emailNavigator = source.SelectChildElement("itunes", "email", manager);
+            XPathNavigator? nameNavigator = source.SelectChildElement("itunes", "name", manager);
 
             if (emailNavigator is not null && !string.IsNullOrEmpty(emailNavigator.Value))
             {

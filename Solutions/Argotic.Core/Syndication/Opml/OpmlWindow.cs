@@ -71,10 +71,10 @@ public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComp
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        XPathNavigator? windowTopNavigator = source.SelectSingleNode("windowTop");
-        XPathNavigator? windowLeftNavigator = source.SelectSingleNode("windowLeft");
-        XPathNavigator? windowBottomNavigator = source.SelectSingleNode("windowBottom");
-        XPathNavigator? windowRightNavigator = source.SelectSingleNode("windowRight");
+        XPathNavigator? windowTopNavigator = source.SelectChildElement("windowTop");
+        XPathNavigator? windowLeftNavigator = source.SelectChildElement("windowLeft");
+        XPathNavigator? windowBottomNavigator = source.SelectChildElement("windowBottom");
+        XPathNavigator? windowRightNavigator = source.SelectChildElement("windowRight");
 
         if (windowTopNavigator is not null)
         {

@@ -250,13 +250,13 @@ public class RssImage : IComparable<RssImage>, IEquatable<RssImage>, IExtensible
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = new(source.NameTable);
-        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
-        XPathNavigator? urlNavigator = source.SelectSingleNode("url", manager);
+        XPathNavigator? linkNavigator = source.SelectChildElement("link");
+        XPathNavigator? titleNavigator = source.SelectChildElement("title");
+        XPathNavigator? urlNavigator = source.SelectChildElement("url");
 
-        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator? heightNavigator = source.SelectSingleNode("height", manager);
-        XPathNavigator? widthNavigator = source.SelectSingleNode("width", manager);
+        XPathNavigator? descriptionNavigator = source.SelectChildElement("description");
+        XPathNavigator? heightNavigator = source.SelectChildElement("height");
+        XPathNavigator? widthNavigator = source.SelectChildElement("width");
 
         if (linkNavigator is not null)
         {

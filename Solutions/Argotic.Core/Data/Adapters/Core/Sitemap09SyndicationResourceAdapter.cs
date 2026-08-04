@@ -49,7 +49,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator? urlsetNavigator = this.Navigator.SelectSingleNode("sm:urlset", manager);
+        XPathNavigator? urlsetNavigator = this.Navigator.SelectChildElement("sm", "urlset", manager);
 
         if (urlsetNavigator is not null)
         {
@@ -97,7 +97,7 @@ public class Sitemap09SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator? sitemapindexNavigator = this.Navigator.SelectSingleNode("sm:sitemapindex", manager);
+        XPathNavigator? sitemapindexNavigator = this.Navigator.SelectChildElement("sm", "sitemapindex", manager);
 
         if (sitemapindexNavigator is not null)
         {

@@ -387,7 +387,7 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
 
         if (navigator.HasChildren)
         {
-            XPathNavigator? titleNavigator = navigator.SelectSingleNode("atom:title", manager);
+            XPathNavigator? titleNavigator = navigator.SelectChildElement("atom", "title", manager);
             XPathNodeIterator acceptIterator = navigator.Select("app:accept", manager);
             XPathNodeIterator categoriesIterator = navigator.Select("app:categories", manager);
 

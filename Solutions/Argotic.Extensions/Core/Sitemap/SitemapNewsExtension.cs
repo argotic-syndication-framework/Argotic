@@ -128,13 +128,13 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
             ?? throw new ArgumentException("The supplied source did not provide a navigator.", nameof(source));
         XmlNamespaceManager manager = this.CreateNamespaceManager(navigator);
 
-        XPathNavigator? newsNavigator = navigator.SelectSingleNode("news:news", manager);
+        XPathNavigator? newsNavigator = navigator.SelectChildElement("news", "news", manager);
 
         if (newsNavigator is not null)
         {
-            XPathNavigator? publicationNavigator = newsNavigator.SelectSingleNode("news:publication", manager);
-            XPathNavigator? publicationDateNavigator = newsNavigator.SelectSingleNode("news:publication_date", manager);
-            XPathNavigator? titleNavigator = newsNavigator.SelectSingleNode("news:title", manager);
+            XPathNavigator? publicationNavigator = newsNavigator.SelectChildElement("news", "publication", manager);
+            XPathNavigator? publicationDateNavigator = newsNavigator.SelectChildElement("news", "publication_date", manager);
+            XPathNavigator? titleNavigator = newsNavigator.SelectChildElement("news", "title", manager);
 
             if (publicationNavigator is not null)
             {

@@ -133,9 +133,9 @@ public class AtomPersonConstruct : IComparable<AtomPersonConstruct>, IEquatable<
         {
             wasLoaded = true;
         }
-        XPathNavigator? nameNavigator = source.SelectSingleNode("atom:name", manager);
-        XPathNavigator? uriNavigator = source.SelectSingleNode("atom:uri", manager);
-        XPathNavigator? emailNavigator = source.SelectSingleNode("atom:email", manager);
+        XPathNavigator? nameNavigator = source.SelectChildElement("atom", "name", manager);
+        XPathNavigator? uriNavigator = source.SelectChildElement("atom", "uri", manager);
+        XPathNavigator? emailNavigator = source.SelectChildElement("atom", "email", manager);
 
         if (nameNavigator is not null)
         {

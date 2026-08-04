@@ -196,9 +196,9 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         {
             wasLoaded = true;
         }
-        XPathNavigator? idNavigator = source.SelectSingleNode("atom:id", manager);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("atom:title", manager);
-        XPathNavigator? updatedNavigator = source.SelectSingleNode("atom:updated", manager);
+        XPathNavigator? idNavigator = source.SelectChildElement("atom", "id", manager);
+        XPathNavigator? titleNavigator = source.SelectChildElement("atom", "title", manager);
+        XPathNavigator? updatedNavigator = source.SelectChildElement("atom", "updated", manager);
 
         if (idNavigator is not null)
         {
@@ -592,11 +592,11 @@ public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, 
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(manager);
-        XPathNavigator? generatorNavigator = source.SelectSingleNode("atom:generator", manager);
-        XPathNavigator? iconNavigator = source.SelectSingleNode("atom:icon", manager);
-        XPathNavigator? logoNavigator = source.SelectSingleNode("atom:logo", manager);
-        XPathNavigator? rightsNavigator = source.SelectSingleNode("atom:rights", manager);
-        XPathNavigator? subtitleNavigator = source.SelectSingleNode("atom:subtitle", manager);
+        XPathNavigator? generatorNavigator = source.SelectChildElement("atom", "generator", manager);
+        XPathNavigator? iconNavigator = source.SelectChildElement("atom", "icon", manager);
+        XPathNavigator? logoNavigator = source.SelectChildElement("atom", "logo", manager);
+        XPathNavigator? rightsNavigator = source.SelectChildElement("atom", "rights", manager);
+        XPathNavigator? subtitleNavigator = source.SelectChildElement("atom", "subtitle", manager);
 
         if (generatorNavigator is not null)
         {

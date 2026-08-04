@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -74,8 +75,8 @@ public class PingbackSyndicationExtensionContext
 
         if (source.HasChildren)
         {
-            XPathNavigator? serverNavigator = source.SelectSingleNode("pingback:server", manager);
-            XPathNavigator? targetNavigator = source.SelectSingleNode("pingback:target", manager);
+            XPathNavigator? serverNavigator = source.SelectChildElement("pingback", "server", manager);
+            XPathNavigator? targetNavigator = source.SelectChildElement("pingback", "target", manager);
             XPathNodeIterator aboutIterator = source.Select("pingback:about", manager);
 
             if (serverNavigator is not null)

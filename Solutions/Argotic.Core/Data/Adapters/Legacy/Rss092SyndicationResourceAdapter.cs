@@ -46,11 +46,11 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = new(this.Navigator.NameTable);
 
-        XPathNavigator? feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
+        XPathNavigator? feedNavigator = this.Navigator.SelectChildElement("rss");
 
         if (feedNavigator is not null)
         {
-            XPathNavigator? channelNavigator = feedNavigator.SelectSingleNode("channel", manager);
+            XPathNavigator? channelNavigator = feedNavigator.SelectChildElement("channel");
             if (channelNavigator is not null)
             {
                 Rss092SyndicationResourceAdapter.FillChannel(resource.Channel, channelNavigator, manager, this.Settings);
@@ -178,10 +178,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
 
-        XPathNavigator? descriptionNavigator = navigator.SelectSingleNode("description", manager);
-        XPathNavigator? linkNavigator = navigator.SelectSingleNode("link", manager);
-        XPathNavigator? titleNavigator = navigator.SelectSingleNode("title", manager);
-        XPathNavigator? languageNavigator = navigator.SelectSingleNode("language", manager);
+        XPathNavigator? descriptionNavigator = navigator.SelectChildElement("description");
+        XPathNavigator? linkNavigator = navigator.SelectChildElement("link");
+        XPathNavigator? titleNavigator = navigator.SelectChildElement("title");
+        XPathNavigator? languageNavigator = navigator.SelectChildElement("language");
 
         if (descriptionNavigator is not null && !string.IsNullOrEmpty(descriptionNavigator.Value))
         {
@@ -214,7 +214,7 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        XPathNavigator? imageNavigator = navigator.SelectSingleNode("image", manager);
+        XPathNavigator? imageNavigator = navigator.SelectChildElement("image");
         if (imageNavigator is not null)
         {
             channel.Image = new RssImage();
@@ -349,14 +349,14 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
 
-        XPathNavigator? copyrightNavigator = navigator.SelectSingleNode("copyright", manager);
-        XPathNavigator? managingEditorNavigator = navigator.SelectSingleNode("managingEditor", manager);
-        XPathNavigator? webMasterNavigator = navigator.SelectSingleNode("webMaster", manager);
-        XPathNavigator? ratingNavigator = navigator.SelectSingleNode("rating", manager);
-        XPathNavigator? publicationNavigator = navigator.SelectSingleNode("pubDate", manager);
-        XPathNavigator? lastBuildDateNavigator = navigator.SelectSingleNode("lastBuildDate", manager);
-        XPathNavigator? textInputNavigator = navigator.SelectSingleNode("textInput", manager);
-        XPathNavigator? cloudNavigator = navigator.SelectSingleNode("cloud", manager);
+        XPathNavigator? copyrightNavigator = navigator.SelectChildElement("copyright");
+        XPathNavigator? managingEditorNavigator = navigator.SelectChildElement("managingEditor");
+        XPathNavigator? webMasterNavigator = navigator.SelectChildElement("webMaster");
+        XPathNavigator? ratingNavigator = navigator.SelectChildElement("rating");
+        XPathNavigator? publicationNavigator = navigator.SelectChildElement("pubDate");
+        XPathNavigator? lastBuildDateNavigator = navigator.SelectChildElement("lastBuildDate");
+        XPathNavigator? textInputNavigator = navigator.SelectChildElement("textInput");
+        XPathNavigator? cloudNavigator = navigator.SelectChildElement("cloud");
 
         if (copyrightNavigator is not null)
         {
@@ -469,13 +469,13 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
 
-        XPathNavigator? linkNavigator = navigator.SelectSingleNode("link", manager);
-        XPathNavigator? titleNavigator = navigator.SelectSingleNode("title", manager);
-        XPathNavigator? urlNavigator = navigator.SelectSingleNode("url", manager);
+        XPathNavigator? linkNavigator = navigator.SelectChildElement("link");
+        XPathNavigator? titleNavigator = navigator.SelectChildElement("title");
+        XPathNavigator? urlNavigator = navigator.SelectChildElement("url");
 
-        XPathNavigator? descriptionNavigator = navigator.SelectSingleNode("description", manager);
-        XPathNavigator? heightNavigator = navigator.SelectSingleNode("height", manager);
-        XPathNavigator? widthNavigator = navigator.SelectSingleNode("width", manager);
+        XPathNavigator? descriptionNavigator = navigator.SelectChildElement("description");
+        XPathNavigator? heightNavigator = navigator.SelectChildElement("height");
+        XPathNavigator? widthNavigator = navigator.SelectChildElement("width");
 
         if (linkNavigator is not null)
         {
@@ -540,10 +540,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
 
-        XPathNavigator? titleNavigator = navigator.SelectSingleNode("title", manager);
-        XPathNavigator? linkNavigator = navigator.SelectSingleNode("link", manager);
-        XPathNavigator? descriptionNavigator = navigator.SelectSingleNode("description", manager);
-        XPathNavigator? sourceNavigator = navigator.SelectSingleNode("source", manager);
+        XPathNavigator? titleNavigator = navigator.SelectChildElement("title");
+        XPathNavigator? linkNavigator = navigator.SelectChildElement("link");
+        XPathNavigator? descriptionNavigator = navigator.SelectChildElement("description");
+        XPathNavigator? sourceNavigator = navigator.SelectChildElement("source");
         XPathNodeIterator enclosureIterator = navigator.Select("enclosure", manager);
         XPathNodeIterator categoryIterator = navigator.Select("category", manager);
 
@@ -640,10 +640,10 @@ public class Rss092SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
 
-        XPathNavigator? descriptionNavigator = navigator.SelectSingleNode("description", manager);
-        XPathNavigator? linkNavigator = navigator.SelectSingleNode("link", manager);
-        XPathNavigator? nameNavigator = navigator.SelectSingleNode("name", manager);
-        XPathNavigator? titleNavigator = navigator.SelectSingleNode("title", manager);
+        XPathNavigator? descriptionNavigator = navigator.SelectChildElement("description");
+        XPathNavigator? linkNavigator = navigator.SelectChildElement("link");
+        XPathNavigator? nameNavigator = navigator.SelectChildElement("name");
+        XPathNavigator? titleNavigator = navigator.SelectChildElement("title");
 
         if (descriptionNavigator is not null)
         {

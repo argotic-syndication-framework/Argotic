@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -90,10 +91,10 @@ public class SiteSummarySlashSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator? sectionNavigator = source.SelectSingleNode("slash:section", manager);
-            XPathNavigator? departmentNavigator = source.SelectSingleNode("slash:department", manager);
-            XPathNavigator? commentsNavigator = source.SelectSingleNode("slash:comments", manager);
-            XPathNavigator? hitParadeNavigator = source.SelectSingleNode("slash:hit_parade", manager);
+            XPathNavigator? sectionNavigator = source.SelectChildElement("slash", "section", manager);
+            XPathNavigator? departmentNavigator = source.SelectChildElement("slash", "department", manager);
+            XPathNavigator? commentsNavigator = source.SelectChildElement("slash", "comments", manager);
+            XPathNavigator? hitParadeNavigator = source.SelectChildElement("slash", "hit_parade", manager);
 
             if (sectionNavigator is not null && !string.IsNullOrEmpty(sectionNavigator.Value))
             {

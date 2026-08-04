@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -56,8 +57,8 @@ public class FeedHistorySyndicationExtensionContext
         }
         if (source.HasChildren)
         {
-            XPathNavigator? archiveNavigator = source.SelectSingleNode("fh:archive", manager);
-            XPathNavigator? completeNavigator = source.SelectSingleNode("fh:complete", manager);
+            XPathNavigator? archiveNavigator = source.SelectChildElement("fh", "archive", manager);
+            XPathNavigator? completeNavigator = source.SelectChildElement("fh", "complete", manager);
             XPathNodeIterator linkIterator = source.Select("atom:link", manager);
 
             if (archiveNavigator is not null)

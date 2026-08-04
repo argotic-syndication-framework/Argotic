@@ -165,8 +165,8 @@ public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessag
 
         if (source.HasChildren)
         {
-            XPathNavigator? methodNameNavigator = source.SelectSingleNode("methodName");
-            XPathNavigator? parametersNavigator = source.SelectSingleNode("params");
+            XPathNavigator? methodNameNavigator = source.SelectChildElement("methodName");
+            XPathNavigator? parametersNavigator = source.SelectChildElement("params");
 
             if (methodNameNavigator is not null && !string.IsNullOrEmpty(methodNameNavigator.Value))
             {

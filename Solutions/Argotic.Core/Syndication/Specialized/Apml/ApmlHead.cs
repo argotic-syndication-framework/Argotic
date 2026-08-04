@@ -100,10 +100,10 @@ public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensible
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = ApmlUtility.CreateNamespaceManager(source.NameTable);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("apml:Title", manager);
-        XPathNavigator? generatorNavigator = source.SelectSingleNode("apml:Generator", manager);
-        XPathNavigator? userEmailNavigator = source.SelectSingleNode("apml:UserEmail", manager);
-        XPathNavigator? dateCreatedNavigator = source.SelectSingleNode("apml:DateCreated", manager);
+        XPathNavigator? titleNavigator = source.SelectChildElement("apml", "Title", manager);
+        XPathNavigator? generatorNavigator = source.SelectChildElement("apml", "Generator", manager);
+        XPathNavigator? userEmailNavigator = source.SelectChildElement("apml", "UserEmail", manager);
+        XPathNavigator? dateCreatedNavigator = source.SelectChildElement("apml", "DateCreated", manager);
 
         if (titleNavigator is not null)
         {

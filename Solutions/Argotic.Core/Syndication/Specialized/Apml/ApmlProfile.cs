@@ -106,8 +106,8 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
 
         if (source.HasChildren)
         {
-            XPathNavigator? implicitDataNavigator = source.SelectSingleNode("apml:ImplicitData", manager);
-            XPathNavigator? explicitDataNavigator = source.SelectSingleNode("apml:ExplicitData", manager);
+            XPathNavigator? implicitDataNavigator = source.SelectChildElement("apml", "ImplicitData", manager);
+            XPathNavigator? explicitDataNavigator = source.SelectChildElement("apml", "ExplicitData", manager);
 
             if (implicitDataNavigator is not null)
             {
@@ -228,8 +228,8 @@ public class ApmlProfile : IComparable<ApmlProfile>, IEquatable<ApmlProfile>, IE
 
         if (source.HasChildren)
         {
-            XPathNavigator? implicitDataNavigator = source.SelectSingleNode("apml:ImplicitData", manager);
-            XPathNavigator? explicitDataNavigator = source.SelectSingleNode("apml:ExplicitData", manager);
+            XPathNavigator? implicitDataNavigator = source.SelectChildElement("apml", "ImplicitData", manager);
+            XPathNavigator? explicitDataNavigator = source.SelectChildElement("apml", "ExplicitData", manager);
 
             if (implicitDataNavigator is not null)
             {

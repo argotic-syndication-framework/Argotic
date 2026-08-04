@@ -102,8 +102,8 @@ public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<Site
 
         XmlNamespaceManager manager = SitemapUtility.CreateNamespaceManager(source.NameTable);
 
-        XPathNavigator? locNavigator = source.SelectSingleNode("sm:loc", manager);
-        XPathNavigator? lastmodNavigator = source.SelectSingleNode("sm:lastmod", manager);
+        XPathNavigator? locNavigator = source.SelectChildElement("sm", "loc", manager);
+        XPathNavigator? lastmodNavigator = source.SelectChildElement("sm", "lastmod", manager);
 
         if (locNavigator is not null)
         {

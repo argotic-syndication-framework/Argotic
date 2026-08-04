@@ -172,10 +172,10 @@ public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>,
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
         XmlNamespaceManager manager = new(source.NameTable);
-        XPathNavigator? descriptionNavigator = source.SelectSingleNode("description", manager);
-        XPathNavigator? linkNavigator = source.SelectSingleNode("link", manager);
-        XPathNavigator? nameNavigator = source.SelectSingleNode("name", manager);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("title", manager);
+        XPathNavigator? descriptionNavigator = source.SelectChildElement("description");
+        XPathNavigator? linkNavigator = source.SelectChildElement("link");
+        XPathNavigator? nameNavigator = source.SelectChildElement("name");
+        XPathNavigator? titleNavigator = source.SelectChildElement("title");
 
         if (descriptionNavigator is not null)
         {

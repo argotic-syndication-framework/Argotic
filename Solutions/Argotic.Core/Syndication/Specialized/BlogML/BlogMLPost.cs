@@ -283,9 +283,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 
         if (source.HasChildren)
         {
-            XPathNavigator? contentNavigator = source.SelectSingleNode("blog:content", manager);
-            XPathNavigator? postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
-            XPathNavigator? excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
+            XPathNavigator? contentNavigator = source.SelectChildElement("blog", "content", manager);
+            XPathNavigator? postNameNavigator = source.SelectChildElement("blog", "post-name", manager);
+            XPathNavigator? excerptNavigator = source.SelectChildElement("blog", "excerpt", manager);
 
             if (contentNavigator is not null)
             {
@@ -381,9 +381,9 @@ public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatab
 
         if (source.HasChildren)
         {
-            XPathNavigator? contentNavigator = source.SelectSingleNode("blog:content", manager);
-            XPathNavigator? postNameNavigator = source.SelectSingleNode("blog:post-name", manager);
-            XPathNavigator? excerptNavigator = source.SelectSingleNode("blog:excerpt", manager);
+            XPathNavigator? contentNavigator = source.SelectChildElement("blog", "content", manager);
+            XPathNavigator? postNameNavigator = source.SelectChildElement("blog", "post-name", manager);
+            XPathNavigator? excerptNavigator = source.SelectChildElement("blog", "excerpt", manager);
 
             if (contentNavigator is not null)
             {

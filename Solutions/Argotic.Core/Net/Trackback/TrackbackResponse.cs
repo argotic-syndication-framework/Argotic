@@ -91,7 +91,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
         XPathNavigator source = document.CreateNavigator();
 
         TrackbackResponse result = new();
-        XPathNavigator? responseNavigator = source.SelectSingleNode("response");
+        XPathNavigator? responseNavigator = source.SelectChildElement("response");
         if (responseNavigator is not null)
         {
             result.Load(responseNavigator);
@@ -129,8 +129,8 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
 
         if (source.HasChildren)
         {
-            XPathNavigator? errorNavigator = source.SelectSingleNode("error");
-            XPathNavigator? messageNavigator = source.SelectSingleNode("message");
+            XPathNavigator? errorNavigator = source.SelectChildElement("error");
+            XPathNavigator? messageNavigator = source.SelectChildElement("message");
 
             if (errorNavigator is not null)
             {

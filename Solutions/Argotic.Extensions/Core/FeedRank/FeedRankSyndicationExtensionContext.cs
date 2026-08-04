@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -94,7 +95,7 @@ public class FeedRankSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator? rankNavigator = source.SelectSingleNode("re:rank", manager);
+            XPathNavigator? rankNavigator = source.SelectChildElement("re", "rank", manager);
             if (rankNavigator is not null)
             {
                 if (rankNavigator.HasAttributes)

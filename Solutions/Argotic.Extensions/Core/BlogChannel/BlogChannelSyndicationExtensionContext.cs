@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -63,10 +64,10 @@ public class BlogChannelSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator? blogRollNavigator = source.SelectSingleNode("blogChannel:blogRoll", manager);
-            XPathNavigator? mySubscriptionsNavigator = source.SelectSingleNode("blogChannel:mySubscriptions", manager);
-            XPathNavigator? blinkNavigator = source.SelectSingleNode("blogChannel:blink", manager);
-            XPathNavigator? changesNavigator = source.SelectSingleNode("blogChannel:changes", manager);
+            XPathNavigator? blogRollNavigator = source.SelectChildElement("blogChannel", "blogRoll", manager);
+            XPathNavigator? mySubscriptionsNavigator = source.SelectChildElement("blogChannel", "mySubscriptions", manager);
+            XPathNavigator? blinkNavigator = source.SelectChildElement("blogChannel", "blink", manager);
+            XPathNavigator? changesNavigator = source.SelectChildElement("blogChannel", "changes", manager);
 
             if (blogRollNavigator is not null)
             {

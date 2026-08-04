@@ -77,7 +77,7 @@ public class SitemapImage : IComparable<SitemapImage>, IEquatable<SitemapImage>,
         // Try to find loc element - handle both cases:
         // 1. Navigator positioned at the <image> element (look for child)
         // 2. Navigator positioned at document root (look for descendant)
-        XPathNavigator? locNavigator = source.SelectSingleNode("image:loc", manager);
+        XPathNavigator? locNavigator = source.SelectChildElement("image", "loc", manager);
         locNavigator ??= source.SelectSingleNode("descendant::image:loc", manager);
 
         if (locNavigator is not null && !string.IsNullOrEmpty(locNavigator.Value))

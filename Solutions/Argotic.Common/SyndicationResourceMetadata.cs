@@ -109,7 +109,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("apml", "http://www.apml.org/apml-0.6");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("APML", manager)) is not null || (navigator = resource.SelectSingleNode("apml:APML", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("APML")) is not null || (navigator = resource.SelectChildElement("apml", "APML", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -142,7 +142,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("atom03", "http://purl.org/atom/ns#");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("feed", manager)) is not null || (navigator = resource.SelectSingleNode("atom:feed", manager)) is not null || (navigator = resource.SelectSingleNode("atom03:feed", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("feed")) is not null || (navigator = resource.SelectChildElement("atom", "feed", manager)) is not null || (navigator = resource.SelectChildElement("atom03", "feed", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -158,7 +158,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
                 version ??= new Version(0, 3);
             }
         }
-        else if ((navigator = resource.SelectSingleNode("entry", manager)) is not null || (navigator = resource.SelectSingleNode("atom:entry", manager)) is not null || (navigator = resource.SelectSingleNode("atom03:entry", manager)) is not null)
+        else if ((navigator = resource.SelectChildElement("entry")) is not null || (navigator = resource.SelectChildElement("atom", "entry", manager)) is not null || (navigator = resource.SelectChildElement("atom03", "entry", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -197,7 +197,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("app", "http://www.w3.org/2007/app");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("categories", manager)) is not null || (navigator = resource.SelectSingleNode("app:categories", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("categories")) is not null || (navigator = resource.SelectChildElement("app", "categories", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -232,7 +232,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("app", "http://www.w3.org/2007/app");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("service", manager)) is not null || (navigator = resource.SelectSingleNode("app:service", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("service")) is not null || (navigator = resource.SelectChildElement("app", "service", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -265,7 +265,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("blogML", "http://www.blogml.com/2006/09/BlogML");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("blog", manager)) is not null || (navigator = resource.SelectSingleNode("blogML:blog", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("blog")) is not null || (navigator = resource.SelectChildElement("blogML", "blog", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -298,7 +298,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("micro", "http://www.mozilla.org/microsummaries/0.1");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("generator", manager)) is not null || (navigator = resource.SelectSingleNode("micro:generator", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("generator")) is not null || (navigator = resource.SelectChildElement("micro", "generator", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -328,7 +328,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         ArgumentNullException.ThrowIfNull(resource);
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("NewsML")) is not null)
+        if ((navigator = resource.SelectChildElement("NewsML")) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
 
@@ -357,7 +357,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("search", "http://a9.com/-/spec/opensearch/1.1/");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("OpenSearchDescription", manager)) is not null || (navigator = resource.SelectSingleNode("search:OpenSearchDescription", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("OpenSearchDescription")) is not null || (navigator = resource.SelectChildElement("search", "OpenSearchDescription", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -387,7 +387,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         ArgumentNullException.ThrowIfNull(resource);
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("opml")) is not null)
+        if ((navigator = resource.SelectChildElement("opml")) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
 
@@ -416,7 +416,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("rsd", "http://archipelago.phrasewise.com/rsd");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("rsd", manager)) is not null || (navigator = resource.SelectSingleNode("rsd:rsd", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("rsd")) is not null || (navigator = resource.SelectChildElement("rsd", "rsd", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -456,14 +456,14 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("rss10", "http://purl.org/rss/1.0/");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("rss", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("rss")) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
 
             resourceConformsToFormat = true;
             version ??= new Version(2, 0);
         }
-        else if ((navigator = resource.SelectSingleNode("rdf:RDF", manager)) is not null)
+        else if ((navigator = resource.SelectChildElement("rdf", "RDF", manager)) is not null)
         {
             version = SyndicationResourceMetadata.GetVersionFromAttribute(navigator, "version");
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
@@ -501,7 +501,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("sm", "http://www.sitemaps.org/schemas/sitemap/0.9");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("urlset", manager)) is not null || (navigator = resource.SelectSingleNode("sm:urlset", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("urlset")) is not null || (navigator = resource.SelectChildElement("sm", "urlset", manager)) is not null)
         {
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 
@@ -533,7 +533,7 @@ public class SyndicationResourceMetadata : IComparable<SyndicationResourceMetada
         manager.AddNamespace("sm", "http://www.sitemaps.org/schemas/sitemap/0.9");
 
         version = null;
-        if ((navigator = resource.SelectSingleNode("sitemapindex", manager)) is not null || (navigator = resource.SelectSingleNode("sm:sitemapindex", manager)) is not null)
+        if ((navigator = resource.SelectChildElement("sitemapindex")) is not null || (navigator = resource.SelectChildElement("sm", "sitemapindex", manager)) is not null)
         {
             Dictionary<string, string> namespaces = (Dictionary<string, string>)navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);
 

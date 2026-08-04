@@ -90,8 +90,8 @@ public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEqua
         XmlNamespaceManager manager = extension.CreateNamespaceManager(source);
         if (source.HasChildren)
         {
-            XPathNavigator? formatNavigator = source.SelectSingleNode("content:format", manager);
-            XPathNavigator? encodingNavigator = source.SelectSingleNode("content:encoding", manager);
+            XPathNavigator? formatNavigator = source.SelectChildElement("content", "format", manager);
+            XPathNavigator? encodingNavigator = source.SelectChildElement("content", "encoding", manager);
 
             if (formatNavigator is not null)
             {

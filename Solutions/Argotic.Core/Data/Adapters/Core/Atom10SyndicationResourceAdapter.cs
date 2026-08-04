@@ -47,7 +47,7 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator? entryNavigator = this.Navigator.SelectSingleNode("atom:entry", manager);
+        XPathNavigator? entryNavigator = this.Navigator.SelectChildElement("atom", "entry", manager);
 
         if (entryNavigator is not null)
         {
@@ -66,15 +66,15 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator? feedNavigator = this.Navigator.SelectSingleNode("atom:feed", manager);
+        XPathNavigator? feedNavigator = this.Navigator.SelectChildElement("atom", "feed", manager);
 
         if (feedNavigator is not null)
         {
             AtomUtility.FillCommonObjectAttributes(resource, feedNavigator);
 
-            XPathNavigator? idNavigator = feedNavigator.SelectSingleNode("atom:id", manager);
-            XPathNavigator? titleNavigator = feedNavigator.SelectSingleNode("atom:title", manager);
-            XPathNavigator? updatedNavigator = feedNavigator.SelectSingleNode("atom:updated", manager);
+            XPathNavigator? idNavigator = feedNavigator.SelectChildElement("atom", "id", manager);
+            XPathNavigator? titleNavigator = feedNavigator.SelectChildElement("atom", "title", manager);
+            XPathNavigator? updatedNavigator = feedNavigator.SelectChildElement("atom", "updated", manager);
 
             if (idNavigator is not null)
             {
@@ -126,9 +126,9 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
 
         AtomUtility.FillCommonObjectAttributes(entry, source);
 
-        XPathNavigator? idNavigator = source.SelectSingleNode("atom:id", manager);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("atom:title", manager);
-        XPathNavigator? updatedNavigator = source.SelectSingleNode("atom:updated", manager);
+        XPathNavigator? idNavigator = source.SelectChildElement("atom", "id", manager);
+        XPathNavigator? titleNavigator = source.SelectChildElement("atom", "title", manager);
+        XPathNavigator? updatedNavigator = source.SelectChildElement("atom", "updated", manager);
 
         if (idNavigator is not null)
         {
@@ -277,11 +277,11 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
 
-        XPathNavigator? contentNavigator = source.SelectSingleNode("atom:content", manager);
-        XPathNavigator? publishedNavigator = source.SelectSingleNode("atom:published", manager);
-        XPathNavigator? rightsNavigator = source.SelectSingleNode("atom:rights", manager);
-        XPathNavigator? sourceNavigator = source.SelectSingleNode("atom:source", manager);
-        XPathNavigator? summaryNavigator = source.SelectSingleNode("atom:summary", manager);
+        XPathNavigator? contentNavigator = source.SelectChildElement("atom", "content", manager);
+        XPathNavigator? publishedNavigator = source.SelectChildElement("atom", "published", manager);
+        XPathNavigator? rightsNavigator = source.SelectChildElement("atom", "rights", manager);
+        XPathNavigator? sourceNavigator = source.SelectChildElement("atom", "source", manager);
+        XPathNavigator? summaryNavigator = source.SelectChildElement("atom", "summary", manager);
 
         if (contentNavigator is not null)
         {
@@ -462,11 +462,11 @@ public class Atom10SyndicationResourceAdapter : SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(manager);
         ArgumentNullException.ThrowIfNull(settings);
 
-        XPathNavigator? generatorNavigator = source.SelectSingleNode("atom:generator", manager);
-        XPathNavigator? iconNavigator = source.SelectSingleNode("atom:icon", manager);
-        XPathNavigator? logoNavigator = source.SelectSingleNode("atom:logo", manager);
-        XPathNavigator? rightsNavigator = source.SelectSingleNode("atom:rights", manager);
-        XPathNavigator? subtitleNavigator = source.SelectSingleNode("atom:subtitle", manager);
+        XPathNavigator? generatorNavigator = source.SelectChildElement("atom", "generator", manager);
+        XPathNavigator? iconNavigator = source.SelectChildElement("atom", "icon", manager);
+        XPathNavigator? logoNavigator = source.SelectChildElement("atom", "logo", manager);
+        XPathNavigator? rightsNavigator = source.SelectChildElement("atom", "rights", manager);
+        XPathNavigator? subtitleNavigator = source.SelectChildElement("atom", "subtitle", manager);
 
         if (generatorNavigator is not null)
         {

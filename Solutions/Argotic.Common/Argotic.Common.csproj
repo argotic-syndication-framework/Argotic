@@ -17,6 +17,11 @@
       to the benchmark project alone - not the test project, which exercises public API only.
     -->
     <InternalsVisibleTo Include="Argotic.Benchmarks" />
+    <!-- XPathNavigatorExtensions is shared with the parse path in both assemblies. It stays internal
+         because it extends a BCL type: public would add members to every XPathNavigator in every
+         consuming codebase. -->
+    <InternalsVisibleTo Include="Argotic.Core" />
+    <InternalsVisibleTo Include="Argotic.Extensions" />
   </ItemGroup>
 
 </Project>

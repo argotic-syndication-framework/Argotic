@@ -110,7 +110,7 @@ public class Apml06SyndicationResourceAdapter : SyndicationResourceAdapter
             }
         }
 
-        XPathNavigator? extensionRoot = this.Navigator.SelectSingleNode("apml:APML", manager);
+        XPathNavigator? extensionRoot = this.Navigator.SelectChildElement("apml", "APML", manager);
 
         if (extensionRoot is null)
 

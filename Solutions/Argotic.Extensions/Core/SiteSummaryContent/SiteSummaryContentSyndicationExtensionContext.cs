@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -69,8 +70,8 @@ public class SiteSummaryContentSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator? encodedNavigator = source.SelectSingleNode("content:encoded", manager);
-            XPathNavigator? itemsNavigator = source.SelectSingleNode("content:items", manager);
+            XPathNavigator? encodedNavigator = source.SelectChildElement("content", "encoded", manager);
+            XPathNavigator? itemsNavigator = source.SelectChildElement("content", "items", manager);
 
             if (encodedNavigator is not null && !string.IsNullOrEmpty(encodedNavigator.Value))
             {

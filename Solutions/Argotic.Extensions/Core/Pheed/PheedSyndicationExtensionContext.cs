@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -80,8 +81,8 @@ public class PheedSyndicationExtensionContext
 
         if (source.HasChildren)
         {
-            XPathNavigator? thumbnailNavigator = source.SelectSingleNode("photo:thumbnail", manager);
-            XPathNavigator? imageSourceNavigator = source.SelectSingleNode("photo:imgsrc", manager);
+            XPathNavigator? thumbnailNavigator = source.SelectChildElement("photo", "thumbnail", manager);
+            XPathNavigator? imageSourceNavigator = source.SelectChildElement("photo", "imgsrc", manager);
 
             if (thumbnailNavigator is not null)
             {

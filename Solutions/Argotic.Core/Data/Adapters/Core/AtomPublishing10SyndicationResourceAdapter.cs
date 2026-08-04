@@ -46,7 +46,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator? documentNavigator = this.Navigator.SelectSingleNode("app:categories", manager);
+        XPathNavigator? documentNavigator = this.Navigator.SelectChildElement("app", "categories", manager);
         if (documentNavigator is not null)
         {
             AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);
@@ -128,7 +128,7 @@ public class AtomPublishing10SyndicationResourceAdapter : SyndicationResourceAda
 
         XmlNamespaceManager manager = AtomUtility.CreateNamespaceManager(this.Navigator.NameTable);
 
-        XPathNavigator? documentNavigator = this.Navigator.SelectSingleNode("app:service", manager);
+        XPathNavigator? documentNavigator = this.Navigator.SelectChildElement("app", "service", manager);
         if (documentNavigator is not null)
         {
             AtomUtility.FillCommonObjectAttributes(resource, documentNavigator);

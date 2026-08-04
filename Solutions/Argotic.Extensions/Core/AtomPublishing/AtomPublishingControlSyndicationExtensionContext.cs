@@ -97,7 +97,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         // The extension is handed the navigator for the entry, whereas the draft flag and the common
         // attributes belong to the app:control element written by WriteTo. Fall back to the supplied
         // navigator so a caller that has already positioned on app:control still loads.
-        XPathNavigator controlNavigator = source.SelectSingleNode("app:control", manager) ?? source;
+        XPathNavigator controlNavigator = source.SelectChildElement("app", "control", manager) ?? source;
 
         if (AtomPublishingUtility.FillCommonObjectAttributes(this, controlNavigator))
         {
@@ -105,7 +105,7 @@ public class AtomPublishingControlSyndicationExtensionContext : IAtomPublishingC
         }
         if (controlNavigator.HasChildren)
         {
-            XPathNavigator? draftNavigator = controlNavigator.SelectSingleNode("app:draft", manager);
+            XPathNavigator? draftNavigator = controlNavigator.SelectChildElement("app", "draft", manager);
             if (draftNavigator is not null && !string.IsNullOrEmpty(draftNavigator.Value))
             {
                 if (string.Equals(draftNavigator.Value, "yes", StringComparison.OrdinalIgnoreCase))

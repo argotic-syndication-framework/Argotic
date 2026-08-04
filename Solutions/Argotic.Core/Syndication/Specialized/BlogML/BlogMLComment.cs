@@ -191,7 +191,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
 
         if (source.HasChildren)
         {
-            XPathNavigator? contentNavigator = source.SelectSingleNode("blog:content", manager);
+            XPathNavigator? contentNavigator = source.SelectChildElement("blog", "content", manager);
             if (contentNavigator is not null)
             {
                 BlogMLTextConstruct content = new();
@@ -259,7 +259,7 @@ public class BlogMLComment : IBlogMLCommonObject, IComparable<BlogMLComment>, IE
 
         if (source.HasChildren)
         {
-            XPathNavigator? contentNavigator = source.SelectSingleNode("blog:content", manager);
+            XPathNavigator? contentNavigator = source.SelectChildElement("blog", "content", manager);
             if (contentNavigator is not null)
             {
                 BlogMLTextConstruct content = new();

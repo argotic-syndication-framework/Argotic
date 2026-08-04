@@ -100,9 +100,9 @@ public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, ICompari
     {
         bool wasLoaded = false;
         ArgumentNullException.ThrowIfNull(source);
-        XPathNavigator? ownerNameNavigator = source.SelectSingleNode("ownerName");
-        XPathNavigator? ownerEmailNavigator = source.SelectSingleNode("ownerEmail");
-        XPathNavigator? ownerIdNavigator = source.SelectSingleNode("ownerId");
+        XPathNavigator? ownerNameNavigator = source.SelectChildElement("ownerName");
+        XPathNavigator? ownerEmailNavigator = source.SelectChildElement("ownerEmail");
+        XPathNavigator? ownerIdNavigator = source.SelectChildElement("ownerId");
 
         if (ownerNameNavigator is not null)
         {

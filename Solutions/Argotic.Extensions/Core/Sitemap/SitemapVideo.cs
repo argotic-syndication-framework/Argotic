@@ -371,9 +371,9 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     {
         bool wasLoaded = false;
 
-        XPathNavigator? thumbnailNavigator = source.SelectSingleNode("video:thumbnail_loc", manager);
-        XPathNavigator? titleNavigator = source.SelectSingleNode("video:title", manager);
-        XPathNavigator? descriptionNavigator = source.SelectSingleNode("video:description", manager);
+        XPathNavigator? thumbnailNavigator = source.SelectChildElement("video", "thumbnail_loc", manager);
+        XPathNavigator? titleNavigator = source.SelectChildElement("video", "title", manager);
+        XPathNavigator? descriptionNavigator = source.SelectChildElement("video", "description", manager);
 
         if (thumbnailNavigator is not null && !string.IsNullOrEmpty(thumbnailNavigator.Value))
         {
@@ -407,19 +407,19 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
     {
         bool wasLoaded = false;
 
-        XPathNavigator? contentLocNavigator = source.SelectSingleNode("video:content_loc", manager);
-        XPathNavigator? playerLocNavigator = source.SelectSingleNode("video:player_loc", manager);
-        XPathNavigator? durationNavigator = source.SelectSingleNode("video:duration", manager);
-        XPathNavigator? expirationNavigator = source.SelectSingleNode("video:expiration_date", manager);
-        XPathNavigator? ratingNavigator = source.SelectSingleNode("video:rating", manager);
-        XPathNavigator? viewCountNavigator = source.SelectSingleNode("video:view_count", manager);
-        XPathNavigator? publicationNavigator = source.SelectSingleNode("video:publication_date", manager);
-        XPathNavigator? familyFriendlyNavigator = source.SelectSingleNode("video:family_friendly", manager);
-        XPathNavigator? subscriptionNavigator = source.SelectSingleNode("video:requires_subscription", manager);
-        XPathNavigator? liveNavigator = source.SelectSingleNode("video:live", manager);
-        XPathNavigator? uploaderNavigator = source.SelectSingleNode("video:uploader", manager);
-        XPathNavigator? platformNavigator = source.SelectSingleNode("video:platform", manager);
-        XPathNavigator? restrictionNavigator = source.SelectSingleNode("video:restriction", manager);
+        XPathNavigator? contentLocNavigator = source.SelectChildElement("video", "content_loc", manager);
+        XPathNavigator? playerLocNavigator = source.SelectChildElement("video", "player_loc", manager);
+        XPathNavigator? durationNavigator = source.SelectChildElement("video", "duration", manager);
+        XPathNavigator? expirationNavigator = source.SelectChildElement("video", "expiration_date", manager);
+        XPathNavigator? ratingNavigator = source.SelectChildElement("video", "rating", manager);
+        XPathNavigator? viewCountNavigator = source.SelectChildElement("video", "view_count", manager);
+        XPathNavigator? publicationNavigator = source.SelectChildElement("video", "publication_date", manager);
+        XPathNavigator? familyFriendlyNavigator = source.SelectChildElement("video", "family_friendly", manager);
+        XPathNavigator? subscriptionNavigator = source.SelectChildElement("video", "requires_subscription", manager);
+        XPathNavigator? liveNavigator = source.SelectChildElement("video", "live", manager);
+        XPathNavigator? uploaderNavigator = source.SelectChildElement("video", "uploader", manager);
+        XPathNavigator? platformNavigator = source.SelectChildElement("video", "platform", manager);
+        XPathNavigator? restrictionNavigator = source.SelectChildElement("video", "restriction", manager);
         XPathNodeIterator tagIterator = source.Select("video:tag", manager);
 
         if (contentLocNavigator is not null && Uri.TryCreate(contentLocNavigator.Value, UriKind.RelativeOrAbsolute, out Uri? contentUrl))

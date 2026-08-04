@@ -45,11 +45,11 @@ public class Rss20SyndicationResourceAdapter : SyndicationResourceAdapter
 
         XmlNamespaceManager manager = new(this.Navigator.NameTable);
 
-        XPathNavigator? feedNavigator = this.Navigator.SelectSingleNode("rss", manager);
+        XPathNavigator? feedNavigator = this.Navigator.SelectChildElement("rss");
 
         if (feedNavigator is not null)
         {
-            XPathNavigator? channelNavigator = feedNavigator.SelectSingleNode("channel", manager);
+            XPathNavigator? channelNavigator = feedNavigator.SelectChildElement("channel");
             if (channelNavigator is not null)
             {
                 resource.Channel.Load(channelNavigator, this.Settings);

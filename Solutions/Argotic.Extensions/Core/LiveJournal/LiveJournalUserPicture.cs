@@ -128,10 +128,10 @@ public class LiveJournalUserPicture : IComparable<LiveJournalUserPicture>, IEqua
 
         if (source.HasChildren)
         {
-            XPathNavigator? urlNavigator = source.SelectSingleNode("url", manager);
-            XPathNavigator? keywordNavigator = source.SelectSingleNode("keyword", manager);
-            XPathNavigator? widthNavigator = source.SelectSingleNode("width", manager);
-            XPathNavigator? heightNavigator = source.SelectSingleNode("height", manager);
+            XPathNavigator? urlNavigator = source.SelectChildElement("url");
+            XPathNavigator? keywordNavigator = source.SelectChildElement("keyword");
+            XPathNavigator? widthNavigator = source.SelectChildElement("width");
+            XPathNavigator? heightNavigator = source.SelectChildElement("height");
 
             if (urlNavigator is not null)
             {

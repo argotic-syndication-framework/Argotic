@@ -1,6 +1,7 @@
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -230,12 +231,12 @@ public class ITunesSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator? authorNavigator = source.SelectSingleNode("itunes:author", manager);
-            XPathNavigator? keywordsNavigator = source.SelectSingleNode("itunes:keywords", manager);
-            XPathNavigator? newFeedUrlNavigator = source.SelectSingleNode("itunes:new-feed-url", manager);
-            XPathNavigator? ownerNavigator = source.SelectSingleNode("itunes:owner", manager);
-            XPathNavigator? subtitleNavigator = source.SelectSingleNode("itunes:subtitle", manager);
-            XPathNavigator? summaryNavigator = source.SelectSingleNode("itunes:summary", manager);
+            XPathNavigator? authorNavigator = source.SelectChildElement("itunes", "author", manager);
+            XPathNavigator? keywordsNavigator = source.SelectChildElement("itunes", "keywords", manager);
+            XPathNavigator? newFeedUrlNavigator = source.SelectChildElement("itunes", "new-feed-url", manager);
+            XPathNavigator? ownerNavigator = source.SelectChildElement("itunes", "owner", manager);
+            XPathNavigator? subtitleNavigator = source.SelectChildElement("itunes", "subtitle", manager);
+            XPathNavigator? summaryNavigator = source.SelectChildElement("itunes", "summary", manager);
 
             XPathNodeIterator categoryIterator = source.Select("itunes:category", manager);
 
@@ -332,10 +333,10 @@ public class ITunesSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator? blockNavigator = source.SelectSingleNode("itunes:block", manager);
-            XPathNavigator? imageNavigator = source.SelectSingleNode("itunes:image", manager);
-            XPathNavigator? durationNavigator = source.SelectSingleNode("itunes:duration", manager);
-            XPathNavigator? explicitNavigator = source.SelectSingleNode("itunes:explicit", manager);
+            XPathNavigator? blockNavigator = source.SelectChildElement("itunes", "block", manager);
+            XPathNavigator? imageNavigator = source.SelectChildElement("itunes", "image", manager);
+            XPathNavigator? durationNavigator = source.SelectChildElement("itunes", "duration", manager);
+            XPathNavigator? explicitNavigator = source.SelectChildElement("itunes", "explicit", manager);
 
             if (blockNavigator is not null && !string.IsNullOrEmpty(blockNavigator.Value))
             {

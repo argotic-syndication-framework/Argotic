@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -59,8 +60,8 @@ public class FeedSynchronizationSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator? sharingNavigator = source.SelectSingleNode("sx:sharing", manager);
-            XPathNavigator? syncNavigator = source.SelectSingleNode("sx:sync", manager);
+            XPathNavigator? sharingNavigator = source.SelectChildElement("sx", "sharing", manager);
+            XPathNavigator? syncNavigator = source.SelectChildElement("sx", "sync", manager);
 
             if (sharingNavigator is not null)
             {

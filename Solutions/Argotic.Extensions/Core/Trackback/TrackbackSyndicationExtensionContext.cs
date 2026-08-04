@@ -1,5 +1,6 @@
 using System.Xml;
 using System.Xml.XPath;
+using Argotic.Common;
 
 namespace Argotic.Extensions.Core;
 
@@ -57,7 +58,7 @@ public class TrackbackSyndicationExtensionContext
         ArgumentNullException.ThrowIfNull(manager);
         if (source.HasChildren)
         {
-            XPathNavigator? pingNavigator = source.SelectSingleNode("trackback:ping", manager);
+            XPathNavigator? pingNavigator = source.SelectChildElement("trackback", "ping", manager);
             XPathNodeIterator aboutIterator = source.Select("trackback:about", manager);
 
             if (pingNavigator is not null)

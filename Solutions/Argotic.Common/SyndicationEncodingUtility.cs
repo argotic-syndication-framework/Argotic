@@ -423,7 +423,7 @@ public static class SyndicationEncodingUtility
     public static Encoding GetXmlEncoding(string content)
     {
         Encoding encoding = Encoding.UTF8;
-        string encodingPattern = @"^<\?xml.+?encoding\s*=\s*(?:""(?<webName>[^""]*)""|(?<webName>\S+)).*?\?>";
+        string encodingPattern = """^<\?xml.+?encoding\s*=\s*(?:"(?<webName>[^"]*)"|(?<webName>\S+)).*?\?>""";
 
         ArgumentException.ThrowIfNullOrEmpty(content);
 

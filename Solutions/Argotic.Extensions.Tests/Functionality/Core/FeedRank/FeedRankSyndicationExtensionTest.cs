@@ -10,9 +10,9 @@ namespace Argotic.Extensions.Tests.Functionality.Core.FeedRank;
 public class FeedRankSyndicationExtensionTest
 {
     private const string namespc = @"xmlns:re=""http://purl.org/atompub/rank/1.0""";
-    private const string nycText = "<rank p1:scheme=\"http://example.com/scheme.txt\" p1:domain=\"http://example.com/\" label=\"Title\" xmlns:p1=\"http://purl.org/atompub/rank/1.0\" xmlns=\"http://purl.org/atompub/rank/1.0\">1.0</rank>";
-    private const string writeToText = "<rank p1:scheme=\"http://example.com/scheme.txt\" p1:domain=\"http://example.com/\" label=\"Title\" xmlns:p1=\"http://purl.org/atompub/rank/1.0\" xmlns=\"http://purl.org/atompub/rank/1.0\">1.0</rank>";
-    private const string strExtXml = "<re:rank re:scheme=\"http://example.com/scheme.txt\" re:domain=\"http://example.com/\" label=\"Title\">1.0</re:rank>";
+    private const string nycText = """<rank p1:scheme="http://example.com/scheme.txt" p1:domain="http://example.com/" label="Title" xmlns:p1="http://purl.org/atompub/rank/1.0" xmlns="http://purl.org/atompub/rank/1.0">1.0</rank>""";
+    private const string writeToText = """<rank p1:scheme="http://example.com/scheme.txt" p1:domain="http://example.com/" label="Title" xmlns:p1="http://purl.org/atompub/rank/1.0" xmlns="http://purl.org/atompub/rank/1.0">1.0</rank>""";
+    private const string strExtXml = """<re:rank re:scheme="http://example.com/scheme.txt" re:domain="http://example.com/" label="Title">1.0</re:rank>""";
 
     public TestContext? TestContext { get; set; }
 

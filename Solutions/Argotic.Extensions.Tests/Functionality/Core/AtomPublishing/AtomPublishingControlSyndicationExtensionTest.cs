@@ -12,7 +12,7 @@ public class AtomPublishingControlSyndicationExtensionTest
 {
     private readonly string namespc = @"xmlns:app=""http://www.w3.org/2007/app""";
     private readonly string nycText = $@"<control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US"" xmlns=""http://www.w3.org/2007/app"">{Environment.NewLine}  <draft>yes</draft>{Environment.NewLine}</control>";
-    private readonly string strExtXml = @"<app:control xml:base=""http://www.example.com/control.html"" xml:lang=""en-US""><app:draft>yes</app:draft></app:control>";
+    private readonly string strExtXml = """<app:control xml:base="http://www.example.com/control.html" xml:lang="en-US"><app:draft>yes</app:draft></app:control>""";
 
     public TestContext? TestContext { get; set; }
 

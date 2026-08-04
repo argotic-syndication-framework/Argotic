@@ -322,41 +322,23 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <exception cref="ArgumentNullException">The <paramref name="scalar"/> is an empty string.</exception>
     private static object StringAsValue(XmlRpcScalarValueType type, string scalar)
     {
-        object result = string.Empty;
-
         ArgumentException.ThrowIfNullOrEmpty(scalar);
 
-        switch (type)
+        // The discard arm and the Boolean arm's fallback both preserve the original behaviour:
+        // an unrecognised type, or a boolean that fails to parse, yielded the empty string that
+        // `result` was initialised to rather than throwing.
+        return type switch
         {
-            case XmlRpcScalarValueType.Base64:
-                result = Convert.FromBase64String(scalar);
-                break;
-
-            case XmlRpcScalarValueType.Boolean:
-                if (XmlRpcClient.TryParseBoolean(scalar, out bool boolean))
-                {
-                    result = boolean;
-                }
-                break;
-
-            case XmlRpcScalarValueType.DateTime:
-                result = SyndicationDateTimeUtility.ParseRfc3339DateTime(scalar);
-                break;
-
-            case XmlRpcScalarValueType.Double:
-                result = double.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
-                break;
-
-            case XmlRpcScalarValueType.Integer:
-                result = int.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo);
-                break;
-
-            case XmlRpcScalarValueType.String:
-                result = scalar.Trim();
-                break;
-        }
-
-        return result;
+            XmlRpcScalarValueType.Base64 => Convert.FromBase64String(scalar),
+            XmlRpcScalarValueType.Boolean => XmlRpcClient.TryParseBoolean(scalar, out bool boolean)
+                ? boolean
+                : string.Empty,
+            XmlRpcScalarValueType.DateTime => SyndicationDateTimeUtility.ParseRfc3339DateTime(scalar),
+            XmlRpcScalarValueType.Double => double.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo),
+            XmlRpcScalarValueType.Integer => int.Parse(scalar, NumberStyles.Float, NumberFormatInfo.InvariantInfo),
+            XmlRpcScalarValueType.String => scalar.Trim(),
+            _ => string.Empty,
+        };
     }
 
     /// <summary>
@@ -367,47 +349,24 @@ public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, I
     /// <returns>The string representation of the current instance's <see cref="Value"/>, based on its <see cref="ValueType"/>.</returns>
     private static string? ValueAsString(XmlRpcScalarValueType type, object? scalar)
     {
-        string value = string.Empty;
-
         if (scalar is null)
         {
             return string.Empty;
         }
 
-        switch (type)
+        // The discard arm preserves the original behaviour: an unrecognised type fell through
+        // the switch and returned the empty string that `value` was initialised to.
+        return type switch
         {
-            case XmlRpcScalarValueType.Base64:
-                if (scalar is byte[] data)
-                {
-                    value = Convert.ToBase64String(data, Base64FormattingOptions.None);
-                }
-                else
-                {
-                    value = Convert.ToString(scalar, CultureInfo.InvariantCulture) ?? string.Empty;
-                }
-                break;
-
-            case XmlRpcScalarValueType.Boolean:
-                value = Convert.ToBoolean(scalar, CultureInfo.InvariantCulture) ? "1" : "0";
-                break;
-
-            case XmlRpcScalarValueType.DateTime:
-                value = SyndicationDateTimeUtility.ToRfc3339DateTime(Convert.ToDateTime(scalar, DateTimeFormatInfo.InvariantInfo));
-                break;
-
-            case XmlRpcScalarValueType.Double:
-                value = Convert.ToDouble(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
-                break;
-
-            case XmlRpcScalarValueType.Integer:
-                value = Convert.ToInt32(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo);
-                break;
-
-            case XmlRpcScalarValueType.String:
-                value = (Convert.ToString(scalar, CultureInfo.InvariantCulture) ?? string.Empty).Trim();
-                break;
-        }
-
-        return value;
+            XmlRpcScalarValueType.Base64 => scalar is byte[] data
+                ? Convert.ToBase64String(data, Base64FormattingOptions.None)
+                : Convert.ToString(scalar, CultureInfo.InvariantCulture) ?? string.Empty,
+            XmlRpcScalarValueType.Boolean => Convert.ToBoolean(scalar, CultureInfo.InvariantCulture) ? "1" : "0",
+            XmlRpcScalarValueType.DateTime => SyndicationDateTimeUtility.ToRfc3339DateTime(Convert.ToDateTime(scalar, DateTimeFormatInfo.InvariantInfo)),
+            XmlRpcScalarValueType.Double => Convert.ToDouble(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo),
+            XmlRpcScalarValueType.Integer => Convert.ToInt32(scalar, NumberFormatInfo.InvariantInfo).ToString(NumberFormatInfo.InvariantInfo),
+            XmlRpcScalarValueType.String => (Convert.ToString(scalar, CultureInfo.InvariantCulture) ?? string.Empty).Trim(),
+            _ => string.Empty,
+        };
     }
 }

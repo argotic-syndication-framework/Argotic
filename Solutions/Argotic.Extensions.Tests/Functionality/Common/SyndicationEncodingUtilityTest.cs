@@ -176,7 +176,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_DetectsUtf8Encoding_FromDeclaration()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><root>content</root>";
+        string xml = """<?xml version="1.0" encoding="utf-8"?><root>content</root>""";
 
         // Act
         Encoding result = SyndicationEncodingUtility.GetXmlEncoding(xml);
@@ -189,7 +189,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_DetectsUtf16Encoding_FromDeclaration()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" encoding=\"utf-16\"?><root>content</root>";
+        string xml = """<?xml version="1.0" encoding="utf-16"?><root>content</root>""";
 
         // Act
         Encoding result = SyndicationEncodingUtility.GetXmlEncoding(xml);
@@ -202,7 +202,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_DetectsIso88591Encoding_FromDeclaration()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><root>content</root>";
+        string xml = """<?xml version="1.0" encoding="iso-8859-1"?><root>content</root>""";
 
         // Act
         Encoding result = SyndicationEncodingUtility.GetXmlEncoding(xml);
@@ -241,7 +241,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_DetectsUsAsciiEncoding()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" encoding=\"us-ascii\"?><root>content</root>";
+        string xml = """<?xml version="1.0" encoding="us-ascii"?><root>content</root>""";
 
         // Act
         Encoding result = SyndicationEncodingUtility.GetXmlEncoding(xml);
@@ -267,7 +267,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_HandlesEncodingWithExtraSpaces()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\"   encoding  =  \"utf-8\" ?><root>content</root>";
+        string xml = """<?xml version="1.0"   encoding  =  "utf-8" ?><root>content</root>""";
 
         // Act
         Encoding result = SyndicationEncodingUtility.GetXmlEncoding(xml);
@@ -280,7 +280,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_IsCaseInsensitive()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" ENCODING=\"UTF-8\"?><root>content</root>";
+        string xml = """<?xml version="1.0" ENCODING="UTF-8"?><root>content</root>""";
 
         // Act
         Encoding result = SyndicationEncodingUtility.GetXmlEncoding(xml);
@@ -293,7 +293,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_DefaultsToUtf8_ForInvalidEncodingName()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" encoding=\"invalid-encoding-name\"?><root>content</root>";
+        string xml = """<?xml version="1.0" encoding="invalid-encoding-name"?><root>content</root>""";
 
         // Act
         Encoding result = SyndicationEncodingUtility.GetXmlEncoding(xml);
@@ -306,7 +306,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_FromByteArray_DetectsEncoding()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><root>test</root>";
+        string xml = """<?xml version="1.0" encoding="utf-8"?><root>test</root>""";
         byte[] data = Encoding.UTF8.GetBytes(xml);
 
         // Act
@@ -320,7 +320,7 @@ public class SyndicationEncodingUtilityTest
     public void GetXmlEncoding_FromStream_DetectsEncoding()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><root>test</root>";
+        string xml = """<?xml version="1.0" encoding="utf-8"?><root>test</root>""";
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
 
         // Act
@@ -370,7 +370,7 @@ public class SyndicationEncodingUtilityTest
     public void CreateSafeNavigator_CreatesNavigator_FromValidXml()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><root><child>value</child></root>";
+        string xml = """<?xml version="1.0" encoding="utf-8"?><root><child>value</child></root>""";
 
         // Act
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(xml);
@@ -448,7 +448,7 @@ public class SyndicationEncodingUtilityTest
     public void CreateSafeNavigator_HandlesXmlWithAttributes()
     {
         // Arrange
-        string xml = "<root id=\"123\" name=\"test\"><child attr=\"value\">content</child></root>";
+        string xml = """<root id="123" name="test"><child attr="value">content</child></root>""";
 
         // Act
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(xml);
@@ -497,7 +497,7 @@ public class SyndicationEncodingUtilityTest
     public void CreateSafeNavigator_FromStream_CreatesNavigator()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\" encoding=\"utf-8\"?><root>content</root>";
+        string xml = """<?xml version="1.0" encoding="utf-8"?><root>content</root>""";
         using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
 
         // Act
@@ -986,7 +986,7 @@ public class SyndicationEncodingUtilityTest
     public void CreateSafeNavigator_DoesNotResolveExternalEntity()
     {
         // Arrange
-        string xml = "<?xml version=\"1.0\"?><!DOCTYPE r [<!ENTITY x SYSTEM \"file:///etc/passwd\">]><r>&x;</r>";
+        string xml = """<?xml version="1.0"?><!DOCTYPE r [<!ENTITY x SYSTEM "file:///etc/passwd">]><r>&x;</r>""";
 
         // Act
         XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(xml);

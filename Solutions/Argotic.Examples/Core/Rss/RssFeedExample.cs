@@ -49,7 +49,7 @@ internal static class RssFeedExample
         feed.Channel.LastBuildDate = new DateTime(2007, 10, 14, 17, 17, 44);
         feed.Channel.ManagingEditor = "jlehrer@dallas.example.com (Jim Lehrer)";
         feed.Channel.PublicationDate = new DateTime(2007, 10, 14, 5, 0, 0);
-        feed.Channel.Rating = "(PICS-1.1 \"http://www.rsac.org/ratingsv01.html\" l by \"webmaster@example.com\" on \"2007.01.29T10:09-0800\" r (n 0 s 0 v 0 l 0))";
+        feed.Channel.Rating = """(PICS-1.1 "http://www.rsac.org/ratingsv01.html" l by "webmaster@example.com" on "2007.01.29T10:09-0800" r (n 0 s 0 v 0 l 0))""";
 
         feed.Channel.SkipDays.Add(DayOfWeek.Saturday);
         feed.Channel.SkipDays.Add(DayOfWeek.Sunday);

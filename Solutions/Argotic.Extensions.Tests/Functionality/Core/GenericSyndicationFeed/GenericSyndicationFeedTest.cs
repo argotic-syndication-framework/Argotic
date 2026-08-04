@@ -13,7 +13,7 @@ public class GenericSyndicationFeedTest
     [TestMethod, TestCategory("fix-39")]
     public void TestCustomXmlNamespace()
     {
-        string xml = @"<rss xmlns:app=""http:/example.com"" version=""2.0""></rss>";
+        string xml = """<rss xmlns:app="http:/example.com" version="2.0"></rss>""";
 
         Syndication.GenericSyndicationFeed feed = new();
 

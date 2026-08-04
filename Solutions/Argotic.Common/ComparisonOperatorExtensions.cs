@@ -1,4 +1,3 @@
-#pragma warning disable CA1034
 namespace Argotic.Common;
 
 /// <summary>
@@ -11,7 +10,12 @@ namespace Argotic.Common;
 /// </remarks>
 public static class ComparisonOperatorExtensions
 {
+    // CA1034 predates C# 14 extension members and fires on the type the compiler generates for the
+    // block below. The empty type name in its message gives it away - there is no nested type here
+    // to make non-visible.
+#pragma warning disable CA1034
     extension<T>(T) where T : class, IComparable<T>, IComparisonOperators
+#pragma warning restore CA1034
     {
         /// <summary>
         /// Determines if first operand is less than second operand.

@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
@@ -308,7 +309,10 @@ public class AtomMemberResources : SyndicationExtension, IComparable<AtomMemberR
     ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="href"/> is a null reference.</exception>
-    [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Globalization", "CA1304:SpecifyCultureInfo", MessageId = "Argotic.Publishing.AtomMemberResources.CreateEditMediaLink(System.Uri,System.String)")]
+    [SuppressMessage(
+        "Globalization",
+        "CA1304:Specify CultureInfo",
+        Justification = "False positive from overload-shape matching. The rule sees a CreateEditMediaLink overload that takes a CultureInfo and concludes the two-argument one must be locale-sensitive, but that overload only assigns AtomLink.ContentType from a string - nothing in the chain reads the current culture. Its suggested fix is also self-referential: it asks this method to call itself, which would recurse forever.")]
     public static AtomLink CreateEditMediaLink(Uri href, string contentType, CultureInfo contentLanguage)
     {
         AtomLink link = AtomMemberResources.CreateEditMediaLink(href, contentType);

@@ -1,5 +1,4 @@
-#pragma warning disable CA1720
-
+using System.Diagnostics.CodeAnalysis;
 using Argotic.Common;
 
 namespace Argotic.Net;
@@ -10,6 +9,10 @@ namespace Argotic.Net;
 /// <seealso cref="XmlRpcScalarValue.ValueType"/>
 /// <seealso cref="XmlRpcScalarValue"/>
 [Serializable]
+[SuppressMessage(
+    "Naming",
+    "CA1720:Identifier contains type name",
+    Justification = "The XML-RPC specification names these scalar types <string>, <double>, <int> and <boolean>, and the members map one-to-one onto those wire values via EnumerationMetadata.AlternateValue. Renaming them to satisfy the rule would break the correspondence with the specification that makes this enum readable.")]
 public enum XmlRpcScalarValueType
 {
     /// <summary>
@@ -54,5 +57,3 @@ public enum XmlRpcScalarValueType
     [EnumerationMetadata(DisplayName = "String", AlternateValue = "string")]
     String = 6
 }
-
-#pragma warning restore CA1720

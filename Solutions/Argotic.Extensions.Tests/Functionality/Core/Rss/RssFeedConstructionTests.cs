@@ -121,11 +121,11 @@ public class RssFeedConstructionTests
             Title = "Test Item With Enclosure"
         };
 
-        item.Enclosures.Add(new RssEnclosure(12345L, "audio/mpeg", new Uri("http://example.com/audio.mp3")));
+        item.Enclosures.Add(new RssEnclosure(12_345L, "audio/mpeg", new Uri("http://example.com/audio.mp3")));
         feed.Channel.Items.Add(item);
 
         RssEnclosure enclosure = feed.Channel.Items.First().Enclosures.First();
-        enclosure.Length.ShouldBe(12345L);
+        enclosure.Length.ShouldBe(12_345L);
         enclosure.ContentType.ShouldBe("audio/mpeg");
         enclosure.Url.ShouldBe(new Uri("http://example.com/audio.mp3"));
     }

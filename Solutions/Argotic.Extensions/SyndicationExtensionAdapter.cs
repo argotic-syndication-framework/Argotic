@@ -48,7 +48,7 @@ public class SyndicationExtensionAdapter
             [
                 .. Assembly.GetExecutingAssembly()
                             .GetExportedTypes()
-                            .Where(t => typeof(SyndicationExtension).IsAssignableFrom(t) && !t.IsAbstract),
+                            .Where(static t => typeof(SyndicationExtension).IsAssignableFrom(t) && !t.IsAbstract),
             ];
 
             return extensions;

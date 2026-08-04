@@ -162,40 +162,24 @@ public class FeedSynchronizationSyndicationExtension : SyndicationExtension, ICo
 
         if (result == 0)
         {
-            if (this.Context.Sharing is not null)
+            result = (this.Context.Sharing, other.Context.Sharing) switch
             {
-                if (other.Context.Sharing is not null)
-                {
-                    result = this.Context.Sharing.CompareTo(other.Context.Sharing);
-                }
-                else
-                {
-                    result = 1;
-                }
-            }
-            else if (other.Context.Sharing is not null)
-            {
-                result = -1;
-            }
+                (FeedSynchronizationSharingInformation sharing, FeedSynchronizationSharingInformation otherSharing) => sharing.CompareTo(otherSharing),
+                (not null, null) => 1,
+                (null, not null) => -1,
+                _ => 0,
+            };
         }
 
         if (result == 0)
         {
-            if (this.Context.Synchronization is not null)
+            result = (this.Context.Synchronization, other.Context.Synchronization) switch
             {
-                if (other.Context.Synchronization is not null)
-                {
-                    result = this.Context.Synchronization.CompareTo(other.Context.Synchronization);
-                }
-                else
-                {
-                    result = 1;
-                }
-            }
-            else if (other.Context.Synchronization is not null)
-            {
-                result = -1;
-            }
+                (FeedSynchronizationItem synchronization, FeedSynchronizationItem otherSynchronization) => synchronization.CompareTo(otherSynchronization),
+                (not null, null) => 1,
+                (null, not null) => -1,
+                _ => 0,
+            };
         }
 
         return result;

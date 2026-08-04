@@ -153,55 +153,31 @@ public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable
 
         int result = this.Context.IsPreformatted.CompareTo(other.Context.IsPreformatted);
 
-        if (this.Context.Mood is not null)
+        if (result == 0) result = (this.Context.Mood, other.Context.Mood) switch
         {
-            if (other.Context.Mood is not null)
-            {
-                if (result == 0) result = this.Context.Mood.CompareTo(other.Context.Mood);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (other.Context.Mood is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (LiveJournalMood mood, LiveJournalMood otherMood) => mood.CompareTo(otherMood),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         if (result == 0) result = string.Compare(this.Context.Music, other.Context.Music, StringComparison.OrdinalIgnoreCase);
 
-        if (this.Context.Security is not null)
+        if (result == 0) result = (this.Context.Security, other.Context.Security) switch
         {
-            if (other.Context.Security is not null)
-            {
-                if (result == 0) result = this.Context.Security.CompareTo(other.Context.Security);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (other.Context.Security is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (LiveJournalSecurity security, LiveJournalSecurity otherSecurity) => security.CompareTo(otherSecurity),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
-        if (this.Context.UserPicture is not null)
+        if (result == 0) result = (this.Context.UserPicture, other.Context.UserPicture) switch
         {
-            if (other.Context.UserPicture is not null)
-            {
-                if (result == 0) result = this.Context.UserPicture.CompareTo(other.Context.UserPicture);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (other.Context.UserPicture is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (LiveJournalUserPicture userPicture, LiveJournalUserPicture otherUserPicture) => userPicture.CompareTo(otherUserPicture),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         return result;
     }

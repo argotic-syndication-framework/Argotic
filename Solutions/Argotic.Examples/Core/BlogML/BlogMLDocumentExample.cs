@@ -138,7 +138,7 @@ internal static class BlogMLDocumentExample
     {
         BlogMLDocument document = new();
 
-        document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
+        document.Loaded += ResourceLoadedCallback;
 
         // Note: Loading from local sample file for demonstration
         using Stream stream = SampleDataPath.OpenRead(SampleDataPath.BlogMLDocument);

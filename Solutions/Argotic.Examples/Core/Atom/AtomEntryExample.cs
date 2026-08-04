@@ -55,7 +55,7 @@ internal static class AtomEntryExample
     {
         AtomEntry entry = new();
 
-        entry.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(EntryLoadedCallback);
+        entry.Loaded += EntryLoadedCallback;
 
         await entry.LoadAsync(new Uri("https://endjin.com/atom.xml")).ConfigureAwait(false);
 

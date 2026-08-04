@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -215,21 +216,13 @@ public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension,
         if (result == 0) result = string.Compare(this.Context.IsRequiredBy, other.Context.IsRequiredBy, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.IsVersionOf, other.Context.IsVersionOf, StringComparison.OrdinalIgnoreCase);
 
-        if (this.Context.Language is not null)
+        if (result == 0) result = (this.Context.Language, other.Context.Language) switch
         {
-            if (other.Context.Language is not null)
-            {
-                if (result == 0) result = string.Compare(this.Context.Language.Name, other.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (other.Context.Language is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (CultureInfo language, CultureInfo otherLanguage) => string.Compare(language.Name, otherLanguage.Name, StringComparison.OrdinalIgnoreCase),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         if (result == 0) result = string.Compare(this.Context.License, other.Context.License, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.Mediator, other.Context.Mediator, StringComparison.OrdinalIgnoreCase);

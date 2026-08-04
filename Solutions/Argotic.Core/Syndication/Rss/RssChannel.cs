@@ -867,21 +867,13 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
             if (result == 0) result = -1;
         }
 
-        if (this.Language is not null)
+        if (result == 0) result = (this.Language, other.Language) switch
         {
-            if (other.Language is not null)
-            {
-                if (result == 0) result = string.Compare(this.Language.Name, other.Language.Name, StringComparison.OrdinalIgnoreCase);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (other.Language is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (CultureInfo language, CultureInfo otherLanguage) => string.Compare(language.Name, otherLanguage.Name, StringComparison.OrdinalIgnoreCase),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         if (this.TextInput is not null)
         {

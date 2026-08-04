@@ -154,7 +154,7 @@ public class SitemapVideoTests
     [TestMethod]
     public void MaxDuration_EqualsTwentyEightThousandEightHundred() =>
         // Assert
-        SitemapVideo.MaxDuration.ShouldBe(28800);
+        SitemapVideo.MaxDuration.ShouldBe(28_800);
 
     [TestMethod]
     public void MinRating_EqualsZeroPointZero() =>

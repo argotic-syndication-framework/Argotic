@@ -402,7 +402,7 @@ public class RssFeedBehaviorTests
             Title = "Podcast Episode"
         };
         item.Enclosures.Add(new RssEnclosure(
-            12345678L,
+            12_345_678L,
             "audio/mpeg",
             new Uri("http://example.com/episode.mp3")));
         originalFeed.Channel.Items.Add(item);
@@ -420,7 +420,7 @@ public class RssFeedBehaviorTests
         loadedFeed.Channel.Items.Count.ShouldBe(1);
         loadedFeed.Channel.Items[0].Enclosures.Count.ShouldBe(1);
         RssEnclosure enclosure = loadedFeed.Channel.Items[0].Enclosures[0];
-        enclosure.Length.ShouldBe(12345678L);
+        enclosure.Length.ShouldBe(12_345_678L);
         enclosure.ContentType.ShouldBe("audio/mpeg");
         enclosure.Url.ShouldBe(new Uri("http://example.com/episode.mp3"));
     }

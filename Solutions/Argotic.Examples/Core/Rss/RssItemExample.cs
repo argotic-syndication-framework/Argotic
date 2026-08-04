@@ -38,7 +38,7 @@ internal static class RssItemExample
         item.Categories.Add(new RssCategory("1991/Texas Rangers", "rec.sports.baseball"));
 
         item.Comments = new Uri("http://dallas.example.com/feedback/1983/06/joebob.htm");
-        item.Enclosures.Add(new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
+        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
         item.Guid = new RssGuid("http://dallas.example.com/1983/05/06/joebob.htm");
         item.PublicationDate = new DateTime(2007, 10, 5, 9, 0, 0);
         item.Source = new RssSource(new Uri("http://la.example.com/rss.xml"), "Los Angeles Herald-Examiner");

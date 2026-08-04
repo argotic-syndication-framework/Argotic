@@ -43,7 +43,7 @@ internal static class SitemapVideoExtensionExample
             Duration = 300, // 5 minutes
             PublicationDate = new DateTime(2025, 6, 15),
             Rating = 4.5m,
-            ViewCount = 12500,
+            ViewCount = 12_500,
             FamilyFriendly = true,
             Uploader = "Example Company",
             UploaderInfo = new Uri("https://www.example.com/about-us")
@@ -340,7 +340,7 @@ internal static class SitemapVideoExtensionExample
             RequiresSubscription = true,
             Duration = 3600, // 1 hour
             Rating = 4.8m,
-            ViewCount = 50000,
+            ViewCount = 50_000,
             PublicationDate = new DateTime(2025, 3, 1),
             FamilyFriendly = true,
             Uploader = "Example Premium",

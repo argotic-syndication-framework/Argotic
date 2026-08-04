@@ -294,7 +294,7 @@ public class SitemapExtensionTests
         // Video duration must be between 1 and 28800 seconds (8 hours)
         // Arrange
         int minDuration = 1;
-        int maxDuration = 28800;
+        int maxDuration = 28_800;
         int testDuration = 600;
 
         // Assert

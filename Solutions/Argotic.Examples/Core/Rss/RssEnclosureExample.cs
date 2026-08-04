@@ -33,7 +33,7 @@ internal static class RssEnclosureExample
             Description = "Texas Rangers pitcher Nolan Ryan hurled the seventh no-hitter of his legendary career on Arlington Appreciation Night, defeating the Toronto Blue Jays 3-0."
         };
 
-        item.Enclosures.Add(new RssEnclosure(24986239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
+        item.Enclosures.Add(new RssEnclosure(24_986_239L, "audio/mpeg", new Uri("http://dallas.example.com/joebob_050689.mp3")));
 
         feed.Channel.Items.Add(item);
 

@@ -42,7 +42,7 @@ public static class ComparisonUtility
         {
             var (s, t) when s > t => 1,
             var (s, t) when s < t => -1,
-            _ => source.Select((item, i) => comparer(item, target[i])).FirstOrDefault(r => r != 0)
+            _ => source.Select((item, i) => comparer(item, target[i])).FirstOrDefault(static r => r != 0)
         };
     }
 
@@ -67,7 +67,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence<T>(IList<T> source, IList<T> target) where T : IComparable<T>
-        => CompareSequence(source, target, (a, b) => a.CompareTo(b));
+        => CompareSequence(source, target, static (a, b) => a.CompareTo(b));
 
     /// <summary>
     /// Compares two specified generic collections of <see cref="DayOfWeek"/> elements.
@@ -78,7 +78,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<DayOfWeek> source, IList<DayOfWeek> target)
-        => CompareSequence(source, target, (a, b) => a.CompareTo(b));
+        => CompareSequence(source, target, static (a, b) => a.CompareTo(b));
 
     /// <summary>
     /// Compares two specified generic collections.
@@ -101,7 +101,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<Type> source, IList<Type> target)
-        => CompareSequence(source, target, (a, b) => string.Compare(a.FullName, b.FullName, StringComparison.Ordinal));
+        => CompareSequence(source, target, static (a, b) => string.Compare(a.FullName, b.FullName, StringComparison.Ordinal));
 
     /// <summary>
     /// Compares two specified generic collections.
@@ -124,7 +124,7 @@ public static class ComparisonUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="target"/> is a null reference.</exception>
     public static int CompareSequence(IList<XPathNavigator> source, IList<XPathNavigator> target)
-        => CompareSequence(source, target, (a, b) => string.Compare(a.OuterXml, b.OuterXml, StringComparison.Ordinal));
+        => CompareSequence(source, target, static (a, b) => string.Compare(a.OuterXml, b.OuterXml, StringComparison.Ordinal));
 
     /// <summary>
     /// Compares two specified generic dictionaries.
@@ -159,7 +159,7 @@ public static class ComparisonUtility
                 .Select(key => target.TryGetValue(key, out string? targetValue)
                     ? string.Compare(source[key], targetValue, comparisonType)
                     : -1)
-                .FirstOrDefault(r => r != 0)
+                .FirstOrDefault(static r => r != 0)
         };
     }
 }

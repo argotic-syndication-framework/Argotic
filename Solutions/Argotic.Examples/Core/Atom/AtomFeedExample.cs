@@ -69,7 +69,7 @@ internal static class AtomFeedExample
     {
         AtomFeed feed = new();
 
-        feed.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(FeedLoadedCallback);
+        feed.Loaded += FeedLoadedCallback;
 
         await feed.LoadAsync(new Uri("https://endjin.com/atom.xml")).ConfigureAwait(false);
 

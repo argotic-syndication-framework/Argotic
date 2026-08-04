@@ -202,7 +202,7 @@ public class YahooMediaSyndicationExtensionTest
 
         // Act
         content.Url = url;
-        content.FileSize = 1024000;
+        content.FileSize = 1_024_000;
         content.ContentType = "video/mp4";
         content.Medium = YahooMediaMedium.Video;
         content.IsDefault = true;
@@ -218,7 +218,7 @@ public class YahooMediaSyndicationExtensionTest
 
         // Assert
         content.Url.ShouldBe(url);
-        content.FileSize.ShouldBe(1024000);
+        content.FileSize.ShouldBe(1_024_000);
         content.ContentType.ShouldBe("video/mp4");
         content.Medium.ShouldBe(YahooMediaMedium.Video);
         content.IsDefault.ShouldBeTrue();
@@ -283,7 +283,7 @@ public class YahooMediaSyndicationExtensionTest
         // Assert
         loaded.ShouldBeTrue();
         content.Url!.ToString().ShouldBe("http://example.com/video.mp4");
-        content.FileSize.ShouldBe(1024000);
+        content.FileSize.ShouldBe(1_024_000);
         content.ContentType.ShouldBe("video/mp4");
         content.Medium.ShouldBe(YahooMediaMedium.Video);
         content.IsDefault.ShouldBeTrue();
@@ -1309,7 +1309,7 @@ public class YahooMediaSyndicationExtensionTest
     {
         return new YahooMediaContent(new Uri("http://example.com/video.mp4"))
         {
-            FileSize = 1024000,
+            FileSize = 1_024_000,
             ContentType = "video/mp4",
             Medium = YahooMediaMedium.Video,
             Height = 720,
@@ -1321,7 +1321,7 @@ public class YahooMediaSyndicationExtensionTest
     {
         YahooMediaContent content = new(new Uri("http://example.com/video.mp4"))
         {
-            FileSize = 1024000,
+            FileSize = 1_024_000,
             ContentType = "video/mp4",
             Medium = YahooMediaMedium.Video,
             IsDefault = true,

@@ -266,37 +266,21 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
 
         int result = 0;
 
-        if (this.Fault is not null)
+        result = (this.Fault, other.Fault) switch
         {
-            if (other.Fault is not null)
-            {
-                result = this.Fault.CompareTo(other.Fault);
-            }
-            else
-            {
-                result = 1;
-            }
-        }
-        else if (other.Fault is not null)
-        {
-            result = -1;
-        }
+            (XmlRpcStructureValue fault, XmlRpcStructureValue otherFault) => fault.CompareTo(otherFault),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
-        if (this.Parameter is not null)
+        if (result == 0) result = (this.Parameter, other.Parameter) switch
         {
-            if (other.Parameter is not null)
-            {
-                if (result == 0) result = string.Compare(this.Parameter.ToString(), other.Parameter.ToString(), StringComparison.Ordinal);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (other.Parameter is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (IXmlRpcValue parameter, IXmlRpcValue otherParameter) => string.Compare(parameter.ToString(), otherParameter.ToString(), StringComparison.Ordinal),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         return result;
     }

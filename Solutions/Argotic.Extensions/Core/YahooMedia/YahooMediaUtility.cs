@@ -339,69 +339,37 @@ internal static class YahooMediaUtility
         }
 
         int result = 0;
-        if (source.Copyright is not null)
+        result = (source.Copyright, target.Copyright) switch
         {
-            if (target.Copyright is not null)
-            {
-                result = source.Copyright.CompareTo(target.Copyright);
-            }
-            else
-            {
-                result = 1;
-            }
-        }
-        else if (target.Copyright is not null)
-        {
-            result = -1;
-        }
+            (YahooMediaCopyright sourceCopyright, YahooMediaCopyright targetCopyright) => sourceCopyright.CompareTo(targetCopyright),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
-        if (source.Description is not null)
+        if (result == 0) result = (source.Description, target.Description) switch
         {
-            if (target.Description is not null)
-            {
-                if (result == 0) result = source.Description.CompareTo(target.Description);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (target.Description is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (YahooMediaTextConstruct sourceDescription, YahooMediaTextConstruct targetDescription) => sourceDescription.CompareTo(targetDescription),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
-        if (source.Player is not null)
+        if (result == 0) result = (source.Player, target.Player) switch
         {
-            if (target.Player is not null)
-            {
-                if (result == 0) result = source.Player.CompareTo(target.Player);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (target.Player is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (YahooMediaPlayer sourcePlayer, YahooMediaPlayer targetPlayer) => sourcePlayer.CompareTo(targetPlayer),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
-        if (source.Title is not null)
+        if (result == 0) result = (source.Title, target.Title) switch
         {
-            if (target.Title is not null)
-            {
-                if (result == 0) result = source.Title.CompareTo(target.Title);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (target.Title is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (YahooMediaTextConstruct sourceTitle, YahooMediaTextConstruct targetTitle) => sourceTitle.CompareTo(targetTitle),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         return result;
     }

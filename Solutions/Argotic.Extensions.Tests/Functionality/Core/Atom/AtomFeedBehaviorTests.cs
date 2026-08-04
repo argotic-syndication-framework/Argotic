@@ -544,7 +544,7 @@ public class AtomFeedBehaviorTests
         feed.Links.Add(new AtomLink(new Uri("http://example.com/enclosure.mp3"), "enclosure")
         {
             ContentType = "audio/mpeg",
-            Length = 5000000
+            Length = 5_000_000
         });
 
         // Act
@@ -566,7 +566,7 @@ public class AtomFeedBehaviorTests
 
         AtomLink enclosureLink = loadedFeed.Links.First(l => l.Relation == "enclosure");
         enclosureLink.ContentType.ShouldBe("audio/mpeg");
-        enclosureLink.Length.ShouldBe(5000000);
+        enclosureLink.Length.ShouldBe(5_000_000);
     }
 
     [TestMethod]

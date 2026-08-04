@@ -1,3 +1,4 @@
+using System.Globalization;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -184,21 +185,13 @@ public class DublinCoreElementSetSyndicationExtension : SyndicationExtension, IC
         if (result == 0) result = string.Compare(this.Context.Format, other.Context.Format, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.Identifier, other.Context.Identifier, StringComparison.Ordinal);
 
-        if (this.Context.Language is not null)
+        if (result == 0) result = (this.Context.Language, other.Context.Language) switch
         {
-            if (other.Context.Language is not null)
-            {
-                if (result == 0) result = string.Compare(this.Context.Language.Name, other.Context.Language.Name, StringComparison.OrdinalIgnoreCase);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (other.Context.Language is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (CultureInfo language, CultureInfo otherLanguage) => string.Compare(language.Name, otherLanguage.Name, StringComparison.OrdinalIgnoreCase),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         if (result == 0) result = string.Compare(this.Context.Publisher, other.Context.Publisher, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = string.Compare(this.Context.Relation, other.Context.Relation, StringComparison.OrdinalIgnoreCase);

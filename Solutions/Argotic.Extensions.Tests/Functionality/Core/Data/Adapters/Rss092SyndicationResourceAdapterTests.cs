@@ -98,7 +98,7 @@ public class Rss092SyndicationResourceAdapterTests
         feed.Channel.Items[0].Enclosures.Count.ShouldBe(1);
         RssEnclosure enclosure = feed.Channel.Items[0].Enclosures[0];
         enclosure.Url.ShouldBe(new Uri("http://example.com/podcast.mp3"));
-        enclosure.Length.ShouldBe(12345678L);
+        enclosure.Length.ShouldBe(12_345_678L);
         enclosure.ContentType.ShouldBe("audio/mpeg");
     }
 

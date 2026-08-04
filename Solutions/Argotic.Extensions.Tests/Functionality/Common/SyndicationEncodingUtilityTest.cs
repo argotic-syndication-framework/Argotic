@@ -699,7 +699,7 @@ public class SyndicationEncodingUtilityTest
     public void DecodeBase64String_HandlesLongContent()
     {
         // Arrange
-        string longContent = new('A', 10000);
+        string longContent = new('A', 10_000);
         string base64Encoded = Convert.ToBase64String(Encoding.UTF8.GetBytes(longContent));
 
         // Act

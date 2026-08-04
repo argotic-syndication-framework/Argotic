@@ -65,7 +65,7 @@ public class BlogMLAttachmentTests
         wasLoaded.ShouldBeTrue();
         attachment.IsEmbedded.ShouldBeTrue();
         attachment.MimeType.ShouldBe("image/png");
-        attachment.Size.ShouldBe(12345);
+        attachment.Size.ShouldBe(12_345);
         attachment.Url.ShouldBe(new Uri("http://example.com/image.png"));
         attachment.Content.ShouldBe("SGVsbG8gV29ybGQ=");
     }
@@ -191,7 +191,7 @@ public class BlogMLAttachmentTests
         {
             IsEmbedded = true,
             MimeType = "image/png",
-            Size = 12345,
+            Size = 12_345,
             Url = new Uri("http://example.com/image.png"),
             Content = "SGVsbG8gV29ybGQ="
         };
@@ -291,7 +291,7 @@ public class BlogMLAttachmentTests
         {
             IsEmbedded = true,
             MimeType = "image/png",
-            Size = 12345,
+            Size = 12_345,
             Url = new Uri("http://example.com/image.png"),
             Content = "SGVsbG8="
         };
@@ -300,7 +300,7 @@ public class BlogMLAttachmentTests
         {
             IsEmbedded = true,
             MimeType = "image/png",
-            Size = 12345,
+            Size = 12_345,
             Url = new Uri("http://example.com/image.png"),
             Content = "SGVsbG8="
         };
@@ -618,7 +618,7 @@ public class BlogMLAttachmentTests
         BlogMLAttachment embedded = document.Posts[0].Attachments[0];
         embedded.IsEmbedded.ShouldBeTrue();
         embedded.MimeType.ShouldBe("image/png");
-        embedded.Size.ShouldBe(12345);
+        embedded.Size.ShouldBe(12_345);
         embedded.Url.ShouldBe(new Uri("http://example.com/image.png"));
         embedded.Content.ShouldBe("SGVsbG8gV29ybGQ=");
 

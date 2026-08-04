@@ -142,7 +142,7 @@ internal static class ApmlDocumentExample
     {
         ApmlDocument document = new();
 
-        document.Loaded += new EventHandler<SyndicationResourceLoadedEventArgs>(ResourceLoadedCallback);
+        document.Loaded += ResourceLoadedCallback;
 
         // Note: Loading from local sample file for demonstration
         using Stream stream = SampleDataPath.OpenRead(SampleDataPath.ApmlDocument);

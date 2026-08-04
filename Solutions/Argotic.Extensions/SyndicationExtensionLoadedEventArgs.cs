@@ -121,37 +121,21 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
 
         int result = 0;
 
-        if (this.Data is not null)
+        result = (this.Data, other.Data) switch
         {
-            if (other.Data is not null)
-            {
-                result = string.Compare(this.Data.OuterXml, other.Data.OuterXml, StringComparison.Ordinal);
-            }
-            else
-            {
-                result = 1;
-            }
-        }
-        else if (other.Data is not null)
-        {
-            result = -1;
-        }
+            (XPathNavigator data, XPathNavigator otherData) => string.Compare(data.OuterXml, otherData.OuterXml, StringComparison.Ordinal),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
-        if (this.Extension is not null)
+        if (result == 0) result = (this.Extension, other.Extension) switch
         {
-            if (other.Extension is not null)
-            {
-                if (result == 0) result = string.Compare(this.Extension.ToString(), other.Extension.ToString(), StringComparison.Ordinal);
-            }
-            else
-            {
-                if (result == 0) result = 1;
-            }
-        }
-        else if (other.Extension is not null)
-        {
-            if (result == 0) result = -1;
-        }
+            (ISyndicationExtension extension, ISyndicationExtension otherExtension) => string.Compare(extension.ToString(), otherExtension.ToString(), StringComparison.Ordinal),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         return result;
     }

@@ -248,20 +248,13 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
             return 1;
         }
 
-        int result = 0;
-
-        if (this.Publication is not null && other.Publication is not null)
+        int result = (this.Publication, other.Publication) switch
         {
-            result = this.Publication.CompareTo(other.Publication);
-        }
-        else if (this.Publication is not null)
-        {
-            result = 1;
-        }
-        else if (other.Publication is not null)
-        {
-            result = -1;
-        }
+            (SitemapNewsPublication publication, SitemapNewsPublication otherPublication) => publication.CompareTo(otherPublication),
+            (not null, null) => 1,
+            (null, not null) => -1,
+            _ => 0,
+        };
 
         if (result == 0) result = this.PublicationDate.CompareTo(other.PublicationDate);
         if (result == 0) result = string.Compare(this.Title, other.Title, StringComparison.OrdinalIgnoreCase);

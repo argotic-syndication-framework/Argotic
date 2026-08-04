@@ -501,7 +501,7 @@ public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
         writer.WriteStartElement("rss");
         writer.WriteAttributeString("version", this.Version.ToString());
 
-        if (this.Channel != null && this.Channel.SelfLink != null)
+        if (this.Channel.SelfLink != null)
         {
             writer.WriteAttributeString("xmlns", "atom", null, "http://www.w3.org/2005/Atom");
         }

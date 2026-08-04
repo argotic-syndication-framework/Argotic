@@ -5,7 +5,12 @@ namespace Argotic.Extensions;
 /// </summary>
 public static class ExtensibleSyndicationObjectExtensions
 {
+    // CA1034 predates C# 14 extension members and fires on the type the compiler generates for the
+    // block below. The empty type name in its message gives it away - there is no nested type here
+    // to make non-visible.
+#pragma warning disable CA1034
     extension(IExtensibleSyndicationObject obj)
+#pragma warning restore CA1034
     {
         /// <summary>
         /// Searches for a syndication extension that matches the conditions defined by the specified predicate.

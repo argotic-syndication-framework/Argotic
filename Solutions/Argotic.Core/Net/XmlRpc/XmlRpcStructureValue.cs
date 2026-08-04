@@ -60,7 +60,7 @@ public class XmlRpcStructureValue : IXmlRpcValue, IComparable<XmlRpcStructureVal
     /// <exception cref="ArgumentNullException">The <paramref name="name"/> is a null reference.</exception>
     /// <exception cref="ArgumentException">The <paramref name="name"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public XmlRpcStructureMember this[string name]
+    public XmlRpcStructureMember? this[string name]
     {
         get
         {

@@ -334,10 +334,14 @@ public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEq
             if (conflictsNavigator is { HasChildren: true })
             {
                 XPathNodeIterator childrenIterator = conflictsNavigator.SelectChildren(XPathNodeType.Element);
-                if (childrenIterator is { Count: > 0 })
+                while (childrenIterator.MoveNext())
                 {
-                    this.Conflicts.Add(childrenIterator.Current);
-                    wasLoaded = true;
+                    XPathNavigator? conflictNode = childrenIterator.Current;
+                    if (conflictNode != null)
+                    {
+                        this.Conflicts.Add(conflictNode);
+                        wasLoaded = true;
+                    }
                 }
             }
         }

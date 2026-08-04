@@ -438,7 +438,7 @@ public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IE
     /// <exception cref="ArgumentNullException">The <paramref name="type"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="type"/> is an empty string.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="xmlUrl"/> is a null reference.</exception>
-    public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl, Uri htmlUrl, string version, string title, string description, CultureInfo language)
+    public static OpmlOutline CreateSubscriptionListOutline(string text, string type, Uri xmlUrl, Uri? htmlUrl, string version, string title, string description, CultureInfo? language)
     {
         OpmlOutline outline = new();
         ArgumentException.ThrowIfNullOrEmpty(text);

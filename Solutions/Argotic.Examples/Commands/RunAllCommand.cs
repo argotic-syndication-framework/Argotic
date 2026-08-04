@@ -1,3 +1,4 @@
+using System.Collections.Immutable;
 using System.Diagnostics;
 using System.Text.Json;
 using Spectre.Console;
@@ -12,8 +13,11 @@ internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
 {
     private static readonly JsonSerializerOptions JsonOptions = new() { WriteIndented = true };
 
-    private static readonly HashSet<string> NetworkExampleKeywords = new(StringComparer.OrdinalIgnoreCase)
-    {
+    // ImmutableArray rather than HashSet: this is only ever iterated by IsNetworkExample, which does a
+    // substring Contains against each entry. No hash lookup happens, so the set's comparer was never
+    // consulted and its hashing was pure overhead. Fastest iteration, and it says "never modified".
+    private static readonly ImmutableArray<string> NetworkExampleKeywords =
+    [
         "Load Uri",
         "Load Async",
         "Create",
@@ -23,8 +27,8 @@ internal sealed class RunAllCommand : AsyncCommand<RunAllSettings>
         "Is Trackback",
         "Source References Target",
         "Uri Exists",
-        "Syndication Content Format Get"
-    };
+        "Syndication Content Format Get",
+    ];
 
     protected override async Task<int> ExecuteAsync(CommandContext context, RunAllSettings settings, CancellationToken cancellationToken)
     {

@@ -20,6 +20,11 @@ csharp_style_prefer_top_level_statements = true:silent
 # C# 14 Language features. The codebase uses the `field` keyword throughout, so a getter that
 # only reads the backing field is written `get;` rather than `get => field;`.
 csharp_style_prefer_simplified_property_accessor = true:suggestion
+csharp_style_prefer_field_keyword = true:suggestion
+# Only fires where the null check guards the assignment TARGET. Guards on the assigned *value*
+# (`if (description is not null) item.Description = description;`) are not candidates - `?.` tests
+# the receiver - so this reports nothing today and is here to catch the shape if it appears.
+csharp_style_prefer_null_conditional_assignment = true:suggestion
 
 # Pattern matching preferences
 csharp_style_pattern_matching_over_is_with_cast_check = true:warning

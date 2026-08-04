@@ -465,9 +465,21 @@ public static class SyndicationEncodingUtility
     {
         ArgumentException.ThrowIfNullOrEmpty(content);
 
+        // Almost every real document is already clean, and the old implementation still allocated a
+        // StringBuilder the size of the whole document and rebuilt it character by character to
+        // discover that. Scan first and hand back the original instance when there is nothing to
+        // remove; only pay for a rebuild when a character actually has to go.
+        int firstInvalid = IndexOfInvalidXmlCharacter(content);
+        if (firstInvalid < 0)
+        {
+            return content;
+        }
+
         // Adapted from https://stackoverflow.com/a/17735649
         StringBuilder result = new(content.Length);
-        for (int i = 0; i < content.Length; i++)
+        result.Append(content.AsSpan(0, firstInvalid));
+
+        for (int i = firstInvalid; i < content.Length; i++)
         {
             if (XmlConvert.IsXmlChar(content[i]))
             {
@@ -482,6 +494,36 @@ public static class SyndicationEncodingUtility
         }
 
         return result.ToString();
+    }
+
+    /// <summary>
+    /// Returns the index of the first character that <see cref="RemoveInvalidXmlHexadecimalCharacters(string)"/> would drop.
+    /// </summary>
+    /// <param name="content">The content to scan.</param>
+    /// <returns>The index of the first character that would be removed, or <b>-1</b> if the content is already valid.</returns>
+    /// <remarks>
+    ///     The two keep conditions mirror the rebuild loop exactly: a character survives if it is a valid
+    ///     XML character, or if it opens a valid surrogate pair with the character after it.
+    /// </remarks>
+    private static int IndexOfInvalidXmlCharacter(string content)
+    {
+        for (int i = 0; i < content.Length; i++)
+        {
+            if (XmlConvert.IsXmlChar(content[i]))
+            {
+                continue;
+            }
+
+            if (i + 1 < content.Length && XmlConvert.IsXmlSurrogatePair(content[i + 1], content[i]))
+            {
+                i++;
+                continue;
+            }
+
+            return i;
+        }
+
+        return -1;
     }
 
     /// <summary>
@@ -527,35 +569,29 @@ public static class SyndicationEncodingUtility
     /// </remarks>
     internal static byte[] GetStreamBytes(Stream stream)
     {
-        int initialLength = 32_768;
-        int read = 0;
-        int chunk;
-
         ArgumentNullException.ThrowIfNull(stream);
 
-        byte[] buffer = new byte[initialLength];
-
-        while ((chunk = stream.Read(buffer, read, buffer.Length - read)) > 0)
+        // A seekable stream already knows how much is left, so the result array can be sized exactly
+        // and filled once. This replaces a read-and-double loop that allocated every intermediate
+        // buffer on the way up and copied the whole payload at each growth; Stream.ReadExactly
+        // arrived in .NET 7 and makes the loop unnecessary.
+        if (stream.CanSeek)
         {
-            read += chunk;
-
-            if (read == buffer.Length)
+            long remaining = stream.Length - stream.Position;
+            if (remaining == 0)
             {
-                int nextByte = stream.ReadByte();
-
-                if (nextByte == -1)
-                {
-                    return buffer;
-                }
-
-                byte[] newBuffer = new byte[buffer.Length * 2];
-                Array.Copy(buffer, newBuffer, buffer.Length);
-                newBuffer[read] = (byte)nextByte;
-                buffer = newBuffer;
-                read++;
+                return [];
             }
+
+            byte[] exact = new byte[remaining];
+            stream.ReadExactly(exact);
+            return exact;
         }
 
-        return buffer[..read];
+        // Non-seekable streams still need to be drained; MemoryStream grows with a pooled copy loop
+        // rather than a hand-written one.
+        using MemoryStream buffer = new();
+        stream.CopyTo(buffer);
+        return buffer.ToArray();
     }
 }

@@ -216,25 +216,28 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
                 }
                 else if (string.Equals(parameterName, "title", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (!string.IsNullOrEmpty(source[parameterName]))
+                    string? titleValue = source[parameterName];
+                    if (!string.IsNullOrEmpty(titleValue))
                     {
-                        this.Title = source[parameterName];
+                        this.Title = titleValue;
                         wasLoaded = true;
                     }
                 }
                 else if (string.Equals(parameterName, "excerpt", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (!string.IsNullOrEmpty(source[parameterName]))
+                    string? excerptValue = source[parameterName];
+                    if (!string.IsNullOrEmpty(excerptValue))
                     {
-                        this.Excerpt = source[parameterName];
+                        this.Excerpt = excerptValue;
                         wasLoaded = true;
                     }
                 }
                 else if (string.Equals(parameterName, "blog_name", StringComparison.OrdinalIgnoreCase))
                 {
-                    if (!string.IsNullOrEmpty(source[parameterName]))
+                    string? weblogNameValue = source[parameterName];
+                    if (!string.IsNullOrEmpty(weblogNameValue))
                     {
-                        this.WeblogName = source[parameterName];
+                        this.WeblogName = weblogNameValue;
                         wasLoaded = true;
                     }
                 }

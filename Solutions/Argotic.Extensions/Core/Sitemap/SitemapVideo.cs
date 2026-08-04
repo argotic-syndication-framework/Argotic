@@ -529,9 +529,10 @@ public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>,
         {
             while (tagIterator.MoveNext() && this.videoTags.Count < MaxTagCount)
             {
-                if (!string.IsNullOrEmpty(tagIterator.Current.Value))
+                XPathNavigator? tagNode = tagIterator.Current;
+                if (tagNode != null && !string.IsNullOrEmpty(tagNode.Value))
                 {
-                    this.videoTags.Add(tagIterator.Current.Value.Trim());
+                    this.videoTags.Add(tagNode.Value.Trim());
                     wasLoaded = true;
                 }
             }

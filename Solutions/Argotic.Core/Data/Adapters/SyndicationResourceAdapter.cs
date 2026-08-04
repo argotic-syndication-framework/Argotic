@@ -130,7 +130,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        ApmlDocument? apmlDocument = resource as ApmlDocument;
+        ApmlDocument apmlDocument = (ApmlDocument)resource;
 
         if (resourceMetadata.Version == new Version("0.6"))
         {
@@ -221,7 +221,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        BlogMLDocument? blogMLDocument = resource as BlogMLDocument;
+        BlogMLDocument blogMLDocument = (BlogMLDocument)resource;
         BlogML20SyndicationResourceAdapter blogML20Adapter = new(this.Navigator, this.Settings);
 
         if (resourceMetadata.Version == new Version("2.0"))
@@ -242,7 +242,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        OpmlDocument? opmlDocument = resource as OpmlDocument;
+        OpmlDocument opmlDocument = (OpmlDocument)resource;
         Opml20SyndicationResourceAdapter opml20Adapter = new(this.Navigator, this.Settings);
 
         if (resourceMetadata.Version == new Version("2.0"))
@@ -273,7 +273,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        RsdDocument? rsdDocument = resource as RsdDocument;
+        RsdDocument rsdDocument = (RsdDocument)resource;
 
         if (resourceMetadata.Version == new Version("1.0"))
         {
@@ -300,7 +300,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        RssFeed? rssFeed = resource as RssFeed;
+        RssFeed rssFeed = (RssFeed)resource;
 
         if (resourceMetadata.Version == new Version("2.0"))
         {
@@ -345,7 +345,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        Sitemap? sitemap = resource as Sitemap;
+        Sitemap sitemap = (Sitemap)resource;
 
         if (resourceMetadata.Version == new Version("0.9"))
         {
@@ -366,7 +366,7 @@ public class SyndicationResourceAdapter
         ArgumentNullException.ThrowIfNull(resource);
         ArgumentNullException.ThrowIfNull(resourceMetadata);
 
-        SitemapIndex? sitemapIndex = resource as SitemapIndex;
+        SitemapIndex sitemapIndex = (SitemapIndex)resource;
 
         if (resourceMetadata.Version == new Version("0.9"))
         {

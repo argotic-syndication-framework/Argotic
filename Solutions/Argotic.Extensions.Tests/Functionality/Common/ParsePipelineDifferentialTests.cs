@@ -119,9 +119,15 @@ public sealed class ParsePipelineDifferentialTests
         legacyMalformed.ExceptionType.ShouldBe(typeof(System.Xml.XmlException).FullName);
         liveMalformed.ShouldBe(legacyMalformed);
 
+        // The reader entry point is the one Phase 2 rewrote, and this is its one intended divergence.
+        // Recorded as a specific difference rather than dropped: if the frozen side ever stops throwing
+        // ArgumentException, or the live side stops throwing XmlException, or either message changes,
+        // this fails. An `ShouldNotBe` would have passed for any difference at all, including a wrong one.
         (ParseOutcome legacyReader, ParseOutcome liveReader) = ParsePipelineDifferential.OverTextReader(string.Empty);
         legacyReader.ExceptionType.ShouldBe(typeof(ArgumentException).FullName);
-        liveReader.ShouldBe(legacyReader);
+        legacyReader.ExceptionMessage!.ShouldContain("xml", Case.Sensitive, "the frozen pipeline leaked the parameter name of the overload it delegated to");
+        liveReader.ExceptionType.ShouldBe(typeof(System.Xml.XmlException).FullName);
+        liveReader.ExceptionMessage.ShouldBe("Root element is missing.");
     }
 
     /// <summary>

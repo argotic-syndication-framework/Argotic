@@ -29,6 +29,18 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
   (`SYSLIB0011`/`SYSLIB0050`). `IXmlSerializable`, `XmlSerializer` and the `Save`/`Load` XML round-trip
   are unaffected: they never depended on `[Serializable]`
 
+### Changed
+
+Behaviour changes that fix no defect and break no documented contract, but that a caller could notice.
+
+- **`SyndicationEncodingUtility.CreateSafeNavigator(TextReader)` filters as it reads.** It previously
+  drained the reader to a string, sanitised that into a second string, and parsed the result; it now
+  drops invalid characters incrementally, so a document is no longer held twice. Two visible
+  consequences: an empty reader produces `XmlException` ("Root element is missing.") rather than
+  `ArgumentException` naming `xml` — a parameter that overload does not have and the caller never
+  supplied — and the reader is consumed lazily, so a parse failure part-way through leaves it part-way
+  through rather than drained. The reader is still never disposed by this method.
+
 ### New Features
 
 - **Sitemap 0.9**: Added support for Sitemap 0.9 protocol
@@ -149,6 +161,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Removed
 
+- **`SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(string)`** — source- and
+  binary-breaking. It had no caller anywhere in the library and could not have had a working one: its
+  pattern relied on `\xD800` meaning U+D800, where .NET regex reads `\x` as exactly two hex digits, so
+  `\xD800` denoted the range `'0'`–`'ß'`. Nearly every letter matched, and each match was passed to
+  `Convert.ToUInt32(value, 16)` — which threw `FormatException` on `"Hello"` and silently rewrote
+  `"abc"` to `"101112"`. Use `RemoveInvalidXmlHexadecimalCharacters` instead
 - `Guard.cs` utility class
 - Legacy configuration provider classes
 - `WebRequestOptions` class

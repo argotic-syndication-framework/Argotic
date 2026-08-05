@@ -246,11 +246,31 @@ public static partial class SyndicationEncodingUtility
     ///     a navigator from being created.
     /// </returns>
     /// <exception cref="ArgumentNullException">The <paramref name="reader"/> is a null reference.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     Filters as it reads. The other overloads still drain their input to a string first; this one
+    ///     no longer does, so a document arrives at the parser without ever being held twice.
+    ///     </para>
+    ///     <para>
+    ///     Two consequences, both deliberate. An empty reader now produces
+    ///     <see cref="System.Xml.XmlException"/> — "Root element is missing" — rather than
+    ///     <see cref="ArgumentException"/> naming <c>xml</c>, a parameter this overload does not have and
+    ///     the caller never supplied. And the reader is consumed lazily, so a parse failure part-way
+    ///     through leaves it part-way through rather than drained.
+    ///     </para>
+    ///     <para>
+    ///     The caller's reader is not disposed. Nothing should close what it did not open.
+    ///     </para>
+    /// </remarks>
     public static XPathNavigator CreateSafeNavigator(TextReader reader)
     {
         ArgumentNullException.ThrowIfNull(reader);
 
-        return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
+        using XmlSanitizingTextReader sanitising = new(reader, leaveOpen: true);
+        using XmlReader xmlReader = XmlReader.Create(sanitising, CreateSafeXmlReaderSettings());
+        XPathDocument document = new(xmlReader);
+
+        return document.CreateNavigator();
     }
 
     /// <summary>

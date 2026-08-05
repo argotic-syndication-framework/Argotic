@@ -84,9 +84,12 @@ public sealed class ParseEntryPointGuardTests
         Should.Throw<ArgumentException>(() => SyndicationEncodingUtility.CreateSafeNavigator(emptyAgain, Encoding.UTF8))
             .ParamName.ShouldBe("xml", "row 29a: the caller's parameters are 'stream' and 'encoding'");
 
+        // Row 29b INVERTED at Phase 2. The reader overload no longer delegates to the string one, so it
+        // no longer borrows its guard or its parameter name. An empty reader is now a document with no
+        // root element, which is what it always was, and the parser says so.
         using StringReader emptyReader = new(string.Empty);
-        Should.Throw<ArgumentException>(() => SyndicationEncodingUtility.CreateSafeNavigator(emptyReader))
-            .ParamName.ShouldBe("xml", "row 29b: the caller's parameter is called 'reader'");
+        Should.Throw<XmlException>(() => SyndicationEncodingUtility.CreateSafeNavigator(emptyReader))
+            .Message.ShouldBe("Root element is missing.");
     }
 
     /// <summary>

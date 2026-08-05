@@ -215,7 +215,10 @@ public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<Trackb
     {
         ArgumentNullException.ThrowIfNull(writer);
 
-        writer.Write($"url={this.Permalink?.ToString() ?? string.Empty}");
+        // The permalink is form-encoded like every other field. Written raw, a permalink carrying an
+        // ordinary query string ("?id=1&ref=weekly") split into extra form fields and arrived at the
+        // receiver truncated at the first ampersand.
+        writer.Write($"url={HttpUtility.UrlEncode(this.Permalink?.ToString() ?? string.Empty)}");
 
         if (!string.IsNullOrEmpty(this.Title))
         {

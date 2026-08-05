@@ -260,6 +260,16 @@ public class TrackbackClient
             payloadData = stream.ToArray();
         }
 
+        // A form body must not carry a byte-order mark. Encoding.UTF8 emits one, and StreamWriter
+        // writes it ahead of the first field, so the receiver saw a first parameter named "﻿url"
+        // rather than "url" - which Argotic's own TrackbackMessage.Load would not match either.
+        // The charset travels in the Content-Type header below, where it belongs.
+        byte[] preamble = message.Encoding.GetPreamble();
+        if (preamble.Length > 0 && payloadData.AsSpan().StartsWith(preamble))
+        {
+            payloadData = payloadData[preamble.Length..];
+        }
+
         using HttpRequestMessage request = new(HttpMethod.Post, host);
         request.Headers.UserAgent.ParseAdd(userAgent);
         request.Content = new ByteArrayContent(payloadData);

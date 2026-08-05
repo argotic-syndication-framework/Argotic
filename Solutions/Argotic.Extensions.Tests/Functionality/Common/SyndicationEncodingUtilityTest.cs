@@ -919,26 +919,6 @@ public class SyndicationEncodingUtilityTest
 
     #endregion
 
-    #region EncodeInvalidXmlHexadecimalCharacters Tests
-
-    [TestMethod]
-    public void EncodeInvalidXmlHexadecimalCharacters_ThrowsOnNullInput()
-    {
-        // Arrange & Act & Assert
-        Should.Throw<ArgumentNullException>(() =>
-            SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(null!));
-    }
-
-    [TestMethod]
-    public void EncodeInvalidXmlHexadecimalCharacters_ThrowsOnEmptyInput()
-    {
-        // Arrange & Act & Assert
-        Should.Throw<ArgumentException>(() =>
-            SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(string.Empty));
-    }
-
-    #endregion
-
     #region EncodeSafeDirectoryName Tests
 
     [TestMethod]

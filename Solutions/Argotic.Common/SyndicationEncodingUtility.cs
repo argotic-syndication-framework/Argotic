@@ -1,5 +1,4 @@
 using System.Buffers;
-using System.Globalization;
 using System.Net;
 using System.Text;
 using System.Text.RegularExpressions;
@@ -412,37 +411,6 @@ public static partial class SyndicationEncodingUtility
         decodedResult = System.Web.HttpUtility.UrlDecode(decodedResult);
 
         return decodedResult;
-    }
-
-    /// <summary>
-    /// Encodes the supplied string so that it can be safely represented in XML.
-    /// </summary>
-    /// <param name="content">A string that represents the XML data to parse for invalid XML hexadecimal characters.</param>
-    /// <returns>A string that has been encoded to be safe for XML.</returns>
-    /// <remarks>
-    ///     <para>The encoding process replaces invalid XML hexadecimal characters with their equivalent decimal representation.</para>
-    ///     <para>
-    ///         Hexadecimal characters that are valid include: #x9, #xA, #xD, [#x20-#xD7FF], [#xE000-#xFFFD], [#x10000-#x10FFFF],
-    ///         and any Unicode character; excluding the surrogate blocks FFFE and FFFF.
-    ///     </para>
-    /// </remarks>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
-    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
-    public static string EncodeInvalidXmlHexadecimalCharacters(string content)
-    {
-        Regex invalidXmlUnicodeCharacters = new(@"[\x01-\x08\x0B-\x0C\x0E-\x1F\xD800-\xDFFF\xFFFE-\xFFFF]");
-
-        ArgumentException.ThrowIfNullOrEmpty(content);
-
-        string encodedContent = content;
-
-        MatchCollection matches = invalidXmlUnicodeCharacters.Matches(encodedContent);
-        foreach (Match match in matches)
-        {
-            encodedContent = encodedContent.Replace(match.Value, Convert.ToUInt32(match.Value, 16).ToString(NumberFormatInfo.InvariantInfo), StringComparison.Ordinal);
-        }
-
-        return encodedContent;
     }
 
     /// <summary>

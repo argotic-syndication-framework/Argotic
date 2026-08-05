@@ -21,4 +21,19 @@
     <ProjectReference Include="..\Argotic.Extensions\Argotic.Extensions.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <!--
+      Real sample documents, linked from the Examples project rather than copied, on the same terms
+      as Argotic.Benchmarks: one source of truth for what a real Argotic input looks like.
+
+      Until this was added the project had no Content or None items at all, so no test could read a
+      file fixture even if it wanted to. Every sample document lived as a C# string literal in
+      TestDoubles/FeedTestData.cs, averaging 10 elements against 56 for these files, and carrying
+      none of the itunes:, media:, sx: or content: namespaces a real feed declares.
+    -->
+    <None Include="..\Argotic.Examples\SampleData\*.xml"
+          Link="SampleData\%(Filename)%(Extension)"
+          CopyToOutputDirectory="PreserveNewest" />
+  </ItemGroup>
+
 </Project>

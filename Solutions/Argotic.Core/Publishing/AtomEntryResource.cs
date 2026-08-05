@@ -236,11 +236,8 @@ public class AtomEntryResource : AtomEntry
         ArgumentNullException.ThrowIfNull(httpClient);
         settings ??= new SyndicationResourceLoadSettings();
 
-        using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        timeoutCts.CancelAfter(settings.Timeout);
-
         XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(
-            source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, timeoutCts.Token).ConfigureAwait(false);
+            source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, cancellationToken).ConfigureAwait(false);
 
         SyndicationResourceAdapter adapter = new(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.Atom);

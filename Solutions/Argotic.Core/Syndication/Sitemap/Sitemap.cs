@@ -220,14 +220,7 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        if (settings is not null)
-        {
-            this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
-        }
-        else
-        {
-            this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream), settings);
-        }
+        this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings), settings);
     }
 
     /// <summary>
@@ -307,11 +300,8 @@ public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(httpClient);
         settings ??= new SyndicationResourceLoadSettings();
 
-        using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        timeoutCts.CancelAfter(settings.Timeout);
-
         XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(
-            source, httpClient, settings, SyndicationContentLengthLimits.Sitemap, requestOptions, timeoutCts.Token).ConfigureAwait(false);
+            source, httpClient, settings, SyndicationContentLengthLimits.Sitemap, requestOptions, cancellationToken).ConfigureAwait(false);
 
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source));
     }

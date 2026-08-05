@@ -256,11 +256,8 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(httpClient);
         settings ??= new SyndicationResourceLoadSettings();
 
-        using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        timeoutCts.CancelAfter(settings.Timeout);
-
         XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(
-            source, httpClient, settings, SyndicationContentLengthLimits.Archive, requestOptions, timeoutCts.Token).ConfigureAwait(false);
+            source, httpClient, settings, SyndicationContentLengthLimits.Archive, requestOptions, cancellationToken).ConfigureAwait(false);
 
         SyndicationResourceAdapter adapter = new(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.BlogML);
@@ -368,14 +365,7 @@ public class BlogMLDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
-        if (settings is not null)
-        {
-            this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
-        }
-        else
-        {
-            this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream), settings);
-        }
+        this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings), settings);
     }
 
     /// <summary>

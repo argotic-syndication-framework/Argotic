@@ -374,6 +374,42 @@ public static partial class SyndicationEncodingUtility
     }
 
     /// <summary>
+    /// Creates a <see cref="XPathNavigator"/> over a stream, honouring the caller's load settings.
+    /// </summary>
+    /// <param name="stream">The stream to navigate.</param>
+    /// <param name="settings">The load settings. This value can be <b>null</b>.</param>
+    /// <returns>A navigator over the supplied <paramref name="stream"/>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     The synchronous counterpart of the settings-taking <c>CreateSafeNavigatorAsync</c>, and the same
+    ///     motivation: twelve <c>Load(Stream, settings)</c> implementations each carried an identical
+    ///     branch on <c>settings is not null</c>, so what a settings object means for encoding was
+    ///     written down twelve times.
+    ///     </para>
+    ///     <para>
+    ///     <b>Behaviour is unchanged and is presently wrong</b> — a non-null settings object forces
+    ///     <see cref="SyndicationResourceLoadSettings.CharacterEncoding"/>, whose default overrides a
+    ///     correctly declared <c>iso-8859-1</c>. That is pinned by
+    ///     <c>SettingsEncodingCharacterisationTests</c> and fixed by the commit that makes the
+    ///     property nullable. Gathering it here first is what lets that commit be one edit.
+    ///     </para>
+    ///     <para>
+    ///     Internal rather than public, and not only for scope. <c>CreateSafeNavigator(stream, null)</c>
+    ///     would become ambiguous against the <see cref="Encoding"/> overload, and there is a call of
+    ///     exactly that shape in <c>ParseEntryPointGuardTests</c> — which, being in the test project,
+    ///     cannot see this one.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    internal static XPathNavigator CreateSafeNavigator(Stream stream, SyndicationResourceLoadSettings? settings)
+    {
+        ArgumentNullException.ThrowIfNull(stream);
+
+        return settings is not null
+            ? CreateSafeNavigator(stream, settings.CharacterEncoding)
+            : CreateSafeNavigator(stream);
+    }
+    /// <summary>
     /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="TextReader"/>.
     /// </summary>
     /// <param name="reader">The <see cref="TextReader"/> object that contains the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
@@ -673,11 +709,19 @@ public static partial class SyndicationEncodingUtility
 
         long cap = settings.MaxResponseContentLength ?? defaultMaxResponseContentLength;
 
+        // The deadline is applied here rather than at each of the thirteen callers, all of which
+        // built this same linked source, applied this same value, and used the token for nothing
+        // but the call below. It covers the body read as well as the headers - which is the point
+        // of a CancellationTokenSource rather than HttpClient.Timeout, and matters more now that
+        // the send completes on headers.
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(settings.Timeout);
+
         using HttpResponseMessage response = await SendHttpRequestAsync(
-            source, httpClient, requestOptions, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+            source, httpClient, requestOptions, HttpCompletionOption.ResponseHeadersRead, timeoutCts.Token).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
 
-        using PooledContentBuffer body = await ReadContentAsync(response, cap, cancellationToken).ConfigureAwait(false);
+        using PooledContentBuffer body = await ReadContentAsync(response, cap, timeoutCts.Token).ConfigureAwait(false);
         using Stream stream = body.AsStream();
 
         // The UTF-8 sentinel, in the one place it now lives. Phase 6 deletes it outright by making the

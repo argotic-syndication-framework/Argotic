@@ -225,11 +225,8 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
         ArgumentNullException.ThrowIfNull(httpClient);
         settings ??= new SyndicationResourceLoadSettings();
 
-        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        timeoutCts.CancelAfter(settings.Timeout);
-
         XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(
-            source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, timeoutCts.Token).ConfigureAwait(false);
+            source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, cancellationToken).ConfigureAwait(false);
 
         SyndicationResourceAdapter adapter = new(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.Rsd);
@@ -337,14 +334,7 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
-        if (settings is not null)
-        {
-            this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
-        }
-        else
-        {
-            this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream), settings);
-        }
+        this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings), settings);
     }
 
     /// <summary>

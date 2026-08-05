@@ -204,15 +204,7 @@ public class GenericSyndicationFeed
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
-        XPathNavigator navigator;
-        if (settings is not null)
-        {
-            navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding);
-        }
-        else
-        {
-            navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);
-        }
+        XPathNavigator navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream, settings);
         this.Load(navigator, settings ?? new SyndicationResourceLoadSettings(), new SyndicationResourceLoadedEventArgs(navigator));
     }
 
@@ -369,11 +361,8 @@ public class GenericSyndicationFeed
         ArgumentNullException.ThrowIfNull(httpClient);
         settings ??= new SyndicationResourceLoadSettings();
 
-        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        timeoutCts.CancelAfter(settings.Timeout);
-
         XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(
-            source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, timeoutCts.Token).ConfigureAwait(false);
+            source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, cancellationToken).ConfigureAwait(false);
 
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source));
     }

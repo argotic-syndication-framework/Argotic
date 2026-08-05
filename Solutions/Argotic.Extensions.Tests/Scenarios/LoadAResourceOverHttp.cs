@@ -1,6 +1,7 @@
 using System.Net;
 using System.Text;
 
+using Argotic.Common;
 using Argotic.Extensions.Tests.TestDoubles;
 using Argotic.Publishing;
 using Argotic.Syndication;
@@ -235,6 +236,62 @@ public sealed class LoadAResourceOverHttp : IDisposable
 
         await Should.ThrowAsync<HttpRequestException>(async () => await RssFeed.CreateAsync(
             Source, httpClient, cancellationToken: TestContext.CancellationTokenSource.Token));
+    }
+
+    /// <summary>
+    /// The same feed, fetched and loaded, decodes two different ways.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     <b>The highest-value row in the characterisation set, and the clearest statement of what
+    ///     Phase 6 is for.</b> One document, correctly declaring <c>iso-8859-1</c> and containing byte
+    ///     <c>0xE9</c>. Loaded from a stream with a default <see cref="SyndicationResourceLoadSettings"/>
+    ///     it comes back with a replacement character; fetched over HTTP it comes back correctly.
+    ///     </para>
+    ///     <para>
+    ///     The cause is that <c>CharacterEncoding</c> defaults to <see cref="Encoding.UTF8"/> and the
+    ///     two paths read that default in opposite directions. The synchronous path honours it and
+    ///     forces UTF-8 over a document that said otherwise. The asynchronous path treats the very same
+    ///     value as meaning "unset", maps it to <see langword="null"/>, and sniffs — which is right here,
+    ///     and is wrong for the caller who set UTF-8 deliberately because a feed lies about itself.
+    ///     One legitimate value doing duty as a sentinel, producing two different bugs depending on
+    ///     which door you came in.
+    ///     </para>
+    ///     <para>
+    ///     <c>windows-1252</c> cannot be used to write this test: it resolves to UTF-8 through the
+    ///     encoding fallback and both paths would agree, for the wrong reason. Inverted at Phase 6,
+    ///     where the synchronous arm starts producing the accented character too.
+    ///     </para>
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    public async Task TheSameFeedDecodesDifferently_LoadedSynchronouslyOrFetched()
+    {
+        byte[] latin1 = Encoding.Latin1.GetBytes(
+            """<?xml version="1.0" encoding="iso-8859-1"?><rss version="2.0"><channel><title>café</title><link>http://example.com/</link><description>d</description></channel></rss>""");
+
+        RssFeed loaded = new();
+        using (MemoryStream stream = new(latin1, writable: false))
+        {
+            loaded.Load(stream, new SyndicationResourceLoadSettings());
+        }
+
+        MockHttpMessageHandler handler = new((_, _) => Task.FromResult(new HttpResponseMessage(HttpStatusCode.OK)
+        {
+            Content = new ByteArrayContent(latin1),
+        }));
+        HttpClient httpClient = new(handler, disposeHandler: false);
+        this.disposables.Add(handler);
+        this.disposables.Add(httpClient);
+
+        RssFeed fetched = await RssFeed.CreateAsync(
+            Source, httpClient, cancellationToken: TestContext.CancellationTokenSource.Token);
+
+        loaded.Channel.Title.ShouldBe("caf\uFFFD",
+            "PINS TODAY: a default settings object forces UTF-8 over a correct iso-8859-1 declaration. "
+            + "Inverted at Phase 6.");
+        fetched.Channel.Title.ShouldBe("café",
+            "INVARIANT: the fetch path treats the same default as 'unset' and sniffs, which is right here.");
     }
 
     private HttpClient Client(string body)

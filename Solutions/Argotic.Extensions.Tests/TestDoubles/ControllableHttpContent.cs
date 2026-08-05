@@ -80,9 +80,74 @@ internal sealed class ControllableHttpContent(byte[] body, bool declareLength = 
     }
 
     /// <inheritdoc/>
+    /// <remarks>
+    ///     Overridden so that reading can be <i>abandoned</i>. The base implementation serializes the
+    ///     whole body into a buffer and hands back a stream over it, so <see cref="BytesRead"/> would
+    ///     reach the full length no matter what the reader did — and a test for "stopped part-way
+    ///     through" would pass or fail for reasons having nothing to do with the code under test.
+    ///     This yields bytes on demand instead, and counts what is actually taken.
+    /// </remarks>
+    protected override Task<Stream> CreateContentReadStreamAsync()
+        => Task.FromResult<Stream>(new CountingStream(this, body));
+
+    /// <inheritdoc/>
     protected override bool TryComputeLength(out long length)
     {
         length = declareLength ? body.Length : 0;
         return declareLength;
+    }
+
+    /// <summary>
+    /// Serves the body a chunk at a time, recording how much was taken before the reader stopped.
+    /// </summary>
+    private sealed class CountingStream(ControllableHttpContent owner, byte[] content) : Stream
+    {
+        private int position;
+
+        public override bool CanRead => true;
+
+        public override bool CanSeek => false;
+
+        public override bool CanWrite => false;
+
+        public override long Length => throw new NotSupportedException();
+
+        public override long Position
+        {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
+        }
+
+        public override void Flush()
+        {
+        }
+
+        public override int Read(byte[] buffer, int offset, int count)
+        {
+            ArgumentNullException.ThrowIfNull(buffer);
+            return this.Read(buffer.AsSpan(offset, count));
+        }
+
+        public override int Read(Span<byte> buffer)
+        {
+            int available = content.Length - this.position;
+            int take = Math.Min(buffer.Length, available);
+            if (take <= 0)
+            {
+                return 0;
+            }
+
+            content.AsSpan(this.position, take).CopyTo(buffer);
+            this.position += take;
+            owner.WasRead = true;
+            owner.BytesRead += take;
+            return take;
+        }
+
+        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+
+        public override void SetLength(long value) => throw new NotSupportedException();
+
+        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
     }
 }

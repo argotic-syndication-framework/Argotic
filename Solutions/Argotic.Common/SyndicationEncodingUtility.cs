@@ -396,6 +396,84 @@ public static partial class SyndicationEncodingUtility
     }
 
     /// <summary>
+    /// Drains a response body asynchronously, refusing to exceed <paramref name="maxBytes"/>.
+    /// </summary>
+    /// <param name="response">The response whose body to read.</param>
+    /// <param name="maxBytes">The most this will accept. Pass <see cref="SyndicationResourceLoadSettings.Unbounded"/> for no limit.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>The drained body. The caller owns it and must dispose it.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     The rule this exists to enforce: <b><see cref="HttpCompletionOption.ResponseHeadersRead"/> is
+    ///     correct exactly where the body is consumed asynchronously or not at all.</b> Every site that
+    ///     hands the stream to a synchronous reader — an <c>XPathDocument</c>, an <c>XmlReader</c> over a
+    ///     <see cref="Stream"/>, <c>ReadToEnd</c>, <c>CopyTo</c> — must come through here first, or it
+    ///     performs a blocking drain of a socket on a thread-pool thread.
+    ///     </para>
+    ///     <para>
+    ///     The declared-length check is <b>an optimisation, not the defence</b>. Automatic decompression
+    ///     strips <c>Content-Length</c> from every response it decompresses, so on a compressing origin
+    ///     it never fires at all. The streaming counter below it is the only guaranteed bound, and it
+    ///     counts <i>decompressed</i> bytes — which is the right unit, because a few kilobytes of gzip
+    ///     can expand to a megabyte.
+    ///     </para>
+    ///     <para>
+    ///     The limit is checked <b>before</b> each chunk is written, so the buffer never holds more than
+    ///     the cap. Reading to the end and then comparing totals would have spent the memory the cap
+    ///     exists to save.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
+    /// <exception cref="SyndicationContentTooLargeException">The body exceeds <paramref name="maxBytes"/>.</exception>
+    internal static async Task<PooledContentBuffer> ReadContentAsync(
+        HttpResponseMessage response,
+        long maxBytes,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(response);
+
+        long? declaredLength = response.Content.Headers.ContentLength;
+        if (declaredLength is { } declared && declared > maxBytes)
+        {
+            throw new SyndicationContentTooLargeException(maxBytes, declared);
+        }
+
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+
+        // Nulled once ownership passes to the caller, so the finally disposes it on every failure
+        // path and on none of the success path.
+        PooledContentBuffer? sink = PooledContentBuffer.ForDeclaredLength(declaredLength);
+        byte[] chunk = ArrayPool<byte>.Shared.Rent(81_920);
+
+        try
+        {
+            long total = 0;
+            int read;
+            while ((read = await stream.ReadAsync(chunk.AsMemory(), cancellationToken).ConfigureAwait(false)) > 0)
+            {
+                total += read;
+                if (total > maxBytes)
+                {
+                    // Thrown before the write, so the sink never holds more than the cap. Unwinding
+                    // disposes the response stream, which aborts the connection rather than returning
+                    // an undrained one to the pool - so nothing further is read from the socket.
+                    throw new SyndicationContentTooLargeException(maxBytes, declaredLength);
+                }
+
+                sink.Write(chunk.AsSpan(0, read));
+            }
+
+            PooledContentBuffer drained = sink;
+            sink = null;
+            return drained;
+        }
+        finally
+        {
+            sink?.Dispose();
+            ArrayPool<byte>.Shared.Return(chunk);
+        }
+    }
+    /// <summary>
     /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> asynchronously using the shared <see cref="HttpClient"/>.
     /// </summary>
     /// <param name="source">A <see cref="Uri"/> that points to the location of the XML data to be navigated by the created <see cref="XPathNavigator"/>.</param>
@@ -532,6 +610,44 @@ public static partial class SyndicationEncodingUtility
 
         using HttpRequestMessage request = CreateHttpRequestMessage(source, requestOptions);
         return await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+    }
+    /// <summary>
+    /// Sends a request, choosing when the returned task completes.
+    /// </summary>
+    /// <param name="source">The resource to request.</param>
+    /// <param name="httpClient">The client to send with.</param>
+    /// <param name="requestOptions">Request-level options. This value can be <b>null</b>.</param>
+    /// <param name="completionOption">When the returned task completes.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>The response. The caller owns it.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <c>internal</c> rather than public, and no default on the trailing parameters, so that
+    ///     <c>SendHttpRequestAsync(uri, client)</c> still binds the public overload uniquely. Nothing
+    ///     outside this assembly needs to choose a completion option yet, and adding an optional
+    ///     parameter to the public method instead would have been a binary break for a published
+    ///     library.
+    ///     </para>
+    ///     <para>
+    ///     <see cref="HttpCompletionOption.ResponseHeadersRead"/> hands back a live network stream, so
+    ///     the caller becomes responsible for reading it — asynchronously, and under a bound. See
+    ///     <see cref="ReadContentAsync"/>.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    internal static async Task<HttpResponseMessage> SendHttpRequestAsync(
+        Uri source,
+        HttpClient httpClient,
+        SyndicationRequestOptions? requestOptions,
+        HttpCompletionOption completionOption,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        using HttpRequestMessage request = CreateHttpRequestMessage(source, requestOptions);
+        return await httpClient.SendAsync(request, completionOption, cancellationToken).ConfigureAwait(false);
     }
 
     /// <summary>

@@ -778,7 +778,10 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(uri);
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        // Headers-read: the common case answers from a header and never touches the body, so downloading
+        // a whole page to read one header was pure waste. The fall-through now drains explicitly.
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(
+            uri, httpClient, null, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
 
         if (response.Headers.TryGetValues("X-Pingback", out var values))
@@ -792,8 +795,9 @@ public static class SyndicationDiscoveryUtility
             }
         }
 
-        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
-        using StreamReader reader = new(stream);
+        using PooledContentBuffer body = await SyndicationEncodingUtility.ReadContentAsync(
+            response, SyndicationContentLengthLimits.Discovery, cancellationToken).ConfigureAwait(false);
+        using StreamReader reader = new(body.AsStream());
         string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
         HtmlAnchor? link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
 
@@ -868,7 +872,10 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(uri);
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        // Headers-read: the common case answers from a header and never touches the body, so downloading
+        // a whole page to read one header was pure waste. The fall-through now drains explicitly.
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(
+            uri, httpClient, null, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
 
         if (response.Headers.TryGetValues("X-Pingback", out var values))
@@ -882,8 +889,9 @@ public static class SyndicationDiscoveryUtility
             }
         }
 
-        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
-        using StreamReader reader = new(stream);
+        using PooledContentBuffer body = await SyndicationEncodingUtility.ReadContentAsync(
+            response, SyndicationContentLengthLimits.Discovery, cancellationToken).ConfigureAwait(false);
+        using StreamReader reader = new(body.AsStream());
         string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
         HtmlAnchor? link = SyndicationDiscoveryUtility.ExtractPingbackNotificationServer(content);
 

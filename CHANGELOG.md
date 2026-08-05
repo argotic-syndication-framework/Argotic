@@ -69,6 +69,13 @@ Behaviour changes that fix no defect and break no documented contract, but that 
   to. `SyndicationResourceLoadSettings.Unbounded` asks for no limit, and
   `SyndicationContentLengthLimits` publishes the per-format defaults: 8 MiB for a feed, 64 MiB for a
   sitemap or a whole-site export, 2 MiB for a discovery fetch
+- **Response size caps**: `SyndicationResourceLoadSettings.MaxResponseContentLength` bounds how much
+  of an HTTP response a load will accept, counted in decompressed bytes. `null` — the default —
+  means the loading type's format default rather than no limit, so a caller who constructs a settings
+  object for an unrelated reason does not silently lose the allowance their document type is entitled
+  to. `SyndicationResourceLoadSettings.Unbounded` asks for no limit, and
+  `SyndicationContentLengthLimits` publishes the per-format defaults: 8 MiB for a feed, 64 MiB for a
+  sitemap or a whole-site export, 2 MiB for a discovery fetch
 - **`SyndicationEncodingUtility.ApplyArgoticHandlerDefaults(SocketsHttpHandler)`**: applies the handler
   settings the shared client uses, so a caller building their own `HttpClient` or configuring one
   through `IHttpClientFactory` gets the same pipeline without having to know what it consists of

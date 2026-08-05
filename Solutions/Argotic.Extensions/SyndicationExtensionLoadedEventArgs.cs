@@ -14,19 +14,8 @@ namespace Argotic.Extensions;
 /// <seealso cref="ISyndicationExtension"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XmlReader)"/>
-[Serializable]
 public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<SyndicationExtensionLoadedEventArgs>, IEquatable<SyndicationExtensionLoadedEventArgs>, IComparisonOperators
 {
-
-    /// <summary>
-    /// Private member to hold instance of event with no event data.
-    /// </summary>
-    private static readonly SyndicationExtensionLoadedEventArgs emptyEventArguments = new();
-
-    /// <summary>
-    /// Private member to hold the syndication extension that resulted from the load operation.
-    /// </summary>
-    private readonly ISyndicationExtension? eventExtension;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class.
@@ -60,7 +49,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     {
         ArgumentNullException.ThrowIfNull(extension);
 
-        eventExtension = extension;
+        Extension = extension;
     }
 
     /// <summary>
@@ -68,7 +57,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// </summary>
     /// <value>An uninitialized instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class.</value>
     /// <remarks>The value of Empty is a read-only instance of <see cref="SyndicationExtensionLoadedEventArgs"/> equivalent to the result of calling the <see cref="SyndicationExtensionLoadedEventArgs()"/> constructor.</remarks>
-    public static new SyndicationExtensionLoadedEventArgs Empty => emptyEventArguments;
+    public static new SyndicationExtensionLoadedEventArgs Empty { get; } = new();
 
     /// <summary>
     /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
@@ -76,9 +65,6 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// <value>
     ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
     /// </value>
-    // [field:] targets the compiler-generated backing field, so the auto-property keeps the
-    // [NonSerialized] that the hand-written field used to carry (C# 7.3).
-    [field: NonSerialized]
     public XPathNavigator? Data { get; }
 
     /// <summary>
@@ -87,7 +73,7 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     /// <value>
     ///     The <see cref="ISyndicationExtension"/> that resulted from the load operation. 
     /// </value>
-    public ISyndicationExtension? Extension => eventExtension;
+    public ISyndicationExtension? Extension { get; }
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationExtensionLoadedEventArgs"/>.

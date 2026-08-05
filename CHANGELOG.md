@@ -22,6 +22,12 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 - **HTTP stack**: Retrieval moved from `WebRequest`/`HttpWebRequest` to `HttpClient`. Failed requests now raise
   `HttpRequestException` rather than `WebException`, and cancellation surfaces as `OperationCanceledException`
   rather than a timeout-flavoured `WebException`
+- **Binary serialization**: Removed `[Serializable]` from all 179 types, and the three `[NonSerialized]`
+  field annotations that accompanied them. `Type.IsSerializable` now returns `false` for every Argotic
+  type. Nothing in the library implemented `ISerializable` or used `SerializationInfo`, and the only
+  runtime consumer of the attribute — `BinaryFormatter` — was removed from the platform in .NET 9
+  (`SYSLIB0011`/`SYSLIB0050`). `IXmlSerializable`, `XmlSerializer` and the `Save`/`Load` XML round-trip
+  are unaffected: they never depended on `[Serializable]`
 
 ### New Features
 

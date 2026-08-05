@@ -8,7 +8,6 @@ namespace Argotic.Extensions.Core;
 /// <seealso cref="SimpleListSort.DataType"/>
 /// <seealso cref="SimpleListSort.DataTypeAsString(SimpleListDataType)"/>
 /// <seealso cref="SimpleListSort.DataTypeByName(string)"/>
-[Serializable]
 public enum SimpleListDataType
 {
     /// <summary>

@@ -6,7 +6,6 @@ namespace Argotic.Extensions.Core;
 /// Indicates the type of media that a restriction applies to.
 /// </summary>
 /// <seealso cref="YahooMediaRestriction"/>
-[Serializable]
 public enum YahooMediaRestrictionType
 {
     /// <summary>

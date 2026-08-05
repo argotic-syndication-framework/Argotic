@@ -19,7 +19,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RssCategory : IComparable<RssCategory>, IEquatable<RssCategory>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 

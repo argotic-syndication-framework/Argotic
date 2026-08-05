@@ -16,7 +16,6 @@ namespace Argotic.Extensions.Core;
 ///         <see cref="YahooMediaText"/> objects can have overlapping start and end times.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class YahooMediaText : IComparable<YahooMediaText>, IEquatable<YahooMediaText>, IComparisonOperators
 {
 

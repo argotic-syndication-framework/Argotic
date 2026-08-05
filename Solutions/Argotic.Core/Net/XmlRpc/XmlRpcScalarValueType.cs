@@ -8,7 +8,6 @@ namespace Argotic.Net;
 /// </summary>
 /// <seealso cref="XmlRpcScalarValue.ValueType"/>
 /// <seealso cref="XmlRpcScalarValue"/>
-[Serializable]
 [SuppressMessage(
     "Naming",
     "CA1720:Identifier contains type name",

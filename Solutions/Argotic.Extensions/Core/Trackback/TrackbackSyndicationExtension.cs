@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class TrackbackSyndicationExtension : SyndicationExtension, IComparable<TrackbackSyndicationExtension>, IEquatable<TrackbackSyndicationExtension>, IComparisonOperators
 {
 

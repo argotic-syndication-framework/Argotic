@@ -12,18 +12,8 @@ namespace Argotic.Common;
 /// <seealso cref="ISyndicationResource"/>
 /// <seealso cref="ISyndicationResource.Load(System.Xml.XPath.IXPathNavigable)"/>
 /// <seealso cref="ISyndicationResource.Load(System.Xml.XmlReader)"/>
-[Serializable]
 public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<SyndicationResourceLoadedEventArgs>, IEquatable<SyndicationResourceLoadedEventArgs>, IComparisonOperators
 {
-    /// <summary>
-    /// Private member to hold instance of event with no event data.
-    /// </summary>
-    private static readonly SyndicationResourceLoadedEventArgs emptyEventArguments = new();
-
-    /// <summary>
-    /// Private member to hold the URI that the syndication resource information was retrieved from.
-    /// </summary>
-    private readonly Uri? eventSource;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.
@@ -57,7 +47,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        eventSource = source;
+        Source = source;
     }
 
     /// <summary>
@@ -65,7 +55,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// </summary>
     /// <value>An uninitialized instance of the <see cref="SyndicationResourceLoadedEventArgs"/> class.</value>
     /// <remarks>The value of Empty is a read-only instance of <see cref="SyndicationResourceLoadedEventArgs"/> equivalent to the result of calling the <see cref="SyndicationResourceLoadedEventArgs()"/> constructor.</remarks>
-    public static new SyndicationResourceLoadedEventArgs Empty => emptyEventArguments;
+    public static new SyndicationResourceLoadedEventArgs Empty { get; } = new();
 
     /// <summary>
     /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication resource.
@@ -73,9 +63,6 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     /// <value>
     ///     A read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication resource.
     /// </value>
-    // [field:] targets the compiler-generated backing field, so the auto-property keeps the
-    // [NonSerialized] that the hand-written field used to carry (C# 7.3).
-    [field: NonSerialized]
     public XPathNavigator? Data { get; }
 
     /// <summary>
@@ -85,7 +72,7 @@ public class SyndicationResourceLoadedEventArgs : EventArgs, IComparable<Syndica
     ///     The <see cref="Uri"/> of the Internet resource that the syndication resource was loaded from.
     ///     If the <see cref="ISyndicationResource"/> was not loaded by an Internet resource, returns <b>null</b>.
     /// </value>
-    public Uri? Source => eventSource;
+    public Uri? Source { get; }
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadedEventArgs"/>.

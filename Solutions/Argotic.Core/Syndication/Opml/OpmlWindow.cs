@@ -8,7 +8,6 @@ namespace Argotic.Syndication;
 /// <summary>
 /// Represents the pixel location of the edges of the outline window for a <see cref="OpmlDocument"/>.
 /// </summary>
-[Serializable]
 public class OpmlWindow : IComparable<OpmlWindow>, IEquatable<OpmlWindow>, IComparisonOperators, IXmlWritable
 {
     /// <summary>

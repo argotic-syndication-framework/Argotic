@@ -18,7 +18,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RssSource : IComparable<RssSource>, IEquatable<RssSource>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 

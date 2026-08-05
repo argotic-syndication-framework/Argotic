@@ -19,7 +19,6 @@ namespace Argotic.Syndication.Specialized;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class ApmlSource : IComparable<ApmlSource>, IEquatable<ApmlSource>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
     /// <summary>

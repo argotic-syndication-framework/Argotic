@@ -8,7 +8,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="AtomPublishingEditedSyndicationExtension"/>.
 /// </summary>
-[Serializable]
 public class AtomPublishingEditedSyndicationExtensionContext
 {
 

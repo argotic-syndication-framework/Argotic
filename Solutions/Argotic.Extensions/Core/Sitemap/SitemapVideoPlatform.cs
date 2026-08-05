@@ -10,7 +10,6 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 [Flags]
-[Serializable]
 public enum SitemapVideoPlatform
 {
     /// <summary>

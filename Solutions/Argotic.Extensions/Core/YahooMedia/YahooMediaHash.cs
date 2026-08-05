@@ -15,7 +15,6 @@ namespace Argotic.Extensions.Core;
 ///         This entity can be associated multiple times to a media object as long as each <see cref="YahooMediaHash"/> instance has a different <see cref="Algorithm"/>.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class YahooMediaHash : IComparable<YahooMediaHash>, IEquatable<YahooMediaHash>, IComparisonOperators
 {
     /// <summary>

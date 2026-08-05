@@ -39,7 +39,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class AtomEntry : ISyndicationResource, IAtomCommonObjectAttributes, IExtensibleSyndicationObject
 {
     /// <summary>

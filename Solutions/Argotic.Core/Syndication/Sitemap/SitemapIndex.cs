@@ -23,7 +23,6 @@ namespace Argotic.Syndication;
 ///         large sites with many pages.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class SitemapIndex : ISyndicationResource, IExtensibleSyndicationObject
 {
     /// <summary>

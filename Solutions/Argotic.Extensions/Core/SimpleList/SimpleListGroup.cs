@@ -21,7 +21,6 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso cref="SimpleListSyndicationExtensionContext.Grouping"/>
-[Serializable]
 public class SimpleListGroup : IComparable<SimpleListGroup>, IEquatable<SimpleListGroup>, IComparisonOperators
 {
 

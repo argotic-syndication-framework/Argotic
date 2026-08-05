@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class LiveJournalSyndicationExtension : SyndicationExtension, IComparable<LiveJournalSyndicationExtension>, IEquatable<LiveJournalSyndicationExtension>, IComparisonOperators
 {
     /// <summary>

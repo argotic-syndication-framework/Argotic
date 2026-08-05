@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class WellFormedWebCommentsSyndicationExtension : SyndicationExtension, IComparable<WellFormedWebCommentsSyndicationExtension>, IEquatable<WellFormedWebCommentsSyndicationExtension>, IComparisonOperators
 {
 

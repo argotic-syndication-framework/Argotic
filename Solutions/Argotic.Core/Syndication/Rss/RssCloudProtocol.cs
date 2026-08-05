@@ -9,7 +9,6 @@ namespace Argotic.Syndication;
 /// <remarks>
 ///     For more information about the RssCloud application programming interface, see <a href="http://www.rssboard.org/rsscloud-interface">http://www.rssboard.org/rsscloud-interface</a>.
 /// </remarks>
-[Serializable]
 public enum RssCloudProtocol
 {
     /// <summary>

@@ -7,24 +7,8 @@ namespace Argotic.Syndication;
 /// Represents a format agnostic view of the discrete content for a syndication feed.
 /// </summary>
 /// <seealso cref="GenericSyndicationFeed.Items"/>
-[Serializable]
 public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEquatable<GenericSyndicationItem>, IComparisonOperators
 {
-
-    /// <summary>
-    /// Private member to hold the title of the syndication item.
-    /// </summary>
-    private string itemTitle = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the summary of the syndication item.
-    /// </summary>
-    private string itemSummary = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the publication date of the item.
-    /// </summary>
-    private DateTime itemPublishedOn = DateTime.MinValue;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationItem"/> class using the supplied <see cref="AtomEntry"/>.
@@ -68,7 +52,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     ///     the <see cref="AtomEntry.PublishedOn"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
     ///     the <see cref="AtomEntry.UpdatedOn"/> property value will be used if present.
     /// </remarks>
-    public DateTime PublishedOn => itemPublishedOn;
+    public DateTime PublishedOn { get; private set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets a short summary, abstract, or excerpt for this item.
@@ -82,7 +66,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     ///     the <see cref="AtomEntry.Summary"/> property value if present. If no summary was specified for the <see cref="AtomEntry"/>,
     ///     the <see cref="AtomEntry.Content"/> property value will be used if present.
     /// </remarks>
-    public string Summary => itemSummary;
+    public string Summary { get; private set; } = string.Empty;
 
     /// <summary>
     /// Gets the human-readable title for this item.
@@ -91,7 +75,7 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
     ///     The human-readable title for this item.
     ///     The default value is an <b>empty</b> string, which indicates that no title was specified.
     /// </value>
-    public string Title => itemTitle;
+    public string Title { get; private set; } = string.Empty;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationItem"/>.
@@ -180,25 +164,25 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
 
         if (entry.Title?.Content is { Length: > 0 } title)
         {
-            itemTitle = title.Trim();
+            Title = title.Trim();
         }
 
         if (entry.PublishedOn != DateTime.MinValue)
         {
-            itemPublishedOn = entry.PublishedOn;
+            PublishedOn = entry.PublishedOn;
         }
         else if (entry.UpdatedOn != DateTime.MinValue)
         {
-            itemPublishedOn = entry.UpdatedOn;
+            PublishedOn = entry.UpdatedOn;
         }
 
         if (entry.Summary?.Content is { Length: > 0 } summaryContent)
         {
-            itemSummary = summaryContent.Trim();
+            Summary = summaryContent.Trim();
         }
         else if (entry.Content?.Content is { Length: > 0 } contentText)
         {
-            itemSummary = contentText.Trim();
+            Summary = contentText.Trim();
         }
 
         foreach (AtomCategory category in entry.Categories)
@@ -218,17 +202,17 @@ public class GenericSyndicationItem : IComparable<GenericSyndicationItem>, IEqua
         ArgumentNullException.ThrowIfNull(item);
         if (!string.IsNullOrEmpty(item.Title))
         {
-            itemTitle = item.Title.Trim();
+            Title = item.Title.Trim();
         }
 
         if (item.PublicationDate != DateTime.MinValue)
         {
-            itemPublishedOn = item.PublicationDate;
+            PublishedOn = item.PublicationDate;
         }
 
         if (!string.IsNullOrEmpty(item.Description))
         {
-            itemSummary = item.Description.Trim();
+            Summary = item.Description.Trim();
         }
 
         foreach (RssCategory category in item.Categories)

@@ -18,7 +18,6 @@ namespace Argotic.Syndication;
 ///         A Sitemap index entry encapsulates the location of a sitemap and optionally when it was last modified.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class SitemapIndexEntry : IComparable<SitemapIndexEntry>, IEquatable<SitemapIndexEntry>, IComparisonOperators, IXmlWritable
 {
 

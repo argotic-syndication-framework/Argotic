@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class DublinCoreMetadataTermsSyndicationExtension : SyndicationExtension, IComparable<DublinCoreMetadataTermsSyndicationExtension>, IEquatable<DublinCoreMetadataTermsSyndicationExtension>, IComparisonOperators
 {
 

@@ -11,7 +11,6 @@ namespace Argotic.Net;
 /// </summary>
 /// <seealso cref="XmlRpcMessage.Parameters"/>
 /// <seealso cref="IXmlRpcValue"/>
-[Serializable]
 public class XmlRpcScalarValue : IXmlRpcValue, IComparable<XmlRpcScalarValue>, IEquatable<XmlRpcScalarValue>, IComparisonOperators
 {
     /// <summary>

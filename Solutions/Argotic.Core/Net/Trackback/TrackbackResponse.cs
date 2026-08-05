@@ -17,18 +17,8 @@ namespace Argotic.Net;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<TrackbackResponse>, IComparisonOperators
 {
-    /// <summary>
-    /// Private member to hold a value indicating if the Trackback ping request failed.
-    /// </summary>
-    private bool responseHasError;
-
-    /// <summary>
-    /// Private member to hold information about the cause of the Trackback ping request failure.
-    /// </summary>
-    private string? responseErrorMessage;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="TrackbackResponse"/> class.
@@ -53,7 +43,7 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     {
         ArgumentException.ThrowIfNullOrEmpty(errorMessage);
 
-        responseErrorMessage = errorMessage;
+        ErrorMessage = errorMessage;
     }
 
     /// <summary>
@@ -104,13 +94,13 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
     /// Gets information about cause of the Trackback ping request failure.
     /// </summary>
     /// <value>Information about the cause of the Trackback ping request failure. The default value is an <b>empty</b> string.</value>
-    public string? ErrorMessage => responseErrorMessage;
+    public string? ErrorMessage { get; private set; }
 
     /// <summary>
     /// Gets a value indicating if the Trackback ping request failed.
     /// </summary>
     /// <value><b>true</b> if the Trackback ping response contains an error indicator; Otherwise, <b>false</b>. The default value is <b>false</b>.</value>
-    public bool HasError => responseHasError;
+    public bool HasError { get; private set; }
 
     /// <summary>
     /// Loads this <see cref="TrackbackResponse"/> using the supplied <see cref="XPathNavigator"/>.
@@ -136,19 +126,19 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
             {
                 if (string.Equals(errorNavigator.Value, "0", StringComparison.OrdinalIgnoreCase))
                 {
-                    responseHasError = false;
+                    HasError = false;
                     wasLoaded = true;
                 }
                 else if (string.Equals(errorNavigator.Value, "1", StringComparison.OrdinalIgnoreCase))
                 {
-                    responseHasError = true;
+                    HasError = true;
                     wasLoaded = true;
                 }
             }
 
             if (messageNavigator is not null)
             {
-                responseErrorMessage = !string.IsNullOrEmpty(messageNavigator.Value) ? messageNavigator.Value : string.Empty;
+                ErrorMessage = !string.IsNullOrEmpty(messageNavigator.Value) ? messageNavigator.Value : string.Empty;
                 wasLoaded = true;
             }
         }

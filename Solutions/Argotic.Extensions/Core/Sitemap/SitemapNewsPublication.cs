@@ -15,7 +15,6 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-news/0.9/sitemap-news.xsd">News Sitemap 0.9 Schema</seealso>
-[Serializable]
 public class SitemapNewsPublication : IComparable<SitemapNewsPublication>, IEquatable<SitemapNewsPublication>, IComparisonOperators
 {
     /// <summary>

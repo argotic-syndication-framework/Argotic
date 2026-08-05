@@ -19,13 +19,8 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
-    /// <summary>
-    /// Private member to hold the URL of the RSS specification implemented by the software that created the feed.
-    /// </summary>
-    private static readonly Uri channelDocumentation = new("http://www.rssboard.org/rss-specification");
 
     /// <summary>
     /// Initializes a new instance of the <see cref="RssChannel"/> class.
@@ -120,7 +115,7 @@ public class RssChannel : IComparable<RssChannel>, IEquatable<RssChannel>, IExte
     /// Gets the URL of the RSS specification implemented by the software that created this feed.
     /// </summary>
     /// <value>A <see cref="Uri"/> that represents the URL of the RSS specification implemented by the software that created this feed.</value>
-    public static Uri Documentation => channelDocumentation;
+    public static Uri Documentation { get; } = new("http://www.rssboard.org/rss-specification");
 
     /// <summary>
     /// Gets or sets a value that credits the software that created this feed.

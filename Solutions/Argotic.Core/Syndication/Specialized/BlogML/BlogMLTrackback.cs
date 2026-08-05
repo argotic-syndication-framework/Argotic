@@ -10,7 +10,6 @@ namespace Argotic.Syndication.Specialized;
 /// Represents a trackback to a post.
 /// </summary>
 /// <seealso cref="BlogMLPost.Trackbacks"/>
-[Serializable]
 public class BlogMLTrackback : IBlogMLCommonObject, IComparable<BlogMLTrackback>, IEquatable<BlogMLTrackback>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
 

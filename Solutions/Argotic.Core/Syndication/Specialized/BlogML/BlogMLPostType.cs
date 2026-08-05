@@ -5,7 +5,6 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents the permissible types of a web log post.
 /// </summary>
-[Serializable]
 public enum BlogMLPostType
 {
     /// <summary>

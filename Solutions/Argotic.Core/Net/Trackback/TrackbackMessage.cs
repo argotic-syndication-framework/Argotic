@@ -17,7 +17,6 @@ namespace Argotic.Net;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class TrackbackMessage : IComparable<TrackbackMessage>, IEquatable<TrackbackMessage>, IComparisonOperators
 {
     /// <summary>

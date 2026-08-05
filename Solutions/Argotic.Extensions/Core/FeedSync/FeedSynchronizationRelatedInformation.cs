@@ -14,7 +14,6 @@ namespace Argotic.Extensions.Core;
 ///     which they might also wish to subscribe to.
 /// </remarks>
 /// <seealso cref="FeedSynchronizationSyndicationExtensionContext"/>
-[Serializable]
 public class FeedSynchronizationRelatedInformation : IComparable<FeedSynchronizationRelatedInformation>, IEquatable<FeedSynchronizationRelatedInformation>, IComparisonOperators
 {
 

@@ -7,7 +7,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="WellFormedWebCommentsSyndicationExtension"/>.
 /// </summary>
-[Serializable]
 public class WellFormedWebCommentsSyndicationExtensionContext
 {
 

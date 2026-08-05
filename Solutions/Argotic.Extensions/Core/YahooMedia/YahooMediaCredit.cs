@@ -14,7 +14,6 @@ namespace Argotic.Extensions.Core;
 ///         and several entities can have the same role. These should appear as distinct <see cref="YahooMediaCredit"/> entities.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class YahooMediaCredit : IComparable<YahooMediaCredit>, IEquatable<YahooMediaCredit>, IComparisonOperators
 {
 

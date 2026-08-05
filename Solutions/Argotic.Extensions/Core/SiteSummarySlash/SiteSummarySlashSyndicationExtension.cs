@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class SiteSummarySlashSyndicationExtension : SyndicationExtension, IComparable<SiteSummarySlashSyndicationExtension>, IEquatable<SiteSummarySlashSyndicationExtension>, IComparisonOperators
 {
 

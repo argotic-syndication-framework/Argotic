@@ -9,7 +9,6 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents machine or human readable text.
 /// </summary>
-[Serializable]
 public class BlogMLTextConstruct : IComparable<BlogMLTextConstruct>, IEquatable<BlogMLTextConstruct>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritableWithElementName
 {
     /// <summary>

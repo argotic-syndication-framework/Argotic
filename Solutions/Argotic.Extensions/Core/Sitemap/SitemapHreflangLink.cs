@@ -15,7 +15,6 @@ namespace Argotic.Extensions.Core;
 ///         or for different regions.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class SitemapHreflangLink : IComparable<SitemapHreflangLink>, IEquatable<SitemapHreflangLink>, IComparisonOperators
 {
     /// <summary>

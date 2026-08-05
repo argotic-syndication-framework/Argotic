@@ -27,7 +27,6 @@ namespace Argotic.Syndication.Specialized;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class ApmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 {
 

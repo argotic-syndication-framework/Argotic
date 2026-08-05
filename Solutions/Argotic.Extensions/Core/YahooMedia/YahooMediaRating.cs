@@ -8,7 +8,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Represents the permissible audience for a media object.
 /// </summary>
-[Serializable]
 public class YahooMediaRating : IComparable<YahooMediaRating>, IEquatable<YahooMediaRating>, IComparisonOperators
 {
 

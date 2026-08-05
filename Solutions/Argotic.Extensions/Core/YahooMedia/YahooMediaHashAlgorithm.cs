@@ -6,7 +6,6 @@ namespace Argotic.Extensions.Core;
 /// Represents the hashing algorithm used to create a hash value.
 /// </summary>
 /// <seealso cref="YahooMediaHash"/>
-[Serializable]
 public enum YahooMediaHashAlgorithm
 {
     /// <summary>

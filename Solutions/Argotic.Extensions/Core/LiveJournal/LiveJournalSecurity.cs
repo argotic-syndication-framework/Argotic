@@ -9,7 +9,6 @@ namespace Argotic.Extensions.Core;
 /// Represents the access level of a LiveJournal entry.
 /// </summary>
 /// <seealso cref="LiveJournalSyndicationExtensionContext.Security"/>
-[Serializable]
 public class LiveJournalSecurity : IComparable<LiveJournalSecurity>, IEquatable<LiveJournalSecurity>, IComparisonOperators
 {
 

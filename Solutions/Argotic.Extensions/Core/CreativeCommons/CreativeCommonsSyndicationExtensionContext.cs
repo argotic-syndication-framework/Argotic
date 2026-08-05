@@ -6,7 +6,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="CreativeCommonsSyndicationExtension"/>.
 /// </summary>
-[Serializable]
 public class CreativeCommonsSyndicationExtensionContext
 {
     /// <summary>

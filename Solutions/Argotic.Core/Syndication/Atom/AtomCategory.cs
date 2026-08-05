@@ -20,7 +20,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class AtomCategory : IAtomCommonObjectAttributes, IComparable<AtomCategory>, IEquatable<AtomCategory>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
     /// <summary>

@@ -28,7 +28,6 @@ namespace Argotic.Publishing;
 /// </remarks>
 /// <seealso cref="AtomMemberResources.Accepts"/>
 /// <seealso cref="AtomMemberResources"/>
-[Serializable]
 public class AtomAcceptedMediaRange : IComparable<AtomAcceptedMediaRange>, IEquatable<AtomAcceptedMediaRange>, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparisonOperators
 {
     /// <summary>

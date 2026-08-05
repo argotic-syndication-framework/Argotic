@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class PingbackSyndicationExtension : SyndicationExtension, IComparable<PingbackSyndicationExtension>, IEquatable<PingbackSyndicationExtension>, IComparisonOperators
 {
 

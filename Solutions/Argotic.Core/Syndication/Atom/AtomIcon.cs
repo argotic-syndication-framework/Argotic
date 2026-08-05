@@ -22,7 +22,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class AtomIcon : IAtomCommonObjectAttributes, IComparable<AtomIcon>, IEquatable<AtomIcon>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
     /// <summary>

@@ -9,7 +9,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="SiteSummaryUpdateSyndicationExtension"/>.
 /// </summary>
-[Serializable]
 public class SiteSummaryUpdateSyndicationExtensionContext
 {
 

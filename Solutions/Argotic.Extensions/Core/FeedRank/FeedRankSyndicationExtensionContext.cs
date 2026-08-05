@@ -8,7 +8,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="FeedRankSyndicationExtension"/>.
 /// </summary>
-[Serializable]
 public class FeedRankSyndicationExtensionContext
 {
 

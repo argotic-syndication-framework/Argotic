@@ -20,38 +20,8 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class GenericSyndicationFeed
 {
-    /// <summary>
-    /// Private member to hold the underlying syndication resource that is being abstracted by this generic feed.
-    /// </summary>
-    private ISyndicationResource? feedResource;
-
-    /// <summary>
-    /// Private member to hold the type of syndication format that the syndication feed implements.
-    /// </summary>
-    private SyndicationContentFormat feedFormat = SyndicationContentFormat.None;
-
-    /// <summary>
-    /// Private member to hold the title of the syndication feed.
-    /// </summary>
-    private string feedTitle = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the description of the syndication feed.
-    /// </summary>
-    private string feedDescription = string.Empty;
-
-    /// <summary>
-    /// Private member to hold a date-time indicating the most recent instant in time when the feed was modified in a way the publisher considers significant.
-    /// </summary>
-    private DateTime feedLastUpdatedOn = DateTime.MinValue;
-
-    /// <summary>
-    /// Private member to hold the natural or formal language in which the feed content is written.
-    /// </summary>
-    private CultureInfo? feedLanguage;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationFeed"/> class.
@@ -87,13 +57,13 @@ public class GenericSyndicationFeed
     ///     Character data that provides a human-readable characterization or summary of this feed. 
     ///     The default value is an <b>empty</b> string, which indicates that no description was specified.
     /// </value>
-    public string Description => feedDescription;
+    public string Description { get; private set; } = string.Empty;
 
     /// <summary>
     /// Gets the <see cref="SyndicationContentFormat"/> that this syndication feed implements.
     /// </summary>
     /// <value>The <see cref="SyndicationContentFormat"/> enumeration value that indicates the type of syndication format that this syndication feed implements.</value>
-    public SyndicationContentFormat Format => feedFormat;
+    public SyndicationContentFormat Format { get; private set; } = SyndicationContentFormat.None;
 
     /// <summary>
     /// Gets the distinct content published in this feed.
@@ -111,7 +81,7 @@ public class GenericSyndicationFeed
     ///     A <see cref="CultureInfo"/> that represents the natural or formal language in which this feed's content is written. 
     ///     The default value is a <b>null</b> reference, which indicates that no natural or formal language was specified.
     /// </value>
-    public CultureInfo? Language => feedLanguage;
+    public CultureInfo? Language { get; private set; }
 
     /// <summary>
     /// Gets a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant.
@@ -120,7 +90,7 @@ public class GenericSyndicationFeed
     ///     A <see cref="DateTime"/> object that represents a date-time indicating the most recent instant in time when this feed was modified in a way the publisher considers significant. 
     ///     The default value is <see cref="DateTime.MinValue"/>, which indicates that update date was specified.
     /// </value>
-    public DateTime LastUpdatedOn => feedLastUpdatedOn;
+    public DateTime LastUpdatedOn { get; private set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets the syndication resource that is being abstracted by this generic feed.
@@ -129,7 +99,7 @@ public class GenericSyndicationFeed
     ///     An object that implements the <see cref="ISyndicationResource"/> interface that represents the actual syndication feed that is being abstracted by this generic feed. 
     ///     The default value is a <b>null</b> reference, which indicates that this generic feed has not been initialized using a syndication resource.
     /// </value>
-    public ISyndicationResource? Resource => feedResource;
+    public ISyndicationResource? Resource { get; private set; }
 
     /// <summary>
     /// Gets character data that provides the name of this feed.
@@ -138,7 +108,7 @@ public class GenericSyndicationFeed
     ///     Character data that provides the name of this feed. 
     ///     The default value is an <b>empty</b> string, which indicates that no title was specified.
     /// </value>
-    public string Title => feedTitle;
+    public string Title { get; private set; } = string.Empty;
 
     /// <summary>
     /// Asynchronously creates a new <see cref="GenericSyndicationFeed"/> instance using the specified <see cref="Uri"/>.
@@ -254,27 +224,27 @@ public class GenericSyndicationFeed
     public void Parse(AtomFeed feed)
     {
         ArgumentNullException.ThrowIfNull(feed);
-        feedResource = feed;
-        feedFormat = SyndicationContentFormat.Atom;
+        Resource = feed;
+        Format = SyndicationContentFormat.Atom;
 
         if (feed.Title?.Content is { Length: > 0 } title)
         {
-            feedTitle = title;
+            Title = title;
         }
 
         if (feed.Subtitle?.Content is { Length: > 0 } subtitle)
         {
-            feedDescription = subtitle;
+            Description = subtitle;
         }
 
         if (feed.UpdatedOn != DateTime.MinValue)
         {
-            feedLastUpdatedOn = feed.UpdatedOn;
+            LastUpdatedOn = feed.UpdatedOn;
         }
 
         if (feed.Language is not null)
         {
-            feedLanguage = feed.Language;
+            Language = feed.Language;
         }
 
         foreach (AtomCategory category in feed.Categories)
@@ -298,27 +268,27 @@ public class GenericSyndicationFeed
     public void Parse(RssFeed feed)
     {
         ArgumentNullException.ThrowIfNull(feed);
-        feedResource = feed;
-        feedFormat = SyndicationContentFormat.Rss;
+        Resource = feed;
+        Format = SyndicationContentFormat.Rss;
 
         if (!string.IsNullOrEmpty(feed.Channel.Title))
         {
-            feedTitle = feed.Channel.Title;
+            Title = feed.Channel.Title;
         }
 
         if (!string.IsNullOrEmpty(feed.Channel.Description))
         {
-            feedDescription = feed.Channel.Description;
+            Description = feed.Channel.Description;
         }
 
         if (feed.Channel.LastBuildDate != DateTime.MinValue)
         {
-            feedLastUpdatedOn = feed.Channel.LastBuildDate;
+            LastUpdatedOn = feed.Channel.LastBuildDate;
         }
 
         if (feed.Channel.Language is not null)
         {
-            feedLanguage = feed.Channel.Language;
+            Language = feed.Channel.Language;
         }
 
         foreach (RssCategory category in feed.Channel.Categories)
@@ -344,8 +314,8 @@ public class GenericSyndicationFeed
     public void Parse(OpmlDocument opmlDocument)
     {
         ArgumentNullException.ThrowIfNull(opmlDocument);
-        feedResource = opmlDocument;
-        feedFormat = SyndicationContentFormat.Opml;
+        Resource = opmlDocument;
+        Format = SyndicationContentFormat.Opml;
     }
 
     /// <summary>

@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class FeedRankSyndicationExtension : SyndicationExtension, IComparable<FeedRankSyndicationExtension>, IEquatable<FeedRankSyndicationExtension>, IComparisonOperators
 {
     /// <summary>

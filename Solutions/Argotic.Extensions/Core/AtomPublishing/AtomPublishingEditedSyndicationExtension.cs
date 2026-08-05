@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core;
 ///         A server <i>should</i> change the value of this element every time an Entry Resource or an associated Media Resource has been edited.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class AtomPublishingEditedSyndicationExtension : SyndicationExtension, IComparable<AtomPublishingEditedSyndicationExtension>, IEquatable<AtomPublishingEditedSyndicationExtension>, IComparisonOperators
 {
 

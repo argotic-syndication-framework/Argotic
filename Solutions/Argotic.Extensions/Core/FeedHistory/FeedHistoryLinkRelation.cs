@@ -9,7 +9,6 @@ namespace Argotic.Extensions.Core;
 /// Represents a link relation used to cross-reference linked feed documents.
 /// </summary>
 /// <seealso cref="FeedHistorySyndicationExtensionContext.Relations"/>
-[Serializable]
 public class FeedHistoryLinkRelation : IComparable<FeedHistoryLinkRelation>, IEquatable<FeedHistoryLinkRelation>, IComparisonOperators
 {
 

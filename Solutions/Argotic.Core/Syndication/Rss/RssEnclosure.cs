@@ -25,7 +25,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RssEnclosure : IComparable<RssEnclosure>, IEquatable<RssEnclosure>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 

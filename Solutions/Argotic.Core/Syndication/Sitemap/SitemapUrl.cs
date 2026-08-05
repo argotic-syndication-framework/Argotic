@@ -20,7 +20,6 @@ namespace Argotic.Syndication;
 ///         the date it was last modified, how frequently it changes, and its relative priority within the site.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class SitemapUrl : IComparable<SitemapUrl>, IEquatable<SitemapUrl>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 

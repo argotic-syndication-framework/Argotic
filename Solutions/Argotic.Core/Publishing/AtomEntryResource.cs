@@ -13,7 +13,6 @@ namespace Argotic.Publishing;
 /// Represents a resource whose IRI is listed in a <see cref="AtomFeed"/> and uses <see cref="AtomEntry"/> as its representation.
 /// </summary>
 /// <seealso cref="AtomEntry"/>
-[Serializable]
 public class AtomEntryResource : AtomEntry
 {
     /// <summary>

@@ -5,7 +5,6 @@ namespace Argotic.Common;
 /// </summary>
 /// <seealso cref="EnumerationMetadataAttribute"/>
 /// <seealso cref="MimeMediaTypeAttribute"/>
-[Serializable]
 public enum SyndicationContentFormat
 {
     /// <summary>

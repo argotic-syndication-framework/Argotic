@@ -18,18 +18,8 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-news/0.9/sitemap-news.xsd">News Sitemap 0.9 Schema</seealso>
-[Serializable]
 public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNewsExtension>, IEquatable<SitemapNewsExtension>, IComparisonOperators
 {
-    /// <summary>
-    /// Private member to hold the publication information.
-    /// </summary>
-    private SitemapNewsPublication? extensionPublication;
-
-    /// <summary>
-    /// Private member to hold the publication date.
-    /// </summary>
-    private DateTime extensionPublicationDate = DateTime.MinValue;
 
     /// <summary>
     /// Private member to hold the title.
@@ -51,12 +41,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     ///     A <see cref="SitemapNewsPublication"/> object that contains information about the publication
     ///     that originally published the news article. The default value is <b>null</b>.
     /// </value>
-    public SitemapNewsPublication? Publication
-    {
-        get => extensionPublication;
-
-        set => extensionPublication = value;
-    }
+    public SitemapNewsPublication? Publication { get; set; }
 
     /// <summary>
     /// Gets or sets the date and time the article was published.
@@ -69,12 +54,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
     ///     The publication date should be the date and time the article was originally published,
     ///     not the date it was added to the sitemap.
     /// </remarks>
-    public DateTime PublicationDate
-    {
-        get => extensionPublicationDate;
-
-        set => extensionPublicationDate = value;
-    }
+    public DateTime PublicationDate { get; set; } = DateTime.MinValue;
 
     /// <summary>
     /// Gets or sets the title of the news article.
@@ -141,7 +121,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
                 SitemapNewsPublication publication = new();
                 if (publication.Load(publicationNavigator, manager))
                 {
-                    this.extensionPublication = publication;
+                    this.Publication = publication;
                     wasLoaded = true;
                 }
             }
@@ -150,7 +130,7 @@ public class SitemapNewsExtension : SyndicationExtension, IComparable<SitemapNew
             {
                 if (DateTime.TryParse(publicationDateNavigator.Value, CultureInfo.InvariantCulture, DateTimeStyles.AssumeUniversal | DateTimeStyles.AdjustToUniversal, out DateTime publicationDate))
                 {
-                    this.extensionPublicationDate = publicationDate;
+                    this.PublicationDate = publicationDate;
                     wasLoaded = true;
                 }
             }

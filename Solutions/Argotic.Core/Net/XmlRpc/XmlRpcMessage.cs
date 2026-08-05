@@ -17,7 +17,6 @@ namespace Argotic.Net;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class XmlRpcMessage : IComparable<XmlRpcMessage>, IEquatable<XmlRpcMessage>, IComparisonOperators
 {
     /// <summary>

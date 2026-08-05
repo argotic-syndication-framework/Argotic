@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core;
 ///         The <see cref="AtomPublishingControlSyndicationExtension"/> <b>must</b> appear only once in an Atom Entry.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class AtomPublishingControlSyndicationExtension : SyndicationExtension, IComparable<AtomPublishingControlSyndicationExtension>, IEquatable<AtomPublishingControlSyndicationExtension>, IComparisonOperators
 {
     /// <summary>

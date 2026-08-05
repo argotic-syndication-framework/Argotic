@@ -7,7 +7,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="PingbackSyndicationExtension"/>.
 /// </summary>
-[Serializable]
 public class PingbackSyndicationExtensionContext
 {
 

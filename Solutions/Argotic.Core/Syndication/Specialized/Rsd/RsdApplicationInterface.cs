@@ -18,7 +18,6 @@ namespace Argotic.Syndication.Specialized;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RsdApplicationInterface : IComparable<RsdApplicationInterface>, IEquatable<RsdApplicationInterface>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
     /// <summary>

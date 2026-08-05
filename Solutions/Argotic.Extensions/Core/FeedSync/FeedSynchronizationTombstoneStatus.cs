@@ -10,7 +10,6 @@ namespace Argotic.Extensions.Core;
 /// </remarks>
 /// <seealso cref="FeedSynchronizationItem.TombstoneStatus"/>
 /// <seealso cref="FeedSynchronizationItem"/>
-[Serializable]
 public enum FeedSynchronizationTombstoneStatus
 {
     /// <summary>

@@ -7,7 +7,6 @@ namespace Argotic.Extensions.Core;
 /// </summary>
 /// <seealso cref="FeedSynchronizationItem.ConflictPreservation"/>
 /// <seealso cref="FeedSynchronizationItem"/>
-[Serializable]
 public enum FeedSynchronizationConflictPreservationDirective
 {
     /// <summary>

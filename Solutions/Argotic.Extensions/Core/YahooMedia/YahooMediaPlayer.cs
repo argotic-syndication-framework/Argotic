@@ -14,7 +14,6 @@ namespace Argotic.Extensions.Core;
 ///         This class is required only if a direct media <see cref="YahooMediaContent.Url"/> property is not specified in the <see cref="YahooMediaContent"/> class.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class YahooMediaPlayer : IComparable<YahooMediaPlayer>, IEquatable<YahooMediaPlayer>, IComparisonOperators
 {
 

@@ -28,7 +28,6 @@ namespace Argotic.Syndication.Specialized;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
 {
 

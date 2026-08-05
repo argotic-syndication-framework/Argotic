@@ -27,7 +27,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RssGuid : IComparable<RssGuid>, IEquatable<RssGuid>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 

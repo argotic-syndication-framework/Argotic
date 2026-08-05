@@ -9,7 +9,6 @@ namespace Argotic.Syndication.Specialized;
 /// <summary>
 /// Represents an author of published content.
 /// </summary>
-[Serializable]
 public class BlogMLAuthor : IBlogMLCommonObject, IComparable<BlogMLAuthor>, IEquatable<BlogMLAuthor>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
 

@@ -7,7 +7,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="FeedHistorySyndicationExtension"/>.
 /// </summary>
-[Serializable]
 public class FeedHistorySyndicationExtensionContext
 {
 

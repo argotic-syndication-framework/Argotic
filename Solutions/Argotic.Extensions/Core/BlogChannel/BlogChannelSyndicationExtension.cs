@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class BlogChannelSyndicationExtension : SyndicationExtension, IComparable<BlogChannelSyndicationExtension>, IEquatable<BlogChannelSyndicationExtension>, IComparisonOperators
 {
     /// <summary>

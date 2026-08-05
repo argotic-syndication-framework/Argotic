@@ -31,7 +31,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class AtomSource : IAtomCommonObjectAttributes, IComparable<AtomSource>, IEquatable<AtomSource>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
     /// <summary>

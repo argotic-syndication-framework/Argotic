@@ -21,7 +21,6 @@ namespace Argotic.Syndication;
 ///         so that search engines can more intelligently crawl the site.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class Sitemap : ISyndicationResource, IExtensibleSyndicationObject
 {
     /// <summary>

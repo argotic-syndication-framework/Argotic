@@ -27,7 +27,6 @@ namespace Argotic.Publishing;
 /// </remarks>
 /// <seealso cref="AtomServiceDocument"/>
 /// <seealso cref="AtomMemberResources.Categories"/>
-[Serializable]
 [MimeMediaType(Name = "application", SubName = "atomcat+xml", Documentation = "http://bitworking.org/projects/atom/rfc5023.html#iana-atomcat")]
 public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndicationObject, IAtomCommonObjectAttributes, IComparable<AtomCategoryDocument>, IEquatable<AtomCategoryDocument>, IComparisonOperators
 {

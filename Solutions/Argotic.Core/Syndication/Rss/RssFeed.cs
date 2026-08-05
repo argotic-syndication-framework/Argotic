@@ -28,7 +28,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RssFeed : ISyndicationResource, IExtensibleSyndicationObject
 {
 

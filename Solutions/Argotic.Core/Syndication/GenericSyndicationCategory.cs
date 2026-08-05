@@ -7,19 +7,8 @@ namespace Argotic.Syndication;
 /// </summary>
 /// <seealso cref="GenericSyndicationFeed.Categories"/>
 /// <seealso cref="GenericSyndicationItem.Categories"/>
-[Serializable]
 public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory>, IEquatable<GenericSyndicationCategory>, IComparisonOperators
 {
-
-    /// <summary>
-    /// Private member to hold a string that identifies a hierarchical position in the taxonomy.
-    /// </summary>
-    private readonly string categoryTerm = string.Empty;
-
-    /// <summary>
-    /// Private member to hold a string that identifies the categorization scheme.
-    /// </summary>
-    private readonly string categoryScheme = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="GenericSyndicationCategory"/> class using the supplied term.
@@ -30,7 +19,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     public GenericSyndicationCategory(string term)
     {
         ArgumentException.ThrowIfNullOrEmpty(term);
-        categoryTerm = term;
+        Term = term;
     }
 
     /// <summary>
@@ -42,7 +31,7 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// <exception cref="ArgumentNullException">The <paramref name="term"/> is an empty string.</exception>
     public GenericSyndicationCategory(string term, string scheme) : this(term)
     {
-        categoryScheme = scheme;
+        Scheme = scheme;
     }
 
     /// <summary>
@@ -56,16 +45,16 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
 
         if (category.Scheme is not null)
         {
-            categoryScheme = category.Scheme.ToString();
+            Scheme = category.Scheme.ToString();
         }
 
         if (!string.IsNullOrEmpty(category.Term))
         {
-            categoryTerm = category.Term.Trim();
+            Term = category.Term.Trim();
         }
         else if (!string.IsNullOrEmpty(category.Label))
         {
-            categoryTerm = category.Label.Trim();
+            Term = category.Label.Trim();
         }
     }
 
@@ -79,12 +68,12 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
         ArgumentNullException.ThrowIfNull(category);
         if (!string.IsNullOrEmpty(category.Domain))
         {
-            categoryScheme = category.Domain.Trim();
+            Scheme = category.Domain.Trim();
         }
 
         if (!string.IsNullOrEmpty(category.Value))
         {
-            categoryTerm = category.Value.Trim();
+            Term = category.Value.Trim();
         }
     }
 
@@ -92,13 +81,13 @@ public class GenericSyndicationCategory : IComparable<GenericSyndicationCategory
     /// Gets a string that identifies the categorization scheme.
     /// </summary>
     /// <value>A string that identifies the categorization scheme used by this category.</value>
-    public string Scheme => categoryScheme;
+    public string Scheme { get; } = string.Empty;
 
     /// <summary>
     /// Gets a string that identifies the category.
     /// </summary>
     /// <value>A string that identifies the category.</value>
-    public string Term => categoryTerm;
+    public string Term { get; } = string.Empty;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="GenericSyndicationCategory"/>.

@@ -18,7 +18,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class AtomTextConstruct : IComparable<AtomTextConstruct>, IEquatable<AtomTextConstruct>, IAtomCommonObjectAttributes, IExtensibleSyndicationObject, IComparisonOperators
 {
     /// <summary>

@@ -17,18 +17,8 @@ namespace Argotic.Net;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResponse>, IComparisonOperators
 {
-    /// <summary>
-    /// Private member to hold the response value that was returned for the remote procedure call.
-    /// </summary>
-    private IXmlRpcValue? responseParameter;
-
-    /// <summary>
-    /// Private member to hold the response fault information.
-    /// </summary>
-    private XmlRpcStructureValue? responseFault;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="XmlRpcResponse"/> class.
@@ -46,7 +36,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     {
         ArgumentNullException.ThrowIfNull(parameter);
 
-        responseParameter = parameter;
+        Parameter = parameter;
     }
 
     /// <summary>
@@ -58,7 +48,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     {
         ArgumentNullException.ThrowIfNull(fault);
 
-        responseFault = fault;
+        Fault = fault;
     }
 
     /// <summary>
@@ -74,7 +64,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
         faultStructure.Members.Add(codeMember);
         faultStructure.Members.Add(stringMember);
 
-        responseFault = faultStructure;
+        Fault = faultStructure;
     }
 
     /// <summary>
@@ -131,7 +121,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     /// </value>
     /// <seealso cref="XmlRpcResponse(XmlRpcStructureValue)"/>
     /// <seealso cref="XmlRpcResponse(int, string)"/>
-    public XmlRpcStructureValue? Fault => responseFault;
+    public XmlRpcStructureValue? Fault { get; private set; }
 
     /// <summary>
     /// Gets the response information that was returned for the remote procedure call.
@@ -141,7 +131,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
     ///     If the remote procedure call raised an exception, will return <b>null</b> and the <see cref="Fault"/> <i>should</i> be populated.
     /// </value>
     /// <seealso cref="XmlRpcResponse(IXmlRpcValue)"/>
-    public IXmlRpcValue? Parameter => responseParameter;
+    public IXmlRpcValue? Parameter { get; private set; }
 
     /// <summary>
     /// Loads this <see cref="XmlRpcResponse"/> using the supplied <see cref="XPathNavigator"/>.
@@ -170,7 +160,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
                 {
                     if (XmlRpcClient.TryParseValue(valueNavigator, out IXmlRpcValue? value))
                     {
-                        responseParameter = value;
+                        Parameter = value;
                         wasLoaded = true;
                     }
                 }
@@ -184,7 +174,7 @@ public class XmlRpcResponse : IComparable<XmlRpcResponse>, IEquatable<XmlRpcResp
                     XmlRpcStructureValue structure = new();
                     if (structure.Load(structNavigator))
                     {
-                        responseFault = structure;
+                        Fault = structure;
                         wasLoaded = true;
                     }
                 }

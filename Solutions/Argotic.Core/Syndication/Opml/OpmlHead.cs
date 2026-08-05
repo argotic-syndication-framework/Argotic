@@ -9,7 +9,6 @@ namespace Argotic.Syndication;
 /// <summary>
 /// Represents the header information for an <see cref="OpmlDocument"/>.
 /// </summary>
-[Serializable]
 public class OpmlHead : IComparable<OpmlHead>, IEquatable<OpmlHead>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 

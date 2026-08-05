@@ -18,7 +18,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class OpmlOutline : IComparable<OpmlOutline>, IEquatable<OpmlOutline>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 

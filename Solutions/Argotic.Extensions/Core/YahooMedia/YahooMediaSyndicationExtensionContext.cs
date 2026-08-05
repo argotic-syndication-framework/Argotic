@@ -6,7 +6,6 @@ namespace Argotic.Extensions.Core;
 /// <summary>
 /// Encapsulates specific information about an individual <see cref="YahooMediaSyndicationExtension"/>.
 /// </summary>
-[Serializable]
 public class YahooMediaSyndicationExtensionContext : IYahooMediaCommonObjectEntities
 {
     /// <summary>

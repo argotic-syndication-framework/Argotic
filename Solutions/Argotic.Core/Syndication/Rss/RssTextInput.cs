@@ -18,7 +18,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RssTextInput : IComparable<RssTextInput>, IEquatable<RssTextInput>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 

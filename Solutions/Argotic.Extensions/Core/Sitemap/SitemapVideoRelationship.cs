@@ -9,7 +9,6 @@ namespace Argotic.Extensions.Core;
 ///         should be allowed or denied access to the video.
 ///     </para>
 /// </remarks>
-[Serializable]
 public enum SitemapVideoRelationship
 {
     /// <summary>

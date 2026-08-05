@@ -89,7 +89,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class AtomId : IAtomCommonObjectAttributes, IComparable<AtomId>, IEquatable<AtomId>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
     /// <summary>

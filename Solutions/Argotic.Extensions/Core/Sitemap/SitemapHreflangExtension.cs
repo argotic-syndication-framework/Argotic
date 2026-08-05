@@ -18,7 +18,6 @@ namespace Argotic.Extensions.Core;
 ///         For more information, see <a href="https://developers.google.com/search/docs/specialty/international/localized-versions">https://developers.google.com/search/docs/specialty/international/localized-versions</a>.
 ///     </para>
 /// </remarks>
-[Serializable]
 public class SitemapHreflangExtension : SyndicationExtension, IComparable<SitemapHreflangExtension>, IEquatable<SitemapHreflangExtension>, IComparisonOperators
 {
     /// <summary>

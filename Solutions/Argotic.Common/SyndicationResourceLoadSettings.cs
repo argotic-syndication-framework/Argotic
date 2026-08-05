@@ -6,7 +6,6 @@ namespace Argotic.Common;
 /// <summary>
 /// Specifies a set of features to support on a <see cref="ISyndicationResource"/> object loaded by the <see cref="ISyndicationResource.Load(IXPathNavigable, SyndicationResourceLoadSettings)"/> method.
 /// </summary>
-[Serializable]
 public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationResourceLoadSettings>, IEquatable<SyndicationResourceLoadSettings>, IComparisonOperators
 {
     /// <summary>

@@ -10,7 +10,6 @@ namespace Argotic.Syndication.Specialized;
 /// Represents the basic administrative information of an <see cref="ApmlDocument"/>.
 /// </summary>
 /// <seealso cref="ApmlDocument.Head"/>
-[Serializable]
 public class ApmlHead : IComparable<ApmlHead>, IEquatable<ApmlHead>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
     /// <summary>

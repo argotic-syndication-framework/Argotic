@@ -16,7 +16,6 @@ namespace Argotic.Syndication;
 ///         they may crawl pages marked "hourly" less frequently than that, and they may crawl pages marked "yearly" more frequently than that.
 ///     </para>
 /// </remarks>
-[Serializable]
 public enum SitemapChangeFrequency
 {
     /// <summary>

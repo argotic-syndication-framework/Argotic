@@ -6,7 +6,6 @@ namespace Argotic.Extensions.Core;
 /// Represents the entity encoding utilized by human-readable text constructs. 
 /// </summary>
 /// <seealso cref="YahooMediaTextConstruct"/>
-[Serializable]
 public enum YahooMediaTextConstructType
 {
     /// <summary>

@@ -10,7 +10,6 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Google Video Sitemap 1.1 XSD Specification</seealso>
-[Serializable]
 public enum SitemapVideoIdType
 {
     /// <summary>

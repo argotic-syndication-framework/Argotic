@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso cref="FeedSynchronizationSyndicationExtensionContext"/>
-[Serializable]
 public class FeedSynchronizationItem : IComparable<FeedSynchronizationItem>, IEquatable<FeedSynchronizationItem>, IComparisonOperators
 {
     /// <summary>

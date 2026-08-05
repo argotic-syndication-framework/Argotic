@@ -22,7 +22,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class PheedSyndicationExtension : SyndicationExtension, IComparable<PheedSyndicationExtension>, IEquatable<PheedSyndicationExtension>, IComparisonOperators
 {
     /// <summary>

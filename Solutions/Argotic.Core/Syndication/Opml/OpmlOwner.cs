@@ -8,7 +8,6 @@ namespace Argotic.Syndication;
 /// <summary>
 /// Represents the owner of an <see cref="OpmlDocument"/>.
 /// </summary>
-[Serializable]
 public class OpmlOwner : IComparable<OpmlOwner>, IEquatable<OpmlOwner>, IComparisonOperators, IXmlWritable
 {
 

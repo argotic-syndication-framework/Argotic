@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class SimpleListSyndicationExtension : SyndicationExtension, IComparable<SimpleListSyndicationExtension>, IEquatable<SimpleListSyndicationExtension>, IComparisonOperators
 {
 

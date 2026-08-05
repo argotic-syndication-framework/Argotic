@@ -21,7 +21,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class RssCloud : IComparable<RssCloud>, IEquatable<RssCloud>, IExtensibleSyndicationObject, IComparisonOperators, IXmlWritable
 {
 

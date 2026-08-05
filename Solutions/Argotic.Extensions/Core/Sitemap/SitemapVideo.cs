@@ -30,7 +30,6 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
-[Serializable]
 public class SitemapVideo : IComparable<SitemapVideo>, IEquatable<SitemapVideo>, IComparisonOperators
 {
     /// <summary>

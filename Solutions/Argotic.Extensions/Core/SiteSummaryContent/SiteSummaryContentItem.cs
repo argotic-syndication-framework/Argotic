@@ -9,7 +9,6 @@ namespace Argotic.Extensions.Core;
 /// Represents a single version of the content for its parent item.
 /// </summary>
 /// <seealso cref="SiteSummaryContentSyndicationExtensionContext.Items"/>
-[Serializable]
 public class SiteSummaryContentItem : IComparable<SiteSummaryContentItem>, IEquatable<SiteSummaryContentItem>, IComparisonOperators
 {
 

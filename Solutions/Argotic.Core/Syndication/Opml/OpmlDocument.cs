@@ -32,7 +32,6 @@ namespace Argotic.Syndication;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class OpmlDocument : ISyndicationResource, IExtensibleSyndicationObject
 {
 

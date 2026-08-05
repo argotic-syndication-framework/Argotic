@@ -28,7 +28,6 @@ namespace Argotic.Publishing;
 ///     </para>
 /// </remarks>
 /// <seealso cref="AtomCategoryDocument"/>
-[Serializable]
 [MimeMediaType(Name = "application", SubName = "atomsvc+xml", Documentation = "http://bitworking.org/projects/atom/rfc5023.html#iana-atomsvc")]
 public class AtomServiceDocument : ISyndicationResource, IExtensibleSyndicationObject, IAtomCommonObjectAttributes
 {

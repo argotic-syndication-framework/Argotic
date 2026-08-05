@@ -23,7 +23,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class CreativeCommonsSyndicationExtension : SyndicationExtension, IComparable<CreativeCommonsSyndicationExtension>, IEquatable<CreativeCommonsSyndicationExtension>, IComparisonOperators
 {
     /// <summary>

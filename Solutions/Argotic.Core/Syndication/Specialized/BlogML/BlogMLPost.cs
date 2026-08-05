@@ -17,7 +17,6 @@ namespace Argotic.Syndication.Specialized;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class BlogMLPost : IBlogMLCommonObject, IComparable<BlogMLPost>, IEquatable<BlogMLPost>, IExtensibleSyndicationObject, IXmlWritable, IComparisonOperators
 {
 

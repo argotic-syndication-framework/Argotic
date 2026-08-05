@@ -24,7 +24,6 @@ namespace Argotic.Extensions.Core;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public class BasicGeocodingSyndicationExtension : SyndicationExtension, IComparable<BasicGeocodingSyndicationExtension>, IEquatable<BasicGeocodingSyndicationExtension>, IComparisonOperators
 {
     /// <summary>

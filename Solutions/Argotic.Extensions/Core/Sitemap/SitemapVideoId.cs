@@ -15,18 +15,12 @@ namespace Argotic.Extensions.Core;
 ///     </para>
 /// </remarks>
 /// <seealso href="https://www.google.com/schemas/sitemap-video/1.1/sitemap-video.xsd">Video Sitemap 1.1 Schema</seealso>
-[Serializable]
 public class SitemapVideoId : IComparable<SitemapVideoId>, IEquatable<SitemapVideoId>, IComparisonOperators
 {
     /// <summary>
     /// Private member to hold the identifier value.
     /// </summary>
     private string identifierValue = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the identifier type.
-    /// </summary>
-    private SitemapVideoIdType identifierType = SitemapVideoIdType.None;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SitemapVideoId"/> class.
@@ -45,7 +39,7 @@ public class SitemapVideoId : IComparable<SitemapVideoId>, IEquatable<SitemapVid
     {
         ArgumentException.ThrowIfNullOrEmpty(value);
         this.identifierValue = value;
-        this.identifierType = type;
+        this.Type = type;
     }
 
     /// <summary>
@@ -68,12 +62,7 @@ public class SitemapVideoId : IComparable<SitemapVideoId>, IEquatable<SitemapVid
     /// Gets or sets the type of the identifier.
     /// </summary>
     /// <value>A <see cref="SitemapVideoIdType"/> that represents the type of the identifier.</value>
-    public SitemapVideoIdType Type
-    {
-        get => identifierType;
-
-        set => identifierType = value;
-    }
+    public SitemapVideoIdType Type { get; set; } = SitemapVideoIdType.None;
 
     /// <summary>
     /// Converts a <see cref="SitemapVideoIdType"/> enumeration value to its string representation.
@@ -138,7 +127,7 @@ public class SitemapVideoId : IComparable<SitemapVideoId>, IEquatable<SitemapVid
         string typeAttribute = source.GetAttribute("type", string.Empty);
         if (!string.IsNullOrEmpty(typeAttribute))
         {
-            this.identifierType = StringToType(typeAttribute);
+            this.Type = StringToType(typeAttribute);
             wasLoaded = true;
         }
 

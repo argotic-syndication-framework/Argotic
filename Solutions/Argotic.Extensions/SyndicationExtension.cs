@@ -26,39 +26,8 @@ namespace Argotic.Extensions;
 ///         />
 ///     </code>
 /// </example>
-[Serializable]
 public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializable
 {
-
-    /// <summary>
-    /// Private member to hold the human-readable description of the syndication extension.
-    /// </summary>
-    private readonly string extensionDescription = string.Empty;
-
-    /// <summary>
-    /// Private member to hold a URL that points to documentation for the syndication extension.
-    /// </summary>
-    private readonly Uri? extensionDocumentation;
-
-    /// <summary>
-    /// Private member to hold the human-readable name of the syndication extension.
-    /// </summary>
-    private readonly string extensionName = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the version of the specification that the syndication extension conforms to.
-    /// </summary>
-    private readonly Version? extensionVersion;
-
-    /// <summary>
-    /// Private member to hold the XML namespace that is used when qualifying the syndication extension's element and attribute names.
-    /// </summary>
-    private readonly string extensionXmlNamespace = string.Empty;
-
-    /// <summary>
-    /// Private member to hold the prefix used to associate the syndication extension's element and attribute names with the syndication extension's XML namespace.
-    /// </summary>
-    private readonly string extensionXmlPrefix = string.Empty;
 
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationExtension"/> class.
@@ -84,9 +53,9 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
         ArgumentException.ThrowIfNullOrEmpty(xmlNamespace);
         ArgumentNullException.ThrowIfNull(version);
 
-        extensionXmlPrefix = xmlPrefix.Trim();
-        extensionXmlNamespace = xmlNamespace.Trim();
-        extensionVersion = version;
+        XmlPrefix = xmlPrefix.Trim();
+        XmlNamespace = xmlNamespace.Trim();
+        Version = version;
     }
 
     /// <summary>
@@ -111,11 +80,11 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
         ArgumentNullException.ThrowIfNull(documentation);
         ArgumentException.ThrowIfNullOrEmpty(name);
 
-        extensionDocumentation = documentation;
-        extensionName = name.Trim();
+        Documentation = documentation;
+        Name = name.Trim();
         if (!string.IsNullOrEmpty(description))
         {
-            extensionDescription = description.Trim();
+            Description = description.Trim();
         }
     }
 
@@ -123,37 +92,37 @@ public abstract class SyndicationExtension : ISyndicationExtension, IXmlSerializ
     /// Gets a human-readable description of this syndication extension.
     /// </summary>
     /// <value>A human-readable description for this syndication extension.</value>
-    public string Description => extensionDescription;
+    public string Description { get; } = string.Empty;
 
     /// <summary>
     /// Gets a <see cref="Uri"/> that points to documentation for this syndication extension.
     /// </summary>
     /// <value>A <see cref="Uri"/> that points to the documentation or implementation details for this syndication extension.</value>
-    public Uri? Documentation => extensionDocumentation;
+    public Uri? Documentation { get; }
 
     /// <summary>
     /// Gets a human-readable name of this syndication extension.
     /// </summary>
     /// <value>A human-readable name for this syndication extension.</value>
-    public string Name => extensionName;
+    public string Name { get; } = string.Empty;
 
     /// <summary>
     /// Gets the <see cref="Version"/> of the specification that this syndication extension conforms to.
     /// </summary>
     /// <value>The <see cref="Version"/> of the specification that this syndication extension conforms to.</value>
-    public Version? Version => extensionVersion;
+    public Version? Version { get; }
 
     /// <summary>
     /// Gets the XML namespace that is used when qualifying this syndication extension's element and attribute names.
     /// </summary>
     /// <value>The XML namespace that is used when qualifying this syndication extension's element and attribute names.</value>
-    public string XmlNamespace => extensionXmlNamespace;
+    public string XmlNamespace { get; } = string.Empty;
 
     /// <summary>
     /// Gets the prefix used to associate this syndication extension's element and attribute names with this syndication extension's XML namespace.
     /// </summary>
     /// <value>The prefix used to associate this syndication extension's element and attribute names with this syndication extension's <see cref="XmlNamespace">XML namespace</see>.</value>
-    public string XmlPrefix => extensionXmlPrefix;
+    public string XmlPrefix { get; } = string.Empty;
 
     /// <summary>
     /// Occurs when the <see cref="SyndicationExtension"/> state has been changed by a load operation.

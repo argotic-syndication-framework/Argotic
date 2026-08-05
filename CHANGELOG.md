@@ -9,6 +9,34 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+- **`SyndicationResourceLoadSettings.CharacterEncoding` is now `Encoding?` and defaults to `null`.**
+  It defaulted to `Encoding.UTF8` and rejected `null`, so one value had to mean both "decode as UTF-8"
+  and "work it out" — and the two load paths read it in opposite directions. `Load(Stream, settings)`
+  honoured it and forced UTF-8 over a document correctly declaring `iso-8859-1`; `LoadAsync` compared it
+  by reference against the singleton and sniffed instead, so an equivalent `new UTF8Encoding(false)`
+  behaved oppositely to a value that decodes identically. **`null` now means "determine it from the
+  byte-order mark or the XML declaration", which is what a default settings object asks for, and naming
+  an encoding means it is used.** A caller relying on the old behaviour — UTF-8 forced over a lying
+  feed — sets the property explicitly. Not binary-breaking: reference-type nullability is metadata
+- **`SyndicationResourceLoadSettings.Timeout` is now `TimeSpan?`.** It still defaults to 100 seconds;
+  `null` means no deadline of the library's own, leaving the caller's own `CancellationToken` as the
+  only bound. `TimeSpan.Zero` is not a way to spell that — it cancels immediately. **Binary-breaking**:
+  `get_Timeout` returns a different CLR type
+- **Conditional GET now answers with the status code, not a heuristic.** `ConditionalGetAsync`
+  compared the response's `Last-Modified` against the one it sent — a comparison only reachable once
+  the origin had already declined to send a 304 — and then fell back to asking whether the response
+  "looked like it had content" via `Content-Length` and `Content-Type`. A chunked 200 with no
+  `Content-Type` answered no to both, so its body was downloaded, discarded, and reported to the caller
+  as unmodified. The fallback was also gated on `== HttpStatusCode.OK` while the success check admits
+  every 2xx, so a 203 or 206 was discarded without reaching it. **304 now means unmodified and any other
+  success means modified.** A caller who depended on the old behaviour was depending on data loss
+- **`SyndicationRequestOptions.ApplyTo` throws on a value it cannot send.** Every setter was a `Try`
+  whose result was discarded, so a malformed `Accept` produced a request with no `Accept` header and
+  the caller learned about it, if at all, as a `406`. A relative `Referer` was worse than dropped:
+  `Uri.TryCreate(..., Absolute, ...)` accepts `/relative/path` on Linux and yields
+  `file:///relative/path`, which was then sent to a remote origin. `Accept`, `User-Agent` and `Referer`
+  now raise `FormatException`; only absolute `http`/`https` referers are accepted. An empty `Referer`
+  still means "do not send one"
 - **Downloaded resources are size-capped by default.** Every `LoadAsync(Uri, ...)` and
   `CreateAsync(Uri, ...)` now refuses a response larger than its format allows: 8 MiB for a feed,
   64 MiB for a sitemap or a BlogML export. Nothing bounded them before. A caller who genuinely needs a
@@ -77,6 +105,35 @@ Behaviour changes that fix no defect and break no documented contract, but that 
 
 ### New Features
 
+- **Conditional loading**: `SyndicationResourceReader.LoadIfModifiedAsync<TResource>` fetches and parses
+  a resource only when the origin reports it has changed, which is the workload a polling consumer
+  actually has. Both outcomes are successes — a 304 arrives as a result rather than as the
+  `HttpRequestException` the same request produces through `LoadAsync`. `ConditionalLoadResult<T>.WasModified`
+  carries `[MemberNotNullWhen]`, so testing it reaches `Resource` with no null check
+- **`SyndicationValidators`**: the `Last-Modified`/`ETag` pair as one type, since they always travel
+  together and must be sent back exactly as received. `SyndicationValidators.None` makes a request
+  unconditional. Deliberately not folded into `SyndicationRequestOptions`: every path that consumes
+  those funnels through a fetch calling `EnsureSuccessStatusCode`, and 304 is not a success code
+- **A 304 now returns the validators it carried.** An origin may rotate its `ETag` on a not-modified
+  response, and the previous behaviour discarded everything about a 304 — so a polling caller re-sent
+  the validator they started with indefinitely, revalidating against a value the origin had stopped
+  recognising. `ConditionalGetResult` also reports `StatusCode` for a 304, where it previously reported
+  `null`
+- **Conditional GET accepts request options**: `ConditionalGetAsync(Uri, SyndicationValidators, HttpClient,
+  SyndicationRequestOptions?, CancellationToken)`. It was the one fetch in the library that could not be
+  given an `Accept` header or a custom `User-Agent`, because it built its request by hand
+- **Conditional GET no longer downloads before it decides.** It completed on content, so the whole body
+  was buffered before `ConditionalGetResult` existed — unbounded and eager both, and `ContentLength`
+  reported the buffered length rather than what the origin declared. It now completes on headers, so
+  the type streams, as its shape always suggested
+- **`IHttpClientFactory` registration**: `AddTrackbackClient` and `AddXmlRpcClient` register typed
+  clients, so a container-resolved client uses the handler the container built rather than the
+  process-wide singleton. `AddArgoticSyndicationClient` registers a named client for the resource
+  types — resolve it with `IHttpClientFactory.CreateClient(ArgoticHttpClients.Syndication)` and pass it
+  to any `LoadAsync` or `CreateAsync` overload taking an `HttpClient`
+- **`SyndicationEncodingUtility.DefaultRequestTimeout`** is now public. The shared `HttpClient` is
+  deliberately `Timeout.InfiniteTimeSpan` — every deadline comes from a `CancellationTokenSource` — so
+  there was previously no value a caller could read to discover what deadline applied to them
 - **Response size caps**: `SyndicationResourceLoadSettings.MaxResponseContentLength` bounds how much
   of an HTTP response a load will accept, counted in decompressed bytes. `null` — the default —
   means the loading type's format default rather than no limit, so a caller who constructs a settings

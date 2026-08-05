@@ -56,6 +56,25 @@ internal sealed class XmlSanitizingTextReader(TextReader inner, bool leaveOpen =
     private bool exhausted;
 
     /// <inheritdoc/>
+    /// <remarks>
+    ///     <para>
+    ///     <b>Cold, and not therefore removable.</b> The only consumer of this reader is
+    ///     <see cref="System.Xml.XmlReader"/>, which reads in blocks, so neither this nor
+    ///     <see cref="Read()"/> has ever executed — and a coverage report says so plainly enough to
+    ///     invite deleting both.
+    ///     </para>
+    ///     <para>
+    ///     They cannot go. <see cref="TextReader"/> does not implement its scalar members in terms of
+    ///     the block overload; its documented default "returns -1". So removing these would not fall
+    ///     back to the sanitising path — it would report end of input to any caller reading a
+    ///     character at a time, silently, on the first call.
+    ///     </para>
+    ///     <para>
+    ///     Both share <c>Fill</c> and <c>Dequeue</c> with the block overload rather than duplicating
+    ///     the classification, which is what keeps a path nothing exercises from drifting away from
+    ///     one that everything does.
+    ///     </para>
+    /// </remarks>
     public override int Peek()
     {
         this.Fill();
@@ -63,6 +82,7 @@ internal sealed class XmlSanitizingTextReader(TextReader inner, bool leaveOpen =
     }
 
     /// <inheritdoc/>
+    /// <remarks>See the remarks on <see cref="Peek"/> for why this exists despite never running.</remarks>
     public override int Read()
     {
         this.Fill();

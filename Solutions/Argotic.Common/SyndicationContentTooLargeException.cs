@@ -22,6 +22,12 @@ public sealed class SyndicationContentTooLargeException : HttpRequestException
     /// <summary>
     /// Initializes a new instance of the <see cref="SyndicationContentTooLargeException"/> class.
     /// </summary>
+    /// <remarks>
+    ///     This and the two <see cref="string"/>-taking constructors below are cold, and stay. CA1032
+    ///     requires the standard set on any public exception type, and this solution treats a warning
+    ///     as a build failure — so they are not optional, and a coverage report showing them at zero is
+    ///     reporting a compliance requirement rather than dead weight.
+    /// </remarks>
     public SyndicationContentTooLargeException()
         : this(0, null)
     {

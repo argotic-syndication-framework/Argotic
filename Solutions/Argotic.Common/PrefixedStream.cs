@@ -33,6 +33,13 @@ internal sealed class PrefixedStream(byte[] prefix, int prefixLength, Stream inn
     public override bool CanRead => true;
 
     /// <inheritdoc/>
+    /// <remarks>
+    ///     This and the eight members below it are cold — nothing in the library or the suite asks a
+    ///     forward-only wrapper whether it can seek, or tries to. They are the surface
+    ///     <see cref="Stream"/> obliges every implementation to have, and the throwing ones are the
+    ///     honest answer rather than an omission: a <see cref="Stream"/> that reported a
+    ///     <see cref="Position"/> it cannot honour would be worse than one that refuses.
+    /// </remarks>
     public override bool CanSeek => false;
 
     /// <inheritdoc/>

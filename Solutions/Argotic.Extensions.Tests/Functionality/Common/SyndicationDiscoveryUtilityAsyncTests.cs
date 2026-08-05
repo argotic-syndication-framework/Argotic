@@ -662,7 +662,10 @@ public class SyndicationDiscoveryUtilityAsyncTests
 
         // Assert
         result.WasModified.ShouldBeFalse();
-        result.StatusCode.ShouldBeNull();
+
+        // Was ShouldBeNull. A 304 used to be reported by discarding everything about it, so the one
+        // status code a conditional GET most needs to distinguish was the one it could not.
+        result.StatusCode.ShouldBe(System.Net.HttpStatusCode.NotModified);
     }
 
     [TestMethod]

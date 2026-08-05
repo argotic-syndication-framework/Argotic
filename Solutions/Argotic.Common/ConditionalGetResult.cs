@@ -52,6 +52,36 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     }
 
     /// <summary>
+    /// Initializes a new instance of the <see cref="ConditionalGetResult"/> class from a 304 response.
+    /// </summary>
+    /// <param name="notModified">The <c>304 Not Modified</c> response whose validators to keep.</param>
+    /// <remarks>
+    ///     <para>
+    ///     Separate from the two-parameter constructor because a 304 is not "no response" — it is a
+    ///     response with no <i>body</i>. It still carries an <c>ETag</c> and a <c>Last-Modified</c>,
+    ///     and RFC 9110 requires it to carry the same <c>ETag</c> a 200 would have. Servers rotate one
+    ///     on a 304 legitimately, so discarding it meant a polling caller re-sent a stale validator for
+    ///     as long as it kept polling.
+    ///     </para>
+    ///     <para>
+    ///     The response itself is not retained. The caller disposes it immediately after; there is no
+    ///     body to hand out and <see cref="GetResponseStream"/> must keep returning
+    ///     <see cref="Stream.Null"/>.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="notModified"/> is a null reference.</exception>
+    internal ConditionalGetResult(HttpResponseMessage notModified)
+    {
+        ArgumentNullException.ThrowIfNull(notModified);
+
+        WasModified = false;
+        StatusCode = notModified.StatusCode;
+        LastModified = notModified.Content.Headers.LastModified;
+        ETag = notModified.Headers.ETag?.Tag;
+        ContentLength = -1;
+    }
+
+    /// <summary>
     /// Gets a value indicating whether the resource was modified since the last request.
     /// </summary>
     /// <value><b>true</b> if the resource was modified; otherwise, <b>false</b>.</value>

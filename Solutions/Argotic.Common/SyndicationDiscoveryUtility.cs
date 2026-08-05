@@ -510,8 +510,12 @@ public static class SyndicationDiscoveryUtility
 
         if (response.StatusCode == HttpStatusCode.NotModified)
         {
+            // Read the validators before disposing. A 304 has no body but it does carry an ETag and a
+            // Last-Modified, and those are precisely what the caller needs for their next poll -
+            // throwing them away meant re-sending a stale tag until the resource changed.
+            ConditionalGetResult unmodified = new(response);
             response.Dispose();
-            return new ConditionalGetResult(null, wasModified: false);
+            return unmodified;
         }
 
         if (!response.IsSuccessStatusCode)
@@ -542,7 +546,6 @@ public static class SyndicationDiscoveryUtility
             response.Dispose();
             return new ConditionalGetResult(null, wasModified: false);
         }
-
         return new ConditionalGetResult(response, wasModified: true);
     }
 

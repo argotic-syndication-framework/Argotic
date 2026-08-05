@@ -137,15 +137,16 @@ public sealed class ConditionalGetCharacterisationTests
     }
 
     /// <summary>
-    /// C4 — a 304 discards the validators the server sent with it.
+    /// C4 — a 304 keeps the validators the server sent with it.
     /// </summary>
     /// <remarks>
     ///     RFC 9110 requires a 304 to carry the <c>ETag</c> a 200 would have carried, and servers
-    ///     legitimately rotate one on a 304. Discarding it means a polling caller re-sends a stale
-    ///     validator for as long as it keeps polling. Inverted at Phase 7.
+    ///     legitimately rotate one on a 304. Discarding it meant a polling caller re-sent a stale
+    ///     validator for as long as it kept polling — the one request shape conditional GET exists
+    ///     to make cheap was the one it got wrong.
     /// </remarks>
     [TestMethod]
-    public async Task A304_DiscardsTheValidatorsTheServerSent()
+    public async Task A304_KeepsTheValidatorsTheServerSent()
     {
         using MockHttpMessageHandler handler = new((_, _) =>
         {
@@ -159,10 +160,16 @@ public sealed class ConditionalGetCharacterisationTests
         using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
             Source, SentValidator, "\"stale-v1\"", client, TestContext.CancellationTokenSource.Token);
 
-        result.WasModified.ShouldBeFalse();
-        result.ETag.ShouldBeNull("PINS TODAY: the rotated tag is thrown away. Inverted at Phase 7.");
-        result.LastModified.ShouldBeNull("PINS TODAY: so is the date. Inverted at Phase 7.");
-        result.StatusCode.ShouldBeNull("PINS TODAY: a 304 is indistinguishable from a heuristic decision. Inverted at Phase 7.");
+        result.WasModified.ShouldBeFalse("INVARIANT: a 304 still means unmodified");
+        result.ETag.ShouldBe("\"rotated-v2\"", "INVERTED: the rotated tag survives, so the next poll sends it");
+        result.LastModified.ShouldBe(SentValidator.AddDays(1), "INVERTED: and so does the date");
+        result.StatusCode.ShouldBe(HttpStatusCode.NotModified, "INVERTED: a 304 is now distinguishable from a heuristic decision");
+
+        // The body accessor is untouched: a 304 has no body, and the validators arriving does not
+        // change that. Asserted here rather than trusted, because the new constructor could easily
+        // have retained the response to read them from.
+        (await result.GetResponseStreamAsync(TestContext.CancellationTokenSource.Token))
+            .ShouldBeSameAs(Stream.Null);
     }
 
     /// <summary>

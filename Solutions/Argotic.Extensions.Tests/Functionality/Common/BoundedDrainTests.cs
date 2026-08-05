@@ -312,4 +312,61 @@ public sealed class BoundedDrainTests
         new SyndicationContentTooLargeException(1_024, null)
             .Message.ShouldContain("declared no length");
     }
+
+    /// <summary>
+    /// A conditional GET applies no cap, and has already downloaded everything when it returns.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     The one path the size limits do not reach, characterised rather than fixed — Phase 7 owns
+    ///     this method. Written expecting <c>WasRead</c> to be <b>false</b>, on the reasoning that a
+    ///     type whose only accessors are <c>GetResponseStream</c> and <c>GetResponseStreamAsync</c>
+    ///     is a streaming type and therefore has nothing to cap. It is not.
+    ///     </para>
+    ///     <para>
+    ///     <c>ConditionalGetAsync</c> calls <c>SendAsync(request, cancellationToken)</c>, whose
+    ///     completion option defaults to <see cref="HttpCompletionOption.ResponseContentRead"/>, so
+    ///     the whole body is copied into memory inside that call — before any Argotic code runs, and
+    ///     before the caller has seen a single header. The stream handed out afterwards is a reader
+    ///     over that buffer. So the gap is not "unbounded but lazy"; it is unbounded <i>and</i> eager,
+    ///     which is the worse of the two.
+    ///     </para>
+    ///     <para>
+    ///     Moving it to headers-read cannot be done here. <c>ContentLength</c> is asserted below to be
+    ///     the exact body size <b>from a response that never declared one</b> — it is the buffered
+    ///     length, and under headers-read it would be −1. The <c>isModified</c> heuristic reads that
+    ///     same header, so the completion option and the heuristic have to change in one commit. That
+    ///     is the <c>UriExistsAsync</c> lesson from earlier in this phase, and it is Phase 7's job.
+    ///     </para>
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    public async Task AConditionalGetAppliesNoCap_AndHasAlreadyReadEverythingWhenItReturns()
+    {
+        byte[] body = Encoding.UTF8.GetBytes(new string('x', (int)SyndicationContentLengthLimits.Feed + 4_096));
+
+        // declareLength: false, so ContentLength below cannot have come from a header.
+        using ControllableHttpContent content = new(body, declareLength: false);
+        using MockHttpMessageHandler handler = new((_, _) =>
+        {
+            HttpResponseMessage response = content.InAResponse("application/xml");
+            response.Content.Headers.LastModified = DateTimeOffset.UtcNow;
+            return Task.FromResult(response);
+        });
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
+            Source, DateTime.UtcNow.AddDays(-1), null, client, this.TestContext.CancellationTokenSource.Token);
+
+        result.WasModified.ShouldBeTrue("eight megabytes past the feed limit, accepted without complaint");
+        content.WasRead.ShouldBeTrue("the body was buffered by SendAsync before this object existed");
+        result.ContentLength.ShouldBe(
+            body.Length, "the buffered length, since the content declared none — proof of the buffering");
+
+        // And the stream is a second reader over that same buffer, not a fetch.
+        using Stream stream = await result.GetResponseStreamAsync(this.TestContext.CancellationTokenSource.Token);
+        using MemoryStream drained = new();
+        await stream.CopyToAsync(drained, this.TestContext.CancellationTokenSource.Token);
+        drained.Length.ShouldBe(body.Length);
+    }
 }

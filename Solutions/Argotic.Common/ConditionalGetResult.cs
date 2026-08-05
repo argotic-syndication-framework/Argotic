@@ -6,8 +6,25 @@ namespace Argotic.Common;
 /// Represents the result of a conditional GET operation.
 /// </summary>
 /// <remarks>
-/// This class replaces the use of <see cref="HttpWebResponse"/> for conditional GET operations,
-/// providing a modern wrapper around <see cref="HttpResponseMessage"/>.
+///     <para>
+///     This class replaces the use of <see cref="HttpWebResponse"/> for conditional GET operations,
+///     providing a modern wrapper around <see cref="HttpResponseMessage"/>.
+///     </para>
+///     <para>
+///     <b>The response size limits in <see cref="SyndicationContentLengthLimits"/> do not apply to
+///     this path.</b> Every other way this library fetches a body now reads it into a buffer it owns
+///     and refuses one larger than the limit for the resource being loaded. This one does not, and
+///     the reason is not that it streams: <c>ConditionalGetAsync</c> sends under the default
+///     completion option, so the body is <b>already fully buffered in memory</b> by the time this
+///     object is constructed. <see cref="GetResponseStream"/> then reads back over that buffer.
+///     </para>
+///     <para>
+///     So the shape of the type suggests streaming and the behaviour is eager. Both facts are pinned
+///     by <c>BoundedDrainTests</c>. Callers who need a bound today must read
+///     <see cref="ContentLength"/> — which is populated, because the body has been counted — and
+///     decide before doing anything else; by then the memory has already been spent, so the check
+///     protects downstream work rather than the fetch itself.
+///     </para>
 /// </remarks>
 public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
 {
@@ -74,6 +91,10 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     /// Gets the response stream for reading the content.
     /// </summary>
     /// <returns>A <see cref="Stream"/> for reading the response content, or <see cref="Stream.Null"/> if no response is available.</returns>
+    /// <remarks>
+    ///     Reads back over a buffer the body was already copied into — see the remarks on
+    ///     <see cref="ConditionalGetResult"/>. Nothing here is bounded, and nothing here is deferred.
+    /// </remarks>
     /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public Stream GetResponseStream()
     {
@@ -86,6 +107,10 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     /// </summary>
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Stream"/> for reading the response content.</returns>
+    /// <remarks>
+    ///     Reads back over a buffer the body was already copied into — see the remarks on
+    ///     <see cref="ConditionalGetResult"/>. Nothing here is bounded, and nothing here is deferred.
+    /// </remarks>
     /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public Task<Stream> GetResponseStreamAsync(CancellationToken cancellationToken = default)
     {

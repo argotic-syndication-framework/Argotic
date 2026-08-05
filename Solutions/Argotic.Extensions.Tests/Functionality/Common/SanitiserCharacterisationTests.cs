@@ -75,12 +75,16 @@ public sealed class SanitiserCharacterisationTests
         ["23. twenty thousand NULs", "<r>" + Nuls(20_000) + "x</r>", "<r>x</r>", "<r>x</r>"],
     ];
 
+    private static readonly string[] EntryPoints = ["string", "reader", "drip-reader", "stream"];
+
+    private static readonly string[] BoundaryPayloads = ["\U0001F600", "\u0001", "\uD800"];
+
     /// <summary>
     /// Gets rows 24 and 25: one case per (entry point, payload), each sweeping the boundary internally.
     /// </summary>
     public static IEnumerable<object[]> BoundarySweeps =>
-        from entryPoint in new[] { "string", "reader", "drip-reader", "stream" }
-        from payload in new[] { "\U0001F600", "\u0001", "\uD800" }
+        from entryPoint in EntryPoints
+        from payload in BoundaryPayloads
         select new object[] { entryPoint, payload };
 
     /// <summary>

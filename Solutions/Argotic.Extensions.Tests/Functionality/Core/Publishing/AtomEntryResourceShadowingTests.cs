@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Text;
 using System.Xml;
 using System.Xml.XPath;
@@ -99,6 +100,7 @@ public sealed class AtomEntryResourceShadowingTests
     ///     Distinct from the row above: this one proves the <i>interface map</i> is fixed at
     ///     <see cref="AtomEntry"/>, rather than proving anything about an internal funnel.
     /// </remarks>
+    [SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance", Justification = "The interface reference is the subject of the test. Narrowing it to AtomEntryResource would bind the shadowed member and the test would assert nothing.")]
     [TestMethod]
     public void SavingThroughAnInterfaceReference_DropsThePublishingState()
     {
@@ -124,6 +126,7 @@ public sealed class AtomEntryResourceShadowingTests
     ///     parse"; with it, the extensions demonstrably arrived and simply were not projected onto the
     ///     properties.
     /// </remarks>
+    [SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance", Justification = "The interface reference is the subject of the test. Narrowing it to AtomEntryResource would bind the shadowed member and the test would assert nothing.")]
     [TestMethod]
     public void LoadingThroughAnInterfaceReference_SkipsThePublishingExtensions()
     {

@@ -44,7 +44,7 @@ public sealed class HttpBufferingCharacterisationTests
     [TestMethod]
     public async Task TheWholeBody_IsBufferedBeforeTheRequestCompletes()
     {
-        ControllableHttpContent content = new(Encoding.UTF8.GetBytes(Feed));
+        using ControllableHttpContent content = new(Encoding.UTF8.GetBytes(Feed));
         using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse()));
         using HttpClient client = new(handler, disposeHandler: false);
 
@@ -80,7 +80,7 @@ public sealed class HttpBufferingCharacterisationTests
     [DataRow(false, DisplayName = "Content-Length absent, as on any decompressed or chunked response")]
     public async Task ASuccessfulResponse_IsReportedAsExisting(bool declareLength)
     {
-        ControllableHttpContent content = new(Encoding.UTF8.GetBytes(Feed), declareLength);
+        using ControllableHttpContent content = new(Encoding.UTF8.GetBytes(Feed), declareLength);
         using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse()));
         using HttpClient client = new(handler, disposeHandler: false);
 
@@ -111,7 +111,7 @@ public sealed class HttpBufferingCharacterisationTests
     {
         static async Task<long?> LengthSeenBy(HttpCompletionOption option, bool declareLength)
         {
-            ControllableHttpContent content = new(Encoding.UTF8.GetBytes("<r>hello</r>"), declareLength);
+            using ControllableHttpContent content = new(Encoding.UTF8.GetBytes("<r>hello</r>"), declareLength);
             using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse()));
             using HttpClient client = new(handler, disposeHandler: false);
             using HttpRequestMessage request = new(HttpMethod.Get, Source);
@@ -152,7 +152,7 @@ public sealed class HttpBufferingCharacterisationTests
         byte[] body = GenerateFeedOfAtLeast(12 * 1024 * 1024);
         body.Length.ShouldBeGreaterThan(12 * 1024 * 1024);
 
-        ControllableHttpContent content = new(body);
+        using ControllableHttpContent content = new(body);
         using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse()));
         using HttpClient client = new(handler, disposeHandler: false);
 

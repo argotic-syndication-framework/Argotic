@@ -1,3 +1,4 @@
+using System.Diagnostics.CodeAnalysis;
 using System.Net;
 using System.Net.Http.Headers;
 using System.Text;
@@ -108,7 +109,8 @@ public sealed class ConditionalGetCharacterisationTests
         result.WasModified.ShouldBeFalse(
             "PINS TODAY: a real 200 with a real body is reported as unmodified and discarded. "
             + "Inverted at Phase 7.");
-        result.GetResponseStream().ShouldBe(Stream.Null, "the body is gone");
+        (await result.GetResponseStreamAsync(TestContext.CancellationTokenSource.Token))
+            .ShouldBe(Stream.Null, "the body is gone");
     }
 
     /// <summary>
@@ -218,6 +220,10 @@ public sealed class ConditionalGetCharacterisationTests
     /// </summary>
     public TestContext TestContext { get; set; } = null!;
 
+    [SuppressMessage(
+        "Reliability",
+        "CA2000:Dispose objects before losing scope",
+        Justification = "Ownership transfers twice, and the analyzer can follow neither hop. The handler is owned by the HttpClient built over it with disposeHandler: true, which every caller disposes; the content is owned by the HttpResponseMessage it is attached to, which the library disposes on the caller's behalf.")]
     private static HttpClient Responding(Action<HttpResponseMessage> configure, bool declareLength = true)
     {
         MockHttpMessageHandler handler = new((_, _) =>

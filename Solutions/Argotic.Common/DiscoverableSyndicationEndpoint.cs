@@ -162,7 +162,12 @@ public class DiscoverableSyndicationEndpoint : IComparable<DiscoverableSyndicati
         ArgumentNullException.ThrowIfNull(this.Source);
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        return SyndicationEncodingUtility.CreateSafeNavigatorAsync(this.Source, httpClient, null, null, cancellationToken);
+        // Named arguments, because `null` as the third positional argument is now ambiguous between
+        // the Encoding? overload and the SyndicationResourceLoadSettings one - neither converts to the
+        // other, so neither is better. This is inside Argotic.Common, so the internal overload is a
+        // candidate here even though it is not one for consumers.
+        return SyndicationEncodingUtility.CreateSafeNavigatorAsync(
+            this.Source, httpClient, encoding: null, requestOptions: null, cancellationToken);
     }
 
     /// <summary>

@@ -9,6 +9,13 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 ### Breaking Changes
 
+- **Downloaded resources are size-capped by default.** Every `LoadAsync(Uri, ...)` and
+  `CreateAsync(Uri, ...)` now refuses a response larger than its format allows: 8 MiB for a feed,
+  64 MiB for a sitemap or a BlogML export. Nothing bounded them before. A caller who genuinely needs a
+  larger document sets `SyndicationResourceLoadSettings.MaxResponseContentLength`, or
+  `SyndicationResourceLoadSettings.Unbounded` to restore the previous behaviour. Note that
+  `RetrievalLimit` does not bound the download — it is applied after parsing — so taming a large
+  archive feed with it now requires raising the cap as well
 - Update the version from 3001.0.0 to 4000.0.0
 - **Target Framework**: Now targets .NET 10 only (dropped .NET Standard 2.0/2.1, .NET 8, .NET 9)
 - **Configuration**: Removed legacy `System.Configuration` classes:

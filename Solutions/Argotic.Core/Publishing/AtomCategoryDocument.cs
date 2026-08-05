@@ -1,5 +1,4 @@
 using System.Globalization;
-using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 
@@ -436,8 +435,8 @@ public class AtomCategoryDocument : ISyndicationResource, IExtensibleSyndication
         using var timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         timeoutCts.CancelAfter(settings.Timeout);
 
-        Encoding? encoding = settings.CharacterEncoding == System.Text.Encoding.UTF8 ? null : settings.CharacterEncoding;
-        XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(source, httpClient, encoding, requestOptions, timeoutCts.Token).ConfigureAwait(false);
+        XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(
+            source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, timeoutCts.Token).ConfigureAwait(false);
 
         SyndicationResourceAdapter adapter = new(navigator, settings);
         adapter.Fill(this, SyndicationContentFormat.AtomCategoryDocument);

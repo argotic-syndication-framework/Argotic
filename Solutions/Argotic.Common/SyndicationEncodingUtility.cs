@@ -612,6 +612,67 @@ public static partial class SyndicationEncodingUtility
         return await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
     /// <summary>
+    /// Fetches a resource and returns a navigator over it, honouring the caller's load settings.
+    /// </summary>
+    /// <param name="source">The resource to fetch.</param>
+    /// <param name="httpClient">The client to fetch with.</param>
+    /// <param name="settings">The load settings. Its encoding and size cap are both honoured.</param>
+    /// <param name="defaultMaxResponseContentLength">
+    ///     The size cap to apply when <see cref="SyndicationResourceLoadSettings.MaxResponseContentLength"/>
+    ///     is unset — the format default for whichever type is loading.
+    /// </param>
+    /// <param name="requestOptions">Request-level options. This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A navigator over the fetched document.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <b>The cap default comes from the caller, not from the settings object.</b> A settings object
+    ///     cannot know what kind of document is being loaded, and the answer differs by a factor of
+    ///     eight between a feed and a sitemap. So the loading type passes its own default and the
+    ///     settings override it when set — which is what lets a caller construct settings for an
+    ///     unrelated reason without silently losing their format's allowance.
+    ///     </para>
+    ///     <para>
+    ///     Taking the settings whole is also what removes the encoding sentinel from thirteen call
+    ///     sites. Each one used to translate <c>CharacterEncoding == Encoding.UTF8</c> into
+    ///     <see langword="null"/> before calling; reading the property here means those lines are
+    ///     deleted rather than rewritten.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="settings"/> is a null reference.</exception>
+    /// <exception cref="SyndicationContentTooLargeException">The response exceeds the effective size cap.</exception>
+    internal static async Task<XPathNavigator> CreateSafeNavigatorAsync(
+        Uri source,
+        HttpClient httpClient,
+        SyndicationResourceLoadSettings settings,
+        long defaultMaxResponseContentLength,
+        SyndicationRequestOptions? requestOptions,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(httpClient);
+        ArgumentNullException.ThrowIfNull(settings);
+
+        long cap = settings.MaxResponseContentLength ?? defaultMaxResponseContentLength;
+
+        using HttpResponseMessage response = await SendHttpRequestAsync(
+            source, httpClient, requestOptions, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+        response.EnsureSuccessStatusCode();
+
+        using PooledContentBuffer body = await ReadContentAsync(response, cap, cancellationToken).ConfigureAwait(false);
+        using Stream stream = body.AsStream();
+
+        // The UTF-8 sentinel, in the one place it now lives. Phase 6 deletes it outright by making the
+        // property nullable; until then it stays here rather than in thirteen copies.
+        Encoding? encoding = settings.CharacterEncoding == Encoding.UTF8 ? null : settings.CharacterEncoding;
+
+        return encoding is not null
+            ? CreateSafeNavigator(stream, encoding)
+            : CreateSafeNavigator(stream);
+    }
+    /// <summary>
     /// Reads at most <paramref name="maxBytes"/> of a response body, treating a longer body as normal.
     /// </summary>
     /// <param name="response">The response whose body to read.</param>

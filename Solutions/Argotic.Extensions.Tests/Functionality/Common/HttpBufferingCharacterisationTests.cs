@@ -129,13 +129,14 @@ public sealed class HttpBufferingCharacterisationTests
     }
 
     /// <summary>
-    /// C9 — a twelve-mebibyte feed loads today, with no cap of any kind.
+    /// C9, INVERTED at Phase 5 — a twelve-mebibyte feed is now refused by the format default.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     Phase 5 introduces an 8 MiB default for feeds, so this becomes a throw and a caller wanting
-    ///     the old behaviour must ask for it. Pinning it first is what makes that a breaking change with
-    ///     a recorded before, rather than a surprise in someone's newsletter pipeline.
+    ///     Nothing bounded a downloaded feed before. The 8 MiB feed default now refuses this one, and a
+    ///     caller who genuinely wants a twelve-mebibyte feed has to say so. Pinned before the change so
+    ///     that the break has a recorded before, rather than being discovered in someone's newsletter
+    ///     pipeline.
     ///     </para>
     ///     <para>
     ///     Generated rather than written as a literal: this repository keeps fixtures as raw string
@@ -145,9 +146,10 @@ public sealed class HttpBufferingCharacterisationTests
     ///     running beside it.
     ///     </para>
     /// </remarks>
+    /// <returns>A task representing the test.</returns>
     [TestMethod]
     [DoNotParallelize]
-    public async Task ATwelveMebibyteFeed_LoadsWithNoCap()
+    public async Task ATwelveMebibyteFeed_IsRefusedByTheFormatDefault()
     {
         byte[] body = GenerateFeedOfAtLeast(12 * 1024 * 1024);
         body.Length.ShouldBeGreaterThan(12 * 1024 * 1024);
@@ -156,17 +158,92 @@ public sealed class HttpBufferingCharacterisationTests
         using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse()));
         using HttpClient client = new(handler, disposeHandler: false);
 
-        Argotic.Syndication.RssFeed feed = await Argotic.Syndication.RssFeed.CreateAsync(
-            Source, client, null, null, TestContext.CancellationTokenSource.Token);
+        SyndicationContentTooLargeException thrown = await Should.ThrowAsync<SyndicationContentTooLargeException>(
+            async () => await Argotic.Syndication.RssFeed.CreateAsync(
+                Source, client, null, null, TestContext.CancellationTokenSource.Token));
 
-        feed.Channel.Items.Count.ShouldBeGreaterThan(0,
-            "PINS TODAY: nothing bounds the size of a downloaded feed. Inverted at Phase 5.");
+        thrown.MaxBytes.ShouldBe(SyndicationContentLengthLimits.Feed);
+    }
+
+    /// <summary>
+    /// The same feed loads when the caller asks for no limit.
+    /// </summary>
+    /// <remarks>
+    ///     The escape hatch, and the thing that makes the row above a policy rather than a ceiling.
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    [DoNotParallelize]
+    public async Task ATwelveMebibyteFeed_LoadsWhenTheCallerAsksForNoLimit()
+    {
+        using ControllableHttpContent content = new(GenerateFeedOfAtLeast(12 * 1024 * 1024));
+        using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse()));
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        Argotic.Syndication.RssFeed feed = await Argotic.Syndication.RssFeed.CreateAsync(
+            Source,
+            client,
+            new SyndicationResourceLoadSettings { MaxResponseContentLength = SyndicationResourceLoadSettings.Unbounded },
+            null,
+            TestContext.CancellationTokenSource.Token);
+
+        feed.Channel.Items.Count.ShouldBeGreaterThan(0);
+    }
+
+    /// <summary>
+    /// A sitemap keeps its larger allowance even when settings are supplied for another reason.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     <b>The failure mode the design exists to avoid.</b> Had the format default been keyed on
+    ///     whether a settings object was supplied, this twelve-mebibyte sitemap — well inside the 64 MiB
+    ///     a sitemap is entitled to — would be refused because the caller happened to set a retrieval
+    ///     limit.
+    ///     </para>
+    ///     <para>
+    ///     The same document through <c>RssFeed</c> is refused, which is what says the allowance is
+    ///     keyed on the loading type rather than being 64 MiB for everyone.
+    ///     </para>
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    [DoNotParallelize]
+    public async Task ASitemapKeepsItsLargerAllowance_EvenWithSettingsSuppliedForAnotherReason()
+    {
+        byte[] body = GenerateSitemapOfAtLeast(12 * 1024 * 1024);
+        using ControllableHttpContent content = new(body);
+        using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse()));
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        Argotic.Syndication.Sitemap sitemap = await Argotic.Syndication.Sitemap.CreateAsync(
+            Source,
+            client,
+            new SyndicationResourceLoadSettings { RetrievalLimit = 10 },
+            null,
+            TestContext.CancellationTokenSource.Token);
+
+        sitemap.Urls.Count.ShouldBe(10, "the retrieval limit still applies; only the size cap differs");
     }
 
     /// <summary>
     /// Gets or sets the test context, used for its cancellation token.
     /// </summary>
     public TestContext TestContext { get; set; } = null!;
+
+    private static byte[] GenerateSitemapOfAtLeast(int minimumBytes)
+    {
+        StringBuilder builder = new(minimumBytes + 4_096);
+        builder.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<urlset xmlns=\"http://www.sitemaps.org/schemas/sitemap/0.9\">\n");
+
+        for (int i = 0; builder.Length < minimumBytes; i++)
+        {
+            builder.Append("<url><loc>http://example.com/page").Append(i).Append('/')
+                   .Append('p', 480).Append("</loc><changefreq>daily</changefreq></url>\n");
+        }
+
+        builder.Append("</urlset>");
+        return Encoding.UTF8.GetBytes(builder.ToString());
+    }
 
     private static byte[] GenerateFeedOfAtLeast(int minimumBytes)
     {

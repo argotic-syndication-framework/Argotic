@@ -372,8 +372,8 @@ public class GenericSyndicationFeed
         using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
         timeoutCts.CancelAfter(settings.Timeout);
 
-        System.Text.Encoding? encoding = settings.CharacterEncoding == System.Text.Encoding.UTF8 ? null : settings.CharacterEncoding;
-        XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(source, httpClient, encoding, requestOptions, timeoutCts.Token).ConfigureAwait(false);
+        XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(
+            source, httpClient, settings, SyndicationContentLengthLimits.Feed, requestOptions, timeoutCts.Token).ConfigureAwait(false);
 
         this.Load(navigator, settings, new SyndicationResourceLoadedEventArgs(navigator, source));
     }

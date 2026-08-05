@@ -1,5 +1,6 @@
 using BenchmarkDotNet.Configs;
 using BenchmarkDotNet.Diagnosers;
+using BenchmarkDotNet.Jobs;
 
 namespace Argotic.Benchmarks;
 
@@ -58,6 +59,11 @@ internal sealed class BenchmarkConfig : ManualConfig
         // loggers, columns and exporters wholesale, and the symptom is an empty results table with
         // only "No loggers defined" on stderr - a run that appears to have measured nothing.
         this.Add(DefaultConfig.Instance);
+
+        // Pin the job. The committed artifacts were produced under three different job configurations
+        // across eight classes, which makes any cross-class ratio invalid, and ShortRun is what
+        // produced an error bar of +/-312% on a mean. A caller can still override with --job.
+        this.AddJob(Job.MediumRun);
 
         this.AddDiagnoser(MemoryDiagnoser.Default);
         this.AddDiagnoser(ExceptionDiagnoser.Default);

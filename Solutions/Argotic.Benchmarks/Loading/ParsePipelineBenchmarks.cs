@@ -90,10 +90,17 @@ public class ParsePipelineBenchmarks
     public Encoding DetectEncoding() => SyndicationEncodingUtility.GetXmlEncoding(this.document);
 
     /// <summary>
-    /// Invalid-character stripping, which produces a second full copy of the document.
+    /// Invalid-character stripping.
     /// </summary>
     /// <returns>The sanitised document.</returns>
-    [Benchmark(Description = "c. RemoveInvalidXmlHexadecimalCharacters")]
+    /// <remarks>
+    /// This no longer produces a second copy of the document, and the corpus cannot make it do so.
+    /// <c>IndexOfInvalidXmlCharacter</c> scans first and returns the original instance when the
+    /// document is clean, and every document this harness generates is clean - so what is measured
+    /// here is the scan, at zero allocation. The rebuild branch is unreachable from any corpus in the
+    /// repository, which is a gap in the corpus rather than a property of the method.
+    /// </remarks>
+    [Benchmark(Description = "c. RemoveInvalidXmlHexadecimalCharacters (clean input: scan only)")]
     public string Sanitise() => SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(this.decoded);
 
     /// <summary>
@@ -154,6 +161,35 @@ public class ParsePipelineBenchmarks
     }
 
     /// <summary>
+    /// The same load as <see cref="WholeLoad"/>, but passing settings. The control for
+    /// <see cref="WholeLoadWithoutExtensionDetection"/>.
+    /// </summary>
+    /// <returns>The parsed feed.</returns>
+    /// <remarks>
+    /// <para>
+    /// This arm exists because the obvious comparison is confounded. <c>RssFeed.Load(Stream, settings)</c>
+    /// branches on <c>settings is not null</c>: with settings it calls
+    /// <c>CreateSafeNavigator(stream, settings.CharacterEncoding)</c>, which skips <c>GetStreamBytes</c>
+    /// and <c>GetXmlEncoding</c> entirely. <see cref="WholeLoad"/> passes null and pays for both;
+    /// <see cref="WholeLoadWithoutExtensionDetection"/> passes an object and does not. Comparing them
+    /// therefore measures two changes at once - at 1000 items the skipped stages were about a tenth of
+    /// the reported delta.
+    /// </para>
+    /// <para>
+    /// Compare <c>g</c> against this arm, never against <c>f</c>. <c>f</c> remains the baseline because
+    /// it is what a caller who passes no settings actually executes.
+    /// </para>
+    /// </remarks>
+    [Benchmark(Description = "f2. Load(Stream, settings), AutoDetectExtensions=true")]
+    public RssFeed WholeLoadWithSettings()
+    {
+        using MemoryStream stream = new(this.document, writable: false);
+        RssFeed feed = new();
+        feed.Load(stream, new SyndicationResourceLoadSettings { AutoDetectExtensions = true });
+        return feed;
+    }
+
+    /// <summary>
     /// The same with extension auto-detection switched off.
     /// </summary>
     /// <returns>The parsed feed.</returns>
@@ -161,8 +197,8 @@ public class ParsePipelineBenchmarks
     /// <para>
     /// The one experiment that can localise the object-model walk without a profiler.
     /// <c>SyndicationResourceLoadSettings.AutoDetectExtensions</c> defaults to <see langword="true"/>,
-    /// and it gates the entire per-entity extension-detection path. Everything else about the two
-    /// loads is identical.
+    /// and it gates the entire per-entity extension-detection path. Its control is
+    /// <see cref="WholeLoadWithSettings"/>, not <see cref="WholeLoad"/>.
     /// </para>
     /// <para>
     /// This is falsifiable in both directions, which is why it is worth running. If auto-detection

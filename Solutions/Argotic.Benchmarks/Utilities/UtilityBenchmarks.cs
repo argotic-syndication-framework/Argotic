@@ -85,11 +85,32 @@ public class UtilityBenchmarks
     [Benchmark(Description = "CompareSequence, differs at first (best case)")]
     public int CompareDiffersFirst() => ComparisonUtility.CompareSequence(this.reference, this.differsFirst, StringComparison.Ordinal);
 
+}
+
+/// <summary>
+/// Scalar hashing, which has no size axis.
+/// </summary>
+/// <remarks>
+/// Split out of <see cref="UtilityBenchmarks"/>. BenchmarkDotNet scopes <c>[Params]</c> to the type,
+/// so these two methods - which never read the parameter - were run three times each and emitted
+/// six duplicate rows. The original class documented the exemption in a comment; a comment cannot
+/// implement it, and splitting the type is the only thing that can.
+/// </remarks>
+[BenchmarkCategory("utilities")]
+[SuppressMessage(
+    "Design",
+    "CA1515:Consider making public types internal",
+    Justification = "BenchmarkDotNet discovers benchmark types by reflection over the assembly's public types and generates a separate runner assembly that calls into them; an internal benchmark class is silently not discovered.")]
+public class HashComponentBenchmarks
+{
+    private readonly Uri sampleUri = new("http://www.example.com/feeds/all.atom.xml");
+    private readonly string sampleUriText = "http://www.example.com/feeds/all.atom.xml";
+
     /// <summary>
     /// Hash component for a string, as used by the framework's equality-consistent hashing.
     /// </summary>
     /// <returns>The hash component.</returns>
-    [Benchmark(Description = "HashCodeUtility.Component(string)")]
+    [Benchmark(Baseline = true, Description = "HashCodeUtility.Component(string)")]
     public int HashStringComponent() => HashCodeUtility.Component(this.sampleUriText);
 
     /// <summary>

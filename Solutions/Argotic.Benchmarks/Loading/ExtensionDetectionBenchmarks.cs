@@ -68,7 +68,10 @@ public class ExtensionDetectionBenchmarks
     /// The real load path invokes this sequence once per extensible entity, so the parameter is
     /// entity count expressed directly rather than feed size expressed indirectly.
     /// </remarks>
-    [Params(1, 100, 1000)]
+    // One value only. Each body is `for (i = 0; i < EntityCount; i++) total += loop-invariant work`,
+    // so the sweep reproduced N times the N=1 number by construction - the committed artifact matched
+    // the prediction to within 0.15%. Six of the nine rows carried no information.
+    [Params(1)]
     public int EntityCount { get; set; }
 
     /// <summary>
@@ -77,7 +80,10 @@ public class ExtensionDetectionBenchmarks
     [GlobalSetup]
     public void Setup()
     {
-        byte[] document = FeedCorpus.GenerateRssUtf8(10);
+        // The extension-bearing corpus, not the extension-free one. Built over GenerateRssUtf8 the
+        // namespaces-in-scope dictionary was empty, so the arm named "namespace filtering" had nothing
+        // to filter and measured a 2% difference that meant nothing.
+        byte[] document = FeedCorpus.GenerateRssWithExtensionsUtf8(10);
         using MemoryStream stream = new(document, writable: false);
         this.navigator = SyndicationEncodingUtility.CreateSafeNavigator(stream);
         this.namespaces = (Dictionary<string, string>)this.navigator.GetNamespacesInScope(XmlNamespaceScope.ExcludeXml);

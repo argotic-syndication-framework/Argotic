@@ -247,6 +247,20 @@ public class ConditionalGetResultTests
     /// <summary>
     /// Creates a ConditionalGetResult using reflection to access the internal constructor.
     /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     All nineteen tests in this class route through here, and the signature is hard-coded. Adding
+    ///     a parameter to that constructor makes <c>GetConstructor</c> return null — and a
+    ///     <c>constructor!</c> would then throw <see cref="NullReferenceException"/> nineteen times
+    ///     with no compile-time signal and nothing naming the cause.
+    ///     </para>
+    ///     <para>
+    ///     The null-forgiving operator is what made that failure mode silent, so it is replaced by an
+    ///     assertion that says what went wrong. <c>ConditionalGetResult</c> is at 100% line and 95.5%
+    ///     branch — the best-covered type in this modernisation — and that coverage rests entirely on
+    ///     one reflective lookup that the compiler cannot check.
+    ///     </para>
+    /// </remarks>
     private static ConditionalGetResult CreateResult(HttpResponseMessage? response, bool wasModified)
     {
         ConstructorInfo? constructor = typeof(ConditionalGetResult).GetConstructor(
@@ -255,7 +269,11 @@ public class ConditionalGetResultTests
             [typeof(HttpResponseMessage), typeof(bool)],
             null);
 
-        return (ConditionalGetResult)constructor!.Invoke([response, wasModified]);
+        constructor.ShouldNotBeNull(
+            "ConditionalGetResult(HttpResponseMessage?, bool) was not found. Its signature has changed, "
+            + "and every test in this class binds to it by reflection — update this helper to match.");
+
+        return (ConditionalGetResult)constructor.Invoke([response, wasModified]);
     }
 
     public TestContext TestContext { get; set; }

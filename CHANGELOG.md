@@ -117,6 +117,17 @@ Behaviour changes that fix no defect and break no documented contract, but that 
 
 #### Atom Publishing
 
+- **`AtomEntryResource.CreateAsync(Uri, SyndicationResourceLoadSettings, CancellationToken)`** is new and
+  returns an `AtomEntryResource`. `AtomEntryResource.CreateAsync(uri, settings)` previously bound the
+  inherited `AtomEntry.CreateAsync` and returned an `AtomEntry`, silently dropping the Atom Publishing
+  members the caller asked for by naming the derived type. The `CancellationToken` parameter of
+  `CreateAsync(Uri, CancellationToken)` no longer has a default value, which is what keeps
+  `CreateAsync(uri)` unambiguous; `CreateAsync(uri, cancellationToken)` still compiles
+- **Six redundant `AtomEntryResource` members removed** - `Load(IXPathNavigable)`, `Load(Stream)`,
+  `Load(Stream, SyndicationResourceLoadSettings)`, `Load(XmlReader)`,
+  `Load(XmlReader, SyndicationResourceLoadSettings)` and `LoadAsync(Uri, CancellationToken)`. Source is
+  unaffected: the inherited `AtomEntry` members have identical signatures and now dispatch correctly
+  through the virtual funnel. Binary-breaking - a caller compiled against 3001.0.0 must be recompiled
 - **Publishing state on a constructed entry**: `AtomEntryResource.Save(Stream)`, `Save(XmlWriter)` and
   `CreateNavigator()` now write `app:edited` and `app:control/app:draft` from `EditedOn` and `IsDraft`.
   Only `Save(XmlWriter, SyndicationResourceSaveSettings)` did, so an entry built in code and saved by

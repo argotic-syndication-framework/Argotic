@@ -108,6 +108,45 @@ public sealed class AtomEntryResourceLoadAsyncTests
     }
 
     /// <summary>
+    /// Every <c>CreateAsync</c> call shape binds to this type, and binds unambiguously.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     <b>This test is a compile-time assertion and it is the only one there can be.</b>
+    ///     <c>AtomEntryResource.CreateAsync(uri, settings)</c> used to bind the inherited
+    ///     <c>AtomEntry.CreateAsync</c> and return an <c>AtomEntry</c>, silently dropping the publishing
+    ///     members a caller asked for by naming this type. Nothing in the repository called it, so
+    ///     nothing failed — and CS0121 is a call-site error, so a re-introduced ambiguity would leave a
+    ///     green build with zero warnings until a consumer hit it.
+    ///     </para>
+    ///     <para>
+    ///     The single-argument line is what guards that: it is the shape that goes ambiguous the moment
+    ///     both overloads default their trailing parameter. The assertions are almost incidental.
+    ///     </para>
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    public async Task EveryCreateAsyncShape_BindsToThisTypeUnambiguously()
+    {
+        using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(PublishingEntry);
+        using HttpClient client = new(handler, disposeHandler: false);
+        CancellationToken token = TestContext.CancellationTokenSource.Token;
+
+        AtomEntryResource withSettings = await AtomEntryResource.CreateAsync(Source, client, new SyndicationResourceLoadSettings(), null, token);
+        withSettings.EditedOn.ShouldBe(ExpectedEditedOn, "the client-and-settings shape returns this type");
+
+        AtomEntryResource withClient = await AtomEntryResource.CreateAsync(Source, client, cancellationToken: token);
+        withClient.EditedOn.ShouldBe(ExpectedEditedOn, "the client shape returns this type");
+
+        // These two do not run - they resolve. Both were the ambiguity, and both must keep compiling.
+        Func<Task<AtomEntryResource>> singleArgument = () => AtomEntryResource.CreateAsync(Source);
+        Func<Task<AtomEntryResource>> positionalToken = () => AtomEntryResource.CreateAsync(Source, token);
+
+        singleArgument.ShouldNotBeNull();
+        positionalToken.ShouldNotBeNull();
+    }
+
+    /// <summary>
     /// A failing fetch surfaces as an HTTP exception rather than an empty resource.
     /// </summary>
     /// <returns>A task representing the test.</returns>

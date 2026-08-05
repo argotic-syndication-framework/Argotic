@@ -75,7 +75,13 @@ public class TrackbackResponse : IComparable<TrackbackResponse>, IEquatable<Trac
             throw new ArgumentException($"The HttpResponseMessage content length is invalid. Content length was {contentLength}. ", nameof(response));
         }
 
-        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+        // These are public and take a response the caller may have obtained under headers-read, in
+        // which case the stream below is the socket and XmlReader.Create would read it synchronously.
+        // Their own callers use content-read, so this is not a live defect - it is a public method that
+        // stops being able to become one.
+        using PooledContentBuffer body = await SyndicationEncodingUtility.ReadContentAsync(
+            response, SyndicationContentLengthLimits.Discovery, cancellationToken).ConfigureAwait(false);
+        using Stream stream = body.AsStream();
         using XmlReader reader = XmlReader.Create(stream, SyndicationEncodingUtility.CreateSafeXmlReaderSettings());
         XPathDocument document = new(reader);
         XPathNavigator source = document.CreateNavigator();

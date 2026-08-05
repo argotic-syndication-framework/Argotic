@@ -473,6 +473,7 @@ public static partial class SyndicationEncodingUtility
             ArrayPool<byte>.Shared.Return(chunk);
         }
     }
+
     /// <summary>
     /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="Uri"/> asynchronously using the shared <see cref="HttpClient"/>.
     /// </summary>

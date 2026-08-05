@@ -172,17 +172,31 @@ public class ParsePipelineBenchmarks
     /// <returns>The parsed feed.</returns>
     /// <remarks>
     /// <para>
-    /// This arm exists because the obvious comparison is confounded. <c>RssFeed.Load(Stream, settings)</c>
-    /// branches on <c>settings is not null</c>: with settings it calls
-    /// <c>CreateSafeNavigator(stream, settings.CharacterEncoding)</c>, which supplies the encoding
-    /// and <c>GetXmlEncoding</c> entirely. <see cref="WholeLoad"/> passes null and pays for both;
-    /// <see cref="WholeLoadWithoutExtensionDetection"/> passes an object and does not. Comparing them
-    /// therefore measures two changes at once - at 1000 items the skipped stages were about a tenth of
-    /// the reported delta.
+    /// This arm existed because the obvious comparison was confounded. <c>RssFeed.Load(Stream, settings)</c>
+    /// branched on <c>settings is not null</c>: with settings it called
+    /// <c>CreateSafeNavigator(stream, settings.CharacterEncoding)</c>, which supplied the encoding and
+    /// so skipped detection entirely. <see cref="WholeLoad"/> passed null and paid for it;
+    /// <see cref="WholeLoadWithoutExtensionDetection"/> passed an object and did not. Comparing them
+    /// measured two changes at once — at 1000 items the skipped stages were about a tenth of the
+    /// reported delta.
     /// </para>
     /// <para>
-    /// Compare <c>g</c> against this arm, never against <c>f</c>. <c>f</c> remains the baseline because
-    /// it is what a caller who passes no settings actually executes.
+    /// <b>That confound is gone.</b> <c>CharacterEncoding</c> is nullable and defaults to null, so a
+    /// default settings object no longer names an encoding and both arms sniff. <c>f</c> and <c>g</c>
+    /// are now directly comparable for the first time.
+    /// </para>
+    /// <para>
+    /// The arm stays, with its job inverted: it used to be the control that made <c>g</c> readable,
+    /// and it is now the control that proves the settings branch costs nothing. <c>f</c> and
+    /// <c>f2</c> must agree on allocation to the byte. If they diverge, a settings object has
+    /// silently acquired a cost again, and every <c>f</c>-versus-<c>g</c> reading in this file is
+    /// measuring that instead of what it claims to.
+    /// </para>
+    /// <para>
+    /// Measured: 146,440 B / 969,968 B / 9,092,368 B at 10, 100 and 1000 items — <b>equal in both
+    /// arms at every size</b>, not merely close. Read the allocation column and nothing else here.
+    /// The same run timed these two provably identical code paths at a ratio of 1.384 under one job
+    /// and 0.908 under another; <c>docs/build-warnings.md</c> §2.25 has the table.
     /// </para>
     /// </remarks>
     [Benchmark(Description = "f2. Load(Stream, settings), AutoDetectExtensions=true")]

@@ -122,9 +122,15 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// Gets or sets a value that specifies the amount of time after which asynchronous load operations will time-out.
     /// </summary>
     /// <value>
-    ///     An <see cref="TimeSpan"/> that specifies the time-out period. The default value is 100 seconds,
-    ///     matching the default time-out of the framework's previous <see cref="System.Net.HttpWebRequest"/>-based pipeline.
+    ///     An <see cref="TimeSpan"/> that specifies the time-out period. The default value is
+    ///     <see cref="SyndicationEncodingUtility.DefaultRequestTimeout"/> — 100 seconds, matching the
+    ///     default time-out of the framework's previous <see cref="System.Net.HttpWebRequest"/>-based pipeline.
     /// </value>
+    /// <remarks>
+    ///     Enforced by <see cref="CancellationTokenSource.CancelAfter(TimeSpan)"/> rather than by
+    ///     <see cref="HttpClient.Timeout"/>, so it applies to the whole load — the response body
+    ///     included — and not merely to the point where the headers arrive.
+    /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is less than zero.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
     public TimeSpan Timeout
@@ -145,7 +151,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
                 field = value;
             }
         }
-    } = TimeSpan.FromSeconds(100);
+    } = SyndicationEncodingUtility.DefaultRequestTimeout;
 
     /// <summary>
     /// Returns a <see cref="string"/> that represents the current <see cref="SyndicationResourceLoadSettings"/>.

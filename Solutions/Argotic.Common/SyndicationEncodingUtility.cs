@@ -21,7 +21,22 @@ public static partial class SyndicationEncodingUtility
     /// The default time-out applied to requests made with the shared <see cref="HttpClient"/> when the caller supplies no bound of their own,
     /// matching the 100-second default of the <see cref="HttpWebRequest"/> pipeline this framework previously used.
     /// </summary>
-    internal static readonly TimeSpan DefaultRequestTimeout = TimeSpan.FromSeconds(100);
+    /// <remarks>
+    ///     <para>
+    ///     Public because a caller cannot otherwise discover what deadline they are subject to. The
+    ///     shared <see cref="HttpClient"/> is deliberately constructed with
+    ///     <see cref="System.Threading.Timeout.InfiniteTimeSpan"/> — every deadline in this library
+    ///     comes from a <see cref="CancellationTokenSource"/>, so reading
+    ///     <see cref="HttpClient.Timeout"/> tells the caller nothing, and there was previously no
+    ///     value to read that did.
+    ///     </para>
+    ///     <para>
+    ///     It is also the default of <see cref="SyndicationResourceLoadSettings.Timeout"/>, which used
+    ///     to write <c>TimeSpan.FromSeconds(100)</c> out a second time in a different assembly's file.
+    ///     Two independent spellings of one number is one edit away from two different numbers.
+    ///     </para>
+    /// </remarks>
+    public static readonly TimeSpan DefaultRequestTimeout = TimeSpan.FromSeconds(100);
 
     /// <summary>
     /// Characters that are invalid in directory names.

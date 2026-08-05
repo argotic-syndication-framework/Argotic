@@ -32,6 +32,22 @@ public class SyndicationRetrievalRegressionTests
         title.ShouldBe("Café Crème");
     }
 
+    /// <summary>
+    /// The load settings default, the framework constant and the documented legacy value are one number.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     There were three independent spellings of 100 seconds: the initialiser on
+    ///     <see cref="SyndicationResourceLoadSettings.Timeout"/>, the constant behind the eight
+    ///     discovery call sites, and the literal this test used to assert. Nothing tied them together,
+    ///     so changing one changed the deadline for half the library.
+    ///     </para>
+    ///     <para>
+    ///     The literal survives deliberately, in exactly one place. Asserting the settings default
+    ///     against the constant alone would pass however the constant changed; the second assertion is
+    ///     what makes the first mean something.
+    ///     </para>
+    /// </remarks>
     [TestMethod]
     public void SyndicationResourceLoadSettings_DefaultTimeout_MatchesTheLegacyRequestTimeout()
     {
@@ -39,7 +55,8 @@ public class SyndicationRetrievalRegressionTests
         SyndicationResourceLoadSettings settings = new();
 
         // Assert
-        settings.Timeout.ShouldBe(TimeSpan.FromSeconds(100));
+        settings.Timeout.ShouldBe(SyndicationEncodingUtility.DefaultRequestTimeout);
+        SyndicationEncodingUtility.DefaultRequestTimeout.ShouldBe(TimeSpan.FromSeconds(100));
     }
 
     [TestMethod]

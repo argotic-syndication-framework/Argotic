@@ -560,6 +560,32 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="content"/> is an empty string.</exception>
     public static IList<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content)
+        => ExtractDiscoverableSyndicationEndpoints(content, baseUri: null);
+
+    /// <summary>
+    /// Extracts auto-discoverable syndication endpoints, resolving relative hrefs against a base URI.
+    /// </summary>
+    /// <param name="content">The HTML markup to parse.</param>
+    /// <param name="baseUri">
+    ///     The address the markup was retrieved from, used to resolve relative hrefs. When
+    ///     <see langword="null"/>, a relative href is stored as it appears.
+    /// </param>
+    /// <returns>A collection of the endpoints found.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <c>href="/feed.xml"</c> is the commonest form an auto-discovery link takes, and without a
+    ///     base URI it produced an endpoint whose <c>Source</c> was relative — which
+    ///     <see cref="DiscoverableSyndicationEndpoint.CreateNavigatorAsync(HttpClient, CancellationToken)"/>
+    ///     cannot fetch. It hands the address to <c>HttpClient</c>, which rejects a relative one.
+    ///     </para>
+    ///     <para>
+    ///     The overload without a base URI is kept and unchanged, because a caller parsing markup they
+    ///     already hold has no address to resolve against and did not necessarily want one invented.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="content"/> is a null reference.</exception>
+    /// <exception cref="ArgumentException">The <paramref name="content"/> is an empty string.</exception>
+    public static IList<DiscoverableSyndicationEndpoint> ExtractDiscoverableSyndicationEndpoints(string content, Uri? baseUri)
     {
         List<DiscoverableSyndicationEndpoint> results = [];
         Regex linkPattern = new("<link[^>]+", RegexOptions.IgnoreCase);
@@ -580,6 +606,11 @@ public static class SyndicationDiscoveryUtility
                 {
                     if (Uri.TryCreate(href, UriKind.RelativeOrAbsolute, out Uri? url))
                     {
+                        if (!url.IsAbsoluteUri && baseUri is not null && Uri.TryCreate(baseUri, url, out Uri? absolute))
+                        {
+                            url = absolute;
+                        }
+
                         DiscoverableSyndicationEndpoint endpoint = new()
                         {
                             Source = url
@@ -688,8 +719,14 @@ public static class SyndicationDiscoveryUtility
         // under a bound - and the synchronous reader gets memory instead.
         using PooledContentBuffer body = await SyndicationEncodingUtility.ReadContentAsync(
             response, SyndicationContentLengthLimits.Discovery, cancellationToken).ConfigureAwait(false);
-        using Stream stream = body.AsStream();
-        return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(stream);
+        using StreamReader reader = new(body.AsStream());
+        string markup = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
+
+        // Resolved against the address the response actually came from rather than the one that was
+        // asked for, so a redirect is honoured: a page moved from example.com to www.example.com
+        // must resolve its relative links against where it ended up.
+        return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(
+            markup, response.RequestMessage?.RequestUri ?? uri);
     }
 
     /// <summary>

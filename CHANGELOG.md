@@ -93,6 +93,12 @@ Behaviour changes that fix no defect and break no documented contract, but that 
 
 #### Feed retrieval
 
+- **Auto-discovery with relative links**: an endpoint discovered from `href="/feed.xml"` — the commonest
+  form such a link takes — is now resolved against the address the page was retrieved from, following
+  redirects. It was stored exactly as written, so `DiscoverableSyndicationEndpoint.CreateNavigatorAsync`
+  handed a relative URI to `HttpClient` and threw. A new
+  `ExtractDiscoverableSyndicationEndpoints(string, Uri)` overload exposes the same resolution to callers
+  parsing markup themselves; the single-argument overload is unchanged
 - **Character encoding**: The encoding declared in a feed's XML declaration is honoured again when loading from a
   `Stream` or `Uri`. Content was being decoded as UTF-8 regardless of the declaration, corrupting non-UTF-8 feeds
   with replacement characters and failing outright on BOM-less UTF-16

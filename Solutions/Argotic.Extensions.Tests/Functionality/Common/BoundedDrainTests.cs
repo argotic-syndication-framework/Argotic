@@ -86,6 +86,64 @@ public sealed class BoundedDrainTests
     }
 
     /// <summary>
+    /// Asking whether a URI exists no longer downloads what is behind it.
+    /// </summary>
+    /// <param name="declareLength">Whether the response declares <c>Content-Length</c>.</param>
+    /// <remarks>
+    ///     <para>
+    ///     <c>UriExistsAsync</c> never reads the body — it only ever looked at the status and the
+    ///     length — but under content-read completion the body was buffered inside <c>SendAsync</c>
+    ///     before the method got a chance not to read it. Asking "does this feed still exist?" cost a
+    ///     full download of the feed.
+    ///     </para>
+    ///     <para>
+    ///     The undeclared row is the one that matters: it is every decompressed and every chunked
+    ///     response, and it is the row that would have started answering "does not exist" had the
+    ///     completion option changed without the predicate changing with it.
+    ///     </para>
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    [DataRow(true, DisplayName = "Content-Length declared")]
+    [DataRow(false, DisplayName = "Content-Length absent")]
+    public async Task AskingWhetherAUriExists_NeverReadsTheBody(bool declareLength)
+    {
+        using ControllableHttpContent content = new(
+            Encoding.UTF8.GetBytes(new string('x', 256 * 1024)), declareLength);
+        using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse("text/html")));
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        bool exists = await SyndicationDiscoveryUtility.UriExistsAsync(
+            Source, client, TestContext.CancellationTokenSource.Token);
+
+        exists.ShouldBeTrue("INVARIANT: a successful response means the URI exists, declared length or not");
+        content.WasRead.ShouldBeFalse("nothing here ever needed the body");
+        content.BytesRead.ShouldBe(0);
+    }
+
+    /// <summary>
+    /// An empty body still means the URI does not exist.
+    /// </summary>
+    /// <remarks>
+    ///     The one thing the old <c>&gt; 0</c> predicate got right, and the reason the new one is
+    ///     <c>!= 0</c> rather than dropped altogether: a declared length of zero is a real answer, where
+    ///     an absent length is the absence of one.
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    public async Task AZeroLengthBody_StillMeansTheUriDoesNotExist()
+    {
+        using ControllableHttpContent content = new([]);
+        using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse("text/html")));
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        bool exists = await SyndicationDiscoveryUtility.UriExistsAsync(
+            Source, client, TestContext.CancellationTokenSource.Token);
+
+        exists.ShouldBeFalse();
+    }
+
+    /// <summary>
     /// N1 — a declared length over the cap is refused without opening the body stream.
     /// </summary>
     /// <remarks>

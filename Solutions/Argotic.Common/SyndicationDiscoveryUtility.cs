@@ -308,10 +308,12 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(target);
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(source, httpClient, null, cancellationToken).ConfigureAwait(false);
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(
+            source, httpClient, null, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
-        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
-        using StreamReader reader = new(stream);
+        using PooledContentBuffer body = await SyndicationEncodingUtility.ReadContentAsync(
+            response, SyndicationContentLengthLimits.Discovery, cancellationToken).ConfigureAwait(false);
+        using StreamReader reader = new(body.AsStream());
         string content = await reader.ReadToEndAsync(cancellationToken).ConfigureAwait(false);
         IList<Uri> links = SyndicationDiscoveryUtility.ExtractUrls(content);
 
@@ -392,9 +394,17 @@ public static class SyndicationDiscoveryUtility
 
         try
         {
-            using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
-            var contentLength = response.Content.Headers.ContentLength ?? -1;
-            return response.IsSuccessStatusCode && contentLength > 0;
+            // The body is never read here, so headers-read is straightforward - but the predicate
+            // has to change in the same breath. Under content-read the body was buffered before this
+            // line ran, and a buffered HttpContent reports its BUFFER's length whatever the origin
+            // sent, so ContentLength was never null and `> 0` was correct. Under headers-read nothing
+            // has been buffered, so a response that declared no length - every decompressed and every
+            // chunked one - reports null and would answer 'does not exist'. Splitting these two
+            // changes across commits introduces the bug the second one fixes.
+            using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(
+                uri, httpClient, null, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
+            long contentLength = response.Content.Headers.ContentLength ?? -1;
+            return response.IsSuccessStatusCode && contentLength != 0;
         }
         catch (HttpRequestException)
         {

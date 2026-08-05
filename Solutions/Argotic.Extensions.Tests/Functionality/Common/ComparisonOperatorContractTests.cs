@@ -1,3 +1,4 @@
+using System.Reflection;
 using System.Xml.XPath;
 
 using Argotic.Common;
@@ -256,6 +257,11 @@ public class ComparisonOperatorContractTests
         (lesser >= greater).ShouldBeFalse($"{typeof(T).Name}: lesser >= greater");
         (first >= none).ShouldBeTrue($"{typeof(T).Name}: instance >= null");
         (none >= alsoNone).ShouldBeTrue($"{typeof(T).Name}: null >= null");
+
+        EqualityOperator(lesser, greater).ShouldBeFalse($"{typeof(T).Name}: unequal instances are not ==");
+        InequalityOperator(lesser, greater).ShouldBeTrue($"{typeof(T).Name}: unequal instances are !=");
+
+        VerifyEquality(first, second, none, alsoNone);
     }
 
     /// <summary>
@@ -284,5 +290,111 @@ public class ComparisonOperatorContractTests
         (first >= none).ShouldBeTrue($"{typeof(T).Name}: instance >= null");
         (none <= alsoNone).ShouldBeTrue($"{typeof(T).Name}: null <= null");
         (none >= alsoNone).ShouldBeTrue($"{typeof(T).Name}: null >= null");
+
+        VerifyEquality(first, second, none, alsoNone);
+    }
+
+    /// <summary>
+    /// Asserts the equality half of the contract, which the 72 files this replaced never covered.
+    /// </summary>
+    /// <remarks>
+    ///     The four ordering operators come from the C# 14 extension block in
+    ///     <see cref="ComparisonOperatorExtensions"/> and route through <see cref="IComparable{T}.CompareTo"/>,
+    ///     which is why <c>CompareTo</c> was already fully covered while <c>op_Equality</c>,
+    ///     <c>Equals(object)</c> and <c>GetHashCode</c> sat at zero on every type. Predefined reference
+    ///     equality beats an extension operator, so <c>==</c> and <c>!=</c> cannot be supplied by the
+    ///     extension block and each type declares them itself - which is precisely why they need asserting.
+    /// </remarks>
+    /// <typeparam name="T">The type under test.</typeparam>
+    /// <param name="first">An instance.</param>
+    /// <param name="second">A separately constructed instance that compares equal to <paramref name="first"/>.</param>
+    /// <param name="none">A null reference.</param>
+    /// <param name="alsoNone">A second null reference, so no comparison is made to the same variable.</param>
+    private static void VerifyEquality<T>(T first, T second, T? none, T? alsoNone)
+        where T : class, IComparable<T>, IComparisonOperators
+    {
+        // Equals and GetHashCode are virtual methods, so these dispatch to the type's own overrides
+        // even through a type parameter.
+        first.Equals(second).ShouldBeTrue($"{typeof(T).Name}: Equals(T) on equal instances");
+        first.Equals((object)second).ShouldBeTrue($"{typeof(T).Name}: Equals(object) on equal instances");
+        first.Equals((object)first).ShouldBeTrue($"{typeof(T).Name}: Equals(object) is reflexive");
+        first.Equals(null).ShouldBeFalse($"{typeof(T).Name}: Equals(null)");
+
+        // Exercises the `is T other` pattern in every Equals(object) override.
+        first.Equals("a value of an unrelated type").ShouldBeFalse($"{typeof(T).Name}: Equals(object) rejects another type");
+
+        first.GetHashCode().ShouldBe(
+            second.GetHashCode(),
+            $"{typeof(T).Name}: instances that are Equals must return the same GetHashCode");
+
+        EqualityOperator(first, second).ShouldBeTrue($"{typeof(T).Name}: equal instances are ==");
+        InequalityOperator(first, second).ShouldBeFalse($"{typeof(T).Name}: equal instances are not !=");
+        EqualityOperator(first, none).ShouldBeFalse($"{typeof(T).Name}: instance == null");
+        EqualityOperator(none, first).ShouldBeFalse($"{typeof(T).Name}: null == instance");
+        InequalityOperator(first, none).ShouldBeTrue($"{typeof(T).Name}: instance != null");
+        EqualityOperator(none, alsoNone).ShouldBeTrue($"{typeof(T).Name}: null == null");
+        InequalityOperator(none, alsoNone).ShouldBeFalse($"{typeof(T).Name}: null is not != null");
+    }
+
+    /// <summary>
+    /// Invokes the type's declared <c>operator ==</c>.
+    /// </summary>
+    /// <typeparam name="T">The type under test.</typeparam>
+    /// <param name="left">The left operand.</param>
+    /// <param name="right">The right operand.</param>
+    /// <returns>The result of the type's equality operator.</returns>
+    private static bool EqualityOperator<T>(T? left, T? right)
+        where T : class, IComparable<T>, IComparisonOperators
+        => InvokeOperator("op_Equality", left, right);
+
+    /// <summary>
+    /// Invokes the type's declared <c>operator !=</c>.
+    /// </summary>
+    /// <typeparam name="T">The type under test.</typeparam>
+    /// <param name="left">The left operand.</param>
+    /// <param name="right">The right operand.</param>
+    /// <returns>The result of the type's inequality operator.</returns>
+    private static bool InequalityOperator<T>(T? left, T? right)
+        where T : class, IComparable<T>, IComparisonOperators
+        => InvokeOperator("op_Inequality", left, right);
+
+    /// <summary>
+    /// Invokes a declared equality operator by reflection.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     Reflection is not incidental here, it is required. Writing <c>left == right</c> inside a generic
+    ///     method binds to <i>predefined reference equality</i>, not to the type's own operator: user-defined
+    ///     operators are not resolved through a type parameter. The four ordering operators do work through
+    ///     the constraint, because they come from the C# 14 extension block in
+    ///     <see cref="ComparisonOperatorExtensions"/> - and the reason that block cannot supply <c>==</c> and
+    ///     <c>!=</c> is the same rule. So these two operators cannot be reached generically at all.
+    ///     </para>
+    ///     <para>
+    ///     The lookup doubles as an assertion that the operator is declared. A type that implements
+    ///     <see cref="IComparisonOperators"/> and forgets <c>==</c> silently gets reference equality, which
+    ///     is exactly the defect worth catching.
+    ///     </para>
+    /// </remarks>
+    /// <typeparam name="T">The type under test.</typeparam>
+    /// <param name="name">The operator's metadata name.</param>
+    /// <param name="left">The left operand.</param>
+    /// <param name="right">The right operand.</param>
+    /// <returns>The result of the operator.</returns>
+    private static bool InvokeOperator<T>(string name, T? left, T? right)
+        where T : class, IComparable<T>, IComparisonOperators
+    {
+        MethodInfo? op = typeof(T).GetMethod(
+            name,
+            BindingFlags.Public | BindingFlags.Static,
+            binder: null,
+            [typeof(T), typeof(T)],
+            modifiers: null);
+
+        op.ShouldNotBeNull(
+            $"{typeof(T).Name} implements {nameof(IComparisonOperators)} but does not declare {name}. " +
+            "The extension block cannot supply it - predefined reference equality wins - so the type must.");
+
+        return (bool)op.Invoke(null, [left, right])!;
     }
 }

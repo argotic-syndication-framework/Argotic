@@ -464,32 +464,15 @@ public static partial class SyndicationEncodingUtility
     {
         ArgumentNullException.ThrowIfNull(data);
 
-        // The declaration sits at offset 0, so decoding the head of the document is normally enough.
+        // The declaration sits at offset 0, so sniffing the head of the document is normally enough.
         // The previous implementation decoded the whole document and ran the regex over all of it,
         // which on a 1000-item feed cost megabytes to read a few dozen bytes.
-        //
-        // A StreamReader over the bounded slice, rather than a direct ASCII decode, so that
-        // byte-order-mark detection still happens - a UTF-16 document would otherwise decode to
-        // nonsense and silently fall back to UTF-8.
         if (data.Length > XmlDeclarationProbeLength)
         {
-            using MemoryStream head = new(data, 0, XmlDeclarationProbeLength, writable: false);
-            using StreamReader headReader = new(head, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
-            string prefix = headReader.ReadToEnd();
-
-            Match prefixMatch = XmlDeclarationEncodingRegex().Match(prefix);
-            if (prefixMatch.Success)
+            Encoding sniffed = SniffXmlEncoding(data.AsSpan(0, XmlDeclarationProbeLength), out bool declarationMayOverrun);
+            if (!declarationMayOverrun)
             {
-                return SyndicationEncodingUtility.EncodingFromMatch(prefixMatch);
-            }
-
-            // A declaration may legally contain arbitrary whitespace between its pseudo-attributes,
-            // so one can run past the probe window. That never happens in practice, but "never in
-            // practice" is not the same as "cannot", and the fast path must not change the answer:
-            // if the document opens a declaration that did not fit, fall back to reading it whole.
-            if (!prefix.TrimStart().StartsWith("<?xml", StringComparison.OrdinalIgnoreCase))
-            {
-                return Encoding.UTF8;
+                return sniffed;
             }
         }
 
@@ -535,6 +518,63 @@ public static partial class SyndicationEncodingUtility
         // whose declaration runs long - and this overload is public API. The byte[] overload gets
         // the bounded fast path instead, falling back to this one when the declaration overruns it.
         return SyndicationEncodingUtility.EncodingFromMatch(XmlDeclarationEncodingRegex().Match(content));
+    }
+
+    /// <summary>
+    /// Reads the character encoding out of an XML declaration at the head of a document.
+    /// </summary>
+    /// <param name="window">The leading bytes of the document.</param>
+    /// <param name="declarationMayOverrun">
+    ///     On return, <see langword="true"/> when the window opens an XML declaration whose closing
+    ///     <c>?&gt;</c> is not inside it, so the answer is not yet known and more bytes are needed.
+    /// </param>
+    /// <returns>The declared encoding, or <see cref="Encoding.UTF8"/> when none is declared, the name is
+    /// unknown, or the window is empty.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     <b>The flag is not optional.</b> Three different situations all produce
+    ///     <see cref="Encoding.UTF8"/> — the document declared UTF-8, the document declared nothing, and
+    ///     the document opened a declaration this window could not see the end of. Only the third means
+    ///     "ask again with more bytes", and a caller cannot tell them apart from the return value alone.
+    ///     </para>
+    ///     <para>
+    ///     The trigger is <b>a declaration that did not close</b>, not <b>an <c>encoding=</c> that was
+    ///     not found</b>, and the difference is a silent mis-decode. The declaration regex requires the
+    ///     closing <c>?&gt;</c>, so a declaration whose <c>encoding=</c> sits inside the window but whose
+    ///     <c>?&gt;</c> does not fails to match even though the answer was right there. Growing on
+    ///     "no <c>encoding=</c>" would stop early on exactly that document and answer <c>utf-8</c> for a
+    ///     feed that said <c>iso-8859-1</c>. Row 15b of the encoding matrix is that document.
+    ///     </para>
+    ///     <para>
+    ///     Decoding goes through <see cref="StreamReader"/> rather than a hand-rolled preamble scan.
+    ///     A byte-order mark has to be detected and stripped before the regex sees the text or a UTF-16
+    ///     document decodes to nonsense, and the three byte-order-mark tests in this repository all
+    ///     declare an encoding matching their own mark — so a decoder that forgot to strip it would pass
+    ///     every one of them. Copying ≤512 bytes to let the framework do it is worth more than the
+    ///     allocation it costs.
+    ///     </para>
+    /// </remarks>
+    internal static Encoding SniffXmlEncoding(ReadOnlySpan<byte> window, out bool declarationMayOverrun)
+    {
+        declarationMayOverrun = false;
+
+        if (window.IsEmpty)
+        {
+            return Encoding.UTF8;
+        }
+
+        using MemoryStream head = new(window.ToArray(), writable: false);
+        using StreamReader headReader = new(head, Encoding.UTF8, detectEncodingFromByteOrderMarks: true);
+        string prefix = headReader.ReadToEnd();
+
+        Match prefixMatch = XmlDeclarationEncodingRegex().Match(prefix);
+        if (prefixMatch.Success)
+        {
+            return SyndicationEncodingUtility.EncodingFromMatch(prefixMatch);
+        }
+
+        declarationMayOverrun = prefix.TrimStart().StartsWith("<?xml", StringComparison.OrdinalIgnoreCase);
+        return Encoding.UTF8;
     }
 
     /// <summary>

@@ -113,6 +113,98 @@ public sealed class EncodingCharacterisationTests
     }
 
     /// <summary>
+    /// The sniff answers correctly when the byte-order mark and the declaration disagree.
+    /// </summary>
+    /// <param name="name">The case name.</param>
+    /// <param name="document">The document's bytes.</param>
+    /// <param name="expectedWebName">The encoding name the sniff must return.</param>
+    /// <remarks>
+    ///     <para>
+    ///     <b>Asserted against <c>GetXmlEncoding(byte[])</c>, deliberately not through
+    ///     <c>CreateSafeNavigator</c>.</b> The navigator hands the sniffed encoding to a
+    ///     <see cref="StreamReader"/> built with byte-order-mark detection on, which would silently
+    ///     correct a wrong sniff — so a test routed through it cannot see the defect it is looking for.
+    ///     </para>
+    ///     <para>
+    ///     Every pre-existing byte-order-mark test in this repository declares an encoding that
+    ///     <i>matches its own mark</i>, so a decoder that forgot to strip the mark before applying the
+    ///     declaration regex would return the right answer for the wrong reason and pass all of them.
+    ///     These are the cells where the two disagree, in both the under- and over-512-byte forms so
+    ///     that the bounded probe and the whole-document fallback are both exercised.
+    ///     </para>
+    ///     <para>
+    ///     <b>Perturbation-checked, and the result narrows what these rows are worth.</b> Setting the
+    ///     sniff's <c>detectEncodingFromByteOrderMarks</c> to <see langword="false"/> turns exactly one
+    ///     row red: <c>utf-16 BE mark, declared iso-8859-1, past the probe window</c>. The UTF-8 rows
+    ///     survive it, because <see cref="StreamReader"/> strips the preamble of the encoding it was
+    ///     <i>given</i> whatever that flag says — the flag only governs switching to a different
+    ///     encoding. So it is the <b>UTF-16 cells alone</b> that hold byte-order-mark detection in place
+    ///     here, and deleting them as redundant would silently remove the only guard there is.
+    ///     </para>
+    /// </remarks>
+    [TestMethod]
+    [DynamicData(nameof(MarkAndDeclarationDisagreements))]
+    public void WhenTheMarkAndTheDeclarationDisagree_TheSniffStillAnswersCorrectly(
+        string name, byte[] document, string expectedWebName)
+        => SyndicationEncodingUtility.GetXmlEncoding(document).WebName.ShouldBe(expectedWebName, name);
+
+    /// <summary>
+    /// Gets the cells where the byte-order mark and the declared encoding disagree.
+    /// </summary>
+    public static IEnumerable<object[]> MarkAndDeclarationDisagreements
+    {
+        get
+        {
+            foreach (bool overrunsProbe in new[] { false, true })
+            {
+                string padding = overrunsProbe ? new string(' ', 700) : string.Empty;
+                string suffix = overrunsProbe ? ", past the probe window" : ", inside the probe window";
+
+                // A UTF-8 mark in front of a declaration naming something else. The mark must be
+                // stripped before the regex runs, or the declaration is never seen.
+                yield return
+                [
+                    "utf-8 mark, declared iso-8859-1" + suffix,
+                    (byte[])[.. Encoding.UTF8.GetPreamble(), .. Encoding.UTF8.GetBytes($"<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><r>{padding}</r>")],
+                    "iso-8859-1",
+                ];
+
+                yield return
+                [
+                    "utf-8 mark, declared us-ascii" + suffix,
+                    (byte[])[.. Encoding.UTF8.GetPreamble(), .. Encoding.UTF8.GetBytes($"<?xml version=\"1.0\" encoding=\"us-ascii\"?><r>{padding}</r>")],
+                    "us-ascii",
+                ];
+
+                // A UTF-16 mark: the declaration is UTF-16 encoded, so it is only legible at all if the
+                // mark was honoured when decoding the window.
+                yield return
+                [
+                    "utf-16 LE mark, declared utf-8" + suffix,
+                    (byte[])[.. Encoding.Unicode.GetPreamble(), .. Encoding.Unicode.GetBytes($"<?xml version=\"1.0\" encoding=\"utf-8\"?><r>{padding}</r>")],
+                    "utf-8",
+                ];
+
+                yield return
+                [
+                    "utf-16 BE mark, declared iso-8859-1" + suffix,
+                    (byte[])[.. Encoding.BigEndianUnicode.GetPreamble(), .. Encoding.BigEndianUnicode.GetBytes($"<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><r>{padding}</r>")],
+                    "iso-8859-1",
+                ];
+
+                // No mark at all, so nothing to strip - the control that says the rows above are about
+                // the mark rather than about the padding.
+                yield return
+                [
+                    "no mark, declared iso-8859-1" + suffix,
+                    Encoding.ASCII.GetBytes($"<?xml version=\"1.0\" encoding=\"iso-8859-1\"?><r>{padding}</r>"),
+                    "iso-8859-1",
+                ];
+            }
+        }
+    }
+
+    /// <summary>
     /// Row 6's premise, asserted rather than assumed.
     /// </summary>
     /// <remarks>

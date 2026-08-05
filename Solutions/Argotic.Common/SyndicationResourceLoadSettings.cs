@@ -61,6 +61,49 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
             field = value;
         }
     }
+    /// <summary>
+    /// The value of <see cref="MaxResponseContentLength"/> that asks for no limit at all.
+    /// </summary>
+    public const long Unbounded = long.MaxValue;
+
+    /// <summary>
+    /// Gets or sets the maximum number of bytes a load will accept from an HTTP response.
+    /// </summary>
+    /// <value>
+    ///     The maximum number of bytes to accept, or <see langword="null"/> to use the default for the
+    ///     type being loaded. The default value is <see langword="null"/>.
+    /// </value>
+    /// <remarks>
+    ///     <para>
+    ///     <b><see langword="null"/> means the loading type's format default, not unbounded.</b> Were
+    ///     it keyed on whether settings were supplied at all, a caller who constructed a settings object
+    ///     for an unrelated reason would silently lose the larger allowance their document type is
+    ///     entitled to. See <see cref="SyndicationContentLengthLimits"/>. Use <see cref="Unbounded"/> to
+    ///     ask for no limit.
+    ///     </para>
+    ///     <para>
+    ///     The count is of <i>decompressed</i> bytes, which is the number that matters: a few kilobytes
+    ///     of gzip can expand to a megabyte. It does not bound a <see cref="Stream"/> the caller opened
+    ///     themselves, only what this framework downloads.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentOutOfRangeException">The value is zero or negative.</exception>
+    public long? MaxResponseContentLength
+    {
+        get;
+        set
+        {
+            if (value is { } bytes)
+            {
+                // Zero is rejected rather than read as "no limit". RetrievalLimit already spends that
+                // meaning on zero in this same type, and a cap of "accept nothing" is indistinguishable
+                // from a misconfiguration.
+                ArgumentOutOfRangeException.ThrowIfNegativeOrZero(bytes);
+            }
+
+            field = value;
+        }
+    }
 
     /// <summary>
     /// Gets the syndication extensions to attempt to load from a syndication resource.
@@ -111,7 +154,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>
-    public override string ToString() => $"[SyndicationResourceLoadSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", RetrievalLimit = \"{this.RetrievalLimit}\", Timeout = \"{this.Timeout.TotalMilliseconds}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
+    public override string ToString() => $"[SyndicationResourceLoadSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", RetrievalLimit = \"{this.RetrievalLimit}\", Timeout = \"{this.Timeout.TotalMilliseconds}\", MaxResponseContentLength = \"{this.MaxResponseContentLength?.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? "default"}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -130,6 +173,10 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
         if (result == 0) result = this.Timeout.CompareTo(other.Timeout);
         if (result == 0) result = this.AutoDetectExtensions.CompareTo(other.AutoDetectExtensions);
         if (result == 0) result = ComparisonUtility.CompareSequence(this.SupportedExtensions, other.SupportedExtensions);
+
+        // Appended rather than inserted: any earlier position could flip the sign of a comparison
+        // that two existing members already decided between them.
+        if (result == 0) result = Nullable.Compare(this.MaxResponseContentLength, other.MaxResponseContentLength);
 
         return result;
     }
@@ -160,7 +207,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// Returns a hash code for the current instance.
     /// </summary>
     /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.CharacterEncoding?.WebName), HashCodeUtility.Component(this.RetrievalLimit), HashCodeUtility.Component(this.Timeout), HashCodeUtility.Component(this.AutoDetectExtensions));
+    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.CharacterEncoding?.WebName), HashCodeUtility.Component(this.RetrievalLimit), HashCodeUtility.Component(this.Timeout), HashCodeUtility.Component(this.AutoDetectExtensions), HashCodeUtility.Component(this.MaxResponseContentLength));
 
     /// <summary>
     /// Determines if operands are equal.

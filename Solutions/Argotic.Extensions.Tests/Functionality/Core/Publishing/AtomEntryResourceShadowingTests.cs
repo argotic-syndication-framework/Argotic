@@ -12,27 +12,29 @@ using Shouldly;
 namespace Argotic.Extensions.Tests.Functionality.Core.Publishing;
 
 /// <summary>
-/// Pins the Atom Publishing state that <see cref="AtomEntryResource"/> silently loses.
+/// The Atom Publishing state that <see cref="AtomEntryResource"/> used to lose, and no longer does.
 /// </summary>
 /// <remarks>
 ///     <para>
 ///     <b>Every entry here is constructed in code. None of them is loaded, and that is the whole
-///     point.</b> The suite already contains a load-then-save round trip that asserts the saved
-///     document contains <c>edited</c> and <c>draft</c>, and it is green — because <c>Load</c> puts the
-///     extension objects into <c>Extensions</c> directly, so the base <c>Save</c> writes them out
+///     point.</b> The suite also contains a load-then-save round trip asserting the output carries
+///     <c>edited</c> and <c>draft</c>, and it was green throughout — because <c>Load</c> puts the
+///     extension objects into <c>Extensions</c> directly, so the base <c>Save</c> wrote them out
 ///     without ever consulting <c>EditedOn</c> or <c>IsDraft</c>. The synthesis step that reads those
-///     properties is the thing that is broken, and a round trip from a loaded document cannot reach it.
+///     properties was what was broken, and a round trip from a loaded document could not reach it.
 ///     </para>
 ///     <para>
-///     §2.19 states it flatly: <c>AtomEntryResource.Save(XmlWriter, settings)</c> is at <b>0.0% line
-///     and 0 of 8 branches</b>. The member that would have written the state has never executed.
+///     §2.19 stated it flatly at the time: <c>AtomEntryResource.Save(XmlWriter, settings)</c> was at
+///     <b>0.0% line and 0 of 8 branches</b>. The member that should have written the state had never
+///     executed.
 ///     </para>
 ///     <para>
-///     Nine members of <see cref="AtomEntryResource"/> are declared <c>new</c> rather than
-///     <c>override</c>, because none of the corresponding <see cref="AtomEntry"/> members is
-///     <c>virtual</c>. Shadowing binds at compile time from the static type of the reference, so the
-///     base overloads funnel past every shadow. Phase 4 makes three members virtual and deletes six
-///     shadows; these five tests are what say whether it worked.
+///     The cause was that <see cref="AtomEntryResource"/> declared nine members <c>new</c> rather than
+///     <c>override</c>, because no corresponding <see cref="AtomEntry"/> member was <c>virtual</c>.
+///     Shadowing binds at compile time from the static type of the reference, so every base overload
+///     funnelled past every shadow. Three base members are now <c>virtual</c> and three shadows are
+///     <c>override</c>s; these five tests are what say it worked, and the fifth is what says the other
+///     four did not merely move together.
 ///     </para>
 /// </remarks>
 [TestClass]
@@ -54,7 +56,7 @@ public sealed class AtomEntryResourceShadowingTests
     private static readonly DateTime EditedOn = new(2024, 2, 20, 8, 30, 0, DateTimeKind.Utc);
 
     /// <summary>
-    /// C6.1 — the concretely-typed <c>Save(Stream)</c> drops both publishing elements.
+    /// C6.1 — the concretely-typed <c>Save(Stream)</c> writes both publishing elements.
     /// </summary>
     /// <remarks>
     ///     No base reference anywhere in this test. <c>AtomEntry.Save(Stream)</c> forwards to
@@ -62,7 +64,7 @@ public sealed class AtomEntryResourceShadowingTests
     ///     itself — so the shadow never runs even though the caller is holding the derived type.
     /// </remarks>
     [TestMethod]
-    public void SavingAConstructedEntryToAStream_DropsThePublishingState()
+    public void SavingAConstructedEntryToAStream_WritesThePublishingState()
     {
         AtomEntryResource entry = ConstructedDraft();
 
@@ -70,15 +72,15 @@ public sealed class AtomEntryResourceShadowingTests
         entry.Save(stream);
 
         (bool edited, bool draft) = Probe(Encoding.UTF8.GetString(stream.ToArray()));
-        edited.ShouldBeFalse("PINS TODAY: app:edited is lost. Inverted at Phase 4.");
-        draft.ShouldBeFalse("PINS TODAY: app:control/app:draft is lost too, which the plan does not say.");
+        edited.ShouldBeTrue("INVERTED at Phase 4: the shadow now runs through the virtual base call.");
+        draft.ShouldBeTrue("INVERTED at Phase 4: app:control/app:draft too, which the plan did not say was lost.");
     }
 
     /// <summary>
     /// C6.2 — so does <c>Save(XmlWriter)</c>, the overload without settings.
     /// </summary>
     [TestMethod]
-    public void SavingAConstructedEntryToAWriter_DropsThePublishingState()
+    public void SavingAConstructedEntryToAWriter_WritesThePublishingState()
     {
         AtomEntryResource entry = ConstructedDraft();
 
@@ -89,8 +91,8 @@ public sealed class AtomEntryResourceShadowingTests
         }
 
         (bool edited, bool draft) = Probe(builder.ToString());
-        edited.ShouldBeFalse("PINS TODAY. Inverted at Phase 4.");
-        draft.ShouldBeFalse("PINS TODAY. Inverted at Phase 4.");
+        edited.ShouldBeTrue("INVERTED at Phase 4.");
+        draft.ShouldBeTrue("INVERTED at Phase 4.");
     }
 
     /// <summary>
@@ -102,7 +104,7 @@ public sealed class AtomEntryResourceShadowingTests
     /// </remarks>
     [SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance", Justification = "The interface reference is the subject of the test. Narrowing it to AtomEntryResource would bind the shadowed member and the test would assert nothing.")]
     [TestMethod]
-    public void SavingThroughAnInterfaceReference_DropsThePublishingState()
+    public void SavingThroughAnInterfaceReference_WritesThePublishingState()
     {
         ISyndicationResource entry = ConstructedDraft();
 
@@ -113,12 +115,12 @@ public sealed class AtomEntryResourceShadowingTests
         }
 
         (bool edited, bool draft) = Probe(builder.ToString());
-        edited.ShouldBeFalse("PINS TODAY. Inverted at Phase 4.");
-        draft.ShouldBeFalse("PINS TODAY. Inverted at Phase 4.");
+        edited.ShouldBeTrue("INVERTED at Phase 4.");
+        draft.ShouldBeTrue("INVERTED at Phase 4.");
     }
 
     /// <summary>
-    /// C6.4 — loading through an interface reference leaves the publishing members unset.
+    /// C6.4 — loading through an interface reference now populates the publishing members.
     /// </summary>
     /// <remarks>
     ///     The <c>HasExtensions</c> assertion is what makes the negative one mean something. Without it,
@@ -128,7 +130,7 @@ public sealed class AtomEntryResourceShadowingTests
     /// </remarks>
     [SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance", Justification = "The interface reference is the subject of the test. Narrowing it to AtomEntryResource would bind the shadowed member and the test would assert nothing.")]
     [TestMethod]
-    public void LoadingThroughAnInterfaceReference_SkipsThePublishingExtensions()
+    public void LoadingThroughAnInterfaceReference_PopulatesThePublishingMembers()
     {
         ISyndicationResource viaInterface = new AtomEntryResource();
         using (MemoryStream stream = new(Encoding.UTF8.GetBytes(PublishingEntry), writable: false))
@@ -138,8 +140,8 @@ public sealed class AtomEntryResourceShadowingTests
 
         AtomEntryResource entry = (AtomEntryResource)viaInterface;
         entry.HasExtensions.ShouldBeTrue("the extensions did arrive; they were simply not projected");
-        entry.EditedOn.ShouldBe(DateTime.MinValue, "PINS TODAY. Inverted at Phase 4.");
-        entry.IsDraft.ShouldBeFalse("PINS TODAY. Inverted at Phase 4.");
+        entry.EditedOn.ShouldBe(EditedOn, "INVERTED at Phase 4: the interface map now reaches the override.");
+        entry.IsDraft.ShouldBeTrue("INVERTED at Phase 4.");
     }
 
     /// <summary>

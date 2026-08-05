@@ -82,17 +82,18 @@ public sealed class AtomEntryResourceLoadAsyncTests
     }
 
     /// <summary>
-    /// Fetching through an <see cref="ISyndicationResource"/> reference drops the publishing state.
+    /// Fetching through an <see cref="ISyndicationResource"/> reference populates the publishing state.
     /// </summary>
     /// <remarks>
     ///     The asynchronous counterpart of the shadowing pins, and the one that had no coverage at all.
-    ///     The interface map is fixed at <c>AtomEntry</c>, so the shadowed <c>LoadAsync</c> never runs
-    ///     and <c>LoadAtomPublishingExtensions</c> is never called. Inverted at Phase 4.
+    ///     It used to drop the state: the interface map is fixed at <c>AtomEntry</c>, so a shadowed
+    ///     <c>LoadAsync</c> never ran and <c>LoadAtomPublishingExtensions</c> was never called. Now that
+    ///     the base member is <c>virtual</c> and this one overrides it, the interface map reaches it.
     /// </remarks>
     /// <returns>A task representing the test.</returns>
     [SuppressMessage("Performance", "CA1859:Use concrete types when possible for improved performance", Justification = "The interface reference is the subject of the test. Narrowing it to AtomEntryResource would bind the shadowed member and the test would assert nothing.")]
     [TestMethod]
-    public async Task LoadAsyncThroughAnInterfaceReference_SkipsThePublishingExtensions()
+    public async Task LoadAsyncThroughAnInterfaceReference_PopulatesThePublishingMembers()
     {
         ISyndicationResource viaInterface = new AtomEntryResource();
         using MockHttpMessageHandler handler = MockHttpMessageHandler.WithContent(PublishingEntry);
@@ -102,8 +103,8 @@ public sealed class AtomEntryResourceLoadAsyncTests
 
         AtomEntryResource entry = (AtomEntryResource)viaInterface;
         entry.HasExtensions.ShouldBeTrue("the extensions did arrive; they were simply not projected");
-        entry.EditedOn.ShouldBe(DateTime.MinValue, "PINS TODAY. Inverted at Phase 4.");
-        entry.IsDraft.ShouldBeFalse("PINS TODAY. Inverted at Phase 4.");
+        entry.EditedOn.ShouldBe(ExpectedEditedOn, "INVERTED at Phase 4: the interface map now reaches the override.");
+        entry.IsDraft.ShouldBeTrue("INVERTED at Phase 4.");
     }
 
     /// <summary>

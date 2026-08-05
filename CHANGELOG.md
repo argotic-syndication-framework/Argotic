@@ -117,6 +117,19 @@ Behaviour changes that fix no defect and break no documented contract, but that 
 
 #### Atom Publishing
 
+- **Publishing state on a constructed entry**: `AtomEntryResource.Save(Stream)`, `Save(XmlWriter)` and
+  `CreateNavigator()` now write `app:edited` and `app:control/app:draft` from `EditedOn` and `IsDraft`.
+  Only `Save(XmlWriter, SyndicationResourceSaveSettings)` did, so an entry built in code and saved by
+  any other route lost its entire Atom Publishing state, silently. An entry that had been *loaded* was
+  unaffected, because loading places the extension objects directly into `Extensions` - which is why a
+  load-then-save round trip could not detect this
+- **Publishing state through a base or interface reference**: an `AtomEntryResource` held as
+  `ISyndicationResource` or `AtomEntry` now populates `EditedOn` and `IsDraft` on every load overload,
+  synchronous and asynchronous. `AtomEntry.Load(IXPathNavigable, SyndicationResourceLoadSettings)`,
+  `LoadAsync(Uri, HttpClient, ...)` and `Save(XmlWriter, SyndicationResourceSaveSettings)` are now
+  `virtual`, and the corresponding `AtomEntryResource` members `override` rather than shadow them. The
+  interface map was fixed at `AtomEntry`, so a caller not using the concrete type got the publishing
+  members silently dropped
 - **`AtomEntryResource` load overloads**: `Load(IXPathNavigable)`, `Load(Stream)` and `Load(XmlReader)` populate
   `EditedOn` and `IsDraft`. Only two overloads were wrapped, so the others silently dropped the publishing state
 - **`app:draft`**: The draft flag is read from the `app:control` element that `WriteTo` emits, so an entry's draft

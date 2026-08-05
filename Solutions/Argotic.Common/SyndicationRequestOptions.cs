@@ -51,24 +51,55 @@ public sealed record SyndicationRequestOptions
     /// Applies the options to an <see cref="HttpRequestMessage"/>.
     /// </summary>
     /// <param name="request">The <see cref="HttpRequestMessage"/> to configure.</param>
+    /// <remarks>
+    ///     <para>
+    ///     <b>A value this method cannot send is an error, not a no-op.</b> Every setter here used to
+    ///     be a <c>Try</c> that discarded its result, so an <see cref="Accept"/> of <c>"@@@"</c> or a
+    ///     <see cref="Referer"/> of <c>"example.com/x"</c> produced a request with the header simply
+    ///     absent — and the caller learned about it, if at all, as a <c>406</c> from a server they had
+    ///     no reason to suspect.
+    ///     </para>
+    ///     <para>
+    ///     A relative <see cref="Referer"/> was worse than dropped. <c>Uri.TryCreate(…, Absolute, …)</c>
+    ///     accepts <c>"/relative/path"</c> on this platform and yields <c>file:///relative/path</c>, so
+    ///     the header was sent — disclosing a local-looking path to a remote origin. Only <c>http</c>
+    ///     and <c>https</c> are accepted now.
+    ///     </para>
+    ///     <para>
+    ///     An empty <see cref="Referer"/> still means "do not send one", which is long-standing and
+    ///     pinned.
+    ///     </para>
+    /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="request"/> is a null reference.</exception>
+    /// <exception cref="FormatException">
+    ///     A header value cannot be sent: <see cref="Accept"/> or <see cref="UserAgent"/> is not a
+    ///     valid header value, <see cref="Referer"/> is not an absolute <c>http</c> or <c>https</c>
+    ///     URI, or a <see cref="CustomHeaders"/> entry names a content header.
+    /// </exception>
     public void ApplyTo(HttpRequestMessage request)
     {
         ArgumentNullException.ThrowIfNull(request);
 
         if (Accept is not null)
         {
-            request.Headers.Accept.TryParseAdd(Accept);
+            request.Headers.Accept.ParseAdd(Accept);
         }
 
         if (UserAgent is not null)
         {
             request.Headers.UserAgent.Clear();
-            request.Headers.UserAgent.TryParseAdd(UserAgent);
+            request.Headers.UserAgent.ParseAdd(UserAgent);
         }
 
-        if (Referer is not null && Uri.TryCreate(Referer, UriKind.Absolute, out var referrerUri))
+        if (!string.IsNullOrEmpty(Referer))
         {
+            if (!Uri.TryCreate(Referer, UriKind.Absolute, out Uri? referrerUri)
+                || (referrerUri.Scheme != Uri.UriSchemeHttp && referrerUri.Scheme != Uri.UriSchemeHttps))
+            {
+                throw new FormatException(
+                    $"The referer '{Referer}' is not an absolute http or https URI, so it cannot be sent as a Referer header.");
+            }
+
             request.Headers.Referrer = referrerUri;
         }
 
@@ -76,9 +107,20 @@ public sealed record SyndicationRequestOptions
         {
             foreach (var (key, value) in CustomHeaders)
             {
-                if (!request.Headers.Contains(key))
+                // NonValidated rather than Contains: the latter throws InvalidOperationException on a
+                // content header name, so the guard written to avoid clobbering a header was itself
+                // the thing that failed - with a BCL message about HttpContent that named nothing the
+                // caller had written.
+                if (request.Headers.NonValidated.Contains(key))
                 {
-                    request.Headers.TryAddWithoutValidation(key, value);
+                    continue;
+                }
+
+                if (!request.Headers.TryAddWithoutValidation(key, value))
+                {
+                    throw new FormatException(
+                        $"The custom header '{key}' cannot be set on a request message. Content headers such as "
+                        + "Content-Type describe a request body, which a syndication fetch does not have.");
                 }
             }
         }

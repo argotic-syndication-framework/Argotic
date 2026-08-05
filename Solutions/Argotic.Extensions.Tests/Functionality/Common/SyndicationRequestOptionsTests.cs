@@ -50,7 +50,7 @@ public class SyndicationRequestOptionsTests
     }
 
     [TestMethod]
-    public void ApplyTo_WithInvalidReferer_DoesNotThrow()
+    public void ApplyTo_WithInvalidReferer_Throws()
     {
         SyndicationRequestOptions options = new()
         {
@@ -58,15 +58,15 @@ public class SyndicationRequestOptionsTests
         };
         using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
-        // Should not throw
-        Should.NotThrow(() => options.ApplyTo(request));
-
-        // Referrer should remain null
-        request.Headers.Referrer.ShouldBeNull();
+        // Was ShouldNotThrow with the header left unset. A value that cannot be sent is a mistake in
+        // the caller's configuration, and reporting it as a missing header defers the symptom to a
+        // 406 from a server they have no reason to suspect.
+        Should.Throw<FormatException>(() => options.ApplyTo(request))
+            .Message.ShouldContain("not a valid uri");
     }
 
     [TestMethod]
-    public void ApplyTo_WithRelativeReferer_SetsFileUri()
+    public void ApplyTo_WithRelativeReferer_Throws()
     {
         SyndicationRequestOptions options = new()
         {
@@ -74,11 +74,51 @@ public class SyndicationRequestOptionsTests
         };
         using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
 
+        // Was ShouldBe("file"). Uri.TryCreate(..., Absolute, ...) accepts /relative/path on this
+        // platform and produces file:///relative/path, which was then sent to a remote origin -- a
+        // local-looking path disclosed in a header the caller thought pointed at a page.
+        Should.Throw<FormatException>(() => options.ApplyTo(request));
+        request.Headers.Referrer.ShouldBeNull();
+    }
+
+    [TestMethod]
+    public void ApplyTo_WithMalformedAccept_Throws()
+    {
+        SyndicationRequestOptions options = new() { Accept = "@@@" };
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
+
+        Should.Throw<FormatException>(() => options.ApplyTo(request));
+    }
+
+    [TestMethod]
+    public void ApplyTo_WithATolerableAccept_StillSetsIt()
+    {
+        // The control, and a reminder that the parser is looser than it looks: a q-value that is not
+        // a number passes, so ParseAdd rejects less than one might assume. Without this row, the
+        // test above is equally consistent with "ParseAdd rejects anything unusual".
+        SyndicationRequestOptions options = new() { Accept = "application/xml; q=not-a-number" };
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
+
         options.ApplyTo(request);
 
-        // Uri.TryCreate with UriKind.Absolute interprets /relative/path as a file:// URI
-        request.Headers.Referrer.ShouldNotBeNull();
-        request.Headers.Referrer!.Scheme.ShouldBe("file");
+        request.Headers.Accept.Count.ShouldBe(1);
+    }
+
+    [TestMethod]
+    public void ApplyTo_WithAContentHeaderInCustomHeaders_ThrowsSomethingLegible()
+    {
+        SyndicationRequestOptions options = new()
+        {
+            CustomHeaders = new Dictionary<string, string> { ["Content-Type"] = "application/xml" }
+        };
+        using HttpRequestMessage request = new(HttpMethod.Get, "http://example.com");
+
+        // This already threw, which the plan did not record -- request.Headers.Contains raises
+        // InvalidOperationException on a content header name, so the guard written to avoid
+        // clobbering an existing header was itself the failure. The BCL message talks about
+        // HttpContent and names nothing the caller wrote.
+        Should.Throw<FormatException>(() => options.ApplyTo(request))
+            .Message.ShouldContain("Content-Type");
     }
 
     [TestMethod]

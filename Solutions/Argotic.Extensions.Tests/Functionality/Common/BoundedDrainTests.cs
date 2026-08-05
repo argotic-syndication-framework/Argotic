@@ -314,38 +314,36 @@ public sealed class BoundedDrainTests
     }
 
     /// <summary>
-    /// A conditional GET applies no cap, and has already downloaded everything when it returns.
+    /// A conditional GET has read nothing when it returns.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     The one path the size limits do not reach, characterised rather than fixed — Phase 7 owns
-    ///     this method. Written expecting <c>WasRead</c> to be <b>false</b>, on the reasoning that a
-    ///     type whose only accessors are <c>GetResponseStream</c> and <c>GetResponseStreamAsync</c>
-    ///     is a streaming type and therefore has nothing to cap. It is not.
+    ///     Written the other way round, asserting that everything had already been downloaded, because
+    ///     that is what it did. <c>ConditionalGetAsync</c> sent under the default completion option, so
+    ///     the whole body was copied into memory inside <c>SendAsync</c> — before any Argotic code ran
+    ///     and before the caller saw a header. Unbounded <i>and</i> eager, which is the worse of the two:
+    ///     a caller who read <c>ContentLength</c>, decided the body was too large and disposed had
+    ///     already paid for all of it.
     ///     </para>
     ///     <para>
-    ///     <c>ConditionalGetAsync</c> calls <c>SendAsync(request, cancellationToken)</c>, whose
-    ///     completion option defaults to <see cref="HttpCompletionOption.ResponseContentRead"/>, so
-    ///     the whole body is copied into memory inside that call — before any Argotic code runs, and
-    ///     before the caller has seen a single header. The stream handed out afterwards is a reader
-    ///     over that buffer. So the gap is not "unbounded but lazy"; it is unbounded <i>and</i> eager,
-    ///     which is the worse of the two.
+    ///     What kept it that way was the modification heuristic. It read <c>ContentLength</c> and
+    ///     <c>ContentType</c> off the response to decide whether anything had changed, and under
+    ///     headers-read <c>ContentLength</c> is null for every chunked reply — so completing on headers
+    ///     would have converted a real body into a discarded one on exactly the responses least likely
+    ///     to declare a length. Deleting the heuristic removed the constraint, not by intending to.
     ///     </para>
     ///     <para>
-    ///     Moving it to headers-read cannot be done here. <c>ContentLength</c> is asserted below to be
-    ///     the exact body size <b>from a response that never declared one</b> — it is the buffered
-    ///     length, and under headers-read it would be −1. The <c>isModified</c> heuristic reads that
-    ///     same header, so the completion option and the heuristic have to change in one commit. That
-    ///     is the <c>UriExistsAsync</c> lesson from earlier in this phase, and it is Phase 7's job.
+    ///     So this asserts the opposite of what it used to, on the same fixture: eight megabytes past
+    ///     the feed limit are offered, and <b>none</b> of them are read. There is still no cap here and
+    ///     there should not be — the type hands out a stream. It is now genuinely a stream.
     ///     </para>
     /// </remarks>
     /// <returns>A task representing the test.</returns>
     [TestMethod]
-    public async Task AConditionalGetAppliesNoCap_AndHasAlreadyReadEverythingWhenItReturns()
+    public async Task AConditionalGetHasReadNothingWhenItReturns()
     {
         byte[] body = Encoding.UTF8.GetBytes(new string('x', (int)SyndicationContentLengthLimits.Feed + 4_096));
 
-        // declareLength: false, so ContentLength below cannot have come from a header.
         using ControllableHttpContent content = new(body, declareLength: false);
         using MockHttpMessageHandler handler = new((_, _) =>
         {
@@ -358,15 +356,16 @@ public sealed class BoundedDrainTests
         using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
             Source, DateTime.UtcNow.AddDays(-1), null, client, this.TestContext.CancellationTokenSource.Token);
 
-        result.WasModified.ShouldBeTrue("eight megabytes past the feed limit, accepted without complaint");
-        content.WasRead.ShouldBeTrue("the body was buffered by SendAsync before this object existed");
+        result.WasModified.ShouldBeTrue();
+        content.WasRead.ShouldBeFalse("INVERTED: the body is the caller's to read, or not");
         result.ContentLength.ShouldBe(
-            body.Length, "the buffered length, since the content declared none — proof of the buffering");
+            -1, "INVERTED: was the buffered length; a response declaring none now reports none");
 
-        // And the stream is a second reader over that same buffer, not a fetch.
+        // And it is all still there to be read, which is the point of not having read it.
         using Stream stream = await result.GetResponseStreamAsync(this.TestContext.CancellationTokenSource.Token);
         using MemoryStream drained = new();
         await stream.CopyToAsync(drained, this.TestContext.CancellationTokenSource.Token);
         drained.Length.ShouldBe(body.Length);
+        content.WasRead.ShouldBeTrue("and reading it is what reads it");
     }
 }

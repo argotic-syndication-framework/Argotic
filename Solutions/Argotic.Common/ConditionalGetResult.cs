@@ -12,18 +12,22 @@ namespace Argotic.Common;
 ///     </para>
 ///     <para>
 ///     <b>The response size limits in <see cref="SyndicationContentLengthLimits"/> do not apply to
-///     this path.</b> Every other way this library fetches a body now reads it into a buffer it owns
-///     and refuses one larger than the limit for the resource being loaded. This one does not, and
-///     the reason is not that it streams: <c>ConditionalGetAsync</c> sends under the default
-///     completion option, so the body is <b>already fully buffered in memory</b> by the time this
-///     object is constructed. <see cref="GetResponseStream"/> then reads back over that buffer.
+///     this path, and that is deliberate.</b> Every other way this library fetches a body reads it
+///     into a buffer it owns and refuses one larger than the limit for the resource being loaded.
+///     This type does not read the body at all — <c>ConditionalGetAsync</c> completes on headers, so
+///     <see cref="GetResponseStream"/> hands out the live response stream and nothing has been
+///     downloaded until the caller reads it.
 ///     </para>
 ///     <para>
-///     So the shape of the type suggests streaming and the behaviour is eager. Both facts are pinned
-///     by <c>BoundedDrainTests</c>. Callers who need a bound today must read
-///     <see cref="ContentLength"/> — which is populated, because the body has been counted — and
-///     decide before doing anything else; by then the memory has already been spent, so the check
-///     protects downstream work rather than the fetch itself.
+///     It was not always so. Until the modification heuristic was deleted this method completed on
+///     content, and the whole body was buffered before this object existed — unbounded and eager
+///     both. <see cref="ContentLength"/> reported the <i>buffered</i> length, which looked helpful and
+///     was worthless: by the time you could read it you had already paid. It now reports what the
+///     origin declared, or <c>-1</c> when it declared nothing.
+///     </para>
+///     <para>
+///     Callers who want a bound apply one as they read, or use
+///     <c>SyndicationResourceReader.LoadIfModifiedAsync</c>, which does.
 ///     </para>
 /// </remarks>
 public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
@@ -122,8 +126,8 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     /// </summary>
     /// <returns>A <see cref="Stream"/> for reading the response content, or <see cref="Stream.Null"/> if no response is available.</returns>
     /// <remarks>
-    ///     Reads back over a buffer the body was already copied into — see the remarks on
-    ///     <see cref="ConditionalGetResult"/>. Nothing here is bounded, and nothing here is deferred.
+    ///     The live response stream — see the remarks on <see cref="ConditionalGetResult"/>. Reading it
+    ///     is what downloads the body, and nothing bounds how much of it there is.
     /// </remarks>
     /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public Stream GetResponseStream()
@@ -138,8 +142,8 @@ public sealed class ConditionalGetResult : IDisposable, IAsyncDisposable
     /// <param name="cancellationToken">A cancellation token to observe.</param>
     /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="Stream"/> for reading the response content.</returns>
     /// <remarks>
-    ///     Reads back over a buffer the body was already copied into — see the remarks on
-    ///     <see cref="ConditionalGetResult"/>. Nothing here is bounded, and nothing here is deferred.
+    ///     The live response stream — see the remarks on <see cref="ConditionalGetResult"/>. Reading it
+    ///     is what downloads the body, and nothing bounds how much of it there is.
     /// </remarks>
     /// <exception cref="ObjectDisposedException">The object has been disposed.</exception>
     public Task<Stream> GetResponseStreamAsync(CancellationToken cancellationToken = default)

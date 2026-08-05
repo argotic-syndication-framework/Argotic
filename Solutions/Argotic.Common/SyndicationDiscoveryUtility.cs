@@ -545,7 +545,14 @@ public static class SyndicationDiscoveryUtility
         using HttpRequestMessage request = SyndicationEncodingUtility.CreateHttpRequestMessage(source, requestOptions);
         validators.ApplyTo(request);
 
-        HttpResponseMessage response = await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+        // Headers-read, which this could not be until the modification heuristic was deleted. That
+        // heuristic read ContentLength and ContentType off the response to decide whether anything had
+        // changed, and under headers-read ContentLength is null for any chunked reply - so completing
+        // on headers would have turned every chunked 200 into a discarded body. With the decision
+        // reduced to the status code, nothing here needs the body, and the caller gets to decide
+        // whether to pay for it.
+        HttpResponseMessage response = await httpClient.SendAsync(
+            request, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
 
         if (response.StatusCode == HttpStatusCode.NotModified)
         {

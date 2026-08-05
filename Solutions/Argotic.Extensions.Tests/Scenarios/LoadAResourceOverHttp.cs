@@ -239,33 +239,37 @@ public sealed class LoadAResourceOverHttp : IDisposable
     }
 
     /// <summary>
-    /// The same feed, fetched and loaded, decodes two different ways.
+    /// The same feed decodes the same way whether it is fetched or loaded.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     <b>The highest-value row in the characterisation set, and the clearest statement of what
-    ///     Phase 6 is for.</b> One document, correctly declaring <c>iso-8859-1</c> and containing byte
-    ///     <c>0xE9</c>. Loaded from a stream with a default <see cref="SyndicationResourceLoadSettings"/>
-    ///     it comes back with a replacement character; fetched over HTTP it comes back correctly.
+    ///     <b>The row this phase existed for.</b> One document, correctly declaring <c>iso-8859-1</c>
+    ///     and containing byte <c>0xE9</c>. It used to come back with a replacement character when
+    ///     loaded from a stream with a default <see cref="SyndicationResourceLoadSettings"/> and
+    ///     correctly when fetched over HTTP — the same document, the same settings, two answers.
     ///     </para>
     ///     <para>
-    ///     The cause is that <c>CharacterEncoding</c> defaults to <see cref="Encoding.UTF8"/> and the
-    ///     two paths read that default in opposite directions. The synchronous path honours it and
-    ///     forces UTF-8 over a document that said otherwise. The asynchronous path treats the very same
-    ///     value as meaning "unset", maps it to <see langword="null"/>, and sniffs — which is right here,
-    ///     and is wrong for the caller who set UTF-8 deliberately because a feed lies about itself.
-    ///     One legitimate value doing duty as a sentinel, producing two different bugs depending on
-    ///     which door you came in.
+    ///     The cause was that <c>CharacterEncoding</c> defaulted to <see cref="Encoding.UTF8"/> and
+    ///     the two paths read that default in opposite directions. The synchronous path honoured it
+    ///     and forced UTF-8 over a document that said otherwise. The asynchronous path treated the
+    ///     very same value as meaning "unset", mapped it to <see langword="null"/> and sniffed —
+    ///     which was right here, and wrong for the caller who set UTF-8 deliberately because a feed
+    ///     lies about itself. One legitimate value doing duty as a sentinel, producing two different
+    ///     bugs depending on which door you came in.
+    ///     </para>
+    ///     <para>
+    ///     The property is now <c>Encoding?</c> and defaults to <see langword="null"/>, so both arms
+    ///     sniff and both are right. Kept as a two-armed test rather than collapsed into one: what is
+    ///     worth guarding is that the arms <i>agree</i>, and a single arm cannot express that.
     ///     </para>
     ///     <para>
     ///     <c>windows-1252</c> cannot be used to write this test: it resolves to UTF-8 through the
-    ///     encoding fallback and both paths would agree, for the wrong reason. Inverted at Phase 6,
-    ///     where the synchronous arm starts producing the accented character too.
+    ///     encoding fallback, and both arms would agree for the wrong reason.
     ///     </para>
     /// </remarks>
     /// <returns>A task representing the test.</returns>
     [TestMethod]
-    public async Task TheSameFeedDecodesDifferently_LoadedSynchronouslyOrFetched()
+    public async Task TheSameFeedDecodesTheSameWay_LoadedSynchronouslyOrFetched()
     {
         byte[] latin1 = Encoding.Latin1.GetBytes(
             """<?xml version="1.0" encoding="iso-8859-1"?><rss version="2.0"><channel><title>café</title><link>http://example.com/</link><description>d</description></channel></rss>""");
@@ -287,11 +291,10 @@ public sealed class LoadAResourceOverHttp : IDisposable
         RssFeed fetched = await RssFeed.CreateAsync(
             Source, httpClient, cancellationToken: TestContext.CancellationTokenSource.Token);
 
-        loaded.Channel.Title.ShouldBe("caf\uFFFD",
-            "PINS TODAY: a default settings object forces UTF-8 over a correct iso-8859-1 declaration. "
-            + "Inverted at Phase 6.");
-        fetched.Channel.Title.ShouldBe("café",
-            "INVARIANT: the fetch path treats the same default as 'unset' and sniffs, which is right here.");
+        loaded.Channel.Title.ShouldBe(
+            "café", "INVERTED: default settings no longer name an encoding, so the declaration stands.");
+        fetched.Channel.Title.ShouldBe(
+            "café", "INVARIANT: the fetch path already sniffed, and still does.");
     }
 
     private HttpClient Client(string body)

@@ -13,14 +13,15 @@ namespace Argotic.Extensions.Tests.Functionality.Common;
 /// </summary>
 /// <remarks>
 ///     <para>
-///     <b>These tests assert behaviour that is wrong.</b> They exist so that the commit which fixes it
-///     has to invert named assertions rather than merely stay green — every one of them passes against
-///     the code as it stands, and the whole point is that they must stop.
+///     Written one commit earlier asserting the <b>broken</b> behaviour, so that the fix had to invert
+///     named assertions rather than merely stay green. Four of the six inverted; the two that did not
+///     are the ones marked as controls, which is what makes the four meaningful.
 ///     </para>
 ///     <para>
-///     Nothing else in the suite reads <see cref="SyndicationResourceLoadSettings.CharacterEncoding"/>.
-///     A grep across the test project returns no hits at all, so a change to this property could delete
-///     every behaviour below and leave 2,691 tests green.
+///     They were the only tests in the suite that read
+///     <see cref="SyndicationResourceLoadSettings.CharacterEncoding"/> at all. Without them the
+///     property could have been changed in any direction, including into a no-op, with 2,697 tests
+///     staying green.
 ///     </para>
 /// </remarks>
 [TestClass]
@@ -63,6 +64,7 @@ public sealed class SettingsEncodingCharacterisationTests
         response.Content.Headers.ContentType = new System.Net.Http.Headers.MediaTypeHeaderValue("application/rss+xml");
         return Task.FromResult(response);
     });
+
     /// <summary>
     /// Gets or sets the test context, used for its cancellation token.
     /// </summary>
@@ -88,42 +90,43 @@ public sealed class SettingsEncodingCharacterisationTests
     }
 
     /// <summary>
-    /// Supplying any settings object at all corrupts the title.
+    /// Supplying a settings object no longer changes the encoding.
     /// </summary>
     /// <remarks>
-    ///     <c>Load(Stream, settings)</c> branches on <c>settings is not null</c>: the null arm sniffs the
-    ///     declaration, the non-null arm passes <c>settings.CharacterEncoding</c>, which defaults to
-    ///     <see cref="Encoding.UTF8"/>. So the default value of a property the caller never touched
-    ///     overrides what the document says about itself.
+    ///     The inversion. <c>Load(Stream, settings)</c> used to branch on <c>settings is not null</c> and
+    ///     pass <c>settings.CharacterEncoding</c>, whose default was <see cref="Encoding.UTF8"/> — so the
+    ///     default value of a property the caller never touched overrode what the document said about
+    ///     itself. The branch now asks whether an encoding was <i>named</i>, and the default is
+    ///     <see langword="null"/>.
     /// </remarks>
     [TestMethod]
-    public void WithDefaultSettings_TheDeclaredEncodingIsIgnoredAndTheTitleIsCorrupted()
+    public void WithDefaultSettings_TheDeclaredEncodingIsStillHonoured()
     {
         RssFeed feed = new();
         using MemoryStream stream = new(Latin1Feed);
 
         feed.Load(stream, new SyndicationResourceLoadSettings());
 
-        feed.Channel.Title.ShouldBe("Caf\uFFFD");
+        feed.Channel.Title.ShouldBe("Café");
     }
 
     /// <summary>
-    /// The settings object need not mention encoding for the encoding to change.
+    /// A settings object set for an unrelated reason says nothing about encoding.
     /// </summary>
     /// <remarks>
-    ///     The shape that makes this worth a test rather than a note. A caller who wants the newest ten
-    ///     items has no reason to think they have said anything about character encoding, and the
-    ///     property they did not set is the one that breaks their feed.
+    ///     The shape that made this worth a test rather than a note, and the one most likely to regress:
+    ///     a caller who wants the newest ten items has no reason to think they have said anything about
+    ///     character encoding, and it used to be the property they did not set that broke their feed.
     /// </remarks>
     [TestMethod]
-    public void ASettingsObjectSetForAnUnrelatedReason_StillChangesTheEncoding()
+    public void ASettingsObjectSetForAnUnrelatedReason_LeavesTheEncodingAlone()
     {
         RssFeed feed = new();
         using MemoryStream stream = new(Latin1Feed);
 
         feed.Load(stream, new SyndicationResourceLoadSettings { RetrievalLimit = 10 });
 
-        feed.Channel.Title.ShouldBe("Caf\uFFFD");
+        feed.Channel.Title.ShouldBe("Café");
     }
 
     /// <summary>
@@ -152,21 +155,23 @@ public sealed class SettingsEncodingCharacterisationTests
     }
 
     /// <summary>
-    /// The same settings object means opposite things to the sync and async loads.
+    /// The sync and async loads now agree about what a default settings object means.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     The async path does not pass the encoding through. It translates: <c>CharacterEncoding ==
-    ///     Encoding.UTF8 ? null : CharacterEncoding</c>, and null means sniff. Default settings hold the
-    ///     <see cref="Encoding.UTF8"/> singleton, so the comparison is true and async sniffs.
+    ///     The async path never passed the encoding through. It translated: <c>CharacterEncoding ==
+    ///     Encoding.UTF8 ? null : CharacterEncoding</c>, where null meant sniff. Default settings held
+    ///     the <see cref="Encoding.UTF8"/> singleton, so the comparison was true and async sniffed
+    ///     while sync forced. One object, two overloads, two encodings, and neither signature hinted
+    ///     at it.
     ///     </para>
     ///     <para>
-    ///     One object, two overloads, two encodings. Neither signature hints at it.
+    ///     The translation is gone because the property can now hold the answer directly.
     ///     </para>
     /// </remarks>
     /// <returns>A task representing the test.</returns>
     [TestMethod]
-    public async Task WithDefaultSettings_TheAsyncLoadSniffsWhereTheSyncLoadDoesNot()
+    public async Task WithDefaultSettings_TheSyncAndAsyncLoadsAgree()
     {
         using MockHttpMessageHandler handler = ServingLatin1();
         using HttpClient client = new(handler, disposeHandler: false);
@@ -179,49 +184,52 @@ public sealed class SettingsEncodingCharacterisationTests
         using MemoryStream stream = new(Latin1Feed);
         synchronous.Load(stream, new SyndicationResourceLoadSettings());
 
-        asynchronous.Channel.Title.ShouldBe("Café");
-        synchronous.Channel.Title.ShouldBe("Caf\uFFFD");
+        asynchronous.Channel.Title.ShouldBe("Café", "INVARIANT: the async path always sniffed");
+        synchronous.Channel.Title.ShouldBe("Café", "INVERTED: the sync path used to force UTF-8 here");
     }
 
     /// <summary>
-    /// Two UTF-8 encodings that decode identically produce opposite async behaviour.
+    /// Naming an encoding means naming it, whichever UTF-8 instance you name.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     The sentinel is reference equality against a singleton, so <c>new UTF8Encoding(false)</c> —
-    ///     which decodes every byte sequence exactly as <see cref="Encoding.UTF8"/> does — fails it, and
-    ///     the encoding is forced instead of sniffed.
+    ///     The sentinel was reference equality against a singleton, so <c>new UTF8Encoding(false)</c> —
+    ///     which decodes every byte sequence exactly as <see cref="Encoding.UTF8"/> does — failed it and
+    ///     forced the encoding, while the singleton passed it and sniffed. Two ways of saying the same
+    ///     thing, two different documents.
     ///     </para>
     ///     <para>
-    ///     This is what makes the sentinel indefensible rather than merely surprising. "Setting the
-    ///     property to its own default value" and "setting it to an equivalent instance" are the same
-    ///     intent, and they give different documents.
+    ///     Both now force. The third arm is the one that could not previously be written at all: there
+    ///     was no value of <c>CharacterEncoding</c> that meant "detect" without also meaning "UTF-8",
+    ///     which is why a caller who genuinely wanted UTF-8 imposed on a lying feed had no way to ask.
     ///     </para>
     /// </remarks>
     /// <returns>A task representing the test.</returns>
     [TestMethod]
-    public async Task AnEquivalentUtf8Instance_DefeatsTheSentinelAndForcesTheEncoding()
+    public async Task AnEquivalentUtf8Instance_NowBehavesLikeTheSingleton()
     {
         using MockHttpMessageHandler handler = ServingLatin1();
         using HttpClient client = new(handler, disposeHandler: false);
 
-        RssFeed singleton = new();
-        await singleton.LoadAsync(
+        RssFeed singleton = await FetchAsync(client, Encoding.UTF8);
+        RssFeed equivalent = await FetchAsync(client, new UTF8Encoding(false));
+        RssFeed unset = await FetchAsync(client, null);
+
+        singleton.Channel.Title.ShouldBe("Caf\uFFFD", "INVERTED: naming UTF-8 now forces UTF-8");
+        equivalent.Channel.Title.ShouldBe("Caf\uFFFD", "INVERTED: and an equivalent instance does the same");
+        unset.Channel.Title.ShouldBe("Café", "and null is how you ask for detection, which is now expressible");
+    }
+
+    private async Task<RssFeed> FetchAsync(HttpClient client, Encoding? encoding)
+    {
+        RssFeed feed = new();
+        await feed.LoadAsync(
             Source,
             client,
-            new SyndicationResourceLoadSettings { CharacterEncoding = Encoding.UTF8 },
+            new SyndicationResourceLoadSettings { CharacterEncoding = encoding },
             null,
             this.TestContext.CancellationTokenSource.Token);
 
-        RssFeed equivalent = new();
-        await equivalent.LoadAsync(
-            Source,
-            client,
-            new SyndicationResourceLoadSettings { CharacterEncoding = new UTF8Encoding(false) },
-            null,
-            this.TestContext.CancellationTokenSource.Token);
-
-        singleton.Channel.Title.ShouldBe("Café", "the singleton trips the sentinel and the declaration is honoured");
-        equivalent.Channel.Title.ShouldBe("Caf\uFFFD", "an equal-but-not-identical instance does not");
+        return feed;
     }
 }

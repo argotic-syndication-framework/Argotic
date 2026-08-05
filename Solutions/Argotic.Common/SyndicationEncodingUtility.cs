@@ -405,10 +405,14 @@ public static partial class SyndicationEncodingUtility
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        return settings is not null
-            ? CreateSafeNavigator(stream, settings.CharacterEncoding)
+        // The condition is now "did the caller name an encoding", where it used to be "did the caller
+        // supply a settings object at all". Those were the same question only because the property
+        // could not be left unset.
+        return settings?.CharacterEncoding is { } encoding
+            ? CreateSafeNavigator(stream, encoding)
             : CreateSafeNavigator(stream);
     }
+
     /// <summary>
     /// Creates a <see cref="XPathNavigator"/> against the supplied <see cref="TextReader"/>.
     /// </summary>
@@ -715,7 +719,12 @@ public static partial class SyndicationEncodingUtility
         // of a CancellationTokenSource rather than HttpClient.Timeout, and matters more now that
         // the send completes on headers.
         using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        timeoutCts.CancelAfter(settings.Timeout);
+        if (settings.Timeout is { } deadline)
+        {
+            // Left unarmed when null. The linked source is still built, so the caller's own token
+            // still cancels the load - what a null removes is the library's deadline, not theirs.
+            timeoutCts.CancelAfter(deadline);
+        }
 
         using HttpResponseMessage response = await SendHttpRequestAsync(
             source, httpClient, requestOptions, HttpCompletionOption.ResponseHeadersRead, timeoutCts.Token).ConfigureAwait(false);
@@ -724,14 +733,11 @@ public static partial class SyndicationEncodingUtility
         using PooledContentBuffer body = await ReadContentAsync(response, cap, timeoutCts.Token).ConfigureAwait(false);
         using Stream stream = body.AsStream();
 
-        // The UTF-8 sentinel, in the one place it now lives. Phase 6 deletes it outright by making the
-        // property nullable; until then it stays here rather than in thirteen copies.
-        Encoding? encoding = settings.CharacterEncoding == Encoding.UTF8 ? null : settings.CharacterEncoding;
-
-        return encoding is not null
+        return settings.CharacterEncoding is { } encoding
             ? CreateSafeNavigator(stream, encoding)
             : CreateSafeNavigator(stream);
     }
+
     /// <summary>
     /// Reads at most <paramref name="maxBytes"/> of a response body, treating a longer body as normal.
     /// </summary>

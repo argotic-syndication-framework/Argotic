@@ -31,17 +31,31 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <summary>
     /// Gets or sets the character encoding to use when parsing a syndication resource.
     /// </summary>
-    /// <value>A <see cref="Encoding"/> object that indicates the character encoding to use when parsing a syndication resource. The default value is <see cref="Encoding.UTF8"/>.</value>
-    /// <exception cref="ArgumentNullException">The <paramref name="value"/> is a null reference.</exception>
-    public Encoding CharacterEncoding
-    {
-        get;
-        set
-        {
-            ArgumentNullException.ThrowIfNull(value);
-            field = value;
-        }
-    } = Encoding.UTF8;
+    /// <value>
+    ///     An <see cref="Encoding"/> to decode the resource with, or <see langword="null"/> to determine
+    ///     the encoding from the document itself. The default is <see langword="null"/>.
+    /// </value>
+    /// <remarks>
+    ///     <para>
+    ///     Detection reads the byte-order mark if there is one and the <c>encoding</c> pseudo-attribute
+    ///     of the XML declaration otherwise, falling back to <see cref="Encoding.UTF8"/> when a document
+    ///     declares nothing. Setting this property overrides the declaration — which is what you want
+    ///     for a server known to lie about its own encoding, and what you do not want otherwise.
+    ///     </para>
+    ///     <para>
+    ///     <b>This property used to default to <see cref="Encoding.UTF8"/> and to reject
+    ///     <see langword="null"/>.</b> Between them those two facts meant a settings object constructed
+    ///     for an unrelated reason — a retrieval limit, say — silently overrode a correctly declared
+    ///     <c>iso-8859-1</c> and replaced every accented character with U+FFFD. There was no way to
+    ///     spell "detect", because the value that meant it was also the value you got by accident.
+    ///     </para>
+    ///     <para>
+    ///     The asynchronous path spelled it as <c>CharacterEncoding == Encoding.UTF8 ? null : …</c>,
+    ///     which made detection depend on <i>reference</i> equality with a singleton: an equivalent
+    ///     <c>new UTF8Encoding(false)</c> decoded identically and behaved oppositely. Both are gone.
+    ///     </para>
+    /// </remarks>
+    public Encoding? CharacterEncoding { get; set; }
 
     /// <summary>
     /// Gets or sets the maximum number of resource entities to retrieve from a syndication resource.
@@ -122,34 +136,39 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// Gets or sets a value that specifies the amount of time after which asynchronous load operations will time-out.
     /// </summary>
     /// <value>
-    ///     An <see cref="TimeSpan"/> that specifies the time-out period. The default value is
+    ///     A <see cref="TimeSpan"/> that specifies the time-out period, or <see langword="null"/> to
+    ///     impose no deadline at all. The default value is
     ///     <see cref="SyndicationEncodingUtility.DefaultRequestTimeout"/> — 100 seconds, matching the
     ///     default time-out of the framework's previous <see cref="System.Net.HttpWebRequest"/>-based pipeline.
     /// </value>
     /// <remarks>
+    ///     <para>
     ///     Enforced by <see cref="CancellationTokenSource.CancelAfter(TimeSpan)"/> rather than by
     ///     <see cref="HttpClient.Timeout"/>, so it applies to the whole load — the response body
     ///     included — and not merely to the point where the headers arrive.
+    ///     </para>
+    ///     <para>
+    ///     <b><see langword="null"/> means no deadline, not "use the default".</b> The shared
+    ///     <see cref="HttpClient"/> is built with
+    ///     <see cref="System.Threading.Timeout.InfiniteTimeSpan"/>, so a null here leaves nothing at
+    ///     all bounding the load but the caller's own <see cref="CancellationToken"/>. That is the
+    ///     right setting for a large archive on a slow link and the wrong one for almost everything
+    ///     else. <see cref="TimeSpan.Zero"/> is <i>not</i> a way to spell it — it cancels immediately.
+    ///     </para>
     /// </remarks>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is less than zero.</exception>
     /// <exception cref="ArgumentOutOfRangeException">The time-out period is greater than a year.</exception>
-    public TimeSpan Timeout
+    public TimeSpan? Timeout
     {
         get;
         set
         {
-            if (value.TotalMilliseconds < 0)
+            if (value is { } period && (period.TotalMilliseconds < 0 || period > TimeSpan.FromDays(365)))
             {
                 throw new ArgumentOutOfRangeException(nameof(value));
             }
-            else if (value > TimeSpan.FromDays(365))
-            {
-                throw new ArgumentOutOfRangeException(nameof(value));
-            }
-            else
-            {
-                field = value;
-            }
+
+            field = value;
         }
     } = SyndicationEncodingUtility.DefaultRequestTimeout;
 
@@ -160,7 +179,7 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
     /// <remarks>
     ///     This method returns a human-readable string for the current instance.
     /// </remarks>
-    public override string ToString() => $"[SyndicationResourceLoadSettings(CharacterEncoding = \"{this.CharacterEncoding.WebName}\", RetrievalLimit = \"{this.RetrievalLimit}\", Timeout = \"{this.Timeout.TotalMilliseconds}\", MaxResponseContentLength = \"{this.MaxResponseContentLength?.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? "default"}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
+    public override string ToString() => $"[SyndicationResourceLoadSettings(CharacterEncoding = \"{this.CharacterEncoding?.WebName ?? "detect"}\", RetrievalLimit = \"{this.RetrievalLimit}\", Timeout = \"{this.Timeout?.TotalMilliseconds.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? "none"}\", MaxResponseContentLength = \"{this.MaxResponseContentLength?.ToString(System.Globalization.NumberFormatInfo.InvariantInfo) ?? "default"}\", Autodetect = \"{this.AutoDetectExtensions}\", SupportedExtensions = \"{this.SupportedExtensions.GetHashCode().ToString(System.Globalization.NumberFormatInfo.InvariantInfo)}\")]";
 
     /// <summary>
     /// Compares the current instance with another object of the same type.
@@ -174,9 +193,11 @@ public sealed class SyndicationResourceLoadSettings : IComparable<SyndicationRes
             return 1;
         }
 
-        int result = string.Compare(this.CharacterEncoding.WebName, other.CharacterEncoding.WebName, StringComparison.OrdinalIgnoreCase);
+        // Both properties are now nullable, and null sorts first in each: "detect the encoding" and
+        // "no deadline" are the absence of a value, not a value that happens to be small.
+        int result = string.Compare(this.CharacterEncoding?.WebName, other.CharacterEncoding?.WebName, StringComparison.OrdinalIgnoreCase);
         if (result == 0) result = this.RetrievalLimit.CompareTo(other.RetrievalLimit);
-        if (result == 0) result = this.Timeout.CompareTo(other.Timeout);
+        if (result == 0) result = Nullable.Compare(this.Timeout, other.Timeout);
         if (result == 0) result = this.AutoDetectExtensions.CompareTo(other.AutoDetectExtensions);
         if (result == 0) result = ComparisonUtility.CompareSequence(this.SupportedExtensions, other.SupportedExtensions);
 

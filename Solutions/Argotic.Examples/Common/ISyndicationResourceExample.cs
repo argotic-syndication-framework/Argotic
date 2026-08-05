@@ -1,4 +1,3 @@
-using System.Text;
 using System.Xml;
 using System.Xml.XPath;
 using Argotic.Common;
@@ -105,14 +104,15 @@ internal class MyCustomRssFeed : ISyndicationResource
     public void Load(Stream stream, SyndicationResourceLoadSettings? settings)
     {
         ArgumentNullException.ThrowIfNull(stream);
-        if (settings is not null)
-        {
-            this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream, settings.CharacterEncoding), settings);
-        }
-        else
-        {
-            this.Load(SyndicationEncodingUtility.CreateSafeNavigator(stream), settings);
-        }
+
+        // Branch on whether an encoding was named, not on whether a settings object was supplied. A
+        // caller who constructed settings to set a retrieval limit has said nothing about encoding,
+        // and forcing one on them would override what the document declares about itself.
+        this.Load(
+            settings?.CharacterEncoding is { } encoding
+                ? SyndicationEncodingUtility.CreateSafeNavigator(stream, encoding)
+                : SyndicationEncodingUtility.CreateSafeNavigator(stream),
+            settings);
     }
 
     /// <summary>
@@ -172,10 +172,17 @@ internal class MyCustomRssFeed : ISyndicationResource
         settings ??= new SyndicationResourceLoadSettings();
 
         using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
-        timeoutCts.CancelAfter(settings.Timeout);
+        if (settings.Timeout is { } deadline)
+        {
+            // A null Timeout means no deadline of the library's own; the caller's token still applies.
+            timeoutCts.CancelAfter(deadline);
+        }
 
-        Encoding? encoding = settings.CharacterEncoding == System.Text.Encoding.UTF8 ? null : settings.CharacterEncoding;
-        XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(source, httpClient, encoding, requestOptions, timeoutCts.Token).ConfigureAwait(false);
+        // The encoding goes straight through. It used to be translated here -- CharacterEncoding ==
+        // Encoding.UTF8 ? null : it -- because the property could not be left unset, so the singleton
+        // had to double as the way to ask for detection. It can now simply be null.
+        XPathNavigator navigator = await SyndicationEncodingUtility.CreateSafeNavigatorAsync(
+            source, httpClient, settings.CharacterEncoding, requestOptions, timeoutCts.Token).ConfigureAwait(false);
 
         // Code to load the syndication resource using the XPathNavigator would go here.
         this.OnFeedLoaded(new SyndicationResourceLoadedEventArgs(navigator, source));

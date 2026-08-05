@@ -208,9 +208,9 @@ public class RsdDocument : ISyndicationResource, IExtensibleSyndicationObject
     ///         This is the recommended pattern for use with <c>IHttpClientFactory</c> in ASP.NET Core applications.
     ///     </para>
     ///     <para>
-    ///         If <paramref name="settings"/> has a <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> of <see cref="System.Text.Encoding.UTF8"/>
-    ///         the character encoding of the <paramref name="source"/> will be attempted to be determined automatically, Otherwise, the specified character encoding will be used.
-    ///         If automatic detection fails, a character encoding of <see cref="System.Text.Encoding.UTF8"/> is used by default.
+    ///         If <paramref name="settings"/> names no <see cref="SyndicationResourceLoadSettings.CharacterEncoding">character encoding</see> — which is
+    ///         the default — the encoding of the <paramref name="source"/> is determined from its byte-order mark or XML declaration, falling
+    ///         back to <see cref="System.Text.Encoding.UTF8"/> if it declares neither. Naming one overrides what the document declares.
     ///     </para>
     ///     <para>
     ///         After the load operation has successfully completed, the <see cref="Loaded"/> event will be raised.

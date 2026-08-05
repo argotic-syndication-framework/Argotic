@@ -89,6 +89,46 @@ public static class ServiceCollectionExtensions
         return services;
     }
     /// <summary>
+    /// Registers the <see cref="HttpClient"/> that the syndication resource types should be fetched with.
+    /// </summary>
+    /// <param name="services">The <see cref="IServiceCollection"/> to add services to.</param>
+    /// <returns>The <see cref="IServiceCollection"/> so that additional calls can be chained.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     Resolve it with <c>IHttpClientFactory.CreateClient(ArgoticHttpClients.Syndication)</c> and
+    ///     pass it to any <c>LoadAsync</c> or <c>CreateAsync</c> overload taking an
+    ///     <see cref="HttpClient"/>. Named rather than typed because the resource types are not
+    ///     services — a caller constructs an <c>RssFeed</c>, they do not resolve one.
+    ///     </para>
+    ///     <para>
+    ///     What this buys over <see cref="SyndicationEncodingUtility.SharedHttpClient"/> is a handler
+    ///     the factory rotates, and one the consumer can extend — a proxy, a client certificate, a
+    ///     delegating handler for retries — none of which is possible on a process-wide singleton.
+    ///     </para>
+    ///     <para>
+    ///     <b>The default <c>User-Agent</c> set here does not appear on Argotic's own requests.</b>
+    ///     <see cref="SyndicationEncodingUtility.CreateHttpRequestMessage"/> sets one per request, and
+    ///     a request-level header wins over a client-level default. It is set for the caller who uses
+    ///     the resolved client directly, and is the reason to assert on
+    ///     <see cref="HttpClient.DefaultRequestHeaders"/> rather than on what crosses the wire.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="services"/> is a null reference.</exception>
+    public static IServiceCollection AddArgoticSyndicationClient(this IServiceCollection services)
+    {
+        ArgumentNullException.ThrowIfNull(services);
+
+        services.AddHttpClient(ArgoticHttpClients.Syndication, client =>
+            {
+                client.Timeout = Timeout.InfiniteTimeSpan;
+                client.DefaultRequestHeaders.UserAgent.ParseAdd(SyndicationDiscoveryUtility.FrameworkUserAgent);
+            })
+            .UseSocketsHttpHandler((handler, _) => SyndicationEncodingUtility.ApplyArgoticHandlerDefaults(handler));
+
+        return services;
+    }
+
+    /// <summary>
     /// Registers a typed client whose <see cref="HttpClient"/> comes from <c>IHttpClientFactory</c>.
     /// </summary>
     /// <typeparam name="TClient">The client type to register.</typeparam>

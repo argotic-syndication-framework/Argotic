@@ -317,20 +317,6 @@ public class SyndicationEncodingUtilityTest
     }
 
     [TestMethod]
-    public void GetXmlEncoding_FromStream_DetectsEncoding()
-    {
-        // Arrange
-        string xml = """<?xml version="1.0" encoding="utf-8"?><root>test</root>""";
-        using MemoryStream stream = new(Encoding.UTF8.GetBytes(xml));
-
-        // Act
-        Encoding result = SyndicationEncodingUtility.GetXmlEncoding(stream);
-
-        // Assert
-        result.ShouldBe(Encoding.UTF8);
-    }
-
-    [TestMethod]
     public void GetXmlEncoding_ThrowsOnNullString()
     {
         // Arrange & Act & Assert
@@ -352,14 +338,6 @@ public class SyndicationEncodingUtilityTest
         // Arrange & Act & Assert
         Should.Throw<ArgumentNullException>(() =>
             SyndicationEncodingUtility.GetXmlEncoding((byte[])null!));
-    }
-
-    [TestMethod]
-    public void GetXmlEncoding_ThrowsOnNullStream()
-    {
-        // Arrange & Act & Assert
-        Should.Throw<ArgumentNullException>(() =>
-            SyndicationEncodingUtility.GetXmlEncoding((Stream)null!));
     }
 
     // The byte[] overload only decodes the head of the document rather than all of it. These cases

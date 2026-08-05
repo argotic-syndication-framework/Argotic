@@ -188,18 +188,23 @@ public static partial class SyndicationEncodingUtility
     /// </returns>
     /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="xml"/> data is an empty string.</exception>
+    /// <remarks>
+    ///     Filters through the same streaming reader the other overloads use, so a dirty document is no
+    ///     longer rebuilt into a second string before parsing. The explicit guard stays: unlike the
+    ///     stream and reader overloads, this one really does have a parameter called <c>xml</c>, so
+    ///     rejecting an empty one by name is the caller's own contract rather than a leak from somewhere
+    ///     else.
+    /// </remarks>
     public static XPathNavigator CreateSafeNavigator(string xml)
     {
         ArgumentException.ThrowIfNullOrEmpty(xml);
 
-        string safeXml = SyndicationEncodingUtility.RemoveInvalidXmlHexadecimalCharacters(xml);
-
-        using StringReader stringReader = new(safeXml);
-        using XmlReader xmlReader = XmlReader.Create(stringReader, CreateSafeXmlReaderSettings());
+        using StringReader stringReader = new(xml);
+        using XmlSanitizingTextReader sanitising = new(stringReader, leaveOpen: true);
+        using XmlReader xmlReader = XmlReader.Create(sanitising, CreateSafeXmlReaderSettings());
         XPathDocument document = new(xmlReader);
-        XPathNavigator navigator = document.CreateNavigator();
 
-        return navigator;
+        return document.CreateNavigator();
     }
 
     /// <summary>
@@ -285,13 +290,36 @@ public static partial class SyndicationEncodingUtility
     /// </returns>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="encoding"/> is a null reference.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     <b>This overload no longer closes the caller's stream.</b> It wrapped it in a
+    ///     <see cref="StreamReader"/> it owned and disposed, which closed the stream as a side effect —
+    ///     while the single-argument overload, which looks symmetrical, did not. Nothing documented the
+    ///     difference and no test observed it. Callers who relied on it to dispose their stream must now
+    ///     do so themselves.
+    ///     </para>
+    ///     <para>
+    ///     A byte-order mark still takes precedence over <paramref name="encoding"/>. That is what the
+    ///     two-argument <see cref="StreamReader"/> constructor did, so it is preserved rather than
+    ///     quietly corrected, and the flag is now passed explicitly instead of inherited.
+    ///     </para>
+    ///     <para>
+    ///     An empty stream produces <see cref="System.Xml.XmlException"/> rather than
+    ///     <see cref="ArgumentException"/> naming <c>xml</c> — the parameter of the string overload this
+    ///     one used to delegate to, which this method's caller never supplied.
+    ///     </para>
+    /// </remarks>
     public static XPathNavigator CreateSafeNavigator(Stream stream, Encoding encoding)
     {
         ArgumentNullException.ThrowIfNull(stream);
         ArgumentNullException.ThrowIfNull(encoding);
 
-        using StreamReader reader = new(stream, encoding);
-        return SyndicationEncodingUtility.CreateSafeNavigator(reader.ReadToEnd());
+        using StreamReader reader = new(stream, encoding, detectEncodingFromByteOrderMarks: true, bufferSize: -1, leaveOpen: true);
+        using XmlSanitizingTextReader sanitising = new(reader, leaveOpen: true);
+        using XmlReader xmlReader = XmlReader.Create(sanitising, CreateSafeXmlReaderSettings());
+        XPathDocument document = new(xmlReader);
+
+        return document.CreateNavigator();
     }
 
     /// <summary>
@@ -534,25 +562,11 @@ public static partial class SyndicationEncodingUtility
             }
         }
 
-        // Delegating to the Stream overload preserves the original behaviour exactly, including the
-        // ArgumentException an empty array produces by way of the string overload's guard.
+        // Decoding the whole array, which is what a declaration longer than the probe window costs and
+        // why this overload is documented as unbounded. Routed through the string overload rather than
+        // the regex directly, so an empty array still produces the ArgumentException that overload's
+        // guard raises.
         using MemoryStream stream = new(data);
-        return SyndicationEncodingUtility.GetXmlEncoding(stream);
-    }
-
-    /// <summary>
-    /// Returns an <see cref="Encoding"/> that represents the XML character encoding for the supplied <see cref="Stream"/>.
-    /// </summary>
-    /// <param name="stream">A <see cref="Stream"/> that represents an XML data source to determine the character encoding for.</param>
-    /// <returns>
-    ///     A <see cref="Encoding"/> that represents the character encoding specified by the XML data source.
-    ///     If the character encoding is not specified or unable to be determined, returns <see cref="Encoding.UTF8"/>.
-    /// </returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
-    public static Encoding GetXmlEncoding(Stream stream)
-    {
-        ArgumentNullException.ThrowIfNull(stream);
-
         using StreamReader reader = new(stream);
         return SyndicationEncodingUtility.GetXmlEncoding(reader.ReadToEnd());
     }

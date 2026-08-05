@@ -55,68 +55,66 @@ public sealed class ParseEntryPointGuardTests
     }
 
     /// <summary>
-    /// Row 29 — an empty stream reports a parameter the caller never supplied.
+    /// Rows 29, 29a and 29b — an empty input is a parse error, not a guard about a foreign parameter.
     /// </summary>
     /// <remarks>
     ///     <para>
-    ///     <c>CreateSafeNavigator(Stream)</c> has one parameter and it is called <c>stream</c>. Handed an
-    ///     empty one it throws <see cref="ArgumentException"/> naming <c>content</c> — which is the
-    ///     parameter of <c>GetXmlEncoding(string)</c>, four calls down a chain the caller cannot see:
-    ///     <c>GetStreamBytes</c> returns an empty array, <c>GetXmlEncoding(byte[])</c> forwards to the
-    ///     <c>Stream</c> overload, which reads it to an empty string, which hits the string overload's
-    ///     guard.
+    ///     All three used to report a parameter the caller never supplied. <c>CreateSafeNavigator(Stream)</c>
+    ///     has one parameter, called <c>stream</c>, and threw <see cref="ArgumentException"/> naming
+    ///     <c>content</c> — the parameter of <c>GetXmlEncoding(string)</c>, four calls down a chain the
+    ///     caller could not see. The other two leaked <c>xml</c>, the parameter of the string overload
+    ///     they delegated to.
     ///     </para>
     ///     <para>
-    ///     Rows 29a and 29b are the same defect wearing a different name: they leak <c>xml</c>, the
-    ///     parameter of the <c>string</c> overload they delegate to. All three disappear when the
-    ///     delegation chain does, and all three become <see cref="XmlException"/> instead. Pinned so
-    ///     that it is a recorded behaviour change rather than something noticed later.
+    ///     All three inverted as their delegation disappeared: the reader at Phase 2, the stream and the
+    ///     stream-with-encoding at Phase 3. An empty document has no root element, which is what it
+    ///     always was, and now that is what the caller is told.
     ///     </para>
     /// </remarks>
     [TestMethod]
-    public void AnEmptyInput_LeaksThePrivateParameterNameOfSomethingItDelegatesTo()
+    public void AnEmptyInput_ProducesAParseErrorRatherThanALeakedParameterName()
     {
-        // Row 29 INVERTED at Phase 3. The stream overload no longer buffers the document and asks the
-        // string overload about it, so it no longer borrows a guard from three calls down. An empty
-        // stream is a document with no root element, and the parser says so.
         using MemoryStream empty = new();
         Should.Throw<XmlException>(() => SyndicationEncodingUtility.CreateSafeNavigator(empty))
-            .Message.ShouldBe("Root element is missing.");
+            .Message.ShouldBe("Root element is missing.", "row 29, inverted at Phase 3");
 
         using MemoryStream emptyAgain = new();
-        Should.Throw<ArgumentException>(() => SyndicationEncodingUtility.CreateSafeNavigator(emptyAgain, Encoding.UTF8))
-            .ParamName.ShouldBe("xml", "row 29a: the caller's parameters are 'stream' and 'encoding'");
+        Should.Throw<XmlException>(() => SyndicationEncodingUtility.CreateSafeNavigator(emptyAgain, Encoding.UTF8))
+            .Message.ShouldBe("Root element is missing.", "row 29a, inverted at Phase 3");
 
-        // Row 29b INVERTED at Phase 2. The reader overload no longer delegates to the string one, so it
-        // no longer borrows its guard or its parameter name. An empty reader is now a document with no
-        // root element, which is what it always was, and the parser says so.
         using StringReader emptyReader = new(string.Empty);
         Should.Throw<XmlException>(() => SyndicationEncodingUtility.CreateSafeNavigator(emptyReader))
-            .Message.ShouldBe("Root element is missing.");
+            .Message.ShouldBe("Root element is missing.", "row 29b, inverted at Phase 2");
     }
 
     /// <summary>
-    /// Row 30 — two overloads that look symmetrical are not, about whose stream they close.
+    /// Row 30 — neither stream overload closes the stream it was handed.
     /// </summary>
     /// <remarks>
-    ///     <c>CreateSafeNavigator(Stream, Encoding)</c> wraps the caller's stream in a
-    ///     <see cref="StreamReader"/> it owns and disposes, which closes the caller's stream as a side
-    ///     effect. <c>CreateSafeNavigator(Stream)</c> copies the bytes out first and only ever disposes
-    ///     its own <see cref="MemoryStream"/>, so the caller's survives. Nothing documents the
-    ///     difference and nothing observed it until now.
+    ///     <para>
+    ///     They used to disagree. <c>CreateSafeNavigator(Stream, Encoding)</c> wrapped the caller's
+    ///     stream in a <see cref="StreamReader"/> it owned and disposed, closing the stream as a side
+    ///     effect, while <c>CreateSafeNavigator(Stream)</c> copied the bytes out first and only disposed
+    ///     its own buffer. Two overloads that read identically at the call site, behaving differently,
+    ///     with nothing documenting it and no test observing it.
+    ///     </para>
+    ///     <para>
+    ///     Inverted at Phase 3: both now pass <c>leaveOpen</c>, so neither closes what it did not open.
+    ///     Asserting both directions is what makes this a rule rather than a coincidence.
+    ///     </para>
     /// </remarks>
     [TestMethod]
-    public void OnlyTheEncodingOverload_ClosesTheCallersStream()
+    public void NeitherStreamOverload_ClosesTheCallersStream()
     {
         byte[] bytes = Encoding.UTF8.GetBytes(Document);
 
-        using MemoryStream survives = new(bytes, writable: false);
-        SyndicationEncodingUtility.CreateSafeNavigator(survives);
-        survives.CanRead.ShouldBeTrue("CreateSafeNavigator(Stream) must not close a stream it did not open");
+        using MemoryStream withoutEncoding = new(bytes, writable: false);
+        SyndicationEncodingUtility.CreateSafeNavigator(withoutEncoding);
+        withoutEncoding.CanRead.ShouldBeTrue("CreateSafeNavigator(Stream) must not close a stream it did not open");
 
-        using MemoryStream closed = new(bytes, writable: false);
-        SyndicationEncodingUtility.CreateSafeNavigator(closed, Encoding.UTF8);
-        closed.CanRead.ShouldBeFalse("CreateSafeNavigator(Stream, Encoding) closes the caller's stream today");
+        using MemoryStream withEncoding = new(bytes, writable: false);
+        SyndicationEncodingUtility.CreateSafeNavigator(withEncoding, Encoding.UTF8);
+        withEncoding.CanRead.ShouldBeTrue("row 30 INVERTED at Phase 3: nor must the encoding overload");
     }
 
     /// <summary>

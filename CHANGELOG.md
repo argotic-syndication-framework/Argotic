@@ -41,6 +41,12 @@ Behaviour changes that fix no defect and break no documented contract, but that 
   `content` — the parameter of a private helper three calls down, which the caller never supplied — and
   the stream is consumed lazily, so a parse failure part-way through leaves it part-way through rather
   than drained. This overload still does not close the stream
+- **`SyndicationEncodingUtility.CreateSafeNavigator(Stream, Encoding)` no longer closes the supplied
+  stream.** It wrapped it in a `StreamReader` it owned and disposed, which closed the stream as a side
+  effect — while the single-argument overload, which reads identically at the call site, did not.
+  Nothing documented the difference. Callers who relied on it to dispose their stream must now do so
+  themselves. An empty stream produces `XmlException` rather than `ArgumentException` naming `xml`, and
+  a byte-order mark still takes precedence over the supplied encoding, as it always did
 - **`SyndicationEncodingUtility.CreateSafeNavigator(TextReader)` filters as it reads.** It previously
   drained the reader to a string, sanitised that into a second string, and parsed the result; it now
   drops invalid characters incrementally, so a document is no longer held twice. Two visible
@@ -169,6 +175,10 @@ Behaviour changes that fix no defect and break no documented contract, but that 
 
 ### Removed
 
+- **`SyndicationEncodingUtility.GetXmlEncoding(Stream)`** — source- and binary-breaking. It read the
+  *entire* stream to find forty bytes and left it consumed, so a stream-shaped sniff could not promise
+  non-consumption and could not be used twice. `GetXmlEncoding(byte[])` still accepts a whole document
+  and is still unbounded; `CreateSafeNavigator(Stream)` now sniffs a bounded head internally
 - **Internal `SyndicationEncodingUtility.GetStreamBytes`** — the load path no longer buffers a whole
   document before parsing it, so nothing called it. Binary-breaking only for the three assemblies
   holding an `InternalsVisibleTo` grant, all of which are in this repository

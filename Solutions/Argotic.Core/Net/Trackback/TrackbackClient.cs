@@ -3,6 +3,7 @@ using System.Net.Http.Headers;
 using Argotic.Common;
 using Argotic.Configuration;
 
+using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Options;
 
 namespace Argotic.Net;
@@ -71,8 +72,17 @@ public class TrackbackClient
     /// <exception cref="ArgumentNullException">The <paramref name="options"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
     /// <remarks>
+    ///     <para>
     ///     This constructor is intended for use with dependency injection and the <see cref="IOptions{TOptions}"/> pattern.
+    ///     </para>
+    ///     <para>
+    ///     Marked as the preferred constructor because three of this type’s six accept an
+    ///     <see cref="HttpClient"/>, and <c>ActivatorUtilities.CreateFactory</c> — which is how a typed
+    ///     client is activated — refuses to choose between them. Without the attribute,
+    ///     <c>AddHttpClient&lt;T&gt;</c> throws at registration.
+    ///     </para>
     /// </remarks>
+    [ActivatorUtilitiesConstructor]
     public TrackbackClient(IOptions<TrackbackClientOptions> options, HttpClient httpClient)
     {
         ArgumentNullException.ThrowIfNull(options);

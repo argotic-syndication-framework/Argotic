@@ -1,7 +1,5 @@
 using System.Xml.XPath;
 
-using Argotic.Common;
-
 namespace Argotic.Extensions;
 
 /// <summary>
@@ -14,7 +12,7 @@ namespace Argotic.Extensions;
 /// <seealso cref="ISyndicationExtension"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XPath.IXPathNavigable)"/>
 /// <seealso cref="ISyndicationExtension.Load(System.Xml.XmlReader)"/>
-public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<SyndicationExtensionLoadedEventArgs>, IEquatable<SyndicationExtensionLoadedEventArgs>, IComparisonOperators
+public class SyndicationExtensionLoadedEventArgs : EventArgs
 {
 
     /// <summary>
@@ -53,13 +51,6 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
     }
 
     /// <summary>
-    /// Represents an syndication extension loaded event with no event data.
-    /// </summary>
-    /// <value>An uninitialized instance of the <see cref="SyndicationExtensionLoadedEventArgs"/> class.</value>
-    /// <remarks>The value of Empty is a read-only instance of <see cref="SyndicationExtensionLoadedEventArgs"/> equivalent to the result of calling the <see cref="SyndicationExtensionLoadedEventArgs()"/> constructor.</remarks>
-    public static new SyndicationExtensionLoadedEventArgs Empty { get; } = new();
-
-    /// <summary>
     /// Gets a read-only <see cref="XPathNavigator"/> object for navigating the XML data that was used to load the syndication extension.
     /// </summary>
     /// <value>
@@ -92,86 +83,4 @@ public class SyndicationExtensionLoadedEventArgs : EventArgs, IComparable<Syndic
 
         return $"""[SyndicationExtensionLoadedEventArgs(Name = "{name}", Prefix = "{prefix}", Namespace = "{xmlNamespace}", Extension = "{extension}", Data = "{data}")]""";
     }
-
-    /// <summary>
-    /// Compares the current instance with another object of the same type.
-    /// </summary>
-    /// <param name="other">An object to compare with this instance.</param>
-    /// <returns>A 32-bit signed integer that indicates the relative order of the objects being compared.</returns>
-    public int CompareTo(SyndicationExtensionLoadedEventArgs? other)
-    {
-        if (other is null)
-        {
-            return 1;
-        }
-
-        int result = 0;
-
-        result = (this.Data, other.Data) switch
-        {
-            (XPathNavigator data, XPathNavigator otherData) => string.Compare(data.OuterXml, otherData.OuterXml, StringComparison.Ordinal),
-            (not null, null) => 1,
-            (null, not null) => -1,
-            _ => 0,
-        };
-
-        if (result == 0) result = (this.Extension, other.Extension) switch
-        {
-            (ISyndicationExtension extension, ISyndicationExtension otherExtension) => string.Compare(extension.ToString(), otherExtension.ToString(), StringComparison.Ordinal),
-            (not null, null) => 1,
-            (null, not null) => -1,
-            _ => 0,
-        };
-
-        return result;
-    }
-
-    /// <summary>
-    /// Determines whether the specified <see cref="SyndicationExtensionLoadedEventArgs"/> is equal to the current instance.
-    /// </summary>
-    /// <param name="other">The <see cref="SyndicationExtensionLoadedEventArgs"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="SyndicationExtensionLoadedEventArgs"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public bool Equals(SyndicationExtensionLoadedEventArgs? other)
-    {
-        if (other is null)
-        {
-            return false;
-        }
-
-        return this.CompareTo(other) == 0;
-    }
-
-    /// <summary>
-    /// Determines whether the specified <see cref="object"/> is equal to the current instance.
-    /// </summary>
-    /// <param name="obj">The <see cref="object"/> to compare with the current instance.</param>
-    /// <returns><b>true</b> if the specified <see cref="object"/> is equal to the current instance; otherwise, <b>false</b>.</returns>
-    public override bool Equals(object? obj) => obj is SyndicationExtensionLoadedEventArgs other && this.Equals(other);
-
-    /// <summary>
-    /// Returns a hash code for the current instance.
-    /// </summary>
-    /// <returns>A 32-bit signed integer hash code.</returns>
-    public override int GetHashCode() => HashCode.Combine(HashCodeUtility.Component(this.Data?.OuterXml), HashCodeUtility.Component(this.Extension?.ToString()));
-
-    /// <summary>
-    /// Determines if operands are equal.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>true</b> if the values of its operands are equal, otherwise; <b>false</b>.</returns>
-    public static bool operator ==(SyndicationExtensionLoadedEventArgs? first, SyndicationExtensionLoadedEventArgs? second)
-    {
-        if (first is null) return second is null;
-        return first.Equals(second);
-    }
-
-    /// <summary>
-    /// Determines if operands are not equal.
-    /// </summary>
-    /// <param name="first">Operand to be compared.</param>
-    /// <param name="second">Operand to compare to.</param>
-    /// <returns><b>false</b> if its operands are equal, otherwise; <b>true</b>.</returns>
-    public static bool operator !=(SyndicationExtensionLoadedEventArgs? first, SyndicationExtensionLoadedEventArgs? second) => !(first == second);
-
 }

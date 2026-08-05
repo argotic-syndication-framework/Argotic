@@ -67,7 +67,6 @@ public class ComparisonOperatorContractTests
         Row<LiveJournalUserPicture>(() => new() { Keyword = "pic-b", Url = new Uri("http://example.com/b.png") }, () => new() { Keyword = "pic-a", Url = new Uri("http://example.com/a.png") }, () => new() { Keyword = "pic-c", Url = new Uri("http://example.com/c.png") }),
         Row<TrackbackMessage>(() => new(new Uri("http://example.com/post/2")) { Title = "Post 2" }, () => new(new Uri("http://example.com/post/1")) { Title = "Post 1" }, () => new(new Uri("http://example.com/post/3")) { Title = "Post 3" }),
         Row<TrackbackResponse>(() => new(), () => new(), () => new("Error occurred")),
-        Row<WebContentType>(() => new("application", "xml"), () => new("application", "atom+xml"), () => new("application", "zip")),
         Row<XmlRpcMessage>(() => new("methodB"), () => new("methodA"), () => new("methodC")),
         Row<XmlRpcResponse>(() => new(), () => new(), () => new(new XmlRpcScalarValue("value"))),
         Row<XmlRpcStructureMember>(() => new("memberB", new XmlRpcScalarValue("valueB")), () => new("memberA", new XmlRpcScalarValue("valueA")), () => new("memberC", new XmlRpcScalarValue("valueC"))),

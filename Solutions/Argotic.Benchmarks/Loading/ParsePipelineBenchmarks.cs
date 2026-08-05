@@ -18,26 +18,32 @@ namespace Argotic.Benchmarks.Loading;
 /// <see cref="XPathDocument"/>, then walk that document into Argotic's object model.
 /// </para>
 /// <para>
-/// Most measured points are nested public calls, so the stages between them fall out by
-/// subtraction:
+/// <b>The decomposition this class was built on no longer exists, and pretending otherwise would be
+/// worse than losing it.</b> The stream path used to buffer the document, sniff it, decode it to a
+/// string and sanitise that into a second string, so each stage was a public call nested inside the
+/// next and the stages between them fell out by subtraction. It now reads a bounded head and streams
+/// the rest, and there is no intermediate to measure.
+/// </para>
+/// <para>
+/// What survives, and the only subtraction still admissible:
 /// </para>
 /// <list type="bullet">
-///   <item><description>XPathDocument build ≈ <c>CreateSafeNavigator(string)</c> − <c>RemoveInvalidXmlHexadecimalCharacters</c></description></item>
-///   <item><description>decode ≈ <c>CreateSafeNavigator(Stream)</c> − <c>CreateSafeNavigator(string)</c> − <c>GetXmlEncoding</c> − <c>GetStreamBytes</c></description></item>
 ///   <item><description>object-model walk ≈ <c>Load(Stream)</c> − <c>CreateSafeNavigator(Stream)</c></description></item>
 /// </list>
 /// <para>
-/// <c>GetStreamBytes</c> is measured directly. It is <c>internal</c> rather than public, and the
-/// harness reaches it through an <c>InternalsVisibleTo</c> grant added deliberately for this
-/// purpose — the alternative, inferring it by subtraction, buried the repository's most-allocating
-/// buffering step inside a residual.
+/// Containment still holds for <c>sniff ⊂ CreateSafeNavigator(Stream) ⊂ Load(Stream)</c>, and that is
+/// the honesty check: a nested call measuring larger than the one containing it means the
+/// decomposition is wrong and no conclusion may be drawn from it.
 /// </para>
 /// <para>
-/// Each nested measured point strictly contains the ones inside it, so the subtractions are well
-/// defined. That containment is also the built-in honesty check: if a nested call ever measures
-/// larger than the one containing it, the decomposition is wrong and no conclusion may be drawn
-/// from it.
+/// The relations that are now <b>false</b>, written down so nobody rederives them from the shape of
+/// the arm list:
 /// </para>
+/// <list type="bullet">
+///   <item><description><c>c ⊄ d</c> — <c>CreateSafeNavigator(string)</c> no longer calls the sanitiser as a separate pass.</description></item>
+///   <item><description><c>d ⊄ e</c> — the stream path never materialises a string, so the string arm is not inside it.</description></item>
+///   <item><description><c>b ⊄ e</c> — <c>GetXmlEncoding(bytes)</c> sniffs the whole array; the stream path sniffs a bounded head.</description></item>
+/// </list>
 /// </remarks>
 [BenchmarkCategory("pipeline", "rss")]
 [SuppressMessage(
@@ -68,19 +74,18 @@ public class ParsePipelineBenchmarks
     }
 
     /// <summary>
-    /// Buffering the whole stream into a byte array — the load path's first act.
+    /// Sniffing the declaration from a bounded head — the load path's first act.
     /// </summary>
-    /// <returns>The buffered bytes.</returns>
+    /// <returns>The sniffed encoding.</returns>
     /// <remarks>
-    /// Reached via <c>InternalsVisibleTo</c>; see the class remarks for why this stage is measured
-    /// directly rather than inferred.
+    /// Replaces the <c>GetStreamBytes</c> arm, which measured buffering the whole document and which
+    /// no longer exists. Reached via <c>InternalsVisibleTo</c>: this is the innermost measured point
+    /// and the only stage still strictly inside <c>CreateSafeNavigator(Stream)</c>, so inferring it by
+    /// subtraction would bury it in a residual.
     /// </remarks>
-    [Benchmark(Description = "a. GetStreamBytes")]
-    public byte[] BufferStream()
-    {
-        using MemoryStream stream = new(this.document, writable: false);
-        return SyndicationEncodingUtility.GetStreamBytes(stream);
-    }
+    [Benchmark(Description = "a. sniff the 512-byte head")]
+    public Encoding SniffHead()
+        => SyndicationEncodingUtility.SniffXmlEncoding(this.document.AsSpan(0, 512), out _);
 
     /// <summary>
     /// Encoding detection over the raw bytes.
@@ -169,7 +174,7 @@ public class ParsePipelineBenchmarks
     /// <para>
     /// This arm exists because the obvious comparison is confounded. <c>RssFeed.Load(Stream, settings)</c>
     /// branches on <c>settings is not null</c>: with settings it calls
-    /// <c>CreateSafeNavigator(stream, settings.CharacterEncoding)</c>, which skips <c>GetStreamBytes</c>
+    /// <c>CreateSafeNavigator(stream, settings.CharacterEncoding)</c>, which supplies the encoding
     /// and <c>GetXmlEncoding</c> entirely. <see cref="WholeLoad"/> passes null and pays for both;
     /// <see cref="WholeLoadWithoutExtensionDetection"/> passes an object and does not. Comparing them
     /// therefore measures two changes at once - at 1000 items the skipped stages were about a tenth of

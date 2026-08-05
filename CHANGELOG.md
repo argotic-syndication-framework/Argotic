@@ -33,6 +33,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Behaviour changes that fix no defect and break no documented contract, but that a caller could notice.
 
+- **`SyndicationEncodingUtility.CreateSafeNavigator(Stream)` streams rather than buffering.** It read
+  the whole document into a `byte[]`, decoded that to a string, sanitised it into a second string, and
+  parsed the result; it now reads a bounded head, detects the encoding from it, and decodes the
+  remainder as it goes. Allocation for a 706 KiB feed falls 68%. Two visible consequences: an empty
+  stream produces `XmlException` ("Root element is missing.") rather than `ArgumentException` naming
+  `content` — the parameter of a private helper three calls down, which the caller never supplied — and
+  the stream is consumed lazily, so a parse failure part-way through leaves it part-way through rather
+  than drained. This overload still does not close the stream
 - **`SyndicationEncodingUtility.CreateSafeNavigator(TextReader)` filters as it reads.** It previously
   drained the reader to a string, sanitised that into a second string, and parsed the result; it now
   drops invalid characters incrementally, so a document is no longer held twice. Two visible
@@ -161,6 +169,9 @@ Behaviour changes that fix no defect and break no documented contract, but that 
 
 ### Removed
 
+- **Internal `SyndicationEncodingUtility.GetStreamBytes`** — the load path no longer buffers a whole
+  document before parsing it, so nothing called it. Binary-breaking only for the three assemblies
+  holding an `InternalsVisibleTo` grant, all of which are in this repository
 - **`SyndicationEncodingUtility.EncodeInvalidXmlHexadecimalCharacters(string)`** — source- and
   binary-breaking. It had no caller anywhere in the library and could not have had a working one: its
   pattern relied on `\xD800` meaning U+D800, where .NET regex reads `\x` as exactly two hex digits, so

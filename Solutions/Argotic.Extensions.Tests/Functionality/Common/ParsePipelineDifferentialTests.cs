@@ -110,9 +110,13 @@ public sealed class ParsePipelineDifferentialTests
         legacyEmpty.ExceptionType.ShouldBe(typeof(ArgumentException).FullName);
         liveEmpty.ShouldBe(legacyEmpty);
 
+        // The stream entry point is the one Phase 3 rewrote, and this is its intended divergence, in
+        // the same shape as the reader row below: the specific difference, not merely "different".
         (ParseOutcome legacyStream, ParseOutcome liveStream) = ParsePipelineDifferential.OverStream([]);
         legacyStream.ExceptionType.ShouldBe(typeof(ArgumentException).FullName);
-        liveStream.ShouldBe(legacyStream);
+        legacyStream.ExceptionMessage!.ShouldContain("content", Case.Sensitive, "the frozen pipeline leaked a private helper's parameter name");
+        liveStream.ExceptionType.ShouldBe(typeof(System.Xml.XmlException).FullName);
+        liveStream.ExceptionMessage.ShouldBe("Root element is missing.");
 
         (ParseOutcome legacyMalformed, ParseOutcome liveMalformed) =
             ParsePipelineDifferential.OverString("<root><unclosed></root>");

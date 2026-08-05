@@ -26,7 +26,7 @@ namespace Argotic.Benchmarks.Loading;
 /// <para>
 /// Every arm passes a non-null settings object, including the unlimited one.
 /// <c>RssFeed.Load(Stream, settings)</c> takes a different branch when settings are null - it skips
-/// <c>GetStreamBytes</c> and <c>GetXmlEncoding</c> - so comparing a limited load against
+/// the encoding sniff - so comparing a limited load against
 /// <c>Load(stream)</c> would measure the limit and the encoding sniff together. That is exactly the
 /// confound this harness carried in <see cref="ParsePipelineBenchmarks"/>.
 /// </para>

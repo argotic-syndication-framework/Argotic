@@ -12,9 +12,10 @@
 
   <ItemGroup>
     <!--
-      The benchmark harness measures individual stages of the load pipeline. GetStreamBytes is one
-      of those stages and is internal rather than public, so the harness needs this grant. Scoped
-      to the benchmark project alone - not the test project, which exercises public API only.
+      The benchmark harness measures individual stages of the load pipeline. The bounded declaration
+      sniff and the two streaming types it feeds - PrefixedStream and XmlSanitizingTextReader - are
+      internal rather than public, so the harness needs this grant. Scoped to the benchmark project
+      alone, not the test project, which exercises public API only.
     -->
     <InternalsVisibleTo Include="Argotic.Benchmarks" />
     <!-- XPathNavigatorExtensions is shared with the parse path in both assemblies. It stays internal

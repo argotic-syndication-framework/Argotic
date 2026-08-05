@@ -56,6 +56,19 @@ public static partial class SyndicationEncodingUtility
     private const int XmlDeclarationProbeLength = 512;
 
     /// <summary>
+    /// The furthest into a document the streaming load will look for the end of an XML declaration.
+    /// </summary>
+    /// <remarks>
+    ///     A declaration may legally carry unbounded whitespace between its pseudo-attributes, so there
+    ///     is no length at which one provably cannot still be open. Reading without a bound would put a
+    ///     whole document back in memory for a pathological input, which is what the streaming load
+    ///     exists to avoid — so the bound is stated rather than left implicit. Beyond it the sniff
+    ///     answers <see cref="Encoding.UTF8"/>. <see cref="GetXmlEncoding(byte[])"/> is unbounded and
+    ///     unaffected, so the two can disagree only on a declaration longer than this.
+    /// </remarks>
+    private const int MaxDeclarationProbeLength = 64 * 1024;
+
+    /// <summary>
     /// Matches the <c>encoding</c> pseudo-attribute of an XML declaration.
     /// </summary>
     /// <returns>The compiled regular expression.</returns>
@@ -203,16 +216,61 @@ public static partial class SyndicationEncodingUtility
     ///     If the character encoding cannot be determined, a default encoding of <see cref="Encoding.UTF8"/> is used.
     /// </remarks>
     /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     Reads a bounded head, sniffs the declaration from it, then decodes the head and the
+    ///     remainder as one stream. The document is never buffered whole, and never becomes a string.
+    ///     </para>
+    ///     <para>
+    ///     <b>The head is filled with <c>ReadAtLeast</c>, not one <c>Read</c>.</b> A single read on a
+    ///     network stream routinely returns far less than asked for, so a naive read would sniff
+    ///     whatever happened to be in the first TCP segment.
+    ///     </para>
+    ///     <para>
+    ///     <b>The head grows when a declaration did not close inside it.</b> Whitespace between the
+    ///     pseudo-attributes of a declaration is legal and unbounded, so one can run past any fixed
+    ///     window. Growing on that condition — rather than on "no <c>encoding=</c> was found" — is what
+    ///     keeps the answer identical to reading the document whole. Past
+    ///     <see cref="MaxDeclarationProbeLength"/> the sniff gives up and returns
+    ///     <see cref="Encoding.UTF8"/>; <see cref="GetXmlEncoding(byte[])"/> remains unbounded and is
+    ///     unaffected.
+    ///     </para>
+    ///     <para>
+    ///     Two deliberate changes come with this. An empty stream now produces
+    ///     <see cref="System.Xml.XmlException"/> rather than <see cref="ArgumentException"/> naming
+    ///     <c>content</c> — the parameter of a private helper three calls down, which this method's
+    ///     caller never supplied. And the stream is consumed lazily, so a parse failure part-way
+    ///     through leaves it part-way through rather than drained.
+    ///     </para>
+    /// </remarks>
     public static XPathNavigator CreateSafeNavigator(Stream stream)
     {
         ArgumentNullException.ThrowIfNull(stream);
 
-        byte[] buffer = SyndicationEncodingUtility.GetStreamBytes(stream);
+        byte[] head = new byte[XmlDeclarationProbeLength];
+        int filled = stream.ReadAtLeast(head, head.Length, throwOnEndOfStream: false);
 
-        Encoding encoding = SyndicationEncodingUtility.GetXmlEncoding(buffer);
+        Encoding encoding = SniffXmlEncoding(head.AsSpan(0, filled), out bool declarationMayOverrun);
 
-        using MemoryStream memoryStream = new(buffer);
-        return SyndicationEncodingUtility.CreateSafeNavigator(memoryStream, encoding);
+        // Only grow while the window is genuinely full: a short fill means the document ended, so
+        // there is nothing more to find and re-reading would loop.
+        while (declarationMayOverrun && filled == head.Length && head.Length < MaxDeclarationProbeLength)
+        {
+            byte[] grown = new byte[Math.Min(head.Length * 2, MaxDeclarationProbeLength)];
+            head.AsSpan(0, filled).CopyTo(grown);
+            head = grown;
+
+            filled += stream.ReadAtLeast(head.AsSpan(filled), head.Length - filled, throwOnEndOfStream: false);
+            encoding = SniffXmlEncoding(head.AsSpan(0, filled), out declarationMayOverrun);
+        }
+
+        using PrefixedStream prefixed = new(head, filled, stream);
+        using StreamReader decoded = new(prefixed, encoding, detectEncodingFromByteOrderMarks: true, bufferSize: -1, leaveOpen: true);
+        using XmlSanitizingTextReader sanitising = new(decoded, leaveOpen: true);
+        using XmlReader xmlReader = XmlReader.Create(sanitising, CreateSafeXmlReaderSettings());
+        XPathDocument document = new(xmlReader);
+
+        return document.CreateNavigator();
     }
 
     /// <summary>
@@ -738,44 +796,5 @@ public static partial class SyndicationEncodingUtility
         }
 
         return result.ToString();
-    }
-
-    /// <summary>
-    /// Gets an array of bytes that represent the data of the supplied <see cref="Stream"/>.
-    /// </summary>
-    /// <param name="stream">The <see cref="Stream"/> to get an array of bytes for.</param>
-    /// <returns>An array of bytes that represent the data of the supplied <paramref name="stream"/>.</returns>
-    /// <exception cref="ArgumentNullException">The <paramref name="stream"/> is a null reference.</exception>
-    /// <remarks>
-    ///     Internal rather than private so the benchmark harness can measure this stage of the load
-    ///     pipeline directly. It is deliberately not public: exposing it would make it a permanent
-    ///     contract on a published library, and nothing outside this assembly needs it.
-    /// </remarks>
-    internal static byte[] GetStreamBytes(Stream stream)
-    {
-        ArgumentNullException.ThrowIfNull(stream);
-
-        // A seekable stream already knows how much is left, so the result array can be sized exactly
-        // and filled once. This replaces a read-and-double loop that allocated every intermediate
-        // buffer on the way up and copied the whole payload at each growth; Stream.ReadExactly
-        // arrived in .NET 7 and makes the loop unnecessary.
-        if (stream.CanSeek)
-        {
-            long remaining = stream.Length - stream.Position;
-            if (remaining == 0)
-            {
-                return [];
-            }
-
-            byte[] exact = new byte[remaining];
-            stream.ReadExactly(exact);
-            return exact;
-        }
-
-        // Non-seekable streams still need to be drained; MemoryStream grows with a pooled copy loop
-        // rather than a hand-written one.
-        using MemoryStream buffer = new();
-        stream.CopyTo(buffer);
-        return buffer.ToArray();
     }
 }

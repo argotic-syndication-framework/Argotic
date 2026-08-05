@@ -76,9 +76,12 @@ public sealed class ParseEntryPointGuardTests
     [TestMethod]
     public void AnEmptyInput_LeaksThePrivateParameterNameOfSomethingItDelegatesTo()
     {
+        // Row 29 INVERTED at Phase 3. The stream overload no longer buffers the document and asks the
+        // string overload about it, so it no longer borrows a guard from three calls down. An empty
+        // stream is a document with no root element, and the parser says so.
         using MemoryStream empty = new();
-        Should.Throw<ArgumentException>(() => SyndicationEncodingUtility.CreateSafeNavigator(empty))
-            .ParamName.ShouldBe("content", "row 29: the caller's parameter is called 'stream'");
+        Should.Throw<XmlException>(() => SyndicationEncodingUtility.CreateSafeNavigator(empty))
+            .Message.ShouldBe("Root element is missing.");
 
         using MemoryStream emptyAgain = new();
         Should.Throw<ArgumentException>(() => SyndicationEncodingUtility.CreateSafeNavigator(emptyAgain, Encoding.UTF8))

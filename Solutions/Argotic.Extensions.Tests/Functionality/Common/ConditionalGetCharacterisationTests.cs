@@ -178,16 +178,52 @@ public sealed class ConditionalGetCharacterisationTests
     }
 
     /// <summary>
-    /// C10 — an unquoted entity tag is silently dropped, degrading the request to an unconditional GET.
+    /// C10 — an unquoted entity tag is refused rather than dropped.
     /// </summary>
     /// <remarks>
-    ///     <c>IfNoneMatch.TryParseAdd</c> returns a bool that nothing checks. An entity tag has to be
-    ///     quoted to be valid, so a caller who stores <c>abc123</c> rather than <c>"abc123"</c> — which
+    ///     <para>
+    ///     <c>IfNoneMatch.TryParseAdd</c> returned a bool that nothing checked. An entity tag has to be
+    ///     quoted to be valid, so a caller who stored <c>abc123</c> rather than <c>"abc123"</c> — which
     ///     is what happens when a tag is round-tripped through a database column or a JSON field
-    ///     without care — gets a full download every poll and no indication why.
+    ///     without care — got a full download every poll and no indication why.
+    ///     </para>
+    ///     <para>
+    ///     The silence was the defect. Degrading to an unconditional GET does not fail: it succeeds,
+    ///     returns a body, and is indistinguishable from a resource that genuinely changed. Nothing
+    ///     downstream can tell the difference, so nothing downstream can report it.
+    ///     </para>
     /// </remarks>
     [TestMethod]
-    public async Task AnUnquotedEntityTag_IsSilentlyDroppedAndTheRequestBecomesUnconditional()
+    public async Task AnUnquotedEntityTag_IsRefusedRatherThanDropped()
+    {
+        bool reached = false;
+        using MockHttpMessageHandler handler = new((_, _) =>
+        {
+            reached = true;
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.NotModified));
+        });
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        await Should.ThrowAsync<FormatException>(async () => await SyndicationDiscoveryUtility.ConditionalGetAsync(
+            Source, SentValidator, "abc123", client, TestContext.CancellationTokenSource.Token));
+
+        reached.ShouldBeFalse("INVERTED: the request is not sent at all, rather than sent unconditionally");
+    }
+
+    /// <summary>
+    /// The framework User-Agent is emitted exactly once.
+    /// </summary>
+    /// <remarks>
+    ///     Conditional GET built its request by hand and set the User-Agent itself, while every other
+    ///     fetch in the library goes through <c>CreateHttpRequestMessage</c>, which also sets it. Now
+    ///     that this path routes through that method, a surviving copy of the old line would append a
+    ///     second product token — and <c>SyndicationRequestOptions.ApplyTo</c> clears the collection
+    ///     before setting a custom one, so the duplicate would be invisible to any test that supplies
+    ///     options. This one supplies none.
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    public async Task TheFrameworkUserAgentIsSentExactlyOnce()
     {
         HttpRequestMessage? sent = null;
         using MockHttpMessageHandler handler = new((request, _) =>
@@ -198,12 +234,44 @@ public sealed class ConditionalGetCharacterisationTests
         using HttpClient client = new(handler, disposeHandler: false);
 
         using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
-            Source, SentValidator, "abc123", client, TestContext.CancellationTokenSource.Token);
+            Source, SyndicationValidators.None, client, null, TestContext.CancellationTokenSource.Token);
 
         sent.ShouldNotBeNull();
-        sent.Headers.IfNoneMatch.Count.ShouldBe(0,
-            "PINS TODAY: the tag is dropped without a word and the poll costs a full download.");
-        sent.Headers.IfModifiedSince.ShouldNotBeNull("the date validator still goes, so it is not wholly unconditional");
+        sent.Headers.UserAgent.ToString().ShouldBe(SyndicationDiscoveryUtility.FrameworkUserAgent);
+    }
+
+    /// <summary>
+    /// Conditional GET can now carry the request options every other fetch could.
+    /// </summary>
+    /// <remarks>
+    ///     It was the one fetch in this library that could not be given an <c>Accept</c> header, because
+    ///     it constructed its own request instead of going through the shared builder. Nothing about
+    ///     conditional GET made that true; it was simply the path the options plumbing never reached.
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    public async Task RequestOptionsReachTheConditionalRequest()
+    {
+        HttpRequestMessage? sent = null;
+        using MockHttpMessageHandler handler = new((request, _) =>
+        {
+            sent = request;
+            return Task.FromResult(new HttpResponseMessage(HttpStatusCode.NotModified));
+        });
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        using ConditionalGetResult result = await SyndicationDiscoveryUtility.ConditionalGetAsync(
+            Source,
+            new SyndicationValidators(SentValidator, "\"v1\""),
+            client,
+            new SyndicationRequestOptions { Accept = "application/rss+xml", UserAgent = "Mine/1.0" },
+            TestContext.CancellationTokenSource.Token);
+
+        sent.ShouldNotBeNull();
+        sent.Headers.Accept.ToString().ShouldBe("application/rss+xml");
+        sent.Headers.UserAgent.ToString().ShouldBe("Mine/1.0");
+        sent.Headers.IfNoneMatch.ToString().ShouldBe("\"v1\"");
+        sent.Headers.IfModifiedSince.ShouldNotBeNull();
     }
 
     /// <summary>

@@ -483,32 +483,69 @@ public static class SyndicationDiscoveryUtility
     /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
     /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
     /// <exception cref="HttpRequestException">The response status code does not indicate success or a lack of modification.</exception>
-    public static async Task<ConditionalGetResult> ConditionalGetAsync(
+    public static Task<ConditionalGetResult> ConditionalGetAsync(
         Uri source,
         DateTime lastModified,
         string? entityTag,
         HttpClient httpClient,
         CancellationToken cancellationToken = default)
     {
-        ArgumentNullException.ThrowIfNull(source);
-        ArgumentNullException.ThrowIfNull(httpClient);
-
-        // HTTP validator times are UTC; treat Unspecified-kind values as UTC so a caller who read a
-        // Last-Modified out of a previous response sends back the instant they were given. There is no
-        // longer a comparison downstream for this to agree with - the sent header is now its only use.
+        // HTTP validator times are UTC; treat an Unspecified kind as UTC so a caller who read a
+        // Last-Modified out of a previous response sends back the instant they were given.
         DateTimeOffset lastModifiedOffset = lastModified.Kind == DateTimeKind.Unspecified
             ? new DateTimeOffset(lastModified, TimeSpan.Zero)
             : new DateTimeOffset(lastModified);
 
-        using var request = new HttpRequestMessage(HttpMethod.Get, source);
-        request.Headers.UserAgent.ParseAdd(FrameworkUserAgent);
-        request.Headers.IfModifiedSince = lastModifiedOffset;
-        if (!string.IsNullOrEmpty(entityTag))
-        {
-            request.Headers.IfNoneMatch.TryParseAdd(entityTag);
-        }
+        return ConditionalGetAsync(
+            source, new SyndicationValidators(lastModifiedOffset, entityTag), httpClient, null, cancellationToken);
+    }
 
-        var response = await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
+    /// <summary>
+    /// Asynchronously performs a conditional get operation against the supplied <see cref="Uri"/>.
+    /// </summary>
+    /// <param name="source">The <see cref="Uri"/> to perform a conditional GET operation against.</param>
+    /// <param name="validators">The cache validators held for the <paramref name="source"/>.</param>
+    /// <param name="httpClient">The <see cref="HttpClient"/> to use for the request. The caller is responsible for managing the client's lifecycle.</param>
+    /// <param name="requestOptions">Request-level options — Accept, User-Agent, Referer, custom headers. This value can be <b>null</b>.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>A task that represents the asynchronous operation. The task result contains a <see cref="ConditionalGetResult"/>.</returns>
+    /// <remarks>
+    ///     <para>
+    ///     The overload the others delegate to, and the only one that can carry a
+    ///     <see cref="SyndicationRequestOptions"/> — conditional GET was previously the one fetch in
+    ///     this library that could not be given an <c>Accept</c> header or a custom <c>User-Agent</c>,
+    ///     because it built its request by hand instead of through
+    ///     <see cref="SyndicationEncodingUtility.CreateHttpRequestMessage"/>.
+    ///     </para>
+    ///     <para>
+    ///     Passing <see cref="SyndicationValidators.None"/> makes the request unconditional, which is
+    ///     the correct thing to do for a resource never yet fetched — and is why
+    ///     <see cref="SyndicationValidators"/> models both halves as nullable rather than requiring a
+    ///     <see cref="DateTime"/> to be invented.
+    ///     </para>
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="source"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="validators"/> is a null reference.</exception>
+    /// <exception cref="ArgumentNullException">The <paramref name="httpClient"/> is a null reference.</exception>
+    /// <exception cref="HttpRequestException">The response status code does not indicate success or a lack of modification.</exception>
+    public static async Task<ConditionalGetResult> ConditionalGetAsync(
+        Uri source,
+        SyndicationValidators validators,
+        HttpClient httpClient,
+        SyndicationRequestOptions? requestOptions = null,
+        CancellationToken cancellationToken = default)
+    {
+        ArgumentNullException.ThrowIfNull(source);
+        ArgumentNullException.ThrowIfNull(validators);
+        ArgumentNullException.ThrowIfNull(httpClient);
+
+        // CreateHttpRequestMessage sets the framework User-Agent and applies the caller's options. The
+        // line that used to set it here as well was the second of two spellings, and the one that
+        // could not be overridden.
+        using HttpRequestMessage request = SyndicationEncodingUtility.CreateHttpRequestMessage(source, requestOptions);
+        validators.ApplyTo(request);
+
+        HttpResponseMessage response = await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
 
         if (response.StatusCode == HttpStatusCode.NotModified)
         {

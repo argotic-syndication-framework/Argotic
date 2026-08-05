@@ -612,6 +612,58 @@ public static partial class SyndicationEncodingUtility
         return await httpClient.SendAsync(request, cancellationToken).ConfigureAwait(false);
     }
     /// <summary>
+    /// Reads at most <paramref name="maxBytes"/> of a response body, treating a longer body as normal.
+    /// </summary>
+    /// <param name="response">The response whose body to read.</param>
+    /// <param name="maxBytes">The most to read.</param>
+    /// <param name="cancellationToken">A cancellation token to observe.</param>
+    /// <returns>The leading bytes of the body. The caller owns it and must dispose it.</returns>
+    /// <remarks>
+    ///     Distinct from <see cref="ReadContentAsync"/> in what an overrun means. There, exceeding the
+    ///     limit is an error and throws; here it is the expected case — the caller wants a head and does
+    ///     not care that more exists. Detecting a document's format needs its first element, not its
+    ///     contents.
+    /// </remarks>
+    /// <exception cref="ArgumentNullException">The <paramref name="response"/> is a null reference.</exception>
+    internal static async Task<PooledContentBuffer> ReadContentPrefixAsync(
+        HttpResponseMessage response,
+        int maxBytes,
+        CancellationToken cancellationToken)
+    {
+        ArgumentNullException.ThrowIfNull(response);
+
+        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+
+        PooledContentBuffer? sink = PooledContentBuffer.ForDeclaredLength(maxBytes);
+        byte[] chunk = ArrayPool<byte>.Shared.Rent(Math.Min(maxBytes, 81_920));
+
+        try
+        {
+            int total = 0;
+            while (total < maxBytes)
+            {
+                int wanted = Math.Min(chunk.Length, maxBytes - total);
+                int read = await stream.ReadAsync(chunk.AsMemory(0, wanted), cancellationToken).ConfigureAwait(false);
+                if (read <= 0)
+                {
+                    break;
+                }
+
+                sink.Write(chunk.AsSpan(0, read));
+                total += read;
+            }
+
+            PooledContentBuffer head = sink;
+            sink = null;
+            return head;
+        }
+        finally
+        {
+            sink?.Dispose();
+            ArrayPool<byte>.Shared.Return(chunk);
+        }
+    }
+    /// <summary>
     /// Sends a request, choosing when the returned task completes.
     /// </summary>
     /// <param name="source">The resource to request.</param>

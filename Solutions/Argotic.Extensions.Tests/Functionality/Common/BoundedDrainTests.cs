@@ -221,6 +221,76 @@ public sealed class BoundedDrainTests
     }
 
     /// <summary>
+    /// Detecting a feed's format reads its head rather than the whole feed.
+    /// </summary>
+    /// <remarks>
+    ///     Format detection needs the document's first element. It used to download a five-megabyte
+    ///     feed to learn the word <c>rss</c> — everything after the first element was read only because
+    ///     nothing stopped it.
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    public async Task DetectingAFeedsFormat_ReadsOnlyItsHead()
+    {
+        StringBuilder builder = new();
+        builder.Append("""<?xml version="1.0" encoding="utf-8"?><rss version="2.0"><channel>""");
+        builder.Append("<title>Large</title>");
+        builder.Append("<description>").Append('x', 5 * 1024 * 1024).Append("</description>");
+        builder.Append("</channel></rss>");
+
+        using ControllableHttpContent content = new(Encoding.UTF8.GetBytes(builder.ToString()));
+        using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse()));
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        SyndicationContentFormat format = await SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(
+            Source, client, TestContext.CancellationTokenSource.Token);
+
+        format.ShouldBe(SyndicationContentFormat.Rss);
+        content.BytesRead.ShouldBeLessThanOrEqualTo(64 * 1024, "the first element is all it needs");
+        content.BytesRead.ShouldBeLessThan(content.Length / 10, "and that is a small fraction of the feed");
+    }
+
+    /// <summary>
+    /// A prolog longer than the probe window reports an undetermined format rather than throwing.
+    /// </summary>
+    /// <remarks>
+    ///     <para>
+    ///     A deliberate degrade, and the one behaviour change the bound brings. Truncating at 64 KiB can
+    ///     cut a document mid-declaration, and the parser rightly objects; both overloads document
+    ///     <see cref="SyndicationContentFormat.None"/> as meaning "unable to determine the format", so
+    ///     answering that is in contract.
+    ///     </para>
+    ///     <para>
+    ///     It is also the shape the bound exists for: a prolog over 64 KiB is a DTD bomb, and
+    ///     <c>DtdProcessing.Parse</c> would otherwise have parsed it straight off the socket.
+    ///     </para>
+    /// </remarks>
+    /// <returns>A task representing the test.</returns>
+    [TestMethod]
+    public async Task APrologLongerThanTheProbeWindow_ReportsAnUndeterminedFormat()
+    {
+        StringBuilder builder = new();
+        builder.Append("<?xml version=\"1.0\" encoding=\"utf-8\"?>\n<!DOCTYPE rss [\n");
+        for (int i = 0; builder.Length < 96 * 1024; i++)
+        {
+            builder.Append("  <!ENTITY padding").Append(i).Append(" \"").Append('y', 256).Append("\">\n");
+        }
+
+        builder.Append("]>\n<rss version=\"2.0\"><channel><title>x</title></channel></rss>");
+
+        using ControllableHttpContent content = new(Encoding.UTF8.GetBytes(builder.ToString()));
+        using MockHttpMessageHandler handler = new((_, _) => Task.FromResult(content.InAResponse()));
+        using HttpClient client = new(handler, disposeHandler: false);
+
+        SyndicationContentFormat format = await SyndicationDiscoveryUtility.SyndicationContentFormatGetAsync(
+            Source, client, TestContext.CancellationTokenSource.Token);
+
+        format.ShouldBe(SyndicationContentFormat.None,
+            "in contract: both overloads document None as 'unable to determine'");
+        content.BytesRead.ShouldBeLessThanOrEqualTo(64 * 1024, "and it stopped reading rather than parsing on");
+    }
+
+    /// <summary>
     /// The exception is catchable as an <see cref="HttpRequestException"/>.
     /// </summary>
     /// <remarks>

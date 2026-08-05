@@ -10,6 +10,15 @@ namespace Argotic.Common;
 /// </summary>
 public static class SyndicationDiscoveryUtility
 {
+    /// <summary>
+    /// How much of a response is read when detecting its syndication format.
+    /// </summary>
+    /// <remarks>
+    ///     Format detection needs the document's first element. Everything after that was read only
+    ///     because nothing stopped it, and on a five-megabyte feed that is five megabytes to learn one
+    ///     word.
+    /// </remarks>
+    private const int FormatDetectionProbeLength = 64 * 1024;
 
     /// <summary>
     /// Creates the framework user agent string with defensive null handling.
@@ -55,10 +64,15 @@ public static class SyndicationDiscoveryUtility
     {
         ArgumentNullException.ThrowIfNull(source);
 
-        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(source, null, cancellationToken).ConfigureAwait(false);
-        response.EnsureSuccessStatusCode();
-        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
-        return SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
+        // The deadline is hoisted here rather than left inside SendHttpRequestAsync(Uri, options, ct),
+        // which creates a token source, calls CancelAfter and disposes it before handing the response
+        // back. That was harmless while the body arrived already buffered; under headers-read the body
+        // is read afterwards, with the caller's own token, so the documented 100-second bound would have
+        // covered the headers and nothing else. Seven other shared-client entry points in this file
+        // already have this shape.
+        using CancellationTokenSource timeoutCts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
+        timeoutCts.CancelAfter(SyndicationEncodingUtility.DefaultRequestTimeout);
+        return await SyndicationContentFormatGetAsync(source, SyndicationEncodingUtility.SharedHttpClient, timeoutCts.Token).ConfigureAwait(false);
     }
 
     /// <summary>
@@ -87,10 +101,30 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(source);
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(source, httpClient, null, cancellationToken).ConfigureAwait(false);
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(
+            source, httpClient, null, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
-        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
-        return SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
+
+        // SyndicationContentFormatGet(Stream) builds an XmlReader and calls MoveToContent, which is
+        // synchronous - and with DtdProcessing.Parse a large internal subset would make it an unbounded
+        // sync-over-socket read. It needs the first element, so it gets the first 64 KiB and nothing
+        // more; this used to download a five-megabyte feed to read the word "rss".
+        using PooledContentBuffer head = await SyndicationEncodingUtility.ReadContentPrefixAsync(
+            response, FormatDetectionProbeLength, cancellationToken).ConfigureAwait(false);
+        using Stream stream = head.AsStream();
+
+        try
+        {
+            return SyndicationDiscoveryUtility.SyndicationContentFormatGet(stream);
+        }
+        catch (System.Xml.XmlException)
+        {
+            // A prolog longer than the probe window truncates mid-declaration. Both overloads document
+            // None as meaning "unable to determine", so this is in contract rather than a new failure -
+            // and a document whose prolog exceeds 64 KiB is the DTD-bomb shape the bound exists for. The
+            // synchronous overload still propagates, because its caller supplied the whole stream.
+            return SyndicationContentFormat.None;
+        }
     }
 
     /// <summary>
@@ -645,9 +679,16 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(uri);
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(
+            uri, httpClient, null, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
-        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+
+        // The Extract overload below takes a Stream and reads it with ReadToEnd, synchronously. Under
+        // headers-read that stream is the socket, so it is drained here first - asynchronously, and
+        // under a bound - and the synchronous reader gets memory instead.
+        using PooledContentBuffer body = await SyndicationEncodingUtility.ReadContentAsync(
+            response, SyndicationContentLengthLimits.Discovery, cancellationToken).ConfigureAwait(false);
+        using Stream stream = body.AsStream();
         return SyndicationDiscoveryUtility.ExtractDiscoverableSyndicationEndpoints(stream);
     }
 
@@ -1102,9 +1143,16 @@ public static class SyndicationDiscoveryUtility
         ArgumentNullException.ThrowIfNull(uri);
         ArgumentNullException.ThrowIfNull(httpClient);
 
-        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(uri, httpClient, null, cancellationToken).ConfigureAwait(false);
+        using HttpResponseMessage response = await SyndicationEncodingUtility.SendHttpRequestAsync(
+            uri, httpClient, null, HttpCompletionOption.ResponseHeadersRead, cancellationToken).ConfigureAwait(false);
         response.EnsureSuccessStatusCode();
-        using Stream stream = await response.Content.ReadAsStreamAsync(cancellationToken).ConfigureAwait(false);
+
+        // The Extract overload below takes a Stream and reads it with ReadToEnd, synchronously. Under
+        // headers-read that stream is the socket, so it is drained here first - asynchronously, and
+        // under a bound - and the synchronous reader gets memory instead.
+        using PooledContentBuffer body = await SyndicationEncodingUtility.ReadContentAsync(
+            response, SyndicationContentLengthLimits.Discovery, cancellationToken).ConfigureAwait(false);
+        using Stream stream = body.AsStream();
         return SyndicationDiscoveryUtility.ExtractTrackbackNotificationServers(stream);
     }
 }

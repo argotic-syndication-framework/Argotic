@@ -33,6 +33,14 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Behaviour changes that fix no defect and break no documented contract, but that a caller could notice.
 
+- **Discovery reads only what it needs.** `IsPingbackEnabledAsync`, `LocatePingbackNotificationServerAsync`,
+  `UriExistsAsync`, `SourceReferencesTargetAsync`, `LocateDiscoverableSyndicationEndpointsAsync`,
+  `LocateTrackbackNotificationServersAsync` and both `SyndicationContentFormatGetAsync` overloads no
+  longer buffer the whole response before deciding what to do with it. A pingback answered from an
+  `X-Pingback` header now reads no body at all; format detection reads the first 64 KiB rather than the
+  whole feed; and every one of them is bounded at 2 MiB. **One consequence to be aware of**: a document
+  whose prolog exceeds 64 KiB now reports `SyndicationContentFormat.None` — documented as "unable to
+  determine" — where before it was parsed in full off the socket
 - **The shared `HttpClient` negotiates Brotli and keeps no cookies.** It advertised only gzip and
   deflate, declining the smallest encoding most origins offer; and `SocketsHttpHandler.UseCookies`
   defaults to `true`, so a `Set-Cookie` from any origin was replayed on the next request to that host.

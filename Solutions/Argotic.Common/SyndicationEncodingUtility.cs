@@ -89,11 +89,47 @@ public static partial class SyndicationEncodingUtility
         SocketsHttpHandler handler = new()
 #pragma warning restore CA2000
         {
+            // Pooling policy is the singleton's own business and deliberately not shared: a static
+            // client must rotate its own connections, where a factory-built one has its whole handler
+            // rotated for it.
             PooledConnectionLifetime = TimeSpan.FromMinutes(15),
             PooledConnectionIdleTimeout = TimeSpan.FromMinutes(2),
-            AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
         };
+
+        ApplyArgoticHandlerDefaults(handler);
         return new HttpClient(handler) { Timeout = Timeout.InfiniteTimeSpan };
+    }
+
+    /// <summary>
+    /// Applies the handler settings every Argotic HTTP pipeline shares.
+    /// </summary>
+    /// <param name="handler">The handler to configure.</param>
+    /// <exception cref="ArgumentNullException">The <paramref name="handler"/> is a null reference.</exception>
+    /// <remarks>
+    ///     <para>
+    ///     Named so that the shared client and anything built by <c>IHttpClientFactory</c> cannot drift
+    ///     apart. Keeping them in step by remembering to is a coordination requirement between two
+    ///     assemblies with nothing enforcing it, and the failure is silent — a factory-built client that
+    ///     keeps cookies while the singleton does not.
+    ///     </para>
+    ///     <para>
+    ///     <b>Cookies are off.</b> <see cref="SocketsHttpHandler.UseCookies"/> defaults to
+    ///     <see langword="true"/>, so a <c>Set-Cookie</c> from any origin was replayed on the next
+    ///     request to that host — and on a process-wide singleton that means per-domain session state
+    ///     accumulating for the lifetime of the application, with no API to inspect or clear it. A feed
+    ///     reader has no use for a cookie jar.
+    ///     </para>
+    ///     <para>
+    ///     <b>Brotli is on.</b> It has been in the platform since .NET Core 3.0 and is what most origins
+    ///     prefer; advertising only gzip and deflate meant declining the smallest encoding available.
+    ///     </para>
+    /// </remarks>
+    public static void ApplyArgoticHandlerDefaults(SocketsHttpHandler handler)
+    {
+        ArgumentNullException.ThrowIfNull(handler);
+
+        handler.AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate | DecompressionMethods.Brotli;
+        handler.UseCookies = false;
     }
 
     /// <summary>

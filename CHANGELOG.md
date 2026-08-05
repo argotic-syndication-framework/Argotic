@@ -33,6 +33,11 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 
 Behaviour changes that fix no defect and break no documented contract, but that a caller could notice.
 
+- **The shared `HttpClient` negotiates Brotli and keeps no cookies.** It advertised only gzip and
+  deflate, declining the smallest encoding most origins offer; and `SocketsHttpHandler.UseCookies`
+  defaults to `true`, so a `Set-Cookie` from any origin was replayed on the next request to that host.
+  On a process-wide singleton that is per-domain session state accumulating for the lifetime of the
+  application, with no API to inspect or clear it
 - **`SyndicationEncodingUtility.CreateSafeNavigator(Stream)` streams rather than buffering.** It read
   the whole document into a `byte[]`, decoded that to a string, sanitised it into a second string, and
   parsed the result; it now reads a bounded head, detects the encoding from it, and decodes the
@@ -57,6 +62,9 @@ Behaviour changes that fix no defect and break no documented contract, but that 
 
 ### New Features
 
+- **`SyndicationEncodingUtility.ApplyArgoticHandlerDefaults(SocketsHttpHandler)`**: applies the handler
+  settings the shared client uses, so a caller building their own `HttpClient` or configuring one
+  through `IHttpClientFactory` gets the same pipeline without having to know what it consists of
 - **Sitemap 0.9**: Added support for Sitemap 0.9 protocol
 - **Google Video Sitemap 1.1**: Improved specification implementation
 - **IComparisonOperators**: New interface with extension-based comparison operators (`<`, `<=`, `>`, `>=`)
